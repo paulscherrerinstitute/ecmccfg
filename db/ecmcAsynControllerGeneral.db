@@ -1,0 +1,106 @@
+#### GENERAL
+record(ai,"$(P)MCU-app-mode"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.appmode")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)MCU-ErrRst"){
+  field(PINI, "1")
+  field(DTYP,  "asynInt32")
+  field(OUT,"@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.error.reset")
+  field(ZNAM,"FALSE")
+  field(ONAM,"TRUE")
+}
+
+record(ai,"$(P)MCU-ErrId"){
+  field(PINI, "1")
+  field(DTYP,"asynInt32")
+  field(INP,"@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.error.id")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+}
+
+record(waveform,"$(P)MCU-ErrMsg"){
+  field(PINI, "1")
+  field(DTYP, "asynInt8ArrayIn")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.error.msg")
+  field(FTVL, "CHAR")
+  field(NELM, "1024")
+  field(SCAN, "I/O Intr")
+}
+
+record(asyn,"$(P)MCU-Cmd"){
+  field(DTYP,"asynRecordDevice")
+  field(PORT,"$(PORT)")
+  field(ADDR,"$(ADDR)")
+  field(OMAX,"512")
+  field(IMAX,"512")
+}
+
+#### THREAD (Realtime)
+record(ai,"$(P)MCU-thread-latency-min"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.latency.min")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-latency-max"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.latency.max")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-period-min"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.period.min")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-period-max"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.period.max")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-execute-min"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.execute.min")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-execute-max"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.execute.max")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-send-min"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.send.min")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)MCU-thread-send-max"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ecmc.thread.send.max")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}

@@ -1,0 +1,15 @@
+
+#Encoder
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisEncTransExpr(${ECMC_AXIS_NO})=${ECMC_ENC_EXPRESSION}"
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisEncExtVelFilterEnable(${ECMC_AXIS_NO},${ECMC_ENC_VELO_FILT_ENABLE})"
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},${ECMC_ENC_SOURCE})"
+
+#Trajectory
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisTrajTransExpr(${ECMC_AXIS_NO})=${ECMC_TRAJ_EXPRESSION}"
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisTrajSourceType(${ECMC_AXIS_NO},${ECMC_TRAJ_SOURCE})"
+
+#Commands
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisEnableCommandsFromOtherAxis(${ECMC_AXIS_NO},${ECMC_CMD_FRM_OTHER_AXIS_ENABLE})"
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisEnableCommandsTransform(${ECMC_AXIS_NO},${ECMC_CMD_EXPRESSION_ENABLE})"
+EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.SetAxisTransformCommandExpr(${ECMC_AXIS_NO})=${ECMC_CMD_EXPRESSION}"
+
