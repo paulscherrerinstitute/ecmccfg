@@ -1,0 +1,8 @@
+record(ai, "$(P)$(R):$(PARAM)")
+{
+   field(PINI, "1")
+   field(DTYP, "$(TYPE)")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))$(PARAM)")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+}

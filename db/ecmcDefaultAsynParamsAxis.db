@@ -1,0 +1,16 @@
+#Asyn parameters for one axis
+record(ai,"$(P)$(AXIS_NAME)-PosAct"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ax$(AXIS_NO).actpos")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)$(AXIS_NAME)-PosSet"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ax$(AXIS_NO).setpos")
+  field(PREC, "3")
+  field(SCAN, "I/O Intr")
+}

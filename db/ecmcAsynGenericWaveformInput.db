@@ -1,0 +1,10 @@
+record(waveform,"$(P)EC$(SLAVE_POS)-$(HWTYPE)-$(REC_SUFFIX)")
+{
+    field(PINI, "1")
+    field(DTYP, "$(TYPE)")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))$(NAME)")
+    field(FTVL, "$(EPICSTYPE)")
+    field(NELM, "$(SIZE)")
+    field(SCAN, "I/O Intr")
+}
+

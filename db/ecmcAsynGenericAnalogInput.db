@@ -1,0 +1,11 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-$(REC_SUFFIX)"){
+   field(PINI, "$(PINI=0)")
+   field(DTYP, "$(TYPE)")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))$(NAME)")
+   field(PREC, "$(PREC=7)")
+   field(SCAN, "$(SCAN=I/O Intr)")                                        
+   field(LINR, "$(LINR=NO CONVERSION)")                                   # Conversion algorithm 
+   field(ESLO, "$(ESLO=1)")                                               # Engineering unit gain
+   field(EOFF, "$(EOFF=0)")                                               # Engineering unit offset
+   field(EGU,  "$(EGU=V)")                                                # Engineering unit
+}

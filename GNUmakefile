@@ -13,7 +13,7 @@ SCRIPTS+=scripts/addSlave.cmd
 SCRIPTS+=scripts/configureSlave.cmd
 SCRIPTS+=scripts/applyConfig.cmd
 SCRIPTS+=scripts/setAppMode.cmd
-#SCRIPTS+=scripts/addAxis.cmd
+SCRIPTS+=scripts/addAxis.cmd
 SCRIPTS+=scripts/configureAxis.cmd
 
 SCRIPTS+=$(wildcard ./general/*)
