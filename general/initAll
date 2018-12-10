@@ -4,9 +4,9 @@ runScript($(ECMC_CONFIG_ROOT)init)
 ############################################################
 ############# ASYN Configuration:
 
-epicsEnvSet("ECMC_MOTOR_PORT",    "$(SM_MOTOR_PORT=MCU1)")
-epicsEnvSet("ECMC_ASYN_PORT",     "$(SM_ASYN_PORT=MC_CPU1)")
-epicsEnvSet("ECMC_PREFIX",        "$(SM_PREFIX=IOC2:)")
+epicsEnvSet("ECMC_MOTOR_PORT"     "$(SM_MOTOR_PORT=MCU1)")
+epicsEnvSet("ECMC_ASYN_PORT"      "$(SM_ASYN_PORT=MC_CPU1)")
+epicsEnvSet("ECMC_PREFIX"         "$(SM_PREFIX=IOC2:)")
 
 ecmcAsynPortDriverConfigure($(ECMC_ASYN_PORT),1000,0,0)
 
@@ -30,11 +30,11 @@ EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetTraceMaskBit(15,0)"
 
 # Choose to generate EPICS-records for EtherCAT-entries
 # (For records use ECMC_GEN_EC_RECORDS="-records" otherwise ECMC_GEN_EC_RECORDS="")
-epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
+epicsEnvSet("ECMC_GEN_EC_RECORDS"         "-records")
 
 # Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
 # (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
-epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
+epicsEnvSet("ECMC_GEN_AX_RECORDS"         "-records")
 
 # Update records in 10Hz (skip 99 cycles, based on 1000Hz sample rate)
-epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",       "99")
+epicsEnvSet("ECMC_ASYN_SKIP_CYCLES"       "99")
