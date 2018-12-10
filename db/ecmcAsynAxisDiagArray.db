@@ -1,0 +1,9 @@
+record(waveform,"$(PREFIX)$(MOTOR_NAME)-Array-Stat")
+{
+    field(PINI, "1")
+    field(DTYP, "asynInt8ArrayIn")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ax$(AXIS_NO).diagnostic")
+    field(FTVL, "CHAR")
+    field(NELM, "$(SIZE)")
+    field(SCAN, "I/O Intr")
+}
