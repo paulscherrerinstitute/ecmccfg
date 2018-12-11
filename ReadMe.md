@@ -18,7 +18,7 @@ provide a module to handle ECMC configuration
 1.  `require` the configuration module
 
     ```bash
-    require ECMC_config kivel "SYS=STEST_ESS"
+    require ECMC_config <VERSION>
     ```
 
 2.  add a slave
