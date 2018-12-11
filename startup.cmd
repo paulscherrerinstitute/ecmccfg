@@ -37,7 +37,7 @@ epicsEnvSet("STREAM_PROTOCOL_PATH"  "$(STREAM_PROTOCOL_PATH=""):$(ECMC_CONFIG_RO
 epicsEnvSet("SCRIPTEXEC"            "$(SCRIPTEXEC=iocshLoad)")
 #
 # define IOC Prefix
-epicsEnvSet("SM_PREFIX"             "$(SYS):")    # colon added since SYS is _not_ PREFIX
+epicsEnvSet("SM_PREFIX"             "$(IOC):")    # colon added since IOC is _not_ PREFIX
 # call init-script --> $(INIT)
 $(SCRIPTEXEC)($(ECMC_config_DIR)$(INIT=initAll))
 # add master ($(MASTER_ID))
