@@ -1,4 +1,4 @@
-runScript($(ECMC_CONFIG_ROOT)$(HW_DESC))
+$(SCRIPTEXEC) $(ECMC_CONFIG_ROOT)$(HW_DESC)
 
 # Drive
 ecmcAsynPortDriverAddParameter($(ECMC_ASYN_PORT),"ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.STM_STATUS","asynUInt32Digital",$(ECMC_ASYN_SKIP_CYCLES))

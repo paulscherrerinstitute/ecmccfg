@@ -39,6 +39,6 @@ epicsEnvSet("SCRIPTEXEC"            "$(SCRIPTEXEC=iocshLoad)")
 # define IOC Prefix
 epicsEnvSet("SM_PREFIX"             "$(IOC):")    # colon added since IOC is _not_ PREFIX
 # call init-script --> $(INIT)
-$(SCRIPTEXEC)($(ECMC_config_DIR)$(INIT=initAll))
+$(SCRIPTEXEC) $(ECMC_config_DIR)$(INIT=initAll)
 # add master ($(MASTER_ID))
-$(SCRIPTEXEC)($(ECMC_config_DIR)addMaster.cmd, "MASTER_ID=$(MASTER_ID=0)")
+$(SCRIPTEXEC) $(ECMC_config_DIR)addMaster.cmd, "MASTER_ID=$(MASTER_ID=0)"

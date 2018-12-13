@@ -1,5 +1,5 @@
 # Init
-runScript($(ECMC_CONFIG_ROOT)init)
+$(SCRIPTEXEC) $(ECMC_CONFIG_ROOT)init
 
 ############################################################
 ############# ASYN Configuration:

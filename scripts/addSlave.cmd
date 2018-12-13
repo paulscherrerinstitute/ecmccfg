@@ -8,6 +8,6 @@
 epicsEnvSet("ECMC_EC_SLAVE_NUM",  "$(SLAVE_ID)")
 epicsEnvSet("HW_DESC",            "$(HW_DESC)")
 
-runScript($(ECMC_CONFIG_ROOT)$(HW_DESC)$(ECMC_GEN_EC_RECORDS))
+$(SCRIPTEXEC) $(ECMC_CONFIG_ROOT)$(HW_DESC)$(ECMC_GEN_EC_RECORDS)
 #default records
-runScript($(ECMC_CONFIG_ROOT)slave)
+$(SCRIPTEXEC) $(ECMC_CONFIG_ROOT)slave
