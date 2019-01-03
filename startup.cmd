@@ -31,7 +31,7 @@ require stream
 # define default PATH for scripts and database/templates
 epicsEnvSet("ECMC_CONFIG_ROOT"      "$(ECMC_config_DIR)")
 epicsEnvSet("ECMC_CONFIG_DB"        "$(ECMC_config_TEMPLATES)/")
-epicsEnvSet("EthercatMC_DB"         "$(EthercatMC_TEMPLATES)/")
+epicsEnvSet("EthercatMC_DB"         "$(EthercatMC_TEMPLATES)")
 epicsEnvSet("STREAM_PROTOCOL_PATH"  "$(STREAM_PROTOCOL_PATH=""):$(ECMC_CONFIG_ROOT)")
 # define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
 epicsEnvSet("SCRIPTEXEC"            "$(SCRIPTEXEC=iocshLoad)")
