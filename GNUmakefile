@@ -14,7 +14,10 @@ SCRIPTS+=scripts/configureSlave.cmd
 SCRIPTS+=scripts/applyConfig.cmd
 SCRIPTS+=scripts/setAppMode.cmd
 SCRIPTS+=scripts/addAxis.cmd
+SCRIPTS+=scripts/addVirtualAxis.cmd
 SCRIPTS+=scripts/configureAxis.cmd
+SCRIPTS+=scripts/configureVirtualAxis.cmd
+SCRIPTS+=scripts/applyAxisSynchronization.cmd
 SCRIPTS+=scripts/loadPLCFile.cmd
 
 SCRIPTS+=$(wildcard ./general/*)
