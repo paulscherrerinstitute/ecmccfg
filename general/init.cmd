@@ -29,7 +29,7 @@ epicsEnvSet("ECMC_ASYN_SKIP_CYCLES"   "0")
 epicsEnvSet("ECMC_EC_AXIS_HEALTH"     "NOT SET")
 
 # Init all axis related variables
-$(SCRIPTEXEC) $(ECMC_config_DIR)initAxis
+$(SCRIPTEXEC) $(ECMC_config_DIR)initAxis.cmd
 
 # Additional parameters when motor Records are loaded
 epicsEnvSet("ECMC_EGU"                "mm")
