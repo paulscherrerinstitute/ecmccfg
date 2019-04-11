@@ -23,18 +23,18 @@ EthercatMCCreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "32", "200", "
 ############################################################
 ############# Misc settings:
 # Disable function call trace printouts
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetEnableFuncCallDiag(0)"
+ecmcConfigOrDie "Cfg.SetEnableFuncCallDiag(0)"
 
 # Disable on change printouts from objects (enable for easy logging)
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetTraceMaskBit(15,0)"
+ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,0)"
 
 # Choose to generate EPICS-records for EtherCAT-entries
 # (For records use ECMC_GEN_EC_RECORDS="-records" otherwise ECMC_GEN_EC_RECORDS="")
-epicsEnvSet("ECMC_GEN_EC_RECORDS"         "-records")
+epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
 
 # Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
 # (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
-epicsEnvSet("ECMC_GEN_AX_RECORDS"         "-records")
+epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
 
 # Update records in 10Hz (skip 99 cycles, based on 1000Hz sample rate)
-epicsEnvSet("ECMC_ASYN_SKIP_CYCLES"       "99")
+epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",       "99")
