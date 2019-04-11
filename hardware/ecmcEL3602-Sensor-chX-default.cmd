@@ -10,7 +10,7 @@
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Presentation:
 # 0 = Signed (Default)
@@ -19,13 +19,13 @@ EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x2")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Signed
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Enable Siemens S5 bits:
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x5")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Enable filter (not available for EL3208 and 3214-00x0):
 # NOTE: According to documentation the filter is always enabled independent of setting since needed for measure process. So rely on default value.
@@ -38,49 +38,49 @@ epicsEnvSet("ECMC_EC_SDO_VALUE",         "1")  # Enabled
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x7")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Enable limit 2 (not available for EL3208 and 3214-00x0):
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x8")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Enable user calibration
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0xA")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Enable vendor calibration
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0xB")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "1")  # Enabled
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # User scale offset
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x11")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # User scale gain (Represented in fixed point format with factor 2^⁻16=> 1 corresponds to  65535)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x12")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "65536")
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Limit 1 (not available for EL3208 and 3214-00x0):
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x13")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Limit 2 (not available for EL3208 and 3214-00x0):
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x14")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # 0x15 is set in the common snippet since these settings are valid for all channels
 
@@ -88,13 +88,13 @@ EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x17")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # User calibration gain
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x18")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "8388607") # default
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
 
 # Range
 # 0 = +-10V (Default)
@@ -104,4 +104,4 @@ EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x19")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0") # -+10V
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"

@@ -19,4 +19,4 @@ epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x15")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          2)
 epicsEnvSet("ECMC_EC_SDO_VALUE",         0)       # 50Hz
-EthercatMCConfigController ${ECMC_MOTOR_PORT} "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},${ECMC_EC_SDO_INDEX_OFFSET},${ECMC_EC_SDO_VALUE},${ECMC_EC_SDO_SIZE})"

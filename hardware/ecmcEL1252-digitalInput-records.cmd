@@ -1,4 +1,4 @@
-$(SCRIPTEXEC) $(ECMC_CONFIG_ROOT)$(HW_DESC)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}${HW_DESC}.cmd
 
 #*********************NOTE:Timestamps not configured yet!! Only like normal I/O!
 
