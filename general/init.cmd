@@ -18,21 +18,21 @@
 #   "ECMC_ASYN_TIMEOUT":      Asyn timeout
 #   "ECMC_ASYN_ADDR":         Asyn Address
 
-epicsEnvSet("ECMC_ASYN_TIMEOUT"       "1")                 # Asyn timeout
-epicsEnvSet("ECMC_ASYN_ADDR"          "0")                 # Asyn Address
-epicsEnvSet("ECMC_MOTOR_PORT"         "NOT SET")
-epicsEnvSet("ECMC_ASYN_PORT"          "NOT SET")
-epicsEnvSet("ECMC_PREFIX"             "NOT SET")
-epicsEnvSet("ECMC_GEN_EC_RECORDS"     "NOT SET")
-epicsEnvSet("ECMC_GEN_AX_RECORDS"     "NOT SET")
-epicsEnvSet("ECMC_ASYN_SKIP_CYCLES"   "0")
-epicsEnvSet("ECMC_EC_AXIS_HEALTH"     "NOT SET")
+epicsEnvSet("ECMC_ASYN_TIMEOUT",      1)                   # Asyn timeout
+epicsEnvSet("ECMC_ASYN_ADDR",         0)                   # Asyn Address
+epicsEnvSet("ECMC_MOTOR_PORT",        "NOT SET")
+epicsEnvSet("ECMC_ASYN_PORT",         "NOT SET")
+epicsEnvSet("ECMC_PREFIX",            "NOT SET")
+epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
+epicsEnvSet("ECMC_GEN_AX_RECORDS",    "NOT SET")
+epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",  0)
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",    "NOT SET")
 
 # Init all axis related variables
-$(SCRIPTEXEC) $(ECMC_config_DIR)initAxis.cmd
+${SCRIPTEXEC} "${ECMC_config_DIR}initAxis.cmd"
 
 # Additional parameters when motor Records are loaded
-epicsEnvSet("ECMC_EGU"                "mm")
-epicsEnvSet("ECMC_PREC"               "3")
-epicsEnvSet("ECMCAXISFIELDINIT"       "")                   # Extra field init to motor record
-epicsEnvSet("ECMC_AXISCONFIG"         "")                   # Extra parameters to driver
+epicsEnvSet("ECMC_EGU",               "mm")
+epicsEnvSet("ECMC_PREC",              3)
+epicsEnvSet("ECMCAXISFIELDINIT",      "")                  # Extra field init to motor record
+epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver
