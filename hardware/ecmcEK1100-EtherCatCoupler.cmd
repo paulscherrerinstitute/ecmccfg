@@ -11,6 +11,4 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x044c2c52")
 
 # Alias = 0
-#EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcAddSlave(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
-
 ecmcConfigOrDie "Cfg.EcAddSlave(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
