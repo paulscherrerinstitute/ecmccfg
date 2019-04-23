@@ -7,4 +7,4 @@
 ${SCRIPTEXEC} ${CONFIG}
 
 # add axis to ECMC
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis_sync
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis_sync.cmd

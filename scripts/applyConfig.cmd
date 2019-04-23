@@ -1,2 +1,2 @@
 # Apply hardware configuration
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcApplyConfig(1)"
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
