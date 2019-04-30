@@ -1,0 +1,203 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Cmd-RB")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): Drive Control Word RB")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_PTO_CONTROL")
+   field(PREC, "0")
+   field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Cmd")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): Drive Control Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_PTO_CONTROL")
+   field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Spd-RB")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): Drive Speed Setpoint RB")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VELOCITY_SETPOINT")
+   field(SCAN, "I/O Intr")
+   field(LINR, "$(LINR=SLOPE)")
+   field(ESLO, "$(ESLO=1)")
+   field(EOFF, "$(EOFF=0)")
+   field(EGU,  "$(EGU=V)")
+   field(PREC, "$(PREC=7)")
+   field(LOW,  "$(LOW=0)")
+   field(LOLO, "$(LOLO=0)")
+   field(HIGH, "$(HIGH=0)")
+   field(HIHI, "$(HIHI=0)")
+   field(HYST, "$(HYST=0)")
+   field(LLSV, "$(LLSV=NO_ALARM)")
+   field(LSV,  "$(LSV=NO_ALARM)")
+   field(HSV,  "$(HSV=NO_ALARM)")
+   field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Spd")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): Drive Speed Setpoint")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VELOCITY_SETPOINT")
+   field(LINR, "$(LINR=SLOPE)")
+   field(ESLO, "$(ESLO=1)")
+   field(EOFF, "$(EOFF=0)")
+   field(EGU,  "$(EGU=V)")
+   field(PREC, "$(PREC=7)")
+   field(LOW,  "$(LOW=0)")
+   field(LOLO, "$(LOLO=0)")
+   field(HIGH, "$(HIGH=0)")
+   field(HIHI, "$(HIHI=0)")
+   field(HYST, "$(HYST=0)")
+   field(LLSV, "$(LLSV=NO_ALARM)")
+   field(LSV,  "$(LSV=NO_ALARM)")
+   field(HSV,  "$(HSV=NO_ALARM)")
+   field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Stat")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): Drive Status Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynUInt32Digital")
+   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).Ch$(CH_ID)_PTO_STATUS")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Wrn-Alrm.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Err-Alrm")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): PTO Drive Error")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Stat.B6")
+   field(ZNAM, "No Alarm")
+   field(ONAM, "Warning")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "MAJOR")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-SyncErr-Alrm")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-SyncErr-Alrm")
+{
+   field(DESC, "$(HWTYPE) CH$(CH_ID): Drive Sync Error")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Drv-Stat.BC")
+   field(ZNAM, "No Alarm")
+   field(ONAM, "Error")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "MAJOR")
+}
+
+#Encoder
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-Stat")
+{
+   field(DESC, "$(HWTYPE): Encoder Status Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynUInt32Digital")
+   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).Ch$(CH_ID)_ENC_STATUS")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-SyncErr-Alrm.PROC")
+   field(SHFT, "0")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-SyncErr-Alrm")
+{
+   field(DESC, "$(HWTYPE): Encoder Sync Error Alarm")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-Stat.BD")
+   field(ZNAM, "No Alarm")
+   field(ONAM, "Alarm")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "MAJOR")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-PosAct")
+{
+   field(DESC, "$(HWTYPE): Encoder Actual Position (Raw)")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_POSITION")
+   field(SCAN, "I/O Intr")
+   field(LINR, "$(LINR=SLOPE)")
+   field(ESLO, "$(ESLO=1)")
+   field(EOFF, "$(EOFF=0)")
+   field(EGU,  "$(EGU=V)")
+   field(PREC, "$(PREC=7)")
+   field(LOW,  "$(LOW=0)")
+   field(LOLO, "$(LOLO=0)")
+   field(HIGH, "$(HIGH=0)")
+   field(HIHI, "$(HIHI=0)")
+   field(HYST, "$(HYST=0)")
+   field(LLSV, "$(LLSV=NO_ALARM)")
+   field(LSV,  "$(LSV=NO_ALARM)")
+   field(HSV,  "$(HSV=NO_ALARM)")
+   field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-Cmd")
+{
+   field(DESC, "$(HWTYPE): Encoder Control Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_ENC_CONTROL")
+   field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-Cmd-RB")
+{
+   field(DESC, "$(HWTYPE): Encoder Control Word RB")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_ENC_CONTROL")
+   field(PREC, "0")
+   field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-PosCmd")
+{
+   field(DESC, "$(HWTYPE): Encoder Counter Value Setpoint")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VALUE")
+   field(LINR, "$(LINR=SLOPE)")
+   field(ESLO, "$(ESLO=1)")
+   field(EOFF, "$(EOFF=0)")
+   field(EGU,  "$(EGU=V)")
+   field(PREC, "$(PREC=7)")
+   field(LOW,  "$(LOW=0)")
+   field(LOLO, "$(LOLO=0)")
+   field(HIGH, "$(HIGH=0)")
+   field(HIHI, "$(HIHI=0)")
+   field(HYST, "$(HYST=0)")
+   field(LLSV, "$(LLSV=NO_ALARM)")
+   field(LSV,  "$(LSV=NO_ALARM)")
+   field(HSV,  "$(HSV=NO_ALARM)")
+   field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Ch$(CH_ID)-Enc-PosCmd-RB")
+{
+   field(DESC, "$(HWTYPE): Encoder Control Word RB")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VALUE")
+   field(SCAN, "I/O Intr")
+   field(LINR, "$(LINR=SLOPE)")
+   field(ESLO, "$(ESLO=1)")
+   field(EOFF, "$(EOFF=0)")
+   field(EGU,  "$(EGU=V)")
+   field(PREC, "$(PREC=7)")
+   field(LOW,  "$(LOW=0)")
+   field(LOLO, "$(LOLO=0)")
+   field(HIGH, "$(HIGH=0)")
+   field(HIHI, "$(HIHI=0)")
+   field(HYST, "$(HYST=0)")
+   field(LLSV, "$(LLSV=NO_ALARM)")
+   field(LSV,  "$(LSV=NO_ALARM)")
+   field(HSV,  "$(HSV=NO_ALARM)")
+   field(HHSV, "$(HHSV=NO_ALARM)")
+}
