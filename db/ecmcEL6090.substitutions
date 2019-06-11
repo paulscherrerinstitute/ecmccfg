@@ -7,3 +7,9 @@ file ecmcEL6090_buttons.template
           {RIGHT, "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
           {ENTER, "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Button Input ${CH_ID}"}
 }
+
+file "ecmcEL6090_counter.template"
+{
+  pattern {N, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
+          {1, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+}
