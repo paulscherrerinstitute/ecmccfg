@@ -1,0 +1,9 @@
+file ecmcEL6090_buttons.template
+{
+  pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                              }
+          {UP,    "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
+          {DOWN,  "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
+          {LEFT,  "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
+          {RIGHT, "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
+          {ENTER, "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Button Input ${CH_ID}"}
+}

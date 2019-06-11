@@ -3,7 +3,7 @@ include /ioc/tools/driver.makefile
 MODULE=ECMC_config
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS=3.14 3.15 3.16
+EXCLUDE_VERSIONS=3
 ARCH_FILTER=RHEL%
 
 SCRIPTS+=startup.cmd
