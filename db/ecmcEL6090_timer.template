@@ -1,8 +1,8 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}"){
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Timer-${N}"){
   field(DESC, "$(HWTYPE): Counter value")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).COUNTER${N}")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).TIMER${N}")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -20,23 +20,23 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}-Incr"){
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Timer-${N}-Start"){
   field(PINI, "$(PINI=1)")
-  field(DESC, "$(DESC=$(HWTYPE)): inc counter")
+  field(DESC, "$(DESC=$(HWTYPE)): enable timer")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).C${N}_INCR")
-  field(ZNAM, "$(ZNAM=Zero)")
-  field(ONAM, "$(ONAM=One)")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).T${N}_START")
+  field(ZNAM, "$(ZNAM=off)")
+  field(ONAM, "$(ONAM=on)")
   field(ZSV,  "$(ZSV=NO_ALARM)")
   field(OSV,  "$(OSV=NO_ALARM)")
   field(FLNK, "$(FLNK=)")
 }
 
-record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}-Rst"){
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Timer-${N}-Rst"){
   field(PINI, "$(PINI=1)")
-  field(DESC, "$(DESC=$(HWTYPE)): reset counter")
+  field(DESC, "$(DESC=$(HWTYPE)): reset timer")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).C${N}_RESET")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).T${N}_RESET")
   field(ZNAM, "$(ZNAM=Zero)")
   field(ONAM, "$(ONAM=One)")
   field(ZSV,  "$(ZSV=NO_ALARM)")

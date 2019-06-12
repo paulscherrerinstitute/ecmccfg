@@ -12,4 +12,16 @@ file "ecmcEL6090_counter.template"
 {
   pattern {N, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
           {1, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {2, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {3, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {4, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+}
+
+file "ecmcEL6090_timer.template"
+{
+  pattern {N, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
+          {1, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {2, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {3, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {4, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
 }
