@@ -11,7 +11,7 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13893052")
 
 #############  Reset terminal
-EthercatMCConfigController "${ECMC_MOTOR_PORT}", "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
+ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
 
 ############################################################
 ############# Config PDOS:
