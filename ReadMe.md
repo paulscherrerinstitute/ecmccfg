@@ -10,7 +10,7 @@
 No mixes please, keep the code nice.
 - Macros
     - put double quotes (`"`) around macros
-    - use _UPPERCASE_ for marocs
+    - use _UPPERCASE_ for macros
     - use _curly brackets_ for macros
     - i.e.: `"${MY_MIGHTY_MACRO}"`
 
@@ -41,17 +41,17 @@ provide a module to handle ECMC configuration
 
     ```bash
     # slave 0 (ecmcEK1100-EtherCatCoupler)
-    $(SCRIPTEXEC) $(ECMC_config_DIR)addSlave.cmd, "SLAVE_ID=0, HW_DESC=ecmcEK1100-EtherCatCoupler"
+    $(SCRIPTEXEC) $(ECMC_config_DIR)addSlave.cmd, "SLAVE_ID=0, HW_DESC=ecmcEK1100"
     ```
 
 3.  apply the configuration
-    
+
     ```bash
     $(SCRIPTEXEC) ($(ECMC_config_DIR)applyConfig.cmd)
     ```
-    
+
 4. go active
-    
+
     ```bash
     $(SCRIPTEXEC) ($(ECMC_config_DIR)setAppMode.cmd)
     ```
