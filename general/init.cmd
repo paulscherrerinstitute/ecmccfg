@@ -27,6 +27,13 @@ epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",    "NOT SET")
 epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",  0)
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",    "NOT SET")
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",    "NOT SET")
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
+
+# ECMC_TIME_SOURCE:
+# = -2 for time stamp in ECMC (default).
+# = 0 for time stamp in EPICS
+epicsEnvSet("ECMC_TSE",               -2)
 
 # Init all axis related variables
 ${SCRIPTEXEC} "${ECMC_config_DIR}initAxis.cmd"

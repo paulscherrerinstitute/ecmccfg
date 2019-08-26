@@ -8,7 +8,7 @@ epicsEnvSet("ECMC_MOTOR_PORT"     "${SM_MOTOR_PORT=MCU1}")
 epicsEnvSet("ECMC_ASYN_PORT"      "${SM_ASYN_PORT=MC_CPU1}")
 epicsEnvSet("ECMC_PREFIX"         "${SM_PREFIX=IOC2:}")
 
-ecmcAsynPortDriverConfigure(${ECMC_ASYN_PORT},1000,0,0)
+ecmcAsynPortDriverConfigure(${ECMC_ASYN_PORT},1000,0,0,100)
 
 asynOctetSetOutputEos(${ECMC_ASYN_PORT}, -1, ";\n")
 asynOctetSetInputEos(${ECMC_ASYN_PORT}, -1, ";\n")
@@ -16,7 +16,7 @@ asynOctetSetInputEos(${ECMC_ASYN_PORT}, -1, ";\n")
 asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
 
 asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
-asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 15)
+asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 1)
 
 EthercatMCCreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "32", "200", "1000", "")
 
@@ -37,4 +37,7 @@ epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
 
 # Update records in 10Hz (skip 99 cycles, based on 1000Hz sample rate)
-epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",       "99")
+#epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",       "99")
+
+# Update records in 10ms (100Hz) 
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
