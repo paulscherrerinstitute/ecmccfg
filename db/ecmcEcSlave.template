@@ -1,0 +1,131 @@
+
+# Slave status word:
+# bit 0 online          : The slave is online.
+# bit 1 int operational : The slave was brought into OP state
+# bit 2..5  al_state    :  The application-layer state of the slave.
+#                             - 1: \a INIT
+#                             - 2: \a PREOP
+#                             - 4: \a SAFEOP
+#                             - 8: \a OP
+# bit 16..31            : entry counter
+record(longin,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat")
+{
+   field(DESC, "$(HWTYPE): Slave Status Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")   
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).slavestatus?")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-entrycounter.PROC")
+   field(TSE,  "$(TSE=-2)")
+}
+
+# Entry counter in 16 msb
+record(calc,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-entrycounter") {
+   field(DESC, "$(HWTYPE): Slave Entry Count")
+   field(PINI, "$(PINI=1)")
+   field(CALC,"A>>16")
+   field(INPA,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat.VAL")
+}
+
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_")
+{
+   field(DESC, "$(HWTYPE): Slave Status Word mbbiD")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynUInt32Digital")   
+   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).slavestatus?")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-online.PROC")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-online")
+{
+   field(DESC, "$(HWTYPE): Slave Online")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_.B0")
+   field(ZNAM, "Offline")
+   field(ONAM, "Online")
+   field(ZSV,  "MAJOR")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-operational.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-operational")
+{
+   field(DESC, "$(HWTYPE): Slave Operational")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_.B1")
+   field(ZNAM, "Not Operational")
+   field(ONAM, "Operational")
+   field(ZSV,  "MAJOR")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-init.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-init")
+{
+   field(DESC, "$(HWTYPE): Slave alstate INIT")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_.B2")
+   field(ZNAM, "Not INIT")
+   field(ONAM, "INIT")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-preop.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-preop")
+{
+   field(DESC, "$(HWTYPE): Slave alstate PREOP")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_.B3")
+   field(ZNAM, "Not PREOP")
+   field(ONAM, "PREOP")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-safeop.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-safeop")
+{
+   field(DESC, "$(HWTYPE): Slave alstate SAFEOP")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_.B4")
+   field(ZNAM, "Not SAFEOP")
+   field(ONAM, "SAFEOP")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-op.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-op")
+{
+   field(DESC, "$(HWTYPE): Slave alstate OP")
+   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat_.B5")
+   field(ZNAM, "Not OP")
+   field(ONAM, "OP")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+}
+
+record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-One"){   
+   info(asyn:READBACK,"1")
+   field(DESC, "$(HWTYPE): 32 bits set to 1 (int=-1)")
+   field(PINI, "1")
+   field(TSE, -2)
+   field(DTYP, "asynUInt32Digital")
+   field(OUT,  "@asynMask($(PORT),$(ADDR),$(MASK=0xFFFFFFFF),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).ONE?")
+   field(SCAN,"Passive")
+}
+
+record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Zero"){
+   info(asyn:READBACK,"1")
+   field(DESC, "$(HWTYPE): 32 bits set to 0 (int=0)")
+   field(PINI, "1")
+   field(TSE, -2)
+   field(DTYP, "asynUInt32Digital")
+   field(OUT,  "@asynMask($(PORT),$(ADDR),$(MASK=0xFFFFFFFF),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).ZERO?")
+   field(SCAN,"Passive")
+}
+
+record(stringin, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-HWType")
+{
+	field(DESC, "EtherCAT terminal hardware type name")
+	field(PINI, "YES")
+	field(VAL,  "$(HWTYPE)")
+}
