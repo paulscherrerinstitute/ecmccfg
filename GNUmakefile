@@ -20,8 +20,7 @@ SCRIPTS+=scripts/applyAxisSynchronization.cmd
 SCRIPTS+=scripts/loadPLCFile.cmd
 
 SCRIPTS+=$(wildcard ./general/*)
-SCRIPTS+=$(wildcard ./hardware/*.cmd)
-SCRIPTS+=$(wildcard ./hardware/technosoft/*.cmd)
+SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
 SCRIPTS+=$(wildcard ./motion/*)
 SCRIPTS+=$(wildcard ./protocol/*)
 
