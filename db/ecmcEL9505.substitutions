@@ -1,11 +1,11 @@
 file ecmcEcSlave.template
 {
-    pattern {}
-            {}			
+  pattern {}
+          {}
 }
 
 file ecmcEL9505.template
 {
-	pattern {}
-		    {}
+  pattern {}
+          {}
 }

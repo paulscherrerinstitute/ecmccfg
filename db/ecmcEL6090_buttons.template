@@ -1,5 +1,4 @@
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-$(CH_ID)")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-$(CH_ID)"){
   field(PINI, "$(PINI=1)")
   field(DESC, "$(DESC=$(HWTYPE): Binary Input $(CH_ID))")
   field(DTYP, "$(DTYP=asynInt32)")
