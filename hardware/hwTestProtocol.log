@@ -1,0 +1,131 @@
+ecmcEK1100-EtherCatCoupler                X
+ecmcEK1100-EtherCatCoupler-records        X
+ecmcEK1101-EtherCatCouplerID              X
+ecmcEK1110-EtherCatExtension              X  NO HARDWARE
+ecmcEK1110-EtherCatExtension-records      X  NO HARDWARE
+ecmcEK1122-EtherCatJunction               X
+ecmcEK1122-EtherCatJunction-records       X
+ecmcEL1014-digitalInput                   X
+ecmcEL1014-digitalInput-records           X
+ecmcEL1018-digitalInput                   X
+ecmcEL1018-digitalInput-records           X
+ecmcEL1252-digitalInput                   X 
+ecmcEL1252-digitalInput-records           X
+ecmcEL2004-digitalOutput                  X
+ecmcEL2004-digitalOutput-records          X
+ecmcEL2124-digitalOutput                  X
+ecmcEL2124-digitalOutput-records          X
+ecmcEL2502-pwmOutput                      X NO HARDWARE
+ecmcEL2502-pwmOutput-records              X NO HARDWARE
+ecmcEL2521-pulseTrain                     X
+ecmcEL2521-pulseTrain-records             X
+ecmcEL2522-pulseTrain                     X
+ecmcEL2522-pulseTrain-records             X
+ecmcEL2612-relayOutput                    X
+ecmcEL2612-relayOutput-records            X
+ecmcEL2808-digitalOutput                  X
+ecmcEL2808-digitalOutput-records          X
+ecmcEL2819-digitalOutput                  X
+ecmcEL2819-digitalOutput-records          X
+ecmcEL3002-analogInput                    X NO HARDWARE
+ecmcEL3002-analogInput-records            X NO HARDWARE
+ecmcEL3004-analogInput                    X NO HARDWARE
+ecmcEL3004-analogInput-records            X NO HARDWARE
+ecmcEL3162-analogInput                    X NO HARDWARE
+ecmcEL3162-analogInput-records            X NO HARDWARE
+ecmcEL3164-analogInput                    X NO HARDWARE
+ecmcEL3164-analogInput-records            X NO HARDWARE
+ecmcEL3202-0010-analogInput               X NO HARDWARE
+ecmcEL3202-0010-analogInput-records       X NO HARDWARE
+ecmcEL3204-analogInput                    X NO HARDWARE
+ecmcEL3204-analogInput-records            X NO HARDWARE
+ecmcEL3208-analogInput                    X
+ecmcEL3208-analogInput-records            X
+ecmcEL3214-analogInput                    X
+ecmcEL3214-analogInput-records            X
+ecmcEL3255-potentiometerInput             X
+ecmcEL3255-potentiometerInput-records     X
+ecmcEL3602-analogInput                    X
+ecmcEL3602-analogInput-records            X 
+ecmcEL3632-analogInput-1                  X
+ecmcEL3632-analogInput-1-records          X
+ecmcEL3632-analogInput-2                  X
+ecmcEL3632-analogInput-2-records          X
+ecmcEL3632-analogInput-5                  X
+ecmcEL3632-analogInput-50                 X
+ecmcEL3632-analogInput-50-records         X
+ecmcEL3632-analogInput-5-records          X
+ecmcEL3702-analogInput-10                 X
+ecmcEL3702-analogInput-100                X
+ecmcEL3702-analogInput-100-records        X
+ecmcEL3702-analogInput-10-records         X
+ecmcEL4002-analogOutput                   X
+ecmcEL4002-analogOutput-records           X
+ecmcEL4004-analogOutput                   X NO HARDWARE
+ecmcEL4004-analogOutput-records           X NO HARDWARE
+ecmcEL4032-analogOutput                   X NO HARDWARE
+ecmcEL4032-analogOutput-records           X NO HARDWARE
+ecmcEL4102-analogOutput                   X NO HARDWARE
+ecmcEL4102-analogOutput-records           X NO HARDWARE
+ecmcEL4104-analogOutput                   X NO HARDWARE
+ecmcEL4104-analogOutput-records           X NO HARDWARE
+ecmcEL4122-analogOutput                   X NO HARDWARE                              
+ecmcEL4122-analogOutput-records           X NO HARDWARE
+ecmcEL4134-analogOutput                   X
+ecmcEL4134-analogOutput-records           X
+ecmcEL5001-ssiEncoder                     X NO HARDWARE
+ecmcEL5001-ssiEncoder-records             X NO HARDWARE
+ecmcEL5002-ssiEncoder                     X
+ecmcEL5002-ssiEncoder-records             X
+ecmcEL5021-SinCosEncoder                  X
+ecmcEL5021-SinCosEncoder-records          X
+ecmcEL5101-32bit-IncEncoder               X
+ecmcEL5101-32bit-IncEncoder-records       X
+ecmcEL5101-IncEncoder                     X
+ecmcEL5101-IncEncoder-records             X
+ecmcEL6080-memory                         X
+ecmcEL6080-memory-records                 X
+ecmcEL7031-StepperDrive                   X
+ecmcEL7031-StepperDrive-records           X
+ecmcEL7037-StepperDrive                   X
+ecmcEL7037-StepperDrive-PosIF             X
+ecmcEL7037-StepperDrive-PosIF-records     X
+ecmcEL7037-StepperDrive-records           X
+ecmcEL7041-1000-StepperDrive              X
+ecmcEL7041-1000-StepperDrive-records      X
+ecmcEL7041-StepperDrive                   X
+ecmcEL7041-StepperDrive-records           X
+ecmcEL7041-0052-StepperDrive              X
+ecmcEL7047-0052-StepperDrive-records      X
+ecmcEL7047-StepperDrive                   X
+ecmcEL7047-StepperDrive-records           X
+ecmcEL7201-ServoDrive                     X
+ecmcEL7201-ServoDrive-records             X
+ecmcEL9410-powerSupplyEBus                X
+ecmcEL9410-powerSupplyEBus-records        X
+ecmcEL9505-powerSupply5V                  X
+ecmcEL9505-powerSupply5V-records          X
+ecmcEL9576-BrakeChopper                   X
+ecmcEL9576-BrakeChopper-records           X
+ecmcFIODrive-StepperDrive                 X
+ecmcFIODrive-StepperDrive-records         X
+ecmcIPOS4808-driveCSV                     X
+ecmcIPOS4808-driveCSV-records             X
+ecmcIPOS4808-EEPROM-BaseConfig-StepperOpenLoopCSV  X
+ecmcIPOS4808-Init.cmd                     X
+ecmcIPOS8020-driveCSV                     X
+ecmcIPOS8020-driveCSV-records             X
+ecmcIPOS8020-EEPROM-BaseConfig-StepperOpenLoopCSV  X
+ecmcIPOS8020-Init.cmd                     X
+ecmcIPOSXXXX-driveCSV                     X
+ecmcIPOSXXXX-driveCSV-records             X
+ecmcMCU1012                               x
+ecmcMCU1015                               x
+ecmcMCU1015_WS                            x
+ecmcMCU1021                               x
+ecmcMCU1025                               x
+ecmcMCU1025_plusEL5101                    x
+ecmcMCU1025_plusEL5101_EL3632             x
+ecmcMCU1025_plusEL5101_EL3632_EL3214      X
+ecmcMCU1026                               X
+ecmcMCU1026_wirescanner                   X

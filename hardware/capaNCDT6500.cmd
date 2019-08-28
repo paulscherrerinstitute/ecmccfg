@@ -10,6 +10,8 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "NCDT6500")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x0000065e")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00200f11")
 
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+
 ############# Config PDOS:
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x0000,0x00,16,GAP)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x03,32,COUNTER)"

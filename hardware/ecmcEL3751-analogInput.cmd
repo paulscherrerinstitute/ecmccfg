@@ -10,6 +10,8 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EL3751")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0ea73052")
 
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+
 #############  Reset terminal
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
 

@@ -1,0 +1,21 @@
+
+############################################################
+############# Configure SDOS:
+
+#Steps per rev 200poles, 256 levels of microstepping=>51200steps
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2084,0x0,51200,4)"
+
+#Stepper current in open loop configuration 2.8A => 2290  (819*I)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2025,0x0,2290,4)"
+
+#Stepper current in standby (open loop) 1A=>820 (819*I)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2026,0x0,820,4)"
+
+
+
+
+
+
+
+
+
