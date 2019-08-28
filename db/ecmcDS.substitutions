@@ -1,5 +1,5 @@
 file ecmcDataStorageNew.template
 {
-	pattern {Index, NELM, T_SMP_MS    }
-		    {1,     100,  -1           }		    
+  pattern {Index, NELM, T_SMP_MS }
+          {1,     100,  -1       }
 }

@@ -1,7 +1,7 @@
 file ecmcEcSlave.template
 {
-    pattern {}
-            {}
+  pattern {}
+          {}
 }
 
 file ecmcEL1XXX.template

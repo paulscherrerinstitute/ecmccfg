@@ -1,5 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd-RB")
-{
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd-RB"){
   field(DESC, "$(HWTYPE): Drive Control Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -8,8 +7,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd-RB")
   field(SCAN, "I/O Intr")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd")
-{
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd"){
   field(DESC, "$(HWTYPE): Drive Control Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -17,8 +15,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd")
   field(PREC, "0")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd-RB")
-{
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd-RB"){
   field(DESC, "$(HWTYPE): Drive Speed Setpoint RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -40,8 +37,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd-RB")
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd")
-{
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd"){
   field(DESC, "$(HWTYPE): Drive Speed Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -62,8 +58,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd")
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat")
-{
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat"){
   field(DESC, "$(HWTYPE): Drive Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
@@ -72,8 +67,7 @@ record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm"){
   field(DESC, "$(HWTYPE): Drive Warning")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.B2")
   field(ZNAM, "No Alarm")
@@ -83,8 +77,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm"){
   field(DESC, "$(HWTYPE): Drive Error")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.B3")
   field(ZNAM, "No Alarm")
@@ -94,8 +87,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stl-Alrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stl-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stl-Alrm"){
   field(DESC, "$(HWTYPE): Drive Motor Stall")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.B7")
   field(ZNAM, "No Alarm")
@@ -105,8 +97,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stl-Alrm")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-SyncErr-Alrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-SyncErr-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-SyncErr-Alrm"){
   field(DESC, "$(HWTYPE): Drive Sync Error")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.BD")
   field(ZNAM, "No Alarm")

@@ -10,8 +10,7 @@ record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)-RB")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)-RB"){
   field(PINI, "YES")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
   field(DTYP, "$(DTYP=asynInt32)")

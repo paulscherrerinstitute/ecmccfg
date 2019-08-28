@@ -1,16 +1,13 @@
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BI$(CH_ID)")
-{
-   field(PINI, "$(PINI=1)")
-   field(DESC, "$(DESC=$(HWTYPE): Binary Input $(CH_ID))")
-   field(DTYP, "$(DTYP=asynInt32)")
-   field(SCAN, "$(SCAN=I/O Intr)")
-   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).INPIN_$(CH_ID)?")
-   field(ZNAM, "$(ZNAM=Zero)")
-   field(ONAM, "$(ONAM=One)")
-   field(ZSV,  "$(ZSV=NO_ALARM)")
-   field(OSV,  "$(OSV=NO_ALARM)")
-   field(FLNK, "$(FLNK=)")
-   field(TSE,  "$(TSE=-2)")
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BI$(CH_ID)"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Input $(CH_ID))")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).INPIN_$(CH_ID)?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(FLNK, "$(FLNK=)")
+  field(TSE,  "$(TSE=-2)")
 }
-
-

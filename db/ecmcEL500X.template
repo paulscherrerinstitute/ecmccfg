@@ -1,5 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-PosAct")
-{
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-PosAct"){
   field(DESC, "$(HWTYPE): Encoder Actual Position (Raw)")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -21,8 +20,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-PosAct")
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Stat")
-{
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Stat"){
   field(DESC, "$(HWTYPE): Encoder Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
@@ -35,8 +33,7 @@ record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Stat")
 #    PDO entry 0x6010:01,  1 bit, "Data error"
 #    PDO entry 0x6010:02,  1 bit, "Frame error"
 #    PDO entry 0x6010:03,  1 bit, "Power failure"
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Data-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Data-Alrm"){
   field(DESC, "$(HWTYPE): Enc: Data Error")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Stat.B0")
   field(ZNAM, "No Alarm")
@@ -46,8 +43,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Data-Alrm")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Frame-Alrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Frame-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Frame-Alrm"){
   field(DESC, "$(HWTYPE): Enc: Frame Error")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Stat.B1")
   field(ZNAM, "No Alarm")
@@ -57,8 +53,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Frame-Alrm")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Power-Alrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Power-Alrm")
-{
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Power-Alrm"){
   field(DESC, "$(HWTYPE): Enc: Power Alarm")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc${CH}-Stat.B2")
   field(ZNAM, "No Alarm")
