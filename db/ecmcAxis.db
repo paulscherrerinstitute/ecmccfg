@@ -1,0 +1,187 @@
+#Asyn parameters for one axis
+record(ai,"$(P)$(AXIS_NAME)-PosAct"){
+   field(PINI, "1")
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos?")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+   field(DESC, "Axis ax$(AXIS_NO): Actual Position")
+   field(TSE,  "$(TSE=-2)")   
+}
+
+record(ai,"$(P)$(AXIS_NAME)-PosSet"){
+   field(PINI, "1")
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).setpos?")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+   field(DESC, "Axis ax$(AXIS_NO): Setpoint Position")
+   field(TSE,  "$(TSE=-2)")   
+}
+
+record(ai,"$(P)$(AXIS_NAME)-PosErr"){
+   field(PINI, "1")
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poserr?")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+   field(DESC, "Axis ax$(AXIS_NO): Following Error")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(waveform,"$(P)$(AXIS_NAME)-Array-Stat")
+{    
+    field(PINI, "1")
+    field(DTYP, "asynInt8ArrayIn")
+    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ax$(AXIS_NO).diagnostic?")
+    field(FTVL, "CHAR")
+    field(NELM, "$(SIZE=256)")
+    field(SCAN, "I/O Intr")
+    field(DESC, "Axis ax$(AXIS_NO): Diagnostic String")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"$(P)$(AXIS_NAME)-Stat")
+{
+   field(DESC, "$(AXIS_NAME): Status Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")   
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)$(AXIS_NAME)-seqstate.PROC")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,"$(P)$(AXIS_NAME)-seqstate") {
+   field(DESC, "$(AXIS_NAME): Seq state")
+   field(PINI, "$(PINI=1)")
+   field(CALC,"A>>16")
+   field(INPA,"$(P)$(AXIS_NAME)-Stat.VAL")
+}
+
+record(calc,"$(P)$(AXIS_NAME)-lastilock") {
+   field(DESC, "$(AXIS_NAME): Last interlock")
+   field(PINI, "$(PINI=1)")
+   field(CALC,"A>>24")
+   field(INPA,"$(P)$(AXIS_NAME)-Stat.VAL")
+}
+
+record(mbbiDirect,"$(P)$(AXIS_NAME)-Stat_")
+{
+   field(DESC, "$(AXIS_NAME): Status Word mbbiD")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynUInt32Digital")   
+   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)$(AXIS_NAME)-enabled.PROC")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-enabled")
+{
+   field(DESC, "$(AXIS_NAME): Enabled")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B0")
+   field(ZNAM, "Disabled")
+   field(ONAM, "Enabled")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-execute.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-execute")
+{
+   field(DESC, "$(AXIS_NAME): Execute Cmd")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B1")
+   field(ZNAM, "No Execute")
+   field(ONAM, "Execute")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-busy.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-busy")
+{
+   field(DESC, "$(AXIS_NAME): Busy")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B2")
+   field(ZNAM, "Free")
+   field(ONAM, "Busy")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-attarget.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-attarget")
+{
+   field(DESC, "$(AXIS_NAME): At target")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B3")
+   field(ZNAM, "Not at target")
+   field(ONAM, "At target")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-moving.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-moving")
+{
+   field(DESC, "$(AXIS_NAME): Moving")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B4")
+   field(ZNAM, "Standstill")
+   field(ONAM, "Moving")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-limitfwd.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-limitfwd")
+{
+   field(DESC, "$(AXIS_NAME): Limit FWD")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B5")
+   field(ZNAM, "Limit activated")
+   field(ONAM, "Limit OK")
+   field(ZSV,  "MINOR")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-limitbwd.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-limitbwd")
+{
+   field(DESC, "$(AXIS_NAME): Limit BWD")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B6")
+   field(ZNAM, "Limit activated")
+   field(ONAM, "Limit OK")
+   field(ZSV,  "MINOR")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-homeswitch.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-homeswitch")
+{
+   field(DESC, "$(AXIS_NAME): Home switch")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B7")
+   field(ZNAM, "Low")
+   field(ONAM, "High")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+   field(FLNK, "$(P)$(AXIS_NAME)-instartup.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-instartup")
+{
+   field(DESC, "$(AXIS_NAME): In startup phase")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B8")
+   field(ZNAM, "Started")
+   field(ONAM, "In startup")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "MINOR")
+   field(FLNK, "$(P)$(AXIS_NAME)-inrealtime.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-inrealtime")
+{
+   field(DESC, "$(AXIS_NAME): In realtime")
+   field(INP,  "$(P)$(AXIS_NAME)-Stat_.B9")
+   field(ZNAM, "Not in realtime")
+   field(ONAM, "In realtime")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")   
+}

@@ -1,0 +1,11 @@
+file ecmcEcSlave.template
+{
+    pattern {}
+            {}			
+}
+
+file ecmcEK1101.template
+{
+	pattern {}
+		    {}
+}

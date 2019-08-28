@@ -1,0 +1,29 @@
+
+record(bo,"$(P)Event$(Index)-En"){
+	field(DTYP,"stream")
+	field(OUT,"@ecmcEvent.proto setEnable($(Index)) $(PORT)")
+	field(ZNAM,"FALSE")
+	field(ONAM,"TRUE")
+}
+
+record(bo,"$(P)Event$(Index)-Trg"){
+	field(DTYP,"stream")
+	field(OUT,"@ecmcEvent.proto setTrigger($(Index)) $(PORT)")
+	field(ZNAM,"FALSE")
+	field(ONAM,"TRUE")
+}
+
+record(bo,"$(P)Event$(Index)-Arm-Trg"){
+	field(DTYP,"stream")
+	field(OUT,"@ecmcEvent.proto setArm($(Index)) $(PORT)")
+	field(ZNAM,"FALSE")
+	field(ONAM,"TRUE")
+}
+
+record(bo,"$(P)Event$(Index)-Print-En"){
+	field(DTYP,"stream")
+	field(OUT,"@ecmcEvent.proto setEnablePrintouts($(Index)) $(PORT)")
+	field(ZNAM,"FALSE")
+	field(ONAM,"TRUE")
+}
+

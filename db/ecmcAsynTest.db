@@ -1,0 +1,146 @@
+record(ai,"$(P)MCU-ai-test-int32-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.test.int32?")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)MCU-ao-test-int32") {
+   field(PINI, "1")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.test.int32=")
+   field(PREC, "3")
+}
+
+record(ai,"$(P)MCU-ai-test-double-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ecmc.test.double?")
+   field(PREC, "3")
+   field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)MCU-ao-test-double") {
+   field(PINI, "1")
+   field(DTYP, "asynFloat64")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ecmc.test.double=")
+   field(PREC, "3")
+}
+
+record(bi,"$(P)MCU-bi-test-int32-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynInt32")
+   field(INP,"@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ecmc.test.int32?")
+   field(ZNAM,"FALSE")
+   field(ONAM,"TRUE")
+   field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)MCU-bo-test-int32") {
+   field(PINI, "1")
+   field(DTYP, "asynInt32")
+   field(OUT,"@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ecmc.test.int32=")
+   field(ZNAM,"FALSE")
+   field(ONAM,"TRUE")
+}
+
+record(waveform,"$(P)MCU-wf-test-int8array-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynInt8ArrayIn")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ecmc.test.int8array?")
+   field(FTVL, "CHAR")
+   field(NELM, "128")
+   field(SCAN, "I/O Intr")
+}
+
+record(waveform,"$(P)MCU-wf-test-int8array") {
+  info(asyn:READBACK,"1")
+  field(PINI, "1")
+  field(TSE,  "$(TSE=-2)")
+  field(DTYP, "asynInt8ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayOut/ecmc.test.int8array=")
+  field(NELM, "128")
+  field(SCAN, "Passive")
+  field(FTVL, "CHAR")
+}
+
+record(waveform,"$(P)MCU-wf-test-int16array-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynInt16ArrayIn")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayIn/ecmc.test.int16array?")
+   field(FTVL, "SHORT")
+   field(NELM, "128")
+   field(SCAN, "I/O Intr")
+}
+
+record(waveform,"$(P)MCU-wf-test-int16array") {
+  info(asyn:READBACK,"1")
+  field(PINI, "1")
+  field(TSE,  "$(TSE=-2)")
+  field(DTYP, "asynInt16ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayOut/ecmc.test.int16array=")
+  field(NELM, "128")
+  field(SCAN, "Passive")
+  field(FTVL, "SHORT")
+}
+
+record(waveform,"$(P)MCU-wf-test-int32array-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynInt32ArrayIn")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32ArrayIn/ecmc.test.int32array?")
+   field(FTVL, "LONG")
+   field(NELM, "128")
+   field(SCAN, "I/O Intr")
+}
+
+record(waveform,"$(P)MCU-wf-test-int32array") {
+  info(asyn:READBACK,"1")
+  field(PINI, "1")  
+  field(TSE,  "$(TSE=-2)")
+  field(DTYP, "asynInt32ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32ArrayOut/ecmc.test.int32array=")
+  field(NELM, "128")
+  field(SCAN, "Passive")
+  field(FTVL, "LONG")
+}
+
+record(waveform,"$(P)MCU-wf-test-float32array-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynFloat32ArrayIn")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat32ArrayIn/ecmc.test.float32array?")
+   field(FTVL, "FLOAT")
+   field(NELM, "128")
+   field(SCAN, "I/O Intr")
+}
+
+record(waveform,"$(P)MCU-wf-test-float32array") {
+  info(asyn:READBACK,"1")    
+  field(PINI, "1")
+  field(TSE,  "$(TSE=-2)")
+  field(DTYP, "asynFloat32ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat32ArrayOut/ecmc.test.float32array=")
+  field(NELM, "128")
+  field(SCAN, "Passive")
+  field(FTVL, "FLOAT")
+}
+
+record(waveform,"$(P)MCU-wf-test-double64array-RB") {
+   field(PINI, "1")
+   field(DTYP, "asynFloat64ArrayIn")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64ArrayIn/ecmc.test.double64array?")
+   field(FTVL, "DOUBLE")
+   field(NELM, "128")
+   field(SCAN, "I/O Intr")
+}
+
+record(waveform,"$(P)MCU-wf-test-double64array") {
+  info(asyn:READBACK,"1")
+  field(PINI, "1")
+  field(TSE,  "$(TSE=-2)")
+  field(DTYP, "asynFloat64ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64ArrayOut/ecmc.test.double64array=")
+  field(NELM, "128")
+  field(SCAN, "Passive")
+  field(FTVL, "DOUBLE")
+}

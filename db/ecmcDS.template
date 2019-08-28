@@ -1,0 +1,67 @@
+
+record(bo,"$(P)ds$(Index)-Clear-Cmd"){
+	field(DTYP,"stream")
+	field(OUT,"@ecmcDataStorage.proto clearDataStorage($(Index)) $(PORT)")
+	field(ZNAM,"FALSE")
+	field(ONAM,"TRUE")
+	field(FLNK,"$(P)ds$(Index)-Data-Act")
+}
+
+record(ai,"$(P)ds$(Index)-DataIndex-Act"){    
+    field(PINI, "1")
+	field(DTYP, "asynInt32")
+	field(INP,"@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ds$(Index).index?")
+    field(SCAN, "I/O Intr")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(waveform,"$(P)ds$(Index)-Data-Act") {
+   info(asyn:FIFO, "1000")         
+   field(PINI, "1")
+   field(DTYP, "asynFloat64ArrayIn")
+   field(INP,  "@asyn($(PORT),$(ADDR=),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64ArrayIn/ds$(Index).data?")
+   field(FTVL, "DOUBLE")
+   field(NELM, "$(NELM)")
+   field(SCAN, "I/O Intr")
+   field(TSE,  "$(TSE=-2)")
+}
+
+
+record(longin,"$(P)ds$(Index)-Stat")
+{
+   field(DESC, "ds$(Index): Status Word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")   
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ds$(Index).status?")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)ds$(Index)-Type.PROC")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,"$(P)ds$(Index)-Type") {
+   field(DESC, "ds$(Index): Buffer type")
+   field(PINI, "$(PINI=1)")
+   field(CALC,"A>>16")
+   field(INPA,"$(P)ds$(Index)-Stat.VAL")
+}
+
+record(mbbiDirect,"$(P)ds$(Index)-Stat_")
+{
+   field(DESC, "ds$(Index): Status Word mbbiD")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynUInt32Digital")   
+   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ds$(Index).status?")
+   field(SCAN, "I/O Intr")
+   field(FLNK, "$(P)ds$(Index)-full.PROC")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ds$(Index)-full")
+{
+   field(DESC, "ds$(Index): Buffer full")
+   field(INP,  "$(P)ds$(Index)-Stat_.B0")
+   field(ZNAM, "Buffer not full")
+   field(ONAM, "Buffer full")
+   field(ZSV,  "NO_ALARM")
+   field(OSV,  "NO_ALARM")
+}

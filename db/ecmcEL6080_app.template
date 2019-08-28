@@ -1,0 +1,94 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat")
+{
+   field(DESC, "$(HWTYPE): Status word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.STATUS?")
+   field(SCAN, "I/O Intr")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cmd")
+{
+   field(DESC, "$(HWTYPE): Control word")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.CONTROL=")
+   field(SCAN, "Passive")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_INT32_1")
+{
+   field(DESC, "$(HWTYPE): Input int32_1")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.IN_INT32_1?")
+   field(SCAN, "I/O Intr")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_INT32_1")
+{
+   field(DESC, "$(HWTYPE): Output int32_1")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.OUT_INT32_1=")
+   field(SCAN, "Passive")   
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_INT32_2")
+{
+   field(DESC, "$(HWTYPE): Input int32_2")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.IN_INT32_2?")
+   field(SCAN, "I/O Intr")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_INT32_2")
+{
+   field(DESC, "$(HWTYPE): Output int32_2")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynInt32")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.OUT_INT32_2=")
+   field(SCAN, "Passive")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_FLOAT64_1")
+{
+   field(DESC, "$(HWTYPE): Input float64_1")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s${SLAVE_POS}.IN_FLOAT64_1?")
+   field(SCAN, "I/O Intr")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_FLOAT64_1")
+{
+   field(DESC, "$(HWTYPE): Output float64_1")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynFloat64")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s${SLAVE_POS}.OUT_FLOAT64_1=")
+   field(SCAN, "Passive")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_FLOAT64_2")
+{
+   field(DESC, "$(HWTYPE): Input float64_2")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynFloat64")
+   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s${SLAVE_POS}.IN_FLOAT64_2?")
+   field(SCAN, "I/O Intr")
+   field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_FLOAT64_2")
+{
+   field(DESC, "$(HWTYPE): Output float64_2")
+   field(PINI, "$(PINI=1)")
+   field(DTYP, "asynFloat64")
+   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s${SLAVE_POS}.OUT_FLOAT64_2=")
+   field(SCAN, "Passive")
+}
