@@ -6,91 +6,66 @@ ReadTimeout = 100;
 
 
 getEncSourceType{
-	out "GetAxisEncSourceType(\$1)";
-	in "%{0|1}";
+  out "GetAxisEncSourceType(\$1)";
+  in "%{0|1}";
 }
 
 setEncSourceType{
-	out "Cfg.SetAxisEncSourceType(\$1,%{0|1})";
-	in "OK";
-	@init { getEncSourceType; }
+  out "Cfg.SetAxisEncSourceType(\$1,%{0|1})";
+  in "OK";
+  @init { getEncSourceType; }
 }
 
 getTrajSourceType{
-	out "GetAxisTrajSourceType(\$1)";
-	in "%{0|1}";
+  out "GetAxisTrajSourceType(\$1)";
+  in "%{0|1}";
 }
 
 setTrajSourceType{
-	out "Cfg.SetAxisTrajSourceType(\$1,%{0|1})";
-	in "OK";
-	@init { getTrajSourceType; }
+  out "Cfg.SetAxisTrajSourceType(\$1,%{0|1})";
+  in "OK";
+  @init { getTrajSourceType; }
 }
 
-getTrajTransExpr{
-	out "GetAxisTrajTransExpr(\$1)";
-	in "%[^;]";
+getAxisPLCEnable{
+  out "GetAxisPLCEnable(\$1)";
+  in "%{0|1}";
 }
 
-setTrajTransExpr{
-	out "Cfg.SetAxisTrajTransExpr(\$1)=%s";
-	in "OK";
-	@init { getTrajTransExpr; }
+setAxisPLCEnable{
+  out "Cfg.SetAxisPLCEnable(\$1,%{0|1})";
+  in "OK";
+  @init { getAxisPLCEnable; }
 }
 
-getEncTransExpr{
-	out "GetAxisEncTransExpr(\$1)";
-	in "%[^;]";
+getAxisPLCExpr{
+  out "GetAxisPLCExpr(\$1)";
+  in "%[^;]";
 }
 
-setEncTransExpr{
-	out "Cfg.SetAxisEncTransExpr(\$1)=%s";
-	in "OK";
-	@init { getEncTransExpr; }
+setAxisPLCExpr{
+  out "Cfg.SetAxisPLCExpr(\$1)=%s";
+  in "OK";
+  @init { getAxisPLCExpr; }
 }
 
-getEnableCommandsTransform{
-	out "GetAxisEnableCommandsTransform(\$1)";
-	in "%{0|1}";
+getAxisAllowCommandsFromPLC{
+  out "GetAxisAllowCommandsFromPLC(\$1)";
+  in "%{0|1}";
 }
 
-setEnableCommandsTransform{
-	out "Cfg.SetAxisEnableCommandsTransform(\$1,%{0|1})";
-	in "OK";
-	@init { getEnableCommandsTransform; }
-}
-
-getCommandTransExpr{
-	out "GetAxisTransformCommandExpr(\$1)";
-	in "%[^;]";
-}
-
-setCommandTransExpr{
-	out "Cfg.SetAxisTransformCommandExpr(\$1)=%s";
-	in "OK";
-	@init { getCommandTransExpr; }
-}
-
-getEnableCommandFromOtherAxis{             
-	out "GetAxisEnableCommandsFromOtherAxis(\$1)";
-	in "%{0|1}";
-}
-
-setEnableCommandFromOtherAxis{
-	out "Cfg.SetAxisEnableCommandsFromOtherAxis(\$1,%{0|1})";
-	in "OK";
-	@init { getEnableCommandFromOtherAxis; }
+setAxisAllowCommandsFromPLC{
+  out "Cfg.SetAxisAllowCommandsFromPLC(\$1,%{0|1})";
+  in "OK";
+  @init { getAxisAllowCommandsFromPLC; }
 }
 
 getAxisType{
-	out "GetAxisType(\$1)";
-	in "%f";
+  out "GetAxisType(\$1)";
+  in "%f";
 }
 
 setAxisStartPos{
-	out "Cfg.SetAxisTrajStartPos(\$1,%f)";
-	in "OK";
+  out "Cfg.SetAxisTrajStartPos(\$1,%f)";
+  in "OK";
 }
-
-
-

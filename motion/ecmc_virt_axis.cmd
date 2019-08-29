@@ -2,6 +2,8 @@
 ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},2)"
 ecmcConfigOrDie "Cfg.SetAxisTrajStartPos(${ECMC_AXIS_NO},0)"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_AXIS_HEALTH},"ax${ECMC_AXIS_NO}.health")"
+ecmcConfigOrDie "Cfg.SetAxisModRange(${ECMC_AXIS_NO}, ${ECMC_MOD_RANGE})"
+ecmcConfigOrDie "Cfg.SetAxisModType(${ECMC_AXIS_NO}, ${ECMC_MOD_TYPE})"
 
 #Trajectory
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},${ECMC_EMERG_DECEL})"
@@ -15,8 +17,8 @@ ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_DENOM
 ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_NUM})"
 ecmcConfigOrDie "Cfg.SetAxisEncType(${ECMC_AXIS_NO},${ECMC_ENC_TYPE})"
 ecmcConfigOrDie "Cfg.SetAxisEncBits(${ECMC_AXIS_NO},${ECMC_ENC_BITS})"
-ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(${ECMC_AXIS_NO},${ECMC_ENC_ABS_BITS})"
-ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},${ECMC_ENC_ABS_OFFSET})"
+ecmcConfigOrDie "Cfg.SetAxisEncAbsBits($(ECMC_AXIS_NO),${ECMC_ENC_ABS_BITS})"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset($(ECMC_AXIS_NO),${ECMC_ENC_ABS_OFFSET})"
 
 #Monitor
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_MON_LOWLIM},"ax${ECMC_AXIS_NO}.mon.lowlim")"
@@ -34,11 +36,11 @@ ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_DRV_TIME})"
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_TRAJ_TIME})"
 
-EthercatMCCreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", "stepSize=${ECMC_MRES}")
+EthercatMCCreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", "stepSize=$(ECMC_MRES)")
 
-dbLoadRecords("$(EthercatMC_DB)EthercatMC.template", "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=$(ECMC_MOTOR_NAME), R=$(ECMC_R), MOTOR_PORT=$(ECMC_MOTOR_PORT), ASYN_PORT=${ECMC_ASYN_PORT}, AXIS_NO=$(ECMC_AXIS_NO), DESC=$(ECMC_DESC), PREC=$(ECMC_PREC), VELO=$(ECMC_VELO), JVEL=$(ECMC_JOG_VEL), JAR=$(ECMC_JAR), ACCL=$(ECMC_ACCL), MRES=$(ECMC_MRES), RDBD=$(ECMC_MON_AT_TARGET_TOL), DLLM=$(ECMC_SOFT_LOW_LIM), DHLM=$(ECMC_SOFT_HIGH_LIM), HOMEPROC=$(ECMC_HOME_PROC)  $(ECMCAXISFIELDINIT)")
+dbLoadRecords("EthercatMC.template", "PREFIX=$(ECMC_PREFIX), MOTOR_NAME=$(ECMC_MOTOR_NAME), R=$(ECMC_R), MOTOR_PORT=$(ECMC_MOTOR_PORT), ASYN_PORT=$(ECMC_ASYN_PORT), AXIS_NO=$(ECMC_AXIS_NO), DESC=$(ECMC_DESC), PREC=$(ECMC_PREC), VELO=$(ECMC_VELO), JVEL=$(ECMC_JOG_VEL), JAR=$(ECMC_JAR), ACCL=$(ECMC_ACCL), MRES=$(ECMC_MRES), RDBD=$(ECMC_MON_AT_TARGET_TOL), DLLM=$(ECMC_SOFT_LOW_LIM), DHLM=$(ECMC_SOFT_HIGH_LIM), HOMEPROC=$(ECMC_HOME_PROC)  $(ECMCAXISFIELDINIT)")
 epicsEnvSet("ECMCAXISFIELDINIT",  "")
 
-dbLoadRecords("$(EthercatMC_DB)EthercatMChome.template", "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=$(ECMC_MOTOR_NAME), R=$(ECMC_R), MOTOR_PORT=$(ECMC_MOTOR_PORT), ASYN_PORT=${ECMC_ASYN_PORT}, AXIS_NO=$(ECMC_AXIS_NO),HOMEPROC=$(ECMC_HOME_PROC), HOMEPOS=$(ECMC_HOME_POS), HVELTO=$(ECMC_HOME_VEL_TO), HVELFRM=$(ECMC_HOME_VEL_FRM), HOMEACC=$(ECMC_HOME_ACC), HOMEDEC=$(ECMC_HOME_DEC)")
+dbLoadRecords("EthercatMChome.template", "PREFIX=$(ECMC_PREFIX), MOTOR_NAME=$(ECMC_MOTOR_NAME), R=$(ECMC_R), MOTOR_PORT=$(ECMC_MOTOR_PORT), ASYN_PORT=$(ECMC_ASYN_PORT), AXIS_NO=$(ECMC_AXIS_NO),HOMEPROC=$(ECMC_HOME_PROC), HOMEPOS=$(ECMC_HOME_POS), HVELTO=$(ECMC_HOME_VEL_TO), HVELFRM=$(ECMC_HOME_VEL_FRM), HOMEACC=$(ECMC_HOME_ACC), HOMEDEC=$(ECMC_HOME_DEC)")
 
-dbLoadRecords("${ECMC_CONFIG_DB}ecmcExpression.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=$(ECMC_AXIS_NO),Name=${ECMC_PREFIX}$(ECMC_MOTOR_NAME)")
+dbLoadRecords("ecmcExpression.db", "PORT=$(ECMC_ASYN_PORT),A=0,Index=${ECMC_AXIS_NO},Name=$(ECMC_PREFIX)$(ECMC_MOTOR_NAME)")
