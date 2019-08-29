@@ -13,5 +13,4 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd
 #default records
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}slave.cmd
 
-NEXT_SID=${ECMC_EC_SLAVE_NUM}+1
-epicsEnvSet("SLAVE_ID",           "${NEXT_SID}")
+epicsEnvSet("SLAVE_ID",           "$(${ECMC_EC_SLAVE_NUM}+1)")
