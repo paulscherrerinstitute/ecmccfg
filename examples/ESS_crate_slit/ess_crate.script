@@ -58,29 +58,27 @@ EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_
 #
 epicsEnvSet("DEV",      "STEST-MYDEVICE")
 ${SCRIPTEXEC} ${ECMC_config_DIR}configureAxis.cmd, "CONFIG=./cfg/axis_1"
-#${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_1_sync
+${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_1_sync"
 #
 ${SCRIPTEXEC} ${ECMC_config_DIR}configureAxis.cmd, "CONFIG=./cfg/axis_2"
-# ${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_2_sync
-# ## virtual AXIS 11&12
-# #
-# ${SCRIPTEXEC} ${ECMC_config_DIR}configureVirtualAxis.cmd, CONFIG=./cfg/axis_11_virt
-# ${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_11_sync
-# ${SCRIPTEXEC} ${ECMC_config_DIR}configureVirtualAxis.cmd, CONFIG=./cfg/axis_12_virt
-# ${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_12_sync
+${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_2_sync"
+# # ## virtual AXIS 11&12
+# # #
+${SCRIPTEXEC} ${ECMC_config_DIR}configureVirtualAxis.cmd, "CONFIG=./cfg/axis_11_virt"
+${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_11_sync
+
+${SCRIPTEXEC} ${ECMC_config_DIR}configureVirtualAxis.cmd, "CONFIG=./cfg/axis_12_virt"
+${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_12_sync
 
 ##############################################################################
 ## PLC 0
 
-# ${SCRIPTEXEC} ${ECMC_config_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc"
+${SCRIPTEXEC} ${ECMC_config_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc"
 #${SCRIPTEXEC} ${ECMC_config_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlitComplex.plc"
 
 ##############################################################################
 ############# Configure diagnostics:
 
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcSetDiagnostics(1)"
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcEnablePrintouts(0)"
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcSetDomainFailedCyclesLimit(100)"
 EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisIndex(1)"
 EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisFreq(2)"
 EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisEnable(0)"
