@@ -1,0 +1,15 @@
+############# Encoder
+# 0 Internal (from hardware), 1 from expression
+epicsEnvSet("ECMC_ENC_SOURCE",                 "1")
+epicsEnvSet("ECMC_ENC_EXPRESSION",             "actPos11:=(actPos1+actPos2)/2#ilock11:=1#")
+epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")
+
+############# Trajectory
+# 0 Internal, 1 from expression
+epicsEnvSet("ECMC_TRAJ_SOURCE",                "0")
+epicsEnvSet("ECMC_TRAJ_EXPRESSION",            "")
+
+############# Commands
+epicsEnvSet("ECMC_CMD_FRM_OTHER_AXIS_ENABLE",  "1")
+epicsEnvSet("ECMC_CMD_EXPRESSION_ENABLE",      "1")
+epicsEnvSet("ECMC_CMD_EXPRESSION",             "en1:=en11+en12#en2:=en11+en12#")

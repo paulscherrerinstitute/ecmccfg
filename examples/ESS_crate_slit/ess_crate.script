@@ -1,0 +1,89 @@
+# ECMC config
+# Arguments
+# [set by module]
+# ECMC_CONFIG_ROOT  ==  ${ECMC_config_DIR}
+# ECMC_CONFIG_DB    ==  ${ECMC_config_TEMPLATES}
+# [mandatory]
+# SYS
+# [optional]
+# ECMC_VER        = kivel
+# EthercatMC_VER  = kivel
+# INIT            = initAll
+# MASTER_ID       = 0
+#
+# calls initAll by default, which calls init
+# calls 'add_master.cmd'
+#require ECMC_config kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+require ECMC_config kivel "ECMC_VER=6, EthercatMC_VER=3"
+
+# slave 0 {ecmcEK1100-EtherCatCoupler}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EK1100, SLAVE_ID=0"
+# slave 1 {ecmcEL1018-digitalInput}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL1018, SLAVE_ID=1"
+# # slave 2 {ecmcEL2808-digitalOutput}A
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT",      "2")
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL2808, SLAVE_ID=${ECMC_EC_SLAVE_NUM_DIG_OUT}"
+# # slave 3 {ecmcEL5101-IncEncoder}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL5101, SLAVE_ID=3"
+# # slave 4 {ecmcEL5101-32bit-IncEncoder}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL5101_32bit, SLAVE_ID=4"
+# # slave 5 ecmcEL9505-powerSupply5V{}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL9505, SLAVE_ID=5"
+# # slave 6 {ecmcEL1252-digitalInput}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL1252, SLAVE_ID=6"
+# # slave 7 {ecmcEL9410-powerSupplyEBus}
+${SCRIPTEXEC} ${ECMC_config_DIR}addSlave.cmd, "HW_DESC=EL9410, SLAVE_ID=7"
+# # slave 8 {ecmcEL7037-StepperDrive}
+${SCRIPTEXEC} ${ECMC_config_DIR}configureSlave.cmd, "SLAVE_ID=8, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+# # slave 9 {ecmcEL7037-StepperDrive}
+${SCRIPTEXEC} ${ECMC_config_DIR}configureSlave.cmd, "SLAVE_ID=9, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+
+# Apply hardware configuration
+${SCRIPTEXEC} ${ECMC_config_DIR}applyConfig.cmd
+
+# ADDITIONAL SETUP
+#
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_1,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_2,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_3,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_4,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_5,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_6,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_7,1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1)"
+# END of ADDITIONAL SETUP
+
+##############################################################################
+## physical AXIS 1&2
+#
+epicsEnvSet("DEV",      "STEST-MYDEVICE")
+${SCRIPTEXEC} ${ECMC_config_DIR}configureAxis.cmd, "CONFIG=./cfg/axis_1"
+#${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_1_sync
+#
+${SCRIPTEXEC} ${ECMC_config_DIR}configureAxis.cmd, "CONFIG=./cfg/axis_2"
+# ${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_2_sync
+# ## virtual AXIS 11&12
+# #
+# ${SCRIPTEXEC} ${ECMC_config_DIR}configureVirtualAxis.cmd, CONFIG=./cfg/axis_11_virt
+# ${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_11_sync
+# ${SCRIPTEXEC} ${ECMC_config_DIR}configureVirtualAxis.cmd, CONFIG=./cfg/axis_12_virt
+# ${SCRIPTEXEC} ${ECMC_config_DIR}applyAxisSynchronization.cmd, CONFIG=./cfg/axis_12_sync
+
+##############################################################################
+## PLC 0
+
+# ${SCRIPTEXEC} ${ECMC_config_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc"
+#${SCRIPTEXEC} ${ECMC_config_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlitComplex.plc"
+
+##############################################################################
+############# Configure diagnostics:
+
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcSetDiagnostics(1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcEnablePrintouts(0)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.EcSetDomainFailedCyclesLimit(100)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisIndex(1)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisFreq(2)"
+EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+${SCRIPTEXEC} ${ECMC_config_DIR}setAppMode.cmd
