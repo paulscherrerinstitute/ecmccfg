@@ -46,8 +46,7 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/axis_1)
 ##############################################################################
 ############# Storage 1:
 
-epicsEnvSet("ECMC_STORAGE_INDEX",              "1")
-epicsEnvSet("ECMC_STORAGE_SIZE",               "100")
+$(SCRIPTEXEC) $(ecmccfg_DIR) addDataStorage.cmd "DS_ID=1, DS_SIZE=1000, SAMPLE_RATE_MS=-1")
 
 ecmcConfigOrDie "Cfg.CreateStorage($(ECMC_STORAGE_INDEX),$(ECMC_STORAGE_SIZE),0)"
 ecmcConfigOrDie "Cfg.ClearStorage($(ECMC_STORAGE_INDEX))"
