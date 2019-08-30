@@ -17,10 +17,10 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT", "${ECMC_EC_SLAVE_NUM}")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL5002"
 
 #Configure Baumer encoder for EL5002 2-channel SSI encoder terminal (Channel 1)
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5002-Encoder-ch1-Baumer-BMMH30D1G24C1213P55.cmd
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "CONFIG=-Encoder-ch1-Baumer-BMMH30D1G24C1213P55"
 
 #Configure Baumer encoder for EL5002 2-channel SSI encoder terminal (Channel 2)
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5002-Encoder-ch2-Baumer-BMMH30D1G24C1213P55.cmd
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "CONFIG=-Encoder-ch2-Baumer-BMMH30D1G24C1213P55"
 
 # Configure EL9505 Power supply terminal 5V
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL9505"
