@@ -36,36 +36,32 @@ The configuration framework contains the necessary files to configure an EPICS I
 ## Example IOC
 
 1.  `require` the configuration module
-
     ```bash
     require ecmccfg <VERSION>
     ```
 
 2.  add a coupler and slave
-
-   ```bash
+    ```bash
       # slave 0 {ecmcEK1100}
       ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EK1100"
       # slave 1 {ecmcEL1018}, with optional SLAVE_ID
       ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL1018, SLAVE_ID=1"
-   ```
+    ```
 3.  add more slaves and apply configuration to the slaves
-   ```bash
+    ```bash
       # slave 8 {ecmcEL7037}, configure slave with optional SLAVE_ID
       ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B, SLAVE_ID=8"
       # slave 9 {ecmcEL7037}, addSlave, with immediate call off applySlaveConfig
       ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7037"
       ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig,   "CONFIG=-Motor-Nanotec-ST4118L1804-B"
-   ```
+    ```
 
 4.  apply the configuration
-
     ```bash
        ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
     ```
 
 5. additional configuration
-
     ```bash
        EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_1,1)"
     ```
@@ -92,7 +88,6 @@ The configuration framework contains the necessary files to configure an EPICS I
    ```   
 
 4. go active
-
     ```bash
       ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
     ```
