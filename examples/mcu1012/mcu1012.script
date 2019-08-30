@@ -13,26 +13,27 @@
 #
 # calls initAll by default, which calls init
 # calls 'add_master.cmd'
-#require ECMC_config kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
 
-require ecmccfg master
+#require ecmccfg kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+
+require ecmccfg develop
 
 # run module startup.cmd
 iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=IOC_ANDRS,ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
 
 # configure hardware
-$(SCRIPTEXEC) $(ecmccfg_DIR)mcu1021.cmd
+$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1012.cmd
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_1,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_2,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_3,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_4,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_5,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_6,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_7,1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1)"
 # END of ADDITIONAL SETUP
 
 ##############################################################################
@@ -49,12 +50,12 @@ ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NU
 ##############################################################################
 ############# Configure diagnostics:
 
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisFreq(2)"
-#ecmcConfigOrDie ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisEnable(0)"
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
