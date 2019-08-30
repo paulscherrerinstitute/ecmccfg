@@ -1,43 +1,44 @@
-# ECMC config
-# Arguments
-# [set by module]
-# ECMC_CONFIG_ROOT  ==  ${ecmccfg_DIR}
-# ECMC_CONFIG_DB    ==  ${ecmccfg_TEMPLATES}
-# [mandatory]
-# SYS
-# [optional]
-# ECMC_VER        = kivel
-# EthercatMC_VER  = kivel
-# INIT            = initAll
-# MASTER_ID       = 0
-#
-# calls initAll by default, which calls init
-# calls 'add_master.cmd'
-#require ecmccfg kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
-#require ecmccfg kivel "ECMC_VER=6, EthercatMC_VER=3"
+#- ECMC config
+#- Arguments
+#- [set by module]
+#- ECMC_CONFIG_ROOT  ==  ${ecmccfg_DIR}
+#- ECMC_CONFIG_DB    ==  ${ecmccfg_TEMPLATES}
+#- [mandatory]
+#- SYS
+#- [optional]
+#- ECMC_VER        = kivel
+#- EthercatMC_VER  = kivel
+#- INIT            = initAll
+#- MASTER_ID       = 0
+#-
+#- calls initAll by default, which calls init
+#- calls 'add_master.cmd'
+#-require ecmccfg kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+#-require ecmccfg kivel "ECMC_VER=6, EthercatMC_VER=3"
 require ecmccfg kivel
 #
-# slave 0 {ecmcEK1100-EtherCatCoupler}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EK1100"
-# slave 1 {ecmcEL1018-digitalInput}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL1018"
-# # slave 2 {ecmcEL2808-digitalOutput}A
+# slave 0 {ecmcEK1100}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EK1100"
+# slave 1 {ecmcEL1018}, with optional SLAVE_ID
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL1018, SLAVE_ID=1"
+# slave 2 {ecmcEL2808}, with SLAVE_ID from MACRO for further use
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT",      "2")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL2808, SLAVE_ID=${ECMC_EC_SLAVE_NUM_DIG_OUT}"
-# # slave 3 {ecmcEL5101-IncEncoder}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL5101"
-# # slave 4 {ecmcEL5101-32bit-IncEncoder}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL5101_32bit"
-# # slave 5 ecmcEL9505-powerSupply5V{}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL9505"
-# # slave 6 {ecmcEL1252-digitalInput}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL1252"
-# # slave 7 {ecmcEL9410-powerSupplyEBus}
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL9410"
-# # slave 8 {ecmcEL7037-StepperDrive}
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=8, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
-# # slave 9 {ecmcEL7037-StepperDrive}
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=9, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL2808, SLAVE_ID=${ECMC_EC_SLAVE_NUM_DIG_OUT}"
+# slave 3 {ecmcEL5101}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL5101"
+# slave 4 {ecmcEL5101_32bit}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL5101_32bit"
+# slave 5 {ecmcEL9505}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL9505"
+# slave 6 {ecmcEL1252}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL1252"
+# slave 7 {ecmcEL9410}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL9410"
+# slave 8 {ecmcEL7037}, configure slave with optional SLAVE_ID
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B, SLAVE_ID=8"
+# slave 9 {ecmcEL7037}, addSlave, with immediate call off applySlaveConfig
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7037"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig,   "CONFIG=-Motor-Nanotec-ST4118L1804-B"
 #
 # Apply hardware configuration
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
@@ -76,8 +77,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_12_
 ## PLC 0
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
-#${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeAxis1.plc"
-#${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlitComplex.plc"
+#-${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeAxis1.plc"
+#-${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlitComplex.plc"
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -88,4 +89,3 @@ EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetDiagAxisEnable(0)"
 #
 # go active
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
-
