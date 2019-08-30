@@ -15,7 +15,7 @@
 # calls 'add_master.cmd'
 #require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
 
-epicsEnvSet("IOC" ,"${IOC,"IOC_TEST"}")
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
 
 require ecmccfg develop
 
@@ -42,10 +42,6 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1
 #
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/axis_1)
-
-##############################################################################
-## PLC 0
-#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, FILE=./ecLibExample.plc")
 
 ##############################################################################
 ############# Configure diagnostics:
