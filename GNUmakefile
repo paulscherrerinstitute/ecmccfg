@@ -1,6 +1,6 @@
 include /ioc/tools/driver.makefile
 
-MODULE=ECMC_config
+MODULE=ecmccfg
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS=3

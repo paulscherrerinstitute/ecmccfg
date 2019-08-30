@@ -1,4 +1,4 @@
-# ECMC_config
+# ecmccfg
 
 ## Conventions
 
@@ -34,24 +34,24 @@ provide a module to handle ECMC configuration
 1.  `require` the configuration module
 
     ```bash
-    require ECMC_config <VERSION>
+    require ecmccfg <VERSION>
     ```
 
 2.  add a slave
 
     ```bash
     # slave 0 (ecmcEK1100-EtherCatCoupler)
-    $(SCRIPTEXEC) $(ECMC_config_DIR)addSlave.cmd, "SLAVE_ID=0, HW_DESC=ecmcEK1100"
+    $(SCRIPTEXEC) $(ecmccfg_DIR)addSlave.cmd, "SLAVE_ID=0, HW_DESC=ecmcEK1100"
     ```
 
 3.  apply the configuration
 
     ```bash
-    $(SCRIPTEXEC) ($(ECMC_config_DIR)applyConfig.cmd)
+    $(SCRIPTEXEC) ($(ecmccfg_DIR)applyConfig.cmd)
     ```
 
 4. go active
 
     ```bash
-    $(SCRIPTEXEC) ($(ECMC_config_DIR)setAppMode.cmd)
+    $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
     ```

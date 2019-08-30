@@ -4,8 +4,7 @@ epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")         # Enable velocity fi
 epicsEnvSet("ECMC_ENC_VELO_FILT_SIZE",         "10")        # Encoder velocity Low pass filter size
 
 ############# Trajectory
-# 0 Internal, 1 from expression
-epicsEnvSet("ECMC_TRAJ_SOURCE",                "0")         # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_TRAJ_SOURCE",                "1")         # 0 Internal (from hardware), 1 from PLC
 epicsEnvSet("ECMC_TRAJ_VELO_FILT_ENABLE",      "1")         # Enable velocity filter
 epicsEnvSet("ECMC_TRAJ_VELO_FILT_SIZE",        "10")        # Trajectory velocity Low pass filter size
 
@@ -14,8 +13,8 @@ epicsEnvSet("ECMC_CMD_FRM_OTHER_PLC_ENABLE",  "1")          # Allow commands fro
 epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",       "1")          # Enable Axis PLC
 # Each line below is appended to one single expression/source.
 # Executed in sync with axis (before)
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax1.traj.source){ax1.drv.enable:=ax11.drv.enable+ax2.drv.enable|}|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax2.traj.source){ax2.drv.enable:=ax11.drv.enable+ax2.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax1.traj.source){ax1.drv.enable:=ax11.drv.enable+ax12.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax2.traj.source){ax2.drv.enable:=ax11.drv.enable+ax12.drv.enable|}|")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "ax11.enc.actpos:=(ax2.enc.actpos+ax1.enc.actpos)/2|")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax11.mon.ilockfwd:=ax1.mon.highlim and ax2.mon.highlim|")

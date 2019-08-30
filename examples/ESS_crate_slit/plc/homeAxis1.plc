@@ -8,12 +8,12 @@
 #     2. Home at startup if needed (mc_home())
 #     3. Move to position 10 (mc_move_abs())
 #     5. Stop sequence if limit switch violation or errorCode on motion blocks
-#     
+#
 
 var errorCode:=0;
 
 ##### 0. Put all initiations here
-if(plc0.firstscan){  
+if(plc0.firstscan){
   println('Starting PLC motion example!!');
   #Ignore commands during startup sequence
   ax1.blockcom:=1;
@@ -52,22 +52,27 @@ if(static.seqStep==1)
 if(static.seqStep==2)
 {
   var homingSeq:=3;
+  println('2. --> homingSeq:=3');
   var velTwoardsCam:=20;
+  println('2. --> velTwoardsCam:=20');
   var velOffCam:=4;
+  println('2. --> velOffCam:=4');
   ax1.enc.homepos:=-30.5;
+  println('2. --> ax1.enc.homepos:=-30.5');
   errorCode=mc_home(1,1,homingSeq,velTwoardsCam,velOffCam);
+  println('2. --> errorCode=mc_home(1,1,homingSeq,velTwoardsCam,velOffCam)');
   if(errorCode){
     println('Function mc_home() returned error: ', errorCode);
     plc0.error:=errorCode;
   };
-  if(ax1.enc.homed and not(mc_get_busy(1)))
+  if(mc_get_homed(1) and not(mc_get_busy(1)))
   {
     static.seqStep:=3;
     println('3. Function mc_move_abs()  triggered!');
   };
 };
 
-##### 3. Trigger a absolute move 
+##### 3. Trigger a absolute move
 if(static.seqStep==3){
   ax1.blockcom:=0;  #Allow EPICS control
   var posTarg:=-10;
