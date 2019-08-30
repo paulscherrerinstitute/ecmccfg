@@ -6,20 +6,21 @@
 # [mandatory]
 # SYS
 # [optional]
-# ECMC_VER        = kivel
-# EthercatMC_VER  = kivel
+# ECMC_VER        = 6.0.0
+# EthercatMC_VER  = 3.0.0
 # INIT            = initAll
 # MASTER_ID       = 0
 #
 # calls initAll by default, which calls init
 # calls 'add_master.cmd'
+#require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
 
-#require ecmccfg kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+epicsEnvSet("IOC" ,"${IOC,"IOC_TEST"}")
 
 require ecmccfg develop
 
 # run module startup.cmd
-iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=IOC_ANDRS,ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
 
 # configure hardware
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1012.cmd
@@ -39,13 +40,12 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1
 ##############################################################################
 ## AXIS 1
 #
-#epicsEnvSet("DEV"      "STEST-MYDEVICE")
-#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./axis_1)
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/axis_1)
 
 ##############################################################################
 ## PLC 0
 #$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, FILE=./ecLibExample.plc")
-
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -53,9 +53,9 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
