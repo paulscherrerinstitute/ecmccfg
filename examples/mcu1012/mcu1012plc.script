@@ -44,16 +44,9 @@ epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/axis_1)
 
 ##############################################################################
-############# Storage 1:
+## Data Storage 1
 
-$(SCRIPTEXEC) $(ecmccfg_DIR) addDataStorage.cmd "DS_ID=1, DS_SIZE=1000, SAMPLE_RATE_MS=-1")
-
-ecmcConfigOrDie "Cfg.CreateStorage($(ECMC_STORAGE_INDEX),$(ECMC_STORAGE_SIZE),0)"
-ecmcConfigOrDie "Cfg.ClearStorage($(ECMC_STORAGE_INDEX))"
-ecmcConfigOrDie "Cfg.SetStorageEnablePrintouts($(ECMC_STORAGE_INDEX),1)"
-
-# Note test with T_SMP_MS=-1 (trigg data transfer with ds_push_asyn())
-dbLoadRecords("ecmcDS.template", "P=$(ECMC_PREFIX), PORT=$(ECMC_ASYN_PORT), ADDR=$(ECMC_ASYN_ADDR), TIMEOUT=$(ECMC_ASYN_TIMEOUT),A=0,Index=$(ECMC_STORAGE_INDEX),NELM=$(ECMC_STORAGE_SIZE),T_SMP_MS=-1")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=1000, SAMPLE_RATE_MS=-1")
 
 ##############################################################################
 ## PLC 0
