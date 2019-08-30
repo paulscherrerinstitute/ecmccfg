@@ -15,7 +15,7 @@
 # calls 'add_master.cmd'
 #require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
 
-epicsEnvSet("IOC" ,"${IOC,"IOC_TEST"}")
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
 
 require ecmccfg develop
 
