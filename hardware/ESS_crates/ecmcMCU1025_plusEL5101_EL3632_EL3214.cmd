@@ -84,19 +84,19 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-PT100-common.cmd
 
 # Configure channel 1 with S+S Regeltechnik HFT50 PT100
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT100
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 
 # Configure channel 2 with S+S Regeltechnik HFT50 PT100
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT100
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 
 # Configure channel 3 with S+S Regeltechnik HFT50 PT1000 NOTE!!! PT1000
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8020")
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT1000
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT1000.cmd
 
 # Configure channel 4 with S+S Regeltechnik HFT50 PT1000 NOTE!!! PT1000
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8030")
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT1000
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT1000.cmd
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
