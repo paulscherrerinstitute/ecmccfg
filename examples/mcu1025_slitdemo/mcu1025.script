@@ -1,19 +1,16 @@
-# ECMC config
-# Arguments
-# [set by module]
-# ECMC_CONFIG_ROOT  ==  $(ecmccfg_DIR)
-# ECMC_CONFIG_DB    ==  $(ECMC_config_TEMPLATES)
-# [mandatory]
-# SYS
-# [optional]
-# ECMC_VER        = 6.0.0
-# EthercatMC_VER  = 3.0.0
-# INIT            = initAll
-# MASTER_ID       = 0
-#
-# calls initAll by default, which calls init
-# calls 'add_master.cmd'
-#require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+##############################################################################
+## Example config for ESS crate of type MCU1025
+## Slit demo:
+## Axis 1: Slit center position (virt)
+## Axis 2: Slit gap/opening (virt)
+## Axis 3: Right blade (normal)
+## Axis 4: Left blade (normal)
+## Axis 5: Timing (virt), connected to signal generator or timing system
+## Axis 6: Amplitude
+## Both gap and position are configuerd to oscillate in sinus. with freq.
+## set by axis 5 and amplitude defined by axis 6.
+##############################################################################
+## Initiation:
 
 epicsEnvSet("IOC" ,"${IOC="IOC_SLIT"}")
 
@@ -24,7 +21,9 @@ iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3
 
 epicsEnvSet("ECMC_EC_OVERSAMPLING_FACTOR",    "5")
 
-# configure hardware
+##############################################################################
+## Configure hardware:
+
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025_plusEL5101_EL3632_EL3214.cmd
 
 # ADDITIONAL SETUP

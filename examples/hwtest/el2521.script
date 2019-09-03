@@ -1,19 +1,8 @@
-# ECMC config
-# Arguments
-# [set by module]
-# ECMC_CONFIG_ROOT  ==  $(ecmccfg_DIR)
-# ECMC_CONFIG_DB    ==  $(ECMC_config_TEMPLATES)
-# [mandatory]
-# SYS
-# [optional]
-# ECMC_VER        = 6.0.0
-# EthercatMC_VER  = 3.0.0
-# INIT            = initAll
-# MASTER_ID       = 0
-#
-# calls initAll by default, which calls init
-# calls 'add_master.cmd'
-#require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+##############################################################################
+## Example config for EL2521 step direction drive
+
+##############################################################################
+## Initiation
 
 epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
 
@@ -24,6 +13,7 @@ iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3
 
 ##############################################################################
 ## Config hardware:
+
 # Add output for enable of step direction drive (also to test reduce torque and brake)
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "18")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_OUTPUT",        "$(ECMC_EC_SLAVE_NUM)")

@@ -1,19 +1,8 @@
-# ECMC config
-# Arguments
-# [set by module]
-# ECMC_CONFIG_ROOT  ==  $(ecmccfg_DIR)
-# ECMC_CONFIG_DB    ==  $(ECMC_config_TEMPLATES)
-# [mandatory]
-# SYS
-# [optional]
-# ECMC_VER        = 6.0.0
-# EthercatMC_VER  = 3.0.0
-# INIT            = initAll
-# MASTER_ID       = 0
-#
-# calls initAll by default, which calls init
-# calls 'add_master.cmd'
-#require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+##############################################################################
+## Example config ESS crate of type MCU1025
+
+##############################################################################
+## Initiation:
 
 epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
 
@@ -22,7 +11,9 @@ require ecmccfg develop
 # run module startup.cmd
 iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
 
-# configure hardware
+##############################################################################
+## Configure hardware:
+
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
 
 # ADDITIONAL SETUP
