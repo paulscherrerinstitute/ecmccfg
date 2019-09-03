@@ -19,7 +19,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 # Set signal type to +-10V
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x800D")
-< ../hardware/ecmc$(ECMC_EC_HWTYPE)-Sensor-chX
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd
 
 ############# Config PDOS: Channel 2
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a02,0x6010,0x1,16,CH2_STATUS)"
@@ -27,7 +27,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 # Set signal type to +-10V
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x801D")
-< ../hardware/ecmc$(ECMC_EC_HWTYPE)-Sensor-chX
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd
 
 ############# Config PDOS: Channel 3
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a04,0x6020,0x1,16,CH3_STATUS)"
@@ -35,7 +35,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 # Set signal type to +-10V
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x802D")
-< ../hardware/ecmc$(ECMC_EC_HWTYPE)-Sensor-chX
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd
 
 ############# Config PDOS: Channel 4
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a06,0x6030,0x1,16,CH4_STATUS)"
@@ -43,4 +43,4 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 # Set signal type to +-10V
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x803D")
-< ../hardware/ecmc$(ECMC_EC_HWTYPE)-Sensor-chX
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd

@@ -3,16 +3,16 @@
 
 #Ch 1 Drive
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8000")     
-< ../hardware/ecmcEL2522-chX-stepDirectionDrive
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL2522-chX-stepDirectionDrive.cmd
 
 #Ch 1 Encoder
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8020")     
-< ../hardware/ecmcEL2522-chX-stepDirectionEncoder
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL2522-chX-stepDirectionEncoder.cmd
 
 #Ch 2 Drive
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8010")     
-< ../hardware/ecmcEL2522-chX-stepDirectionDrive
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL2522-chX-stepDirectionDrive.cmd
 
 #Ch 2 Encoder
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8030")     
-< ../hardware/ecmcEL2522-chX-stepDirectionEncoder
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL2522-chX-stepDirectionEncoder.cmd
