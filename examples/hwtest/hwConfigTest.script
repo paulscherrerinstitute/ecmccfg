@@ -1,0 +1,18 @@
+##############################################################################
+## Example: Test "EcPrintAllHardware()" command
+
+##############################################################################
+## Initiation:
+
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
+
+require ecmccfg develop
+
+# run module startup.cmd
+iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+
+##############################################################################
+## Config hardware:
+
+# Print All hardware for seleted hardware
+ecmcConfigOrDie "EcPrintAllHardware()"

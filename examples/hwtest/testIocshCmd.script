@@ -1,0 +1,33 @@
+############################################################
+############# Example use of ASYN record to feed any ascii command to ecmc
+#
+# Simple test IOC for remote IOC access using Asyn record and 
+# the ECMC comamnd "Cfg.IocshCmd=<ioccmd>"
+#
+# See last rows in this file for how to execute an example cmd
+#
+# Note: Unfortenately records cannot be loaded dynamically in EPICS
+# 
+
+##############################################################################
+## Initiation:
+
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
+
+require ecmccfg develop
+
+# run module startup.cmd
+iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+
+$(SCRIPTEXEC) ($(ecmccfg_DIR)general.cmd 
+
+##############################################################################
+############# Example: 
+#
+# Commands to test iocshCmd over asyn record with ecmc ASCII command "Cfg.IocshCmd=<cmd>":
+# 1: Set use of Binary output of Asyn record (to allow larger size than 40):
+# caput -S IOC2:MCU-Cmd.OFMT "Binary"
+# 2: Test simple dbl command (EPICS variables can be used also, ECMC_SLAVE_NUM):
+# caput -S IOC2:MCU-Cmd.BOUT 'Cfg.IocshCmd=dbl'
+# 3: Check response. Ends up in AINP since asyn input is set to ASCII (IFMT=ASCII) as default
+# caget -S  IOC2:MCU-Cmd.AINP

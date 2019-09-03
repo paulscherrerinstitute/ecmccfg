@@ -1,0 +1,31 @@
+##############################################################################
+## Example config for el6080
+
+##############################################################################
+## Initiation:
+
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
+
+require ecmccfg develop
+
+# run module startup.cmd
+iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "31")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6080"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

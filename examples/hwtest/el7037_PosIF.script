@@ -1,0 +1,52 @@
+##############################################################################
+## Example config for el7037 positioning interface (no motorrecord support yet)
+
+##############################################################################
+## Initiation:
+
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
+
+require ecmccfg develop
+
+# run module startup.cmd
+iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+
+##############################################################################
+## Configure hardware
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "26")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037_PosIF, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+ecmcConfig "Cfg.SetAppMode(1)"
+
+# Below is a sequence describing what records to use for absolute positioning! 
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-StartType 1
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-AccCmd 1000
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-DecCmd 1000
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-VelCmd 500
+# Enable
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Drv-Cmd 1
+# Move one rev (200step*64microstepping)
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-PosCmd 12800
+#Trigg motion by toggle
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-Cmd 0
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-Cmd 1
+# Get actual position alt 1
+#mcu002> dbgf IOC2:ec0-s7-EL7037_PosIF-Enc-PosAct
+# Get actual position alt 2
+#mcu002> dbgf IOC2:ec0-s7-EL7037_PosIF-Pos-Pos
+# Stop motion
+#mcu002> dbpf IOC2:ec0-s7-EL7037_PosIF-Pos-Cmd 0
