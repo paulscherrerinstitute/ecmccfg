@@ -47,5 +47,5 @@ ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,100000,0,1000000
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "10")    # 10 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "20")    # 20 bytes
 
-ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},sm3.p1.e0,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).mm.CH1_ARRAY)"
-ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},sm3.p52.e0,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).mm.CH2_ARRAY)"
+ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH1_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).mm.CH1_ARRAY)"
+ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH2_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).mm.CH2_ARRAY)"
