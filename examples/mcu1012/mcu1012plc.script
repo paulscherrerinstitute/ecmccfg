@@ -4,13 +4,14 @@
 
 ##############################################################################
 ## Initiation:
-
-epicsEnvSet("IOC" ,"${IOC,"IOC_TEST"}")
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg develop
 
-# run module startup.cmd
-iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=IOC_ANDRS,ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=IOC_ANDRS,ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
 
 ##############################################################################
 ## Configure hardware:
