@@ -1,0 +1,7 @@
+record(bo,"$(Name)PLC-$(Index)-enable"){
+  field(DTYP, "stream")
+  field(OUT,  "@ecmcPlc.proto setPLCEnable($(Index)) $(PORT)")
+  field(ZNAM, "FALSE")
+  field(ONAM, "TRUE")
+  field(DESC, "Enable/disable PLC $(Index)")
+}
