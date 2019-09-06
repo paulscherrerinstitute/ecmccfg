@@ -11,6 +11,6 @@
 epicsEnvSet("ECMC_PLC_ID",          "${PLC_ID=0}")
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS","${SAMPLE_RATE_MS=1}") # execute in 1000Hz
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
-ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${FILE}"
+ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${FILE})"
 
 dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX}")
