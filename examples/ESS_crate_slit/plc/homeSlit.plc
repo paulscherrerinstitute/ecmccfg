@@ -17,19 +17,28 @@ var errorCode2:=0;
 
 ##### Put all initiations here
 if(plc0.firstscan){
-  println('Starting PLC0:');
-  #Ignore commands during startup sequence
-  ax1.blockcom:=1;
-  ax2.blockcom:=1;
-  static.seqStep:=1;
-  static.cycleCounter:=0;
-  static.epicsDisableSeq:=0;  #For disable over epics
-  println('>>>> 1. init Axis 1');
+  static.seqStep:=99;   # let's go
 };
 
 if(static.epicsDisableSeq){
   static.seqStep:=100;  #invalid
 };
+
+##### 1. Put power on axis1 (run mc_power())
+if(static.seqStep==99){
+  println('Starting PLC0:');
+  #Ignore commands during startup sequence
+  ax1.blockcom:=1;
+  ax2.blockcom:=1;
+  ax1.enc.homed:=0;
+  println('>>>> ax1.enc.homed: ', ax1.enc.homed);
+  ax1.traj.source:=0;
+  println('>>>> ax1.traj.source: ', ax1.traj.source);
+  static.seqStep:=1;
+  static.cycleCounter:=0;
+  static.epicsDisableSeq:=0;  #For disable over epics
+  println('>>>> 1. init Axis 1');
+}
 
 ##### 1. Put power on axis1 (run mc_power())
 if(static.seqStep==1){
@@ -152,6 +161,8 @@ if(static.seqStep==0){
   println('Ax2 TrajSrc: ', ax2.traj.source);
   #println('>>>> Ax11 position: ', ax11.enc.actpos);
   #println('>>>> Ax12 position: ', ax12.enc.actpos);
+  static.seqStep:=99;
+  println('seqStep: ', static.seqStep);
   plc0.enable:=0;          # Disable PLC
 };
 
