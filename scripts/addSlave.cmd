@@ -9,11 +9,12 @@
 #-d   \file
 #-d   \param HW_DESC Hardware descriptor, i.e. EL1008
 #-d   \param SLAVE_ID (optional) bus position
-#-d   \note call w/o SLAVE_ID
+#-d   \note Example calls:
+#-d   \note - call w/o SLAVE_ID
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7037"
 #-d   \endcode
-#-d   \note call w/ SLAVE_ID
+#-d   \note - call w/ SLAVE_ID
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL1018, SLAVE_ID=1"
 #-d   \endcode

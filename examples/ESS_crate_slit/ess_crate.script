@@ -38,7 +38,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL9410"
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B, SLAVE_ID=8"
 # slave 9 {ecmcEL7037}, addSlave, with immediate call off applySlaveConfig
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7037"
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig,   "CONFIG=-Motor-Nanotec-ST4118L1804-B"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "CONFIG=-Motor-Nanotec-ST4118L1804-B"
 #
 # Apply hardware configuration
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
