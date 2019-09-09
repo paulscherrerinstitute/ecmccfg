@@ -1,0 +1,50 @@
+#- ECMC config
+#- Arguments
+#- [set by module]
+#- ECMC_CONFIG_ROOT  ==  ${ecmccfg_DIR}
+#- ECMC_CONFIG_DB    ==  ${ecmccfg_TEMPLATES}
+#- [mandatory]
+#- SYS
+#- [optional]
+#- ECMC_VER        = kivel
+#- EthercatMC_VER  = kivel
+#- INIT            = initAll
+#- MASTER_ID       = 0
+#-
+#- calls initAll by default, which calls init
+#- calls 'add_master.cmd'
+#-require ecmccfg kivel "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+#-require ecmccfg kivel "ECMC_VER=6, EthercatMC_VER=3"
+require ecmccfg kivel
+#
+# slave 0 {ecmcEK1100}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EK1100"
+# slave 1 {ecmcEL1018}, with optional SLAVE_ID
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL1018, SLAVE_ID=1"
+# slave 2 {ecmcEL2808}, with SLAVE_ID from MACRO for further use
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT",      2)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL2808, SLAVE_ID=${ECMC_EC_SLAVE_NUM_DIG_OUT}"
+
+#
+# Apply hardware configuration
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+#
+# ADDITIONAL SETUP
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1)"
+# END of ADDITIONAL SETUP
+#
+## PLC 7
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=7, FILE=./plc/testPLC.plc, SAMPLE_RATE_MS=100"
+
+##############################################################################
+############# Configure diagnostics:
+#
+# go active
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
