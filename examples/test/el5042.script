@@ -19,7 +19,7 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "16")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5042"
 
 # Configure Wachendorff encoder on channel 1
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5042-Encoder-ch1-Wachendorff-WDGA36E-06-1218-SIA-B01-CB8
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5042-Encoder-ch1-Wachendorff-WDGA36E-06-1218-SIA-B01-CB8.cmd
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
