@@ -6,7 +6,6 @@
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
 #-d   \note Selected range: 0..20mA (actually 0..21.474mA)
-#-d   \todo migrate to ecmccfg
 #-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL3174_0to20mA")

@@ -3,7 +3,6 @@
 #-d   \details Technosoft IPOS4808 (stepper and servo)
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d   \todo adapt to \ecmccfg.
 #-d */
 
 ############################################################

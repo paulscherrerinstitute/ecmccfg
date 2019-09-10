@@ -3,7 +3,6 @@
 #-d   \details Parmetrization of technosoft IPOS4808 for motor Oriental Motor PK296DB
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d   \todo migrate to \b ecmccfg
 #-d */
 
 #- ###########################################################

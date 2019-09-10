@@ -3,7 +3,6 @@
 #-d   \details Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d   \todo migrate to \b ecmccfg
 #-d */
 
 #- ###########################################################

@@ -3,7 +3,7 @@
 #-d   \details
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d   \todo This should be handles by a config
+#-d   \todo This should be handled by a config
 #-d */
 
 

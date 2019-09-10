@@ -3,7 +3,6 @@
 #-d   \details
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d   \todo adapt to \ecmccfg.
 #-d */
 
 ############################################################
@@ -62,4 +61,4 @@ ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd

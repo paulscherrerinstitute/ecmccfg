@@ -6,7 +6,6 @@
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
 #-d   \note Selected range: +-10V (actually +-10.737V)
-#-d   \todo migrate to ecmccfg
 #-d */
 
 #- ###########################################################

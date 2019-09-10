@@ -5,7 +5,6 @@
 #-d   \file
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
-#-d   \todo migrate to ecmccfg
 #-d */
 
 #- ###########################################################
@@ -56,4 +55,3 @@ epicsEnvSet("ECMC_EC_PDO"                "0x1a03")
 epicsEnvSet("ECMC_EC_PDO_ENTRY"          "0x6030")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-chX-analogInput.cmd
-
