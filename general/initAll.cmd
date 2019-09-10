@@ -1,5 +1,15 @@
-# Init
-$(SCRIPTEXEC) $(ECMC_CONFIG_ROOT)init.cmd
+#==============================================================================
+# initAll.cmd
+#- Arguments: n/a
+
+#-d /**
+#-d   \brief Script for basic ECMC setup.
+#-d   \author Niko Kivel, Anders Sandstroem
+#-d   \file
+#-d */
+
+#- call init.cmd
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}init.cmd
 
 ############################################################
 ############# ASYN Configuration:
@@ -39,5 +49,5 @@ epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
 # Update records in 10Hz (skip 99 cycles, based on 1000Hz sample rate)
 #epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",       "99")
 
-# Update records in 10ms (100Hz) 
+# Update records in 10ms (100Hz)
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
