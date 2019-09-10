@@ -11,19 +11,6 @@
 #-d   \note Coding:     Binary
 #-d */
 
-############################################################
-############# Information:
-#- Description: Wachendorff SSI encoder
-#- Supply:     10-24V
-#- Resolution: 12 bit singleturn, 18 bit multiturn
-#- Coding:     Binary
-#
-#-  Need the following varibales:
-#-      1. ECMC_EC_SLAVE_NUM    Slave index
-#-      2. ECMC_EC_SDO_INDEX    0x8008 for CH1
-#-                              0x8018 for CH2
-############################################################
-
 #- 0x80p8:01: Invert feedback direction (default 0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x1,0,1)"
 
