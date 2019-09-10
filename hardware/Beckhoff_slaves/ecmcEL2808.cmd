@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: 8ch digital output
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL2808
+#-d   \details 8ch digital output
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL2808")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

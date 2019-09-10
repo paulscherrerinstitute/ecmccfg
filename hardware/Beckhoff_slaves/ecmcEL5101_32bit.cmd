@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: EL5101 Incremental encoder interface (differential RS422) 32 bit support
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL5101_32bit
+#-d   \details EL5101 Incremental encoder interface (differential RS422) 32 bit support
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL5101_32bit")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
