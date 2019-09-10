@@ -43,3 +43,9 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 # Configure DC clock 100000ns update for oversampling (10 values oversampling)
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,100000,0,1000000,0)"
+
+epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "10")    # 10 values
+epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "20")    # 20 bytes
+
+ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH1_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).mm.CH1_ARRAY)"
+ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH2_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).mm.CH2_ARRAY)"

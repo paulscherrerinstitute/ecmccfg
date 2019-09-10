@@ -48,3 +48,5 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 # add master (defaults to '0')
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
 #
+# Ensure that this command is not executed twice (ESS vs PSI)
+epicsEnvSet("ECMCCFG_INIT" ,"#")

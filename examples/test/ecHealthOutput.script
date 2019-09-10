@@ -1,0 +1,34 @@
+##############################################################################
+## Example config for test of ethercat bus health ouput (digital output linked to status of bus) 
+
+##############################################################################
+## Initiation
+
+epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
+
+require ecmccfg develop
+
+# run module startup.cmd
+iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "10")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL2004"
+
+# Test health output for ethercat status
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s$(ECMC_EC_SLAVE_NUM).OUPIN_4.0,ec0.health)"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

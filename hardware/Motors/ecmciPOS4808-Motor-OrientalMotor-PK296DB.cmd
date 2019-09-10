@@ -35,7 +35,7 @@ epicsEnvSet("ECMC_TECHNOSOFT_CFG_HEX"          "0084")
 # Write data SFTCL1=1 (1dec)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0280")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 # SCL2L_long = 2*DSP_FREQ*NoMicroStepsPerStep*Ts_S ()
 # SCL2H=HIGH(SCL2L_long) at technosoft adress 281:
@@ -44,19 +44,19 @@ epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
 # Write SCL2H=0x02BF (read in EasyMotion Studio)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0281")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "02BF")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 # Write SCL2L=0x2000 (read in EasyMotion Studio)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0282")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "2000")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 # STEPRES at technosoft adress 802
 # STEPRES=NoMotorSteps*NoMicroStepsPerStep (200*256)
 # Write STEPRES=C800 (51200) (read in EasyMotion Studio)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0282")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "C800")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 ############# Current controller:
 # The values for current control can be automaticaly tuned/calculated in EasymotionStudio.
@@ -68,12 +68,12 @@ epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "C800")
 # Write data KPI=0x5E9D (24221dec)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0271")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "5E9D")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 # Write data SFTKPI=0x2(2dec)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0272")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 # KII at technosoft address 0x0273 range 0..32737 (int). TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?KII 
 # SFTKII at technosoft address 0x0274 range 0..14 (int). TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?SFTKII 
@@ -83,12 +83,12 @@ epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
 # Write data KII=0x2AEF (10991dec)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0273")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "2AEF")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 # Write data SFTKII=0x0 (0dec)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0274")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 ############# Max Current protection: 
 # IMAXPROT at technosoft address 0x0295 
@@ -97,7 +97,7 @@ epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
 # Write data IMAXPROT=0x1CCB (7371dec)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0295")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "1CCB")
-< ../hardware/technosoft/technosoftWriteGenericCfg
+${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 ############# Speed controller:
 # KPS at technosoft address 0x0237 range 0..32737 (int) 
@@ -112,7 +112,7 @@ epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "1CCB")
 
 ############################################################
 ############# Save changes and reset (NOTE: only needs to be executed if number of steps is changed above):
-#< ../hardware/technosoft/technosoftSaveAndReset
+#${SCRIPTEXEC} ${ecmccfg_DIR}technosoftSaveAndReset.cmd
 
 ############################################################
 ############# Configure SDOS:
