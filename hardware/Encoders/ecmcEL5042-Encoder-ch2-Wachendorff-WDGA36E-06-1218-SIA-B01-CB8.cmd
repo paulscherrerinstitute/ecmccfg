@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief hardware script for EL5042-Encoder-ch2-Wachendorff-WDGA36E-06-1218-SIA-B01-CB8
+#-d   \details 
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
 ############################################################
 ############# Parmetrization of EL5042  channel 2 for encoder Wachendorff WDGA36E-06-1218-SIA-B01-CB8
 
