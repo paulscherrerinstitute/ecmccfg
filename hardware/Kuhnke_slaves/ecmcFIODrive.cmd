@@ -1,8 +1,11 @@
-############################################################
-############# Information:
-# Description: Kuhnke FIODrive (stepper and BLDC) with incremental feedback (differential rs422)
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for FIODrive
+#-d   \details Kuhnke FIODrive (stepper and BLDC) with incremental feedback (differential rs422)
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \note SDOS
+#-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "FIODrive")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x0048554b")
@@ -12,31 +15,31 @@ ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},$
 
 ############# Factory reset
 #
-# Reset drive with sdo command:
+#-Reset drive with sdo command:
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
-# NOTE IMPORTANT!! Drive will reboot to restore default parameters. Wait 5s to startup
+#-NOTE IMPORTANT!! Drive will reboot to restore default parameters. Wait 5s to startup
 epicsThreadSleep(1)
-# Rebooting 1s..
+#-Rebooting 1s..
 epicsThreadSleep(1)
-# Rebooting 2s..
+#-Rebooting 2s..
 epicsThreadSleep(1)
-# Rebooting 3s..
+#-Rebooting 3s..
 epicsThreadSleep(1)
-# Rebooting 4s..
+#-Rebooting 4s..
 epicsThreadSleep(1)
-# Rebooting 5s..
+#-Rebooting 5s..
 
-############# 
+#############
 #
-# Notes: The drive needs special startup sequence. 
-# Control word needs to be set to:
-# 1. 0hex
-# 2. 80hex (Fault reset)
-# 3. 6hex  (Shutdown)
-# 4. 7hex  (Switch on)
-# 5. Fhex  (Enable operation)
+#-Notes: The drive needs special startup sequence.
+#-Control word needs to be set to:
+#-1. 0hex
+#-2. 80hex (Fault reset)
+#-3. 6hex  (Shutdown)
+#-4. 7hex  (Switch on)
+#-5. Fhex  (Enable operation)
 #
-############# 
+#############
 
 ############# Clear sync managers:
 epicsEnvSet("ECMC_SDO_INDEX",              "0x1C12")
@@ -144,30 +147,30 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 ############# Configure SDOS:
 #Setup 256 fold microstepping
-# Encoder increments for 1 rev = 256*200=51200 
+#-Encoder increments for 1 rev = 256*200=51200
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x608F,0x1,51200,4)"
-# Per revs = 1
+#-Per revs = 1
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x608F,0x2,1,4)"
-#Phys encoder resolution for 1 rev = 256*200=51200 
+#Phys encoder resolution for 1 rev = 256*200=51200
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2052,0x0,51200,4)"
 #Mode= Velocity mode = 2 (csv = 9 not possible in open loop due to firmvare)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6060,0x0,2,1)"
 #Drive sub mode select
-# Bit 0: Control mode: closed (1)/open loop (0) 
-# Bit 1: VoS simulate speed controller: enable (1)/ disable (0)?
-# Bit 2: Brake: enable (1)/ disable (0)
-# Bit 3: Current reduction: enable (1)/ disable (0)
-# Bit 4: Not used
-# Bit 5: Torque (only valid in torque mode)?
-# Bit 6: Motor type: BLDC (1) / stepper (0)
-# Bit 7: Ferr ?
-# Bit 7..0: 2#00001000=>8
+#-Bit 0: Control mode: closed (1)/open loop (0)
+#-Bit 1: VoS simulate speed controller: enable (1)/ disable (0)?
+#-Bit 2: Brake: enable (1)/ disable (0)
+#-Bit 3: Current reduction: enable (1)/ disable (0)
+#-Bit 4: Not used
+#-Bit 5: Torque (only valid in torque mode)?
+#-Bit 6: Motor type: BLDC (1) / stepper (0)
+#-Bit 7: Ferr ?
+#-Bit 7..0: 2#00001000=>8
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x3202,0x0,8,4)"
 #Current reduction delay = 1000ms
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2036,0x0,1000,4)"
 #Current reduction  = 10% of max (if set to -50 then a reduction of 50%)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2037,0x0,-10,4)"
-#Step counter as position 
+#Step counter as position
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x320A,0x4,-1,4)"
 #Use ethercat (bit 4=1=>20)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2102,0x0,20,4)"

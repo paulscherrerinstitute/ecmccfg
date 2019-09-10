@@ -1,10 +1,18 @@
-#########################################################
-#  Parsing of Technosoft setup-file to ECMC format.
-#      Input file name: ipos4808/ESM_projects/iPOS4808-BX-CAT_Base_V1_0_EEPROM_prog_file.sw
-#      Input file start adress: 0x7b78
-#      Output file name: ../ecmcIPOS4808-EEPROM-BaseConfig-StepperOpenLoopCSV
-#      Date: 2018/01/24 09:40:21
-#########################################################
+#-d /**
+#-d   \brief hardware script for iPOS4808-EEPROM-BaseConfig-StepperOpenLoopCSV
+#-d   \details
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \note
+#-d */
+
+#-########################################################
+#-  Parsing of Technosoft setup-file to ECMC format.
+#-     Input file name: ipos4808/ESM_projects/iPOS4808-BX-CAT_Base_V1_0_EEPROM_prog_file.sw
+#-     Input file start adress: 0x7b78
+#-     Output file name: ../ecmcIPOS4808-EEPROM-BaseConfig-StepperOpenLoopCSV
+#-     Date: 2018/01/24 09:40:21
+#-########################################################
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2064,0x0,0x7B780008,4)"
 epicsThreadSleep(0.01)
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2065,0x0,0x649C,4)"
@@ -2167,17 +2175,17 @@ ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2065,0x0,0x3851,4)"
 epicsThreadSleep(0.01)
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2065,0x0,0xE95A,4)"
 epicsThreadSleep(0.01)
-# Setup drive to calculate online checksum (0x7b78:0x7faf):
+#-Setup drive to calculate online checksum (0x7b78:0x7faf):
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2069,0x0,0x7faf7b78,4)"
 epicsThreadSleep(0.01)
-#########################################################
-#      Total number of lines parsed: 1080
-#      Offline calculated checksum: 0xd2b4 (53940)
-#      Online calculated checksum (in drive) (in dec..):
+#-########################################################
+#-     Total number of lines parsed: 1080
+#-     Offline calculated checksum: 0xd2b4 (53940)
+#-     Online calculated checksum (in drive) (in dec..):
 ecmcConfig "EcReadSdo(${ECMC_EC_SLAVE_NUM},0x206A,0x0,2)"
 ecmcConfigOrDie "Cfg.EcVerifySdo(${ECMC_EC_SLAVE_NUM},0x206A,0x0,0xd2b4,2)"
-#########################################################
-# Reset drive to apply settings:
-# NOTE: Reset drive command will return error -5 since no repsonse is sent back to the master! The drive will be reset anyway!
+#-########################################################
+#-Reset drive to apply settings:
+#-NOTE: Reset drive command will return error -5 since no repsonse is sent back to the master! The drive will be reset anyway!
 ecmcConfig "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2080,0x0,1,2)"
 epicsThreadSleep(0.01)

@@ -1,3 +1,11 @@
+#-d /**
+#-d   \brief hardware script for iPOS8020-Init
+#-d   \details
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \todo adapt to \ecmccfg.
+#-d */
+
 ############################################################
 ############# Init
 
@@ -41,15 +49,15 @@ ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,1)"
 # Disable on command transform diag
 ecmcConfigOrDie "Cfg.SetTraceMaskBit(7,0)"
 
-# Choose to generate EPICS-records for EtherCAT-entries 
-# (For records use ECMC_GEN_EC_RECORDS="-records" otherwise ECMC_GEN_EC_RECORDS="") 
+# Choose to generate EPICS-records for EtherCAT-entries
+# (For records use ECMC_GEN_EC_RECORDS="-records" otherwise ECMC_GEN_EC_RECORDS="")
 epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
 
 # Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
-# (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="") 
+# (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
 
-# Update records in 10ms (100Hz) 
+# Update records in 10ms (100Hz)
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
 
 ############################################################
