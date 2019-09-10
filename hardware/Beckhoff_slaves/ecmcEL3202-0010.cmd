@@ -32,11 +32,11 @@ epicsEnvSet("ECMC_EC_CHANNEL_ID"         "1")
 epicsEnvSet("ECMC_EC_PDO"                "0x1a00")
 epicsEnvSet("ECMC_EC_PDO_ENTRY"          "0x6000")
 
-< ../hardware/ecmcEL32XX-chX-analogInput
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-chX-analogInput.cmd
 
 #- ############ Config PDOS: Channel 2
 epicsEnvSet("ECMC_EC_CHANNEL_ID"         "2")
 epicsEnvSet("ECMC_EC_PDO"                "0x1a01")
 epicsEnvSet("ECMC_EC_PDO_ENTRY"          "0x6010")
 
-< ../hardware/ecmcEL32XX-chX-analogInput
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-chX-analogInput.cmd

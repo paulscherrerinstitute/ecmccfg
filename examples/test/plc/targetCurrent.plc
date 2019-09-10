@@ -1,0 +1,18 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Target current Measurement test:
+#
+
+if(static.cycleCounter<35){
+  ec0.s28.OUPIN_1:=1;
+} else {
+  ec0.s28.OUPIN_1:=0;
+};
+
+static.cycleCounter:=static.cycleCounter+1;
+if(static.cycleCounter>70) {
+  static.cycleCounter:=0;
+  #println('New period')
+};
+

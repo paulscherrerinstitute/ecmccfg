@@ -1,0 +1,26 @@
+##############################################################################
+#  See plcSyntaxHelp.plc for doc on commands.
+#
+#   NOTE 1: Assignment is ":=", equal is "="
+#   NOTE 2: Each statement should be terminated with "|" (instaed of ";" since ";" is used as command delimiter)
+#
+#  Code Description:
+#     1. Set interlock if trying to move passed ax1.enc.actpos>50|
+#        Allow motion back again. NOTE: Better to use softlimits (same functionality)! 
+#        This is just an exmple how the variables can be used.. 
+#
+
+#Create a new PLC
+epicsEnvSet("ECMC_PLC_ID",        "2")
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS","10") # execute in 100Hz
+ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
+
+#Add code
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ax1.mon.ilockfwd:=1|                                   "
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  if(ax1.enc.homed and ax1.enc.actpos>50 and ax1.traj.busy and ax1.traj.dir>0)"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  {                                                   "
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=    ax1.mon.ilockfwd:=0|                                 "
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  }|                                                  "
+
+#Enable PLC
+ecmcConfigOrDie "Cfg.SetPLCEnable(${ECMC_PLC_ID},1)"

@@ -22,4 +22,4 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x01bae7ae")
 
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
 
-< ../hardware/ecmciPOSXXXX
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmciPOSXXXX.cmd
