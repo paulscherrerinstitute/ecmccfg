@@ -1,22 +1,35 @@
-#General
+#==============================================================================
+# ecmc_axis.cmd
+#- Arguments: n/a
+
+#-d /**
+#-d   \brief Script for configuring a physical axis.
+#-d   \details Configures a physical axis in ECMC, based on previously set environment variables.
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \note This script is typically called by \b addAxis.cmd, often via \b ecmc_axis-records.cmd
+#-d   \pre An axis definition for a physical axis has to be added/configured immediately before the call of this script.
+#-d */
+
+#- General
 ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},1,${ECMC_DRV_TYPE})"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_AXIS_HEALTH},"ax${ECMC_AXIS_NO}.health")"
 ecmcConfigOrDie "Cfg.SetAxisModRange(${ECMC_AXIS_NO}, ${ECMC_MOD_RANGE})"
 ecmcConfigOrDie "Cfg.SetAxisModType(${ECMC_AXIS_NO}, ${ECMC_MOD_TYPE})"
 
-#Trajectory
+#- Trajectory
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},${ECMC_EMERG_DECEL})"
 ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime(${ECMC_AXIS_NO},${ECMC_VELO},${ECMC_ACCL})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_FRM})"
 
-#Controller
+#- Controller
 ecmcConfigOrDie "Cfg.SetAxisCntrlKp(${ECMC_AXIS_NO},${ECMC_CNTRL_KP})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKi(${ECMC_AXIS_NO},${ECMC_CNTRL_KI})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKd(${ECMC_AXIS_NO},${ECMC_CNTRL_KD})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKff(${ECMC_AXIS_NO},${ECMC_CNTRL_KFF})"
 
-#Encoder
+#- Encoder
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ACTPOS},"ax${ECMC_AXIS_NO}.enc.actpos")"
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_DENOM})"
 ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_NUM})"
@@ -25,7 +38,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncBits(${ECMC_AXIS_NO},${ECMC_ENC_BITS})"
 ecmcConfigOrDie "Cfg.SetAxisEncAbsBits($(ECMC_AXIS_NO),${ECMC_ENC_ABS_BITS})"
 ecmcConfigOrDie "Cfg.SetAxisEncOffset($(ECMC_AXIS_NO),${ECMC_ENC_ABS_OFFSET})"
 
-#Drive
+#- Drive
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_CONTROL},"ax${ECMC_AXIS_NO}.drv.control")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_STATUS},"ax${ECMC_AXIS_NO}.drv.status")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_VELOCITY},"ax${ECMC_AXIS_NO}.drv.velocity")"
@@ -36,13 +49,13 @@ ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum(${ECMC_AXIS_NO},${ECMC_DRV_SCALE_NUM})"
 ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime(${ECMC_AXIS_NO},${ECMC_DRV_BRAKE_OPEN_DLY_TIME})"
 ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime(${ECMC_AXIS_NO},${ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME})"
 
-# Soft limits
+#- Soft limits
 ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd(${ECMC_AXIS_NO},${ECMC_SOFT_LOW_LIM})"
 ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd(${ECMC_AXIS_NO},${ECMC_DXLM_ENABLE})"
 ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd(${ECMC_AXIS_NO},${ECMC_SOFT_HIGH_LIM})"
 ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd(${ECMC_AXIS_NO},${ECMC_DXLM_ENABLE})"
 
-#Monitor
+#- Monitor
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_MON_LOWLIM},"ax${ECMC_AXIS_NO}.mon.lowlim")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_MON_HIGHLIM},"ax${ECMC_AXIS_NO}.mon.highlim")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_MON_HOME_SWITCH},"ax${ECMC_AXIS_NO}.mon.homesensor")"
