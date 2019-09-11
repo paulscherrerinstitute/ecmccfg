@@ -1,8 +1,15 @@
+#-d /**
+#-d   \brief hardware script for iPOS4808
+#-d   \details Technosoft IPOS4808 (stepper and servo)
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
 ############################################################
 ############# Information:
-# Description: Technosoft IPOS4808 (stepper and servo) 
-# Feedbacks: 
-#     -Incremental feedback (differential rs422) 
+# Description: Technosoft IPOS4808 (stepper and servo)
+# Feedbacks:
+#     -Incremental feedback (differential rs422)
 #     -SSI,BISS (config in drive needs to be updated)
 #     -Analog  (config in drive needs to be updated)
 #

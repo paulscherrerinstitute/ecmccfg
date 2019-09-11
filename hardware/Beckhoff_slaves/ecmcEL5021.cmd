@@ -1,8 +1,11 @@
-############################################################
-############# Information:
-# Description: EL5021 Sin/Cos 1Vpp encoder interface
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL5021
+#-d   \details EL5021 Sin/Cos 1Vpp encoder interface
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \note SDOS
+#-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL5021")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

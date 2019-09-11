@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: 2ch digital input (fast with timestamp)
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL1252
+#-d   \details 2ch digital input (fast with timestamp)
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL1252")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

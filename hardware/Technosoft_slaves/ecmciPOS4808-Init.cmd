@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief hardware script for iPOS4808-Init
+#-d   \details
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
 ############################################################
 ############# General:
 # This file is only used to download the basic setup to an technosoft drive.
@@ -7,6 +14,7 @@
 # This procedure should only be needed to perform once (new drive or replacing of drive)
 # Please ensure that the online cheksum corresponds to the offline checksum (see logfile printouts)
 ############################################################
+
 # ECMC config
 # Arguments
 # [set by module]
@@ -53,4 +61,4 @@ ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd

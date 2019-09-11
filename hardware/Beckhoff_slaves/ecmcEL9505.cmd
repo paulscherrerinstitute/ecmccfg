@@ -1,8 +1,15 @@
-############################################################
-############# Information:
-# Description: Power supply terminal 5V
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL9505
+#-d   \details Power supply terminal 5V
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
+#- ###########################################################
+#- ############ Information:
+#-  Description: Power supply terminal 5V
+#-
+#- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL9505")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

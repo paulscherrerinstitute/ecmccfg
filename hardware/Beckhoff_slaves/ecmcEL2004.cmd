@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: 4ch digital output, 0.5A
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL2004
+#-d   \details 4ch digital output, 0.5A
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL2004")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

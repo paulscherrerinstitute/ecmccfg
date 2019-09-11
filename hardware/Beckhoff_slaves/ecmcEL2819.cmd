@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: 16ch digital output with diagnostics
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL2819
+#-d   \details 16ch digital output with diagnostics
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL2819")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
@@ -44,8 +45,3 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A00,0x60D1,0x1,4,STATUS_14)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A00,0x60E1,0x1,4,STATUS_15)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A00,0x60F1,0x1,4,STATUS_16)"
-
-
-
-
-
