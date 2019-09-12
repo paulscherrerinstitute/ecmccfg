@@ -1,51 +1,32 @@
 ############################################################
 ############# MCU1026:
 
-epicsEnvSet("ECMC_EC_MASTER_ID"          "0")
+#Configure EL1018 digital input terminal
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=0, HW_DESC=EL1018"
 
-#Choose master
-ecmcConfigOrDie "Cfg.EcSetMaster($(ECMC_EC_MASTER_ID))"
-
-# Configure EL1018 digital input terminal
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
-< ../hardware/ecmcEL1018$(ECMC_GEN_EC_RECORDS)
-
-# Configure EL2808 digital output terminal
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
-< ../hardware/ecmcEL2808$(ECMC_GEN_EC_RECORDS)
+#Configure EL2808 digital output terminal
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL2808"
 
 # Save the slave number for later
-epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT",      "${ECMC_EC_SLAVE_NUM}")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT", "${ECMC_EC_SLAVE_NUM}")
 
-# Configure EL5101 incremental encoder terminal, motor 1
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "2")
-< ../hardware/ecmcEL5101$(ECMC_GEN_EC_RECORDS)
+#Configure EL5101 Incremental Encoder Interface
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL5101"
 
-# Configure EL5101 incremental encoder terminal, motor 2
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
-< ../hardware/ecmcEL5101$(ECMC_GEN_EC_RECORDS)
+#Configure EL5101 Incremental Encoder Interface
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL5101"
 
 # Configure EL9505 Power supply terminal 5V
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "4")
-< ../hardware/ecmcEL9505$(ECMC_GEN_EC_RECORDS)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL9505"
 
 # Configure EL1252 digital input terminal
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "5")
-< ../hardware/ecmcEL1252$(ECMC_GEN_EC_RECORDS)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=5, HW_DESC=EL1252"
 
-# Configure EL7037 stepper drive terminal, motor 1
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "6")
-< ../hardware/ecmcEL7037$(ECMC_GEN_EC_RECORDS)
+#Configure EL7037 stepper drive terminal, motor 1
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=6, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
 
-#Configure motor for EL7037
-< ../hardware/ecmcEL7037-Motor-Nanotec-ST4118L1804-B
+#Configure EL7037 stepper drive terminal, motor 2
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=7, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
 
-# Configure EL7037 stepper drive terminal, motor 2
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "7")
-< ../hardware/ecmcEL7037$(ECMC_GEN_EC_RECORDS)
-
-#Configure motor for EL7037
-< ../hardware/ecmcEL7037-Motor-Nanotec-ST4118L1804-B
-
-# Apply hardware configuration
+#Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"

@@ -1,0 +1,11 @@
+# BO with readback
+record(bo,"$(P)Set$(REC_NAME)-RB"){
+  info(asyn:READBACK,"1")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(SCAN, "Passive")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/$(ASYN_NAME)?")
+  field(ONAM, "One")
+  field(ZNAM, "Zero")
+  field(TSE,  "$(TSE=-2)")
+}
