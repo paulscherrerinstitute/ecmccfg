@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief hardware script for iPOSXXXX
+#-d   \details 
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
 ############# Clear sync managers:
 epicsEnvSet("ECMC_SDO_INDEX",              "0x1C12")
 epicsThreadSleep(0.01)

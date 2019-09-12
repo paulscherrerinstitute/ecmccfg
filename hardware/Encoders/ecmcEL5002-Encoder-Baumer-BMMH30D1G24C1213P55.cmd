@@ -1,27 +1,34 @@
+#-d /**
+#-d   \brief hardware script for EL5002-Encoder-Baumer-BMMH30D1G24C1213P55
+#-d   \details
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
-# Do not supress frame error (default setting)
+
+#- Do not supress frame error (default setting)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x1,0,1)"
 
-# Disable power failure bit  (default setting)
+#- Disable power failure bit  (default setting)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x2,0,1)"
 
-# Disable inhibit bit  (default setting)
+#- Disable inhibit bit  (default setting)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x3,0,1)"
 
-# Disable test mode  (default setting)
+#- Disable test mode  (default setting)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x4,0,1)"
 
-# Gray code
+#- Gray code
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x6,1,1)"
 
-# SSI baud rate 500kBaud=3 (default setting)
+#- SSI baud rate 500kBaud=3 (default setting)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x9,3,1)"
 
-# SSI frame type variable analysis =2 (default setting)
+#- SSI frame type variable analysis =2 (default setting)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0xF,2,1)"
 
-# SSI frame size 26bits
+#- SSI frame size 26bits
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x11,27,2)"
 
-# SSI data length 25bits
+#- SSI data length 25bits
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x12,25,2)"

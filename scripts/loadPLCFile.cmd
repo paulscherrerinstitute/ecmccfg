@@ -1,15 +1,25 @@
-#===============================================================================
-# create PLC from file
-# Arguments
-# [mandatory]
-# FILE
-# [optional]
-# PLC_ID = 0
-# SAMPLE_RATE_MS = 1
+#==============================================================================
+# loadPLCFile.cmd
+#- Arguments: FILE, [PLC_ID], [SAMPLE_RATE_MS]
 
-#Create a new PLC 0 (Motion: Direct access through variables, I/O, global var, plc enable)
+#-d /**
+#-d   \brief Script for adding a PLC from file.
+#-d   \details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
+#-d   \author Niko Kivel
+#-d   \file
+#-d   \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
+#-d   \param PLC_ID (optional) PLC number, default 0
+#-d   \param SAMPLE_RATE_MS (optional) excecution rate, default 1 ms (realtime)
+#-d   \note Example call:
+#-d   \code
+#-d     ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
+#-d   \endcode
+#-d */
+
+#- Create a new PLC 0 (Motion: Direct access through variables, I/O, global var, plc enable)
+
 epicsEnvSet("ECMC_PLC_ID",          "${PLC_ID=0}")
-epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS","${SAMPLE_RATE_MS=1}") # execute in 1000Hz
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS","${SAMPLE_RATE_MS=1}") # execute at 1000Hz
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${FILE})"
 

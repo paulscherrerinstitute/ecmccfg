@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: 4ch digital input, 10micros filter
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL1014
+#-d   \details 4ch digital input, 10micros filter
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL1014")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

@@ -1,14 +1,17 @@
-############################################################
-############# Information:
-# Description: EL7332 DC motor drive
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL7332
+#-d   \details EL7332 DC motor drive
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \note SDOS
+#-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL7332")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1ca43052")
 
-#############  Reset terminal
+#- ############  Reset terminal
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
 
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1604,0x7020,0x1,16,STM_CONTROL_0)"

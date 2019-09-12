@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief hardware script for iPOS8020-EEPROM-BaseConfig-StepperOpenLoopCSV
+#-d   \details 
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
 #########################################################
 #  Parsing of Technosoft setup-file to ECMC format.
 #      Input file name: ESM_projects/iPOS8020 BA-CAT_Base_V1_0_EEPROM_prog_file.sw

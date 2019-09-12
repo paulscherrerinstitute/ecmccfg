@@ -1,10 +1,9 @@
-############################################################
-############# Information:
-# Description: 8ch digital input
-#
-# by Niko Kivel, Paul Scherrer Institute, 2019
-# email: niko.kivel@psi.ch
-############################################################
+#-d /**
+#-d   \brief hardware script for EL1008
+#-d   \details 8ch digital input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL1008")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

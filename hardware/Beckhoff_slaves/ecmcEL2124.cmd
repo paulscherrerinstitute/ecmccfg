@@ -1,8 +1,9 @@
-############################################################
-############# Information:
-# Description: 4ch 5V digital output, 20mA
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL2124
+#-d   \details 4ch 5V digital output, 20mA
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL2124")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

@@ -1,10 +1,10 @@
-############################################################
-############# Information:
-# Description: EK1100, EtherCAT coupler
-#
-# Note: No process data.
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EK1100
+#-d   \details EK1100, EtherCAT coupler
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d   \note No process data.
+#-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EK1100")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

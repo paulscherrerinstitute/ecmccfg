@@ -1,28 +1,20 @@
-# ECMC config
-# Arguments
-# [set by module]
-# ECMC_CONFIG_ROOT  ==  $(ecmccfg_DIR)
-# ECMC_CONFIG_DB    ==  $(ECMC_config_TEMPLATES)
-# [mandatory]
-# SYS
-# [optional]
-# ECMC_VER        = 6.0.0
-# EthercatMC_VER  = 3.0.0
-# INIT            = initAll
-# MASTER_ID       = 0
-#
-# calls initAll by default, which calls init
-# calls 'add_master.cmd'
-#require ecmccfg develop "SYS=STEST_KN82,SCRIPTEXEC=runScript"
+##############################################################################
+## Example config ESS crate of type MCU1025
 
-epicsEnvSet("IOC" ,"${IOC="IOC_TEST"}")
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg develop
 
-# run module startup.cmd
-iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
 
-# configure hardware
+##############################################################################
+## Configure hardware:
+
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
 
 # ADDITIONAL SETUP
@@ -41,13 +33,13 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},OUPIN_8,1
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/axis_1)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 
 ##############################################################################
 ## AXIS 2
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/axis_2)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 
 ##############################################################################
 ############# Configure diagnostics:

@@ -1,8 +1,15 @@
-############################################################
-############# Information:
-# Description: Power supply terminal with refresh of E-Bus
-#
-############################################################
+#-d /**
+#-d   \brief hardware script for EL9410
+#-d   \details Power supply terminal with refresh of E-Bus
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
+#- ###########################################################
+#- ############ Information:
+#-  Description: Power supply terminal with refresh of E-Bus
+#-
+#- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL9410")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
