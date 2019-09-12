@@ -1,6 +1,6 @@
 #==============================================================================
 # configureAxis.cmd
-#- Arguments: CONFIG, DEV
+#- Arguments: CONFIG, [DEV]
 
 #-d /**
 #-d   \brief Script for adding an axis with configuration.
@@ -8,7 +8,7 @@
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \param CONFIG configuration file, i.e. ./cfg/linear_1.pax
-#-d   \param DEV device name, i.e. MOTOR1
+#-d   \param DEV (optional) device name, i.e. MOTOR1
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=./cfg/linear_1.pax"
@@ -16,7 +16,8 @@
 #-d   \post After all axis have been added to the bus configuration, \b applyConfig.cmd has to be called.
 #-d */
 
-epicsEnvSet("ECMC_PREFIX"      "${DEV}:")
+#- set device name, default to ${IOC}
+epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 ${SCRIPTEXEC} ${CONFIG}
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addAxis.cmd
 #- reset PREFIX
