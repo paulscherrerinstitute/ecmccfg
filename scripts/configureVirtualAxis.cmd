@@ -8,7 +8,7 @@
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \param CONFIG configuration file, i.e. ./cfg/linear_11.vax
-#-d   \param DEV (optinal) device name, i.e. GAP
+#-d   \param DEV (optional) device name, i.e. GAP
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/linear_11.vax"

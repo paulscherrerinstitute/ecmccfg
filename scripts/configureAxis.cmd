@@ -8,7 +8,7 @@
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \param CONFIG configuration file, i.e. ./cfg/linear_1.pax
-#-d   \param DEV (optinal) device name, i.e. MOTOR1
+#-d   \param DEV (optional) device name, i.e. MOTOR1
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=./cfg/linear_1.pax"
