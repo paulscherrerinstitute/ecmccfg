@@ -26,5 +26,6 @@ static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_5,4);
 static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_6,5);
 static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_7,6);
 static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_8,7);
-println('');
+print('Output byte value: ');
 ec_print_bin(static.outputByte,0,7);
+println('');
