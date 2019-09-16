@@ -16,3 +16,16 @@ ec0.s2.OUPIN_5:=not(ec0.s2.OUPIN_1);
 ec0.s2.OUPIN_6:=not(ec0.s2.OUPIN_2);
 ec0.s2.OUPIN_7:=not(ec0.s2.OUPIN_3);
 ec0.s2.OUPIN_8:=not(ec0.s2.OUPIN_4);
+
+# Assemble the complete byte (to test ec_wrt_bit() command)
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_1,0);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_2,1);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_3,2);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_4,3);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_5,4);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_6,5);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_7,6);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_8,7);
+print('Output byte value: ');
+ec_print_bin(static.outputByte,0,7);
+println('');

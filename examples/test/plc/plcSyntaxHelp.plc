@@ -149,6 +149,13 @@
 #                           );
 #      Sets bit at bitindex position of value. Returns the new value.
 # 
+#   1. retvalue = ec_wrt_bit(
+#                           <value>,         : Value to change
+#                           <wrtValue>,      : Value of bit to write
+#                           <bitindex>       : Bit index 
+#                           );
+#      Write a wrtValue to a bit at bitindex position of value. Returns the new value.
+# 
 #   2. retvalue = ec_clr_bit(
 #                           <value>,         : Value to change
 #                           <bitindex>       : Bit index 

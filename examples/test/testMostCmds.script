@@ -7,7 +7,7 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
 
 ##############################################################################
 ############# General:
@@ -207,6 +207,29 @@ ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(1,100)"
 ecmcConfig      "Cfg.SetAxisMonMaxVelTrajILDelay(1,-20)"
 ecmcConfig      "Cfg.SetAxisMonMaxVelTrajILDelay(100,-20)"
 
+ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(1,1)"
+ecmcConfig      "Cfg.SetAxisMonHomeSwitchPolarity(1,-20)"
+ecmcConfig      "Cfg.SetAxisMonHomeSwitchPolarity(100,-20)"
+ecmcConfig      "GetAxisMonHomeSwitchPolarity(1)"
+ecmcConfig      "GetAxisMonHomeSwitchPolarity(100)"
+
+ecmcConfigOrDie "Cfg.SetAxisMonLimitFwdPolarity(1,1)"
+ecmcConfig      "Cfg.SetAxisMonLimitFwdPolarity(1,-20)"
+ecmcConfig      "Cfg.SetAxisMonLimitFwdPolarity(100,-20)"
+ecmcConfig      "GetAxisMonLimitFwdPolarity(1)"
+ecmcConfig      "GetAxisMonLimitFwdPolarity(100)"
+
+ecmcConfigOrDie "Cfg.SetAxisMonLimitBwdPolarity(1,1)"
+ecmcConfig      "Cfg.SetAxisMonLimitBwdPolarity(1,-20)"
+ecmcConfig      "Cfg.SetAxisMonLimitBwdPolarity(100,-20)"
+ecmcConfig      "GetAxisMonLimitBwdPolarity(1)"
+ecmcConfig      "GetAxisMonLimitBwdPolarity(100)"
+
+ecmcConfigOrDie "Cfg.SetAxisMonExtHWInterlockPolarity(1,1)"
+ecmcConfig      "Cfg.SetAxisMonExtHWInterlockPolarity(1,-20)"
+ecmcConfig      "Cfg.SetAxisMonExtHWInterlockPolarity(100,-20)"
+ecmcConfig      "GetAxisMonExtHWInterlockPolarity(1)"
+ecmcConfig      "GetAxisMonExtHWInterlockPolarity(100)"
 
 ecmcConfig      "MoveAbsolutePosition(1,1234,10,100,200)"
 ecmcConfig      "MoveAbsolutePosition(100,1234,10,100,200)"
