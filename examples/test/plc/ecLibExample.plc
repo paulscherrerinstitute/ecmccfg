@@ -7,25 +7,25 @@
 #    1. Test Ec lib
 
 #Flash outputs
-ec0.s2.OUPIN_1:=ec_flp_bit(ec0.s2.OUPIN_1,0);
-ec0.s2.OUPIN_2:=ec_flp_bit(ec0.s2.OUPIN_2,0);
-ec0.s2.OUPIN_3:=ec_flp_bit(ec0.s2.OUPIN_3,0);
-ec0.s2.OUPIN_4:=ec_flp_bit(ec0.s2.OUPIN_4,0);
+ec0.s2.BO_1:=ec_flp_bit(ec0.s2.BO_1,0);
+ec0.s2.BO_2:=ec_flp_bit(ec0.s2.BO_2,0);
+ec0.s2.BO_3:=ec_flp_bit(ec0.s2.BO_3,0);
+ec0.s2.BO_4:=ec_flp_bit(ec0.s2.BO_4,0);
 
-ec0.s2.OUPIN_5:=not(ec0.s2.OUPIN_1);
-ec0.s2.OUPIN_6:=not(ec0.s2.OUPIN_2);
-ec0.s2.OUPIN_7:=not(ec0.s2.OUPIN_3);
-ec0.s2.OUPIN_8:=not(ec0.s2.OUPIN_4);
+ec0.s2.BO_5:=not(ec0.s2.BO_1);
+ec0.s2.BO_6:=not(ec0.s2.BO_2);
+ec0.s2.BO_7:=not(ec0.s2.BO_3);
+ec0.s2.BO_8:=not(ec0.s2.BO_4);
 
 # Assemble the complete byte (to test ec_wrt_bit() command)
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_1,0);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_2,1);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_3,2);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_4,3);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_5,4);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_6,5);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_7,6);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.OUPIN_8,7);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_1,0);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_2,1);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_3,2);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_4,3);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_5,4);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_6,5);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_7,6);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_8,7);
 print('Output byte value: ');
 ec_print_bin(static.outputByte,0,7);
 println('');

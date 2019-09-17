@@ -16,9 +16,9 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS","100") # execute in 10Hz
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 
 #Add code
-ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ec0.s2.OUPIN_7:=global.test|          "
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ec0.s2.BO_7:=global.test|          "
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  plc1.enable:=plc0.enable|               "
-ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ec0.s2.OUPIN_5:=not(ec0.s2.OUPIN_5)|"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ec0.s2.BO_5:=not(ec0.s2.BO_5)|"
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  plc1.error:=12345|                      "
 
 #Enable PLC

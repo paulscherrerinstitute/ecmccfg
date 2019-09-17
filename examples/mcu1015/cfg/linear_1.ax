@@ -6,7 +6,7 @@ epicsEnvSet("ECMC_DESC",                  "MCU1015 Axis 1")
 epicsEnvSet("ECMC_EGU",                   "mm")                       # Motor Record Unit
 epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
-epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.OUPIN_1.0)
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.BO_1.0)
 epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
 epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
