@@ -24,7 +24,7 @@ ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ax1.traj.command:=10|      
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ax1.traj.cmddata:=3|                       "
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ax1.enc.homepos:=25|                       "
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  "
-ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ec0.s2.OUPIN_8 = ec_set_bit(ec0.s1.INPIN_1 and ax1.enc.actpos>0,0)|"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  ec0.s2.OUPIN_8 = ec_set_bit(ec0.s1.BI_1 and ax1.enc.actpos>0,0)|"
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  "
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  if(not(ax1.error))                         "
 ecmcConfigOrDie "Cfg.AppendPLCExpr(${ECMC_PLC_ID})=  {                                          "
