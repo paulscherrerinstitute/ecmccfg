@@ -6,7 +6,7 @@
 #   Code Description:
 #     1. Enable power on axis (mc_power())
 #     2. Home at startup if needed (mc_home())
-#     3. Move to position 130 (mc_move_abs())
+#     3. Move to position 120 (mc_move_abs())
 #     4. Move to position -10 (mc_move_abs())
 #     5. Stop sequence if limit switch violation or errorCode on motion blocks
 #     
@@ -71,7 +71,7 @@ if(static.seqStep==2)
 if(static.seqStep==3){
   ec0.s3.ENC_CONTROL:=ec_clr_bit(ec0.s3.ENC_CONTROL,0);  #Set/reset latch on C  
   ax1.blockcom:=0;  #Allow EPICS control
-  var posTarg:=130;
+  var posTarg:=120;
   var vel:=50;
   var acc:=100;
   var dec:=100;
@@ -104,7 +104,7 @@ if(static.seqStep==4){
   {
     mc_move_abs(1,0,posTarg,vel,acc,dec);  # Set execute low
     static.seqStep:=3;
-    println('3. Function mc_move_abs(1,1,130,50,100,100) triggered!');
+    println('3. Function mc_move_abs(1,1,120,50,100,100) triggered!');
     static.cycleCounter:=static.cycleCounter+1;
     println('Cycles:  ',static.cycleCounter);  # See if axis 1 is busy
   };
