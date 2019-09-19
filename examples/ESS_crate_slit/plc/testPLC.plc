@@ -14,7 +14,7 @@ if(static.seqStep==99){
   # println('----> PLC7: will disable now');
   # static.seqStep:=0;
   # do blink
-  ec0.s2.OUPIN_8:=not(ec0.s2.OUPIN_8);
+  ec0.s2.BO_8:=not(ec0.s2.BO_8);
 }
 
 if(static.seqStep==0){

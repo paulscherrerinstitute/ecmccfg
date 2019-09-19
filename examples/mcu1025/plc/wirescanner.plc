@@ -21,7 +21,7 @@ if(ax2.drv.enable and not(static.ax2_enable_old)){
 };
 
 # Trigger for capture of data is connected to EL1252-0050 (5v dig input)
-static.trigger:=ec0.s5.INPIN_1;
+static.trigger:=ec0.s5.BI_1;
 
 # Store data for Axis 1 to data storage 1
 if(not(static.trigger_old) and static.trigger and ax1.drv.enabled) {
@@ -36,7 +36,7 @@ if(not(static.trigger_old) and static.trigger and ax2.drv.enabled) {
 };
 
 # Save state of trigger for edge detection
-static.trigger_old:=ec0.s5.INPIN_1;
+static.trigger_old:=ec0.s5.BI_1;
 static.ax1_enable_old:=ax1.drv.enable;
 static.ax2_enable_old:=ax2.drv.enable;
 

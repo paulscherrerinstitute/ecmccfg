@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_DESC",                  "NOT SET")
 epicsEnvSet("ECMC_EGU",                   "NOT SET")       # Motor Record Unit
 epicsEnvSet("ECMC_PREC",                  "NOT SET")       # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "NOT SET")       # Extra parameters to driver
-epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "NOT SET")       # Entry for axis health output (example: ec0.s1.OUPIN_1.0)
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "NOT SET")       # Entry for axis health output (example: ec0.s1.BO_1.0)
 
 #- Encoder
 epicsEnvSet("ECMC_ENC_SCALE_NUM",         "NOT SET")
