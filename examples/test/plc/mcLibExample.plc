@@ -8,7 +8,7 @@
 #     2. Home at startup if needed (mc_home())
 #     3. Move to position 70 (mc_move_abs())
 #     4. Disable power on axis (mc_power())
-#     5. A warning light will flash during sequence (at ec0.s2.OUPIN_4)
+#     5. A warning light will flash during sequence (at ec0.s2.BO_4)
 #     6. PLC will be disabled after startup sequence have been performed
 #     
 
@@ -101,7 +101,7 @@ if(static.seqStep==4)
 };
 
 # Print status during startup sequence and flash warning light during sequence
-var warning_light:=ec0.s2.OUPIN_4;
+var warning_light:=ec0.s2.BO_4;
 if(static.seqStep<10){  
   static.counter+=1;
   if(static.counter>=static.blink_cycles)
@@ -109,7 +109,7 @@ if(static.seqStep<10){
     warning_light:=not(warning_light);
     static.counter:=0;  
   };  
-  ec0.s2.OUPIN_4:=warning_light;  
+  ec0.s2.BO_4:=warning_light;  
 };
 
 return [];
