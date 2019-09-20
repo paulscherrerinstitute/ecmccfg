@@ -2,30 +2,30 @@
 record(bo,"$(Name)-EncSourceType-Cmd"){
   field(DTYP,"stream")
   field(OUT,"@ecmcExpression.proto setEncSourceType($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
+  field(ZNAM,"internal")
+  field(ONAM,"from PLC")
 }
 
 record(bi,"$(Name)-EncSourceType-RB"){
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto getEncSourceType($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
+  field(ZNAM,"internal")
+  field(ONAM,"from PLC")
   field(SCAN, "1 second")
 }
 
 record(bo,"$(Name)-TrajSourceType-Cmd"){
   field(DTYP,"stream")
   field(OUT,"@ecmcExpression.proto setTrajSourceType($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
+  field(ZNAM,"internal")
+  field(ONAM,"from PLC")
 }
 
 record(bi,"$(Name)-TrajSourceType-RB"){
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto getTrajSourceType($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
+  field(ZNAM,"internal")
+  field(ONAM,"from PLC")
   field(SCAN, "1 second")
 }
 
@@ -47,15 +47,15 @@ record(bi,"$(Name)-Transform-CmdEn-RB"){
 record(bo,"$(Name)-CmdFromOtherAxis-CmdEn"){
   field(DTYP,"stream")
   field(OUT,"@ecmcExpression.proto setEnableCommandFromOtherAxis($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
+  field(ZNAM,"refuse")
+  field(ONAM,"allow")
 }
 
 record(bi,"$(Name)-CmdFromOtherAxis-CmdEn-RB"){
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto getEnableCommandFromOtherAxis($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
+  field(ZNAM,"refused")
+  field(ONAM,"allowed")
   field(SCAN, "1 second")
 }
 
