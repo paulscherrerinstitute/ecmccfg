@@ -22,12 +22,11 @@
 
 epicsEnvSet("ECMC_PLC_ID",              "${PLC_ID=0}")
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${SAMPLE_RATE_MS=1}") # execute at 1000Hz
-epicsEnvSet("ECMC_PLC_MACROS",          "${PLC_MACROS=EMPTY}")
 epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc")
 
 #- Convert file with optional macros (msi)
 
-system "msi -V -M ${ECMC_PLC_MACROS} ${FILE} > ${ECMC_TMP_FILE}"
+system "msi -V -M ${PLC_MACROS=EMPTY} ${FILE} > ${ECMC_TMP_FILE}"
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 
