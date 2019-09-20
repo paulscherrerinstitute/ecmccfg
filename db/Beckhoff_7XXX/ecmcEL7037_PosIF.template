@@ -1,0 +1,338 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-Stat"){
+  field(DESC, "$(HWTYPE): PosIF status word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_STATUS?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-Pos"){
+  field(DESC, "$(HWTYPE): PosIF Position Act")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_POSITION?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-Vel"){
+  field(DESC, "$(HWTYPE): PosIF Velocity Act")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_VELOCITY?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-Time"){
+  field(DESC, "$(HWTYPE): PosIF Drive Time")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_DRIVETIME?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Count-RB"){
+  field(DESC, "$(HWTYPE): Enc Counter RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_COUNTER?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Count"){
+  field(DESC, "$(HWTYPE): Enc Counter")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_COUNTER=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-Cmd-RB"){
+  field(DESC, "$(HWTYPE): PosIF Control Word RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_CONTROL?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-Cmd"){
+  field(DESC, "$(HWTYPE): PosIF Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_CONTROL=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-PosCmd-RB"){
+  field(DESC, "$(HWTYPE): PosIF Target Pos RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_TARGETPOSITION?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-PosCmd"){
+  field(DESC, "$(HWTYPE): PosIF Target Pos")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_TARGETPOSITION=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-VelCmd-RB"){
+  field(DESC, "$(HWTYPE): PosIF Target Vel RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_VELOCITY?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-VelCmd"){
+  field(DESC, "$(HWTYPE): PosIF Target Vel")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_VELOCITY=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-StartType-RB"){
+  field(DESC, "$(HWTYPE): PosIF Start Type RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_STARTTYPE?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-StartType"){
+  field(DESC, "$(HWTYPE): PosIF Start Type")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_STARTTYPE=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-AccCmd-RB"){
+  field(DESC, "$(HWTYPE): PosIF Acc SP RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_ACCELERATION?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-AccCmd"){
+  field(DESC, "$(HWTYPE): PosIF Acc SP")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_ACCELERATION=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-DecCmd-RB"){
+  field(DESC, "$(HWTYPE): PosIF Dec SP RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_DECELERATION?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Pos-DecCmd"){
+  field(DESC, "$(HWTYPE): PosIF Dec SP")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POS_DECELERATION=")
+  field(PREC, "0")
+}
+
+# Drive
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd-RB"){
+  field(DESC, "$(HWTYPE): Drive Control Word RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).STM_CONTROL?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd"){
+  field(DESC, "$(HWTYPE): Drive Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).STM_CONTROL=")
+  field(PREC, "0")
+}
+
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat"){
+  field(DESC, "$(HWTYPE): Drive Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).STM_STATUS?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Warning")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.B2")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Error")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.B3")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stl-Alrm")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stl-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Motor Stall")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-SyncErr-Alrm")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-SyncErr-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Sync Error")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat.BD")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+}
+
+# Encoder
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat"){
+  field(DESC, "$(HWTYPE): Enc Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).ENC_STATUS?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OpnCrct-Alrm.PROC")
+  field(SHFT, "0")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-OpnCrct-Alrm"){
+  field(DESC, "$(HWTYPE): Enc Open Circuit Alm")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B6")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Open Circuit")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Wrn-Alrm")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Wrn-Alrm"){
+  field(DESC, "$(HWTYPE): Enc Extpltn Stall Alm")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-SyncErr-Alrm")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-SyncErr-Alrm"){
+  field(DESC, "$(HWTYPE): Enc Sync Error Alm")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.BD")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
+  field(DESC, "$(HWTYPE): Enc Act Pos (Raw)")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POSITION?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=V)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-PosAct"){
+  field(DESC, "$(HWTYPE): Enc Latch Pos")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).LATCH_POSITION?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=V)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd"){
+  field(DESC, "$(HWTYPE): Enc Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_CONTROL=")
+  field(PREC, "0")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd-RB"){
+  field(DESC, "$(HWTYPE): Enc Control Word RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_CONTROL?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}

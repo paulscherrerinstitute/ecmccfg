@@ -1,0 +1,11 @@
+# AO with readback
+record(ao,"$(P)Set$(REC_NAME)-RB"){
+  info(asyn:READBACK,"1")
+  field(PINI, "1")
+  field(TSE, -2)
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/$(ASYN_NAME)?")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "Passive")
+  field(TSE,  "$(TSE=-2)")
+}

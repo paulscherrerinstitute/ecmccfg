@@ -1,0 +1,169 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Functionality simultanious homing of a slit system:
+#
+#   Code Description:
+#     0. Disable PLC0
+#     1. Enable power on axis 1 (mc_power())
+#     2. Enable power on axis 2 (mc_power())
+#     3. Home at startup if needed (mc_home())
+#     4. Move to position 5 (mc_move_abs())
+#
+
+var errorCode:=0;
+var errorCode1:=0;
+var errorCode2:=0;
+
+##### Put all initiations here
+if(plc0.firstscan){
+  static.seqStep:=99;   # let's go
+};
+
+if(static.epicsDisableSeq){
+  static.seqStep:=100;  #invalid
+};
+
+##### 1. Put power on axis1 (run mc_power())
+if(static.seqStep==99){
+  println('Starting PLC0:');
+  #Ignore commands during startup sequence
+  ax1.blockcom:=1;
+  ax2.blockcom:=1;
+  ax1.enc.homed:=0;
+  println('>>>> ax1.enc.homed: ', ax1.enc.homed);
+  ax1.traj.source:=0;
+  println('>>>> ax1.traj.source: ', ax1.traj.source);
+  static.seqStep:=1;
+  static.cycleCounter:=0;
+  static.epicsDisableSeq:=0;  #For disable over epics
+  println('>>>> 1. init Axis 1');
+}
+
+##### 1. Put power on axis1 (run mc_power())
+if(static.seqStep==1){
+  if(not(ax1.error) and not(ax1.mon.lowlim)){
+    println('>>>> ERROR: AX1 LLS is triggered! : ', ax1.mon.lowlim);
+    static.seqStep:=0;
+  };
+  if(not(ax1.error) and not(ax1.mon.highlim)){
+    println('>>>> ERROR: AX1 HLS is triggered!');
+    static.seqStep:=0;
+  };
+  if(not(ax1.error)){
+    ax1.traj.source:=0
+    errorCode=mc_power(1,1);
+    if(errorCode){
+      println('Function mc_power() returned error: ', errorCode);
+      plc0.error:=errorCode;
+    };
+  }
+  else{
+    ax1.reset:=1;
+  };
+
+  if(static.seqStep>0 and ax1.drv.enabled){
+    println('>>>> axis 1 enabled');
+    println('>>>> 2. init Axis 2');
+    static.seqStep:=2;
+  }
+};
+
+##### 2. Put power on axis2 (run mc_power())
+if(static.seqStep==2){
+  if(not(ax2.error) and not(ax2.mon.lowlim)){
+    println('>>>> ERROR: AX2 LLS is triggered!');
+    static.seqStep:=0;
+  };
+  if(not(ax2.error) and not(ax2.mon.highlim)){
+    println('>>>> ERROR: AX2 HLS is triggered!');
+    static.seqStep:=0;
+  };
+  if(not(ax2.error)){
+    ax2.traj.source:=0
+    errorCode=mc_power(2,1);
+    if(errorCode){
+      println('Function mc_power() returned error: ', errorCode);
+      plc0.error:=errorCode;
+    };
+  }
+  else{
+    ax2.reset:=1;
+  };
+
+  if(ax2.drv.enabled){
+    println('>>>> axis 2 enabled');
+    println('>>>> 3. home axis 1');
+    static.seqStep:=3;
+  }
+};
+
+##### 3. Do homing sequence axis1 and axis2 (run mc_home())
+if(static.seqStep==3)
+{
+  var homingSeq1:=3;
+  var homingSeq2:=4;
+  ax1.enc.homepos:=-30.5;
+  ax2.enc.homepos:=30.5;
+  var velTowardsCam:=20;
+  var velOffCam:=20;
+  errorCode1=mc_home(1,1,homingSeq1,velTowardsCam,velOffCam);
+  if(errorCode1){
+    println('Function mc_home() returned error: ', errorCode1);
+    plc0.error:=errorCode1;
+  };
+  errorCode2=mc_home(2,1,homingSeq2,velTowardsCam,velOffCam);
+  if(errorCode2){
+    println('Function mc_home() returned error: ', errorCode2);
+    plc0.error:=errorCode2;
+  };
+  if(ax1.enc.homed and ax2.enc.homed and not(mc_get_busy(1)) and not(mc_get_busy(2))){
+    println('>>>> axis 1 and axis 2 homed');
+    static.seqStep:=4;
+  };
+};
+
+##### 4. Trigger absolute move
+if(static.seqStep==4){
+  ax1.blockcom:=0;  #Allow EPICS control
+  ax2.blockcom:=0;  #Allow EPICS control
+  var posTarg:=5;
+  var vel:=50;
+  var acc:=100;
+  var dec:=100;
+  errorCode1:=mc_move_abs(1,1,-posTarg,vel,acc,dec);
+  if(errorCode1){
+    println('Error: mc_move_abs() returned error: ',errorCode1);
+    plc0.error:=errorCode1;
+  };
+  errorCode2:=mc_move_abs(2,1,posTarg,vel,acc,dec);
+  if(errorCode2){
+    println('Error: mc_move_abs() returned error: ',errorCode2);
+    plc0.error:=errorCode2;
+  };
+
+  if( ax1.traj.setpos==-posTarg and ax2.traj.setpos==posTarg and not(mc_get_busy(1)) and not(mc_get_busy(2)) )
+  {
+    mc_move_abs(1,0,posTarg,vel,acc,dec);  # Set execute low
+    mc_move_abs(2,0,posTarg,vel,acc,dec);  # Set execute low
+    static.seqStep:=0;
+  };
+};
+
+##### 0. Disable PLC0
+if(static.seqStep==0){
+  ax1.blockcom:=0;  #Allow EPICS control
+  ax2.blockcom:=0;  #Allow EPICS control
+  ax1.traj.source:=1;
+  ax2.traj.source:=1;
+  println('>>>> Disable PLC0');
+  println('Ax1 TrajSrc: ', ax1.traj.source);
+  println('Ax2 TrajSrc: ', ax2.traj.source);
+  #println('>>>> Ax11 position: ', ax11.enc.actpos);
+  #println('>>>> Ax12 position: ', ax12.enc.actpos);
+  static.seqStep:=99;
+  println('seqStep: ', static.seqStep);
+  plc0.enable:=0;          # Disable PLC
+};
+
+return [];

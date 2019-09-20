@@ -1,0 +1,27 @@
+var errorCode:=0;
+var errorCode1:=0;
+var errorCode2:=0;
+
+if(plc7.firstscan){
+  println('----> first run of PLC7');
+  println('----> PLC7: plc7.scantime = ', plc7.scantime);
+  static.seqStep:=99;   # let's go
+};
+
+if(static.seqStep==99){
+  # println('');
+  # println('----> PLC7: static.seqStep = ', static.seqStep);
+  # println('----> PLC7: will disable now');
+  # static.seqStep:=0;
+  # do blink
+  ec0.s2.BO_8:=not(ec0.s2.BO_8);
+}
+
+if(static.seqStep==0){
+  println('----> PLC7: static.seqStep = ', static.seqStep);
+  static.seqStep:=99;
+  println('----> PLC7: plc7.enable = ', plc7.enable);
+  plc7.enable:=0;
+  println('----> PLC7: plc7.enable = ', plc7.enable);
+  println('----> ecmcConfigOrDie "Cfg.SetPLCEnable(7,1)"');
+}

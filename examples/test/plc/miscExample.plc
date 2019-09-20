@@ -1,0 +1,14 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Functionality Demo:
+#
+#  Code Description:
+#    1. Test of global variable 
+#    2. Test of custom error id
+#    3. Test of plc<id>.enable
+
+ec0.s2.BO_7:=global.test;
+plc1.enable:=plc0.enable;
+ec0.s2.BO_5:=not(ec0.s2.BO_5);
+plc1.error:=12345;

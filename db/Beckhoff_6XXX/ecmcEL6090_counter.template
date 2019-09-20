@@ -1,0 +1,45 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}"){
+  field(DESC, "$(HWTYPE): Counter value")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).COUNTER${N}")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=V)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}-Incr"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(DESC=$(HWTYPE)): inc counter")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).C${N}_INCR")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(FLNK, "$(FLNK=)")
+}
+
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cntr-${N}-Rst"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(DESC=$(HWTYPE)): reset counter")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).C${N}_RESET")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(FLNK, "$(FLNK=)")
+}

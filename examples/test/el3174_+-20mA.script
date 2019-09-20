@@ -1,0 +1,51 @@
+##############################################################################
+## Example config for el3174 multi range analog input
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "22")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3174_+-20mA"
+
+# Configure analog sensors common (filter settings valid for all channles)
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL31XX-Sensor-common.cmd
+
+# Example of default configuration of analog sensor CH0
+epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3164-Sensor-chX-default.cmd
+
+# Example of default configuration of analog sensor CH1
+epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3164-Sensor-chX-default.cmd
+
+# Example of default configuration of analog sensor CH2
+epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8020")
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3164-Sensor-chX-default.cmd
+
+# Example of default configuration of analog sensor CH3
+epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8030")
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3164-Sensor-chX-default.cmd
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

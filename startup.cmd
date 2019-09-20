@@ -1,6 +1,6 @@
 ################################################################################
 #-------------- Information:
-# Description: ECMC_config startup.script
+# Description: ecmccfg startup.script
 #
 # by Niko Kivel, Paul Scherrer Institute, 2018
 # email: niko.kivel@psi.ch
@@ -11,34 +11,42 @@
 # SYS
 #
 # [optional]
-# ECMC_VER          = kivel
-# EthercatMC_VER    = kivel
+# ECMC_VER          = 6.0
+# EthercatMC_VER    = 3.0
 # INIT              = initAll
 # MASTER_ID         = 0
 # SCRIPTEXEC        = iocshLoad
 #
 # [set by module]
-# ECMC_CONFIG_ROOT  = $(ECMC_config_DIR)
-# ECMC_CONFIG_DB    = $(ECMC_config_TEMPLATES)
-# EthercatMC_DB     = $(EthercatMC_TEMPLATES)
-
+# ECMC_CONFIG_ROOT  = root directory of ${MODULE}
+# ECMC_CONFIG_DB    = database directory of ${MODULE}
+# EthercatMC_DB     = database directory of EthercatMC
 #
+#-------------------------------------------------------------------------------
 # load required modules
-require ecmc        $(ECMC_VER=kivel)
-require EthercatMC  $(EthercatMC_VER=kivel)
-require stream
+require ecmc        "${ECMC_VER=6.0}"
+require EthercatMC  "${EthercatMC_VER=3.0}"
+require stream      "${stream_VER=kivel}"
 #
+#-------------------------------------------------------------------------------
 # define default PATH for scripts and database/templates
-epicsEnvSet("ECMC_CONFIG_ROOT"      "$(ECMC_config_DIR)")
-epicsEnvSet("ECMC_CONFIG_DB"        "$(ECMC_config_TEMPLATES)/")
-epicsEnvSet("EthercatMC_DB"         "$(EthercatMC_TEMPLATES)/")
-epicsEnvSet("STREAM_PROTOCOL_PATH"  "$(STREAM_PROTOCOL_PATH=""):$(ECMC_CONFIG_ROOT)")
+epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
+epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_TEMPLATES}/")
+epicsEnvSet("EthercatMC_DB",        "${EthercatMC_TEMPLATES}/")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}")
 # define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
-epicsEnvSet("SCRIPTEXEC"            "$(SCRIPTEXEC=iocshLoad)")
+epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #
+#-------------------------------------------------------------------------------
 # define IOC Prefix
-epicsEnvSet("SM_PREFIX"             "$(SYS):")    # colon added since SYS is _not_ PREFIX
-# call init-script --> $(INIT)
-$(SCRIPTEXEC)($(ECMC_config_DIR)$(INIT=initAll))
-# add master ($(MASTER_ID))
-$(SCRIPTEXEC)($(ECMC_config_DIR)addMaster.cmd, "MASTER_ID=$(MASTER_ID=0)")
+epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
+#-------------------------------------------------------------------------------
+# call init-script, defaults to 'initAll'
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
+#
+#-------------------------------------------------------------------------------
+# add master (defaults to '0')
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
+#
+# Ensure that this command is not executed twice (ESS vs PSI)
+epicsEnvSet("ECMCCFG_INIT" ,"#")

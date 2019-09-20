@@ -1,0 +1,348 @@
+###############################################################################################
+#  For detailed Syntax help please visit the exprtk website
+#
+#
+#  Common sources of error and some usefull info:
+#  1. Assignment is ':='  egual is '=' or '=='
+#  2. Ensure that all statements end with a ';'
+#  3. All variables are initiated to 0
+#   
+#  Below the ECMC specific accessible variables and functions are listed:
+#
+#  Accessible variables in code:
+#   1.  static.<varname>             Static variable. Initiated to 0. (rw)                                    
+#                                    Access only in the PLC where defined.
+#                                    Will keep value between execution
+#                                    loops.
+#   2.  global.<varname>             Global variable. Initiated to 0. (rw)
+#                                    Access from all PLCs.
+#                                    Will keep value between execution
+#                                    loops.
+#   3.  var <varname>                Local variable (exprtk syntax)   (rw)
+#                                    Will NOT keep value between
+#                                    execution loops.
+#
+#  EtherCAT data:
+#   1.  ec<ecid>.s<sid>.<alias>      ethetcat data                (rw)
+#                                    ecid:  ethercat master index
+#                                    sid:   ethercat slave bus position
+#                                    alias: entry name as defined in
+#                                           "Cfg.EcAddEntryComplete()
+#   2.  ec<ecid>.masterstatus        Status of master (1=OK)
+# 
+#  Motion variables:
+#   1.  ax<id>.id                    axis id                          (ro)
+#   2.  ax<id>.reset                 reset axis error                 (rw)
+#   3.  ax<id>.counter               execution counter                (ro)
+#   4.  ax<id>.error                 error                            (ro)
+#   5.  ax<id>.allowplccmd           Allow writes to axis from PLC    (rw)
+#   6.  ax<id>.enc.actpos            actual position                  (ro)
+#   7.  ax<id>.enc.actvel            actual velocity                  (ro)
+#   8.  ax<id>.enc.rawpos            actual raw position              (ro)
+#   9.  ax<id>.enc.source            internal source or expressions   (rw)
+#                                    source = 0: internal encoder
+#                                    source > 0: actual pos from expr
+#   10. ax<id>.enc.homed             encoder homed                    (rw)
+#   11. ax<id>.enc.homepos           homing position                  (rw)
+#   12. ax<id>.traj.setpos           curent trajectory setpoint       (rw)
+#   13. ax<id>.traj.targetpos        target position                  (rw)
+#   14. ax<id>.traj.targetvel        target velocity setpoint         (rw)
+#   15. ax<id>.traj.targetacc        target acceleration setpoint     (rw)
+#   16. ax<id>.traj.targetdec        target deceleration setpoint     (rw)
+#   17. ax<id>.traj.setvel           current velocity setpoint        (ro)
+#   18. ax<id>.traj.setvelffraw      feed forward raw velocity        (ro)
+#   19. ax<id>.traj.command          command                          (rw)
+#                                    command=1: move velocity  
+#                                    command=2: move rel. pos
+#                                    command=3: move abs. pos
+#                                    command=10: homing
+#   20. ax<id>.traj.cmddata          cmddat. Homing procedure
+#                                    only valid if ax<id>.traj.command=10
+#                                    cmddata=1 : ref low limit
+#                                    cmddata=2 : ref high limit
+#                                    cmddata=3 : ref home sensor
+#                                                (via low limit)
+#                                    cmddata=4 : ref home sensor
+#                                                (via high limit)
+#                                    cmddata=5 : ref center of home sensor
+#                                                (via low limit)
+#                                    cmddata=6 : ref center of home sensor
+#                                                (via high limit)
+#                                    cmddata=15 : direct homing
+#                                    cmddata=21 : ref partly abs. encoder
+#                                                 (via low limit).
+#                                                 ref at abs bits.
+#                                                 over/under-flow..
+#                                    cmddata=22 : ref partly abs. encoder
+#                                                 (via high limit).
+#                                                 ref at abs bits.
+#                                                 over/under-flow..
+#   21. ax<id>.traj.source           internal source or expressions   (rw)
+#                                    source = 0: internal traj
+#                                    source > 0: setpoints from expr
+#   22. ax<id>.traj.execute          execute motion command           (rw)
+#   23. ax<id>.traj.busy             axis busy                        (ro)
+#   24. ax<id>.traj.dir              axis setpoint direction          (ro)
+#                                    ax<id>.traj.dir>0: forward
+#                                    ax<id>.traj.dir<0: backward
+#                                    ax<id>.traj.dir=0: standstill
+#   25. ax<id>.cntrl.error           actual controller error          (ro)
+#   26. ax<id>.cntrl.poserror        actual position error            (ro)
+#   27. ax<id>.cntrl.output          actual controller output         (ro)
+#   28. ax<id>.drv.setvelraw         actual raw velocity setpoint     (ro)
+#   29. ax<id>.drv.enable            enable drive command             (rw)
+#   30. ax<id>.drv.enabled           drive enabled                    (ro)
+#   31. ax<id>.seq.state             sequence state (homing)          (ro)
+#   32. ax<id>.mon.ilock             motion interlock (both dir)      (rw)
+#                                    ax<id>.mon.ilock=1: motion allowed
+#                                    ax<id>.mon.ilock=0: motion not allowed        
+#   33. ax<id>.mon.ilockbwd          motion interlock bwd dir         (rw)
+#                                    ax<id>.mon.ilockbwd=1: motion allowed
+#                                    ax<id>.mon.ilockbwd=0: motion not allowed        
+#   34. ax<id>.mon.ilockfwd          motion interlock fwd dir         (rw)
+#                                    ax<id>.mon.ilockfwd=1: motion allowed
+#                                    ax<id>.mon.ilockfwd=0: motion not allowed        
+#   35. ax<id>.mon.attarget          axis at taget                    (ro)
+#   36. ax<id>.mon.lowlim            low limit switch                 (ro)
+#   37. ax<id>.mon.highlim           high limit switch                (ro)
+#   38. ax<id>.mon.homesensor        home sensor                      (ro)
+#   39. ax<id>.mon.lowsoftlim        low soft limit                   (rw)
+#   40. ax<id>.mon.highsoftlim       high soft limit                  (rw)
+#   41. ax<id>.mon.lowsoftlimenable  low soft limit enable            (rw)
+#   42. ax<id>.mon.highsoftlimenable high soft limit enable           (rw)
+#   43. ax<id>.blockcom              Enables/disables "set" commands   (rw)
+#                                    via command parser (ascii commands)
+#                                    Statuses can still be read.
+#                                    Exceptions ("set"-commands) that 
+#                                    will work: 
+#                                    - "StopMotion(axid)"
+#                                    - "Cfg.SetAxisBlockCom(axid,block)"
+#
+#  PLC variables: 
+#   1.  plc<id>.enable               plc enable                       (rw)
+#                                    (end exe with "plc<id>.enable:=0#"
+#                                    Could be usefull for startup
+#                                    sequences)
+#   2.  plc<id>.error                plc error                        (rw)
+#                                    Will be forwarded to user as
+#                                    controller error.
+#   3.  plc<id>.scantime             plc sample time in seconds       (ro)
+#   4.  plc<id>.firstscan            true during first plc scan only  (ro)
+#                                    usefull for initiations of variables
+# 
+#  Data Storage variables:
+#   1.  ds<id>.size                  Set/get size of data storage     (rw)
+#                                    Set will clear the data storage 
+#   2.  ds<id>.append                Add new data at end              (rw)
+#                                    Current position index will be 
+#                                    increased
+#   3.  ds<id>.data                  Set/get data ar current position (rw)
+#   4.  ds<id>.index                 Set/get current position index   (rw)
+#   5.  ds<id>.error                 Data storage class error         (ro)
+#   6.  ds<id>.clear                 Data buffer clear (set to zero)  (ro)
+#   7.  ds<id>.full                  True if data storage is full     (ro)
+# 
+#  Function Lib: EtherCAT
+#   1. retvalue = ec_set_bit(
+#                           <value>,         : Value to change
+#                           <bitindex>       : Bit index 
+#                           );
+#      Sets bit at bitindex position of value. Returns the new value.
+# 
+#   1. retvalue = ec_wrt_bit(
+#                           <value>,         : Value to change
+#                           <wrtValue>,      : Value of bit to write
+#                           <bitindex>       : Bit index 
+#                           );
+#      Write a wrtValue to a bit at bitindex position of value. Returns the new value.
+# 
+#   2. retvalue = ec_clr_bit(
+#                           <value>,         : Value to change
+#                           <bitindex>       : Bit index 
+#                           );
+#      Clears bit at bitindex position of value. Returns the new value.
+# 
+#   3. retvalue = ec_flp_bit(
+#                           <value>,         : Value to change
+#                           <bitindex>       : Bit index 
+#                           );
+#      Flips bit at bitindex position of value. Returns the new value.
+# 
+#   4. retvalue = ec_chk_bit(
+#                           <value>,         : Value to change
+#                           <bitindex>       : Bit index 
+#                           );
+#      Checks bit at bitindex position of value. Returns the value of bit.
+#
+#   5. retvalue = ec_print_hex(
+#                           <value>,         : Value to print
+#                           <startBit>       : Start bit index 
+#                           <stopBit>        : Stop bit index 
+#                           );
+#      Prints <startBit> to <stopBit> of <value> in hex format 
+#      Returns error code or 0 if success.#
+# 
+#   6. retvalue = ec_print_bin(
+#                           <value>,         : Value to print
+#                           <startBit>       : Start bit index 
+#                           <stopBit>        : Stop bit index 
+#                           );
+#      Prints <startBit> to <stopBit> of <value> in bin format 
+#      Returns error code or 0 if success.
+# 
+#   7. retvalue=ec_get_err():
+#      Returns error code from last lib call.
+# 
+#  Function Lib: Motion
+#   1. retvalue = mc_move_abs(
+#                           <axIndex>,       : Axis index
+#                           <execute>,       : Trigger
+#                           <pos>,           : Target position
+#                           <vel>,           : Target velocity
+#                           <acc>,           : Acceleration
+#                           <dec>            : Deceleration
+#                           ):
+#      Absolute motion of axis.
+#      Motion is triggerd with a positive edge on <execute> input.
+#      returns 0 if success or error code.
+#      
+#   2. retvalue = mc_move_rel(
+#                           <axIndex>,       : Axis index
+#                           <execute>,       : Trigger
+#                           <pos>,           : Target position
+#                           <vel>,           : Target velocity
+#                           <acc>,           : Acceleration
+#                           <dec>            : Deceleration
+#                           );
+# 
+#      Relative motion of axis <axIndex>.
+#      Motion is triggerd with a positive edge on <execute> input.
+#      returns 0 if success or error code.
+# 
+#   3. retvalue = mc_move_vel(
+#                           <axIndex>,       : Axis index
+#                           <execute>,       : Trigger
+#                           <vel>,           : Target velocity
+#                           <acc>,           : Acceleration
+#                           <dec>            : Deceleration
+#                           );
+#      Constant velocity motion of axis <axIndex>.
+#      Motion is triggerd with a positive edge on <execute> input.
+#      returns 0 if success or error code.
+# 
+#   4. retvalue = mc_home(
+#                           <axIndex>,       : Axis index
+#                           <execute>,       : Trigger
+#                           <seqId>,         : Motion sequence
+#                           <velTwoardsCam>, : Target Velocity twords cam
+#                           <velOffCam>      : Target velocity off cam
+#                           );
+#      Perform a homing sequence of axis <axIndex>.
+#      Motion is triggerd with a positive edge on <execute> input.
+#      returns 0 if success or error code.
+# 
+#   5. retvalue = mc_halt(
+#                           <axIndex>,       : Axis index
+#                           <execute>,       : Trigger
+#                           );
+#      Stop motion of axis <axIndex>.
+#      Motion is triggerd with a positive edge on <execute> input.
+#      returns 0 if success or error code.
+# 
+#   6. retvalue = mc_power(
+#                           <axIndex>,       : Axis index
+#                           <enable>,        : Enable power
+#                           );
+#      Enable power of  axis <axIndex>.
+#      Motion is triggerd with a positive edge on <execute> input.
+#      returns 0 if success or error code.
+#
+#   7. retvalue = mc_get_busy(
+#                           <axIndex>,       : Axis index#                           
+#                           );
+#      Check if axis is busy.
+#
+#      returns busy state of axis (1 if busy and 0 if not busy).
+#
+#   8. retvalue = mc_get_homed(
+#                           <axIndex>,       : Axis index#                           
+#                           );
+#      Check if axis is homed.
+#
+#      returns state of homed flag of axis (1 if homed and 0 if not homed).
+#
+#   9. retvalue = mc_get_err();
+#      Returns error code for last lib call.
+#   
+#  Function Lib: Data Storage
+#   1. retvalue = ds_append_data(
+#                           <dsIndex>,       : Data storage index
+#                           <data>,          : Data
+#                           );
+#      Append data to data storage.
+#      returns 0 if success or error code.
+# 
+#   2. retvalue = ds_clear_data(
+#                           <dsIndex>,       : Data storage index
+#                           );
+#      Clear data to data storage.
+#      returns 0 if success or error code.
+# 
+#   3. retvalue = ds_get_data(
+#                           <dsIndex>,       : Data storage index
+#                           <bufferIndex>,   : Buffer index
+#                           );
+#      Returns data from buffer.
+#
+#   4. retvalue = ds_set_data(
+#                           <dsIndex>,       : Data storage index
+#                           <bufferIndex>,   : Buffer index
+#                           );
+#      Sets data in data storage buffer.
+#      returns 0 if success or error code.
+# 
+#   5. retvalue = ds_get_buff_id(
+#                           <dsIndex>,       : Data storage index
+#                           );
+#      Returns current buffer index.
+#
+#   6. retvalue = ds_set_buff_id(
+#                           <dsIndex>,       : Data storage index
+#                           <bufferIndex>,   : Buffer index
+#                           );
+#      Sets current buffer index in data storage buffer.
+#      returns 0 if success or error code.
+# 
+#   7. retvalue = ds_is_full(
+#                           <dsIndex>,       : Data storage index
+#                           );
+#      Returns true if buffer is full.
+# 
+#   8. retvalue = ds_get_size(
+#                           <dsIndex>,       : Data storage index
+#                           );
+#      Returns buffer size of data storage.
+# 
+#   9. retvalue = ds_get_err()
+#      Returns error code for last lib call.
+#  
+#   10. retvalue = ds_push_asyn(
+#                           <dsIndex>,       : Data storage index
+#                           );
+#      Triggers push of all asyn parameters in ds to EPICS (including data). 
+#
+#   11. retvalue = ds_get_avg(
+#                           <dsIndex>,       : Data storage index\n
+#                           );
+#      Returns average of the values in the data storage.\n
+#
+#   12. retvalue = ds_get_min(
+#                           <dsIndex>,       : Data storage index\n
+#                           );
+#      Returns minimum of the values in the data storage.\n
+#
+#   13. retvalue = ds_get_max(
+#                           <dsIndex>,       : Data storage index\n
+#                           );
+#      Returns maximum of the values in the data storage.\n      
+#

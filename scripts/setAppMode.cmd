@@ -1,4 +1,14 @@
-runScript($(ECMC_config_DIR)general.cmd)
-runScript($(ECMC_config_DIR)diagnostics.cmd)
+#==============================================================================
+# setAppMode.cmd
+#- Arguments: n/a
 
-EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.SetAppMode(1)"
+#-d /**
+#-d   \brief Script for switching to operational mode.
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}generalDiagnostics.cmd
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}general.cmd
+
+ecmcConfigOrDie "Cfg.SetAppMode(1)"

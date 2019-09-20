@@ -1,0 +1,9 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-ID"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(DESC=$(HWTYPE): ID)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ID?")
+  field(FLNK, "$(FLNK=)")
+  field(TSE,  "$(TSE=-2)")
+}

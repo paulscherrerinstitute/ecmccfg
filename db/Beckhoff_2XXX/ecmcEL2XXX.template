@@ -1,0 +1,24 @@
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).BO_$(CH_ID)?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(SCAN, "Passive")
+  field(FLNK, "$(FLNK=)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)-RB")
+{
+  field(PINI, "YES")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).BO_$(CH_ID)?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(TSE,  "$(TSE=-2)")
+}

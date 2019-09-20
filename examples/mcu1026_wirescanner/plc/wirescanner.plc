@@ -1,0 +1,45 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# Wire scanner application:
+#
+#   Code Description:
+#     1. Only allow one axis to be enabled simultantous
+#     2. Store data on positive edge of trigger:
+#        - Actual position of axis 1 to data storage 1
+#        - Actual position of axis 2 to data storage 2
+#     
+
+# New command: Enable ax 1 => kill ax 2
+if(ax1.drv.enable and not(static.ax1_enable_old)){
+  mc_power(2,0);
+};
+
+# New command: Enable ax 2 => kill ax 1
+if(ax2.drv.enable and not(static.ax2_enable_old)){
+  mc_power(1,0);
+};
+
+# Trigger for capture of data is connected to EL1252-0050 (5v dig input)
+static.trigger:=ec0.s5.BI_1;
+
+# Store data for Axis 1 to data storage 1
+if(not(static.trigger_old) and static.trigger and ax1.drv.enabled) {
+  println('Data latched to data storage 1');
+  ds_append_data(1,ax1.enc.actpos);
+};
+
+# Store data for Axis 2 to data storage 2
+if(not(static.trigger_old) and static.trigger and ax2.drv.enabled) {
+  println('Data latched to data storage 2');
+  ds_append_data(2,ax2.enc.actpos);
+};
+
+# Save state of trigger for edge detection
+static.trigger_old:=ec0.s5.BI_1;
+static.ax1_enable_old:=ax1.drv.enable;
+static.ax2_enable_old:=ax2.drv.enable;
+
+return [];
+
+println('NEVER HERE');

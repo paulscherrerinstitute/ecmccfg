@@ -1,4 +1,3 @@
-
 record(bo,"$(Name)-EncSourceType-Cmd"){
   field(DTYP,"stream")
   field(OUT,"@ecmcExpression.proto setEncSourceType($(Index)) $(PORT)")
@@ -29,79 +28,56 @@ record(bi,"$(Name)-TrajSourceType-RB"){
   field(SCAN, "1 second")
 }
 
-record(bo,"$(Name)-Transform-CmdEn"){
+record(bo,"$(Name)-PLC-CmdEn"){
   field(DTYP,"stream")
-  field(OUT,"@ecmcExpression.proto setEnableCommandsTransform($(Index)) $(PORT)")
+  field(OUT,"@ecmcExpression.proto setAxisPLCEnable($(Index)) $(PORT)")
   field(ZNAM,"FALSE")
   field(ONAM,"TRUE")
+  field(DESC, "Axis sync. PLC Enable cmd")
 }
 
-record(bi,"$(Name)-Transform-CmdEn-RB"){
+record(bi,"$(Name)-PLC-CmdEn-RB"){
   field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getEnableCommandsTransform($(Index)) $(PORT)")
+  field(INP,"@ecmcExpression.proto getAxisPLCEnable($(Index)) $(PORT)")
   field(ZNAM,"FALSE")
   field(ONAM,"TRUE")
   field(SCAN, "1 second")
+  field(DESC, "Axis sync. PLC Enable cmd RB")
 }
 
-record(bo,"$(Name)-CmdFromOtherAxis-CmdEn"){
+record(bo,"$(Name)-AllowCmdFromPLC-CmdEn"){
   field(DTYP,"stream")
-  field(OUT,"@ecmcExpression.proto setEnableCommandFromOtherAxis($(Index)) $(PORT)")
+  field(OUT,"@ecmcExpression.proto setAxisAllowCommandsFromPLC($(Index)) $(PORT)")
   field(ZNAM,"refuse")
   field(ONAM,"allow")
+  field(DESC, "Allow command from PLC")
+
 }
 
-record(bi,"$(Name)-CmdFromOtherAxis-CmdEn-RB"){
+record(bi,"$(Name)-AllowCmdFromPLC-CmdEn-RB"){
   field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getEnableCommandFromOtherAxis($(Index)) $(PORT)")
+  field(INP,"@ecmcExpression.proto getAxisAllowCommandsFromPLC($(Index)) $(PORT)")
   field(ZNAM,"refused")
   field(ONAM,"allowed")
   field(SCAN, "1 second")
+  field(DESC, "Allow command from PLC RB")
 }
 
-record(waveform,"$(Name)-TrajExpr"){
+record(waveform,"$(Name)-PLCExpr-RB"){
   field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto setTrajTransExpr($(Index)) $(PORT)")
-  field(NELM,1000)
-  field (FTVL, "CHAR")
-}
-
-record(waveform,"$(Name)-TrajExpr-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getTrajTransExpr($(Index)) $(PORT)")
-  field(NELM,1000)
-  field(SCAN, "1 second")
-  field (FTVL, "CHAR")
-}
-
-record(waveform,"$(Name)-EncExpr"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto setEncTransExpr($(Index)) $(PORT)")
-  field(NELM,1000)
-  field (FTVL, "CHAR")
-}
-
-record(waveform,"$(Name)-EncExpr-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getEncTransExpr($(Index)) $(PORT)")
+  field(INP,"@ecmcExpression.proto getAxisPLCExpr($(Index)) $(PORT)")
   field(SCAN, "1 second")
   field(NELM,1000)
   field (FTVL, "CHAR")
+  field(DESC, "PLC code -RB")
 }
 
-record(waveform,"$(Name)-CmdExpr-RB"){
+record(waveform,"$(Name)-PLCExpr"){
   field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getCommandTransExpr($(Index)) $(PORT)")
-  field(SCAN, "1 second")
+  field(INP,"@ecmcExpression.proto setAxisPLCExpr($(Index)) $(PORT)")
   field(NELM,1000)
   field (FTVL, "CHAR")
-}
-
-record(waveform,"$(Name)-CmdExpr"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto setCommandTransExpr($(Index)) $(PORT)")
-  field(NELM,1000)
-  field (FTVL, "CHAR")
+  field(DESC, "PLC code")
 }
 
 record(ai,"$(Name)-AxisType-Act"){
