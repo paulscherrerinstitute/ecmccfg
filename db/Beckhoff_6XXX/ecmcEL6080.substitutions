@@ -5,7 +5,7 @@ file "ecmcEcSlave.template"
           {}
 }
 
-file "ecmcEL6080.template"
+file "ecmcEL6080-chX.template"
 {
   pattern {}
           {}
