@@ -1,10 +1,10 @@
-file ecmcEcSlave.template
+file "ecmcEcSlave.template"
 {
   pattern {}
           {}
 }
 
-file ecmcEL2XXX.template
+file "ecmcEL2XXX.template"
 {
   pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                               }
           {1,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}
@@ -25,7 +25,7 @@ file ecmcEL2XXX.template
           {16,    "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}
 }
 
-file ecmcEL2819.template
+file "ecmcEL2819-Stat-Alarm.template"
 {
   pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                               }
           {1,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}

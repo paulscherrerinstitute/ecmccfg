@@ -1,17 +1,17 @@
 # All fields related to postion scaling and alarms
-file ecmcEcSlave.template
+file "ecmcEcSlave.template"
 {
   pattern {}
           {}
 }
 
-file ecmcEL6080.template
+file "ecmcEL6080-chX.template"
 {
   pattern {}
           {}
 }
 
-file ecmcEL6080_app.template
+file "ecmcEL6080_app.template"
 {
   pattern {}
           {}

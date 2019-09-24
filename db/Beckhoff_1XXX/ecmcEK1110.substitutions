@@ -1,4 +1,4 @@
-file ecmcEcSlave.template
+file "ecmcEcSlave.template"
 {
   pattern {}
           {}
