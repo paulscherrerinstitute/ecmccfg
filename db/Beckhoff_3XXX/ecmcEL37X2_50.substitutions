@@ -1,3 +1,9 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
 file "ecmcEL37XX-chX.template"
 {
   pattern { CH_ID, DTYP,             FTVL,  NELM}

@@ -1,3 +1,9 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
 file "ecmcEL6090-chX.template"
 {
   pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                              }
