@@ -1,11 +1,11 @@
 #-d /**
-#-d   \brief hardware script for EL7047-Motor-OrientalMotor-PK296M-02B
-#-d   \details Parmetrization of EL7047 for motor Oriental Motor PK296M-02B
+#-d   \brief hardware script for EL7047-Motor-OrientalMotor-PK244M-01B
+#-d   \details Parmetrization of EL7047 for motor Oriental Motor PK244M-01B
 #-d   \author Orell Hürzeler
 #-d   \file
-#-d   \note Max current= 2 A
-#-d   \note Inductance per phase =? mH
-#-d   \note Resistance = 2.25 Ohm
+#-d   \note Max current= 4.8 A
+#-d   \note Inductance per phase = 4.3 mH
+#-d   \note Resistance per phase = 3.3 Ohm
 #-d */
 
 #- Set max current to 1.2A/pase = 4.8A (max current is ? A for this motor)
