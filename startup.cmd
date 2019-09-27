@@ -33,7 +33,7 @@ require stream      "${stream_VER=kivel}"
 epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
 epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_TEMPLATES}/")
 epicsEnvSet("EthercatMC_DB",        "${EthercatMC_TEMPLATES}/")
-epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}:${ecmccfg_DB}")
 # define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
 epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #
