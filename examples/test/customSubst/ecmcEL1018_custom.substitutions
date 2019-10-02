@@ -1,0 +1,18 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcEL1XXX_custom.template"
+{
+  pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                              }
+          {1,     "Limit","OK",   "MINOR",    "NO_ALARM", 1      "$(HWTYPE): Low Limit Switch"}
+          {2,     "Limit","OK",   "MINOR",    "NO_ALARM", 1      "$(HWTYPE): High Limit Switch"}
+          {3,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Home Sensor"}
+          {4,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Not used"}
+          {5,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Not used"}
+          {6,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Not used"}
+          {7,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Not used"}
+          {8,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Not used"}
+}
