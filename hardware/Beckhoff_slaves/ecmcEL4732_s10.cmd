@@ -1,16 +1,9 @@
 #-d /**
 #-d   \brief hardware script for EL3742_s10
-#-d   \details 2 channel 16bit analog output differential +-10V (with oversampling)
+#-d   \details 2 channel 16bit analog output +-10V (with oversampling factor 10)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
-
-#- ###########################################################
-#- ############ Information:
-#-  Description: 2 channel 16bit analog input differential 0..20mA (with oversampling)
-#-  Oversampling factor = 10
-#-
-#- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL4732_s10")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
