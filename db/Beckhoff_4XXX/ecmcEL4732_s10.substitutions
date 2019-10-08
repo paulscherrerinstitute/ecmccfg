@@ -6,7 +6,7 @@ file "ecmcEcSlave.template"
 
 file "ecmcEL47XX-chX.template"
 {
-  pattern {CH_ID, DTYP,             FTVL,  NELM}
-          {1,     asynInt16ArrayIn, SHORT, 10  }
-          {2,     asynInt16ArrayIn, SHORT, 10  }
+  pattern {CH_ID, DTYP,              FTVL,  NELM}
+          {1,     asynInt16ArrayOut, SHORT, 10  }
+          {2,     asynInt16ArrayOut, SHORT, 10  }
 }
