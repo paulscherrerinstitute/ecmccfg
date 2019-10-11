@@ -1,0 +1,15 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# Move memmap object
+
+static.cycles:=static.cycles+1;
+# Copy memap 0 to memap 2
+if(ec_mm_cp(0,2)) {
+  println('Error: ', ec_get_err());
+};
+
+if(static.cycles>1000) {
+  println('Alive!!!!');
+  static.cycles:=0;
+};
