@@ -38,8 +38,8 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 #-       Seems one additional value is output (always zero) if twincat settings are used. Need to look into this..
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,500001,0,1000000,0)"
 
-epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "2")    # 10 values
-epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "4")    # 20 bytes
+epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "2")    # 2 values
+epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "4")    # 4 bytes
 
 ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH1_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH1_ARRAY)"
 ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH2_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH2_ARRAY)"
