@@ -224,8 +224,9 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,1,0x1762,0x7620,0x2,16,CH2_VALUE_99,0)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,1,0x1763,0x7630,0x2,16,CH2_VALUE_100,0)"
 
-#-  Configure DC clock 10000ns update for oversampling (100 values oversampling)
-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,10000,0,1000000,0)"
+#- Configure DC clock 10000ns update for oversampling (100 values oversampling)
+#- Not sure why it works with the below settings. Twincat uses  10000 and 1000000. If these settings are used here the period will be 10000ns to long?!
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,10000,0,990000,0)"
 
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "100")    # 10 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "200")    # 20 bytes
