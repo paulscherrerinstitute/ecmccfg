@@ -1,25 +1,11 @@
-# record(bo,"$(Name)PLC-$(Index)-enable_ASYN_BO"){
-#   field(DTYP, "$(DTYP=asynFloat64)")
-#   field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.enable=")
-# }
-# aint work
-# Can't set "STEST-KN85:PLC-7-enable_ASYN_BO.DTYP" to "asynFloat64" No digits to convert
-# Error at or before ")" in path "/gfa/.mounts/sf_ioc/modules/ecmccfg/kivel/R7.0.3/db"  file "ecmcPlc.db" line 10
-#
-# Error: STEST-KN85:PLC-7-enable_ASYN_BO.OUT: can't initialize link type 0 with "@asyn(MC_CPU1,0,1)T_SMP_MS=1000/TYPE=asynFloat64/plcs.plc7.enable?" (type 12)
-
 record(bo,"$(Name)PLC-$(Index)-enable"){
-  field(DESC, "${DESC=Enable/disable PLC ${Index}}")
-  field(OUT,  "$(Name)PLC-$(Index)-enable_ PP")
-  field(ZNAM, "enable")
-  field(ONAM, "disable")
-}
-
-record(ao,"$(Name)PLC-$(Index)-enable_"){
+  info(asyn:READBACK,"1")
   field(PINI, "$(PINI=YES)")
   field(DESC, "$(DESC=PLC$(Index) scantime)")
-  field(DTYP, "$(DTYP=asynFloat64)")
-  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.enable=")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.enable?")
+  field(ZNAM, "disable")
+  field(ONAM, "enable")
   field(SCAN, "Passive")
   field(FLNK, "$(FLNK=)")
 }
