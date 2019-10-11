@@ -192,7 +192,18 @@
 # 
 #   7. retvalue=ec_get_err():
 #      Returns error code from last lib call.
-# 
+#
+#   8. retvalue = ec_mm_cp(
+#                           <srcId>,         : Source memmap index
+#                           <sdestId>        : Dest memmap index
+#                           );
+#      Copies data from source memmap to dest memmap. The memmap ids are defined by the 
+#      order they are created (starting at 0). The smallest memmap size will define the
+#      amout of data copied.
+#
+#   9. retvalue=ec_err_rst():
+#      Resets error code for ec_lib.
+#
 #  Function Lib: Motion
 #   1. retvalue = mc_move_abs(
 #                           <axIndex>,       : Axis index
@@ -344,5 +355,8 @@
 #   13. retvalue = ds_get_max(
 #                           <dsIndex>,       : Data storage index\n
 #                           );
-#      Returns maximum of the values in the data storage.\n      
+#      Returns maximum of the values in the data storage.\n
+#
+#   14. retvalue=ds_err_rst():
+#      Resets error code for ds_lib.
 #
