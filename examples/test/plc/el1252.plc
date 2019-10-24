@@ -1,0 +1,11 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+
+if(ec0.s${SLAVE_ID}.CH1_LATCH_POS!=static.oldCh1PosTime) {
+  println('New latched positive edge [ns]: ', ec0.s${SLAVE_ID}.CH1_LATCH_POS);
+  println('    Time since last latch [ns]: ', (ec0.s${SLAVE_ID}.CH1_LATCH_POS-static.oldCh1PosTime));
+  println('                          [ms]: ', (ec0.s${SLAVE_ID}.CH1_LATCH_POS-static.oldCh1PosTime)/1E6);
+};
+
+static.oldCh1PosTime:=ec0.s${SLAVE_ID}.CH1_LATCH_POS;

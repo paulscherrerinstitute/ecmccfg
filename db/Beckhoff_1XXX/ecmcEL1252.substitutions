@@ -10,3 +10,11 @@ file "ecmcEL1XXX.template"
           {1,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Input $(CH_ID)"}
           {2,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Input $(CH_ID)"}
 }
+
+# Timestamps and status words
+file "ecmcEL1252.template"
+{
+  pattern {CH_ID, PINI }
+          {1,     1    }
+          {2,     1    }
+}
