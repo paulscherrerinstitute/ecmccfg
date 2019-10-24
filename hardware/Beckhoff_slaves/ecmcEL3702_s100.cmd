@@ -252,7 +252,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 #- NOTE: Not sure why it works with the below settings. Twincat uses 100000 and 1000000. 
 #-       If these settings are used here the period will be 10000ns to long?!
 #-       Seems one additional value is output (always zero) if twincat settings are used. Need to look into this..
-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,10001,0,1000000,0)"
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,10000,0,990000,0)"
 
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "100")    # 100 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "200")    # 200 bytes
