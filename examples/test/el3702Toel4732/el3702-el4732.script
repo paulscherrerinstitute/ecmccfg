@@ -5,10 +5,15 @@
 # 2. Connect oscilloscope to signal generator and EL4732 output
 
 # Epics Configs:
-# 1. Read data form EL3702 in 100kHz (oversample factor 100). 
+# 1. Read data form EL3702 in 100kHz (oversample factor 100 (optional 1,2,10,50,100)). 
 # 2. Push data to EPICS waveform record (input)
-# 3. Forward data to waveform output record linked to EL4732 analog output terminal
-
+# 3. Forward data to aclacout record configured to make maniplulations (gain and 
+#    y-offset). Then forward record to output waveform   
+# 4. output record linked to EL4732 analog output terminal
+#
+# Note: Values in wavform are in I/0 range units (+-32768 correspoinds to +-10V) . 
+#       Offset value are in V
+#       
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")

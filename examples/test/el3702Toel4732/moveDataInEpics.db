@@ -26,7 +26,7 @@ record(acalcout,"$(P)MoveData"){
   field(INAA, "$(P)ec$(MASTER_ID)-s$(SLAVE_AI)-EL3702_s$(NELM)-AI1-Array.VAL")  
   field(INPA, "$(P)Gain.VAL")
   field(INPB, "$(P)Offset.VAL")
-  field(CALC, "(A*AA+B)")
+  field(CALC, "(A*AA+(B*3276.8))")
   field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_AO)-EL4732_s$(NELM)-AO1-Array.VAL")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_AO)-EL4732_s$(NELM)-AO1-Array.PROC")
   field(NELM, "$(NELM)")  
@@ -35,9 +35,11 @@ record(acalcout,"$(P)MoveData"){
 record(ao,"$(P)Gain"){
   field(DESC, "Amplification gain of input data (Y)")
   field(VAL,  "1")
+  field(EGU,  "No unit")
 }
 
 record(ao,"$(P)Offset"){
   field(DESC, "Offset of input data (Y)")
   field(VAL,  "0")
+  field(EGU,  "Volt")
 }
