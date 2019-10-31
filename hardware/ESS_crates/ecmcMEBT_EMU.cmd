@@ -23,17 +23,16 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=5, HW_DESC=EL5101"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL5101"
 
 #Configure EL7047 stepper drive terminal, motor 1 GRID
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=7, HW_DESC=EL7047, CONFIG=-Motor-Leadshine-57HS09"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=7, HW_DESC=EL7047, CONFIG=-Motor-AS4118L1804-E"
 
 #Configure EL7047 stepper drive terminal, motor 1 GRID
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=8, HW_DESC=EL7047, CONFIG=-Motor-Leadshine-57HS09"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=8, HW_DESC=EL7047, CONFIG=-Motor-AS4118L1804-E"
 
 # Configure EL3004 +/- 10V Analog Input
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=9, HW_DESC=EL3004"
 
 # Configure EL4004 0-10V Analog Output
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=10, HW_DESC=EL4004"
-
 
 # Configure EL9505 Power supply terminal 5V
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=11, HW_DESC=EL9505"
