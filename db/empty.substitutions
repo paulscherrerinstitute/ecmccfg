@@ -1,4 +1,4 @@
-file empty.template
+file "empty.template"
 {
   pattern {}
 }
