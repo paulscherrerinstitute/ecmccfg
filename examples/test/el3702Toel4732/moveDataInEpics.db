@@ -1,0 +1,45 @@
+# EL3702
+record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_AI)-EL3702_s$(NELM)-AI1-Array"){
+  field(DESC, "$(HWTYPE): AI1: Value Array [$(NELM)]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "$(DTYP=asynInt16ArrayIn)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_AI).mm.CH1_ARRAY?")
+  field(FTVL, "$(FTVL=SHORT)")
+  field(NELM, "$(NELM)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(FLNK, "$(P)MoveData.PROC")
+}
+
+# EL4732
+record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_AO)-EL4732_s$(NELM)-AO1-Array"){
+  field(DESC, "$(HWTYPE): AO1: Value Array [$(NELM)]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "$(DTYP=asynInt16ArrayOut)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_AO).mm.CH1_ARRAY=")
+  field(FTVL, "$(FTVL=SHORT)")
+  field(NELM, "$(NELM)")  
+}
+
+record(acalcout,"$(P)MoveData"){
+  field(DESC, "Move data from EL3702 to EL4732")  
+  field(INAA, "$(P)ec$(MASTER_ID)-s$(SLAVE_AI)-EL3702_s$(NELM)-AI1-Array.VAL")  
+  field(INPA, "$(P)Gain.VAL")
+  field(INPB, "$(P)Offset.VAL")
+  field(CALC, "(A*AA+(B*3276.8))")
+  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_AO)-EL4732_s$(NELM)-AO1-Array.VAL")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_AO)-EL4732_s$(NELM)-AO1-Array.PROC")
+  field(NELM, "$(NELM)")  
+}
+
+record(ao,"$(P)Gain"){
+  field(DESC, "Amplification gain of input data (Y)")
+  field(VAL,  "1")
+  field(EGU,  "No unit")
+}
+
+record(ao,"$(P)Offset"){
+  field(DESC, "Offset of input data (Y)")
+  field(VAL,  "0")
+  field(EGU,  "Volt")
+}

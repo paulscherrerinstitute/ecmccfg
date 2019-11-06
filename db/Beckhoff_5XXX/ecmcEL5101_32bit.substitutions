@@ -1,18 +1,18 @@
 # All fields related to postion scaling and alarms
-file ecmcEcSlave.template
+file "ecmcEcSlave.template"
 {
   pattern {}
           {}
 }
 
-file ecmcEL5101.template
+file "ecmcEL5101-chX.template"
 {
     pattern {LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
             {"SLOPE", 1,      0,      "Steps",    3,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
 }
 
 # Period and frequency measurement
-file ecmcEL5101_32bit_extras.template
+file "ecmcEL5101_32bit_extras.template"
 {
   pattern {}
           {}

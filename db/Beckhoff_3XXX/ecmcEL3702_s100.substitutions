@@ -1,10 +1,10 @@
-file ecmcEcSlave.template
+file "ecmcEcSlave.template"
 {
   pattern {}
           {}
 }
 
-file ecmcEL3702-chX.template
+file "ecmcEL37XX-chX.template"
 {
   pattern {CH_ID, DTYP,             FTVL,  NELM }
           {1,     asynInt16ArrayIn, SHORT, 100  }

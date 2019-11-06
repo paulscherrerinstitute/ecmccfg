@@ -1,10 +1,10 @@
-file ecmcEcSlave.template
+file "ecmcEcSlave.template"
 {
   pattern {}
           {}
 }
 
-file ecmcEL9505.template
+file "ecmcEL9505-chX.template"
 {
   pattern {}
           {}

@@ -1,4 +1,10 @@
-file capaNCDT6500_chX.template
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "capaNCDT6500_chX.template"
 {
   pattern { CH_ID,  EGU,  PREC }
           { 1,      "nm", 1    }

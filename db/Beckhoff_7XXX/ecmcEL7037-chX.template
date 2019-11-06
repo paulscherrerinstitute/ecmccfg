@@ -109,4 +109,4 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-SyncErr-Alrm"){
   field(OSV,  "MAJOR")
 }
 
-# Encoder interface of EL70X7 are defined in ecmcEL5101.template
+# Encoder interface of EL70X7 are defined in ecmcEL5101-chX.template

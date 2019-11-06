@@ -1,4 +1,11 @@
-file ecmcEL6090_buttons.template{
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcEL6090-chX.template"
+{
   pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                              }
           {UP,    "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
           {DOWN,  "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Binary Input ${CH_ID}"}
@@ -7,7 +14,8 @@ file ecmcEL6090_buttons.template{
           {ENTER, "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "${HWTYPE}: Button Input ${CH_ID}"}
 }
 
-file "ecmcEL6090_counter.template"{
+file "ecmcEL6090_counter.template"
+{
   pattern {N, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
           {1, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
           {2, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
@@ -15,7 +23,8 @@ file "ecmcEL6090_counter.template"{
           {4, "SLOPE", 1,      0,      "Ticks",    0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
 }
 
-file "ecmcEL6090_timer.template"{
+file "ecmcEL6090_timer.template"
+{
   pattern {N, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
           {1, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
           {2, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
@@ -23,12 +32,14 @@ file "ecmcEL6090_timer.template"{
           {4, "SLOPE", 1,      0,      "s",        0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
 }
 
-file "ecmcAsynGenericAnalogInput.db"{
+file "ecmcAsynGenericAnalogInput.db"
+{
   pattern {REC_SUFFIX,  NAME,                                     TYPE,         PINI, PREC, LINR,     ESLO,           EGU }
           {"opHours",   "ec${MASTER_ID}.s${SLAVE_POS}.OPHOURS",   "asynInt32",  1,    0,    "SLOPE",  "2.7777777e-4", h   }
 }
 
-file "ecmcAsynGenericAnalogOutput.db"{
+file "ecmcAsynGenericAnalogOutput.db"
+{
   pattern {REC_SUFFIX,  NAME,                                   TYPE        }
           {"value1",    "ec${MASTER_ID}.s${SLAVE_POS}.VALUE1",  "asynInt32" }
           {"value2",    "ec${MASTER_ID}.s${SLAVE_POS}.VALUE2",  "asynInt32" }
