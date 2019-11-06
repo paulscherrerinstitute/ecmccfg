@@ -1,0 +1,52 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# Move memmap object
+
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+static.timeOffset:=10e6;
+ec0.s${SLAVE_ID_EL2252}.TRISTATE_1:=0;
+ec0.s${SLAVE_ID_EL2252}.TRISTATE_2:=0;
+
+if(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS!=static.oldCh1PosTime) {
+  static.timeSinceLast:= (ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS-static.oldCh1PosTime); 
+  println('');
+  println('New latched positive edge [ns]: ', ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS);
+  println('    Time since last latch [ns]: ', static.timeSinceLast );
+  println('                          [ms]: ', static.timeSinceLast/1E6);
+  println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));    
+  ec0.s${SLAVE_ID_EL2252}.STARTTIME:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG+static.timeOffset;
+  ec0.s${SLAVE_ID_EL2252}.BO_1:=1;
+  ec0.s${SLAVE_ID_EL2252}.BO_2:=0;
+  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=0;  
+  static.triggNewOutput:=1;
+  println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.STARTTIME);
+}
+else {
+  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=3;
+};
+
+if(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG!=static.oldCh1NegTime) {
+  static.timeSinceLast:= (ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG-static.oldCh1NegTime); 
+  println('');
+  println('New latched negative edge [ns]: ', ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG);
+  println('    Time since last latch [ns]: ', static.timeSinceLast );
+  println('                          [ms]: ', static.timeSinceLast/1E6);
+  println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));    
+  ec0.s${SLAVE_ID_EL2252}.STARTTIME:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG+static.timeOffset;
+  ec0.s${SLAVE_ID_EL2252}.BO_1:=0;
+  ec0.s${SLAVE_ID_EL2252}.BO_2:=1;
+  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=0;
+  static.triggNewOutput:=1;
+  println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.STARTTIME);
+}
+else {
+  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=3;
+};
+
+static.oldCh1PosTime:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS;
+static.oldCh1NegTime:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG;
+static.oldStartTime:=ec0.s${SLAVE_ID_EL2252}.STARTTIME;
+
