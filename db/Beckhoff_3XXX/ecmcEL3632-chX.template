@@ -2,7 +2,7 @@ record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Array"){
   field(DESC, "$(HWTYPE): AI$(CH_ID): Value Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayIn)")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID)s$(SLAVE_POS).mm.CH$(CH_ID)_ARRAY?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.CH$(CH_ID)_ARRAY?")
   field(FTVL, "$(FTVL=SHORT)")
   field(NELM, "$(NELM=1)")
   field(SCAN, "I/O Intr")
