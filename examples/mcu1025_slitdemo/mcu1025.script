@@ -19,10 +19,12 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=3.0.0,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware:
+
+epicsEnvSet("ECMC_EC_OVERSAMPLING_FACTOR" ,"50")
 
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025_plusEL5101_EL3632_EL3214.cmd
 
