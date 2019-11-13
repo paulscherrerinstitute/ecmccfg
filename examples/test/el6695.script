@@ -56,11 +56,12 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1608,0x7000,0x4,64,OUT_FLOAT64_2)"
 
 ##HW snippet end here
-
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+dbLoadRecords("./ecmcEL6695_app.template","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 
 ##############################################################################
 ## PLC 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=100,FILE=./plc/el6695.plc, PLC_MACROS='PLC_ID=1,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),DBG='")
+#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=100,FILE=./plc/el6695.plc, PLC_MACROS='PLC_ID=1,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),DBG='")
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
