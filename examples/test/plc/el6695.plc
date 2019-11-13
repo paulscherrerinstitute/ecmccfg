@@ -1,0 +1,14 @@
+
+static.counter:=static.counter+1;
+
+println('IN_INT32_1  : ', ec0.s${SLAVE_ID}.STATUS);
+println('IN_INT32_1  : ', ec0.s${SLAVE_ID}.IN_INT32_1);
+println('IN_INT32_2  : ', ec0.s${SLAVE_ID}.IN_INT32_2);
+println('IN_FLOAT64_1: ', ec0.s${SLAVE_ID}.IN_FLOAT64_1);
+println('IN_FLOAT64_2: ', ec0.s${SLAVE_ID}.IN_FLOAT64_2);
+
+ec0.s${SLAVE_ID}.OUT_INT32_1:=static.counter;
+ec0.s${SLAVE_ID}.OUT_INT32_2:=static.counter*10;
+ec0.s${SLAVE_ID}.OUT_FLOAT64_1:=sin(static.counter);
+ec0.s${SLAVE_ID}.OUT_FLOAT64_2:=cos(static.counter);
+ec0.s${SLAVE_ID}.CONTROL:=0;

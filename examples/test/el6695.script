@@ -57,6 +57,11 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 ##HW snippet end here
 
+
+##############################################################################
+## PLC 1
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=100,FILE=./plc/el6695.plc, PLC_MACROS='PLC_ID=1,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),DBG='")
+
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
