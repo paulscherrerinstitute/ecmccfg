@@ -1,5 +1,15 @@
 ##############################################################################
-## Example config for el6080
+#- Example config for el6695 (EtherCAT bridge)
+#- Since this is a "freely" configurable slave, only an example is shown here and no dedicated HW snippet exists.
+#- This example sets up 2 doubles(64bit) and 2 ints (32bits) for exchange between two ethercat masters.
+#- The configuration for this slave MUST be same on both masters.
+#- To test with ECMC run two masters:
+#-  1. Primary side (one master):       iocsh.bash el6695.script "IOC=IOC_P,SLAVE_ID=<..>"
+#-  2. Secondary side (another master): iocsh.bash el6695.script "IOC=IOC_S,SLAVE_ID=<..>"
+#-
+#- NOTE: If the data should be accessible from EPICS records, a custom data base needs to be loaded (like below).
+#-
+
 
 ##############################################################################
 ## Initiation:
@@ -17,19 +27,15 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM" ,"${SLAVE_ID=53}")
 
-##HW snippet start here
+##############################################################################
+## HW- snippet start here  (similar to the snippets in ecmccfg/hardware/*)
 
 #- ###########################################################
 #- ############ Information:
-#-  Description: 128kb memory terminal
+#-  Description: EtherCAT Bridge terminal
 #-  Vendor id   = 0x2  (Beckhoff)
 #-  Product id  = 0x1a273052 (EL6695)
 #-  Direction   = 1,2 (Output/Input)
-#-  Note:
-#-  - Input and output section needs to be identical otherwise the terminal will not go to OP state
-#-  - Max 128 byte in cyclic. The rest of memory is accessible over SDO.
-#-  - Test configuration with 2 int, 2 dint, 2 double in each direction
-#-  - Use 32bit int or 64 bit float
 #- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL6695")
@@ -56,12 +62,10 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1608,0x7000,0x4,64,OUT_FLOAT64_2)"
 
 ##HW snippet end here
-# add ${HW_DESC} to the bus at position ${SLAVE_ID}
-dbLoadRecords("./ecmcEL6695_app.template","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
-
 ##############################################################################
-## PLC 1
-#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=100,FILE=./plc/el6695.plc, PLC_MACROS='PLC_ID=1,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),DBG='")
+
+# Load records to access the data from EPICS records
+dbLoadRecords("./ecmcEL6695_app.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
