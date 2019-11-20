@@ -2,6 +2,7 @@
 #-d   \brief hardware script for EL6688
 #-d   \details PTP Sync Terminal
 #-d   \author Anders Sandstroem
+#-d   \note Only tested without PTP clock.
 #-d   \file
 #-d */
 
