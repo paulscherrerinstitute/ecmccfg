@@ -9,7 +9,7 @@ record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Array"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Stat"){
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Stat"){
   field(DESC, "$(HWTYPE): AI$(CH_ID): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
