@@ -68,7 +68,7 @@ record(mbbiDirect,"$(P)$(AXIS_NAME)-Stat_"){
   field(DESC, "$(AXIS_NAME): Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).status?")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(P)$(AXIS_NAME)-enabled.PROC")
   field(TSE,  "$(TSE=-2)")
