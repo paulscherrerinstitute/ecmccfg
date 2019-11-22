@@ -7,7 +7,7 @@ epicsEnvSet("IOC" ,"$(IOC="MEBT-010:PBI-FC-001")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg Julen_BIlab
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.1,EthercatMC_VER=3.0.1,stream_VER=2.8.8"
@@ -16,6 +16,9 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0
 ## Configure hardware:
 
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMEBT_FC_v2.cmd
+
+dbLoadTemplate(FC_HV.db,"IOC=MEBT-010:PBI-FC-001:,HV=HV")
+dbLoadTemplate(FC_MCU.db,"IOC=MEBT-010:PBI-FC-001:,MCU=MCU")
 
 
 ##############################################################################
