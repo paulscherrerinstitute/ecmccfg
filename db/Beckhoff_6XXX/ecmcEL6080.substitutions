@@ -10,9 +10,3 @@ file "ecmcEL6080-chX.template"
   pattern {}
           {}
 }
-
-file "ecmcEL6080_app.template"
-{
-  pattern {}
-          {}
-}
