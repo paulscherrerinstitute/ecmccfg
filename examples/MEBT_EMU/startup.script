@@ -3,14 +3,14 @@
 
 ##############################################################################
 ## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("IOC" ,"$(IOC="IOC2")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg Julen_BIlab
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.1,EthercatMC_VER=3.0.1,stream_VER=2.8.8"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.1,EthercatMC_VER=3.0.2,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware:
@@ -19,21 +19,36 @@ $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMEBT_EMU.cmd
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_8,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_8,1)"
+
 # END of ADDITIONAL SETUP
 
 ##############################################################################
 ## AXIS 1
 #
-#epicsEnvSet("DEV",      "$(IOC)")
-#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+
+##############################################################################
+## AXIS 2
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
