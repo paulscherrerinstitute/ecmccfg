@@ -1,8 +1,17 @@
-##############################################################################
-## Example config for el6080
+#-d /**
+#-d   \brief Example config for el6080 memory terminal
+#-d   \details
+#-d   The el6080 is a freely configurable terminal and therefore custom EtherCAT entries
+#-d   can be added. Therefore there is no dedicated hardware snippet for this slave.
+#-d   \note Control word and Status word needs to be configured 
+#-d   \note Values are written when "CONTROL" is set to 1 (pos edge)
+#-d   \note Only full bytes are allowed (no bits). 
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
 
-##############################################################################
-## Initiation:
+#-#############################################################################
+#-# Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
@@ -30,35 +39,72 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "31")
 #-  - Use 32bit int or 64 bit float
 #- ###########################################################
 
+# NOTE: Hardware snippet starts here!!
+
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL6080")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x17c03052")
 
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
 
+#- ###########################################################
 #- ############ Config PDOS: Inputs
-
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0xF100,0x1,16,STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x1,32,IN_INT32_1)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x2,32,IN_INT32_2)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x3,64,IN_FLOAT64_1)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x4,64,IN_FLOAT64_2)"
+
+#Start of custom input setup
+epicsEnvSet("ECMC_EC_BITS", "8")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x5,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x6,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS},1)"
+epicsEnvSet("ECMC_EC_BITS", "16")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x7,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x8,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS},1)"
+epicsEnvSet("ECMC_EC_BITS", "32")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x9,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xA,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS},1)"
+epicsEnvSet("ECMC_EC_BITS", "64")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xB,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xC,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS},1)"
+# Double, real
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xD,F32,IN_F32,1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xE,F64,IN_F64,1)"
+
 
 #- ###########################################################
 #- ############ Config PDOS: Outputs
-
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0xF200,0x1,16,CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x1,32,OUT_INT32_1)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x2,32,OUT_INT32_2)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x3,64,OUT_FLOAT64_1)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x4,64,OUT_FLOAT64_2)"
+
+#Start of custom  output setup
+
+epicsEnvSet("ECMC_EC_BITS", "8")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x5,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x6,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS},1)"
+epicsEnvSet("ECMC_EC_BITS", "16")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x7,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x8,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS},1)"
+epicsEnvSet("ECMC_EC_BITS", "32")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x9,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xA,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS},1)"
+epicsEnvSet("ECMC_EC_BITS", "64")
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xB,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS},1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xC,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS},1)"
+# Double, real
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xD,F32,OUT_F32,1)"
+ecmcConfigOrDie "Cfg.EcAddEntry(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xE,F64,OUT_F64,1)"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
-# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+# NOTE: Hardware snippet ends here!!
+
+# Load records for control and status word
 dbLoadTemplate("ecmcEL6080.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
-dbLoadRecords("./ecmcEL6080_app.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+
+# Load custom records ints (note, must be full bytes (no bits))
+dbLoadTemplate("ecmcEL6080_app_ints.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+# Load custom records floats
+dbLoadTemplate("ecmcEL6080_app_floats.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+# Load custom records 64bit (needs special handling)
+dbLoadRecords(ecmcEL6080_app_64int.db,"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -69,3 +115,7 @@ ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+
+# use camonitor to check values:
+# camonitor IOC_TEST:ec0-s31-EL6080-IN_B1 IOC_TEST:ec0-s31-EL6080-IN_B2 IOC_TEST:ec0-s31-EL6080-IN_B3 IOC_TEST:ec0-s31-EL6080-IN_B4 IOC_TEST:ec0-s31-EL6080-IN_U8 IOC_TEST:ec0-s31-EL6080-IN_S8 IOC_TEST:ec0-s31-EL6080-IN_U16 IOC_TEST:ec0-s31-EL6080-IN_S16 IOC_TEST:ec0-s31-EL6080-IN_U32 IOC_TEST:ec0-s31-EL6080-IN_S32 IOC_TEST:ec0-s31-EL6080-IN_U64 IOC_TEST:ec0-s31-EL6080-IN_S64 IOC_TEST:ec0-s31-EL6080-IN_F32 IOC_TEST:ec0-s31-EL6080-IN_F64
