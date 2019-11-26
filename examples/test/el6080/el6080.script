@@ -107,6 +107,10 @@ dbLoadTemplate("ecmcEL6080_app_floats.substitutions","P=${ECMC_PREFIX},PORT=${EC
 dbLoadRecords(ecmcEL6080_app_64int.db,"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 
 ##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/el6080.plc,PLC_MACROS='PLC_ID=0,SLAVE_ID=${ECMC_EC_SLAVE_NUM},DBG='")
+
+##############################################################################
 ############# Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
