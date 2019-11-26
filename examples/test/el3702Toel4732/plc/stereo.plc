@@ -1,9 +1,10 @@
 ###############################################################################################
-# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
 #
-# Move memmap object and apply gain to left and right channel (stereo)
-# The input memmap are amplified in a for loop and then output to output memmap.
+# Transfer Stereo sound from EL3702 to EL4732 over ethercat. Volume and gains for left and Right
+# can be adjusted through access of plc variables from  epics.
+# The input memmaps are amplified and then output is directed to other memmap.
 # Scaling is made to be same as example stereo.script (calcs in epics)
+#
 
 if(plc${PLC_ID}.firstscan) {
   ${DBG=#}println('Starting stereo sound PLC demo');
@@ -28,7 +29,7 @@ for (static.i := 0; static.i < static.elements; static.i += 1)
   # Right channel
   ec_set_mm_data(static.r_id_out,static.i,ec_get_mm_data(static.r_id_in,static.i)*static.vol/200*static.r_gain/100);
 
-  # Some debug printouts (nore: only left ch)
+  # Some debug printouts (note: only left ch)
   ${DBG=#}print('Left ch input: ',static.l_input);
   ${DBG=#}print(' index: ',static.i);
   ${DBG=#}println(' output: ',static.l_output);
