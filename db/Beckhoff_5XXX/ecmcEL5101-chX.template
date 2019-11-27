@@ -4,13 +4,21 @@ record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).ENC_STATUS?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OpnCrct-Alrm.PROC")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-ExtLatch-OK")
   field(SHFT, "0")
   field(TSE,  "$(TSE=-2)")
 }
 
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-ExtLatch-OK"){
+  field(DESC, "$(HWTYPE): Enc Latch extern valid")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B1")
+  field(ZNAM, "no latch")
+  field(ONAM, "latched")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-OpnCrct-Alrm")
+}
+
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-OpnCrct-Alrm"){
-  field(DESC, "$(HWTYPE): Enc Open Circuit Alm")
+  field(DESC, "$(HWTYPE): Enc Opn Ccrt Alrm")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B6")
   field(ZNAM, "No Alarm")
   field(ONAM, "Open Circuit")
@@ -20,7 +28,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-OpnCrct-Alrm"){
 }
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Wrn-Alrm"){
-  field(DESC, "$(HWTYPE): Enc Extpltn Stall Alm")
+  field(DESC, "$(HWTYPE): Enc Extpltn Stall Alrm")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Alarm")
@@ -30,7 +38,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Wrn-Alrm"){
 }
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-SyncErr-Alrm"){
-  field(DESC, "$(HWTYPE): Enc Sync Error Alm")
+  field(DESC, "$(HWTYPE): Enc Sync Err Alrm")
   field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.BD")
   field(ZNAM, "No Alarm")
   field(ONAM, "Alarm")
@@ -38,8 +46,35 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-SyncErr-Alrm"){
   field(OSV,  "MAJOR")
 }
 
+# latching
+record(bo,    "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-AutoRst_SP"){
+  field(DESC, "reset latch automatically")
+  field(ZNAM, "off")
+  field(ONAM, "on")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-AutoRst")
+}
+
+record(calcout,   "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-AutoRst") {
+  field(DESC, "reset latch automatically calc")
+  field(CALC, "A&&B?2:1")
+  field(INPA, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-AutoRst_SP")
+  field(INPB, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-ExtLatch-OK CP")
+  field(IVOA, "Don't drive outputs")
+  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-Rst.SELN PP")
+}
+
+# to reset, the Enc-Cmd has to be set to 'no latching' and then to 'latching' again
+record(seq, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-Rst") {
+  field(DESC, "reset latch")
+  field(SELM, "Specified")
+  field(DOL1, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-Cmd")
+  field(LNK1, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd PP")
+  field(DOL2, "0")
+  field(LNK2, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd PP")
+}
+
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
-  field(DESC, "$(HWTYPE): Enc Act Pos (Raw)")
+  field(DESC, "$(HWTYPE): Enc Actl Pos (Raw)")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POSITION?")
@@ -84,8 +119,24 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
+record(mbbo,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Latch-Cmd"){
+  field(DESC, "latch source selector")
+  field(DTYP, "Raw Soft Channel")
+  field(ZRST, "no latching")
+  field(ZRVL, 0)
+  field(ONST, "latch C")
+  field(ONVL, 1)
+  field(TWST, "latch ext. rising")
+  field(TWVL, 2)
+  field(THST, "Set counter")
+  field(THVL, 3)
+  field(FRST, "latch ext. falling")
+  field(FRVL, 4)
+  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd PP")
+}
+
 record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd"){
-  field(DESC, "$(HWTYPE): Enc Control Word")
+  field(DESC, "$(HWTYPE): Enc Ctrl Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_CONTROL=")
@@ -93,7 +144,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd"){
 }
 
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd-RB"){
-  field(DESC, "$(HWTYPE): Enc Control Word RB")
+  field(DESC, "$(HWTYPE): Enc Ctrl Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_CONTROL?")
@@ -124,7 +175,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosCmd"){
 }
 
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosCmd-RB"){
-  field(DESC, "$(HWTYPE): Enc Control Word RB")
+  field(DESC, "$(HWTYPE): Enc Ctrl Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).VALUE?")
