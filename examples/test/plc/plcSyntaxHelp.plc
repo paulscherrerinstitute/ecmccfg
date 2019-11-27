@@ -1,12 +1,50 @@
 ###############################################################################################
 #  For detailed Syntax help please visit the exprtk website
 #
-#
 #  Common sources of error and some usefull info:
+#
 #  1. Assignment is ':='  egual is '=' or '=='
+#
 #  2. Ensure that all statements end with a ';'
+#
 #  3. All variables are initiated to 0
-#   
+#
+#  4. "#" is reserved for comments. Everything after this char will be removed before compile.
+#      So, "println('########')" is not a good idea (will look like "println('" for the compiler).
+#
+#  5. Use macros to make your code more generic (same syntac as in iocsh):
+#      ${DBG=#}println('Starting up');
+#      plc${PLC_ID=0}.enable
+#      ax${AX_ID=1}.enc.actpos
+#
+#      Note: The macrons must be defined when issuing "loadPLCFile.cmd" in variable "PLC_MACROS"
+#            See "plcMCU1012TestMacro.script" for example
+#
+#
+#  Syntax examples:
+#
+#  1. Assignment:
+#     ec0.s1.VALUE:=100; 
+#
+#  2. if-else (note the equl sign):
+#     if(ec0.s1.VALUE=100) {
+#       # code
+#     }
+#     else {
+#       # code
+#     };
+#
+#   3. for loop:
+#     for (static.i := 0; static.i < static.elements; static.i += 1) {
+#       # code
+#     };
+#
+#   4. printouts (minimize printouts or use only for debug):
+#      print("The value of ec0.s1.VALUE is: ",ec0.s1.VALUE);  # Without line feed
+#      println("The value of ec0.s1.VALUE is: ",ec0.s1.VALUE);  # With line feed
+#
+#      Also see the "ec_print_bin()" and "ec_print_hex()" below.
+#
 #  Below the ECMC specific accessible variables and functions are listed:
 #
 #  Accessible variables in code:
@@ -149,32 +187,47 @@
 #                           );
 #      Sets bit at bitindex position of value. Returns the new value.
 # 
-#   1. retvalue = ec_wrt_bit(
+#   2. retvalue = ec_wrt_bit(
 #                           <value>,         : Value to change
 #                           <wrtValue>,      : Value of bit to write
 #                           <bitindex>       : Bit index 
 #                           );
-#      Write a wrtValue to a bit at bitindex position of value. Returns the new value.
+#      Write wrtValue to a bit at bitindex position of value. Returns the new value.
+#
+#   3. retvalue = ec_wrt_bits(
+#                           <value>,         : Value to change
+#                           <wrtValue>,      : Value of bit to write
+#                           <startBit>       : Start bit index (lsb is bit 0)
+#                           <stopBit>        : Stop bit index 
+#                           );
+#      Write wrtValue to a range of bits (statBit..stopBit) of value. Returns the new value.
 # 
-#   2. retvalue = ec_clr_bit(
+#   4. retvalue = ec_clr_bit(
 #                           <value>,         : Value to change
 #                           <bitindex>       : Bit index 
 #                           );
 #      Clears bit at bitindex position of value. Returns the new value.
 # 
-#   3. retvalue = ec_flp_bit(
+#   5. retvalue = ec_flp_bit(
 #                           <value>,         : Value to change
 #                           <bitindex>       : Bit index 
 #                           );
 #      Flips bit at bitindex position of value. Returns the new value.
 # 
-#   4. retvalue = ec_chk_bit(
+#   6. retvalue = ec_chk_bit(
 #                           <value>,         : Value to change
 #                           <bitindex>       : Bit index 
 #                           );
 #      Checks bit at bitindex position of value. Returns the value of bit.
 #
-#   5. retvalue = ec_print_hex(
+#   7. retvalue = ec_chk_bits(
+#                           <value>,         : Value to change
+#                           <startBit>       : Start bit index (lsb is bit 0)
+#                           <stopBit>        : Stop bit index 
+#                           );
+#      Checks range of bits (startBit..stopBit) of value. Returns the value of bits.
+#
+#   8. retvalue = ec_print_hex(
 #                           <value>,         : Value to print
 #                           <startBit>       : Start bit index 
 #                           <stopBit>        : Stop bit index 
@@ -182,27 +235,77 @@
 #      Prints <startBit> to <stopBit> of <value> in hex format 
 #      Returns error code or 0 if success.#
 # 
-#   6. retvalue = ec_print_bin(
+#   9. retvalue = ec_print_bin(
 #                           <value>,         : Value to print
 #                           <startBit>       : Start bit index 
 #                           <stopBit>        : Stop bit index 
 #                           );
 #      Prints <startBit> to <stopBit> of <value> in bin format 
 #      Returns error code or 0 if success.
-# 
-#   7. retvalue=ec_get_err():
-#      Returns error code from last lib call.
 #
-#   8. retvalue = ec_mm_cp(
+#   10. retvalue = ec_mm_cp(
 #                           <srcId>,         : Source memmap index
 #                           <sdestId>        : Dest memmap index
 #                           );
 #      Copies data from source memmap to dest memmap. The memmap ids are defined by the 
 #      order they are created (starting at 0). The smallest memmap size will define the
-#      amout of data copied.
+#      amout of data copied. Returns 0 for success or an error code.
 #
-#   9. retvalue=ec_err_rst():
-#      Resets error code for ec_lib.
+#   11. retvalue = ec_get_mm_type(
+#                           <srcId>,         : Source memmap index
+#                           );
+#
+#      Returns data type of memmap:
+#          0  = Not defined (Use "Cfg.EcAddMemMapDT()" instead of "Cfg.EcAddMemMap()")
+#          1  = (Not valid for memmap)
+#          2  = (Not valid for memmap)
+#          3  = (Not valid for memmap)
+#          4  = (Not valid for memmap)
+#          5  = U8
+#          6  = S8
+#          7  = U16
+#          8  = S16
+#          9  = U32
+#          10 = S32
+#          11 = U64
+#          12 = S64
+#          13 = F32
+#          14 = F64
+#
+#   12. retvalue = ec_get_mm_data(
+#                           <srcId>,       : Source memmap index
+#                           <index>        : Index of data element 
+#                           );
+#
+#      Reads data element at index from memmap with srcId and returns value.
+#
+#   13. retvalue = ec_set_mm_data(
+#                           <srcId>,       : Source memmap index
+#                           <index>        : Index of data element 
+#                           <data>         : Data to write
+#                           );
+#
+#      Writes data element at index from memmap with srcId. Returns 0 for success or an error code.
+#
+#   14. retvalue = ec_get_mm_size(
+#                           <srcId>,       : Source memmap index
+#                           );
+#
+#      Returns number of elements (of type "ec_get_mm_type()")in memmap with srcId. 
+#      If return value is less than zero it should be considered to be an error code.
+#
+#   15. retvalue = ec_get_time();
+#
+#      Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
+#      If return value is less than zero it should be considered to be an error code.
+#
+#   16. retvalue=ec_get_err():
+#
+#       Returns error code from last lib call.
+#
+#   17. retvalue=ec_err_rst():
+#
+#       Resets error code for ec_lib.
 #
 #  Function Lib: Motion
 #   1. retvalue = mc_move_abs(
