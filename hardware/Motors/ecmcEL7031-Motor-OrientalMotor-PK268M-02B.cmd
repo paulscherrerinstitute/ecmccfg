@@ -20,7 +20,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,600,2)"
 #- Coil resistance 2.25 Ohm (unit 10mOhm)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x4,225,2)"
 
-#- Motor full steps count 400
+#- Motor half steps count 800
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,400,2)"
 
 #- Coil inductance 1.5mH (unit 0.01mH)
