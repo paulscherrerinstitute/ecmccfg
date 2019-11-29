@@ -36,8 +36,8 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a42,0x6001,0x2,16,sm3.p53.e0,0)"
 
 
-#- Configure DC clock 20000ns update for oversampling (50 values oversampling in 1kHz)
-#- ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,20000,-20000,1000000,0)"
+#- Configure DC clock 500000ns update for oversampling (2 values oversampling in 1kHz)
+#- ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,500000,-20000,500000,0)"
 
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "2")    # 2 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "4")    # 4 bytes
