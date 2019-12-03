@@ -25,7 +25,6 @@ record(waveform,"$(P)ds$(Index)-Data-Act") {
   field(TSE,  "$(TSE=-2)")
 }
 
-
 record(longin,"$(P)ds$(Index)-Stat"){
   field(DESC, "ds$(Index): Status Word")
   field(PINI, "$(PINI=1)")
