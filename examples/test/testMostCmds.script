@@ -7,7 +7,7 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=3.0.0,stream_VER=2.8.10"
 
 ##############################################################################
 ############# General:
@@ -51,9 +51,9 @@ ecmcConfigOrDie "Cfg.EcSetEntryUpdateInRealtime(1,"ONE",0)"
 ecmcConfig      "Cfg.EcSetEntryUpdateInRealtime(100,"ONE",0)"
 ecmcConfig      "Cfg.EcSetEntryUpdateInRealtime(1,"not_valid",222)"
 ecmcConfigOrDie "Cfg.EcSlaveConfigWatchDog(1,100,100)"
-ecmcConfigOrDie "Cfg.EcAddMemMap(1,"BI_1",1,1,"ec0.mm.TEST")"
-ecmcConfig      "Cfg.EcAddMemMap(2,"not_valid",1000,0x111,"ec0.mm.TEST")"
-
+ecmcConfigOrDie "Cfg.EcAddMemMap(1,"BI_1",1,1,"ec0.s1.mm.TEST")"
+ecmcConfig      "Cfg.EcAddMemMap(2,"not_valid",1000,0x111,"ec0.s1.mm.TEST")"
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec0.s1.BI_1,1,1,U8,"ec0.s1.mm.TEST2")"
 #Printouts
 ecmcConfigOrDie "EcPrintSlaveConfig(1)"
 ecmcConfigOrDie "EcPrintAllHardware()"
