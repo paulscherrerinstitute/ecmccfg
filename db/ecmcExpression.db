@@ -5,27 +5,11 @@ record(bo,"$(Name)-EncSourceType-Cmd"){
   field(ONAM,"from PLC")
 }
 
-record(bi,"$(Name)-EncSourceType-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getEncSourceType($(Index)) $(PORT)")
-  field(ZNAM,"internal")
-  field(ONAM,"from PLC")
-  field(SCAN, "1 second")
-}
-
 record(bo,"$(Name)-TrajSourceType-Cmd"){
   field(DTYP,"stream")
   field(OUT,"@ecmcExpression.proto setTrajSourceType($(Index)) $(PORT)")
   field(ZNAM,"internal")
   field(ONAM,"from PLC")
-}
-
-record(bi,"$(Name)-TrajSourceType-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getTrajSourceType($(Index)) $(PORT)")
-  field(ZNAM,"internal")
-  field(ONAM,"from PLC")
-  field(SCAN, "1 second")
 }
 
 record(bo,"$(Name)-PLC-CmdEn"){
@@ -54,15 +38,6 @@ record(bo,"$(Name)-AllowCmdFromPLC-CmdEn"){
 
 }
 
-record(bi,"$(Name)-AllowCmdFromPLC-CmdEn-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getAxisAllowCommandsFromPLC($(Index)) $(PORT)")
-  field(ZNAM,"refused")
-  field(ONAM,"allowed")
-  field(SCAN, "1 second")
-  field(DESC, "Allow command from PLC RB")
-}
-
 record(waveform,"$(Name)-PLCExpr-RB"){
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto getAxisPLCExpr($(Index)) $(PORT)")
@@ -80,8 +55,10 @@ record(waveform,"$(Name)-PLCExpr"){
   field(DESC, "PLC code")
 }
 
+#Only read once (will not change)
 record(ai,"$(Name)-AxisType-Act"){
+  field(PINI,"1")
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto getAxisType($(Index)) $(PORT)")
-  field(SCAN,"1 second")
+  field(SCAN,"Passive")
 }

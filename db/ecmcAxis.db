@@ -171,4 +171,34 @@ record(bi,"$(P)$(AXIS_NAME)-inrealtime"){
   field(ONAM, "In realtime")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-TrajSourceType-RB.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-TrajSourceType-RB"){
+  field(DESC, "$(AXIS_NAME): Traj Source")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B10")
+  field(ZNAM, "Internal")
+  field(ONAM, "PLC")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-EncSourceType-RB.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
+  field(DESC, "$(AXIS_NAME): Enc Source")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B11")
+  field(ZNAM, "Internal")
+  field(ONAM, "PLC")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
+  field(DESC, "$(AXIS_NAME): Allow PLC cmds")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B12")
+  field(ZNAM, "PLC cmd blocked")
+  field(ONAM, "PLC cmd allowed")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
 }
