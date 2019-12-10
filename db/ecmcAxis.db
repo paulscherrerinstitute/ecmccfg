@@ -176,7 +176,7 @@ record(bi,"$(P)$(AXIS_NAME)-inrealtime"){
 
 record(bi,"$(P)$(AXIS_NAME)-TrajSourceType-RB"){
   field(DESC, "$(AXIS_NAME): Traj Source")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B10")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BA")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
   field(ZSV,  "NO_ALARM")
@@ -186,7 +186,7 @@ record(bi,"$(P)$(AXIS_NAME)-TrajSourceType-RB"){
 
 record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
   field(DESC, "$(AXIS_NAME): Enc Source")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B11")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BB")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
   field(ZSV,  "NO_ALARM")
@@ -196,7 +196,7 @@ record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
 
 record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
   field(DESC, "$(AXIS_NAME): Allow PLC cmds")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B12")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BC")
   field(ZNAM, "PLC cmd blocked")
   field(ONAM, "PLC cmd allowed")
   field(ZSV,  "NO_ALARM")
