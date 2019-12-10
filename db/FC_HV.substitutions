@@ -1,0 +1,17 @@
+file "FC_HV.template"
+
+
+{
+  pattern {IOC,           MASTER_ID, SLAVE_POS, HWTYPE, CH_ID, DESC}
+          {"MEBT-010:PBI-FC-001", 0,     4,       "EL3602",   AI1,   "$(HV):Volt-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     4,       "EL3602",   AI2,   "$(HV):Curr-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     5,       "EL4134",   AO1,   "$(HV):Volt"}
+          {"MEBT-010:PBI-FC-001", 0,     5,	  "EL4134",   AO1-RB,"$(HV):Volt-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     5,       "EL4134",   AO2,   "$(HV):Curr"}
+          {"MEBT-010:PBI-FC-001", 0,     5,	  "EL4134",   AO2-RB,"$(HV):Curr-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     7,	  "EL2124",   BO1,   "$(HV):Pol"}
+          {"MEBT-010:PBI-FC-001", 0,     7,       "EL2124",   BO1-RB,"$(HV):Pol-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     7,	  "EL2124",   BO2,   "$(HV):Bias"}
+          {"MEBT-010:PBI-FC-001", 0,     7,       "EL2124",   BO2-RB,"$(HV):Bias-RB"}
+}
+
