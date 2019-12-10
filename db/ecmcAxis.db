@@ -197,8 +197,8 @@ record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
 record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
   field(DESC, "$(AXIS_NAME): Allow PLC cmds")
   field(INP,  "$(P)$(AXIS_NAME)-Stat_.BC")
-  field(ZNAM, "PLC cmd blocked")
-  field(ONAM, "PLC cmd allowed")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
 }
