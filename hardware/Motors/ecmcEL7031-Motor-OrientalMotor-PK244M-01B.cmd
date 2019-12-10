@@ -11,11 +11,11 @@
 #-d   \note Basic step angle = 0.9 Degrees - 400 full steps count
 #-d */
 
-#- Set max current in m
+#- Set max current in mA
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,1200,2)"
 
 #- Reduced current in mA
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,1000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,120,2)"
 
 #- Nominal voltage in cV
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,800,2)"
