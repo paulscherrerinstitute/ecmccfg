@@ -20,15 +20,6 @@ record(bo,"$(Name)-PLC-CmdEn"){
   field(DESC, "Axis sync. PLC Enable cmd")
 }
 
-record(bi,"$(Name)-PLC-CmdEn-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getAxisPLCEnable($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
-  field(SCAN, "1 second")
-  field(DESC, "Axis sync. PLC Enable cmd RB")
-}
-
 record(bo,"$(Name)-AllowCmdFromPLC-CmdEn"){
   field(DTYP,"stream")
   field(OUT,"@ecmcExpression.proto setAxisAllowCommandsFromPLC($(Index)) $(PORT)")

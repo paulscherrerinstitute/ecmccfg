@@ -202,3 +202,24 @@ record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
 }
+
+record(longin,"$(P)$(AXIS_NAME)-Stat"){
+  field(DESC, "$(AXIS_NAME): Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(P)$(AXIS_NAME)-seqstate.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(Name)-PLC-CmdEn-RB"){
+  field(DESC, "$(AXIS_NAME): Plc enable")
+  field(DTYP,"asynInt32")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).plc.enable?")
+  field(ZNAM,"Disabled")
+  field(ONAM,"Enabled")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Axis sync. PLC Enable cmd RB")
+}
