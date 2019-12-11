@@ -213,7 +213,7 @@ record(longin,"$(P)$(AXIS_NAME)-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(Name)-PLC-CmdEn-RB"){
+record(bi,"$(P)$(AXIS_NAME)-PLC-CmdEn-RB"){
   field(DESC, "$(AXIS_NAME): Plc enable")
   field(DTYP,"asynInt32")
   field(PINI, "$(PINI=1)")
