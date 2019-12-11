@@ -167,6 +167,14 @@
 #   3.  plc<id>.scantime             plc sample time in seconds       (ro)
 #   4.  plc<id>.firstscan            true during first plc scan only  (ro)
 #                                    usefull for initiations of variables
+#   5.  ax<id>.plc.enable            Same as plc<id>.enable but for
+#                                    axis <id> sync plc.
+#   6.  ax<id>.plc.error             Same as plc<id>.error but for
+#                                    axis <id> sync plc. 
+#   7.  ax<id>.plc.scantime          Same as plc<id>.scantime but for
+#                                    axis<id> sync plc.
+#   8.  ax<id>.plc.firstscan         Same as plc<id>.firstscan but for
+#                                    axis <id> sync plc.
 # 
 #  Data Storage variables:
 #   1.  ds<id>.size                  Set/get size of data storage     (rw)
