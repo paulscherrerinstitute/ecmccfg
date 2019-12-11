@@ -75,5 +75,5 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 #- PWM period (1Hz-20kHz)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x16")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "4")
-epicsEnvSet("ECMC_EC_SDO_VALUE",         "100000")
+epicsEnvSet("ECMC_EC_SDO_VALUE",         "1000000")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
