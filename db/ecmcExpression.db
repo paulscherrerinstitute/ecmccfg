@@ -36,3 +36,11 @@ record(waveform,"$(Name)-PLCExpr"){
   field (FTVL, "CHAR")
   field(DESC, "PLC code")
 }
+
+#Only read once (will not change)
+record(ai,"$(Name)-AxisType-Act"){
+  field(PINI,"1")
+  field(DTYP,"stream")
+  field(INP,"@ecmcExpression.proto getAxisType($(Index)) $(PORT)")
+  field(SCAN,"Passive")
+}

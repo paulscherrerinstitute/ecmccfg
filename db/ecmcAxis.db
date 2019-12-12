@@ -254,12 +254,3 @@ record(waveform,"$(P)$(AXIS_NAME)-PLCExpr-RB"){
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
 }
-
-#Only read once (will not change)
-record(ai,"$(P)$(AXIS_NAME)-AxisType-Act"){
-  field(PINI,"1")
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getAxisType($(Index)) $(PORT)")
-  field(SCAN,"Passive")
-}
-
