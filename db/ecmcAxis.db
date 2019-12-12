@@ -256,7 +256,7 @@ record(waveform,"$(P)$(AXIS_NAME)-PLCExpr-RB"){
 }
 
 #Only read once (will not change)
-record(ai,"$(Name)-AxisType-Act"){
+record(ai,"$(P)$(AXIS_NAME)-AxisType-Act"){
   field(PINI,"1")
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto getAxisType($(Index)) $(PORT)")
