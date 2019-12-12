@@ -243,3 +243,23 @@ record(ai,"$(P)$(AXIS_NAME)-PLC-error"){
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)") 
 }
+
+record(waveform,"$(P)$(AXIS_NAME)-PLCExpr-RB"){
+  field(DESC, "PLC code -RB")
+  field(PINI, "1")
+  field(DTYP, "asynInt8ArrayIn")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ax1.plc.expression?")
+  field(FTVL, "CHAR")
+  field(NELM, "1024")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+#Only read once (will not change)
+record(ai,"$(Name)-AxisType-Act"){
+  field(PINI,"1")
+  field(DTYP,"stream")
+  field(INP,"@ecmcExpression.proto getAxisType($(Index)) $(PORT)")
+  field(SCAN,"Passive")
+}
+

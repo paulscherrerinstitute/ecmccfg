@@ -29,27 +29,10 @@ record(bo,"$(Name)-AllowCmdFromPLC-CmdEn"){
 
 }
 
-record(waveform,"$(Name)-PLCExpr-RB"){
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getAxisPLCExpr($(Index)) $(PORT)")
-  field(SCAN, "1 second")
-  field(NELM,1000)
-  field (FTVL, "CHAR")
-  field(DESC, "PLC code -RB")
-}
-
 record(waveform,"$(Name)-PLCExpr"){
   field(DTYP,"stream")
   field(INP,"@ecmcExpression.proto setAxisPLCExpr($(Index)) $(PORT)")
   field(NELM,1000)
   field (FTVL, "CHAR")
   field(DESC, "PLC code")
-}
-
-#Only read once (will not change)
-record(ai,"$(Name)-AxisType-Act"){
-  field(PINI,"1")
-  field(DTYP,"stream")
-  field(INP,"@ecmcExpression.proto getAxisType($(Index)) $(PORT)")
-  field(SCAN,"Passive")
 }
