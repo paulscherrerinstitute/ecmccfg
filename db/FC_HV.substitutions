@@ -9,9 +9,9 @@ file "FC_HV.template"
           {"MEBT-010:PBI-FC-001", 0,     5,	  "EL4134",   AO1-RB,"$(HV):Volt-RB"}
           {"MEBT-010:PBI-FC-001", 0,     5,       "EL4134",   AO2,   "$(HV):Curr"}
           {"MEBT-010:PBI-FC-001", 0,     5,	  "EL4134",   AO2-RB,"$(HV):Curr-RB"}
-          {"MEBT-010:PBI-FC-001", 0,     7,	  "EL2124",   BO1,   "$(HV):Pol"}
-          {"MEBT-010:PBI-FC-001", 0,     7,       "EL2124",   BO1-RB,"$(HV):Pol-RB"}
-          {"MEBT-010:PBI-FC-001", 0,     7,	  "EL2124",   BO2,   "$(HV):Bias"}
-          {"MEBT-010:PBI-FC-001", 0,     7,       "EL2124",   BO2-RB,"$(HV):Bias-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     7,	  "EL2124",   BO2,   "$(HV):Pol"}
+          {"MEBT-010:PBI-FC-001", 0,     7,       "EL2124",   BO2-RB,"$(HV):Pol-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     7,	  "EL2124",   BO1,   "$(HV):Bias"}
+          {"MEBT-010:PBI-FC-001", 0,     7,       "EL2124",   BO1-RB,"$(HV):Bias-RB"}
 }
 
