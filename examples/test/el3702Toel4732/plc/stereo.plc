@@ -1,0 +1,36 @@
+###############################################################################################
+#
+# Transfer Stereo sound from EL3702 to EL4732 over ethercat. Volume and gains for left and Right
+# can be adjusted through access of plc variables from  epics.
+# The input memmaps are amplified and then output is directed to other memmap.
+# Scaling is made to be same as example stereo.script (calcs in epics)
+#
+
+if(plc${PLC_ID}.firstscan) {
+  ${DBG=#}println('Starting stereo sound PLC demo');
+  static.vol:=10;
+  static.l_gain:=100;
+  static.r_gain:=100;
+  # Memmap id:s
+  static.l_id_in:=0;
+  static.r_id_in:=1;
+  static.l_id_out:=2;
+  static.r_id_out:=3;
+  # All memmaps must have same size
+  static.elements:=ec_get_mm_size(static.l_id_in);
+  ${DBG=#}println('Elements in memmaps: ', static.elements);
+};
+
+for (static.i := 0; static.i < static.elements; static.i += 1)
+{
+  # Left channel
+  ec_set_mm_data(static.l_id_out,static.i,ec_get_mm_data(static.l_id_in,static.i)*static.vol/200*static.l_gain/100);
+
+  # Right channel
+  ec_set_mm_data(static.r_id_out,static.i,ec_get_mm_data(static.r_id_in,static.i)*static.vol/200*static.r_gain/100);
+
+  # Some debug printouts (note: only left ch)
+  ${DBG=#}print('Left ch input: ',static.l_input);
+  ${DBG=#}print(' index: ',static.i);
+  ${DBG=#}println(' output: ',static.l_output);
+};

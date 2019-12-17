@@ -78,7 +78,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "22")    # 22 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "22")    # 22 bytes
-ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH1_DATA_IN_0,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH1_ARRAY_IN)"
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.CH1_DATA_IN_0,$(ECMC_EC_ARRAY_BYTE_SIZE),2,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH1_ARRAY_IN)"
 
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6011,0x1,16,CH2_STATUS)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6010,0x11,8,CH2_DATA_IN_0,0)"
@@ -105,7 +105,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6010,0x26,8,CH2_DATA_IN_21,0)"
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "22")    # 22 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "22")    # 22 bytes
-ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH2_DATA_IN_0,$(ECMC_EC_ARRAY_BYTE_SIZE),2,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH2_ARRAY_IN)"
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.CH2_DATA_IN_0,$(ECMC_EC_ARRAY_BYTE_SIZE),2,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH2_ARRAY_IN)"
 
 #- ###########################################################
 #- ############ Config PDOS: Outputs
@@ -161,7 +161,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "22")    # 22 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "22")    # 22 bytes
-ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH1_DATA_OUT_0,$(ECMC_EC_ARRAY_BYTE_SIZE),1,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH1_ARRAY_OUT)"
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.CH1_DATA_OUT_0,$(ECMC_EC_ARRAY_BYTE_SIZE),1,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH1_ARRAY_OUT)"
 
 #- ############ Config PDOS: Channel 2
 
@@ -191,7 +191,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 epicsEnvSet("ECMC_EC_ARRAY_SIZE"             "22")    # 22 values
 epicsEnvSet("ECMC_EC_ARRAY_BYTE_SIZE"        "22")    # 22 bytes
-ecmcConfigOrDie "Cfg.EcAddMemMap(${ECMC_EC_SLAVE_NUM},CH2_DATA_OUT_0,$(ECMC_EC_ARRAY_BYTE_SIZE),1,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH2_ARRAY_OUT)"
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.CH2_DATA_OUT_0,$(ECMC_EC_ARRAY_BYTE_SIZE),1,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH2_ARRAY_OUT)"
 
 #- DC
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x0,1000000,0,0,0)"
