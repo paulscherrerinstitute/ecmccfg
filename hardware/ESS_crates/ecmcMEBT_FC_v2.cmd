@@ -26,8 +26,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL3214"
 #Configure EL3004 analog input  +/-10V
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL3602"
 
-# Configure EL4004 analog output terminal 0-10V, 12 bit
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=5, HW_DESC=EL4134"
+# Configure EL4004 analog output terminal 0-10V, 12 bit NOTE: Use cutsom substitution file (ecmcEL1018_FC.substitutions)!
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=5, HW_DESC=EL4134,SUBST_FILE=ecmcEL4134_FC.substitutions"
 
 # Configure EL9505 power supply 5V
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL9505"
