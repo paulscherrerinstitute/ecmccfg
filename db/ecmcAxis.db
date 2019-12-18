@@ -60,16 +60,15 @@ record(calc,"$(P)$(AXIS_NAME)-seqstate") {
 record(calc,"$(P)$(AXIS_NAME)-lastilock") {
   field(DESC, "$(AXIS_NAME): Last interlock")
   field(PINI, "$(PINI=1)")
-  field(CALC,"A>>24")
-  field(INPA,"$(P)$(AXIS_NAME)-Stat.VAL")
+  field(CALC, "A>>24")
+  field(INPA, "$(P)$(AXIS_NAME)-Stat.VAL")
+  field(FLNK, "$(P)$(AXIS_NAME)-Stat_.PROC")
 }
 
 record(mbbiDirect,"$(P)$(AXIS_NAME)-Stat_"){
   field(DESC, "$(AXIS_NAME): Status Word mbbiD")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).status?")
-  field(SCAN, "I/O Intr")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat.VAL")
   field(FLNK, "$(P)$(AXIS_NAME)-enabled.PROC")
   field(TSE,  "$(TSE=-2)")
 }
@@ -201,16 +200,6 @@ record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-}
-
-record(longin,"$(P)$(AXIS_NAME)-Stat"){
-  field(DESC, "$(AXIS_NAME): Status Word")
-  field(PINI, "$(PINI=1)")
-  field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
-  field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)$(AXIS_NAME)-seqstate.PROC")
-  field(TSE,  "$(TSE=-2)")
 }
 
 record(bi,"$(P)$(AXIS_NAME)-PLC-CmdEn-RB"){
