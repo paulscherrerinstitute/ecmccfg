@@ -16,7 +16,8 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0
 ##############################################################################
 ## Configure hardware:
 
-$(SCRIPTEXEC) $(ecmccfg_DIR)ecmchwilab.cmd
+#$(SCRIPTEXEC) $(ecmccfg_DIR)ecmchwilab.cmd
+$(SCRIPTEXEC) ../../hardware/ESS_crates/ecmchwilab.cmd
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches

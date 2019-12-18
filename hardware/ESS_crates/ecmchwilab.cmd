@@ -20,7 +20,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL2502"
 # EtherCAT Bus Coupler
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=5, HW_DESC=EK1100"
 # EL3202 | 2-channel input terminal PT100 (RTD) for 2- or 3-wire connection
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL3202"
+#${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL3202"
 # EL3164 | 4-channel analog input terminal 0…10 V, single-ended, 16 bit
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=7, HW_DESC=EL3164"
 # EL3602 | 2-channel analog input terminal ±10 V, ±5 V, ±2.5 V, ±1.25 V, differential input, 24 bit
