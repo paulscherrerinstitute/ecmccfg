@@ -7,11 +7,11 @@ epicsEnvSet("IOC" ,"$(IOC="HWILAB")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg 0.9.0
+require ecmccfg master
 #require MCoreUtils 1.2.1
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.1,EthercatMC_VER=3.0.2,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=3.0.2,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware:
