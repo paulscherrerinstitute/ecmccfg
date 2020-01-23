@@ -26,6 +26,9 @@ epicsEnvSet("ECMC_ENC_TYPE",              "NOT SET")       # Type: 0=Incremental
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "NOT SET")       # Ethercat entry for actual position input (encoder)
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "NOT SET")       # Absolute bit count (for absolute encoders) always least significant part
 epicsEnvSet("ECMC_ENC_ABS_OFFSET",        "NOT SET")       # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "")              # Ethercat entry for latch position (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "")              # Ethercat entry for latch control (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "")              # Ethercat entry for latch status (only valid for home seq 11,12)
 
 #- Drive
 epicsEnvSet("ECMC_DRV_SCALE_NUM",         "NOT SET")
@@ -48,12 +51,13 @@ epicsEnvSet("ECMC_EMERG_DECEL",           "NOT SET")       # Emergency decelerat
 epicsEnvSet("ECMC_MRES",                  "NOT SET")
 
 #- Homing
-epicsEnvSet("ECMC_HOME_PROC",             "NOT SET")
-epicsEnvSet("ECMC_HOME_POS",              "NOT SET")
-epicsEnvSet("ECMC_HOME_VEL_TO",           "NOT SET")
-epicsEnvSet("ECMC_HOME_VEL_FRM",          "NOT SET")
-epicsEnvSet("ECMC_HOME_ACC",              "NOT SET")
-epicsEnvSet("ECMC_HOME_DEC",              "NOT SET")
+epicsEnvSet("ECMC_HOME_PROC",              "NOT SET")
+epicsEnvSet("ECMC_HOME_POS",               "NOT SET")
+epicsEnvSet("ECMC_HOME_VEL_TO",            "NOT SET")
+epicsEnvSet("ECMC_HOME_VEL_FRM",           "NOT SET")
+epicsEnvSet("ECMC_HOME_ACC",               "NOT SET")
+epicsEnvSet("ECMC_HOME_DEC",               "NOT SET")
+epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","0")
 
 #- Controller
 epicsEnvSet("ECMC_CNTRL_KP",              "NOT SET")

@@ -1,0 +1,14 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcELM3604-chX.template"
+{
+  pattern {CH_ID, DTYP,             FTVL,  NELM}
+          {1,     asynInt32ArrayIn, LONG,  20  }
+          {2,     asynInt32ArrayIn, LONG,  20  }
+          {3,     asynInt32ArrayIn, LONG,  20  }
+          {4,     asynInt32ArrayIn, LONG,  20  }
+}

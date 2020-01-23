@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-StatWd"){
   field(DESC, "$(HWTYPE): Status word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -7,7 +7,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Cmd"){
+record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CmdWd"){
   field(DESC, "$(HWTYPE): Control word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")

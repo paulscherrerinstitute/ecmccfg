@@ -9,7 +9,7 @@
 #-d */
 
 ############################################################
-############# Parmetrization Default SDO settings for EL3164
+############# Parmetrization Default SDO settings for EL3174
 
 #- Input signal type
 #- 0x02 = +-10V (default)

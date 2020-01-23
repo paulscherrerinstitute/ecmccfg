@@ -14,14 +14,13 @@ record(calc,"$(P)ec$(MASTER_ID)-slavesresp") {
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>16")
   field(INPA,"$(P)ec$(MASTER_ID)-Stat.VAL")
+  field(FLNK, "$(P)ec$(MASTER_ID)-Stat_.PROC")
 }
 
 record(mbbiDirect,"$(P)ec$(MASTER_ID)-Stat_"){
   field(DESC, "Master: Master Status Word mbbiD")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).masterstatus?")
-  field(SCAN, "I/O Intr")
+  field(INP,  "$(P)ec$(MASTER_ID)-Stat")
   field(FLNK, "$(P)ec$(MASTER_ID)-linkup.PROC")
   field(TSE,  "$(TSE=-2)")
 }
@@ -122,19 +121,18 @@ record(longin,"$(P)ec$(MASTER_ID)-Domain-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(calc,"$(P)ec$(MASTER_ID)-Domain-WC") {
+record(calc,  "$(P)ec$(MASTER_ID)-Domain-WC") {
   field(DESC, "Master: Domain Working Counter")
   field(PINI, "$(PINI=1)")
-  field(CALC,"A>>16")
-  field(INPA,"$(P)ec$(MASTER_ID)-Domain-Stat.VAL")
+  field(CALC, "A>>16")
+  field(INPA, "$(P)ec$(MASTER_ID)-Domain-Stat.VAL")
+  field(FLNK, "$(P)ec$(MASTER_ID)-Domain-Stat_")
 }
 
 record(mbbiDirect,"$(P)ec$(MASTER_ID)-Domain-Stat_"){
   field(DESC, "Master: Domain Status Word mbbiD")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).domainstatus?")
-  field(SCAN, "I/O Intr")
+  field(INP,  "$(P)ec$(MASTER_ID)-Domain-Stat.VAL")
   field(FLNK, "$(P)ec$(MASTER_ID)-Domain-redunactive.PROC")
   field(TSE,  "$(TSE=-2)")
 }
