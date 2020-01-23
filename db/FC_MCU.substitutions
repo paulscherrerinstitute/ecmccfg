@@ -1,0 +1,19 @@
+file "FC_MCU.template"
+
+
+{
+  pattern {IOC,           MASTER_ID, SLAVE_POS, HWTYPE, CH_ID, DESC}
+          {"MEBT-010:PBI-FC-001", 0,     1,       "EL1808",   "BI2",    "$(MCU):LimitIn-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     1,       "EL1808",   "BI1",    "$(MCU):LimitOut-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     1,       "EL1808",   "BI3",    "$(MCU):WaterFlowinput-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     1,       "EL1808",   "BI4",    "$(MCU):MovePermit-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO2",    "$(MCU):Move"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO2-RB", "$(MCU):Move-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO6",    "$(MCU):TemperatureStatus"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO6-RB", "$(MCU):TemperatureStatus-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO3",    "$(MCU):WaterFlowStatus"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO3-RB", "$(MCU):WaterFlowStatus-RB"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO4",    "$(MCU):HealthStatus"}
+          {"MEBT-010:PBI-FC-001", 0,     2,	  "EL2819",   "BO4-RB", "$(MCU):HealthStatus-RB"}
+
+}
