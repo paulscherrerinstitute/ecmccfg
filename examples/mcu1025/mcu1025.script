@@ -9,8 +9,13 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg develop
 
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.0,EthercatMC_VER=3.0.0,stream_VER=2.7.14p"
+#- Choose motor record implementation
+#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC built in motor record support
+#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support ffrom EthercatMC module (need to be loaded) default
+epicsEnvSet(ECMC_MR_MODULE,"ecmcMotorRecord")
+
+# run module startup.cmd (only needed at ESS  PSI auto call at requiXre)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=NOT_NEEDED,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware:
@@ -38,8 +43,8 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 ##############################################################################
 ## AXIS 2
 #
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
+#epicsEnvSet("DEV",      "$(IOC)")
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
