@@ -9,11 +9,12 @@ record(ai,"$(P)MCU-app-mode"){
 }
 
 record(bo,"$(P)MCU-ErrRst"){
-  field(DTYP,"stream")
-  field(OUT,"@ecmcControllerGeneral.proto setGeneralErrorReset() $(PORT)")
+  field(DTYP,"asynInt32")
+  field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.error.reset=")
   field(ZNAM,"FALSE")
   field(ONAM,"TRUE")
-  field(DOL,"0")
+  field(DOL, "0")
+  field(VAL, "0")
 }
 
 record(ai,"$(P)MCU-ErrId"){
