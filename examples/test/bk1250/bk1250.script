@@ -15,6 +15,8 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0
 ##############################################################################
 ## Config hardware:
 
+# NOTE: ALL KL slaves after the BK1250 coupler needs to be configured for the BK1250 to go to "OP" state
+
 # BK1250: Use normal "addSlave.cmd" to configure the BK1250 coupler (since its EtherCAT)
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=BK1250"
