@@ -27,6 +27,7 @@ The configuration framework contains the necessary files to configure an EPICS I
 
 *  addMaster.cmd
 *  addSlave.cmd
+*  addSlaveKL.cmd
 *  applySlaveConfig.cmd
 *  configureSlave.cmd
 *  applyConfig.cmd
