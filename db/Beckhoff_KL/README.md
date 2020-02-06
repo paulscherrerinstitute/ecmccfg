@@ -17,3 +17,6 @@ Inputs of KL slaves are mapped to SM3 pdo index 0x7<ECMC_KL_SLAVE_NUM>0 (for sla
 
 ### Example:
 See example in: ecmccfg/examples/test/bk1250/bk1250.script
+
+## Note:
+All KL slaves after the BK1250 coupler needs to be configured. Otherwise the BK1250 will not go to "OP" state.
