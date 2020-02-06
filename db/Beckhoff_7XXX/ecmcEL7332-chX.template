@@ -74,7 +74,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-RdyToEna"){
   field(ONAM, "Ready")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Rdy-Alrm")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Rdy-Alrm.PROC")
 }
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Rdy"){
@@ -84,7 +84,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Rdy"){
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Wrn-Alrm")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Wrn-Alrm.PROC")
 }
 
 
@@ -95,7 +95,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Wrn-Alrm"){
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Err-Alrm")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Err-Alrm.PROC")
 }
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Err-Alrm"){
