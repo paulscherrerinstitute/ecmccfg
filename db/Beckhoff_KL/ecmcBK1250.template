@@ -1,0 +1,100 @@
+#- Status word
+#- 0x0001 = K-Bus error
+#- 0x0002 = Configuration error
+#- 0x0010 = Outputs disabled
+#- 0x0020 = K-Bus overrun
+#- 0x0040 = Communication error (Inputs)
+#- 0x0080 = Communication error (Outputs)
+
+
+record(longin,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
+  field(DESC, "$(HWTYPE): Slave Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).BK1250_STATUS?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-entrycounter.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_"){
+  field(DESC, "$(HWTYPE): Slave Status Word")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).BK1250_STATUS?")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-KBusErr.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-KBusErr"){
+  field(DESC, "$(HWTYPE): K-Bus error")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_.B0")
+  field(ZNAM, "No Error")
+  field(ONAM, "K-Bus Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-CfgErr.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-CfgErr"){
+  field(DESC, "$(HWTYPE): Config error")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_.B1")
+  field(ZNAM, "No Error")
+  field(ONAM, "Config Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-OutpDis.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-OutpDis"){
+  field(DESC, "$(HWTYPE): Outputs disabled")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_.B2")
+  field(ZNAM, "No Error")
+  field(ONAM, "Outputs Disabled")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-KBusOvrRun.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-KBusOvrRun"){
+  field(DESC, "$(HWTYPE): K-Bus overrun")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_.B3")
+  field(ZNAM, "No Error")
+  field(ONAM, "K-Bus Overrun")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-InpComErr.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-InpComErr"){
+  field(DESC, "$(HWTYPE): Com error inputs")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_.B4")
+  field(ZNAM, "No Error")
+  field(ONAM, "Com Error Inputs")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-OutpComErr.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat-OutpComErr"){
+  field(DESC, "$(HWTYPE): Com error outputs")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Stat_.B5")
+  field(ZNAM, "No Error")
+  field(ONAM, "Com Error Outputs")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+}
+
+#Control word
+#- Control word
+#- 0x0010 = Disable outputs
+#- 0x0020 = Show K-Bus overrun
+
+record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Coupler-Cmd"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=$(HWTYPE): Coupler Control Word)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).BK1250_CONTROL=")
+  field(SCAN, "Passive")
+  field(FLNK, "$(FLNK=)")
+}
