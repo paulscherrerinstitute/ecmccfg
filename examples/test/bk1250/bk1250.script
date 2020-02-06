@@ -1,0 +1,45 @@
+##############################################################################
+## Example config for el3162 analog input
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg test_bk1250
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0.2,EthercatMC_VER=3.0.2,stream_VER=2.8.10"
+
+##############################################################################
+## Config hardware:
+
+# BK1250: Use normal "addSlave.cmd" to configure the BK1250 coupler (since its EtherCAT)
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=BK1250"
+
+# KL2032: Use "addSlaveKL.cmd" to configure the KL2032 coupler (since its KL-bus). Note "SLAVE_ID_KL" needs to be 2 digit hex.
+# "SLAVE_ID" needs to be same as BK1250 (all pdo entries are exposed via the BK1250)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlaveKL.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), SLAVE_ID_KL=00, HW_DESC=KL2032"
+
+# KL1809: Use "addSlaveKL.cmd" to configure the KL1809 coupler (since its KL-bus). Note "SLAVE_ID_KL" needs to be 2 digit hex.
+# "SLAVE_ID" needs to be same as BK1250 (all pdo entries are exposed via the BK1250)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlaveKL.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), SLAVE_ID_KL=01, HW_DESC=KL1809"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/bk1250.plc")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
