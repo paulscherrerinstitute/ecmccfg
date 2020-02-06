@@ -1,6 +1,6 @@
 #==============================================================================
-# addSlave.cmd
-#- Arguments: HW_DESC, [SLAVE_ID = 0]
+# addSlaveKL.cmd
+#- Arguments: HW_DESC, SLAVE_ID, SLAVE_ID_KL
 
 #-d /**
 #-d   \brief Script for adding a slave to the EtherCAT bus configuration of KL type.
@@ -26,5 +26,3 @@ epicsEnvSet("HW_DESC",            "${HW_DESC}")
 # add ${HW_DESC} to the bus at position ${SLAVE_ID}
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd
 dbLoadTemplate(${SUBST_FILE="ecmc${ECMC_EC_HWTYPE}.substitutions"},"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}, SLAVE_NUM_KL=${ECMC_KL_SLAVE_NUM}")
-# increment SLAVE_ID
-epicsEnvSet("SLAVE_ID",           "$(${ECMC_EC_SLAVE_NUM}+1)")
