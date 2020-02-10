@@ -54,12 +54,3 @@ epicsEnvSet("ECMC_EGU",               "mm")
 epicsEnvSet("ECMC_PREC",              3)
 epicsEnvSet("ECMCAXISFIELDINIT",      "")                  # Extra field init to motor record
 epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver
-
-# Choose motor record implementation to use:
-#   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC built in motor record support (EthercatMC not used) default
-#   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#   ECMC_MR_MODULE can be overriden to any of the two options above in your startup file (needs to be set after execution of startup.cmd)
-#   If EthercatMC is used (ECMC_MR_MODULE=="EthercatMC") then the EthercatMC module needs to be required. Example:
-#   require EthercatMC  "3.0.2"
-epicsEnvSet(ECMC_MR_MODULE,"ecmcMotorRecord")
-# epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")

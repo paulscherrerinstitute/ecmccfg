@@ -28,7 +28,7 @@ asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
 asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
 asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 1)
 
-${ECMC_MR_MODULE="EthercatMC"}CreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "32", "200", "1000", "")
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "32", "200", "1000", "")
 
 ############################################################
 ############# Misc settings:
