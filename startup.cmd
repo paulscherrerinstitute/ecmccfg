@@ -12,7 +12,6 @@
 #
 # [optional]
 # ECMC_VER          = 6.0
-# EthercatMC_VER    = 3.0
 # INIT              = initAll
 # MASTER_ID         = 0
 # SCRIPTEXEC        = iocshLoad
