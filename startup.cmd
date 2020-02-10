@@ -25,6 +25,7 @@
 #-------------------------------------------------------------------------------
 # load required modules
 require ecmc        "${ECMC_VER=6.0}"
+# Use ecmc motor record implementation as default
 #require EthercatMC  "${EthercatMC_VER=3.0}"
 require stream      "${stream_VER=kivel}"
 #
