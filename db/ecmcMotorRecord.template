@@ -1,0 +1,334 @@
+record(motor,"$(PREFIX)$(MOTOR_NAME)")
+{
+	field(DESC,"$(DESC)")
+	field(DTYP,"asynMotor")
+	field(DIR,"$(DIR=0)")
+	field(VELO,"$(VELO=0)")
+	field(JVEL,"$(JVEL=0)")
+	field(VBAS,"$(VBAS=0)")
+	field(ACCL,"$(ACCL=0)")
+	field(JAR, "$(JAR=0)")
+	field(BDST,"$(BDST=0)")
+	field(DLY, "$(DLY=0)")
+	field(BVEL,"$(BVEL=0)")
+	field(BACC,"$(BACC=0)")
+	field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))")
+	field(MRES,"$(MRES=1)")
+	field(ERES,"$(ERES=0)")
+	field(PREC,"$(PREC=3)")
+	field(EGU,"$(EGU=mm)")
+	field(DHLM,"$(DHLM=0)")
+	field(DLLM,"$(DLLM=0)")
+	field(RDBD,"$(RDBD=0)")
+	field(RTRY,"$(RTRY=1)")
+	field(RMOD,"$(RMOD=3)")
+	field(DLY,"$(DLY=0)")
+	field(FOFF,"$(FOFF=0)")
+	field(NTM,"0")
+	field(TWV,"$(TWV=1)")
+}
+
+# The message text
+record(stringin, "$(PREFIX)$(MOTOR_NAME)-MsgTxt") {
+    field(DTYP, "asynOctetRead")
+    field(INP, "@asyn($(MOTOR_PORT),$(AXIS_NO))MOTOR_MESSAGE_TEXT")
+    field(SCAN, "I/O Intr")
+}
+
+# Debug message in IOC log
+record(stringout, "$(PREFIX)$(MOTOR_NAME)-DbgStrToLOG") {
+    field(DESC, "Log String in IOC log")
+    field(VAL, "")
+    field(DTYP, "asynOctetWrite")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))StrToLOG")
+}
+
+# These records make the motor resolution, offset and direction available to the driver
+# which is needed for profile moves and other applications
+
+# Motor direction for this axis
+record(longout,"$(PREFIX)$(MOTOR_NAME)-DIR_") {
+    field(DESC, "$(MOTOR_NAME) direction")
+    field(DOL,  "$(PREFIX)$(MOTOR_NAME).DIR CP MS")
+    field(OMSL, "closed_loop")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MOTOR_REC_DIRECTION")
+}
+
+record(longin, "$(PREFIX)$(MOTOR_NAME)-Err")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MCUErr")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-VelAct")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))VelAct")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-Vel-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))Vel-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-Acc-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))Acc-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-EncAct")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "0")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))EncAct")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(PREFIX)$(MOTOR_NAME)-ErrId")
+{
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))ErrId")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(PREFIX)$(MOTOR_NAME)-ErrRst") {
+    field(DESC, "Error Reset")
+    field(VAL,  0)
+    field(DTYP, "asynInt32")
+    field(PINI, "YES")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))ErrRst")
+}
+
+# Motor offset for this axis
+record(ao,"$(PREFIX)$(MOTOR_NAME)-OFF_") {
+    field(DESC, "$(MOTOR_NAME) offset")
+    field(DOL,  "$(PREFIX)$(MOTOR_NAME).OFF CP MS")
+    field(OMSL, "closed_loop")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MOTOR_REC_OFFSET")
+}
+
+
+# Motor resolution for this axis
+record(ao,"$(PREFIX)$(MOTOR_NAME)-MRES_") {
+    field(DESC, "$(MOTOR_NAME) resolution")
+    field(DOL,  "$(PREFIX)$(MOTOR_NAME).MRES CP MS")
+    field(OMSL, "closed_loop")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MOTOR_REC_RESOLUTION")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgSREV-RB") {
+    field(DESC, "Micro Steps / Revolution")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgSREV-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgUREV-RB") {
+    field(DESC, "EGU / Revolution")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgUREV-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgPMIN-RB") {
+    field(DESC, "Absolute Minimum")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgPMIN-RB")
+    field(SCAN, "I/O Intr")
+}
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgPMAX-RB") {
+    field(DESC, "Absolute Maximum")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgPMAX-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgSPDB-RB") {
+    field(DESC, "Set point dead band window")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgSPDB-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgRDBD-RB") {
+    field(DESC, "In target position window")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgRDBD-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgRDBD-Tim-RB") {
+    field(DESC, "In target position time")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgRDBD-Tim-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(PREFIX)$(MOTOR_NAME)-CfgRDBD-En-RB") {
+    field(DESC, "In target position enabled")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgRDBD-En-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgPOSLAG-RB") {
+    field(DESC, "In target position window")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgPOSLAG-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgPOSLAG-Tim-RB") {
+    field(DESC, "In target position time")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgPOSLAG-Tim-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(PREFIX)$(MOTOR_NAME)-CfgPOSLAG-En-RB") {
+    field(DESC, "In target position enabled")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgPOSLAG-En-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-RB") {
+    field(DESC, "EC High Soft Limit RB")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-RB") {
+    field(DESC, "EC Low Soft Limit RB")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-En-RB") {
+    field(DESC, "EC High Soft Limit enabled RB")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM-En")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-En-RB") {
+    field(DESC, "EC Low Soft Limit enabled RB")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM-En")
+    field(SCAN, "I/O Intr")
+}
+
+# Config records, the values will be pushed into the motor record fields
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-CfgVELO-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgVELO")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-CfgVMAX-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgVMAX")
+    field(SCAN, "I/O Intr")
+}
+
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-CfgJVEL-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgJVEL")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(PREFIX)$(MOTOR_NAME)-CfgACCS-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgACCS")
+    field(SCAN, "I/O Intr")
+}
+
+record(mbbi,"$(PREFIX)$(MOTOR_NAME)-HomProc-RB") {
+    field(DESC,"Homing procedure")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))HomProc-RB")
+    field(SCAN, "I/O Intr")
+    field(ZRVL,  "0")
+    field(ONVL,  "1")
+    field(TWVL,  "2")
+    field(THVL,  "3")
+    field(FRVL,  "4")
+    field(FVVL,  "5")
+    field(SXVL,  "6")
+    field(SVVL,  "7")
+    field(EIVL,  "8")
+    field(NIVL,  "9")
+    field(TEVL, "10")
+    field(ELVL, "11")
+    field(TVVL, "12")
+    field(TTVL, "13")
+    field(FTVL, "14")
+    field(FFVL, "15")
+
+    field(ZRST, "NotHomable")
+    field(ONST, "LimBwd")
+    field(TWST, "LimFwd")
+    field(THST, "HSfwdfromLimBwd")
+    field(FRST, "HSbwdfromLimFwd")
+    field(FVST, "HSmidfromLimBwd")
+    field(SXST, "HSmidfromLimFwd")
+    field(SVST, "HSbwd")
+    field(EIST, "HSfwd")
+    field(NIST, "HSmidBwd")
+    field(TEST, "HSmidFwd")
+    field(ELST, "IndexNfromLimBwd")
+    field(TVST, "IndexNfromLimFwd")
+    field(TTST, "HomeSwiLeftRight")
+    field(FTST, "Homable")
+    field(FFST, "ManSetPos")
+}
+
+record(ai,"$(PREFIX)$(MOTOR_NAME)-HomPos-RB") {
+    field(DESC, "Home Position")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))HomPos-RB")
+    field(SCAN, "I/O Intr")
+}
+
+record (asyn, "$(PREFIX)$(MOTOR_PORT):asyn")
+{
+}
+
