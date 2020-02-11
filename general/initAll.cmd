@@ -27,8 +27,8 @@ asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
 asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
 asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 1)
 
-#- Create motor record controller
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "32", "200", "1000", "")
+#- Create motor record controller (keep 64 for use with EthercatMC)
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "64", ${ECMC_MR_MOV_POLL_MS=200}, ${ECMC_MR_IDLE_POLL_MS=1000}, "")
 
 ############################################################
 ############# Misc settings:
