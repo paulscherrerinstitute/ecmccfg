@@ -1,5 +1,5 @@
 #==============================================================================
-# ecmc_virt_axis_unset.cmd
+# ecmc_axis_sync_unset.cmd
 #- Arguments: n/a
 #-d /**
 #-d   \brief Unsets all varaiables set by ecmc_axis_sync.cmd configuration snippet

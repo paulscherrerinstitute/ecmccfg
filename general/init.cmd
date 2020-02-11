@@ -36,7 +36,6 @@ epicsEnvSet("ECMC_PREFIX",            "NOT SET")
 epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",    "NOT SET")
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",    "NOT SET")
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",    "NOT SET")
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
 
 #- ECMC_TIME_SOURCE:
