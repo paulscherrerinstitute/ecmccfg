@@ -152,3 +152,8 @@ epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1B")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "3")  # 0.1Ω
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
+
+#- Cleanup
+epicsEnvUnset("ECMC_EC_SDO_INDEX_OFFSET")
+epicsEnvUnset("ECMC_EC_SDO_SIZE")
+epicsEnvUnset("ECMC_EC_SDO_VALUE")
