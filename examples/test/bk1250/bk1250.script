@@ -1,6 +1,6 @@
 ##############################################################################
-## Example config for el3162 analog input
-
+## Example config for BK1250 with a few KLxxxx terminals
+## BK1250 is a EtherCAT to K-Bus coupler.
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
