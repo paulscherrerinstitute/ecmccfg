@@ -1,5 +1,5 @@
 #-d /**
-#-d   \brief hardware script for El1408
+#-d   \brief hardware script for KL1408
 #-d   \details 8ch 24V digital input
 #-d   \note This is not an EtherCAT slave and needs to be configured 
 #-d   togheter with an BK1250 or similar.
