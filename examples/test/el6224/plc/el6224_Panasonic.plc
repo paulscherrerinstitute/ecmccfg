@@ -22,7 +22,7 @@
 #- 0xA_ = no Device detected
 
 ${DBG=#}println('----------------------------------------------------');
-${DBG=#}print(' AI1:           ',ec0.s$(SLAVE_ID).AI_1, '  ');
+${DBG=#}print(' AI1:           ',ec0.s$(SLAVE_ID).AI_1, ' bits 0..15 ', ec_chk_bits(ec0.s$(SLAVE_ID).AI_1,0,15));
 ${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH1_STATUS,0,7);
 ${DBG=#}println('');
 
