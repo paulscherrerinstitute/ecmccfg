@@ -6,7 +6,7 @@
 3. A Setup data file can be transferred via FoE protocol only in OP, PREOP and SAFEOP (BOOTSTRAP rejects download)
 4. The password to program a FoE setup data file is 0.
 
-## Download file (write file):
+## Configure drive (download file, write file):
 1. Identify correct bin configuration file (see sub dirs in FoE dir)
 2. ethercat -p<slaveid> foe_write <filename>
 
@@ -30,8 +30,8 @@ ethercat -p0 foe_read FOESW_8020.bin > test.bin
 1. Make your configuration
 2. Application->Create EtherCAT FOE File->Setup Only
 3. Choose filename and save (note: max 14 chars).
-4. Store the file in ecmccfg/hardware/Technosoft_slaves/config/FoE/<suitable_name>
-5. Add a README.md file in cmccfg/hardware/Technosoft_slaves/config/FoE/<suitable_name> describing the config:
+4. Store the file in ecmccfg/hardware/Technosoft_slaves/config/FoE/<suitable_dir_name>/<suitable_file_name>
+5. Add a README.md file in cmccfg/hardware/Technosoft_slaves/config/FoE/<suitable_dir_name>/ describing the config:
 * Drive type (8020BX-CAT or 4808BX-CAT)
 * DC-link voltage (48V)
 * Control mode (normally always CSV)
