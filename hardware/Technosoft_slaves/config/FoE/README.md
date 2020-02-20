@@ -1,4 +1,4 @@
-### Technosoft EasyMotion Config over FoE (File over EtherCAT)
+# Technosoft EasyMotion Config over FoE (File over EtherCAT)
 
 ## Requirements from Technosoft CoE manual (https://technosoftmotion.com/wp-content/uploads/2019/10/P091.064.EtherCAT.iPOS_.UM.pdf):
 1. The FoE file must start with “FOESW_”.
@@ -7,10 +7,10 @@
 4. The password to program a FoE setup data file is 0.
 
 ## Download file (write file):
-1. Identify correct bin configuration file (see directories in FoE folder)
+1. Identify correct bin configuration file (see sub dirs in FoE dir)
 2. ethercat -p<slaveid> foe_write <filename>
 
-# Example:
+### Example:
 ```
 ethercat -p0 foe_write FOESW_8020.bin
 
@@ -20,7 +20,7 @@ ethercat -p0 foe_write FOESW_8020.bin
 2. ethercat -p<slaveid> foe_read <filename> > <output filename>
 Note: Seems the "-o" or "--output-file" is not working.
 
-# Example:
+### Example:
 ```
 ethercat -p0 foe_read FOESW_8020.bin > test.bin
 
