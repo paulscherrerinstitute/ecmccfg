@@ -28,7 +28,7 @@ iocshLoad ${ecmccfg_DIR}startup.cmd, "IOC=${IOC},ECMC_VER=master,stream_VER=2.8.
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=0, HW_DESC=iPOS8020BX, CONFIG=-Motor-McLennan-34HT18C340-Parallel"
 
 # Download base config (parsed from Techosoft EasySetup configuration): Only needed first time a drive is used..
-${SCRIPTEXEC} ./ecmciPOS8020BX-EEPROM-BaseConfig-StepperOpenLoopCSV.cmd
+${SCRIPTEXEC} ./ecmciPOS8020BX-EEPROM-BaseConfig-72Volt-StepperOpenLoopCSV.cmd
 
 # Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
