@@ -9,11 +9,12 @@
 ## Configure drive (download file, write file):
 1. Identify correct bin configuration file (see sub dirs in FoE dir)
 2. ethercat -p<slaveid> foe_write <filename>
+3. power cycle of drive is needed in order to load the new config.
 
 ### Example:
 ```
 ethercat -p0 foe_write FOESW_8020.bin
-
+# Do not forget power cycle
 ```
 ## Upload file (read file):
 1. You must know the name of the file on the slave
