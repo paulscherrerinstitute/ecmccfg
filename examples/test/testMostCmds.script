@@ -14,7 +14,7 @@ require ecmccfg master
 #- require EthercatMC 3.0.2
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_dev20200227,stream_VER=2.8.10"
 
 ##############################################################################
 ############# General:
@@ -97,6 +97,10 @@ ecmcConfig      "EcReadSoE(2,0,10,2)"
 ecmcConfig      "EcReadSoE(2000,0,10,2)"
 ecmcConfig      "Cfg.EcWriteSoE(2,0,10,2,100)"
 ecmcConfig      "Cfg.EcWriteSoE(20000,0,10,2,100)"
+
+ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
+ecmcConfig "Cfg.SetEcStartupTimeout(0)"
+ecmcConfig "Cfg.SetEcStartupTimeout(-10)"
 
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
