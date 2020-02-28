@@ -16,6 +16,8 @@ ecmcEpicsEnvSetCalc -h
           <expression> : Calculation expression (see exprTK for available functionality). Examples:
                          Simple expression:"5.5+${TEST_SCALE}*sin(${TEST_ANGLE}/10)".
                          Use of "RESULT" variable: "if(${TEST_VAL}>5){RESULT:=100;}else{RESULT:=200;};".
+                         Strings are used within '<str>': "'test'='test'". Note: expression result must be numeric and 
+                         not string (in this case expression result is 1 => <envVarName> will be set to "1").
           <format>     : Optional format string. Example "%lf", "%8.3lf", "%x", "%04d" or "%d", defaults to "%d".
                          Can contain text like "0x%x" or "Hex value is 0x60%x".
                          Must contain one numeric value where result of expression will be written.
@@ -62,6 +64,20 @@ ecmcEpicsEnvSetCalc("IF_TEST", "if(10>5){RESULT:=100;}else{RESULT:=200;};")
 epicsEnvShow("IF_TEST")
 IF_TEST=100
 
+#### Comparing strings 1 (use '<string>'):
+epicsEnvSet("filename","ecmcEL3002.cmd")
+# ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+ecmcEpicsEnvSetCalc("result", "'ecmcEL3002.cmd'='test.script'")
+epicsEnvShow("result")
+result=0
+
+#### Comparing strings 2 (if-else):
+# ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+ecmcEpicsEnvSetCalc("result", "if('ecmcEL3002.cmd'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+epicsEnvShow("result")
+result=0
+
+
 ```
 ## Iocsh function "ecmcEpicsEnvSetCalcTenary()"
  "ecmcEpicsEnvSetCalcTenary()" is used o evaluate expressions and set EPCIS environment variables to different strings.
@@ -80,13 +96,15 @@ ecmcEpicsEnvSetCalcTenary -h
           <expression>  : Calculation expression (see exprTK for available functionality). Examples:
                           Simple expression:"5.5+${TEST_SCALE}*sin(${TEST_ANGLE}/10)".
                           Use of "RESULT" variable: "if(${TEST_VAL}>5){RESULT:=100;}else{RESULT:=200;};".
+                          Strings are used within '<str>': "'test'='test'". Note: expression result must be numeric and 
+                          not string (in this case expression result is 1 => <envVarName> will be set to <trueString>).                          
           <trueString>  : String to set <envVarName> if expression (or "RESULT") evaluates to true.
           <falseString> : String to set <envVarName> if expression (or "RESULT") evaluates to false.
 
 ```
 ### Examples:
 ```
-#### Simple true false
+### Simple true false
 epicsEnvSet("VALUE",10)
 # ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
 ecmcEpicsEnvSetCalcTenary("test_var", "10+2+5/10","True","False")
@@ -98,6 +116,19 @@ test_var=True
 ecmcEpicsEnvSetCalcTenary("filename", "10>20","./plc_fast.cfg","./plc_slow.cfg")
 epicsEnvShow("filename")
 filename=./plc_slow.cfg
+
+### Comparing strings 1 (simple):
+# ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+ecmcEpicsEnvSetCalcTenary("result", "'./plc_slow.cfg'='./plc_slow.cfg'","equal","not_equal")
+epicsEnvShow("result")
+result=equal
+
+### Comparing strings 2 (with if-else):
+# ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+ecmcEpicsEnvSetCalcTenary("result", "if('./plc_slow.cfg'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+epicsEnvShow("result")
+result=no_use_this_file.cfg
+
 
 ```
 
