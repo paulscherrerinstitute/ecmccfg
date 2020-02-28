@@ -21,7 +21,7 @@ ecmcEpicsEnvSetCalc -h
          - Hex numbers in the expression is not allowed (but hex as output by formating is OK).
          - Non floatingpoint values will be rounded to nearest int.
 ```
-Examples:
+## Examples:
 ```
 #### Calculate addresses in HEX with specified width
 # ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
@@ -49,3 +49,33 @@ epicsEnvSet("ECMC_SLAVE_NUM_OFFSET",25)
 ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "10+25")
 epicsEnvShow("ECMC_SLAVE_NUM")
 ECMC_SLAVE_NUM=35
+
+```
+
+# Use return value of ecmcConfig(OrDie):
+
+The return value from ecmcConfig(OrDie) is stored in the EPICS environment variable
+"ECMC_CONFIG_RETURN_VAL". This value can be used to make som dynamic configuration.
+All ASCII configuration commands for ecmcConfig(OrDie) can be used in the same way.
+
+## Example: Read firmware version of an EL7037 stepper drive (sdo read must be before serAppMode(1))
+Note: SDO reads need to be before "SetAppMode(1)"
+```
+ecmcConfig "EcReadSdo(${ECMC_SLAVE_NUM},0x100a,0x0,2)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ECMC_CONFIG_RETURN_VAL=14640
+
+```
+The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields,name or alias for instance.. 
+
+## Example: Read "ID" PDO from EK1101 (shown in detail in aliasRecordFromPdoData.script)
+Note: PDO reads need to be after "SetAppMode(1)" since cyclic value
+```
+ecmcConfig "ReadEcEntryIDString(${ECMC_SLAVE_NUM},"ID")"
+2020/02/28 08:58:03.771 1024
+## This is the value of the EK1101 ID switch
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ECMC_CONFIG_RETURN_VAL=1024
+
+```
+The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields,name or alias for instance.. 
