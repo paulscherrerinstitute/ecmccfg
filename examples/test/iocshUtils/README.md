@@ -1,4 +1,6 @@
-# Test iocsh function "ecmcEpicsEnvSetCalc()"
+# ECMC Iocsh Utilities
+
+## Test iocsh function "ecmcEpicsEnvSetCalc()"
  "ecmcEpicsEnvSetCalc()" is used to evaluate expressions and set result to EPCIS environment variables. Usefull for calculate:
   * slave offsets
   * sdo/pdo adresses (also in hex)
@@ -21,7 +23,7 @@ ecmcEpicsEnvSetCalc -h
          - Hex numbers in the expression is not allowed (but hex as output by formating is OK).
          - Non floatingpoint values will be rounded to nearest int.
 ```
-## Examples:
+### Examples:
 ```
 #### Calculate addresses in HEX with specified width
 # ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
@@ -52,13 +54,13 @@ ECMC_SLAVE_NUM=35
 
 ```
 
-# Use return value of ecmcConfig(OrDie):
+## Use return value of ecmcConfig(OrDie):
 
 The return value from ecmcConfig(OrDie) is stored in the EPICS environment variable
 "ECMC_CONFIG_RETURN_VAL". This value can be used to make som dynamic configuration.
 All ASCII configuration commands for ecmcConfig(OrDie) can be used in the same way.
 
-## Example: Read firmware version of an EL7037 stepper drive (sdo read must be before serAppMode(1))
+### Example: Read firmware version of an EL7037 stepper drive
 Note: SDO reads need to be before "SetAppMode(1)"
 ```
 ecmcConfig "EcReadSdo(${ECMC_SLAVE_NUM},0x100a,0x0,2)"
@@ -66,9 +68,9 @@ epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 ECMC_CONFIG_RETURN_VAL=14640
 
 ```
-The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields,name or alias for instance.. 
+The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields, name or alias for instance.. 
 
-## Example: Read "ID" PDO from EK1101 (shown in detail in aliasRecordFromPdoData.script)
+### Example: Read "ID" PDO from EK1101 (shown in detail in aliasRecordFromPdoData.script)
 Note: PDO reads need to be after "SetAppMode(1)" since cyclic value
 ```
 ecmcConfig "ReadEcEntryIDString(${ECMC_SLAVE_NUM},"ID")"
@@ -78,4 +80,4 @@ epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 ECMC_CONFIG_RETURN_VAL=1024
 
 ```
-The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields,name or alias for instance.. 
+The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields, name or alias for instance.. 
