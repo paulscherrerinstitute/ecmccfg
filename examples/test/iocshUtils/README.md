@@ -9,17 +9,20 @@
 ``` 
 ecmcEpicsEnvSetCalc -h
 
-      "ecmcEpicsEnvSetCalc(<envVarName>,  <expression>, <format>)"
+      Use "ecmcEpicsEnvSetCalc(<envVarName>,  <expression>, <format>)" to evaluate the expression and assign the variable.
           <envVarName> : EPICS environment variable name.
-          <expression> : Calculation expression (see exprTK for available functionality).
+          <expression> : Calculation expression (see exprTK for available functionality). Examples:
+                         Simple expression:"5.5+${TEST_SCALE}*sin(${TEST_ANGLE}/10)".
+                         Use of "RESULT" variable: "if(${TEST_VAL}>5){RESULT:=100;}else{RESULT:=200;};".
           <format>     : Optional format string. Example "%lf", "%8.3lf", "%x", "%04d" or "%d", defaults to "%d".
                          Can contain text like "0x%x" or "Hex value is 0x60%x".
                          Must contain one numeric value where result of expression will be written.
 
-       Restrictions:
+      Restrictions:
          - Some flags and/or width/precision combinations might not be supported.
          - Hex numbers in the expression is not allowed (but hex as output by formating is OK).
          - Non floatingpoint values will be rounded to nearest int.
+
 ```
 ## Examples:
 ```
@@ -49,6 +52,13 @@ epicsEnvSet("ECMC_SLAVE_NUM_OFFSET",25)
 ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "10+25")
 epicsEnvShow("ECMC_SLAVE_NUM")
 ECMC_SLAVE_NUM=35
+
+#### if-statement syntax (use "RESULT" variable)
+epicsEnvSet("VALUE",10)
+# ecmcEpicsEnvSetCalc("IF_TEST", "if(${VALUE}>5){RESULT:=100;}else{RESULT:=200;};")
+ecmcEpicsEnvSetCalc("IF_TEST", "if(10>5){RESULT:=100;}else{RESULT:=200;};")
+epicsEnvShow("IF_TEST")
+IF_TEST=100
 
 ```
 

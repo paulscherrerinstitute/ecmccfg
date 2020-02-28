@@ -12,7 +12,7 @@
 #         - Some flags and/or width/precision combinations might not be supported.
 #         - Hex numbers in the expression is not allowed (but hex as output by formating is OK)
 #
-require ecmc anders_calc_iocsh
+require ecmc anders_dev20200228
 #
 # Help screens
 ecmcEpicsEnvSetCalc -h
@@ -59,4 +59,11 @@ epicsEnvSet("ECMC_SLAVE_NUM_OFFSET",25)
 # ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "$(ECMC_SLAVE_NUM)+$(ECMC_SLAVE_NUM_OFFSET)")
 ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "$(ECMC_SLAVE_NUM)+$(ECMC_SLAVE_NUM_OFFSET)")
 epicsEnvShow("ECMC_SLAVE_NUM")
+#
+
+# If syntax (use "RESULT" variable)
+epicsEnvSet("ECMC_SLAVE_NUM",10)
+# ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
+ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
+epicsEnvShow("ECMC_IF_TEST")
 #
