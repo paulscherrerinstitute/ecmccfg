@@ -47,7 +47,7 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 #-
 #-------------------------------------------------------------------------------
 # Set EtherCAT frequency (defaults to 1000)
-ecmcConfigOrDie "Cfg.SetSampleRate({EC_RATE=1000})"
+ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 #-
 #-------------------------------------------------------------------------------
 #- add master (defaults to '0')

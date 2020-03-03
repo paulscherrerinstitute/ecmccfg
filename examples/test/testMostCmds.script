@@ -4,7 +4,7 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg master
+require ecmccfg anders_change_samplerate
 
 #- Choose motor record driver implementation
 #-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
@@ -13,11 +13,8 @@ require ecmccfg master
 #- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
 #- require EthercatMC 3.0.2
 
-// Set new sample rate
-epicsEnvSet(ECMC_ETHERCAT_SMAPLE_RATE,500)
-
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=2000"
 
 // Should give error since after ec->init()
 ecmcConfig "Cfg.SetSampleRate(1000)"
