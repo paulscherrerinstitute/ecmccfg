@@ -17,10 +17,14 @@ If these slaves are to be used at a different rate new configuration file(s) mig
 
 Note 2: Not all slaves support sample rates higher than 1kHz. Check docs.
 
-Note 3: For lower sample rates it takes longer time for the ethercat bus to startup. 
-The EtherCAT startup timeout value might need to be increase ("ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)")
+Note 3: For lower sample rates it takes longer time for the EtherCAT bus to startup. 
+The EtherCAT startup timeout value might need to be increased ("ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)")
 
-Note 4: Lower samplerates than 50Hz have been seen as unstable when using more complex DC enabled slaves like drives, oversampling slaves and position measurement. 
+Note 4: Lower samplerates than 50Hz have been identified as unstable when using more complex slaves:
+* DC enabled slaves like drives
+* oversampling slaves 
+* position measurement slaves.
+This is most likely for the dc clock synronization will fail when to long between sync telegrams.
 Low sample rate for pure digital or analog have shown to be stable.
 
 This rate can be changed by:
@@ -41,6 +45,6 @@ ecmcConfigOrDie "Cfg.SetSampleRate(500)"
 ecmcConfigOrDie "Cfg.SetSampleTimeMs(2)"
 ```
 
-Note: The commands "Cfg.SetSampleRate()" or "ecmcConfigOrDie "Cfg.SetSampleTimeMs()" needs to be executed nefore any ecmc configuration 
-is done but after the "require ecmc" statement. Therefore the parameter EC_RATE is the prefereed way to handle changed sample rates.
+Note: The commands "Cfg.SetSampleRate()" or "Cfg.SetSampleTimeMs()" needs to be executed before any ecmc configuration 
+is performed but of cource after the "require ecmc" statement. Therefore the parameter EC_RATE is the prefereed way to handle changed sample rates.
 
