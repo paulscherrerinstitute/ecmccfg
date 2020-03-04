@@ -8,7 +8,7 @@ Lowering a sample rate could be benefical:
 * ...
 
 Sometimes also higher sample can be benefical:
-* Accuire more data
+* Acquire more data
 * Increase control performance
 * ..
 
