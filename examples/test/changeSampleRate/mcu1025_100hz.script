@@ -1,0 +1,43 @@
+##############################################################################
+## Example: Config ESS crate of type MCU1025 
+## - Reduced sampling rate (100Hz)
+## - EtherCAT bus startup timeout increased to 100s
+## - To start with a different rate you can use the EC_RATE parameter:
+##   $ iocsh.bash mcu1025_100hz.script EC_RATE=500 
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg anders_change_samplerate
+
+#- Choose motor record driver implementation
+#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
+#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
+#- Uncomment the two lines below to use EthercatMC:
+#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
+#- require EthercatMC 3.0.2
+
+# Epics Motor record driver that will be used:
+epicsEnvShow(ECMC_MR_MODULE)
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=${EC_RATE=100}"
+
+ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
+
+##############################################################################
+## Configure hardware:
+
+$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

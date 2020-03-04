@@ -15,6 +15,7 @@
 #- INIT              = initAll
 #- MASTER_ID         = 0
 #- SCRIPTEXEC        = iocshLoad
+#- EC_RATE           = 1000
 #-
 #- [set by module]
 #- ECMC_CONFIG_ROOT  = root directory of ${MODULE}
@@ -23,9 +24,8 @@
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=6.0}"
+require ecmc        "${ECMC_VER=6.1.0}"
 #- Use ecmc motor record implementation as default
-#require EthercatMC  "${EthercatMC_VER=3.0}"
 require stream      "${stream_VER=kivel}"
 #-
 #-------------------------------------------------------------------------------
@@ -40,9 +40,14 @@ epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #-------------------------------------------------------------------------------
 #- define IOC Prefix
 epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
+#-
 #-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
+#-
+#-------------------------------------------------------------------------------
+# Set EtherCAT frequency (defaults to 1000)
+ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 #-
 #-------------------------------------------------------------------------------
 #- add master (defaults to '0')

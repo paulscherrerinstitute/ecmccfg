@@ -67,3 +67,16 @@ epicsEnvSet("ECMC_SLAVE_NUM",10)
 ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
 epicsEnvShow("ECMC_IF_TEST")
 #
+
+epicsEnvSet("filename","ecmcEL3002.cmd")
+# Comparing strings 1:
+# ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+epicsEnvShow("result")
+#
+
+# Comparing strings 2:
+# ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+epicsEnvShow("result")
+#
