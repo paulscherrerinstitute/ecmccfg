@@ -1,6 +1,9 @@
 ##############################################################################
-## Example config ESS crate of type MCU1025
-
+## Example: Config ESS crate of type MCU1025 
+## - Reduced sampling rate (100Hz)
+## - EtherCAT bus startup timeout increased to 100s
+## - To start with a different rate you can use the EC_RATE parameter:
+##   $ iocsh.bash mcu1025_100hz.script EC_RATE=500 
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
@@ -20,7 +23,7 @@ require ecmccfg anders_change_samplerate
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=100"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=${EC_RATE=100}"
 
 ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
 
@@ -29,39 +32,12 @@ ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
 
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
 
-# ADDITIONAL SETUP
-# Set all outputs to feed switches
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
-# END of ADDITIONAL SETUP
-
-##############################################################################
-## AXIS 1
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
-
-##############################################################################
-## AXIS 2
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
-
 ##############################################################################
 ############# Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
