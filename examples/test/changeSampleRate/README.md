@@ -18,7 +18,7 @@ If these slaves are to be used at a different rate new configuration file(s) mig
 Note 2: Not all slaves support sample rates higher than 1kHz. Check docs.
 
 Note 3: For lower sample rates it takes longer time for the EtherCAT bus to startup. 
-The EtherCAT startup timeout value might need to be increased ("ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)")
+The EtherCAT startup timeout might need to be increased ("ecmcConfigOrDie "Cfg.SetEcStartupTimeout(<timeInSeconds>)", default 30s)
 
 Note 4: Lower samplerates than 50Hz have been identified as unstable when using more complex slaves:
 * DC enabled slaves like drives
