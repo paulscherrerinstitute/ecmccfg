@@ -4,7 +4,7 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg anders_change_samplerate
+require ecmccfg master
 
 #- Choose motor record driver implementation
 #-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
@@ -14,7 +14,7 @@ require ecmccfg anders_change_samplerate
 #- require EthercatMC 3.0.2
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=2000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_file_exist,stream_VER=2.8.10, EC_RATE=2000"
 
 // Should give error since after ec->init()
 ecmcConfig "Cfg.SetSampleRate(1000)"
@@ -573,7 +573,6 @@ ecmcConfigOrDie "Cfg.AddCommandToCommandList(1)=Main.M1.bExecute=1"
 ecmcConfig      "Cfg.TriggerCommandList(1)"
 ecmcConfig      "Cfg.TriggerCommandList(100)"
 
-
 ##############################################################################
 ############# PLC:
 
@@ -625,5 +624,138 @@ ecmcAsynPortDriverConfigure asbdkadb
 ecmcConfigOrDie
 ecmcConfig NotAValidCommand!!!
 
-iocInit
+ecmcGrepParam *test*
+ecmcGrepParam -h
+ecmcGrepParam --help
+ecmcGrepParam
 
+ecmcGrepRecord *test*
+ecmcGrepRecord -h
+ecmcGrepRecord --help
+ecmcGrepRecord
+
+ecmcMotorRecordCreateController -h
+ecmcMotorRecordCreateController
+
+ecmcMotorRecordCreateAxis -hecmcMotorRecordCreateAxis
+
+ecmcFileExist ("no_file.cmd",0)
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0,${EPICS_DB_INCLUDE_PATH})
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0)
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0,"test")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0,":")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0,":test")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0,"test:")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("test.script",0, "")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("no_file.cmd",0, "")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("testMostCmds.script",1, "")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("no_file.cmd",0, "")
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist
+ecmcFileExist -h
+ecmcFileExist --help
+
+ecmcEpicsEnvSetCalc -h
+ecmcEpicsEnvSetCalc --help
+ecmcEpicsEnvSetCalc
+#
+# Misc examples
+ecmcEpicsEnvSetCalc("test1", "1+2+3+4+5*10", "%lf")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10", "%lf")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10", "%d")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10.1")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10.1", "0x%x")
+epicsEnvShow("test1")
+#
+# Example of invalid format (must be one numerical value). "test1" will not be overwritten.
+ecmcEpicsEnvSetCalc("test1", "1+2+3+4+5*10.1", "0x%s")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "1+2+3+4+5*10.1", "%03d")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test2", "1+2+3+4+5*10.1", "%03.4lf")
+epicsEnvShow("test2")
+#
+# Calculate addresses in HEX
+#ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
+ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
+epicsEnvShow("test2")
+# ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "This is the number: 0x%06x")
+ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "This is the number: 0x%06x")
+epicsEnvShow("test2")
+#
+# Calculate scalings
+epicsEnvSet("IORange",32768)
+# ecmcEpicsEnvSetCalc("scaling", "$(test1)/$(IORange)*10", "%lf")
+ecmcEpicsEnvSetCalc("scaling", "$(test1)/$(IORange)*10", "%lf")
+epicsEnvShow("scaling")
+#
+# Offset slave numbers
+epicsEnvSet("ECMC_SLAVE_NUM",10)
+epicsEnvSet("ECMC_SLAVE_NUM_OFFSET",25)
+# ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "$(ECMC_SLAVE_NUM)+$(ECMC_SLAVE_NUM_OFFSET)")
+ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "$(ECMC_SLAVE_NUM)+$(ECMC_SLAVE_NUM_OFFSET)")
+epicsEnvShow("ECMC_SLAVE_NUM")
+#
+
+# If syntax (use "RESULT" variable)
+epicsEnvSet("ECMC_SLAVE_NUM",10)
+# ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
+ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
+epicsEnvShow("ECMC_IF_TEST")
+#
+
+epicsEnvSet("filename","ecmcEL3002.cmd")
+# Comparing strings 1:
+# ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+epicsEnvShow("result")
+#
+
+# Comparing strings 2:
+# ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+epicsEnvShow("result")
+#
+
+# Help screens
+ecmcEpicsEnvSetCalcTenary -h
+ecmcEpicsEnvSetCalcTenary --help
+ecmcEpicsEnvSetCalcTenary
+#
+# Simple true false
+epicsEnvSet("VALUE",10)
+# ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
+ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
+epicsEnvShow("test_var")
+#
+# Can be used for choosing different files
+# ecmcEpicsEnvSetCalcTenary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+ecmcEpicsEnvSetCalcTenary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+epicsEnvShow("filename")
+#
+# Comparing strings 1 (simple):
+# ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+epicsEnvShow("result")
+#
+# Comparing strings 2 (with if-else):
+# ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+epicsEnvShow("result")
+#
+
+iocInit
