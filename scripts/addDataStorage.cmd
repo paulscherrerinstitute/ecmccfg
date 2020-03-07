@@ -39,4 +39,5 @@ epicsEnvSet("ECMC_STORAGE_SIZE",    "${DS_SIZE}")
 ecmcConfigOrDie "Cfg.CreateStorage(${ECMC_STORAGE_INDEX},${ECMC_STORAGE_SIZE},${DS_TYPE=0})"
 ecmcConfigOrDie "Cfg.ClearStorage(${ECMC_STORAGE_INDEX})"
 ecmcConfigOrDie "Cfg.SetStorageEnablePrintouts(${ECMC_STORAGE_INDEX},${DS_DEBUG=0})"
+ecmcFileExist("ecmcDS-idx.template",1,${EPICS_DB_INCLUDE_PATH})
 dbLoadRecords("ecmcDS-idx.template", "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_STORAGE_INDEX},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1}")

@@ -20,8 +20,10 @@
 #- set device name, default to ${IOC}
 epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 ${SCRIPTEXEC} ${CONFIG}
+ecmcFileExist("${ECMC_CONFIG_ROOT}addVirtualAxis.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addVirtualAxis.cmd
 #- Clear env vars
+ecmcFileExist(${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_virt_axis_unset"}.cmd,1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_virt_axis_unset"}.cmd
 # reset PREFIX
 epicsEnvSet("ECMC_PREFIX"      "${SM_PREFIX}")

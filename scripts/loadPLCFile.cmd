@@ -25,12 +25,13 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${SAMPLE_RATE_MS=1}") # execute at 1000
 epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc")
 
 #- Convert file with optional macros (msi)
-
+ecmcFileExist("${FILE}",1)
 system "msi -V -M ${PLC_MACROS=EMPTY} ${FILE} > ${ECMC_TMP_FILE}"
+ecmcFileExist("${ECMC_TMP_FILE}",1)
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 
 #- Remove parsed file after load
 system "rm -f ${ECMC_TMP_FILE}"
-
+ecmcFileExist("ecmcPlc.db",1,${EPICS_DB_INCLUDE_PATH})
 dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX}")

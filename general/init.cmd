@@ -44,6 +44,7 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
 epicsEnvSet("ECMC_TSE",               -2)
 
 #- Init all axis related variables
+ecmcFileExist("${ECMC_CONFIG_ROOT}initAxis.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAxis.cmd"
 
 #- Additional parameters when motor Records are loaded

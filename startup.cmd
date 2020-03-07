@@ -43,6 +43,7 @@ epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _no
 #-
 #-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
+ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 #-
 #-------------------------------------------------------------------------------
@@ -51,6 +52,7 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 #-
 #-------------------------------------------------------------------------------
 #- add master (defaults to '0')
+ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)

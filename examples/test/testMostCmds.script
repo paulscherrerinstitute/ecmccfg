@@ -637,7 +637,8 @@ ecmcGrepRecord
 ecmcMotorRecordCreateController -h
 ecmcMotorRecordCreateController
 
-ecmcMotorRecordCreateAxis -hecmcMotorRecordCreateAxis
+ecmcMotorRecordCreateAxis -h
+ecmcMotorRecordCreateAxis
 
 ecmcFileExist ("no_file.cmd",0)
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
