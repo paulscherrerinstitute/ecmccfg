@@ -17,7 +17,7 @@
 #     FROM   : Lower position (default -20)
 #     VEL    : Velocity setpoint (defaults to 20)
 #     ACC    : Acceleration setpoint (defaults to 100)
-#     DEC    : Deceleration setpoint (defaults to ${ACC})
+#     DEC    : Deceleration setpoint (defaults to ACC)
 #     DBG    : Set to "#" to remove printouts, set to "" to keep printouts (default "#")
 #
 
