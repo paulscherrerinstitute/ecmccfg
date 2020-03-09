@@ -9,6 +9,7 @@
 #-d */
 
 #- call init.cmd
+ecmcFileExist("${ECMC_CONFIG_ROOT}init.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}init.cmd
 
 ############################################################

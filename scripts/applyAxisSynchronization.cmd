@@ -19,6 +19,8 @@
 ${SCRIPTEXEC} ${CONFIG}
 
 #- add axis to ECMC
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis_sync.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis_sync.cmd
 #- Clear env vars
+ecmcFileExist(${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_axis_sync_unset"}.cmd,1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_axis_sync_unset"}.cmd
