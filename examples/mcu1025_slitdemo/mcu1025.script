@@ -36,7 +36,13 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=mas
 
 epicsEnvSet("ECMC_EC_OVERSAMPLING_FACTOR" ,"50")
 
+ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025_plusEL5101_EL3632_EL3214.cmd,1)
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025_plusEL5101_EL3632_EL3214.cmd
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+epicsEnvUnset("ECMC_EC_OVERSAMPLING_FACTOR")
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
