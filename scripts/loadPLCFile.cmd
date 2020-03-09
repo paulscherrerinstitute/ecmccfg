@@ -26,7 +26,7 @@ epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc"
 
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
-system "msi -V -M ${PLC_MACROS=EMPTY} ${FILE} > ${ECMC_TMP_FILE}"
+system "msi -V -M '${PLC_MACROS=EMPTY}' ${FILE} > ${ECMC_TMP_FILE}"
 ecmcFileExist("${ECMC_TMP_FILE}",1)
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
