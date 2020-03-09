@@ -54,9 +54,7 @@ epicsEnvSet("ECMC_SAMPLE_RATE_MS", $(ECMC_SAMPLE_RATE_MS_BACK))
 
 # Sensors ch 0
 epicsEnvSet("ECMC_EC_CHANNEL_ID",  "0")
-
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "CONFIG=-Sensor-chX-MTS-PCB-608A11"
-
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "HW_DESC=EL3632, CONFIG=-Sensor-chX-MTS-PCB-608A11"
 # test sensor amplifier (gain = 20)
 epicsEnvSet("ECMC_EC_SDO_INDEX",  "0x80$(ECMC_EC_CHANNEL_ID)8")
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x6")
@@ -66,7 +64,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 
 # Sensors ch 1
 epicsEnvSet("ECMC_EC_CHANNEL_ID",  "1")
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "CONFIG=-Sensor-chX-MTS-PCB-608A11"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "HW_DESC=EL3632, CONFIG=-Sensor-chX-MTS-PCB-608A11"
 
 # test sensor amplifier (gain = 20)
 epicsEnvSet("ECMC_EC_SDO_INDEX",  "0x80$(ECMC_EC_CHANNEL_ID)8")
