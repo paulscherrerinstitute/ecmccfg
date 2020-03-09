@@ -762,3 +762,5 @@ epicsEnvShow("result")
 #
 
 iocInit
+# Now will die..
+ecmcFileExist ("no_file.cmd",1,1,"/TEST:/user")
