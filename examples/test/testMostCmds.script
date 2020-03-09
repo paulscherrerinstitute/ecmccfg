@@ -14,7 +14,7 @@ require ecmccfg master
 #- require EthercatMC 3.0.2
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_file_exist,stream_VER=2.8.10, EC_RATE=2000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10, EC_RATE=2000"
 
 // Should give error since after ec->init()
 ecmcConfig "Cfg.SetSampleRate(1000)"
@@ -642,25 +642,27 @@ ecmcMotorRecordCreateAxis
 
 ecmcFileExist ("no_file.cmd",0)
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("ecmcEL2612.substitutions",0,${EPICS_DB_INCLUDE_PATH})
+ecmcFileExist ("ecmcEL2612.substitutions",0,1)
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcFileExist ("ecmcEL2612.substitutions",0,1,/usr/:/home/)
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0)
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("ecmcEL2612.substitutions",0,"test")
+ecmcFileExist ("ecmcEL2612.substitutions",0,0,"test")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("ecmcEL2612.substitutions",0,":")
+ecmcFileExist ("ecmcEL2612.substitutions",0,0,":")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("ecmcEL2612.substitutions",0,":test")
+ecmcFileExist ("ecmcEL2612.substitutions",0,0,":test")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("ecmcEL2612.substitutions",0,"test:")
+ecmcFileExist ("ecmcEL2612.substitutions",0,0,"test:")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 ecmcFileExist ("test.script",0, "")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 ecmcFileExist ("no_file.cmd",0, "")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("testMostCmds.script",1, "")
+ecmcFileExist ("testMostCmds.script",1,0,"")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ecmcFileExist ("no_file.cmd",0, "")
+ecmcFileExist ("no_file.cmd",0,0,"")
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 ecmcFileExist
 ecmcFileExist -h

@@ -13,5 +13,5 @@
 
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis.cmd
-ecmcFileExist("ecmcAxis.db",1,${EPICS_DB_INCLUDE_PATH})
+ecmcFileExist("ecmcAxis.db",1,1)
 dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
