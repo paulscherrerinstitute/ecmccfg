@@ -1,5 +1,14 @@
 ##############################################################################
-## Example config ESS crate of type MCU1025
+## Example config for ESS crate of type MCU1025
+## Slit demo:
+## Axis 1: Slit center position (virt)
+## Axis 2: Slit gap/opening (virt)
+## Axis 3: Right blade (normal)
+## Axis 4: Left blade (normal)
+## Axis 5: Timing (virt), connected to signal generator or timing system
+## Axis 6: Amplitude
+## Both gap and position are configuerd to oscillate in sinus. with freq.
+## set by axis 5 and amplitude defined by axis 6.
 
 ##############################################################################
 ## Initiation:
@@ -7,7 +16,7 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg anders_change_samplerate
+require ecmccfg master
 
 #- Choose motor record driver implementation
 #-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
@@ -20,18 +29,22 @@ require ecmccfg anders_change_samplerate
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=100"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=${EC_RATE=100}"
 
 ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
 
 ##############################################################################
 ## Configure hardware:
 
-ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025.cmd,1)
-$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
+epicsEnvSet("ECMC_EC_OVERSAMPLING_FACTOR" ,"50")
+
+ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025_plusEL5101_EL3632_EL3214.cmd,1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025_plusEL5101_EL3632_EL3214.cmd
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+epicsEnvUnset("ECMC_EC_OVERSAMPLING_FACTOR")
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
@@ -46,16 +59,46 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
 # END of ADDITIONAL SETUP
 
 ##############################################################################
-## AXIS 1
+## AXIS 3 (physical right motor)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_3.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_3.sax)
 
 ##############################################################################
-## AXIS 2
+## AXIS 4 (physical left motor)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_4.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_4.sax)
+
+##############################################################################
+## AXIS 1 (slit center position)
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_1.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_1.sax)
+
+##############################################################################
+## AXIS 2 (slit opening)
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_2.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_2.sax)
+
+##############################################################################
+## AXIS 5 (timing system, EL5101)
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_5.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_5.sax)
+
+##############################################################################
+## AXIS 6 (amplitude)
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_6.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_6.sax)
 
 ##############################################################################
 ############# Configure diagnostics:

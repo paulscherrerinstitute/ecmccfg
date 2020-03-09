@@ -26,7 +26,12 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=mas
 ##############################################################################
 ## Configure hardware:
 
+ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025.cmd,1)
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
