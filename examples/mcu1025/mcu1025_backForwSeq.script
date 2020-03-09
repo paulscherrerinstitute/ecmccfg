@@ -53,7 +53,7 @@ $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RAT
 
 ##############################################################################
 ## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/backForwSeq.plc, PLC_MACROS='FROM=-20,TO=20,PLC_ID=0,AX_ID=1,DBG='")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/backForwSeq.plc, PLC_MACROS='FROM=-20, TO=20, VEL=10, PLC_ID=0, AX_ID=1, DBG='")
 
 ##############################################################################
 ############# Configure diagnostics:
