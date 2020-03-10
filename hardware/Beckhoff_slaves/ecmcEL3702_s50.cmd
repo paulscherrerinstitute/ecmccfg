@@ -1,3 +1,7 @@
+############################################################
+# WARNING: This file is obsolete. Please use ecmcEL3702.cmd instead.
+############################################################
+
 #-d /**
 #-d   \brief hardware script for EL3702_s50
 #-d   \details 2 channel 16bit analog input differential (with oversampling factor 50)
