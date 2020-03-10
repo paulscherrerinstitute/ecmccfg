@@ -49,6 +49,11 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 #-------------------------------------------------------------------------------
 # Set EtherCAT frequency (defaults to 1000)
 ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
+
+#- Set current EtherCAT sample rate
+#- Note: Not the same as ECMC_SAMPLE_RATE_MS which is for record update
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
+
 #-
 #-------------------------------------------------------------------------------
 #- add master (defaults to '0')
