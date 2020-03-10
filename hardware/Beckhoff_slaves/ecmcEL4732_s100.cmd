@@ -1,3 +1,7 @@
+############################################################
+# WARNING: This file is obsolete. Please use ecmcEL4732.cmd instead.
+############################################################
+
 #-d /**
 #-d   \brief hardware script for EL3742_s10
 #-d   \details 2 channel 16bit analog output differential +-10V (with oversampling factor 100)

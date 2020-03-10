@@ -1,16 +1,13 @@
+############################################################
+# WARNING: This file is obsolete. Please use ecmcEL3702.cmd instead.
+############################################################
+
 #-d /**
 #-d   \brief hardware script for EL3702_s10
 #-d   \details 2 channel 16bit analog input differential (with oversampling)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
-
-#- ###########################################################
-#- ############ Information:
-#-  Description: 2 channel 16bit analog input differential (with oversampling)
-#-  Oversampling factor = 10
-#-
-#- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL3702_s1")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")

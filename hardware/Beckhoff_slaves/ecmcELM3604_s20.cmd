@@ -1,3 +1,7 @@
+############################################################
+# WARNING: This file is obsolete. Please use ecmcELM3604.cmd instead.
+############################################################
+
 #-d /**
 #-d   \brief hardware script for EL3604_s20
 #-d   \details 4-channel 24bit analog input terminal for Condition Monitoring (IEPE) with oversampling (20)

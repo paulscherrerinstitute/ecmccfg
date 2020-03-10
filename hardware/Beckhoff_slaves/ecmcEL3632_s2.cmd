@@ -1,3 +1,7 @@
+############################################################
+# WARNING: This file is obsolete. Please use ecmcEL3632.cmd instead.
+############################################################
+
 #-d /**
 #-d   \brief hardware script for EL3632_s2
 #-d   \details 2-channel analog input terminal for Condition Monitoring (IEPE) with oversampling

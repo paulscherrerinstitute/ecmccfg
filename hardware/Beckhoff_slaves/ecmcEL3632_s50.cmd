@@ -1,3 +1,7 @@
+############################################################
+# WARNING: This file is obsolete. Please use ecmcEL3632.cmd instead.
+############################################################
+
 #-d /**
 #-d   \brief hardware script for EL3632_s50
 #-d   \details 2-channel analog input terminal for Condition Monitoring (IEPE) with oversampling
@@ -5,12 +9,6 @@
 #-d   \file
 #-d */
 
-#- ###########################################################
-#- ############ Information:
-#-  Description: 2-channel analog input terminal for Condition Monitoring (IEPE) with oversampling
-#-  Oversampling factor = 50
-#-
-#- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL3632_s50")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
