@@ -1,0 +1,28 @@
+# Test iocsh function "ecmcForLoop()"
+#
+#
+# ecmcForLoop -h
+#
+#       Use "ecmcFileExist(<filename>, <macros>, <loopvar>, <from>, <to>, <step>)" to loop execution of file with a changing loop variable.
+#          <filename> : Filename to execute in for loop.
+#          <macros>   : Macros to feed to execution of file.
+#          <loopvar   : Environment variable to use as index in for loop.
+#          <from>     : <loopvar> start value.
+#          <to>       : <loopvar> end value.
+#          <step>     : Step to increase <loopvar> each loop cycle.
+#
+
+require ecmc master
+
+ecmcForLoop
+
+ecmcForLoop -h
+ecmcForLoop --help
+ecmcForLoop  testing, bla
+
+ecmcForLoop(./loopStep.cmd,"",ECMC_LOOP_IDX,1,10,1)
+ecmcForLoop(./loopStep.cmd,"",ECMC_LOOP_IDX,100,110,2)
+
+ecmcForLoop(./loopStep.cmd,"",ECMC_LOOP_IDX,-100,-110,-2)
+
+#ecmcForLoop(./loopStep.cmd,"",ECMC_LOOP_IDX,-100,-110,2)
