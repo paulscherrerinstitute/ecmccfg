@@ -15,9 +15,9 @@ require ecmccfg anders_change_samplerate
 #- Choose motor record driver implementation
 #-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
 #-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the two lines below to use EthercatMC:
+#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
 #- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-#- require EthercatMC 3.0.2
+
 
 # Epics Motor record driver that will be used:
 epicsEnvShow(ECMC_MR_MODULE)
