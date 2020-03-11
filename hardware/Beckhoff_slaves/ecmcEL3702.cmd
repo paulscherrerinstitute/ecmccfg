@@ -15,6 +15,10 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EL3702")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0e763052")
 
+#- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE
+ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampFactOrDie.cmd, "OVER_SAMP_MAX=100, OVER_SAMP_REQ=${NELM}, EC_SAMP=${ECMC_EC_SAMPLE_RATE},HW_TYPE=${ECMC_EC_HWTYPE}, SLAVE_ID=${ECMC_EC_SLAVE_NUM}"
+
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
 
 #- ############ Config PDOS: Channel 1
