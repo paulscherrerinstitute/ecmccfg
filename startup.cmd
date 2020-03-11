@@ -4,7 +4,7 @@
 #-
 #- by Niko Kivel, Paul Scherrer Institute, 2018
 #- email: niko.kivel@psi.ch
-#  and Anders Sandström, ESS, 2020
+#- and Anders Sandström, ESS, 2020
 #- email: anders.sandstrom@ess.eu
 #-
 #-###############################################################################
