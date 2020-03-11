@@ -23,6 +23,10 @@
 #- EthercatMC_DB     = database directory of EthercatMC
 #-
 #-------------------------------------------------------------------------------
+#- Halt on error
+on error halt
+#-
+#-------------------------------------------------------------------------------
 #- load required modules
 require ecmc        "${ECMC_VER=6.1.0}"
 #- Use ecmc motor record implementation as default
