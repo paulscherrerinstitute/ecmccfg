@@ -4,6 +4,9 @@
 #-
 #- by Niko Kivel, Paul Scherrer Institute, 2018
 #- email: niko.kivel@psi.ch
+#- and Anders Sandström, ESS, 2020
+#- email: anders.sandstrom@ess.eu
+#-
 #-###############################################################################
 #-
 #- Arguments
@@ -11,22 +14,31 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 6.0
+#- ECMC_VER          = 6.1.0
+#- EthercatMC_VER    = 3.0.2
 #- INIT              = initAll
 #- MASTER_ID         = 0
 #- SCRIPTEXEC        = iocshLoad
 #- EC_RATE           = 1000
 #-
 #- [set by module]
-#- ECMC_CONFIG_ROOT  = root directory of ${MODULE}
-#- ECMC_CONFIG_DB    = database directory of ${MODULE}
-#- EthercatMC_DB     = database directory of EthercatMC
+#- ECMC_CONFIG_ROOT    = root directory of ${MODULE}
+#- ECMC_CONFIG_DB      = database directory of ${MODULE}
+#- EthercatMC_DB       = database directory of EthercatMC
+#- ECMC_EC_SAMPLE_RATE = EtherCAT bus sampling rate [Hz] (1000 default)
+#-
+#-------------------------------------------------------------------------------
+#- Halt on error (dbLoad*)
+on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
 require ecmc        "${ECMC_VER=6.1.0}"
-#- Use ecmc motor record implementation as default
 require stream      "${stream_VER=kivel}"
+#- Require EthercatMC if used.
+ecmcEpicsEnvSetCalcTenary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
+${ECMC_EXE_CMD}
+epicsEnvUnset(ECMC_EXE_CMD)
 #-
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
@@ -49,11 +61,11 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 #-------------------------------------------------------------------------------
 # Set EtherCAT frequency (defaults to 1000)
 ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
-
+#-
 #- Set current EtherCAT sample rate
 #- Note: Not the same as ECMC_SAMPLE_RATE_MS which is for record update
 epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
-
+#_
 #-
 #-------------------------------------------------------------------------------
 #- add master (defaults to '0')
