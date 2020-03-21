@@ -1,5 +1,6 @@
 ##############################################################################
-## Example: Configuraftion for running ecmc PLC without ethercat bus support
+## Example: Configuraftion for running ecmc PLC and virtual axis without
+## ethercat bus support
 ##############################################################################
 
 ## Initiation:
@@ -33,7 +34,7 @@ ${SCRIPTEXEC} "${ecmccfg_DIR}${INIT=initAll}.cmd"
 #-------------------------------------------------------------------------------
 
 epicsEnvSet("ECMC_SAMPLE_RATE_MS" ,100) # Records update period
-epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,10) # Realtime loop sample rate
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,100) # Realtime loop sample rate
 ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 ##############################################################################
@@ -42,16 +43,26 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 # No EtherCAT hardware..
 
 ##############################################################################
-## Data Storage 1
+## AXIS 1:
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_1.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_1.sax)
+
+##############################################################################
+## Data Storage 1:
 $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
-## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/plc_no_ec.plc")
+## PLC 0:
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/plc_no_ec.plc, PLC_MACROS='PLC_ID=0,DBG=#'")
 dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.test,REC_NAME=-Test,TSE=0,T_SMP_MS=1000")
 
 ##############################################################################
 ############# Configure diagnostics:
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 ecmcFileExist("${ecmccfg_DIR}generalDiagnostics.cmd",1)

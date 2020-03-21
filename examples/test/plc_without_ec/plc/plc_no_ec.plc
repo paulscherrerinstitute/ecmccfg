@@ -5,4 +5,4 @@
 #   No hardware related variables
 #
 static.test:=static.test+1;
-println('No ec: ', static.test);
+${DBG=#}println('No ec: ', static.test);
