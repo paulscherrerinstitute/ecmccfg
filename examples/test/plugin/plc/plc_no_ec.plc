@@ -6,4 +6,5 @@
 #
 static.test:=static.test+1;
 ${DBG=#}println('No ec: ', static.test);
-println('Test plugin function: ',ex_customPlcFunc1(static.test,static.test));
+println('Test plugin function 1: ',ex_plugin_func_1(static.test,static.test));
+println('Test plugin function 2: ',ex_plugin_func_2(static.test,static.test,static.test));
