@@ -7,11 +7,11 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg run_without_ec
+require ecmccfg plugins
 
 ##############################################################################
 ###### Startup
-require ecmc        "${ECMC_VER=dev_20200313}"
+require ecmc        "${ECMC_VER=plugins}"
 require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
@@ -67,3 +67,6 @@ dbLoadRecords("ecmcGeneral.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,T
 # ecmcReport 3
 
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
+
+iocInit
+
