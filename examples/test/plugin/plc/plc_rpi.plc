@@ -12,7 +12,11 @@ if(plc${PLC_ID=0}.firstscan) {
 
 static.pinZeroValue:=not(static.pinZeroValue);
 ${DBG=#}println('Pin zero write value :  ',static.pinZeroValue);
+static.before:=ec_get_time();
 rpi_digitalWrite(0,static.pinZeroValue);
-${DBG=#}println('Pin zero read value  :  ',rpi_digitalRead(0));
+static.middle:=ec_get_time();
+static.digRead:=rpi_digitalRead(0);
+static.after:=ec_get_time();
+${DBG=#}println('Pin zero read value  :  ',static.digRead, ', write exe time: ', static.middle-static.before, ', read exe time: ',static.after-static.middle);
 static.test:=static.test+1;
 ${DBG=#}println('Total changes        :  ',static.test);
