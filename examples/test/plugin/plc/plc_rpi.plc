@@ -2,10 +2,17 @@
 # For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
 #
 # PLC Functionality Demo:
-#   Test raspi lib
+#   Test raspi plugin
 #
 
+if(plc${PLC_ID=0}.firstscan) {
+  ${DBG=#}println('Config of Pins!');
+  rpi_pinMode(0,1); # Set pin 0 to output
+};
+
 static.pinZeroValue:=not(static.pinZeroValue);
-${DBG=#}println('Pin zero write value: ', static.pinZeroValue);
-rpi_digitalWrite(0,1);
-${DBG=#}println('Pin zero read value:  ',rpi_digitalRead(0));
+${DBG=#}println('Pin zero write value :  ',static.pinZeroValue);
+rpi_digitalWrite(0,static.pinZeroValue);
+${DBG=#}println('Pin zero read value  :  ',rpi_digitalRead(0));
+static.test:=static.test+1;
+${DBG=#}println('Total changes        :  ',static.test);
