@@ -5,18 +5,40 @@
 #   Test raspi plugin
 #
 
+# Initiation
 if(plc${PLC_ID=0}.firstscan) {
   ${DBG=#}println('Config of Pins!');
   rpi_pinMode(0,1); # Set pin 0 to output
 };
-
+println('========= rpi plugin functions =============');
 static.pinZeroValue:=not(static.pinZeroValue);
 ${DBG=#}println('Pin zero write value :  ',static.pinZeroValue);
+
+# Measure exe time for rpi_writeDigital() and rpi_readDigital()
 static.before:=ec_get_time();
 rpi_digitalWrite(0,static.pinZeroValue);
 static.middle:=ec_get_time();
 static.digRead:=rpi_digitalRead(0);
 static.after:=ec_get_time();
-${DBG=#}println('Pin zero read value  :  ',static.digRead, ', write exe time: ', static.middle-static.before, ', read exe time: ',static.after-static.middle);
+${DBG=#}println('Pin zero read value  :  ',static.digRead, ', write exe time [ns]: ', static.middle-static.before , ', read exe time [ns]: ',static.after-static.middle);
 static.test:=static.test+1;
 ${DBG=#}println('Total changes        :  ',static.test);
+
+# Print constants
+println('========= rpi plugin constants =============');
+println('rpi_LOW               = ',rpi_LOW);
+println('rpi_HIGH              = ',rpi_HIGH);
+println('rpi_INPUT             = ',rpi_INPUT);
+println('rpi_OUTPUT            = ',rpi_OUTPUT);
+println('rpi_PWM_OUTPUT        = ',rpi_PWM_OUTPUT);
+println('rpi_GPIO_CLOCK        = ',rpi_GPIO_CLOCK);
+println('rpi_SOFT_PWM_OUTPUT   = ',rpi_SOFT_PWM_OUTPUT);
+println('rpi_SOFT_TONE_OUTPUT  = ',rpi_SOFT_TONE_OUTPUT);
+println('rpi_PWM_TONE_OUTPUT   = ',rpi_PWM_TONE_OUTPUT);
+println('rpi_PUD_OFF           = ',rpi_PUD_OFF);
+println('rpi_PUD_DOWN          = ',rpi_PUD_DOWN);
+println('rpi_WPI_MODE_PINS     = ',rpi_WPI_MODE_PINS);
+println('rpi_WPI_MODE_GPIO     = ',rpi_WPI_MODE_GPIO);
+println('rpi_WPI_MODE_GPIO_SYS = ',rpi_WPI_MODE_GPIO_SYS);
+println('rpi_WPI_MODE_PHYS     = ',rpi_WPI_MODE_PHYS);
+println('rpi_WPI_MODE_PIFACE   = ',rpi_WPI_MODE_PIFACE);
