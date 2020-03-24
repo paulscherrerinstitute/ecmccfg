@@ -24,7 +24,7 @@ if(plc${PLC_ID=0}.firstscan) {
 
 ${DBG=#}println('========= rpi plugin functions =============');
 static.pinZeroValue:=not(static.pinZeroValue);
-${DBG=#}println('Pin 0 write value :  ',static.pinZeroValue);
+${DBG=#}println('Pin 0: rpi_digitalWrite(0      , ', static.pinZeroValue,')');
 
 # Measure exe time for rpi_writeDigital() and rpi_readDigital()
 static.before:=ec_get_time();
@@ -32,9 +32,12 @@ rpi_digitalWrite(0,static.pinZeroValue);
 static.middle:=ec_get_time();
 static.digRead:=rpi_digitalRead(2);
 static.after:=ec_get_time();
-${DBG=#}println('Pin 2 read value  :  ',static.digRead, ', write exe time [ns]: ', static.middle-static.before , ', read exe time [ns]: ',static.after-static.middle);
+${DBG=#}println('Pin 2: rpi_digitalRead(2)      : ', static.digRead);
+${DBG=#}println('rpi_writeDigital exe time [ns] : ', static.middle-static.before);
+${DBG=#}println('rpi_digitalRead exe time [ns]  : ', static.after-static.middle);
+
 static.test:=static.test+1;
-${DBG=#}println('Total changes        :  ',static.test);
+${DBG=#}println('Total changes                  : ', static.test);
 
 # Print constants
 ${DBG=#}println('========= rpi plugin constants =============');
@@ -49,6 +52,7 @@ ${DBG=#}println('rpi_SOFT_TONE_OUTPUT  = ',rpi_SOFT_TONE_OUTPUT);
 ${DBG=#}println('rpi_PWM_TONE_OUTPUT   = ',rpi_PWM_TONE_OUTPUT);
 ${DBG=#}println('rpi_PUD_OFF           = ',rpi_PUD_OFF);
 ${DBG=#}println('rpi_PUD_DOWN          = ',rpi_PUD_DOWN);
+${DBG=#}println('rpi_PUD_UP            = ',rpi_PUD_UP);
 ${DBG=#}println('rpi_WPI_MODE_PINS     = ',rpi_WPI_MODE_PINS);
 ${DBG=#}println('rpi_WPI_MODE_GPIO     = ',rpi_WPI_MODE_GPIO);
 ${DBG=#}println('rpi_WPI_MODE_GPIO_SYS = ',rpi_WPI_MODE_GPIO_SYS);
