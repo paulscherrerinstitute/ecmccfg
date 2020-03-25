@@ -1,0 +1,10 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Functionality Demo:
+#   Test advanced plugin
+#
+static.test:=static.test+1;
+${DBG=#}println('Test plugin function 1: ',adv_plugin_func_1(static.test,static.test));
+${DBG=#}println('Test plugin function 2: ',adv_plugin_func_2(static.test,static.test,static.test));
+${DBG=#}println('adv_CONST             : ', adv_CONST);
