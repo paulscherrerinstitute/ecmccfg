@@ -7,11 +7,11 @@
 ## The plugin also registers a asyn parameter called "plugin.adv.counter" which 
 ## incraeses for each ecmc rt-loop.
 ## This parameter can be linked to a record like all other parameters and 
-## the increaseing value can be seen with:
+## the increasing value can be seen with:
 ## $ camonitor IOC_TEST:Plugin-Adv-Counter
 ##
-## Plugin information:
-## ecmcConfigOrDie "Cfg.LoadPlugin(/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/linux-x86_64/libecmcPlugin_Advanced.so)"
+##############################################################################
+##
 ## Plugin info: 
 ##   Name                 = ecmcExamplePlugin
 ##   Description          = Advanced example with use of asynport obj.
@@ -43,7 +43,6 @@
 ##     consts[01]:
 ##       Name     = "adv_CONST_2" = 9.877
 ##       Desc     = Test constant "adv_CONST_2" = 9.876543210
-## 
 ## 
 ##############################################################################
 
@@ -83,8 +82,7 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 ##############################################################################
 ## Configure hardware:
-
-# No EtherCAT hardware..
+# No EtherCAT hardware (in this example)..
 
 ##############################################################################
 ## Load plugin:
