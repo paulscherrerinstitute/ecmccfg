@@ -1,5 +1,7 @@
 ##############################################################################
-## Example: Demo of ecmc plugins. In this example ecmcPlugin_Advanced is loaded.
+## Example: Demo of ecmc plugins. In this example ecmcPlugin_Advanced is loaded:
+## https://github.com/anderssandstrom/e3-ecmcPlugin_Advanced
+##
 ## The plugin exposes:
 ##  - 2 plc functions 
 ##  - 2 plc constants
