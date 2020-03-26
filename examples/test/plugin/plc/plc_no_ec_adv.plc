@@ -5,6 +5,7 @@
 #   Test advanced plugin
 #
 static.test:=static.test+1;
-${DBG=#}println('Test plugin function 1: ',adv_plugin_func_1(static.test,static.test));
-${DBG=#}println('Test plugin function 2: ',adv_plugin_func_2(static.test,static.test,static.test));
-${DBG=#}println('adv_CONST             : ', adv_CONST);
+${DBG=#}println('Function adv_plugin_func_1() : ',adv_plugin_func_1(static.test,static.test));
+${DBG=#}println('Function adv_plugin_func_2() : ',adv_plugin_func_2(static.test,static.test,static.test));
+${DBG=#}println('Constant adv_CONST_1         : ', adv_CONST_1);
+${DBG=#}println('Constant adv_CONST_2         : ', adv_CONST_2);
