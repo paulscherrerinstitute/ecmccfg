@@ -89,7 +89,10 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 ##############################################################################
 ## Load plugin:
 #require ecmcPlugin_Simple master # do not require then loaded twice..
-ecmcConfigOrDie "Cfg.LoadPlugin(/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/linux-x86_64/libecmcPlugin_Advanced.so)"
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/linux-x86_64/libecmcPlugin_Advanced.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"Here you can place custom configs needed for the plugin")
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}'"
+
 dbLoadRecords("./ecmcGenericAnalog.db","REC_NAME=$(IOC):Plugin-Adv-Counter,PORT=MC_CPU1,ASYN_NAME=plugin.adv.counter,TSE=0,T_SMP_MS=100")
 
 ##############################################################################
