@@ -1,0 +1,10 @@
+
+record(ai,"$(REC_NAME)"){
+  field(PINI, "1")
+  field(TSE, -2)
+  field(DTYP, ${DTYP=asynInt32})
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=100)/TYPE=${DTYP=asynInt32}/$(ASYN_NAME)?")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=0)")
+}
