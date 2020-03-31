@@ -1,0 +1,10 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# Test BK coupler
+#
+
+ec0.s3.BK_S00_BO_1:=not(ec0.s3.BK_S00_BO_1 > 0);
+ec0.s3.BK_S00_BO_2:=not(ec0.s3.BK_S00_BO_1);
+
+println('ec0.s3.BK_S01_BI_1: ',ec0.s3.BK_S01_BI_1);

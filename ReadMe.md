@@ -27,6 +27,7 @@ The configuration framework contains the necessary files to configure an EPICS I
 
 *  addMaster.cmd
 *  addSlave.cmd
+*  addSlaveKL.cmd
 *  applySlaveConfig.cmd
 *  configureSlave.cmd
 *  applyConfig.cmd
@@ -63,7 +64,7 @@ The configuration framework contains the necessary files to configure an EPICS I
 
 5. additional configuration
     ```bash
-       EthercatMCConfigController ${ECMC_MOTOR_PORT}, "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
+       ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
     ```
 6. adding a physical motor axis
    ```bash

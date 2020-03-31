@@ -17,6 +17,8 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)"){
   field(LSV,  "$(LSV=NO_ALARM)")
   field(HSV,  "$(HSV=NO_ALARM)")
   field(HHSV, "$(HHSV=NO_ALARM)")
+  field(DRVL, "$(DRVL=0)")
+  field(DRVH, "$(DRVH=24)")
 }
 
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BO$(CH_ID)-RB"){

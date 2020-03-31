@@ -24,10 +24,17 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg ecmc_for_loop
+
+#- Choose motor record driver implementation
+#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
+#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
+#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
+#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
+
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,EthercatMC_VER=3.0.0,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10, EC_RATE=1000"
 
 ##############################################################################
 ## Config hardware:
@@ -39,11 +46,11 @@ epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
 
 # EL3702 (empty subst file => no default records loaded)
 epicsEnvSet("ECMC_EC_SLAVE_NUM_AI",           "12")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_DESC=EL3702_s${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_DESC=EL3702, NELM=${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
 
 # EL4732 (empty subst file => no default records loaded)
 epicsEnvSet("ECMC_EC_SLAVE_NUM_AO",           "23")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_DESC=EL4732_s${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_DESC=EL4732, NELM=${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 

@@ -39,3 +39,7 @@ epicsEnvSet("ECMC_EC_PDO"                "0x1a01")
 epicsEnvSet("ECMC_EC_PDO_ENTRY"          "0x6010")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL32XX-chX-analogInput.cmd
+
+epicsEnvUnset("ECMC_EC_CHANNEL_ID")
+epicsEnvUnset("ECMC_EC_PDO")
+epicsEnvUnset("ECMC_EC_PDO_ENTRY")

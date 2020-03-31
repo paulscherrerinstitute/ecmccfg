@@ -1,0 +1,124 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Functionality Demo:
+#
+#   Code Description:
+#     1. Enable power on axis (mc_power())
+#     3. Move to position ${TO=20} (mc_move_abs())
+#     4. Move to position ${FROM=-20} (mc_move_abs())
+#     5. Stop sequence if limit switch violation or errorCode on motion blocks
+#     
+#
+#  Macros:
+#     PLC_ID : ID of this PLC (default = 0)
+#     AX_ID  : Motion axis to move (default =1)
+#     TO     : Upper position (default 20)
+#     FROM   : Lower position (default -20)
+#     VEL    : Velocity setpoint (defaults to 20)
+#     ACC    : Acceleration setpoint (defaults to 100)
+#     DEC    : Deceleration setpoint (defaults to ACC)
+#     DBG    : Set to "#" to remove printouts, set to "" to keep printouts (default "#")
+#
+
+var errorCode:=0;
+
+##### 0. Put all initiations here
+if(plc${PLC_ID=0}.firstscan){  
+  ${DBG=#}println('Starting PLC motion example!!');
+  #Ignore commands during startup sequence
+  ax${AX_ID=1}.blockcom:=1;
+  static.seqStep:=1;
+  static.cycleCounter:=0;
+  static.epicsDisableSeq:=0;
+};
+
+if(static.epicsDisableSeq){
+  static.seqStep:=100;  #invalid
+};
+
+##### 1. Put power on axis (run mc_power())
+if(static.seqStep==1)
+{
+  if(not(ax${AX_ID=1}.error))
+  {
+    errorCode=mc_power(${AX_ID=1},1);
+    if(errorCode)
+    {
+      ${DBG=#}println('Function mc_power() returned error: ', errorCode);
+      plc${PLC_ID=0}.error:=errorCode;
+    };
+  }
+  else
+  {
+    ax${AX_ID=1}.reset:=1;
+  };
+  if(ax${AX_ID=1}.drv.enabled){
+    static.seqStep:=3;
+    ${DBG=#}println('2. Function mc_move_abs()  triggered!');
+  }
+};
+
+##### 3. Trigger a absolute move 
+if(static.seqStep==3){
+  ax${AX_ID=1}.blockcom:=0;  #Allow EPICS control
+  var posTarg:=${TO=20};
+  var vel:=${VEL=20};
+  var acc:=${ACC=100};
+  var dec:=${DEC=${ACC=100}};
+  errorCode:=mc_move_abs(${AX_ID=1},1,posTarg,vel,acc,dec);
+  if(errorCode){
+    ${DBG=#}println('Error: mc_move_abs() returned error: ',errorCode);
+    plc${PLC_ID=0}.error:=errorCode;
+  };
+  if(ax${AX_ID=1}.traj.setpos==posTarg and not(mc_get_busy(1)))
+  {
+    mc_move_abs(${AX_ID=1},0,posTarg,vel,acc,dec);  # Set execute low
+    static.seqStep:=4;
+    ${DBG=#}println('4. Function mc_move_abs(${AX_ID=1},1,${FROM=-20},${VEL=20},${ACC=100},${DEC=${ACC=100}}) triggered!');
+  };
+};
+
+##### 4. Trigger a absolute move 
+if(static.seqStep==4){    
+  var posTarg:=${FROM=-20};
+  var vel:=${VEL=20};
+  var acc:=${ACC=100};
+  var dec:=${DEC=${ACC=100}};
+  errorCode:=mc_move_abs(${AX_ID=1},1,posTarg,vel,acc,dec);
+  if(errorCode){
+    ${DBG=#}println('Error: mc_move_abs() returned error: ',errorCode);
+    plc${PLC_ID=0}.error:=errorCode;
+  };
+  if(ax${AX_ID=1}.traj.setpos==posTarg and not(mc_get_busy(1)))
+  {
+    mc_move_abs(${AX_ID=1},0,posTarg,vel,acc,dec);  # Set execute low
+    static.seqStep:=3;
+    ${DBG=#}println('4. Function mc_move_abs(${AX_ID=1},1,${TO=-20},${VEL=20},${ACC=100},${DEC=${ACC=100}}) triggered!');
+    static.cycleCounter:=static.cycleCounter+1;
+    ${DBG=#}println('Cycles:  ',static.cycleCounter);  # See if axis 1 is busy
+  };
+};
+
+##### 5. Disable power if any of the limits are engaged
+if((static.seqStep>2 and (not(ax${AX_ID=1}.mon.lowlim) or not(ax${AX_ID=1}.mon.highlim))) or static.epicsDisableSeq or errorCode)
+{
+  errorCode=mc_power(${AX_ID=1},0);
+  if(errorCode)
+  {
+    ${DBG=#}println('Function mc_power() returned error: ', errorCode);
+    plc${PLC_ID=0}.error:=errorCode;
+  };
+
+  if(not(ax${AX_ID=1}.drv.enabled))
+  {
+    ${DBG=#}println('Sequence ended by limit switch violation. ErrorCode:', errorCode);
+    static.seqStep:=10;      # Sequence end
+    ax${AX_ID=1}.blockcom:=0;         # Allow commands again
+    plc${PLC_ID=0}.enable:=0;         # Disable PLC
+  };
+};
+
+return [];
+
+println('NEVER HERE');

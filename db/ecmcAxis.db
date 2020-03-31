@@ -60,16 +60,15 @@ record(calc,"$(P)$(AXIS_NAME)-seqstate") {
 record(calc,"$(P)$(AXIS_NAME)-lastilock") {
   field(DESC, "$(AXIS_NAME): Last interlock")
   field(PINI, "$(PINI=1)")
-  field(CALC,"A>>24")
-  field(INPA,"$(P)$(AXIS_NAME)-Stat.VAL")
+  field(CALC, "A>>24")
+  field(INPA, "$(P)$(AXIS_NAME)-Stat.VAL")
+  field(FLNK, "$(P)$(AXIS_NAME)-Stat_.PROC")
 }
 
 record(mbbiDirect,"$(P)$(AXIS_NAME)-Stat_"){
   field(DESC, "$(AXIS_NAME): Status Word mbbiD")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
-  field(SCAN, "I/O Intr")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat.VAL")
   field(FLNK, "$(P)$(AXIS_NAME)-enabled.PROC")
   field(TSE,  "$(TSE=-2)")
 }
@@ -171,4 +170,76 @@ record(bi,"$(P)$(AXIS_NAME)-inrealtime"){
   field(ONAM, "In realtime")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-TrajSourceType-RB.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-TrajSourceType-RB"){
+  field(DESC, "$(AXIS_NAME): Traj Source")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BA")
+  field(ZNAM, "Internal")
+  field(ONAM, "PLC")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-EncSourceType-RB.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
+  field(DESC, "$(AXIS_NAME): Enc Source")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BB")
+  field(ZNAM, "Internal")
+  field(ONAM, "PLC")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB.PROC")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
+  field(DESC, "$(AXIS_NAME): Allow PLC cmds")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BC")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+}
+
+record(bi,"$(P)$(AXIS_NAME)-PLC-CmdEn-RB"){
+  field(DESC, "$(AXIS_NAME): Plc enable")
+  field(DTYP,"asynInt32")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.enable?")
+  field(ZNAM,"Disabled")
+  field(ONAM,"Enabled")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)") 
+}
+
+record(bi,"$(P)$(AXIS_NAME)-PLC-firstscan"){
+  field(DESC, "$(AXIS_NAME): Plc firstscan")
+  field(DTYP,"asynInt32")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.firstscan?")
+  field(ZNAM,"Disabled")
+  field(ONAM,"Enabled")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)") 
+}
+
+record(ai,"$(P)$(AXIS_NAME)-PLC-error"){
+  field(DESC, "$(AXIS_NAME): Plc error")
+  field(DTYP,"asynFloat64")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.error?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)") 
+}
+
+record(waveform,"$(P)$(AXIS_NAME)-PLCExpr-RB"){
+  field(DESC, "PLC code -RB")
+  field(PINI, "1")
+  field(DTYP, "asynInt8ArrayIn")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ax1.plc.expression?")
+  field(FTVL, "CHAR")
+  field(NELM, "1024")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
 }

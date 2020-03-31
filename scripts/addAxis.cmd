@@ -7,5 +7,5 @@
 #-d   \author Niko Kivel
 #-d   \file
 #-d */
-
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis${ECMC_GEN_EC_RECORDS}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis${ECMC_GEN_EC_RECORDS}.cmd

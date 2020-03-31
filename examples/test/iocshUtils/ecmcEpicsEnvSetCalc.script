@@ -1,0 +1,82 @@
+# Test iocsh function "ecmcEpicsEnvSetCalc()" to evaluate expressions and set 
+# result to EPCIS environment variables.
+#
+#       Use "ecmcEpicsEnvSetCalc(<envVarName>,  <expression>, <format>)" to evaluate the expression and assign the variable.
+#          <envVarName> : EPICS environment variable name.
+#          <expression> : Calculation expression (see exprTK for available functionality).
+#          <format>     : Optional format string. Example "%lf", "%8.3lf", "%x", "%04d" or "%d", defaults to "%d".
+#                         Can contain text like "0x%x" or "Hex value is 0x60%x".
+#                         Must contain one numeric value where result of expression will be written.
+#
+#       Restrictions:
+#         - Some flags and/or width/precision combinations might not be supported.
+#         - Hex numbers in the expression is not allowed (but hex as output by formating is OK)
+#
+require ecmc anders_dev20200228
+#
+# Help screens
+ecmcEpicsEnvSetCalc -h
+ecmcEpicsEnvSetCalc --help
+ecmcEpicsEnvSetCalc
+#
+# Misc examples
+ecmcEpicsEnvSetCalc("test1", "1+2+3+4+5*10", "%lf")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10", "%lf")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10", "%d")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10.1")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "${test1}+1+2+3+4+5*10.1", "0x%x")
+epicsEnvShow("test1")
+#
+# Example of invalid format (must be one numerical value). "test1" will not be overwritten.
+ecmcEpicsEnvSetCalc("test1", "1+2+3+4+5*10.1", "0x%s")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test1", "1+2+3+4+5*10.1", "%03d")
+epicsEnvShow("test1")
+ecmcEpicsEnvSetCalc("test2", "1+2+3+4+5*10.1", "%03.4lf")
+epicsEnvShow("test2")
+#
+# Calculate addresses in HEX
+#ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
+ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
+epicsEnvShow("test2")
+# ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "This is the number: 0x%06x")
+ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "This is the number: 0x%06x")
+epicsEnvShow("test2")
+#
+# Calculate scalings
+epicsEnvSet("IORange",32768)
+# ecmcEpicsEnvSetCalc("scaling", "$(test1)/$(IORange)*10", "%lf")
+ecmcEpicsEnvSetCalc("scaling", "$(test1)/$(IORange)*10", "%lf")
+epicsEnvShow("scaling")
+#
+# Offset slave numbers
+epicsEnvSet("ECMC_SLAVE_NUM",10)
+epicsEnvSet("ECMC_SLAVE_NUM_OFFSET",25)
+# ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "$(ECMC_SLAVE_NUM)+$(ECMC_SLAVE_NUM_OFFSET)")
+ecmcEpicsEnvSetCalc("ECMC_SLAVE_NUM", "$(ECMC_SLAVE_NUM)+$(ECMC_SLAVE_NUM_OFFSET)")
+epicsEnvShow("ECMC_SLAVE_NUM")
+#
+
+# If syntax (use "RESULT" variable)
+epicsEnvSet("ECMC_SLAVE_NUM",10)
+# ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
+ecmcEpicsEnvSetCalc("ECMC_IF_TEST", "if(${ECMC_SLAVE_NUM}>5){RESULT:=100;}else{RESULT:=200;};")
+epicsEnvShow("ECMC_IF_TEST")
+#
+
+epicsEnvSet("filename","ecmcEL3002.cmd")
+# Comparing strings 1:
+# ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+ecmcEpicsEnvSetCalc("result", "'$(filename)'='test.script'")
+epicsEnvShow("result")
+#
+
+# Comparing strings 2:
+# ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+ecmcEpicsEnvSetCalc("result", "if('$(filename)'='test.script') {RESULT:=1;}else{RESULT:=0;};")
+epicsEnvShow("result")
+#

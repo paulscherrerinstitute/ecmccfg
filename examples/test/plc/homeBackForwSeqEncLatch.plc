@@ -36,7 +36,7 @@ if(static.seqStep==1)
     if(errorCode)
     {
       println('Function mc_power() returned error: ', errorCode);
-      plc3.error:=errorCode;
+      plc0.error:=errorCode;
     };
   }
   else
@@ -58,7 +58,7 @@ if(static.seqStep==2)
   errorCode=mc_home(1,1,homingSeq,velTwoardsCam,velOffCam);
   if(errorCode){
     println('Function mc_home() returned error: ', errorCode);
-    plc3.error:=errorCode;
+    plc0.error:=errorCode;
   };
   if(ax1.enc.homed and not(mc_get_busy(1)))
   {
@@ -78,7 +78,7 @@ if(static.seqStep==3){
   errorCode:=mc_move_abs(1,1,posTarg,vel,acc,dec);
   if(errorCode){
     println('Error: mc_move_abs() returned error: ',errorCode);
-    plc3.error:=errorCode;
+    plc0.error:=errorCode;
   };
   if(ax1.traj.setpos==posTarg and not(mc_get_busy(1)))
   {
@@ -98,7 +98,7 @@ if(static.seqStep==4){
   errorCode:=mc_move_abs(1,1,posTarg,vel,acc,dec);
   if(errorCode){
     println('Error: mc_move_abs() returned error: ',errorCode);
-    plc3.error:=errorCode;
+    plc0.error:=errorCode;
   };
   if(ax1.traj.setpos==posTarg and not(mc_get_busy(1)))
   {
@@ -117,7 +117,7 @@ if((static.seqStep>2 and (not(ax1.mon.lowlim) or not(ax1.mon.highlim))) or stati
   if(errorCode)
   {
     println('Function mc_power() returned error: ', errorCode);
-    plc3.error:=errorCode;
+    plc0.error:=errorCode;
   };
 
   if(not(ax1.drv.enabled))

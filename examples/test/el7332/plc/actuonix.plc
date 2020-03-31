@@ -1,0 +1,69 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC for controlling a actuonix linear axis
+# Implements 2 commands that controlls actuaror in or out. 
+#  static.cmdMoveFFW_${CH_ID}: Cmd to move forward
+#  static.cmdMoveBWW_${CH_ID}: Cmd to move backward
+#
+# Since limit switch is not connected yet there's an timout implemented. 
+# The power will automatically be removed after MAX_TIME seconds.
+#
+# Note: No feedbacks yet due to no 12V I/O available. Need to buy..
+# 
+#  Macros:
+#    S_ID     : Slave id of el7332
+#    CH_ID    : Channel id of el7332
+#  Optional macros:
+#    M_ID     : Ethercat master id, defaults to 0
+#    MAX_TIME : Maximum time to keep voltage on actuator (protect from overheat). Defaults to 3 seconds. Unit [s]
+#    DBG      : Set to "" to keep debug printouts. Set to "#" to disable printouts. Defaults to "#"
+#
+
+if(plc${PLC_ID}.firstscan){
+  static.maxOutputCycles:=${MAX_TIME=3} / plc${PLC_ID}.scantime;
+  ${DBG="#"}println('Max output cycles:',static.maxOutputCycles); 
+}
+
+if(not(static.cmdMoveFWD_${CH_ID}) and not(static.cmdMoveBWD_${CH_ID})) {
+  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=0;
+  ec${M_ID=0}.s${S_ID}.VELOCITY_SETPOINT_${CH_ID}:=0;
+  static.outputCounter:=0;
+};
+
+if(static.cmdMoveFWD_${CH_ID}) {
+  # Enable
+  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=1;
+  # Apply 12V
+  ec${M_ID=0}.s${S_ID}.VELOCITY_SETPOINT_${CH_ID}:=16384;  # 32768 = 24V
+  ${DBG="#"}if(static.cmdMoveFWD_${CH_ID}_old <> static.cmdMoveFWD_${CH_ID}) {
+    ${DBG="#"}println('Going Out!');
+  ${DBG="#"}};
+};
+
+if(static.cmdMoveBWD_${CH_ID}) {
+  # Enable
+  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=1;
+  # Apply -12V
+  ec${M_ID=0}.s${S_ID}.VELOCITY_SETPOINT_${CH_ID}:=-16384;  # 32768 =24V
+  ${DBG="#"}if(static.cmdMoveBWD_${CH_ID}_old <> static.cmdMoveBWD_${CH_ID}) {
+    ${DBG="#"}println('Going In!');
+  ${DBG="#"}};
+};
+
+# Ensure not enabled longer than MAX_TIME
+if(ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID} > 0) {
+  static.outputCounter:=static.outputCounter + 1;
+};
+
+if(static.outputCounter > static.maxOutputCycles) {
+  ${DBG="#"}println('Max time reached. Killing amplifier!');
+  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=0;
+  # Apply 0V
+  ec${M_ID=0}.s${S_ID}.VELOCITY_SETPOINT_${CH_ID}:=0;  # 32768 =24V
+  static.cmdMoveBWD_${CH_ID}:=0;
+  static.cmdMoveFWD_${CH_ID}:=0;  
+};
+
+static.cmdMoveBWD_${CH_ID}_old:=static.cmdMoveBWD_${CH_ID};
+static.cmdMoveFWD_${CH_ID}_old:=static.cmdMoveFWD_${CH_ID};
