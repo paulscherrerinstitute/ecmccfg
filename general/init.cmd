@@ -14,7 +14,6 @@
 #-   "ECMC_EC_MASTER_ID":      EtherCAT master index
 #-   "ECMC_EC_SLAVE_NUM":      EtherCAT slave bus position index
 #-   "ECMC_EC_CHANNEL_ID"      Index of input
-#-   "ECMC_ASYN_SKIP_CYCLES":  Update rate (number of realtime loops to skip before update)
 #-   "ECMC_PINI":              Process at Initialization
 #-   "ECMC_DESC":              Description
 #-   "ECMC_DTYP":              Data type
@@ -36,9 +35,7 @@ epicsEnvSet("ECMC_ASYN_PORT",         "NOT SET")
 epicsEnvSet("ECMC_PREFIX",            "NOT SET")
 epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",    "NOT SET")
-epicsEnvSet("ECMC_ASYN_SKIP_CYCLES",  0)
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",    "NOT SET")
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",    "NOT SET")
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
 
 #- ECMC_TIME_SOURCE:
@@ -47,6 +44,7 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
 epicsEnvSet("ECMC_TSE",               -2)
 
 #- Init all axis related variables
+ecmcFileExist("${ECMC_CONFIG_ROOT}initAxis.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAxis.cmd"
 
 #- Additional parameters when motor Records are loaded

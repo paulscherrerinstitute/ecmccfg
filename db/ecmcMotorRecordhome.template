@@ -1,0 +1,41 @@
+record(longout,"$(PREFIX)$(MOTOR_NAME)-HomProc") {
+    field(DESC, "Homing Procedure")
+    field(VAL, "$(HOMEPROC=0)")
+    field(DTYP, "asynInt32")
+    field(PINI, "YES")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))HomProc")
+    info(asyn:READBACK,"1")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-HomPos") {
+    field(DESC, "Homing Position")
+    field(VAL, "$(HOMEPOS=0)")
+    field(DTYP, "asynFloat64")
+    field(PINI, "YES")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))HomPos")
+    info(asyn:READBACK,"1")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-VelToHom") {
+    field(DESC, "Homing Velocity To CAM")
+    field(VAL, "$(HVELTO=0)")
+    field(DTYP, "asynFloat64")
+    field(PINI, "YES")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))VelToHom")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-VelFrmHom") {
+    field(DESC, "Homing Velocity from CAM")
+    field(VAL, "$(HVELFRM=0.502)")
+    field(DTYP, "asynFloat64")
+    field(PINI, "YES")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))VelFrmHom")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-AccHom") {
+    field(DESC, "Homing Acceleration EGU/s^2")
+    field(VAL, "$(HOMEACC=0)")
+    field(DTYP, "asynFloat64")
+    field(PINI, "YES")
+    field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))AccHom")
+}

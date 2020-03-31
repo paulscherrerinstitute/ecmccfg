@@ -1,0 +1,16 @@
+#- Status word
+#-    PDO entry 0x10f4:01,  2 bit, "Sync Mode"
+#-    PDO entry 0x0000:00,  6 bit, "Gap"
+#-    PDO entry 0x0000:00,  5 bit, "Gap"
+#-    PDO entry 0x10f4:0e,  1 bit, "Control value update toggle"
+#-    PDO entry 0x10f4:0f,  1 bit, "Time stamp update toggle"
+#-    PDO entry 0x10f4:10,  1 bit, "External device not connected"
+
+${DBG}println('STATUS:               ', ec0.s${SLAVE_ID}.STATUS);
+${DBG}println('  Sync Mode:          ', ec_chk_bits(ec0.s${SLAVE_ID}.STATUS,0,1));
+${DBG}println('  Cntr Update:        ', ec_chk_bit(ec0.s${SLAVE_ID}.STATUS,13));
+${DBG}println('  Time stamp Updated: ', ec_chk_bit(ec0.s${SLAVE_ID}.STATUS,14));
+${DBG}println('  PTP not connected:  ', ec_chk_bit(ec0.s${SLAVE_ID}.STATUS,15));
+${DBG}println('DC_TIME:              ', ec0.s${SLAVE_ID}.DC_TIME);
+${DBG}println('PTP_TIME:             ', ec0.s${SLAVE_ID}.PTP_TIME);
+${DBG}println('CONT_VAL_DC_MASTER:   ', ec0.s${SLAVE_ID}.CONT_VAL_DC_MASTER);

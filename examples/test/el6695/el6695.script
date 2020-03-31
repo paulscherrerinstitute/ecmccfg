@@ -1,0 +1,87 @@
+##############################################################################
+#- Example config for el6695 (EtherCAT bridge)
+#- Since this is a "freely" configurable slave, only an example is shown here and no dedicated HW snippet exists.
+#- This example sets up 2 doubles(64bit) and 2 ints (32bits) for exchange between two ethercat masters.
+#- The configuration for this slave MUST be same on both masters.
+#- To test with ECMC run two masters:
+#-  1. Primary side (one master):       iocsh.bash el6695.script "IOC=IOC_P,SLAVE_ID=<..>"
+#-  2. Secondary side (another master): iocsh.bash el6695.script "IOC=IOC_S,SLAVE_ID=<..>"
+#-
+#- NOTE: If the data should be accessible from EPICS records, a custom data base needs to be loaded (like below).
+#-
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg master
+
+#- Choose motor record driver implementation
+#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
+#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
+#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
+#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
+
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM" ,"${SLAVE_ID=53}")
+
+##############################################################################
+## HW- snippet start here  (similar to the snippets in ecmccfg/hardware/*)
+
+#- ###########################################################
+#- ############ Information:
+#-  Description: EtherCAT Bridge terminal
+#-  Vendor id   = 0x2  (Beckhoff)
+#-  Product id  = 0x1a273052 (EL6695)
+#-  Direction   = 1,2 (Output/Input)
+#- ###########################################################
+
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL6695")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1a273052")
+
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+
+#- ############ Config PDOS: Inputs
+
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0xF100,0x1,16,STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a08,0x6000,0x1,32,IN_INT32_1)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a08,0x6000,0x2,32,IN_INT32_2)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a08,0x6000,0x3,64,IN_FLOAT64_1)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a08,0x6000,0x4,64,IN_FLOAT64_2)"
+
+#- ###########################################################
+#- ############ Config PDOS: Outputs
+
+#ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0xF200,0x1,16,CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1608,0x7000,0x1,32,OUT_INT32_1)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1608,0x7000,0x2,32,OUT_INT32_2)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1608,0x7000,0x3,64,OUT_FLOAT64_1)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1608,0x7000,0x4,64,OUT_FLOAT64_2)"
+
+##HW snippet end here
+##############################################################################
+
+# Load records to access the data from EPICS records
+dbLoadRecords("./ecmcEL6695_app.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

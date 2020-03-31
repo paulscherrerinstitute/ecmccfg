@@ -1,0 +1,67 @@
+##############################################################################
+## Example config for el7332 connectedd to an actuonix linear 12V actuator
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg anders_actuonix
+
+#- Choose motor record driver implementation
+#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
+#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
+#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
+#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
+
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10"
+
+##############################################################################
+## Configure hardware
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7332, SUBST_FILE=ecmcEL7332_volts.substitutions"
+
+# Configure motor CH1
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7332, CONFIG=-ch1-Motor-Actuonix-PQ12-100-12-S"
+                                                                                              
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## PLC 0:  Generic code for one actuonix PQ12-S actuator
+##         If more then teh same plc code can be used but you need to update these three env vars:
+##          1. ECMC_PLC_ID     : ID of plc
+##          2. ECMC_SLAVE_ID   : Slave position of el7332
+##          3. ECMC_CH_ID      : Channel id of el7332 (el7332 has two channels)
+##
+epicsEnvSet(ECMC_PLC_ID,0)
+epicsEnvSet(ECMC_SLAVE_ID,3)
+epicsEnvSet(ECMC_CH_ID,1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ECMC_PLC_ID}, SAMPLE_RATE_MS=100,FILE=./plc/actuonix.plc, PLC_MACROS='PLC_ID=${ECMC_PLC_ID},M_ID=0,S_ID=${ECMC_SLAVE_ID},CH_ID=${ECMC_CH_ID},MAX_TIME=3,DBG='")
+## Load records to control movement
+dbLoadRecords("ecmcPlcBinary.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc${ECMC_PLC_ID}.static.cmdMoveBWD_${ECMC_CH_ID},REC_NAME=-s${ECMC_SLAVE_ID}-ch-${ECMC_CH_ID}-Cmd-Bwd")
+dbLoadRecords("ecmcPlcBinary.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc${ECMC_PLC_ID}.static.cmdMoveFWD_${ECMC_CH_ID},REC_NAME=-s${ECMC_SLAVE_ID}-ch-${ECMC_CH_ID}-Cmd-Fwd")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit
+
+#
+# Move out for test actuator:
+# dbpf IOC_TEST:Set-s3-ch-1-Cmd-Fwd-RB 1
+#
+# Move in for test actuator:
+# dbpf IOC_TEST:Set-s3-ch-1-Cmd-Bwd-RB 1
+#

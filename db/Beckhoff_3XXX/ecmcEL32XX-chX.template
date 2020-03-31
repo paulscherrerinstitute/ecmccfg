@@ -36,7 +36,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-UnderLim-Alrm")
   field(ONAM, "Under Range")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-OverLim-Alrm")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-OverLim-Alrm.PROC")
 }
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-OverLim-Alrm"){
@@ -46,7 +46,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-OverLim-Alrm"){
   field(ONAM, "Over Range")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Err-Alrm")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Err-Alrm.PROC")
 }
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Err-Alrm"){

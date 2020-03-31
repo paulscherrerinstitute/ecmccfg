@@ -1,6 +1,6 @@
 #==============================================================================
 # configureAxis.cmd
-#- Arguments: CONFIG, [DEV]
+#- Arguments: CONFIG, [DEV], [CLEAR_VARS_CMD]
 
 #-d /**
 #-d   \brief Script for adding an axis with configuration.
@@ -9,6 +9,7 @@
 #-d   \file
 #-d   \param CONFIG configuration file, i.e. ./cfg/linear_1.pax
 #-d   \param DEV (optional) device name, i.e. MOTOR1
+#-d   \param CLEAR_VARS_CMD (optional) Set to "empty" for not clear env vars (if vars needed for later use).
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=./cfg/linear_1.pax"
@@ -18,7 +19,12 @@
 
 #- set device name, default to ${IOC}
 epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
+ecmcFileExist("${CONFIG}",1)
 ${SCRIPTEXEC} ${CONFIG}
+ecmcFileExist("${ECMC_CONFIG_ROOT}addAxis.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addAxis.cmd
+#- Clear env vars
+ecmcFileExist(${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_axis_unset"}.cmd,1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_axis_unset"}.cmd
 #- reset PREFIX
 epicsEnvSet("ECMC_PREFIX"      "${SM_PREFIX}")

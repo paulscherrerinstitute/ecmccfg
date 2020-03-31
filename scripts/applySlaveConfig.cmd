@@ -15,4 +15,5 @@
 #-d */
 #-d   \pre A slave has to added immediately before this script is called by \b addSlave.cmd.
 
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd
