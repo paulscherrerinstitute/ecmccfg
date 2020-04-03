@@ -1,0 +1,8 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Functionality Demo:
+#   No hardware related variables
+#
+static.test:=static.test+1;
+${DBG=#}println('No ec: ', static.test);
