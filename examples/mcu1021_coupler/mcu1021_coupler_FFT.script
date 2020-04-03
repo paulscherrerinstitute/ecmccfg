@@ -54,9 +54,8 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 ##############################################################################
 ## Load plugin 0: FFT
 epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-arm/libecmcPlugin_FFT.so")
-"epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;SOURCE=ecmc.thread.latency.max;")
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;SOURCE=ax1.actpos;")
-")  # Enable printouts from plugin
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;SOURCE=ecmc.thread.latency.max;")
+#epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;SOURCE=ax1.actpos;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
 epicsEnvUnset(ECMC_PLUGIN_CONFIG)

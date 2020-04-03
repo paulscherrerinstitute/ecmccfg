@@ -73,6 +73,22 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 dbLoadRecords("./ecmcGenericAnalog.db","REC_NAME=$(IOC):Plugin-Adv-Counter,PORT=MC_CPU1,ASYN_NAME=plugin.adv.counter,TSE=0,T_SMP_MS=100")
 
 ##############################################################################
+## Load plugin 2: FFT
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-arm/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;SOURCE=ax1.actpos;")
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=2,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+epicsEnvUnset(ECMC_PLUGIN_FILNAME)
+epicsEnvUnset(ECMC_PLUGIN_CONFIG)
+
+##############################################################################
+## Load plugin 3: Simple example
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Simple/master/lib/linux-arm/libecmcPlugin_Simple.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"NO OPTIONS")
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=3,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+epicsEnvUnset(ECMC_PLUGIN_FILNAME)
+epicsEnvUnset(ECMC_PLUGIN_CONFIG)
+
+##############################################################################
 ## Data Storage 1
 #
 $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
