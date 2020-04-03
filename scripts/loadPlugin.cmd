@@ -1,5 +1,5 @@
 #==============================================================================
-# pluginLoad.cmd
+# loadPlugin.cmd
 #- Arguments: FILE, PLUGIN_ID, [CONFIG], [REPORT]
 
 #-d /**
