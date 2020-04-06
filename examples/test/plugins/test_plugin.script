@@ -7,11 +7,11 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg plugins
+require ecmccfg master
 
 ##############################################################################
 ###### Startup
-require ecmc        "${ECMC_VER=plugins}"
+require ecmc        "${ECMC_VER=master}"
 require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
@@ -40,10 +40,9 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 ## Configure hardware:
 
 # No EtherCAT hardware..
-
 ##############################################################################
 ## Load plugin:
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Simple/master/lib/linux-x86_64/libecmcPlugin_Simple.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Simple/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_Simple.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"No plugin option implemented!")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
