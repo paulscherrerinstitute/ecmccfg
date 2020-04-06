@@ -751,29 +751,29 @@ epicsEnvShow("result")
 #
 
 # Help screens
-ecmcEpicsEnvSetCalcTenary -h
-ecmcEpicsEnvSetCalcTenary --help
-ecmcEpicsEnvSetCalcTenary
+ecmcEpicsEnvSetCalcTernary -h
+ecmcEpicsEnvSetCalcTernary --help
+ecmcEpicsEnvSetCalcTernary
 #
 # Simple true false
 epicsEnvSet("VALUE",10)
-# ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
-ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
+# ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
+ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
 epicsEnvShow("test_var")
 #
 # Can be used for choosing different files
-# ecmcEpicsEnvSetCalcTenary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
-ecmcEpicsEnvSetCalcTenary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+# ecmcEpicsEnvSetCalcTernary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+ecmcEpicsEnvSetCalcTernary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
 epicsEnvShow("filename")
 #
 # Comparing strings 1 (simple):
-# ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
-ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+# ecmcEpicsEnvSetCalcTernary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+ecmcEpicsEnvSetCalcTernary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
 epicsEnvShow("result")
 #
 # Comparing strings 2 (with if-else):
-# ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
-ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+# ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
 epicsEnvShow("result")
 #
 

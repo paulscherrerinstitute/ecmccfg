@@ -11,7 +11,7 @@ require ecmccfg master
 
 ##############################################################################
 ###### Startup
-require ecmc        "${ECMC_VER=master}"
+require ecmc        "master"
 require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ ${SCRIPTEXEC} "${ecmccfg_DIR}${INIT=initAll}.cmd"
 #-------------------------------------------------------------------------------
 
 epicsEnvSet("ECMC_SAMPLE_RATE_MS" ,100) # Records update period
-epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,10) # Realtime loop sample rate
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,100) # Realtime loop sample rate
 ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 ##############################################################################
@@ -41,22 +41,29 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 # No EtherCAT hardware..
 
-##############################################################################
-## Load plugin:
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/${EPICS_HOST_ARCH=linux-arm/libecmcPlugin_RasPi.so")
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1")  # Enable printouts from plugin
+########################################################################s######
+## Load plugin: FFT 
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-x86_64/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=plcs.plc0.static.sineval;DBG_PRINT=1;NFFT=1024;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+epicsEnvUnset(ECMC_PLUGIN_FILNAME)
+epicsEnvUnset(ECMC_PLUGIN_CONFIG)
+
+########################################################################s######
+## Load plugin: FFT again (will create a new FFT object in the same namespace)
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ecmc.thread.period.min;DBG_PRINT=1;NFFT=1024;")
+#${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
 epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ##############################################################################
 ## Data Storage 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+#$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
-## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/plc_rpi.plc, PLC_MACROS='DBG=,PLC_ID=0'")
-dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.test,REC_NAME=-Test,TSE=0,T_SMP_MS=1000")
+## PLC 0: Generate a sine wave at 10Hz
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/plc_no_ec_fft_sin.plc")
 
 ##############################################################################
 ############# Configure diagnostics:
