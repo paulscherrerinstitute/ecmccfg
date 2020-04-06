@@ -18,6 +18,6 @@
 
 ecmcConfigOrDie "Cfg.LoadPlugin(${PLUGIN_ID},${FILE},${CONFIG=""})"
 #- Report if REPORT>0
-ecmcEpicsEnvSetCalcTenary("ECMC_PLUGIN_REPORT", "${REPORT=-1}>0","","#")
+ecmcEpicsEnvSetCalcTernary("ECMC_PLUGIN_REPORT", "${REPORT=-1}>0","","#")
 ${ECMC_PLUGIN_REPORT}ecmcConfigOrDie "Cfg.ReportPlugin(${PLUGIN_ID})"
 epicsEnvUnset(ECMC_PLUGIN_REPORT);
