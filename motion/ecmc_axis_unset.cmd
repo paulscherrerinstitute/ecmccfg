@@ -26,14 +26,10 @@ epicsEnvUnset(ECMC_CNTRL_KI)
 epicsEnvUnset(ECMC_CNTRL_KD)
 epicsEnvUnset(ECMC_CNTRL_KFF)
 epicsEnvUnset(ECMC_EC_ENC_ACTPOS)
-
-#- Clear these instead of unset since not used in "normal" axis cfg file
-#- but used in ecmc_axis.cmd..
-epicsEnvSet(ECMC_EC_ENC_LATCHPOS,"")
-epicsEnvSet(ECMC_EC_ENC_LATCH_CONTROL,"")
-epicsEnvSet(ECMC_EC_ENC_LATCH_STATUS,"")
-epicsEnvSet(ECMC_HOME_LATCH_COUNT_OFFSET,"")
-
+epicsEnvUnset(ECMC_EC_ENC_LATCHPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_CONTROL)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_STATUS)
+epicsEnvUnset(ECMC_HOME_LATCH_COUNT_OFFSET)
 epicsEnvUnset(ECMC_ENC_SCALE_DENOM)
 epicsEnvUnset(ECMC_ENC_SCALE_NUM)
 epicsEnvUnset(ECMC_ENC_TYPE)
