@@ -56,7 +56,7 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_2
 ##############################################################################
 ## Load plugin 0: RasPi
 #
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/linux-arm/libecmcPlugin_RasPi.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_RasPi.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0")  # Enable printouts from plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -65,7 +65,7 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 ##############################################################################
 ## Load plugin 1: Advanced
 #
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/linux-arm/libecmcPlugin_Advanced.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_Advanced.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;") # Only one option implemented in this plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -74,7 +74,7 @@ dbLoadRecords("./ecmcGenericAnalog.db","REC_NAME=$(IOC):Plugin-Adv-Counter,PORT=
 
 ##############################################################################
 ## Load plugin 2: FFT
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-arm/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_FFT.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;SOURCE=ax1.actpos;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=2,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -82,7 +82,7 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ##############################################################################
 ## Load plugin 3: Simple example
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Simple/master/lib/linux-arm/libecmcPlugin_Simple.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Simple/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_Simple.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"NO OPTIONS")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=3,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
