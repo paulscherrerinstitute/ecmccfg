@@ -1,0 +1,122 @@
+##############################################################################
+## Example: Demo of ecmc plugins. In this example ecmcPlugin_Advanced is loaded:
+## https://github.com/anderssandstrom/e3-ecmcPlugin_Advanced
+##
+## The plugin exposes:
+##  - 2 plc functions 
+##  - 2 plc constants
+##
+## The plugin also registers a asyn parameter called "plugin.adv.counter" which 
+## incraeses for each ecmc rt-loop.
+## This parameter can be linked to a record like all other parameters and 
+## the increasing value can be seen with:
+## $ camonitor IOC_TEST:Plugin-Adv-Counter
+##
+##############################################################################
+##
+## Plugin info: 
+##   Name                 = ecmcExamplePlugin
+##   Description          = Advanced example with use of asynport obj.
+##   Version              = 1
+##   Interface version    = 512 (ecmc = 512)
+##       max plc funcs    = 64
+##       max plc consts   = 64
+##   Construct func       = @0x7fac4353d190
+##   Enter realtime func  = @0x7fac4353d200
+##   Exit realtime func   = @0x7fac4353d1c0
+##   Realtime func        = @0x7fac4353d1e0
+##   Destruct func        = @0x7fac4353d1b0
+##   dlhandle             = @0x182e580
+##   Plc functions:
+##     funcs[00]:
+##       Name       = "adv_plugin_func_1(arg0, arg1);"
+##       Desc       = Multiply arg0 with arg1.
+##       Arg count  = 2
+##       func       = @0x7fac4353d170
+##     funcs[01]:
+##       Name       = "adv_plugin_func_2(arg0, arg1, arg2);"
+##       Desc       = Multiply arg0, arg1 and arg2.
+##       Arg count  = 3
+##       func       = @0x7fac4353d180
+##   Plc constants:
+##     consts[00]:
+##       Name     = "adv_CONST_1" = 1.235
+##       Desc     = Test constant "adv_CONST_1" = 1.234567890
+##     consts[01]:
+##       Name     = "adv_CONST_2" = 9.877
+##       Desc     = Test constant "adv_CONST_2" = 9.876543210
+## 
+##############################################################################
+
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg plugins
+
+##############################################################################
+###### Startup
+require ecmc        "${ECMC_VER=plugins}"
+require stream      "${stream_VER=2.8.10}"
+
+#-------------------------------------------------------------------------------
+#- define default PATH for scripts and database/templates
+epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
+epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}:${ecmccfg_DB}")
+
+#-
+#-------------------------------------------------------------------------------
+#- define IOC Prefix
+epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
+#-
+#-------------------------------------------------------------------------------
+#- call init-script, defaults to 'initAll'
+ecmcFileExist("${ecmccfg_DIR}${INIT=initAll}.cmd",1)
+${SCRIPTEXEC} "${ecmccfg_DIR}${INIT=initAll}.cmd"
+#-
+#-------------------------------------------------------------------------------
+
+epicsEnvSet("ECMC_SAMPLE_RATE_MS" ,100) # Records update period
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,10) # Realtime loop sample rate
+ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
+
+##############################################################################
+## Configure hardware:
+# No EtherCAT hardware (in this example)..
+
+##############################################################################
+## Load plugin:
+#require ecmcPlugin_Simple master # do not require then loaded twice..
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_Advanced.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;") # Only one option implemented in this plugin
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+epicsEnvUnset(ECMC_PLUGIN_FILNAME)
+epicsEnvUnset(ECMC_PLUGIN_CONFIG)
+dbLoadRecords("./ecmcGenericAnalog.db","REC_NAME=$(IOC):Plugin-Adv-Counter,PORT=MC_CPU1,ASYN_NAME=plugin.adv.counter,TSE=0,T_SMP_MS=100")
+
+##############################################################################
+## Data Storage 1
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/plc_no_ec_adv.plc ,PLC_MACROS='DBG='")
+dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.test,REC_NAME=-Test,TSE=0,T_SMP_MS=1000")
+
+##############################################################################
+############# Configure diagnostics:
+
+# go active
+ecmcFileExist("${ecmccfg_DIR}generalDiagnostics.cmd",1)
+${SCRIPTEXEC} ${ecmccfg_DIR}generalDiagnostics.cmd ECMC_TSE=0
+ecmcFileExist("ecmcGeneral.db",1,1)
+dbLoadRecords("ecmcGeneral.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=${ECMC_TSE=0}")
+# Nice commands for info ecmcReport <level> or asynReport <level>
+# ecmcReport 3
+
+ecmcConfigOrDie "Cfg.SetAppMode(1)"
+
+iocInit
+

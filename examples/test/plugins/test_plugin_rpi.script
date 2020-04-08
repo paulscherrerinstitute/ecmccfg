@@ -1,0 +1,75 @@
+##############################################################################
+## Example: Configuraftion for running ecmc PLC without ethercat bus support
+##############################################################################
+
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg master
+
+##############################################################################
+###### Startup
+require ecmc        "${ECMC_VER=master}"
+require stream      "${stream_VER=2.8.10}"
+
+#-------------------------------------------------------------------------------
+#- define default PATH for scripts and database/templates
+epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
+epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}:${ecmccfg_DB}")
+
+#-
+#-------------------------------------------------------------------------------
+#- define IOC Prefix
+epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
+#-
+#-------------------------------------------------------------------------------
+#- call init-script, defaults to 'initAll'
+ecmcFileExist("${ecmccfg_DIR}${INIT=initAll}.cmd",1)
+${SCRIPTEXEC} "${ecmccfg_DIR}${INIT=initAll}.cmd"
+#-
+#-------------------------------------------------------------------------------
+
+epicsEnvSet("ECMC_SAMPLE_RATE_MS" ,100) # Records update period
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,10) # Realtime loop sample rate
+ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
+
+##############################################################################
+## Configure hardware:
+
+# No EtherCAT hardware..
+
+##############################################################################
+## Load plugin:
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/${EPICS_HOST_ARCH=linux-arm/libecmcPlugin_RasPi.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1")  # Enable printouts from plugin
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+epicsEnvUnset(ECMC_PLUGIN_FILNAME)
+epicsEnvUnset(ECMC_PLUGIN_CONFIG)
+
+##############################################################################
+## Data Storage 1
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/plc_rpi.plc, PLC_MACROS='DBG=,PLC_ID=0'")
+dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.test,REC_NAME=-Test,TSE=0,T_SMP_MS=1000")
+
+##############################################################################
+############# Configure diagnostics:
+
+# go active
+ecmcFileExist("${ecmccfg_DIR}generalDiagnostics.cmd",1)
+${SCRIPTEXEC} ${ecmccfg_DIR}generalDiagnostics.cmd ECMC_TSE=0
+ecmcFileExist("ecmcGeneral.db",1,1)
+dbLoadRecords("ecmcGeneral.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=${ECMC_TSE=0}")
+# Nice commands for info ecmcReport <level> or asynReport <level>
+# ecmcReport 3
+
+ecmcConfigOrDie "Cfg.SetAppMode(1)"
+
+iocInit
+

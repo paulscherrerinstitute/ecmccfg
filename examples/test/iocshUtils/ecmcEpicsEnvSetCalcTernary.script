@@ -1,0 +1,41 @@
+#
+# Test iocsh function "ecmcEpicsEnvSetCalcTernary()" to evaluate expressions and set 
+# EPCIS environment variables to differnt strings.
+#
+#        Use "ecmcEpicsEnvSetCalcTernary(<envVarName>,  <expression>, <trueString>, <falseString>)" to evaluate the expression and assign the variable.
+#          <envVarName>  : EPICS environment variable name.
+#          <expression>  : Calculation expression (see exprTK for available functionality). Examples:
+#                          Simple expression:"5.5+${TEST_SCALE}*sin(${TEST_ANGLE}/10)".
+#                          Use of "RESULT" variable: "if(${TEST_VAL}>5){RESULT:=100;}else{RESULT:=200;};".
+#          <trueString>  : String to set <envVarName> if expression (or "RESULT") evaluates to true.
+#          <falseString> : String to set <envVarName> if expression (or "RESULT") evaluates to false.
+#
+#
+require ecmc anders_dev20200228
+#
+# Help screens
+ecmcEpicsEnvSetCalcTernary -h
+ecmcEpicsEnvSetCalcTernary --help
+ecmcEpicsEnvSetCalcTernary
+#
+# Simple true false
+epicsEnvSet("VALUE",10)
+# ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
+ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
+epicsEnvShow("test_var")
+#
+# Can be used for choosing different files
+# ecmcEpicsEnvSetCalcTernary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+ecmcEpicsEnvSetCalcTernary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+epicsEnvShow("filename")
+#
+# Comparing strings 1 (simple):
+# ecmcEpicsEnvSetCalcTernary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+ecmcEpicsEnvSetCalcTernary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+epicsEnvShow("result")
+#
+# Comparing strings 2 (with if-else):
+# ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+epicsEnvShow("result")
+#

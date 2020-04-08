@@ -600,6 +600,22 @@ ecmcConfig      "GetPLCExpr(0)"
 ecmcConfig      "GetPLCExpr(100)"
 
 ##############################################################################
+############# Plugins:
+ecmcConfig "Cfg.LoadPlugin(100,./test,${CONFIG=""})"
+ecmcConfig "Cfg.LoadPlugin(100,./test)"
+ecmcConfig "Cfg.LoadPlugin(100,)"
+ecmcConfig "Cfg.LoadPlugin(-1,)"
+ecmcConfig "Cfg.LoadPlugin(-1,)"
+ecmcConfig "Cfg.LoadPlugin(-1,./test)"
+ecmcConfig "Cfg.LoadPlugin(1,./test)"
+ecmcConfig "Cfg.LoadPlugin(1,./test,'TEST=NO;')"
+ecmcConfig "Cfg.LoadPlugin("
+ecmcConfig "Cfg.ReportPlugin(1)"
+ecmcConfig "Cfg.ReportPlugin(-1)"
+ecmcConfig "Cfg.ReportPlugin(100)"
+ecmcConfig "Cfg.ReportPlugin("
+
+##############################################################################
 ############# Main general:
 
 ecmcConfig      "GetControllerError()"
@@ -641,29 +657,29 @@ ecmcMotorRecordCreateAxis -h
 ecmcMotorRecordCreateAxis
 
 ecmcFileExist ("no_file.cmd",0)
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0,1)
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0,1,/usr/:/home/)
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0)
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0,0,"test")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0,0,":")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0,0,":test")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("ecmcEL2612.substitutions",0,0,"test:")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("test.script",0, "")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("no_file.cmd",0, "")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("testMostCmds.script",1,0,"")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist ("no_file.cmd",0,0,"")
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ecmcFileExist
 ecmcFileExist -h
 ecmcFileExist --help
@@ -735,29 +751,29 @@ epicsEnvShow("result")
 #
 
 # Help screens
-ecmcEpicsEnvSetCalcTenary -h
-ecmcEpicsEnvSetCalcTenary --help
-ecmcEpicsEnvSetCalcTenary
+ecmcEpicsEnvSetCalcTernary -h
+ecmcEpicsEnvSetCalcTernary --help
+ecmcEpicsEnvSetCalcTernary
 #
 # Simple true false
 epicsEnvSet("VALUE",10)
-# ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
-ecmcEpicsEnvSetCalcTenary("test_var", "${VALUE}+2+5/10","True","False")
+# ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
+ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
 epicsEnvShow("test_var")
 #
 # Can be used for choosing different files
-# ecmcEpicsEnvSetCalcTenary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
-ecmcEpicsEnvSetCalcTenary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+# ecmcEpicsEnvSetCalcTernary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
+ecmcEpicsEnvSetCalcTernary("filename", "${VALUE}>20","./plc_fast.cfg","./plc_slow.cfg")
 epicsEnvShow("filename")
 #
 # Comparing strings 1 (simple):
-# ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
-ecmcEpicsEnvSetCalcTenary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+# ecmcEpicsEnvSetCalcTernary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
+ecmcEpicsEnvSetCalcTernary("result", "'$(filename)'='./plc_slow.cfg'","equal","not_equal")
 epicsEnvShow("result")
 #
 # Comparing strings 2 (with if-else):
-# ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
-ecmcEpicsEnvSetCalcTenary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+# ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
+ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
 epicsEnvShow("result")
 #
 

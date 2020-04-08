@@ -36,7 +36,7 @@ on error halt
 require ecmc        "${ECMC_VER=6.1.0}"
 require stream      "${stream_VER=kivel}"
 #- Require EthercatMC if used.
-ecmcEpicsEnvSetCalcTenary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)
 #-
