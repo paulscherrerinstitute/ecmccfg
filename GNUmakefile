@@ -2,6 +2,8 @@ include /ioc/tools/driver.makefile
 
 MODULE=ecmccfg
 
+LIBVERSION = 6.2.0
+
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS=3
 ARCH_FILTER=RHEL%
