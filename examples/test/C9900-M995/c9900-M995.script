@@ -29,7 +29,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ##############################################################################
 ## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/c9900-m995.plc, PLC_MACROS=',SLAVE_ID=${ECMC_EC_SLAVE_NUM}'")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/c9900-m995.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=${ECMC_EC_SLAVE_NUM}'")
 
 ##############################################################################
 ############# Configure diagnostics:
