@@ -1,0 +1,76 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# Move memmap object
+
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+static.counter:=static.counter+1;
+if(static.counter<10) {
+  ec0.s${SLAVE_ID}.BO_1_RED:=1;
+  ec0.s${SLAVE_ID}.BO_2_RED:=1;
+  ec0.s${SLAVE_ID}.BO_3_RED:=1;
+  ec0.s${SLAVE_ID}.BO_4_RED:=1;
+  ec0.s${SLAVE_ID}.BO_5_RED:=1;
+  ec0.s${SLAVE_ID}.BO_6_RED:=1;
+  ec0.s${SLAVE_ID}.BO_7_RED:=1;
+  ec0.s${SLAVE_ID}.BO_8_RED:=1;
+  ec0.s${SLAVE_ID}.BO_9_RED:=1;
+  ec0.s${SLAVE_ID}.BO_10_RED:=1;
+} else if(static.counter<20) {
+  ec0.s${SLAVE_ID}.BO_1_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_2_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_3_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_4_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_5_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_6_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_8_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_7_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_9_GREEN:=1;
+  ec0.s${SLAVE_ID}.BO_10_GREEN:=1;
+} else if(static.counter<30) {
+  ec0.s${SLAVE_ID}.BO_1_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_2_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_3_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_4_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_5_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_6_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_8_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_7_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_9_BLUE:=1;
+  ec0.s${SLAVE_ID}.BO_10_BLUE:=1;
+} else if(static.counter<40) {  
+  ec0.s${SLAVE_ID}.BO_1_RED:=0;
+  ec0.s${SLAVE_ID}.BO_2_RED:=0;
+  ec0.s${SLAVE_ID}.BO_3_RED:=0;
+  ec0.s${SLAVE_ID}.BO_4_RED:=0;
+  ec0.s${SLAVE_ID}.BO_5_RED:=0;
+  ec0.s${SLAVE_ID}.BO_6_RED:=0;
+  ec0.s${SLAVE_ID}.BO_7_RED:=0;
+  ec0.s${SLAVE_ID}.BO_8_RED:=0;
+  ec0.s${SLAVE_ID}.BO_9_RED:=0;
+  ec0.s${SLAVE_ID}.BO_10_RED:=0;
+  ec0.s${SLAVE_ID}.BO_1_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_2_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_3_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_4_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_5_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_6_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_7_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_8_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_9_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_10_GREEN:=0;
+  ec0.s${SLAVE_ID}.BO_1_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_2_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_3_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_4_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_5_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_6_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_7_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_8_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_9_BLUE:=0;
+  ec0.s${SLAVE_ID}.BO_10_BLUE:=0;
+} else {
+  static.counter:=0;
+};
