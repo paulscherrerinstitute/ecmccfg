@@ -1,5 +1,5 @@
 ##############################################################################
-## Example: Configuraftion for running ecmc PLC without ethercat bus support
+## Example: Configuraftion for running ecmc FFT plugin
 ##############################################################################
 
 ## Initiation:
@@ -37,33 +37,34 @@ epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,100) # Realtime loop sample rate
 ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 ##############################################################################
-## Configure hardware:
-
+## Configure hardware.
 # No EtherCAT hardware..
+
+##############################################################################
+require ecmcPlugin_FFT master  # te get access to db file..
+epicsEnvSet("FFT_NELM", 1024)
 
 ########################################################################s######
 ## Load plugin: FFT 
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-x86_64/libecmcPlugin_FFT.so")
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=plcs.plc0.static.sineval;DBG_PRINT=1;NFFT=1024;")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=plcs.plc0.static.sineval;DBG_PRINT=0;NFFT=1024;RATE=100;RM_DC=1;RM_LIN=1;APPLY_SCALE=1;MODE=TRIGG;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
-epicsEnvUnset(ECMC_PLUGIN_FILNAME)
-epicsEnvUnset(ECMC_PLUGIN_CONFIG)
+# Note: INDEX is the index of FFT object in FFT plugin and not PLUGIN_ID. In this case the same
+dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=0, NELM=${FFT_NELM}")
 
 ########################################################################s######
 ## Load plugin: FFT again (will create a new FFT object in the same namespace)
 epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_FFT.so")
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ecmc.thread.period.min;DBG_PRINT=1;NFFT=1024;")
-#${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ecmc.thread.latency.max;DBG_PRINT=0;NFFT=1024;RM_LIN=1;")
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
+# Note: INDEX is the index of FFT object in FFT plugin and not PLUGIN_ID. In this case the same
+dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=1, NELM=${FFT_NELM}")
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
 epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ##############################################################################
-## Data Storage 1
-#$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
-
-##############################################################################
 ## PLC 0: Generate a sine wave at 10Hz
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/plc_no_ec_fft_sin.plc")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/plc_no_ec_fft_sin.plc, PLC_MACROS='FREQ=5'")
 
 ##############################################################################
 ############# Configure diagnostics:
