@@ -2,7 +2,7 @@ include /ioc/tools/driver.makefile
 
 MODULE=ecmccfg
 
-LIBVERSION = 6.2.0
+LIBVERSION = 6.2.1
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS=3
