@@ -1,0 +1,12 @@
+file "ecmcEcSlave.template"
+{
+    pattern {}
+            {}
+}
+
+file "ecmcEL9227-5500.template"
+{
+    pattern {CH_ID}
+            {1}
+            {2}          
+}

@@ -1,0 +1,326 @@
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat"){
+    field(DESC, "$(HWTYPE): Status Word")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynUInt32Digital")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_STATUS?")
+    field(SCAN, "I/O Intr")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Enabled.PROC")
+    field(SHFT, "0")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Enabled"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Enabled")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B0")
+    field(ZNAM, "Zero")
+    field(ONAM, "Enabled")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Tripped.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Tripped"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Tripped")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B1")
+    field(ZNAM, "Zero")
+    field(ONAM, "Tripped")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-ShortCircuit.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-ShortCircuit"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Short Circuit")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B2")
+    field(ZNAM, "Zero")
+    field(ONAM, "Short Circuit")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Overload.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Overload"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Overload")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B3")
+    field(ZNAM, "Zero")
+    field(ONAM, "Overload")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-HardwareProtection.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-HardwareProtection"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): HardwareProtection")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B4")
+    field(ZNAM, "Zero")
+    field(ONAM, "Hardware Protection")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Overvoltage.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Overvoltage"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Overvoltage")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B5")
+    field(ZNAM, "Zero")
+    field(ONAM, "Overvoltage")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Undervoltage.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Undervoltage"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Undervoltage")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B6")
+    field(ZNAM, "Zero")
+    field(ONAM, "Undervoltage")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-CurrentLevelWarning.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-CurrentLevelWarning"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Current Level Warning")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B7")
+    field(ZNAM, "Zero")
+    field(ONAM, "CurrentLevelWarning")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-CoolDownLock.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-CoolDownLock"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Cool Down Lock")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B8")
+    field(ZNAM, "Zero")
+    field(ONAM, "Cool Down Lock")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-DisabledBySwitch.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-DisabledBySwitch"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): DisabledBySwitch")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B9")
+    field(ZNAM, "Zero")
+    field(ONAM, "Disabled By Switch")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-DisabledByDI.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-DisabledByDI"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Disabled By DI")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.BA")
+    field(ZNAM, "Zero")
+    field(ONAM, "Disabled By DI")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-DisabledByOutput.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-DisabledByOutput"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Disabled By Output")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.BB")
+    field(ZNAM, "Zero")
+    field(ONAM, "Disabled By Output")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Diag.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Diag"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Diag")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.BC")
+    field(ZNAM, "Zero")
+    field(ONAM, "Diag")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateDeviceSwitch.PROC")
+}
+
+#record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-TxPDOState"){
+#    field(DESC, "$(HWTYPE): CH$(CH_ID): TxPDO State")
+#    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.BD")
+#    field(ZNAM, "Zero")
+#    field(ONAM, "TxPDO State")
+#    field(ZSV,  "NO_ALARM")
+#    field(OSV,  "MAJOR")
+#    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-InputCycleCounter.PROC")
+#}
+#
+#record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-InputCycleCounter"){
+#    field(DESC, "$(HWTYPE): CH$(CH_ID): TxPDO State")
+#    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.BE")
+#    field(ZNAM, "Zero")
+#    field(ONAM, "Input Cycle Counter")
+#    field(ZSV,  "NO_ALARM")
+#    field(OSV,  "MAJOR")
+#    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateDeviceSwitch.PROC")
+#}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateDeviceSwitch"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): State Device Switch")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B10")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateDigitalInput.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateDigitalInput"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Status Digital Input")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B11")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Error.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Error"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): Error")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B12")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateReset.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateReset"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): State Reset")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B13")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateSwitch.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateSwitch"){
+    field(DESC, "$(HWTYPE): CH$(CH_ID): State Switch")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B14")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    #field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateReset.PROC")
+}
+
+
+###Needs check!!######
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Load"){
+    field(DESC, "$(HWTYPE): Load")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_LOAD?")
+    field(PREC, "0")
+    field(SCAN, "I/O Intr")
+    #field(LINR, "SLOPE")
+    #field(ESLO, "3.0518509476E-4")
+    field(EOFF, "0")
+    field(EGU, "%")
+    field(TSE,  "$(TSE=-2)")
+}
+
+###Needs check!!######
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Current"){
+    field(DESC, "$(HWTYPE): Current")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CURRENT?")
+    field(PREC, "3")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "6.5535447249E-4")
+    field(EOFF, "0")
+    field(EGU, "0.01 A")
+    field(TSE,  "$(TSE=-2)")
+}
+
+###Needs check!!######
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageIn"){
+    field(DESC, "$(HWTYPE): Voltage In")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VOLTAGE_IN?")
+    field(PREC, "3")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "6.5535447249E-4")
+    field(EOFF, "0")
+    field(EGU, "0.1 V")
+    field(TSE,  "$(TSE=-2)")
+}
+
+###Needs check!!######
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageOut"){
+    field(DESC, "$(HWTYPE): Voltage Out")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VOLTAGE_OUT?")
+    field(PREC, "3")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "6.5535447249E-4")
+    field(EOFF, "0")
+    field(EGU, "0.1 V")
+    field(TSE,  "$(TSE=-2)")
+}
+
+
+######OCP RxPDO-Map Outputs#######
+
+###Trial 1 - Access with Control Word###
+
+record(mbboDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_"){
+    field(DESC, "$(HWTYPE): Control Word")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt16ArrayOut")
+    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL?")
+}
+
+#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset"){
+#    field(DESC, "$(HWTYPE): Reset")
+#    field(PINI, "$(PINI=1)")
+#    field(SCAN, "PASSIVE")
+#    #field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
+#    field(FLNK,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
+#    field(VAL,  "0")
+#    field(ZNAM, "Zero")
+#    field(ONAM, "One")
+#}
+
+#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch"){
+#    field(DESC, "$(HWTYPE): Switch")
+#    field(PINI, "$(PINI=1)")
+#    field(SCAN, "PASSIVE")
+#    #field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
+#    field(FLNK,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
+#    field(VAL,  "0")
+#    field(ZNAM, "Zero")
+#    field(ONAM, "One")
+#}
+
+
+###Trial 2 - Access without Control Word####
+
+#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset"){
+#    field(DESC, "$(HWTYPE): Ctrl-Reset")
+#    field(PINI, "$(PINI=1)")
+#    field(DTYP, "asynInt32")
+#    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUIntDigital32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_RESET?")
+#    field(ZNAM, "Zero")
+#    field(ONAM, "One")
+#    field(SCAN, "PASSIVE")
+#}
+
+#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch"){
+#    field(DESC, "$(HWTYPE): Ctrl-Switch")
+#    field(PINI, "$(PINI=1)")
+#    field(DTYP, "asynInt32")
+#    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_SWITCH?")
+#    #field(SCAN, "PASSIVE")
+#}
