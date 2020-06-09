@@ -273,54 +273,34 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageOut"){
 
 ######OCP RxPDO-Map Outputs#######
 
-###Trial 1 - Access with Control Word###
+###Access with Control Word###
 
 record(mbboDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_"){
     field(DESC, "$(HWTYPE): Control Word")
     field(PINI, "$(PINI=1)")
-    field(DTYP, "asynInt16ArrayOut")
-    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL?")
+    field(DTYP, "asynUInt32Digital")
+    #field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL=")
+    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL?")
 }
 
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset"){
-#    field(DESC, "$(HWTYPE): Reset")
-#    field(PINI, "$(PINI=1)")
-#    field(SCAN, "PASSIVE")
-#    #field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
-#    field(FLNK,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
-#    field(VAL,  "0")
-#    field(ZNAM, "Zero")
-#    field(ONAM, "One")
-#}
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset"){
+    field(DESC, "$(HWTYPE): Reset")
+    field(PINI, "$(PINI=1)")
+    #field(SCAN, "PASSIVE")
+    #field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
+    field(FLNK,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
+    field(VAL,  "0")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
 
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch"){
-#    field(DESC, "$(HWTYPE): Switch")
-#    field(PINI, "$(PINI=1)")
-#    field(SCAN, "PASSIVE")
-#    #field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
-#    field(FLNK,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
-#    field(VAL,  "0")
-#    field(ZNAM, "Zero")
-#    field(ONAM, "One")
-#}
-
-
-###Trial 2 - Access without Control Word####
-
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset"){
-#    field(DESC, "$(HWTYPE): Ctrl-Reset")
-#    field(PINI, "$(PINI=1)")
-#    field(DTYP, "asynInt32")
-#    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUIntDigital32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_RESET?")
-#    field(ZNAM, "Zero")
-#    field(ONAM, "One")
-#    field(SCAN, "PASSIVE")
-#}
-
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch"){
-#    field(DESC, "$(HWTYPE): Ctrl-Switch")
-#    field(PINI, "$(PINI=1)")
-#    field(DTYP, "asynInt32")
-#    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_SWITCH?")
-#    #field(SCAN, "PASSIVE")
-#}
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch"){
+    field(DESC, "$(HWTYPE): Switch")
+    field(PINI, "$(PINI=1)")
+    #field(SCAN, "PASSIVE")
+    #field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
+    field(FLNK,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
+    field(VAL,  "0")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
