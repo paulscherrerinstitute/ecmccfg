@@ -1,0 +1,29 @@
+# AI record
+record(ai,"$(P)AI"){
+  field(PINI, "1")
+  field(INP, "$(P)AO.VAL")
+}
+
+# AO record
+record(ao,"$(P)AO"){
+  field(PINI, "1")
+  field(FLNK, "$(P)AI.PROC")
+  field(SCAN, "Passive")
+}
+
+# BI record
+record(bi,"$(P)BI"){
+  field(PINI, "1")    
+  field(INP,  "$(P)BO.VAL")
+  field(ONAM, "One")
+  field(ZNAM, "Zero")
+}
+
+# BO record
+record(bo,"$(P)BO"){
+  field(PINI, "1")
+  field(SCAN, "Passive")
+  field(FLNK, "$(P)BI.PROC")
+  field(ONAM, "One")
+  field(ZNAM, "Zero")
+}
