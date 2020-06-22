@@ -135,4 +135,5 @@ record(waveform,"$(P)MCU-updated"){
   field(NELM, "1")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
+  field(FLNK, "${ECMC_PROC_HOOK=''}")
 }

@@ -4,9 +4,9 @@ Example shows how to:
 2. write an ecmc plc value to an external PV (IOC_TEST:FromPLC to IOC_TEST:ToExternal)
 
 ## Run example
-´´´
+``` 
 $ iocsh.bash external.script
-´´´
+``` 
 
 ## Records
 * IOC_TEST:FromPLC      : AI record reading a plc variable ("plcs.plc0.static.toEpics")
@@ -15,11 +15,11 @@ $ iocsh.bash external.script
 * IOC_TEST:ToExternal   : AI record writing a value to external system
 
 ## camonitor
-´´´
-camonitor IOC_TEST:FromPLC IOC_TEST:FromExternal IOC_TEST:ToPLC IOC_TEST:ToExternal
-´´´
+``` 
+$ camonitor IOC_TEST:FromPLC IOC_TEST:FromExternal IOC_TEST:ToPLC IOC_TEST:ToExternal
+``` 
 
 ## caput
-´´´
-caput IOC_TEST:FromExternal 10
-´´´
+``` 
+$ caput IOC_TEST:FromExternal 10
+``` 

@@ -54,6 +54,11 @@ epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
 #-
 #-------------------------------------------------------------------------------
+#- define the link to a PV that should be foward-linked after EC-frame is processes
+#- This is for deterministic processing of data _after_ ECMC is done
+epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
+#-
+#-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
 ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
@@ -65,7 +70,6 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 #- Set current EtherCAT sample rate
 #- Note: Not the same as ECMC_SAMPLE_RATE_MS which is for record update
 epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
-#_
 #-
 #-------------------------------------------------------------------------------
 #- add master (defaults to '0')
