@@ -21,7 +21,7 @@ require ecmccfg master
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.1,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware:
@@ -88,6 +88,11 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=3,FILE=${ECMC_PLUGIN_FILN
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
 epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
+########################################################################s######
+## Load plugin 4: Utils use exteran_ioc.script to start the "target" ioc for the bleo plc code
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Utils/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_Utils.so")
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=4,FILE=${ECMC_PLUGIN_FILNAME},CONFIG=MAX_PV_COUNT=5, REPORT=1"
+
 ##############################################################################
 ## Data Storage 1
 #
@@ -104,6 +109,11 @@ dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.sta
 #
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=1000,FILE=./plc/plc_no_ec_adv.plc ,PLC_MACROS='DBG='")
 dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.test,REC_NAME=-Test,TSE=0,T_SMP_MS=1000")
+
+##############################################################################
+## PLC 2: pvaAccess test code
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=2, SAMPLE_RATE_MS=100,FILE=./plc/ecmc_pva.plc, PLC_MACROS='DBG=,PLC_ID=2'")
+
 
 ##############################################################################
 ############# Configure diagnostics:

@@ -1,0 +1,131 @@
+###############################################################################
+# Example of pv access fucntions in ecmcPlugin_Utils
+# The pvAccess commands can take "long" time, which can disturb the realtime
+# thread, and is therefore executed async in a separate thread.
+#
+# Workflow for a "pv_get()" operation: (update automatically from monitor)
+#  1: Regsiter PV with pv_reg_asyn() command (returns handle)
+#  2: Wait for pv_reg_asyn() to finish (pv_busy(), pv_conencted())
+#  3: Get last read value with pv_get().
+#  4: Goto 3 (read again)
+#
+# Workflow for a "pv_put()" operation:
+#  1: Regsiter PV with pv_reg_asyn() command (returns handle)
+#  2: Wait for pv_reg_asyn() to finish (pv_busy())
+#  3: Initiate async write command with pv_put_asyn())
+#  4: Wait for pv_put_asyn() to finish (pv_busy())
+#  5: Goto 3 (write again)
+#
+###############################################################################
+
+static.AO:=static.AO+1;
+
+var error:=0;
+
+####### READ PV IOC_DUMMY:AI ###################################################
+
+# Register pv IOC_DUMMY:AI when ecmc ioc has started
+if(ioc_get_started() and static.aiHandle=0) {
+  static.aiHandle:=pv_reg_asyn('IOC_DUMMY:AI','pva');
+  if(static.aiHandle < 0) {
+    static.failCount +=1; 
+    println('Failed reg IOC_DUMMY:AI, fail count:', static.failCount);
+    # Test to register again
+    static.aiHandle:=0;
+  };
+};
+
+# Read value of "IOC_DUMMY:AI" when registered (auto updates via monitor)
+if(static.aiHandle > 0) {
+  if(pv_connected(static.aiHandle)) {
+    # Value auto update by monitor.
+    static.before1:=ec_get_time();
+    var retPvGet:=pv_get(static.aiHandle);    
+    static.after1:=ec_get_time();
+    ${DBG=#}println('pv_get AI exe time [ns] : ', static.after1-static.before1);
+    ${DBG=#}println('Get AI from PV:', retPvGet);
+  };
+};
+
+####### WRITE PV IOC_DUMMY:AO ##################################################
+
+# Register pv IOC_DUMMY:AO when ecmc ioc has started
+if(ioc_get_started() and static.aoHandle=0) {
+  static.before2:=ec_get_time();
+  static.aoHandle:=pv_reg_asyn('IOC_DUMMY:AO','pva');
+  static.after2:=ec_get_time();
+  ${DBG=#}println('pv_reg_asyn exe time [ns] : ', static.after2-static.before2);
+
+  if(static.aoHandle < 0) {
+    static.failCount +=1; 
+    println('Failed reg IOC_DUMMY:AO, fail count:', static.failCount);
+    # Test to reg again
+    static.aoHandle:=0;
+  };
+};
+
+# Write value of "IOC_DUMMY:AO" when registered
+if(static.aoHandle > 0) {
+  if(pv_connected(static.aoHandle)) {
+    # Start new write if not busy
+    if(not(pv_busy(static.aoHandle))) {
+      static.before3:=ec_get_time();
+      error:=pv_put_asyn(static.aoHandle,static.AO);
+      static.after3:=ec_get_time();
+      ${DBG=#}println('Put AO to PV  :', static.AO);
+      ${DBG=#}println('pv_put_asyn AO exe time [ns] : ', static.after3-static.before3);
+      ${DBG=#}println('Busy after pv_put_asyn(): ', pv_busy(static.aoHandle));
+    }else {    
+      ${DBG=#}println('Still busy pv_put_asyn()...');
+    }      
+  };
+};
+
+####### READ PV IOC_DUMMY:BI ###################################################
+
+# Register pv IOC_DUMMY:BI when ecmc ioc has started
+if(ioc_get_started() and static.biHandle=0) {
+  static.biHandle:=pv_reg_asyn('IOC_DUMMY:BI','pva');
+  if(static.biHandle < 0) {
+    static.failCount +=1; 
+    println('Failed reg IOC_DUMMY:BI, fail count:', static.failCount);
+    # Test to reg again
+    static.biHandle:=0;
+  };  
+};
+
+# Read value of "IOC_DUMMY:BI" when registered (auto updates via monitor)
+if(static.biHandle > 0) {
+  if(pv_connected(static.biHandle)) {
+    var retPvBIGet:=pv_get(static.biHandle);
+    ${DBG=#}println('Get BI from PV:', retPvBIGet);    
+  };
+};
+
+####### WRITE PV IOC_DUMMY:BO ##################################################
+
+# Register pv IOC_DUMMY:BO when ecmc ioc has started
+if(ioc_get_started() and static.boHandle=0) {
+  static.boHandle:=pv_reg_asyn('IOC_DUMMY:BO','pva');
+  if(static.boHandle < 0) {
+    static.failCount +=1; 
+    println('Failed reg IOC_DUMMY:BO, fail count:', static.failCount);
+    # Test to reg again
+    static.boHandle:=0;
+  };
+};
+
+# Write value of "IOC_DUMMY:BO" when registered
+if(static.boHandle > 0) {
+  if(pv_connected(static.boHandle)) {
+    # Start new write if not busy
+    if(not(pv_busy(static.boHandle))) {
+      static.BO:=not(static.BO);
+      error:=pv_put_asyn(static.boHandle,static.BO);
+      ${DBG=#}println('Put BO to PV  :', static.BO);    
+      ${DBG=#}println('Busy after pv_put_asyn(): ', pv_busy(static.boHandle), ', err: ', pv_err(static.boHandle));
+    }else {    
+      ${DBG=#}println('Still busy pv_put_asyn()...');
+    }
+  };
+};
