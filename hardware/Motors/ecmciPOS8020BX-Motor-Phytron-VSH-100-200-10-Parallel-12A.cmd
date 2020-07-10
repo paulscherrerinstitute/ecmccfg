@@ -1,15 +1,15 @@
 #-d /**
-#-d   \brief hardware script for iPOS8020-Motor--Phytron-VSH-100-200-10-Parallel-8A
-#-d   \details Parmetrization of technosoft IPOS8020 for motor Phytron VSH.100.200.10 Parallel (8A)
+#-d   \brief hardware script for iPOS8020-Motor--Phytron-VSH-100-200-10-Parallel-12A
+#-d   \details Parmetrization of technosoft IPOS8020 for motor Phytron VSH.100.200.10 Parallel (12A)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS8020 for Phytron VSH.100.200.10 Parallel (8A)
+#- ############ Parmetrization of technosoft IPOS8020 for Phytron VSH.100.200.10 Parallel (12A)
 #-
 #-   Connection Parallel connection
-#-   Run current: 8A
+#-   Run current: 12A
 #-   Max current protection: (1.25*Run current)
 #-   standby current: 1.0A
 #-   NoMicroStepsPerStep=256
@@ -22,4 +22,4 @@
 #-d   I_MAX_PROT:    Max current protection limit (defaults to 1.25*ECMC_I_RUN_SET)
 
 ecmcFileExist("${ecmccfg_DIR}ecmciPOS8020BX-Motor-Phytron-VSH-100-200-10-Parallel-XA.cmd")
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmciPOS8020BX-Motor-Phytron-VSH-100-200-10-Parallel-XA.cmd "I_RUN_SET=8"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmciPOS8020BX-Motor-Phytron-VSH-100-200-10-Parallel-XA.cmd "I_RUN_SET=12"
