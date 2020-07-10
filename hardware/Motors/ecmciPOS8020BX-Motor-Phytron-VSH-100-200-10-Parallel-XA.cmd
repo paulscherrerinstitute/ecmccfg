@@ -6,7 +6,7 @@
 #-d   Argumemts:
 #-d   I_RUN_SET:     Running current in amps (defualts to 10). Allowed range 0..14 
 #-d   I_STDBY_SET:   Stanbby current in amps (defualts to 1) 
-#-d   I_MAX_PROT:    Max current protection limit (defaults to 1.25*ECMC_I_RUN_SET)
+#-d   I_MAX_PROT:    Max current protection limit (defaults to ECMC_I_RUN_SET+3)
 #-d */
 
 #- ###########################################################
@@ -108,12 +108,11 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #- ############ Max Current protection: TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?IMAXPROT
 #-  IMAXPROT at technosoft address 0x0295
 #-  IMAXPROT=From args
-ecmcEpicsEnvSetCalc("ECMC_TEMP_IMAXPROT_CALC_1",1.25*${I_RUN_SET=10})
-ecmcEpicsEnvSetCalc("ECMC_TEMP_IMAXPROT_CALC_2",${I_MAX_PROT=${ECMC_TEMP_IMAXPROT_CALC_1}}*819,"%04x")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_IMAXPROT_CALC","if(${I_MAX_PROT=0}>0){ RESULT:=${I_MAX_PROT=0}*819;} else {RESULT:= (${I_RUN_SET=10}+3)*819;};","%04x")
 
-#-  Write data IMAXPROT=0x1FFE
+#-  Write data IMAXPROT
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0295")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         ${ECMC_TEMP_IMAXPROT_CALC_2})
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         ${ECMC_TEMP_IMAXPROT_CALC})
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #- ############ Speed controller:
@@ -148,5 +147,4 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2026,0x0,${ECMC_TEMP_I_STDB
 #- Cleanup
 epicsEnvUnset("ECMC_TEMP_I_STDBY_SET")
 epicsEnvUnset("ECMC_TEMP_I_RUN_SET")
-epicsEnvUnset("ECMC_TEMP_IMAXPROT_CALC_1")
-epicsEnvUnset("ECMC_TEMP_IMAXPROT_CALC_2")
+epicsEnvUnset("ECMC_TEMP_IMAXPROT_CALC")
