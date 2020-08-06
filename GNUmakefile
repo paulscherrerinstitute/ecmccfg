@@ -1,11 +1,12 @@
 include /ioc/tools/driver.makefile
+include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = 6.2.1
+LIBVERSION = dev
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS=3
+EXCLUDE_VERSIONS=3 7.0.4.1
 ARCH_FILTER=RHEL%
 
 SCRIPTS+=startup.cmd
