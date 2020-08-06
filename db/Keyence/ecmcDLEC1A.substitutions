@@ -1,0 +1,18 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcDLEC1A_chX.template"
+{
+  pattern { CH_ID,  EGU,  ESLO,   PREC }
+          { 1,      "mm", 0.0001, 4    }
+          { 2,      "mm", 0.0001, 4    }
+          { 3,      "mm", 0.0001, 4    }
+          { 4,      "mm", 0.0001, 4    }
+          { 5,      "mm", 0.0001, 4    }
+          { 6,      "mm", 0.0001, 4    }
+          { 7,      "mm", 0.0001, 4    }
+          { 8,      "mm", 0.0001, 4    }
+}
