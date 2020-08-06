@@ -14,18 +14,6 @@ ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},$
 #- ###########################################################
 #- ############ Config PDOS:
 
-#- SM2: PhysAddr 0x1c00, DefaultSize    0, ControlRegister 0x24, Enable 1
-#-   RxPDO 0x1600 "Input Request 1 RxPDOMap"
-#-     PDO entry 0x7000:01, 32 bit, "Request 1"
-#-   RxPDO 0x1601 "Input Request 2 RxPDOMap"
-#-     PDO entry 0x7000:02, 32 bit, "Request 2"
-#-   RxPDO 0x1602 "Input Request 3 RxPDOMap"
-#-     PDO entry 0x7000:03, 32 bit, "Request 3"
-#-   RxPDO 0x1603 "Input Request 4 RxPDOMap"
-#-     PDO entry 0x7000:04, 32 bit, "Request 4"
-#-   RxPDO 0x1604 "Input Request 5 RxPDOMap"
-#-     PDO entry 0x7000:05, 32 bit, "Request 5"
-
 #- #### Main device
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x1,32,INP_REQ1)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7000,0x2,32,INP_REQ2)"
@@ -220,62 +208,3 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,${ECMC_EC_PDO_INDEX},${ECMC_EC_SDO_INDEX},0x0f,1,GAP)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,${ECMC_EC_PDO_INDEX},${ECMC_EC_SDO_INDEX},0x10,1,CH${CH_ID}_WRN)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,${ECMC_EC_PDO_INDEX},${ECMC_EC_SDO_INDEX},0x11,1,CH${CH_ID}_ERR)"
-
-
-
-
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a21,0x6110,0x01,32,CH2_VALUE)"
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a22,0x6120,0x01,32,CH3_VALUE)"
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a23,0x6130,0x01,32,CH4_VALUE)"
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a24,0x6140,0x01,32,CH5_VALUE)"
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a25,0x6150,0x01,32,CH6_VALUE)"
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a26,0x6160,0x01,32,CH7_VALUE)"
-# ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a27,0x6170,0x01,32,CH8_VALUE)"
-
-# TxPDO 0x1a30 "ID01 Status TxPDOMap"
-#   PDO entry 0x6100:02,  1 bit, "ID01 Output 1"
-#   PDO entry 0x6100:03,  1 bit, "ID01 Output 2"
-#   PDO entry 0x6100:04,  1 bit, "ID01 Output 3"
-#   PDO entry 0x6100:05,  1 bit, "ID01 Output 4"
-#   PDO entry 0x6100:06,  1 bit, "ID01 Output 5"
-#   PDO entry 0x6100:07,  1 bit, "Reserved"
-#   PDO entry 0x6100:08,  1 bit, "Reserved"
-#   PDO entry 0x6100:09,  1 bit, "Reserved"
-#   PDO entry 0x6100:0a,  1 bit, "Reserved"
-#   PDO entry 0x6100:0b,  1 bit, "ID01 Current Value Invalid"
-#   PDO entry 0x6100:0c,  1 bit, "ID01 Current Value Under Range"
-#   PDO entry 0x6100:0d,  1 bit, "ID01 Current Value Over Range"
-#   PDO entry 0x6100:0e,  1 bit, "Reserved"
-#   PDO entry 0x6100:0f,  1 bit, "Reserved"
-#   PDO entry 0x6100:10,  1 bit, "ID01 Warning Status"
-#   PDO entry 0x6100:11,  1 bit, "ID01 Error Status"
-
-# TxPDO 0x1a20 "ID01 Current Value  TxPDOMap"
-#   PDO entry 0x6100:01, 32 bit, "ID01 Current Value (P.V.)"
-# TxPDO 0x1a21 "ID02 Current Value  TxPDOMap"
-#   PDO entry 0x6110:01, 32 bit, "ID02 Current Value (P.V.)"
-# TxPDO 0x1a22 "ID03 Current Value  TxPDOMap"
-#   PDO entry 0x6120:01, 32 bit, "ID03 Current Value (P.V.)"
-# TxPDO 0x1a23 "ID04 Current Value  TxPDOMap"
-#   PDO entry 0x6130:01, 32 bit, "ID04 Current Value (P.V.)"
-# TxPDO 0x1a24 "ID05 Current Value  TxPDOMap"
-#   PDO entry 0x6140:01, 32 bit, "ID05 Current Value (P.V.)"
-# TxPDO 0x1a25 "ID06 Current Value  TxPDOMap"
-#   PDO entry 0x6150:01, 32 bit, "ID06 Current Value (P.V.)"
-# TxPDO 0x1a26 "ID07 Current Value  TxPDOMap"
-#   PDO entry 0x6160:01, 32 bit, "ID07 Current Value (P.V.)"
-# TxPDO 0x1a27 "ID08 Current Value  TxPDOMap"
-#   PDO entry 0x6170:01, 32 bit, "ID08 Current Value (P.V.)"
-#
-# SM3: PhysAddr 0x1800, DefaultSize    0, ControlRegister 0x20, Enable 1
-#   TxPDO 0x1a00 "Status of System TxPDOMap"
-#     PDO entry 0x6000:01,  1 bit, "Error Status"
-#     PDO entry 0x6000:02,  1 bit, "Warning Status"
-#     PDO entry 0x6000:03,  1 bit, "Reserved"
-#     PDO entry 0x6000:04,  1 bit, "Current Value Property"
-#     PDO entry 0x6000:05,  1 bit, "Reserved"
-#     PDO entry 0x6000:06,  1 bit, "Reserved"
-#     PDO entry 0x6000:07,  1 bit, "Reserved"
-#     PDO entry 0x6000:08,  1 bit, "Reserved"
-#     PDO entry 0x6000:09,  8 bit, "Reserved"
-#     PDO entry 0x6000:0a, 16 bit, "Error Code"
