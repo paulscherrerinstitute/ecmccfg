@@ -6,7 +6,7 @@ MODULE=ecmccfg
 LIBVERSION = dev
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS=3 7.0.4.1
+EXCLUDE_VERSIONS=3 7.0.3
 ARCH_FILTER=RHEL%
 
 SCRIPTS+=startup.cmd
@@ -25,3 +25,4 @@ TEMPLATES+=$(wildcard ./db/*/*.db)
 TEMPLATES+=$(wildcard ./db/*/*.template)
 TEMPLATES+=$(wildcard ./db/*/*.substitutions)
 TEMPLATES+=$(wildcard ./db/*/*.subs)
+
