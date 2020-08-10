@@ -1,0 +1,27 @@
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-ERROR"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(HWTYPE): Error Status")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ERR_STATUS?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=MAJOR)")
+  field(FLNK, "$(FLNK=)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-WARNING"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(HWTYPE): Warning Status")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).WRN_STATUS?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=MINOR)")
+  field(FLNK, "$(FLNK=)")
+  field(TSE,  "$(TSE=-2)")
+}
