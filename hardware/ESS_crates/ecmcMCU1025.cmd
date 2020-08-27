@@ -41,7 +41,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DES
 
 #Configure EL7037 stepper drive terminal, motor 1
 ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B, CFG_MACROS='RUN_CURR_MA=900,STBY_CURR_MA=200'"
 
 #Configure EL7037 stepper drive terminal, motor 2
 ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
