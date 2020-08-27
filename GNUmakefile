@@ -1,8 +1,9 @@
 include /ioc/tools/driver.makefile
+include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = 6.2.1
+LIBVERSION = 6.2.2
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS=3
@@ -24,3 +25,4 @@ TEMPLATES+=$(wildcard ./db/*/*.db)
 TEMPLATES+=$(wildcard ./db/*/*.template)
 TEMPLATES+=$(wildcard ./db/*/*.substitutions)
 TEMPLATES+=$(wildcard ./db/*/*.subs)
+
