@@ -1,21 +1,17 @@
 #-d /**
-#-d   \brief hardware script for iPOS8020-Motor-McLennan-34HT18C340-Parallel
-#-d   \details Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
+#-d   \brief hardware script for iPOS8020-Motor-Stoegra-SM107-3-18M12-Parallel
+#-d   \details Parmetrization of technosoft IPOS8020 for motor Stögra SM107.3.18M12 Parallel
 #-d   \author Anders Sandstroem
-#-d   \note Max current for this motor is set to 5600mA RMS = 5600*1.4=7800mA, drive allows 20000mA
-#-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 5000mA)
-#-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 2000mA)
+#-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 10000mA)
+#-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 1000mA)
 #-d   \param I_MAX_PROT_MA: (optional) Max current protection limit (defaults to I_RUN_MA + 3000mA)
 #-d   \file
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
+#- ############ Parmetrization of technosoft IPOS8020 for Phytron VSH.100.200.10 Parallel (10A)
 #-
 #-   Connection Parallel connection
-#-   Max current: 5.6A
-#-   Run current: 5.0A
-#-   standby current: 2.0A
 #-   NoMicroStepsPerStep=256
 #-   NoMotorSteps=200
 #-
@@ -36,10 +32,10 @@
 #-  Bit 0: 0 (16bit)
 #-  Result: 0x2710084
 
-#- Motor max 5600mA = 7800mA, Drive max 20000mA peak => Use 7800mA
-epicsEnvSet(I_MAX_MA_LOCAL,"7800")
-epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=5000})
-epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=2000})
+#- Motor max 10000mArms = 14000mApeak, Drive max 20000mA peak => Use 14000mA
+epicsEnvSet(I_MAX_MA_LOCAL,"14000")
+epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=10000})
+epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=1000})
 
 #- Ensure valid current settings 
 ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
@@ -87,14 +83,14 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  Formula Kp=KPI/32767*2^SFTKPI
 #-  Kp=18.398 (from autotune in EasyMotionStudio)=>KPI=18839, SFTKPI=5
 
-#-  Write data KPI=0x4997 (18839dec)
+#-  Write data KPI=0x5309
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0271")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "4997")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "5309")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
-#-  Write data SFTKPI=0x5(5dec)
+#-  Write data SFTKPI=0x0
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0272")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0005")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0000")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #-  KII at technosoft address 0x0273 range 0..32737 (int). TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?KII
@@ -102,14 +98,14 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  Formula Ki=KII/32767*2^SFTKII
 #-  Ki=2.028 (from autotune in EasyMotionStudio)=>KII=16407, SFTKII=2
 
-#-  Write data KII=0x4017 (16407dec)
+#-  Write data KII=0x1291
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0273")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "4017")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "1291")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
-#-  Write data SFTKII=0x2 (2dec)
+#-  Write data SFTKII=0x0
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0274")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0000")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #- ############ Max Current protection: TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?IMAXPROT
