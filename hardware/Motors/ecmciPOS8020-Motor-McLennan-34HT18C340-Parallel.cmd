@@ -2,6 +2,10 @@
 #-d   \brief hardware script for iPOS8020-Motor-McLennan-34HT18C340-Parallel
 #-d   \details Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
 #-d   \author Anders Sandstroem
+#-d   \note Max current for this motor is set to 5600mA RMS = 5600*1.4=7800mA, drive allows 20000mA
+#-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 5000mA)
+#-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 2000mA)
+#-d   \param I_MAX_PROT_MA: (optional) Max current protection limit (defaults to I_RUN_MA + 3000mA)
 #-d   \file
 #-d */
 
@@ -31,7 +35,18 @@
 #-  Bit 1: Always 0
 #-  Bit 0: 0 (16bit)
 #-  Result: 0x2710084
-epicsEnvSet("ECMC_TECHNOSOFT_CFG_HEX"          "0084")
+
+#- Motor max 5600mA = 7800mA, Drive max 20000mA peak => Use 7800mA
+epicsEnvSet(I_MAX_MA_LOCAL,"7800")
+epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=5000})
+epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=2000})
+
+#- Ensure valid current settings 
+ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=${I_STDBY_MA_LOCAL},I_MAX_MA=${I_MAX_MA_LOCAL}"
+
+#- Start parametrization
+epicsEnvSet("I_MAX_MA_LOCAL"          "0084")
 
 #- ############ Number of steps per revolution:
 #-  NOTE:If changed from default then save and reset is needed (SE BELOW "Save and Reset section")!
@@ -101,9 +116,14 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  IMAXPROT at technosoft address 0x0295
 #-  IMAXPROT=Imax*819=5.6*819=4586dec (0x11EA)
 
-#-  Write data IMAXPROT=0x11EA (4586dec)
+#- ############ Max Current protection: TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?IMAXPROT
+#-  IMAXPROT at technosoft address 0x0295
+#-  IMAXPROT=From args
+ecmcEpicsEnvSetCalc("ECMC_TEMP_IMAXPROT","if(${I_MAX_PROT_MA=0}>0){ RESULT:=${I_MAX_PROT_MA=0}*819/1000;} else {RESULT:= (${I_RUN_MA_LOCAL}+3000)*819/1000;};","%04x")
+
+#-  Write data IMAXPROT
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0295")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "11EA")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         ${ECMC_TEMP_IMAXPROT})
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #- ############ Speed controller:
@@ -127,8 +147,18 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  NOTE: SHOULD NOT BE USED. Already set above! Steps per rev 200poles, 256 levels of microstepping=>51200steps SHOULD NOT BE USED.
 #- ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2084,0x0,51200,4)"
 
-#-  Stepper current in open loop configuration 5A => 4095 (Isetting=2*Ipeak/65520*I, Ipeak=40A =>Isetting=819*I)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2025,0x0,4095,4)"
+#-  Stepper current in open loop configuration (Isetting=2*Ipeak/65520*I, Ipeak=40A =>Isetting=819*I)
+ecmcEpicsEnvSetCalc("ECMC_TEMP_I_RUN_SET","${I_RUN_MA_LOCAL}*819/1000","%d")
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2025,0x0,${ECMC_TEMP_I_RUN_SET},4)"
 
-#-  Stepper current in standby (open loop) 2A=>1638 (Isetting=2*Ipeak/65520*I, Ipeak=40A =>Isetting=819*I)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2026,0x0,1638,4)"
+#-  Stepper current in standby (open loop) 1A=>819 (Isetting=2*Ipeak/65520*I, Ipeak=40A =>Isetting=819*I)
+ecmcEpicsEnvSetCalc("ECMC_TEMP_I_STDBY_SET","${I_STDBY_MA_LOCAL}*819/1000","%d")
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2026,0x0,${ECMC_TEMP_I_STDBY_SET},4)"
+
+#- Cleanup
+epicsEnvUnset("ECMC_TEMP_I_STDBY_SET")
+epicsEnvUnset("ECMC_TEMP_I_RUN_SET")
+epicsEnvUnset("ECMC_TEMP_IMAXPROT")
+epicsEnvUnset("I_RUN_MA_LOCAL")
+epicsEnvUnset("I_STDBY_MA_LOCAL")
+epicsEnvUnset("I_MAX_MA_LOCAL")

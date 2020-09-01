@@ -1,6 +1,6 @@
 #==============================================================================
 # configureSlave.cmd
-#- Arguments: HW_DESC, CONFIG, [SLAVE_ID = 0]
+#- Arguments: HW_DESC, CONFIG, [SLAVE_ID = 0], [CFG_MACROS]
 
 #-d /**
 #-d   \brief Script for adding a slave with dedicated slave configuration to the EtherCAT bus configuration.
@@ -11,6 +11,7 @@
 #-d   \param CONFIG configuration file, i.e. -Motor-Nanotec-ST4118L1804-B
 #-d   \note The CONFIG together with the HW_DESC form the full filename which by definition is ecmc${HW_DESC}${CONFIG}.cmd, i.e.: _ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd_
 #-d   \param SLAVE_ID (optional) bus position
+#-d   \param CFG_MACROS (optional) Substitution macros for config file
 #-d   \note Example calls:
 #-d   \note - call w/o SLAVE_ID
 #-d   \code
@@ -30,4 +31,4 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}addSlave.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd "SLAVE_ID=${SLAVE_ID}, HW_DESC=${HW_DESC}"
 # apply config ${CONFIG} for ${HW_DESC}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd "${CFG_MACROS=""}"

@@ -1,21 +1,18 @@
 #-d /**
-#-d   \brief hardware script for iPOS8020-Motor-McLennan-34HT18C340-Parallel
-#-d   \details Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
+#-d   \brief hardware script for iPOS8020-Motor-Stoegra-SM107-3-18M12-Parallel-XA
+#-d   \details Parmetrization of technosoft IPOS8020 for motor Stögra SM107.3.18M12 Parallel (XA)
 #-d   \author Anders Sandstroem
-#-d   \note Max current for this motor is set to 5600mA RMS = 5600*1.4=7800mA, drive allows 20000mA
-#-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 5000mA)
-#-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 2000mA)
-#-d   \param I_MAX_PROT_MA: (optional) Max current protection limit (defaults to I_RUN_MA + 3000mA)
 #-d   \file
+#-d   Argumemts:
+#-d   I_RUN_SET:     Running current in amps (defualts to 10). Allowed range 0..14 
+#-d   I_STDBY_SET:   Stanbby current in amps (defualts to 1) 
+#-d   I_MAX_PROT:    Max current protection limit (defaults to ECMC_I_RUN_SET+3)
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
+#- ############ Parmetrization of technosoft IPOS8020 for Phytron VSH.100.200.10 Parallel (10A)
 #-
 #-   Connection Parallel connection
-#-   Max current: 5.6A
-#-   Run current: 5.0A
-#-   standby current: 2.0A
 #-   NoMicroStepsPerStep=256
 #-   NoMotorSteps=200
 #-
@@ -35,18 +32,14 @@
 #-  Bit 1: Always 0
 #-  Bit 0: 0 (16bit)
 #-  Result: 0x2710084
-
-#- Motor max 5600mA = 7800mA, Drive max 20000mA peak => Use 7800mA
-epicsEnvSet(I_MAX_MA_LOCAL,"7800")
-epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=5000})
-epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=2000})
-
-#- Ensure valid current settings 
-ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=${I_STDBY_MA_LOCAL},I_MAX_MA=${I_MAX_MA_LOCAL}"
-
-#- Start parametrization
 epicsEnvSet("ECMC_TECHNOSOFT_CFG_HEX"          "0084")
+
+#- Ensure running current is below 17A (12*1.4) A otherwise exit (12A is max for this motor)
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_RUN_SET=10}>17 or ${I_RUN_SET=10}<=0", "ecmcExit Error: Current setpoint to high","# Current setting OK")
+# Result: 
+${ECMC_EXE_CMD}
+epicsEnvUnset(ECMC_EXE_CMD)
+
 
 #- ############ Number of steps per revolution:
 #-  NOTE:If changed from default then save and reset is needed (SE BELOW "Save and Reset section")!
@@ -87,14 +80,14 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  Formula Kp=KPI/32767*2^SFTKPI
 #-  Kp=18.398 (from autotune in EasyMotionStudio)=>KPI=18839, SFTKPI=5
 
-#-  Write data KPI=0x4997 (18839dec)
+#-  Write data KPI=0x5309
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0271")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "4997")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "5309")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
-#-  Write data SFTKPI=0x5(5dec)
+#-  Write data SFTKPI=0x0
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0272")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0005")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0000")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #-  KII at technosoft address 0x0273 range 0..32737 (int). TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?KII
@@ -102,24 +95,24 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  Formula Ki=KII/32767*2^SFTKII
 #-  Ki=2.028 (from autotune in EasyMotionStudio)=>KII=16407, SFTKII=2
 
-#-  Write data KII=0x4017 (16407dec)
+#-  Write data KII=0x1291
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0273")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "4017")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "1291")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
-#-  Write data SFTKII=0x2 (2dec)
+#-  Write data SFTKII=0x0
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0274")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0002")
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "0000")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #- ############ Max Current protection: TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?IMAXPROT
 #-  IMAXPROT at technosoft address 0x0295
 #-  IMAXPROT=From args
-ecmcEpicsEnvSetCalc("ECMC_TEMP_IMAXPROT","if(${I_MAX_PROT_MA=0}>0){ RESULT:=${I_MAX_PROT_MA=0}*819/1000;} else {RESULT:= (${I_RUN_MA_LOCAL}+3000)*819/1000;};","%04x")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_IMAXPROT_CALC","if(${I_MAX_PROT=0}>0){ RESULT:=${I_MAX_PROT=0}*819;} else {RESULT:= (${I_RUN_SET=10}+3)*819;};","%04x")
 
 #-  Write data IMAXPROT
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0295")
-epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         ${ECMC_TEMP_IMAXPROT})
+epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         ${ECMC_TEMP_IMAXPROT_CALC})
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 
 #- ############ Speed controller:
@@ -144,17 +137,14 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #- ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2084,0x0,51200,4)"
 
 #-  Stepper current in open loop configuration (Isetting=2*Ipeak/65520*I, Ipeak=40A =>Isetting=819*I)
-ecmcEpicsEnvSetCalc("ECMC_TEMP_I_RUN_SET","${I_RUN_MA_LOCAL}*819/1000","%d")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_I_RUN_SET","${I_RUN_SET=10}*819")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2025,0x0,${ECMC_TEMP_I_RUN_SET},4)"
 
 #-  Stepper current in standby (open loop) 1A=>819 (Isetting=2*Ipeak/65520*I, Ipeak=40A =>Isetting=819*I)
-ecmcEpicsEnvSetCalc("ECMC_TEMP_I_STDBY_SET","${I_STDBY_MA_LOCAL}*819/1000","%d")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_I_STDBY_SET","${I_STDBY_SET=1}*819")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2026,0x0,${ECMC_TEMP_I_STDBY_SET},4)"
 
 #- Cleanup
 epicsEnvUnset("ECMC_TEMP_I_STDBY_SET")
 epicsEnvUnset("ECMC_TEMP_I_RUN_SET")
-epicsEnvUnset("ECMC_TEMP_IMAXPROT")
-epicsEnvUnset("I_RUN_MA_LOCAL")
-epicsEnvUnset("I_STDBY_MA_LOCAL")
-epicsEnvUnset("I_MAX_MA_LOCAL")
+epicsEnvUnset("ECMC_TEMP_IMAXPROT_CALC")
