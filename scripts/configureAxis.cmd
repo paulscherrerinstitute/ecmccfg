@@ -10,6 +10,7 @@
 #-d   \param CONFIG configuration file, i.e. ./cfg/linear_1.pax
 #-d   \param DEV (optional) device name, i.e. MOTOR1
 #-d   \param CLEAR_VARS_CMD (optional) Set to "empty" for not clear env vars (if vars needed for later use).
+#-d   \param CFG_MACROS (optional) Substitution macros for config file
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=./cfg/linear_1.pax"
@@ -20,7 +21,7 @@
 #- set device name, default to ${IOC}
 epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 ecmcFileExist("${CONFIG}",1)
-${SCRIPTEXEC} ${CONFIG}
+${SCRIPTEXEC} ${CONFIG} "${CFG_MACROS=""}"
 ecmcFileExist("${ECMC_CONFIG_ROOT}addAxis.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addAxis.cmd
 #- Clear env vars
