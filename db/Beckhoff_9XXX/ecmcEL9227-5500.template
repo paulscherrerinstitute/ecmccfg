@@ -209,10 +209,8 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateSwitch"){
     #field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-StateReset.PROC")
 }
 
-
-###Needs check!!######
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Load"){
-    field(DESC, "$(HWTYPE): Load")
+    field(DESC, "$(HWTYPE): Load ")
     field(PINI, "$(PINI=1)")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_LOAD?")
@@ -225,7 +223,6 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Load"){
     field(TSE,  "$(TSE=-2)")
 }
 
-###Needs check!!######
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Current"){
     field(DESC, "$(HWTYPE): Current")
     field(PINI, "$(PINI=1)")
@@ -240,7 +237,6 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Current"){
     field(TSE,  "$(TSE=-2)")
 }
 
-###Needs check!!######
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageIn"){
     field(DESC, "$(HWTYPE): Voltage In")
     field(PINI, "$(PINI=1)")
@@ -255,7 +251,6 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageIn"){
     field(TSE,  "$(TSE=-2)")
 }
 
-###Needs check!!######
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageOut"){
     field(DESC, "$(HWTYPE): Voltage Out")
     field(PINI, "$(PINI=1)")
@@ -266,7 +261,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageOut"){
     field(LINR, "SLOPE")
     field(ESLO, "1")
     field(EOFF, "0")
-    #field(EGU, "0.1 V")
+    field(EGU, "0.1 V")
     field(TSE,  "$(TSE=-2)")
 }
 
@@ -286,14 +281,12 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-VoltageOut"){
 
 record(mbboDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_"){
     field(DESC, "$(HWTYPE): Control Word")
-    field(PINI, "$(PINI=1)")
     field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl__.VAL PP")
     field(SCAN, "Passive")
 }
 
 record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl__"){
     field(DESC, "$(HWTYPE): Control Word")
-    field(PINI, "$(PINI=1)")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL=")
     field(SCAN, "Passive")
@@ -301,20 +294,40 @@ record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl__"){
 
 record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset"){
     field(DESC, "$(HWTYPE): Reset")
-    field(PINI, "$(PINI=1)")
-    #field(SCAN, "PASSIVE")
     field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B0 PP")
-    field(VAL,  "0")
     field(ZNAM, "Zero")
     field(ONAM, "One")
 }
 
 record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch"){
     field(DESC, "$(HWTYPE): Switch")
-    field(PINI, "$(PINI=1)")
-    #field(SCAN, "PASSIVE")
     field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl_.B1 PP")
-    field(VAL,  "0")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-RB"){
+    field(DESC, "$(HWTYPE): Control Word RB")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynUInt32Digital")
+    field(INP, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL?")
+    field(SCAN, "I/O Intr")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset-RB.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Reset-RB"){
+    field(DESC, "$(HWTYPE): Reset")
+    field(PINI, "$(PINI=1)")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-RB.B0")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch-RB.PROC")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-Switch-RB"){
+    field(DESC, "$(HWTYPE): Switch")
+    field(PINI, "$(PINI=1)")
+    field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Ctrl-RB.B1")
     field(ZNAM, "Zero")
     field(ONAM, "One")
 }
