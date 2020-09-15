@@ -36,7 +36,7 @@ The configuration framework contains the necessary files to configure an EPICS I
 
 ## Example IOC
 
-1.  `require` the configuration module
+1.  `require` the configuration module with optional version
     ```bash
     require ecmccfg <VERSION>
     ```
@@ -45,8 +45,10 @@ The configuration framework contains the necessary files to configure an EPICS I
     ```bash
       # slave 0 {ecmcEK1100}
       ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EK1100"
-      # slave 1 {ecmcEL1018}, with optional SLAVE_ID
+      # slave 1 {ecmcEL1018}
       ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL1018, SLAVE_ID=1"
+      # slave 7 {ecmcEL2008}, with optional SLAVE_ID
+      ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=E2008, SLAVE_ID=7"
     ```
 3.  add more slaves and apply configuration to the slaves
     ```bash
@@ -66,6 +68,7 @@ The configuration framework contains the necessary files to configure an EPICS I
     ```bash
        ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
     ```
+
 6. adding a physical motor axis
    ```bash
       epicsEnvSet("DEV",      "STEST-MYDEVICE")
@@ -88,7 +91,8 @@ The configuration framework contains the necessary files to configure an EPICS I
       ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
    ```   
 
-4. go active
+10. go active
     ```bash
       ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
     ```
+
