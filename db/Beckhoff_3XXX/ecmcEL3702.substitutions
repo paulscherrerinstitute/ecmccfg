@@ -10,3 +10,9 @@ file "ecmcEL37XX-chX.template"
           {1,     asynInt16ArrayIn, SHORT }
           {2,     asynInt16ArrayIn, SHORT }
 }
+
+file "ecmcEL37XX_common.template"      
+{
+  pattern {}
+          {}
+}
