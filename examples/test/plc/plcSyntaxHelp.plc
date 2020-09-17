@@ -307,11 +307,22 @@
 #      Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
 #      If return value is less than zero it should be considered to be an error code.
 #
-#   16. retvalue=ec_get_err():
+#
+#   16. retvalue = ec_get_time_l32();
+#
+#      Returns lower 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
+#      If return value is less than zero it should be considered to be an error code.
+#
+#   17. retvalue = ec_get_time_u32();
+#
+#      Returns upper 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
+#      If return value is less than zero it should be considered to be an error code.
+#
+#   18. retvalue=ec_get_err():
 #
 #       Returns error code from last lib call.
 #
-#   17. retvalue=ec_err_rst():
+#   19. retvalue=ec_err_rst():
 #
 #       Resets error code for ec_lib.
 #
