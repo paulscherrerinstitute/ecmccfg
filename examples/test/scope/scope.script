@@ -36,7 +36,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ##############################################################################
 ## PLC 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/scope.plc, PLC_MACROS='ID_EL1252=${SLAVE_NUM_TRIGG},ID_EL3702=${SLAVE_NUM_AI},NELM=${ECMC_OVER_SMP}'")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/scope.plc, PLC_MACROS='ID_EL1252=${SLAVE_NUM_TRIGG},ID_EL3702=${SLAVE_NUM_AI},NELM=${ECMC_OVER_SMP},RATE=${ECMC_SAMPLE_RATE_MS}'")
 
 ##############################################################################
 ############# Configure diagnostics:
