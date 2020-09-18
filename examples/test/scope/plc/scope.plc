@@ -1,0 +1,22 @@
+
+
+static.timeOffset:=10e6;
+
+if(ec0.s${ID_EL1252}.CH1_LATCH_POS!=static.oldCh1PosTime) {
+  static.timeSinceLast:= (ec0.s${ID_EL1252}.CH1_LATCH_POS-static.oldCh1PosTime); 
+  println('');
+  println('Current time              [ns]: ', ec_get_time());
+  println('New latched positive edge [ns]: ', ec0.s${ID_EL1252}.CH1_LATCH_POS);
+  println('    Time since last latch [ns]: ', static.timeSinceLast );
+  println('                          [ms]: ', static.timeSinceLast/1E6);
+  println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${ID_EL1252}.CH1_LATCH_POS,0,31));
+  println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));
+  println('Current time   l32        [ns]:',ec_get_time_l32());
+  println('Current time   u32        [ns]:',ec_get_time_u32());
+
+  println('Next latch time EL3702 l32[ns]:', ec0.s${ID_EL3702}.NEXT_TIME);
+
+};
+
+static.oldCh1PosTime:=ec0.s${ID_EL1252}.CH1_LATCH_POS;
+
