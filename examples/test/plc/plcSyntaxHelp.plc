@@ -302,6 +302,12 @@
 #      Returns number of elements (of type "ec_get_mm_type()")in memmap with srcId. 
 #      If return value is less than zero it should be considered to be an error code.
 #
+#   14. retvalue = ec_mm_ds_append(
+#                           <mmId>,       : Source memmap index
+#                           <dsId>);      : Destination data storage index
+#
+#      Returns Error code or zero if success
+#
 #   15. retvalue = ec_get_time();
 #
 #      Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
@@ -479,6 +485,14 @@
 #                           );
 #      Returns maximum of the values in the data storage.\n
 #
-#   14. retvalue=ds_err_rst():
+#   14. retvalue=ds_append_to_ds(
+#                           <dsFromId>,       : Source data storage index\n
+#                           <dsFromDataId>,   : Source data element index\n
+#                           <elements>,       : Number of elements to copy \n
+#                           <dsToId>          : Destination data storage index\n
+#                           );
+#      Appends data at the current position of the destination data storage (dsToId). The data source is defined by (dsFromId) and the selected position (dsFromDataId) and element count (elements) .
+#
+#   15. retvalue=ds_err_rst():
 #      Resets error code for ds_lib.
 #
