@@ -15,12 +15,16 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 ##############################################################################
 ## Config hardware:
 
+## Sampel rate in milliseconds
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
 
 # Choose sample rate (2, 10 or 100)
 epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
 
-# EL1252
+# Number of samples to collect
+epicsEnvSet("ECMC_SAMPLES",               ${SAMPLES=1000})
+
+# EL1252: trigger on pos edge timestamp
 epicsEnvSet("SLAVE_NUM_TRIGG",           "6")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_NUM_TRIGG), HW_DESC=EL1252"
 
@@ -28,15 +32,25 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_NUM_TRIGG), HW_DESC=
 epicsEnvSet("SLAVE_NUM_AI",           "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_NUM_AI), HW_DESC=EL3702, NELM=${ECMC_OVER_SMP}"
 
-
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ##############################################################################
-## PLC 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/scope.plc, PLC_MACROS='ID_EL1252=${SLAVE_NUM_TRIGG},ID_EL3702=${SLAVE_NUM_AI},NELM=${ECMC_OVER_SMP},RATE=${ECMC_SAMPLE_RATE_MS}'")
+## Data Storage: Buffer for AI values (sample rate -1.. push based on asyn)
+# NEED atleast the size of ECMC_SAMPLES + two cycles
+ecmcEpicsEnvSetCalc("ECMC_BUFFER_SIZE","${ECMC_SAMPLES}+2*${ECMC_OVER_SMP}","%d")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${ECMC_BUFFER_SIZE}, SAMPLE_RATE_MS=-1")
+
+##############################################################################
+## Data Storage: Buffer for the AI values to transfer to EPICS (COPY correct indexes of data from DS0 to this before push)
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${ECMC_SAMPLES}, SAMPLE_RATE_MS=-1")
+
+##############################################################################
+## PLC 1: Calculate correct intex for transfer to epics. Copy data to ds.
+epicsEnvSet("ECMC_PLC_ID",1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ECMC_PLC_ID}, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/scope.plc, PLC_MACROS='PLC_ID=${ECMC_PLC_ID},ID_EL1252=${SLAVE_NUM_TRIGG},ID_EL3702=${SLAVE_NUM_AI},NELM=${ECMC_OVER_SMP},RATE=${ECMC_SAMPLE_RATE_MS},SAMPLES=${ECMC_SAMPLES}'")
 
 ##############################################################################
 ############# Configure diagnostics:
