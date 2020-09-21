@@ -1,7 +1,7 @@
 #-d /**
-#-d   \brief hardware script for EL7211-0010
-#-d   \details EL7211-0010 Servo terminal with OCT feedback
-#-d   \author Anders Sandstroem
+#-d   \brief hardware script for EP7211-0034
+#-d   \details EP7211-0034 Servo terminal with OCT feedback
+#-d   \author Niko Kivel
 #-d   \file
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
@@ -9,7 +9,7 @@
 
 #- ###########################################################
 #- ############ Information:
-#-  Description: EL7211-0010 Servo terminal with OCT feedback
+#-  Description: EP7211-0034 Servo terminal with OCT feedback
 #-
 #-  Note: The sync mode can not be written to in newer firmwares:
 #-        (0x1C32,0x1,0x1C33,0x1). So then these lines below needs
@@ -21,9 +21,9 @@
 #-
 #- ###########################################################
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "EL7211-0010")
+epicsEnvSet("ECMC_EC_HWTYPE"             "EP7211-0034")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b3052")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b4052")
 
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
 
@@ -37,6 +37,7 @@ ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x3,1,1)"
 
 #- ############  set velocity loop parameters
 #- TODO: For some strange reason, those two paramters are read from the motor, but seem not to take effect
+#- The values below seem to fir both, a small AM8111 and a big 8122, I assume everything in between is also fine.
 #- Velocity loop integral time = 50
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,50,4)"
 #- Velocity loop proportianal gain = 50
@@ -46,9 +47,8 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7010,0x06,32,1,VELOCITY_SETPOINT)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x11,32,POSITION)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6010,0x01,16,STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a02,0x6010,0x07,32,VELOCITY)"
 
-#- ############ Distributed clocks config EL7201:
+#- ############ Distributed clocks config EP7211-0034:
 
 #- NOTE important the sync 1 period needs to be 0!
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x700,1000000,500000,0,0)"
