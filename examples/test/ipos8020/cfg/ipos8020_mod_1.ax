@@ -20,7 +20,7 @@ epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder 
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM).POSITION")  # Ethercat entry for actual position input (encoder)
 
 #Additional encoder filter variables
-epicsEnvSet("{ECMC_ENC_VEL_FILTER_SIZE",  "100")
+epicsEnvSet("ECMC_ENC_VEL_FILTER_SIZE",  "100")
 epicsEnvSet("ECMC_ENC_POS_FILTER_SIZE",   "10")
 epicsEnvSet("ECMC_ENC_POS_FILTER_ENABLE", "1")
 
