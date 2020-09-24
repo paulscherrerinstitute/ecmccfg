@@ -109,5 +109,5 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
-initIoc();
+iocInit();
 dbl > pvs.log
