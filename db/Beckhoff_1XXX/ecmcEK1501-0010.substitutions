@@ -1,0 +1,12 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcEK1501-0010-ID.template"
+{
+  pattern {}
+          {}
+}
+
