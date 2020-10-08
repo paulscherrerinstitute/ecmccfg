@@ -21,7 +21,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat"){
   field(DESC, "$(HWTYPE): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
@@ -33,7 +33,7 @@ record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Freq-Alrm"){
   field(DESC, "$(HWTYPE): Freq. Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat.B3")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Freq Error")
   field(ZSV,  "NO_ALARM")
@@ -43,7 +43,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Freq-Alrm"){
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Amp-Alrm"){
   field(DESC, "$(HWTYPE): Amp. Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat.B4")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B4")
   field(ZNAM, "No Alarm")
   field(ONAM, "Amp Error")
   field(ZSV,  "NO_ALARM")
@@ -53,7 +53,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Amp-Alrm"){
 
 record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Sync-Alrm"){
   field(DESC, "$(HWTYPE):Sync. Alarm")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat.BD")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.BD")
   field(ZNAM, "No Alarm")
   field(ONAM, "Sync Error")
   field(ZSV,  "NO_ALARM")
