@@ -29,6 +29,9 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ecmcFileExist(${ecmccfg_DIR}ecmcEL3742_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}ecmcEL3742_loopStep.cmd,"CH_ID=2, PDO_OFFSET=128, PDO_ENTRY_OFFSET=2, SYNC_MAN=1",ECMC_LOOP_IDX,1,${NELM=1},1)
 
+#- ############ StartTimeNextLatch
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,2,0x1b10,0x1d09,0x98,U32,NEXT_TIME)"
+
 #- ############ Configfigure DCs
 #-  Cfg.EcSlaveConfigDC(
 #-      int slave_bus_position,

@@ -1,0 +1,68 @@
+##############################################################################
+# Test to make a triggered scope
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10, EC_RATE=1000"
+
+##############################################################################
+## Config hardware:
+
+## Sampel rate in milliseconds
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
+
+# Choose sample rate (2, 10 or 100)
+epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
+
+# Number of samples to collect
+epicsEnvSet("ECMC_SAMPLES",               ${SAMPLES=1000})
+
+# EL1252: trigger on pos edge timestamp
+epicsEnvSet("SLAVE_NUM_TRIGG",           "6")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_NUM_TRIGG), HW_DESC=EL1252"
+
+# EL3702: Note: Set NELM to define oversampling rate
+epicsEnvSet("SLAVE_NUM_AI",           "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_NUM_AI), HW_DESC=EL3702, NELM=${ECMC_OVER_SMP}"
+
+ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## Data Storage: Buffer for AI values (sample rate -1.. push based on asyn)
+# NEED atleast the size of ECMC_SAMPLES + two cycles
+ecmcEpicsEnvSetCalc("ECMC_BUFFER_SIZE","${ECMC_SAMPLES}+2*${ECMC_OVER_SMP}","%d")
+epicsEnvSet("ECMC_ID_DS_BUF",0)
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ECMC_ID_DS_BUF}, DS_SIZE=${ECMC_BUFFER_SIZE}, SAMPLE_RATE_MS=-1,DS_TYPE=2")
+
+##############################################################################
+## Data Storage: Buffer for the AI values to transfer to EPICS (COPY correct indexes of data from DS0 to this before push)
+epicsEnvSet("ECMC_ID_DS_RES",1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ECMC_ID_DS_RES}, DS_SIZE=${ECMC_SAMPLES}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## PLC 1: Calculate correct intex for transfer to epics. Copy data to ds.
+epicsEnvSet("ECMC_PLC_ID",1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ECMC_PLC_ID}, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/scope.plc, PLC_MACROS='PLC_ID=${ECMC_PLC_ID},ID_EL1252=${SLAVE_NUM_TRIGG},ID_EL3702=${SLAVE_NUM_AI},NELM=${ECMC_OVER_SMP},RATE=${ECMC_SAMPLE_RATE_MS},SAMPLES=${ECMC_SAMPLES},ID_MM=0,ID_DS_BUF=${ECMC_ID_DS_BUF},ID_DS_RES=${ECMC_ID_DS_RES}'")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+dbl > pvs.log
