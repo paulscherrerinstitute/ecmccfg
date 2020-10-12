@@ -1,0 +1,113 @@
+co##############################################################################
+## Example config for filtering a encoder signal by use of data storage and virtual axis. 
+## Let virtual axis handle over/underflows
+## Tha basic principle:
+## 1. Write the virt axis encoder position to data storage (ds_append_data())
+## 2. Write the average of the data storage (ds_get_avg()) values to a to extrenal encoder value of the physical axis.
+##
+## Known issues: Homing will not work..
+##
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+#- Choose motor record driver implementation
+#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
+#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
+#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
+#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
+
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+
+##############################################################################
+## Configure hardware
+
+#Configure EL1018 digital input terminal
+epicsEnvSet(ECMC_EC_SLAVE_NUM,                "1")
+epicsEnvSet("SLAVE_INPUTS", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL1018"
+
+#Configure EL2808 digital output terminal
+epicsEnvSet(ECMC_EC_SLAVE_NUM,                "2")
+epicsEnvSet("SLAVE_OUTPUTS", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL2808"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+epicsEnvSet("SLAVE_ENCODER", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5101"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "8")
+epicsEnvSet("SLAVE_DRIVE", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+
+
+# ADDITIONAL SETUP
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_8,1)"
+# END of ADDITIONAL SETUP
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## Data Storage: For encoder values
+epicsEnvSet("ECMC_ID_DS_FILT",0)
+epicsEnvSet("ECMC_FILT_SIZE", 10)
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ECMC_ID_DS_FILT}, DS_SIZE=${ECMC_FILT_SIZE}, SAMPLE_RATE_MS=100,DS_TYPE=2")
+
+##############################################################################
+## AXIS 1: physical axis
+#
+epicsEnvSet("PHYS_AXIS", "1")
+epicsEnvSet("VIRT_AXIS" ,"2")
+
+epicsEnvSet("DEV",       "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7037_enc_filt_ds_virt_1.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/el7037_enc_filt_ds_virt_1.sax)
+
+##############################################################################
+## AXIS 2: Virt encoder axis
+#
+
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/el7037_enc_filt_ds_virt_2.vax)
+
+##############################################################################
+## PLC 1: Implemnts a low pas filter. Writes filterend posiiton
+
+# DS_FILT_ID = ID of ds to use as a filter id.
+# PLC_ID     = ID of this PLC
+# VIRT_AX_ID = Axis id of virt encoder
+#epicsEnvSet("ECMC_PLC_ID",0)
+#epicsEnvSet(PLC_MACROS,"PLC_ID=${ECMC_PLC_ID},VIRT_AX_ID=2,DS_FILT_ID=${ECMC_ID_DS_FILT},ENC_S_ID=${SLAVE_ENCODER},PHYS_AX_ID=1")
+3$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ECMC_PLC_ID}, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/enc_filt_virt_ds.plc, PLC_MACROS='${PLC_MACROS}'")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit();
+dbl > pvs.log
