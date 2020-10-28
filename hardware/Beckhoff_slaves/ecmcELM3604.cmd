@@ -8,6 +8,9 @@
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
+#############################################
+# WARNING!!!!! THIS HARDWARE CONFIG IS NOT 100% TESTED. HAVE ONLY BEEN TESTED WITHOUT ACCELEROMETERS AND WITH NELM LOWER THAN 5 ON RASPI.
+#############################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3604")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
@@ -25,9 +28,8 @@ ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},$
 
 #- ############################################
 
-#- ############ Add memmaps (each element is 4 bytes (32bits))
+#- ############ Calc memmap size (each element is 4 bytes (32bits))
 ecmcEpicsEnvSetCalc("ECMC_EC_ARRAY_BYTE_SIZE",${NELM=1}*4)
-
 
 #- Different pdo index depending on sampling rate.. 
 #- NELM    PDO index dec
