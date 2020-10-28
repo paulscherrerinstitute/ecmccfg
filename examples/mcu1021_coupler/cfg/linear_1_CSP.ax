@@ -11,13 +11,15 @@ epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo r
 epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
 #Encoder
-epicsEnvSet("ECMC_ENC_SCALE_NUM"          "-60")
-epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "2000")
+epicsEnvSet("ECMC_ENC_SCALE_NUM"          "60")
+epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "12800")
 epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
-epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.POSITION")          # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s8.POSITION")          # Ethercat entry for actual position input (encoder)
+
+# Note: FOR CSP then  "ECMC_EC_ENC_ACTPOS" needs to be on the same ethercat slave as "ECMC_EC_DRV_POSITION" and use same scaling
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
