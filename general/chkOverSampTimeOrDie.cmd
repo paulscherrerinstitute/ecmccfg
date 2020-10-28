@@ -27,7 +27,7 @@ ${ECMC_EXE_CMD}
 ecmcEpicsEnvSetCalc(ECMC_ELEMENT_SAMP_TIME,"1/${EC_SAMP}*1E9/${OVER_SAMP_REQ}")
 
 # Check that sampling period [ns] (for each sample in the terminal) is higher than SAMP_TIME_MIN
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${ECMC_ELEMENT_SAMP_TIME}<=${SAMP_TIME_MIN}", "ecmcExit Error: Req. oversamp.rate (${OVER_SAMP_REQ}) and ethercat rate results in an element time rate lower than minimum (min=${SAMP_TIME_MIN}ns, requesed=${ECMC_ELEMENT_SAMP_TIME}ns) (${HW_TYPE} at bus position ${SLAVE_ID}).","# Element sample time valid: ${ECMC_ELEMENT_SAMP_TIME}>=${SAMP_TIME_MIN}")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${ECMC_ELEMENT_SAMP_TIME}<${SAMP_TIME_MIN}", "ecmcExit Error: Req. oversamp.rate (${OVER_SAMP_REQ}) and ethercat rate results in an element time rate lower than minimum (min=${SAMP_TIME_MIN}ns, requesed=${ECMC_ELEMENT_SAMP_TIME}ns) (${HW_TYPE} at bus position ${SLAVE_ID}).","# Element sample time valid: ${ECMC_ELEMENT_SAMP_TIME}>=${SAMP_TIME_MIN}")
 # Result: 
 ${ECMC_EXE_CMD}
 #-Cleanup
