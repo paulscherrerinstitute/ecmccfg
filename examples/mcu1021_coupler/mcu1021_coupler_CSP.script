@@ -1,0 +1,32 @@
+##############################################################################
+## Example config ESS crate of type MCU1021 with coupler instead of CPU
+## Test CSP mode of EL7037
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+
+##############################################################################
+## Configure hardware:
+
+#Configure EL7037 stepper drive terminal, motor 1
+epicsEnvSet(ECMC_EC_SLAVE_NUM, "8")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7037_CSP"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## Goto realtime:
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+dbl > pvs.log
