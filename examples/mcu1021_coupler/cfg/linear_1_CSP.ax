@@ -23,8 +23,8 @@ epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s8.POSITION")          # Ethercat
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-epicsEnvSet("ECMC_DRV_SCALE_NUM"          "60.0")                     # Fastest speed in engineering units
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "12800")                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+epicsEnvSet("ECMC_DRV_SCALE_NUM"          "60.0")                      # Fastest speed in engineering units
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "12800")                     # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
 epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s8.STM_CONTROL.0")      # Ethercat entry for control word or bit output
 epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s8.STM_STATUS.1")       # Ethercat entry for status word or bit input
 epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "")                          # Ethercat entry for velocity setpoint output CSV
