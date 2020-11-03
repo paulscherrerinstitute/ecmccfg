@@ -97,8 +97,12 @@ ecmcEpicsEnvSetCalc("ECMC_PDO_CH1",${ECMC_PDO_TEMP},"0x1A%02x")
 epicsEnvShow(ECMC_PDO_CH1)
 
 #-  CH 1
-#-  Configuration for sync manager 3
 epicsEnvSet("ECMC_CH"             "1")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x01,16,CH${ECMC_CH}_CONTROL)"
+
+#-  Configuration for sync manager 3
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x1,S32,CH${ECMC_CH}_STATUS)"
 #- Inflate all pdos with a for loop
 epicsEnvSet("ECMC_EC_ENTRY"       "0x6001")
@@ -110,8 +114,12 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a10,0x6005,0x2,U32,CH${ECMC_CH}_TIMESTAMP_H32)"
 
 #-  CH 2
-#-  Configuration for sync manager 3
 epicsEnvSet("ECMC_CH"             "2")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7010,0x01,16,CH${ECMC_CH}_CONTROL)"
+
+#-  Configuration for sync manager 3
 #- Calculate PDO of ch2. ECMC_PDO_TEMP=ECMC_PDO_TEMP+33
 ecmcEpicsEnvSetCalc("ECMC_PDO_CH2",${ECMC_PDO_TEMP}+33,"0x1A%02x")
 epicsEnvShow(ECMC_PDO_CH2)
@@ -127,8 +135,12 @@ ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a31,0x6015,0x2,U32,CH${ECMC_CH}_TIMESTAMP_H32)"
 
 #-  CH 3
-#-  Configuration for sync manager 3
 epicsEnvSet("ECMC_CH"             "3")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1602,0x7020,0x01,16,CH${ECMC_CH}_CONTROL)"
+
+#-  Configuration for sync manager 3
 #- Calculate PDO of ch3. ECMC_PDO_TEMP=ECMC_PDO_TEMP+66
 ecmcEpicsEnvSetCalc("ECMC_PDO_CH3",${ECMC_PDO_TEMP}+66,"0x1A%02x")
 epicsEnvShow(ECMC_PDO_CH3)
@@ -142,9 +154,14 @@ ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a52,0x6025,0x1,S64,CH${ECMC_CH}_TIMESTAMP)"
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a52,0x6025,0x1,U32,CH${ECMC_CH}_TIMESTAMP_L32)"
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a52,0x6025,0x2,U32,CH${ECMC_CH}_TIMESTAMP_H32)"
+
 #-  CH 4
-#-  Configuration for sync manager 3
 epicsEnvSet("ECMC_CH"             "4")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1603,0x7030,0x01,16,CH${ECMC_CH}_CONTROL)"
+
+#-  Configuration for sync manager 3
 #- Calculate PDO of ch4. ECMC_PDO_TEMP=ECMC_PDO_TEMP+99
 ecmcEpicsEnvSetCalc("ECMC_PDO_CH4",${ECMC_PDO_TEMP}+99,"0x1A%02x")
 epicsEnvShow(ECMC_PDO_CH4)
@@ -178,9 +195,22 @@ ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.
 #-ecmcEpicsEnvSetCalc("ECMC_EC_SLAVE_SYNC_1_CYCLE_NS",1/${ECMC_EC_SAMPLE_RATE=1000}*1E9-${ECMC_EC_SLAVE_SYNC_0_CYCLE_NS})
 #-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x700,${ECMC_EC_SLAVE_SYNC_0_CYCLE_NS},0,${ECMC_EC_SLAVE_SYNC_1_CYCLE_NS},0)"
 
-#- Set used pdos
+#- Set used pdos (outputs)
 epicsEnvSet("ECMC_SDO_INDEX",              "0x1C12")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
+
+#- CH1
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x1600,2)"
+#- CH2
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x1601,2)"
+#- CH3
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x1602,2)"
+#- CH4
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x1603,2)"
+#-PDO count
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,4,1)"
+
+#- Set used pdos (inputs)
 epicsEnvSet("ECMC_SDO_INDEX",              "0x1C13")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
 
