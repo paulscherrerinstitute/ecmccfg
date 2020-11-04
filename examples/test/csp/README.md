@@ -12,3 +12,12 @@ TwinCAT probablly resets encoder raw position before every enable cmd (by trigge
  1. CSP needs special PDO mapping (since position target needs to be mapped instead of VELOCITY_SETPOINT)
  2. Scaling needs to be same for both encoder and drv object in the axis cfg file.
  3. Only link the SET_POSITION PDO if you want to run CSP. If VELOCITY_SETPOINT is also linked, then ecmc will default to CSV, generating velocity setpoints instead.
+ 4. Set all controller params to 0 to avaid warning message (position loop is in drive and not ecmc):
+```
+#Controller: THESE ARE NOT USED SINCE IN CSP.. SET TO 0 to avoid warning!
+epicsEnvSet("ECMC_CNTRL_KP",              "0")
+epicsEnvSet("ECMC_CNTRL_KI",              "0")
+epicsEnvSet("ECMC_CNTRL_KD",              "0")
+epicsEnvSet("ECMC_CNTRL_KFF",             "0")
+```
+
