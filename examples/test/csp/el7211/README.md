@@ -2,7 +2,7 @@
 
 Smooth running motor. No jumps in position like identified with the el7037.
 
-## Tested features working features:
+## Tested working features:
 1. JOGF, JOGR
 2. TWF,TWR
 3. ABS positioning
