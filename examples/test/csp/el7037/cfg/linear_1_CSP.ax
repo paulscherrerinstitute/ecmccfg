@@ -51,11 +51,11 @@ epicsEnvSet("ECMC_HOME_VEL_FRM",          "4")
 epicsEnvSet("ECMC_HOME_ACC",              "21")
 epicsEnvSet("ECMC_HOME_DEC",              "100")
 
-#Controller
-epicsEnvSet("ECMC_CNTRL_KP",              "15.0")
-epicsEnvSet("ECMC_CNTRL_KI",              "0.02")
-epicsEnvSet("ECMC_CNTRL_KD",              "0.0")
-epicsEnvSet("ECMC_CNTRL_KFF",             "1.0")
+#Controller: THESE ARE NOT USED SINCE IN CSP.. SET TO 0 to avoid warning!
+epicsEnvSet("ECMC_CNTRL_KP",              "0")
+epicsEnvSet("ECMC_CNTRL_KI",              "0")
+epicsEnvSet("ECMC_CNTRL_KD",              "0")
+epicsEnvSet("ECMC_CNTRL_KFF",             "0")
 
 #Monitoring
 # Switches
