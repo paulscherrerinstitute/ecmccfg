@@ -10,7 +10,7 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10, EC_RATE=500"
 
 ##############################################################################
 ## Configure hardware:
@@ -18,13 +18,13 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 
 #Configure EL7211 Servo terminal, motor 1
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "48")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "1")
+#epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "1")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7211-0010_CSP, CONFIG=-Motor-Beckhoff-AM8121-0F00-0000"
 
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
+#epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
 
 # Position control (CSP)
 
