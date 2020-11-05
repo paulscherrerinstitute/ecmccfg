@@ -3,7 +3,6 @@
 ## Tested hardware
 ### EL7211:
 Seems to work well. See dedicated README in subdir.
-NOTE: Homing not tested
 
 ### EL7037 (not real CSP mode, called  "Position control")
 Works only if enable at raw encoder value equal to zero. Otherwise stange jumps will appear.
