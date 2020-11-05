@@ -96,7 +96,7 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-alstate-op"){
 
 record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-One"){
   info(asyn:READBACK,"1")
-  field(DESC, "$(HWTYPE): 32 bits set to 1 (int=-1)")
+  field(DESC, "$(HWTYPE): 32 bits (int=-1)")
   field(PINI, "1")
   field(TSE, -2)
   field(DTYP, "asynInt32")
@@ -106,7 +106,7 @@ record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-One"){
 
 record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Zero"){
   info(asyn:READBACK,"1")
-  field(DESC, "$(HWTYPE): 32 bits set to 0 (int=0)")
+  field(DESC, "$(HWTYPE): 32 bits (int=0)")
   field(PINI, "1")
   field(TSE, -2)
   field(DTYP, "asynInt32")
