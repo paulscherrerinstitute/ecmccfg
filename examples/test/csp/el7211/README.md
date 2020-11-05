@@ -8,7 +8,4 @@ Smooth running motor. No jumps in position like identified with the el7037.
 3. ABS positioning
 4. Overflow and underflow of raw position
 5. Enable/disable at any start value (start value other than 0,(this was issue with el7037))
-
-## Not tested
-1. Homing. Will probably not work.. Need to investigate
-
+6. Homing
