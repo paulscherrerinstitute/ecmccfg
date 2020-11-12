@@ -1,5 +1,5 @@
 ##############################################################################
-## Example config ESS crate of type MCU1021 with coupler instead of CPU
+## Example config for el7211
 
 ##############################################################################
 ## Initiation:
@@ -16,40 +16,27 @@ require ecmccfg develop
 #- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
 
 
-# Epics Motor record driver that will be used:
-epicsEnvShow(ECMC_MR_MODULE)
-
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.3,stream_VER=2.8.10"
 
 ##############################################################################
-## Configure hardware:
+## Configure hardware
 
-$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1021_coupler.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "36")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7211, CONFIG=-Motor-Beckhoff-AM8121-0F00-0000"
 
-# ADDITIONAL SETUP
-# Set all outputs to feed switches
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
-# END of ADDITIONAL SETUP
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+#Does not work. Known issue DC-patch for etherlab manster needed...
+#ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 
 ##############################################################################
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
-
-##############################################################################
-## AXIS 2
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7201_1.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
