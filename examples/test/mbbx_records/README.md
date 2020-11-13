@@ -17,14 +17,16 @@ $ caput IOC_TEST:mbbo 7
 $ caput IOC_TEST:longout 10
 ```
 
-For some reason this will not work (without pv-field):
+Note: For some reason this will not work (without pv-field):
 ```
-$ caput IOC_TEST:mbboDirect 0
+$ caput IOC_TEST:mbboDirect 10
 ```
-Probbaly have something todo with the asyn mask. The better to use:
+however this will work:
 ```
 $ caput IOC_TEST:longout 10
 ```
 
+Note: The mbbi, mbbo records can only handle values in the range 0..15
+
 ## asynMask
-Need more tests..
+All these tests were performed with a mask of 0xFFFFFFF (32bits). Need more tests with different masks to see that it works properly.
