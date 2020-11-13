@@ -1,0 +1,39 @@
+##############################################################################
+## Example config for mbbx
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd:
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL1018, SUBST_FILE=empty.substitutions"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## PLC 0: Test some mbbo and mbbi records
+#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/mbbx.plc, PLC_MACROS='DBG=#,PLC_ID=0'")
+
+##############################################################################
+## Load test mbbx records:
+dbLoadRecords("mbbx.db","P=$(IOC):,PORT=MC_CPU1,TSE=0,T_SMP_MS=10")
+
+##############################################################################
+## go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit();
+dbl > pvs.log
+
+# camonitor IOC_TEST:mbbiDirect IOC_TEST:longin IOC_TEST:mbbi
+# caput IOC_TEST:mbboDirect.B1 0
+# caput IOC_TEST:mbbo 7
+# caput IOC_TEST:longout 10
