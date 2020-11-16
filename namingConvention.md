@@ -9,7 +9,7 @@
 The index starts Fortran-style at `1`.
 The index is of decimal type with two (2) zero padded digits to accomodate slaves with upto 99 inputs.
 * Variables must start with the decripition followed by the index.
-* In case the slave has a generic registers, those use the index `0`.
+* In case the slave has a generic registers, those do _not_ feature an index.
 See examples below for clarification.
 
 #### Examples
@@ -42,9 +42,9 @@ See examples below for clarification.
   
   | old         | new |
   |--           |--|
-  |INP_REQ1     |requestInp00 |
-  |DEV_STATUS   |status00 |
-  |DEV_ERR_CODE |errCode00  |
+  |INP_REQ1     |requestInp |
+  |DEV_STATUS   |status |
+  |DEV_ERR_CODE |errCode  |
 
   * Channel 13
   
@@ -53,7 +53,7 @@ See examples below for clarification.
   |CH13_STATUS  |status13 |
   |CH13_VALUE   |value13  |
   
-  assuming this is slave 17 on the third master it would translate into `ec2.s17.errCode00` internally for the error code information of the main unit.
+  assuming this is slave 17 on the third master it would translate into `ec2.s17.errCode` internally for the error code information of the main unit.
   The actual data of the 8th input will reside under `ec2.s17.value08`.
 
 
