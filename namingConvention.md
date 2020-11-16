@@ -4,26 +4,38 @@
 
 ### ECMC internal variables
 
-* Use camelCase for the naming of the internal variables. This affects mostly the hardware defintion files in `$ROOT/hardware/*`
+* Use camelCase for the naming of the internal variables.
+This affects mostly the hardware defintion files in `$ROOT/hardware/*`
+* Variables must start with the decripition followed by the index.
+The description might also represents the data type, i.e. analog, binary, posAct, setPos, timeStamp, ...
 * Since many EtherCAT slaves have multiple input channels, _ALL_ channels will be given an index.
 The index starts Fortran-style at `1`.
 The index is of decimal type with two (2) zero padded digits to accomodate slaves with upto 99 inputs.
-* Variables must start with the decripition followed by the index.
 * In case the slave has a generic registers, those do _not_ feature an index.
 See examples below for clarification.
 
 #### Examples
 
+* EL1008, 8 channel digital input
+
+  * Channel 7
+  
+  | old         | new |
+  |--           |--|
+  |BI_7         |binary07 |
+  
+  Assuming this is slave 103 on the first master it would translate into `ec0.s103.binary07` internally for binary input 7.
+
 * EL3164, 4 channel 16bit analog input (0--10V)
 
   * Channel 1
   
-  | old | new |
-  |--|--|
-  |CH1_STATUS |status01 |
-  |CH1_VALUE  |value01  |
+  | old         | new |
+  |--           |--|
+  |CH1_STATUS   |status01 |
+  |CH1_VALUE    |analog01  |
   
-  Assuming this is slave 42 on the first master it would translate into `ec0.s42.value01` internally for the value channel.
+  Assuming this is slave 42 on the first master it would translate into `ec0.s42.analog01` internally for the value channel.
   
 * EL5002, 2 channel SSI encoder interface
 
@@ -32,9 +44,9 @@ See examples below for clarification.
   | old         | new |
   |--           |--|
   |CH2_STATUS   |status02 |
-  |CH2_VALUE    |value02  |
+  |CH2_VALUE    |posAct02  |
   
-  assuming this is slave 23 on the second master it would translate into `ec1.s23.status02` internally for the status information.
+  assuming this is slave 23 on the second master it would translate into `ec1.s23.posAct02` internally for the status information.
 
 * Keyence DL-EC1A, max 15 channel, EtherCAT Compatible Network Unit for High-Accuracy Digital Contact Sensors
 
@@ -51,10 +63,10 @@ See examples below for clarification.
   | old         | new |
   |--           |--|
   |CH13_STATUS  |status13 |
-  |CH13_VALUE   |value13  |
+  |CH13_VALUE   |posAct13  |
   
   assuming this is slave 17 on the third master it would translate into `ec2.s17.errCode` internally for the error code information of the main unit.
-  The actual data of the 8th input will reside under `ec2.s17.value08`.
+  The actual data of the 8th input will reside under `ec2.s17.posAct13`.
 
 
 ## ESS
