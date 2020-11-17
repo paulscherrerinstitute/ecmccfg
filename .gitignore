@@ -21,4 +21,7 @@ db/*/*.db
 db/ecmcDS.db
 db/empty.db
 db/testAIs.db
+doc/html
+doc/latex
+qt
 
