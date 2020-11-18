@@ -22,7 +22,7 @@ require ecmccfg develop
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.4,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware:  MCU1021_coupler:
@@ -96,6 +96,7 @@ dbl > pvs.log
 ## RDBD : Readtry deadband 
 ## URIP : Use RDBL Link If Present
 ## RDBL : Readback link (position form EPICS variable)
+## RDBL : Readback link (position form EPICS variable)
 
 dbgf ${IOC}:Axis1.RTRY
 dbgf ${IOC}:Axis1.RMOD
@@ -103,4 +104,5 @@ dbgf ${IOC}:Axis1.UEIP
 dbgf ${IOC}:Axis1.RDBD
 dbgf ${IOC}:Axis1.URIP
 dbgf ${IOC}:Axis1.RDBL
+dbgf ${IOC}:Axis1.RRES
 dbgrep *Sim*
