@@ -50,5 +50,5 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAxis.cmd"
 #- Additional parameters when motor Records are loaded
 epicsEnvSet("ECMC_EGU",               "mm")
 epicsEnvSet("ECMC_PREC",              3)
-epicsEnvSet("ECMCAXISFIELDINIT",      "")                  # Extra field init to motor record
+epicsEnvSet("ECMC_AXISFIELDINIT",     "")                  # Extra field init to motor record
 epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver
