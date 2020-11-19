@@ -106,3 +106,13 @@ dbgf ${IOC}:Axis1.URIP
 dbgf ${IOC}:Axis1.RDBL
 dbgf ${IOC}:Axis1.RRES
 dbgrep *Sim*
+
+# Torstens
+dbpf ${IOC}:Axis1.SPAM 1023
+#dbpf ${IOC}:Axis1.DLY 0
+#dbpf ${IOC}:Axis1.RTRY 3
+#dbpf ${IOC}:Axis1.RMOD 2
+#dbpf ${IOC}:Axis1.RDBL $MOTOR-PosAct
+#dbpf ${IOC}:Axis1.RRES 0.95
+#dbpf ${IOC}:Axis1.URIP 1
+#dbpf ${IOC}:Axis1.TWF 1
