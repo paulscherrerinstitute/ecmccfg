@@ -1,9 +1,9 @@
 # Example: Extra feedback linked to motor RDBL field
 
 Bug fixes was needed in both ecmc and motor before this was working.
-ecmc commit needed     : 1b971da8a  (version 6.2.4 will not work)
-motor commit needed    : 46dfadb12  (version 7.0.3.1 will not work)
-ecmccfg commmit needed : 66c04b72f  (version 6.2.4 will not work)
+* ecmc commit needed     : 1b971da8a  (version 6.2.4 will not work)
+* motor commit needed    : 46dfadb12  (version 7.0.3.1 will not work)
+* ecmccfg commmit needed : 66c04b72f  (version 6.2.4 will not work)
 
 ## Configuration
 
