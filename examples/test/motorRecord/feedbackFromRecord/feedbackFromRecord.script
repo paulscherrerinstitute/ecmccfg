@@ -119,3 +119,6 @@ dbpf ${IOC}:Axis1.SPAM 1023
 #dbpf ${IOC}:Axis1.RRES 0.95
 #dbpf ${IOC}:Axis1.URIP 1
 #dbpf ${IOC}:Axis1.TWF 1
+
+asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x11)
+asynSetTraceMask(${ECMC_MOTOR_PORT}, -1, 0x11)

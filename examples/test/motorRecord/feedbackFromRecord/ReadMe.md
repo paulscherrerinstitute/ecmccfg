@@ -56,8 +56,10 @@ epicsEnvSet("ECMC_MRES",                  "1.0")
 # RDBD : Readtry deadband 
 # URIP : Use RDBL Link If Present
 # RDBL : Readback link (position form EPICS variable)
-epicsEnvSet("ECMC_AXISFIELDINIT",  "RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim CP")
+epicsEnvSet("ECMC_AXISFIELDINIT",  "RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim")
 ```
+NOTE: Do not use "CP" on the RDBL link...
+
 ## Running the test
 
 1. Start:
