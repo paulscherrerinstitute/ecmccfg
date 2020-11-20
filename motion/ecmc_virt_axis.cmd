@@ -11,6 +11,10 @@
 #-d   \pre An axis definition for a virtual axis has to be added/configured immediately before the call of this script.
 #-d */
 
+#- Issue Warning if ECMC_MRES is set. MRES calculated bu SREV and UREV instead
+ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_MRES=-1}>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
+
 #- General
 ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},2)"
 ecmcConfigOrDie "Cfg.SetAxisTrajStartPos(${ECMC_AXIS_NO},0)"
@@ -52,10 +56,13 @@ ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_DRV_TIME})"
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_TRAJ_TIME})"
 
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", "stepSize=${ECMC_MRES}")
+ISSUE WARNING IF ECMC_MRES IS DEFINED
+ECMC_MRES
+
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", "${ECMC_AXISCONFIG}")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}".template",1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}".template", "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL}, MRES=${ECMC_MRES}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC}, ${ECMC_AXISFIELDINIT=""}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}".template", "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL},RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC}, ${ECMC_AXISFIELDINIT=""}")
 epicsEnvSet("ECMC_AXISFIELDINIT",  "")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}"home.template",1,1)
