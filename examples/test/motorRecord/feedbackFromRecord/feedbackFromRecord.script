@@ -119,9 +119,3 @@ dbpf ${IOC}:Axis1.SPAM 1023
 #dbpf ${IOC}:Axis1.RRES 0.95
 #dbpf ${IOC}:Axis1.URIP 1
 #dbpf ${IOC}:Axis1.TWF 1
-
-# Temporary
-#dbpf ${IOC}:Axis1.MRES 1
-#dbgf ${IOC}:Axis1.MRES
-#dbpf ${IOC}:Axis1.SREV 200
-#dbpf ${IOC}:Axis1.UREV 200
