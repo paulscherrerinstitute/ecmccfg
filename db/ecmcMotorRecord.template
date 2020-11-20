@@ -30,6 +30,8 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
     field(UEIP,"$(UEIP=0)")
     field(URIP,"$(URIP=0)")
     field(RRES,"$(RRES=0)")
+    field(SREV,"$(SREV=1)")
+    field(UREV,"$(UREV=1.0)")
 }
 
 # The message text

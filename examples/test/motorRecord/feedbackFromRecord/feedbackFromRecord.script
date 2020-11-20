@@ -92,19 +92,22 @@ dbl > pvs.log
 
 ## RTRY : Max retry count
 ## RMOD : Retry Mode
-## UEIP : Use encoder if present
+#- UEIP : Use encoder if present
 ## RDBD : Readtry deadband 
-## URIP : Use RDBL Link If Present
+#- URIP : Use RDBL Link If Present
 ## RDBL : Readback link (position form EPICS variable)
-## RDBL : Readback link (position form EPICS variable)
+
 
 dbgf ${IOC}:Axis1.RTRY
 dbgf ${IOC}:Axis1.RMOD
-dbgf ${IOC}:Axis1.UEIP
+#-dbgf ${IOC}:Axis1.UEIP
 dbgf ${IOC}:Axis1.RDBD
-dbgf ${IOC}:Axis1.URIP
+#- dbgf ${IOC}:Axis1.URIP
 dbgf ${IOC}:Axis1.RDBL
 dbgf ${IOC}:Axis1.RRES
+dbgf ${IOC}:Axis1.SREV
+dbgf ${IOC}:Axis1.UREV
+dbgf ${IOC}:Axis1.MRES
 dbgrep *Sim*
 
 # Torstens
@@ -116,3 +119,9 @@ dbpf ${IOC}:Axis1.SPAM 1023
 #dbpf ${IOC}:Axis1.RRES 0.95
 #dbpf ${IOC}:Axis1.URIP 1
 #dbpf ${IOC}:Axis1.TWF 1
+
+# Temporary
+#dbpf ${IOC}:Axis1.MRES 1
+#dbgf ${IOC}:Axis1.MRES
+#dbpf ${IOC}:Axis1.SREV 200
+#dbpf ${IOC}:Axis1.UREV 200
