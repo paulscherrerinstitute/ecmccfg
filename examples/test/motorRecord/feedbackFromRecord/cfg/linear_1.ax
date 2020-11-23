@@ -17,7 +17,7 @@ epicsEnvSet("ECMC_MOD_TYPE",              "0")                         # For pos
 # RDBD : Readtry deadband 
 # URIP : Use RDBL Link If Present
 # RDBL : Readback link (position form EPICS variable)
-epicsEnvSet("ECMC_AXISFIELDINIT",  "RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim")
+epicsEnvSet("ECMC_AXISFIELDINIT",  "RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim MMS")
 
 #Encoder
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "-60")
