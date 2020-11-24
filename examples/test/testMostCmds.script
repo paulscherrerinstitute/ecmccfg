@@ -69,6 +69,16 @@ ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec0.s1.BI_1,1,1,U8,"ec0.s1.mm.TEST2")"
 ecmcConfigOrDie "EcPrintSlaveConfig(1)"
 ecmcConfigOrDie "EcPrintAllHardware()"
 
+# Get some slave info:
+ecmcConfig "EcGetSlaveVendorId(0)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcConfig "EcGetSlaveProductCode(0)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcConfig "EcGetSlaveRevisionNum(0)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ecmcConfig "EcGetSlaveSerialNum(0)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+
 #Diagnostics
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(1000)"
@@ -776,7 +786,7 @@ epicsEnvShow("result")
 ecmcEpicsEnvSetCalcTernary("result", "if('$(filename)'='test') {RESULT:=1;}else{RESULT:=0;};","use_this_file.cfg","no_use_this_file.cfg")
 epicsEnvShow("result")
 #
-
 iocInit
 # Now will die..
 ecmcFileExist ("no_file.cmd",1,1,"/TEST:/user")
+
