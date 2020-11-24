@@ -1,0 +1,5 @@
+
+  # print some mbbx record values: 
+  ${DBG}println('--------------------------------------------');
+  ${DBG}println('value: ',ec0.s1.ONE);
+  ec0.s1.ONE+=1;

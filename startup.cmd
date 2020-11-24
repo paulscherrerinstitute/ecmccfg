@@ -14,10 +14,10 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 6.2.0
+#- ECMC_VER          = 6.2.4
 #- EthercatMC_VER    = 3.0.2
 #- INIT              = initAll
-#- MASTER_ID         = 0
+#- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
 #- SCRIPTEXEC        = iocshLoad
 #- EC_RATE           = 1000
 #-
@@ -33,7 +33,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=6.2.1}"
+require ecmc        "${ECMC_VER=6.2.4}"
 require stream      "${stream_VER=''}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
@@ -72,9 +72,11 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
 #-
 #-------------------------------------------------------------------------------
-#- add master (defaults to '0')
-ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
-${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
+
+#- add master (defaults to '0'), no master when MASTER_ID < 0
+ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")
+${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
+${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)
 epicsEnvSet("ECMCCFG_INIT" ,"#")

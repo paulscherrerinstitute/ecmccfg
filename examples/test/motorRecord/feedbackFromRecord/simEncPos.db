@@ -1,0 +1,7 @@
+record(calc,"$(P)$(AXIS_NAME)-PosActSim")
+{
+  field(DESC, "Simulated act. pos. of axis 1")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A*0.95")
+  field(INPA, "$(P)$(AXIS_NAME)-PosAct CP")  
+}

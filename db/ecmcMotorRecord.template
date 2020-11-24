@@ -26,6 +26,10 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
 	field(FOFF,"$(FOFF=0)")
 	field(NTM,"0")
 	field(TWV,"$(TWV=1)")
+    field(RDBL,"$(RDBL=)")
+    field(UEIP,"$(UEIP=0)")
+    field(URIP,"$(URIP=0)")
+    field(RRES,"$(RRES=0)")
 }
 
 # The message text

@@ -1,0 +1,118 @@
+##############################################################################
+## Use record as feedback for motor record. Motor record fields of intrest:
+## RTRY : Max retry count
+## RMOD : Retry Mode
+## UEIP : Use encoder if present
+## RDBD : Readtry deadband 
+## URIP : Use RDBL Link If Present
+## RDBL : Readback link (position form EPICS variable)
+##
+## Example based on  ESS crate of type MCU1021 with coupler.
+##
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# Epics Motor record driver that will be used:
+epicsEnvShow(ECMC_MR_MODULE)
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+
+##############################################################################
+## Configure hardware:  MCU1021_coupler:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM" ,1)
+
+#Configure EL1018 digital input terminal
+epicsEnvSet("ECMC_EC_SLAVE_NUM" ,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL1018"
+
+#Configure EL2808 digital output terminal
+epicsEnvSet("ECMC_EC_SLAVE_NUM" ,2)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL2808"
+
+# Save the slave number for later
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT", "${ECMC_EC_SLAVE_NUM}")
+
+#Configure EL5101 Incremental Encoder Interface
+epicsEnvSet("ECMC_EC_SLAVE_NUM" ,3)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL5101"
+
+#Configure EL7037 stepper drive terminal, motor 1
+epicsEnvSet("ECMC_EC_SLAVE_NUM" ,8)
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+# ADDITIONAL SETUP
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
+# END of ADDITIONAL SETUP
+
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+
+# load simulated position (0.95* actpos)
+dbLoadRecords("simEncPos.db","P=${IOC}:,AXIS_NAME=Axis1,AXIS_NO=1,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=-2")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+##############################################################################
+############# Go active:
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit())
+dbl > pvs.log
+
+## RTRY : Max retry count
+## RMOD : Retry Mode
+## UEIP : Use encoder if present
+## RDBD : Readtry deadband 
+## URIP : Use RDBL Link If Present
+## RDBL : Readback link (position form EPICS variable)
+## RDBL : Readback link (position form EPICS variable)
+
+dbgf ${IOC}:Axis1.RTRY
+dbgf ${IOC}:Axis1.RMOD
+dbgf ${IOC}:Axis1.UEIP
+dbgf ${IOC}:Axis1.RDBD
+dbgf ${IOC}:Axis1.URIP
+dbgf ${IOC}:Axis1.RDBL
+dbgf ${IOC}:Axis1.RRES
+dbgrep *Sim*
+
+# Torstens
+dbpf ${IOC}:Axis1.SPAM 1023
+#dbpf ${IOC}:Axis1.DLY 0
+#dbpf ${IOC}:Axis1.RTRY 3
+#dbpf ${IOC}:Axis1.RMOD 2
+#dbpf ${IOC}:Axis1.RDBL $MOTOR-PosAct
+#dbpf ${IOC}:Axis1.RRES 0.95
+#dbpf ${IOC}:Axis1.URIP 1
+#dbpf ${IOC}:Axis1.TWF 1
