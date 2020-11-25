@@ -1,5 +1,13 @@
 # EL7411 Test
 
+## EL7411 Config
+
+### HW enable:
+Do not forget to wire HW-enable input to 24V. If not wired the DS402 statemachine will just timout.
+Orange led on right side of terminal should not be lit.
+For test purpose the HW-enable can be wired to the Fan out terminal on the EL7411
+
+## Maxon motor Encoder combo 312315 used for test
 MAXON EC-40 MAX 311733 2239929 312315 2307522
 BLDC motor with incremental encoder and hall sensors.
 Hard to know what compinets based on those numbers. 
@@ -28,7 +36,7 @@ pin 5 green  : 3..24V
 pin 6        : NC
 
 ## Encoders
-MR-type L 1000pts 3 channels with line driver
+MR-type L 1000pts (4000counts/rev) 3 channels with line driver
 Encoder partnumber: 228456
 Supply voltage 5V
 TTL compatible
@@ -48,4 +56,3 @@ Looking into the female connector with the red wire to the left. Pin 1 is the up
 8    : B
 9    : Z neg
 10   : Z
-

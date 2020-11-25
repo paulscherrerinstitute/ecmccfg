@@ -1,5 +1,5 @@
 ##############################################################################
-## Example config for el7211
+## Example config for el7411 with maxon BLDC motor (incremental encoder, not hall)
 
 ##############################################################################
 ## Initiation:
@@ -7,10 +7,13 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
+system("ethercat rescan")
+system("ethercat slaves")
+
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.4,stream_VER=2.8.10"
 
 ##############################################################################
 ## Configure hardware
@@ -20,22 +23,25 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
 
 #${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7411"
 
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7411, CONFIG=-Motor-Maxon-M283870-E228456"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7411, CONFIG=-Motor-Maxon-M283870-E228456, CFG_MACROS='I_RUN_MA=2000'"
 
-# Configure Wachendorff encoder on channel 1
-#${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5002-Encoder-ch1-Wachendorff-WDGA36E-06-1218-SIA-B01-CB8
+#- Invert feedback direction 
+####ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x1,0,1)"
+
+#- Commutation type 
+####ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x64,1,1)"
+
+#- Encoder type
+###ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x12,2,2)"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-#Does not work. Known issue DC-patch for etherlab manster needed...
-#ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 
 ##############################################################################
 ## AXIS 1
 #
 #epicsEnvSet("DEV",      "$(IOC)")
-#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7411_1.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7411_1.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -43,9 +49,9 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 ##############################################################################
 ############# go active:
