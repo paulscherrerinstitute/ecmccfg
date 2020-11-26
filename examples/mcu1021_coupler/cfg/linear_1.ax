@@ -67,7 +67,7 @@ epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "130")
 epicsEnvSet("ECMC_DXLM_ENABLE",           "1")
 
 # Position lag
-epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "0.5")
+epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "1.0")
 epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "10")
 epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
 
