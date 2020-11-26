@@ -14,13 +14,14 @@ Hard to know what compinets based on those numbers.
 Some searching resulted in that 312315 is a combination numer for these components:
 
 ## Motor 
-EC-Max 40 brushless 120W with hallsensors
-Motor Partnumber 283870
-Nominal torque: 170mNm
-Nominal voltage: 48V
-Max continious current: 4.06A
-No load speed 10100 rpm
+* EC-Max 40 brushless 120W with hallsensors
+* Motor Partnumber 283870
+* Nominal torque: 170mNm
+* Nominal voltage: 48V
+* Max continious current: 4.06A
+* No load speed 10100 rpm
 
+```
 Pinout:
 pin 1 red    : L1
 pin 2 black  : L2
@@ -34,13 +35,15 @@ pin 3 grey   : hall 3
 pin 4 blue   : gnd
 pin 5 green  : 3..24V
 pin 6        : NC
+```
 
 ## Encoders
-MR-type L 1000pts (4000counts/rev) 3 channels with line driver
-Encoder partnumber: 228456
-Supply voltage 5V
-TTL compatible
+* MR-type L 1000pts (4000counts/rev) 3 channels with line driver
+* Encoder partnumber: 228456
+* Supply voltage 5V
+* TTL compatible
 
+```
 Pin allocation (connector DIN 41651):
 Looking into the female connector with the red wire to the left. Pin 1 is the upper left, pin two lower left:
 1 3 5 7 9
@@ -56,7 +59,7 @@ Looking into the female connector with the red wire to the left. Pin 1 is the up
 8    : B
 9    : Z neg
 10   : Z
-
+```
 ## Drive scale in CSV mode
 Reverse engineering of the velocity scaling resulted in that the unit for the velo is in deg/s (a bit strange, not like other terminals).
 Method to find out.
