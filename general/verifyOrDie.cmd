@@ -1,6 +1,6 @@
 #==============================================================================
-#-d /** verifyOrDie.cmd
-#-d
+# verifyOrDie.cmd
+#-d  /** 
 #-d   \brief Generic verification script for expressions
 #-d          if the evaluated expression is true the execution will continue otherwise exit
 #-d

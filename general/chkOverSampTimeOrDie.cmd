@@ -1,6 +1,6 @@
 #==============================================================================
-#-d /** chkOverSampleTimeOrDie.cmd
-#-d
+# chkOverSampleTimeOrDie.cmd
+#-d /**
 #-d   \brief Checks if the resulting sampling time for oversampling slaves is higher or equal to the minimum time.
 #-d   if not the exit IOC.
 #-d   

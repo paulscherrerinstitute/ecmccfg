@@ -1,6 +1,6 @@
 #==============================================================================
-#-d /** chkValidCurrentSetOrDie.cmd
-#-d
+# chkValidCurrentSetOrDie.cmd
+#-d /**
 #-d   \brief Checks if requested run current and stanby current is less than max current and larget than 0
 #-d   need to use ecmcExit since iocsh command "exit" just stops reading current file.
 #-d
@@ -12,7 +12,7 @@
 #-d      I_STDBY_MA :  Standby current in mA
 #-d
 #-d   \file
-#-d */
+#-d*/
 
 # Ensure running current is below max current otherwise exit
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_RUN_MA=-1}>${I_MAX_MA=0} or ${I_RUN_MA=-1}<=0", "ecmcExit Error: Run current setpoint to high or negative...","# Run current setting OK (${I_RUN_MA_LOCAL=-1})...")
