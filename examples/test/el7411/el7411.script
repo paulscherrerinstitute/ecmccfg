@@ -7,8 +7,8 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-system("ethercat rescan")
-system("ethercat slaves")
+#system("ethercat rescan")
+#system("ethercat slaves")
 
 require ecmccfg develop
 
@@ -21,6 +21,16 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "10")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7411, CONFIG=-Motor-Maxon-312315, CFG_MACROS='I_RUN_MA=2000,I_MAX_MA=8000'"
+
+#- Current loop I default 10 = 1ms  (40 =4ms)
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x12,15,2)"
+#- Current loop P (0.1V/A) default 10 = 1V/A  (5 = 0.5V/A)
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x13,10,2)"
+#- Velocity loop proportianal gain = 20
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,20,4)"
+#- Velocity loop integral time = 50
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,50,4)"
+
 
 #- Invert feedback direction 312315
 ####ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x1,0,1)"

@@ -65,16 +65,15 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_M
 #- NOTE The Current control paarmeters are very important for FOC commutation. 
 #- If warning or error when commutating then slower control params could solve then problem
 #-
-#- Current loop I default 10 = 1ms  (40 =4ms)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x12,40,2)"
-#- Current loop P (0.1V/A) default 10 = 1V/A  (5 = 0.5V/A)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x13,5,2)"
+#- Current loop I default 10 = 1ms
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x12,10,2)"
+#- Current loop P (0.1V/A) default 10 = 1V/A
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x13,10,2)"
 
-#- Velocity loop proportianal gain = 95
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,95,4)"
-#- Velocity loop integral time = 150
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,150,4)"
-
+#- Velocity loop proportianal gain = 20
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,20,4)"
+#- Velocity loop integral time = 50
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,50,4)"
 
 #- Nominal voltage = 48V
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x19,48000,4)"

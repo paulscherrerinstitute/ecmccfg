@@ -22,11 +22,11 @@ epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).POSIT
 600Hz
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "1")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-# Scalings: Amplifier Max 599Hz = 215640 deg/s 
-epicsEnvSet("ECMC_DRV_SCALE_NUM"          "21564000")                                     # Fastest speed in engineering units
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "2147483648")                                 # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CONTROL")       # Ethercat entry for control word or bit output
-epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).STATUS")        # Ethercat entry for status word or bit input
+# Seems scaling of drive is in deg/s.. Reverse engineered since no manual. STRANGE
+epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")                                           # Fastest speed in engineering units
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "1")                                           # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CONTROL")     # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).STATUS")      # Ethercat entry for status word or bit input
 epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).VELOCITY_SETPOINT") # Ethercat entry for velocity setpoint output
 epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "")                                            # Ethercat entry for reduce torque output
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
@@ -35,7 +35,7 @@ epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                             
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "1000.0")
-epicsEnvSet("ECMC_JOG_VEL",               "360")
+epicsEnvSet("ECMC_JOG_VEL",               "1000.0")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "1.0")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
@@ -50,7 +50,7 @@ epicsEnvSet("ECMC_HOME_ACC",              "100")
 epicsEnvSet("ECMC_HOME_DEC",              "100")
 
 #Controller
-epicsEnvSet("ECMC_CNTRL_KP",              "1.0")
+epicsEnvSet("ECMC_CNTRL_KP",              "5.0")
 epicsEnvSet("ECMC_CNTRL_KI",              "0.0")
 epicsEnvSet("ECMC_CNTRL_KD",              "0.0")
 epicsEnvSet("ECMC_CNTRL_KFF",             "1.0")
@@ -73,7 +73,7 @@ epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "100")
 epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "0")
 
 # At target
-epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "10")
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "2")
 epicsEnvSet("ECMC_MON_AT_TARGET_TIME",    "100")
 epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
 # Velocity
