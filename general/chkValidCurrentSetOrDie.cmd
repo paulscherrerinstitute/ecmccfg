@@ -21,7 +21,7 @@ ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)
 
 # Ensure standby current is below max current otherwise exit
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_STDBY_MA=-1}>${I_MAX_MA=0} or ${I_STDBY_MA=-1}<=0", "ecmcExit Error: Standby current setpoint to high or negative...","# Standby current setting OK (${I_STDBY_MA=-1})...")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_STDBY_MA=-1}>${I_MAX_MA=0} or ${I_STDBY_MA=-1}<0", "ecmcExit Error: Standby current setpoint to high or negative...","# Standby current setting OK (${I_STDBY_MA=-1})...")
 # Result: 
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)
