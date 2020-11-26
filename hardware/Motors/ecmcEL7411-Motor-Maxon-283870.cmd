@@ -1,11 +1,15 @@
+#===============================================================================
+# ecmcEL7411-Motor-Maxon-283870.cmd
 #-d /**
-#-d   \brief hardware script for EL7411-Motor-Maxon-M283870-E228456
-#-d   \details Parmetrization of EL7411 for motor Maxon-M283870-E228456 BLDC with hall and incremental encoder
-#-d   Operation mode is to use incremental encoder (not hall sensors)
+#-d   \brief hardware script for EL7411-Motor-Maxon-283870
+#-d 
+#-d   \details Parmetrization of EL7411 for motor Maxon-283870
+#-d 
+#-d   \note This config only configures the motor part of the EL7411. 
 #-d
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 4000mA)
-#-d   \param I_MAX_PROT_MA: (optional) Max current protection limit (10000mA)
-#-d
+#-d   \param I_MAX_MA     : (optional) Max current protection limit (max is 12000mA)
+#-d   \param I_STDBY_MA   : Not supported for servos
 #-d
 #-d   Combination partnumber: 312315
 #-d   Motor:
@@ -39,42 +43,23 @@
 #-d         pin 5 green  : 3..24V
 #-d         pin 6        : NC
 #-d
-#-d   Encoder:
-#-d     partnumber: 228456
-#-d     name: MR-type L 1000pts 
-#-d     type: 3 channels with line driver, TTL compatible
-#-d     resolution: 1000 / rev
-#-d     Supply voltage 5V
-#-d     Pinout (connector DIN 41651):
-#-d         Looking into the female connector with the red wire to the left. Pin 1 is the upper left, pin two lower left:
-#-d         1 3 5 7 9
-#-d         2 4 6 8 10
-#-d         
-#-d         1    : NC
-#-d         2    : Vcc
-#-d         3    : Gnd
-#-d         4    : NC
-#-d         5    : A neg
-#-d         6    : A
-#-d         7    : B neg
-#-d         8    : B
-#-d         9    : Z neg
-#-d         10   : Z
-#-d
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note For important parameters see TwinCAT CoE startup list for the motor terminal configuration.
 #-d */ 
 
 #- ###################### Verify current ######################################
-#- Motor max 10000mArms = 14000mApeak, Drive max 20000mA peak => Use 14000mA
-epicsEnvSet(I_MAX_MA_LOCAL,"12000")
+
+epicsEnvSet(I_MAX_MA_LOCAL,12000)
+
+# Only use I_MAX_MA if lower than 12000
+ecmcEpicsEnvSetCalcTernary(I_MAX_MA_LOCAL, "${I_MAX_MA=${I_MAX_MA_LOCAL}}<${I_MAX_MA_LOCAL}", "${I_MAX_MA=${I_MAX_MA_LOCAL}}","${I_MAX_MA_LOCAL}")
+
 epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=4000})
-epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=0})  // NOT USED
 
 #- Ensure valid current settings 
 ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=${I_STDBY_MA_LOCAL},I_MAX_MA=${I_MAX_MA_LOCAL}"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=0,I_MAX_MA=${I_MAX_MA_LOCAL}"
 
 #- ###################### MOTOR ######################################
 #- NOTE The Current control paarmeters are very important for FOC commutation. 
@@ -122,18 +107,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x30,1030,4)"
 
 #- Motor thermal time constant = 3.96 s for WINDING!!
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x2d,40,2)"
-
-#- ###################### ENCODER ######################################
-
-#- Invert feedback direction No
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x1,0,1)"
-#- Enable encoder power supply yes
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x2,1,1)"
-#- Enable encoder c track
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x5,1,1)"
-#- Encoder voltage 5000mv
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x11,5000,4)"
-#- Encoder type: Test TTL => 2
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x12,2,2)"
-#- Encoder resolution per rev: 1000 * 4 = 4000
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x13,4000,4)"
