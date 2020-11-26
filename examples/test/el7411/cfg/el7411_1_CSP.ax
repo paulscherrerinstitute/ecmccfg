@@ -2,8 +2,8 @@
 epicsEnvSet("ECMC_MOTOR_NAME",            "Axis1")
 epicsEnvSet("ECMC_R",                     "Axis1-")
 epicsEnvSet("ECMC_AXIS_NO",               "1")
-epicsEnvSet("ECMC_DESC",                  "EL7411 Test")
-epicsEnvSet("ECMC_EGU",                   "deg")                       # Motor Record Unit
+epicsEnvSet("ECMC_DESC",                  "EL7411 CSP")
+epicsEnvSet("ECMC_EGU",                   "deg")                      # Motor Record Unit
 epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.BO_1.0)
