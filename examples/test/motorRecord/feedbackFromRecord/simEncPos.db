@@ -31,11 +31,11 @@ record(calc,"$(P)$(AXIS_NAME)-PosActSim")
 #IOC_TEST:Axis1-PosActSim.SEVR  2020-11-23 09:29:22.849692 2 HIHI MAJOR
 
 # Stop motor if SEVR is MAJOR
-record(calcout,"$(P)$(AXIS_NAME)-PosActSimAlarm")
-{
-  field(DESC, "Calc simulated act. pos. of axis 1")
-  field(PINI, "$(PINI=1)")
-  field(CALC, "A>1")
-  field(INPA, "IOC_TEST:Axis1-PosActSim.SEVR CP")
-  field(OUT, "IOC_TEST:Axis1.STOP")
-}
+#record(calcout,"$(P)$(AXIS_NAME)-PosActSimAlarm")
+#{
+#  field(DESC, "Calc simulated act. pos. of axis 1")
+#  field(PINI, "$(PINI=1)")
+#  field(CALC, "A>1")
+#  field(INPA, "IOC_TEST:Axis1-PosActSim.SEVR CP")
+#  field(OUT, "IOC_TEST:Axis1.STOP")
+#}
