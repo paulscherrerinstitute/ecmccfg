@@ -56,3 +56,17 @@ Looking into the female connector with the red wire to the left. Pin 1 is the up
 8    : B
 9    : Z neg
 10   : Z
+
+## Drive scale in CSV mode
+Reverse engineering of the velocity scaling resulted in that the unit for the velo is in deg/s (a bit strange, not like other terminals).
+Method to find out.
+1. Link the axis velocity setpoint to the sim entry "ZERO"
+2. Start ioc
+3. Enable axis: caput IOC_TEST:Axis1.CNEN 1
+4. Set raw velocity setpoint from epics pv: caput  IOC_TEST:ec0-s10-EL7411-Drv-Spd 1000
+5. Log movement: camonitor IOC_TEST:ec0-s10-EL7411-Enc-PosAct | tee pos.log
+6. Calculate the velocity from logged data and compare to the  velo setpoint.
+
+## Drive in CSP mode
+The CSP config is not perfect. There seems to be a scaling error somehow. A jog of 360deg/s results in approx 35deg/s oscilating movement.
+Probably the position control parameters in the drive needs more attention. So its suggetsed to use CSV for now.
