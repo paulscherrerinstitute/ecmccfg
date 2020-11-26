@@ -83,12 +83,12 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x63,20,2)"
 #- Commutation type FOC with incremental encoder =1
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x64,1,1)"
 
-#- Motor max current = 4A
+#- Motor max current = 12000
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,${I_MAX_MA_LOCAL},4)"
 #- Motor rated current = 4A
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x12,${I_RUN_MA_LOCAL},4)"
-#- Motor pole pairs = 3
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x13,3,1)"
+#- Motor pole pairs = 1
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x13,1,1)"
 #- Torque contstant = 44.8
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x16,45,4)"
 #- Rotor moment of inertia = 101
