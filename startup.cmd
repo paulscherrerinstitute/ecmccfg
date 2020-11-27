@@ -78,8 +78,7 @@ epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
 ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")
 ${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
-${ECMC_MASTER_CMD} ecmcFileExist("ecmcEc.db",1,1)
-${ECMC_MASTER_CMD} dbLoadRecords("ecmcEc.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+epicsEnvSet("ECMC_MASTER_ID" ,${MASTER_ID=0})
 
 #- Set default diag params
 ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
