@@ -2,7 +2,7 @@
 # Scope: Triggered data acq. with ecmc.
 
 The preferred and most  efficient solution to use timestamped and oversampling I/O isto use the scope plugin:
-https://github.com/anderssandstrom/e3-ecmcPlugin_Scope
+https://github.com/anderssandstrom/e3-ecmc_plugin_scope
 Please read the README.md in this repo and checkout the example in the "iocsh" dir.
 
 

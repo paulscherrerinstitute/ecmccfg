@@ -52,13 +52,13 @@ epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 
 ##############################################################################
-require ecmcPlugin_FFT master  # te get access to db file..
+require ecmc_plugin_fft master  # te get access to db file..
 epicsEnvSet("FFT_NELM", 1024)
 
 ##############################################################################
 ## Load plugin 0: FFT
 
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-arm/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_fft/master/lib/linux-arm/libecmc_plugin_fft.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;SOURCE=ax1.poserr;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -69,7 +69,7 @@ dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,PORT=MC_CPU1,INDEX=0, NELM=${FFT
 
 ##############################################################################
 ## Load plugin 1: FFT
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/linux-arm/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_fft/master/lib/linux-arm/libecmc_plugin_fft.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;SOURCE=ecmc.thread.latency.max;RATE=100;DC_REMOVE=1;APPLY_SCALE=1;")
 #epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;SOURCE=ax1.poserr;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
@@ -93,3 +93,6 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+dbl > pvs.log

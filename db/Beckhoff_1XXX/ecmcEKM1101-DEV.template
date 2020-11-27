@@ -1,0 +1,50 @@
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-DEV_ID"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "$(DESC=$(HWTYPE): ID)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).DEV_ID?")
+  field(FLNK, "$(FLNK=)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-ACC_Time-Act"){
+  field(DESC, "$(HWTYPE): ACC: Latch time [ns]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=UINT64TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).ACC_TS?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(PREC, "0" )
+  field(EGU,  "ns" )
+}
+
+record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Stat"){
+  field(DESC, "$(HWTYPE): Device Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).DEV_STATUS?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Diag-Alrm.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Diag-Alrm"){
+  field(DESC, "$(HWTYPE): Device Warning")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Stat.B1")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Err-Alrm")
+}
+record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Err-Alrm"){
+  field(DESC, "$(HWTYPE): Device Warning")
+  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Dev-Stat.B2")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+#  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Err-Alrm")
+}
+
