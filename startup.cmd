@@ -82,8 +82,8 @@ ${ECMC_MASTER_CMD} ecmcFileExist("ecmcEc.db",1,1)
 ${ECMC_MASTER_CMD} dbLoadRecords("ecmcEc.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 
 #- Set default diag params
-ecmcFileExist("${ECMC_CONFIG_ROOT}generalDiagnostics.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}generalDiagnostics.cmd
+ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)
