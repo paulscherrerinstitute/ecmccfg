@@ -102,7 +102,7 @@ dbgf ${IOC}:Axis1.RTRY
 dbgf ${IOC}:Axis1.RMOD
 #-dbgf ${IOC}:Axis1.UEIP
 dbgf ${IOC}:Axis1.RDBD
-#- dbgf ${IOC}:Axis1.URIP
+dbgf ${IOC}:Axis1.URIP
 dbgf ${IOC}:Axis1.RDBL
 dbgf ${IOC}:Axis1.RRES
 dbgf ${IOC}:Axis1.SREV

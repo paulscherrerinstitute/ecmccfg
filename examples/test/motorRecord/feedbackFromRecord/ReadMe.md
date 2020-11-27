@@ -84,8 +84,7 @@ NOTE: JOGGING is not supported (motor record will stop any started JOGGING cmd)
 
 
 ## Stop on RDBL pv alarms
-Motor record stops motion if the RDBL linked PV is in alarm state (MAJOR or INVALID)
-For this functionality the alarmstate of the record needs to be transferred to motor record by adding "MS" after the RDBL link.
+Motor record stops motion if the RDBL linked PV is in alarm state (MAJOR or INVALID) independet on if severity propagation is set (disregarding NMS,MS,MSS...)
 
 The simulated position is configured like this:
 ```
