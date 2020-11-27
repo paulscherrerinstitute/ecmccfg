@@ -35,7 +35,6 @@ on error halt
 #-------------------------------------------------------------------------------
 #- load required modules
 require ecmc        "${ECMC_VER=6.2.4}"
-require stream      "${stream_VER=''}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
@@ -45,8 +44,6 @@ epicsEnvUnset(ECMC_EXE_CMD)
 #- define default PATH for scripts and database/templates
 epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
 epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_TEMPLATES}/")
-#epicsEnvSet("EthercatMC_DB",        "${EthercatMC_TEMPLATES}/")
-epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}:${ecmccfg_DB}")
 #- define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
 epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #-
