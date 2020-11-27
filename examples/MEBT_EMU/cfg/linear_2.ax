@@ -37,7 +37,6 @@ epicsEnvSet("ECMC_JOG_VEL",               "1")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "0.1")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
-epicsEnvSet("ECMC_MRES",                  "0.001")
 
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "$(SM_HOMEPROC=1)")
