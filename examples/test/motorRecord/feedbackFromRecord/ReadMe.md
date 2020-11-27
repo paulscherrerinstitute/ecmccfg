@@ -84,8 +84,8 @@ NOTE: JOGGING is not supported (motor record will stop any started JOGGING cmd)
 
 
 ## Stop on RDBL pv alarms
-Motor record should stop motion if the RDBL linked PV is in alarm state (MAJOR, maybe also MINOR, need to test)
-For this functionality the alarmstate of teh record needs to be transferred to motor record by adding "MS" after the RDBL link.
+Motor record stops motion if the RDBL linked PV is in alarm state (MAJOR or INVALID)
+For this functionality the alarmstate of the record needs to be transferred to motor record by adding "MS" after the RDBL link.
 
 The simulated position is configured like this:
 ```
@@ -97,5 +97,11 @@ The simulated position is configured like this:
 IMPORTANT: If you use an incremental encoder linked to calc record, like in this example. You can sometimes experience stops during homing sequence since then the motion axis might go outside of the alarm limits defined. Normally motor record driver will not update the posiion during homing but I will happen for instance when activating limit switch or homing switch. Then a stop could occur.
 This is ofcource no problem if the RDBL linked value is absolute like intended.
 
-NOTE: JOG and HOME works since these modes do not use RDBL (or retries).
+## How to move when RDBL alarm interlock 
 
+If motion is interlocked by the RDBL alarm then motion can be executed by setting the URIP to 0 (disabling RDBL).
+```
+dbpf IOC_TEST:Axis1.URIP 0
+```
+Motion can now be executed. 
+Note: The RDBL link are now not used (retries based on RDBL will not be executed)
