@@ -76,9 +76,6 @@ epicsEnvSet("ECMC_AXISFIELDINIT",  "")
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}"home.template",1,1)
 dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}"home.template", "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC}, HOMEPOS=${ECMC_HOME_POS}, HVELTO=${ECMC_HOME_VEL_TO}, HVELFRM=${ECMC_HOME_VEL_FRM}, HOMEACC=${ECMC_HOME_ACC}, HOMEDEC=${ECMC_HOME_DEC}")
 
-ecmcFileExist("ecmcExpression.db",1,1)
-dbLoadRecords("ecmcExpression.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_AXIS_NO},Name=${ECMC_PREFIX}${ECMC_MOTOR_NAME}")
-
 #- Cleanup
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_TEMP_UREV)
