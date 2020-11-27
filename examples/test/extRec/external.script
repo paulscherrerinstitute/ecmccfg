@@ -12,7 +12,6 @@ require ecmccfg 6.2.0
 ##############################################################################
 ###### Startup
 require ecmc        "6.2.0"
-require stream      "2.8.10"
 
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
