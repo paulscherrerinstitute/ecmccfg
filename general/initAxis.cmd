@@ -41,14 +41,12 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "NOT SET")       # Ethercat entry for 
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "NOT SET")  # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "NOT SET")  # Brake timing parameter in cycles (default 1kHz)
 
-
 #- Trajectory
 epicsEnvSet("ECMC_VELO",                  "NOT SET")
 epicsEnvSet("ECMC_JOG_VEL",               "NOT SET")
 epicsEnvSet("ECMC_JAR",                   "NOT SET")       # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "NOT SET")
 epicsEnvSet("ECMC_EMERG_DECEL",           "NOT SET")       # Emergency deceleration
-epicsEnvSet("ECMC_MRES",                  "NOT SET")
 
 #- Homing
 epicsEnvSet("ECMC_HOME_PROC",              "NOT SET")
