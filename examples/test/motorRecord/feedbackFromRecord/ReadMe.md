@@ -34,7 +34,7 @@ Not used in this test. Set to 0.
 Set to 0.1 in this test.
 
 ### URIP : Use RDBL Link If Present
-Not used in this test. Set to "".
+Set to 1
 
 ### RDBL : Readback link (position form EPICS variable)
 This should be a record holding the value. In this test the a simulates position was generated through a CALC record multiplying the actual position by 0.95.
