@@ -72,4 +72,6 @@ Method to find out.
 
 ## Drive in CSP mode
 The CSP config is not perfect. There seems to be a scaling error somehow. A jog of 360deg/s results in approx 35deg/s oscilating movement.
-Probably the position control parameters in the drive needs more attention. So its suggetsed to use CSV for now.
+Probably the position control parameters in the drive needs more attention. So its suggetsed to use CSV for now. 
+
+NOTE: Try setting the drive scale to same values as encoder scale might solve this problem.
