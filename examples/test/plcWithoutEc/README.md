@@ -9,7 +9,7 @@ Since "require" differs slightly between ESS and PSI the syntax is slightly diff
 
 ```
 # ESS syntax
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.4,stream_VER=2.8.10, MASTER_ID=-1"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.4, MASTER_ID=-1"
 
 # PSI syntax
 require ecmccfg 6.2.4 MASTER_ID=-1

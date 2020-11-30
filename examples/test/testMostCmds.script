@@ -14,7 +14,7 @@ require ecmccfg master
 
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10, EC_RATE=2000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master, EC_RATE=2000"
 
 // Should give error since after ec->init()
 ecmcConfig "Cfg.SetSampleRate(1000)"

@@ -58,7 +58,6 @@ require ecmccfg plugins
 ##############################################################################
 ###### Startup
 require ecmc        "${ECMC_VER=plugins}"
-require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates

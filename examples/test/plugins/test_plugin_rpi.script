@@ -12,7 +12,6 @@ require ecmccfg master
 ##############################################################################
 ###### Startup
 require ecmc        "${ECMC_VER=master}"
-require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
