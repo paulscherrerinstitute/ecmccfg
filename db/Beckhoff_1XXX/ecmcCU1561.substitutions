@@ -1,0 +1,6 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
