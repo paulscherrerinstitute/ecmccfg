@@ -71,5 +71,6 @@ Method to find out.
 6. Calculate the velocity from logged data and compare to the  velo setpoint.
 
 ## Drive in CSP mode
-The CSP config is not perfect. There seems to be a scaling error somehow. A jog of 360deg/s results in approx 35deg/s oscilating movement.
-Probably the position control parameters in the drive needs more attention. So its suggetsed to use CSV for now.
+CSP mode works OK.
+Use same DRV scale ENC scale.
+
