@@ -53,8 +53,9 @@ record(longin,"$(P)$(AXIS_NAME)-Stat"){
 record(calc,"$(P)$(AXIS_NAME)-seqstate") {
   field(DESC, "$(AXIS_NAME): Seq state")
   field(PINI, "$(PINI=1)")
-  field(CALC,"A>>16")
+  field(CALC,"A>>20")
   field(INPA,"$(P)$(AXIS_NAME)-Stat.VAL")
+  field(FLNK, "$(P)$(AXIS_NAME)-lastilock.PROC")
 }
 
 record(calc,"$(P)$(AXIS_NAME)-lastilock") {
@@ -69,23 +70,35 @@ record(mbbiDirect,"$(P)$(AXIS_NAME)-Stat_"){
   field(DESC, "$(AXIS_NAME): Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "$(P)$(AXIS_NAME)-Stat.VAL")
-  field(FLNK, "$(P)$(AXIS_NAME)-enabled.PROC")
+  field(FLNK, "$(P)$(AXIS_NAME)-enable.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
+#  // bit 0 enable
+record(bi,"$(P)$(AXIS_NAME)-enable"){
+  field(DESC, "$(AXIS_NAME): Enable")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B0")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-enabled.PROC")
+}
+
+#  // bit 1 enabled
 record(bi,"$(P)$(AXIS_NAME)-enabled"){
   field(DESC, "$(AXIS_NAME): Enabled")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B0")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B1")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
   field(FLNK, "$(P)$(AXIS_NAME)-execute.PROC")
 }
-
+#  // bit 2 execute  
 record(bi,"$(P)$(AXIS_NAME)-execute"){
   field(DESC, "$(AXIS_NAME): Execute Cmd")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B1")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B2")
   field(ZNAM, "No Execute")
   field(ONAM, "Execute")
   field(ZSV,  "NO_ALARM")
@@ -93,9 +106,10 @@ record(bi,"$(P)$(AXIS_NAME)-execute"){
   field(FLNK, "$(P)$(AXIS_NAME)-busy.PROC")
 }
 
+#  // bit 3 busy
 record(bi,"$(P)$(AXIS_NAME)-busy"){
   field(DESC, "$(AXIS_NAME): Busy")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B2")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B3")
   field(ZNAM, "Free")
   field(ONAM, "Busy")
   field(ZSV,  "NO_ALARM")
@@ -103,9 +117,10 @@ record(bi,"$(P)$(AXIS_NAME)-busy"){
   field(FLNK, "$(P)$(AXIS_NAME)-attarget.PROC")
 }
 
+#  // bit 4 at target  
 record(bi,"$(P)$(AXIS_NAME)-attarget"){
   field(DESC, "$(AXIS_NAME): At target")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B3")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B4")
   field(ZNAM, "Not at target")
   field(ONAM, "At target")
   field(ZSV,  "NO_ALARM")
@@ -113,9 +128,10 @@ record(bi,"$(P)$(AXIS_NAME)-attarget"){
   field(FLNK, "$(P)$(AXIS_NAME)-moving.PROC")
 }
 
+#  // bit 5 moving
 record(bi,"$(P)$(AXIS_NAME)-moving"){
   field(DESC, "$(AXIS_NAME): Moving")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B4")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B5")
   field(ZNAM, "Standstill")
   field(ONAM, "Moving")
   field(ZSV,  "NO_ALARM")
@@ -123,9 +139,10 @@ record(bi,"$(P)$(AXIS_NAME)-moving"){
   field(FLNK, "$(P)$(AXIS_NAME)-limitfwd.PROC")
 }
 
+#  // bit 6 limit fwd
 record(bi,"$(P)$(AXIS_NAME)-limitfwd"){
   field(DESC, "$(AXIS_NAME): Limit FWD")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B5")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B6")
   field(ZNAM, "Limit activated")
   field(ONAM, "Limit OK")
   field(ZSV,  "MINOR")
@@ -133,9 +150,10 @@ record(bi,"$(P)$(AXIS_NAME)-limitfwd"){
   field(FLNK, "$(P)$(AXIS_NAME)-limitbwd.PROC")
 }
 
+#  // bit 7 limit bwd
 record(bi,"$(P)$(AXIS_NAME)-limitbwd"){
   field(DESC, "$(AXIS_NAME): Limit BWD")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B6")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B7")
   field(ZNAM, "Limit activated")
   field(ONAM, "Limit OK")
   field(ZSV,  "MINOR")
@@ -143,29 +161,32 @@ record(bi,"$(P)$(AXIS_NAME)-limitbwd"){
   field(FLNK, "$(P)$(AXIS_NAME)-homeswitch.PROC")
 }
 
+#  // bit 8 homeswitch
 record(bi,"$(P)$(AXIS_NAME)-homeswitch"){
   field(DESC, "$(AXIS_NAME): Home switch")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B7")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B8")
   field(ZNAM, "Low")
   field(ONAM, "High")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)$(AXIS_NAME)-instartup.PROC")
+  field(FLNK, "$(P)$(AXIS_NAME)-homed.PROC")
 }
 
-record(bi,"$(P)$(AXIS_NAME)-instartup"){
-  field(DESC, "$(AXIS_NAME): In startup phase")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B8")
-  field(ZNAM, "Started")
-  field(ONAM, "In startup")
+#  // bit 9 homed
+record(bi,"$(P)$(AXIS_NAME)-homed"){
+  field(DESC, "$(AXIS_NAME): Homed")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B9")
+  field(ZNAM, "Not homed")
+  field(ONAM, "Homed")
   field(ZSV,  "NO_ALARM")
-  field(OSV,  "MINOR")
+  field(OSV,  "NO_ALARM")
   field(FLNK, "$(P)$(AXIS_NAME)-inrealtime.PROC")
 }
 
+#  // bit 10 inRealtime  
 record(bi,"$(P)$(AXIS_NAME)-inrealtime"){
   field(DESC, "$(AXIS_NAME): In realtime")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.B9")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BA")
   field(ZNAM, "Not in realtime")
   field(ONAM, "In realtime")
   field(ZSV,  "NO_ALARM")
@@ -173,9 +194,10 @@ record(bi,"$(P)$(AXIS_NAME)-inrealtime"){
   field(FLNK, "$(P)$(AXIS_NAME)-TrajSourceType-RB.PROC")
 }
 
+#  // bit 11 traj source  
 record(bi,"$(P)$(AXIS_NAME)-TrajSourceType-RB"){
   field(DESC, "$(AXIS_NAME): Traj Source")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BA")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BB")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
   field(ZSV,  "NO_ALARM")
@@ -183,9 +205,10 @@ record(bi,"$(P)$(AXIS_NAME)-TrajSourceType-RB"){
   field(FLNK, "$(P)$(AXIS_NAME)-EncSourceType-RB.PROC")
 }
 
+#  // bit 12 enc source  
 record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
   field(DESC, "$(AXIS_NAME): Enc Source")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BB")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BC")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
   field(ZSV,  "NO_ALARM")
@@ -193,14 +216,48 @@ record(bi,"$(P)$(AXIS_NAME)-EncSourceType-RB"){
   field(FLNK, "$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB.PROC")
 }
 
+#  // bit 13 Allow plc commands  
 record(bi,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn-RB"){
   field(DESC, "$(AXIS_NAME): Allow PLC cmds")
-  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BC")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BD")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-SoftLimFwd-CmdEn-RB.PROC")
+}
+
+#  // bit 14 softlimbwdena
+record(bi,"$(P)$(AXIS_NAME)-SoftLimFwd-CmdEn-RB"){
+  field(DESC, "$(AXIS_NAME): Softlim Fwd")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BE")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "$(P)$(AXIS_NAME)-SoftLimBwd-CmdEn-RB.PROC")
+}
+
+#  // bit 15 softlimbwdena  
+record(bi,"$(P)$(AXIS_NAME)-SoftLimBwd-Ena-RB"){
+  field(DESC, "$(AXIS_NAME): Softlim Fwd")
+  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BF")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
 }
+
+#  // bit 16 inStartupPhase
+#record(bi,"$(P)$(AXIS_NAME)-instartup"){
+#  field(DESC, "$(AXIS_NAME): In startup phase")
+#  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BF")
+#  field(ZNAM, "Started")
+#  field(ONAM, "In startup")
+#  field(ZSV,  "NO_ALARM")
+#  field(OSV,  "MINOR")
+#  field(FLNK, "$(P)$(AXIS_NAME)-inrealtime.PROC")
+#}
 
 record(bi,"$(P)$(AXIS_NAME)-PLC-CmdEn-RB"){
   field(DESC, "$(AXIS_NAME): Plc enable")
@@ -247,15 +304,13 @@ record(waveform,"$(P)$(AXIS_NAME)-PLCExpr-RB"){
 record(mbboDirect,"$(P)$(AXIS_NAME)-Cmd_"){
   info(asyn:READBACK,"1")  
   field(DESC, "$(AXIS_NAME): Control Word")
-  field(DTYP, "asynUInt32Digital")
-  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")  
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).controlbin?")
   field(SCAN, "Passive")
   field(TSE,  "0")
 }
 
-record(bo,"$(P)$(AXIS_NAME)-Enable-Cmd"){
-  field(PINI, "$(PINI=1)")
+record(bo,"$(P)$(AXIS_NAME)-Enable-Cmd"){  
   field(DESC, "$(AXIS_NAME): Enable cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B0")
   field(ZNAM, "Disable")
@@ -266,7 +321,6 @@ record(bo,"$(P)$(AXIS_NAME)-Enable-Cmd"){
 }
 
 record(bo,"$(P)$(AXIS_NAME)-Execute-Cmd"){
-  field(PINI, "$(PINI=1)")
   field(DESC, "$(AXIS_NAME): Execute cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B1")
   field(ZNAM, "Not Execute")
@@ -277,7 +331,6 @@ record(bo,"$(P)$(AXIS_NAME)-Execute-Cmd"){
 }
 
 record(bo,"$(P)$(AXIS_NAME)-Reset-Cmd"){
-  field(PINI, "$(PINI=1)")
   field(DESC, "$(AXIS_NAME): Reset cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B2")
   field(ZNAM, "Not Reset")
@@ -288,40 +341,36 @@ record(bo,"$(P)$(AXIS_NAME)-Reset-Cmd"){
 }
 
 record(bo,"$(P)$(AXIS_NAME)-EncSourceType-Cmd"){
-  field(PINI, "$(PINI=1)")
   field(DESC, "$(AXIS_NAME): Encoder source cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B3")
-  field(ZNAM, "Disabled")
-  field(ONAM, "Internal")
+  field(ZNAM, "Internal")
+  field(ONAM, "External")
   field(SCAN, "Passive")
   field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
   field(TSE,  "0") 
 }
 
 record(bo,"$(P)$(AXIS_NAME)-TrajSourceType-Cmd"){
-  field(PINI, "$(PINI=1)")
   field(DESC, "$(AXIS_NAME): Traj source cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B4")
-  field(ZNAM, "Disabled")
-  field(ONAM, "Internal")
+  field(ZNAM, "Internal")
+  field(ONAM, "External")
   field(SCAN, "Passive")
   field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
   field(TSE,  "0") 
 }
 
-record(bo,"$(P)$(AXIS_NAME)-PLC-CmdEn"){
-  field(PINI, "$(PINI=1)")
+record(bo,"$(P)$(AXIS_NAME)-PLC-CmdEn"){  
   field(DESC, "$(AXIS_NAME): PLC enable cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B5")
-  field(ZNAM, "PLC disable")
-  field(ONAM, "PLC enable")
+  field(ZNAM, "disable")
+  field(ONAM, "enable")
   field(SCAN, "Passive")
   field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
   field(TSE,  "0") 
 }
 
 record(bo,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn"){
-  field(PINI, "$(PINI=1)")
   field(DESC, "$(AXIS_NAME): Allow cmd from PLCs")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B6")
   field(ZNAM, "Refuse")
