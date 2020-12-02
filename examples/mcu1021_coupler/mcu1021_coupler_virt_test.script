@@ -69,3 +69,22 @@ iocInit()
 dbl > pvs.log
 
 dbpf IOC_TEST:Axis1.SPAM 1023
+epicsThreadSleep(0.01)
+
+dbgf IOC_TEST:Axis3-EncSourceType-RB
+epicsThreadSleep(0.01)
+
+dbgf IOC_TEST:Axis3-EncSourceType-Cmd
+epicsThreadSleep(0.01)
+
+dbpf IOC_TEST:Axis3-EncSourceType-Cmd 0
+epicsThreadSleep(0.01)
+
+dbgf IOC_TEST:Axis3-EncSourceType-RB
+epicsThreadSleep(0.01)
+
+dbpf IOC_TEST:Axis3-EncSourceType-Cmd 1
+epicsThreadSleep(0.01)
+
+dbgf IOC_TEST:Axis3-EncSourceType-RB
+

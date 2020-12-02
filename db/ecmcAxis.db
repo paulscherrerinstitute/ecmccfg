@@ -302,7 +302,7 @@ record(waveform,"$(P)$(AXIS_NAME)-PLCExpr-RB"){
 }
 
 record(mbboDirect,"$(P)$(AXIS_NAME)-Cmd_"){
-  info(asyn:READBACK,"1")  
+  info(asyn:READBACK,"1")
   field(DESC, "$(AXIS_NAME): Control Word")
   field(DTYP, "asynUInt32Digital")  
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).controlbin?")
@@ -310,7 +310,7 @@ record(mbboDirect,"$(P)$(AXIS_NAME)-Cmd_"){
   field(TSE,  "0")
 }
 
-record(bo,"$(P)$(AXIS_NAME)-Enable-Cmd"){  
+record(bo,"$(P)$(AXIS_NAME)-Enable-Cmd"){
   field(DESC, "$(AXIS_NAME): Enable cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B0")
   field(ZNAM, "Disable")
@@ -344,7 +344,7 @@ record(bo,"$(P)$(AXIS_NAME)-EncSourceType-Cmd"){
   field(DESC, "$(AXIS_NAME): Encoder source cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B3")
   field(ZNAM, "Internal")
-  field(ONAM, "External")
+  field(ONAM, "PLC")
   field(SCAN, "Passive")
   field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
   field(TSE,  "0") 
@@ -354,13 +354,13 @@ record(bo,"$(P)$(AXIS_NAME)-TrajSourceType-Cmd"){
   field(DESC, "$(AXIS_NAME): Traj source cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B4")
   field(ZNAM, "Internal")
-  field(ONAM, "External")
+  field(ONAM, "PLC")
   field(SCAN, "Passive")
   field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
   field(TSE,  "0") 
 }
 
-record(bo,"$(P)$(AXIS_NAME)-PLC-CmdEn"){  
+record(bo,"$(P)$(AXIS_NAME)-PLC-CmdEn"){    
   field(DESC, "$(AXIS_NAME): PLC enable cmd")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B5")
   field(ZNAM, "disable")
@@ -373,6 +373,26 @@ record(bo,"$(P)$(AXIS_NAME)-PLC-CmdEn"){
 record(bo,"$(P)$(AXIS_NAME)-AllowCmdFromPLC-CmdEn"){
   field(DESC, "$(AXIS_NAME): Allow cmd from PLCs")
   field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B6")
+  field(ZNAM, "Refuse")
+  field(ONAM, "Allow")
+  field(SCAN, "Passive")
+  field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
+  field(TSE,  "0") 
+}
+
+record(bo,"$(P)$(AXIS_NAME)-SoftLimBwd-CmdEn"){
+  field(DESC, "$(AXIS_NAME): Softlimit Bwd enable")
+  field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B7")
+  field(ZNAM, "Refuse")
+  field(ONAM, "Allow")
+  field(SCAN, "Passive")
+  field(FLNK, "$(P)$(AXIS_NAME)-Cmd_.PROC")
+  field(TSE,  "0") 
+}
+
+record(bo,"$(P)$(AXIS_NAME)-SoftLimFwd-CmdEn"){
+  field(DESC, "$(AXIS_NAME): Softlimit Fwd enable")
+  field(OUT,  "$(P)$(AXIS_NAME)-Cmd_.B8")
   field(ZNAM, "Refuse")
   field(ONAM, "Allow")
   field(SCAN, "Passive")
