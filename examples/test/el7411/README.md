@@ -3,14 +3,14 @@
 ## EL7411 Config
 
 ### HW enable:
-Do not forget to wire HW-enable input to 24V. If not wired the DS402 statemachine will just timout.
+The HW-enable input needs to be linked to to 24V (or interlock signal). If not wired the DS402 statemachine will just timout.
 Orange led on right side of terminal should not be lit.
 For test purpose the HW-enable can be wired to the Fan out terminal on the EL7411
 
 ## Maxon motor Encoder combo 312315 used for test
 MAXON EC-40 MAX 311733 2239929 312315 2307522
 BLDC motor with incremental encoder and hall sensors.
-Hard to know what compinets based on those numbers. 
+Hard to know what components based on those numbers. 
 Some searching resulted in that 312315 is a combination numer for these components:
 
 ## Motor 
@@ -73,4 +73,3 @@ Method to find out.
 ## Drive in CSP mode
 CSP mode works OK.
 Use same DRV scale ENC scale.
-
