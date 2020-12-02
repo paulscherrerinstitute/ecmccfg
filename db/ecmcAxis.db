@@ -251,9 +251,31 @@ record(bi,"$(P)$(AXIS_NAME)-SoftLimBwd-Ena-RB"){
 #  // bit 16 inStartupPhase
 #record(bi,"$(P)$(AXIS_NAME)-instartup"){
 #  field(DESC, "$(AXIS_NAME): In startup phase")
-#  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BF")
+#  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BX")
 #  field(ZNAM, "Started")
 #  field(ONAM, "In startup")
+#  field(ZSV,  "NO_ALARM")
+#  field(OSV,  "MINOR")
+#  field(FLNK, "$(P)$(AXIS_NAME)-inrealtime.PROC")
+#}
+
+#  // bit 17 sumilockfwd
+#record(bi,"$(P)$(AXIS_NAME)-sumilockfwd"){
+#  field(DESC, "$(AXIS_NAME): sumilockfwd")
+#  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BX")
+#  field(ZNAM, "Not ok")
+#  field(ONAM, "OK")
+#  field(ZSV,  "NO_ALARM")
+#  field(OSV,  "MINOR")
+#  field(FLNK, "$(P)$(AXIS_NAME)-inrealtime.PROC")
+#}
+
+#  // bit 18 sumilockfwd
+#record(bi,"$(P)$(AXIS_NAME)-sumilockbwd"){
+#  field(DESC, "$(AXIS_NAME): sumilockbwd")
+#  field(INP,  "$(P)$(AXIS_NAME)-Stat_.BX")
+#  field(ZNAM, "Not ok")
+#  field(ONAM, "OK")
 #  field(ZSV,  "NO_ALARM")
 #  field(OSV,  "MINOR")
 #  field(FLNK, "$(P)$(AXIS_NAME)-inrealtime.PROC")
