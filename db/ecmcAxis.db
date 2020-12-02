@@ -327,7 +327,7 @@ record(mbboDirect,"$(P)$(AXIS_NAME)-Cmd_"){
   info(asyn:READBACK,"1")
   field(DESC, "$(AXIS_NAME): Control Word")
   field(DTYP, "asynUInt32Digital")  
-  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).controlbin?")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
   field(SCAN, "Passive")
   field(TSE,  "0")
 }
