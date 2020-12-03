@@ -1,4 +1,5 @@
-################################################################################
+#==============================================================================
+# startup.cmd
 #-------------- Information:
 #- Description: ecmccfg startup.script
 #-
@@ -34,7 +35,6 @@ on error halt
 #-------------------------------------------------------------------------------
 #- load required modules
 require ecmc        "${ECMC_VER=6.2.4}"
-require stream      "${stream_VER=''}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
@@ -44,8 +44,6 @@ epicsEnvUnset(ECMC_EXE_CMD)
 #- define default PATH for scripts and database/templates
 epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
 epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_TEMPLATES}/")
-#epicsEnvSet("EthercatMC_DB",        "${EthercatMC_TEMPLATES}/")
-epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}:${ecmccfg_DB}")
 #- define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
 epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #-
@@ -77,6 +75,12 @@ epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
 ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")
 ${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
+epicsEnvSet("ECMC_MASTER_ID" ,${MASTER_ID=0})
+
+#- Set default diag params
+ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
+
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)
 epicsEnvSet("ECMCCFG_INIT" ,"#")

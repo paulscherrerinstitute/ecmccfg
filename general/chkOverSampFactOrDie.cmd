@@ -1,6 +1,6 @@
 #==============================================================================
-#-d /** chkOverSampFactOrDie.cmd
-#-d
+# chkOverSampFactOrDie.cmd
+#-d /**
 #-d   \brief Checks if requested oversampling factor is valid otherwise exits EPICS/ECMC
 #-d   need ti use ecmcExit since iocsh command "exit" just stops reading current file
 #-d

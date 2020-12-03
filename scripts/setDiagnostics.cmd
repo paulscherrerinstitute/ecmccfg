@@ -9,5 +9,5 @@
 #-d */
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(${DIAG=1})"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(${PRINTOUT=0}"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(${PRINTOUT=0})"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(${FAILEDCYCLES=100})"

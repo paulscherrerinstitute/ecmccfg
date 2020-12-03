@@ -37,7 +37,6 @@ epicsEnvSet("ECMC_JOG_VEL",               "5")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "0.1")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
-epicsEnvSet("ECMC_MRES",                  "0.001")
 
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "3")
@@ -66,7 +65,7 @@ epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "20")
 epicsEnvSet("ECMC_DXLM_ENABLE",           "1")
 
 # Position lag
-epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "0.5")
+epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "1.0")
 epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "10")
 epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
 

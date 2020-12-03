@@ -11,7 +11,7 @@ epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo r
 epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
 #Encoder
-epicsEnvSet("ECMC_ENC_SCALE_NUM"          "0")
+epicsEnvSet("ECMC_ENC_SCALE_NUM"          "1")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "1")
 epicsEnvSet("ECMC_ENC_TYPE"               "1")                        # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_BITS"               "0")                        # Total bit count of encoder raw data
@@ -25,7 +25,6 @@ epicsEnvSet("ECMC_JOG_VEL",               "5")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "0.1")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
-epicsEnvSet("ECMC_MRES",                  "0.001")
 
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "$(SM_HOMEPROC=3)")

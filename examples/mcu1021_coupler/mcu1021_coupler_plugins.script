@@ -20,7 +20,7 @@ require ecmccfg master
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
 
 ##############################################################################
 ## Configure hardware:
@@ -53,7 +53,7 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 
 ##############################################################################
 ## Load plugin 0: RasPi
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/linux-arm/libecmcPlugin_RasPi.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_raspi/master/lib/linux-arm/libecmc_plugin_raspi.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0")  # Enable printouts from plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -61,7 +61,7 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ##############################################################################
 ## Load plugin 1: Advanced
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/linux-arm/libecmcPlugin_Advanced.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_advanced/master/lib/linux-arm/libecmc_plugin_advanced.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;") # Only one option implemented in this plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -94,3 +94,6 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+dbl > pvs.log

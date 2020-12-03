@@ -126,11 +126,12 @@ record(ai,"$(P)MCU-thread-send-max"){
 }
 
 # Updated last in updates cycles (for record with fastest update rate).
-# Can be used as trigger after all data have been updated.
+# Can be used as trigger after all data have been updated. 
+# T_SMP_MS is not supported for this record. 
 record(waveform,"$(P)MCU-updated"){
   field(PINI, "1")
   field(DTYP, "asynInt32ArrayIn")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32ArrayIn/ecmc.updated?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32ArrayIn/ecmc.updated?")
   field(FTVL, "LONG")
   field(NELM, "1")
   field(SCAN, "I/O Intr")

@@ -1,0 +1,41 @@
+record(calc,"$(P)$(AXIS_NAME)-PosActSim")
+{
+  field(DESC, "Calc simulated act. pos. of axis 1")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A*0.95")
+  field(INPA, "$(P)$(AXIS_NAME)-PosAct CP")
+  field(FLNK, "$(P)$(AXIS_NAME)-PosActSim.PROC")
+  field(LOW,  "-50")
+  field(LOLO, "-60")
+  field(HIGH, "50")
+  field(HIHI, "60")
+  field(HYST, "0")
+  field(LLSV, "MAJOR")
+  field(LSV,  "MINOR")
+  field(HSV,  "MINOR")
+  field(HHSV, "MAJOR")
+}
+
+# STAT numeric values
+#IOC_TEST:Axis1-PosActSim.STAT  2020-11-23 09:24:15.869006 0  "NO ALARM"
+#IOC_TEST:Axis1-PosActSim.STAT  2020-11-23 09:26:02.009623 6 LOW MINOR
+#IOC_TEST:Axis1-PosActSim.STAT  2020-11-23 09:26:04.119621 5 LOLO MAJOR
+#IOC_TEST:Axis1-PosActSim.STAT  2020-11-23 09:24:31.348975 4 HIGH MINOR
+#IOC_TEST:Axis1-PosActSim.STAT  2020-11-23 09:24:33.448988 3 HIHI MAJOR
+
+# SEVR numeric values
+#IOC_TEST:Axis1-PosActSim.SEVR  2020-11-23 09:29:08.239693 0  "NO SEVERITY"
+#IOC_TEST:Axis1-PosActSim.SEVR  2020-11-23 09:28:51.489700 1 LOW MINOR
+#IOC_TEST:Axis1-PosActSim.SEVR  2020-11-23 09:28:53.599701 2 LOLO MAJOR
+#IOC_TEST:Axis1-PosActSim.SEVR  2020-11-23 09:29:20.749693 1 HIGH MINOR
+#IOC_TEST:Axis1-PosActSim.SEVR  2020-11-23 09:29:22.849692 2 HIHI MAJOR
+
+# Stop motor if SEVR is MAJOR
+#record(calcout,"$(P)$(AXIS_NAME)-PosActSimAlarm")
+#{
+#  field(DESC, "Calc simulated act. pos. of axis 1")
+#  field(PINI, "$(PINI=1)")
+#  field(CALC, "A>1")
+#  field(INPA, "IOC_TEST:Axis1-PosActSim.SEVR CP")
+#  field(OUT, "IOC_TEST:Axis1.STOP")
+#}

@@ -12,7 +12,6 @@ require ecmccfg master
 ##############################################################################
 ###### Startup
 require ecmc        "${ECMC_VER=master}"
-require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
@@ -43,7 +42,7 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 ##############################################################################
 ## Load plugin 0: RasPi
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_RasPi.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_raspi/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmc_plugin_raspi.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0")  # Enable printouts from plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -51,7 +50,7 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ##############################################################################
 ## Load plugin 1: Advanced
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_Advanced.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_advanced/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmc_plugin_advanced.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;") # Only one option implemented in this plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -86,4 +85,5 @@ dbLoadRecords("ecmcGeneral.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,T
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
 
 iocInit
+dbl > pvs.log
 

@@ -1,6 +1,6 @@
 ##############################################################################
-## Example: Demo of ecmc plugins. In this example ecmcPlugin_Advanced is loaded:
-## https://github.com/anderssandstrom/e3-ecmcPlugin_Advanced
+## Example: Demo of ecmc plugins. In this example ecmc_plugin_advanced is loaded:
+## https://github.com/anderssandstrom/e3-ecmc_plugin_advanced
 ##
 ## The plugin exposes:
 ##  - 2 plc functions 
@@ -58,7 +58,6 @@ require ecmccfg plugins
 ##############################################################################
 ###### Startup
 require ecmc        "${ECMC_VER=plugins}"
-require stream      "${stream_VER=2.8.10}"
 
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
@@ -88,8 +87,8 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
 
 ##############################################################################
 ## Load plugin:
-#require ecmcPlugin_Simple master # do not require then loaded twice..
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_Advanced.so")
+#require ecmc_plugin_advanced master # do not require then loaded twice..
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_advanced/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmc_plugin_advanced.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=1;") # Only one option implemented in this plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -119,4 +118,5 @@ dbLoadRecords("ecmcGeneral.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,T
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
 
 iocInit
+dbl > pvs.log
 

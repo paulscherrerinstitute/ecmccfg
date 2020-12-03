@@ -11,6 +11,21 @@
 #-d   \pre An axis definition for a physical axis has to be added/configured immediately before the call of this script.
 #-d */
 
+#- Ensure valid current settings 
+ecmcFileExist("${ECMC_CONFIG_ROOT}verifyOrDie.cmd",1)
+#- ECMC_ENC_SCALE_NUM
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_ENC_SCALE_NUM})<>0',SUCCESS_STR='ECMC_ENC_SCALE_NUM value OK == ${ECMC_ENC_SCALE_NUM}...',ERROR_STR='ECMC_ENC_SCALE_NUM == 0...'"
+#- ECMC_ENC_SCALE_DENOM
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_ENC_SCALE_DENOM})<>0',SUCCESS_STR='ECMC_ENC_SCALE_DENOM value OK == ${ECMC_ENC_SCALE_DENOM}...',ERROR_STR='ECMC_ENC_SCALE_DENOM == 0...'"
+#- ECMC_DRV_SCALE_NUM
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_DRV_SCALE_NUM})<>0',SUCCESS_STR='ECMC_DRV_SCALE_NUM value OK == ${ECMC_DRV_SCALE_NUM}...',ERROR_STR='ECMC_DRV_SCALE_NUM == 0...'"
+#- ECMC_DRV_SCALE_DENOM
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_DRV_SCALE_DENOM})<>0',SUCCESS_STR='ECMC_DRV_SCALE_DENOM value OK == ${ECMC_DRV_SCALE_DENOM}...',ERROR_STR='ECMC_DRV_SCALE_DENOM == 0...'"
+
+#- Issue Warning if ECMC_MRES is set. MRES calculated bu SREV and UREV instead
+ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_MRES=-1}>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
+
 #- General
 ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},1,${ECMC_DRV_TYPE})"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_AXIS_HEALTH},"ax${ECMC_AXIS_NO}.health")"
@@ -54,8 +69,8 @@ ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset(${ECMC_AXIS_NO=""},${ECMC_HOME_
 #- Drive
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_CONTROL},"ax${ECMC_AXIS_NO}.drv.control")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_STATUS},"ax${ECMC_AXIS_NO}.drv.status")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_VELOCITY},"ax${ECMC_AXIS_NO}.drv.velocity")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_POSITION},"ax${ECMC_AXIS_NO}.drv.position")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_VELOCITY=""},"ax${ECMC_AXIS_NO}.drv.velocity")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_POSITION=""},"ax${ECMC_AXIS_NO}.drv.position")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_BRAKE},"ax${ECMC_AXIS_NO}.drv.brake")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_REDUCE_TORQUE},"ax${ECMC_AXIS_NO}.drv.reducetorque")"
 ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom(${ECMC_AXIS_NO},${ECMC_DRV_SCALE_DENOM})"
@@ -85,15 +100,21 @@ ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_DRV_TIME})"
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO_MAX_TRAJ_TIME})"
 
+#- Motor record init
 ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", ${ECMC_AXISCONFIG})
 
-ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL}, MRES=${ECMC_MRES}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC} ${ECMCAXISFIELDINIT}")
+#- Calc motor record SREV and UREV fields if not defined then return 1 for both SREV and UREV
+ecmcEpicsEnvSetCalc("ECMC_TEMP_SREV","if(abs(${ECMC_ENC_SCALE_DENOM=0})>0){RESULT:=abs(${ECMC_ENC_SCALE_DENOM=0});} else {RESULT:=1.0};","%d")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_UREV","if(abs(${ECMC_ENC_SCALE_NUM=0})>0){RESULT:=abs(${ECMC_ENC_SCALE_NUM=0});} else {RESULT:=1.0};","%lf")
 
-epicsEnvSet("ECMCAXISFIELDINIT",  "")
+ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC},SREV=${ECMC_TEMP_SREV},UREV=${ECMC_TEMP_UREV}, ${ECMC_AXISFIELDINIT=""}")
+
+epicsEnvSet("ECMC_AXISFIELDINIT",  "")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
 dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC}, HOMEPOS=${ECMC_HOME_POS}, HVELTO=${ECMC_HOME_VEL_TO}, HVELFRM=${ECMC_HOME_VEL_FRM}, HOMEACC=${ECMC_HOME_ACC}, HOMEDEC=${ECMC_HOME_DEC}")
 
-ecmcFileExist("ecmcExpression.db",1,1)
-dbLoadRecords("ecmcExpression.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_AXIS_NO},Name=${ECMC_PREFIX}${ECMC_MOTOR_NAME}")
+#- Cleanup
+epicsEnvUnset(ECMC_TEMP_SREV)
+epicsEnvUnset(ECMC_TEMP_UREV)

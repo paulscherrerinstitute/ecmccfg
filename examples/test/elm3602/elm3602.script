@@ -1,5 +1,5 @@
 ##############################################################################
-## Example config for el3604
+## Example config for el3602
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
 ## Note: The el3702 does not support any value of NELM. The EtherCAT bus period in nanoseconds diveded by 
 ##       oversampling factor must be an integer.  "(1/EC_RATE*1E9) / NELM" 
@@ -21,7 +21,7 @@ require ecmccfg develop
 
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,stream_VER=2.8.10, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=1000"
 
 ##############################################################################
 ## Config hardware:
@@ -39,7 +39,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 require ecmc_plugin_fft master  # te get access to db file..
 epicsEnvSet("FFT_NELM", 10240)
 epicsEnvSet(ECMC_PLUGIN_FILNAME,"${HOME}/epics/base-7.0.4/require/3.3.0/siteMods/ecmc_plugin_fft/master/lib/linux-x86_64/libecmc_plugin_fft.so")
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ec0.s1.mm.CH1_ARRAY;DBG_PRINT=0;NFFT=${FFT_NELM};RATE=1000;DC_REMOVE=1;SCALE=1;MODE=CONT;ENABLE=1;")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ec0.s1.mm.CH1_ARRAY;DBG_PRINT=0;NFFT=${FFT_NELM};RATE=1000;RM_DC=1;SCALE=1;MODE=CONT;ENABLE=1;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 # Note: INDEX is the index of FFT object in FFT plugin and not PLUGIN_ID. In this case the same
 dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=0, NELM=${FFT_NELM}")
@@ -60,3 +60,6 @@ ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit
+dbl > pvs.log

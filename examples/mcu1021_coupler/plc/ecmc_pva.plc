@@ -1,5 +1,5 @@
 ###############################################################################
-# Example of pv access fucntions in ecmcPlugin_Utils
+# Example of pv access fucntions in ecmc_plugin_pva
 # The pvAccess commands can take "long" time, which can disturb the realtime
 # thread, and is therefore executed async in a separate thread.
 #

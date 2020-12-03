@@ -11,17 +11,11 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg master
 
-#- Choose motor record driver implementation
-#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
-#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
-#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-
 # Epics Motor record driver that will be used:
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.1,stream_VER=2.8.10"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.1"
 
 ##############################################################################
 ## Configure hardware:
@@ -56,7 +50,7 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_2
 ##############################################################################
 ## Load plugin 0: RasPi
 #
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_RasPi/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_RasPi.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_raspi/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmc_plugin_raspi.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0")  # Enable printouts from plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -65,7 +59,7 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 ##############################################################################
 ## Load plugin 1: Advanced
 #
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Advanced/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_Advanced.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_advanced/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmc_plugin_advanced.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;") # Only one option implemented in this plugin
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=1,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -74,7 +68,7 @@ dbLoadRecords("./ecmcGenericAnalog.db","REC_NAME=$(IOC):Plugin-Adv-Counter,PORT=
 
 ##############################################################################
 ## Load plugin 2: FFT
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_FFT/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_FFT.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_fft/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmc_plugin_fft.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"DBG_PRINT=0;SOURCE=ax1.actpos;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=2,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
@@ -82,15 +76,15 @@ epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ##############################################################################
 ## Load plugin 3: Simple example
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Simple/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmcPlugin_Simple.so")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_simple/master/lib/${EPICS_HOST_ARCH=linux-arm}/libecmc_plugin_simple.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"NO OPTIONS")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=3,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 epicsEnvUnset(ECMC_PLUGIN_FILNAME)
 epicsEnvUnset(ECMC_PLUGIN_CONFIG)
 
 ########################################################################s######
-## Load plugin 4: Utils use exteran_ioc.script to start the "target" ioc for the bleo plc code
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmcPlugin_Utils/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmcPlugin_Utils.so")
+## Load plugin 4: pvaAccess use extera_ioc.script to start the "target" ioc for the below plc code
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"/epics/base-7.0.3.1/require/3.1.2/siteMods/ecmc_plugin_pva/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmc_plugin_pva.so")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=4,FILE=${ECMC_PLUGIN_FILNAME},CONFIG=MAX_PV_COUNT=5, REPORT=1"
 
 ##############################################################################
@@ -127,4 +121,6 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-iocInit
+
+iocInit()
+dbl > pvs.log

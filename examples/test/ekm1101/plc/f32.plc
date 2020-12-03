@@ -1,0 +1,1 @@
+println('F32:', ec0.s0.CHUSIN_VALUE);

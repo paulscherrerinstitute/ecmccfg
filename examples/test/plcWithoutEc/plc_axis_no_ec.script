@@ -1,0 +1,51 @@
+##############################################################################
+## Example: Configuraftion for running ecmc PLC without ethercat bus support
+## Set MASTER_ID to -1 at call of startup.cmd
+##############################################################################
+
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg 6.2.4
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.2.4, MASTER_ID=-1"
+
+##############################################################################
+## Configure hardware:
+
+# No EtherCAT hardware..
+
+##############################################################################
+## AXIS 1:
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_1.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_1.sax)
+
+##############################################################################
+## Data Storage 1:
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=100, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## PLC 0:
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/plc_no_ec.plc, PLC_MACROS='PLC_ID=0,DBG='")
+dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.test,REC_NAME=-Test,TSE=0,T_SMP_MS=1000")
+
+##############################################################################
+############# Configure diagnostics:
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+ecmcFileExist("${ecmccfg_DIR}generalDiagnostics.cmd",1)
+${SCRIPTEXEC} ${ecmccfg_DIR}generalDiagnostics.cmd ECMC_TSE=0
+ecmcFileExist("ecmcGeneral.db",1,1)
+dbLoadRecords("ecmcGeneral.db","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=${ECMC_TSE=0}")
+# Nice commands for info ecmcReport <level> or asynReport <level>
+# ecmcReport 3
+
+ecmcConfigOrDie "Cfg.SetAppMode(1)"

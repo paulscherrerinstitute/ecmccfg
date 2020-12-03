@@ -1,8 +1,0 @@
-file "testNewAsyn.template"
-{
-  pattern {DESC,        DTYP,      TIMEBASE, T_SMP_MS, ALIAS,       LINR,    ESLO, EOFF,   EGU,    PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {"TESTAI1",   asynInt32, EPICS,    500,      "CH1_VALUE?", "SLOPE", 0.1,  0,     "TEST", 0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {"TESTAI1_2", asynInt32, EPICS,    600,      "CH1_VALUE?", "SLOPE", 0.1,  0,     "TEST", 0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {"TESTAI2",   asynFloat64, ECMC,   400,      "CH2_VALUE?", "SLOPE", 0.1,  0,     "TEST", 0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {"TESTAI2_2", asynInt32, ECMC,     700,      "CH2_VALUE?", "SLOPE", 0.1,  0,     "TEST", 0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-}

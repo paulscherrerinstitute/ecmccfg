@@ -23,7 +23,7 @@ require ecmccfg anders_change_samplerate
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate,stream_VER=2.8.10, EC_RATE=${EC_RATE=100}"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=anders_set_sample_rate, EC_RATE=${EC_RATE=100}"
 
 ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
 
