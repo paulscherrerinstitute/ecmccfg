@@ -1,0 +1,37 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+
+#- separate templates as not all buttons also have LED-rings
+#- inputs, button, switch and ESTOP
+file "ecmcC9900-M993-BI-chX.template"
+{
+  pattern {CH_ID}
+          {01    }
+          {02    }
+          {03    }
+          {04    }
+          {05    }
+          {06    }
+          {08    }
+          {09    }
+          {0A    }
+          {0B    }
+}
+
+#- RGB-out for LED-rings
+file "ecmcC9900-M993-RGBLED-chX.template"
+{
+  pattern {CH_ID}
+          {01    }
+          {02    }
+          {03    }
+          {04    }
+          {05    }
+          {09    }
+          {0A    }
+          {0B    }
+}
