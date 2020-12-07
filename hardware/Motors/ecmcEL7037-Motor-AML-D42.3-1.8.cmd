@@ -49,3 +49,8 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,200,2)"
 
 #- Coil inductance 19.5mH Ohm (unit 0.01mH)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0xA,1950,2)"
+
+#- Cleanup
+epicsEnvUnset("I_RUN_MA_LOCAL")
+epicsEnvUnset("I_STDBY_MA_LOCAL")
+epicsEnvUnset("I_MAX_MA_LOCAL")
