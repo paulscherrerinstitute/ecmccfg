@@ -1,0 +1,10 @@
+record(bi,"${P}ec${MASTER_ID}-s${SLAVE_POS}-${HWTYPE}-BI${CH_ID}"){
+  field(PINI, "YES")
+  field(DESC, "${DESC=${HWTYPE}: binaryInput${CH_ID}}")
+  field(DTYP, "${DTYP=asynInt32}")
+  field(SCAN, "${SCAN=I/O Intr}")
+  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.binaryInput${CH_ID}?")
+  field(ZNAM, "${ZNAM=False}")
+  field(ONAM, "${ONAM=True}")
+  field(TSE,  "${TSE=-2}")
+}
