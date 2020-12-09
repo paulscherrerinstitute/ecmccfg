@@ -3,7 +3,7 @@ include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = 6.2.4
+LIBVERSION = naming
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS=3 7.0.3
@@ -26,6 +26,7 @@ DIRS += ${HW_DIR}Beckhoff_9XXX
 SCRIPTS += $(foreach d,${DIRS}, $(wildcard $d/*/*.cmd))
 
 SCRIPTS+=$(wildcard ./scripts/*)
+SCRIPTS+=$(wildcard ./naming/*)
 SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
 SCRIPTS+=$(wildcard ./motion/*)
