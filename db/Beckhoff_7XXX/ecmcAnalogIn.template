@@ -14,6 +14,8 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-${SUFFIX}"){
   field(LOLO, "$(LOLO=0)")
   field(HIGH, "$(HIGH=0)")
   field(HIHI, "$(HIHI=0)")
+  field(LOPR, "$(LOPR=0)")
+  field(HOPR, "$(HOPR=0)")
   field(HYST, "$(HYST=0)")
   field(LLSV, "$(LLSV=NO_ALARM)")
   field(LSV,  "$(LSV=NO_ALARM)")
@@ -21,4 +23,3 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-${SUFFIX}"){
   field(HHSV, "$(HHSV=NO_ALARM)")
   field(TSE,  "$(TSE=-2)")
 }
-
