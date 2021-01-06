@@ -21,4 +21,3 @@ file "ecmcEL1XXX.template"
           {3,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1,      "$(HWTYPE): Binary Input $(CH_ID)"}
           {4,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1,      "$(HWTYPE): Binary Input $(CH_ID)"}
 }
-
