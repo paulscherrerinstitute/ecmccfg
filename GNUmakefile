@@ -26,6 +26,7 @@ DIRS += ${HW_DIR}Beckhoff_9XXX
 SCRIPTS += $(foreach d,${DIRS}, $(wildcard $d/*/*.cmd))
 
 SCRIPTS+=$(wildcard ./scripts/*)
+SCRIPTS+=$(wildcard ./naming/*)
 SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
 SCRIPTS+=$(wildcard ./motion/*)

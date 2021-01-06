@@ -1,0 +1,72 @@
+record(bo,"${ECMC_P}-BO${CH_ID}_RED"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutput${CH_ID}_R=")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(SCAN, "Passive")
+  field(FLNK, "$(FLNK=)")
+}
+
+record(bi,"${ECMC_P}-BO${CH_ID}_RED-RB"){
+  field(PINI, "YES")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutput${CH_ID}_R?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bo,"${ECMC_P}-BO${CH_ID}_GREEN"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutput${CH_ID}_G=")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(SCAN, "Passive")
+  field(FLNK, "$(FLNK=)")
+}
+
+record(bi,"${ECMC_P}-BO${CH_ID}_GREEN-RB"){
+  field(PINI, "YES")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutput${CH_ID}_G?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+
+record(bo,"${ECMC_P}-BO${CH_ID}_BLUE"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutput${CH_ID}_B=")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(ZSV,  "$(ZSV=NO_ALARM)")
+  field(OSV,  "$(OSV=NO_ALARM)")
+  field(SCAN, "Passive")
+  field(FLNK, "$(FLNK=)")
+}
+
+record(bi,"${ECMC_P}-BO${CH_ID}_BLUE-RB"){
+  field(PINI, "YES")
+  field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(SCAN, "$(SCAN=I/O Intr)")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutput${CH_ID}_B?")
+  field(ZNAM, "$(ZNAM=Zero)")
+  field(ONAM, "$(ONAM=One)")
+  field(TSE,  "$(TSE=-2)")
+}

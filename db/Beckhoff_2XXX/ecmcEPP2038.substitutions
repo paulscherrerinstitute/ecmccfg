@@ -1,0 +1,31 @@
+# generic slave part
+file "ecmcEcSlave.template"{
+  pattern {}
+          {}
+}
+
+# binary outputs
+file "ecmc_binaryOutput-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
+}
+
+# diagnostics (binary) inputs
+file "ecmc_binaryInput-chX.template"{
+  pattern {CH_ID, ZNAM, ONAM,     OSV,      KEY,    sourceName   }
+          {01,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {02,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {03,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {04,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {05,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {06,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {07,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+          {08,    "OK", "Error",  "MINOR",  "DIAG", "diagnosticInput"}
+}

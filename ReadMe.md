@@ -68,6 +68,9 @@ The configuration framework contains the necessary files to configure an EPICS I
       # skip slaves 2..6
       # slave 7 {ecmcEL2008}, with optional SLAVE_ID
       ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=E2008, SLAVE_ID=7"
+      #-- ATTENTION, this only work for certain slaves, as the EPICS templates have to be migrated before
+      # slave 9 {ecmcEL2008}, with optional SLAVE_ID and P_SCRIPT
+      ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=E2008, SLAVE_ID=7, P_SCRIPT=mXsXXX"
     ```
 3.  add more slaves and apply configuration to the slaves
     ```bash
