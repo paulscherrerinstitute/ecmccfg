@@ -1,0 +1,23 @@
+# generic slave part
+file "ecmcEcSlave.template"{
+  pattern {}
+          {}
+}
+
+# binary outputs
+file "ecmc_binaryOutput-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+}
+
+# binary inputs
+file "ecmc_binaryInput-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+}
