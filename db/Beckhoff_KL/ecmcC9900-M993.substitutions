@@ -8,7 +8,7 @@ file "ecmcEcSlave.template"
 #- separate templates as not all buttons also have LED-rings
 #- inputs, button, switch and ESTOP
 #- file "ecmcC9900-M993-BI-chX.template"
-file "ecmc-BI-chX.template"
+file "ecmc_binaryInput-chX.template"
 {
   pattern {CH_ID}
           {01    }
