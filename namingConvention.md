@@ -7,12 +7,25 @@
 * Use camelCase for the naming of the internal variables.
 This affects mostly the hardware defintion files in `$ROOT/hardware/*`
 * Variables must start with the decripition followed by the index.
-The description might also represents the data type, i.e. analog, binary, posAct, setPos, timeStamp, ...
+The description might also represents the data type, i.e. analog, binary, posAct, setPos, timestamp, ...
 * Since many EtherCAT slaves have multiple input channels, _ALL_ channels will be given an index.
 The index starts Fortran-style at `1`.
 The index is of hexadecimal type with two (2) zero padded digits to accommodate slaves with up to 153 inputs.
 * In case the slave has a generic registers, those do _not_ feature an index.
 See examples below for clarification.
+
+#### List
+##### inputs
+- binaryInput
+- binaryInputArray
+- diagnosticInput
+- accelerometerStatus
+- accelerometerActual
+- status
+- timestampLatchPositive
+- timestampLatchNegative
+##### outputs
+- binaryOutput
 
 #### Examples
 
