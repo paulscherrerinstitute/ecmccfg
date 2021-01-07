@@ -1,0 +1,23 @@
+# generic slave part
+file "ecmcEcSlave.template"{
+  pattern {}
+          {}
+}
+
+#- binary input array (8 bit each)
+file "ecmcEP1816_binaryInputs_chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
+
+# diagnostics (binary) inputs
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, ESLO,   EGU,  PREC, KEY,    sourceName   }
+          {01,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+          {02,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+          {03,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+          {04,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+          {05,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+          {06,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+}
