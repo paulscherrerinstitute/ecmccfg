@@ -11,7 +11,7 @@ file "ecmcEP1816_binaryInputs_chX.template"{
           {02   }
 }
 
-# diagnostics (binary) inputs
+# accelerometer inputs
 file "ecmc_analogInput-chX.template"{
   pattern {CH_ID, ESLO,   EGU,  PREC, KEY,    sourceName   }
           {01,    0.001,  "g",  3,    "ACC", "accelerometerActual"}

@@ -27,11 +27,3 @@ record(ai,"${ECMC_P}-latchTime${CH_ID}_falling"){
   field(PREC, 0 )
   field(EGU,  "ns" )
 }
-
-record(mbbiDirect,"${ECMC_P}-CH${CH_ID}-Stat"){
-  field(DESC, "${HWTYPE}: CH${CH_ID}: Status Word")
-  field(PINI, "${PINI=1}")
-  field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask(${PORT},${ADDR=0},${MASK=0xFFFFFFFF},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.status${CH_ID}?")
-  field(SCAN, "I/O Intr")
-}
