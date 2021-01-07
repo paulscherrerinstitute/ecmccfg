@@ -17,9 +17,16 @@ file "ecmc_binaryInput-chX.template"{
           {08   }
 }
 
-# status and timestamp
+# timestamp
 file "ecmcEX125X_timestamp.template"{
   pattern {CH_ID}
           {01   }
           {02   }
+}
+
+# channel status
+file "ecmc_status-chX.template"{
+  pattern {CH_ID, KEY}
+          {01,    BI }
+          {02,    BI }
 }
