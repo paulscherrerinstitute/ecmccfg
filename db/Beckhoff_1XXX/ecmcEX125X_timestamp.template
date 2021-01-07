@@ -2,7 +2,11 @@ record(ai,"${ECMC_P}-latchTime${CH_ID}_rising"){
   field(DESC, "${HWTYPE}: CH${CH_ID}: Latch time pos [ns]")
   field(PINI, 1)
   field(DTYP, "asynFloat64")
+<<<<<<< HEAD
   field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})CMD=UINT64TOFLOAT64/T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynFloat64/ec${MASTER_ID}.s${SLAVE_POS}.latchPositive${CH_ID}?")
+=======
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})CMD=UINT64TOFLOAT64/T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynFloat64/ec${MASTER_ID}.s${SLAVE_POS}.timestampLatchPositive${CH_ID}?")
+>>>>>>> v7_RC1
   field(SCAN, "I/O Intr")
   field(TSE,  "${TSE=-2}")
   field(PREC, "0" )
@@ -13,7 +17,11 @@ record(ai,"${ECMC_P}-latchTime${CH_ID}_falling"){
   field(DESC, "${HWTYPE}: CH${CH_ID}: Latch time neg [ns]")
   field(PINI, 1)
   field(DTYP, "asynFloat64")
+<<<<<<< HEAD
   field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})CMD=UINT64TOFLOAT64/T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynFloat64/ec${MASTER_ID}.s${SLAVE_POS}.latchNegative${CH_ID}?")
+=======
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})CMD=UINT64TOFLOAT64/T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynFloat64/ec${MASTER_ID}.s${SLAVE_POS}.timestampLatchNegative${CH_ID}?")
+>>>>>>> v7_RC1
   field(SCAN, "I/O Intr")
   field(TSE,  "${TSE=-2}")
   field(PREC, 0 )

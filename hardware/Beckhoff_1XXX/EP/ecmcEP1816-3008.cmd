@@ -34,32 +34,38 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8080,0x1d,5,2)"
 epicsEnvSet("ECMC_PDO_INDEX"   "2")
 epicsEnvSet("CH_ID"            "01")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x01,U16,accelerometerStatus${CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerValue${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerActual${CH_ID})"
+
 #- accelerometers input Ch2
 epicsEnvSet("ECMC_PDO_INDEX"   "3")
 epicsEnvSet("CH_ID"            "02")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x01,U16,accelerometerStatus${CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerValue${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerActual${CH_ID})"
+
 #- accelerometers input Ch3
 epicsEnvSet("ECMC_PDO_INDEX"   "4")
 epicsEnvSet("CH_ID"            "03")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x01,U16,accelerometerStatus${CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerValue${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerActual${CH_ID})"
+
 #- accelerometers input Ch4
 epicsEnvSet("ECMC_PDO_INDEX"   "5")
 epicsEnvSet("CH_ID"            "04")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x01,U16,accelerometerStatus${CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerValue${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerActual${CH_ID})"
+
 #- accelerometers input Ch5
 epicsEnvSet("ECMC_PDO_INDEX"   "6")
 epicsEnvSet("CH_ID"            "05")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x01,U16,accelerometerStatus${CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerValue${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerActual${CH_ID})"
+
 #- accelerometers input Ch6
 epicsEnvSet("ECMC_PDO_INDEX"   "7")
 epicsEnvSet("CH_ID"            "06")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x01,U16,accelerometerStatus${CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerValue${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a0${ECMC_PDO_INDEX},0x60${ECMC_PDO_INDEX}0,0x11,S16,accelerometerActual${CH_ID})"
+
 
 #- device status
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a80,0xf600,0x01,U16,status)"

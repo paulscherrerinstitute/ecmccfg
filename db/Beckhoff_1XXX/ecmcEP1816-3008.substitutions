@@ -14,10 +14,10 @@ file "ecmcEP1816_binaryInputs_chX.template"{
 # diagnostics (binary) inputs
 file "ecmc_analogInput-chX.template"{
   pattern {CH_ID, ESLO,   EGU,  PREC, KEY,    sourceName   }
-          {01,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
-          {02,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
-          {03,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
-          {04,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
-          {05,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
-          {06,    0.001,  "g",  3,    "ACC", "accelerometerValue"}
+          {01,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {02,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {03,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {04,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {05,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {06,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
 }
