@@ -22,10 +22,13 @@ See examples below for clarification.
 - accelerometerStatus
 - accelerometerActual
 - status
+- safeStatus
+- voltageStatus
 - timestampLatchPositive
 - timestampLatchNegative
 ##### outputs
 - binaryOutput
+- binaryOutputArray
 
 #### Examples
 
