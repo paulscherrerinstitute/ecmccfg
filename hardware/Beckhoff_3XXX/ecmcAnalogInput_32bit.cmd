@@ -10,7 +10,7 @@
 #-d       PDO entry 0x0000:00,  7 bit, "Gap"
 #-d       PDO entry 0x6020:0f,  1 bit, "TxPDO State"
 #-d       PDO entry 0x6020:10,  1 bit, "TxPDO Toggle"
-#-d       PDO entry 0x6020:11, 16 bit, "Value"
+#-d       PDO entry 0x6020:11, 32 bit, "Value"
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Macros
@@ -25,4 +25,4 @@ ecmcEpicsEnvSetCalc("ECMC_CHANNEL",${CH_ID=1},"%02x")
 
 #- analog input channel with status
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,${SYNC_MAN=3},${ECMC_PDO=0x1a00},${ECMC_ENTRY=0x6000},0x01,U16,status${ECMC_CHANNEL})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,${SYNC_MAN=3},${ECMC_PDO=0x1a00},${ECMC_ENTRY=0x6000},0x11,S16,analogInput${ECMC_CHANNEL})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,${SYNC_MAN=3},${ECMC_PDO=0x1a00},${ECMC_ENTRY=0x6000},0x11,S32,analogInput${ECMC_CHANNEL})"

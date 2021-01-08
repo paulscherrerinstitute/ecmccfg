@@ -3,8 +3,9 @@
 #- mandatory
 #-  ECMC_P
 #-  KEY
+#-  CH_ID
 #- optional
-#-  sourceName, deaults to 'status'
+#-  sourceName, defaults to 'status'
 
 record(mbbiDirect,"${ECMC_P}-${KEY}${CH_ID}-Stat"){
   field(DESC, "${HWTYPE}: CH${CH_ID}: Status Word")
