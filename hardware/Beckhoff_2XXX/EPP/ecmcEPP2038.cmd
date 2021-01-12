@@ -1,5 +1,5 @@
 #-d /**
-#-d   \brief hardware script for EPP2038-000X; 8-channel digital output 24 V DC, Imax = 2 A (∑ 3 A), with diagnostics
+#-d   \brief hardware script for EPP2038-000X; 8-channel digital output 24 V DC, Imax = 2 A (total 3 A), with diagnostics
 #-d   \details 8 channel digital output, 2 A, total 3 A
 #-d   \details -0001: M8  connector
 #-d   \details -0002: M12 connector

@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief template for binary input
+#-d   \details single channel analog input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
 record(ai,"${ECMC_P}-${KEY=AI}${CH_ID}"){
   field(DESC, "${HWTYPE}: AI${CH_ID}: Value")
   field(PINI, "${PINI=1}")

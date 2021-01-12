@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief hardware script for EP1008
+#-d   \details 8ch digital input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
 # generic slave part
 file "ecmcEcSlave.template"{
   pattern {}

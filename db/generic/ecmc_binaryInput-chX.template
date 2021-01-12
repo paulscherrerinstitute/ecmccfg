@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief template for binary input
+#-d   \details single channel digital input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
 record(bi,"${ECMC_P}-${KEY=BI}${CH_ID}"){
   field(DESC, "${DESC=${HWTYPE}: binaryInput${CH_ID}}")
   field(PINI, "${PINI=1}")

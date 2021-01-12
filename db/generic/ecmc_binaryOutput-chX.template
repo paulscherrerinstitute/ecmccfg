@@ -1,3 +1,11 @@
+#-d /**
+#-d   \brief template for binary output
+#-d   \details single channel digital output with readback
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
+#-d /** \note TEST */
 record(bo,"${ECMC_P}-BO${CH_ID}"){
   info(asyn:READBACK,"1")
   field(PINI, "${PINI=YES}")

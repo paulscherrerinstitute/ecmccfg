@@ -1,3 +1,10 @@
+#-d /**
+#-d   \brief template for binary input array
+#-d   \details 8ch digital input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
 record(mbbiDirect,"${ECMC_P}-${KEY=BI}${CH_ID}-Array"){
   field(DESC, "${HWTYPE}: BI${CH_ID}: Array")
   field(PINI, "${PINI=1}")
