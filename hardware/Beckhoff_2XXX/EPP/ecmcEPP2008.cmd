@@ -12,4 +12,7 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EPP2008")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x64764389")
 
+#- verify slave
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
+
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX2008.cmd

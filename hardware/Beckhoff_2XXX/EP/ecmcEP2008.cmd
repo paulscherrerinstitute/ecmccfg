@@ -12,6 +12,7 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EP2008")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x07d84052")
 
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+#- verify slave
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX2008.cmd

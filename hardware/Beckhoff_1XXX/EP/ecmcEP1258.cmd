@@ -11,7 +11,9 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EP1258")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x04ea4052")
 
-#- configuration for sync manager 0
+#- verify slave
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
+
 #- binary inputs
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX1008.cmd
 
