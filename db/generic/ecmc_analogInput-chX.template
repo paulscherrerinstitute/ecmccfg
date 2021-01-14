@@ -1,5 +1,5 @@
 #-d /**
-#-d   \brief template for binary input
+#-d   \brief template for analog input
 #-d   \details single channel analog input
 #-d   \author Niko Kivel
 #-d   \file
