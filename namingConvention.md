@@ -114,7 +114,7 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   assuming this is slave 17 on the third master it would translate into `ec2.s17.errCode` internally for the error code information of the main unit.
   The actual data of the 13th input will reside under `ec2.s17.analogInput13`.
 
-#### List PV names/abbrevations
+### List PV names/abbrevations
   | Property (or part of) | Abbrevation for PV name (or part of) |
   |--            |--      |
   |device        |dev     |
