@@ -13,4 +13,4 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x07113052")
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 #- binary inputs
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX1008.cmd
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX1016.cmd
