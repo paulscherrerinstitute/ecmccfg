@@ -15,9 +15,9 @@ file "ecmc_binaryInput-chX.template"{
 file "ecmc_timestamp_64-chX.template"{
   pattern {CH_ID, KEY,          suffix,     sourceName                }
           {01,    "latchTime",  "_rising",  "timestampLatchPositive"  }
-          {01,    "latchTime",  "_falling", "timestampLatchPositive"  }
+          {01,    "latchTime",  "_falling", "timestampLatchNegative"  }
           {02,    "latchTime",  "_rising",  "timestampLatchPositive"  }
-          {02,    "latchTime",  "_falling", "timestampLatchPositive"  }
+          {02,    "latchTime",  "_falling", "timestampLatchNegative"  }
 }
 
 # channel status
