@@ -10,25 +10,70 @@ This affects mostly the hardware defintion files in `$ROOT/hardware/*`
 The description might also represents the data type, i.e. analog, binary, posAct, setPos, timestamp, ...
 * Since many EtherCAT slaves have multiple input channels, _ALL_ channels will be given an index.
 The index starts Fortran-style at `1`.
-The index is of hexadecimal type with two (2) zero padded digits to accommodate slaves with up to 153 inputs.
+The index is of decimal type with two (2) zero padded digits to accommodate slaves with up to 99 inputs.
 * In case the slave has a generic registers, those do _not_ feature an index.
 See examples below for clarification.
 
-#### List
+#### List ecmc names
 ##### inputs
 - binaryInput
 - binaryInputArray
 - diagnosticInput
 - accelerometerStatus
 - accelerometerActual
-- status
+- accelerometerActualX
+- accelerometerActualY
+- accelerometerActualZ
+- accelerometerSamples
+- accelerometerTimestamp
+- deviceStatus
 - safeStatus
 - voltageStatus
 - timestampLatchPositive
 - timestampLatchNegative
+- id
+- voltageActualUsIn
+- voltageStatusUsIn
+- voltageActualUpIn
+- voltageStatusUpIn
+- voltageActualUpOut
+- voltageStatusUpOut
+
 ##### outputs
 - binaryOutput
 - binaryOutputArray
+- deviceControl
+
+Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
+
+#### List PV names/abbrevations
+  | Property (or part of) | Abbrevation for PV name (or part of) |
+  |--            |--      |
+  |device        |dev     |
+  |status        |stat    |
+  |control       |ctrl    |
+  |slave         |slave   |
+  |latch         |latch   |
+  |warning       |warn    |
+  |error         |err     |
+  |alarm         |alrm    |
+  |acceleration  |acc     |
+  |deceleration  |dec     |
+  |accelerometer |acc     |
+  |position      |pos     |
+  |velocity,speed|velo    |
+  |actual        |act     |
+  |setpoint      |set     |
+  |busy          |busy    |
+  |done          |done    |
+  |ready         |rdy     |
+  |over          |ovr     |
+  |range         |rng     |
+  |run           |run     |
+  |under         |udr     |
+  |voltage       |volt    |
+  |reset         |rst     |
+  |auto          |auto    |
 
 #### Examples
 
