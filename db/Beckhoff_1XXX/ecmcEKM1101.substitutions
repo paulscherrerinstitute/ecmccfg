@@ -16,7 +16,7 @@ file "ecmc_timestamp_64-chX.template"{
           {"",    "acc",  "Time",  "accelerometerTimestamp"  }
 }
 
-file "ecmcEKM1101-DEV.template"
+file "ecmcEKM1101-DEV-Stat.template"
 {
   pattern {}
           {}
