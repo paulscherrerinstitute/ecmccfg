@@ -46,35 +46,6 @@ See examples below for clarification.
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
-#### List PV names/abbrevations
-  | Property (or part of) | Abbrevation for PV name (or part of) |
-  |--            |--      |
-  |device        |dev     |
-  |status        |stat    |
-  |control       |ctrl    |
-  |slave         |slave   |
-  |latch         |latch   |
-  |warning       |warn    |
-  |error         |err     |
-  |alarm         |alrm    |
-  |acceleration  |acc     |
-  |deceleration  |dec     |
-  |accelerometer |acc     |
-  |position      |pos     |
-  |velocity,speed|velo    |
-  |actual        |act     |
-  |setpoint      |set     |
-  |busy          |busy    |
-  |done          |done    |
-  |ready         |rdy     |
-  |over          |ovr     |
-  |range         |rng     |
-  |run           |run     |
-  |under         |udr     |
-  |voltage       |volt    |
-  |reset         |rst     |
-  |auto          |auto    |
-
 #### Examples
 
 * EL1008, 8 channel digital input
@@ -138,11 +109,39 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   | old         | new |
   |--           |--|
   |CH13_STATUS  |status13 |
-  |CH13_VALUE   |analogInput0D  |
+  |CH13_VALUE   |analogInput13  |
 
   assuming this is slave 17 on the third master it would translate into `ec2.s17.errCode` internally for the error code information of the main unit.
-  The actual data of the 13th input will reside under `ec2.s17.analogInput0D`.
+  The actual data of the 13th input will reside under `ec2.s17.analogInput13`.
 
+#### List PV names/abbrevations
+  | Property (or part of) | Abbrevation for PV name (or part of) |
+  |--            |--      |
+  |device        |dev     |
+  |status        |stat    |
+  |control       |ctrl    |
+  |slave         |slave   |
+  |latch         |latch   |
+  |warning       |warn    |
+  |error         |err     |
+  |alarm         |alrm    |
+  |acceleration  |acc     |
+  |deceleration  |dec     |
+  |accelerometer |acc     |
+  |position      |pos     |
+  |velocity,speed|velo    |
+  |actual        |act     |
+  |setpoint      |set     |
+  |busy          |busy    |
+  |done          |done    |
+  |ready         |rdy     |
+  |over          |ovr     |
+  |range         |rng     |
+  |run           |run     |
+  |under         |udr     |
+  |voltage       |volt    |
+  |reset         |rst     |
+  |auto          |auto    |
 
 ## ESS
 
