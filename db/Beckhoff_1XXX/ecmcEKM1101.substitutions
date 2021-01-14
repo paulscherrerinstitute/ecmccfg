@@ -13,7 +13,7 @@ file "ecmc_coupler-ID.template"
 # timestamp
 file "ecmc_timestamp_64-chX.template"{
   pattern {CH_ID, KEY,    suffix,  sourceName                }
-          {"",    "acc",  "Time",  "accelerometerTimestamp"  }
+          {"",    "Acc",  "Time",  "accelerometerTimestamp"  }
 }
 
 file "ecmcEKM1101-DEV-Stat.template"
@@ -24,10 +24,10 @@ file "ecmcEKM1101-DEV-Stat.template"
 
 # accelerometer inputs
 file "ecmc_analogInput-chX.template"{
-  pattern { KEY,   CH_ID, ESLO,   EGU,  PREC,  sourceName   }
-          { "Acc", X,     0.001,  "g",  3,    "accelerometerActual"}
-          { "Acc", Y,     0.001,  "g",  3,    "accelerometerActual"}
-          { "Acc", Z,     0.001,  "g",  3,    "accelerometerActual"}
+  pattern { CH_ID, KEY,   ESLO,   EGU,  PREC,  sourceName   }
+          { X,     "Acc", 0.001,  "g",  3,    "accelerometerActual"}
+          { Y,     "Acc", 0.001,  "g",  3,    "accelerometerActual"}
+          { Z,     "Acc", 0.001,  "g",  3,    "accelerometerActual"}
 }
 
 # accelerometer status (only one for all channels)
@@ -39,16 +39,16 @@ file "ecmcEKM1101-ACC-Stat.template"
 
 # Voltages inputs
 file "ecmc_analogInput-chX.template"{
-  pattern { KEY,    CH_ID,    ESLO,   EGU,  PREC,  sourceName     }
-          { "Volt", "UsIn",   1,      "V",  3,    "voltageActual"}
-          { "Volt", "UpIn",   1,      "V",  3,    "voltageActual"}
-          { "Volt", "UpOut",  1,      "V",  3,    "voltageActual"}          
+  pattern { CH_ID,   KEY,    ESLO,   EGU,  PREC, sourceName     }
+          { "UsIn",  "Volt", 1,      "V",  3,    "voltageActual"}
+          { "UpIn",  "Volt", 1,      "V",  3,    "voltageActual"}
+          { "UpOut", "Volt", 1,      "V",  3,    "voltageActual"}          
 }
 
 # Voltages statuses
 file "ecmc_status-chX.template"{
-  pattern { KEY,    CH_ID,   sourceName     }
-          { "Volt", "UsIn",  "voltageStatus"}
-          { "Volt", "UpIn",  "voltageStatus"}
-          { "Volt", "UpOut", "voltageStatus"}          
+  pattern { CH_ID,   KEY,    sourceName     }
+          { "UsIn",  "Volt", "voltageStatus"}
+          { "UpIn",  "Volt", "voltageStatus"}
+          { "UpOut", "Volt", "voltageStatus"}          
 }
