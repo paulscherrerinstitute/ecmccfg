@@ -1,0 +1,21 @@
+#Encoder
+record(mbbiDirect,"${ECMC_P}EncStat${CH_ID}"){
+  field(DESC, "$(HWTYPE): Encoder Status Word ${CH_ID}")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderStatus${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}EncSyncErrAlrm${CH_ID}.PROC")
+  field(SHFT, "0")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}EncSyncErrAlrm${CH_ID}"){
+  field(DESC, "$(HWTYPE): Encoder Sync Error Alarm ${CH_ID}")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${ECMC_P}EncStat${CH_ID}.BD")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+}

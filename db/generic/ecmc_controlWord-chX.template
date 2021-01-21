@@ -1,0 +1,23 @@
+#-d /**
+#-d   \brief template for control word
+#-d   \details single channel control word
+#-d   \author Anders Sandström
+#-d   \file
+#-d */
+
+record(longout,"${ECMC_P}${KEY=CntrlWd}${CH_ID}"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${DESC=${HWTYPE}: Control WD ${CH_ID}}")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=control}${CH_ID}=")
+}
+
+record(longin,"${ECMC_P}${KEY=CntrlWd}${CH_ID}-RB"){
+  field(DESC, "${DESC=${HWTYPE}: Control WD ${CH_ID} RB}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=control}${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "${TSE=-2}")
+}

@@ -1,0 +1,53 @@
+#-d /**
+#-d   \brief template for analog output
+#-d   \details single channel analog output
+#-d   \author Anders Sandström
+#-d   \file
+#-d */
+
+record(ao,"${ECMC_P}${KEY=AO}${CH_ID}"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${DESC=${HWTYPE}: analogOutput${CH_ID}}")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=analogOutput}${CH_ID}=")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=V)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(DRVL, "$(DRVL=0)")
+  field(DRVH, "$(DRVH=0)")
+}
+
+record(ai,"${ECMC_P}${KEY=AO}${CH_ID}-RB"){
+  field(DESC, "${DESC=${HWTYPE}: analogOutput${CH_ID} RB}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=analogOutput}${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "${LINR=SLOPE}")
+  field(ESLO, "${ESLO=1}")
+  field(EOFF, "${EOFF=0}")
+  field(EGU,  "${EGU=V}")
+  field(PREC, "${PREC=7}")
+  field(LOW,  "${LOW=0}")
+  field(LOLO, "${LOLO=0}")
+  field(HIGH, "${HIGH=0}")
+  field(HIHI, "${HIHI=0}")
+  field(HYST, "${HYST=0}")
+  field(LLSV, "${LLSV=NO_ALARM}")
+  field(LSV,  "${LSV=NO_ALARM}")
+  field(HSV,  "${HSV=NO_ALARM}")
+  field(HHSV, "${HHSV=NO_ALARM}")
+  field(TSE,  "${TSE=-2}")
+}
