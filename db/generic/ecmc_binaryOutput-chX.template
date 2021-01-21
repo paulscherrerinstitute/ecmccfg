@@ -6,7 +6,7 @@
 #-d */
 
 #-d /** \note TEST */
-record(bo,"${ECMC_P}-BO${CH_ID}"){
+record(bo,"${ECMC_P}BO${CH_ID}"){
   info(asyn:READBACK,"1")
   field(PINI, "${PINI=YES}")
   field(DESC, "${DESC=${HWTYPE}: binaryOutput${CH_ID}}")
@@ -20,7 +20,7 @@ record(bo,"${ECMC_P}-BO${CH_ID}"){
   field(FLNK, "${FLNK=}")
 }
 
-record(bi,"${ECMC_P}-BO$(CH_ID)-RB")
+record(bi,"${ECMC_P}BO$(CH_ID)-RB")
 {
   field(PINI, "YES")
   field(DESC, "${DESC=${HWTYPE}: binaryOutput${CH_ID} RB}")
