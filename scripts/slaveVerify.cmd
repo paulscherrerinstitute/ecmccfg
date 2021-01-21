@@ -8,7 +8,9 @@
 #-d */
 
 #- verify slave identity
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+ecmcEpicsEnvSetCalcTernary(ECMC_SLAVE_VERIFY, "${ECMC_DEV_MODE=0}==0", "","#- ")
+${ECMC_SLAVE_VERIFY}ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+epicsEnvUnset(ECMC_SLAVE_VERIFY)
 
 #- reset terminal
 ecmcEpicsEnvSetCalcTernary(ECMC_SLAVE_RESET, "${RESET=0}>0", "","#- ")
