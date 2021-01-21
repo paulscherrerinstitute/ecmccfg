@@ -7,17 +7,17 @@ file "ecmcEcSlave.template"
 # Drive Control word
 file "ecmc_controlWord-chX.template"
 {
-  pattern {CH_ID, KEY,     sourceName,   DESC              }
-          {01,    DrvCtrl, driveControl, Drive Control Word}
-          {02,    DrvCtrl, driveControl, Drive Control Word}
+  pattern {CH_ID, KEY,       sourceName,     DESC                }
+          {01,    "DrvCtrl", "driveControl", "Drive Control Word"}
+          {02,    "DrvCtrl", "driveControl", "Drive Control Word"}
 }
 
 # Drive Velocity setpoint
 file "ecmc_analogOutput-chX.template"
 {
-  pattern {CH_ID, KEY,        sourceName,       DESC                   }
-          {01,    DrvVeloSet, velocitySetpoint, Drive Velocity setpoint}
-          {02,    DrvVeloSet, velocitySetpoint, Drive Velocity setpoint}
+  pattern {CH_ID, KEY,          sourceName,         DESC                     }
+          {01,    "DrvVeloSet", "velocitySetpoint", "Drive Velocity setpoint"}
+          {02,    "DrvVeloSet", "velocitySetpoint", "Drive Velocity setpoint"}
 }
 
 # Drive Status word
@@ -31,9 +31,9 @@ file "ecmcEL252X-drvStat-chX.template"
 # Encoder Control word
 file "ecmc_controlWord-chX.template"
 {
-  pattern {CH_ID, KEY,     sourceName,   DESC                  }
-          {01,    EncCtrl, encoderControl, Encoder Control Word}
-          {02,    EncCtrl, encoderControl, Encoder Control Word}          
+  pattern {CH_ID, KEY,       sourceName,       DESC                  }
+          {01,    "EncCtrl", "encoderControl", "Encoder Control Word"}
+          {02,    "EncCtrl", "encoderControl", "Encoder Control Word"}          
 }
 
 # Encoder Status word
@@ -47,15 +47,15 @@ file "ecmcEL252X-encStat-chX.template"
 # Encoder actual position
 file "ecmc_analogInput-chX.template"
 {
-  pattern {CH_ID, KEY,       sourceName,     EGU,    DESC                   }
-          {01,    EncPosAct, positionActual, Counts, Encoder Actual position}
-          {02,    EncPosAct, positionActual, Counts, Encoder Actual position}          
+  pattern {CH_ID, KEY,         sourceName,       EGU,      DESC                     }
+          {01,    "EncPosAct", "positionActual", "Counts", "Encoder Actual position"}
+          {02,    "EncPosAct", "positionActual", "Counts", "Encoder Actual position"}
 }
 
 # Encoder position value (for setting "preset" value)
 file "ecmc_analogOutput-chX.template"
 {
-  pattern {CH_ID, KEY,       sourceName,   DESC         }
-          {01,    EncPosVal, encoderValue, Encoder Value}
-          {02,    EncPosVal, encoderValue, Encoder Value}          
+  pattern {CH_ID, KEY,         sourceName,     DESC           }
+          {01,    "EncPosVal", "encoderValue", "Encoder Value"}
+          {02,    "EncPosVal", "encoderValue", "Encoder Value"}
 }
