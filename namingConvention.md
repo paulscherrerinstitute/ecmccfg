@@ -165,8 +165,8 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   |value         |val     | EncVal    |
   |short         |shrt    |  |
   |circuit       |circ    | ShrtCircAlrm |
-  
-
+  |rising        |rise    |  |
+  |falling       |fall    |  |
 
 ## ESS
 
