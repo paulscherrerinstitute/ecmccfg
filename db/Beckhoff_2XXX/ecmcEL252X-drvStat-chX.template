@@ -11,7 +11,7 @@ record(mbbiDirect,"${ECMC_P}DrvStat${CH_ID}"){
 record(bi,"${ECMC_P}DrvErrAlrm${CH_ID}"){
   field(DESC, "$(HWTYPE): PTO Drive Error Ch${CH_ID}")
   field(PINI, "$(PINI=1)")
-  field(INP,  ${ECMC_P}DrvStat${CH_ID}.B6")
+  field(INP,  "${ECMC_P}DrvStat${CH_ID}.B6")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
@@ -22,7 +22,7 @@ record(bi,"${ECMC_P}DrvErrAlrm${CH_ID}"){
 record(bi,"${ECMC_P}DrvSyncErrAlrm${CH_ID}"){
   field(DESC, "$(HWTYPE): Drive Sync Error Ch${CH_ID}")
   field(PINI, "$(PINI=1)")
-  field(INP,  ${ECMC_P}DrvStat${CH_ID}.BC")
+  field(INP,  "${ECMC_P}DrvStat${CH_ID}.BC")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
