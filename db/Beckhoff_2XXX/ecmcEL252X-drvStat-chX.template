@@ -1,28 +1,28 @@
-record(mbbiDirect,"${ECMC_P}DrvStat${CH_ID}"){
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): Drive Status Word Ch${CH_ID}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}DrvErrAlrm${CH_ID}.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${ECMC_P}DrvErrAlrm${CH_ID}"){
+record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(DESC, "$(HWTYPE): PTO Drive Error Ch${CH_ID}")
   field(PINI, "$(PINI=1)")
-  field(INP,  "${ECMC_P}DrvStat${CH_ID}.B6")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B6")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}DrvSyncErrAlrm${CH_ID}")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-SyncErrAlrm.PROC")
 }
 
-record(bi,"${ECMC_P}DrvSyncErrAlrm${CH_ID}"){
+record(bi,"${ECMC_P}Drv${CH_ID}-SyncErrAlrm"){
   field(DESC, "$(HWTYPE): Drive Sync Error Ch${CH_ID}")
   field(PINI, "$(PINI=1)")
-  field(INP,  "${ECMC_P}DrvStat${CH_ID}.BC")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BC")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
