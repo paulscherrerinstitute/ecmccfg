@@ -1,5 +1,5 @@
 
-record(bo,"${ECMC_P}TriState${CH_ID}"){
+record(bo,"${ECMC_P}BO${CH_ID}-TriState"){
   info(asyn:READBACK,"1")
   field(PINI, "$(PINI=YES)")
   field(DESC, "$(DESC=$(HWTYPE): Tristate mode)")
@@ -13,7 +13,7 @@ record(bo,"${ECMC_P}TriState${CH_ID}"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(bi,"${ECMC_P}TriState${CH_ID}-RB"){
+record(bi,"${ECMC_P}BO${CH_ID}-TriState-RB"){
 {
   field(PINI, "YES")
   field(DESC, "$(DESC=$(HWTYPE): Tristate mode RB) RB")
