@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(ai,"${ECMC_P}${KEY=AI}${CH_ID}"){
+record(ai,"${ECMC_P}${KEY=AI}${CH_ID}${suffix=}"){
   field(DESC, "${HWTYPE}: AI${CH_ID}: Value")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynInt32")

@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(ao,"${ECMC_P}${KEY=AO}${CH_ID}"){
+record(ao,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}"){
   info(asyn:READBACK,"1")
   field(DESC, "${DESC=${HWTYPE}: analogOutput${CH_ID}}")
   field(PINI, "$(PINI=1)")
@@ -29,7 +29,7 @@ record(ao,"${ECMC_P}${KEY=AO}${CH_ID}"){
   field(DRVH, "$(DRVH=0)")
 }
 
-record(ai,"${ECMC_P}${KEY=AO}${CH_ID}-RB"){
+record(ai,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}-RB"){
   field(DESC, "${DESC=${HWTYPE}: analogOutput${CH_ID} RB}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynInt32")
