@@ -1,0 +1,32 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcEL72XX_DRV.template"
+{
+  pattern {LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
+          {"SLOPE", 1,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+}
+
+file "ecmcEL72XX_ENC.template"
+{
+  pattern {LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
+          {"SLOPE", 1,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+}
+
+file "ecmcAnalogIn.template"
+{
+  pattern {ECMC_NAME,           SUFFIX,       DESC,         EGU,    ESLO,       PREC, LOPR, HOPR, LOLO, LOW,  HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV}
+          {"velocityActual01",  "DrvVelAct",  "Actual Vel", "a.u.", 9.5367e-7,  0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+          {"torqueActual01",    "DrvTrqAct",  "Actual Trq", "%",    0.1,        1,    -100, 100,  0,    -80,  80,   0,    0,    "NO_ALARM", "NO_ALARM", "MINOR",    "NO_ALARM"  }
+          {"infoData01",        "DrvVolAct",  "InfoData1",  "V",    0.001,      1,    0,    60,   8,    20,   49,   50,   0.25, "MAJOR",    "MINOR",    "MINOR",    "MAJOR"  }
+          {"infoData02",        "DrvTmpAct",  "InfoData2",  "degC", 0.1,        1,    0,    50,   0,    0,    40,   50,   0.5,  "NO_ALARM", "NO_ALARM", "MINOR",    "MAJOR"  }
+}
+
+file "ecmcEL72XX_TP.template"
+{
+  pattern {}
+          {}
+}
