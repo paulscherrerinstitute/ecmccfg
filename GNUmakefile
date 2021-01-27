@@ -3,7 +3,7 @@ include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = 6.2.4
+LIBVERSION = dev
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS=3 7.0.3
