@@ -38,11 +38,23 @@ See examples below for clarification.
 - voltageStatusUpIn
 - voltageActualUpOut
 - voltageStatusUpOut
+- ptoStatus       (pulse train output)
+- encoderStatus
+- binaryOutputStatus
 
 ##### outputs
 - binaryOutput
 - binaryOutputArray
 - deviceControl
+- triState
+- activate
+- timestamp
+- startTime
+- pwmOutput       (pulse width modulation)
+- driveControl
+- encoderControl
+- velocitySetpoint
+- encoderValue
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
@@ -115,33 +127,46 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   The actual data of the 13th input will reside under `ec2.s17.analogInput13`.
 
 ### List PV names/abbrevations
-  | Property (or part of) | Abbrevation for PV name (or part of) |
-  |--            |--      |
-  |device        |dev     |
-  |status        |stat    |
-  |control       |ctrl    |
-  |slave         |slave   |
-  |latch         |latch   |
-  |warning       |warn    |
-  |error         |err     |
-  |alarm         |alrm    |
-  |acceleration  |acc     |
-  |deceleration  |dec     |
-  |accelerometer |acc     |
-  |position      |pos     |
-  |velocity,speed|velo    |
-  |actual        |act     |
-  |setpoint      |set     |
-  |busy          |busy    |
-  |done          |done    |
-  |ready         |rdy     |
-  |over          |ovr     |
-  |range         |rng     |
-  |run           |run     |
-  |under         |udr     |
-  |voltage       |volt    |
-  |reset         |rst     |
-  |auto          |auto    |
+  | Property (or part of) | Abbrevation for PV name (or part of) | Example PV | 
+  |--            |--      |  |
+  |device        |dev     |  |
+  |status        |stat    | DevStat |
+  |control       |ctrl    |  |
+  |command       |cmd     |  |
+  |slave         |slave   |  |
+  |latch         |latch   |  |
+  |warning       |warn    |  |
+  |error         |err     |  |
+  |alarm         |alrm    |  |
+  |acceleration  |acc     |  |
+  |deceleration  |dec     |  |
+  |accelerometer |acc     |  |
+  |position      |pos     | LatchPos02 |
+  |velocity,speed|velo    |  |
+  |actual        |act     |  |
+  |setpoint      |set     |  |
+  |busy          |busy    |  |
+  |done          |done    |  |
+  |ready         |rdy     |  |
+  |over          |ovr     |  |
+  |range         |rng     |  |
+  |run           |run     |  |
+  |under         |udr     |  |
+  |voltage       |volt    |  |
+  |reset         |rst     |  |
+  |auto          |auto    |  |
+  |state         |state   |  |
+  |triState      |tri     | TriState  |
+  |start         |start   |  |
+  |time          |time    | StartTime |
+  |word          |wd      | CtrlWd    |
+  |encoder       |enc     | EncCtrl   |
+  |drive         |drv     | DrvCtrl   |
+  |value         |val     | EncVal    |
+  |short         |shrt    |  |
+  |circuit       |circ    | ShrtCircAlrm |
+  |rising        |rise    |  |
+  |falling       |fall    |  |
 
 ## ESS
 

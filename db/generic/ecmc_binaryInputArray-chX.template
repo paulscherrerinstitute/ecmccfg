@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(mbbiDirect,"${ECMC_P}-${KEY=BI}${CH_ID}-Array"){
+record(mbbiDirect,"${ECMC_P}${KEY=BI}${CH_ID}-Array"){
   field(DESC, "${HWTYPE}: BI${CH_ID}: Array")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")

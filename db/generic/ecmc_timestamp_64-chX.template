@@ -5,7 +5,7 @@
 #- CH_ID
 #- sourceName
 
-record(ai,"${ECMC_P}-${KEY=timestamp}${CH_ID}${suffix=}"){
+record(ai,"${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}"){
   field(DESC, "${HWTYPE}: CH${CH_ID}: timestamp [ns]")
   field(PINI, 1)
   field(DTYP, "asynFloat64")

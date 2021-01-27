@@ -14,7 +14,7 @@
 ecmcEpicsEnvSetCalc("sid", "${SLAVE_POS}","%03d")
 ecmcEpicsEnvSetCalc("mid", "${MASTER_ID}","%01d")
 
-epicsEnvSet("ECMC_P",            "${ECMC_PREFIX}m${mid}s${sid}")
+epicsEnvSet("ECMC_P",            "${ECMC_PREFIX}m${mid}s${sid}-")
 
 epicsEnvUnset(sid)
 epicsEnvUnset(mid)
