@@ -21,8 +21,8 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
 
 # Update records in 1ms (all data to EPICS in 1kHz)
-epicsEnvSet(ECMC_SAMPLE_RATE_MS,1
-)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
+
 # Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=_+-320mV-Sensor"
