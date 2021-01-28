@@ -1,0 +1,11 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmcOptoILD2300_XXmm_chX.template"
+{
+  pattern {CH_ID, LINR,     ESLO,     EOFF,   EGU,     PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV       }
+          {1,     "SLOPE",  1e-6,     0,      "mm",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}          
+}
