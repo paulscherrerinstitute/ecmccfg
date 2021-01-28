@@ -25,7 +25,7 @@ epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 
 # Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=_+-320mV-Sensor"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)

@@ -8,6 +8,6 @@
 #-d */
 
 epicsEnvSet(ECMC_RANGE,"+-320mV")
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcELM360X_${ECMC_RANGE}-Sensor-chX.cmd CH_ID=1
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcELM360X_${ECMC_RANGE}-Sensor-chX.cmd CH_ID=2
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcELM360X-Sensor_${ECMC_RANGE}-chX.cmd CH_ID=1
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcELM360X-Sensor_${ECMC_RANGE}-chX.cmd CH_ID=2
 epicsEnvUnset(ECMC_RANGE)
