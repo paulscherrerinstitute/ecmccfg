@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for el3604
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
-##       
+## This test script uses the +-320mV sensor configuration       
 
 ##############################################################################
 ## Initiation:
@@ -20,33 +20,30 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
 
-# Update records in 1ms
-epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
-
-# Note NELM equals oversampling factor in this case
+# Update records in 1ms (all data to EPICS in 1kHz)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,1
+)
+# Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=_+-320mV-Sensor"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C32,0x1,2,2)"
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C33,0x1,2,2)"
-
-# +-10V ch 1
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x1,97,2)"
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x3,0,2)"
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x7,0,1)"
-ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,0)"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ##############################################################################
-############# Configure diagnostics:
+## Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
-# go active
+##############################################################################
+## Go active:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+iocInit()
+
+dbl > pvs.log
+
