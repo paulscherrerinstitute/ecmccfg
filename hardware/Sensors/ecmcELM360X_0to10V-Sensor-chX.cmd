@@ -10,8 +10,8 @@
 
 ecmcEpicsEnvSetCalc("ECMC_SDO_ID_LOCAL",${CH_ID}-1)
 
-#- Check ECMC_SDO_ID_LOCAL>=0
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${ECMC_SDO_ID_LOCAL=-1}<0", "ecmcExit Error: Channel ID out of range (${HW_TYPE} at bus position ${SLAVE_ID})","#- Channel ID valid")
+# Check ECMC_SDO_ID_LOCAL>=0
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${ECMC_SDO_ID_LOCAL=-1}<0", "ecmcExit Error: Channel ID out of range (${ECMC_EC_HWTYPE} at bus position ${ECMC_EC_SLAVE_NUM})","# Channel ID valid")
 # Result:
 ${ECMC_EXE_CMD}
 
