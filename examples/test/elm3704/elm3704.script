@@ -1,7 +1,7 @@
 ##############################################################################
-## Example config for el3604
+## Example config for el3704 4CH multifunction AI
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
-## This test script uses the +-320mV sensor configuration       
+##
 
 ##############################################################################
 ## Initiation:
@@ -23,9 +23,9 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 # Update records in 1ms (all data to EPICS in 1kHz)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 
-# Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
+# Note NELM equals oversampling factor in this case.
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3704, NELM=${NELM=10}"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)

@@ -1,19 +1,36 @@
 #-d /**
-#-d   \brief hardware script for EL3602
-#-d   \details 2-channel 24bit analog input terminal for Condition Monitoring (IEPE) with oversampling
+#-d   \brief hardware script for EL3704
+#-d   \details 4-channel 24bit analog input terminal for many different signal types
 #-d
-#-d   Minimum sample time          = 20000ns  (oversampling rate of 50 in 1kHz ec rate)
-#-d   Maximum Oversampling factor  = 100      (if ec rate is 500Hz then a NELM of 100 can be used)
+#-d   Minimum sample time          = 100000ns  (oversampling rate of 20 in 1kHz ec rate)
+#-d   Maximum Oversampling factor  = 100      (if ec rate is 200Hz then a NELM of 100 can be used)
+#-d
+#-d   Supported signal types (choose via SDO settings):
+#-d   * strain gauge:
+#-d      * quarter bridge           (350 Ω + 120 Ω, ±2/4/8/32 mV/V), half bridge (±2/16 mV/V), 
+#-d      * full bridge              (±2/4/32 mV/V), internal bridge completion and supply adjustable 0…5 V (2-/3-/4-/5-/6-wire connection)
+#-d   * Voltage:    	            ±60/10/5/2.5/1.25 V, ±640/320/160/80/40/20 mV, 0…5/10 V (2-wire connection)
+#-d   * Current:	                ±20 mA, 0/4…20 mA, NAMUR NE43 (2-wire connection)
+#-d   * IEPE:	                    ±2,5/5/10 V, current feed 2 mA, acquisition of the modulated AC voltage, AC/DC coupling (parameterisable high-pass), (2-wire connection)
+#-d   * Potentiometer:	            potentiometer ≥ 1 kΩ, supply integrated and adjustable 0…5 V (3-/5-wire connection)
+#-d   * Resistance:	                0…50 Ω, 0…200 Ω, 0…500 Ω, 0…2 kΩ, 0…5 kΩ (2-/3-/4-wire connection)
+#-d   * Temperature (RTD):          PT100, PT200, PT500, PT1000, Ni100, Ni120, Ni1000, diverse KT/KTY (types see documentation) (2-/3-/4-wire connection)
+#-d   * Temperature (thermocouple):	type A1, A2, A3, B, C, D, E, G, J, K, L, N, P, R, S, T, U; internal cold junction measurement (2-wire connection)
+#-d
+#-d   NOTE: Some differences between this and ELM3604:
+#-d    * The Pdo offset between the channels is 32 (not 33 as ELM3604 so the configs are not the same)
+#-d    * Not same Status PDOs
+#-d    * Not same Control PDOs
 #-d
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3602")
+epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3704")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50219329")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50219989")
 epicsEnvSet("ECMC_OVER_SAMP_MAX"         "100")
-epicsEnvSet("ECMC_SAMP_TIME_MIN"         "20000")
+epicsEnvSet("ECMC_SAMP_TIME_MIN"         "100000")
 
 #- ############################################
 
@@ -98,6 +115,7 @@ epicsEnvSet("ECMC_CH"             "1")
 
 #-  Configuration for sync manager 2
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x01,16,CH${ECMC_CH}_CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7001,0x1,F32,CH${ECMC_CH}_TC_COLD)"
 
 #-  Configuration for sync manager 3
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x1,S32,CH${ECMC_CH}_STATUS)"
@@ -114,14 +132,16 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 epicsEnvSet("ECMC_CH"             "2")
 
 #-  Configuration for sync manager 2
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7010,0x01,16,CH${ECMC_CH}_CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1602,0x7010,0x01,16,CH${ECMC_CH}_CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1603,0x7011,0x1,F32,CH${ECMC_CH}_TC_COLD)"
 
 #-  Configuration for sync manager 3
-#- Calculate PDO of ch2. ECMC_PDO_TEMP=ECMC_PDO_TEMP+33
-ecmcEpicsEnvSetCalc("ECMC_PDO_CH2",${ECMC_PDO_TEMP}+33,"0x1A%02x")
+#- Calculate PDO of ch2. ECMC_PDO_TEMP=ECMC_PDO_TEMP+48 
+#ecmcEpicsEnvSetCalc("ECMC_PDO_CH2",${ECMC_PDO_TEMP}+48,"0x1A%02x")
+ecmcEpicsEnvSetCalc("ECMC_PDO_CH2","${ECMC_PDO_TEMP}+48*(${ECMC_CH}-1)","0x1A%02x")
 epicsEnvShow(ECMC_PDO_CH2)
 epicsEnvSet("ECMC_EC_ENTRY"       "0x6011")
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a21,0x6010,0x1,S32,CH${ECMC_CH}_STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a30,0x6010,0x1,S32,CH${ECMC_CH}_STATUS)"
 
 #- Inflate all pdos with a for loop
 ecmcFileExist(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,1)
@@ -130,6 +150,50 @@ ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a31,0x6015,0x1,S64,CH${ECMC_CH}_TIMESTAMP)"
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a31,0x6015,0x1,U32,CH${ECMC_CH}_TIMESTAMP_L32)"
 #-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a31,0x6015,0x2,U32,CH${ECMC_CH}_TIMESTAMP_H32)"
+
+#-  CH 3
+epicsEnvSet("ECMC_CH"             "3")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1604,0x7020,0x01,16,CH${ECMC_CH}_CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x7021,0x1,F32,CH${ECMC_CH}_TC_COLD)"
+
+#-  Configuration for sync manager 3
+#- Calculate PDO of ch3. ECMC_PDO_TEMP=ECMC_PDO_TEMP+96
+ecmcEpicsEnvSetCalc("ECMC_PDO_CH3","${ECMC_PDO_TEMP}+48*(${ECMC_CH}-1)","0x1A%02x")
+epicsEnvShow(ECMC_PDO_CH3)
+epicsEnvSet("ECMC_EC_ENTRY"       "0x6021")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a60,0x6020,0x1,S32,CH${ECMC_CH}_STATUS)"
+
+#- Inflate all pdos with a for loop
+ecmcFileExist(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,1)
+ecmcForLoop(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,"CH_ID=${ECMC_CH}, PDO=${ECMC_PDO_CH3}, ENTRY=${ECMC_EC_ENTRY}",ECMC_LOOP_IDX,1,${NELM=1},1)
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.CH${ECMC_CH}_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,S32,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH${ECMC_CH}_ARRAY)"
+#-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a52,0x6025,0x1,S64,CH${ECMC_CH}_TIMESTAMP)"
+#-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a52,0x6025,0x1,U32,CH${ECMC_CH}_TIMESTAMP_L32)"
+#-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a52,0x6025,0x2,U32,CH${ECMC_CH}_TIMESTAMP_H32)"
+
+#-  CH 4
+epicsEnvSet("ECMC_CH"             "4")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1606,0x7030,0x01,16,CH${ECMC_CH}_CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1607,0x7031,0x1,F32,CH${ECMC_CH}_TC_COLD)"
+
+#-  Configuration for sync manager 3
+#- Calculate PDO of ch4. ECMC_PDO_TEMP=ECMC_PDO_TEMP+96
+ecmcEpicsEnvSetCalc("ECMC_PDO_CH4","${ECMC_PDO_TEMP}+48*(${ECMC_CH}-1)","0x1A%02x")
+epicsEnvShow(ECMC_PDO_CH4)
+epicsEnvSet("ECMC_EC_ENTRY"       "0x6031")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a90,0x6030,0x1,S32,CH${ECMC_CH}_STATUS)"
+
+#- Inflate all pdos with a for loop
+ecmcFileExist(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,1)
+ecmcForLoop(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,"CH_ID=${ECMC_CH}, PDO=${ECMC_PDO_CH4}, ENTRY=${ECMC_EC_ENTRY}",ECMC_LOOP_IDX,1,${NELM=1},1)
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.CH${ECMC_CH}_VALUE_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,S32,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.CH${ECMC_CH}_ARRAY)"
+#-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a73,0x6035,0x1,S64,CH${ECMC_CH}_TIMESTAMP)"
+#-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a73,0x6035,0x1,U32,CH${ECMC_CH}_TIMESTAMP_L32)"
+#-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a73,0x6035,0x2,U32,CH${ECMC_CH}_TIMESTAMP_H32)"
 
 #- ############ Configfigure DCs
 #-  Cfg.EcSlaveConfigDC(
@@ -156,10 +220,23 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
 
 #- CH1
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x1600,2)"
-#- CH2
+#- CH1 TC
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,0x1601,2)"
+#- CH2
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x3,0x1602,2)"
+#- CH2 TC
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x4,0x1603,2)"
+#- CH3
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x5,0x1604,2)"
+#- CH3 TC
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x6,0x1605,2)"
+#- CH4
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x7,0x1606,2)"
+#- CH4 TC
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x8,0x1607,2)"
+
 #-PDO count
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,2,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,8,1)"
 
 #- Set used pdos (inputs)
 epicsEnvSet("ECMC_SDO_INDEX",              "0x1C13")
@@ -171,11 +248,19 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,${ECMC_
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x3,0x1A10,2)"
 
 #- CH2
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x4,0x1A21,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x4,0x1A30,2)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x5,${ECMC_PDO_CH2},2)"
 
+#- CH3
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x6,0x1A60,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x7,${ECMC_PDO_CH3},2)"
+
+#- CH4
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x8,0x1A90,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x9,${ECMC_PDO_CH4},2)"
+
 #-PDO count
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,5,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,9,1)"
 
 #- Cleanup
 epicsEnvUnset(ECMC_EC_ARRAY_BYTE_SIZE)
