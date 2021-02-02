@@ -6,7 +6,7 @@
 #-d */
 
 record(ai,"${ECMC_P}${KEY=AI}${CH_ID}${suffix=}"){
-  field(DESC, "${HWTYPE}: AI${CH_ID}: Value")
+  field(DESC, "${HWTYPE}: ${KEY=AI}${CH_ID} ${suffix=}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=analogInput}${CH_ID}?")
