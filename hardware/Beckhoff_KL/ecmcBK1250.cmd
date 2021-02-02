@@ -11,7 +11,7 @@
 #-d   Note that all these pdo entries are accessed through the BK1250 coupler (with slave id ECMC_EC_SLAVE_NUM).
 #-d   Needed environment vars:
 #-d   - ECMC_EC_SLAVE_NUM  : The slave number of the BK1250
-#-d   (- ECMC_KL_SLAVE_NUM  : The slave number of the KL terminal starting at "00" at the first terminal _after_ the BK1250 
+#-d   - ECMC_KL_SLAVE_NUM  : The slave number of the KL terminal starting at "00" at the first terminal _after_ the BK1250 
 #-d                          Must always be a 2 digit hex number (without "0x").. Example: "1A" for slave 26(decimal))
 #-d   - ECMC_EC_VENDOR_ID  : The vendor id of BK1250 (or similar)
 #-d   - ECMC_EC_PRODUCT_ID : The product id of BK1250 (or similar)
@@ -24,7 +24,7 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "BK1250")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x04e22c22")
 
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 #- Status word
 #- 0x0001 = K-Bus error
@@ -33,9 +33,9 @@ ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},$
 #- 0x0020 = K-Bus overrun
 #- 0x0040 = Communication error (Inputs)
 #- 0x0080 = Communication error (Outputs)
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1aff,0xf100,0x1,U16,BK1250_STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1aff,0xf100,0x1,U16,status)"
 
 #- Control word
 #- 0x0010 = Disable outputs
 #- 0x0020 = Show K-Bus overrun
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16ff,0xf200,0x1,U16,BK1250_CONTROL)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16ff,0xf200,0x1,U16,control)"
