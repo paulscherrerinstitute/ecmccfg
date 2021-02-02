@@ -1,13 +1,14 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
-  field(DESC, "$(HWTYPE): Encoder Actual Position (Raw)")
+record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosAct")
+{
+  field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POSITION?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VALUE")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=V)")
+  field(EGU,  "$(EGU=nm)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -18,5 +19,4 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
   field(LSV,  "$(LSV=NO_ALARM)")
   field(HSV,  "$(HSV=NO_ALARM)")
   field(HHSV, "$(HHSV=NO_ALARM)")
-  field(TSE,  "$(TSE=-2)")
 }

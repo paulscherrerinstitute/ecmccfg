@@ -29,7 +29,7 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 ##############################################################################
 ## Config hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              $(SLAVE_ID="NOT_VALID"))
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              $(SLAVE_ID=0))
 epicsEnvSet("ECMC_EC_SLAVE_DESC",             $(HW_DESC="NOT_VALID"))
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=$(ECMC_EC_SLAVE_DESC)"
 

@@ -38,9 +38,17 @@ See examples below for clarification.
 - voltageStatusUpIn
 - voltageActualUpOut
 - voltageStatusUpOut
-- ptoStatus       (pulse train output)
 - encoderStatus
 - binaryOutputStatus
+- currentActual
+- binaryOutputArrayReadBack
+- analogInput
+- analogInputSetpoint  (for analog drives, the analog setpoint value (reference) to the drive)
+- analogInputActual    (for analog drives, the analog actual value (feedback) recived to the drive)
+- dcVoltageActual
+- temperatureActual
+- positionActualSecondary (for drives with multiple feedbacks)
+- notConnected
 
 ##### outputs
 - binaryOutput
@@ -55,6 +63,10 @@ See examples below for clarification.
 - encoderControl
 - velocitySetpoint
 - encoderValue
+- mask
+- binaryOutputArrayMask
+- notConnected
+- R,G,B (Red,Green,Blue)
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
@@ -167,6 +179,12 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   |circuit       |circ    | ShrtCircAlrm |
   |rising        |rise    |  |
   |falling       |fall    |  |
+  |mask          |mask    |  |
+  |array         |array   |  |
+  |current       |curr    |  |
+  |Red           |Red     |  |
+  |Green         |Green   |  |
+  |Blue          |Blue    |  |
 
 ## ESS
 

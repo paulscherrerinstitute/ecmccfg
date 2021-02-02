@@ -1,9 +1,7 @@
 ##############################################################################
 ## Example config for el3604
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
-## Note: The el3702 does not support any value of NELM. The EtherCAT bus period in nanoseconds diveded by 
-##       oversampling factor must be an integer.  "(1/EC_RATE*1E9) / NELM" 
-##       
+## This test script uses the +-320mV sensor configuration       
 
 ##############################################################################
 ## Initiation:
@@ -12,13 +10,6 @@ epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call 
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg develop
-
-#- Choose motor record driver implementation
-#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
-#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
-#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=1000"
@@ -29,25 +20,30 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
 
+# Update records in 1ms (all data to EPICS in 1kHz)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 
-# Note NELM equals oversampling factor in this case
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}"
+# Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
 
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C32,0x1,2,2)"
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C33,0x1,2,2)"
-
-ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,0)"
+# Update records in 10ms (for all records loaded below)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ##############################################################################
-############# Configure diagnostics:
+## Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
-# go active
+##############################################################################
+## Go active:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+iocInit()
+
+dbl > pvs.log
+
