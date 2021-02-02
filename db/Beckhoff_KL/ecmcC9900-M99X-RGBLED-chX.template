@@ -1,4 +1,4 @@
-record(bo,"${ECMC_P}-BO${CH_ID}_RED"){
+record(bo,"${ECMC_P}BO${CH_ID}-Red"){
   field(PINI, "$(PINI=YES)")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
   field(DTYP, "$(DTYP=asynInt32)")
@@ -11,7 +11,7 @@ record(bo,"${ECMC_P}-BO${CH_ID}_RED"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(bi,"${ECMC_P}-BO${CH_ID}_RED-RB"){
+record(bi,"${ECMC_P}BO${CH_ID}-Red-RB"){
   field(PINI, "YES")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
   field(DTYP, "$(DTYP=asynInt32)")
@@ -22,7 +22,7 @@ record(bi,"${ECMC_P}-BO${CH_ID}_RED-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bo,"${ECMC_P}-BO${CH_ID}_GREEN"){
+record(bo,"${ECMC_P}BO${CH_ID}-Green"){
   field(PINI, "$(PINI=YES)")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
   field(DTYP, "$(DTYP=asynInt32)")
@@ -35,7 +35,7 @@ record(bo,"${ECMC_P}-BO${CH_ID}_GREEN"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(bi,"${ECMC_P}-BO${CH_ID}_GREEN-RB"){
+record(bi,"${ECMC_P}BO${CH_ID}-Green-RB"){
   field(PINI, "YES")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
   field(DTYP, "$(DTYP=asynInt32)")
@@ -47,7 +47,7 @@ record(bi,"${ECMC_P}-BO${CH_ID}_GREEN-RB"){
 }
 
 
-record(bo,"${ECMC_P}-BO${CH_ID}_BLUE"){
+record(bo,"${ECMC_P}BO${CH_ID}-Blue"){
   field(PINI, "$(PINI=YES)")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output)")
   field(DTYP, "$(DTYP=asynInt32)")
@@ -60,7 +60,7 @@ record(bo,"${ECMC_P}-BO${CH_ID}_BLUE"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(bi,"${ECMC_P}-BO${CH_ID}_BLUE-RB"){
+record(bi,"${ECMC_P}BO${CH_ID}-Blue-RB"){
   field(PINI, "YES")
   field(DESC, "$(DESC=$(HWTYPE): Binary Output RB) RB")
   field(DTYP, "$(DTYP=asynInt32)")
