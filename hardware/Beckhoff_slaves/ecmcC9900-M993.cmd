@@ -9,7 +9,7 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "C9900-M993")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1ede4032")
 
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 ##################### BK1250
 
@@ -44,7 +44,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x0d,B1,binaryOutput05_R)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x0e,B1,binaryOutput05_G)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x0f,B1,binaryOutput05_B)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x10,B1,NC_1,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x10,B1,notConnected01,0)"
 
 ##################### KL1408 (inputs for first row of buttons, key switch and ESTOP)
 #- from right to left:
@@ -69,19 +69,19 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ##################### KL1408 (inputs for second row of buttons), three last inputs not connected
 epicsEnvSet("ECMC_KL_SLAVE_NUM"             "03")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x01,B1,binaryOutput09_B)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x02,B1,binaryOutput0A_R)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x03,B1,binaryOutput0A_G)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x04,B1,binaryOutput0A_B)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x05,B1,binaryOutput0B_R)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x06,B1,binaryOutput0B_G)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x07,B1,binaryOutput0B_B)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x08,B1,NC_2,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x02,B1,binaryOutput10_R)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x03,B1,binaryOutput10_G)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x04,B1,binaryOutput10_B)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x05,B1,binaryOutput11_R)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x06,B1,binaryOutput11_G)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x07,B1,binaryOutput11_B)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x16${ECMC_KL_SLAVE_NUM},0x7${ECMC_KL_SLAVE_NUM}0,0x08,B1,notConnected02,0)"
 
 ##################### KL1408 (inputs for second row of buttons)
 #- from right to left:
 #- buttons 1..3 --> B1_9..11
 epicsEnvSet("ECMC_KL_SLAVE_NUM"             "04")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x01,B1,binaryInput09)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x02,B1,binaryInput0A)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x03,B1,binaryInput0B)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x04,B1,NC_3,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x02,B1,binaryInput10)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x03,B1,binaryInput11)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a${ECMC_KL_SLAVE_NUM},0x6${ECMC_KL_SLAVE_NUM}0,0x04,B1,notConnected03,0)"
