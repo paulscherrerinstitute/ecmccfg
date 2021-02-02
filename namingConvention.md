@@ -50,7 +50,6 @@ See examples below for clarification.
 - positionActualSecondary (for drives with multiple feedbacks)
 - notConnected
 
-
 ##### outputs
 - binaryOutput
 - binaryOutputArray
@@ -68,6 +67,7 @@ See examples below for clarification.
 - binaryOutputArrayMask
 - notConnected
 - R,G,B (Red,Green,Blue)
+
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
