@@ -50,6 +50,7 @@ See examples below for clarification.
 - positionActualSecondary (for drives with multiple feedbacks)
 - notConnected
 
+
 ##### outputs
 - binaryOutput
 - binaryOutputArray
@@ -185,6 +186,7 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   |Red           |Red     |  |
   |Green         |Green   |  |
   |Blue          |Blue    |  |
+
 
 ## ESS
 
