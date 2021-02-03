@@ -1,7 +1,8 @@
 ##############################################################################
 ## Example config for el3604
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
-## This test script uses the +-320mV sensor configuration       
+## This test script uses the +-320mV sensor configuration
+## A FFT plugin calculates the spectrum for ch4 of the elm3604
 
 ##############################################################################
 ## Initiation:
@@ -50,8 +51,6 @@ dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=0, NELM=${FFT_NELM}")
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-ecmcGrepParam *ds0*
 
 ##############################################################################
 ## Go active:
