@@ -1,0 +1,21 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# Move memmap object to data storage and scale it to engineering units
+#
+# Macros:
+#   DS_ID   = Id of data storage (defaults to 0)
+#   MM_ID   = Id of memmap       (defaults to 0)
+#   SCALE   = scale              (defaults to 1)
+#   OFFSET  = offset             (defaults to 0)
+
+# Copy memap to ds
+if(ec_mm_append_to_ds_scale_offset(${MM_ID},${DS_ID},${SCALE},${OFFSET})) {
+  println('Error: ', ec_get_err());
+};
+
+# Check if full, then send to epics and clear
+if(ds_is_full(${DS_ID})) {
+  ds_push_asyn(${DS_ID});
+  ds_clear_data(${DS_ID});
+};

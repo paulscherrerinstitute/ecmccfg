@@ -24,6 +24,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 
 # Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
+epicsEnvSet("NELM",              "20")
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
 
@@ -32,6 +33,53 @@ epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## Data Storage 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## Data Storage 1
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## Data Storage 2
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## Data Storage 3
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+
+##############################################################################
+## Check MM index:
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY)"
+epicsEnvSet(MM_CH_1,${ECMC_CONFIG_RETURN_VAL})
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH2_ARRAY)"
+epicsEnvSet(MM_CH_2,${ECMC_CONFIG_RETURN_VAL})
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH3_ARRAY)"
+epicsEnvSet(MM_CH_3,${ECMC_CONFIG_RETURN_VAL})
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH4_ARRAY)"
+epicsEnvSet(MM_CH_4,${ECMC_CONFIG_RETURN_VAL})
+
+# 24bit full range corresponds to 343.6mV
+ecmcEpicsEnvSetCalc(SCALE, "343.6/2^23;",%lf)
+epicsEnvSet(OFFSET,0)
+
+##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=0,MM_ID=${MM_CH_1},SCALE=${SCALE},OFFSET=${OFFSET}'")
+
+##############################################################################
+## PLC 1
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=1,MM_ID=${MM_CH_2},SCALE=${SCALE},OFFSET=${OFFSET}'")
+
+##############################################################################
+## PLC 3
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=2, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=2,MM_ID=${MM_CH_3},SCALE=${SCALE},OFFSET=${OFFSET}'")
+
+##############################################################################
+## PLC 4
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=3, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=3,MM_ID=${MM_CH_4},SCALE=${SCALE},OFFSET=${OFFSET}'")
 
 ##############################################################################
 ## Configure diagnostics:
@@ -47,3 +95,10 @@ iocInit()
 
 dbl > pvs.log
 
+ecmcGrepParam *ARRAY*
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY)"
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH2_ARRAY)"
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH4_ARRAY)"
+
+# Can now be used in PLC with the PLC functions
+epicsEnvShow(MY_MEM_MAP_ID)
