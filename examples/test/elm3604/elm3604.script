@@ -12,7 +12,7 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=500"
 
 ##############################################################################
 ## Config hardware:
@@ -21,10 +21,10 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
 
 # Update records in 1ms (all data to EPICS in 1kHz)
-epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,2)
 
 # Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
-epicsEnvSet("NELM",              "20")
+epicsEnvSet("NELM",              "40")
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
 
@@ -51,7 +51,7 @@ $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${NELM=20}, SAM
 $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
-## Check MM index:
+## Prepare PLC macros (check MM index adn calc scale and offset):
 ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY)"
 epicsEnvSet(MM_CH_1,${ECMC_CONFIG_RETURN_VAL})
 ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH2_ARRAY)"
@@ -61,25 +61,25 @@ epicsEnvSet(MM_CH_3,${ECMC_CONFIG_RETURN_VAL})
 ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH4_ARRAY)"
 epicsEnvSet(MM_CH_4,${ECMC_CONFIG_RETURN_VAL})
 
-# 24bit full range corresponds to 343.6mV
-ecmcEpicsEnvSetCalc(SCALE, "343.6/2^23;",%lf)
+# 24bit full range corresponds to +-343.600mV
+ecmcEpicsEnvSetCalc(SCALE, "343.6/2^23;",%.10lf)
 epicsEnvSet(OFFSET,0)
 
 ##############################################################################
 ## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=0,MM_ID=${MM_CH_1},SCALE=${SCALE},OFFSET=${OFFSET}'")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=0,DS_ID=0,MM_ID=${MM_CH_1},SCALE=${SCALE},OFFSET=${OFFSET}'")
 
 ##############################################################################
 ## PLC 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=1,MM_ID=${MM_CH_2},SCALE=${SCALE},OFFSET=${OFFSET}'")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=1,DS_ID=1,MM_ID=${MM_CH_2},SCALE=${SCALE},OFFSET=${OFFSET}'")
+
+##############################################################################
+## PLC 2
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=2, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=2,DS_ID=2,MM_ID=${MM_CH_3},SCALE=${SCALE},OFFSET=${OFFSET}'")
 
 ##############################################################################
 ## PLC 3
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=2, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=2,MM_ID=${MM_CH_3},SCALE=${SCALE},OFFSET=${OFFSET}'")
-
-##############################################################################
-## PLC 4
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=3, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='DS_ID=3,MM_ID=${MM_CH_4},SCALE=${SCALE},OFFSET=${OFFSET}'")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=3, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=3,DS_ID=3,MM_ID=${MM_CH_4},SCALE=${SCALE},OFFSET=${OFFSET}'")
 
 ##############################################################################
 ## Configure diagnostics:
@@ -88,17 +88,11 @@ ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
+ecmcGrepParam *ds0*
+
 ##############################################################################
 ## Go active:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 iocInit()
 
 dbl > pvs.log
-
-ecmcGrepParam *ARRAY*
-ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY)"
-ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH2_ARRAY)"
-ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH4_ARRAY)"
-
-# Can now be used in PLC with the PLC functions
-epicsEnvShow(MY_MEM_MAP_ID)

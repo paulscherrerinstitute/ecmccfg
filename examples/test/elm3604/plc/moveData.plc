@@ -4,18 +4,31 @@
 # Move memmap object to data storage and scale it to engineering units
 #
 # Macros:
+#   PLC_ID  = Id of this PLC     (defaults to 0)
 #   DS_ID   = Id of data storage (defaults to 0)
 #   MM_ID   = Id of memmap       (defaults to 0)
 #   SCALE   = scale              (defaults to 1)
 #   OFFSET  = offset             (defaults to 0)
 
+if(plc${PLC_ID=0}.firstscan) {
+  println('Starting PLC: ', ${PLC_ID=0});
+  println('Scan time   : ', plc${PLC_ID=0}.scantime);
+  println('DS_ID       : ', ${DS_ID=0});
+  println('MM_ID       : ', ${MM_ID=0});
+  println('SCALE       : ', ${SCALE=1});
+  println('OFFSET      : ', ${OFFSET=0});
+}
+
 # Copy memap to ds
-if(ec_mm_append_to_ds_scale_offset(${MM_ID},${DS_ID},${SCALE},${OFFSET})) {
+if(ec_mm_append_to_ds_scale_offset(${MM_ID=0},${DS_ID=0},${SCALE=1},${OFFSET=0})) {
   println('Error: ', ec_get_err());
 };
 
 # Check if full, then send to epics and clear
-if(ds_is_full(${DS_ID})) {
-  ds_push_asyn(${DS_ID});
-  ds_clear_data(${DS_ID});
+if(ds_is_full(${DS_ID=0})) {
+  #println('PLC (ds_push_asyn): ',${PLC_ID=0});
+  ds_push_asyn(${DS_ID=0});
+  #println('PLC (ds_clear_data): ',${PLC_ID=0});
+  ds_clear_data(${DS_ID=0});
+  #println('time at push:', ec_get_time_l32()/1e6);
 };
