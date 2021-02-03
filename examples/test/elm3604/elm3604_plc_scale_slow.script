@@ -1,9 +1,13 @@
 ##############################################################################
 ## Example config for el3604
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
-## This test script uses the +-320mV sensor configuration.
+## This test script uses the +-320mV sensor configuration
 ## Scaling to engineering units are made in by plc:s and the result is 
 ## exposed to epics through data storages.
+##
+## Data storage have a 4 times larger size than the memmap so the callback 
+## to epics will be less frequent (8ms based on 500Hz ec rate)
+##
 
 ##############################################################################
 ## Initiation:
@@ -36,21 +40,24 @@ epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
+# Make data storages 4 times the size of the memmaps
+ecmcEpicsEnvSetCalc(DS_SIZE, "${NELM=20}*4")
+
 ##############################################################################
 ## Data Storage 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
 ## Data Storage 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
 ## Data Storage 2
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
 ## Data Storage 3
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${NELM=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
 
 ##############################################################################
 ## Prepare PLC macros (check MM index and calc scale and offset):
