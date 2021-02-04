@@ -49,6 +49,7 @@ See examples below for clarification.
 - temperatureActual
 - positionActualSecondary (for drives with multiple feedbacks)
 - notConnected
+- KL<slaveid>_binaryInput
 
 ##### outputs
 - binaryOutput
@@ -67,7 +68,7 @@ See examples below for clarification.
 - binaryOutputArrayMask
 - notConnected
 - R,G,B (Red,Green,Blue)
-
+- KL<slaveid>_binaryOutput
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
@@ -186,7 +187,9 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   |Red           |Red     |  |
   |Green         |Green   |  |
   |Blue          |Blue    |  |
-
+  |disabled      |dis     |  |
+  |input         |inp     |  |
+  |output        |outp    |  |
 
 ## ESS
 
