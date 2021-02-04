@@ -1,0 +1,25 @@
+#-d /**
+#-d   \brief hardware script for EP1008
+#-d   \details 8ch digital input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
+# generic slave part
+file "ecmcEcSlave.template"{
+  pattern {}
+          {}
+}
+
+# binary inputs
+file "ecmc_binaryInput-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
+}

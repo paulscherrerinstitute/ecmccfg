@@ -1,0 +1,59 @@
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
+  field(DESC, "$(HWTYPE): Drive Status Word Ch${CH_ID}")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Warning")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Error")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-QStp-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-QStp-Alrm"){
+  field(DESC, "$(HWTYPE): Drive in Quick Stop")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B5")
+  field(ZNAM, "Q Stop")
+  field(ONAM, "Q Stop OK")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Lim-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Internal Limit Active")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BB")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Limit Active")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Flw-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Flw-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Following Error")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BD")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Following Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "")
+}
