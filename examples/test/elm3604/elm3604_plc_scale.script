@@ -4,6 +4,9 @@
 ## This test script uses the +-320mV sensor configuration.
 ## Scaling to engineering units are made in by plc:s and the result is 
 ## exposed to epics through data storages.
+## The scaled data can be retrived in the data storage PVs: 
+## IOC_TEST:ds<dsId>-Data-Act  (dsId 0..3)
+##
 
 ##############################################################################
 ## Initiation:

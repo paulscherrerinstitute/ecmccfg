@@ -8,6 +8,13 @@
 ## Data storage have a 4 times larger size than the memmap so the callback 
 ## to epics will be less frequent (8ms based on 500Hz ec rate)
 ##
+## The scaled data can be retrived in the data storage PVs: IOC_TEST:ds<dsId>-Data-Act  (dsId 0..3)
+## Note the size of the arrays are 4 times the size of the oversampled data (callbacks 4 times less frequent).
+##
+## Example: EC_RATE=500Hz => oversampling size is 40 elements per sample. 
+##          The data storages are 160 elements in size resulting in 
+##          callbacks in 125Hz, or 8ms, for the data storages arrays.
+##
 
 ##############################################################################
 ## Initiation:
