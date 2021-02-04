@@ -187,6 +187,9 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   |Red           |Red     |  |
   |Green         |Green   |  |
   |Blue          |Blue    |  |
+  |disabled      |dis     |  |
+  |input         |inp     |  |
+  |output        |outp    |  |
 
 ## ESS
 
