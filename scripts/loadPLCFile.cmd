@@ -9,7 +9,7 @@
 #-d   \file
 #-d   \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
 #-d   \param PLC_ID (optional) PLC number, default 0
-#-d   \param SAMPLE_RATE_MS (optional) excecution rate, default 1 ms (realtime)
+#-d   \param SAMPLE_RATE_MS (optional) excecution rate, default 1000/EC_RATE
 #-d   \param PLC_MACROS (optional) Substitution macros for PLC code
 #-d   \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
 #-d   \note Example call:
@@ -21,7 +21,13 @@
 #- Create a new PLC 0 (Motion: Direct access through variables, I/O, global var, plc enable)
 
 epicsEnvSet("ECMC_PLC_ID",              "${PLC_ID=0}")
-epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${SAMPLE_RATE_MS=1}") # execute at 1000Hz
+
+#- PLC rate, if not explicitly declared, deduce rate from bus frequence (ECMC_EC_SAMPLE_RATE)
+ecmcEpicsEnvSetCalc(ECMC_PLC_RATE_, "1000/${ECMC_EC_SAMPLE_RATE}")
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${SAMPLE_RATE_MS=0}")
+ecmcEpicsEnvSetCalcTernary(ECMC_PLC_SAMPLE_RATE_MS, "${ECMC_PLC_SAMPLE_RATE_MS}>0", "${ECMC_PLC_SAMPLE_RATE_MS}","${ECMC_PLC_RATE_}")
+epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
+
 epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc")
 
 #- Convert file with optional macros (msi)
