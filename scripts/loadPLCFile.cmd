@@ -34,4 +34,4 @@ ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 #- Remove parsed file after load
 system "rm -f ${ECMC_TMP_FILE}"
 ecmcFileExist("ecmcPlc.db",1,1)
-dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX}")
+dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")

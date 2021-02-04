@@ -1,10 +1,10 @@
-record(bo,"$(P)ds$(Index)-Clear-Cmd"){
-  field(DTYP,"stream")
-  field(OUT,"@ecmcDataStorage.proto clearDataStorage($(Index)) $(PORT)")
-  field(ZNAM,"FALSE")
-  field(ONAM,"TRUE")
-  field(FLNK,"$(P)ds$(Index)-Data-Act")
-}
+#record(bo,"$(P)ds$(Index)-Clear-Cmd"){
+#  field(DTYP,"stream")
+#  field(OUT,"@ecmcDataStorage.proto clearDataStorage($(Index)) $(PORT)")
+#  field(ZNAM,"FALSE")
+#  field(ONAM,"TRUE")
+#  field(FLNK,"$(P)ds$(Index)-Data-Act")
+#}
 
 record(ai,"$(P)ds$(Index)-DataIndex-Act"){
   field(PINI, "1")
