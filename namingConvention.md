@@ -172,7 +172,7 @@ IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
 
 ```
 
-### "<type>"
+### "type"
 
   | Type | Description    | Comment  |
   |--    |--              |--        |
@@ -186,7 +186,7 @@ IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
   |Dev*  |Device*         | Shall only be used if the terminal have specifc data that cannot be assigned to a other type|
   |EC    |Ethercat        | Reserved for ethercat status data (from master, not process data)|
 
-### <id>
+### "id"
 
 Id is the number of the "channel".
 
@@ -196,9 +196,9 @@ IOC_TEST:m0s000-Enc01-PosAct
 IOC_TEST:m0s000-Enc02-PosAct
 ```
 
-### List PV names/abbrevations (<name>)
+### "name"
 
-The below abbrevations should be used for the "<name>" of the PV:
+The below abbrevations should be used for the "name" part of the PV:
 
   | Property (or part of) | Abbrevation for PV name (or part of) | Example PV | 
   |--            |--      |  |
