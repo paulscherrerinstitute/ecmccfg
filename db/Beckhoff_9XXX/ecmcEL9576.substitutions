@@ -6,6 +6,6 @@ file "ecmcEcSlave.template"
 
 file "ecmcEL9576-chX.template"
 {
-  pattern {}
-          {}
+  pattern {CH_ID}
+          {01   }
 }
