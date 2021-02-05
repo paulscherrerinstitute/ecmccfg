@@ -149,7 +149,56 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   assuming this is slave 17 on the third master it would translate into `ec2.s17.errCode` internally for the error code information of the main unit.
   The actual data of the 13th input will reside under `ec2.s17.analogInput13`.
 
-### List PV names/abbrevations
+## PV Naming
+
+The naming should follow the below concept:0
+
+```
+${ECMC_P}<type><id>-<name>
+```
+
+Or for terminals that have both channels and terminal specific data, the "Dev" type can be used.
+
+```
+${ECMC_P}Dev-<name>
+```
+
+Example: Status words
+```
+IOC_TEST:m0s000-Dev-Stat   # Status word for device 
+IOC_TEST:m0s000-CH1-Stat   # Status word for channel 1
+IOC_TEST:m0s000-CH2-Stat   # Status word for channel 2
+IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
+```
+
+### "<type>"
+
+  | Type | Description  | Comment  |
+  |--    |--|
+  |BI    |Binary input  |   |
+  |BO    |Binary output |   |
+  |AI    |Binary input |   |
+  |AO    |Analog output |   |
+  |CH    |Generic channel |   |
+  |Drv   |Drive |   |
+  |Enc   |Encoder |   |
+  |Dev*  |Device* |   Shall only be used if the terminal have specifc data that cannot be assigned to a other type|
+  |EC    |Ethercat | Reserved for ethercat status data (from master, not process data)|
+
+### <id>
+
+Id is the number of the "channel".
+
+Example: Encoder with two channels
+```
+IOC_TEST:m0s000-Enc01-PosAct
+IOC_TEST:m0s000-Enc02-PosAct
+```
+
+### List PV names/abbrevations (<name>)
+
+The below abbrevations should be used for the "<name>" of the PV:
+
   | Property (or part of) | Abbrevation for PV name (or part of) | Example PV | 
   |--            |--      |  |
   |device        |dev     |  |
