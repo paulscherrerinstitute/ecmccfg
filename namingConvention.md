@@ -169,21 +169,22 @@ IOC_TEST:m0s000-Dev-Stat   # Status word for device
 IOC_TEST:m0s000-CH1-Stat   # Status word for channel 1
 IOC_TEST:m0s000-CH2-Stat   # Status word for channel 2
 IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
+
 ```
 
 ### "<type>"
 
-  | Type | Description  | Comment  |
-  |--    |--|
-  |BI    |Binary input  |   |
-  |BO    |Binary output |   |
-  |AI    |Binary input |   |
-  |AO    |Analog output |   |
-  |CH    |Generic channel |   |
-  |Drv   |Drive |   |
-  |Enc   |Encoder |   |
-  |Dev*  |Device* |   Shall only be used if the terminal have specifc data that cannot be assigned to a other type|
-  |EC    |Ethercat | Reserved for ethercat status data (from master, not process data)|
+  | Type | Description    | Comment  |
+  |--    |--              |--        |
+  |BI    |Binary input    |          |
+  |BO    |Binary output   |          |
+  |AI    |Binary input    |          |
+  |AO    |Analog output   |          |
+  |CH    |Generic channel |          |
+  |Drv   |Drive           |          |
+  |Enc   |Encoder         |          |
+  |Dev*  |Device*         | Shall only be used if the terminal have specifc data that cannot be assigned to a other type|
+  |EC    |Ethercat        | Reserved for ethercat status data (from master, not process data)|
 
 ### <id>
 
