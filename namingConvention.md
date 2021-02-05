@@ -45,11 +45,20 @@ See examples below for clarification.
 - analogInput
 - analogInputSetpoint  (for analog drives, the analog setpoint value (reference) to the drive)
 - analogInputActual    (for analog drives, the analog actual value (feedback) recived to the drive)
-- dcVoltageActual
 - temperatureActual
+- voltageActual
 - positionActualSecondary (for drives with multiple feedbacks)
 - notConnected
 - KL<slaveid>_binaryInput
+- load
+- ebus
+- underVoltageEbus
+- underVoltagePower
+- powerOk
+- overload
+- currentActualResistor
+- dutyCycle
+- 
 
 ##### outputs
 - binaryOutput
@@ -190,6 +199,25 @@ Note: Each slave will have a record set with status recived by the master (ecmcE
   |disabled      |dis     |  |
   |input         |inp     |  |
   |output        |outp    |  |
+  |load          |ld      |  |
+  |enabled       |ena     |  |
+  |short         |shrt    |  |
+  |circuit       |circ    | shrtCirc |
+  |overload      |ovrld   |  |
+  |hardware      |hw      |  |
+  |protection    |prot    | hwProt |
+  |level         |lvl     |  |
+  |cool          |cool    |  |
+  |down          |dwn     |  |
+  |lock          |lck     | coolDwnLck |
+  |switch        |swtch   |  |
+  |pdo           |pdo     |  |
+  |diagnostics   |diag    |  |
+  |channel       |ch      |  |
+  |I2T           |i2t     |  |
+  |duty          |dty     |  |
+  |Cyckle        |cyc     | dtyCyc |
+  
 
 ## ESS
 

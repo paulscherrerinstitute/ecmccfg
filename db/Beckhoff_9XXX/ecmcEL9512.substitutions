@@ -4,7 +4,7 @@ file "ecmcEcSlave.template"
           {}
 }
 
-file "ecmcEL9512-chX.template"
+file "ecmcEL95XX-chX.template"
 {
   pattern {}
           {}

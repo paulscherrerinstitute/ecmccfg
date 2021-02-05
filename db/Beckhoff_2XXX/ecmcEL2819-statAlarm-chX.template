@@ -21,10 +21,10 @@ record(bi,"${ECMC_P}BO$(CH_ID)-OvrTmpAlrm"){
   field(ONAM, "Overtemp")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}BO$(CH_ID)-OpnLoadAlrm.PROC")
+  field(FLNK, "${ECMC_P}BO$(CH_ID)-OpnLdAlrm.PROC")
 }
 
-record(bi,"${ECMC_P}BO$(CH_ID)-OpnLoadAlrm"){
+record(bi,"${ECMC_P}BO$(CH_ID)-OpnLdAlrm"){
   field(DESC, "$(HWTYPE): BO$(CH_ID) Open Load Alarm")
   field(INP,  "${ECMC_P}BO$(CH_ID)-Stat.B1")
   field(ZNAM, "No Alarm")
