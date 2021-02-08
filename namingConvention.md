@@ -58,7 +58,13 @@ See examples below for clarification.
 - overload
 - currentActualResistor
 - dutyCycle
-- 
+- analogInputArray
+- nextSyncTime
+- sampleCount
+- cycleCounter
+- timestamp<id>_l32
+- timestamp<id>_u32
+- tc_cold
 
 ##### outputs
 - binaryOutput
