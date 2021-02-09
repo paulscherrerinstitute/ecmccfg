@@ -1,5 +1,5 @@
 
-record(ai,${ECMC_P}Dev-NxtTime"){
+record(ai,"${ECMC_P}Dev-NxtTime"){
   field(DESC, "${HWTYPE}: Next latch time l32 [ns]")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynInt32")

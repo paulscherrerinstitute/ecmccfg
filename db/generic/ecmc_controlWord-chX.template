@@ -5,19 +5,19 @@
 #-d   \file
 #-d */
 
-record(mbboDirect,"${ECMC_P}${KEY=CntrlWd}${CH_ID}${suffix=}"){
+record(mbboDirect,"${ECMC_P}${KEY=Cntrl}${CH_ID}${suffix=}"){
   info(asyn:READBACK,"1")
   field(DESC, "${DESC=${HWTYPE}: Control WD ${CH_ID}}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(OUT,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=control}${CH_ID}=")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=control}${CH_ID}=")
 }
 
-record(mbbiDirect,"${ECMC_P}${KEY=CntrlWd}${CH_ID}${suffix=}-RB"){
+record(mbbiDirect,"${ECMC_P}${KEY=Cntrl}${CH_ID}${suffix=}-RB"){
   field(DESC, "${DESC=${HWTYPE}: Control WD ${CH_ID} RB}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=control}${CH_ID}?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=control}${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(TSE,  "${TSE=-2}")
 }
