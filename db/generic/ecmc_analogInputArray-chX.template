@@ -1,0 +1,17 @@
+#-d /**
+#-d   \brief template for analog input array
+#-d   \details single channel analog input array
+#-d   \author Anders Sandström
+#-d   \file
+#-d */
+
+record(waveform,"${ECMC_P}${KEY=AI}${CH_ID}-Array"){
+  field(DESC, "${HWTYPE}: AI$(CH_ID): Value Array [$(NELM)]")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "${DTYP=asynInt16ArrayIn}")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=${DTYP=asynInt16ArrayIn}/ec$(MASTER_ID).s$(SLAVE_POS).mm.analogInputArray$(CH_ID)?")
+  field(FTVL, "${FTVL=SHORT}")
+  field(NELM, "$(NELM=1)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "${TSE=-2}")
+}

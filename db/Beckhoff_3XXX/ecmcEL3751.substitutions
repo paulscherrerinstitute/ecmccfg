@@ -1,0 +1,16 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID,   EGU,    PREC}
+          {01,      "Raw",  3   }
+}
+
+file "ecmc_status-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}          
+}

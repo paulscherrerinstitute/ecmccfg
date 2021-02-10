@@ -58,7 +58,13 @@ See examples below for clarification.
 - overload
 - currentActualResistor
 - dutyCycle
-- 
+- analogInputArray
+- nextSyncTime
+- sampleCount
+- cycleCounter
+- timestamp<id>_l32
+- timestamp<id>_u32
+- tc_cold
 
 ##### outputs
 - binaryOutput
@@ -201,7 +207,7 @@ IOC_TEST:m0s000-Enc02-PosAct
 The below abbrevations should be used for the "name" part of the PV:
 
   | Property (or part of) | Abbrevation for PV name (or part of) | Example PV | 
-  |--            |--      |  |
+  |--            |--      |--|
   |device        |dev     |  |
   |status        |stat    | DevStat |
   |control       |ctrl    |  |
@@ -224,7 +230,7 @@ The below abbrevations should be used for the "name" part of the PV:
   |over          |ovr     |  |
   |range         |rng     |  |
   |run           |run     |  |
-  |under         |udr     |  |
+  |under         |undr    |  |
   |voltage       |volt    |  |
   |reset         |rst     |  |
   |auto          |auto    |  |
@@ -243,9 +249,9 @@ The below abbrevations should be used for the "name" part of the PV:
   |mask          |mask    |  |
   |array         |array   |  |
   |current       |curr    |  |
-  |Red           |Red     |  |
-  |Green         |Green   |  |
-  |Blue          |Blue    |  |
+  |red           |Red     |  |
+  |green         |Green   |  |
+  |blue          |Blue    |  |
   |disabled      |dis     |  |
   |input         |inp     |  |
   |output        |outp    |  |
@@ -266,7 +272,9 @@ The below abbrevations should be used for the "name" part of the PV:
   |channel       |ch      |  |
   |I2T           |i2t     |  |
   |duty          |dty     |  |
-  |Cyckle        |cyc     | dtyCyc |
+  |cycle         |cyc     | dtyCyc |
+  |limit         |lim     |  |
+  |next          |nxt     |  |
   
 
 ## ESS

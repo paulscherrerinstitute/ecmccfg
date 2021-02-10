@@ -52,19 +52,19 @@ ecmcEpicsEnvSetCalc(DS_SIZE, "${NELM=20}*4")
 
 ##############################################################################
 ## Data Storage 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
 
 ##############################################################################
 ## Data Storage 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
 
 ##############################################################################
 ## Data Storage 2
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
 
 ##############################################################################
 ## Data Storage 3
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
 
 ##############################################################################
 ## Prepare PLC macros (check MM index and calc scale and offset):
