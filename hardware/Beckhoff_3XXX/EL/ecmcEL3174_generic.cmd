@@ -12,18 +12,11 @@
 #-d   \note Selected range: 0..10V (actually 0..10.737V)
 #-d */
 
+#- Configure PDOS
+ecmcFileExist("${ecmccfg_DIR}ecmcEL3174_pdos.cmd",1)
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3174_pdos.cmd
 
-#- verify slave, including reset
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
-
-#- analog input Ch1
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=01,ECMC_PDO=0x1a00,ECMC_ENTRY=0x6000"
-#- analog input Ch2
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=02,ECMC_PDO=0x1a02,ECMC_ENTRY=0x6010"
-#- analog input Ch3
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=03,ECMC_PDO=0x1a04,ECMC_ENTRY=0x6020"
-#- analog input Ch4
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=04,ECMC_PDO=0x1a06,ECMC_ENTRY=0x6030"
+ecmcFileExist("${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd",1)
 
 #-  Set signal type
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x800D")
