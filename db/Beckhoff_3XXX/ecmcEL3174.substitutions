@@ -1,0 +1,15 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+#Actually the scalinging is between 0..10.737V (see manual)
+file "ecmcEL3XXX-chX.template"
+{
+  pattern {CH_ID, EGU  }
+          {1,     "Raw"}
+          {2,     "Raw"}
+          {3,     "Raw"}
+          {4,     "Raw"}
+}
