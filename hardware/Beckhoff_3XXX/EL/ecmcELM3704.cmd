@@ -7,13 +7,13 @@
 #-d
 #-d   Supported signal types (choose via SDO settings):
 #-d   * strain gauge:
-#-d      * quarter bridge           (350 Ω + 120 Ω, ±2/4/8/32 mV/V), half bridge (±2/16 mV/V), 
-#-d      * full bridge              (±2/4/32 mV/V), internal bridge completion and supply adjustable 0…5 V (2-/3-/4-/5-/6-wire connection)
-#-d   * Voltage:    	            ±60/10/5/2.5/1.25 V, ±640/320/160/80/40/20 mV, 0…5/10 V (2-wire connection)
-#-d   * Current:	                ±20 mA, 0/4…20 mA, NAMUR NE43 (2-wire connection)
-#-d   * IEPE:	                    ±2,5/5/10 V, current feed 2 mA, acquisition of the modulated AC voltage, AC/DC coupling (parameterisable high-pass), (2-wire connection)
-#-d   * Potentiometer:	            potentiometer ≥ 1 kΩ, supply integrated and adjustable 0…5 V (3-/5-wire connection)
-#-d   * Resistance:	                0…50 Ω, 0…200 Ω, 0…500 Ω, 0…2 kΩ, 0…5 kΩ (2-/3-/4-wire connection)
+#-d      * quarter bridge           (350 Ohm + 120 Ohm, +-2/4/8/32 mV/V), half bridge (+-2/16 mV/V), 
+#-d      * full bridge              (+-2/4/32 mV/V), internal bridge completion and supply adjustable 0…5 V (2-/3-/4-/5-/6-wire connection)
+#-d   * Voltage:    	            +-60/10/5/2.5/1.25 V, +-640/320/160/80/40/20 mV, 0…5/10 V (2-wire connection)
+#-d   * Current:	                +-20 mA, 0/4…20 mA, NAMUR NE43 (2-wire connection)
+#-d   * IEPE:	                    +-2,5/5/10 V, current feed 2 mA, acquisition of the modulated AC voltage, AC/DC coupling (parameterisable high-pass), (2-wire connection)
+#-d   * Potentiometer:	            potentiometer > 1 kOhm, supply integrated and adjustable 0…5 V (3-/5-wire connection)
+#-d   * Resistance:	                0…50 Ohm, 0…200 Ohm, 0…500 Ohm, 0…2 kOhm, 0…5 kOhm (2-/3-/4-wire connection)
 #-d   * Temperature (RTD):          PT100, PT200, PT500, PT1000, Ni100, Ni120, Ni1000, diverse KT/KTY (types see documentation) (2-/3-/4-wire connection)
 #-d   * Temperature (thermocouple):	type A1, A2, A3, B, C, D, E, G, J, K, L, N, P, R, S, T, U; internal cold junction measurement (2-wire connection)
 #-d
