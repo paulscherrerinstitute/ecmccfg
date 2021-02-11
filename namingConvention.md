@@ -84,6 +84,7 @@ See examples below for clarification.
 - notConnected
 - R,G,B (Red,Green,Blue)
 - KL<slaveid>_binaryOutput
+- analogOutputArray
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
