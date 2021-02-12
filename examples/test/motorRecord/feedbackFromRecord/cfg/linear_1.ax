@@ -32,10 +32,10 @@ epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.POSITION")           # Etherca
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "600.0")                     # Fastest speed in engineering units
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "32768.0")                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s8.STM_CONTROL.0")      # Ethercat entry for control word or bit output
-epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s8.STM_STATUS.1")       # Ethercat entry for status word or bit input
-epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s8.VELOCITY_SETPOINT")  # Ethercat entry for velocity setpoint output
-epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s8.STM_CONTROL.2")      # Ethercat entry for reduce torque output
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s8.driveControl01.0")      # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s8.driveStatus01.1")       # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s8.velocitySetpoint01")  # Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s8.driveControl01.2")      # Ethercat entry for reduce torque output
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                          # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                    # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                    # Brake timing parameter in cycles (default 1kHz)

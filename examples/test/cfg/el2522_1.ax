@@ -26,7 +26,7 @@ epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")                        # Fastest 
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "1")                        # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
 epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_1.0")         # Ethercat entry for control word or bit output
 epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_1.0")         # Ethercat entry for status word or bit input
-epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CH1_VELOCITY_SETPOINT") # Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CH1_velocitySetpoint01") # Ethercat entry for velocity setpoint output
 epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_3.0")         # Ethercat entry for reduce torque output
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_2.0")         # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                   # Brake timing parameter in cycles (default 1kHz)
