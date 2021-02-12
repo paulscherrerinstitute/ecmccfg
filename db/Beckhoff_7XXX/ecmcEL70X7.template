@@ -2,7 +2,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd-RB"){
   field(DESC, "$(HWTYPE): Drive Control Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).STM_CONTROL")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).driveControl01")
   field(PREC, "0")
   field(SCAN, "I/O Intr")
 }
@@ -11,7 +11,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Cmd"){
   field(DESC, "$(HWTYPE): Drive Control Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).STM_CONTROL")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).driveControl01")
   field(PREC, "0")
 }
 
@@ -19,7 +19,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd-RB"){
   field(DESC, "$(HWTYPE): Drive Speed Setpoint RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).VELOCITY_SETPOINT")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint01")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -41,7 +41,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Spd"){
   field(DESC, "$(HWTYPE): Drive Speed Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).VELOCITY_SETPOINT")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint01")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
@@ -62,7 +62,7 @@ record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Stat"){
   field(DESC, "$(HWTYPE): Drive Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).STM_STATUS")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).driveStatus01")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Drv-Wrn-Alrm.PROC")
 }
