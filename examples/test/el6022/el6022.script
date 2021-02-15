@@ -13,8 +13,7 @@
 #-
 #- Read data:
 #- 1. camonitor -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn
-#- 2. Trigger next read by (transfer from RS232 input buffer to PDOs): caput IOC_TEST:ec0-s53-EL6002-Serial1-Cmd-Trigg-Read 1
-#- 3. Several records showing status are available
+#- 2. Several records showing status are available
 #-
 #- A simple test can be done by wire a loopback connection on the DB9:
 #-  1. Bridge 2 and 3
@@ -25,11 +24,6 @@
 #- static.InBytes       : Number of avialble bytes to read
 #- static.triggWrite;   : Trigg write of data by rising edge (this is done aurmatically when write to ArrayOut waveform)
 #- static.triggRead;    : Trigger New read of data. (manual triggering of next read is needed in this example)
-#-
-#- The following should result in "Test" in "IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn"
-#- caput -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayOut Test
-#- caput IOC_TEST:ec0-s11-EL6022-Serial1-Cmd-Trigg-Read 1
-#- caget -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn
 #-
 
 ##############################################################################
@@ -56,9 +50,12 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
 ##############################################################################
 ## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/el6022.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),CH_ID=1,DBG='")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/el6022.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),CH_ID=1,MM_ID=${MM_CH_1_IN},DBG='")
 
 ##############################################################################
 ############# Configure diagnostics:
