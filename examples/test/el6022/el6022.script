@@ -26,11 +26,6 @@
 #- static.triggWrite;   : Trigg write of data by rising edge (this is done aurmatically when write to ArrayOut waveform)
 #- static.triggRead;    : Trigger New read of data. (manual triggering of next read is needed in this example)
 #-
-#- The following should result in "Test" in "IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn"
-#- caput -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayOut Test
-#- caput IOC_TEST:ec0-s11-EL6022-Serial1-Cmd-Trigg-Read 1
-#- caget -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn
-#-
 
 ##############################################################################
 ## Initiation:
