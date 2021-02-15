@@ -11,9 +11,9 @@
 #- NOTE: Max length is 22bytes at the time (can be extended)
 #- 1. caput  -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayOut "CMD_TO_SEND"
 #-
-#- Read data:
+#- Read data (the IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn will be updated for each new value available in the terminal):
 #- 1. camonitor -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn
-#- 2. Several records showing status are available
+#- (2. Several records showing status are available)
 #-
 #- A simple test can be done by wire a loopback connection on the DB9:
 #-  1. Bridge 2 and 3
