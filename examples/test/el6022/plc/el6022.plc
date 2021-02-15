@@ -1,0 +1,89 @@
+###############################################################################
+#-d /**
+#-d   \brief Example plc code EL6002
+#-d   \details Code show how to init, write and read data over EL6022 RS422/485 slave
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+# 
+# Epics records are linked to below variables:
+# static.outBytes      : Number of bytes to write
+# static.InBytes       : Number of avialble bytes to read
+# static.triggWrite;   : Trigg write of data by rising edge
+# static.triggRead;    : Trigger New read of data.
+# Input and output data are stored in EPICS waveforms (memmaps).
+# 
+
+# Reset EL6002 by setting bit 2 of control word (and then clear when bit 2 of status word)
+if(not(static.initdone)) {
+  ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_set_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2);
+  if(ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,2)) {
+    ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_clr_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2);
+    static.initdone:=1;
+    println('Init of EL6002 done!');
+  }
+  else {
+    return [];
+  };
+};
+
+if(static.outBytes<0) {
+  static.outBytes:=0;
+};
+
+if(static.outBytes>22) {
+  println('Error: outBytes must be in range 0..22. Current value:',static.outBytes);
+  static.outBytes:=0;
+};
+
+ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_wrt_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,static.outBytes,8,15);
+static.InBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,8,15);
+
+if(static.triggWrite and static.initdone) {
+  ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0);
+  static.triggWrite:=0;
+  println('Trigg Write!');
+};
+
+if(static.triggRead and static.initdone) {
+  ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,1);
+  static.triggRead:=0;
+  println('Trigg Read!');
+};
+
+if(static.outBytesOld != static.outBytes) {
+  println('outBytes: ',static.outBytes);
+};
+
+if(static.InBytesOld != static.InBytes) {
+  println('InBytes:  ',static.InBytes);
+};
+
+static.outBytesOld:=static.outBytes;
+static.InBytesOld:=static.InBytes;
+
+return [];
+
+${DBG=#}println('----------------------------------------------------');
+${DBG=#}print('Status:   ',ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS);
+${DBG=#}print(' (');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,0,15);
+${DBG=#}println(')');
+${DBG=#}println(' TA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,0));
+${DBG=#}println(' RR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,1));
+${DBG=#}println(' IA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,2));
+${DBG=#}println(' FIFO FULL:    ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,3));
+${DBG=#}println(' PARITY ERR:   ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,4));
+${DBG=#}println(' FRAME ERR:    ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,5));
+${DBG=#}println(' OVERRUN ERR:  ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,6));
+${DBG=#}println(' InBytes:      ',ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,8,15));
+${DBG=#}println('');
+${DBG=#}print('Control:  ',ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL);
+${DBG=#}print(' (');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0,15);
+${DBG=#}println(')');
+${DBG=#}println(' TR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0));
+${DBG=#}println(' RA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,1));
+${DBG=#}println(' IR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2));
+${DBG=#}println(' SC:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,3));
+${DBG=#}println(' OutBytes:     ',ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,8,15));
