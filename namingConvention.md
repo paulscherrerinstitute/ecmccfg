@@ -65,6 +65,7 @@ See examples below for clarification.
 - timestamp<id>_l32
 - timestamp<id>_u32
 - tc_cold
+- positionActualArray
 
 ##### outputs
 - binaryOutput

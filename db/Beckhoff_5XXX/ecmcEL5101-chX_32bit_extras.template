@@ -1,9 +1,9 @@
 # Counts over 10ms. 0.01Hz/digit
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-FreqAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-FreqAct"){
   field(DESC, "$(HWTYPE): Encoder Freq")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).FREQUENCY?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderFrequency${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "SLOPE")
   field(ESLO, "0.01")
@@ -23,11 +23,11 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-FreqAct"){
 }
 
 # Scale in 500ns per digit
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PeriodAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-PeriodAct"){
   field(DESC, "$(HWTYPE): Encoder Freq")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).PERIOD?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderPeriod${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "SLOPE")
   field(ESLO, "5e-7")

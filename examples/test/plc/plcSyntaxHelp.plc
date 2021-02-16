@@ -312,29 +312,37 @@
 #                        <mmId>,       : Source memmap index
 #                        <dsId>        : Destination data storage index
 #                        <scale>       : Scale 
-#                        <offset>);    : Offset  
+#                        <offset>);    : Offset
 #
-#   16. retvalue = ec_get_time();
+#   16. retvalue = ec_mm_push_asyn(
+#                         <mmId>)       : Source memmap index.
+#
+#       push memap to epics (can be used if T_SMP_MS=-1 for the param)
+#       The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+#         ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+#         epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+#
+#   17. retvalue = ec_get_time();
 #
 #      Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
 #      If return value is less than zero it should be considered to be an error code.
 #
 #
-#   17. retvalue = ec_get_time_l32();
+#   18. retvalue = ec_get_time_l32();
 #
 #      Returns lower 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
 #      If return value is less than zero it should be considered to be an error code.
 #
-#   18. retvalue = ec_get_time_u32();
+#   19. retvalue = ec_get_time_u32();
 #
 #      Returns upper 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
 #      If return value is less than zero it should be considered to be an error code.
 #
-#   19. retvalue=ec_get_err():
+#   20. retvalue=ec_get_err():
 #
 #       Returns error code from last lib call.
 #
-#   20. retvalue=ec_err_rst():
+#   21. retvalue=ec_err_rst():
 #
 #       Resets error code for ec_lib.
 #
