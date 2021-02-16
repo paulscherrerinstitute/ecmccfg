@@ -1129,9 +1129,9 @@ Starting iocInit
 2020/08/17 14:31:06.547 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.CH1_LATCH_NEG linked to record (asyn reason 83).
 2020/08/17 14:31:06.548 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.CH2_LATCH_POS linked to record (asyn reason 84).
 2020/08/17 14:31:06.550 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.CH2_LATCH_NEG linked to record (asyn reason 85).
-2020/08/17 14:31:06.553 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s7.POSITION linked to record (asyn reason 86).
+2020/08/17 14:31:06.553 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s7.positionActual01 linked to record (asyn reason 86).
 2020/08/17 14:31:06.555 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s7.encoderLatchPostion01 linked to record (asyn reason 87).
-2020/08/17 14:31:06.560 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.POSITION linked to record (asyn reason 88).
+2020/08/17 14:31:06.560 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.positionActual01 linked to record (asyn reason 88).
 2020/08/17 14:31:06.561 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.encoderLatchPostion01 linked to record (asyn reason 89).
 2020/08/17 14:31:06.565 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actpos linked to record (asyn reason 90).
 2020/08/17 14:31:06.567 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.setpos linked to record (asyn reason 91).
