@@ -28,16 +28,16 @@ if(plc${PLC_ID}.firstscan) {
 };
 
 # Start flashing if pushbutton pressed
-if(ec0.s${SLAVE_ID}.BI_1 or 
-   ec0.s${SLAVE_ID}.BI_2 or
-   ec0.s${SLAVE_ID}.BI_3 or
-   ec0.s${SLAVE_ID}.BI_4 or
-   ec0.s${SLAVE_ID}.BI_5 or
-   ec0.s${SLAVE_ID}.BI_6 or
-   ec0.s${SLAVE_ID}.BI_7 or
-   ec0.s${SLAVE_ID}.BI_8 or
-   ec0.s${SLAVE_ID}.BI_9 or
-   ec0.s${SLAVE_ID}.BI_10) {
+if(ec0.s${SLAVE_ID}.binaryInput01 or 
+   ec0.s${SLAVE_ID}.binaryInput02 or
+   ec0.s${SLAVE_ID}.binaryInput03 or
+   ec0.s${SLAVE_ID}.binaryInput04 or
+   ec0.s${SLAVE_ID}.binaryInput05 or
+   ec0.s${SLAVE_ID}.binaryInput06 or
+   ec0.s${SLAVE_ID}.binaryInput07 or
+   ec0.s${SLAVE_ID}.binaryInput08 or
+   ec0.s${SLAVE_ID}.binaryInput09 or
+   ec0.s${SLAVE_ID}.binaryInput010) {
   static.start:=1;
 };
 

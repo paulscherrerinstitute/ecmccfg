@@ -54,9 +54,9 @@ epicsEnvSet("ECMC_CNTRL_KFF",             "1.0")
 
 #Monitoring
 # Switches
-epicsEnvSet("ECMC_EC_MON_LOWLIM",         "ec0.s0.BI_6.0")           #  Ethercat entry for low limit switch input
-epicsEnvSet("ECMC_EC_MON_HIGHLIM",        "ec0.s0.BI_5.0")           #  Ethercat entry for high limit switch inpuit
-epicsEnvSet("ECMC_EC_MON_HOME_SWITCH",    "ec0.s0.BI_7.0")           #  Ethercat entry for home switch input
+epicsEnvSet("ECMC_EC_MON_LOWLIM",         "ec0.s0.binaryInput06.0")           #  Ethercat entry for low limit switch input
+epicsEnvSet("ECMC_EC_MON_HIGHLIM",        "ec0.s0.binaryInput05.0")           #  Ethercat entry for high limit switch inpuit
+epicsEnvSet("ECMC_EC_MON_HOME_SWITCH",    "ec0.s0.binaryInput07.0")           #  Ethercat entry for home switch input
 
 # Enable cmd is removed by software if interlocked.
 # Axis 1 are only allowed to move when input of drive is high
