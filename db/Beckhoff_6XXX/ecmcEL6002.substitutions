@@ -4,9 +4,9 @@ file "ecmcEcSlave.template"
           {}
 }
 
-file "ecmcEL6002-chX.template"
+file "ecmcEL60X2-chX.template"
 {
   pattern {CH_ID, NELM }
-          {1,     22   }
-          {2,     22   }
+          {01,     22   }
+          {02,     22   }
 }
