@@ -503,11 +503,11 @@ macLib: macro 6+1 is undefined (expanding string epicsEnvSet("SLAVE_ID",        
 2019/10/29 15:11:06.058 OK
 2019/10/29 15:11:06.058 OK
 2019/10/29 15:11:06.058 OK
-x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,LATCH_POSITION)"
+x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,encoderLatchPostion01)"
 dbLoadTemplate(ecmcEL5101.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=5,HWTYPE=EL5101,T_SMP_MS=10,TSE=-2")
 # increment SLAVE_ID
 #Configure EL5101 incremental encoder terminal, motor 1
@@ -522,11 +522,11 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EL5101")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13ed3052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,6,0x2,0x13ed3052)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,LATCH_POSITION)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(6,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,encoderLatchPostion01)"
 dbLoadTemplate(ecmcEL5101.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=6,HWTYPE=EL5101,T_SMP_MS=10,TSE=-2")
 # increment SLAVE_ID
 #Configure EL7047 stepper drive terminal, motor 1 GRID
@@ -547,14 +547,14 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b873052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,7,0x2,0x1b873052)"
 ecmcConfigOrDie "Cfg.EcWriteSdo(7,0x1011,0x1,1684107116,4)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,STM_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,VELOCITY_SETPOINT)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,LATCH_POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,STM_STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(7,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
 ecmcConfigOrDie "Cfg.EcAddSdo(7,0x8012,0x5,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(7,0x8012,0xA,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(7,0x8012,0x8,1,1)"
@@ -619,14 +619,14 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b873052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,8,0x2,0x1b873052)"
 ecmcConfigOrDie "Cfg.EcWriteSdo(8,0x1011,0x1,1684107116,4)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,STM_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,VELOCITY_SETPOINT)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,LATCH_POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,STM_STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
 ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0x5,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0xA,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0x8,1,1)"
@@ -902,8 +902,8 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EL5101")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13ed3052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,18,0x2,0x13ed3052)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,VALUE)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,encoderValue01"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,2,3,0x1a03,0x6010,02019/10/29 15:11:06.204 OK
 2019/10/29 15:11:06.204 OK
 2019/10/29 15:11:06.204 OK
@@ -930,9 +930,9 @@ macLib: macro 19+1 is undefined (expanding string epicsEnvSet("SLAVE_ID",       
 2019/10/29 15:11:06.503 OK
 2019/10/29 15:11:06.503 OK
 macLib: macro 20+1 is undefined (expanding string epicsEnvSet("SLAVE_ID",           "$(${ECMC_EC_SLAVE_NUM}+1)"))
-x00,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,LATCH_POSITION)"
+x00,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(18,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,encoderLatchPostion01)"
 dbLoadTemplate(ecmcEL5101.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=18,HWTYPE=EL5101,T_SMP_MS=10,TSE=-2")
 # increment SLAVE_ID
 #Configure EL5101 incremental encoder terminal, motor 1
@@ -947,11 +947,11 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EL5101")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13ed3052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,19,0x2,0x13ed3052)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,LATCH_POSITION)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(19,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,encoderLatchPostion01)"
 dbLoadTemplate(ecmcEL5101.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=19,HWTYPE=EL5101,T_SMP_MS=10,TSE=-2")
 # increment SLAVE_ID
 #Configure EL7047 stepper drive terminal, motor 1 GRID
@@ -972,14 +972,14 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b873052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,20,0x2,0x1b873052)"
 ecmcConfigOrDie "Cfg.EcWriteSdo(20,0x1011,0x1,1684107116,4)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,STM_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,VELOCITY_SETPOINT)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,LATCH_POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,STM_STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(20,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
 ecmcConfigOrDie "Cfg.EcAddSdo(20,0x8012,0x5,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(20,0x8012,0xA,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(20,0x8012,0x8,1,1)"
@@ -1053,14 +1053,14 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b873052")
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,21,0x2,0x1b873052)"
 ecmcConfigOrDie "Cfg.EcWriteSdo(21,0x1011,0x1,1684107116,4)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,ENC_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,VALUE)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,STM_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,VELOCITY_SETPOINT)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,ENC_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,LATCH_POSITION)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,STM_STATUS)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1600,0x7000,0x01,16,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1600,0x7000,0x11,16,encoderValue01"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1602,0x7010,0x1,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,1,2,0x1604,0x7010,0x21,16,1,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a00,0x6000,0x0,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(21,0x2,0x1b873052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
 ecmcConfigOrDie "Cfg.EcAddSdo(21,0x8012,0x5,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(21,0x8012,0xA,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(21,0x8012,0x8,1,1)"

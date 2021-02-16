@@ -1,0 +1,300 @@
+# ECMCupdated flag, counter of updates
+# new data on EC bus
+# this record is foward linked from the ECMC via the macro ${PROC_HOOK}
+#- file iocsh/ecmc.iocsh
+#- require ecmccfg "PROC_HOOK=SARMA01-DBCM030:CH1-Cycle"
+#- this used to be handled with _CP_ but changed after consulting with Tadej Humar
+#- on 2020-07-01 we figured an issue when using the FLNK of MCU-updated
+#- it seems as if the FLNK is blocking ecmc, which causes drops on the EC-bus
+# _reverted back to _CP_
+record(waveform,"$(P)CH$(CH_ID)-Cycle"){
+  field(INP,  "$(HOOK) CP")
+  field(FLNK, "$(P)CH$(CH_ID)-CycleFO.PROC")
+}
+#  ||
+#  \/
+record(fanout,"$(P)CH$(CH_ID)-CycleFO") {
+  field(SELM, "All")
+  field(LNKA, "$(P)CH$(CH_ID)-Buffer")
+  field(LNKB, "$(P)CH$(CH_ID)-TrgRst")
+}
+#  |
+#  \---- > Buffer ==> forward chain on EC bus cycle
+#  \---- > TrgRst ==> check for trigger reset (DAQ off)
+#
+# add data to circular buffer
+record(compress,"$(P)CH$(CH_ID)-Buffer"){
+  field(INP,  "${DATA_SRC}")
+  field(ALG,  "Circular Buffer")
+  field(NSAM, "${BFR_LEN}")
+  field(FLNK, "$(P)CH$(CH_ID)-TrgTime.PROC")
+}
+#  ||
+#  \/
+# time of trigger
+record(ai,"$(P)CH$(CH_ID)-TrgTime"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=${PLC_ID} trigger time (ns))")
+  field(DTYP, "$(DTYP=asynFloat64)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.TrgTime?")
+  field(SCAN, "Passive")
+  field(EGU,  "ns")
+  field(FLNK, "$(P)CH$(CH_ID)-TrgOffSamples.PROC")
+}
+#  ||
+#  \/
+# get trigger offset in overSamples from PLC
+record(ai,"$(P)CH$(CH_ID)-TrgOffSamples"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=${PLC_ID} trigger offset)")
+  field(DTYP, "$(DTYP=asynFloat64)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.sampleIdx?")
+  field(SCAN, "Passive")
+  field(EGU,  "overSamples")
+  field(FLNK, "$(P)CH$(CH_ID)-Trg_.PROC")
+}
+#  ||
+#  \/
+# time of last trigger input in ns (1 ns resolution)
+# this number _will_ certainly increase for each trigger
+record(calcout,"$(P)CH$(CH_ID)-Trg_"){
+  field(INPA, "$(P)CH$(CH_ID)-TrgTime MS")
+  field(INPB, "$(P)CH$(CH_ID)-TrgLast_ MS")
+  field(INPC, "$(P)CH$(CH_ID)-Trg MS")
+  field(CALC, "!C?A>B:0") # if not triggered (C); then A>B; else 0
+  field(OOPT, "Transition To Non-zero")
+  field(IVOA, "Don't drive outputs")
+  field(OUT,  "$(P)CH$(CH_ID)-TrgPID.PROC PP")
+}
+
+# FLNK BREAK ===================================================================
+
+# Trigger CHAIN
+## first thing, buffer the PulseID.
+## PulseID buffer
+record(ai,    "$(P)CH$(CH_ID)-TrgPID"){
+  field(INP,  "$(EVR)RX-PULSEID")
+  field(DESC, "PulseID buffer")
+  field(FLNK, "$(P)CH$(CH_ID)-TrgSEC.PROC")
+}
+#  ||
+#  \/
+## timestamp second buffer
+record(longin,"$(P)CH$(CH_ID)-TrgSEC"){
+  field(INP,  "$(EVR)RX-MTS-SEC")
+  field(DESC, "timestamp buffer")
+  field(FLNK, "$(P)CH$(CH_ID)-TrgNSEC.PROC")
+}
+#  ||
+#  \/
+## timestamp nano-second buffer
+record(longin,"$(P)CH$(CH_ID)-TrgNSEC"){
+  field(INP,  "$(EVR)RX-MTS-NSEC")
+  field(DESC, "timestamp buffer")
+  field(FLNK, "$(P)CH$(CH_ID)-Trg.PROC")
+}
+#  ||
+#  \/
+## is the scope triggered?
+## beware, this will also get processed by the trigger reset mechanism
+record(bi,    "$(P)CH$(CH_ID)-Trg"){
+  field(DESC, "Scope DAQ state")
+  field(INP,  "$(P)CH$(CH_ID)-Trg_")
+  field(ZNAM, "idle")
+  field(ONAM, "triggered")
+  field(PINI, "YES")
+  field(FLNK,  "$(P)CH$(CH_ID)-TrgStart.PROC")
+}
+#  ||
+#  \/
+# obtain current EC frame number
+record(ai,    "$(P)CH$(CH_ID)-TrgStart"){
+  field(INP,  "$(P)CH$(CH_ID)-Cycle")
+  field(FLNK, "$(P)CH$(CH_ID)-TrgEnd.PROC")
+}
+#  ||
+#  \/
+# obtain EC frame number for DAQ to stop
+record(calc,"$(P)CH$(CH_ID)-TrgEnd"){
+  field(INPA, "$(P)CH$(CH_ID)-TrgStart")
+  field(INPB, "$(P)CH$(CH_ID)-DAQPostTrgCycles")
+  field(CALC, "A+B")
+  field(FLNK, "$(P)CH$(CH_ID)-TrgLast_.PROC")
+}
+#  ||
+#  \/
+# store last trigger timestamp
+record(ai,  "$(P)CH$(CH_ID)-TrgLast_") {
+  field(INP,  "$(P)CH$(CH_ID)-TrgTime")
+  field(EGU,  "ns")
+}
+#
+# FLNK BREAK ===================================================================
+# this chain is EC bus synced
+
+# re-arm trigger in case DAQ is finished, do only if trigger is active
+record(calcout,"$(P)CH$(CH_ID)-TrgRst") {
+  field(INPA, "$(P)CH$(CH_ID)-Cycle MS")
+  field(INPB, "$(P)CH$(CH_ID)-TrgEnd MS")
+  field(INPC, "$(P)CH$(CH_ID)-Trg MS")
+  field(CALC, "C?(A>=B?0:nan):nan")
+  field(IVOA, "Don't drive outputs")
+  #field(OUT,  "$(P)CH$(CH_ID)-DAQSeq.PROC PP")
+  field(OUT,  "$(P)CH$(CH_ID)-ADCdata_ PP")
+}
+#  || OUT PP
+#  \/
+# scale raw WF
+record(aSub,"$(P)CH$(CH_ID)-ADCdata_") {
+  field(INAM, "vecMathInit")
+  field(SCAN, "Passive")
+  field(SNAM, "scaleWF")
+  field(INPA, "$(P)CH$(CH_ID)-Buffer")
+  field(NOA,  "${BFR_LEN}")
+  field(FTA,  "DOUBLE")
+  field(INPF, 0.00030517578125)
+  field(INPG, 0)
+  field(FTF,  "DOUBLE")
+  field(NOVA, "${BFR_LEN}")
+  field(FLNK, "$(P)CH$(CH_ID)-DAQStartIdx.PROC PP")
+}
+#  ||
+#  \/
+# starting index of data in circular buffer
+record(calcout,"$(P)CH$(CH_ID)-DAQStartIdx"){
+  field(DESC, "start index within circular buffer")
+  field(INPA, "${BFR_LEN}")
+  field(INPB, "$(P)CH$(CH_ID)-DAQPostTrgCycles")
+  field(INPC, "$(P)CH$(CH_ID)-DAQPreTrgTime")
+  field(INPD, "$(P)CH$(CH_ID)-TrgOffSamples")
+  field(F,    "${ECMC_BUS_FREQ=1000}")
+  field(E,    "${ECMC_OVER_SMP=100}")
+  field(CALC, "A-(B*E)-(C*1000/F*E)-D")
+  field(OUT,  "$(P)CH$(CH_ID)-ADCdata.INDX PP")
+}
+#  ||
+#  \/
+# subArray with trigger latched ADC data
+record(subArray, "$(P)CH$(CH_ID)-ADCdata"){
+  field(DESC, "trigger latched subArray")
+  field(INP,  "$(P)CH$(CH_ID)-ADCdata_.VALA")
+  field(FTVL, "DOUBLE")
+  field(MALM, "${BFR_LEN}")
+  field(EGU,  "$(EGU=V)")
+  field(FLNK, "$(P)CH$(CH_ID)-reArm.PROC")
+}
+# ||
+# \/
+record(ao, "$(P)CH$(CH_ID)-reArm") {
+  field(VAL,  0)
+  field(OUT,  "$(P)CH$(CH_ID)-Trg PP")
+  field(FLNK, "${postProcFlnk=''}")
+}
+
+# ==============================================================================
+# DAQ settings
+
+# time before the trigger
+record(ao, "$(P)CH$(CH_ID)-DAQPreTrgTime") {
+  field(DESC, "number of pre-trigger time (ms)")
+  field(EGU,  "ms")
+  field(VAL,  2.5)
+  field(PREC, 2)
+  field(PINI, "YES")
+}
+
+# time after the trigger
+record(ao, "$(P)CH$(CH_ID)-DAQPostTrgTime") {
+  field(DESC, "number of post-trigger time (ms)")
+  field(EGU,  "ms")
+  field(VAL,  7.5)
+  field(PREC, 2)
+  field(PINI, "YES")
+}
+
+# cycles, based on EC bus freq (default: 1 kHz)
+record(calc,  "$(P)CH$(CH_ID)-DAQPostTrgCycles") {
+  field(DESC, "number of post-trigger cycles")
+  field(INPA, "$(P)CH$(CH_ID)-DAQPostTrgTime CP")
+  field(F,    "${ECMC_BUS_FREQ=1000}")
+  field(CALC, "CEIL(A*1000/F)")
+}
+
+# number of samples to copy
+record(calcout,"$(P)CH$(CH_ID)-DAQSamples"){
+  field(DESC, "length of subArray")
+  field(INPA, "$(P)CH$(CH_ID)-DAQPreTrgTime CP")
+  field(INPB, "$(P)CH$(CH_ID)-DAQPostTrgTime CP")
+  field(E,    "${ECMC_OVER_SMP=100}")
+  field(F,    "${ECMC_BUS_FREQ=1000}")
+  field(CALC, "(A*1000/F+B*1000/F)*E")
+  field(OUT,  "$(P)CH$(CH_ID)-ADCdata.NELM")
+  field(PINI, "YES")
+}
+
+# low end of the x-axis
+record(calcout,  "$(P)CH$(CH_ID)-xAxis_LOW") {
+  field(DESC,  "description")
+  field(CALC,  "A*-1000")
+  field(INPA,  "$(P)CH$(CH_ID)-DAQPreTrgTime CP")
+  field(FLNK,  "$(P)CH$(CH_ID)-xAxis_.PROC")
+}
+
+# x-axis for GUI
+record(aSub,"$(P)CH$(CH_ID)-xAxis_") {
+  field(INAM, "vecMathInit")
+  field(SCAN, "Passive")
+  field(SNAM, "sequence")
+  field(INPA, "$(P)CH$(CH_ID)-xAxis_LOW")
+  field(INPB, 10)
+  field(INPF, 0.001)
+  field(NOVA, "${BFR_LEN}")
+  field(FLNK, "$(P)CH$(CH_ID)-xAxis.PROC")
+}
+
+record(waveform,"$(P)CH$(CH_ID)-xAxis") {
+  field(DESC, "History Time Base")
+  field(FTVL, "DOUBLE")
+  field(INP,  "$(P)CH$(CH_ID)-xAxis_.VALA")
+  field(NELM, "${BFR_LEN}")
+  field(PREC, 3)
+  field(EGU,  "ms")
+  field(PINI, "YES")
+}
+
+# ==============================================================================
+# trigger selector
+
+record(mbbo,  "$(P)CH$(CH_ID)-TrgEdge"){
+  field(DESC, "trigger source selector")
+  field(DTYP, "Raw Soft Channel")
+  field(ZRST, "CH1 pos edge")
+  field(ZRVL, 0)
+  field(ONST, "CH2 pos edge")
+  field(ONVL, 1)
+  field(TWST, "CH1 neg edge")
+  field(TWVL, 2)
+  field(THST, "CH2 neg edge")
+  field(THVL, 3)
+  field(OUT,  "$(P)$(CH_ID)-TrgEdge_ PP")
+}
+
+record(ao,"$(P)$(CH_ID)-TrgEdge_"){
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.TrgID=")
+  field(PREC, "0")
+}
+
+# ==============================================================================
+# Eye candy
+
+record(ai,"$(P)CH$(CH_ID)-TrgFreq"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "$(DESC=PLC${PLC_ID} trigger frequency)")
+  field(DTYP, "$(DTYP=asynFloat64)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.trgFreq?")
+  field(SCAN, "1 second")
+  field(EGU,  "Hz")
+  field(PREC,  3)
+}

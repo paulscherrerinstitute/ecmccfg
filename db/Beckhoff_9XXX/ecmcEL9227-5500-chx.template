@@ -1,0 +1,292 @@
+record(mbbiDirect,"${ECMC_P}CH${CH_ID}-Stat"){
+    field(DESC, "$(HWTYPE): Status Word")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynUInt32Digital")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).status${CH_ID}?")
+    field(SCAN, "I/O Intr")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-EnaAct.PROC")
+    field(SHFT, "0")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-EnaAct"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Enabled")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B0")
+    field(ZNAM, "Zero")
+    field(ONAM, "Enabled")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-TripAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-TripAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Tripped")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B1")
+    field(ZNAM, "Zero")
+    field(ONAM, "Tripped")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH{CH_ID}-ShrtCircAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-ShrtCircAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Short Circuit")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B2")
+    field(ZNAM, "Zero")
+    field(ONAM, "Short Circuit")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-OvrldAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-OvrldAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Overload")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B3")
+    field(ZNAM, "Zero")
+    field(ONAM, "Overload")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-HwProtAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-HwProtAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: HardwareProtection")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B4")
+    field(ZNAM, "Zero")
+    field(ONAM, "Hardware Protection")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-OvrVoltAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-OvrVoltAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Overvoltage")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B5")
+    field(ZNAM, "Zero")
+    field(ONAM, "Overvoltage")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-UdrVoltAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-UdrVoltAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Undervoltage")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B6")
+    field(ZNAM, "Zero")
+    field(ONAM, "Undervoltage")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-CurrLvlAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-CurrLvlAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Current Level Warning")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B7")
+    field(ZNAM, "Zero")
+    field(ONAM, "CurrentLevelWarning")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-CoolDwnAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-CoolDwnAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Cool Down Lock")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B8")
+    field(ZNAM, "Zero")
+    field(ONAM, "Cool Down Lock")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-DisSwtchAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-DisSwtchAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: DisabledBySwitch")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B9")
+    field(ZNAM, "Zero")
+    field(ONAM, "Disabled By Switch")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-DisBIAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-DisBIAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Disabled By DI")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.BA")
+    field(ZNAM, "Zero")
+    field(ONAM, "Disabled By DI")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-DisPDOAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-DisPDOAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Disabled by PDO")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.BB")
+    field(ZNAM, "Zero")
+    field(ONAM, "Disabled By Output")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-DiagAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-DiagAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Diag")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.BC")
+    field(ZNAM, "Zero")
+    field(ONAM, "Diag")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-SwtchAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: State Device Switch")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B10")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-BI.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-BI"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Status Digital Input")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B11")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-ErrAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-ErrAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Error")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B12")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-RstAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-RstAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: State Reset")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B13")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-SwtchAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: State Switch")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B14")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")    
+}
+
+record(ai,"${ECMC_P}CH${CH_ID}-LoadAct"){
+    field(DESC, "$(HWTYPE): Load")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).load${CH_ID}?")
+    field(PREC, "0")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "1")
+    field(EOFF, "0")
+    field(EGU, "%")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${ECMC_P}CH${CH_ID}-CurrAct"){
+    field(DESC, "$(HWTYPE): Current")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).current${CH_ID}?")
+    field(PREC, "0")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "0.01")
+    field(EOFF, "0")
+    field(EGU,  "A")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${ECMC_P}CH${CH_ID}-VoltInAct"){
+    field(DESC, "$(HWTYPE): Voltage In")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).voltageIn${CH_ID}?")
+    field(PREC, "0")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "0.1")
+    field(EOFF, "0")
+    field(EGU,  "V")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${ECMC_P}CH${CH_ID}-VoltOutAct"){
+    field(DESC, "$(HWTYPE): Voltage Out")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).voltageOut${CH_ID}?")
+    field(PREC, "0")
+    field(SCAN, "I/O Intr")
+    field(LINR, "SLOPE")
+    field(ESLO, "0.1")
+    field(EOFF, "0")
+    field(EGU,  "V")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(mbboDirect,"${ECMC_P}CH${CH_ID}-Ctrl_"){
+    field(DESC, "$(HWTYPE): Control Word")
+    field(DTYP, "asynUInt32Digital")
+    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}=")
+    field(SCAN, "Passive")
+}
+
+record(bo,"${ECMC_P}CH${CH_ID}-Ctrl-Rst"){
+    field(DESC, "$(HWTYPE): Reset")
+    field(OUT,  "${ECMC_P}CH${CH_ID}-Ctrl_.B0 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(bo,"${ECMC_P}CH${CH_ID}-Ctrl-Swtch"){
+    field(DESC, "$(HWTYPE): Switch")
+    field(OUT,  "${ECMC_P}CH${CH_ID}-Ctrl_.B1 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(mbbiDirect,"${ECMC_P}CH${CH_ID}-Ctrl_-RB"){
+    field(DESC, "$(HWTYPE): Control Word RB")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynUInt32Digital")
+    field(INP, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}?")
+    field(SCAN, "I/O Intr")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-RstCmd-RB.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-RstCmd-RB"){
+    field(DESC, "$(HWTYPE): Reset RB")
+    field(PINI, "$(PINI=1)")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Ctrl_-RB.BO")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-SwtchCmd-RB.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-SwtchCmd-RB"){
+    field(DESC, "$(HWTYPE): Switch")
+    field(PINI, "$(PINI=1)")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Ctrl_-RB.B1")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}

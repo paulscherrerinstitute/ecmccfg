@@ -69,7 +69,7 @@ if(static.seqStep==2)
 
 ##### 3. Trigger a absolute move 
 if(static.seqStep==3){
-  ec0.s3.ENC_CONTROL:=ec_clr_bit(ec0.s3.ENC_CONTROL,0);  #Set/reset latch on C  
+  ec0.s3.encoderControl01:=ec_clr_bit(ec0.s3.encoderControl01,0);  #Set/reset latch on C  
   ax1.blockcom:=0;  #Allow EPICS control
   var posTarg:=120;
   var vel:=50;
@@ -90,7 +90,7 @@ if(static.seqStep==3){
 
 ##### 4. Trigger a absolute move 
 if(static.seqStep==4){
-  ec0.s3.ENC_CONTROL:=ec_set_bit(ec0.s3.ENC_CONTROL,0); #Set/reset latch on C
+  ec0.s3.encoderControl01:=ec_set_bit(ec0.s3.encoderControl01,0); #Set/reset latch on C
   var posTarg:=-10;
   var vel:=100;
   var acc:=100;
@@ -130,14 +130,14 @@ if((static.seqStep>2 and (not(ax1.mon.lowlim) or not(ax1.mon.highlim))) or stati
 };
 
 # print out each new valid latched value (on c-track)
-if(ec_chk_bit(ec0.s3.ENC_STATUS,0) and not(static.oldLatchValid))
+if(ec_chk_bit(ec0.s3.encoderStatus01,0) and not(static.oldLatchValid))
 {
-  println('New latched position: ' , ec0.s3.LATCH_POSITION);
-  static.errorcode:=ds_append_data(1, ec0.s3.LATCH_POSITION);
+  println('New latched position: ' , ec0.s3.encoderLatchPostion01);
+  static.errorcode:=ds_append_data(1, ec0.s3.encoderLatchPostion01);
   ds_push_asyn(1);  
 };
 
-static.oldLatchValid:=ec_chk_bit(ec0.s3.ENC_STATUS,0);
+static.oldLatchValid:=ec_chk_bit(ec0.s3.encoderStatus01,0);
 
 return [];
 

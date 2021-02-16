@@ -20,6 +20,7 @@
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
 #- SCRIPTEXEC        = iocshLoad
+#- NAMING            = ClassicNaming
 #- EC_RATE           = 1000
 #-
 #- [set by module]
@@ -67,9 +68,11 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 #-
 #- Set current EtherCAT sample rate
 #- Note: Not the same as ECMC_SAMPLE_RATE_MS which is for record update
-epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
+epicsEnvSet("ECMC_EC_SAMPLE_RATE",  "${EC_RATE=1000}")
 #-
 #-------------------------------------------------------------------------------
+#- define naming convention script
+epicsEnvSet("ECMC_P_SCRIPT",        "${NAMING=ClassicNaming}")
 
 #- add master (defaults to '0'), no master when MASTER_ID < 0
 ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")

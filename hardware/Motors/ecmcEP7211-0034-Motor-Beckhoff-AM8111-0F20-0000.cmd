@@ -7,6 +7,44 @@
 #-d   \note Most parameters are read from the electronic nameplate of the OCT motor. Only velocity loop parameters seem necessary.
 #-d */
 
+#- 0x9009 0x0A Effective nominal voltage (mV)
+#- --> 33900
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x19,33900,4)"
+
+#- 0x9009 0x07 Effective holding current (mA)
+#- --> 2850
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,2850,4)"
+#- 0x9009 0x08 Effective rated current (mA)
+#- --> 2710
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x12,2710,4)"
+#- 0x9009 0x06 Number of pole pair
+#- --> 3
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x13,3,1)"
+#-
+#- Commutation offset = -90 (reset by auto-configuration)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x15,-90,2)"
+
+#- 0x9009 0x0E Torque constant (mNm/A)
+#- --> 70
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x16,70,4)"
+#- 0x9009 0x14 Mass moment of inertia (g cm^2)
+#- --> 33
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x18,33,4)"
+#- 0x9009 0x11 Inductance in the direction of flow (0.1 mH)
+#- --> 15
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x19,15,2)"
+#- 0x9009 0x18 Thermal time constant of the motor (s)
+#- --> 5400
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x2d,5400,2)"
+
+#- 0x9009 0x13 Maximum speed (rpm)
+#- --> 10000 (reset by auto-configuration to 5406)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x1b,5406,4)"
+#-
+#- Current loop integral time = 5 (reset by auto-configuration to 5)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x12,5,2)"
+#- Current loop proportianal gain = 106 (reset by auto-configuration to 106)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x13,177,2)"
 #- Velocity loop integral time = 50 (reset by auto-configuration to 50)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,50,4)"
 #- Velocity loop proportianal gain = 150 (reset by auto-configuration to 150)

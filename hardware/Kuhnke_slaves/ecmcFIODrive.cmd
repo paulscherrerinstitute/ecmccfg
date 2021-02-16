@@ -11,23 +11,23 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "FIODrive")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x0048554b")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0002ba67")
 
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 ############# Factory reset
 #
 #-Reset drive with sdo command:
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
-#-NOTE IMPORTANT!! Drive will reboot to restore default parameters. Wait 5s to startup
+# NOTE IMPORTANT!! Drive will reboot to restore default parameters. Wait 5s to startup
 epicsThreadSleep(1)
-#-Rebooting 1s..
+# Rebooting ${ECMC_EC_HWTYPE} 1s..
 epicsThreadSleep(1)
-#-Rebooting 2s..
+# Rebooting ${ECMC_EC_HWTYPE} 2s..
 epicsThreadSleep(1)
-#-Rebooting 3s..
+# Rebooting ${ECMC_EC_HWTYPE} 3s..
 epicsThreadSleep(1)
-#-Rebooting 4s..
+# Rebooting ${ECMC_EC_HWTYPE} 4s..
 epicsThreadSleep(1)
-#-Rebooting 5s..
+# Rebooting ${ECMC_EC_HWTYPE} 5s..
 
 #############
 #
@@ -140,10 +140,10 @@ ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,6656,
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,1,1)"
 
 ############# Configure PDOS:
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x6040,0x0,16,STM_CONTROL)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x6042,0x0,16,VELOCITY_SETPOINT)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6041,0x0,16,STM_STATUS)"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6064,0x0,32,POSITION)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x6040,0x0,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x6042,0x0,16,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6041,0x0,16,driveStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6064,0x0,32,positionActual01)"
 
 ############# Configure SDOS:
 #Setup 256 fold microstepping

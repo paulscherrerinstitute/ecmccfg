@@ -1,78 +1,78 @@
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat"){
+record(mbbiDirect,"${ECMC_P}CH${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).STATUS?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).status${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-OvrTmp-Alrm.PROC")
+  field(FLNK, "${ECMC_P}CH${CH_ID}-OvrTmpAlrm.PROC")
   field(SHFT, "0")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-OvrTmp-Alrm"){
+record(bi,"${ECMC_P}CH${CH_ID}-OvrTmpAlrm"){
   field(DESC, "$(HWTYPE): Over Temperature")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat.B0")
+  field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B0")
   field(ZNAM, "No Alarm")
   field(ONAM, "Over Temp")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-I2TErr-Alrm.PROC")
+  field(FLNK, "${ECMC_P}CH${CH_ID}-I2TErrAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-I2TErr-Alrm"){
+record(bi,"${ECMC_P}CH${CH_ID}-I2TErrAlrm"){
   field(DESC, "$(HWTYPE): I2T Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat.B1")
+  field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B1")
   field(ZNAM, "No Alarm")
   field(ONAM, "I2T Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-I2TWrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}CH${CH_ID}-I2TWrnAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-I2TWrn-Alrm"){
+record(bi,"${ECMC_P}CH${CH_ID}-I2TWrnAlrm"){
   field(DESC, "$(HWTYPE): I2T Warning")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat.B2")
+  field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B2")
   field(ZNAM, "No Alarm")
   field(ONAM, "I2T Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-OvrVlt-Alrm.PROC")
+  field(FLNK, "${ECMC_P}CH${CH_ID}-OvrVltAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-OvrVlt-Alrm"){
+record(bi,"${ECMC_P}CH${CH_ID}-OvrVltAlrm"){
   field(DESC, "$(HWTYPE): Over Voltage")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat.B3")
+  field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Over Voltage")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-UndrVlt-Alrm.PROC")
+  field(FLNK, "${ECMC_P}CH${CH_ID}-UndrVltAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-UndrVlt-Alrm"){
+record(bi,"${ECMC_P}CH${CH_ID}-UndrVltAlrm"){
   field(DESC, "$(HWTYPE): Under Voltage")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat.B4")
+  field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B4")
   field(ZNAM, "No Alarm")
   field(ONAM, "Under Voltage")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-OnAct.PROC")
+  field(FLNK, "${ECMC_P}CH${CH_ID}-OnAct.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-OnAct"){
+record(bi,"${ECMC_P}CH${CH_ID}-OnAct"){
   field(DESC, "$(HWTYPE): Chopper On")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-Stat.B5")
+  field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B5")
   field(ZNAM, "No Alarm")
   field(ONAM, "No Alarm")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-CurAct"){
+record(ai,"${ECMC_P}CH${CH_ID}-CurrAct"){
   field(DESC, "$(HWTYPE): Current [raw]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).RESISTOR_CURRENT?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).currentActualResistor${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -91,11 +91,11 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-CurAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-DtyCycle"){
+record(ai,"${ECMC_P}CH${CH_ID}-DtyCyc"){
   field(DESC, "$(HWTYPE): Duty Cycle [raw]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).DUTY_CYCLE?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).dutyCycle${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -114,11 +114,11 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-DtyCycle"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BrkChp-VltAct"){
+record(ai,"${ECMC_P}CH${CH_ID}-VoltAct"){
   field(DESC, "$(HWTYPE): Voltage Act [V]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).DC_VOLTAGE?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).voltageActual${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "SLOPE")
   field(ESLO, "0.001")

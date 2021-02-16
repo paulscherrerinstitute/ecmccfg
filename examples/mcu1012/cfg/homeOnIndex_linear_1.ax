@@ -18,18 +18,18 @@ epicsEnvSet("ECMC_ENC_BITS"               "16")                        # Total b
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                         # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                         # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.POSITION")           # Ethercat entry for actual position input (encoder)
-epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.LATCH_POSITION")     # Ethercat entry for latch position (only valid for home seq 11,12)
-epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.ENC_CONTROL.0")      # Ethercat entry for latch control (only valid for home seq 11,12)
-epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.ENC_STATUS.0")       # Ethercat entry for latch status (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPostion01")     # Ethercat entry for latch position (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.encoderControl01.0")      # Ethercat entry for latch control (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.encoderStatus01.0")       # Ethercat entry for latch status (only valid for home seq 11,12)
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "600.0")                     # Fastest speed in engineering units
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "32768.0")                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s7.STM_CONTROL.0")      # Ethercat entry for control word or bit output
-epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s7.STM_STATUS.1")       # Ethercat entry for status word or bit input
-epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s7.VELOCITY_SETPOINT")  # Ethercat entry for velocity setpoint output
-epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s7.STM_CONTROL.2")      # Ethercat entry for reduce torque output
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s7.driveControl01.0")      # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s7.driveStatus01.1")       # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s7.velocitySetpoint01")  # Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s7.driveControl01.2")      # Ethercat entry for reduce torque output
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                          # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                    # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                    # Brake timing parameter in cycles (default 1kHz)

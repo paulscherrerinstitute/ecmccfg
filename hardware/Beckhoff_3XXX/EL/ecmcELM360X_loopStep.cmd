@@ -10,4 +10,4 @@
 
 #- Convert to hex value with zero padding (subtract one since addresses start from 0)
 ecmcEpicsEnvSetCalc("ECMC_ENTRY_HEX_VALUE",${ECMC_LOOP_IDX},"%02x")
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,${PDO},${ENTRY},0x${ECMC_ENTRY_HEX_VALUE},S32,CH${CH_ID}_VALUE_${ECMC_LOOP_IDX},0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,${PDO},${ENTRY},0x${ECMC_ENTRY_HEX_VALUE},S32,analogInputArray${CH_ID}_${ECMC_LOOP_IDX},0)"
