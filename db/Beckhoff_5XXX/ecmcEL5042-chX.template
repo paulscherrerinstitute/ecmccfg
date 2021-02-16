@@ -1,13 +1,13 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=UINT64TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VALUE?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=UINT64TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).positionActual$(CH_ID)?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=V)")
+  field(EGU,  "$(EGU=Counts)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -21,13 +21,13 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat"){
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_STATUS?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).encoderStatus$(CH_ID)?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-WrnAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -40,39 +40,39 @@ record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat"){
 #    PDO entry 0x6000:0e,  1 bit, "TxPDO State"
 #    PDO entry 0x6000:0f,  2 bit, "Input cycle counter"
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Wrn-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-WrnAlrm"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Warning")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B0")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B0")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Err-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-ErrAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Err-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-ErrAlrm"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B1")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B1")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Rdy-Stat.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-RdyStat.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Rdy-Stat"){
+record(bi,"${ECMC_P}Enc${CH_ID}-RdyStat"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Ready")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B2")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B2")
   field(ZNAM, "Not Ready")
   field(ONAM, "Ready")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Diag-Stat.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-DiagStat.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Diag-Stat"){
+record(bi,"${ECMC_P}Enc${CH_ID}-DiagStat"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Diag")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.BC")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.BC")
   field(ZNAM, "Zero")
   field(ONAM, "One")
   field(ZSV,  "NO_ALARM")
