@@ -1,7 +1,7 @@
 ###########################################################################################
 ############################### 
-# Test of EL6002 RS232 communication
-# This database is designed to work together with el6002.plc
+# Test of EL6022 RS422/485 communication
+# This database is designed to work together with el6022.plc
 #
 
 ###########################################################################################
@@ -160,14 +160,4 @@ record(longin,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesIn
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.InBytes?")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")  
-}
-
-record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-Trigg-Read"){    
-  field(VAL,  "1")
-  field(DESC, "$(DESC=$(HWTYPE): Trigg Read)")
-  field(SCAN, "Passive")
-  field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.triggRead=")
-  field(ZNAM, "Zero")
-  field(ONAM, "One")
 }
