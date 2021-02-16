@@ -277,7 +277,7 @@ Below the ECMC specific accessible variables and functions are listed:
    amout of data copied. Returns 0 for success or an error code.
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 
@@ -302,7 +302,7 @@ Below the ECMC specific accessible variables and functions are listed:
        14 = F64
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 
@@ -313,7 +313,7 @@ Below the ECMC specific accessible variables and functions are listed:
    Reads data element at index from memmap with srcId and returns value.
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 13. retvalue = ec_set_mm_data(
@@ -324,7 +324,7 @@ Below the ECMC specific accessible variables and functions are listed:
    Writes data element at index from memmap with srcId. Returns 0 for success or an error code.
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 14. retvalue = ec_get_mm_size(
@@ -334,7 +334,7 @@ Below the ECMC specific accessible variables and functions are listed:
    If return value is less than zero it should be considered to be an error code.
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 14. retvalue = ec_mm_ds_append(
@@ -343,7 +343,7 @@ Below the ECMC specific accessible variables and functions are listed:
    Returns Error code or zero if success
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 15. retvalue = ec_mm_append_to_ds_scale_offset(
@@ -355,14 +355,14 @@ Below the ECMC specific accessible variables and functions are listed:
    Returns Error code or zero if success
 
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 16. retvalue = ec_mm_push_asyn(
                       <mmId>)       : Source memmap index.
     push memap data to epics (can be used if T_SMP_MS=-1 for the param)
    Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
-      ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
       epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 17. retvalue = ec_get_time();
