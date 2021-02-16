@@ -3,11 +3,11 @@ epicsEnvSet("ECMC_MOTOR_NAME",            "Axis1")
 epicsEnvSet("ECMC_R",                     "Axis1-")
 epicsEnvSet("ECMC_AXIS_NO",               "1")
 epicsEnvSet("ECMC_DESC",                  "EL2522 Test 1")
-epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.BO_1.0)
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
 epicsEnvSet("ECMC_EGU",                   "mm")                       # Motor Record Unit
 epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
-epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.BO_1.0)
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
 epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
 epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
@@ -24,11 +24,11 @@ epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CH1_P
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                        # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")                        # Fastest speed in engineering units
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "1")                        # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_1.0")         # Ethercat entry for control word or bit output
-epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_1.0")         # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).binaryOutput01.0")         # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).binaryOutput01.0")         # Ethercat entry for status word or bit input
 epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CH1_velocitySetpoint01") # Ethercat entry for velocity setpoint output
-epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_3.0")         # Ethercat entry for reduce torque output
-epicsEnvSet("ECMC_EC_DRV_BRAKE",          "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_2.0")         # Ethercat entry for brake output
+epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).binaryOutput03.0")         # Ethercat entry for reduce torque output
+epicsEnvSet("ECMC_EC_DRV_BRAKE",          "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).binaryOutput02.0")         # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                   # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                   # Brake timing parameter in cycles (default 1kHz)
 

@@ -17,7 +17,7 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.0
 
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMEBT_FC_v2.cmd
 
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput01,1)"
 
 dbLoadTemplate(./FC_HV.substitutions, "HV=MEBT-HV")
 dbLoadTemplate(./FC_MCU.substitutions, "MCU=MEBT-MCU")

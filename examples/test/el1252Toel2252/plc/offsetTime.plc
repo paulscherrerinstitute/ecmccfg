@@ -20,8 +20,8 @@ if(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS!=static.oldCh1PosTime) {
   println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS,0,31));
   println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));
   ec0.s${SLAVE_ID_EL2252}.STARTTIME:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG+static.timeOffset;
-  ec0.s${SLAVE_ID_EL2252}.BO_1:=1;
-  ec0.s${SLAVE_ID_EL2252}.BO_2:=0;
+  ec0.s${SLAVE_ID_EL2252}.binaryOutput01:=1;
+  ec0.s${SLAVE_ID_EL2252}.binaryOutput02:=0;
   ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=0;  
   static.triggNewOutput:=1;
   println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.STARTTIME);
@@ -40,8 +40,8 @@ if(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG!=static.oldCh1NegTime) {
   println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG,0,31));
   println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));
   ec0.s${SLAVE_ID_EL2252}.STARTTIME:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG+static.timeOffset;
-  ec0.s${SLAVE_ID_EL2252}.BO_1:=0;
-  ec0.s${SLAVE_ID_EL2252}.BO_2:=1;
+  ec0.s${SLAVE_ID_EL2252}.binaryOutput01:=0;
+  ec0.s${SLAVE_ID_EL2252}.binaryOutput02:=1;
   ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=0;
   static.triggNewOutput:=1;
   println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.STARTTIME);

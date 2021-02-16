@@ -28,7 +28,7 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM_OUTPUT",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL2004"
 
 # Test health output for ethercat status
-#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s$(ECMC_EC_SLAVE_NUM).BO_4.0,ec0.health)"
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s$(ECMC_EC_SLAVE_NUM).binaryOutput04.0,ec0.health)"
 
 #Configure EL2521 as pulse direction
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "19")
