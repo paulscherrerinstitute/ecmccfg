@@ -12,13 +12,15 @@
 # static.triggWrite;   : Trigg write of data by rising edge
 # static.triggRead;    : Trigger New read of data.
 # Input and output data are stored in EPICS waveforms (memmaps).
+#
+# NOTE: PLEASE LOOK AT PLC CODE FOR EL6022 SINCE IT IS BETTER
 # 
 
 # Reset EL6002 by setting bit 2 of control word (and then clear when bit 2 of status word)
 if(not(static.initdone)) {
-  ec0.s$(SLAVE_ID).CH1_CONTROL:=ec_set_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,2);
-  if(ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,2)) {
-    ec0.s$(SLAVE_ID).CH1_CONTROL:=ec_clr_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,2);
+  ec0.s$(SLAVE_ID).control01:=ec_set_bit(ec0.s$(SLAVE_ID).control01,2);
+  if(ec_chk_bit(ec0.s$(SLAVE_ID).status01,2)) {
+    ec0.s$(SLAVE_ID).control01:=ec_clr_bit(ec0.s$(SLAVE_ID).control01,2);
     static.initdone:=1;
     println('Init of EL6002 done!');
   }
@@ -36,17 +38,17 @@ if(static.outBytes>22) {
   static.outBytes:=0;
 };
 
-ec0.s$(SLAVE_ID).CH1_CONTROL:=ec_wrt_bits(ec0.s$(SLAVE_ID).CH1_CONTROL,static.outBytes,8,15);
-static.InBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).CH1_STATUS,8,15);
+ec0.s$(SLAVE_ID).control01:=ec_wrt_bits(ec0.s$(SLAVE_ID).control01,static.outBytes,8,15);
+static.InBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).status01,8,15);
 
 if(static.triggWrite and static.initdone) {
-  ec0.s$(SLAVE_ID).CH1_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,0);
+  ec0.s$(SLAVE_ID).control01:=ec_flp_bit(ec0.s$(SLAVE_ID).control01,0);
   static.triggWrite:=0;
   println('Trigg Write!');
 };
 
 if(static.triggRead and static.initdone) {
-  ec0.s$(SLAVE_ID).CH1_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,1);
+  ec0.s$(SLAVE_ID).control01:=ec_flp_bit(ec0.s$(SLAVE_ID).control01,1);
   static.triggRead:=0;
   println('Trigg Read!');
 };
@@ -64,26 +66,26 @@ static.InBytesOld:=static.InBytes;
 
 return [];
 
-${DBG=#}println('----------------------------------------------------');
-${DBG=#}print('Status:   ',ec0.s$(SLAVE_ID).CH1_STATUS);
-${DBG=#}print(' (');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH1_STATUS,0,15);
-${DBG=#}println(')');
-${DBG=#}println(' TA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,0));
-${DBG=#}println(' RR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,1));
-${DBG=#}println(' IA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,2));
-${DBG=#}println(' FIFO FULL:    ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,3));
-${DBG=#}println(' PARITY ERR:   ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,4));
-${DBG=#}println(' FRAME ERR:    ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,5));
-${DBG=#}println(' OVERRUN ERR:  ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_STATUS,6));
-${DBG=#}println(' InBytes:      ',ec_chk_bits(ec0.s$(SLAVE_ID).CH1_STATUS,8,15));
-${DBG=#}println('');
-${DBG=#}print('Control:  ',ec0.s$(SLAVE_ID).CH1_CONTROL);
-${DBG=#}print(' (');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH1_CONTROL,0,15);
-${DBG=#}println(')');
-${DBG=#}println(' TR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,0));
-${DBG=#}println(' RA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,1));
-${DBG=#}println(' IR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,2));
-${DBG=#}println(' SC:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH1_CONTROL,3));
-${DBG=#}println(' OutBytes:     ',ec_chk_bits(ec0.s$(SLAVE_ID).CH1_CONTROL,8,15));
+#${DBG=#}println('----------------------------------------------------');
+#${DBG=#}print('Status:   ',ec0.s$(SLAVE_ID).status01);
+#${DBG=#}print(' (');
+#${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status01,0,15);
+#${DBG=#}println(')');
+#${DBG=#}println(' TA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,0));
+#${DBG=#}println(' RR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,1));
+#${DBG=#}println(' IA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,2));
+#${DBG=#}println(' FIFO FULL:    ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,3));
+#${DBG=#}println(' PARITY ERR:   ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,4));
+#${DBG=#}println(' FRAME ERR:    ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,5));
+#${DBG=#}println(' OVERRUN ERR:  ',ec_chk_bit(ec0.s$(SLAVE_ID).status01,6));
+#${DBG=#}println(' InBytes:      ',ec_chk_bits(ec0.s$(SLAVE_ID).status01,8,15));
+#${DBG=#}println('');
+#${DBG=#}print('Control:  ',ec0.s$(SLAVE_ID).control01);
+#${DBG=#}print(' (');
+#${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).control01,0,15);
+#${DBG=#}println(')');
+#${DBG=#}println(' TR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control01,0));
+#${DBG=#}println(' RA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control01,1));
+#${DBG=#}println(' IR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control01,2));
+#${DBG=#}println(' SC:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control01,3));
+#${DBG=#}println(' OutBytes:     ',ec_chk_bits(ec0.s$(SLAVE_ID).control01,8,15));

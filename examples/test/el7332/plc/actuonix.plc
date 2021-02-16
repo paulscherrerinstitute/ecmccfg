@@ -26,16 +26,16 @@ if(plc${PLC_ID}.firstscan){
 }
 
 if(not(static.cmdMoveFWD_${CH_ID}) and not(static.cmdMoveBWD_${CH_ID})) {
-  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=0;
-  ec${M_ID=0}.s${S_ID}.velocitySetpoint01_${CH_ID}:=0;
+  ec${M_ID=0}.s${S_ID}.control0${CH_ID}:=0;
+  ec${M_ID=0}.s${S_ID}.velocitySetpoint0${CH_ID}:=0;
   static.outputCounter:=0;
 };
 
 if(static.cmdMoveFWD_${CH_ID}) {
   # Enable
-  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=1;
+  ec${M_ID=0}.s${S_ID}.control0${CH_ID}:=1;
   # Apply 12V
-  ec${M_ID=0}.s${S_ID}.velocitySetpoint01_${CH_ID}:=16384;  # 32768 = 24V
+  ec${M_ID=0}.s${S_ID}.velocitySetpoint0${CH_ID}:=16384;  # 32768 = 24V
   ${DBG="#"}if(static.cmdMoveFWD_${CH_ID}_old <> static.cmdMoveFWD_${CH_ID}) {
     ${DBG="#"}println('Going Out!');
   ${DBG="#"}};
@@ -43,24 +43,24 @@ if(static.cmdMoveFWD_${CH_ID}) {
 
 if(static.cmdMoveBWD_${CH_ID}) {
   # Enable
-  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=1;
+  ec${M_ID=0}.s${S_ID}.control0${CH_ID}:=1;
   # Apply -12V
-  ec${M_ID=0}.s${S_ID}.velocitySetpoint01_${CH_ID}:=-16384;  # 32768 =24V
+  ec${M_ID=0}.s${S_ID}.velocitySetpoint0${CH_ID}:=-16384;  # 32768 =24V
   ${DBG="#"}if(static.cmdMoveBWD_${CH_ID}_old <> static.cmdMoveBWD_${CH_ID}) {
     ${DBG="#"}println('Going In!');
   ${DBG="#"}};
 };
 
 # Ensure not enabled longer than MAX_TIME
-if(ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID} > 0) {
+if(ec${M_ID=0}.s${S_ID}.control0${CH_ID} > 0) {
   static.outputCounter:=static.outputCounter + 1;
 };
 
 if(static.outputCounter > static.maxOutputCycles) {
   ${DBG="#"}println('Max time reached. Killing amplifier!');
-  ec${M_ID=0}.s${S_ID}.CONTROL_${CH_ID}:=0;
+  ec${M_ID=0}.s${S_ID}.control0${CH_ID}:=0;
   # Apply 0V
-  ec${M_ID=0}.s${S_ID}.velocitySetpoint01_${CH_ID}:=0;  # 32768 =24V
+  ec${M_ID=0}.s${S_ID}.velocitySetpoint0${CH_ID}:=0;  # 32768 =24V
   static.cmdMoveBWD_${CH_ID}:=0;
   static.cmdMoveFWD_${CH_ID}:=0;  
 };

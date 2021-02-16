@@ -10,47 +10,47 @@ static.timeOffset:=10e6;
 ec0.s${SLAVE_ID_EL2252}.TRISTATE_1:=0;
 ec0.s${SLAVE_ID_EL2252}.TRISTATE_2:=0;
 
-if(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS!=static.oldCh1PosTime) {
-  static.timeSinceLast:= (ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS-static.oldCh1PosTime); 
+if(ec0.s${SLAVE_ID_EL1252}.timestampLatchPositive01!=static.oldCh1PosTime) {
+  static.timeSinceLast:= (ec0.s${SLAVE_ID_EL1252}.timestampLatchPositive01-static.oldCh1PosTime); 
   println('');
   println('Current time              [ns]: ', ec_get_time());
-  println('New latched positive edge [ns]: ', ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS);
+  println('New latched positive edge [ns]: ', ec0.s${SLAVE_ID_EL1252}.timestampLatchPositive01);
   println('    Time since last latch [ns]: ', static.timeSinceLast );
   println('                          [ms]: ', static.timeSinceLast/1E6);
-  println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS,0,31));
+  println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${SLAVE_ID_EL1252}.timestampLatchPositive01,0,31));
   println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));
-  ec0.s${SLAVE_ID_EL2252}.STARTTIME:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG+static.timeOffset;
+  ec0.s${SLAVE_ID_EL2252}.startTime:=ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01+static.timeOffset;
   ec0.s${SLAVE_ID_EL2252}.binaryOutput01:=1;
   ec0.s${SLAVE_ID_EL2252}.binaryOutput02:=0;
-  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=0;  
+  ec0.s${SLAVE_ID_EL2252}.activate:=0;  
   static.triggNewOutput:=1;
-  println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.STARTTIME);
+  println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.startTime);
 }
 else {
-  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=3;
+  ec0.s${SLAVE_ID_EL2252}.activate:=3;
 };
 
-if(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG!=static.oldCh1NegTime) {
-  static.timeSinceLast:= (ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG-static.oldCh1NegTime); 
+if(ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01!=static.oldCh1NegTime) {
+  static.timeSinceLast:= (ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01-static.oldCh1NegTime); 
   println('');
   println('Current time              [ns]: ', ec_get_time());
-  println('New latched negative edge [ns]: ', ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG);
+  println('New latched negative edge [ns]: ', ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01);
   println('    Time since last latch [ns]: ', static.timeSinceLast );
   println('                          [ms]: ', static.timeSinceLast/1E6);
-  println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG,0,31));
+  println('    Lower 32 bits         [ns]: ', ec_chk_bits(ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01,0,31));
   println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));
-  ec0.s${SLAVE_ID_EL2252}.STARTTIME:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG+static.timeOffset;
+  ec0.s${SLAVE_ID_EL2252}.startTime:=ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01+static.timeOffset;
   ec0.s${SLAVE_ID_EL2252}.binaryOutput01:=0;
   ec0.s${SLAVE_ID_EL2252}.binaryOutput02:=1;
-  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=0;
+  ec0.s${SLAVE_ID_EL2252}.activate:=0;
   static.triggNewOutput:=1;
-  println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.STARTTIME);
+  println('Trigger Output at time    [ns]:', ec0.s${SLAVE_ID_EL2252}.startTime);
 }
 else {
-  ec0.s${SLAVE_ID_EL2252}.ACTIVATE:=3;
+  ec0.s${SLAVE_ID_EL2252}.activate:=3;
 };
 
-static.oldCh1PosTime:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_POS;
-static.oldCh1NegTime:=ec0.s${SLAVE_ID_EL1252}.CH1_LATCH_NEG;
-static.oldStartTime:=ec0.s${SLAVE_ID_EL2252}.STARTTIME;
+static.oldCh1PosTime:=ec0.s${SLAVE_ID_EL1252}.timestampLatchPositive01;
+static.oldCh1NegTime:=ec0.s${SLAVE_ID_EL1252}.timestampLatchNegative01;
+static.oldstartTime:=ec0.s${SLAVE_ID_EL2252}.startTime;
 
