@@ -1,26 +1,26 @@
-record(ai,"${ECMC_P}Drv-Cmd-RB"){
+record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
   field(DESC, "$(HWTYPE): Drive Control Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl01?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}?")
   field(PREC, "0")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"${ECMC_P}Drv-Cmd"){
+record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
   field(DESC, "$(HWTYPE): Drive Control Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl01=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
   field(PREC, "0")
 }
 
-record(ai,"${ECMC_P}Drv-PosCmd-RB"){
+record(ai,"${ECMC_P}Drv${CH_ID}-PosCmd-RB"){
   field(DESC, "$(HWTYPE): Drive Position Set RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint01?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint${CH_ID}?")
   field(PREC, "0")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
@@ -40,11 +40,11 @@ record(ai,"${ECMC_P}Drv-PosCmd-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"${ECMC_P}Drv-PosCmd"){
+record(ao,"${ECMC_P}Drv${CH_ID}-PosCmd"){
   field(DESC, "$(HWTYPE): Drive Position Set")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint01=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint${CH_ID}=")
   field(PREC, "0")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -62,29 +62,29 @@ record(ao,"${ECMC_P}Drv-PosCmd"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(mbbiDirect,"${ECMC_P}Drv-Stat"){
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): Drive Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus01?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${ECMC_P}Drv-Wrn-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
   field(DESC, "$(HWTYPE): Drive Warning")
-  field(INP,  "${ECMC_P}Drv-Stat.B7")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Drv-Err-Alrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
 }
 
-record(bi,"${ECMC_P}Drv-Err-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
   field(DESC, "$(HWTYPE): Drive Error")
-  field(INP,  "${ECMC_P}Drv-Stat.B3")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")

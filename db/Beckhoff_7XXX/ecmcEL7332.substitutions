@@ -7,7 +7,7 @@ file "ecmcEcSlave.template"
 # All fields related to velocity scaling and alarms
 file "ecmcEL7332-chX.template"
 {
-  pattern {CH_ID, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {1      "SLOPE", 1,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {2      "SLOPE", 1,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+  pattern {CH_ID}
+          {01   }
+          {02   }
 }
