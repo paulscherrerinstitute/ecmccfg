@@ -7,6 +7,17 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosTime-Act"){
   field(TSE,  "$(TSE=-2)")
   field(PREC, "0" )
   field(EGU,  "ns" )
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosTimestamp.PROC")
+}
+
+record(aSub,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosTimestamp") {
+  field(DESC,  "ECAT timestamp")
+  field(INAM,  "ECATtimestampInit")
+  field(SNAM,  "ECATtimestamp")
+  field(INPA,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosTime-Act")
+  field(FTA,   "DOUBLE")
+  field(NOA,   1)
+  field(TSE,  -2)
 }
 
 record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-NegTime-Act"){
@@ -18,6 +29,17 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-NegTime-Act"){
   field(TSE,  "$(TSE=-2)")
   field(PREC, "0" )
   field(EGU,  "ns" )
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-NegTimestamp.PROC")
+}
+
+record(aSub,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-NegTimestamp") {
+  field(DESC,  "ECAT timestamp")
+  field(INAM,  "ECATtimestampInit")
+  field(SNAM,  "ECATtimestamp")
+  field(INPA,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-NegTime-Act")
+  field(FTA,   "DOUBLE")
+  field(NOA,   1)
+  field(TSE,  -2)
 }
 
 record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat"){

@@ -40,3 +40,5 @@ TEMPLATES+=$(wildcard ./db/*/*.template)
 TEMPLATES+=$(wildcard ./db/*/*.substitutions)
 TEMPLATES+=$(wildcard ./db/*/*.subs)
 
+SOURCES += $(wildcard ./src/*.cpp)
+DBDS    += $(wildcard ./dbd/*.dbd)
