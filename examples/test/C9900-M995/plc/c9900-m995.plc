@@ -4,40 +4,40 @@
 
 if(plc${PLC_ID}.firstscan) {
   # 1. Red
-  ec0.s${SLAVE_ID}.BO_1_RED:=1;
+  ec0.s${SLAVE_ID}.binaryOutput01_R:=1;
   # 2. Green
-  ec0.s${SLAVE_ID}.BO_2_GREEN:=1;
+  ec0.s${SLAVE_ID}.binaryOutput02_G:=1;
   # 3. Blue
-  ec0.s${SLAVE_ID}.BO_3_BLUE:=1;
+  ec0.s${SLAVE_ID}.binaryOutput03_B:=1;
   # 4. Red/Green
-  ec0.s${SLAVE_ID}.BO_4_RED:=1;
-  ec0.s${SLAVE_ID}.BO_4_GREEN:=1;
+  ec0.s${SLAVE_ID}.binaryOutput04_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput04_G:=1;
   # 5. Red/Green/Blue
-  ec0.s${SLAVE_ID}.BO_5_RED:=1;
-  ec0.s${SLAVE_ID}.BO_5_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_5_BLUE:=1;
+  ec0.s${SLAVE_ID}.binaryOutput05_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput05_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput05_B:=1;
   # 6. Red/Blue
-  ec0.s${SLAVE_ID}.BO_6_RED:=1;
-  ec0.s${SLAVE_ID}.BO_6_BLUE:=1;
+  ec0.s${SLAVE_ID}.binaryOutput06_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput06_B:=1;
   # 7. Green/Blue
-  ec0.s${SLAVE_ID}.BO_7_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_7_BLUE:=1;
+  ec0.s${SLAVE_ID}.binaryOutput07_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput07_B:=1;
   # 8. No light
 
   static.start:=0;
 };
 
 # Start flashing if pushbutton pressed
-if(ec0.s${SLAVE_ID}.BI_1 or 
-   ec0.s${SLAVE_ID}.BI_2 or
-   ec0.s${SLAVE_ID}.BI_3 or
-   ec0.s${SLAVE_ID}.BI_4 or
-   ec0.s${SLAVE_ID}.BI_5 or
-   ec0.s${SLAVE_ID}.BI_6 or
-   ec0.s${SLAVE_ID}.BI_7 or
-   ec0.s${SLAVE_ID}.BI_8 or
-   ec0.s${SLAVE_ID}.BI_9 or
-   ec0.s${SLAVE_ID}.BI_10) {
+if(ec0.s${SLAVE_ID}.binaryInput01 or 
+   ec0.s${SLAVE_ID}.binaryInput02 or
+   ec0.s${SLAVE_ID}.binaryInput03 or
+   ec0.s${SLAVE_ID}.binaryInput04 or
+   ec0.s${SLAVE_ID}.binaryInput05 or
+   ec0.s${SLAVE_ID}.binaryInput06 or
+   ec0.s${SLAVE_ID}.binaryInput07 or
+   ec0.s${SLAVE_ID}.binaryInput08 or
+   ec0.s${SLAVE_ID}.binaryInput09 or
+   ec0.s${SLAVE_ID}.binaryInput010) {
   static.start:=1;
 };
 
@@ -47,69 +47,69 @@ if(not(static.start)) {
 
 static.counter:=static.counter+1;
 if(static.counter<10) {
-  ec0.s${SLAVE_ID}.BO_1_RED:=1;
-  ec0.s${SLAVE_ID}.BO_2_RED:=1;
-  ec0.s${SLAVE_ID}.BO_3_RED:=1;
-  ec0.s${SLAVE_ID}.BO_4_RED:=1;
-  ec0.s${SLAVE_ID}.BO_5_RED:=1;
-  ec0.s${SLAVE_ID}.BO_6_RED:=1;
-  ec0.s${SLAVE_ID}.BO_7_RED:=1;
-  ec0.s${SLAVE_ID}.BO_8_RED:=1;
-  ec0.s${SLAVE_ID}.BO_9_RED:=1;
-  ec0.s${SLAVE_ID}.BO_10_RED:=1;
+  ec0.s${SLAVE_ID}.binaryOutput01_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput02_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput03_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput04_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput05_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput06_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput07_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput08_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput09_R:=1;
+  ec0.s${SLAVE_ID}.binaryOutput010_R:=1;
 } else if(static.counter<20) {
-  ec0.s${SLAVE_ID}.BO_1_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_2_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_3_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_4_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_5_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_6_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_8_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_7_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_9_GREEN:=1;
-  ec0.s${SLAVE_ID}.BO_10_GREEN:=1;
+  ec0.s${SLAVE_ID}.binaryOutput01_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput02_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput03_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput04_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput05_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput06_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput08_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput07_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput09_G:=1;
+  ec0.s${SLAVE_ID}.binaryOutput010_G:=1;
 } else if(static.counter<30) {
-  ec0.s${SLAVE_ID}.BO_1_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_2_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_3_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_4_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_5_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_6_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_8_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_7_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_9_BLUE:=1;
-  ec0.s${SLAVE_ID}.BO_10_BLUE:=1;
+  ec0.s${SLAVE_ID}.binaryOutput01_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput02_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput03_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput04_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput05_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput06_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput08_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput07_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput09_B:=1;
+  ec0.s${SLAVE_ID}.binaryOutput010_B:=1;
 } else if(static.counter<40) {  
-  ec0.s${SLAVE_ID}.BO_1_RED:=0;
-  ec0.s${SLAVE_ID}.BO_2_RED:=0;
-  ec0.s${SLAVE_ID}.BO_3_RED:=0;
-  ec0.s${SLAVE_ID}.BO_4_RED:=0;
-  ec0.s${SLAVE_ID}.BO_5_RED:=0;
-  ec0.s${SLAVE_ID}.BO_6_RED:=0;
-  ec0.s${SLAVE_ID}.BO_7_RED:=0;
-  ec0.s${SLAVE_ID}.BO_8_RED:=0;
-  ec0.s${SLAVE_ID}.BO_9_RED:=0;
-  ec0.s${SLAVE_ID}.BO_10_RED:=0;
-  ec0.s${SLAVE_ID}.BO_1_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_2_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_3_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_4_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_5_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_6_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_7_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_8_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_9_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_10_GREEN:=0;
-  ec0.s${SLAVE_ID}.BO_1_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_2_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_3_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_4_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_5_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_6_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_7_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_8_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_9_BLUE:=0;
-  ec0.s${SLAVE_ID}.BO_10_BLUE:=0;
+  ec0.s${SLAVE_ID}.binaryOutput01_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput02_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput03_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput04_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput05_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput06_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput07_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput08_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput09_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput010_R:=0;
+  ec0.s${SLAVE_ID}.binaryOutput01_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput02_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput03_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput04_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput05_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput06_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput07_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput08_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput09_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput010_G:=0;
+  ec0.s${SLAVE_ID}.binaryOutput01_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput02_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput03_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput04_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput05_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput06_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput07_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput08_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput09_B:=0;
+  ec0.s${SLAVE_ID}.binaryOutput010_B:=0;
 } else {
   static.counter:=0;
 };

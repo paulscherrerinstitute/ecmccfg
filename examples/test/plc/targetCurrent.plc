@@ -5,9 +5,9 @@
 #
 
 if(static.cycleCounter<35){
-  ec0.s28.BO_1:=1;
+  ec0.s28.binaryOutput01:=1;
 } else {
-  ec0.s28.BO_1:=0;
+  ec0.s28.binaryOutput01:=0;
 };
 
 static.cycleCounter:=static.cycleCounter+1;

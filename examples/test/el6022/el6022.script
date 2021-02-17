@@ -50,7 +50,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
-ecmcConfig "EcGetMemMapId(ec0.s11.mm.CH1_ARRAY_IN)"
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.inputDataArray01)"
 epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 ##############################################################################

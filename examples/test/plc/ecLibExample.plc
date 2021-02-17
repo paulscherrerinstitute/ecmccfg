@@ -7,25 +7,25 @@
 #    1. Test Ec lib
 
 #Flash outputs
-ec0.s2.BO_1:=ec_flp_bit(ec0.s2.BO_1,0);
-ec0.s2.BO_2:=ec_flp_bit(ec0.s2.BO_2,0);
-ec0.s2.BO_3:=ec_flp_bit(ec0.s2.BO_3,0);
-ec0.s2.BO_4:=ec_flp_bit(ec0.s2.BO_4,0);
+ec0.s2.binaryOutput01:=ec_flp_bit(ec0.s2.binaryOutput01,0);
+ec0.s2.binaryOutput02:=ec_flp_bit(ec0.s2.binaryOutput02,0);
+ec0.s2.binaryOutput03:=ec_flp_bit(ec0.s2.binaryOutput03,0);
+ec0.s2.binaryOutput04:=ec_flp_bit(ec0.s2.binaryOutput04,0);
 
-ec0.s2.BO_5:=not(ec0.s2.BO_1);
-ec0.s2.BO_6:=not(ec0.s2.BO_2);
-ec0.s2.BO_7:=not(ec0.s2.BO_3);
-ec0.s2.BO_8:=not(ec0.s2.BO_4);
+ec0.s2.binaryOutput05:=not(ec0.s2.binaryOutput01);
+ec0.s2.binaryOutput06:=not(ec0.s2.binaryOutput02);
+ec0.s2.binaryOutput07:=not(ec0.s2.binaryOutput03);
+ec0.s2.binaryOutput08:=not(ec0.s2.binaryOutput04);
 
 # Assemble the complete byte (to test ec_wrt_bit() command)
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_1,0);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_2,1);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_3,2);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_4,3);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_5,4);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_6,5);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_7,6);
-static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.BO_8,7);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput01,0);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput02,1);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput03,2);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput04,3);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput05,4);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput06,5);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput07,6);
+static.outputByte:=ec_wrt_bit(static.outputByte,ec0.s2.binaryOutput08,7);
 print('Output byte value: ');
 ec_print_bin(static.outputByte,0,7);
 println('');

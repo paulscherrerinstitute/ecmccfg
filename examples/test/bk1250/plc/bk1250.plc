@@ -4,7 +4,7 @@
 # Test BK coupler
 #
 
-ec0.s3.BK_S00_BO_1:=not(ec0.s3.BK_S00_BO_1 > 0);
-ec0.s3.BK_S00_BO_2:=not(ec0.s3.BK_S00_BO_1);
+ec0.s3.KL00_binaryOutput01:=not(ec0.s3.KL00_binaryOutput01 > 0);
+ec0.s3.KL00_binaryOutput02:=not(ec0.s3.KL00_binaryOutput01);
 
-println('ec0.s3.BK_S01_BI_1: ',ec0.s3.BK_S01_BI_1);
+println('ec0.s3.KL01_binaryInput01: ',ec0.s3.KL01_binaryInput01);

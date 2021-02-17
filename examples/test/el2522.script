@@ -9,13 +9,6 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg master
 
-#- Choose motor record driver implementation
-#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
-#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
-#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-
-
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
 
@@ -28,7 +21,7 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM_OUTPUT",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL2004"
 
 # Test health output for ethercat status
-#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s$(ECMC_EC_SLAVE_NUM).BO_4.0,ec0.health)"
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s$(ECMC_EC_SLAVE_NUM).binaryOutput04.0,ec0.health)"
 
 #Configure EL2521 as pulse direction
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "19")

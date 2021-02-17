@@ -19,22 +19,22 @@ $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMEBT_EMU.cmd
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,BO_8,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,BO_8,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput02,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(16,binaryOutput08,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput02,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(17,binaryOutput08,1)"
 
 # END of ADDITIONAL SETUP
 

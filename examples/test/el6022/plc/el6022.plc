@@ -15,9 +15,9 @@
 
 # Reset EL6002 by setting bit 2 of control word (and then clear when bit 2 of status word)
 if(not(static.initdone)) {
-  ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_set_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2);
-  if(ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,2)) {
-    ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_clr_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2);
+  ec0.s$(SLAVE_ID).control${CH_ID}:=ec_set_bit(ec0.s$(SLAVE_ID).control${CH_ID},2);
+  if(ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},2)) {
+    ec0.s$(SLAVE_ID).control${CH_ID}:=ec_clr_bit(ec0.s$(SLAVE_ID).control${CH_ID},2);
     static.initdone:=1;
     println('Init of EL6002 done!');
   }
@@ -36,13 +36,13 @@ if(static.outBytes>22) {
 };
 
 # Check if new bytes (on toggle)
-static.recReq:=ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,1);
+static.recReq:=ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},1);
 
-ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_wrt_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,static.outBytes,8,15);
-static.inBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,8,15);
+ec0.s$(SLAVE_ID).control${CH_ID}:=ec_wrt_bits(ec0.s$(SLAVE_ID).control${CH_ID},static.outBytes,8,15);
+static.inBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).status${CH_ID},8,15);
 
 if(static.triggWrite and static.initdone) {
-  ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0);
+  ec0.s$(SLAVE_ID).control${CH_ID}:=ec_flp_bit(ec0.s$(SLAVE_ID).control${CH_ID},0);
   static.triggWrite:=0;  
   println('Trigg Write!');
 };
@@ -59,7 +59,7 @@ if(static.pushAsynNextScan) {
 
 if(static.recReqOld != static.recReq and static.initdone) {
   println('inBytes:  ',static.inBytes);
-  ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,1);  
+  ec0.s$(SLAVE_ID).control${CH_ID}:=ec_flp_bit(ec0.s$(SLAVE_ID).control${CH_ID},1);  
   println('Trigg Read!');
   static.pushAsynNextScan:=1;
 };
@@ -71,25 +71,25 @@ static.recReqOld:=static.recReq;
 return [];
 
 # ${DBG=#}println('----------------------------------------------------');
-# ${DBG=#}print('Status:   ',ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS);
+# ${DBG=#}print('Status:   ',ec0.s$(SLAVE_ID).status${CH_ID});
 # ${DBG=#}print(' (');
-# ${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,0,15);
+# ${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status${CH_ID},0,15);
 # ${DBG=#}println(')');
-# ${DBG=#}println(' TA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,0));
-# ${DBG=#}println(' RR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,1));
-# ${DBG=#}println(' IA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,2));
-# ${DBG=#}println(' FIFO FULL:    ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,3));
-# ${DBG=#}println(' PARITY ERR:   ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,4));
-# ${DBG=#}println(' FRAME ERR:    ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,5));
-# ${DBG=#}println(' OVERRUN ERR:  ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,6));
-# ${DBG=#}println(' InBytes:      ',ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,8,15));
+# ${DBG=#}println(' TA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},0));
+# ${DBG=#}println(' RR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},1));
+# ${DBG=#}println(' IA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},2));
+# ${DBG=#}println(' FIFO FULL:    ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},3));
+# ${DBG=#}println(' PARITY ERR:   ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},4));
+# ${DBG=#}println(' FRAME ERR:    ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},5));
+# ${DBG=#}println(' OVERRUN ERR:  ',ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},6));
+# ${DBG=#}println(' InBytes:      ',ec_chk_bits(ec0.s$(SLAVE_ID).status${CH_ID},8,15));
 # ${DBG=#}println('');
-# ${DBG=#}print('Control:  ',ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL);
+# ${DBG=#}print('Control:  ',ec0.s$(SLAVE_ID).control${CH_ID});
 # ${DBG=#}print(' (');
-# ${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0,15);
+# ${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).control${CH_ID},0,15);
 # ${DBG=#}println(')');
-# ${DBG=#}println(' TR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0));
-# ${DBG=#}println(' RA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,1));
-# ${DBG=#}println(' IR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2));
-# ${DBG=#}println(' SC:           ',ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,3));
-# ${DBG=#}println(' OutBytes:     ',ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,8,15));
+# ${DBG=#}println(' TR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control${CH_ID},0));
+# ${DBG=#}println(' RA:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control${CH_ID},1));
+# ${DBG=#}println(' IR:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control${CH_ID},2));
+# ${DBG=#}println(' SC:           ',ec_chk_bit(ec0.s$(SLAVE_ID).control${CH_ID},3));
+# ${DBG=#}println(' OutBytes:     ',ec_chk_bits(ec0.s$(SLAVE_ID).control${CH_ID},8,15));
