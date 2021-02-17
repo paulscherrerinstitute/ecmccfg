@@ -1,13 +1,13 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VALUE?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionActual$(CH_ID)?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=V)")
+  field(EGU,  "$(EGU=Counts)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -21,42 +21,42 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat"){
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_STATUS?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).encoderStatus$(CH_ID)?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Data-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-DataAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
 #    PDO entry 0x6010:01,  1 bit, "Data error"
 #    PDO entry 0x6010:02,  1 bit, "Frame error"
 #    PDO entry 0x6010:03,  1 bit, "Power failure"
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Data-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-DataAlrm"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Data Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B0")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B0")
   field(ZNAM, "No Alarm")
   field(ONAM, "Data Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Frame-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-FrameAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Frame-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-FrameAlrm"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Frame Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B1")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B1")
   field(ZNAM, "No Alarm")
   field(ONAM, "Frame Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Power-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-PowerAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Power-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-PowerAlrm"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Power Alarm")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-Stat.B2")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B2")
   field(ZNAM, "No Alarm")
   field(ONAM, "Power Error")
   field(ZSV,  "NO_ALARM")

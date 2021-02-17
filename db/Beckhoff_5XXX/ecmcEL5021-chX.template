@@ -1,13 +1,13 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POSITION?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionActual$(CH_ID)?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=V)")
+  field(EGU,  "$(EGU=Counts)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -21,39 +21,39 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat"){
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).ENC_STATUS?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).encoderStatus$(CH_ID)?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Freq-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-FreqAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Freq-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-FreqAlrm"){
   field(DESC, "$(HWTYPE): Freq. Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B3")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Freq Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Amp-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-AmpAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Amp-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-AmpAlrm"){
   field(DESC, "$(HWTYPE): Amp. Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B4")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B4")
   field(ZNAM, "No Alarm")
   field(ONAM, "Amp Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Sync-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-SyncAlrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Sync-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-SyncAlrm"){
   field(DESC, "$(HWTYPE):Sync. Alarm")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.BD")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.BD")
   field(ZNAM, "No Alarm")
   field(ONAM, "Sync Error")
   field(ZSV,  "NO_ALARM")

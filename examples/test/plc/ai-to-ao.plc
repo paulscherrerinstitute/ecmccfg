@@ -2,4 +2,4 @@
 # For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
 #
 
-ec0.s13.CH1_VALUE:=ec0.s22.CH2_VALUE;
+ec0.s13.analogOutput01:=ec0.s22.analogInput02;

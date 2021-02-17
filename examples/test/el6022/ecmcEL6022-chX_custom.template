@@ -1,8 +1,17 @@
+###########################################################################################
+############################### 
+# Test of EL6022 RS422/485 communication
+# This database is designed to work together with el6022.plc
+#
+
+###########################################################################################
+############################### Data in/out:
+
 record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-ArrayIn"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Value Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt8ArrayIn")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.CH$(CH_ID)_ARRAY_IN?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=-1/TYPE=asynInt8ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.CH$(CH_ID)_ARRAY_IN?")
   field(FTVL, "CHAR")
   field(NELM, "$(NELM=1)")
   field(SCAN, "I/O Intr")
@@ -23,6 +32,37 @@ record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Array
 ###########################################################################################
 ############################### Control word:
 
+record(calc,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesOut-Calc_"){
+  field(SCAN, "Passive")
+  field(DESC, "$(HWTYPE): Serial $(CH_ID): Bytes Out Calc")
+  field(INPA, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-ArrayOut.NORD")
+  field(CALC, "A-1") # Remove string terminator  
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesOut-Cmd_.PROC")
+}
+
+record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesOut-Cmd_"){
+  field(DESC, "$(HWTYPE): Serial $(CH_ID): Bytes Out")
+  field(SCAN, "Passive")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.outBytes=")
+  field(DOL,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesOut-Calc_.VAL")
+  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-Trigg-Wrt_.PROC")
+  field(OMSL, "closed_loop")
+}
+
+record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-Trigg-Wrt_"){    
+  field(VAL,  "1")
+  field(DESC, "$(DESC=$(HWTYPE): Trigg Write)")
+  field(SCAN, "Passive")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.triggWrite=")
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(DOL,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-ArrayOut.NORD")
+  field(OMSL, "closed_loop")
+}
+
+# Not used
 record(longout,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Control word")
   field(PINI, "$(PINI=1)")
@@ -113,50 +153,11 @@ record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Stat-Overru
   field(OSV,  "MAJOR")  
 }
 
-## The below output records are commented out since triggering of read and writes are handled by ecmc PLC.
-#record(mbboDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd_"){
-#  field(DESC, "$(HWTYPE): Serial $(CH_ID): Control Word")
-#  field(PINI, "$(PINI=1)")
-#  field(DTYP, "asynUInt32Digital")
-#  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CONTROL=")
-#}
-
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-TR"){
-#  field(PINI, "$(PINI=YES)")
-#  field(DESC, "$(DESC=$(HWTYPE): Trans. Req.)")
-#  field(SCAN, "Passive")
-#  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd_.B0 PP")
-#  field(VAL,  "0")
-#  field(ZNAM, "Zero")
-#  field(ONAM, "One")
-#}
-
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-RA"){
-#  field(PINI, "$(PINI=YES)")  
-#  field(DESC, "$(DESC=$(HWTYPE): Receive Accepted)")
-#  field(SCAN, "Passive")
-#  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd_.B1 PP")
-#  field(VAL,  "0")
-#  field(ZNAM, "Zero")
-#  field(ONAM, "One")
-#}
-
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-IR"){
-#  field(PINI, "$(PINI=YES)")  
-#  field(DESC, "$(DESC=$(HWTYPE): Init Request)")
-#  field(SCAN, "Passive")
-#  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd_.B2 PP")
-#  field(VAL,  "0")
-#  field(ZNAM, "Zero")
-#  field(ONAM, "One")
-#}
-
-#record(bo,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd-SC"){
-#  field(PINI, "$(PINI=YES)")
-#  field(DESC, "$(DESC=$(HWTYPE): Send Cont.)")
-#  field(SCAN, "Passive")
-#  field(OUT,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-Cmd_.B3 PP")
-#  field(VAL,  "0")
-#  field(ZNAM, "Zero")
-#  field(ONAM, "One")
-#}
+record(longin,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesIn-Act"){
+  field(DESC, "$(HWTYPE): Serial $(CH_ID): Input byte count")
+  field(PINI, "$(PINI=1)")  
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.InBytes?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")  
+}

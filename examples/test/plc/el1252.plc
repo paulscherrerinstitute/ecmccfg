@@ -2,13 +2,13 @@
 # For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
 #
 
-if(ec0.s${SLAVE_ID}.CH1_LATCH_POS!=static.oldCh1PosTime) {
-  static.timeSinceLast:= (ec0.s${SLAVE_ID}.CH1_LATCH_POS-static.oldCh1PosTime); 
+if(ec0.s${SLAVE_ID}.timestampLatchPositive01!=static.oldCh1PosTime) {
+  static.timeSinceLast:= (ec0.s${SLAVE_ID}.timestampLatchPositive01-static.oldCh1PosTime); 
   println('');
-  println('New latched positive edge [ns]: ', ec0.s${SLAVE_ID}.CH1_LATCH_POS);
+  println('New latched positive edge [ns]: ', ec0.s${SLAVE_ID}.timestampLatchPositive01);
   println('    Time since last latch [ns]: ',static.timeSinceLast );
   println('                          [ms]: ', static.timeSinceLast/1E6);
   println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));  
 };
 
-static.oldCh1PosTime:=ec0.s${SLAVE_ID}.CH1_LATCH_POS;
+static.oldCh1PosTime:=ec0.s${SLAVE_ID}.timestampLatchPositive01;

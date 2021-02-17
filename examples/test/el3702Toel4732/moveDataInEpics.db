@@ -3,7 +3,7 @@ record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_AI)-EL3702_s$(NELM)-AI1-Array"){
   field(DESC, "$(HWTYPE): AI1: Value Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayIn)")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_AI).mm.CH1_ARRAY?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_AI).mm.analogInputArray01?")
   field(FTVL, "$(FTVL=SHORT)")
   field(NELM, "$(NELM)")
   field(SCAN, "I/O Intr")
@@ -16,7 +16,7 @@ record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_AO)-EL4732_s$(NELM)-AO1-Array"){
   field(DESC, "$(HWTYPE): AO1: Value Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayOut)")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_AO).mm.CH1_ARRAY=")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_AO).mm.analogOutputArray01=")
   field(FTVL, "$(FTVL=SHORT)")
   field(NELM, "$(NELM)")  
 }

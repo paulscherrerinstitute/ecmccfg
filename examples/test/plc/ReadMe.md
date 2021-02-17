@@ -276,6 +276,11 @@ Below the ECMC specific accessible variables and functions are listed:
    order they are created (starting at 0). The smallest memmap size will define the
    amout of data copied. Returns 0 for success or an error code.
 
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
+
 11. retvalue = ec_get_mm_type(
                         <srcId>,         : Source memmap index
                         );
@@ -296,11 +301,20 @@ Below the ECMC specific accessible variables and functions are listed:
        13 = F32
        14 = F64
 
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
+
 12. retvalue = ec_get_mm_data(
                         <srcId>,       : Source memmap index
                         <index>        : Index of data element 
                         );
    Reads data element at index from memmap with srcId and returns value.
+
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 13. retvalue = ec_set_mm_data(
                         <srcId>,       : Source memmap index
@@ -309,16 +323,28 @@ Below the ECMC specific accessible variables and functions are listed:
                         );
    Writes data element at index from memmap with srcId. Returns 0 for success or an error code.
 
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
 14. retvalue = ec_get_mm_size(
                         <srcId>,       : Source memmap index
                         );
    Returns number of elements (of type "ec_get_mm_type()")in memmap with srcId. 
    If return value is less than zero it should be considered to be an error code.
 
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
 14. retvalue = ec_mm_ds_append(
                         <mmId>,       : Source memmap index
                         <dsId>);      : Destination data storage index
    Returns Error code or zero if success
+
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
 15. retvalue = ec_mm_append_to_ds_scale_offset(
                         <mmId>,       : Source memmap index
@@ -328,22 +354,33 @@ Below the ECMC specific accessible variables and functions are listed:
 
    Returns Error code or zero if success
 
-16. retvalue = ec_get_time();
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
+16. retvalue = ec_mm_push_asyn(
+                      <mmId>)       : Source memmap index.
+    push memap data to epics (can be used if T_SMP_MS=-1 for the param)
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+      ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
+      epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
+17. retvalue = ec_get_time();
    Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
    If return value is less than zero it should be considered to be an error code.
 
-17. retvalue = ec_get_time_l32();
+18. retvalue = ec_get_time_l32();
    Returns lower 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
    If return value is less than zero it should be considered to be an error code.
 
-18. retvalue = ec_get_time_u32();
+19. retvalue = ec_get_time_u32();
    Returns upper 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
    If return value is less than zero it should be considered to be an error code.
 
-19. retvalue=ec_get_err():
+20. retvalue=ec_get_err():
     Returns error code from last lib call.
 
-20. retvalue=ec_err_rst():
+21. retvalue=ec_err_rst():
     Resets error code for ec_lib.
 ```
 ### Function Lib: Motion

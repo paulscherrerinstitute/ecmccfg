@@ -1,3 +1,3 @@
 
-println('CH1 Control Word:', ec0.s${SLAVE_ID=12}.CH1_CONTROL);
-println('CH2 Control Word:', ec0.s${SLAVE_ID=12}.CH2_CONTROL);
+println('CH1 Control Word:', ec0.s${SLAVE_ID=12}.control01);
+println('CH2 Control Word:', ec0.s${SLAVE_ID=12}.control02);

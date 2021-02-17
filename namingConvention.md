@@ -64,7 +64,16 @@ See examples below for clarification.
 - cycleCounter
 - timestamp<id>_l32
 - timestamp<id>_u32
-- tc_cold
+- positionActualArray
+- timerActual
+- counterActual
+- counterInputCycle
+- operationHours
+- controlValueDcMaster
+- timePtp
+- timeDc
+- toggle
+
 
 ##### outputs
 - binaryOutput
@@ -85,6 +94,17 @@ See examples below for clarification.
 - R,G,B (Red,Green,Blue)
 - KL<slaveid>_binaryOutput
 - analogOutputArray
+- tc_cold
+- timerStart
+- timerReset
+- counterIncrement
+- counterReset
+- buttonUp
+- buttonDown
+- buttonLeft
+- buttonRight
+- buttonEnter
+- buttonToggle
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
@@ -192,6 +212,9 @@ IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
   |Enc   |Encoder         |          |
   |Dev*  |Device*         | Shall only be used if the terminal have specifc data that cannot be assigned to a other type|
   |EC    |Ethercat        | Reserved for ethercat status data (from master, not process data)|
+  |Cntr  |Counter         |          |
+  |Tmr   |Timer           |          |
+
 
 ### "id"
 
@@ -276,7 +299,10 @@ The below abbrevations should be used for the "name" part of the PV:
   |cycle         |cyc     | dtyCyc |
   |limit         |lim     |  |
   |next          |nxt     |  |
-  
+  |parity        |prty    |  |
+  |frame         |frm     |  |
+  |operation     |op      |  |
+  |hours         |hrs     |  |
 
 ## ESS
 
