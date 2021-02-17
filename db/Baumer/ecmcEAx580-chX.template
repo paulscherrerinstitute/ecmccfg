@@ -90,7 +90,7 @@ record(bi,"${ECMC_P}Enc${CH_ID}-FreqEx"){
   field(ONAM, "frequency exceeded")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Enc${CH_ID}-LightCrtlRes.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-LghtCrtlRes.PROC")
 }
 
 record(bi,"${ECMC_P}Enc${CH_ID}-LghtCrtlRes"){
