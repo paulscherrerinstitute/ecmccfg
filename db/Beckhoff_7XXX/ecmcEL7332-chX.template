@@ -1,25 +1,25 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Cmd-RB"){
+record(ai,"${ECMC_P}-Drv${CH_ID}-Cmd-RB"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Control Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CONTROL_${CH_ID}?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}?")
   field(PREC, "0")
   field(SCAN, "I/O Intr")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Cmd"){
+record(ao,"${ECMC_P}-Drv${CH_ID}-Cmd"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Control Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CONTROL_${CH_ID}=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
   field(PREC, "0")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Spd-RB"){
+record(ai,"${ECMC_P}-Drv${CH_ID}-Spd-RB"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Speed Setpoint RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint01_${CH_ID}?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}_${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -37,11 +37,11 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Spd-RB"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Spd"){
+record(ao,"${ECMC_P}-Drv${CH_ID}-Spd"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Speed Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint01_${CH_ID}=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}_${CH_ID}=")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
@@ -58,109 +58,109 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Spd"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat"){
+record(mbbiDirect,"${ECMC_P}-Drv${CH_ID}-Stat"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).STATUS_${CH_ID}?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-RdyToEna.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-RdyToEna.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-RdyToEna"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-RdyToEna"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Ready to Enable")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B0")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B0")
   field(ZNAM, "Not Ready")
   field(ONAM, "Ready")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Rdy-Alrm.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-Rdy-Alrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Rdy"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-Rdy"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Enabled")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B1")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B1")
   field(ZNAM, "Not Ready")
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-Wrn-Alrm.PROC")
 }
 
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Wrn-Alrm"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-Wrn-Alrm"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Warning")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B2")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B2")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Err-Alrm.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-Err-Alrm.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Err-Alrm"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-Err-Alrm"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B3")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-MovPos.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-MovPos.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-MovPos"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-MovPos"){
   field(DESC, "${HWTYPE}-${CH_ID}: Moving Positive")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B4")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B4")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-MovNeg.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-MovNeg.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-MovNeg"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-MovNeg"){
   field(DESC, "${HWTYPE}-${CH_ID}: Moving Negative")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B5")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B5")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-TqueRed.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-TqueRed.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-TqueRed"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-TqueRed"){
   field(DESC, "${HWTYPE}-${CH_ID}: Torque Reduced")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.B6")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B6")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-BI_1.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-BI_1.PROC")
 }
 
 ###########################################################################################
-# NOTE: There are totally 2 digital inputs on EL7332. 
+# NOTE: There are totally 2 digital inputs on EL7332.
 # These 2 inputs are exposed in the status word of each channel which makes it appear like 4 inputs.
-# So the input "*1_Drv-BI_1" is the same as "*2_Drv-BI_1"
+# So the input "*1_Drv${CH_ID}-BI_1" is the same as "*2_Drv${CH_ID}-BI_1"
 ###########################################################################################
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-BI_1"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-BI_1"){
   field(DESC, "${HWTYPE}-${CH_ID}: Digital Input 1")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.BB")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BB")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-BI_2.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-BI_2.PROC")
 }
 
 ###########################################################################################
-# NOTE: There are totally 2 digital inputs on EL7332. 
+# NOTE: There are totally 2 digital inputs on EL7332.
 # These 2 inputs are exposed in the status word of each channel which makes it appear like 4 inputs.
-# So the input "*1_Drv-BI_1" is the same as "*2_Drv-BI_1"
+# So the input "*1_Drv${CH_ID}-BI_1" is the same as "*2_Drv${CH_ID}-BI_1"
 ###########################################################################################
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-BI_2"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-BI_2"){
   field(DESC, "${HWTYPE}-${CH_ID}: Digital Input 2")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.BC")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BC")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-SyncErr.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-SyncErr.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-SyncErr-Alrm"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-SyncErr-Alrm"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Sync Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-${HWTYPE}-${CH_ID}-Drv-Stat.BD")
+  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BD")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
