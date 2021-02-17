@@ -1,8 +1,8 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).actPos?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionActual${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -21,11 +21,11 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-VelAct"){
+record(ai,"${ECMC_P}Enc${CH_ID}-VelAct"){
   field(DESC, "$(HWTYPE): Actual velocity")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).actVel?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocityActual${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -44,79 +44,79 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-VelAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Alarms"){
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-Alarms"){
   field(DESC, "$(HWTYPE): Alarm Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).alarms?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).alarms${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosErr.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-PosErr.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-PosErr"){
+record(bi,"${ECMC_P}Enc${CH_ID}-PosErr"){
   field(DESC, "$(HWTYPE): positon Error")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Alarms.B0")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Alarms.B0")
   field(ZNAM, "No Alarm")
   field(ONAM, "Position Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CdeState.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-CdeState.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CdeState"){
+record(bi,"${ECMC_P}Enc${CH_ID}-CdeState"){
   field(DESC, "$(HWTYPE): cde state")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Alarms.B1")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Alarms.B1")
   field(ZNAM, "No Alarm")
   field(ONAM, "cde state")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
 }
 
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Warnings"){
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-Warnings"){
   field(DESC, "$(HWTYPE): Alarm Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).warnings?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).warnings${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, $(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-FreqEx.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-FreqEx.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-FreqEx"){
+record(bi,"${ECMC_P}Enc${CH_ID}-FreqEx"){
   field(DESC, "$(HWTYPE): frequency exceeded")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Warnings.B0")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Warnings.B0")
   field(ZNAM, "No Alarm")
   field(ONAM, "frequency exceeded")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-LightCrtlRes.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-LghtCrtlRes.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-LightCrtlRes"){
+record(bi,"${ECMC_P}Enc${CH_ID}-LghtCrtlRes"){
   field(DESC, "$(HWTYPE): light control reserve")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Warnings.B1")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Warnings.B1")
   field(ZNAM, "No Alarm")
   field(ONAM, "light control reserve")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BatCharge.PROC")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-BatCharge.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-BatCharge"){
+record(bi,"${ECMC_P}Enc${CH_ID}-BatCharge"){
   field(DESC, "$(HWTYPE): battery charge")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Warnings.B3")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Warnings.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "battery charge")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Temp"){
+record(ai,"${ECMC_P}Enc${CH_ID}-Temp"){
   field(DESC, "$(HWTYPE): Temperature")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).temperature?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).temperatureActual${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(EGU,  "degC")
   field(PREC, "$(PREC=7)")

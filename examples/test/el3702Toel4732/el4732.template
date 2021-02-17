@@ -1,15 +1,15 @@
-record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AO$(CH_ID)-Array"){
+record(waveform,"${ECMC_P}AO$(CH_ID)-Array"){
   field(DESC, "$(HWTYPE): AO$(CH_ID): Value Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayOut)")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).mm.CH$(CH_ID)_ARRAY=")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).mm.analogOutputArray$(CH_ID)=")
   field(FTVL, "$(FTVL=SHORT)")
   field(NELM, "$(NELM)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-CycleCnt"){
+record(ao,"${ECMC_P}AI$(CH_ID)-CycleCnt"){
   field(DESC, "$(HWTYPE): AO$(CH_ID): Cycle Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_CYCLE_CNT=")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter$(CH_ID)=")
 }

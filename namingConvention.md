@@ -73,7 +73,12 @@ See examples below for clarification.
 - timePtp
 - timeDc
 - toggle
-
+- encoderLatchPostion
+- driveStatus
+- posSatus                 (position interface)
+- posPositionActual        (position interface)
+- posVelocityActual        (position interface)
+- posDriveTime             (position interface)
 
 ##### outputs
 - binaryOutput
@@ -105,6 +110,13 @@ See examples below for clarification.
 - buttonRight
 - buttonEnter
 - buttonToggle
+- encoderControl           (position interface)
+- driveControl             (position interface)
+- posControl               (position interface)
+- posPositionTarget        (position interface)
+- posStartType             (position interface)
+- posAccelerationSetpoint  (position interface)
+- posDecelerationSetpoint  (position interface)
 
 Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
@@ -210,11 +222,11 @@ IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
   |CH    |Generic channel |          |
   |Drv   |Drive           |          |
   |Enc   |Encoder         |          |
-  |Dev*  |Device*         | Shall only be used if the terminal have specifc data that cannot be assigned to a other type|
-  |EC    |Ethercat        | Reserved for ethercat status data (from master, not process data)|
+  |Dev*  |Device*         | Shall only be used if the terminal have specifc data that cannot be assigned to a other type |
+  |EC    |Ethercat        | Reserved for ethercat status data (from master, not process data) |
   |Cntr  |Counter         |          |
   |Tmr   |Timer           |          |
-
+  |Pos   |Position        | Positioning interface of drives |
 
 ### "id"
 

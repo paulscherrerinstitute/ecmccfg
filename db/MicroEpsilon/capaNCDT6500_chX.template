@@ -1,9 +1,9 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosAct")
+record(ai,"${ECMC_P}CH$(CH_ID)-PosAct")
 {
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_VALUE")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).analogInput$(CH_ID)")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")

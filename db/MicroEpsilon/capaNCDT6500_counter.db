@@ -1,8 +1,8 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Counter")
+record(ai,"${ECMC_P}Dev-Counter")
 {
   field(DESC, "$(HWTYPE): Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).COUNTER")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).counter")
   field(SCAN, "I/O Intr")
 }
