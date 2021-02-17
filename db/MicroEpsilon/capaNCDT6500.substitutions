@@ -7,12 +7,12 @@ file "ecmcEcSlave.template"
 file "capaNCDT6500_chX.template"
 {
   pattern { CH_ID,  EGU,  PREC }
-          { 1,      "nm", 1    }
-          { 2,      "nm", 1    }
-          { 3,      "nm", 1    }
-          { 4,      "nm", 1    }
-          { 5,      "nm", 1    }
-          { 6,      "nm", 1    }
-          { 7,      "nm", 1    }
-          { 8,      "nm", 1    }
+          { 01,     "nm", 1    }
+          { 02,     "nm", 1    }
+          { 03,     "nm", 1    }
+          { 04,     "nm", 1    }
+          { 05,     "nm", 1    }
+          { 06,     "nm", 1    }
+          { 07,     "nm", 1    }
+          { 08,     "nm", 1    }
 }

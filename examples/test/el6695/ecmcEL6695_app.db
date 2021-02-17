@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
+record(ai,"${ECMC_P}Stat"){
   field(DESC, "$(HWTYPE): Status word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -7,7 +7,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_INT32_1"){
+record(ai,"${ECMC_P}IN_INT32_1"){
   field(DESC, "$(HWTYPE): Input int32_1")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -16,7 +16,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_INT32_1"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_INT32_1"){
+record(ao,"${ECMC_P}OUT_INT32_1"){
   field(DESC, "$(HWTYPE): Output int32_1")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -24,7 +24,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_INT32_1"){
   field(SCAN, "Passive")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_INT32_2"){
+record(ai,"${ECMC_P}IN_INT32_2"){
   field(DESC, "$(HWTYPE): Input int32_2")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -33,7 +33,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_INT32_2"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_INT32_2"){
+record(ao,"${ECMC_P}OUT_INT32_2"){
   field(DESC, "$(HWTYPE): Output int32_2")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -41,7 +41,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_INT32_2"){
   field(SCAN, "Passive")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_FLOAT64_1"){
+record(ai,"${ECMC_P}IN_FLOAT64_1"){
   field(DESC, "$(HWTYPE): Input float64_1")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
@@ -50,7 +50,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_FLOAT64_1"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_FLOAT64_1"){
+record(ao,"${ECMC_P}OUT_FLOAT64_1"){
   field(DESC, "$(HWTYPE): Output float64_1")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
@@ -58,7 +58,7 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_FLOAT64_1"){
   field(SCAN, "Passive")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_FLOAT64_2"){
+record(ai,"${ECMC_P}IN_FLOAT64_2"){
   field(DESC, "$(HWTYPE): Input float64_2")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
@@ -67,7 +67,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_FLOAT64_2"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_FLOAT64_2"){
+record(ao,"${ECMC_P}OUT_FLOAT64_2"){
   field(DESC, "$(HWTYPE): Output float64_2")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")

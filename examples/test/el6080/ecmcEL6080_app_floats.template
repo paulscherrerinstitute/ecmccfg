@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_${EC_TYPE}"){
+record(ai,"${ECMC_P}IN_${EC_TYPE}"){
   field(DESC, "$(HWTYPE): Input ${EC_TYPE}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
@@ -7,7 +7,7 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-IN_${EC_TYPE}"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-OUT_${EC_TYPE}"){
+record(ao,"${ECMC_P}OUT_${EC_TYPE}"){
   field(DESC, "$(HWTYPE): Output ${EC_TYPE}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
