@@ -1,27 +1,27 @@
 #- Touch Probe status
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-Stat"){
+record(mbbiDirect,"${ECMC_P}Tp-Stat"){
   field(DESC, "$(HWTYPE): Touch Probe Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).touchProbeStatus01?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-BI01.PROC")
+  field(FLNK, "${ECMC_P}Tp-BI01.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-BI01"){
+record(bi,"${ECMC_P}Tp-BI01"){
   field(DESC, "$(HWTYPE): TP Input 01")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-Stat.B7")
+  field(INP,  "${ECMC_P}Tp-Stat.B7")
   field(ZNAM, "False")
   field(ONAM, "True")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-BI02.PROC")
+  field(FLNK, "${ECMC_P}Tp-BI02.PROC")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-BI02"){
+record(bi,"${ECMC_P}Tp-BI02"){
   field(DESC, "$(HWTYPE): TP Input 01")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Tp-Stat.BF")
+  field(INP,  "${ECMC_P}Tp-Stat.BF")
   field(ZNAM, "False")
   field(ONAM, "True")
   field(ZSV,  "NO_ALARM")

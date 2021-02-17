@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
+record(ai,"${ECMC_P}Enc-PosAct"){
   field(DESC, "$(HWTYPE): Enc Act Pos (Raw)")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")

@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-DrvVelAct"){
+record(ai,"${ECMC_P}DrvVelAct"){
   field(DESC, "$(HWTYPE): Drive Actual Vel")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
