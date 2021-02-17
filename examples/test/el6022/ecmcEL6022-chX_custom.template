@@ -157,7 +157,7 @@ record(longin,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Serial$(CH_ID)-BytesIn
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Input byte count")
   field(PINI, "$(PINI=1)")  
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.InBytes?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.inBytes?")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")  
 }
