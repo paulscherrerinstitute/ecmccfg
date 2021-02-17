@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-${SUFFIX}"){
+record(ai,"${ECMC_P}${SUFFIX}"){
   field(DESC, "$(HWTYPE): ${DESC=''}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
