@@ -14,7 +14,9 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EAM580")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x000000ec")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00000300")
 
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+#- verify slave, including reset
+ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 #- ############ Config PDOS: Channel 1
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6004,0x00,U32,ENC_POSITION)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6004,0x00,U32,positionActual01)"
