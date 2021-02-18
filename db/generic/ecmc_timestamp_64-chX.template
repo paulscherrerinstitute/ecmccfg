@@ -14,4 +14,15 @@ record(ai,"${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}"){
   field(TSE,  "${TSE=-2}")
   field(PREC, "0" )
   field(EGU,  "ns" )
+  field(FLNK, "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS.PROC")
+}
+
+record(aSub,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS") {
+  field(DESC,  "ECAT timestamp")
+  field(INAM,  "ECATtimestampInit")
+  field(SNAM,  "ECATtimestamp")
+  field(INPA,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}")
+  field(FTA,   "DOUBLE")
+  field(NOA,   1)
+  field(TSE,  -2)
 }
