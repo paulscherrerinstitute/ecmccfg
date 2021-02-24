@@ -1,7 +1,7 @@
 ###############################################################################
 #-d /**
 #-d   \brief Example script of EL6022 (2 channel RS422/485)
-#-d   \details Example shows how to read and write data over RS422/485 (EL6022).
+#-d   \details Example shows how to read and write byte data over RS422/485 (EL6022).
 #-d   
 #-d   \author Anders Sandstroem
 #-d   \file
@@ -9,10 +9,11 @@
 #-  
 #- Write Data (send "CMD_TO_SEND" over RS422/485):
 #- NOTE: Max length is 22bytes at the time (can be extended)
-#- 1. caput  -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayOut "CMD_TO_SEND"
+#- 1. caput  -a IOC_TEST:ec0-s11-EL6022-Serial1-ArrayOut <bytes> <value>
+#-    caput  -a IOC_TEST:ec0-s11-EL6022-Serial1-ArrayOut 5 1 2 3 4 5
 #-
 #- Read data (the IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn will be updated for each new value available in the terminal):
-#- 1. camonitor -S IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn
+#- 1. camonitor IOC_TEST:ec0-s11-EL6022-Serial1-ArrayIn
 #- (2. Several records showing status are available)
 #-
 #- A simple test can be done by wire a loopback connection on the DB9:
@@ -45,7 +46,7 @@ epicsEnvSet("ECMC_SAMPLE_RATE_MS",  "10")
 #- Configure EL6002 with custom database and config of SDOs
 epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8000")  # To set correct sdo address in sensor config
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "$(SLAVE_ID=11)")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6022, CONFIG=-Sensor-chX-default, SUBST_FILE=ecmcEL6022_custom.substitutions"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6022, CONFIG=-Sensor-chX-default, SUBST_FILE=ecmcEL6022_bytes.substitutions"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"

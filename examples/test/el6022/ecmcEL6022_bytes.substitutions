@@ -4,7 +4,7 @@ file "ecmcEcSlave.template"
           {}
 }
 
-file "ecmcEL6022-chX_custom.template"
+file "ecmcEL6022-chX_bytes.template"
 {
   pattern {CH_ID, PLC_ID, NELM }
           {1,     0,      22   }
