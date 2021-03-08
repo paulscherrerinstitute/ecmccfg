@@ -130,9 +130,9 @@ record(ai,"$(P)MCU-thread-send-max"){
 # T_SMP_MS is not supported for this record. 
 record(waveform,"$(P)MCU-updated"){
   field(PINI, "1")
-  field(DTYP, "asynInt32ArrayIn")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt32ArrayIn/ecmc.updated?")
-  field(FTVL, "LONG")
+  field(DTYP, "asynInt64ArrayIn")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt64ArrayIn/ecmc.updated?")
+  field(FTVL, "UINT64")
   field(NELM, "1")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
