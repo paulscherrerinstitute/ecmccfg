@@ -125,6 +125,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ecmcConfigOrDie "Cfg.CreateDefaultAxis(1)"
 ecmcConfig      "Cfg.CreateDefaultAxis(1000)"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("ec0.s1.ONE","ax1.health")"
+ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions(1,1,0,0)"
 
 #Trajectory
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(1,100)"

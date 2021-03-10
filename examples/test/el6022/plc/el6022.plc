@@ -19,7 +19,7 @@ if(not(static.initdone)) {
   if(ec_chk_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,2)) {
     ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_clr_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,2);
     static.initdone:=1;
-    println('Init of EL6002 done!');
+    ${DBG=#}println('Info: Init of EL6002 done!');
   }
   else {
     return [];
@@ -31,7 +31,7 @@ if(static.outBytes<0) {
 };
 
 if(static.outBytes>22) {
-  println('Error: outBytes must be in range 0..22. Current value:',static.outBytes);
+  ${DBG=#}println('Error: outBytes must be in range 0..22. Current value:',static.outBytes);
   static.outBytes:=0;
 };
 
@@ -44,11 +44,11 @@ static.inBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).CH${CH_ID}_STATUS,8,15);
 if(static.triggWrite and static.initdone) {
   ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,0);
   static.triggWrite:=0;  
-  println('Trigg Write!');
+  ${DBG=#}println('Info: Trigg Write!');
 };
 
 if(static.outBytesOld != static.outBytes) {
-  println('outBytes: ',static.outBytes);
+  ${DBG=#}println('Info: outBytes = ',static.outBytes);
 };
 
 if(static.pushAsynNextScan) {
@@ -58,9 +58,9 @@ if(static.pushAsynNextScan) {
 }
 
 if(static.recReqOld != static.recReq and static.initdone) {
-  println('inBytes:  ',static.inBytes);
+  ${DBG=#}println('Infor: inBytes=  ',static.inBytes);
   ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL:=ec_flp_bit(ec0.s$(SLAVE_ID).CH${CH_ID}_CONTROL,1);  
-  println('Trigg Read!');
+  ${DBG=#}println('Info: Trigg Read!');
   static.pushAsynNextScan:=1;
 };
 
