@@ -5,13 +5,13 @@
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
-# 
+#
 # Epics records are linked to below variables:
 # static.outBytes      : Number of bytes to write
 # static.InBytes       : Number of avialble bytes to read
 # static.triggWrite;   : Trigg write of data by rising edge
 # Input and output data are stored in EPICS waveforms (memmaps).
-# 
+#
 
 # Reset EL6002 by setting bit 2 of control word (and then clear when bit 2 of status word)
 if(not(static.initdone)) {
@@ -19,7 +19,7 @@ if(not(static.initdone)) {
   if(ec_chk_bit(ec0.s$(SLAVE_ID).status${CH_ID},2)) {
     ec0.s$(SLAVE_ID).control${CH_ID}:=ec_clr_bit(ec0.s$(SLAVE_ID).control${CH_ID},2);
     static.initdone:=1;
-    println('Init of EL6002 done!');
+    ${DBG=#}println('Info: Init of EL6002 done!');
   }
   else {
     return [];
@@ -31,7 +31,7 @@ if(static.outBytes<0) {
 };
 
 if(static.outBytes>22) {
-  println('Error: outBytes must be in range 0..22. Current value:',static.outBytes);
+  ${DBG=#}println('Error: outBytes must be in range 0..22. Current value:',static.outBytes);
   static.outBytes:=0;
 };
 
@@ -43,12 +43,12 @@ static.inBytes:=ec_chk_bits(ec0.s$(SLAVE_ID).status${CH_ID},8,15);
 
 if(static.triggWrite and static.initdone) {
   ec0.s$(SLAVE_ID).control${CH_ID}:=ec_flp_bit(ec0.s$(SLAVE_ID).control${CH_ID},0);
-  static.triggWrite:=0;  
-  println('Trigg Write!');
+  static.triggWrite:=0;
+  ${DBG=#}println('Info: Trigg Write!');
 };
 
 if(static.outBytesOld != static.outBytes) {
-  println('outBytes: ',static.outBytes);
+  ${DBG=#}println('Info: outBytes = ',static.outBytes);
 };
 
 if(static.pushAsynNextScan) {
@@ -59,7 +59,7 @@ if(static.pushAsynNextScan) {
 
 if(static.recReqOld != static.recReq and static.initdone) {
   println('inBytes:  ',static.inBytes);
-  ec0.s$(SLAVE_ID).control${CH_ID}:=ec_flp_bit(ec0.s$(SLAVE_ID).control${CH_ID},1);  
+  ec0.s$(SLAVE_ID).control${CH_ID}:=ec_flp_bit(ec0.s$(SLAVE_ID).control${CH_ID},1);
   println('Trigg Read!');
   static.pushAsynNextScan:=1;
 };

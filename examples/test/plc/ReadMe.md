@@ -461,6 +461,21 @@ Below the ECMC specific accessible variables and functions are listed:
 
 9. retvalue = mc_get_err();
    Returns error code for last lib call.
+
+10. retvalue = mc_reset(<axIndex>);
+   Resets error of motion axis.
+
+11. retvalue = mc_get_axis_err(<axIndex>);
+   Returns motion axis error code.
+
+12. retvalue = mc_set_enable_motion_funcs(
+                        <axIndex>,         : Axis index
+                        <enablePos>,       : Enable positioning
+                        <enableVelo>,      : Enable const velo
+                        <enableHome>,      : Enable const homing
+                        );
+
+   Enables/disables motion functionalities. Returns error code.
 ```
 ### Function Lib: Data Storage
 ```

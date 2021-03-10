@@ -1,5 +1,5 @@
 ###########################################################################################
-############################### 
+###############################
 # Test of EL6022 RS422/485 communication
 # This database is designed to work together with el6022.plc
 #
@@ -36,7 +36,7 @@ record(calc,"${ECMC_P}Ch${CH_ID}-BytesOut-Calc_"){
   field(SCAN, "Passive")
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Bytes Out Calc")
   field(INPA, "${ECMC_P}Ch${CH_ID}-ArrayOut.NORD")
-  field(CALC, "A-1") # Remove string terminator  
+  field(CALC, "A-1") # Remove string terminator
   field(FLNK, "${ECMC_P}Ch${CH_ID}-BytesOut-Cmd_.PROC")
 }
 
@@ -50,12 +50,12 @@ record(longout,"${ECMC_P}Ch${CH_ID}-BytesOut-Cmd_"){
   field(OMSL, "closed_loop")
 }
 
-record(bo,"${ECMC_P}Ch${CH_ID}-Cmd-Trigg-Wrt_"){    
+record(bo,"${ECMC_P}Ch${CH_ID}-Cmd-Trigg-Wrt_"){
   field(VAL,  "1")
   field(DESC, "$(DESC=$(HWTYPE): Trigg Write)")
   field(SCAN, "Passive")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.triggWrite=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.triggWrite=")
   field(ZNAM, "Zero")
   field(ONAM, "One")
   field(DOL,  "${ECMC_P}Ch${CH_ID}-ArrayOut.NORD")
@@ -67,7 +67,7 @@ record(longout,"${ECMC_P}Ch${CH_ID}-Cmd"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Control word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}=")  
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}=")
 }
 
 ###########################################################################################
@@ -150,14 +150,14 @@ record(bi,"${ECMC_P}Ch${CH_ID}-Stat-Overrun-Alm"){
   field(ZNAM, "Overrun OK")
   field(ONAM, "Overrun Error")
   field(ZSV,  "NO_ALARM")
-  field(OSV,  "MAJOR")  
+  field(OSV,  "MAJOR")
 }
 
 record(longin,"${ECMC_P}Ch${CH_ID}-BytesIn-Act"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Input byte count")
-  field(PINI, "$(PINI=1)")  
+  field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.InBytes?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.inBytes?")
   field(SCAN, "I/O Intr")
-  field(TSE,  "$(TSE=-2)")  
+  field(TSE,  "$(TSE=-2)")
 }
