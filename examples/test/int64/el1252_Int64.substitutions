@@ -1,0 +1,9 @@
+# Just test of int 64 input
+
+# Timestamps and status words
+file "./el1252_Int64.template"
+{
+  pattern {CH_ID, PINI }
+          {1,     1    }
+          {2,     1    }
+}

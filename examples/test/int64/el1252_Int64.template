@@ -1,0 +1,9 @@
+record(int64in,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-CH$(CH_ID)-PosTime-Act"){
+  field(DESC, "$(HWTYPE): CH$(CH_ID): Latch time pos [ns]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt64")  
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ec$(MASTER_ID).s$(SLAVE_POS).CH$(CH_ID)_LATCH_POS?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(EGU,  "ns" )
+}
