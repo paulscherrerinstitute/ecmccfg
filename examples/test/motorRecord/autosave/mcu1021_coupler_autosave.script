@@ -1,0 +1,76 @@
+##############################################################################
+## Example config ESS crate of type MCU1025 with test of autosave
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg 6.3.2
+require autosave 5.10.0
+
+# Epics Motor record driver that will be used:
+epicsEnvShow(ECMC_MR_MODULE)
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
+
+##############################################################################
+## Configure hardware:
+
+ecmcFileExist($(ecmccfg_DIR)ecmcMCU1021_coupler.cmd,1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1021_coupler.cmd
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# ADDITIONAL SETUP
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
+# END of ADDITIONAL SETUP
+
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_1021_c.ax)
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+##############################################################################
+############# Configure autosave:
+# Note some settings below might not be needed (but save and restore works for motor position if below is used).
+save_restoreSet_Debug(1)
+save_restoreSet_IncompleteSetsOk(1)
+save_restoreSet_DatedBackupFiles(1)
+set_savefile_path(".", "save");
+set_requestfile_path(".","req")
+set_pass0_restoreFile("auto_positions.sav")
+save_restoreSet_NumSeqFiles(3)
+save_restoreSet_SeqPeriodInSeconds(600)
+save_restoreSet_RetrySeconds(60)
+save_restoreSet_CAReconnect(1)
+save_restoreSet_CallbackTimeout(-1)
+
+iocInit()
+
+create_monitor_set("auto_positions.req", 5, "P=$(IOC)")
