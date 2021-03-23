@@ -72,7 +72,7 @@ epicsEnvSet("ECMC_EC_SAMPLE_RATE",  "${EC_RATE=1000}")
 #-
 #-------------------------------------------------------------------------------
 #- define naming convention script
-epicsEnvSet("ECMC_P_SCRIPT",        "${NAMING=ClassicNaming}")
+epicsEnvSet("ECMC_P_SCRIPT",        "${NAMING=mXsXXX}")
 
 #- add master (defaults to '0'), no master when MASTER_ID < 0
 ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")
