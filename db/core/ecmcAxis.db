@@ -46,7 +46,7 @@ record(longin,"${P}${AXIS_NAME}-Stat"){
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${P}${AXIS_NAME}-seqstate.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-SeqState.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -55,7 +55,7 @@ record(calc,"${P}${AXIS_NAME}-SeqState") {
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>20")
   field(INPA,"${P}${AXIS_NAME}-Stat.VAL")
-  field(FLNK, "${P}${AXIS_NAME}-lastilock.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-LastIlock.PROC")
 }
 
 record(calc,"${P}${AXIS_NAME}-LastIlock") {
@@ -224,23 +224,23 @@ record(bi,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB"){
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}${AXIS_NAME}-SftLimFwdCmdEna-RB.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-SftLimFwdEna-RB.PROC")
 }
 
 #  // bit 14 softlimbwdena
-record(bi,"${P}${AXIS_NAME}-SftLimFwdCmdEna-RB"){
-  field(DESC, "${AXIS_NAME}: Softlim Fwd")
+record(bi,"${P}${AXIS_NAME}-SftLimFwdEna-RB"){
+  field(DESC, "${AXIS_NAME}: Softlim Fwd Enabled")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BE")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}${AXIS_NAME}-SftLimBwdCmdEna-RB.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-SftLimBwdEna-RB.PROC")
 }
 
 #  // bit 15 softlimbwdena  
-record(bi,"${P}${AXIS_NAME}-SftLimBwdCmdEna-RB"){
-  field(DESC, "${AXIS_NAME}: Softlim Fwd")
+record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
+  field(DESC, "${AXIS_NAME}: Softlim Bwd Enabled")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BF")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
@@ -402,7 +402,7 @@ record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
   field(TSE,  "0") 
 }
 
-record(bo,"${P}${AXIS_NAME}-SftLimBwdCmdEna"){
+record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B7")
   field(ZNAM, "Refuse")
@@ -412,7 +412,7 @@ record(bo,"${P}${AXIS_NAME}-SftLimBwdCmdEna"){
   field(TSE,  "0") 
 }
 
-record(bo,"${P}${AXIS_NAME}-SftLimFwdCmdEna"){
+record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B8")
   field(ZNAM, "Refuse")
