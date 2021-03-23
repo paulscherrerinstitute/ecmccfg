@@ -1,5 +1,5 @@
 #### GENERAL
-record(ai,"$(P)MCU-appMode"){
+record(ai,"$(P)MCU-AppMode"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.appmode?")
@@ -45,7 +45,7 @@ record(asyn,"$(P)MCU-Cmd"){
 }
 
 #### THREAD (Realtime)
-record(ai,"$(P)MCU-thdLatMin"){
+record(ai,"$(P)MCU-ThdLatMin"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.latency.min?")
@@ -55,7 +55,7 @@ record(ai,"$(P)MCU-thdLatMin"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdLatMax"){
+record(ai,"$(P)MCU-ThdLatMax"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.latency.max?")
@@ -65,7 +65,7 @@ record(ai,"$(P)MCU-thdLatMax"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdPrdMin"){
+record(ai,"$(P)MCU-ThdPrdMin"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.period.min?")
@@ -75,7 +75,7 @@ record(ai,"$(P)MCU-thdPrdMin"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdPrdMmax"){
+record(ai,"$(P)MCU-ThdPrdMmax"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.period.max?")
@@ -85,7 +85,7 @@ record(ai,"$(P)MCU-thdPrdMmax"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdExeMin"){
+record(ai,"$(P)MCU-ThdExeMin"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.execute.min?")
@@ -95,7 +95,7 @@ record(ai,"$(P)MCU-thdExeMin"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdExeMax"){
+record(ai,"$(P)MCU-ThdExeMax"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.execute.max?")
@@ -105,7 +105,7 @@ record(ai,"$(P)MCU-thdExeMax"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdSndMin"){
+record(ai,"$(P)MCU-ThdSndMin"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.send.min?")
@@ -115,7 +115,7 @@ record(ai,"$(P)MCU-thdSndMin"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-thdSndMax"){
+record(ai,"$(P)MCU-ThdSndMax"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.send.max?")
@@ -128,7 +128,7 @@ record(ai,"$(P)MCU-thdSndMax"){
 # Updated last in updates cycles (for record with fastest update rate).
 # Can be used as trigger after all data have been updated.
 # T_SMP_MS is not supported for this record.
-record(waveform,"$(P)MCU-updated"){
+record(waveform,"$(P)MCU-Updated"){
   field(PINI, "1")
   field(DTYP, "asynInt64ArrayIn")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt64ArrayIn/ecmc.updated?")

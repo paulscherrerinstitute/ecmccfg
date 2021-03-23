@@ -9,7 +9,7 @@ record(longin,"${P}m${MASTER_ID}-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(calc,"${P}m${MASTER_ID}-slavesresp") {
+record(calc,"${P}m${MASTER_ID}-SlvRsp") {
   field(DESC, "Master: Total Slaves Responding")
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>16")
@@ -25,48 +25,48 @@ record(mbbiDirect,"${P}m${MASTER_ID}-Stat_"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${P}m${MASTER_ID}-linkup"){
+record(bi,"${P}m${MASTER_ID}-LinkUp"){
   field(DESC, "Master: Master com up")
   field(INP,  "${P}m${MASTER_ID}-Stat_.B0")
   field(ZNAM, "Link down")
   field(ONAM, "Link up")
   field(ZSV,  "MAJOR")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-alstates-init.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-init.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-alstates-init"){
-  field(DESC, "Master: Slaves alstates INIT")
+record(bi,"${P}m${MASTER_ID}-AlStates-Init"){
+  field(DESC, "Master: Slaves AlStates INIT")
   field(INP,  "${P}m${MASTER_ID}-Stat_.B1")
   field(ZNAM, "Not INIT")
   field(ONAM, "INIT")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-alstates-preop.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-preop.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-alstates-preop"){
-  field(DESC, "Master: Slaves alstates PREOP")
+record(bi,"${P}m${MASTER_ID}-AlStates-Preop"){
+  field(DESC, "Master: Slaves AlStates PREOP")
   field(INP,  "${P}m${MASTER_ID}-Stat_.B2")
   field(ZNAM, "Not PREOP")
   field(ONAM, "PREOP")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-alstates-safeop.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Safeop.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-alstates-safeop"){
-  field(DESC, "Master: Slaves alstates SAFEOP")
+record(bi,"${P}m${MASTER_ID}-AlStates-Safeop"){
+  field(DESC, "Master: Slaves AlStates SAFEOP")
   field(INP,  "${P}m${MASTER_ID}-Stat_.B3")
   field(ZNAM, "Not SAFEOP")
   field(ONAM, "SAFEOP")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-alstates-op.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Op.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-alstates-op"){
-  field(DESC, "Master: Slaves alstates OP")
+record(bi,"${P}m${MASTER_ID}-AlStates-Op"){
+  field(DESC, "Master: Slaves AlStates OP")
   field(INP,  "${P}m${MASTER_ID}-Stat_.B4")
   field(ZNAM, "Not OP")
   field(ONAM, "OP")
@@ -74,7 +74,7 @@ record(bi,"${P}m${MASTER_ID}-alstates-op"){
   field(OSV,  "NO_ALARM")
 }
 
-record(longin,"${P}m${MASTER_ID}-slavecounter"){
+record(longin,"${P}m${MASTER_ID}-SlvCnt"){
   field(DESC, "Master: Total slaves in use")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -83,7 +83,7 @@ record(longin,"${P}m${MASTER_ID}-slavecounter"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"${P}m${MASTER_ID}-memmapcounter"){
+record(longin,"${P}m${MASTER_ID}-MemmapCnt"){
   field(DESC, "Master: Mem map counter")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -92,7 +92,7 @@ record(longin,"${P}m${MASTER_ID}-memmapcounter"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"${P}m${MASTER_ID}-domainfailcountertotal"){
+record(longin,"${P}m${MASTER_ID}-DomFailCntTot"){
   field(DESC, "Master: Domain fail counter")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -101,7 +101,7 @@ record(longin,"${P}m${MASTER_ID}-domainfailcountertotal"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"${P}m${MASTER_ID}-entrycounter"){
+record(longin,"${P}m${MASTER_ID}-EntryCnt"){
   field(DESC, "Master: EtherCAT entry counter")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -111,65 +111,65 @@ record(longin,"${P}m${MASTER_ID}-entrycounter"){
 }
 
 #Domain
-record(longin,"${P}m${MASTER_ID}-Domain-Stat"){
+record(longin,"${P}m${MASTER_ID}-Dom-Stat"){
   field(DESC, "Master: Domain Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).domainstatus?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${P}m${MASTER_ID}-Domain-WC.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(calc,  "${P}m${MASTER_ID}-Domain-WC") {
+record(calc,  "${P}m${MASTER_ID}-Dom-WC") {
   field(DESC, "Master: Domain Working Counter")
   field(PINI, "$(PINI=1)")
   field(CALC, "A>>16")
-  field(INPA, "${P}m${MASTER_ID}-Domain-Stat.VAL")
-  field(FLNK, "${P}m${MASTER_ID}-Domain-Stat_")
+  field(INPA, "${P}m${MASTER_ID}-Dom-Stat.VAL")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-Stat_")
 }
 
-record(mbbiDirect,"${P}m${MASTER_ID}-Domain-Stat_"){
+record(mbbiDirect,"${P}m${MASTER_ID}-Dom-Stat_"){
   field(DESC, "Master: Domain Status Word mbbiD")
   field(PINI, "$(PINI=1)")
-  field(INP,  "${P}m${MASTER_ID}-Domain-Stat.VAL")
-  field(FLNK, "${P}m${MASTER_ID}-Domain-redunactive.PROC")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat.VAL")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-RedunActive.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${P}m${MASTER_ID}-Domain-redunactive"){
+record(bi,"${P}m${MASTER_ID}-Dom-RedunActive"){
   field(DESC, "Master: Domain redundancy active")
-  field(INP,  "${P}m${MASTER_ID}-Domain-Stat_.B0")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B0")
   field(ZNAM, "No redundancy")
   field(ONAM, "Redundancy active")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-Domain-WC-zero.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC-Zero.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-Domain-WC-zero"){
+record(bi,"${P}m${MASTER_ID}-Dom-WC-Zero"){
   field(DESC, "Master: Domain Work Counter Zero")
-  field(INP,  "${P}m${MASTER_ID}-Domain-Stat_.B1")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B1")
   field(ZNAM, "Not EC_WC_ZERO")
   field(ONAM, "EC_WC_ZERO")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${P}m${MASTER_ID}-Domain-WC-incomplete.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC-Incomplete.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-Domain-WC-incomplete"){
+record(bi,"${P}m${MASTER_ID}-Dom-WC-Incomplete"){
   field(DESC, "Master: Domain Work Counter incomplete")
-  field(INP,  "${P}m${MASTER_ID}-Domain-Stat_.B2")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B2")
   field(ZNAM, "not EC_WC_INCOMPLETE")
   field(ONAM, "EC_WC_INCOMPLETE")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${P}m${MASTER_ID}-Domain-WC-complete.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC-Complete.PROC")
 }
 
-record(bi,"${P}m${MASTER_ID}-Domain-WC-complete"){
+record(bi,"${P}m${MASTER_ID}-Dom-WC-Complete"){
   field(DESC, "Master: Domain Work Counter complete")
-  field(INP,  "${P}m${MASTER_ID}-Domain-Stat_.B3")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B3")
   field(ZNAM, "not EC_WC_COMPLETE")
   field(ONAM, "EC_WC_COMPLETE")
   field(ZSV,  "MAJOR")

@@ -20,7 +20,7 @@ record(longin,"${ECMC_P}Stat"){
 }
 
 # Entry counter in 16 msb
-record(calc,"${ECMC_P}entrycounter") {
+record(calc,"${ECMC_P}EntryCnt") {
   field(DESC, "$(HWTYPE): Slave Entry Count")
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>16")
@@ -36,7 +36,7 @@ record(mbbiDirect,"${ECMC_P}Stat_"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${ECMC_P}online"){
+record(bi,"${ECMC_P}Online"){
   field(DESC, "$(HWTYPE): Slave Online")
   field(INP,  "${ECMC_P}Stat_.B0")
   field(ZNAM, "Offline")
@@ -46,7 +46,7 @@ record(bi,"${ECMC_P}online"){
   field(FLNK, "${ECMC_P}operational.PROC")
 }
 
-record(bi,"${ECMC_P}operational"){
+record(bi,"${ECMC_P}Operational"){
   field(DESC, "$(HWTYPE): Slave Operational")
   field(INP,  "${ECMC_P}Stat_.B1")
   field(ZNAM, "Not Operational")
@@ -56,27 +56,27 @@ record(bi,"${ECMC_P}operational"){
   field(FLNK, "${ECMC_P}alstate-init.PROC")
 }
 
-record(bi,"${ECMC_P}alstate-init"){
+record(bi,"${ECMC_P}Alstate-Init"){
   field(DESC, "$(HWTYPE): Slave alstate INIT")
   field(INP,  "${ECMC_P}Stat_.B2")
   field(ZNAM, "Not INIT")
   field(ONAM, "INIT")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}alstate-preop.PROC")
+  field(FLNK, "${ECMC_P}Alstate-Preop.PROC")
 }
 
-record(bi,"${ECMC_P}alstate-preop"){
+record(bi,"${ECMC_P}Alstate-Preop"){
   field(DESC, "$(HWTYPE): Slave alstate PREOP")
   field(INP,  "${ECMC_P}Stat_.B3")
   field(ZNAM, "Not PREOP")
   field(ONAM, "PREOP")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}alstate-safeop.PROC")
+  field(FLNK, "${ECMC_P}Alstate-Safeop.PROC")
 }
 
-record(bi,"${ECMC_P}alstate-safeop"){
+record(bi,"${ECMC_P}Alstate-Safeop"){
   field(DESC, "$(HWTYPE): Slave alstate SAFEOP")
   field(INP,  "${ECMC_P}Stat_.B4")
   field(ZNAM, "Not SAFEOP")
@@ -86,7 +86,7 @@ record(bi,"${ECMC_P}alstate-safeop"){
   field(FLNK, "${ECMC_P}alstate-op.PROC")
 }
 
-record(bi,"${ECMC_P}alstate-op"){
+record(bi,"${ECMC_P}Alstate-Op"){
   field(DESC, "$(HWTYPE): Slave alstate OP")
   field(INP,  "${ECMC_P}Stat_.B5")
   field(ZNAM, "Not OP")
