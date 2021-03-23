@@ -20,7 +20,7 @@ record(longin,"${ECMC_P}Stat"){
 }
 
 # Entry counter in 16 msb
-record(calc,"${ECMC_P}EntryCnt") {
+record(calc,"${ECMC_P}EntryCntr") {
   field(DESC, "$(HWTYPE): Slave Entry Count")
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>16")

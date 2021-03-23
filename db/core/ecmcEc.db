@@ -21,7 +21,7 @@ record(mbbiDirect,"${P}m${MASTER_ID}-Stat_"){
   field(DESC, "Master: Master Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "${P}m${MASTER_ID}-Stat")
-  field(FLNK, "${P}m${MASTER_ID}-linkup.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-Linkup.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -32,7 +32,7 @@ record(bi,"${P}m${MASTER_ID}-LinkUp"){
   field(ONAM, "Link up")
   field(ZSV,  "MAJOR")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-AlStates-init.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Init.PROC")
 }
 
 record(bi,"${P}m${MASTER_ID}-AlStates-Init"){
@@ -42,7 +42,7 @@ record(bi,"${P}m${MASTER_ID}-AlStates-Init"){
   field(ONAM, "INIT")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}m${MASTER_ID}-AlStates-preop.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Preop.PROC")
 }
 
 record(bi,"${P}m${MASTER_ID}-AlStates-Preop"){
@@ -74,7 +74,7 @@ record(bi,"${P}m${MASTER_ID}-AlStates-Op"){
   field(OSV,  "NO_ALARM")
 }
 
-record(longin,"${P}m${MASTER_ID}-SlvCnt"){
+record(longin,"${P}m${MASTER_ID}-SlvCntr"){
   field(DESC, "Master: Total slaves in use")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -83,7 +83,7 @@ record(longin,"${P}m${MASTER_ID}-SlvCnt"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"${P}m${MASTER_ID}-MemmapCnt"){
+record(longin,"${P}m${MASTER_ID}-MemmapCntr"){
   field(DESC, "Master: Mem map counter")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -92,7 +92,7 @@ record(longin,"${P}m${MASTER_ID}-MemmapCnt"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"${P}m${MASTER_ID}-DomFailCntTot"){
+record(longin,"${P}m${MASTER_ID}-DomFailCntrTot"){
   field(DESC, "Master: Domain fail counter")
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -101,7 +101,7 @@ record(longin,"${P}m${MASTER_ID}-DomFailCntTot"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"${P}m${MASTER_ID}-EntryCnt"){
+record(longin,"${P}m${MASTER_ID}-EntryCntr"){
   field(DESC, "Master: EtherCAT entry counter")
   field(PINI, "1")
   field(DTYP, "asynInt32")
