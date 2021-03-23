@@ -1,7 +1,7 @@
-record(bo,"$(Name)PLC-$(Index)-enable"){
+record(bo,"$(Name)PLC${Index}-enable"){
   info(asyn:READBACK,"1")
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=PLC$(Index) scantime)")
+  field(DESC, "$(DESC=PLC${Index} scantime)")
   field(DTYP, "$(DTYP=asynInt32)")
   field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.enable?")
   field(ZNAM, "disable")
@@ -10,9 +10,9 @@ record(bo,"$(Name)PLC-$(Index)-enable"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(ai,"$(Name)PLC-$(Index)-scantime"){
+record(ai,"$(Name)PLC${Index}-scantime"){
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=PLC$(Index) scantime)")
+  field(DESC, "$(DESC=PLC${Index} scantime)")
   field(DTYP, "$(DTYP=asynFloat64)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.scantime?")
   field(SCAN, "Passive")
@@ -20,9 +20,9 @@ record(ai,"$(Name)PLC-$(Index)-scantime"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(ai,"$(Name)PLC-$(Index)-error"){
+record(ai,"$(Name)PLC${Index}-error"){
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=PLC$(Index) error)")
+  field(DESC, "$(DESC=PLC${Index} error)")
   field(DTYP, "$(DTYP=asynFloat64)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.error?")
   field(SCAN, "Passive")
