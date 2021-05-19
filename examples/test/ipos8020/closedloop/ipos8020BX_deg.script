@@ -1,5 +1,6 @@
 ##############################################################################
-## Example config for iPOS8020
+## Example config for iPOS8020 closed loop, scaled in deg/s
+## Resolver connected to EL7201 used as encoder
 
 ##############################################################################
 ## Initiation:
@@ -31,7 +32,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## AXIS 1: Scaling in degrees
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos8020_1_resolver.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos8020_1_resolver_deg.ax)
 
 ##############################################################################
 ############# Configure diagnostics:

@@ -1,5 +1,6 @@
 ##############################################################################
-## Example config for iPOS8020
+## Example config for iPOS8020 closed loop, scaling in mm (10mm/rev)
+## Resolver connected to EL7201 used as encoder
 
 ##############################################################################
 ## Initiation:
