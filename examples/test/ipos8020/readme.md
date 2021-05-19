@@ -76,3 +76,17 @@ epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335592")   # 9322*360/10=335592 (3355
 
 ```
 
+# Notes on drive scaling
+
+A raw setpoint of 2^16 corresponds to 1000microsteps/second (for ESS generic stepper configuration).
+
+So scaling for degrees would then be:
+```
+2^16/1000.0*51200/360 = 9320.6755. (corresponds to 1 deg/s)
+
+```
+
+
+
+
+
