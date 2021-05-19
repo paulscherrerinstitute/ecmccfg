@@ -6,13 +6,17 @@ Two example setups are available:
 2. Closed loop (resolver connected to EL7201)
 
 
-# Notes on drive scaling for IPOS8020
+# Notes on drive scaling
 
 A raw velocity setpoint of 2^16 corresponds to 1000microsteps/second (for ESS generic stepper configuration).
 
-So scaling for degrees would then be (256microsteps/step*200fullsteps=51200 microsteps/rev):
+So scaling for degrees would then be:
 ```
-2^16/1000.0*51200/360 = 9320.6755. (corresponds to 1 deg/s)
+Based on (51200 microsteps/rev):
+* 256microsteps/step*
+* 200fullsteps
+
+VeloSetScale = 2^16/1000.0*51200/360 = 9320.6755 (corresponds to 1 deg/s)
 
 ```
 
@@ -43,7 +47,7 @@ epicsEnvSet("ECMC_ENC_SCALE_NUM"          "10")       # One rev is 10 mm
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "51200")    # Open loop counter scaled in micro steps (256levels per fullstep, 256*200=51200)
 ```
 
-Example of scaling of drive for unit deg:
+Example of scaling of drive for unit mm (10mm/rev):
 
 ```
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
@@ -79,7 +83,7 @@ epicsEnvSet("ECMC_ENC_SCALE_NUM"          "-10")     # 10mm/rev (- sign just bec
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "1048576")  # Single turn resolution of EL7201 (2^20) 
 ```
 
-Example of scaling of drive for unit deg:
+Example of scaling of drive for unit mm (10mm/rev):
 
 ```
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
