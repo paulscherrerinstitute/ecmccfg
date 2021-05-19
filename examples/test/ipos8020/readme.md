@@ -5,6 +5,17 @@ Two example setups are available:
 
 2. Closed loop (resolver connected to EL7201)
 
+
+# Notes on drive scaling for IPOS8020
+
+A raw setpoint of 2^16 corresponds to 1000microsteps/second (for ESS generic stepper configuration).
+
+So scaling for degrees would then be:
+```
+2^16/1000.0*51200/360 = 9320.6755. (corresponds to 1 deg/s)
+
+```
+
 ## Open loop
 
 ### Scaling (degrees)
@@ -20,7 +31,7 @@ Example of scaling of drive for unit motor deg:
 
 ```
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "9322")   # 9322 raw velocity setpoint corresponds to 1deg/s (based on the generic setup of the drive (40Khz PWM))
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "9320.7")   # 9320.7 raw velocity setpoint corresponds to 1deg/s (based on the generic setup of the drive)
 ```
 
 ### Scaling (mm)
@@ -36,7 +47,7 @@ Example of scaling of drive for unit deg:
 
 ```
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335592")   # 9322*360/10=335592 (335592 raw velocity setpoint to the drive corresponds to 1mm/s)  
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335544.3")   # 9320.7*360/10=335544.3 (335544.3 raw velocity setpoint to the drive corresponds to 1mm/s)  
 ```
 
 ## Closed loop
@@ -56,7 +67,7 @@ Example of scaling of drive for unit motor deg:
 
 ```
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "9322")   # 9322 raw velocity setpoint corresponds to 1deg/s (based on the generic setup of the drive (40Khz PWM))
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "9320.7")   # 9320.7 raw velocity setpoint corresponds to 1deg/s (based on the generic setup of the drive)
 ```
 
 ### Scaling (mm)
@@ -72,21 +83,6 @@ Example of scaling of drive for unit deg:
 
 ```
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335592")   # 9322*360/10=335592 (335592 raw velocity setpoint to the drive corresponds to 1mm/s)  
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335544.3")   # 9320.7*360/10=335544.3 (335544.3 raw velocity setpoint to the drive corresponds to 1mm/s)  
 
 ```
-
-# Notes on drive scaling
-
-A raw setpoint of 2^16 corresponds to 1000microsteps/second (for ESS generic stepper configuration).
-
-So scaling for degrees would then be:
-```
-2^16/1000.0*51200/360 = 9320.6755. (corresponds to 1 deg/s)
-
-```
-
-
-
-
-
