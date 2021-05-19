@@ -8,9 +8,9 @@ Two example setups are available:
 
 # Notes on drive scaling for IPOS8020
 
-A raw setpoint of 2^16 corresponds to 1000microsteps/second (for ESS generic stepper configuration).
+A raw velocity setpoint of 2^16 corresponds to 1000microsteps/second (for ESS generic stepper configuration).
 
-So scaling for degrees would then be:
+So scaling for degrees would then be (256microsteps/step*200fullsteps=51200 microsteps/rev):
 ```
 2^16/1000.0*51200/360 = 9320.6755. (corresponds to 1 deg/s)
 
