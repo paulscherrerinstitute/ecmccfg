@@ -96,25 +96,26 @@ epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335544.3")   # 9320.7*360/10=335544.3
 ## Encoder scaling
 Same encoder scaling as in ecmc in can be used
 
-## Drv Velocity scaling (CSV mode)
+## Velocity scaling (CSV mode)
 
-The iPOS8020 is a ds402 drive so the velocity scaling should be used (and not reference veolocity).
+The iPOS8020 is a ds402 drive which means that the velocity scaling factor should be used (and not reference velocity).
 
-The TwinCAT NC is setup for the AX2000 as a reference. This makes it very hard to find scaling factors and the same velocity scalings as ecmc can NOT be used. So even if you know the scalings of the drive you use it's hard to deduce the scalings factors since this drive needs to be compared to AX2000. Also the velocity scaling is whieghted with the encoder scaling denominator (strange).  
+The TwinCAT NC is setup for the AX2000 as a reference. This makes it hard to find the correct velocity scaling factor and the same the ecmc scalings can NOT be used. Even if you know the scalings of the drive velocity setpoint it's hard to deduce the twicat NC velocity scaling factor since this drive needs to be compared to AX2000. Also the velocity scaling is wheighted with the encoder scaling denominator (or encoder mask).  
 
-Anyway, by trail and error some settings that works for open and closed loop have been identified
+Anyway, by trail and error some settings that works for open and closed loop have been identified.
 
 ### Open loop
-For open loop with units deg/s and (using the generic ess ipos EasySetup config) an velocity scaling factor of 8190 can be used.
+For open loop with units deg/s an velocity scaling factor of 8190 can be used.
+Note: This is based on the generic ess ipos EasySetup config.
 
 ### Closed loop resolver
-For closed loop with reolver connected to EL7201 the velocity scaling factor needs to be recalulated:
+For closed loop with resolver connected to EL7201 the velocity scaling factor needs to be recalulated:
 ```
 
 VelocityScalingFactor=8190*51200/1048576=399,9
 
 ```
-So basically the velocity scaling factor needs to linearly scaled with the encoder denominator (or encoder mask abs).
+So, basically the velocity scaling factor needs to linearly scaled with the encoder denominator (or encoder mask abs).
 
 
 
