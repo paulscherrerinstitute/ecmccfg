@@ -90,3 +90,35 @@ epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "335544.3")   # 9320.7*360/10=335544.3 (335544.3 raw velocity setpoint to the drive corresponds to 1mm/s)  
 
 ```
+
+# Notes on TwinCAT
+
+## Encoder scaling
+Same encoder scaling as in ecmc in can be used
+
+## Drv Velocity scaling (CSV mode)
+
+The iPOS8020 is a ds402 drive so the velocity scaling should be used (and not reference veolocity).
+
+The TwinCAT NC is setup for the AX2000 as a reference. This makes it very hard to find scaling factors and the same velocity scalings as ecmc can NOT be used. So even if you know the scalings of the drive you use it's hard to deduce the scalings factors since this drive needs to be compared to AX2000. Also the velocity scaling is whieghted with the encoder scaling denominator (strange).  
+
+Anyway, by trail and error some settings that works for open and closed loop have been identified
+
+### Open loop
+For open loop with units deg/s and (using the generic ess ipos EasySetup config) an velocity scaling factor of 8190 can be used.
+
+### Closed loop resolver
+For closed loop with reolver connected to EL7201 the velocity scaling factor needs to be recalulated:
+```
+
+VelocityScalingFactor=8190*51200/1048576=399,9
+
+```
+So basically the velocity scaling factor needs to linearly scaled with the encoder denominator (or encoder mask abs).
+
+
+
+
+
+
+
