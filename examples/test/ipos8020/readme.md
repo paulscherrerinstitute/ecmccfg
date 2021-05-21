@@ -100,9 +100,10 @@ Same encoder scaling as in ecmc in can be used
 
 The iPOS8020 is a ds402 drive which means that the velocity scaling factor should be used (and not reference velocity).
 
-The TwinCAT NC is setup for the AX2000 as a reference. This makes it hard to find the correct velocity scaling factor and the same the ecmc scalings can NOT be used. Even if you know the scalings of the drive velocity setpoint it's hard to deduce the twicat NC velocity scaling factor since this drive needs to be compared to AX2000. Also the velocity scaling is wheighted with the encoder scaling denominator (or encoder mask).  
+The TwinCAT NC is setup for the AX2000 as a reference. Even if you know the scalings of the drive velocity setpoint it's hard to deduce the twicat NC velocity scaling factor since this drive needs to be compared to AX2000. This makes it hard to find the correct velocity scaling factor. 
+Also the velocity scaling is wheighted with the encoder scaling denominator (or encoder mask).  The ecmc velocity scaling factor can NOT be used.
 
-Anyway, by trail and error some settings that works for open and closed loop have been identified.
+By trail and error some settings that works for open and closed loop have been identified.
 
 ### Open loop
 For open loop with units deg/s an velocity scaling factor of 8190 can be used.
@@ -111,7 +112,6 @@ Note: This is based on the generic ess ipos EasySetup config.
 ### Closed loop resolver
 For closed loop with resolver connected to EL7201 the velocity scaling factor needs to be recalulated:
 ```
-
 VelocityScalingFactor=8190*51200/1048576=399,9
 
 ```
