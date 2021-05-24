@@ -15,7 +15,7 @@ record(longin,"${ECMC_P}Stat"){
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).slavestatus?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}entrycounter.PROC")
+  field(FLNK, "${ECMC_P}EntryCntr.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -32,7 +32,7 @@ record(mbbiDirect,"${ECMC_P}Stat_"){
   field(DESC, "$(HWTYPE): Slave Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "${ECMC_P}Stat.VAL")
-  field(FLNK, "${ECMC_P}online.PROC")
+  field(FLNK, "${ECMC_P}Online.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -43,7 +43,7 @@ record(bi,"${ECMC_P}Online"){
   field(ONAM, "Online")
   field(ZSV,  "MAJOR")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}operational.PROC")
+  field(FLNK, "${ECMC_P}Operational.PROC")
 }
 
 record(bi,"${ECMC_P}Operational"){
@@ -53,7 +53,7 @@ record(bi,"${ECMC_P}Operational"){
   field(ONAM, "Operational")
   field(ZSV,  "MAJOR")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}alstate-init.PROC")
+  field(FLNK, "${ECMC_P}Alstate-Init.PROC")
 }
 
 record(bi,"${ECMC_P}Alstate-Init"){
@@ -83,7 +83,7 @@ record(bi,"${ECMC_P}Alstate-Safeop"){
   field(ONAM, "SAFEOP")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}alstate-op.PROC")
+  field(FLNK, "${ECMC_P}Alstate-Op.PROC")
 }
 
 record(bi,"${ECMC_P}Alstate-Op"){
