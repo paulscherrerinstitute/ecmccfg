@@ -454,7 +454,7 @@ Below the ECMC specific accessible variables and functions are listed:
                         <execute>,       : Trigger
                         );
    Stop motion of axis <axIndex>.
-   Motion is triggerd with a positive edge on <execute> input.
+   Command is triggerd with a positive edge on <execute> input.
    returns 0 if success or error code.
 
 7. retvalue = mc_power(
