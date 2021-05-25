@@ -449,7 +449,19 @@ Below the ECMC specific accessible variables and functions are listed:
    Motion is triggerd with a positive edge on <execute> input.
    returns 0 if success or error code.
 
-6. retvalue = mc_halt(
+6. retvalue = mc_home_pos(
+                     <axIndex>,       : Axis index
+                     <execute>,       : Trigger
+                     <seqId>,         : Motion sequence
+                     <velTwoardsCam>, : Target Velocity twords cam
+                     <velOffCam>      : Target velocity off cam
+                     <homePos>        : Homing position
+                     );
+Perform a homing sequence of axis <axIndex>
+Motion is triggerd with a positive edge on <execute> input.
+returns 0 if success or error code.
+
+7. retvalue = mc_halt(
                         <axIndex>,       : Axis index
                         <execute>,       : Trigger
                         );
@@ -457,7 +469,7 @@ Below the ECMC specific accessible variables and functions are listed:
    Command is triggerd with a positive edge on <execute> input.
    returns 0 if success or error code.
 
-7. retvalue = mc_power(
+8. retvalue = mc_power(
                         <axIndex>,       : Axis index
                         <enable>,        : Enable power
                         );
@@ -465,28 +477,28 @@ Below the ECMC specific accessible variables and functions are listed:
    Motion is triggerd with a positive edge on <execute> input.
    returns 0 if success or error code.
 
-8. retvalue = mc_get_busy(
+9. retvalue = mc_get_busy(
                         <axIndex>,       : Axis index#                           
                         );
    Check if axis is busy.
    returns busy state of axis (1 if busy and 0 if not busy).
 
-9. retvalue = mc_get_homed(
+10. retvalue = mc_get_homed(
                         <axIndex>,       : Axis index#                           
                         );
    Check if axis is homed.
    returns state of homed flag of axis (1 if homed and 0 if not homed).
 
-10. retvalue = mc_get_err();
+11. retvalue = mc_get_err();
    Returns error code for last lib call.
 
-11. retvalue = mc_reset(<axIndex>);
+12. retvalue = mc_reset(<axIndex>);
    Resets error of motion axis.
 
-12. retvalue = mc_get_axis_err(<axIndex>);
+13. retvalue = mc_get_axis_err(<axIndex>);
    Returns motion axis error code.
 
-13. retvalue = mc_set_enable_motion_funcs(
+14. retvalue = mc_set_enable_motion_funcs(
                         <axIndex>,         : Axis index
                         <enablePos>,       : Enable positioning
                         <enableVelo>,      : Enable const velo
