@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0e763052")
 
 #- verify slave, including reset
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=false"
 
 #- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE
 ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
