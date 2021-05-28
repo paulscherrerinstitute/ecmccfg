@@ -43,10 +43,16 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3
 
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",  "10")
 
-#- Configure EL6002 with custom database and config of SDOs
-epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8000")  # To set correct sdo address in sensor config
+#- Configure EL6022 with custom database and config of SDOs
+
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "$(SLAVE_ID=11)")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6022, CONFIG=-Sensor-chX-default, SUBST_FILE=ecmcEL6022_bytes.substitutions"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6022, SUBST_FILE=ecmcEL6022_string.substitutions"
+epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8000")  # To set correct sdo address in sensor config
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6022-Sensor-chX-default.cmd
+
+epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8010")  # To set correct sdo address in sensor config
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6022-Sensor-chX-default.cmd
+
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
