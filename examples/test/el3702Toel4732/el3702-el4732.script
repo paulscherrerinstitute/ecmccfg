@@ -20,10 +20,11 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg ecmc_for_loop
+require ecmccfg develop
+require calc 3.7.4
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2, EC_RATE=1000"
 
 ##############################################################################
 ## Config hardware:
@@ -38,7 +39,7 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM_AI",           "12")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_DESC=EL3702, NELM=${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
 
 # EL4732 (empty subst file => no default records loaded)
-epicsEnvSet("ECMC_EC_SLAVE_NUM_AO",           "23")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_AO",           "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_DESC=EL4732, NELM=${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
@@ -47,7 +48,7 @@ ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 # Load custom records (no record loaded by addSlave.cmd)
-dbLoadRecords(moveDataInEpics.db,"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_AI=${ECMC_EC_SLAVE_NUM_AI},SLAVE_AO=${ECMC_EC_SLAVE_NUM_AO},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}, NELM=${ECMC_OVER_SMP}")
+dbLoadRecords(moveDataInEpics.db,"ECMC_P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_AI=${ECMC_EC_SLAVE_NUM_AI},SLAVE_AO=${ECMC_EC_SLAVE_NUM_AO},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}, NELM=${ECMC_OVER_SMP}")
 
 ##############################################################################
 ############# Configure diagnostics:
