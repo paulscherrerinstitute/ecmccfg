@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0e763052")
 
 #- verify slave, including reset
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=false"
 
 #- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE
 ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
@@ -47,7 +47,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 #-      int32_t sync0_shift,
 #-      uint32_t sync1_cycle,
 #-      int32_t sync1_shift)
-#- 
+#-
 #- Sync configuration is not the same as in TwinCAT..
 #-    sync0_cycle: Sample period in nanoseconds (for each sample). Example: EC_RATE 1000Hz, OVERSAMPLING_FACTOR=100 results in sync0_cycle=10000ns)
 #-    sync1_cycle: EtherCAT sample period minus sync0_cycle.  Example: EC_RATE 1000Hz, OVERSAMPLING_FACTOR=100 results in sync1_cycle=990000ns)
