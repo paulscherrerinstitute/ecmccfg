@@ -1,9 +1,3 @@
-# generic slave part
-file "ecmcEcSlave.template"{
-  pattern {}
-          {}
-}
-
 # realy (binary) outputs
 file "ecmc_binaryOutput-chX.template"{
   pattern {CH_ID, ZNAM,   ONAM}
