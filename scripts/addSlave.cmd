@@ -50,10 +50,10 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MAST
 ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "${DEFAULT_SUBS=True}", "","#- ")
 ${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}"
 epicsEnvUnset(DEFAULT_SUBS)
-# placeholder for issue #101
-# ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
-# ${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P}"
-# epicsEnvUnset(DEFAULT_SLAVE_PVS)
+
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
+${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P}"
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
 
 # increment SLAVE_ID
 ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
