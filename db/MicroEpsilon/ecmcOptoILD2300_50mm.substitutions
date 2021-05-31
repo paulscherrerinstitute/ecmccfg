@@ -1,11 +1,5 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 file "ecmcOptoILD2300_XXmm_chX.template"
 {
   pattern {CH_ID, LINR,     ESLO,     EOFF,   EGU,     PREC }
-          {01,    "SLOPE",  1e-6,     0,      "mm",    5    }          
+          {01,    "SLOPE",  1e-6,     0,      "mm",    5    }
 }
