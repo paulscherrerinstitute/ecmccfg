@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 file "ecmc_analogInputArray-chX.template"
 {
   pattern {CH_ID, DTYP,                FTVL    }
