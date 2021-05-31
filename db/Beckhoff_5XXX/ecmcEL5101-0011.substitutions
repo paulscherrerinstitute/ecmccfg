@@ -1,11 +1,5 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 file "ecmcEL5101-0011-chX.template"
 {
   pattern {DTYP,             FTVL  }
-          {asynInt32ArrayIn, LONG  }          
+          {asynInt32ArrayIn, LONG  }
 }
