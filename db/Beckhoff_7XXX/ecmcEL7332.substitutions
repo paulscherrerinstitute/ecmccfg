@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 # All fields related to velocity scaling and alarms
 file "ecmcEL7332-chX.template"
 {
