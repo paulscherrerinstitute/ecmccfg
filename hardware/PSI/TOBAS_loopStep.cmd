@@ -10,5 +10,6 @@
 
 #- Convert to hex value with zero padding (subtract one since addresses start from 0)
 ecmcEpicsEnvSetCalc("ECMC_ENTRY_OFFSET_HEX_VALUE",${IDX},"%02x")
+ecmcEpicsEnvSetCalc("CH_ID",${IDX},"%02d")
 
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},${DIR=1},${SM=2},${PDO},${ENTRY},0x${ECMC_ENTRY_OFFSET_HEX_VALUE},${TYPE},${KEY}${IDX},0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},${DIR=1},${SM=2},${PDO},${ENTRY},0x${ECMC_ENTRY_OFFSET_HEX_VALUE},${TYPE},${KEY}${CH_ID},0)"
