@@ -1,7 +1,7 @@
 #-d /**
-#-d   \brief hardware script for EL1809
+#-d   \brief hardware script for EL1862
 #-d   \details HD terminal 16ch digital input
-#-d   \author Julen Etxeberria
+#-d   \author Niko Kivel
 #-d   \file
 #-d */
 
