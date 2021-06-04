@@ -1,0 +1,72 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmc_enableWord-chX.template"{
+  pattern {CH_ID, KEY,    sourceName, PINI, VAL,  DESC,                   EGU,  PREC  }
+          {01,    enable, enable,     1,    7,    "enable ILK ${CH_ID}",  "",   0     }
+}
+
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,        sourceName,   PINI, VAL,  DESC,                  EGU,     PREC  }
+          {01,    alarmHigh, alarmHigh,     1,    7,    "alarmHigh ${CH_ID}",  "degC",  7     }
+          {01,    alarmLow,  alarmLow,      1,    7,    "alarmLow ${CH_ID}",   "degC",  7     }
+}
+
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, KEY,  sourceName,   ESLO,             EGU,    PREC}
+          {01,    rev,  revision,     1,                "",     0   }
+          {01,    temp, temperature,  1,                "degC", 3   }
+}
+#          {02,    temp, temperature,  1,                "degC", 3   }
+#          {03,    temp, temperature,  1,                "degC", 3   }
+#          {04,    temp, temperature,  1,                "degC", 3   }
+#          {05,    temp, temperature,  1,                "degC", 3   }
+#          {06,    temp, temperature,  1,                "degC", 3   }
+#          {07,    temp, temperature,  1,                "degC", 3   }
+#          {08,    temp, temperature,  1,                "degC", 3   }
+#          {09,    temp, temperature,  1,                "degC", 3   }
+#          {10,    temp, temperature,  1,                "degC", 3   }
+#
+#          {11,    temp, temperature,  1,                "degC", 3   }
+#          {12,    temp, temperature,  1,                "degC", 3   }
+#          {13,    temp, temperature,  1,                "degC", 3   }
+#          {14,    temp, temperature,  1,                "degC", 3   }
+#          {15,    temp, temperature,  1,                "degC", 3   }
+#          {16,    temp, temperature,  1,                "degC", 3   }
+#          {17,    temp, temperature,  1,                "degC", 3   }
+#          {18,    temp, temperature,  1,                "degC", 3   }
+#          {19,    temp, temperature,  1,                "degC", 3   }
+#          {20,    temp, temperature,  1,                "degC", 3   }
+#
+#          {21,    temp, temperature,  1,                "degC", 3   }
+#          {22,    temp, temperature,  1,                "degC", 3   }
+#          {23,    temp, temperature,  1,                "degC", 3   }
+#          {24,    temp, temperature,  1,                "degC", 3   }
+#          {25,    temp, temperature,  1,                "degC", 3   }
+#          {26,    temp, temperature,  1,                "degC", 3   }
+#          {27,    temp, temperature,  1,                "degC", 3   }
+#          {28,    temp, temperature,  1,                "degC", 3   }
+#          {29,    temp, temperature,  1,                "degC", 3   }
+#          {30,    temp, temperature,  1,                "degC", 3   }
+#
+#          {31,    temp, temperature,  1,                "degC", 3   }
+#          {32,    temp, temperature,  1,                "degC", 3   }
+#          {33,    temp, temperature,  1,                "degC", 3   }
+#          {34,    temp, temperature,  1,                "degC", 3   }
+#          {35,    temp, temperature,  1,                "degC", 3   }
+#          {36,    temp, temperature,  1,                "degC", 3   }
+#          {37,    temp, temperature,  1,                "degC", 3   }
+#          {38,    temp, temperature,  1,                "degC", 3   }
+#          {39,    temp, temperature,  1,                "degC", 3   }
+#          {40,    temp, temperature,  1,                "degC", 3   }
+#}
+
+file "ecmc_status-chX.template"{
+  pattern {CH_ID, KEY,    sourceName      }
+          {01,    sumILK, sumILK          }
+          {01,    id,     identification  }
+          {01,    temp,   status          }
+}

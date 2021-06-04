@@ -49,7 +49,7 @@ ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,20,1)
 
 #- SDO 0x200c, "13th ADI - Mode/Calib"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x200c,0x0,U8,modeCalib01,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x200c,0x0,U8,modeCalib01)"
 
 #- =============================================================================
 #- SyncManager 3
@@ -74,13 +74,13 @@ ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,40,1)
 
 #- SDO 0x2006, "6th ADI - SUM ILK"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x2006,0x0,U8,sumILK01,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x2006,0x0,U8,sumILK01)"
 
 #- SDO 0x2007, "7th ADI - Identification"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x2007,0x0,U8,identification01,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x2007,0x0,U8,identification01)"
 
 #- SDO 0x2008, "8th ADI - Revision"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x2008,0x0,U32,revision01,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x2008,0x0,U32,revision01)"
 
 #- SDO 0x2009, "9th ADI - ExtSens Val"
 epicsEnvSet("ECMC_EC_ENTRY" "0x2009")
@@ -90,4 +90,5 @@ ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,12,1)
 
 #- SDO 0x200a, "10th ADI - ExtSens Stat"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x200a,0x0,U8,statusExtSensores01,0)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x200a,0x0,U8,extSensorstatus01)"
+
