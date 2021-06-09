@@ -30,14 +30,14 @@ ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM
 #- SDO 0x2002, "DIGINP"
 epicsEnvSet("ECMC_EC_ENTRY" "0x2002")
 epicsEnvSet("ECMC_EC_TYPE"  "U8")
-epicsEnvSet("ECMC_EC_KEY"   "digitalInput")
+epicsEnvSet("ECMC_EC_KEY"   "binaryOutputArray")
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,10,1)
 
 #- SDO 0x2003, "AN_INP"
 epicsEnvSet("ECMC_EC_ENTRY" "0x2003")
 epicsEnvSet("ECMC_EC_TYPE"  "U16")
-epicsEnvSet("ECMC_EC_KEY"   "analogInput")
+epicsEnvSet("ECMC_EC_KEY"   "analogOutput")
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,59,1)
 
@@ -66,14 +66,13 @@ ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM
 #- SDO 0x2006, "DIGOUT"
 epicsEnvSet("ECMC_EC_ENTRY" "0x2006")
 epicsEnvSet("ECMC_EC_TYPE"  "U8")
-epicsEnvSet("ECMC_EC_KEY"   "digitalOut")
+epicsEnvSet("ECMC_EC_KEY"   "binaryInputArray")
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,22,1)
 
 #- SDO 0x2007, "AN_OUT"
 epicsEnvSet("ECMC_EC_ENTRY" "0x2007")
 epicsEnvSet("ECMC_EC_TYPE"  "U16")
-epicsEnvSet("ECMC_EC_KEY"   "analogOut")
+epicsEnvSet("ECMC_EC_KEY"   "analogInput")
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,11,1)
-

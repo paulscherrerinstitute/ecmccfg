@@ -7,10 +7,10 @@
 
 record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}"){
   info(asyn:READBACK,"1")
-  field(DESC, "${DESC="${HWTYPE}: BO${CH_ID}: Array"}")
+  field(DESC, "${DESC="${HWTYPE}: ${sourceName=BO}${CH_ID}: Array"}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
-  field(SCAN, "${SCAN=I/O Intr}")
+#  field(SCAN, "${SCAN=I/O Intr}")
   field(OUT,  "@asynMask(${PORT},${ADDR=0},0xFFFF,${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=binaryOutputArray}${CH_ID}=")
   field(TSE,  "${TSE=-2}")
 }
