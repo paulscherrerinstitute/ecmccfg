@@ -4,7 +4,7 @@ file "ecmcEcSlave.template"
           {}
 }
 
-file "ecmc_binaryOutputArray-chX.template"{
+file "ecmc_analogOutput-chX.template"{
   pattern {CH_ID, KEY,    sourceName}
           {01,    spiRd,  spiRd   }
           {02,    spiRd,  spiRd   }
@@ -42,6 +42,16 @@ file "ecmc_binaryOutputArray-chX.template"{
           {34,    spiRd,  spiRd   }
           {35,    spiRd,  spiRd   }
           {36,    spiRd,  spiRd   }
+          {01,    digInp, digInp  }
+          {02,    digInp, digInp  }
+          {03,    digInp, digInp  }
+          {04,    digInp, digInp  }
+          {05,    digInp, digInp  }
+          {06,    digInp, digInp  }
+          {07,    digInp, digInp  }
+          {08,    digInp, digInp  }
+          {09,    digInp, digInp  }
+          {10,    digInp, digInp  }
 }
 
 file "ecmc_analogOutput-chX.template"
@@ -106,20 +116,6 @@ file "ecmc_analogOutput-chX.template"
           {57,    1,    ""  }
           {58,    1,    ""  }
           {59,    1,    ""  }
-}
-
-file "ecmc_binaryOutputArray-chX.template"{
-  pattern {CH_ID  }
-          {01     }
-          {02     }
-          {03     }
-          {04     }
-          {05     }
-          {06     }
-          {07     }
-          {08     }
-          {09     }
-          {10     }
 }
 
 file "ecmc_binaryInputArray-chX.template"{
