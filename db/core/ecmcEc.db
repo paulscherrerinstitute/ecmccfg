@@ -5,7 +5,7 @@ record(longin,"${P}m${MASTER_ID}-Stat"){
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).masterstatus?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${P}m${MASTER_ID}-slavesresp.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-SlvRsp.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -21,7 +21,7 @@ record(mbbiDirect,"${P}m${MASTER_ID}-Stat_"){
   field(DESC, "Master: Master Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "${P}m${MASTER_ID}-Stat")
-  field(FLNK, "${P}m${MASTER_ID}-Linkup.PROC")
+  field(FLNK, "${P}m${MASTER_ID}-LinkUp.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 

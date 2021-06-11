@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 # Drive Control word
 file "ecmc_controlWord-chX.template"
 {

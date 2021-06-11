@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 #- binary output array (8 bit each)
 #- TODO: expose the outputs to Epics
 
