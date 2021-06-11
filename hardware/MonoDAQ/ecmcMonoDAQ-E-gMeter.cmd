@@ -14,9 +14,9 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x000000A2")
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=false"
 
 # Raw data select
-# ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8020,0x03,20992,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8020,0x03,0,2)"
 # BufferedInput
-# ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8020,0x07,16896,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8020,0x07,0,2)"
 
 #- device
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6001,0x01,U16,counter01)"
