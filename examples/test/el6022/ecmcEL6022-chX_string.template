@@ -44,7 +44,7 @@ record(longout,"${ECMC_P}Ch${CH_ID}-BytesOut-Cmd_"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Bytes Out")
   field(SCAN, "Passive")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.outBytes=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.outBytes=")
   field(DOL,  "${ECMC_P}Ch${CH_ID}-BytesOut-Calc_.VAL")
   field(FLNK, "${ECMC_P}Ch${CH_ID}-Cmd-Trigg-Wrt_.PROC")
   field(OMSL, "closed_loop")

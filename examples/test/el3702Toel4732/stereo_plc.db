@@ -1,7 +1,7 @@
 ###############################################################################
 ##### Common
 
-record(ao,"$(P)Volume"){
+record(ao,"${ECMC_P}Volume"){
   info(asyn:READBACK,"1")
   field(PINI, "1")
   field(DESC, "Amplification gain of input data (Y)")
@@ -16,9 +16,9 @@ record(ao,"$(P)Volume"){
 ###############################################################################
 ##### Left Channel
 
-record(ao,"$(P)LeftGain"){
+record(ao,"${ECMC_P}LeftGain"){
   info(asyn:READBACK,"1")
-  field(DESC, "Amplification gain of left input data (Y)")
+  field(DESC, "Gain of left input data (Y)")
   field(PINI, "1")  
   field(VAL,  "100")
   field(EGU,  "No unit")      
@@ -31,9 +31,9 @@ record(ao,"$(P)LeftGain"){
 ###############################################################################
 ##### Right Channel
 
-record(ao,"$(P)RightGain"){
+record(ao,"${ECMC_P}RightGain"){
   info(asyn:READBACK,"1")
-  field(DESC, "Amplification gain of right input data (Y)")
+  field(DESC, "Gain of right input data (Y)")
   field(PINI, "1")
   field(VAL,  "100")
   field(EGU,  "No unit")      
