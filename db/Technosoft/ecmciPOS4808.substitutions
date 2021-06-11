@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 # Encoder actual position
 file "ecmc_analogInput-chX.template"
 {
@@ -68,7 +62,7 @@ file "ecmc_analogInput-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,  sourceName,      LINR,    ESLO,      EGU }
           {01,    "Drv", "-Volt", "voltageActual", "SLOPE", 0.0015614, "V" }
-}  
+}
 
 # temperatureActual, ESLO= 102.3/65520 (see manual)
 file "ecmc_analogInput-chX.template"

@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 file "ecmc_analogInput-chX.template"{
   pattern {CH_ID, ESLO,             EGU,  PREC}
           {01,    3.0518509476E-4,  "V",  3   }

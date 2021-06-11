@@ -1,9 +1,3 @@
-# generic slave part
-file "ecmcEcSlave.template"{
-  pattern {}
-          {}
-}
-
 # binary inputs
 file "ecmc_binaryInput-chX.template"{
   pattern {CH_ID}

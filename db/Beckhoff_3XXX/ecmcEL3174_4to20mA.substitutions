@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 # Scaling is between 4..21.179mA 16bit (see manual)
 file "ecmc_analogInput-chX.template"{
   pattern {CH_ID, ESLO,            EGU,  EOFF, PREC, LOW, LOLO, HIGH, HIHI, LLSV,    LSV,     HSV,     HHSV   }

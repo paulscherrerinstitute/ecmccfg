@@ -1,10 +1,3 @@
-
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 #Actually the scalinging is between 0..10.737V (see manual)
 file "ecmc_analogInput-chX.template"
 {
