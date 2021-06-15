@@ -174,46 +174,6 @@ file "ecmc_analogInput-chX.template"{
   pattern {CH_ID, KEY,  sourceName,   ESLO,             EGU,    PREC}
           {01,    revision,  revision,     1,           "",     0   }
           {01,    identification,  identification,  1,  "",     0   }
-          {01,    temp, temperature,  1,                "degC", 3   }
-          {02,    temp, temperature,  1,                "degC", 3   }
-          {03,    temp, temperature,  1,                "degC", 3   }
-          {04,    temp, temperature,  1,                "degC", 3   }
-          {05,    temp, temperature,  1,                "degC", 3   }
-          {06,    temp, temperature,  1,                "degC", 3   }
-          {07,    temp, temperature,  1,                "degC", 3   }
-          {08,    temp, temperature,  1,                "degC", 3   }
-          {09,    temp, temperature,  1,                "degC", 3   }
-          {10,    temp, temperature,  1,                "degC", 3   }
-          {11,    temp, temperature,  1,                "degC", 3   }
-          {12,    temp, temperature,  1,                "degC", 3   }
-          {13,    temp, temperature,  1,                "degC", 3   }
-          {14,    temp, temperature,  1,                "degC", 3   }
-          {15,    temp, temperature,  1,                "degC", 3   }
-          {16,    temp, temperature,  1,                "degC", 3   }
-          {17,    temp, temperature,  1,                "degC", 3   }
-          {18,    temp, temperature,  1,                "degC", 3   }
-          {19,    temp, temperature,  1,                "degC", 3   }
-          {20,    temp, temperature,  1,                "degC", 3   }
-          {21,    temp, temperature,  1,                "degC", 3   }
-          {22,    temp, temperature,  1,                "degC", 3   }
-          {23,    temp, temperature,  1,                "degC", 3   }
-          {24,    temp, temperature,  1,                "degC", 3   }
-          {25,    temp, temperature,  1,                "degC", 3   }
-          {26,    temp, temperature,  1,                "degC", 3   }
-          {27,    temp, temperature,  1,                "degC", 3   }
-          {28,    temp, temperature,  1,                "degC", 3   }
-          {29,    temp, temperature,  1,                "degC", 3   }
-          {30,    temp, temperature,  1,                "degC", 3   }
-          {31,    temp, temperature,  1,                "degC", 3   }
-          {32,    temp, temperature,  1,                "degC", 3   }
-          {33,    temp, temperature,  1,                "degC", 3   }
-          {34,    temp, temperature,  1,                "degC", 3   }
-          {35,    temp, temperature,  1,                "degC", 3   }
-          {36,    temp, temperature,  1,                "degC", 3   }
-          {37,    temp, temperature,  1,                "degC", 3   }
-          {38,    temp, temperature,  1,                "degC", 3   }
-          {39,    temp, temperature,  1,                "degC", 3   }
-          {40,    temp, temperature,  1,                "degC", 3   }
           {01,    extS, extSensorVal, 1,                "n/a",  3   }
           {02,    extS, extSensorVal, 1,                "n/a",  3   }
           {03,    extS, extSensorVal, 1,                "n/a",  3   }
@@ -227,6 +187,50 @@ file "ecmc_analogInput-chX.template"{
           {11,    extS, extSensorVal, 1,                "n/a",  3   }
           {12,    extS, extSensorVal, 1,                "n/a",  3   }
   }
+
+file "ecmc_RtdInput-chX.template"{
+  pattern {CH_ID, KEY,  sourceName, EGU,    PREC}
+          {01,    temp, Rtd,        "degC", 9   }
+          {02,    temp, Rtd,        "degC", 9   }
+          {03,    temp, Rtd,        "degC", 9   }
+          {04,    temp, Rtd,        "degC", 9   }
+          {05,    temp, Rtd,        "degC", 9   }
+          {06,    temp, Rtd,        "degC", 9   }
+          {07,    temp, Rtd,        "degC", 9   }
+          {08,    temp, Rtd,        "degC", 9   }
+          {09,    temp, Rtd,        "degC", 9   }
+          {10,    temp, Rtd,        "degC", 9   }
+          {11,    temp, Rtd,        "degC", 9   }
+          {12,    temp, Rtd,        "degC", 9   }
+          {13,    temp, Rtd,        "degC", 9   }
+          {14,    temp, Rtd,        "degC", 9   }
+          {15,    temp, Rtd,        "degC", 9   }
+          {16,    temp, Rtd,        "degC", 9   }
+          {17,    temp, Rtd,        "degC", 9   }
+          {18,    temp, Rtd,        "degC", 9   }
+          {19,    temp, Rtd,        "degC", 9   }
+          {20,    temp, Rtd,        "degC", 9   }
+          {21,    temp, Rtd,        "degC", 9   }
+          {22,    temp, Rtd,        "degC", 9   }
+          {23,    temp, Rtd,        "degC", 9   }
+          {24,    temp, Rtd,        "degC", 9   }
+          {25,    temp, Rtd,        "degC", 9   }
+          {26,    temp, Rtd,        "degC", 9   }
+          {27,    temp, Rtd,        "degC", 9   }
+          {28,    temp, Rtd,        "degC", 9   }
+          {29,    temp, Rtd,        "degC", 9   }
+          {30,    temp, Rtd,        "degC", 9   }
+          {31,    temp, Rtd,        "degC", 9   }
+          {32,    temp, Rtd,        "degC", 9   }
+          {33,    temp, Rtd,        "degC", 9   }
+          {34,    temp, Rtd,        "degC", 9   }
+          {35,    temp, Rtd,        "degC", 9   }
+          {36,    temp, Rtd,        "degC", 9   }
+          {37,    temp, Rtd,        "degC", 9   }
+          {38,    temp, Rtd,        "degC", 9   }
+          {39,    temp, Rtd,        "degC", 9   }
+          {40,    temp, Rtd,        "degC", 9   }
+}
 
 
 

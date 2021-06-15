@@ -62,7 +62,7 @@ epicsEnvSet("ECMC_EC_PDO"   "0x1a00")
 #- SDO 0x2001, "1st ADI - Temperature"
 epicsEnvSet("ECMC_EC_ENTRY" "0x2001")
 epicsEnvSet("ECMC_EC_TYPE"  "U32")
-epicsEnvSet("ECMC_EC_KEY"   "temperature")
+epicsEnvSet("ECMC_EC_KEY"   "Rtd")
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,40,1)
 
@@ -91,4 +91,3 @@ ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM
 
 #- SDO 0x200a, "10th ADI - ExtSens Stat"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x200a,0x0,U8,extSensorstatus01)"
-
