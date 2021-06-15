@@ -68,10 +68,18 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_VELOCITY=""},"ax${ECMC_AX
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_POSITION=""},"ax${ECMC_AXIS_NO}.drv.position")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_BRAKE},"ax${ECMC_AXIS_NO}.drv.brake")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_REDUCE_TORQUE},"ax${ECMC_AXIS_NO}.drv.reducetorque")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_RESET=""},"ax${ECMC_AXIS_NO}.drv.reset")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_ALARM_0=""},"ax${ECMC_AXIS_NO}.drv.alarm0")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_ALARM_1=""},"ax${ECMC_AXIS_NO}.drv.alarm1")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_ALARM_2=""},"ax${ECMC_AXIS_NO}.drv.alarm2")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_WARNING=""},"ax${ECMC_AXIS_NO}.drv.warning")"
+
 ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom(${ECMC_AXIS_NO},${ECMC_DRV_SCALE_DENOM})"
 ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum(${ECMC_AXIS_NO},${ECMC_DRV_SCALE_NUM})"
 ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime(${ECMC_AXIS_NO},${ECMC_DRV_BRAKE_OPEN_DLY_TIME})"
 ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime(${ECMC_AXIS_NO},${ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME})"
+
+
 
 #- Soft limits
 ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd(${ECMC_AXIS_NO},${ECMC_SOFT_LOW_LIM})"
