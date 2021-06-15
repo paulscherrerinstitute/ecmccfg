@@ -7,17 +7,22 @@ epicsEnvSet("ECMC_EGU",                   "mm")                        # Motor R
 epicsEnvSet("ECMC_PREC",                  "3")                         # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "")                          # Extra parameters to driver
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                          # Entry for axis health output (example: ec0.s1.BO_1.0)
-epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
-epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
+epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                         # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
+epicsEnvSet("ECMC_MOD_TYPE",              "0")                         # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
 #Encoder
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "-60")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "2000")
-epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
-epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bit count of encoder raw data
-epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
-epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_ENC_TYPE"               "0")                         # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_BITS"               "16")                        # Total bit count of encoder raw data
+epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                         # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
+epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                         # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.POSITION")           # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                          # Reset   handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                          # Error 0 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                          # Error 1 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                          # Error 2 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                          # Warning handled by DS402 statemachine
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)

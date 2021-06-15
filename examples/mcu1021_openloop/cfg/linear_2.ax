@@ -18,6 +18,11 @@ epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bi
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s8.POSITION")          # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning (if no encoder warning bit then leave empty)
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                        # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)

@@ -18,11 +18,11 @@ epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bi
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s4.POSITION")          # Ethercat entry for actual position input (encoder)
-# Test alarms with digital inputs and outputs
+# Test alarms with digital inputs and outputs (nromally these should be linked to alarm/reset of encoder)
 epicsEnvSet("ECMC_EC_ENC_RESET",          "ec0.s2.BO_8")              # Reset   (if no encoder reset bit then leave empty)
-epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")              # Error 0 (if no encoder error bit then leave empty)
-epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "ec0.s1.BI_8")                         # Error 1 (if no encoder error bit then leave empty)
-epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "ec0.s1.BI_8")                         # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "ec0.s1.BI_8")              # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "ec0.s1.BI_8")              # Error 2 (if no encoder error bit then leave empty)
 epicsEnvSet("ECMC_EC_ENC_WARNING",        "ec0.s1.BI_8")              # Warning (if no encoder warning bit then leave empty)
 
 #Drive

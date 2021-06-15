@@ -21,6 +21,11 @@ epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.POSITION")           # Etherca
 epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.LATCH_POSITION")     # Ethercat entry for latch position (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.ENC_CONTROL.0")      # Ethercat entry for latch control (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.ENC_STATUS.0")       # Ethercat entry for latch status (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                          # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                          # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                          # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                          # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                          # Warning (if no encoder warning bit then leave empty)
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
