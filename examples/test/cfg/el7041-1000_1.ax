@@ -37,6 +37,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM).STM_CONTROL
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                      # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "")                                            # Reset: Not sure if el7041-1000 have a this bit. Need to check. 
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "")                                            # Error: Not sure if el7041-1000 have a this bit. Need to check. 
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")                                            #  Error: Not sure if el7041-1000 have a this bit. Need to check. 
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "")                                            #  Error: Not sure if el7041-1000 have a this bit. Need to check. 
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "")                                            # Warning: Not sure if el7041-1000 have a this bit. Need to check. 
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "90.0")

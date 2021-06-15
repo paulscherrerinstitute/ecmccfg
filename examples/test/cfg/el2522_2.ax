@@ -36,6 +36,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_3
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "ec0.s$(ECMC_EC_SLAVE_NUM_OUTPUT).BO_2.0")         # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                   # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                   # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "")                         # Reset   (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "")                         # Error 0 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")                         # Error 1 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "")                         # Error 2 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "")                         # Warning (handled by ds402 statemachine, but this bit can be used anyway if needed)
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "1000.0")

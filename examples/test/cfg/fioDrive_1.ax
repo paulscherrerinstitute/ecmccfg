@@ -35,6 +35,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "")                                   
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                      # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "")      # Reset: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "")      # Error: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")      # Error: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "")      # Error: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "")      # Warning: Not sue if FIO drive has this bit. Need to check
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "100.0")

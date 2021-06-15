@@ -38,6 +38,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s7.STM_CONTROL.2")      # Etherca
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                          # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                    # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                    # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "ec0.s7.STM_CONTROL.1")      # Reset
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "ec0.s7.STM_STATUS.3")       # Error
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "ec0.s7.STM_STATUS.7")       # Stall
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "ec0.s7.STM_STATUS.14")      # Sync error
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s7.STM_STATUS.2")       # Warning
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "10.0")
