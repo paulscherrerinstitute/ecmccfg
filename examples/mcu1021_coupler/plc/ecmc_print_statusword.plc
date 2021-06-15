@@ -1,0 +1,15 @@
+
+if(static.controlOld != ec0.s9.STM_CONTROL) {
+  print('Control word: ');
+  ec_print_bin(ec0.s9.STM_CONTROL,0,7);
+  println('');
+};
+#if(static.statusOld != ec0.s9.STM_STATUS) {
+#  print('Status word: ');
+#  ec_print_bin(ec0.s9.STM_STATUS,0,7);
+#  println('');
+#};
+
+static.controlOld:=ec0.s9.STM_CONTROL;
+static.statusOld:=ec0.s9.STM_STATUS;
+return [];
