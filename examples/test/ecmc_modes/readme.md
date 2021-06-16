@@ -29,3 +29,9 @@ Example of starting ecmc in DAQ mode:
 ```
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,MODE=DAQ"
 ```
+
+NOTE: The default record update rate is set to 10ms in initAlll.cmd. For DAQ applications it could be needed to change this parameter to update records faster by changing the ECMC_SAMPLE_RATE_MS variable:
+```
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",1)
+```
+
