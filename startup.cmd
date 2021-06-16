@@ -21,12 +21,17 @@
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
 #- SCRIPTEXEC        = iocshLoad
 #- EC_RATE           = 1000
-#-
+#- MODE              = FULL / DAQ
+#-    FULL: Init ecmc with support for both motion and DAQ (DEFAULT)
+#-    DAQ:  Init ecmc with support for only daq (not motion)
+#-    
 #- [set by module]
 #- ECMC_CONFIG_ROOT    = root directory of ${MODULE}
 #- ECMC_CONFIG_DB      = database directory of ${MODULE}
 #- EthercatMC_DB       = database directory of EthercatMC
 #- ECMC_EC_SAMPLE_RATE = EtherCAT bus sampling rate [Hz] (1000 default)
+#- ECMC_MODE           = ecmc mode. FULL/DAQ, Defaults to FULL
+#- ECMC_SUPPORT_MOTION = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
@@ -58,6 +63,10 @@ epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
 #-
 #-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
+
+epicsEnvSet(ECMC_MODE, ${MODE=FULL})
+ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'=='FULL'","","# MODE == DAQ, DISABLING MOTION.")
+epicsEnvShow(ECMC_SUPPORT_MOTION)
 ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 #-
