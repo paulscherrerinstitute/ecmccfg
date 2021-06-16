@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 6.3.0
+#- ECMC_VER          = 6.3.2
 #- EthercatMC_VER    = 3.0.2
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
