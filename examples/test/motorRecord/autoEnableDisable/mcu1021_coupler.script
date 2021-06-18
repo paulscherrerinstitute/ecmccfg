@@ -1,14 +1,14 @@
 ##############################################################################
-## Example config ESS crate of type MCU1025
+## Example config ESS crate of type MCU1021_coupler with test of auto on off
 
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg 6.3.2
+require autosave 5.10.0
 
 # Epics Motor record driver that will be used:
 epicsEnvShow(ECMC_MR_MODULE)
@@ -44,7 +44,6 @@ epicsEnvSet(ECMC_ENC_CH_ID,1)
 epicsEnvSet(ECMC_ENC_TYPE,0)      # Type: 0=Incremental, 1=Absolute
 epicsEnvSet(ECMC_DRV_SLAVE_ID,8)
 
-
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_auto_on_off.ax)
 
@@ -69,5 +68,9 @@ ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
 ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
-# go active
+##############################################################################
+############# Go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+

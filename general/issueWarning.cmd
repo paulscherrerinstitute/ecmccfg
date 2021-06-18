@@ -15,6 +15,6 @@
 
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"${EXPR_STR}","", "#-")
 ${ECMC_EXE_CMD}############## WARNING ##################################################
-${ECMC_EXE_CMD}${WARNING_STR}
+${ECMC_EXE_CMD}#${WARNING_STR = ""}
 ${ECMC_EXE_CMD}#########################################################################
 epicsEnvUnset(ECMC_EXE_CMD)

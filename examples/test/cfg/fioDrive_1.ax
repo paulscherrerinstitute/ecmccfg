@@ -18,6 +18,11 @@ epicsEnvSet("ECMC_ENC_BITS"               "32")                       # Total bi
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM).positionActual01")  # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning (if no encoder warning bit then leave empty)
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "1")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
@@ -30,6 +35,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "")                                   
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                      # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "")      # Reset: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "")      # Error: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")      # Error: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "")      # Error: Not sue if FIO drive has this bit. Need to check
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "")      # Warning: Not sue if FIO drive has this bit. Need to check
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "100.0")

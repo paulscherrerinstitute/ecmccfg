@@ -28,8 +28,8 @@ asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
 asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
 asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 1)
 
-#- Create motor record controller (keep 64 for use with EthercatMC)
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "64", ${ECMC_MR_MOV_POLL_MS=200}, ${ECMC_MR_IDLE_POLL_MS=1000}, "")
+#- Create motor record controller if MODE==FULL (keep 64 for use with EthercatMC, not needed for ecmcMotorRecord)
+${ECMC_SUPPORT_MOTION}${ECMC_MR_MODULE="ecmcMotorRecord"}CreateController(${ECMC_MOTOR_PORT}, ${ECMC_ASYN_PORT}, "64", ${ECMC_MR_MOV_POLL_MS=200}, ${ECMC_MR_IDLE_POLL_MS=1000}, "")
 
 ############################################################
 ############# Misc settings:
@@ -46,6 +46,3 @@ epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
 # Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
 # (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
-
-# Update records in 10ms (100Hz)
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
