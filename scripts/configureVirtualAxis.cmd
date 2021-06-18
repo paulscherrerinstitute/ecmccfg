@@ -17,6 +17,11 @@
 #-d   \post After all axis have been added to the bus configuration, \b applyConfig.cmd has to be called.
 #-d */
 
+#- Check ECMC_MODE, only allow if in "FULL" mode
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MODE=FULL}'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")${ECMC_EXE_CMD}
+${ECMC_EXE_CMD}
+epicsEnvUnset(ECMC_EXE_CMD)
+
 #- set device name, default to ${IOC}
 epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 ${SCRIPTEXEC} ${CONFIG}
