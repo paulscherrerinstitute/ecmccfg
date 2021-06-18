@@ -16,6 +16,11 @@
 #-d   \pre A physical/virtual axis has to be added/configured immediately before the call of this script.
 #-d */
 
+#- Check ECMC_MODE, only allow if in "FULL" mode
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MODE=FULL}'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")${ECMC_EXE_CMD}
+${ECMC_EXE_CMD}
+epicsEnvUnset(ECMC_EXE_CMD)
+
 ${SCRIPTEXEC} ${CONFIG}
 
 #- add axis to ECMC

@@ -7,7 +7,7 @@ epicsEnvSet("ECMC_EGU",                   "mm")                       # Motor Re
 epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
-epicsEnvSet("ECMC_MOD_RANGE" ,            "360")                      # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
+epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
 epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
 #Encoder
@@ -18,6 +18,11 @@ epicsEnvSet("ECMC_ENC_BITS"               "32")                       # Total bi
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM).positionActual01")  # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning handled by DS402 statemachine
 
 #Additional encoder filter variables
 epicsEnvSet("ECMC_ENC_VEL_FILTER_SIZE",  "100")
@@ -27,7 +32,7 @@ epicsEnvSet("ECMC_ENC_POS_FILTER_ENABLE", "1")
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "1")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")                                           # Fastest speed in engineering units
-epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "9322")                                        # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "9320.7")                                      # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
 epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM).driveControl01")       # Ethercat entry for control word or bit output
 epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM).driveStatus01")        # Ethercat entry for status word or bit input
 epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s$(ECMC_EC_SLAVE_NUM).velocitySetpoint01") # Ethercat entry for velocity setpoint output
@@ -35,6 +40,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "")                                   
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                      # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "")                                            # Reset   (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "")                                            # Error 0 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")                                            # Error 1 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "")                                            # Error 2 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "")                                            # Warning (handled by ds402 statemachine, but this bit can be used anyway if needed)
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "720.0")
