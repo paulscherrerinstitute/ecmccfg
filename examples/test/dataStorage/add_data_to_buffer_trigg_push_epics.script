@@ -1,0 +1,119 @@
+##############################################################################
+## Example config for adding data to dataStroage
+## Buffer 10000 values from encoder
+## Push to epics when trigger from bo record (rising edge)
+## 
+## Trigg data by rising edge of "IOC_TEST:Set-PushDataTrigger-RB" pv:
+##     raspberrypi-16970 > dbpf IOC_TEST:Set-PushDataTrigger-RB 1
+##     DBF_STRING:         "One"     
+##     raspberrypi-16970 > Pushing data to EPICS....
+##     dbpf IOC_TEST:Set-PushDataTrigger-RB 0
+##     DBF_STRING:         "Zero"    
+##     raspberrypi-16970 > dbpf IOC_TEST:Set-PushDataTrigger-RB 1
+##     DBF_STRING:         "One"     
+##     raspberrypi-16970 > Pushing data to EPICS....
+##
+## data storage data (waveform) is accesible in this pv: IOC_TEST:ds0-Data-Act
+##
+##
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
+
+##############################################################################
+## Configure hardware
+#
+
+# Configure EL1018 digital input terminal
+epicsEnvSet(ECMC_EC_SLAVE_NUM,                "1")
+epicsEnvSet("SLAVE_INPUTS", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL1018"
+
+# Configure EL2808 digital output terminal
+epicsEnvSet(ECMC_EC_SLAVE_NUM,                "2")
+epicsEnvSet("SLAVE_OUTPUTS", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL2808"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+epicsEnvSet("SLAVE_ENCODER", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5101"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "8")
+epicsEnvSet("SLAVE_DRIVE", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## ADDITIONAL SETUP
+#
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_1,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_2,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_4,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_5,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_6,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_7,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_8,1)"
+# END of ADDITIONAL SETUP
+
+##############################################################################
+## AXIS 1: physical axis
+#
+epicsEnvSet("DEV",       "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+
+##############################################################################
+## Data Storage: For encoder values
+#
+epicsEnvSet("DS_ID",0)
+epicsEnvSet("DS_SIZE", 10000)
+#  DS_TYPE = 0 : Fill from beginning. Stop when full
+#  DS_TYPE = 1 : Fill from beginning. Start over in beginning
+#  DS_TYPE = 2 : Fill from end (newwst value in the end). Old values shifted out
+epicsEnvSet("DS_TYPE", 2)  # Fill from end (newwst value in the end). Old values shifted out
+# SAMPLE_RATE_MS = -1  (push data when triggerd from PLC)
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${DS_ID}, DS_SIZE=${DS_SIZE}, SAMPLE_RATE_MS=-1,DS_TYPE=${DS_TYPE}")
+
+##############################################################################
+## PLC 0: Feed data to asyn and trigger transfer to epics
+# DS__ID         = ID of ds to use as a filter id.
+# PLC_ID         = ID of this PLC
+# ENC_S_ID       = Encoder terminal slave id
+# DBG            = = Set to empty string to get printouts, set to "#" to avoid printouts
+# SAMPLE_RATE_MS = 1MS
+# SCALE          = Encoder scale value, 0.1234 
+# OFFSET         = Encoder offset value, 9876
+#
+epicsEnvSet("PLC_ID",0)
+epicsEnvSet(PLC_MACROS,"PLC_ID=${PLC_ID},DS_ID=${DS_ID},ENC_S_ID=${SLAVE_ENCODER}, DBG=, SCALE=0.1234, OFFSET=9876")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${PLC_ID}, SAMPLE_RATE_MS=1, FILE=./plc/enc_data_storage_epics_trigg.plc, PLC_MACROS='${PLC_MACROS}'")
+dbLoadRecords("ecmcPlcBinary.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc${PLC_ID}.static.trigg,REC_NAME=-PushDataTrigger")
+
+##############################################################################
+############# Configure diagnostics:
+#
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+##############################################################################
+############# Go active:
+#
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit();
+dbl > pvs.log

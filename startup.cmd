@@ -26,12 +26,13 @@
 #-    DAQ:  Init ecmc with support for only daq (not motion)
 #-    
 #- [set by module]
-#- ECMC_CONFIG_ROOT    = root directory of ${MODULE}
-#- ECMC_CONFIG_DB      = database directory of ${MODULE}
-#- EthercatMC_DB       = database directory of EthercatMC
-#- ECMC_EC_SAMPLE_RATE = EtherCAT bus sampling rate [Hz] (1000 default)
-#- ECMC_MODE           = ecmc mode. FULL/DAQ, Defaults to FULL
-#- ECMC_SUPPORT_MOTION = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
+#- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
+#- ECMC_CONFIG_DB         = database directory of ${MODULE}
+#- EthercatMC_DB          = database directory of EthercatMC
+#- ECMC_EC_SAMPLE_RATE    = EtherCAT bus sampling rate [Hz] (1000 default)
+#- ECMC_EC_SAMPLE_RATE_MS = EtherCAT bus sampling rate [ms] (1 default)
+#- ECMC_MODE              = ecmc mode. FULL/DAQ, Defaults to FULL
+#- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
@@ -76,7 +77,11 @@ ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
 #-
 #- Set current EtherCAT sample rate
 #- Note: Not the same as ECMC_SAMPLE_RATE_MS which is for record update
-epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,   ${EC_RATE=1000})
+ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS" ,1000/${ECMC_EC_SAMPLE_RATE=1000})
+
+# Update records in 10ms (100Hz) for FULL MODE and in EC_RATE for DAQ mode
+ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'${ECMC_MODE=FULL}'=='DAQ'","${ECMC_EC_SAMPLE_RATE_MS}","10")
 #-
 #-------------------------------------------------------------------------------
 

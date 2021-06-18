@@ -46,6 +46,3 @@ epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
 # Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
 # (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
 epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
-
-# Update records in 10ms (100Hz)
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "${ECMC_SAMPLE_RATE_MS=10}")
