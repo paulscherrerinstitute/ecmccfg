@@ -9,7 +9,7 @@
 #-d */
 
 #- Check ECMC_MODE, only allow if in "FULL" mode
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MODE=FULL}'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")${ECMC_EXE_CMD}
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MODE=FULL}'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)
 
