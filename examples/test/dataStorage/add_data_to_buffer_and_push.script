@@ -2,6 +2,10 @@
 ## Example config for adding data to dataStroage
 ## Buffer 10000 values from encoder
 ## Push to epics when high limit is triggered (falling edge)
+##
+## data storage data (waveform) is accesible in this pv: IOC_TEST:ds0-Data-Act
+##
+
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
@@ -29,7 +33,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DES
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
 epicsEnvSet("SLAVE_ENCODER", ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5101"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5101"
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "8")
 epicsEnvSet("SLAVE_DRIVE", ${ECMC_EC_SLAVE_NUM})
