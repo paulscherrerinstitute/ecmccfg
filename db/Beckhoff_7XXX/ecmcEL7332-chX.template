@@ -137,12 +137,12 @@ record(bi,"${ECMC_P}-Drv${CH_ID}-TqueRed"){
 # These 2 inputs are exposed in the status word of each channel which makes it appear like 4 inputs.
 # So the input "*1_Drv${CH_ID}-BI_1" is the same as "*2_Drv${CH_ID}-BI_1"
 ###########################################################################################
-record(bi,"${ECMC_P}-Drv${CH_ID}-BI_1"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-BI01"){
   field(DESC, "${HWTYPE}-${CH_ID}: Digital Input 1")
   field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BB")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-BI_2.PROC")
+  field(FLNK, "${ECMC_P}-Drv${CH_ID}-BI02.PROC")
 }
 
 ###########################################################################################
@@ -150,7 +150,7 @@ record(bi,"${ECMC_P}-Drv${CH_ID}-BI_1"){
 # These 2 inputs are exposed in the status word of each channel which makes it appear like 4 inputs.
 # So the input "*1_Drv${CH_ID}-BI_1" is the same as "*2_Drv${CH_ID}-BI_1"
 ###########################################################################################
-record(bi,"${ECMC_P}-Drv${CH_ID}-BI_2"){
+record(bi,"${ECMC_P}-Drv${CH_ID}-BI02"){
   field(DESC, "${HWTYPE}-${CH_ID}: Digital Input 2")
   field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BC")
   field(ZSV,  "NO_ALARM")
