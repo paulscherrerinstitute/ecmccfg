@@ -4,6 +4,7 @@
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
@@ -13,13 +14,12 @@ require ecmccfg develop
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
 
 ##############################################################################
 ## Configure hardware:
-
-ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025.cmd,1)
-$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
+ecmcFileExist($(ecmccfg_DIR)ecmcMCU1021_coupler.cmd,1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1021_coupler.cmd
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -41,7 +41,9 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOut
 #
 epicsEnvSet(ECMC_ENC_SLAVE_ID,3)
 epicsEnvSet(ECMC_ENC_CH_ID,1)
-epicsEnvSet(ECMC_DRV_SLAVE_ID,7)
+epicsEnvSet(ECMC_ENC_TYPE,0)      # Type: 0=Incremental, 1=Absolute
+epicsEnvSet(ECMC_DRV_SLAVE_ID,8)
+
 
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_auto_on_off.ax)
@@ -49,9 +51,10 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_auto_on_of
 ##############################################################################
 ## AXIS 2
 #
-epicsEnvSet(ECMC_ENC_SLAVE_ID,3)
-epicsEnvSet(ECMC_ENC_CH_ID,2)
-epicsEnvSet(ECMC_DRV_SLAVE_ID,8)
+epicsEnvSet(ECMC_ENC_SLAVE_ID,4)
+epicsEnvSet(ECMC_ENC_CH_ID,1)
+epicsEnvSet(ECMC_ENC_TYPE,0)      # Type: 0=Incremental, 1=Absolute
+epicsEnvSet(ECMC_DRV_SLAVE_ID,9)
 
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2_no_auto.ax)

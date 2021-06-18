@@ -19,16 +19,15 @@ epicsEnvSet("ECMC_ENC_ABS_BITS",          "20")                       # Absolute
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).positionActual01")          # Ethercat entry for actual position input (encoder)
 
-600Hz
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "1")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 # Seems scaling of drive is in deg/s.. Reverse engineered since no manual. STRANGE
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "1")                                           # Fastest speed in engineering units
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "1")                                           # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).CONTROL")     # Ethercat entry for control word or bit output
-epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).STATUS")      # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).driveControl01")     # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).driveStatus01")      # Ethercat entry for status word or bit input
 epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).velocitySetpoint01") # Ethercat entry for velocity setpoint output
-epicsEnvSet("ECMC_EC_DRV_POSITION",       "")# Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_POSITION",       "")# Ethercat entry for position setpoint output
 epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "")                                            # Ethercat entry for reduce torque output
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
