@@ -1,0 +1,10 @@
+# ------------------------------------------------------------------------------
+# jinga2 was stopped due to an error
+# observe the lines prior to this message for more details
+# errors are indiacte by lines beginning with '# error: '
+# ------------------------------------------------------------------------------
+! sleep 86400
+
+{% macro abort(error) %}
+    {{ None['[ERROR] ' ~ error][0] }}
+{% endmacro %}
