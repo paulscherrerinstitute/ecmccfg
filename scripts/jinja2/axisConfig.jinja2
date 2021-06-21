@@ -1,0 +1,38 @@
+{%- block config %}
+#- General
+ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},1,{{ drive.type or 0 }})"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ output.health or '' }},"ax{{ axis.id }}.health")"
+ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id }}, {{ details.moduloRange or 0 |float}})"
+ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id }}, {{ details.moduloType or 0 |float}})"
+
+#- Trajectory
+ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.emergencyDeceleration or trajectory.axis.accelaration |float }})"
+ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime({{ axis.id }},{{ trajectory.axis.velocity|float }},{{ trajectory.axis.accelaration|float }})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id }},{{ homing.velocity.to or 0 |float }})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id }},{{ homing.velocity.from or 0 |float }})"
+
+#- Controller
+ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id }},{{ controller.Kp|float }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id }},{{ controller.Ki or 0 |float }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id }},{{ controller.Kd or 0 |float }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff or 1 |float }})"
+
+#-Drive
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ drive.control }},"ax{{ axis.id }}.drv.control")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ drive.status }},"ax{{ axis.id }}.drv.status")"
+{%- if axis.mode == 'CSV' %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ drive.setpoint }},"ax{{ axis.id }}.drv.velocity")"
+{%- else %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ drive.setpoint }},"ax{{ axis.id }}.drv.position")"
+{%- endif %}
+
+#- Encoder
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom({{ axis.id }},{{ encoder.denominator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum({{ axis.id }},{{ encoder.numerator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncType({{ axis.id }},{{ encoder.type|int }})"
+ecmcConfigOrDie "Cfg.SetAxisEncBits({{ axis.id }},{{ encoder.bits|int }})"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ encoder.position }},"ax{{ axis.id }}.enc.actpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ encoder.latch.position or '' }},"ax{{ axis.id }}.enc.latchpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ encoder.latch.control }},"ax{{ axis.id }}.enc.latchcontrol")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ encoder.latch.status }},"ax{{ axis.id }}.enc.latchstatus")"
+{%- endblock %}

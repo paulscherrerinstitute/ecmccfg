@@ -1,0 +1,33 @@
+{%- set ns = namespace(error=false) %}
+{%- block sanity %}
+{%- macro onError() %}
+{%- set ns.error = true %}
+{% endmacro %}
+
+{%- if not axis.id %}
+#===============================================================================
+# axisConfig sanity check failed!
+# error: axis.id must be set!
+{{ onError() }}
+{%- else %}
+#===============================================================================
+# axisConfig sanity check for axis {{ axis.id }}
+{%- endif %}
+
+{%- if not ns.error and not (drive.numerator and drive.denominator) %}
+# error: drive.numerator or drive.denominator not defined or zero
+{{ onError() }}
+{%- endif %}
+
+{%- if not ns.error and not (encoder.numerator and encoder.denominator) %}
+# error: encoder.numerator or encoder.denominator not defined or zero
+{{ onError() }}
+{%- endif %}
+
+{%- if not ns.error %}
+# ==> OK
+{%- endif %}
+
+{%- endblock %}
+
+{%- extends "axisConfig.jinja2" if ns.error is false else "errorMessage.jinja2"%}
