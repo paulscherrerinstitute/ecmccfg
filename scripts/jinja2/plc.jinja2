@@ -1,0 +1,30 @@
+#- PLC rate, if not explicitly declared, deduce rate from bus frequence (ECMC_EC_SAMPLE_RATE)
+{%- if plc.rateMilliseconds > 0 %}
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "{{ plc.rateMilliseconds|float }}")
+{%- else %}
+ecmcEpicsEnvSetCalc(ECMC_PLC_RATE_, "1000/${ECMC_EC_SAMPLE_RATE}", "%f")
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${ECMC_PLC_RATE_}")
+epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
+{%- endif %}
+
+#- Create a new PLC
+epicsEnvSet("PLC_ID", {{ plc.id }})
+ecmcConfigOrDie "Cfg.CreatePLC({{ plc.id }},${ECMC_PLC_SAMPLE_RATE_MS})"
+
+#- Add code
+{%- if plc.code %}
+{%- for line in plc.code %}
+ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line }}"
+{%- endfor %}
+{%- endif %}
+
+#- Enable PLC
+ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable or 1|int}})"
+
+#- default PLC-PVs
+ecmcFileExist("ecmcPlc.db",1,1)
+dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+
+#- cleanup
+epicsEnvUnset(PLC_ID)
+
