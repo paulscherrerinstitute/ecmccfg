@@ -17,9 +17,10 @@ In the axis configuration files the parameter "ECMC_AXISCONFIG" string can be us
 
 Example of config in ecmccfg axis file:
  ```bash
-epicsEnvSet("ECMC_AXISCONFIG",            "powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0")
+epicsEnvSet("ECMC_AXISCONFIG",            "powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;")
 
  ```
+NOTE: It is important to have the last ";" in "ECMC_AXISCONFIG" otherwise the option will not be parsed.
 
 Some additional help can be printed by executing the ecmcMotorRecordCreateAxis without parameters in the iocsh:
 

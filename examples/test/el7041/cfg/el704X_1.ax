@@ -18,6 +18,11 @@ epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bi
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM).POSITION")         # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning handled by DS402 statemachine
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "0")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
@@ -30,6 +35,11 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM).STM_CONTROL
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                      # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "ec0.s$(ECMC_EC_SLAVE_NUM).STM_CONTROL.1")     # Reset
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "ec0.s$(ECMC_EC_SLAVE_NUM).STM_STATUS.3")      # Error
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "ec0.s$(ECMC_EC_SLAVE_NUM).STM_STATUS.14")     # Sync error
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s$(ECMC_EC_SLAVE_NUM).STM_STATUS.2")      # Warning
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "90.0")
