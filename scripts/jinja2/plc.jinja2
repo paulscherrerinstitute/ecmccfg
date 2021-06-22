@@ -19,7 +19,7 @@ ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line }}"
 {%- endif %}
 
 #- Enable PLC
-ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable or 1|int}})"
+ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable|int or 1|int}})"
 
 #- default PLC-PVs
 ecmcFileExist("ecmcPlc.db",1,1)
