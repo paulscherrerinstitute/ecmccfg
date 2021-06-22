@@ -35,7 +35,7 @@
 #- ECMC_EC_SAMPLE_RATE_MS = EtherCAT bus sampling rate [ms] (1 default)
 #- ECMC_MODE              = ecmc mode. FULL/DAQ, defaults to FULL
 #- ECMC_SUPPORT_MOTION    = variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
-#- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_MASTER_ID}}/"
+#- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
@@ -98,7 +98,7 @@ epicsEnvSet("ECMC_EC_MASTER_ID" ,${MASTER_ID=0})
 
 #-------------------------------------------------------------------------------
 #- temp dir for file output
-epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_MASTER_ID}}/")
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
 system "mkdir -p ${ECMC_TMP_DIR}"
 
 #-------------------------------------------------------------------------------
