@@ -8,8 +8,8 @@
 ##  HW_DESC : Slave type/name ("EL1018")
 ## 
 ## Example call: 
-##  ESS (E3):  iocsh.bash genericTest.script "SLAVE_ID=10,HW_DESC=EL1018"
-##  PSI EPICS: iocsh genericTest.script "SLAVE_ID=10,HW_DESC=EL1018"
+##  ESS (E3):  iocsh.bash genericTest.script "S_ID=10,HW=EL1018"
+##  PSI EPICS: iocsh genericTest.script "S_ID=10,HW_DESC=EL1018"
 ##
 ##############################################################################
 ## Initiation:
@@ -17,23 +17,16 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg master
-
-#- Choose motor record driver implementation
-#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
-#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
-#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-
+require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
 
 ##############################################################################
 ## Config hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              $(SLAVE_ID="NOT_VALID"))
-epicsEnvSet("ECMC_EC_SLAVE_DESC",             $(HW_DESC="NOT_VALID"))
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              $(S_ID="NOT_VALID"))
+epicsEnvSet("ECMC_EC_SLAVE_DESC",             $(HW="NOT_VALID"))
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=$(ECMC_EC_SLAVE_DESC)"
 
 #Apply hardware configuration
@@ -46,5 +39,8 @@ ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
-# go active
+##############################################################################
+############# go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+iocInit();
+dbgrep *${ECMC_EC_SLAVE_NUM}*
