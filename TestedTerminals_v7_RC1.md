@@ -16,3 +16,4 @@
 * EL4732 (tested but without signal generator and scope)
 * EL1088
 * EL3602
+* EL3255 (with potentiometer)
