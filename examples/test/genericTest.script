@@ -4,12 +4,12 @@
 ## Warning: No settings for motors or sensor will be performed!!!
 ##
 ## Mandatory arguments:
-##  SLAVE_ID: Slave position on bus 
-##  HW_DESC : Slave type/name ("EL1018")
+##  S_ID: Slave position on bus 
+##  HW  : Slave type/name ("EL1018")
 ## 
 ## Example call: 
 ##  ESS (E3):  iocsh.bash genericTest.script "S_ID=10,HW=EL1018"
-##  PSI EPICS: iocsh genericTest.script "S_ID=10,HW_DESC=EL1018"
+##  PSI EPICS: iocsh genericTest.script "S_ID=10,HW=EL1018"
 ##
 ##############################################################################
 ## Initiation:
@@ -43,4 +43,9 @@ ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 ############# go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 iocInit();
-dbgrep *${ECMC_EC_SLAVE_NUM}*
+
+ecmcEpicsEnvSetCalc(DBGREP_STR, "${S_ID}", "%03d")
+
+dbgrep *s${DBGREP_STR}*
+epicsEnvUnset(DBGREP_STR)
+
