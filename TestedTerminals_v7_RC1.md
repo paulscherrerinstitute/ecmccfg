@@ -17,3 +17,4 @@
 * EL1088
 * EL3602
 * EL3255 (with potentiometer)
+* EL2014
