@@ -6,7 +6,7 @@
 #-d */
 
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT1000 sensor
 #- Type: PT1000
 #- Range: -35 to 105 degC
 #- Connectiontype : 2 wire

@@ -14,3 +14,12 @@
 * EL2502
 * EL5101-0011
 * EL4732 (tested but without signal generator and scope)
+* EL1088
+* EL3602
+* EL3255 (with potentiometer)
+* EL2014
+* EL1014
+* EL3208
+* EL4002
+* EL3214
+* EL2819
