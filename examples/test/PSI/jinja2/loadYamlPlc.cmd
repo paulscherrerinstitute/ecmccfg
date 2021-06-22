@@ -10,14 +10,14 @@
 #-d     ${SCRIPTEXEC} "./loadYamlPlc.cmd" "FILE=./plc1.yaml"
 #-d   \endcode
 #-d   \pre jinja2 has to be in the PATH
-#-d */
+#-d */ 
 
 #- call jinja2
-! jinja2 ${ECMC_CONFIG_ROOT}plc.jinja2 ${FILE} -o /tmp/${FILE}.plc
+system "jinja2 ${ECMC_CONFIG_ROOT}plc.jinja2 ${FILE} -o /tmp/${FILE}.plc"
 
 #- check for ECMC-format PLC file and load the PLC
 ecmcFileExist("/tmp/${FILE}.plc",1)
 ${SCRIPTEXEC} "/tmp/${FILE}.plc"
 
 #- cleanup
-! rm -rf "/tmp/${FILE}.plc"
+system "rm -rf /tmp/${FILE}.plc"
