@@ -75,7 +75,7 @@ epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,${EC_RATE=1000})
 ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")
 ${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
-epicsEnvSet("ECMC_MASTER_ID" ,${MASTER_ID=0})
+epicsEnvSet("ECMC_EC_MASTER_ID" ,${MASTER_ID=0})
 
 #- Set default diag params
 ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
