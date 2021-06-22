@@ -16,9 +16,6 @@
 system "cp ${ECMC_CONFIG_ROOT}requirements.txt ${ECMC_TMP_DIR}"
 system "${ECMC_CONFIG_ROOT}pythonVenvJinja2.sh -d ${ECMC_TMP_DIR} -t ${ECMC_CONFIG_ROOT}plc.jinja2 -D ${FILE} -o ${ECMC_TMP_DIR}${FILE}.plc"
 
-#- call jinja2
-#- system "jinja2 ${ECMC_CONFIG_ROOT}plc.jinja2 ${FILE} -o /tmp/${FILE}.plc"
-
 #- check for ECMC-format PLC file and load the PLC
 ecmcFileExist("${ECMC_TMP_DIR}${FILE}.plc",1)
 ${SCRIPTEXEC} "${ECMC_TMP_DIR}${FILE}.plc"

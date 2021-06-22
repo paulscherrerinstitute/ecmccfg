@@ -11,8 +11,6 @@ do
     esac
 done
 
-#SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-
 ENV_DIR=${TMP_DIR}/.venv
 
 if [ -d "${ENV_DIR}" ]; then
