@@ -15,3 +15,4 @@
 * EL5101-0011
 * EL4732 (tested but without signal generator and scope)
 * EL1088
+* EL3602
