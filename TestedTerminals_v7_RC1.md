@@ -21,6 +21,7 @@
 * EL3742 (without signal)
 * EL3751 (tested +-10V with signal generator)
 * EL4002
+* EL4134
 * EL4732 (tested but without signal generator and scope)
 * EL5021 (without encoder)
 * EL5101 (encoder control only partly)
