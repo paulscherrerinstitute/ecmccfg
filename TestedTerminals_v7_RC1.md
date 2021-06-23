@@ -24,3 +24,4 @@
 * EL3214
 * EL2819
 * EL7041 (without motor)
+* EL5021 (without encoder)
