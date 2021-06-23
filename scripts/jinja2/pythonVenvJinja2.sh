@@ -11,14 +11,14 @@ do
     esac
 done
 
-ENV_DIR=${TMP_DIR}/.venv
+ENV_DIR="${TMP_DIR}"/.venv
 
 if [ -d "${ENV_DIR}" ]; then
     source "${ENV_DIR}"/bin/activate
 else
     python3 -m venv "${ENV_DIR}"
     source "${ENV_DIR}"/bin/activate
-    pip3 install -r ${TMP_DIR}/requirements.txt
+    pip3 install pyyaml jinja2-cli
 fi
 
-jinja2 ${TEMPLATE} ${DATA} -o ${OUTFILE}
+jinja2 "${TEMPLATE}" "${DATA}" -o "${OUTFILE}"

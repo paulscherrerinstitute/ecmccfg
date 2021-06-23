@@ -13,7 +13,6 @@
 #-d */
 
 #- python3 virtual env (credits Maciej Patro)
-system "cp ${ECMC_CONFIG_ROOT}requirements.txt ${ECMC_TMP_DIR}"
 system "${ECMC_CONFIG_ROOT}pythonVenvJinja2.sh -d ${ECMC_TMP_DIR} -t ${ECMC_CONFIG_ROOT}plc.jinja2 -D ${FILE} -o ${ECMC_TMP_DIR}${FILE}.plc"
 
 #- check for ECMC-format PLC file and load the PLC
