@@ -16,6 +16,7 @@
 * EL3602
 * ELM3604
 * EL3702
+* EL3742 (without signal)
 * EL3751 (tested +-10V with signal generator)
 * EL4002
 * EL4732 (tested but without signal generator and scope)
