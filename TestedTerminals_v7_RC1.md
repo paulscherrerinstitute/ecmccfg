@@ -23,3 +23,4 @@
 * EL4002
 * EL3214
 * EL2819
+* EL7041 (without motor)
