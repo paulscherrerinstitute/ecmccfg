@@ -6,6 +6,7 @@
 * EL1809
 * EL2014
 * EL2502
+* EL2521
 * EL2808
 * EL2819
 * EL3174 (tested +-10V with signal generator)
