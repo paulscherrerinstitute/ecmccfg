@@ -25,3 +25,4 @@
 * EL2819
 * EL7041 (without motor)
 * EL5021 (without encoder)
+* EL3174 (tested +-10V with signal generator)
