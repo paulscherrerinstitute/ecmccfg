@@ -102,6 +102,11 @@ epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MA
 system "mkdir -p ${ECMC_TMP_DIR}"
 
 #-------------------------------------------------------------------------------
+#- temp dir for file output
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_MASTER_ID}}/")
+system "mkdir -p ${ECMC_TMP_DIR}"
+
+#-------------------------------------------------------------------------------
 #- Set default diag params
 ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
