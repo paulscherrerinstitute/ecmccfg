@@ -16,6 +16,7 @@
 * EL3314
 * EL3255 (with potentiometer)
 * EL3602
+* ELM3602
 * ELM3604
 * EL3702
 * EL3742 (without signal)
