@@ -1,5 +1,5 @@
 file ecmcPlc.template
 {
-  pattern { PLC_ENABLE,           PLC_SCANTIME,              PLC_ERROR }
-          { PLC$(NameIndex)-ena,  PLC$(NameIndex)-scantime,  PLC$(NameIndex)-err }
+  pattern { PLC_ENABLE,               PLC_SCANTIME,               PLC_ERROR            }
+          { PLC$(Index2Char)-EnaCmd,  PLC$(Index2Char)-ScanTime,  PLC$(Index2Char)-Err }
 }

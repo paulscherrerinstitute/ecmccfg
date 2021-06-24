@@ -41,4 +41,6 @@ ecmcConfigOrDie "Cfg.ClearStorage(${ECMC_STORAGE_INDEX})"
 ecmcConfigOrDie "Cfg.SetStorageEnablePrintouts(${ECMC_STORAGE_INDEX},${DS_DEBUG=0})"
 
 ecmcFileExist(${SUBST_FILE="ecmcDS.substitutions"},1,1)
-dbLoadTemplate(${SUBST_FILE="ecmcDS.substitutions"}, "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_STORAGE_INDEX},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1}")
+ecmcEpicsEnvSetCalc(ECMC_DS_ID_2_CHARS, "${ECMC_STORAGE_INDEX}", "%02d")
+dbLoadTemplate(${SUBST_FILE="ecmcDS.substitutions"}, "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_STORAGE_INDEX},Index2Char=${ECMC_DS_ID_2_CHARS},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1}")
+epicsEnvUnset(ECMC_DS_ID_2_CHARS)
