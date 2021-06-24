@@ -29,6 +29,7 @@
 * EL5101 (encoder control only partly)
 * EL5101-0011
 * EL5042 (with SSI encoder)
+* EL6002
 * EL6022
 * EL7031 (There are encoder latch PVs. I think the hardware not supports this)
 * EL7037 (not the encoder control)
