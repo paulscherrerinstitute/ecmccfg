@@ -1,7 +1,7 @@
 ###########################################################################################
 ############################### 
-# Test of EL6002 RS232 communication
-# This database is designed to work together with el6002.plc
+# Test of EL6022 RS422/485 communication
+# This database is designed to work together with el6022.plc
 #
 
 ###########################################################################################
@@ -11,7 +11,7 @@ record(waveform,"${ECMC_P}Ch${CH_ID}-ArrayIn"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Value Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt8ArrayIn")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.inputDataArray$(CH_ID)?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=-1/TYPE=asynInt8ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.inputDataArray$(CH_ID)?")
   field(FTVL, "CHAR")
   field(NELM, "$(NELM=1)")
   field(SCAN, "I/O Intr")
@@ -36,7 +36,7 @@ record(calc,"${ECMC_P}Ch${CH_ID}-BytesOut-Calc_"){
   field(SCAN, "Passive")
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Bytes Out Calc")
   field(INPA, "${ECMC_P}Ch${CH_ID}-ArrayOut.NORD")
-  field(CALC, "A-1") # Remove string terminator  
+  field(CALC, "A") # Remove string terminator  
   field(FLNK, "${ECMC_P}Ch${CH_ID}-BytesOut-Cmd_.PROC")
 }
 
@@ -44,7 +44,7 @@ record(longout,"${ECMC_P}Ch${CH_ID}-BytesOut-Cmd_"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Bytes Out")
   field(SCAN, "Passive")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.outBytes=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.outBytes=")
   field(DOL,  "${ECMC_P}Ch${CH_ID}-BytesOut-Calc_.VAL")
   field(FLNK, "${ECMC_P}Ch${CH_ID}-Cmd-Trigg-Wrt_.PROC")
   field(OMSL, "closed_loop")
@@ -55,7 +55,7 @@ record(bo,"${ECMC_P}Ch${CH_ID}-Cmd-Trigg-Wrt_"){
   field(DESC, "$(DESC=$(HWTYPE): Trigg Write)")
   field(SCAN, "Passive")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.triggWrite=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.triggWrite=")
   field(ZNAM, "Zero")
   field(ONAM, "One")
   field(DOL,  "${ECMC_P}Ch${CH_ID}-ArrayOut.NORD")
@@ -67,7 +67,7 @@ record(longout,"${ECMC_P}Ch${CH_ID}-Cmd"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Control word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).control$(CH_ID)=")  
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}=")
 }
 
 ###########################################################################################
@@ -157,17 +157,7 @@ record(longin,"${ECMC_P}Ch${CH_ID}-BytesIn-Act"){
   field(DESC, "$(HWTYPE): Serial $(CH_ID): Input byte count")
   field(PINI, "$(PINI=1)")  
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.InBytes?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${PLC_ID}.static.inBytes?")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")  
-}
-
-record(bo,"${ECMC_P}Ch${CH_ID}-Cmd-Trigg-Read"){    
-  field(VAL,  "1")
-  field(DESC, "$(DESC=$(HWTYPE): Trigg Read)")
-  field(SCAN, "Passive")
-  field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.triggRead=")
-  field(ZNAM, "Zero")
-  field(ONAM, "One")
 }

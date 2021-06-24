@@ -1,27 +1,23 @@
 ###############################################################################
 #-d /**
 #-d   \brief Example script of EL6002 (2 channel RS232)
-#-d   \details Example shows how to read and write data over RS232 (EL6002).
+#-d   \details Example shows how to read and string write data over RS232 (EL6002).
 #-d   
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 #-  
-#-  ALSO look at the EL6022 example, its more complete and trigg read is not needed!!
-#-
 #- Write Data (send "CMD_TO_SEND" over RS232):
 #- NOTE: Max length is 22bytes at the time (can be extended)
 #- 1. caput  -S IOC_TEST:m0s011-Ch01-ArrayOut "CMD_TO_SEND"
 #-
-#- Read data:
+#- Read data (the IOC_TEST:m0s011-Ch01-ArrayIn will be updated for each new value available in the terminal):
 #- 1. camonitor -S IOC_TEST:m0s011-Ch01-ArrayIn
-#- 2. Trigger next read by (transfer from RS232 input buffer to PDOs): caput IOC_TEST:ec0-s53-EL6002-Serial1-Cmd-Trigg-Read 1
-#- 3. Several records showing status are available
+#- (2. Several records showing status are available)
 #-
 #- A simple test can be done by wire a loopback connection on the DB9:
 #-  1. Bridge 2 and 3
 #-  2. Bridge 7 and 8
-#-  3. Bridge 1,4 and 6
 #-
 #- Epics records are linked to below variables in plc code:
 #- static.outBytes      : Number of bytes to write (this is done aurmatically when write to ArrayOut waveform)
@@ -36,27 +32,42 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg master
+require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2,EC_RATE=200"
 
 ##############################################################################
 ## Config hardware:
 
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",  "1")
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",  "10")
 
 #- Configure EL6002 with custom database and config of SDOs
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "$(SLAVE_ID=11)")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6002, SUBST_FILE=ecmcEL6002_string.substitutions"
+
 epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8000")  # To set correct sdo address in sensor config
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "$(SLAVE_ID=53)")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6002, CONFIG=-Sensor-chX-default, SUBST_FILE=ecmcEL6002_custom.substitutions"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6002-Sensor-chX-default.cmd
+
+epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8010")  # To set correct sdo address in sensor config
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6002-Sensor-chX-default.cmd
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.inputDataArray01)"
+epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
+
+ecmcConfig "EcGetMemMapId(ec0.s11.mm.inputDataArray02)"
+epicsEnvSet(MM_CH_2_IN,${ECMC_CONFIG_RETURN_VAL})
+
 ##############################################################################
 ## PLC 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/el6002.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),DBG='")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/el6002.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),CH_ID=01,MM_ID=${MM_CH_1_IN},DBG='")
+
+##############################################################################
+## PLC 1
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=10,FILE=./plc/el6002.plc, PLC_MACROS='PLC_ID=1,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),CH_ID=02,MM_ID=${MM_CH_2_IN},DBG='")
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -65,5 +76,10 @@ ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
-# go active
+##############################################################################
+############# Go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+
+dbgrep *0${ECMC_EC_SLAVE_NUM}*
