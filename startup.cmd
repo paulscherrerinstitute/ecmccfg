@@ -103,7 +103,7 @@ system "mkdir -p ${ECMC_TMP_DIR}"
 
 #-------------------------------------------------------------------------------
 #- temp dir for file output
-epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_MASTER_ID}}/")
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
 system "mkdir -p ${ECMC_TMP_DIR}"
 
 #-------------------------------------------------------------------------------
