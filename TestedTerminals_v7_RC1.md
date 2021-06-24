@@ -1,4 +1,6 @@
 ## Terminals tested with new naming in branch v7_RC1
+* EK1100
+* EK1122
 * EL1018
 * EL1014
 * EL1088
