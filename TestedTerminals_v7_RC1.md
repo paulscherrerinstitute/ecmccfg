@@ -28,6 +28,7 @@
 * EL5101 (encoder control only partly)
 * EL5101-0011
 * EL6022
+* EL7031 (There are encoder latch PVs. I think the hardware not supports this)
 * EL7037 (not the encoder control)
 * EL7041 (without motor)
 * EL7411
