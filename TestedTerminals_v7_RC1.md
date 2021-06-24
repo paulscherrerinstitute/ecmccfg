@@ -24,6 +24,7 @@
 * EL4002
 * EL4134
 * EL4732 (tested but without signal generator and scope)
+* EL5002 (with wachendorf SSI)
 * EL5021 (without encoder)
 * EL5101 (encoder control only partly)
 * EL5101-0011
