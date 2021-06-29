@@ -5,6 +5,7 @@ Like in python, in yaml the indentation is part of the syntax.
 Make sure to indent with spaces, a tab indent is 2 spaces.
 
 The configuration is separated into the following mandatory sections:
+
 - axis
 - motorRecord
 - drive
@@ -14,15 +15,18 @@ The configuration is separated into the following mandatory sections:
 - input
 
 in addition the following optional sections are available.
+
 - output
 - homing
 - monitoring
 
 ## axis
 mandatory
+
 - `id`: unique numeric identifier of the axis
 
 optional
+
 - `type`: for future used
 - `mode`: operating mode of the drive; default CSV
 - `parameters`: additional parameters
@@ -38,9 +42,11 @@ axis:
 Epics motorRecord field configuration.
 
 mandatory
+
 - `name`: name of the PV
 
 optional
+
 - `precision`: PREC field; default 3
 - `description`: DESC field; default ''
 - `unit`: EGU field; optional default mm
@@ -57,6 +63,7 @@ motorRecord:
 
 ## drive
 mandatory
+
 - `numerator`: scaling numerator
 - `denominator`: scaling denominator
 - `type`: type of drive: `0`=stepper, `1`=DS402, aka servo or complex stepper
@@ -65,10 +72,11 @@ mandatory
 - `setpoint`: setpoint entry, **position** or **velocity**, depending on mode
 
 optional
+
 - `reduceTorque`: control word _bit_ to set for reduced torque mode
 - `brake`
-  - `openDelay`: number of cycles to wait after enable to disengage the brake
-  - `closeAhead`: number of cycles to wait after the brake was engaged
+  * `openDelay`: number of cycles to wait after enable to disengage the brake
+  * `closeAhead`: number of cycles to wait after the brake was engaged
 - `reset`: control word _bit_ to set in order to reset the drive
 - `warning`: status word _bit_ for drive warning
 - `error`: list of status _bits_ for drive errors
@@ -95,6 +103,7 @@ drive:
 
 ## encoder
 mandatory
+
 - `numerator`: scaling numerator
 - `denominator`: scaling denominator
 - `type`: type of encoder: `0`=incremental, `1`=absolute
@@ -104,6 +113,7 @@ mandatory
 - `position`: position entry
 
 optional
+
 - `control`: control word entry; mandatory when **reset** is set.
 - `status`: status word entry; mandatory when **error** or **warning** are set
 - `reset`: control word _bit_ to set in order to reset the encoder
@@ -113,9 +123,9 @@ optional
 - `positionFilterSize`: size of the position filter (cycles)
 - `positionFilterEnable`: position filter enable
 - `latch`:
-  - `position`: ''
-  - `control`: ''
-  - `status`: ''
+  * `position`: ''
+  * `control`: ''
+  * `status`: ''
 
 ```yaml
 encoder:
@@ -147,9 +157,11 @@ encoder:
 PID controller parameters
 
 mandatory
+
 - `Kp`: proportional
 
 optional
+
 - `Ki`: integral; default 0
 - `Kd`: differential; default 0
 - `Kff`: feed forward; default 1
@@ -166,18 +178,20 @@ controller:
 settings for the trajectory planning.
 
 mandatory
+
 - `axis`
   - `velocity`: velocity setpoint the axis will be initialized to
   - `acceleration`: acceleration setpoint for initialization
   - `emergencyDeceleration`: deceleration setpoint for emergencies. Defaults to acceleration setpoint if not specified.
 
 optional
+
 - `jog`
-  - `velocity`: velocity setpoint the axis will be initialized to for jogging
-  - `acceleration`: acceleration setpoint for initialization, for jogging
+  * `velocity`: velocity setpoint the axis will be initialized to for jogging
+  * `acceleration`: acceleration setpoint for initialization, for jogging
 - `modulo`
-  - `range`: modulo range
-  - `type`: modulo type
+  * `range`: modulo range
+  * `type`: modulo type
 
 ```yaml
 trajectory:
@@ -200,9 +214,10 @@ If an input is not used, set it to the `ONE.0` entry of a slave.
 See the example for details.
 
 mandatory
+
 - `limit`
-  - `forward`: limit switch sensor input in the forward direction.
-  - `backward`: limit switch sensor input in the backward direction.
+  * `forward`: limit switch sensor input in the forward direction.
+  * `backward`: limit switch sensor input in the backward direction.
 - `home`: binary input for the home sensor
 - `extinterlock`: binary input for external interlock.
 
@@ -219,7 +234,7 @@ input:
 ```yaml
 # output:
 #   health: ''      # Ethercat entry for health output
-#   b
+#   brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
 ```
 
 ## homing
@@ -229,9 +244,9 @@ input:
 #   position: 0
 #   velocity:
 #     to: 2.72
-#     # from: 3.14
-#   # acceleration: 2
-#   # deceleration: 5
+#     from: 3.14
+#   acceleration: 2
+#   deceleration: 5
 ```
 
 ## softlimits
