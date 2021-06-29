@@ -18,7 +18,3 @@ else
     pip3 install pyyaml jinja2-cli
 fi
 
-echo ---------------------------------
-echo python virtual env:
-echo `which python`
-echo ---------------------------------

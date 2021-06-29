@@ -15,10 +15,10 @@ done
 ENV_DIR="${TMP_DIR}"/.venv
 
 if [ -d "${ENV_DIR}" ]; then
-    source "${ENV_DIR}"/bin/activate
+    . "${ENV_DIR}"/bin/activate
 else
     python3 -m venv "${ENV_DIR}"
-    source "${ENV_DIR}"/bin/activate
+    . "${ENV_DIR}"/bin/activate
     pip3 install pyyaml jinja2-cli
 fi
 

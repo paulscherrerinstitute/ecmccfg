@@ -4,6 +4,7 @@
 {%- set ns.error = true %}
 {% endmacro %}
 
+{# ============== Axis ====================================================== #}
 {%- if not axis.id %}
 #===============================================================================
 # axisConfig sanity check failed!
@@ -14,14 +15,66 @@
 # axisConfig sanity check for axis {{ axis.id }}
 {%- endif %}
 
+{# ============== Drive ===================================================== #}
 {%- if not ns.error and not (drive.numerator and drive.denominator) %}
 # error: drive.numerator or drive.denominator not defined or zero
 {{ onError() }}
 {%- endif %}
 
+{%- if not ns.error and drive.reset %}
+{%- if not drive.control %}
+# error: drive.reset w/o drive.control
+{{ onError() }}
+{%- endif %}
+{%- endif %}
+
+{%- if not ns.error and drive.warning or drive.error %}
+{%- if not drive.status %}
+# error: drive.warning or drive.error w/o drive.status
+{{ onError() }}
+{%- endif %}
+{%- endif %}
+
+{# ============== Limit switches ============================================= #}
+{%- if not ns.error and not input.limit %}
+# error: input.limit forward,backward are mandatory
+{{ onError() }}
+{%- else %}
+  {%- if input.limit.forward is not defined -%}
+    # error: input.limit.forward is mandatory
+    {{ onError() }}
+  {%- endif %}
+  {%- if input.limit.backward is not defined -%}
+    # error: input.limit.backward is mandatory
+    {{ onError() }}
+  {%- endif %}
+{%- endif %}
+
+{# ============== Encoder =================================================== #}
 {%- if not ns.error and not (encoder.numerator and encoder.denominator) %}
 # error: encoder.numerator or encoder.denominator not defined or zero
 {{ onError() }}
+{%- endif %}
+
+{%- if not ns.error and encoder.reset %}
+{%- if not encoder.control %}
+# error: encoder.reset w/o encoder.control
+{{ onError() }}
+{%- endif %}
+{%- endif %}
+
+{%- if not ns.error and encoder.warning or encoder.error %}
+{%- if not encoder.status %}
+# error: encoder.warning or encoder.error w/o encoder.status
+{{ onError() }}
+{%- endif %}
+{%- endif %}
+
+{%- if homing is defined %}
+{%- if not ns.error and not(homing.type|default(0)>0 and homing.velocity if not defined) %}
+# error: homing w/o velocity.to
+{{ onError() }}
+{%- endif %}
 {%- endif %}
 
 {%- if not ns.error %}

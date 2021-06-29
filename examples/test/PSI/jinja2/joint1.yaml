@@ -2,15 +2,14 @@ axis:
   id: 1
   type: joint   # this is for future selection of axis type
   mode: CSV     # supported mode, CSV and CSP
+  # parameters: 'axisPar' # additional parameters
 
-details:
+motorRecord:
   name: M1
-  decimals: 3
+  precision: 3
   description: very important motor axis
-  moduloRange: 0
-  moduloType: 0
-  paramters: ''
   unit: mm
+  # fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim'
 
 drive:
   numerator: 360                                      # Fastest speed in engineering units
@@ -19,7 +18,7 @@ drive:
   control: ec0.s$(DRV_SLAVE).driveControl01
   status: ec0.s$(DRV_SLAVE).driveStatus01
   setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01
-  reduceTorque: 2
+  reduceTorque: 2 # Reduce torque bit in drive control word
   brake:
     openDelay: 0  # Brake timing parameter in cycles (default 1kHz)
     closeAhead: 0 # Brake timing parameter in cycles (default 1kHz)
@@ -38,38 +37,39 @@ encoder:
   absBits: 0      # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   absOffset: 0    # Encoder offset in eng units (for absolute encoders)
   position: ec0.s$(ENC_SLAVE).positionActual01  # Ethercat entry for actual position input (encoder)
-  reset: ''       # Reset   (if no encoder reset bit then leave empty)
-  warning: ''     # Warning (if no encoder warning bit then leave empty)
-  error:          # max 3
-    - ''          # Error 0 (if no encoder error bit then leave empty)
-    - ''          # Error 1 (if no encoder error bit then leave empty)
-    - ''          # Error 2 (if no encoder error bit then leave empty)
-  filter:         # velocity filter
-    velocity:
-      size: 100
-    position:
-      enable: false
-      size: 1
-  latch:
-    position: 0
-    control: ''
-    status: ''
-
+  control: ec0.s$(ENC_SLAVE).encoderControl01   # mandatory only if 'reset' is used
+  status: ec0.s$(DRV_SLAVE).encoderStatus01     # mandatory only if 'warning' or 'error' are used
+  # reset: 1        # Reset   (optional)
+  warning: 2      # Warning (optional)
+  error:          # max 3 (optional)
+    - 5           # Error 0
+    - 9           # Error 1
+    - 11          # Error 2
+  velocityFilterSize: 100
+  positionFilterSize: 1
+  positionFilterEnable: false
+  # latch:
+  #   position: ''
+  #   control: ''
+  #   status: ''
 
 controller:
   Kp:  15
-  Ki:  0.02
+  # Ki:  0.02
   # Kd:  0
   # Kff: 1
 
 trajectory:
   axis:
     velocity: 10
-    accelaration: 0.1
-    emergencyDeceleration: 0.05
+    acceleration: 0.1
+    # emergencyDeceleration: 0.05
   jog:
     velocity: 5
-    accelaration: 0.1
+    acceleration: 0.1
+  modulo:
+    range: 0
+    type: 0
 
 input:
   limit:
@@ -80,16 +80,16 @@ input:
 
 output:
   health: ''      # Ethercat entry for health output
-  brake: ''       # Ethercat entry for brake output
+  brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
 
 homing:
   type: 3
   position: 0
   velocity:
-    to: 2
-    from: 2
-  accelaration: 2
-  deceleration: 5
+    to: 2.72
+    # from: 3.14
+  # acceleration: 2
+  # deceleration: 5
 
 softlimits:
   enable: false
