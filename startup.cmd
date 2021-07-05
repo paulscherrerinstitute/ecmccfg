@@ -25,7 +25,8 @@
 #- MODE              = FULL / DAQ
 #-    FULL: Init ecmc with support for both motion and DAQ (DEFAULT)
 #-    DAQ:  Init ecmc with support for only daq (not motion)
-#-    
+#- PVA               = YES / NO
+#-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
 #- ECMC_CONFIG_DB         = database directory of ${MODULE}
@@ -33,6 +34,7 @@
 #- ECMC_EC_SAMPLE_RATE    = EtherCAT bus sampling rate [Hz] (1000 default)
 #- ECMC_EC_SAMPLE_RATE_MS = EtherCAT bus sampling rate [ms] (1 default)
 #- ECMC_MODE              = ecmc mode. FULL/DAQ, Defaults to FULL
+#- ECMC_PVA               = use pva, default NO
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #-
 #-------------------------------------------------------------------------------
@@ -71,6 +73,12 @@ ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'=='FULL'",""
 epicsEnvShow(ECMC_SUPPORT_MOTION)
 ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
+
+#-
+#-------------------------------------------------------------------------------
+# suffix for pva enabled scripts, templates and substitutions
+ecmcEpicsEnvSetCalcTernary(ECMC_PVA, "${PVA=0}", "Pva","")
+
 #-
 #-------------------------------------------------------------------------------
 # Set EtherCAT frequency (defaults to 1000)

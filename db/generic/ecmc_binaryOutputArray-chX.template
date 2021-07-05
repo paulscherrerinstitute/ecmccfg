@@ -13,6 +13,11 @@ record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}"){
   field(SCAN, "${SCAN=I/O Intr}")
   field(OUT,  "@asynMask(${PORT},${ADDR=0},0xFFFF,${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=binaryOutputArray}${CH_ID}=")
   field(TSE,  "${TSE=-2}")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=BO}${CH_ID}${suffix=-Array}": {+channel:"VAL"}
+    }
+  })
 }
 
 
@@ -23,4 +28,9 @@ record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}-RB"){
   field(SCAN, "${SCAN=I/O Intr}")
   field(INP,  "@asynMask(${PORT},${ADDR=0},0xFFFF,${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=binaryOutputArray}${CH_ID}?")
   field(TSE,  "${TSE=-2}")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=BO}${CH_ID}${suffix=-Array}-RB": {+channel:"VAL"}
+    }
+  })
 }

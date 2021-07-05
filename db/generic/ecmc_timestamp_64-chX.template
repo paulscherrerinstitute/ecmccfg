@@ -15,6 +15,11 @@ record(ai,"${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}"){
   field(PREC, "0" )
   field(EGU,  "ns" )
   field(FLNK, "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=timestamp}${CH_ID}${suffix=}": {+channel:"VAL"}
+    }
+  })
 }
 
 record(aSub,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS") {
@@ -25,4 +30,9 @@ record(aSub,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS") {
   field(FTA,   "DOUBLE")
   field(NOA,   1)
   field(TSE,  -2)
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=timestamp}${CH_ID}${suffix=}TS": {+channel:"VAL"}
+    }
+  })
 }
