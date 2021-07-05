@@ -1,0 +1,53 @@
+##############################################################################
+## Example config for el3602
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
+
+#ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,0)"
+
+#epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+#${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3602"
+#${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd, "ASSIGN_ACTIVATE=0x730"
+#
+## Configure analog sensors common (filter settings valid for all channles)
+#${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL36XX-Sensor-common.cmd
+#
+## Example of default configuration of analog sensor CH0
+#epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
+#${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3602-Sensor-chX-default.cmd
+#
+## Example of default configuration of analog sensor CH1
+#epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
+#${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3602-Sensor-chX-default.cmd
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "12")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3174_+-10V"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd, "ASSIGN_ACTIVATE=0x700,SYNC_0_SHIFT=-100000,SYNC_1_CYCLE=25000"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
