@@ -183,6 +183,23 @@ ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/1000*1E6)
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(12,0x700,1000000,-100000,25000,0)"
 
 ```
+
+# dc.script test application for 2 EL3702
+The dc.script starup file contains configuration for two el3702 slaves. After each addSlave.cmd the follwoing commad is added allowing for changing params:
+
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(11,0x730,1000000,-500000,0,0)"
+
+By connecting a signal generator with  low freq signal (9Hz) to AI1 of both these slaves it is possible to see how the sync_1_shift parameter affects the data.
+
+Basically it shows that keeping the same sync_1_shift results in best perforemewnce without phaseshifts (atleast for EL3702 terminals). 
+When having to big differnce it seems that sometimes the values will be from previous cycle and not stable.
+```
+Log values to file with: 
+  camonitor IOC_TEST:ec0-s11-EL3702-AI1-Array  IOC_TEST:ec0-s12-EL3702-AI1-Array| tee data.log
+plot data with:
+  cat data.log | python ~/sources/ecmccomgui/pyDataManip/plotCaMonitor.py &
+```
+
 # ELM slaves
 Seems they do not need any DC configuration. They work without. Need to look into..
 

@@ -1,0 +1,6 @@
+
+record(calc,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Val1-Scaled") {
+  field(DESC, "")  
+  field(CALC,"A*10/32768")
+  field(INPA,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-AI$(CH_ID)-Array.[1] CP")  
+}
