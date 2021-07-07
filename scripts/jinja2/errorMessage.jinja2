@@ -1,10 +1,8 @@
-# ------------------------------------------------------------------------------
-# jinga2 was stopped due to an error
-# observe the lines prior to this message for more details
-# errors are indiacte by lines beginning with '# error: '
-# ------------------------------------------------------------------------------
-! sleep 86400
+{%- macro abort(error) %}
+    {{ None['[ERROR] in ' ~ error.caller|default('unkown caller') ~ ' --> ' ~ error.msg][0] }}
+{% endmacro -%}
 
-{% macro abort(error) %}
-    {{ None['[ERROR] ' ~ error][0] }}
-{% endmacro %}
+{# raise exception, the ugly way. It sucks, but it works!
+  in iocsh make sure to set 'on error halt' or 'on error wait <time>'
+  #}
+{{ abort(Error) }}

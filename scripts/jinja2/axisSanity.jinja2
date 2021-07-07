@@ -1,86 +1,118 @@
-{%- set ns = namespace(error=false) %}
-{%- block sanity %}
-{%- macro onError() %}
-{%- set ns.error = true %}
-{% endmacro %}
+{%- block sanity -%}
+{%- set Error.caller = 'axisSanity' -%}
+{%- macro onError(msg='') -%}
+  {%- set Error.state = true -%}
+  {%- set Error.msg = msg -%}
+{%- endmacro -%}
 
-{# ============== Axis ====================================================== #}
-{%- if not axis.id %}
-#===============================================================================
-# axisConfig sanity check failed!
-# error: axis.id must be set!
-{{ onError() }}
-{%- else %}
-#===============================================================================
-# axisConfig sanity check for axis {{ axis.id }}
+{#- ============== Axis ==================================================== -#}
+{#- check for axis key -#}
+{%- if axis is not defined %}
+  {{- onError('axis must be set!') }}
+{%- elif not axis.id %}
+  {{- onError('axis.id must be set!') }}
 {%- endif %}
-
-{# ============== Drive ===================================================== #}
-{%- if not ns.error and not (drive.numerator and drive.denominator) %}
-# error: drive.numerator or drive.denominator not defined or zero
-{{ onError() }}
+{#- ============== Drive =================================================== -#}
+{#- check for drive key -#}
+{%- if drive is not defined %}
+  {{- onError('drive must be set!') }}
+{#- check for numerator and denominator -#}
+{%- elif not (drive.numerator and drive.denominator) %}
+  {{ onError('drive.numerator or drive.denominator not defined or zero') }}
+{#- check for setpoint -#}
+{%- elif not drive.setpoint %}
+  {{ onError('drive.setpoint is mandatory') }}
+{#- check for control if reset is set -#}
+{%- elif drive.reset %}
+  {%- if not drive.control %}
+    {{ onError('drive.reset w/o drive.control') }}
+  {%- endif %}
+{#- check for status if warning or error is set -#}
+{%- elif drive.warning or drive.error %}
+  {%- if not drive.status %}
+    {{ onError('drive.warning or drive.error w/o drive.status') }}
+  {%- endif %}
 {%- endif %}
-
-{%- if not ns.error and drive.reset %}
-{%- if not drive.control %}
-# error: drive.reset w/o drive.control
-{{ onError() }}
-{%- endif %}
-{%- endif %}
-
-{%- if not ns.error and drive.warning or drive.error %}
-{%- if not drive.status %}
-# error: drive.warning or drive.error w/o drive.status
-{{ onError() }}
-{%- endif %}
-{%- endif %}
-
-{# ============== Limit switches ============================================= #}
-{%- if not ns.error and not input.limit %}
-# error: input.limit forward,backward are mandatory
-{{ onError() }}
+{#- ============== imput mappings ========================================== -#}
+{#- check for input key -#}
+{%- if input is not defined %}
+  {{- onError('input must be set!') }}
+{#- check for input.home and input.interlock #}
+{%- elif not input.home %}
+    {{ onError('input.home is mandatory') }}
+{%- elif not input.interlock %}
+    {{ onError('input.interlock is mandatory') }}
+{#- check for input.limit and both forward and backward -#}
+{%- elif not input.limit %}
+  {{ onError('input.limit forward,backward are mandatory') }}
 {%- else %}
   {%- if input.limit.forward is not defined -%}
-    # error: input.limit.forward is mandatory
-    {{ onError() }}
+    {{ onError('input.limit.forward is mandatory') }}
   {%- endif %}
   {%- if input.limit.backward is not defined -%}
-    # error: input.limit.backward is mandatory
-    {{ onError() }}
+    {{ onError('input.limit.backward is mandatory') }}
   {%- endif %}
 {%- endif %}
-
-{# ============== Encoder =================================================== #}
-{%- if not ns.error and not (encoder.numerator and encoder.denominator) %}
-# error: encoder.numerator or encoder.denominator not defined or zero
-{{ onError() }}
+{#- ============== Encoder ================================================= -#}
+{#- check for encoder key -#}
+{%- if encoder is not defined %}
+  {{- onError('encoder must be set!') }}
+{#- check for numerator and denominator -#}
+{%- elif not (encoder.numerator and encoder.denominator) %}
+  {{ onError('encoder.numerator or encoder.denominator not defined or zero') }}
 {%- endif %}
-
-{%- if not ns.error and encoder.reset %}
-{%- if not encoder.control %}
-# error: encoder.reset w/o encoder.control
-{{ onError() }}
+{#- check for position -#}
+{%- if not encoder.position %}
+  {{ onError('encoder.position is mandatory') }}
 {%- endif %}
+{#- check for control if reset is set -#}
+{%- if encoder.reset %}
+  {%- if not encoder.control %}
+  {{ onError('encoder.reset w/o encoder.control') }}
+  {%- endif %}
 {%- endif %}
-
-{%- if not ns.error and encoder.warning or encoder.error %}
-{%- if not encoder.status %}
-# error: encoder.warning or encoder.error w/o encoder.status
-{{ onError() }}
+{#- check for status if warning or error is set -#}
+{%- if encoder.warning or encoder.error %}
+  {%- if not encoder.status %}
+  {{ onError('encoder.warning or encoder.error w/o encoder.status') }}
+  {%- endif %}
 {%- endif %}
+{#- ============== Controller ============================================== -#}
+{#- check for controller key -#}
+{%- if controller is not defined %}
+  {{ onError('controller is mandatory') }}
+{#- check for Kp -#}
+{%- elif not controller.Kp %}
+  {{ onError('controller.Kp is mandatory') }}
 {%- endif %}
-
+{#- ============== Trajectory ============================================== -#}
+{#- check for trajectory key -#}
+{%- if trajectory is not defined %}
+  {{ onError('trajectory is mandatory') }}
+{#- check for axis key in trajectory -#}
+{%- elif not trajectory.axis is defined %}
+  {{ onError('trajectory.axis is mandatory') }}
+{#- check for axis.acceleration key in trajectory -#}
+{%- elif not trajectory.axis.acceleration is defined %}
+  {{ onError('trajectory.axis.acceleration is mandatory') }}
+{#- check for axis.velocity key in trajectory -#}
+{%- elif not trajectory.axis.velocity is defined %}
+  {{ onError('trajectory.axis.velocity is mandatory') }}
+{%- endif %}
+{#- ============== Homing ================================================== -#}
+{#- check for sane homing definition -#}
 {%- if homing is defined %}
-{%- if not ns.error and not(homing.type|default(0)>0 and homing.velocity if not defined) %}
-# error: homing w/o velocity.to
-{{ onError() }}
+  {%- if not(homing.type|default(0)>0 and homing.velocity if not defined) %}
+    {{ onError('homing w/o velocity.to') }}
+  {%- endif %}
 {%- endif %}
-{%- endif %}
-
-{%- if not ns.error %}
+{#- ============== The End ================================================= -#}
+{%- if not Error.state %}
+# ==============================================================================
+# axis config for axis {{ axis.id }}
 # ==> OK
-{%- endif %}
+{% endif -%}
 
-{%- endblock %}
+{%- endblock -%}
 
-{%- extends "axisConfig.jinja2" if ns.error is false else "errorMessage.jinja2"%}
+{%- extends "axisConfig.jinja2" if Error.state is false else "errorMessage.jinja2" -%}
