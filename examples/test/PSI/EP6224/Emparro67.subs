@@ -1,0 +1,18 @@
+#- substitution for Emparro67 on CH4 of the EP6224
+
+global { PS1 = 04 }
+
+file "ecmc_status-chX.template"
+{
+  pattern {KEY,   CH_ID     }
+          {"PS",  "${PS1}"  }
+}
+
+file "ecmc_analogInput-chX.template"
+{
+  pattern {KEY,   CH_ID,    sourceName,       suffix      }
+          {"PS",  "${PS1}", "currentUa",      "currentUa" }
+          {"PS",  "${PS1}", "currentUs",      "currentUs" }
+          {"PS",  "${PS1}", "currentLimitUa", "currentLimitUa" }
+          {"PS",  "${PS1}", "currentLimitUs", "currentLimitUs" }
+}
