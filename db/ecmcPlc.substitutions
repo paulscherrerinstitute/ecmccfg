@@ -1,0 +1,5 @@
+file ecmcPlc.template
+{
+  pattern { PLC_ENABLE,           PLC_SCANTIME,           PLC_ERROR }
+          { PLC-$(Index)-enable,  PLC-$(Index)-scantime,  PLC-$(Index)-error }
+}
