@@ -26,4 +26,9 @@ record(ai,"${ECMC_P}${KEY=AI}${CH_ID}${suffix=}"){
   field(HSV,  "${HSV=NO_ALARM}")
   field(HHSV, "${HHSV=NO_ALARM}")
   field(TSE,  "${TSE=-2}")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=AI}${CH_ID}${suffix=}": {+channel:"VAL"}
+    }
+  })
 }

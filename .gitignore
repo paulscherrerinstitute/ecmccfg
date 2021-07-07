@@ -28,3 +28,5 @@ db/testAIs.db
 qt
 doc
 tools
+
+.venv

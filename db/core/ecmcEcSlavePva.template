@@ -1,0 +1,160 @@
+
+# Slave status word:
+# bit 0 online          : The slave is online.
+# bit 1 int operational : The slave was brought into OP state
+# bit 2..5  al_state    :  The application-layer state of the slave.
+#                             - 1: \a INIT
+#                             - 2: \a PREOP
+#                             - 4: \a SAFEOP
+#                             - 8: \a OP
+# bit 16..31            : entry counter
+
+record(longin,"${ECMC_P}Stat"){
+  field(DESC, "$(HWTYPE): Slave Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).slavestatus?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}EntryCntr.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+# Entry counter in 16 msb
+record(calc,"${ECMC_P}EntryCntr") {
+  field(DESC, "$(HWTYPE): Slave Entry Count")
+  field(PINI, "$(PINI=1)")
+  field(CALC,"A>>16")
+  field(INPA,"${ECMC_P}Stat.VAL")
+  field(FLNK, "${ECMC_P}Stat_.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "entryCounter": {+channel:"VAL"}
+    }
+  })
+}
+
+record(mbbiDirect,"${ECMC_P}Stat_"){
+  field(DESC, "$(HWTYPE): Slave Status Word mbbiD")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${ECMC_P}Stat.VAL")
+  field(FLNK, "${ECMC_P}Online.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Online"){
+  field(DESC, "$(HWTYPE): Slave Online")
+  field(INP,  "${ECMC_P}Stat_.B0")
+  field(ZNAM, "Offline")
+  field(ONAM, "Online")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Operational.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "online": {+channel:"VAL"}
+    }
+  })
+}
+
+record(bi,"${ECMC_P}Operational"){
+  field(DESC, "$(HWTYPE): Slave Operational")
+  field(INP,  "${ECMC_P}Stat_.B1")
+  field(ZNAM, "Not Operational")
+  field(ONAM, "Operational")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Alstate-Init.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "operational": {+channel:"VAL"}
+    }
+  })
+}
+
+record(bi,"${ECMC_P}Alstate-Init"){
+  field(DESC, "$(HWTYPE): Slave alstate INIT")
+  field(INP,  "${ECMC_P}Stat_.B2")
+  field(ZNAM, "Not INIT")
+  field(ONAM, "INIT")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Alstate-Preop.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "init": {+channel:"VAL"}
+    }
+  })
+}
+
+record(bi,"${ECMC_P}Alstate-Preop"){
+  field(DESC, "$(HWTYPE): Slave alstate PREOP")
+  field(INP,  "${ECMC_P}Stat_.B3")
+  field(ZNAM, "Not PREOP")
+  field(ONAM, "PREOP")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Alstate-Safeop.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "preop": {+channel:"VAL"}
+    }
+  })
+}
+
+record(bi,"${ECMC_P}Alstate-Safeop"){
+  field(DESC, "$(HWTYPE): Slave alstate SAFEOP")
+  field(INP,  "${ECMC_P}Stat_.B4")
+  field(ZNAM, "Not SAFEOP")
+  field(ONAM, "SAFEOP")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Alstate-Op.PROC")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "safeop": {+channel:"VAL"}
+    }
+  })
+}
+
+record(bi,"${ECMC_P}Alstate-Op"){
+  field(DESC, "$(HWTYPE): Slave alstate OP")
+  field(INP,  "${ECMC_P}Stat_.B5")
+  field(ZNAM, "Not OP")
+  field(ONAM, "OP")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "op": {+channel:"VAL"}
+    }
+  })
+}
+
+record(longout,"${ECMC_P}One"){
+  info(asyn:READBACK,"1")
+  field(DESC, "$(HWTYPE): 32 bits (int=-1)")
+  field(TSE, -2)
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ONE?")
+  field(SCAN,"Passive")
+}
+
+record(longout,"${ECMC_P}Zero"){
+  info(asyn:READBACK,"1")
+  field(DESC, "$(HWTYPE): 32 bits (int=0)")
+  field(TSE, -2)
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ZERO?")
+  field(SCAN,"Passive")
+}
+
+record(stringin, "${ECMC_P}HWType"){
+  field(DESC, "EtherCAT terminal hardware type name")
+  field(PINI, "YES")
+  field(VAL,  "$(HWTYPE)")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "hwType": {+channel:"VAL"}
+    }
+  })
+}

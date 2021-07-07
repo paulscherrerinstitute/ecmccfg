@@ -5,8 +5,7 @@
 #-d   \file
 #-d */
 
-#-d /** \note TEST */
-record(bo,"${ECMC_P}BO${CH_ID}"){
+record(bo,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=}"){
   info(asyn:READBACK,"1")
   field(PINI, "${PINI=YES}")
   field(DESC, "${DESC=${HWTYPE}: binaryOutput${CH_ID}}")
@@ -18,9 +17,14 @@ record(bo,"${ECMC_P}BO${CH_ID}"){
   field(OSV,  "${OSV=NO_ALARM}")
   field(SCAN, "Passive")
   field(FLNK, "${FLNK=}")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=BO}${CH_ID}${suffix=}": {+channel:"VAL"}
+    }
+  })
 }
 
-record(bi,"${ECMC_P}BO$(CH_ID)-RB")
+record(bi,"${ECMC_P}${KEY=BO}$(CH_ID)${suffix=}-RB")
 {
   field(PINI, "YES")
   field(DESC, "${DESC=${HWTYPE}: binaryOutput${CH_ID} RB}")
@@ -30,4 +34,9 @@ record(bi,"${ECMC_P}BO$(CH_ID)-RB")
   field(ZNAM, "${ZNAM=Zero}")
   field(ONAM, "${ONAM=One}")
   field(TSE,  "${TSE=-2}")
+  info(Q:group, {
+    "${ECMC_G}": {
+      "${KEY=BO}${CH_ID}${suffix=}-RB": {+channel:"VAL"}
+    }
+  })
 }
