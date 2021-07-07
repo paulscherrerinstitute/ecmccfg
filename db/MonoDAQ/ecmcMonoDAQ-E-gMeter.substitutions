@@ -6,7 +6,7 @@ file "ecmc_analogInput-chX.template"{
 file "ecmc_analogInputFloat-chX.template"{
   pattern {CH_ID, KEY,          sourceName,     ESLO, EGU,    PREC}
           {01,    temperature,  temperature,    1,    "degC", 3   }
-          {01,    X,            accelerometer,  1,    "g",    6   }
-          {02,    Y,            accelerometer,  1,    "g",    6   }
-          {03,    Z,            accelerometer,  1,    "g",    6   }
+          {01,    X,            accelerometerX, 1,    "g",    6   }
+          {01,    Y,            accelerometerY, 1,    "g",    6   }
+          {01,    Z,            accelerometerZ, 1,    "g",    6   }
 }
