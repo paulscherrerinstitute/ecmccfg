@@ -26,6 +26,7 @@
 #-    FULL: Init ecmc with support for both motion and DAQ (DEFAULT)
 #-    DAQ:  Init ecmc with support for only daq (not motion)
 #- PVA               = YES / NO
+#- TMP_DIR      = directory for temporary files
 #-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
@@ -36,6 +37,8 @@
 #- ECMC_MODE              = ecmc mode. FULL/DAQ, Defaults to FULL
 #- ECMC_PVA               = use pva, default NO
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
+#- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
+
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
@@ -102,6 +105,17 @@ ${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
 epicsEnvSet("ECMC_EC_MASTER_ID" ,${MASTER_ID=0})
 
+#-------------------------------------------------------------------------------
+#- temp dir for file output
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
+system "mkdir -p ${ECMC_TMP_DIR}"
+
+#-------------------------------------------------------------------------------
+#- temp dir for file output
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
+system "mkdir -p ${ECMC_TMP_DIR}"
+
+#-------------------------------------------------------------------------------
 #- Set default diag params
 ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
