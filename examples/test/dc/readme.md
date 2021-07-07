@@ -186,12 +186,56 @@ ecmcConfigOrDie "Cfg.EcSlaveConfigDC(12,0x700,1000000,-100000,25000,0)"
 
 # dc.script test application for 2 EL3702
 The dc.script starup file contains configuration for two el3702 slaves. After each addSlave.cmd the follwoing commad is added allowing for changing params:
-
+```
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(11,0x730,1000000,-500000,0,0)"
+```
 
-By connecting a signal generator with  low freq signal (9Hz) to AI1 of both these slaves it is possible to see how the sync_1_shift parameter affects the data.
+## Test with shift of sync_0_shift
 
-Basically it shows that keeping the same sync_1_shift results in best perforemewnce without phaseshifts (atleast for EL3702 terminals). 
+By connecting a signal generator with  low freq signal (9Hz) to AI1 of both these slaves it is possible to see how the sync_0_shift parameter affects the data.
+
+### Log latch time
+
+Test bo sync_0_shift to 50000 for the first EL3702.
+
+EL3702 1:
+```
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM_3702_1},0x730,1000000,50000,0,0)"
+```
+
+EL3702 2:
+```
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM_3702_2},0x730,1000000,0,0,0)"
+```
+
+Log latch time to file:
+```
+camonitor -g10 IOC_TEST:ec0-s11-EL3702-NextTime IOC_TEST:ec0-s12-EL3702-NextTime | tee time.log
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.205566 1589427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.205566 1589377095  
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.206604 1590427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.206604 1590377095  
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.207747 1591427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.207747 1591377095  
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.208643 1592427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.208643 1592377095  
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.209593 1593427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.209593 1593377095  
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.210588 1594427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.210588 1594377095  
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.211582 1595427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.211582 1595377095  
+
+```
+
+Here it can be concluded that the latching of the first EL3702 slave is 50000ns later than the second EL3702 slave.
+```
+IOC_TEST:ec0-s11-EL3702-NextTime 2021-07-07 08:35:47.211582 1595427095  
+IOC_TEST:ec0-s12-EL3702-NextTime 2021-07-07 08:35:47.211582 1595377095  
+```
+
+### Log data
+Logging data basically shows that keeping the same sync_1_shift results in best performance without phaseshifts (atleast for EL3702 terminals). 
 When having to big differnce it seems that sometimes the values will be from previous cycle and not stable.
 ```
 Log values to file with: 

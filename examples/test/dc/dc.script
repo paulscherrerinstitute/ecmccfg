@@ -24,17 +24,15 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 
 #ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,0)"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM_3702_1",              "11")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_3702_1",       "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_3702_1), HW_DESC=EL3702"
+# Here the parameters can be changed to see how that affetcts the data. (these settings only works for oversampling factor 1)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd, "ASSIGN_ACTIVATE=0x730,SYNC_0_CYCLE=1000000,SYNC_0_SHIFT=50000,SYNC_1_CYCLE=0"
 
-# Here the sync_1_shift, 4:th, parameter can be changed to see how that affetcts the data.
-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM_3702_1},0x730,1000000,0,0,0)"
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM_3702_2",            "12")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_3702_2",       "12")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_3702_2), HW_DESC=EL3702"
-
-# Here the sync_1_shift, 4:th, parameter can be changed to see how that affetcts the data.
-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM_3702_2},0x730,1000000,0,0,0)"
+# Here the parameters can be changed to see how that affetcts the data. (these settings only works for oversampling factor 1)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd, "ASSIGN_ACTIVATE=0x730,SYNC_0_CYCLE=1000000,SYNC_0_SHIFT=0,SYNC_1_CYCLE=0"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
