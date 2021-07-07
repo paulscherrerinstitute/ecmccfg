@@ -41,6 +41,7 @@ ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, ${PRINT_PLC_FILE=1}=1,"", "#-"  )
 ${ECMC_EXE_CMD=""}########### Parsed PLC file:
 ${ECMC_EXE_CMD=""}system "cat ${ECMC_TMP_FILE}"
 ${ECMC_EXE_CMD=""}############ PLC file end
+${ECMC_EXE_CMD=""}#
 epicsEnvUnset(ECMC_EXE_CMD)
 
 ecmcFileExist("${ECMC_TMP_FILE}",1)
