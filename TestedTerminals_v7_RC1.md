@@ -1,4 +1,5 @@
 ## Terminals tested with new naming in branch v7_RC1
+* c9900-M995
 * EK1100
 * EK1110
 * EK1122
