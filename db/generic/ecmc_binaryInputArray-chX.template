@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(mbbiDirect,"${ECMC_P}${KEY=BI}${CH_ID}${suffix=-Array}"){
+record(mbbiDirect,"${ECMC_P}${KEY=BI}${CH_ID}${suffix=_Array}"){
   field(DESC, "${HWTYPE}: BI${CH_ID}: Array")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
@@ -14,7 +14,7 @@ record(mbbiDirect,"${ECMC_P}${KEY=BI}${CH_ID}${suffix=-Array}"){
   field(TSE,  "${TSE=-2}")
   info(Q:group, {
     "${ECMC_G}": {
-      "${KEY=BI}${CH_ID}${suffix=-Array}": {+channel:"VAL"}
+      "${KEY=BI}${CH_ID}${suffix=_Array}": {+channel:"VAL"}
     }
   })
 }

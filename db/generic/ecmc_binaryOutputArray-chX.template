@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}"){
+record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=_Array}"){
   info(asyn:READBACK,"1")
   field(DESC, "${DESC="${HWTYPE}: BO${CH_ID}: Array"}")
   field(PINI, "${PINI=1}")
@@ -15,13 +15,13 @@ record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}"){
   field(TSE,  "${TSE=-2}")
   info(Q:group, {
     "${ECMC_G}": {
-      "${KEY=BO}${CH_ID}${suffix=-Array}": {+channel:"VAL"}
+      "${KEY=BO}${CH_ID}${suffix=_Array}": {+channel:"VAL"}
     }
   })
 }
 
 
-record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}-RB"){
+record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=_Array}_RB"){
   field(DESC, "${DESC="${HWTYPE}: BO${CH_ID}: Array RB"}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
@@ -30,7 +30,7 @@ record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}-RB"){
   field(TSE,  "${TSE=-2}")
   info(Q:group, {
     "${ECMC_G}": {
-      "${KEY=BO}${CH_ID}${suffix=-Array}-RB": {+channel:"VAL"}
+      "${KEY=BO}${CH_ID}${suffix=_Array}-RB": {+channel:"VAL"}
     }
   })
 }

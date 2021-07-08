@@ -32,7 +32,7 @@ record(aSub,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS") {
   field(TSE,  -2)
   info(Q:group, {
     "${ECMC_G}": {
-      "${KEY=timestamp}${CH_ID}${suffix=}TS": {+channel:"VAL"}
+      "${KEY=timestamp}${CH_ID}${suffix=}_TS": {+channel:"VAL"}
     }
   })
 }

@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(waveform,"${ECMC_P}${KEY=AI}${CH_ID}${suffix=-Array}"){
+record(waveform,"${ECMC_P}${KEY=AI}${CH_ID}${suffix=_Array}"){
   field(DESC, "${HWTYPE}: AI$(CH_ID): Value Array [$(NELM)]")
   field(PINI, "${PINI=1}")
   field(DTYP, "${DTYP=asynInt16ArrayIn}")
@@ -16,7 +16,7 @@ record(waveform,"${ECMC_P}${KEY=AI}${CH_ID}${suffix=-Array}"){
   field(TSE,  "${TSE=-2}")
   info(Q:group, {
     "${ECMC_G}": {
-      "${KEY=AI}${CH_ID}${suffix=-Array}": {+channel:"VAL"}
+      "${KEY=AI}${CH_ID}${suffix=_Array}": {+channel:"VAL"}
     }
   })
 }

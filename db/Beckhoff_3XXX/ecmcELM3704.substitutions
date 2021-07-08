@@ -19,8 +19,8 @@ file "ecmcELM360X-stat-chX.template"
 file "ecmc_controlWord-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,  sourceName, DESC             }
-          {01,    "AI", "-Ctrl", "control",   "AI Control Word"}
-          {02,    "AI", "-Ctrl", "control",   "AI Control Word"}
-          {03,    "AI", "-Ctrl", "control",   "AI Control Word"}
-          {04,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {01,    "AI", "_Ctrl", "control",   "AI Control Word"}
+          {02,    "AI", "_Ctrl", "control",   "AI Control Word"}
+          {03,    "AI", "_Ctrl", "control",   "AI Control Word"}
+          {04,    "AI", "_Ctrl", "control",   "AI Control Word"}
 }

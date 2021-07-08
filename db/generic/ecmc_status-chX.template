@@ -7,7 +7,7 @@
 #- optional
 #-  sourceName, defaults to 'status'
 
-record(mbbiDirect,"${ECMC_P}${KEY}${CH_ID}${suffix=-Stat}"){
+record(mbbiDirect,"${ECMC_P}${KEY}${CH_ID}${suffix=_Stat}"){
   field(DESC, "${HWTYPE}: CH${CH_ID}: Status Word")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
@@ -16,7 +16,7 @@ record(mbbiDirect,"${ECMC_P}${KEY}${CH_ID}${suffix=-Stat}"){
   field(FLNK, "${FLNK=}")
   info(Q:group, {
     "${ECMC_G}": {
-      "${KEY}${CH_ID}${suffix=-Stat}": {+channel:"VAL"}
+      "${KEY}${CH_ID}${suffix=_Stat}": {+channel:"VAL"}
     }
   })
 }
