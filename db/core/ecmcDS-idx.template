@@ -1,12 +1,12 @@
-#record(bo,"$(P)DS${Index}-Clear-Cmd"){
+#record(bo,"$(P)$(DS_CLEAR_CMD)"){
 #  field(DTYP,"stream")
 #  field(OUT,"@ecmcDataStorage.proto clearDataStorage(${Index}) $(PORT)")
 #  field(ZNAM,"FALSE")
 #  field(ONAM,"TRUE")
-#  field(FLNK,"$(P)DS${Index}-Data-Act")
+#  field(FLNK,"$(P)$(DS_DATA_ACT)")
 #}
 
-record(ai,"$(P)DS${Index}-DataIndex-Act"){
+record(ai,"$(P)$(DS_DATAINDEX_ACT)"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,"@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ds${Index}.index?")
@@ -14,7 +14,7 @@ record(ai,"$(P)DS${Index}-DataIndex-Act"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(waveform,"$(P)DS${Index}-Data-Act") {
+record(waveform,"$(P)$(DS_DATA_ACT)") {
   info(asyn:FIFO, "1000")
   field(PINI, "1")
   field(DTYP, "asynFloat64ArrayIn")
@@ -25,36 +25,36 @@ record(waveform,"$(P)DS${Index}-Data-Act") {
   field(TSE,  "$(TSE=-2)")
 }
 
-record(longin,"$(P)DS${Index}-Stat"){
-  field(DESC, "DS${Index}: Status Word")
+record(longin,"$(P)$(DS_STAT)"){
+  field(DESC, "ds$(Index): Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ds${Index}.status?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)DS${Index}-Type.PROC")
+  field(FLNK, "$(P)$(DS_TYPE).PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(calc,"$(P)DS${Index}-Type") {
-  field(DESC, "DS${Index}: Buffer type")
+record(calc,"$(P)$(DS_TYPE)") {
+  field(DESC, "ds$(Index): Buffer type")
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>16")
-  field(INPA,"$(P)DS${Index}-Stat.VAL")
+  field(INPA,"$(P)$(DS_STAT).VAL")
 }
 
-record(mbbiDirect,"$(P)DS${Index}-Stat_"){
-  field(DESC, "DS${Index}: Status Word mbbiD")
+record(mbbiDirect,"$(P)$(DS_STAT_)"){
+  field(DESC, "ds$(Index): Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ds${Index}.status?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)DS${Index}-full.PROC")
+  field(FLNK, "$(P)$(DS_FULL).PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)DS${Index}-full"){
-  field(DESC, "DS${Index}: Buffer full")
-  field(INP,  "$(P)DS${Index}-Stat_.B0")
+record(bi,"$(P)$(DS_FULL)"){
+  field(DESC, "ds$(Index): Buffer full")
+  field(INP,  "$(P)$(DS_STAT_).B0")
   field(ZNAM, "Buffer not full")
   field(ONAM, "Buffer full")
   field(ZSV,  "NO_ALARM")
