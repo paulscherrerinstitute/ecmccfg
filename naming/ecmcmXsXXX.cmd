@@ -14,8 +14,10 @@
 ecmcEpicsEnvSetCalc("sid", "${SLAVE_POS}","%03d")
 ecmcEpicsEnvSetCalc("mid", "${MASTER_ID}","%01d")
 
+#- pva Group
+epicsEnvSet("ECMC_G",            "${ECMC_PREFIX}m${mid}s${sid}")
+#- PV Prefix
 epicsEnvSet("ECMC_P",            "${ECMC_PREFIX}m${mid}s${sid}-")
 
 epicsEnvUnset(sid)
 epicsEnvUnset(mid)
-
