@@ -11,6 +11,9 @@
 #-d   \endcode
 #-d */
 
+#- halt the ioc startup in case od an error
+on error halt
+
 #- setup python venv and run `plcYamlJinja2.py`
 #- MUST be in the same 'system'-context!!!
 system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; jinja2 "${ECMC_CONFIG_ROOT}axis.jinja2" "${FILE}" -o "${ECMC_TMP_DIR}${FILE}.axis""
@@ -20,4 +23,4 @@ ecmcFileExist("${ECMC_TMP_DIR}${FILE}.axis",1)
 ${SCRIPTEXEC} "${ECMC_TMP_DIR}${FILE}.axis"
 
 #- cleanup
-#- system "rm -rf ${ECMC_TMP_DIR}${FILE}.axis"
+system "rm -rf ${ECMC_TMP_DIR}${FILE}.axis"
