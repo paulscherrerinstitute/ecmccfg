@@ -1,0 +1,14 @@
+# Slaves that need to be migrated to generic templates
+A close look should be taken to identify potential duplicated code in the templates.
+In general an effort should be made to reduce specific templates and substitute with generic ones.
+
+- Beckhoff
+  * EKM1101
+    @kivel: make sure to clean up this, it's a mess :)
+  * 2XXX
+  * 3XXX
+  * EL4732
+  * 5XXX
+
+- Keyence
+  * DL-EC1A
