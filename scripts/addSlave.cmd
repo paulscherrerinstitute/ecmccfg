@@ -52,7 +52,7 @@ ${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_
 epicsEnvUnset(DEFAULT_SUBS)
 
 ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
-${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave${ECMC_PVA}.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
+${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
 epicsEnvUnset(DEFAULT_SLAVE_PVS)
 
 # increment SLAVE_ID
