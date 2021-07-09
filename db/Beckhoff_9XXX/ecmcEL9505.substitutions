@@ -1,11 +1,5 @@
-file "ecmcEcSlave.template"
+file "ecmcEL95XX-chX.template"
 {
-  pattern {}
-          {}
-}
-
-file "ecmcEL9505-chX.template"
-{
-  pattern {}
-          {}
+  pattern {CH_ID}
+          {01   }
 }

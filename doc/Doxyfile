@@ -268,7 +268,7 @@ OPTIMIZE_OUTPUT_VHDL   = NO
 # Note that for custom extensions you also need to set FILE_PATTERNS otherwise
 # the files are not read by doxygen.
 
-EXTENSION_MAPPING      = sh=C cmd=C script=C
+EXTENSION_MAPPING      = template=C sh=C cmd=C script=C substitutions=C
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -753,7 +753,7 @@ INPUT_ENCODING         = UTF-8
 # *.md, *.mm, *.dox, *.py, *.f90, *.f, *.for, *.tcl, *.vhd, *.vhdl, *.ucf,
 # *.qsf, *.as and *.js.
 
-FILE_PATTERNS          = *.cmd *.script *.md *.sh
+FILE_PATTERNS          = *.cmd *.script *.md *.sh *.template *.substitutions *.iocsh
 #FILE_PATTERNS           = *.cmd
 #FILE_PATTERNS          += *.sh
 
@@ -840,11 +840,8 @@ IMAGE_PATH             =
 # code is scanned, but not when the output code is generated. If lines are added
 # or removed, the anchors will not be placed correctly.
 
-#INPUT_FILTER           = "sed -n -f helpers/bash-doxygen/doxygen-bash.sed -- "
-#INPUT_FILTER           = "sed -e 's|##|//!|'"
-#INPUT_FILTER           = IOCSH "sed -e 's|#-d|//!|'"
-#INPUT_FILTER           = "sed -e 's|#-||'"
-#INPUT_FILTER           = "sed -e 's/^\s*#-d\( \|$\)/\/\/!\1/p'"
+INPUT_FILTER = helpers/iocsh-doxygen/iocsh-doxygen.sed
+
 
 # The FILTER_PATTERNS tag can be used to specify filters on a per file pattern
 # basis. Doxygen will compare the file name with each pattern and apply the
@@ -853,7 +850,7 @@ IMAGE_PATH             =
 # filters are used. If the FILTER_PATTERNS tag is empty or if none of the
 # patterns match the file name, INPUT_FILTER is applied.
 
-FILTER_PATTERNS        = *.cmd=helpers/iosch-doxygen/iosch-doxygen.sed
+#FILTER_PATTERNS        = *.cmd=helpers/iosch-doxygen/iosch-doxygen.sed *.template=helpers/iosch-doxygen/iosch-doxygen.sed
 
 # If the FILTER_SOURCE_FILES tag is set to YES, the input filter (if set using
 # INPUT_FILTER ) will also be used to filter the input files that are used for

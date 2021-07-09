@@ -1,0 +1,8 @@
+{%- macro abort(error) %}
+    {{ None['[ERROR] in ' ~ error.caller|default('unkown caller') ~ ' --> ' ~ error.msg][0] }}
+{% endmacro -%}
+
+{# raise exception, the ugly way. It sucks, but it works!
+  in iocsh make sure to set 'on error halt' or 'on error wait <time>'
+  #}
+{{ abort(Error) }}

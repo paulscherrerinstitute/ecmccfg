@@ -1,18 +1,12 @@
-file "ecmcEcSlave.template"
+file "ecmc_analogInput-chX"
 {
-  pattern {}
-          {}
-}
-
-file "capaNCDT6500_chX.template"
-{
-  pattern { CH_ID,  EGU,  PREC }
-          { 1,      "nm", 1    }
-          { 2,      "nm", 1    }
-          { 3,      "nm", 1    }
-          { 4,      "nm", 1    }
-          { 5,      "nm", 1    }
-          { 6,      "nm", 1    }
-          { 7,      "nm", 1    }
-          { 8,      "nm", 1    }
+  pattern { CH_ID,  KEY,   EGU,  PREC,  suffix    }
+          { 01,     "Enc", "nm", 1,     "PosAct"  }
+          { 02,     "Enc", "nm", 1,     "PosAct"  }
+          { 03,     "Enc", "nm", 1,     "PosAct"  }
+          { 04,     "Enc", "nm", 1,     "PosAct"  }
+          { 05,     "Enc", "nm", 1,     "PosAct"  }
+          { 06,     "Enc", "nm", 1,     "PosAct"  }
+          { 07,     "Enc", "nm", 1,     "PosAct"  }
+          { 08,     "Enc", "nm", 1,     "PosAct"  }
 }

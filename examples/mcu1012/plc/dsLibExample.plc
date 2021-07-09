@@ -23,7 +23,7 @@ if(plc1.firstscan) {
 global.data := global.data + 1;
 
 static.scale:=0.123456789;
-static.dsTestValue:=ec0.s3.POSITION*static.scale+global.data;
+static.dsTestValue:=ec0.s3.positionActual01*static.scale+global.data;
 var errorCode:=ds_append_data(1,static.dsTestValue);
 if(errorCode){
   plc3.error:=errorCode;

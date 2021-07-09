@@ -1,12 +1,6 @@
-file "ecmcEcSlave.template"
+file "ecmc_analogOutput-chX.template"
 {
-  pattern {}
-          {}
-}
-
-file "ecmcEL2502-chX.template"
-{
-  pattern {CH_ID, LINR,    ESLO,            EOFF,    EGU,    PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV,     DRVL,  DRVH}
-          {1,     "SLOPE", 7.324442274E-4,  0,      "V",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM", 0,   24}
-          {2,     "SLOPE", 7.324442274E-4,  0,      "V",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM", 0,   24}
+  pattern {CH_ID, sourceName, LINR,    ESLO,           DRVL, DRVH}
+          {01,    pwmOutput,  "SLOPE", 7.324442274E-4, 0,    24  }
+          {02,    pwmOutput,  "SLOPE", 7.324442274E-4, 0,    24  }
 }

@@ -15,16 +15,19 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 6.3.2
-#- EthercatMC_VER    = 3.0.2
+#- ECMC_VER          = 7.0.0
+#- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
 #- SCRIPTEXEC        = iocshLoad
+#- NAMING            = ClassicNaming
 #- EC_RATE           = 1000
 #- MODE              = FULL / DAQ
 #-    FULL: Init ecmc with support for both motion and DAQ (DEFAULT)
 #-    DAQ:  Init ecmc with support for only daq (not motion)
-#-    
+#- PVA               = YES / NO
+#- TMP_DIR      = directory for temporary files
+#-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
 #- ECMC_CONFIG_DB         = database directory of ${MODULE}
@@ -32,7 +35,10 @@
 #- ECMC_EC_SAMPLE_RATE    = EtherCAT bus sampling rate [Hz] (1000 default)
 #- ECMC_EC_SAMPLE_RATE_MS = EtherCAT bus sampling rate [ms] (1 default)
 #- ECMC_MODE              = ecmc mode. FULL/DAQ, Defaults to FULL
+#- ECMC_PVA               = use pva, default NO
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
+#- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
+
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
@@ -40,7 +46,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=6.3.2}"
+require ecmc        "${ECMC_VER=7}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
@@ -70,6 +76,12 @@ ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'=='FULL'",""
 epicsEnvShow(ECMC_SUPPORT_MOTION)
 ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
+
+#-
+#-------------------------------------------------------------------------------
+# suffix for pva enabled scripts, templates and substitutions
+ecmcEpicsEnvSetCalcTernary(ECMC_PVA, "${PVA=0}", "Pva","")
+
 #-
 #-------------------------------------------------------------------------------
 # Set EtherCAT frequency (defaults to 1000)
@@ -84,6 +96,8 @@ ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS" ,1000/${ECMC_EC_SAMPLE_RATE=1000})
 ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'${ECMC_MODE=FULL}'=='DAQ'","${ECMC_EC_SAMPLE_RATE_MS}","10")
 #-
 #-------------------------------------------------------------------------------
+#- define naming convention script
+epicsEnvSet("ECMC_P_SCRIPT",        "${NAMING=mXsXXX}")
 
 #- add master (defaults to '0'), no master when MASTER_ID < 0
 ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "${MASTER_ID=0}>=0", "","#- ")
@@ -91,6 +105,17 @@ ${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
 epicsEnvSet("ECMC_EC_MASTER_ID" ,${MASTER_ID=0})
 
+#-------------------------------------------------------------------------------
+#- temp dir for file output
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
+system "mkdir -p ${ECMC_TMP_DIR}"
+
+#-------------------------------------------------------------------------------
+#- temp dir for file output
+epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
+system "mkdir -p ${ECMC_TMP_DIR}"
+
+#-------------------------------------------------------------------------------
 #- Set default diag params
 ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd

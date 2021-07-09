@@ -22,18 +22,18 @@
 #- 0xA_ = no Device detected
 
 ${DBG=#}println('----------------------------------------------------');
-${DBG=#}print(' AI1:           ',ec0.s$(SLAVE_ID).AI_1, ' bits 0..15 ', ec_chk_bits(ec0.s$(SLAVE_ID).AI_1,0,15));
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH1_STATUS,0,7);
+${DBG=#}print(' AI1:           ',ec0.s$(SLAVE_ID).analogInput01, ' bits 0..15: ', ec_chk_bits(ec0.s$(SLAVE_ID).analogInput01,0,15), ' status: ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status01,0,7);
 ${DBG=#}println('');
 
-${DBG=#}print(' BI2:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BI_2,0),'  ', ec0.s$(SLAVE_ID).CH2_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH2_STATUS,0,7);
-${DBG=#}println('');
-
-${DBG=#}print(' BI3:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BI_3,0),'  ', ec0.s$(SLAVE_ID).CH3_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH3_STATUS,0,7);
-${DBG=#}println('');
-
-${DBG=#}print(' BI4:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BI_4,0),'  ', ec0.s$(SLAVE_ID).CH4_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH4_STATUS,0,7);
-${DBG=#}println('');
+#${DBG=#}print(' BI2:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryInput02,0),'  ', ec0.s$(SLAVE_ID).status02, ', ');
+#${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status02,0,7);
+#${DBG=#}println('');
+#
+#${DBG=#}print(' BI3:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryInput03,0),'  ', ec0.s$(SLAVE_ID).status03, ', ');
+#${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status03,0,7);
+#${DBG=#}println('');
+#
+#${DBG=#}print(' BI4:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryInput04,0),'  ', ec0.s$(SLAVE_ID).status04, ', ');
+#${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status04,0,7);
+#${DBG=#}println('');

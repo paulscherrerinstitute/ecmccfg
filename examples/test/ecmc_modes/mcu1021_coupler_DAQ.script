@@ -7,13 +7,15 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
-
-# Epics Motor record driver that will be used:
-epicsEnvShow(ECMC_MR_MODULE)
+require ecmccfg master
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop,MODE=DAQ"
+
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7047, CONFIG=-Motor-Vexta-PK268DB"
 
 ##############################################################################
 ## Configure hardware:

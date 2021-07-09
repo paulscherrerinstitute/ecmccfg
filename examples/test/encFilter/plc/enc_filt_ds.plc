@@ -6,7 +6,7 @@
 # ENC_S_ID    = Slave id of encoder terminal
 #
 
-ds_append_data(${DS_FILT_ID},ec0.s${ENC_S_ID}.POSITION);
+ds_append_data(${DS_FILT_ID},ec0.s${ENC_S_ID}.positionActual01);
 ec0.s${ENC_S_ID}.ZERO:=ds_get_avg(${DS_FILT_ID});
 
 static.counter+=1;

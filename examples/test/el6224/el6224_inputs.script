@@ -26,31 +26,23 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6224"
 
 # Example of default configuration of digital input CH 0
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "0")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "1")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "01")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 # Example of default configuration of digital input CH 1
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "1")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "2")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "02")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 # Example of default configuration of digital input CH 2
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "2")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "3")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "03")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 # Example of default configuration of digital input CH 3
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "3")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "4")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "04")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 #Apply hardware configuration

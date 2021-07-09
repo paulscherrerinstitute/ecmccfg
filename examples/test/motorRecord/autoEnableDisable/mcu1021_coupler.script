@@ -18,7 +18,6 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3
 
 ##############################################################################
 ## Configure hardware:
-
 ecmcFileExist($(ecmccfg_DIR)ecmcMCU1021_coupler.cmd,1)
 $(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1021_coupler.cmd
 
@@ -27,27 +26,37 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},BO_8,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput02,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput08,1)"
 # END of ADDITIONAL SETUP
 
 ##############################################################################
 ## AXIS 1
 #
+epicsEnvSet(ECMC_ENC_SLAVE_ID,3)
+epicsEnvSet(ECMC_ENC_CH_ID,1)
+epicsEnvSet(ECMC_ENC_TYPE,0)      # Type: 0=Incremental, 1=Absolute
+epicsEnvSet(ECMC_DRV_SLAVE_ID,8)
+
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_1021_c_auto_on_off.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_auto_on_off.ax)
 
 ##############################################################################
 ## AXIS 2
 #
+epicsEnvSet(ECMC_ENC_SLAVE_ID,4)
+epicsEnvSet(ECMC_ENC_CH_ID,1)
+epicsEnvSet(ECMC_ENC_TYPE,0)      # Type: 0=Incremental, 1=Absolute
+epicsEnvSet(ECMC_DRV_SLAVE_ID,9)
+
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2_1021_c_auto_on_off.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2_no_auto.ax)
 
 ##############################################################################
 ############# Configure diagnostics:

@@ -1,66 +1,66 @@
-record(mbbiDirect,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat"){
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): Enc Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).ENC_STATUS?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).encoderStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-OpnCrct-Alrm PP")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-OpnCrctAlrm PP")
   field(SHFT, "0")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-OpnCrct-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-OpnCrctAlrm"){
   field(DESC, "$(HWTYPE): Enc Opn Ccrt Alrm")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B6")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B6")
   field(ZNAM, "No Alarm")
   field(ONAM, "Open Circuit")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Wrn-Alrm")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-WrnAlrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Wrn-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-WrnAlrm"){
   field(DESC, "$(HWTYPE): Enc Extpltn Stall Alrm")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.B7")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Alarm")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-SyncErr-Alrm")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-SyncErrAlrm")
 }
 
-record(bi,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-SyncErr-Alrm"){
+record(bi,"${ECMC_P}Enc${CH_ID}-SyncErrAlrm"){
   field(DESC, "$(HWTYPE): Enc Sync Err Alrm")
-  field(INP,  "$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Stat.BD")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.BD")
   field(ZNAM, "No Alarm")
   field(ONAM, "Alarm")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd"){
+record(ao,"${ECMC_P}Enc${CH_ID}-Cmd"){
   field(DESC, "$(HWTYPE): Enc Ctrl Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_CONTROL=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderControl${CH_ID}=")
   field(PREC, "0")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-Cmd-RB"){
+record(ai,"${ECMC_P}Enc${CH_ID}-Cmd-RB"){
   field(DESC, "$(HWTYPE): Enc Ctrl Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ENC_CONTROL?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderControl${CH_ID}?")
   field(PREC, "0")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosCmd"){
+record(ao,"${ECMC_P}Enc${CH_ID}-PosCmd"){
   field(DESC, "$(HWTYPE): Enc Counter Value Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).VALUE=")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderValue${CH_ID}=")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
@@ -77,11 +77,11 @@ record(ao,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosCmd"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosCmd-RB"){
+record(ai,"${ECMC_P}Enc${CH_ID}-PosCmd-RB"){
   field(DESC, "$(HWTYPE): Enc Ctrl Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).VALUE?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderValue${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
@@ -100,36 +100,13 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosCmd-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(waveform,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
+record(waveform,"${ECMC_P}Enc${CH_ID}-PosAct-Array"){
   field(DESC, "$(HWTYPE): Actual position Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayIn)")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.CH1_ARRAY?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.positionActualArray${CH_ID}?")
   field(FTVL, "$(FTVL=SHORT)")
   field(NELM, "$(NELM)")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
 }
-
-#record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-Enc-PosAct"){
-#  field(DESC, "$(HWTYPE): Enc Actl Pos (Raw)")
-#  field(PINI, "$(PINI=1)")
-#  field(DTYP, "asynInt32")
-#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).POSITION?")
-#  field(SCAN, "I/O Intr")
-#  field(LINR, "$(LINR=SLOPE)")
-#  field(ESLO, "$(ESLO=1)")
-#  field(EOFF, "$(EOFF=0)")
-#  field(EGU,  "$(EGU=V)")
-#  field(PREC, "$(PREC=7)")
-#  field(LOW,  "$(LOW=0)")
-#  field(LOLO, "$(LOLO=0)")
-#  field(HIGH, "$(HIGH=0)")
-#  field(HIHI, "$(HIHI=0)")
-#  field(HYST, "$(HYST=0)")
-#  field(LLSV, "$(LLSV=NO_ALARM)")
-#  field(LSV,  "$(LSV=NO_ALARM)")
-#  field(HSV,  "$(HSV=NO_ALARM)")
-#  field(HHSV, "$(HHSV=NO_ALARM)")
-#  field(TSE,  "$(TSE=-2)")
-#}

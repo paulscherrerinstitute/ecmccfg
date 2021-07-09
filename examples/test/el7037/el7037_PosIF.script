@@ -1,0 +1,88 @@
+##############################################################################
+## Example config for el7037 positioning interface (no motorrecord support yet)
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg master
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+
+##############################################################################
+## Configure hardware
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "26")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037_PosIF, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+ecmcConfig "Cfg.SetAppMode(1)"
+
+# Below is a sequence describing what records to use for absolute positioning! 
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-StartType 1
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-AccCmd 1000
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-DecCmd 1000
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-VelCmd 500
+# Enable
+#mcu002> dbpf IOC_TEST:m0s000-Drv01-Ctrl 1
+# Move one rev (200step*64microstepping)
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-PosCmd 12800
+#Trigg motion by toggle
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-Ctrl 0
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-Ctrl 1
+# Get actual position alt 1
+#mcu002> dbgf IOC_TEST:m0s000-Enc01-PosAct
+# Get actual position alt 2
+#mcu002> dbgf IOC_TEST:m0s000-Pos01-PosAct
+# Stop motion
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-Ctrl 0
+
+#- PVs:
+#-IOC_TEST:m0s000-Enc01-Count
+#-IOC_TEST:m0s000-Pos01-Ctrl
+#-IOC_TEST:m0s000-Pos01-PosCmd
+#-IOC_TEST:m0s000-Pos01-VelCmd
+#-IOC_TEST:m0s000-Pos01-StartType
+#-IOC_TEST:m0s000-Pos01-AccCmd
+#-IOC_TEST:m0s000-Pos01-DecCmd
+#-IOC_TEST:m0s000-Drv01-Ctrl
+#-IOC_TEST:m0s000-Enc01-Cmd
+#-IOC_TEST:m0s000-Drv01-Stat
+#-IOC_TEST:m0s000-Enc01-Stat
+#-IOC_TEST:m0s000-Drv01-WrnAlrm
+#-IOC_TEST:m0s000-Drv01-ErrAlrm
+#-IOC_TEST:m0s000-Drv01-StlAlrm
+#-IOC_TEST:m0s000-Drv01-SyncErrAlrm
+#-IOC_TEST:m0s000-Enc01-OpnCrctAlrm
+#-IOC_TEST:m0s000-Enc01-WrnAlrm
+#-IOC_TEST:m0s000-Enc01-SyncErrAlrm
+#-IOC_TEST:m0s000-Pos01-Stat
+#-IOC_TEST:m0s000-Pos01-PosAct
+#-IOC_TEST:m0s000-Pos01-Vel
+#-IOC_TEST:m0s000-Pos01-Time
+#-IOC_TEST:m0s000-Enc01-Count-RB
+#-IOC_TEST:m0s000-Pos01-Ctrl-RB
+#-IOC_TEST:m0s000-Pos01-PosCmd-RB
+#-IOC_TEST:m0s000-Pos01-VelCmd-RB
+#-IOC_TEST:m0s000-Pos01-StartType-RB
+#-IOC_TEST:m0s000-Pos01-AccCmd-RB
+#-IOC_TEST:m0s000-Pos01-DecCmd-RB
+#-IOC_TEST:m0s000-Drv01-Ctrl-RB
+#-IOC_TEST:m0s000-Enc01-PosAct
+#-IOC_TEST:m0s000-Enc01-LtchPosAct
+#-IOC_TEST:m0s000-Enc01-Cmd-RB

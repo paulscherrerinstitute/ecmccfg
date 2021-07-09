@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 # 
-# CHx_STATUS
+# status0X:
 #- 0x_1 = Port in std dig in
 #- 0x_2 = Port in std dig out
 #- 0x_3 = Port in communikation OP
@@ -22,23 +22,23 @@
 #- 0xA_ = no Device detected
 
 ${DBG=#}println('----------------------------------------------------');
-${DBG=#}print(' BO1:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BO_1,0),'  ', ec0.s$(SLAVE_ID).CH1_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH1_STATUS,0,7);
+${DBG=#}print(' BO1:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput01,0),'  ', ec0.s$(SLAVE_ID).status01, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status01,0,7);
 ${DBG=#}println('');
 
-${DBG=#}print(' BO2:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BO_2,0),'  ', ec0.s$(SLAVE_ID).CH2_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH2_STATUS,0,7);
+${DBG=#}print(' BO2:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput02,0),'  ', ec0.s$(SLAVE_ID).status02, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status02,0,7);
 ${DBG=#}println('');
 
-${DBG=#}print(' BO3:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BO_3,0),'  ', ec0.s$(SLAVE_ID).CH3_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH3_STATUS,0,7);
+${DBG=#}print(' BO3:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput03,0),'  ', ec0.s$(SLAVE_ID).status03, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status03,0,7);
 ${DBG=#}println('');
 
-${DBG=#}print(' BO4:           ',ec_chk_bit(ec0.s$(SLAVE_ID).BO_4,0),'  ', ec0.s$(SLAVE_ID).CH4_STATUS, ', ');
-${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).CH4_STATUS,0,7);
+${DBG=#}print(' BO4:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput04,0),'  ', ec0.s$(SLAVE_ID).status04, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status04,0,7);
 ${DBG=#}println('');
 
-ec0.s$(SLAVE_ID).BO_1:=not(ec0.s$(SLAVE_ID).BO_1);
-ec0.s$(SLAVE_ID).BO_2:=not(ec0.s$(SLAVE_ID).BO_2);
-ec0.s$(SLAVE_ID).BO_3:=not(ec0.s$(SLAVE_ID).BO_3);
-ec0.s$(SLAVE_ID).BO_4:=not(ec0.s$(SLAVE_ID).BO_4);
+ec0.s$(SLAVE_ID).binaryOutput01:=not(ec0.s$(SLAVE_ID).binaryOutput01);
+ec0.s$(SLAVE_ID).binaryOutput02:=not(ec0.s$(SLAVE_ID).binaryOutput02);
+ec0.s$(SLAVE_ID).binaryOutput03:=not(ec0.s$(SLAVE_ID).binaryOutput03);
+ec0.s$(SLAVE_ID).binaryOutput04:=not(ec0.s$(SLAVE_ID).binaryOutput04);

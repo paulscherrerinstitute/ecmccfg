@@ -1,23 +1,80 @@
-file "ecmcEcSlave.template"
+# Encoder actual position
+file "ecmc_analogInput-chX.template"
 {
-  pattern {}
-          {}
+  pattern {CH_ID, KEY,   suffix,    sourceName,       EGU,      DESC                     }
+          {01,    "Enc", "-PosAct", "positionActual", "Counts", "Encoder Actual position"}
+          {02,    "Enc", "-PosAct", "positionActual", "Counts", "Encoder Actual position"}
 }
 
-file "ecmcIPOSXXXX_DRV.template"
+# Drive Control word
+file "ecmc_controlWord-chX.template"
 {
-  pattern {LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {"SLOPE", 1,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+  pattern {CH_ID, KEY,   suffix,  sourceName,     DESC                }
+          {01,    "Drv", "-Ctrl", "driveControl", "Drive Control Word"}
 }
 
-file "ecmcIPOSXXXX_ENC.template"
+# Drive Velocity setpoint
+file "ecmc_analogOutput-chX.template"
 {
-  pattern {LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {"SLOPE", 1,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+  pattern {CH_ID, KEY,   suffix,    sourceName,         DESC                     }
+          {01,    "Drv", "-VeloSet", "velocitySetpoint", "Drive Velocity setpoint"}
 }
 
-file "ecmcIPOSXXXX_AUX.template"
+# Drive Status word
+file "ecmcIPOSXXXX-drvStat-chX.template"
 {
-  pattern {CURRESLO}
-          {0.001221}
+  pattern {CH_ID}
+          {01   }
+}
+
+# binaryOutputArray01
+file "ecmc_binaryOutputArray-chX.template"
+{
+  pattern {CH_ID }
+          {01    }
+}
+
+# binaryOutputArrayMask01
+file "ecmc_binaryOutputArray-chX.template"
+{
+  pattern {CH_ID, Suffix,       }
+          {01,    "-ArrayMask"  }
+}
+
+# binaryOutputArrayReadBack01 skip since kind of "duplicate"
+
+# binaryInputArray01
+file "ecmc_binaryInputArray-chX.template"
+{
+  pattern {CH_ID }
+          {01    }
+}
+
+# currentActual
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,  sourceName,      LINR,    ESLO,      EGU }
+          {01,    "Drv", "-Curr", "currentActual", "SLOPE", 0.0012210, "A" }
+}
+
+# voltageActual, ESLO= 102.3/65520 (see manual)
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,  sourceName,      LINR,    ESLO,      EGU }
+          {01,    "Drv", "-Volt", "voltageActual", "SLOPE", 0.0015614, "V" }
+}
+
+# temperatureActual, ESLO= 102.3/65520 (see manual)
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,  sourceName,          LINR,    ESLO,     EGU    }
+          {01,    "Drv", "-Temp", "temperatureActual", "SLOPE", 0.001221, "DegC" }
+}
+
+# analogInputActual (analog drive feedback)
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
 }

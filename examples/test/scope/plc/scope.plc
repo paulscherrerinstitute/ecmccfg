@@ -40,21 +40,21 @@ if(static.state==0 and ds_is_full(${ID_DS_BUF})) {
 
 ##### STATE 1: Wait for trigger
 # Wait for trigger (positive edge on EL1252)
-if(ec0.s${ID_EL1252}.CH1_LATCH_POS!=static.oldCh1PosTime and static.state==1) {
+if(ec0.s${ID_EL1252}.timestampLatchPositive01!=static.oldCh1PosTime and static.state==1) {
   println('STATE 1');  
-  static.timeSinceLast:= (ec0.s${ID_EL1252}.CH1_LATCH_POS-static.oldCh1PosTime); 
+  static.timeSinceLast:= (ec0.s${ID_EL1252}.timestampLatchPositive01-static.oldCh1PosTime); 
   println('');
   println('Current time              [ns]: ', ec_get_time());
-  println('New latched positive edge [ns]: ', ec0.s${ID_EL1252}.CH1_LATCH_POS);
+  println('New latched positive edge [ns]: ', ec0.s${ID_EL1252}.timestampLatchPositive01);
   println('    Time since last latch [ns]: ', static.timeSinceLast );
   println('                          [ms]: ', static.timeSinceLast/1E6);
-  static.el1252_L32:=ec_chk_bits(ec0.s${ID_EL1252}.CH1_LATCH_POS,0,31);
+  static.el1252_L32:=ec_chk_bits(ec0.s${ID_EL1252}.timestampLatchPositive01,0,31);
   println('    Lower 32 bits         [ns]: ', static.el1252_L32);
   println('    Frequency             [Hz]: ', 1e9/(static.timeSinceLast));
   println('Current time   l32        [ns]: ',ec_get_time_l32());
   println('Current time   u32        [ns]: ',ec_get_time_u32());
-  println('Next latch time EL3702 l32[ns]: ', ec0.s${ID_EL3702}.NEXT_TIME);
-  static.timeDiff:=ec0.s${ID_EL3702}.NEXT_TIME-static.el1252_L32;
+  println('Next latch time EL3702 l32[ns]: ', ec0.s${ID_EL3702}.nextSyncTime);
+  static.timeDiff:=ec0.s${ID_EL3702}.nextSyncTime-static.el1252_L32;
   println('Diff AI vs Trigg          [ns]: ', static.timeDiff);
   static.sampleRateAIns:= 1E6*${RATE=1}/${NELM=100};
   println('SampleTimeAI              [ns]: ',static.sampleRateAIns);
@@ -91,4 +91,4 @@ if(static.state==3) {
   static.state:=1;
 };
 
-static.oldCh1PosTime:=ec0.s${ID_EL1252}.CH1_LATCH_POS;
+static.oldCh1PosTime:=ec0.s${ID_EL1252}.timestampLatchPositive01;

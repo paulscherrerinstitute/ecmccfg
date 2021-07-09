@@ -1,1 +1,2 @@
-println('F32:', ec0.s0.CHUSIN_VALUE);
+println('F32:', ec0.s0.voltageActualUsIn);
+                       

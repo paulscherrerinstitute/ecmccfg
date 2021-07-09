@@ -1,0 +1,41 @@
+record(mbbiDirect,"${ECMC_P}${KEY=AI}${CH_ID}-Stat"){
+  field(DESC, "$(HWTYPE): AI$(CH_ID): Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).status${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}${KEY=AI}${CH_ID}-UndrLim-Alrm.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}${KEY=AI}${CH_ID}-UndrLimAlrm"){
+  field(DESC, "$(HWTYPE): AI$(CH_ID): Under Range Alarm")
+  field(INP,  "${ECMC_P}${KEY=AI}${CH_ID}-Stat.B0")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Under Range")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}${KEY=AI}${CH_ID}-OvrLimAlrm")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}${KEY=AI}${CH_ID}-OvrLimAlrm"){
+  field(DESC, "$(HWTYPE): AI$(CH_ID): Over Range Alarm")
+  field(INP,  "${ECMC_P}${KEY=AI}${CH_ID}-Stat.B1")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Over Range")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}${KEY=AI}${CH_ID}-ErrAlrm")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}${KEY=AI}${CH_ID}-ErrAlrm"){
+  field(DESC, "$(HWTYPE): AI$(CH_ID): Error Alarm")
+  field(INP,  "${ECMC_P}${KEY=AI}${CH_ID}-Stat.B6")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(TSE,  "$(TSE=-2)")
+}

@@ -1,24 +1,18 @@
-file "ecmcEcSlave.template"
+file "ecmc_binaryOutput-chX.template"
 {
-  pattern {}
-          {}
-}
-
-file "ecmcEL2XXX-chx.template"
-{
-  pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                               }
-          {1,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}
-          {2,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}       
+  pattern {CH_ID}
+          {01   }
+          {02   }
 }
 
 file "ecmcEL2252-chx.template"
 {
-  pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                               }
-          {1,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}
-          {2,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1      "$(HWTYPE): Binary Output $(CH_ID)"}       
+  pattern {CH_ID}
+          {01   }
+          {02   }
 }
 
-file "ecmcEL2252-General.template"
+file "ecmcEL2252-general.template"
 {
   pattern {}
           {}

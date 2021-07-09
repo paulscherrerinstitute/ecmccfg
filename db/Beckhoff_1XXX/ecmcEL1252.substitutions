@@ -1,20 +1,22 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
+# binary inputs
+file "ecmc_binaryInput-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
 }
 
-file "ecmcEL1XXX.template"
-{
-  pattern {CH_ID, ZNAM,   ONAM,   ZSV,        OSV,        PINI,  DESC                              }
-          {1,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1,     "$(HWTYPE): Binary Input $(CH_ID)"}
-          {2,     "Zero", "One",  "NO_ALARM", "NO_ALARM", 1,     "$(HWTYPE): Binary Input $(CH_ID)"}
+# timestamp
+file "ecmc_timestamp_64-chX.template"{
+  pattern {CH_ID, KEY,   suffix,      sourceName                }
+          {01,    "BI",  "-TimeRise", "timestampLatchPositive"  }
+          {01,    "BI",  "-TimeFall", "timestampLatchNegative"  }
+          {02,    "BI",  "-TimeRise", "timestampLatchPositive"  }
+          {02,    "BI",  "-TimeFall", "timestampLatchNegative"  }
 }
 
-# Timestamps and status words
-file "ecmcEL1252.template"
-{
-  pattern {CH_ID, PINI }
-          {1,     1    }
-          {2,     1    }
+# channel status
+file "ecmc_status-chX.template"{
+  pattern {CH_ID, KEY}
+          {01,    BI }
+          {02,    BI }
 }

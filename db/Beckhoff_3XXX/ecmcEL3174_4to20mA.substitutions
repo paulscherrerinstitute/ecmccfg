@@ -1,15 +1,17 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
+# Scaling is between 4..21.179mA 16bit (see manual)
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, ESLO,            EGU,  EOFF, PREC, LOW, LOLO, HIGH, HIHI, LLSV,    LSV,     HSV,     HHSV   }
+          {01,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+          {02,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+          {03,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+          {04,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
 }
 
-#Actually the scalinging is between 4..21.179mA (see manual)
-file "ecmcEL3XXX-chX.template"
+file "ecmc_status-chX.template"
 {
-  pattern {CH_ID, LINR,    ESLO,             EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI,  HYST, LLSV,    LSV,     HSV,     HHSV   }
-          {1,     "SLOPE", 5.2428075234E-4,  4,      "mA",       3,    4,   3,    20,   21,    0,    "MAJOR", "MAJOR", "MINOR", "MAJOR"}
-          {2,     "SLOPE", 5.2428075234E-4,  4,      "mA",       3,    4,   3,    20,   21,    0,    "MAJOR", "MAJOR", "MINOR", "MAJOR"}
-          {3,     "SLOPE", 5.2428075234E-4,  4,      "mA",       3,    4,   3,    20,   21,    0,    "MAJOR", "MAJOR", "MINOR", "MAJOR"}
-          {4,     "SLOPE", 5.2428075234E-4,  4,      "mA",       3,    4,   3,    20,   21,    0,    "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+          {02,    "AI"}
+          {03,    "AI"}
+          {04,    "AI"}
 }

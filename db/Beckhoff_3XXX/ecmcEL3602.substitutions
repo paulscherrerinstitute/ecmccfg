@@ -1,12 +1,13 @@
-file "ecmcEcSlave.template"
+file "ecmc_analogInput-chX.template"
 {
-  pattern {}
-          {}
+  pattern {CH_ID, ESLO,           EOFF, EGU, PREC}
+          {01,    4.656612875E-9, 0,    "V", 3   }
+          {02,    4.656612875E-9, 0,    "V", 3   }
 }
 
-file "ecmcEL3XXX-chX.template"
+file "ecmc_status-chX.template"
 {
-  pattern {CH_ID, LINR,    ESLO,               EOFF,   EGU,     PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {1,     "SLOPE", 4.656612875E-9,     0,      "V",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {2,     "SLOPE", 4.656612875E-9,     0,      "V",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+          {02,    "AI"}
 }

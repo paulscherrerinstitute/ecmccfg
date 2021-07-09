@@ -1,4 +1,4 @@
-record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-DrvVelAct"){
+record(ai,"${ECMC_P}Drv${CH_ID}-VelAct"){
   field(DESC, "$(HWTYPE): Drive Actual Vel")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -21,4 +21,3 @@ record(ai,"$(P)ec$(MASTER_ID)-s$(SLAVE_POS)-$(HWTYPE)-DrvVelAct"){
   field(HHSV, "$(HHSV=NO_ALARM)")
   field(TSE,  "$(TSE=-2)")
 }
-

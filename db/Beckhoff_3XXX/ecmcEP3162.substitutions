@@ -1,0 +1,13 @@
+# analog inputs
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, ESLO,             EGU,  PREC}
+          {01,    3.0518509476E-4,  "V",  3   }
+          {02,    3.0518509476E-4,  "V",  3   }
+}
+
+# channel status
+file "ecmc_status-chX.template"{
+  pattern {CH_ID, KEY}
+          {01,    AI }
+          {02,    AI }
+}

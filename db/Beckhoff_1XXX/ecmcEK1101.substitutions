@@ -1,10 +1,4 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
-file "ecmcEK1101-ID.template"
+file "ecmc_coupler-ID.template"
 {
   pattern {}
           {}

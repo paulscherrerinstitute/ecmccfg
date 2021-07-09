@@ -8,51 +8,35 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg anders_io_link
-
-#- Choose motor record driver implementation
-#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
-#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
-#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-
+require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
 
 ##############################################################################
 ## Config hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6224"
-#dbLoadRecords(ecmcEL6224-Analog-chX.template,"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},CH_ID=$(ECMC_EC_CH_ID_TEXT)")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6224, SUBST_FILE=empty.substitutions"
 
 # Example Panasonic-HG-C1100L3-P.cmd on CH 0
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "0")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "1")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "01")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_Panasonic-HG-C1100L3-P.cmd
 
 # Example default configuration of digital input CH 1
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "1")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "2")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "02")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 # Example default configuration of digital input CH 2
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "2")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "3")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "03")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 # Example default configuration of digital input CH 3
-#-d    \pre ECMC_EC_CH_ID       0..3 ("0x80n0")
-#-d    \pre ECMC_EC_CH_ID_TEXT  1..4  ECMC_EC_CH_ID+1
-epicsEnvSet("ECMC_EC_CH_ID",         "3")
-epicsEnvSet("ECMC_EC_CH_ID_TEXT",    "4")
+#-d    \pre ECMC_EC_CH_ID       01..04
+epicsEnvSet("ECMC_EC_CH_ID",         "04")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6224-Sensor-chX_input.cmd
 
 #Apply hardware configuration

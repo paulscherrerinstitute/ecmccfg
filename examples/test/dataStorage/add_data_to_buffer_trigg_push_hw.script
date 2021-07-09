@@ -46,14 +46,14 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## ADDITIONAL SETUP
 #
 # Set all outputs to feed switches
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_1,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_2,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_3,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_4,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_5,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_6,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_7,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},BO_8,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput02,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput08,1)"
 # END of ADDITIONAL SETUP
 
 ##############################################################################

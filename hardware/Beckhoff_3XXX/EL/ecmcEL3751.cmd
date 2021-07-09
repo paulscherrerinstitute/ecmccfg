@@ -1,30 +1,117 @@
 #-d /**
 #-d   \brief hardware script for EL3751
-#-d   \details single channel 24bit analog input differential (selectable range (SDO), not in this config yet)
+#-d   \details single channel 24bit analog input differential
 #-d   \author Anders Sandstroem
+#-d
+#-d   Minimum sample time          = 100000ns  (oversampling rate of 10 in 1kHz ec rate)
+#-d   Maximum Oversampling factor  = 64      (if ec rate is 200Hz then a NELM of 100 can be used)
+#-d
 #-d   \file
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
 #-d */
 
-#- ###########################################################
-#- ############ Information:
-#-  Description: single channel 24bit analog input differential (selectable range (SDO), not in this config yet)
-#-
-#-  by Niko Kivel, Paul Scherrer Institute, 2018
-#-  email: niko.kivel@psi.ch
-#- ###########################################################
-
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL3751")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0ea73052")
+epicsEnvSet("ECMC_OVER_SAMP_MAX"         "64")
+epicsEnvSet("ECMC_SAMP_TIME_MIN"         "100000")
 
-ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
 
-#- ############  Reset terminal
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
+#- verify slave, including reset
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 
-#- ############ Config PDOS: Channel 1
 
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x01,16,STATUS)"
-#- EthercatMCConfigController ${ECMC_MOTOR_PORT} "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6001,0x01,32,VALUE)"
+#- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE. MAX NELM is 100
+ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampFactOrDie.cmd, "OVER_SAMP_MAX=${ECMC_OVER_SAMP_MAX}, OVER_SAMP_REQ=${NELM}, EC_SAMP=${ECMC_EC_SAMPLE_RATE},HW_TYPE=${ECMC_EC_HWTYPE}, SLAVE_ID=${ECMC_EC_SLAVE_NUM}"
+
+#- Check valid minimum sampling time for a certain NELM and ECMC_EC_SAMPLE_RATE. Needs to higher than 50000
+ecmcFileExist(${ecmccfg_DIR}chkOverSampTimeOrDie.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampTimeOrDie.cmd, "SAMP_TIME_MIN=${ECMC_SAMP_TIME_MIN}, OVER_SAMP_REQ=${NELM}, EC_SAMP=${ECMC_EC_SAMPLE_RATE},HW_TYPE=${ECMC_EC_HWTYPE}, SLAVE_ID=${ECMC_EC_SLAVE_NUM}"
+
+#- ############ Calc memmap size (each element is 4 bytes (32bits))
+ecmcEpicsEnvSetCalc("ECMC_EC_ARRAY_BYTE_SIZE",${NELM=1}*4)
+
+#- Different pdo index depending on sampling rate..
+#- NELM    PDO index dec
+#- 1       0xA01     1
+#- 2       0xA02     2
+#- 4       0xA03     3
+#- 5       0xA04     4
+#- 8       0xA05     5
+#- 10      0xA06     6
+#- 16      0xA07     7
+#- 20      0xA08     8
+#- 25      0xA09     9
+#- 32      0xA0A     10
+#- 40      0xA0B     11
+#- 50      0xA0C     12
+#- 64      0xA0D     13
+#- Check if valid NELM and set ECMC_PDO_TEMP to correct value according to list
+#- Try to simulate switch statement
+
+epicsEnvSet(ECMC_PDO_TEMP,"-1")
+epicsEnvSet(ECMC_PDO_NELM_FOUND,"")
+ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=1 and ${ECMC_PDO_TEMP}==-1", "1","-1")
+ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=2 and ${ECMC_PDO_TEMP}==-1", "2","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=4 and ${ECMC_PDO_TEMP}==-1", "3","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=5 and ${ECMC_PDO_TEMP}==-1", "4","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=8 and ${ECMC_PDO_TEMP}==-1", "5","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=10 and ${ECMC_PDO_TEMP}==-1", "6","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=16 and ${ECMC_PDO_TEMP}==-1", "7","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=20 and ${ECMC_PDO_TEMP}==-1", "8","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=25 and ${ECMC_PDO_TEMP}==-1", "9","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=32 and ${ECMC_PDO_TEMP}==-1", "10","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=40 and ${ECMC_PDO_TEMP}==-1", "11","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=50 and ${ECMC_PDO_TEMP}==-1", "12","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_TEMP, "${NELM=1}=64 and ${ECMC_PDO_TEMP}==-1", "13","-1")
+${ECMC_PDO_NELM_FOUND}ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM valid => stop look for other valid NELM matches. ","")
+
+#- Ensure that ECMC_PDO_TEMP is set
+ecmcEpicsEnvSetCalcTernary(ECMC_PDO_NELM_FOUND, "${ECMC_PDO_TEMP}!=-1", "# NELM and PDO is valid (${ECMC_PDO_TEMP}).","ecmcExit Error: NELM not valid => PDO not set..")
+#- Exit if not valid according to
+${ECMC_PDO_NELM_FOUND}
+
+#- Convert to hex
+ecmcEpicsEnvSetCalc("ECMC_PDO_CH1",${ECMC_PDO_TEMP},"0x1A%02x")
+epicsEnvShow(ECMC_PDO_CH1)
+
+#-  CH 1
+epicsEnvSet("ECMC_CH"             "01")
+
+#-  Configuration for sync manager 2
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x01,16,control${ECMC_CH})"
+
+#-  Configuration for sync manager 3
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x1,S32,status${ECMC_CH})"
+#- Inflate all pdos with a for loop
+epicsEnvSet("ECMC_EC_ENTRY"       "0x6001")
+ecmcFileExist(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,1)
+ecmcForLoop(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,"CH_ID=${ECMC_CH}, PDO=${ECMC_PDO_CH1}, ENTRY=${ECMC_EC_ENTRY}",ECMC_LOOP_IDX,1,${NELM=1},1)
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.analogInputArray${ECMC_CH}_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,S32,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.analogInputArray${ECMC_CH})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a10,0xF600,0x1,U32,timestamp${ECMC_CH}_l32)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a10,0xF600,0x2,U32,timestamp${ECMC_CH}_u32)"
+
+#- Cleanup
+epicsEnvUnset(ECMC_EC_ARRAY_BYTE_SIZE)
+epicsEnvUnset(ECMC_EC_SLAVE_SYNC_0_CYCLE_NS)
+epicsEnvUnset(ECMC_EC_SLAVE_SYNC_1_CYCLE_NS)
+epicsEnvUnset(ECMC_ENTRY_HEX_VALUE)
+epicsEnvUnset(ECMC_PDO_HEX_VALUE)
+epicsEnvUnset(ECMC_LOOP_IDX)
+epicsEnvUnset(ECMC_PDO_CH1)
+epicsEnvUnset(ECMC_OVER_SAMP_MAX)
+epicsEnvUnset(ECMC_SAMP_TIME_MIN)

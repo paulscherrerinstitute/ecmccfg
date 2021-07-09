@@ -11,7 +11,7 @@
 #-d   \pre An axis definition for a physical axis has to be added/configured immediately before the call of this script.
 #-d */
 
-#- Ensure valid current settings 
+#- Ensure valid current settings
 ecmcFileExist("${ECMC_CONFIG_ROOT}verifyOrDie.cmd",1)
 #- ECMC_ENC_SCALE_NUM
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_ENC_SCALE_NUM})<>0',SUCCESS_STR='ECMC_ENC_SCALE_NUM value OK == ${ECMC_ENC_SCALE_NUM}...',ERROR_STR='ECMC_ENC_SCALE_NUM == 0...'"
@@ -119,8 +119,8 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_N
 ecmcEpicsEnvSetCalc("ECMC_TEMP_SREV","if(abs(${ECMC_ENC_SCALE_DENOM=0})>0){RESULT:=abs(${ECMC_ENC_SCALE_DENOM=0});} else {RESULT:=1.0};","%d")
 ecmcEpicsEnvSetCalc("ECMC_TEMP_UREV","if(abs(${ECMC_ENC_SCALE_NUM=0})>0){RESULT:=abs(${ECMC_ENC_SCALE_NUM=0});} else {RESULT:=1.0};","%lf")
 
-ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC},SREV=${ECMC_TEMP_SREV},UREV=${ECMC_TEMP_UREV}, ${ECMC_AXISFIELDINIT=""}")
+ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord${ECMC_PVA}"}.template,1,1)
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord${ECMC_PVA}"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC},SREV=${ECMC_TEMP_SREV},UREV=${ECMC_TEMP_UREV}, ${ECMC_AXISFIELDINIT=""}")
 
 epicsEnvSet("ECMC_AXISFIELDINIT",  "")
 

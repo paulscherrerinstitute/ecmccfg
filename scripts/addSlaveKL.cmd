@@ -26,5 +26,9 @@ epicsEnvSet("HW_DESC",            "${HW_DESC}")
 # add ${HW_DESC} to the bus at position ${SLAVE_ID}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd
-ecmcFileExist(${SUBST_FILE="ecmc${ECMC_EC_HWTYPE}.substitutions"},1,1)
-dbLoadTemplate(${SUBST_FILE="ecmc${ECMC_EC_HWTYPE}.substitutions"},"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}, SLAVE_NUM_KL=${ECMC_KL_SLAVE_NUM}")
+
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "${DEFAULT_SUBS=True}", "","#- ")
+${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}"
+epicsEnvUnset(DEFAULT_SUBS)
+
+#- TODO: do you want the default stuff in, or not?

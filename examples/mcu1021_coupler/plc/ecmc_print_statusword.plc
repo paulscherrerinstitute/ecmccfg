@@ -1,15 +1,15 @@
 
-if(static.controlOld != ec0.s9.STM_CONTROL) {
+if(static.controlOld != ec0.s9.driveControl01) {
   print('Control word: ');
-  ec_print_bin(ec0.s9.STM_CONTROL,0,7);
+  ec_print_bin(ec0.s9.driveControl01,0,7);
   println('');
 };
-#if(static.statusOld != ec0.s9.STM_STATUS) {
+#if(static.statusOld != ec0.s9.driveStatus01) {
 #  print('Status word: ');
-#  ec_print_bin(ec0.s9.STM_STATUS,0,7);
+#  ec_print_bin(ec0.s9.driveStatus01,0,7);
 #  println('');
 #};
 
-static.controlOld:=ec0.s9.STM_CONTROL;
-static.statusOld:=ec0.s9.STM_STATUS;
+static.controlOld:=ec0.s9.driveControl01;
+static.statusOld:=ec0.s9.driveStatus01;
 return [];

@@ -32,7 +32,7 @@ PLC-code:
 #
 
 # Append data to storage
-ds_append_data(${DS_ID},ec0.s${ENC_S_ID}.POSITION*${SCALE=1}+${OFFSET=0});
+ds_append_data(${DS_ID},ec0.s${ENC_S_ID}.positionActual01*${SCALE=1}+${OFFSET=0});
 
 # Trigger push of data on falling edge of limit switch
 if(static.highlimOld and not(ax1.mon.highlim)) {
@@ -80,7 +80,7 @@ PLC-code:
 #
 
 # Append data to storage
-ds_append_data(${DS_ID},ec0.s${ENC_S_ID}.POSITION*${SCALE=1}+${OFFSET=0});
+ds_append_data(${DS_ID},ec0.s${ENC_S_ID}.positionActual01*${SCALE=1}+${OFFSET=0});
 
 # Trigger push of data on rising edge of trigger
 if(static.trigg and not(static.triggOld)) {

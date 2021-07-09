@@ -1,10 +1,4 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
-file "ecmcBK1150.template"
+file "ecmcBK1X50.template"
 {
   pattern {}
           {}

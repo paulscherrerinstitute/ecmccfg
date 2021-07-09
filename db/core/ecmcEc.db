@@ -1,0 +1,191 @@
+#ETHERCAT
+record(longin,"${P}m${MASTER_ID}-Stat"){
+  field(DESC, "Master: Master Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).masterstatus?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${P}m${MASTER_ID}-SlvRsp.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,"${P}m${MASTER_ID}-SlvRsp") {
+  field(DESC, "Master: Total Slaves Responding")
+  field(PINI, "$(PINI=1)")
+  field(CALC,"A>>16")
+  field(INPA,"${P}m${MASTER_ID}-Stat.VAL")
+  field(FLNK, "${P}m${MASTER_ID}-Stat_.PROC")
+}
+
+record(mbbiDirect,"${P}m${MASTER_ID}-Stat_"){
+  field(DESC, "Master: Master Status Word mbbiD")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${P}m${MASTER_ID}-Stat")
+  field(FLNK, "${P}m${MASTER_ID}-LinkUp.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${P}m${MASTER_ID}-LinkUp"){
+  field(DESC, "Master: Master com up")
+  field(INP,  "${P}m${MASTER_ID}-Stat_.B0")
+  field(ZNAM, "Link down")
+  field(ONAM, "Link up")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Init.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-AlStates-Init"){
+  field(DESC, "Master: Slaves AlStates INIT")
+  field(INP,  "${P}m${MASTER_ID}-Stat_.B1")
+  field(ZNAM, "Not INIT")
+  field(ONAM, "INIT")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Preop.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-AlStates-Preop"){
+  field(DESC, "Master: Slaves AlStates PREOP")
+  field(INP,  "${P}m${MASTER_ID}-Stat_.B2")
+  field(ZNAM, "Not PREOP")
+  field(ONAM, "PREOP")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Safeop.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-AlStates-Safeop"){
+  field(DESC, "Master: Slaves AlStates SAFEOP")
+  field(INP,  "${P}m${MASTER_ID}-Stat_.B3")
+  field(ZNAM, "Not SAFEOP")
+  field(ONAM, "SAFEOP")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}m${MASTER_ID}-AlStates-Op.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-AlStates-Op"){
+  field(DESC, "Master: Slaves AlStates OP")
+  field(INP,  "${P}m${MASTER_ID}-Stat_.B4")
+  field(ZNAM, "Not OP")
+  field(ONAM, "OP")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+}
+
+record(longin,"${P}m${MASTER_ID}-SlvCntr"){
+  field(DESC, "Master: Total slaves in use")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).slavecounter?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}m${MASTER_ID}-MemmapCntr"){
+  field(DESC, "Master: Mem map counter")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).memmapcounter?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}m${MASTER_ID}-DomFailCntrTot"){
+  field(DESC, "Master: Domain fail counter")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).domainfailcountertotal?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}m${MASTER_ID}-EntryCntr"){
+  field(DESC, "Master: EtherCAT entry counter")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).entrycounter?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+#Domain
+record(longin,"${P}m${MASTER_ID}-Dom-Stat"){
+  field(DESC, "Master: Domain Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).domainstatus?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,  "${P}m${MASTER_ID}-Dom-WC") {
+  field(DESC, "Master: Domain Working Counter")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A>>16")
+  field(INPA, "${P}m${MASTER_ID}-Dom-Stat.VAL")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-Stat_")
+}
+
+record(mbbiDirect,"${P}m${MASTER_ID}-Dom-Stat_"){
+  field(DESC, "Master: Domain Status Word mbbiD")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat.VAL")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-RedunActive.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${P}m${MASTER_ID}-Dom-RedunActive"){
+  field(DESC, "Master: Domain redundancy active")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B0")
+  field(ZNAM, "No redundancy")
+  field(ONAM, "Redundancy active")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC-Zero.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-Dom-WC-Zero"){
+  field(DESC, "Master: Domain Work Counter Zero")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B1")
+  field(ZNAM, "Not EC_WC_ZERO")
+  field(ONAM, "EC_WC_ZERO")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC-Incomplete.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-Dom-WC-Incomplete"){
+  field(DESC, "Master: Domain Work Counter incomplete")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B2")
+  field(ZNAM, "not EC_WC_INCOMPLETE")
+  field(ONAM, "EC_WC_INCOMPLETE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${P}m${MASTER_ID}-Dom-WC-Complete.PROC")
+}
+
+record(bi,"${P}m${MASTER_ID}-Dom-WC-Complete"){
+  field(DESC, "Master: Domain Work Counter complete")
+  field(INP,  "${P}m${MASTER_ID}-Dom-Stat_.B3")
+  field(ZNAM, "not EC_WC_COMPLETE")
+  field(ONAM, "EC_WC_COMPLETE")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+}
+
+# T_SMP_MS not supporeted for this record. Will always update at ethercat sample rate.
+# can be used as a summary alarm for ethercat status.
+record(bi,"${P}m${MASTER_ID}-Stat-OK"){
+  field(PINI, "$(PINI=1)")
+  field(DESC, "Master: Ethercat status OK")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))TYPE=asynInt32/ec$(MASTER_ID).ok?")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "Not OK")
+  field(ONAM, "OK")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+}

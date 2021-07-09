@@ -1,0 +1,28 @@
+#- timestamp template
+#- MACROS
+#- mandatory
+#- ECMC_P
+#- CH_ID
+#- sourceName
+
+record(ai,"${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}"){
+  field(DESC, "${HWTYPE}: CH${CH_ID}: timestamp [ns]")
+  field(PINI, 1)
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})CMD=UINT64TOFLOAT64/T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynFloat64/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName}${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "${TSE=-2}")
+  field(PREC, "0" )
+  field(EGU,  "ns" )
+  field(FLNK, "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS.PROC")
+}
+
+record(aSub,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}TS") {
+  field(DESC,  "ECAT timestamp")
+  field(INAM,  "ECATtimestampInit")
+  field(SNAM,  "ECATtimestamp")
+  field(INPA,  "${ECMC_P}${KEY=timestamp}${CH_ID}${suffix=}")
+  field(FTA,   "DOUBLE")
+  field(NOA,   1)
+  field(TSE,  -2)
+}

@@ -29,7 +29,7 @@
 epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 ecmcFileExist("${ECMC_CONFIG_ROOT}addSlave.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd "SLAVE_ID=${SLAVE_ID}, HW_DESC=${HW_DESC}, NELM=${NELM=1}"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=${HW_DESC}, NELM=${NELM=1}"
 # apply config ${CONFIG} for ${HW_DESC}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd "${CFG_MACROS=""}"

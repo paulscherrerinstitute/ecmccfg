@@ -1,14 +1,17 @@
-file "ecmcEcSlave.template"
+file "ecmc_analogInput-chX.template"
 {
-  pattern {}
-          {}
+  pattern {CH_ID, ESLO,   EOFF,   EGU,    PREC}
+          {01,    0.1,    0,      "DegC", 2   }
+          {02,    0.1,    0,      "DegC", 2   }
+          {03,    0.1,    0,      "DegC", 2   }
+          {04,    0.1,    0,      "DegC", 2   }
 }
 
-file "ecmcEL3XXX-chX.template"
+file "ecmc_status-chX.template"
 {
-  pattern {CH_ID, LINR,    ESLO,   EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {1,     "SLOPE", 0.1,    0,      "DegC",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {2,     "SLOPE", 0.1,    0,      "DegC",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {3,     "SLOPE", 0.1,    0,      "DegC",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
-          {4,     "SLOPE", 0.1,    0,      "DegC",     0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+          {02,    "AI"}
+          {03,    "AI"}
+          {04,    "AI"}
 }
