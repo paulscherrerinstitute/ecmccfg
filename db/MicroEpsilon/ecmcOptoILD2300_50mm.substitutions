@@ -1,5 +1,5 @@
-file "ecmcOptoILD2300_XXmm_chX.template"
+file "ecmc_analogInput-chX"
 {
-  pattern {CH_ID, LINR,     ESLO,     EOFF,   EGU,     PREC }
-          {01,    "SLOPE",  1e-6,     0,      "mm",    5    }
+  pattern { CH_ID,  KEY,   EGU,  PREC,  ESLO, suffix    }
+          { 01,     "Enc", "mm", 5,     1e-6, "PosAct"  }
 }
