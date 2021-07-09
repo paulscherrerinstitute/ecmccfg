@@ -14,10 +14,10 @@ file "ecmc_binaryInput-chX.template"{
 # timestamp, only channel 1 and 2 have this feature
 file "ecmc_timestamp_64-chX.template"{
   pattern {CH_ID, KEY,          suffix,     sourceName                }
-          {01,    "latchTime",  "_rising",  "timestampLatchPositive"  }
-          {01,    "latchTime",  "_falling", "timestampLatchPositive"  }
-          {02,    "latchTime",  "_rising",  "timestampLatchPositive"  }
-          {02,    "latchTime",  "_falling", "timestampLatchPositive"  }
+          {01,    "latchTime",  "-rising",  "timestampLatchPositive"  }
+          {01,    "latchTime",  "-falling", "timestampLatchPositive"  }
+          {02,    "latchTime",  "-rising",  "timestampLatchPositive"  }
+          {02,    "latchTime",  "-falling", "timestampLatchPositive"  }
 }
 
 # channel status

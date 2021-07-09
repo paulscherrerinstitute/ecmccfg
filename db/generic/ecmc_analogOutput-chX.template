@@ -27,11 +27,6 @@ record(ao,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}"){
   field(HHSV, "$(HHSV=NO_ALARM)")
   field(DRVL, "$(DRVL=0)")
   field(DRVH, "$(DRVH=0)")
-  info(Q:group, {
-    "${ECMC_G}": {
-      "${KEY=AO}${CH_ID}${suffix=}": {+channel:"VAL"}
-    }
-  })
 }
 
 record(ai,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}-RB"){
@@ -55,9 +50,4 @@ record(ai,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}-RB"){
   field(HSV,  "${HSV=NO_ALARM}")
   field(HHSV, "${HHSV=NO_ALARM}")
   field(TSE,  "${TSE=-2}")
-  info(Q:group, {
-    "${ECMC_G}": {
-      "${KEY=AO}${CH_ID}${suffix=}-RB": {+channel:"VAL"}
-    }
-  })
 }

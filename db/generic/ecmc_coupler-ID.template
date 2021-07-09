@@ -6,9 +6,4 @@ record(longin,"${ECMC_P}-${KEY=ID}"){
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).id?")
   field(FLNK, "$(FLNK=)")
   field(TSE,  "$(TSE=-2)")
-  info(Q:group, {
-    "${ECMC_G}": {
-      "${KEY=ID}": {+channel:"VAL"}
-    }
-  })
 }

@@ -36,6 +36,6 @@ file "ecmc_analogInput-chX.template"
 file "ecmc_analogOutput-chX.template"
 {
   pattern {CH_ID, KEY,  suffix, sourceName}
-          {01,    "Ch", "_Val",  value     }
-          {02,    "Ch", "_Val",  value     }
+          {01,    "Ch", "-Val",  value     }
+          {02,    "Ch", "-Val",  value     }
 }
