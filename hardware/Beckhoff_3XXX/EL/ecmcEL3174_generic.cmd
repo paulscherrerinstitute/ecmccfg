@@ -12,6 +12,9 @@
 #-d   \note Selected range: 0..10V (actually 0..10.737V)
 #-d */
 
+#- verify slave, including reset
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+
 #- Configure PDOS
 ecmcFileExist("${ecmccfg_DIR}ecmcEL3174_pdos.cmd",1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3174_pdos.cmd

@@ -1,8 +1,6 @@
 ##############################################################################
 ## Example config for el3602
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
-## Note: The el3702 does not support any value of NELM. The EtherCAT bus period in nanoseconds diveded by 
-##       oversampling factor must be an integer.  "(1/EC_RATE*1E9) / NELM" 
 ##       
 
 ##############################################################################
@@ -14,7 +12,7 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2, EC_RATE=1000"
 
 ##############################################################################
 ## Config hardware:
@@ -23,23 +21,15 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 #${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
 
 
+# Update records in 1ms (all data to EPICS in 1kHz)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
+
 # Note NELM equals oversampling factor in this case
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3602, NELM=${NELM=50}"
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3602, NELM=${NELM=50}, CONFIG=-Sensor_+-320mV"
 
-########################################################################s######
-## Load plugin: FFT 
-require ecmc_plugin_fft master  # te get access to db file..
-epicsEnvSet("FFT_NELM", 10240)
-epicsEnvSet(ECMC_PLUGIN_FILNAME,"${HOME}/epics/base-7.0.4/require/3.3.0/siteMods/ecmc_plugin_fft/master/lib/linux-x86_64/libecmc_plugin_fft.so")
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ec0.s1.mm.analogInputArray01;DBG_PRINT=0;NFFT=${FFT_NELM};RATE=1000;RM_DC=1;SCALE=1;MODE=CONT;ENABLE=1;")
-${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
-# Note: INDEX is the index of FFT object in FFT plugin and not PLUGIN_ID. In this case the same
-dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=0, NELM=${FFT_NELM}")
-
-#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C32,0x1,2,2)"
-#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C33,0x1,2,2)"
-#ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,0)"
+# Update records in 10ms (for all records loaded below)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -51,8 +41,8 @@ ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
-# go active
+##############################################################################
+############# go active:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
-iocInit
-dbl > pvs.log
+iocInit()

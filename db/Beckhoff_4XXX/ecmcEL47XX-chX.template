@@ -1,4 +1,4 @@
-record(longout,"${ECMC_P}${KEY=AI}${CH_ID}-CycCnt"){
+record(longout,"${ECMC_P}${KEY=AO}${CH_ID}-CycCnt"){
   field(DESC, "$(HWTYPE): AO$(CH_ID): Cycle Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")

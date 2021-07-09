@@ -1,0 +1,48 @@
+##############################################################################
+## Example config for testing dc:s
+## Log values to file with: 
+##   camonitor IOC_TEST:ec0-s11-EL3702-AI1-Array  IOC_TEST:ec0-s12-EL3702-AI1-Array| tee data.log
+## plot data with:
+##   cat data.log | python ~/sources/ecmccomgui/pyDataManip/plotCaMonitor.py &
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
+
+##############################################################################
+## Config hardware:
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",1)
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
+
+#ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,0)"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM_3702_1",       "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_3702_1), HW_DESC=EL3702"
+# Here the parameters can be changed to see how that affetcts the data. (these settings only works for oversampling factor 1)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd, "ASSIGN_ACTIVATE=0x730,SYNC_0_CYCLE=1000000,SYNC_0_SHIFT=50000,SYNC_1_CYCLE=0"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM_3702_2",       "12")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_3702_2), HW_DESC=EL3702"
+# Here the parameters can be changed to see how that affetcts the data. (these settings only works for oversampling factor 1)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd, "ASSIGN_ACTIVATE=0x730,SYNC_0_CYCLE=1000000,SYNC_0_SHIFT=0,SYNC_1_CYCLE=0"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

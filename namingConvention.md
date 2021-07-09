@@ -227,6 +227,8 @@ IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
   |Cntr  |Counter         |          |
   |Tmr   |Timer           |          |
   |Pos   |Position        | Positioning interface of drives |
+  |PLC   |ecmc PLCs       | |
+  |DS    |Data storages   | |
 
 ### "id"
 
