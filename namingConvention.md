@@ -118,7 +118,7 @@ See examples below for clarification.
 - posAccelerationSetpoint  (position interface)
 - posDecelerationSetpoint  (position interface)
 
-Note: Each slave will have a record set with status recived by the master (ecmcEcSlave.template). These data are not regitsred as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
+Note: Each slave will have a record set with status received by the master (ecmcEcSlave.template). These data are not registered as pdos in the hardware scripts. Therefore these alias and record names must not be used for pdo data:
 
 #### Examples
 
@@ -204,7 +204,7 @@ ${ECMC_P}Dev-<name>
 
 Example: Status words
 ```
-IOC_TEST:m0s000-Dev-Stat   # Status word for device 
+IOC_TEST:m0s000-Dev-Stat   # Status word for device
 IOC_TEST:m0s000-CH1-Stat   # Status word for channel 1
 IOC_TEST:m0s000-CH2-Stat   # Status word for channel 2
 IOC_TEST:m0s000-EC-Stat    # Ethercat slave status word
@@ -244,7 +244,7 @@ IOC_TEST:m0s000-Enc02-PosAct
 
 The below abbrevations should be used for the "name" part of the PV:
 
-  | Property (or part of) | Abbrevation for PV name (or part of) | Example PV | 
+  | Property (or part of) | Abbrevation for PV name (or part of) | Example PV |
   |--            |--      |--|
   |device        |dev     |  |
   |status        |stat    | DevStat |
