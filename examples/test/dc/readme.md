@@ -243,6 +243,276 @@ Log values to file with:
 plot data with:
   cat data.log | python ~/sources/ecmccomgui/pyDataManip/plotCaMonitor.py &
 ```
+## plc test
+
+```
+println('=========================================');
+static.time:=ec_get_time_l32()/1000;
+static.el3702_1:=ec0.s${S1}.nextSyncTime/1000;
+static.el3702_2:=ec0.s${S2}.nextSyncTime/1000;
+println('Current time       : ', static.time/1000);
+println('EL3702 1 time      : ', static.el3702_1);
+println('EL3702 2 time      : ', static.el3702_2);
+println('Diff EL3702 1      : ', static.el3702_1-static.time);
+println('Diff EL3702 2      : ', static.el3702_2-static.time);
+println('Diff EL3702 1 vs 2 : ', static.el3702_2-static.el3702_1);
+
+```
+Printouts from plc code of 32 bit time registers [micro seconds]:
+```
+=========================================
+Current time       : 4072.28575
+EL3702 1 time      : 4072197.66700
+EL3702 2 time      : 4072147.66700
+Diff EL3702 1      :  -88.08700
+Diff EL3702 2      : -138.08700
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  777.25527
+EL3702 1 time      : 777230.37100
+EL3702 2 time      : 777180.37100
+Diff EL3702 1      :  -24.90200
+Diff EL3702 2      :  -74.90200
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1777.25811
+EL3702 1 time      : 1777230.37100
+EL3702 2 time      : 1777180.37100
+Diff EL3702 1      :  -27.73500
+Diff EL3702 2      :  -77.73500
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2777.31342
+EL3702 1 time      : 2777230.37100
+EL3702 2 time      : 2777180.37100
+Diff EL3702 1      :  -83.04800
+Diff EL3702 2      : -133.04800
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3777.31429
+EL3702 1 time      : 3777230.37100
+EL3702 2 time      : 3777180.37100
+Diff EL3702 1      :  -83.91700
+Diff EL3702 2      : -133.91700
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  482.40323
+EL3702 1 time      : 482263.07500
+EL3702 2 time      : 482213.07500
+Diff EL3702 1      : -140.15600
+Diff EL3702 2      : -190.15600
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1482.35325
+EL3702 1 time      : 1482263.07500
+EL3702 2 time      : 1482213.07500
+Diff EL3702 1      :  -90.17400
+Diff EL3702 2      : -140.17400
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2482.34880
+EL3702 1 time      : 2482263.07500
+EL3702 2 time      : 2482213.07500
+Diff EL3702 1      :  -85.72900
+Diff EL3702 2      : -135.72900
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3482.34478
+EL3702 1 time      : 3482263.07500
+EL3702 2 time      : 3482213.07500
+Diff EL3702 1      :  -81.70900
+Diff EL3702 2      : -131.70900
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  187.32321
+EL3702 1 time      : 187295.77900
+EL3702 2 time      : 187245.77900
+Diff EL3702 1      :  -27.43100
+Diff EL3702 2      :  -77.43100
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1187.37704
+EL3702 1 time      : 1187295.77900
+EL3702 2 time      : 1187245.77900
+Diff EL3702 1      :  -81.26200
+Diff EL3702 2      : -131.26200
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2187.32784
+EL3702 1 time      : 2187295.77900
+EL3702 2 time      : 2187245.77900
+Diff EL3702 1      :  -32.05700
+Diff EL3702 2      :  -82.05700
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3187.35115
+EL3702 1 time      : 3187295.77900
+EL3702 2 time      : 3187245.77900
+Diff EL3702 1      :  -55.37000
+Diff EL3702 2      : -105.37000
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 4187.38235
+EL3702 1 time      : 4187295.77900
+EL3702 2 time      : 4187245.77900
+Diff EL3702 1      :  -86.57200
+Diff EL3702 2      : -136.57200
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  892.41846
+EL3702 1 time      : 892328.48300
+EL3702 2 time      : 892278.48300
+Diff EL3702 1      :  -89.97800
+Diff EL3702 2      : -139.97800
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1892.38726
+EL3702 1 time      : 1892328.48300
+EL3702 2 time      : 1892278.48300
+Diff EL3702 1      :  -58.77300
+Diff EL3702 2      : -108.77300
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2892.35770
+EL3702 1 time      : 2892328.48300
+EL3702 2 time      : 2892278.48300
+Diff EL3702 1      :  -29.21600
+Diff EL3702 2      :  -79.21600
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3892.41840
+EL3702 1 time      : 3892328.48300
+EL3702 2 time      : 3892278.48300
+Diff EL3702 1      :  -89.91600
+Diff EL3702 2      : -139.91600
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  597.44975
+EL3702 1 time      : 597361.18700
+EL3702 2 time      : 597311.18700
+Diff EL3702 1      :  -88.56300
+Diff EL3702 2      : -138.56300
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1597.44930
+EL3702 1 time      : 1597361.18700
+EL3702 2 time      : 1597311.18700
+Diff EL3702 1      :  -88.11600
+Diff EL3702 2      : -138.11600
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2597.44923
+EL3702 1 time      : 2597361.18700
+EL3702 2 time      : 2597311.18700
+Diff EL3702 1      :  -88.04000
+Diff EL3702 2      : -138.04000
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3597.42078
+EL3702 1 time      : 3597361.18700
+EL3702 2 time      : 3597311.18700
+Diff EL3702 1      :  -59.59400
+Diff EL3702 2      : -109.59400
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  302.53078
+EL3702 1 time      : 302393.89100
+EL3702 2 time      : 302343.89100
+Diff EL3702 1      : -136.88700
+Diff EL3702 2      : -186.88700
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1302.60009
+EL3702 1 time      : 1302393.89100
+EL3702 2 time      : 1302343.89100
+Diff EL3702 1      : -206.19800
+Diff EL3702 2      : -256.19800
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2302.56975
+EL3702 1 time      : 2302393.89100
+EL3702 2 time      : 2302343.89100
+Diff EL3702 1      : -175.86300
+Diff EL3702 2      : -225.86300
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3302.53403
+EL3702 1 time      : 3302393.89100
+EL3702 2 time      : 3302343.89100
+Diff EL3702 1      : -140.13900
+Diff EL3702 2      : -190.13900
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :    7.53582
+EL3702 1 time      : 7426.59500
+EL3702 2 time      : 7376.59500
+Diff EL3702 1      : -109.22900
+Diff EL3702 2      : -159.22900
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1007.50556
+EL3702 1 time      : 1007426.59500
+EL3702 2 time      : 1007376.59500
+Diff EL3702 1      :  -78.96800
+Diff EL3702 2      : -128.96800
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2007.57382
+EL3702 1 time      : 2007426.59500
+EL3702 2 time      : 2007376.59500
+Diff EL3702 1      : -147.22300
+Diff EL3702 2      : -197.22300
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3007.61361
+EL3702 1 time      : 3007426.59500
+EL3702 2 time      : 3007376.59500
+Diff EL3702 1      : -187.01600
+Diff EL3702 2      : -237.01600
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 4007.56013
+EL3702 1 time      : 4007426.59500
+EL3702 2 time      : 4007376.59500
+Diff EL3702 1      : -133.53300
+Diff EL3702 2      : -183.53300
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       :  712.54613
+EL3702 1 time      : 712459.29900
+EL3702 2 time      : 712409.29900
+Diff EL3702 1      :  -86.82700
+Diff EL3702 2      : -136.82700
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 1712.56375
+EL3702 1 time      : 1712459.29900
+EL3702 2 time      : 1712409.29900
+Diff EL3702 1      : -104.45300
+Diff EL3702 2      : -154.45300
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 2712.66671
+EL3702 1 time      : 2712459.29900
+EL3702 2 time      : 2712409.29900
+Diff EL3702 1      : -207.41100
+Diff EL3702 2      : -257.41100
+Diff EL3702 1 vs 2 :  -50.00000
+=========================================
+Current time       : 3712.60573
+EL3702 1 time      : 3712459.29900
+EL3702 2 time      : 3712409.29900
+Diff EL3702 1      : -146.42800
+Diff EL3702 2      : -196.42800
+Diff EL3702 1 vs 2 :  -50.00000
+```
+
+Conclusions:
+1. Diff between the two el3702 next latch times are always 50micor seconds (like set in cfg).
+2. The next "nextSyncTime" always occur in the past. So it has already been processed in the slave when the data from previous scan arrives in ecmc
+3. A bit strange that the "Diff EL3702 1" and "Diff EL3702 2" have such big spread.. 150..200 microseconds related to ec system time. 
+
+NOTE: Teste where performed on not rt patched raspbi 4b (high latency). This could be the explenation for bullt 3 above.
 
 # ELM slaves
 Seems they do not need any DC configuration. They work without. Need to look into..
