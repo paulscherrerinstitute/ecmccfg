@@ -1,6 +1,3 @@
-file "ecmcEcSlave.template"
-{
+file "empty.template"{
   pattern {}
-          {}
 }
-

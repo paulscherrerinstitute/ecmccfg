@@ -1,0 +1,7 @@
+plc:
+  id: 1
+  enable: yes
+  rateMilliseconds: 10
+  code:
+    - println('plc1')|
+  file: plc1.plc

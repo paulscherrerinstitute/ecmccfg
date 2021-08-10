@@ -8,10 +8,12 @@
 #-d     ECMC_EC_SLAVE_NUM         : Slave number
 #-d     ECMC_EC_MASTER_ID         : Master id
 #-d     ECMC_EC_SAMPLE_RATE       : EtherCAT sampling rate [Hz] (set in startup.cmd)
+#-d   \todo add a way to specify product ID thriugh `addSlave.cmd`
 #-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EAx580")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x000000ec")
+#- might not work with non-EAM580 devices
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00000300")
 
 #- verify slave, including reset
@@ -29,7 +31,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a04,0x6505,0x00,U16,warnings01)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a04,0x2120,0x00,S32,temperatureActual01)"
 
-#- ############ Distributed clocks config EL7201:
+#- ############ Distributed clocks config Baumer EAx580:
 ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/${ECMC_EC_SAMPLE_RATE=1000}*1E6)
 ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS_HALF",${ECMC_TEMP_PERIOD_NANO_SECS}/2)
 

@@ -11,16 +11,16 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg ecmc_for_loop
+require ecmccfg develop
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2, EC_RATE=1000"
 
 ##############################################################################
 ## Config hardware:
 
 # Note NELM equals oversampling factor in this case
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "23")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL4732, NELM=100"
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
@@ -35,5 +35,8 @@ ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
-# go active
+##############################################################################
+#############  go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()

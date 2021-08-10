@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 #- separate templates as not all buttons also have LED-rings
 #- inputs, button, switch and ESTOP
 file "ecmc_binaryInput-chX.template"

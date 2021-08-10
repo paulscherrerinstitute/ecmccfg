@@ -12,6 +12,8 @@
 #-d   \param SAMPLE_RATE_MS (optional) excecution rate, default 1000/EC_RATE
 #-d   \param PLC_MACROS (optional) Substitution macros for PLC code
 #-d   \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
+#-d   \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
+#-d   \param SUBST_FILE (optional) custom substitution file otherwise ecmccfg default will be loaded
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
@@ -23,7 +25,7 @@
 epicsEnvSet("ECMC_PLC_ID",              "${PLC_ID=0}")
 
 #- PLC rate, if not explicitly declared, deduce rate from bus frequence (ECMC_EC_SAMPLE_RATE)
-ecmcEpicsEnvSetCalc(ECMC_PLC_RATE_, "1000/${ECMC_EC_SAMPLE_RATE}")
+ecmcEpicsEnvSetCalc(ECMC_PLC_RATE_, "1000/${ECMC_EC_SAMPLE_RATE}", "%f")
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${SAMPLE_RATE_MS=0}")
 ecmcEpicsEnvSetCalcTernary(ECMC_PLC_SAMPLE_RATE_MS, "${ECMC_PLC_SAMPLE_RATE_MS}>0", "${ECMC_PLC_SAMPLE_RATE_MS}","${ECMC_PLC_RATE_}")
 epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
@@ -32,12 +34,23 @@ epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc"
 
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
-system "msi -V -M '${PLC_MACROS=EMPTY}' ${FILE} > ${ECMC_TMP_FILE}"
+system "msi -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} ${FILE}"
+
+#- Printout parsed file?
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, ${PRINT_PLC_FILE=1}=1,"", "#-"  )
+${ECMC_EXE_CMD=""}########### Parsed PLC file:
+${ECMC_EXE_CMD=""}system "cat ${ECMC_TMP_FILE}"
+${ECMC_EXE_CMD=""}############ PLC file end
+${ECMC_EXE_CMD=""}#
+epicsEnvUnset(ECMC_EXE_CMD)
+
 ecmcFileExist("${ECMC_TMP_FILE}",1)
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 
 #- Remove parsed file after load
 system "rm -f ${ECMC_TMP_FILE}"
-ecmcFileExist("ecmcPlc.db",1,1)
-dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+ecmcFileExist(${SUBST_FILE="ecmcPlc.substitutions"},1,1)
+ecmcEpicsEnvSetCalc(ECMC_PLC_ID_2_CHARS, "${ECMC_PLC_ID}", "%02d")
+dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},Index2Char=${ECMC_PLC_ID_2_CHARS},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+epicsEnvUnset(ECMC_PLC_ID_2_CHARS)

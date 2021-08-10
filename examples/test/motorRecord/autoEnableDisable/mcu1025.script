@@ -39,12 +39,20 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOut
 ##############################################################################
 ## AXIS 1
 #
+epicsEnvSet(ECMC_ENC_SLAVE_ID,3)
+epicsEnvSet(ECMC_ENC_CH_ID,1)
+epicsEnvSet(ECMC_DRV_SLAVE_ID,7)
+
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1_auto_on_off.ax)
 
 ##############################################################################
 ## AXIS 2
 #
+epicsEnvSet(ECMC_ENC_SLAVE_ID,3)
+epicsEnvSet(ECMC_ENC_CH_ID,2)
+epicsEnvSet(ECMC_DRV_SLAVE_ID,8)
+
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2_no_auto.ax)
 

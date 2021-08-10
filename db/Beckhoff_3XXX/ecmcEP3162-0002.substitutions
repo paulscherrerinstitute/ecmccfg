@@ -1,9 +1,3 @@
-file "ecmcEcSlave.template"
-{
-  pattern {}
-          {}
-}
-
 file "ecmcEL3XXX-chX.template"
 {
   pattern {CH_ID, LINR,    ESLO,            EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }

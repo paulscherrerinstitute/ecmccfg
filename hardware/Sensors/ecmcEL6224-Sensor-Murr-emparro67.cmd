@@ -10,14 +10,15 @@
 
 #- Convert to PDO id
 ecmcEpicsEnvSetCalc("ECMC_EC_PDO_ID", "${ECMC_EC_CH_ID=01}-1", "%d")
+ecmcEpicsEnvSetCalc("CH_ID", "${ECMC_EC_CH_ID=01}", "%02d")
 
 #-  Configuration for sync manager 3
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x01,U8,status${ECMC_EC_CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x09,U8,currentUA${ECMC_EC_CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x0A,U8,currentUA${ECMC_EC_CH_ID})"
-#- twice 4 bit current limit, not sure about the data type
-# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x0B,U4,CH${ECMC_EC_CH_ID}_UA_CURR_LIM)"
-# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x0C,U4,CH${ECMC_EC_CH_ID}_US_CURR_LIM)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x01,U8,status${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x09,U8,currentUa${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x0A,U8,currentUs${CH_ID})"
+#- twice 4 bit current limit
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x0B,4,currentLimitUa${CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1A0${ECMC_EC_PDO_ID},0x60${ECMC_EC_PDO_ID}0,0x0C,4,currentLimitUs${CH_ID})"
 
 #- 0x8020:04, rwrwrw, uint32, 32 bit, "Device ID" 524800
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x4")

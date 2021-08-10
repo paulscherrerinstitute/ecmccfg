@@ -1,0 +1,17 @@
+file "ecmc_binaryOutput-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+}
+
+file "ecmcEL2819-statAlarm-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+}

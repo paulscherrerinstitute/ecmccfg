@@ -1,16 +1,17 @@
-file "ecmcEcSlave.template"
+file "ecmc_analogInputArray-chX.template"
 {
-  pattern {}
-          {}
+  pattern {CH_ID, DTYP,                FTVL    }
+          {01,    "asynInt32ArrayIn",  "LONG" }
 }
 
-file "ecmc_analogInput-chX.template"{
-  pattern {CH_ID,   EGU,    PREC}
-          {01,      "Raw",  3   }
+file "ecmcELM360X-stat-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
 }
 
-file "ecmc_status-chX.template"
+file "ecmc_controlWord-chX.template"
 {
-  pattern {CH_ID, KEY }
-          {01,    "AI"}          
+  pattern {CH_ID, KEY,   suffix,  sourceName, DESC             }
+          {01,    "AI", "-Ctrl", "control",   "AI Control Word"}
 }

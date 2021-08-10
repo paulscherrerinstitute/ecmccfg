@@ -17,21 +17,31 @@ epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=
 epicsEnvSet("ECMC_ENC_BITS"               "32")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "20")                       # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
-epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM).positionActual01")          # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM).positionActual01") # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 handled by DS402 statemachine
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning handled by DS402 statemachine
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "1")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 # Scalings: Amplifier Max 8000Hz = 2880000 deg/s (8kHz Reverse engineered) 
 epicsEnvSet("ECMC_DRV_SCALE_NUM"          "360")                                         # Fastest speed in engineering units
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "1048576")                                     # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-epicsEnvSet("ECMC_EC_DRV_driveControl01",        "ec0.s$(ECMC_EC_SLAVE_NUM).driveControl01")           # Ethercat entry for control word or bit output
-epicsEnvSet("ECMC_EC_DRV_driveStatus01",         "ec0.s$(ECMC_EC_SLAVE_NUM).driveStatus01")            # Ethercat entry for status word or bit input
-epicsEnvSet("ECMC_EC_DRV_velocityActual01",       "")                                            # Ethercat entry for velocity setpoint output for CSV
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s$(ECMC_EC_SLAVE_NUM).driveControl01")           # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s$(ECMC_EC_SLAVE_NUM).driveStatus01")            # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "")                                            # Ethercat entry for velocity setpoint output for CSV
 epicsEnvSet("ECMC_EC_DRV_POSITION",       "ec0.s$(ECMC_EC_SLAVE_NUM).positionSetpoint01")      # Ethercat position setpoint for CSP
 epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "")                                            # Ethercat entry for reduce torque output
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                            # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                      # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                      # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "")                                            # Reset   (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "")                                            # Error 0 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "")                                            # Error 1 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "")                                            # Error 2 (handled by ds402 statemachine, but this bit can be used anyway if needed)
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "")                                            # Warning (handled by ds402 statemachine, but this bit can be used anyway if needed)
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "1000.0")

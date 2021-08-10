@@ -1,8 +1,0 @@
-record(mbbiDirect,"${ECMC_P}-BI${CH_ID}-Array"){
-  field(DESC, "${HWTYPE}: BI${CH_ID}: Array")
-  field(PINI, "${PINI=1}")
-  field(DTYP, "asynUInt32Digital")
-  field(INP,  "@asynMask(${PORT},${ADDR=0},0xFFFF,${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.binaryInputArray${CH_ID}?")
-  field(SCAN, "I/O Intr")
-  field(TSE,  "${TSE=-2}")
-}

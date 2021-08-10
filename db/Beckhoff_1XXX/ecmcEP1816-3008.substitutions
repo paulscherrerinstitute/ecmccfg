@@ -1,11 +1,5 @@
-# generic slave part
-file "ecmcEcSlave.template"{
-  pattern {}
-          {}
-}
-
 #- binary input array (8 bit each)
-file "ecmcEP1816_binaryInputs_chX.template"{
+file "ecmc_binaryInputArray-chX.template"{
   pattern {CH_ID}
           {01   }
           {02   }
