@@ -6,7 +6,7 @@ MODULE=ecmccfg
 LIBVERSION = ILK_slaves
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS=3 7.0.4.1
+EXCLUDE_VERSIONS = 3 7.0.3 7.0.4.1
 ARCH_FILTER=RHEL%
 
 SCRIPTS+=startup.cmd
@@ -26,6 +26,7 @@ DIRS += ${HW_DIR}Beckhoff_9XXX
 SCRIPTS += $(foreach d,${DIRS}, $(wildcard $d/*/*.cmd))
 
 SCRIPTS+=$(wildcard ./scripts/*)
+SCRIPTS+=$(wildcard ./scripts/jinja2/*)
 SCRIPTS+=$(wildcard ./naming/*)
 SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
