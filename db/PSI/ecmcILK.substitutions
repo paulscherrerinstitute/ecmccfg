@@ -1,0 +1,203 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,    sourceName}
+          {01,    spiRd,  spiRd   }
+          {02,    spiRd,  spiRd   }
+          {03,    spiRd,  spiRd   }
+          {04,    spiRd,  spiRd   }
+          {05,    spiRd,  spiRd   }
+          {06,    spiRd,  spiRd   }
+          {07,    spiRd,  spiRd   }
+          {08,    spiRd,  spiRd   }
+          {09,    spiRd,  spiRd   }
+          {10,    spiRd,  spiRd   }
+          {11,    spiRd,  spiRd   }
+          {12,    spiRd,  spiRd   }
+          {13,    spiRd,  spiRd   }
+          {14,    spiRd,  spiRd   }
+          {15,    spiRd,  spiRd   }
+          {16,    spiRd,  spiRd   }
+          {17,    spiRd,  spiRd   }
+          {18,    spiRd,  spiRd   }
+          {19,    spiRd,  spiRd   }
+          {20,    spiRd,  spiRd   }
+          {21,    spiRd,  spiRd   }
+          {22,    spiRd,  spiRd   }
+          {23,    spiRd,  spiRd   }
+          {24,    spiRd,  spiRd   }
+          {25,    spiRd,  spiRd   }
+          {26,    spiRd,  spiRd   }
+          {27,    spiRd,  spiRd   }
+          {28,    spiRd,  spiRd   }
+          {29,    spiRd,  spiRd   }
+          {30,    spiRd,  spiRd   }
+          {31,    spiRd,  spiRd   }
+          {32,    spiRd,  spiRd   }
+          {33,    spiRd,  spiRd   }
+          {34,    spiRd,  spiRd   }
+          {35,    spiRd,  spiRd   }
+          {36,    spiRd,  spiRd   }
+          {01,    digInp, digInp  }
+          {02,    digInp, digInp  }
+          {03,    digInp, digInp  }
+          {04,    digInp, digInp  }
+          {05,    digInp, digInp  }
+          {06,    digInp, digInp  }
+          {07,    digInp, digInp  }
+          {08,    digInp, digInp  }
+          {09,    digInp, digInp  }
+          {10,    digInp, digInp  }
+}
+
+file "ecmc_analogOutput-chX.template"
+{
+  pattern {CH_ID, ESLO, EGU }
+          {01,    1,    ""  }
+          {02,    1,    ""  }
+          {03,    1,    ""  }
+          {04,    1,    ""  }
+          {05,    1,    ""  }
+          {06,    1,    ""  }
+          {07,    1,    ""  }
+          {08,    1,    ""  }
+          {09,    1,    ""  }
+          {10,    1,    ""  }
+          {11,    1,    ""  }
+          {12,    1,    ""  }
+          {13,    1,    ""  }
+          {14,    1,    ""  }
+          {15,    1,    ""  }
+          {16,    1,    ""  }
+          {17,    1,    ""  }
+          {18,    1,    ""  }
+          {19,    1,    ""  }
+          {20,    1,    ""  }
+          {21,    1,    ""  }
+          {22,    1,    ""  }
+          {23,    1,    ""  }
+          {24,    1,    ""  }
+          {25,    1,    ""  }
+          {26,    1,    ""  }
+          {27,    1,    ""  }
+          {28,    1,    ""  }
+          {29,    1,    ""  }
+          {30,    1,    ""  }
+          {31,    1,    ""  }
+          {32,    1,    ""  }
+          {33,    1,    ""  }
+          {34,    1,    ""  }
+          {35,    1,    ""  }
+          {36,    1,    ""  }
+          {37,    1,    ""  }
+          {38,    1,    ""  }
+          {39,    1,    ""  }
+          {40,    1,    ""  }
+          {41,    1,    ""  }
+          {42,    1,    ""  }
+          {43,    1,    ""  }
+          {44,    1,    ""  }
+          {45,    1,    ""  }
+          {46,    1,    ""  }
+          {47,    1,    ""  }
+          {48,    1,    ""  }
+          {49,    1,    ""  }
+          {50,    1,    ""  }
+          {51,    1,    ""  }
+          {52,    1,    ""  }
+          {53,    1,    ""  }
+          {54,    1,    ""  }
+          {55,    1,    ""  }
+          {56,    1,    ""  }
+          {57,    1,    ""  }
+          {58,    1,    ""  }
+          {59,    1,    ""  }
+}
+
+file "ecmc_binaryInputArray-chX.template"{
+  pattern {CH_ID, KEY,    sourceName}
+          {01,    siiWr,  siiWr   }
+          {02,    siiWr,  siiWr   }
+          {03,    siiWr,  siiWr   }
+          {04,    siiWr,  siiWr   }
+          {05,    siiWr,  siiWr   }
+          {06,    siiWr,  siiWr   }
+          {07,    siiWr,  siiWr   }
+          {08,    siiWr,  siiWr   }
+          {09,    siiWr,  siiWr   }
+          {10,    siiWr,  siiWr   }
+          {11,    siiWr,  siiWr   }
+          {12,    siiWr,  siiWr   }
+          {13,    siiWr,  siiWr   }
+          {14,    siiWr,  siiWr   }
+          {15,    siiWr,  siiWr   }
+          {16,    siiWr,  siiWr   }
+          {17,    siiWr,  siiWr   }
+          {18,    siiWr,  siiWr   }
+          {19,    siiWr,  siiWr   }
+          {20,    siiWr,  siiWr   }
+          {21,    siiWr,  siiWr   }
+          {22,    siiWr,  siiWr   }
+          {23,    siiWr,  siiWr   }
+          {24,    siiWr,  siiWr   }
+          {25,    siiWr,  siiWr   }
+          {26,    siiWr,  siiWr   }
+          {27,    siiWr,  siiWr   }
+          {28,    siiWr,  siiWr   }
+          {29,    siiWr,  siiWr   }
+          {30,    siiWr,  siiWr   }
+          {31,    siiWr,  siiWr   }
+          {32,    siiWr,  siiWr   }
+          {33,    siiWr,  siiWr   }
+}
+
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, KEY,    sourceName, ESLO, EGU,  PREC}
+          {01,    signal, signal,     1,    "",   0   }
+          {02,    signal, signal,     1,    "",   0   }
+}
+
+file "ecmc_binaryInputArray-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
+          {09   }
+          {10   }
+          {11   }
+          {12   }
+          {13   }
+          {14   }
+          {15   }
+          {16   }
+          {17   }
+          {18   }
+          {19   }
+          {20   }
+          {21   }
+          {22   }
+}
+
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, ESLO, EGU,  PREC}
+          {01,    1,    "",   3   }
+          {02,    1,    "",   3   }
+          {03,    1,    "",   3   }
+          {04,    1,    "",   3   }
+          {05,    1,    "",   3   }
+          {06,    1,    "",   3   }
+          {07,    1,    "",   3   }
+          {08,    1,    "",   3   }
+          {09,    1,    "",   3   }
+          {10,    1,    "",   3   }
+          {11,    1,    "",   3   }
+}
