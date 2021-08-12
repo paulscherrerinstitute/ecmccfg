@@ -1,0 +1,6 @@
+file "ecmc_binaryOutput-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}

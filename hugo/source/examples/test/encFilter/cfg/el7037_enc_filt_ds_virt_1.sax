@@ -1,0 +1,26 @@
+############# Encoder
+epicsEnvSet("ECMC_ENC_SOURCE",                 "1")      # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")      # Enable velocity filter
+epicsEnvSet("ECMC_ENC_VELO_FILT_SIZE",         "10")    # Encoder velocity Low pass filter size
+
+############# Trajectory
+epicsEnvSet("ECMC_TRAJ_SOURCE",                "0")      # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_TRAJ_VELO_FILT_ENABLE",      "0")      # Enable velocity filter
+epicsEnvSet("ECMC_TRAJ_VELO_FILT_SIZE",        "20")     # Trajectory velocity Low pass filter size
+
+############# Commands
+epicsEnvSet("ECMC_CMD_FRM_OTHER_PLC_ENABLE",   "1")      # Allow commands from PLC
+epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",        "1")      # Enable Axis PLC
+# Each line below is appended to one single expression/source. 
+# Executed in sync with axis (before)
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "static.counter+=1|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(static.counter>10) {")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "#println(ax${PHYS_AXIS}.enc.actpos)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "#println(ax${VIRT_AXIS}.enc.actpos)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "static.counter:=0|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "ds_append_data(${ECMC_ID_DS_FILT},ax${VIRT_AXIS}.enc.actpos)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax${PHYS_AXIS}.enc.actpos:=ds_get_avg(${ECMC_ID_DS_FILT})|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")

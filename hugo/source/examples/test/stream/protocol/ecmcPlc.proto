@@ -1,0 +1,9 @@
+LockTimeout = 5000;
+WriteTimeout = 100;
+ReplyTimeout = 1000;
+ReadTimeout = 100;
+
+setPLCEnable{
+  out "Cfg.SetPLCEnable(\$1,%{0|1})";
+  in "OK";
+}

@@ -1,0 +1,16 @@
+record(ai,"${ECMC_P}IN_${EC_TYPE}"){
+  field(DESC, "$(HWTYPE): Input ${EC_TYPE}")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s${SLAVE_POS}.IN_${EC_TYPE}?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"${ECMC_P}OUT_${EC_TYPE}"){
+  field(DESC, "$(HWTYPE): Output ${EC_TYPE}")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s${SLAVE_POS}.OUT_${EC_TYPE}=")
+  field(SCAN, "Passive")
+}

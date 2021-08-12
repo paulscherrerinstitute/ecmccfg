@@ -1,0 +1,109 @@
+record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
+  field(DESC, "$(HWTYPE): Drive Control Word RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+}
+
+record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
+  field(DESC, "$(HWTYPE): Drive Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}")
+  field(PREC, "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
+  field(DESC, "$(HWTYPE): Drive Speed Setpoint RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=V)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
+  field(DESC, "$(HWTYPE): Drive Speed Setpoint")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=V)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
+  field(DESC, "$(HWTYPE): Drive Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Warning")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B2")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Error")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Stl-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Stl-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Motor Stall")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-SyncErr-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-SyncErr-Alrm"){
+  field(DESC, "$(HWTYPE): Drive Sync Error")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BD")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+}
+
+# Encoder interface of EL70X7 are defined in ecmcEL5101-chX.template

@@ -1,0 +1,6 @@
+file "ecmc_analogOutput-chX.template"
+{
+  pattern {CH_ID, sourceName, LINR,    ESLO,           DRVL, DRVH}
+          {01,    pwmOutput,  "SLOPE", 7.324442274E-4, 0,    24  }
+          {02,    pwmOutput,  "SLOPE", 7.324442274E-4, 0,    24  }
+}

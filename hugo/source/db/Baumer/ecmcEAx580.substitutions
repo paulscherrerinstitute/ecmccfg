@@ -1,0 +1,5 @@
+file "ecmcEAx580-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}

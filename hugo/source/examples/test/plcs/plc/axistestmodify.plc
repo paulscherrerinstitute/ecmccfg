@@ -1,0 +1,24 @@
+
+# Test axis write vars
+  println('--------------------------------------------');
+  static.counter:=static.counter+1;
+  ax1.reset:=not(ax1.reset);
+  #ax1.allowplccmd:=not(ax1.allowplccmd);
+  ax1.enc.source:=not(ax1.enc.source);
+  ax1.enc.homepos:=ax1.enc.homepos+1;
+  ax1.traj.setpos:=ax1.traj.setpos+2;
+  ax1.traj.targetpos:=ax1.traj.targetpos+3;
+  ax1.traj.targetvel:=ax1.traj.targetvel+4;
+  ax1.traj.targetacc:=ax1.traj.targetacc+5;
+  ax1.traj.targetdec:=ax1.traj.targetdec+6;
+  ax1.traj.command:=ax1.traj.command+7;
+  ax1.traj.cmddata:=ax1.traj.cmddata+8;
+  ax1.traj.source:=not(ax1.traj.source);
+  ax1.traj.execute:=not(ax1.traj.execute);
+  #ax1.drv.enable:=not(ax1.drv.enable);
+  ax1.mon.ilock:=not(ax1.mon.ilock);
+  ax1.mon.ilockfwd:=not(ax1.mon.ilockfwd);
+  ax1.mon.ilockbwd:=not(ax1.mon.ilockbwd);
+  ax1.mon.lowsoftlimenable:=not(ax1.mon.lowsoftlimenable);
+  ax1.mon.highsoftlimenable:=not(ax1.mon.highsoftlimenable);
+  ax1.blockcom:=not(ax1.blockcom);

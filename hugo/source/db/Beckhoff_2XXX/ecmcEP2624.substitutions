@@ -1,0 +1,8 @@
+# realy (binary) outputs
+file "ecmc_binaryOutput-chX.template"{
+  pattern {CH_ID, ZNAM,   ONAM}
+          {01,    "open", "closed"  }
+          {02,    "open", "closed"  }
+          {03,    "open", "closed"  }
+          {04,    "open", "closed"  }
+}

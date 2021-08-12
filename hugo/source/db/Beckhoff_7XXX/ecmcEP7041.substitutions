@@ -1,0 +1,11 @@
+file "ecmcEL7037-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}
+
+file "ecmcEL5101-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}

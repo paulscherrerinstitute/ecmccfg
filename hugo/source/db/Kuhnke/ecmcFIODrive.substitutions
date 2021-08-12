@@ -1,0 +1,27 @@
+# Encoder actual position
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,    sourceName,       EGU,      DESC                     }
+          {01,    "Enc", "-PosAct", "positionActual", "Counts", "Encoder Actual position"}
+}
+
+# Drive Control word
+file "ecmc_controlWord-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,  sourceName,     DESC                }
+          {01,    "Drv", "-Ctrl", "driveControl", "Drive Control Word"}
+}
+
+# Drive Velocity setpoint
+file "ecmc_analogOutput-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,    sourceName,         DESC                     }
+          {01,    "Drv", "-VeloSet", "velocitySetpoint", "Drive Velocity setpoint"}
+}
+
+# Drive Status word
+file "ecmcFIODrive-drvStat-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}

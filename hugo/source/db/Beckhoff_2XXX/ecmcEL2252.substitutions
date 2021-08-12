@@ -1,0 +1,19 @@
+file "ecmc_binaryOutput-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
+
+file "ecmcEL2252-chx.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
+
+file "ecmcEL2252-general.template"
+{
+  pattern {}
+          {}
+}

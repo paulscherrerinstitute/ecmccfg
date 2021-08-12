@@ -1,0 +1,16 @@
+languageCode = 'en-us'
+title = 'ecmccfg'
+theme = "hugo-theme-learn"
+relativeURLs = true
+canonifyURLs = true
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+[outputs]
+  home = [ "HTML", "RSS", "JSON"]
+[params]
+  # Change default color scheme with a variant one. Can be "red", "blue", "green".
+  themeVariant = "green"
+  # Set this to true to disable copy-to-clipboard button for inline code.
+  disableInlineCopyToClipBoard = true

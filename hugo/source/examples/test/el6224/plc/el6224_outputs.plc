@@ -1,0 +1,44 @@
+###############################################################################
+#-d /**
+#-d   \brief Example plc code EL6224
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+# 
+# status0X:
+#- 0x_1 = Port in std dig in
+#- 0x_2 = Port in std dig out
+#- 0x_3 = Port in communikation OP
+#- 0x_4 = Port in communikation COMSTOP
+#- 0x1_ = Watchdog detected
+#- 0x2_ = internal Error
+#- 0x3_ = invalid Device ID
+#- 0x4_ = invalid Vendor ID
+#- 0x5_ = invalid IO-Link Version
+#- 0x6_ = invalid Frame CapaBOlity
+#- 0x7_ = invalid Cycle Time
+#- 0x8_ = invalid PD in length
+#- 0x9_ = invalid PD out length
+#- 0xA_ = no Device detected
+
+${DBG=#}println('----------------------------------------------------');
+${DBG=#}print(' BO1:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput01,0),'  ', ec0.s$(SLAVE_ID).status01, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status01,0,7);
+${DBG=#}println('');
+
+${DBG=#}print(' BO2:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput02,0),'  ', ec0.s$(SLAVE_ID).status02, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status02,0,7);
+${DBG=#}println('');
+
+${DBG=#}print(' BO3:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput03,0),'  ', ec0.s$(SLAVE_ID).status03, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status03,0,7);
+${DBG=#}println('');
+
+${DBG=#}print(' BO4:           ',ec_chk_bit(ec0.s$(SLAVE_ID).binaryOutput04,0),'  ', ec0.s$(SLAVE_ID).status04, ', ');
+${DBG=#}ec_print_bin(ec0.s$(SLAVE_ID).status04,0,7);
+${DBG=#}println('');
+
+ec0.s$(SLAVE_ID).binaryOutput01:=not(ec0.s$(SLAVE_ID).binaryOutput01);
+ec0.s$(SLAVE_ID).binaryOutput02:=not(ec0.s$(SLAVE_ID).binaryOutput02);
+ec0.s$(SLAVE_ID).binaryOutput03:=not(ec0.s$(SLAVE_ID).binaryOutput03);
+ec0.s$(SLAVE_ID).binaryOutput04:=not(ec0.s$(SLAVE_ID).binaryOutput04);

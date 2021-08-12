@@ -1,0 +1,49 @@
+##############################################################################
+## Example config for el3704 4CH multifunction AI
+## Oversampling factor can be set by the changing the "NELM" arg to addSlave
+##
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=1000"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
+
+# Update records in 1ms (all data to EPICS in 1kHz)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
+
+# Note NELM equals oversampling factor in this case.
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3704, NELM=${NELM=10}"
+
+# Update records in 10ms (for all records loaded below)
+epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+##############################################################################
+## Go active:
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+iocInit()
+
+dbl > pvs.log
+

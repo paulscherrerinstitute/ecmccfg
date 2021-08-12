@@ -1,0 +1,41 @@
+file "ecmcEL6090-chX.template"
+{
+  pattern {KEY,          sourceName }
+          {Dev-BtnUp,    buttonUp   }
+          {Dev-BtnDwn,   buttonDown }
+          {Dev-BtnLft,   buttonLeft }
+          {Dev-BtnRght,  buttonRight}
+          {Dev-BtnEntr,  buttonEnter}
+}
+
+file "ecmcEL6090_counter-chX.template"
+{
+  pattern {CH_ID, EGU,     PREC}
+          {01,    "Ticks", 0   }
+          {02,    "Ticks", 0   }
+          {03,    "Ticks", 0   }
+          {04,    "Ticks", 0   }
+}
+
+file "ecmcEL6090_timer-chX.template"
+{
+  pattern {CH_ID, EGU, PREC}
+          {01,    "s", 0   }
+          {02,    "s", 0   }
+          {03,    "s", 0   }
+          {04,    "s", 0   }
+}
+
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, KEY, suffix,      sourceName,       ESLO,         EGU, PREC }
+          {"",    "",  "Dev-OpHrs", "operationHours", 2.7777777e-4, "h", 2    }
+
+}
+
+file "ecmc_analogOutput-chX.template"
+{
+  pattern {CH_ID, KEY,  suffix, sourceName}
+          {01,    "Ch", "-Val",  value     }
+          {02,    "Ch", "-Val",  value     }
+}

@@ -1,0 +1,106 @@
+record(ao,"${ECMC_P}Volume"){
+  field(DESC, "Amplification gain of input data (Y)")
+  field(VAL,  "10")
+  field(EGU,  "No unit")
+}
+
+###############################################################################
+##### Left Channel
+
+# EL3702 ch 1
+record(waveform,"${ECMC_P}AI01-Array"){
+  field(DESC, "$(HWTYPE): AI01: Value Array [$(NELM)]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "$(DTYP=asynInt16ArrayIn)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_AI).mm.analogInputArray01?")
+  field(FTVL, "$(FTVL=SHORT)")
+  field(NELM, "$(NELM)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(FLNK, "${ECMC_P}LeftMoveData_.PROC")
+}
+
+# EL4732 ch1
+record(waveform,"${ECMC_P}AO01-Array"){
+  field(DESC, "$(HWTYPE): AO01: Value Array [$(NELM)]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "$(DTYP=asynInt16ArrayOut)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_AO).mm.analogOutputArray01=")
+  field(FTVL, "$(FTVL=SHORT)")
+  field(NELM, "$(NELM)")  
+}
+
+record(acalcout,"${ECMC_P}LeftMoveData_"){
+  field(DESC, "Move data from EL3702 to EL4732")  
+  field(INAA, "${ECMC_P}AI01-Array.VAL")  
+  field(INPA, "${ECMC_P}LeftGain.VAL")
+  field(INPB, "${ECMC_P}LeftOffset.VAL")
+  field(INPC, "${ECMC_P}Volume.VAL")
+  field(CALC, "(C/200*A/100*AA+(B*3276.8))")
+  field(OUT,  "${ECMC_P}AO01-Array.VAL")
+  field(FLNK, "${ECMC_P}AO01-Array.PROC")
+  field(NELM, "$(NELM)")  
+}
+
+record(ao,"${ECMC_P}LeftGain"){
+  field(DESC, "Amplification gain of input data (Y)")
+  field(VAL,  "100")
+  field(EGU,  "No unit")
+}
+
+record(ao,"${ECMC_P}LeftOffset"){
+  field(DESC, "Offset of input data (Y)")
+  field(VAL,  "0")
+  field(EGU,  "Volt")
+}
+
+###############################################################################
+##### Right Channel
+
+# EL3702 ch 2
+record(waveform,"${ECMC_P}AI02-Array"){
+  field(DESC, "$(HWTYPE): AI02: Value Array [$(NELM)]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "$(DTYP=asynInt16ArrayIn)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_AI).mm.analogInputArray02?")
+  field(FTVL, "$(FTVL=SHORT)")
+  field(NELM, "$(NELM)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(FLNK, "${ECMC_P}RightMoveData_.PROC")
+}
+
+# EL4732 ch1
+record(waveform,"${ECMC_P}AO02-Array"){
+  field(DESC, "$(HWTYPE): AO2: Value Array [$(NELM)]")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "$(DTYP=asynInt16ArrayOut)")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1)/TYPE=asynInt16ArrayOut/ec$(MASTER_ID).s$(SLAVE_AO).mm.analogOutputArray02=")
+  field(FTVL, "$(FTVL=SHORT)")
+  field(NELM, "$(NELM)")  
+}
+
+record(acalcout,"${ECMC_P}RightMoveData_"){
+  field(DESC, "Move data from EL3702 to EL4732")  
+  field(INAA, "${ECMC_P}AI02-Array.VAL")  
+  field(INPA, "${ECMC_P}RightGain.VAL")
+  field(INPB, "${ECMC_P}RightOffset.VAL")
+  field(INPC, "${ECMC_P}Volume.VAL")
+  field(CALC, "(C/200*A/100*AA+(B*3276.8))")
+  field(OUT,  "${ECMC_P}AO02-Array.VAL")
+  field(FLNK, "${ECMC_P}AO02-Array.PROC")
+  field(NELM, "$(NELM)")  
+}
+
+record(ao,"${ECMC_P}RightGain"){
+  field(DESC, "Amplification gain of input data (Y)")
+  field(VAL,  "100")
+  field(EGU,  "No unit")
+}
+
+record(ao,"${ECMC_P}RightOffset"){
+  field(DESC, "Offset of input data (Y)")
+  field(VAL,  "0")
+  field(EGU,  "Volt")
+}
+
