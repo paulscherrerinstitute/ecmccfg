@@ -1,0 +1,13 @@
+file "ecmc_analogInputArray-chX.template"
+{
+  pattern {CH_ID, DTYP,                FTVL    }
+          {01,    "asynInt16ArrayIn",  "SHORT" }
+          {02,    "asynInt16ArrayIn",  "SHORT" }
+}
+
+file "ecmcEL3632-stat-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}

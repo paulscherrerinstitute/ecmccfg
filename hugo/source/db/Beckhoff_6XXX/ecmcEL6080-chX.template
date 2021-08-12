@@ -1,0 +1,16 @@
+record(ai,"${ECMC_P}Dev-Stat"){
+  field(DESC, "$(HWTYPE): Status word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.status01?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"${ECMC_P}Dev-Ctrl"){
+  field(DESC, "$(HWTYPE): Control word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.control01=")
+  field(SCAN, "Passive")
+}

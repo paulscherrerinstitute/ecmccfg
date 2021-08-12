@@ -1,0 +1,59 @@
+##############################################################################
+## 1. Example ecmc PLC varaible to external record
+## 2. Example external record to ecmc PLC varaible
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg 6.2.0
+
+##############################################################################
+###### Startup
+require ecmc        "6.2.0"
+
+#-------------------------------------------------------------------------------
+#- define default PATH for scripts and database/templates
+epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
+epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "${STREAM_PROTOCOL_PATH=""}:${ECMC_CONFIG_ROOT}:${ecmccfg_DB}")
+#-
+#-------------------------------------------------------------------------------
+#- define IOC Prefix
+epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
+#-
+#-------------------------------------------------------------------------------
+#- call init-script, defaults to 'initAll'
+ecmcFileExist("${ecmccfg_DIR}${INIT=initAll}.cmd",1)
+${SCRIPTEXEC} "${ecmccfg_DIR}${INIT=initAll}.cmd"
+#-
+#-------------------------------------------------------------------------------
+
+epicsEnvSet("ECMC_SAMPLE_RATE_MS" ,100) # Records update period
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,10) # Realtime loop sample rate
+ecmcConfigOrDie "Cfg.SetSampleRate(${ECMC_EC_SAMPLE_RATE})"
+
+##############################################################################
+## Config hardware: No hardware for this example
+
+##############################################################################
+## PLC 
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/external.plc")
+dbLoadRecords("external.db","P=$(IOC):,PORT=MC_CPU1,T_SMP_MS=1000")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+#### Use to monitor records
+# camonitor IOC_TEST:FromPLC IOC_TEST:FromExternal IOC_TEST:ToPLC IOC_TEST:ToExternal
+
+#### set data of external system  
+# caput IOC_TEST:FromExternal 10

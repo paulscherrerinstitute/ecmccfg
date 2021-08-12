@@ -1,0 +1,125 @@
+#-d /**
+#-d   \brief Example config for el6080 memory terminal
+#-d   \details
+#-d   The el6080 is a freely configurable terminal and therefore custom EtherCAT entries
+#-d   can be added. Therefore there is no dedicated hardware snippet for this slave.
+#-d   \note Control word and Status word needs to be configured 
+#-d   \note Values are written when "CONTROL" is set to 1 (pos edge)
+#-d   \note Only full bytes are allowed (no bits). 
+#-d   \author Anders Sandstroem
+#-d   \file
+#-d */
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg master
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "31")
+
+#- ###########################################################
+#- ############ Information:
+#-  Description: 128kb memory terminal
+#-  Vendor id   = 0x2  (Beckhoff)
+#-  Product id  = 0x17c03052 (EL6080)
+#-  Direction   = 1,2 (Output/Input)
+#-  Note:
+#-  - Input and output section needs to be identical otherwise the terminal will not go to OP state
+#-  - Max 128 byte in cyclic. The rest of memory is accessible over SDO.
+#-  - Test configuration with 2 int, 2 dint, 2 double in each direction
+#-  - Use 32bit int or 64 bit float
+#- ###########################################################
+
+# NOTE: Hardware snippet starts here!!
+
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL6080")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x17c03052")
+
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
+
+#- ###########################################################
+#- ############ Config PDOS: Inputs
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0xF100,0x1,U16,STATUS,)"
+
+#Start of custom input setup
+epicsEnvSet("ECMC_EC_BITS", "8")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x5,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x6,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS})"
+epicsEnvSet("ECMC_EC_BITS", "16")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x7,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x8,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS})"
+epicsEnvSet("ECMC_EC_BITS", "32")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x9,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xA,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS})"
+epicsEnvSet("ECMC_EC_BITS", "64")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xB,U${ECMC_EC_BITS},IN_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xC,S${ECMC_EC_BITS},IN_S${ECMC_EC_BITS})"
+# Double, real
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xD,F32,IN_F32)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0xE,F64,IN_F64)"
+
+
+#- ###########################################################
+#- ############ Config PDOS: Outputs
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0xF200,0x1,U16,CONTROL,1)"
+
+#Start of custom  output setup
+
+epicsEnvSet("ECMC_EC_BITS", "8")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x5,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x6,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS})"
+epicsEnvSet("ECMC_EC_BITS", "16")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x7,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x8,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS})"
+epicsEnvSet("ECMC_EC_BITS", "32")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x9,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xA,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS})"
+epicsEnvSet("ECMC_EC_BITS", "64")
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xB,U${ECMC_EC_BITS},OUT_U${ECMC_EC_BITS})"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xC,S${ECMC_EC_BITS},OUT_S${ECMC_EC_BITS})"
+# Double, real
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xD,F32,OUT_F32)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0xE,F64,OUT_F64)"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# NOTE: Hardware snippet ends here!!
+
+# Load records for control and status word
+dbLoadTemplate("ecmcEL6080.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+
+# Load custom records ints (note, must be full bytes (no bits))
+dbLoadTemplate("ecmcEL6080_app_ints.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+# Load custom records floats
+dbLoadTemplate("ecmcEL6080_app_floats.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+# Load custom records 64bit (needs special handling)
+dbLoadRecords(ecmcEL6080_app_64int.db,"P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+
+##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/el6080.plc,PLC_MACROS='PLC_ID=0,SLAVE_ID=${ECMC_EC_SLAVE_NUM},DBG='")
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+
+# use camonitor to check values:
+# camonitor IOC_TEST:ec0-s31-EL6080-IN_B1 IOC_TEST:ec0-s31-EL6080-IN_B2 IOC_TEST:ec0-s31-EL6080-IN_B3 IOC_TEST:ec0-s31-EL6080-IN_B4 IOC_TEST:ec0-s31-EL6080-IN_U8 IOC_TEST:ec0-s31-EL6080-IN_S8 IOC_TEST:ec0-s31-EL6080-IN_U16 IOC_TEST:ec0-s31-EL6080-IN_S16 IOC_TEST:ec0-s31-EL6080-IN_U32 IOC_TEST:ec0-s31-EL6080-IN_S32 IOC_TEST:ec0-s31-EL6080-IN_U64 IOC_TEST:ec0-s31-EL6080-IN_S64 IOC_TEST:ec0-s31-EL6080-IN_F32 IOC_TEST:ec0-s31-EL6080-IN_F64

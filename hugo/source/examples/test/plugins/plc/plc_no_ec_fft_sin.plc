@@ -1,0 +1,9 @@
+###############################################################################################
+# For help on syntax, variables and functions, please read the file: "plcSyntaxHelp.plc"
+#
+# PLC Functionality Demo:
+#   No hardware related variables
+#
+
+static.time:=ec_get_time()/1E9;
+static.sineval:=sin(2*pi*${FREQ=10}*static.time);

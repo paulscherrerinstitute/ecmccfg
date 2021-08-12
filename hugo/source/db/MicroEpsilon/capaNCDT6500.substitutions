@@ -1,0 +1,12 @@
+file "ecmc_analogInput-chX"
+{
+  pattern { CH_ID,  KEY,   EGU,  PREC,  suffix    }
+          { 01,     "Enc", "nm", 1,     "PosAct"  }
+          { 02,     "Enc", "nm", 1,     "PosAct"  }
+          { 03,     "Enc", "nm", 1,     "PosAct"  }
+          { 04,     "Enc", "nm", 1,     "PosAct"  }
+          { 05,     "Enc", "nm", 1,     "PosAct"  }
+          { 06,     "Enc", "nm", 1,     "PosAct"  }
+          { 07,     "Enc", "nm", 1,     "PosAct"  }
+          { 08,     "Enc", "nm", 1,     "PosAct"  }
+}

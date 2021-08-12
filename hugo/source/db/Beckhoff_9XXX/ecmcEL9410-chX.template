@@ -1,0 +1,25 @@
+record(bi,"${ECMC_P}CH${CH_ID}-EBusAlrm"){
+  field(PINI, "1")
+  field(DESC, "$(HWTYPE): E-Bus Undervoltage Alarm")
+  field(DTYP, "asynInt32")
+  field(SCAN, "I/O Intr")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.underVoltageEbus${CH_ID}?")
+  field(ZNAM, "Power OK")
+  field(ONAM, "Power Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-VoltAlrm"){
+  field(PINI, "1")
+  field(DESC, "$(HWTYPE): Power Undervoltage Alarm")
+  field(DTYP, "asynInt32")
+  field(SCAN, "I/O Intr")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s${SLAVE_POS}.underVoltagePower${CH_ID}?")
+  field(ZNAM, "Power OK")
+  field(ONAM, "Power Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(TSE,  "$(TSE=-2)")
+}

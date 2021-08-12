@@ -1,0 +1,42 @@
+
+################ From PLC AI to external AO
+
+# PLC AI record
+record(ai,"$(P)FromPLC"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.toEpics?")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=0)")
+  field(FLNK, "$(P)ToExternal.PROC")
+}
+
+# External AO record
+record(ao,"$(P)ToExternal"){
+  field(PINI, "1")  
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "Passive")
+  field(OMSL, "closed_loop")
+  field(DOL,  "$(P)FromPLC.VAL")
+}
+
+################ From External AI to PLC AO
+# External AI record
+record(ai,"$(P)FromExternal"){
+  field(PINI, "1")  
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "1 second")
+  field(FLNK, "$(P)ToPLC.PROC")
+}
+
+# PLC AO record
+record(ao,"$(P)ToPLC"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.fromEpics=")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "Passive")
+  field(OMSL, "closed_loop")
+  field(DOL,  "$(P)FromExternal.VAL")
+}

@@ -1,0 +1,53 @@
+###############################################################################
+# inline double mc_move_gear_in(double axIndex,double execute, double vel, double acc, double dec)
+###############################################################################
+
+static.counter:=static.counter+1;
+
+# Init
+if(plc${PLC_ID=0}.firstscan){
+  println('Init!!!!!!!!!');
+  ax${AX_ID=0}.traj.source:= 0;  
+  #ax${AX_ID=0}.plc.enable:=1;
+  #ax${AX_ID=0}.allowplccmd:=1;
+  return[];
+};
+ 
+# Power on
+#if(static.state=1) {
+#  mc_power(${AX_ID=0},1);
+#  static.state:=2;
+#  return [];
+#};
+
+println('-------------------------------------------');
+println('Ext setpos ax1:',ax1.traj.extsetpos);
+println('Setpos ax1:    ',ax1.traj.setpos);
+println('Ext setpos ax2:',ax2.traj.extsetpos);
+println('Setpos ax2:    ',ax2.traj.setpos);
+if(static.counter = 2) {
+ println('move gear in 0');
+};
+
+if(static.counter>2 and static.counter<9) {
+  mc_move_ext_pos(${AX_ID=0},0, 10, 1, 1);
+};
+
+if(static.counter = 20) {
+ println('move gear in 1');
+};
+
+# wait  20 seconds then issue 
+if(static.counter>20) {
+  #mc_power(1,1);
+  mc_power(${AX_ID=0},1);
+  #if(ax${AX_ID=0}.drv.enabled) {
+  #  mc_move_abs(${AX_ID=0},1,ax${AX_ID=0}.traj.extsetpos, 10, 1, 1);
+  #};
+
+  if(ax${AX_ID=0}.drv.enabled) {
+    mc_move_ext_pos(${AX_ID=0},1, 10, 1, 1);
+  };
+};
+
+static.counterOld:=static.counter;

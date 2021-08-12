@@ -1,0 +1,17 @@
+#- binary input array (8 bit each)
+file "ecmc_binaryInputArray-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
+
+# accelerometer inputs
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, ESLO,   EGU,  PREC, KEY,    sourceName   }
+          {01,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {02,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {03,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {04,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {05,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+          {06,    0.001,  "g",  3,    "ACC", "accelerometerActual"}
+}

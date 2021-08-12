@@ -1,0 +1,8 @@
+# binary inputs
+file "ecmc_binaryInput-chX.template"{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+}

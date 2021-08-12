@@ -1,0 +1,44 @@
+###############################################################################
+##### Common
+
+record(ao,"${ECMC_P}Volume"){
+  info(asyn:READBACK,"1")
+  field(PINI, "1")
+  field(DESC, "Amplification gain of input data (Y)")
+  field(VAL,  "10")
+  field(EGU,  "No unit")      
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.vol?")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "Passive")
+}
+
+###############################################################################
+##### Left Channel
+
+record(ao,"${ECMC_P}LeftGain"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Gain of left input data (Y)")
+  field(PINI, "1")  
+  field(VAL,  "100")
+  field(EGU,  "No unit")      
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.l_gain?")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "Passive")
+}
+
+###############################################################################
+##### Right Channel
+
+record(ao,"${ECMC_P}RightGain"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Gain of right input data (Y)")
+  field(PINI, "1")
+  field(VAL,  "100")
+  field(EGU,  "No unit")      
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc0.static.r_gain?")
+  field(PREC, "$(PREC=3)")
+  field(SCAN, "Passive")
+}

@@ -1,0 +1,53 @@
+##############################################################################
+## Test script to test that files and records loads like without errors for different hardwares.
+## 
+## WARNING: ETHERCAT BUS WILL NOT GO ONLINE. 
+##          HARDWARE WILL NOT BE VERIFIED (ECMC_DEV_MODE=1)
+##
+## Mandatory arguments:
+##  SLAVE_ID: Slave position on bus 
+##  HW_DESC : Slave type/name ("EL1018")
+## 
+## Example call (test that EL1809 loads all files and records correct):
+##  ESS (E3):  iocsh.bash genericTest.script SLAVE_ID=1 HW_DESC=EL1809
+##
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+
+epicsEnvSet(ECMC_DEV_MODE, 1)  # Without verification and reset of slaves.
+epicsEnvSet(P_SCRIPT, mXsXXX)
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              $(SLAVE_ID=0))
+epicsEnvSet("ECMC_EC_SLAVE_DESC",             $(HW_DESC="NOT_VALID"))
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=$(ECMC_EC_SLAVE_DESC)"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+##################$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+dbgrep *m0s00${ECMC_EC_SLAVE_NUM}*
+
+
+

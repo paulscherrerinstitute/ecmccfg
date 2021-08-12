@@ -1,0 +1,5 @@
+file "ecmcEL95XX-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}

@@ -1,0 +1,5 @@
+file "ecmc_coupler-ID.template"
+{
+  pattern {}
+          {}
+}
