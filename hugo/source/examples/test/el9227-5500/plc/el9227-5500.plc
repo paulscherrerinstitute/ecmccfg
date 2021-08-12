@@ -1,5 +1,0 @@
-
-${DBG=#}println('CH1 Control Word:', ec0.s${SLAVE_ID=12}.control01);
-${DBG=#}println('CH2 Control Word:', ec0.s${SLAVE_ID=12}.control02);
-${DBG=#}println('CH1 Status Word: ', ec0.s${SLAVE_ID=12}.status01);
-${DBG=#}println('CH2 Status Word: ', ec0.s${SLAVE_ID=12}.status02);

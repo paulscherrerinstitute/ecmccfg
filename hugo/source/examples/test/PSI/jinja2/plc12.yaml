@@ -1,9 +1,0 @@
-plc:
-  id: 1
-  enable: no
-  rateMilliseconds: 10
-  code:
-    - 'ec0.s2.binaryOutput07:=global.test|'
-    - '${PLC_ID}.enable:=plc0.enable|'
-    - 'ec0.s2.binaryOutput05:=not(ec0.s2.binaryOutput05)|'
-    - 'plc1.error:=12345|'

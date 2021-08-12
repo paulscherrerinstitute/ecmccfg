@@ -1,2 +1,0 @@
-println('F32:', ec0.s0.voltageActualUsIn);
-                       

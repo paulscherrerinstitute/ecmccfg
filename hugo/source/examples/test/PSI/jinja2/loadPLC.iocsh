@@ -1,6 +1,0 @@
-require ecmccfg,kivel "MASTER_ID=-1"
-
-${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1.yaml"
-
-# go active
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd

@@ -1,7 +1,0 @@
-# All fields related to velocity scaling and alarms
-file "ecmcEL7332-chX.template"
-{
-  pattern {CH_ID}
-          {01   }
-          {02   }
-}
