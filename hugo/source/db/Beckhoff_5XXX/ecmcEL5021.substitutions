@@ -1,6 +1,0 @@
-# All fields related to postion scaling and alarms
-file "ecmcEL5021-chX.template"
-{
-  pattern {CH_ID}
-          {01   }
-}

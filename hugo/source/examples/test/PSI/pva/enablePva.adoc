@@ -1,6 +1,0 @@
-Example how to enable pva
-
-```bash
-require ecmccfg pva, "ECMC_VER=dev,NAMING=mXsXXX,MASTER_ID=0,PVA=true"
-```
-

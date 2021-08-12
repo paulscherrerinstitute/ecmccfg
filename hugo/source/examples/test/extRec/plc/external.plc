@@ -1,4 +1,0 @@
-static.toEpics:=static.toEpics+1;
-println('fromEpics:   ',static.fromEpics);
-println('toEpics:     ',static.toEpics);
-  

@@ -1,5 +1,0 @@
-file "ecmcEL7037_PosIF-chX.template"
-{
-  pattern {CH_ID}
-          {01   }
-}

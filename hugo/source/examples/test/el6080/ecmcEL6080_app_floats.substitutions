@@ -1,6 +1,0 @@
-file "ecmcEL6080_app_floats.template"
-{
-  pattern {EC_TYPE}
-          {F32    }
-          {F64    }
-}

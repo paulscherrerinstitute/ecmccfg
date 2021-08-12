@@ -1,3 +1,0 @@
-# ecmccfg changelog
-
-v7.0.0
