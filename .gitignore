@@ -31,4 +31,4 @@ doc
 tools
 
 .venv
-hugo/content
+hugo/content/source/
