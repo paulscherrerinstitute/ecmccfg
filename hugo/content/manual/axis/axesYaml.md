@@ -4,7 +4,7 @@ weight = 15
 chapter = false  
 +++  
 
-## instruction
+## introduction
 The config is processed by `jinja2`, the processor will set complain if mandatory kyes are missing. Likewise, missing optional keys are populated with default values.
 A [minmal example](#minimal-example) is give at the end of this file.
 
