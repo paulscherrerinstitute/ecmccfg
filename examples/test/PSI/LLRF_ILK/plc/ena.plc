@@ -1,0 +1,7 @@
+if(plc0.firstscan){
+  println('Starting slave2slavePLC');
+}
+
+var srcBit:=1; # source bit index
+var trgBit:=3; # target bit index
+ec0.s0.enable04:=ec_wrt_bit(ec0.s0.enable04,ec_chk_bit(ec0.s0.enable01,srcBit),trgBit);
