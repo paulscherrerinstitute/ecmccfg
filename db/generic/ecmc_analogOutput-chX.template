@@ -7,7 +7,7 @@
 
 record(ao,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}"){
   info(asyn:READBACK,"1")
-  field(DESC, "${DESC=${HWTYPE}: analogOutput${CH_ID}}")
+  field(DESC, "${DESC=${HWTYPE}: ${sourceName=analogOutput}${CH_ID}}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=analogOutput}${CH_ID}=")
@@ -30,7 +30,7 @@ record(ao,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}"){
 }
 
 record(ai,"${ECMC_P}${KEY=AO}${CH_ID}${suffix=}-RB"){
-  field(DESC, "${DESC=${HWTYPE}: analogOutput${CH_ID} RB}")
+  field(DESC, "${DESC=${HWTYPE}: ${sourceName=analogOutput}${CH_ID} RB}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=analogOutput}${CH_ID}?")

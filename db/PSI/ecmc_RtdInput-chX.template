@@ -1,0 +1,43 @@
+#-d /**
+#-d   \brief template for analog input
+#-d   \details single channel analog input
+#-d   \author Niko Kivel
+#-d   \file
+#-d */
+
+record(ai,"${ECMC_P}Rtd${CH_ID}${suffix=}"){
+  field(DESC, "${HWTYPE}: Rtd${CH_ID} ${suffix=}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.${sourceName=RtdInput}${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "${LINR=SLOPE}")
+  field(ESLO, "${ESLO=1.4901162082E-05}")
+  field(EOFF, "${EOFF=0}")
+  field(EGU,  "Ohm")
+  field(PREC, "${PREC=3}")
+  field(LOW,  "${LOW=100}")
+  field(LOLO, "${LOLO=0}")
+  field(HIGH, "${HIGH=0}")
+  field(HIHI, "${HIHI=0}")
+  field(HYST, "${HYST=0}")
+  field(LLSV, "${LLSV=NO_ALARM}")
+  field(LSV,  "${LSV=MINOR}")
+  field(HSV,  "${HSV=NO_ALARM}")
+  field(HHSV, "${HHSV=NO_ALARM}")
+  field(TSE,  "${TSE=-2}")
+  field(FLNK, "${ECMC_P}${KEY=temp}${CH_ID}${suffix=}.PROC")
+}
+
+record(calcout,"${ECMC_P}${KEY=temp}${CH_ID}${suffix=}"){
+  field(DESC, "${HWTYPE}: ${KEY=temp}${CH_ID} ${suffix=}")
+  field(INPA, "3.9083e-3")
+  field(INPB, "-5.775e-7")
+  field(INPC, "-4.183e-12")
+  field(INPD, "${ECMC_P}Rtd${CH_ID}${suffix=} MS")
+  field(CALC, "(-A*100+sqrt((A*100)^2-4*B*100*(100-D)))/(2*B*100)") # according to DIN EN 60751
+  field(PREC, "${PREC=9}")
+  field(EGU,  "${EGU=degC}")
+  field(TSE,  "${TSE=-2}")
+  field(IVOA, "Don't drive outputs")
+}

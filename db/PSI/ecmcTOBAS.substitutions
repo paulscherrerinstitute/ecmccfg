@@ -1,0 +1,280 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+# file "ecmc_enableWord-chX.template"{
+#   pattern {CH_ID, KEY,    sourceName, PINI, VAL,  DESC,                   EGU,  PREC  }
+#           {01,    enable, enable,     1,    7,    "enable ILK ${CH_ID}",  "",   0     }
+# }
+
+# file "ecmc_analogOutput-chX.template"{
+#   pattern {CH_ID, KEY,        sourceName,   PINI, VAL,  DESC,                  EGU,     PREC  }
+#           {01,    alarmHigh, alarmHigh,     1,    7,    "alarmHigh ${CH_ID}",  "degC",  7     }
+#           {01,    alarmLow,  alarmLow,      1,    7,    "alarmLow ${CH_ID}",   "degC",  7     }
+# }
+
+file "ecmc_binaryOutputArray-chX.template"{
+  pattern {CH_ID, KEY,        sourceName  }
+          # {01,    modeCalib,  modeCalib   }
+          # {01,    enable, enable   }
+}
+
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,    sourceName}
+          {01,    modeCalib,  modeCalib   }
+          {01,    enable, enable   }
+          {02,    enable, enable   }
+          {03,    enable, enable   }
+          {04,    enable, enable   }
+          {05,    enable, enable   }
+          {06,    enable, enable   }
+          {07,    enable, enable   }
+          {08,    enable, enable   }
+          {09,    enable, enable   }
+          {10,    enable, enable   }
+          {11,    enable, enable   }
+          {12,    enable, enable   }
+          {13,    enable, enable   }
+          {14,    enable, enable   }
+          {15,    enable, enable   }
+          {16,    enable, enable   }
+          {17,    enable, enable   }
+          {18,    enable, enable   }
+          {19,    enable, enable   }
+          {20,    enable, enable   }
+          {21,    enable, enable   }
+          {22,    enable, enable   }
+          {23,    enable, enable   }
+          {24,    enable, enable   }
+          {25,    enable, enable   }
+          {26,    enable, enable   }
+          {27,    enable, enable   }
+          {28,    enable, enable   }
+          {29,    enable, enable   }
+          {30,    enable, enable   }
+          {31,    enable, enable   }
+          {32,    enable, enable   }
+          {33,    enable, enable   }
+          {34,    enable, enable   }
+          {35,    enable, enable   }
+          {36,    enable, enable   }
+          {37,    enable, enable   }
+          {38,    enable, enable   }
+          {39,    enable, enable   }
+          {40,    enable, enable   }
+
+          {01,    alarmHigh, alarmHigh   }
+          {02,    alarmHigh, alarmHigh   }
+          {03,    alarmHigh, alarmHigh   }
+          {04,    alarmHigh, alarmHigh   }
+          {05,    alarmHigh, alarmHigh   }
+          {06,    alarmHigh, alarmHigh   }
+          {07,    alarmHigh, alarmHigh   }
+          {08,    alarmHigh, alarmHigh   }
+          {09,    alarmHigh, alarmHigh   }
+          {10,    alarmHigh, alarmHigh   }
+          {11,    alarmHigh, alarmHigh   }
+          {12,    alarmHigh, alarmHigh   }
+          {13,    alarmHigh, alarmHigh   }
+          {14,    alarmHigh, alarmHigh   }
+          {15,    alarmHigh, alarmHigh   }
+          {16,    alarmHigh, alarmHigh   }
+          {17,    alarmHigh, alarmHigh   }
+          {18,    alarmHigh, alarmHigh   }
+          {19,    alarmHigh, alarmHigh   }
+          {20,    alarmHigh, alarmHigh   }
+          {21,    alarmHigh, alarmHigh   }
+          {22,    alarmHigh, alarmHigh   }
+          {23,    alarmHigh, alarmHigh   }
+          {24,    alarmHigh, alarmHigh   }
+          {25,    alarmHigh, alarmHigh   }
+          {26,    alarmHigh, alarmHigh   }
+          {27,    alarmHigh, alarmHigh   }
+          {28,    alarmHigh, alarmHigh   }
+          {29,    alarmHigh, alarmHigh   }
+          {30,    alarmHigh, alarmHigh   }
+          {31,    alarmHigh, alarmHigh   }
+          {32,    alarmHigh, alarmHigh   }
+          {33,    alarmHigh, alarmHigh   }
+          {34,    alarmHigh, alarmHigh   }
+          {35,    alarmHigh, alarmHigh   }
+          {36,    alarmHigh, alarmHigh   }
+          {37,    alarmHigh, alarmHigh   }
+          {38,    alarmHigh, alarmHigh   }
+          {39,    alarmHigh, alarmHigh   }
+          {40,    alarmHigh, alarmHigh   }
+
+          {01,    alarmLow, alarmLow   }
+          {02,    alarmLow, alarmLow   }
+          {03,    alarmLow, alarmLow   }
+          {04,    alarmLow, alarmLow   }
+          {05,    alarmLow, alarmLow   }
+          {06,    alarmLow, alarmLow   }
+          {07,    alarmLow, alarmLow   }
+          {08,    alarmLow, alarmLow   }
+          {09,    alarmLow, alarmLow   }
+          {10,    alarmLow, alarmLow   }
+          {11,    alarmLow, alarmLow   }
+          {12,    alarmLow, alarmLow   }
+          {13,    alarmLow, alarmLow   }
+          {14,    alarmLow, alarmLow   }
+          {15,    alarmLow, alarmLow   }
+          {16,    alarmLow, alarmLow   }
+          {17,    alarmLow, alarmLow   }
+          {18,    alarmLow, alarmLow   }
+          {19,    alarmLow, alarmLow   }
+          {20,    alarmLow, alarmLow   }
+          {21,    alarmLow, alarmLow   }
+          {22,    alarmLow, alarmLow   }
+          {23,    alarmLow, alarmLow   }
+          {24,    alarmLow, alarmLow   }
+          {25,    alarmLow, alarmLow   }
+          {26,    alarmLow, alarmLow   }
+          {27,    alarmLow, alarmLow   }
+          {28,    alarmLow, alarmLow   }
+          {29,    alarmLow, alarmLow   }
+          {30,    alarmLow, alarmLow   }
+          {31,    alarmLow, alarmLow   }
+          {32,    alarmLow, alarmLow   }
+          {33,    alarmLow, alarmLow   }
+          {34,    alarmLow, alarmLow   }
+          {35,    alarmLow, alarmLow   }
+          {36,    alarmLow, alarmLow   }
+          {37,    alarmLow, alarmLow   }
+          {38,    alarmLow, alarmLow   }
+          {39,    alarmLow, alarmLow   }
+          {40,    alarmLow, alarmLow   }
+
+          {01,    spareInput, spareInput   }
+          {02,    spareInput, spareInput   }
+          {03,    spareInput, spareInput   }
+          {04,    spareInput, spareInput   }
+          {05,    spareInput, spareInput   }
+          {06,    spareInput, spareInput   }
+          {07,    spareInput, spareInput   }
+          {08,    spareInput, spareInput   }
+          {09,    spareInput, spareInput   }
+          {10,    spareInput, spareInput   }
+          {11,    spareInput, spareInput   }
+          {12,    spareInput, spareInput   }
+          {13,    spareInput, spareInput   }
+          {14,    spareInput, spareInput   }
+          {15,    spareInput, spareInput   }
+          {16,    spareInput, spareInput   }
+          {17,    spareInput, spareInput   }
+          {18,    spareInput, spareInput   }
+          {19,    spareInput, spareInput   }
+          {20,    spareInput, spareInput   }
+}
+
+
+file "ecmc_analogInput-chX.template"{
+  pattern {CH_ID, KEY,  sourceName,   ESLO,             EGU,    PREC}
+          {01,    revision,  revision,     1,           "",     0   }
+          {01,    identification,  identification,  1,  "",     0   }
+          {01,    extS, extSensorVal, 1,                "n/a",  3   }
+          {02,    extS, extSensorVal, 1,                "n/a",  3   }
+          {03,    extS, extSensorVal, 1,                "n/a",  3   }
+          {04,    extS, extSensorVal, 1,                "n/a",  3   }
+          {05,    extS, extSensorVal, 1,                "n/a",  3   }
+          {06,    extS, extSensorVal, 1,                "n/a",  3   }
+          {07,    extS, extSensorVal, 1,                "n/a",  3   }
+          {08,    extS, extSensorVal, 1,                "n/a",  3   }
+          {09,    extS, extSensorVal, 1,                "n/a",  3   }
+          {10,    extS, extSensorVal, 1,                "n/a",  3   }
+          {11,    extS, extSensorVal, 1,                "n/a",  3   }
+          {12,    extS, extSensorVal, 1,                "n/a",  3   }
+  }
+
+file "ecmc_RtdInput-chX.template"{
+  pattern {CH_ID, KEY,  sourceName, EGU,    PREC}
+          {01,    temp, Rtd,        "degC", 9   }
+          {02,    temp, Rtd,        "degC", 9   }
+          {03,    temp, Rtd,        "degC", 9   }
+          {04,    temp, Rtd,        "degC", 9   }
+          {05,    temp, Rtd,        "degC", 9   }
+          {06,    temp, Rtd,        "degC", 9   }
+          {07,    temp, Rtd,        "degC", 9   }
+          {08,    temp, Rtd,        "degC", 9   }
+          {09,    temp, Rtd,        "degC", 9   }
+          {10,    temp, Rtd,        "degC", 9   }
+          {11,    temp, Rtd,        "degC", 9   }
+          {12,    temp, Rtd,        "degC", 9   }
+          {13,    temp, Rtd,        "degC", 9   }
+          {14,    temp, Rtd,        "degC", 9   }
+          {15,    temp, Rtd,        "degC", 9   }
+          {16,    temp, Rtd,        "degC", 9   }
+          {17,    temp, Rtd,        "degC", 9   }
+          {18,    temp, Rtd,        "degC", 9   }
+          {19,    temp, Rtd,        "degC", 9   }
+          {20,    temp, Rtd,        "degC", 9   }
+          {21,    temp, Rtd,        "degC", 9   }
+          {22,    temp, Rtd,        "degC", 9   }
+          {23,    temp, Rtd,        "degC", 9   }
+          {24,    temp, Rtd,        "degC", 9   }
+          {25,    temp, Rtd,        "degC", 9   }
+          {26,    temp, Rtd,        "degC", 9   }
+          {27,    temp, Rtd,        "degC", 9   }
+          {28,    temp, Rtd,        "degC", 9   }
+          {29,    temp, Rtd,        "degC", 9   }
+          {30,    temp, Rtd,        "degC", 9   }
+          {31,    temp, Rtd,        "degC", 9   }
+          {32,    temp, Rtd,        "degC", 9   }
+          {33,    temp, Rtd,        "degC", 9   }
+          {34,    temp, Rtd,        "degC", 9   }
+          {35,    temp, Rtd,        "degC", 9   }
+          {36,    temp, Rtd,        "degC", 9   }
+          {37,    temp, Rtd,        "degC", 9   }
+          {38,    temp, Rtd,        "degC", 9   }
+          {39,    temp, Rtd,        "degC", 9   }
+          {40,    temp, Rtd,        "degC", 9   }
+}
+
+
+
+file "ecmc_binaryInputArray-chX.template"{
+  pattern {CH_ID, KEY,    sourceName}
+          {01,    sumILK, sumILK   }
+          {01,    status, status   }
+          {02,    status, status   }
+          {03,    status, status   }
+          {04,    status, status   }
+          {05,    status, status   }
+          {06,    status, status   }
+          {07,    status, status   }
+          {08,    status, status   }
+          {09,    status, status   }
+          {10,    status, status   }
+          {11,    status, status   }
+          {12,    status, status   }
+          {13,    status, status   }
+          {14,    status, status   }
+          {15,    status, status   }
+          {16,    status, status   }
+          {17,    status, status   }
+          {18,    status, status   }
+          {19,    status, status   }
+          {20,    status, status   }
+          {21,    status, status   }
+          {22,    status, status   }
+          {23,    status, status   }
+          {24,    status, status   }
+          {25,    status, status   }
+          {26,    status, status   }
+          {27,    status, status   }
+          {28,    status, status   }
+          {29,    status, status   }
+          {30,    status, status   }
+          {31,    status, status   }
+          {32,    status, status   }
+          {33,    status, status   }
+          {34,    status, status   }
+          {35,    status, status   }
+          {36,    status, status   }
+          {37,    status, status   }
+          {38,    status, status   }
+          {39,    status, status   }
+          {40,    status, status   }
+}
