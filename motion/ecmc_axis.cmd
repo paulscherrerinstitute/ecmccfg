@@ -112,7 +112,7 @@ ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(${ECMC_AXIS_NO},${ECMC_HOME_SW
 ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset(${ECMC_AXIS_NO},${ECMC_HOME_LATCH_COUNT_OFFSET=0.0})"
 ecmcConfigOrDie "Main.M${ECMC_AXIS_NO}.fHomePosition=${ECMC_HOME_POS=0.0}"
 ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_ENA=0})"
-ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_POSSET=0})"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_TARG_POS=0})"
 
 #- Motor record init
 ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", ${ECMC_AXISCONFIG})
