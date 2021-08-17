@@ -50,6 +50,8 @@ epicsEnvSet("ECMC_HOME_VEL_TO",           "5")
 epicsEnvSet("ECMC_HOME_VEL_FRM",          "4")
 epicsEnvSet("ECMC_HOME_ACC",              "21")
 epicsEnvSet("ECMC_HOME_DEC",              "100")
+epicsEnvSet("ECMC_HOME_POS_MOVE_ENA",     "0")                        # Enable move to position after successfull homing 
+epicsEnvSet("ECMC_HOME_POS_MOVE_TARG_POS","0")                        # Target position to go to after successfull homing
 
 #Controller
 epicsEnvSet("ECMC_CNTRL_KP",              "15.0")

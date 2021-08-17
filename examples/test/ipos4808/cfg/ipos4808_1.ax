@@ -49,12 +49,14 @@ epicsEnvSet("ECMC_ACCL",                  "1")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
 
 #Homing
-epicsEnvSet("ECMC_HOME_PROC",             "$(SM_HOMEPROC=1)")
-epicsEnvSet("ECMC_HOME_POS",              "$(SM_HOMEPOS=0.0)")
-epicsEnvSet("ECMC_HOME_VEL_TO",           "$(SM_HVELTP=5)")
-epicsEnvSet("ECMC_HOME_VEL_FRM",          "$(SM_HVELTP=4)")
-epicsEnvSet("ECMC_HOME_ACC",              "$(SM_HOMEACC=21)")
-epicsEnvSet("ECMC_HOME_DEC",              "$(SM_HOMEDEC=100)")
+epicsEnvSet("ECMC_HOME_PROC",             "1")
+epicsEnvSet("ECMC_HOME_POS",              "0.0")
+epicsEnvSet("ECMC_HOME_VEL_TO",           "5")
+epicsEnvSet("ECMC_HOME_VEL_FRM",          "4")
+epicsEnvSet("ECMC_HOME_ACC",              "21")
+epicsEnvSet("ECMC_HOME_DEC",              "100")
+epicsEnvSet("ECMC_HOME_POS_MOVE_ENA",     "0")                        # Enable move to position after successfull homing 
+epicsEnvSet("ECMC_HOME_POS_MOVE_TARG_POS","0")                        # Target position to go to after successfull homing
 
 #Controller
 epicsEnvSet("ECMC_CNTRL_KP",              "5.0")
