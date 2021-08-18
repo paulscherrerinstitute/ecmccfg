@@ -95,7 +95,7 @@ record(bi,"${P}${AXIS_NAME}-EnaAct"){
   field(OSV,  "NO_ALARM")
   field(FLNK, "${P}${AXIS_NAME}-ExeCmd-RB.PROC")
 }
-#  // bit 2 execute  
+#  // bit 2 execute
 record(bi,"${P}${AXIS_NAME}-ExeCmd-RB"){
   field(DESC, "${AXIS_NAME}: Execute Cmd")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B2")
@@ -117,7 +117,7 @@ record(bi,"${P}${AXIS_NAME}-Busy"){
   field(FLNK, "${P}${AXIS_NAME}-AtTarget.PROC")
 }
 
-#  // bit 4 at target  
+#  // bit 4 at target
 record(bi,"${P}${AXIS_NAME}-AtTarget"){
   field(DESC, "${AXIS_NAME}: At target")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B4")
@@ -183,7 +183,7 @@ record(bi,"${P}${AXIS_NAME}-Homed"){
   field(FLNK, "${P}${AXIS_NAME}-InRT.PROC")
 }
 
-#  // bit 10 inRealtime  
+#  // bit 10 inRealtime
 record(bi,"${P}${AXIS_NAME}-InRT"){
   field(DESC, "${AXIS_NAME}: In realtime")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BA")
@@ -194,7 +194,7 @@ record(bi,"${P}${AXIS_NAME}-InRT"){
   field(FLNK, "${P}${AXIS_NAME}-TrjSrcTyp-RB.PROC")
 }
 
-#  // bit 11 traj source  
+#  // bit 11 traj source
 record(bi,"${P}${AXIS_NAME}-TrjSrcTyp-RB"){
   field(DESC, "${AXIS_NAME}: Traj Source")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BB")
@@ -205,7 +205,7 @@ record(bi,"${P}${AXIS_NAME}-TrjSrcTyp-RB"){
   field(FLNK, "${P}${AXIS_NAME}-EncSrcTyp-RB.PROC")
 }
 
-#  // bit 12 enc source  
+#  // bit 12 enc source
 record(bi,"${P}${AXIS_NAME}-EncSrcTyp-RB"){
   field(DESC, "${AXIS_NAME}: Enc Source")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BC")
@@ -216,7 +216,7 @@ record(bi,"${P}${AXIS_NAME}-EncSrcTyp-RB"){
   field(FLNK, "${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB.PROC")
 }
 
-#  // bit 13 Allow plc commands  
+#  // bit 13 Allow plc commands
 record(bi,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB"){
   field(DESC, "${AXIS_NAME}: Allow PLC cmds")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BD")
@@ -238,7 +238,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimFwdEna-RB"){
   field(FLNK, "${P}${AXIS_NAME}-SftLimBwdEna-RB.PROC")
 }
 
-#  // bit 15 softlimbwdena  
+#  // bit 15 softlimbwdena
 record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
   field(DESC, "${AXIS_NAME}: Softlim Bwd Enabled")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BF")
@@ -289,7 +289,7 @@ record(bi,"${P}${AXIS_NAME}-PLC-EnaCmd-RB"){
   field(ZNAM,"Disabled")
   field(ONAM,"Enabled")
   field(SCAN, "I/O Intr")
-  field(TSE,  "$(TSE=-2)") 
+  field(TSE,  "$(TSE=-2)")
 }
 
 record(bi,"${P}${AXIS_NAME}-PLC-FirstScan"){
@@ -300,7 +300,7 @@ record(bi,"${P}${AXIS_NAME}-PLC-FirstScan"){
   field(ZNAM,"Disabled")
   field(ONAM,"Enabled")
   field(SCAN, "I/O Intr")
-  field(TSE,  "$(TSE=-2)") 
+  field(TSE,  "$(TSE=-2)")
 }
 
 record(ai,"${P}${AXIS_NAME}-PLC-Err"){
@@ -309,7 +309,7 @@ record(ai,"${P}${AXIS_NAME}-PLC-Err"){
   field(PINI, "$(PINI=1)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.error?")
   field(SCAN, "I/O Intr")
-  field(TSE,  "$(TSE=-2)") 
+  field(TSE,  "$(TSE=-2)")
 }
 
 record(waveform,"${P}${AXIS_NAME}-PLC-Expr-RB"){
@@ -326,7 +326,7 @@ record(waveform,"${P}${AXIS_NAME}-PLC-Expr-RB"){
 record(mbboDirect,"${P}${AXIS_NAME}-Cmd_"){
   info(asyn:READBACK,"1")
   field(DESC, "${AXIS_NAME}: Control Word")
-  field(DTYP, "asynUInt32Digital")  
+  field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
   field(SCAN, "Passive")
   field(TSE,  "0")
@@ -339,7 +339,7 @@ record(bo,"${P}${AXIS_NAME}-EnaCmd"){
   field(ONAM, "Enable")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-ExeCmd"){
@@ -349,7 +349,7 @@ record(bo,"${P}${AXIS_NAME}-ExeCmd"){
   field(ONAM, "Execute")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-RstCmd"){
@@ -359,7 +359,7 @@ record(bo,"${P}${AXIS_NAME}-RstCmd"){
   field(ONAM, "Reset")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
@@ -369,7 +369,7 @@ record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
   field(ONAM, "PLC")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
@@ -379,17 +379,17 @@ record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
   field(ONAM, "PLC")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
-record(bo,"${P}${AXIS_NAME}-PLC-CmdEna"){    
+record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){    
   field(DESC, "${AXIS_NAME}: PLC enable cmd")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B5")
   field(ZNAM, "disable")
   field(ONAM, "enable")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
@@ -399,7 +399,7 @@ record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
   field(ONAM, "Allow")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
@@ -409,7 +409,7 @@ record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
   field(ONAM, "Allow")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
 
 record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
@@ -419,5 +419,5 @@ record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(ONAM, "Allow")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0") 
+  field(TSE,  "0")
 }
