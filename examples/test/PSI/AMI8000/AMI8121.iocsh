@@ -1,0 +1,27 @@
+#- #############################################################################
+#- mXsXXX naming
+require ecmccfg AMI, "ECMC_VER=dev,NAMING=mXsXXX,EC_RATE=500"
+
+#- #############################################################################
+#- add slaves
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd, "HW_DESC=AMI8121"
+
+epicsEnvSet("DRV_SLAVE", 0)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addAxisYaml.cmd, "FILE=cfg/AMI8121.yaml, ECMC_TMPDIR=/tmp/"
+
+#- #############################################################################
+#- apply hardware configuration
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyConfig.cmd
+
+#- #############################################################################
+#- diagnostics
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
+#- #############################################################################
