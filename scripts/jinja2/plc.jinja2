@@ -19,12 +19,10 @@ ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line }}"
 {%- endif %}
 
 #- Enable PLC
-ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable|int or 1|int}})"
+ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable|default(1)|int }})"
 
 #- default PLC-PVs
-ecmcFileExist("ecmcPlc.db",1,1)
-dbLoadRecords("ecmcPlc.db", "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char={{ '%02d' % plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
 
 #- cleanup
 epicsEnvUnset(PLC_ID)
-

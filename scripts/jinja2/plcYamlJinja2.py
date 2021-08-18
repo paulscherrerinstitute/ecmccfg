@@ -21,7 +21,7 @@ args = vars(ap.parse_args())
 
 # if no tmp dir was provided, use ${PWD}
 if args['tmpdir'] is None:
-  args['tmpdir'] = './'
+    args['tmpdir'] = './'
 
 # rest of the arguments
 plcConfig = args['data']
@@ -54,10 +54,14 @@ with open(plcConfig) as f:
 
 # if the config contains a 'file', load the file and replace all 'plc.code'
 if 'file' in data['plc'] and data['plc']['file'] is not None:
-  data['plc']['code'] = loadPlcFile(data['plc']['file'])
+    data['plc']['code'] = loadPlcFile(data['plc']['file'])
 
 # load the jinja2 template
 template = Template(open(jinja2Template).read())
+
+# if 'macros' are specified, run the template renderer twice
+if 'var' in data:
+    template = Template(template.render(data))
 
 # render the template and write to 'outfile' in 'tmpdir'
 with open(os.path.join(args['tmpdir'], args['outfile']), "w") as f:
