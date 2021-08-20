@@ -46,7 +46,6 @@ class JinjaTemplate:
         with open(filename, "w") as f:
             for line in self.product:
                 f.write(line)
-            f.close()
 
     def show(self):
         print(self.product)
