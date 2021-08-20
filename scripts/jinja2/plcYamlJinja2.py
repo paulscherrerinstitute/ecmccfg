@@ -1,8 +1,7 @@
-import ecmcPlcYaml
-import ecmcRenderJinja2
+from ecmcJinja2 import JinjaCli
+from ecmcPlc import EcmcPlc
 
 if __name__ == '__main__':
-    plc = ecmcPlcYaml.EcmcPlc()
-    plc.loadPlcConfig()
-    print(plc.debug())
-    ecmcRenderJinja2.renderTemplate(plc.template, plc.data, plc.outFile)
+    cli = JinjaCli()
+    plc = EcmcPlc(cli.cfgFile, cli.template)
+    plc.write(cli.outFile)
