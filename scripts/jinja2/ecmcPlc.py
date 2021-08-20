@@ -3,14 +3,12 @@ from ecmcYamlHandler import *
 from ecmcJinja2 import JinjaTemplate
 
 
-class EcmcPlc(YamlHandler):
-    def __init__(self, plcconfig, jinjatemplatedir, jinjatemplate):
-        super().__init__()
-        if jinjatemplate is None:
-            jinjatemplate = 'plc.jinja2'
-        self.jt = JinjaTemplate(jinjatemplatedir, jinjatemplate)
+class EcmcPlc(YamlHandler, JinjaTemplate):
+    def __init__(self, plcconfig, jinjatemplate):
         self.hasPlcFile = False
+        self.hasVariables = False
         self.loadYamlData(plcconfig)
+        self.read(jinjatemplate)
         self.sanityCheckPlc()
         self.process()
 
@@ -24,14 +22,18 @@ class EcmcPlc(YamlHandler):
         if self.hasPlcFile:
             self.loadPlcFile()
         if self.hasVariables:
-            self.jt.render(self.yamlData)
-            self.jt.setTemplate(self.jt.product)
-        self.jt.render(self.yamlData)
+            self.render(self.yamlData)
+            self.setTemplate(self.product)
+        self.render(self.yamlData)
 
     def checkForFile(self):
         # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
         if 'file' in self.yamlData['plc'] and self.yamlData['plc']['file'] is not None:
             self.hasPlcFile = True
+
+    def checkForVariables(self):
+        if 'var' in self.yamlData:
+            self.hasVariables = True
 
     def loadPlcFile(self):
         # replace all 'plc.code' with the content of {{ plc.file }}
@@ -54,5 +56,5 @@ class EcmcPlc(YamlHandler):
         return code
 
 if __name__ == '__main__':
-    plc = EcmcPlc('./test/testPlc.yaml', './plc.jinja2')
+    plc = EcmcPlc('./test/testPlc.yaml')
     print(yaml.dump(plc.yamlData))
