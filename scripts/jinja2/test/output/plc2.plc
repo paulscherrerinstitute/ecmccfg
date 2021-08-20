@@ -1,0 +1,24 @@
+#- PLC rate, if not explicitly declared, deduce rate from bus frequence (ECMC_EC_SAMPLE_RATE)
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "1000.0")
+
+#- Create a new PLC
+epicsEnvSet("PLC_ID", 2)
+ecmcConfigOrDie "Cfg.CreatePLC(2,${ECMC_PLC_SAMPLE_RATE_MS})"
+
+#- Add code
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=println('plc2 from file')|"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=println('plc2 from file # hash')|"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=println('plc2 from file # hash with inline comment')| # inline test"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=static.i:=static.i+1| # counter"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=println('i = # + - * / ', static.i)| # print"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=println('3.14')|"
+ecmcConfigOrDie "Cfg.AppendPLCExpr(2)=println('bar')|"
+
+#- Enable PLC
+ecmcConfigOrDie "Cfg.SetPLCEnable(2,1)"
+
+#- default PLC-PVs
+dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index=2,Name=${ECMC_PREFIX},Index2Char=02,T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+
+#- cleanup
+epicsEnvUnset(PLC_ID)

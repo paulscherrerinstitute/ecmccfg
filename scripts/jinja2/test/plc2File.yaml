@@ -1,0 +1,8 @@
+plc:
+  id: 2
+  enable: yes
+  rateMilliseconds: 1000
+  file: plc2.plc
+var:
+  pi: 3.14
+  foo: bar
