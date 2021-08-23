@@ -8,7 +8,7 @@ class JinjaCli:
         args = self.getArgs()
         self.tmpDir = Path(args.tmpdir)
         self.cfgFile = Path(args.data)
-        self.template = Path(args.template)
+        self.template = args.template
         self.templatedir = args.templatedir
         self.outFile = Path(self.tmpDir, args.outfile)
         Path(self.outFile).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
@@ -23,7 +23,7 @@ class JinjaCli:
                         help="Directory for temporary storage. Optional, defaults to ${PWD}")
         ap.add_argument("-T", "--templatedir", required=False, default='./',
                         help="Jinja2 template directory. Optional, defaults to ${PWD}")
-        ap.add_argument("-t", "--template", required=True,
+        ap.add_argument("-t", "--template", required=False, default=None,
                         help="Jinja2 template")
         ap.add_argument("-D", "--data", required=True,
                         help="File containing the data/configuration.")
@@ -33,11 +33,12 @@ class JinjaCli:
 
 
 class JinjaTemplate:
-    def __init__(self, templateFile, templateDir):
+    def __init__(self, templateDir, templateFile=None):
         self.template = None
         self.product = None
         self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(templateDir)))
-        self.read(templateFile)
+        if templateFile is not None:
+            self.read(templateFile)
 
     def read(self, filename):
         self.template = self.env.get_template(str(filename))
