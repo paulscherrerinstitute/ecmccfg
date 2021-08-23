@@ -4,8 +4,10 @@ from ecmcJinja2 import JinjaTemplate
 
 
 class EcmcPlc(YamlHandler):
-    def __init__(self, plcconfig, jinjatemplate, jinjatemplatedir):
-        self.jt = JinjaTemplate(jinjatemplate, jinjatemplatedir)
+    def __init__(self, plcconfig, jinjatemplatedir, jinjatemplate):
+        if jinjatemplate is None:
+            jinjatemplate = 'plc.jinja2'
+        self.jt = JinjaTemplate(jinjatemplatedir, jinjatemplate)
         self.hasPlcFile = False
         self.loadYamlData(plcconfig)
         self.sanityCheckPlc()
