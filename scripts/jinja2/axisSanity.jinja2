@@ -115,4 +115,7 @@
 
 {%- endblock -%}
 
+{#
 {%- extends "axisConfig.jinja2" if Error.state is false else "errorMessage.jinja2" -%}
+#}
+{%- extends "axisCommon.jinja2" if Error.state is false else "errorMessage.jinja2" -%}
