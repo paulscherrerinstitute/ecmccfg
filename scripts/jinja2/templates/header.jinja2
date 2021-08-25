@@ -1,0 +1,11 @@
+#- General
+ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},1,{{ drive.type |default(0)|int }})"
+#- health --> see Output
+
+#- Trajectory
+ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id|int }},{{ trajectory.axis.emergencyDeceleration or trajectory.axis.acceleration |float }})"
+ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime({{ axis.id|int }},{{ trajectory.axis.velocity|float }},{{ trajectory.axis.acceleration|float }})"
+
+{%- set modulo = None if trajectory.modulo is not defined else trajectory.modulo %}
+ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id|int }}, {{ modulo.range|default(0)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id|int }}, {{ modulo.type|default(0)|float}})"
