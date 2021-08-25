@@ -5,6 +5,7 @@ from ecmcJinja2 import JinjaTemplate
 
 class EcmcPlc(YamlHandler):
     def __init__(self, plcconfig, jinjatemplatedir, jinjatemplate):
+        super().__init__()
         if jinjatemplate is None:
             jinjatemplate = 'plc.jinja2'
         self.jt = JinjaTemplate(jinjatemplatedir, jinjatemplate)
