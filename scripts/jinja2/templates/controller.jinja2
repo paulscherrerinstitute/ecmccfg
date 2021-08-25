@@ -1,0 +1,5 @@
+#- Controller
+ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id|int }},{{ controller.Kp|float }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id|int }},{{ controller.Ki|default(0)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id|int }},{{ controller.Kd|default(0)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id|int }},{{ controller.Kff|default(1)|float }})"
