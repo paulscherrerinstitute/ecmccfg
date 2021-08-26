@@ -27,7 +27,7 @@ class JinjaCli:
                         help="Jinja2 template")
         ap.add_argument("-D", "--data", required=True,
                         help="File containing the data/configuration.")
-        ap.add_argument("-o", "--outfile", required=False, default='ecmc.plc',
+        ap.add_argument("-o", "--outfile", required=False, default='ecmcScriptFromYaml.txt',
                         help="File to use for output. Optional, defaults to stdout")
         return ap.parse_args()
 

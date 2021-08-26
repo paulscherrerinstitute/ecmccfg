@@ -15,6 +15,7 @@ class YamlHandler:
         'end_effector': 2,
         'endeffector': 2,
         'virtual': 2,
+        'debug': 0,
     }
 
     def __init__(self):
@@ -38,7 +39,7 @@ class YamlHandler:
             if optional:
                 return False
             else:
-                raise ValueError('yaml file does not contain >> {} <<'.format(key))
+                raise KeyError('yaml file does not contain >> {} <<'.format(key))
 
     def checkForVariables(self):
         if self.checkForKey('var', optional=True):
@@ -55,5 +56,5 @@ class YamlHandler:
             self.yamlData['axis']['EcmcType'] = type_
             self.axisType = self.supportedAxisTypes[str(type_)]
         else:
-            raise TypeError('unknown axis type "{}".\nSupported type are:\n{}'.format(
+            raise NotImplementedError('Axis type >> {} << not implemented.\nSupported type are:\n{}'.format(
                 type_, yaml.dump(self.supportedAxisTypes)))

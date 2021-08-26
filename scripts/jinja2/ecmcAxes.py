@@ -7,6 +7,7 @@ class EcmcAxis(YamlHandler):
         super().__init__()
         self.jinjatemplatedir = jinjatemplatedir
         self.loadYamlData(axisconfig)
+        self.checkForVariables()
         self.setEcmcAxisType()
         self.config = None
 
@@ -24,12 +25,15 @@ class EcmcCommonAxis(JinjaTemplate):
         self.axisType = self.configuration['axis']['EcmcType']
         self.setAxisTemplate()
 
-    def setAxisTemplate(self):
-        axisTemplate = {
+    def setAxisTemplate(self, type_=None, template=None):
+        if type_ is None:
+            type_ = self.axisType
+        axisTemplates = {
+            0: 'debug.jinja2',
             1: 'joint.jinja2',
             2: 'endEffector.jinja2',
         }
-        self.read(axisTemplate[self.axisType])
+        self.read(axisTemplates[type_])
 
 
 class EcmcEndEffector(EcmcCommonAxis):
@@ -51,6 +55,11 @@ if __name__ == '__main__':
     # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
     axis = EcmcAxis('./test/testJoint.yaml', './templates/')
     axis.create()
+    axis.config.setAxisTemplate(0)
+    # if the config has a 'var' key, run renderer twice
+    if axis.hasVariables:
+        axis.config.setTemplate(axis.config.render(axis.yamlData))
+        axis.config.show()
     axis.config.render(axis.yamlData)
     axis.config.show()
 
