@@ -1,0 +1,8 @@
+# this is a comment
+println('plc2 from file');
+println('plc2 from file # hash');
+println('plc2 from file # hash with inline comment'); # inline test
+static.i:=static.i+1; # counter
+println('i = # + - * / ', static.i); # print
+println('{{ var.pi }}');
+println('{{ var.foo }}');
