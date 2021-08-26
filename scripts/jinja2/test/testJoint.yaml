@@ -7,9 +7,16 @@ axis:
 var:
   drvSlave: 3
   encSlave: 17
+  foo: '{{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}'
+  bar: 3.14
+  baz:
+    - 1
+    - 2
+    - 3
+    -
 
 motorRecord:
-  name: M1
+  name: 'M1: drv {{ var.drvSlave }}, enc {{ var.encSlave }}'
   precision: 3
   description: AMI8121 CSV
   unit: deg

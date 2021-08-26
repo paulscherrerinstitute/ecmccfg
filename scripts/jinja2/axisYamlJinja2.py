@@ -3,8 +3,14 @@ from ecmcAxes import EcmcAxis
 
 if __name__ == '__main__':
     cli = JinjaCli()
-    print(cli.template)
+
     axis = EcmcAxis(cli.cfgFile, cli.templatedir)
-    axis.jt.render(axis.yamlData)
-    print(axis.jt.product)
-    axis.jt.write(cli.outFile)
+    axis.create()
+    # if the config has a 'var' key, run renderer twice
+    if axis.hasVariables:
+        axis.config.setTemplate(axis.config.render(axis.yamlData))
+        axis.config.show()
+    axis.config.render(axis.yamlData)
+    axis.config.show()
+    axis.config.write(cli.outFile)
+
