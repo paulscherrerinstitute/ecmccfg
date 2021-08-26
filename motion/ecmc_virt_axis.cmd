@@ -84,6 +84,8 @@ ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd(${ECMC_AXIS_NO},${ECMC_DXLM_ENABL
 ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(${ECMC_AXIS_NO},${ECMC_HOME_SWITCH_POL=0})"
 ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset(${ECMC_AXIS_NO},${ECMC_HOME_LATCH_COUNT_OFFSET=0.0})"
 ecmcConfigOrDie "Main.M${ECMC_AXIS_NO}.fHomePosition=${ECMC_HOME_POS=0.0}"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_ENA=0})"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_TARG_POS=0})"
 
 ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, "${ECMC_AXIS_NO}", "6", "${ECMC_AXISCONFIG}")
 

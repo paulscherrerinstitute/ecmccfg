@@ -1,0 +1,10 @@
+println('=========================================');
+static.time:=ec_get_time_l32()/1000;
+static.el3702_1:=ec0.s${S1}.nextSyncTime/1000;
+static.el3702_2:=ec0.s${S2}.nextSyncTime/1000;
+println('Current time       : ', static.time/1000);
+println('EL3702 1 time      : ', static.el3702_1);
+println('EL3702 2 time      : ', static.el3702_2);
+println('Diff EL3702 1      : ', static.el3702_1-static.time);
+println('Diff EL3702 2      : ', static.el3702_2-static.time);
+println('Diff EL3702 1 vs 2 : ', static.el3702_2-static.el3702_1);
