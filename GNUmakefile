@@ -27,6 +27,7 @@ SCRIPTS += $(foreach d,${DIRS}, $(wildcard $d/*/*.cmd))
 
 SCRIPTS+=$(wildcard ./scripts/*)
 SCRIPTS+=$(wildcard ./scripts/jinja2/*)
+SCRIPTS+=$(wildcard ./scripts/jinja2/templates/*.jinja2)
 SCRIPTS+=$(wildcard ./naming/*)
 SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
