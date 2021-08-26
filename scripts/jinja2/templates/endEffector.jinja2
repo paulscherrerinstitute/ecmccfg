@@ -1,4 +1,14 @@
 ### ENDEFFECTOR ###
-{% include 'header.jinja2' %}
-{% include 'encoder.jinja2' %}
-{% include 'footer.jinja2' %}
+{# define namespace Error -#}
+{%- set Error = namespace(state=false) -%}
+
+{%- extends "endEffectorSanity.jinja2" -%}
+
+{%- block sanity -%}
+{{super()}}
+{%- endblock -%}
+
+{% block body %}
+{{super()}}
+
+{% endblock %}

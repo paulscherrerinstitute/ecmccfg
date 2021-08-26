@@ -52,14 +52,13 @@ class EcmcJoint(EcmcCommonAxis):
 
 
 if __name__ == '__main__':
-    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
-    axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
+    # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
     axis.create()
-    axis.config.setAxisTemplate(0)
+    # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
     # if the config has a 'var' key, run renderer twice
     if axis.hasVariables:
         axis.config.setTemplate(axis.config.render(axis.yamlData))
-        axis.config.show()
     axis.config.render(axis.yamlData)
     axis.config.show()
 

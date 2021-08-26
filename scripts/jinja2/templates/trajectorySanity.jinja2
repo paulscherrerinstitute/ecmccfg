@@ -1,0 +1,13 @@
+{#- check for trajectory key -#}
+{%- if trajectory is not defined %}
+  {{ onError('trajectory is mandatory') }}
+{#- check for axis key in trajectory -#}
+{%- elif not trajectory.axis is defined %}
+  {{ onError('trajectory.axis is mandatory') }}
+{#- check for axis.acceleration key in trajectory -#}
+{%- elif not trajectory.axis.acceleration is defined %}
+  {{ onError('trajectory.axis.acceleration is mandatory') }}
+{#- check for axis.velocity key in trajectory -#}
+{%- elif not trajectory.axis.velocity is defined %}
+  {{ onError('trajectory.axis.velocity is mandatory') }}
+{%- endif %}
