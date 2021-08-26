@@ -2,27 +2,25 @@ from ecmcYamlHandler import *
 from ecmcJinja2 import JinjaTemplate
 
 
-class EcmcBaseAxis(YamlHandler):
+class EcmcAxis(YamlHandler):
     def __init__(self, axisconfig, jinjatemplatedir):
         super().__init__()
         self.jinjatemplatedir = jinjatemplatedir
         self.loadYamlData(axisconfig)
         self.setEcmcAxisType()
-        self.axis = None
+        self.config = None
 
-    def setAxis(self):
+    def create(self):
         if self.axisType == 1:
-            self.axis = EcmcJoint(self.yamlData, self.jinjatemplatedir)
+            self.config = EcmcJoint(self.yamlData, self.jinjatemplatedir)
         else:
-            self.axis = EcmcEndEffector(self.yamlData, self.jinjatemplatedir)
+            self.config = EcmcEndEffector(self.yamlData, self.jinjatemplatedir)
 
 
-class EcmcCommonAxis(YamlHandler):
-    def __init__(self, jinjatemplatedir_, configuration_):
-        super().__init__()
-        print("Setup")
-        self.jt = JinjaTemplate(jinjatemplatedir_)
-        self.configuration = configuration_
+class EcmcCommonAxis(JinjaTemplate):
+    def __init__(self, _jinjatemplatedir, _configuration):
+        super(EcmcCommonAxis, self).__init__(directory=_jinjatemplatedir, templateFile=None)
+        self.configuration = _configuration
         self.axisType = self.configuration['axis']['EcmcType']
         self.setAxisTemplate()
 
@@ -31,33 +29,28 @@ class EcmcCommonAxis(YamlHandler):
             1: 'joint.jinja2',
             2: 'endEffector.jinja2',
         }
-        self.jt.read(axisTemplate[self.axisType])
-
-    def render(self):
-        self.jt.render(self.configuration)
+        self.read(axisTemplate[self.axisType])
 
 
 class EcmcEndEffector(EcmcCommonAxis):
-    def __init__(self, configuration, jinjatemplatedir):
-        super(EcmcEndEffector, self).__init__(jinjatemplatedir_=jinjatemplatedir, configuration_=configuration)
+    def __init__(self, _configuration, _jinjatemplatedir):
+        super(EcmcEndEffector, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
         self.pruneConfiguration()
-        self.render()
-        print('VIRTUAL AXIS')
-        print(self.jt.product)
 
     def pruneConfiguration(self):
-        self.configuration['drive']=None
-        self.configuration['controller']=None
+        self.configuration['drive'] = None
+        self.configuration['controller'] = None
 
 
 class EcmcJoint(EcmcCommonAxis):
-    def __init__(self, configuration, jinjatemplatedir):
-        super(EcmcJoint, self).__init__(jinjatemplatedir_=jinjatemplatedir, configuration_=configuration)
-        self.render()
-        print('PHYSICAL AXIS')
-        print(self.jt.product)
+    def __init__(self, _configuration, _jinjatemplatedir):
+        super(EcmcJoint, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
 
 
 if __name__ == '__main__':
-    axis = EcmcBaseAxis('./test/testEndEffector.yaml', './templates/')
-    axis.setAxis()
+    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
+    axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    axis.create()
+    axis.config.render(axis.yamlData)
+    axis.config.show()
+

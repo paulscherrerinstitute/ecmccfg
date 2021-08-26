@@ -33,21 +33,23 @@ class JinjaCli:
 
 
 class JinjaTemplate:
-    def __init__(self, templateDir, templateFile=None):
+    def __init__(self, directory, templateFile=None):
         self.template = None
         self.product = None
-        self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(templateDir)))
+        self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(directory)))
         if templateFile is not None:
             self.read(templateFile)
 
     def read(self, filename):
         self.template = self.env.get_template(str(filename))
+        return self.template
 
     def setTemplate(self, template):
         self.template = jinja2.Template(template)
 
     def render(self, data):
         self.product = self.template.render(data)
+        return self.product
 
     def write(self, filename):
         with open(filename, "w") as f:
