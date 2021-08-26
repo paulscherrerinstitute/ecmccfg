@@ -3,10 +3,10 @@ include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = ILK_slaves
+LIBVERSION = master
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS = 3 7.0.3 7.0.4.1
+EXCLUDE_VERSIONS = 3 7.0.3 7.0.4.1 7.0.6
 ARCH_FILTER=RHEL%
 
 SCRIPTS+=startup.cmd
