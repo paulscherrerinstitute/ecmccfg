@@ -44,14 +44,16 @@ class YamlHandler:
         if self.checkForKey('var', optional=True):
             self.hasVariables = True
 
-    def setEcmcAxisType(self):
-        self.checkForKey('axis')
-        self.checkForKey('type', self.yamlData['axis'])
-        axisType = str(self.yamlData['axis']['type']).lower()
-        if axisType in self.supportedAxisTypes:
-            type_ = self.supportedAxisTypes[axisType]
+    def setEcmcAxisType(self, type_=None):
+        if type_ is None:
+            self.checkForKey('axis')
+            self.checkForKey('type', self.yamlData['axis'])
+            type_ = str(self.yamlData['axis']['type']).lower()
+
+        if type_ in self.supportedAxisTypes:
+            type_ = self.supportedAxisTypes[type_]
             self.yamlData['axis']['EcmcType'] = type_
-            self.axisType = self.supportedAxisTypes[axisType]
+            self.axisType = self.supportedAxisTypes[str(type_)]
         else:
             raise TypeError('unknown axis type "{}".\nSupported type are:\n{}'.format(
-                axisType, yaml.dump(self.supportedAxisTypes)))
+                type_, yaml.dump(self.supportedAxisTypes)))

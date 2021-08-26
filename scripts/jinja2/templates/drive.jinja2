@@ -37,6 +37,6 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id|int }}.m
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id|int }}.mon.extinterlock")"
 
 #- Output
-{%- set output = None if output is not defined else output -%}
+{%- set output = None if output is not defined else output %}
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id|int }}.drv.brake")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.health|default('') }}","ax{{ axis.id|int }}.health")"
