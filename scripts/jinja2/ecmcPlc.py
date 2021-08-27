@@ -4,27 +4,23 @@ from ecmcJinja2 import JinjaTemplate
 
 
 class EcmcPlc(YamlHandler):
-    def __init__(self, plcconfig, jinjatemplatedir, jinjatemplate):
+    def __init__(self, plcconfig, jinjatemplatedir):
         super().__init__()
-        if jinjatemplate is None:
-            jinjatemplate = 'plc.jinja2'
-        self.jt = JinjaTemplate(jinjatemplatedir, jinjatemplate)
+        self.jinjatemplatedir = jinjatemplatedir
         self.loadYamlData(plcconfig)
-        self.sanityCheckPlc()
-        self.process()
+        self.checkForVariables()
+        self.config = None
+
+    def create(self):
+        if self.checkForKey('axis', optional=True):
+            self.config = EcmcAxisPlc(self.yamlData, self.jinjatemplatedir)
+        else:
+            self.config = EcmcStandAlonePlc(self.yamlData, self.jinjatemplatedir)
 
     def sanityCheckPlc(self):
         self.checkForKey('plc')
         self.checkForPlcFile()
         self.checkForVariables()
-
-    def process(self):
-        if self.hasPlcFile:
-            self.loadPlcFile()
-        if self.hasVariables:
-            self.jt.render(self.yamlData)
-            self.jt.setTemplate(self.jt.product)
-        self.jt.render(self.yamlData)
 
     def loadPlcFile(self):
         # replace all 'plc.code' with the content of {{ plc.file }}
@@ -44,6 +40,42 @@ class EcmcPlc(YamlHandler):
                 code.append(line)  # append whatever is left
         return code
 
+
+class EcmcCommonPlc(JinjaTemplate):
+    def __init__(self, _jinjatemplatedir, _configuration):
+        super(EcmcCommonPlc, self).__init__(directory=_jinjatemplatedir, templateFile=None)
+        self.configuration = _configuration
+        self.setPlcTemplate()
+
+    def setPlcTemplate(self, type_= 1, template = None):
+        if 'axis' in self.configuration:
+            type_ = 2
+        plcTemplates = {
+            0: 'debug.jinja2',
+            1: 'plc.jinja2',
+            2: 'axisSynchronization.jinja2',
+        }
+        self.read(plcTemplates[type_])
+
+class EcmcAxisPlc(EcmcCommonPlc):
+    def __init__(self, _configuration, _jinjatemplatedir):
+        super(EcmcAxisPlc, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
+        print("#- AXIS PLC")
+
+
+class EcmcStandAlonePlc(EcmcCommonPlc):
+    def __init__(self, _configuration, _jinjatemplatedir):
+        super(EcmcStandAlonePlc, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
+        print("#- STANDALONE PLC")
+
 if __name__ == '__main__':
-    plc = EcmcPlc('./test/testPlc.yaml', './plc.jinja2')
-    print(yaml.dump(plc.yamlData))
+    plc = EcmcPlc('./test/testPlc.yaml', './templates/')
+    plc.create()
+    plc.sanityCheckPlc()
+    if plc.hasPlcFile:
+        print("loading plc file")
+        plc.loadPlcFile()
+    if plc.hasVariables:
+        plc.config.setTemplate(plc.config.render(plc.yamlData))
+    plc.config.render(plc.yamlData)
+    plc.config.show()
