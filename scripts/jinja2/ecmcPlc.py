@@ -9,14 +9,13 @@ class EcmcPlc(YamlHandler):
         if jinjatemplate is None:
             jinjatemplate = 'plc.jinja2'
         self.jt = JinjaTemplate(jinjatemplatedir, jinjatemplate)
-        self.hasPlcFile = False
         self.loadYamlData(plcconfig)
         self.sanityCheckPlc()
         self.process()
 
     def sanityCheckPlc(self):
         self.checkForKey('plc')
-        self.checkForFile()
+        self.checkForPlcFile()
         self.checkForVariables()
 
     def process(self):
@@ -26,10 +25,6 @@ class EcmcPlc(YamlHandler):
             self.jt.render(self.yamlData)
             self.jt.setTemplate(self.jt.product)
         self.jt.render(self.yamlData)
-
-    def checkForFile(self):
-        # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
-        self.hasPlcFile = self.checkForKey('file', self.yamlData['plc']) and self.yamlData['plc']['file'] is not None
 
     def loadPlcFile(self):
         # replace all 'plc.code' with the content of {{ plc.file }}

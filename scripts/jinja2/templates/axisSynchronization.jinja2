@@ -1,19 +1,19 @@
 #- Commands
 
-ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|int or 0 }})"
-ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|int or 0 }})"
+ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|default(0)|int }})"
 
 #- PLC
 {%- if plc.code %}
 {%- for line in plc.code %}
-ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line }}"
+ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line|replace(';', '|') }}"
 {%- endfor %}
 {% endif %}
 
 #- Encoder
-ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ encoder.filter.size|int or 0 }})"
-ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ encoder.filter.enable|int or 0 }})"
-ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|int or 0 }})"
+ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ encoder.filter.size|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ encoder.filter.enable|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|default(0)|int }})"
 
 #- Trajectory
 ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ trajectory.filter.size|int }})"
