@@ -15,8 +15,7 @@ class EcmcPlc(YamlHandler):
         self.process()
 
     def sanityCheckPlc(self):
-        if 'plc' not in self.yamlData:
-            raise
+        self.checkForKey('plc')
         self.checkForFile()
         self.checkForVariables()
 
@@ -30,8 +29,7 @@ class EcmcPlc(YamlHandler):
 
     def checkForFile(self):
         # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
-        if 'file' in self.yamlData['plc'] and self.yamlData['plc']['file'] is not None:
-            self.hasPlcFile = True
+        self.hasPlcFile = self.checkForKey('file', self.yamlData['plc']) and self.yamlData['plc']['file'] is not None
 
     def loadPlcFile(self):
         # replace all 'plc.code' with the content of {{ plc.file }}
@@ -48,8 +46,6 @@ class EcmcPlc(YamlHandler):
                 x = re.findall("^#.*", line)  # remove commented lines
                 if x:
                     continue
-                line = line.replace(";",
-                                    "|")  # statements are terminated with a pipe, but plc-files use a semi colon ';'
                 code.append(line)  # append whatever is left
         return code
 
