@@ -21,6 +21,7 @@ class YamlHandler:
     def __init__(self):
         self.yamlData = None
         self.hasVariables = False
+        self.hasPlcFile = False
         self.axisType = None
 
     def loadYamlData(self, file):
@@ -42,8 +43,11 @@ class YamlHandler:
                 raise KeyError('yaml file does not contain >> {} <<'.format(key))
 
     def checkForVariables(self):
-        if self.checkForKey('var', optional=True):
-            self.hasVariables = True
+        self.hasVariables = self.checkForKey('var', optional=True)
+
+    def checkForPlcFile(self):
+        # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
+        self.hasPlcFile = self.checkForKey('file', self.yamlData['plc']) and self.yamlData['plc']['file'] is not None
 
     def setEcmcAxisType(self, type_=None):
         if type_ is None:
