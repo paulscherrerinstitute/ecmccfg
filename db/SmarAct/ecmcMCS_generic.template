@@ -1,0 +1,22 @@
+record(mbbo,  "${ECMC_P}Drv-ModeSet"){
+  field(DESC, "mode selector")
+  field(ZRST, "None")
+  field(ZRVL, 0)
+  field(ONST, "Profile Position")
+  field(ONVL, 1)
+  field(TWST, "Cal")
+  field(TWVL, 65535)
+  field(SXST, "Homing")
+  field(SXVL, 6)
+  field(EIST, "CSP")
+  field(EIVL, 8)
+  field(OMSL, "supervisory")
+  field(OUT,  "${ECMC_P}Drv-ModeApply PP")
+}
+
+record(dfanout,  "${ECMC_P}Drv-ModeApply") {
+  field(DESC,  "description")
+  field(OUTA,  "${ECMC_P}Drv01-ModeSet PP")
+  field(OUTB,  "${ECMC_P}Drv02-ModeSet PP")
+  field(OUTC,  "${ECMC_P}Drv03-ModeSet PP")
+}
