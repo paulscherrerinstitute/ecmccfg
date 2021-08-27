@@ -2,7 +2,14 @@
 
 A configuration framework for ECMC Motion Control Module for EPICS.
 
-## License
+## Documentation
+The documentation can be found [here](https://paulscherrerinstitute.github.io/ecmccfg/)
+
+### [Manual](https://paulscherrerinstitute.github.io/ecmccfg/manual/)
+
+### [Sources](https://paulscherrerinstitute.github.io/ecmccfg/source/)
+
+## [License](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/LICENSE)
 
 This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,6 +24,3 @@ This program is distributed in the hope that it will be useful,
 You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-
-## Documentation
-The documentation can be found [here](https://paulscherrerinstitute.github.io/ecmccfg/)
