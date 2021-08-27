@@ -14,7 +14,7 @@ ecmcConfigOrDie "Cfg.CreatePLC({{ plc.id }},${ECMC_PLC_SAMPLE_RATE_MS})"
 #- Add code
 {%- if plc.code %}
 {%- for line in plc.code %}
-ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line }}"
+ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
 {%- endfor %}
 {%- endif %}
 
