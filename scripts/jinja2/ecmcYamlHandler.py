@@ -49,16 +49,19 @@ class YamlHandler:
         # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
         self.hasPlcFile = self.checkForKey('file', self.yamlData['plc']) and self.yamlData['plc']['file'] is not None
 
-    def setEcmcAxisType(self, type_=None):
-        if type_ is None:
-            self.checkForKey('axis')
-            self.checkForKey('type', self.yamlData['axis'])
-            type_ = str(self.yamlData['axis']['type']).lower()
+    def getAxisType(self):
+        self.checkForKey('axis')
+        self.checkForKey('type', self.yamlData['axis'])
+        type_ = str(self.yamlData['axis']['type']).lower()
 
         if type_ in self.supportedAxisTypes:
-            type_ = self.supportedAxisTypes[type_]
-            self.yamlData['axis']['EcmcType'] = type_
-            self.axisType = self.supportedAxisTypes[str(type_)]
+            return self.supportedAxisTypes[type_]
         else:
             raise NotImplementedError('Axis type >> {} << not implemented.\nSupported type are:\n{}'.format(
                 type_, yaml.dump(self.supportedAxisTypes)))
+
+    def setEcmcAxisType(self, type_=None):
+        if type_ is None:
+            type_ = self.getAxisType()
+        # self.yamlData['axis']['EcmcType'] = type_
+        self.axisType = self.supportedAxisTypes[str(type_)]
