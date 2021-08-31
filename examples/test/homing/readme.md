@@ -36,6 +36,7 @@ ECMC_SEQ_HOME_HIGH_LIM_INDEX           = 12,
 ECMC_SEQ_HOME_SET_POS                  = 15,
 ECMC_SEQ_HOME_LOW_LIM_SINGLE_TURN_ABS  = 21,
 ECMC_SEQ_HOME_HIGH_LIM_SINGLE_TURN_ABS = 22,
+ECMC_SEQ_HOME_SET_POS_2                = 25,
 ```
 
 ### ECMC_SEQ_HOME_NOT_VALID                = 0
@@ -130,8 +131,10 @@ epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                               # 
 ```
 
 ### ECMC_SEQ_HOME_SET_POS                  = 15, (setPosition)
-Sequence 15 is resereved for save/restore functionality. 
-However the sequence can be triggered like the following:
+Sequence 15 is resereved for save/restore functionality.  
+Use ECMC_SEQ_HOME_SET_POS_2 instead (same but not blocked by motor record).
+
+However the sequence 15 can be triggered like the following:
 ```
 # Turn off amplifier
 caput IOC_TEST:Axis1.CNEN 0
@@ -172,6 +175,9 @@ epicsEnvSet("ECMC_ENC_BITS"               "25")                       # Total bi
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "12")                       # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                       # Number of over/under-flow for home (home seq 11,12,21,22)
 ```
+
+### ECMC_SEQ_HOME_SET_POS_2                  = 25, (setPosition)
+Sequence 25 is the same as 15 but not blocked by motor record. The sequence will just set a new position of the encoder without any movement.
 
 ## Setting polarity of home sensor
 For some of the sequenceses it could be usefull to change the polarity of the home sensor. That can be done with the follwoing command:
