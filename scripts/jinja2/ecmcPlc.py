@@ -69,7 +69,8 @@ class EcmcStandAlonePlc(EcmcCommonPlc):
         print("#- STANDALONE PLC")
 
 if __name__ == '__main__':
-    plc = EcmcPlc('./test/testPlc.yaml', './templates/')
+    # plc = EcmcPlc('./test/testPlc.yaml', './templates/')
+    plc = EcmcPlc('./test/testJointWithPlc.yaml', './templates/')
     plc.create()
     plc.sanityCheckPlc()
     if plc.hasPlcFile:

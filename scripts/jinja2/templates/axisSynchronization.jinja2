@@ -11,11 +11,13 @@ ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line|replace(';', '|') 
 {% endif %}
 
 #- Encoder
-ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ encoder.filter.size|default(0)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ encoder.filter.enable|default(0)|int }})"
+{%- set filter = None if encoder.filter is not defined else encoder.filter %}
+ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ filter.size|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|default(0)|int }})"
 
 #- Trajectory
-ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ trajectory.filter.size|int }})"
-ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ trajectory.filter.enable|int }})"
-ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source|int }})"
+{%- set filter = None if trajectory.filter is not defined else trajectory.filter %}
+ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ filter.size|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source|default(0)|int }})"

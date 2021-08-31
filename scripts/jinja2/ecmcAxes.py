@@ -1,28 +1,29 @@
 from ecmcYamlHandler import *
 from ecmcJinja2 import JinjaTemplate
+from ecmcPlc import EcmcPlc
 
 
 class EcmcAxis(YamlHandler):
     def __init__(self, axisconfig, jinjatemplatedir):
         super().__init__()
+        self.axisconfig = axisconfig
         self.jinjatemplatedir = jinjatemplatedir
         self.loadYamlData(axisconfig)
-        self.checkForVariables()
-        self.setEcmcAxisType()
         self.config = None
 
     def create(self):
-        if self.axisType == 1:
-            self.config = EcmcJoint(self.yamlData, self.jinjatemplatedir)
+        if self.getAxisType() == 1:
+            self.config = EcmcJoint(self.axisconfig, self.jinjatemplatedir)
         else:
-            self.config = EcmcEndEffector(self.yamlData, self.jinjatemplatedir)
+            self.config = EcmcEndEffector(self.axisconfig, self.jinjatemplatedir)
 
 
-class EcmcCommonAxis(JinjaTemplate):
+class EcmcCommonAxis(JinjaTemplate, YamlHandler):
     def __init__(self, _jinjatemplatedir, _configuration):
         super(EcmcCommonAxis, self).__init__(directory=_jinjatemplatedir, templateFile=None)
-        self.configuration = _configuration
-        self.axisType = self.configuration['axis']['EcmcType']
+        self.loadYamlData(_configuration)
+        self.axisType = self.getAxisType()
+        self.checkForVariables()
         self.setAxisTemplate()
 
     def setAxisTemplate(self, type_=None, template=None):
@@ -42,8 +43,8 @@ class EcmcEndEffector(EcmcCommonAxis):
         self.pruneConfiguration()
 
     def pruneConfiguration(self):
-        self.configuration['drive'] = None
-        self.configuration['controller'] = None
+        self.yamlData['drive'] = None
+        self.yamlData['controller'] = None
 
 
 class EcmcJoint(EcmcCommonAxis):
@@ -52,12 +53,13 @@ class EcmcJoint(EcmcCommonAxis):
 
 
 if __name__ == '__main__':
-    axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
+    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
     # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    axis = EcmcAxis('./test/testJointWithPlc.yaml', './templates/')
     axis.create()
     # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
     # if the config has a 'var' key, run renderer twice
-    if axis.hasVariables:
+    if axis.config.hasVariables:
         axis.config.setTemplate(axis.config.render(axis.yamlData))
     axis.config.render(axis.yamlData)
     axis.config.show()
