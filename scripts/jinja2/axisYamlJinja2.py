@@ -6,8 +6,8 @@ if __name__ == '__main__':
 
     axis = EcmcAxis(cli.cfgFile, cli.templatedir)
     axis.create()
-    # if the config has a 'var' key, run renderer twice
-    if axis.hasVariables:
+    '''if the config has a 'var' key, run renderer twice'''
+    if axis.config.hasVariables:
         axis.config.setTemplate(axis.config.render(axis.yamlData))
     axis.config.render(axis.yamlData)
     axis.config.write(cli.outFile)
