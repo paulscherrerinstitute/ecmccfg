@@ -1,6 +1,6 @@
 from ecmcYamlHandler import *
 from ecmcJinja2 import JinjaTemplate
-from ecmcPlc import EcmcPlc
+from ecmcPlc import EcmcPlc, EcmcAxisPlc
 
 
 class EcmcAxis(YamlHandler):
@@ -25,6 +25,12 @@ class EcmcCommonAxis(JinjaTemplate, YamlHandler):
         self.axisType = self.getAxisType()
         self.checkForVariables()
         self.setAxisTemplate()
+        self.hasSyncPLC = False
+
+        if self.checkForKey('sync', optional=True) and self.yamlData['sync']['enable']:
+            self.hasSyncPLC = True
+            self.axisPlc = EcmcPlc(_configuration, _jinjatemplatedir)
+            self.axisPlc.create()
 
     def setAxisTemplate(self, type_=None, template=None):
         if type_ is None:
@@ -53,15 +59,23 @@ class EcmcJoint(EcmcCommonAxis):
 
 
 if __name__ == '__main__':
-    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
-    axis = EcmcAxis('./test/testJoint.yaml', './templates/')
-    # axis = EcmcAxis('./test/testJointWithPlc.yaml', './templates/')
+    axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
+    # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
     axis.create()
     # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
     ''' if the config has a 'var' key, run renderer twice'''
     if axis.config.hasVariables:
         axis.config.setTemplate(axis.config.render(axis.yamlData))
     axis.config.render(axis.yamlData)
-    axis.config.show()
+    if axis.config.hasSyncPLC:
+        plc = axis.config.axisPlc
+        plc.checkForPlcFile()
+        plc.checkForVariables()
+        if plc.hasPlcFile:
+            plc.loadPlcFile()
+        if plc.hasVariables:
+            plc.config.setTemplate(plc.config.render(plc.yamlData))
+        plc.config.render(plc.yamlData)
+        axis.config.product += plc.config.product
+    # axis.config.show()
     axis.config.write('test.txt')
-
