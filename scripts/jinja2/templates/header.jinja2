@@ -1,5 +1,7 @@
 #- General
-ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},1,{{ drive.type |default(0)|int }})"
+{#- catch unconfigured drive. For end effectors, only. #}
+{%- set drive = None if drive is not defined else drive %}
+ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},1,{{ drive.type|default(0)|int }})"
 #- health --> see Output
 
 #- Trajectory
