@@ -1,5 +1,7 @@
+#- =================================================================================
+#- SYNCHRONIZATION
+#- =================================================================================
 #- Commands
-
 ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|default(0)|int }})"
 
@@ -11,13 +13,13 @@ ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line|replace(';', '|') 
 {% endif %}
 
 #- Encoder
-{%- set filter = None if encoder.filter is not defined else encoder.filter %}
+{%- set filter = None if sync.encoder.filter is not defined else sync.encoder.filter %}
 ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ filter.size|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|default(0)|int }})"
 
 #- Trajectory
-{%- set filter = None if trajectory.filter is not defined else trajectory.filter %}
+{%- set filter = None if sync.trajectory.filter is not defined else sync.trajectory.filter %}
 ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ filter.size|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source|default(0)|int }})"
