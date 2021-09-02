@@ -60,17 +60,15 @@ class EcmcCommonPlc(JinjaTemplate):
 class EcmcAxisPlc(EcmcCommonPlc):
     def __init__(self, _configuration, _jinjatemplatedir):
         super(EcmcAxisPlc, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
-        print("#- AXIS PLC")
 
 
 class EcmcStandAlonePlc(EcmcCommonPlc):
     def __init__(self, _configuration, _jinjatemplatedir):
         super(EcmcStandAlonePlc, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
-        print("#- STANDALONE PLC")
 
 if __name__ == '__main__':
-    # plc = EcmcPlc('./test/testPlc.yaml', './templates/')
-    plc = EcmcPlc('./test/testJointWithPlc.yaml', './templates/')
+    plc = EcmcPlc('./test/testPlc.yaml', './templates/')
+    # plc = EcmcPlc('./test/testJointWithPlc.yaml', './templates/')
     plc.create()
     plc.sanityCheckPlc()
     if plc.hasPlcFile:

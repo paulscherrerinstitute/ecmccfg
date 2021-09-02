@@ -4,11 +4,33 @@ axis:
   mode: CSV     # supported mode, CSV and CSP
   parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 
+# optional synchronization
+# Note: sync `plc` is on the top level!
+sync:
+  enable: true
+  encoder:
+    source: 1
+    filter:
+      enable: false
+      size: 10
+  trajectory:
+    source: 0
+    filter:
+      enable: false
+      size: 10
+plc:
+  enable: false
+  externalCommands: false
+  file: test/plc2.plc
+  code:
+    - if(ax2.traj.source){ax2.drv.enable:=ax1.drv.enable};
+    - ax2.traj.setpos:=ax1.traj.setpos*0.5;
+
 var:
   drvSlave: 3
   encSlave: 17
   foo: '{{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}'
-  bar: 3.14
+  pi: 3.14
   baz:
     - 1
     - 2
@@ -25,9 +47,9 @@ drive:
   numerator: 2880000                                  # Fastest speed of the drive in engineering units
   denominator:  2147483648                            # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-  control: ec0.s$(DRV_SLAVE).driveControl01
-  status: ec0.s$(DRV_SLAVE).driveStatus01
-  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01
+  control: ec0.s{{ var.drvSlave }}.driveControl01
+  status: ec0.s{{ var.drvSlave }}.driveStatus01
+  setpoint: ec0.s{{ var.drvSlave }}.velocitySetpoint01
 
 encoder:
   numerator: 360
@@ -36,7 +58,7 @@ encoder:
   bits: 32        # Total bit count of encoder raw data
   absBits: 32     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   absOffset: 0    # Encoder offset in eng units (for absolute encoders)
-  position: ec0.s$(DRV_SLAVE).positionActual01  # Ethercat entry for actual position input (encoder)
+  position: ec0.s{{ var.drvSlave }}.positionActual01  # EtherCAT entry for actual position input (encoder)
 
 controller:
   Kp:  90
@@ -49,10 +71,10 @@ trajectory:
 
 input:
   limit:
-    forward: ec0.s$(DRV_SLAVE).binaryInputArray01.0    #  Ethercat entry for low limit switch input
-    backward: ec0.s$(DRV_SLAVE).binaryInputArray01.1   #  Ethercat entry for high limit switch input
-  home: ec0.s$(DRV_SLAVE).ONE.0         #  Ethercat entry for home switch input
-  interlock: ec0.s$(ENC_SLAVE).ONE.0    #  Ethercat entry for interlock switch input
+    forward: ec0.s{{ var.drvSlave }}.binaryInputArray01.0    #  EtherCAT entry for low limit switch input
+    backward: ec0.s{{ var.drvSlave }}.binaryInputArray01.1   #  EtherCAT entry for high limit switch input
+  home: ec0.s{{ var.drvSlave }}.ONE.0                        #  EtherCAT entry for home switch input
+  interlock: ec0.s{{ var.encSlave }}.ONE.0                   #  EtherCAT entry for interlock switch input
 
 monitoring:
   lag:
