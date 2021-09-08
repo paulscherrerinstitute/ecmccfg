@@ -13,7 +13,7 @@ ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id|int }},{{ lag.tollerance|def
 ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id|int }},{{ lag.time|default(10)|int }})"
 
 {%- set target = None if monitoring.target is not defined else monitoring.target %}
-ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tollerance|default(0.5)|float }}"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tollerance|default(0.5)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id|int }},{{ target.time|default(10)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id|int }},{{ target.enable|default(false)|int }})"
 
@@ -42,7 +42,7 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id|int
 {#- set jog velocity to 1/10th of axis velocity if jog velocity is not defined #}
 {%- set jogVelocity=trajectory.axis.velocity/10 if jog.velocity is not defined else jog.velocity %}
 {#- use axis acceleration for jog id not explicitly defined #}
-{%- set jogacceleration=trajectory.axis.acceleration if jog.acceleration is not defined else jog.acceleration %}
+{%- set jogacceleration=trajectory.axis.velocity/trajectory.axis.acceleration if jog.acceleration is not defined else jog.acceleration %}
 {#- catch unconfigured drive. For end effectors, only. #}
 {%- set drive = None if drive is not defined else drive %}
 
