@@ -440,9 +440,9 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(TSE,  "0")
 }
 
-record(mbbo,  "${P}${AXIS_NAME}-MtnTypeCmd"){
+record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Motion Command Type")
+  field(DESC, "${AXIS_NAME}: Motion Command")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
   field(ZRST, "NO_COMMAND")
@@ -457,9 +457,9 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnTypeCmd"){
   field(FRVL, 10)
 }
 
-record(longout,"${P}${AXIS_NAME}-MtnTypeCmdData"){
+record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Motion Command Type Data Param")
+  field(DESC, "${AXIS_NAME}: Motion Command Data Param")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).cmddata?")
   field(SCAN, "Passive")
