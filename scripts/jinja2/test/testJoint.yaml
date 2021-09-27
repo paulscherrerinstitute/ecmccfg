@@ -37,6 +37,13 @@ var:
     - 3
     -
 
+epics:
+  name: 'M1: drv {{ var.drvSlave }}, enc {{ var.encSlave }}'
+  # motorRecord: false
+  precision: 3
+  description: AMI8121 CSV
+  unit: deg
+
 motorRecord:
   name: 'M1: drv {{ var.drvSlave }}, enc {{ var.encSlave }}'
   precision: 3
