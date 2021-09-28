@@ -1,0 +1,14 @@
+### ENDEFFECTOR ###
+{# define namespace Error -#}
+{%- set Error = namespace(state=false) -%}
+
+{%- extends "endEffectorSanity.jinja2" -%}
+
+{%- block sanity -%}
+{{super()}}
+{%- endblock -%}
+
+{% block body %}
+{{super()}}
+
+{% endblock %}
