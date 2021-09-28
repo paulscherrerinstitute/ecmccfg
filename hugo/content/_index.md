@@ -1,15 +1,14 @@
++++  
+title = "ecmccfg"   
+weight = 5  
+chapter = true  
++++  
+
 # ecmccfg
 
 A configuration framework for ECMC Motion Control Module for EPICS.
 
-## Documentation
-The documentation can be found [here](https://paulscherrerinstitute.github.io/ecmccfg/)
-
-### [Manual](https://paulscherrerinstitute.github.io/ecmccfg/manual/)
-
-### [Sources](https://paulscherrerinstitute.github.io/ecmccfg/source/)
-
-## [License](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/LICENSE)
+## License <a href="https://github.com/paulscherrerinstitute/ecmccfg/blob/master/LICENSE" target="_blank" rel="license">![GitHub](https://img.shields.io/github/license/paulscherrerinstitute/ecmccfg?style=for-the-badge)</a>
 
 This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,3 +23,11 @@ This program is distributed in the hope that it will be useful,
 You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+
+## Latest release
+
+<a href="https://github.com/paulscherrerinstitute/ecmccfg/releases/latest" target="_blank" rel="latest release">![GitHub release (latest by date)](https://img.shields.io/github/v/release/paulscherrerinstitute/ecmccfg?style=for-the-badge)</a>
+
+## Download
+
+<a href="https://github.com/paulscherrerinstitute/ecmccfg" target="_blank" rel="top language">![GitHub top language](https://img.shields.io/github/languages/top/paulscherrerinstitute/ecmccfg?style=for-the-badge)</a>
