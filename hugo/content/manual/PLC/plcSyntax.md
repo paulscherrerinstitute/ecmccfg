@@ -13,8 +13,10 @@ For detailed syntax help please visit the [exprtk website](https://github.com/Ar
 - `=` or `==`: equal comparison
 
 ### functions
-PLC do _not_ write to the bus!
-The data will be send to the bus with the next cycle.
+PLC do _not_ immediately write to the bus!
+The PLC will excecute synchronous to the cycle, or at an integer fraction of it.
+The prcessed data will be send to the bus with the next cycle.
+PLCs do _not_ delay the bus!
 
 ### statement terminator
 Statements are terminated by a semicolon `;`
