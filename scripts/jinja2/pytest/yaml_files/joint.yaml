@@ -1,0 +1,13 @@
+axis:
+  type: joint
+
+var:
+  drvSlave: 3
+  encSlave: 17
+  foo: '{{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}'
+  bar: 3.14
+  baz:
+    - 1
+    - 2
+    - 3
+    -
