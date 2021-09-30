@@ -1,14 +1,22 @@
 from ecmcYamlHandler import *
 from ecmcJinja2 import JinjaTemplate
+from pathlib import Path
 from ecmcPlc import EcmcPlc
 
 
 class EcmcAxis(YamlHandler):
     def __init__(self, axisconfig, jinjatemplatedir):
         super().__init__()
-        self.axisconfig = axisconfig
-        self.jinjatemplatedir = jinjatemplatedir
-        self.loadYamlData(axisconfig)
+        c = Path(axisconfig)
+        if c.exists() and c.is_file():
+            self.axisconfig = axisconfig
+        else:
+            raise FileNotFoundError(f'axis configuration >> {axisconfig} << not found!')
+        p = Path(jinjatemplatedir)
+        if p.exists() and p.is_dir():
+            self.jinjatemplatedir = jinjatemplatedir
+        else:
+            raise FileNotFoundError(f'template directory >> {jinjatemplatedir} << not found!')
         self.config = None
 
     def create(self):
