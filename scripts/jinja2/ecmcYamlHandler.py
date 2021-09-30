@@ -3,6 +3,8 @@ import yaml
 
 class YamlHandler:
     supportedAxisTypes = {
+        '0': 0,
+        'debug': 0,
         '1': 1,
         'j': 1,
         'joint': 1,
@@ -10,12 +12,12 @@ class YamlHandler:
         'motor': 1,
         'real': 1,
         '2': 2,
+        'e': 2,
         'ee': 2,
         'end effector': 2,
         'end_effector': 2,
         'endeffector': 2,
         'virtual': 2,
-        'debug': 0,
     }
 
     def __init__(self):
@@ -30,17 +32,20 @@ class YamlHandler:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
 
     def checkForKey(self, key, data_=None, optional=False):
-        if data_ is not None:
-            data = data_
-        else:
-            data = self.yamlData
-        if key in data:
-            return True
-        else:
-            if optional:
-                return False
-            else:
-                raise KeyError(f'yaml file does not contain >> {key} <<')
+        data = data_ if data_ is not None else self.yamlData
+
+        if data is None:
+            raise ValueError(f'cannot check for key >> {key} << in data of \'NoneType\'')
+
+        try:
+            if key in data:
+                return True
+        except:
+            raise
+
+        if optional:
+            return False
+        raise KeyError(f'yaml file does not contain >> {key} <<')
 
     def checkForVariables(self):
         self.hasVariables = self.checkForKey('var', optional=True)
@@ -57,13 +62,20 @@ class YamlHandler:
         except KeyError:
             type_ = '1'
 
-        if type_ not in self.supportedAxisTypes:
-            raise NotImplementedError(f'Axis type >> {type_} << not implemented.\nSupported type are:\n'
-                                      f'{yaml.dump(self.supportedAxisTypes)}')
+        self.isSupportedAxisType(type_)
 
         return self.supportedAxisTypes[type_]
+
+    def isSupportedAxisType(self, type_):
+        if str(type_) not in self.supportedAxisTypes:
+            raise NotImplementedError(f'Axis type >> {type_} << not implemented.\nSupported type are:\n'
+                                      f'{yaml.dump(self.supportedAxisTypes)}')
+        return True
 
     def setEcmcAxisType(self, type_=None):
         if type_ is None:
             type_ = self.getAxisType()
+        else:
+            self.isSupportedAxisType(type_)
+
         self.axisType = self.supportedAxisTypes[str(type_)]
