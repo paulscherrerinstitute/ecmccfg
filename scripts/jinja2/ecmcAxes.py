@@ -20,17 +20,22 @@ class EcmcAxis(YamlHandler):
         self.config = None
 
     def create(self):
-        if self.getAxisType() == 1:
+        self.loadYamlData(self.axisconfig)
+        self.setEcmcAxisType()
+        if self.axisType == 1:
             self.config = EcmcJoint(self.axisconfig, self.jinjatemplatedir)
-        else:
+        elif self.axisType == 2:
             self.config = EcmcEndEffector(self.axisconfig, self.jinjatemplatedir)
+        else:
+            ''' this should never happen, as setEcmcAxisType catches unsupported axisTypes '''
+            raise NotImplementedError(f'axis ot type >> {self.axisType} << not implemented')
 
 
 class EcmcCommonAxis(JinjaTemplate, YamlHandler):
     def __init__(self, _jinjatemplatedir, _configuration):
         super(EcmcCommonAxis, self).__init__(directory=_jinjatemplatedir, templateFile=None)
         self.loadYamlData(_configuration)
-        self.axisType = self.getAxisType()
+        self.setEcmcAxisType()
         self.checkForVariables()
         self.setAxisTemplate()
 
