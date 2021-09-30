@@ -1,14 +1,22 @@
 from ecmcYamlHandler import *
 from ecmcJinja2 import JinjaTemplate
-from ecmcPlc import EcmcPlc, EcmcAxisPlc
+from pathlib import Path
+from ecmcPlc import EcmcPlc
 
 
 class EcmcAxis(YamlHandler):
     def __init__(self, axisconfig, jinjatemplatedir):
         super().__init__()
-        self.axisconfig = axisconfig
-        self.jinjatemplatedir = jinjatemplatedir
-        self.loadYamlData(axisconfig)
+        c = Path(axisconfig)
+        if c.exists() and c.is_file():
+            self.axisconfig = axisconfig
+        else:
+            raise FileNotFoundError(f'axis configuration >> {axisconfig} << not found!')
+        p = Path(jinjatemplatedir)
+        if p.exists() and p.is_dir():
+            self.jinjatemplatedir = jinjatemplatedir
+        else:
+            raise FileNotFoundError(f'template directory >> {jinjatemplatedir} << not found!')
         self.config = None
 
     def create(self):
@@ -25,12 +33,6 @@ class EcmcCommonAxis(JinjaTemplate, YamlHandler):
         self.axisType = self.getAxisType()
         self.checkForVariables()
         self.setAxisTemplate()
-        self.hasSyncPLC = False
-
-        if self.checkForKey('sync', optional=True) and self.yamlData['sync']['enable']:
-            self.hasSyncPLC = True
-            self.axisPlc = EcmcPlc(_configuration, _jinjatemplatedir)
-            self.axisPlc.create()
 
     def setAxisTemplate(self, type_=None, template=None):
         if type_ is None:
@@ -59,23 +61,15 @@ class EcmcJoint(EcmcCommonAxis):
 
 
 if __name__ == '__main__':
-    axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
-    # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
+    axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    # axis = EcmcAxis('./test/testJointWithPlc.yaml', './templates/')
     axis.create()
     # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
     ''' if the config has a 'var' key, run renderer twice'''
     if axis.config.hasVariables:
         axis.config.setTemplate(axis.config.render(axis.yamlData))
     axis.config.render(axis.yamlData)
-    if axis.config.hasSyncPLC:
-        plc = axis.config.axisPlc
-        plc.checkForPlcFile()
-        plc.checkForVariables()
-        if plc.hasPlcFile:
-            plc.loadPlcFile()
-        if plc.hasVariables:
-            plc.config.setTemplate(plc.config.render(plc.yamlData))
-        plc.config.render(plc.yamlData)
-        axis.config.product += plc.config.product
-    # axis.config.show()
+    axis.config.show()
     axis.config.write('test.txt')
+
