@@ -40,7 +40,7 @@ class YamlHandler:
             if optional:
                 return False
             else:
-                raise KeyError('yaml file does not contain >> {} <<'.format(key))
+                raise KeyError(f'yaml file does not contain >> {key} <<')
 
     def checkForVariables(self):
         self.hasVariables = self.checkForKey('var', optional=True)
@@ -58,13 +58,12 @@ class YamlHandler:
             type_ = '1'
 
         if type_ not in self.supportedAxisTypes:
-            raise NotImplementedError('Axis type >> {} << not implemented.\nSupported type are:\n{}'.format(
-                type_, yaml.dump(self.supportedAxisTypes)))
+            raise NotImplementedError(f'Axis type >> {type_} << not implemented.\nSupported type are:\n'
+                                      f'{yaml.dump(self.supportedAxisTypes)}')
 
         return self.supportedAxisTypes[type_]
 
     def setEcmcAxisType(self, type_=None):
         if type_ is None:
             type_ = self.getAxisType()
-        # self.yamlData['axis']['EcmcType'] = type_
         self.axisType = self.supportedAxisTypes[str(type_)]
