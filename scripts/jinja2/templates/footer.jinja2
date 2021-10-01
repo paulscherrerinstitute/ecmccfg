@@ -12,15 +12,15 @@ ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id|int }},{{ lag.enable|defa
 ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id|int }},{{ lag.tollerance|default(0.5)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id|int }},{{ lag.time|default(10)|int }})"
 
-{%- set target = None if monitoring.target is undefined else monitoring.target %}
-ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tollerance|default(0.5)|float }}"
+{%- set target = None if monitoring.target is not defined else monitoring.target %}
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tollerance|default(0.5)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id|int }},{{ target.time|default(10)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id|int }},{{ target.enable|default(false)|int }})"
 
-{%- set velocity = None if monitoring.velocity is undefined else monitoring.velocity %}
-ecmcConfigOrDie "Cfg.SetAxisMonMaxVel({{ axis.id|int }},{{ velocity.max|default(100)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id|int }},{{ velocity.enable|default(false)|int}})"
-{%- set velMonTime = None if velocity.time is undefined else monitoring.velocity.time %}
+{%- set velMon = None if monitoring.velocity is not defined else monitoring.velocity %}
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVel({{ axis.id|int }},{{ velMon.max|default(100)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id|int }},{{ velMon.enable|default(false)|int}})"
+{%- set velMonTime = None if velMon.time is not defined else monitoring.velocity.time %}
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay({{ axis.id|int }},{{ velMonTime.trajectory|default(100)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay({{ axis.id|int }},{{ velMonTime.drive|default(100)|int}})"
 
@@ -49,10 +49,12 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id|int
 {#- set jog velocity to 1/10th of axis velocity if jog velocity is undefined #}
 {%- set jogVelocity=trajectory.axis.velocity/10 if jog.velocity is undefined else jog.velocity %}
 {#- use axis acceleration for jog id not explicitly defined #}
-{%- set jogacceleration=trajectory.axis.acceleration if jog.acceleration is undefined else jog.acceleration %}
+{%- set jogacceleration=trajectory.axis.velocity/trajectory.axis.acceleration if jog.acceleration is not defined else jog.acceleration %}
+{#- catch unconfigured drive. For end effectors, only. #}
+{%- set drive = None if drive is not defined else drive %}
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME={{ motorRecord.name }}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, DESC='{{ motorRecord.description }}', EGU={{ motorRecord.unit|default('mm') }}, PREC={{ motorRecord.precision|default(3)|int }}, VELO={{ trajectory.axis.velocity|float }}, JVEL={{ jogVelocity|float }}, JAR={{ jogacceleration|float }}, ACCL={{ trajectory.axis.acceleration|float }}, RDBD={{ target.tollerance|default(0.5)|float }}, DLLM={{ softlimits.backward|default(0)|float}}, DHLM={{ softlimits.forward|default(0)|float}}, HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator }},UREV={{ drive.numerator }}, {{ motorRecord.fieldInit|default('') }}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ motorRecord.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, DESC='{{ motorRecord.description }}', EGU={{ motorRecord.unit|default('mm') }}, PREC={{ motorRecord.precision|default(3)|int }}, VELO={{ trajectory.axis.velocity|float }}, JVEL={{ jogVelocity|float }}, JAR={{ jogacceleration|float }}, ACCL={{ trajectory.axis.acceleration|float }}, RDBD={{ target.tollerance|default(0.5)|float }}, DLLM={{ softlimits.backward|default(0)|float}}, DHLM={{ softlimits.forward|default(0)|float}}, HOMEPROC={{ homing.type|default(0)|int }}, SREV={{ drive.denominator|default(1)|int|abs }}, UREV={{ drive.numerator|default(0)|float }}, VMAX={{ velMon.max|default(100)|float }}, {{ motorRecord.fieldInit|default('') }}")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
 dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ motorRecord.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, HOMEPROC={{ homing.type|default(0)|int }}, HOMEPOS={{ homing.position|default(0)|float }}, HVELTO={{ homingVelocity.to|default(0)|float }}, HVELFRM={{ homingVelocity.from or homingVelocity.to|default(0)|float }}, HOMEACC={{ homing.acceleration|default(0)|float }}, HOMEDEC={{ homing.deceleration or homing.acceleration|default(0) |float}}")
