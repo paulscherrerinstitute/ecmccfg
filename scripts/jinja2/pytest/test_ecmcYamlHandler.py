@@ -6,6 +6,7 @@ from ecmcYamlHandler import YamlHandler
 def myHandler():
     return YamlHandler()
 
+
 @pytest.mark.dependency()
 def test_is_supported_axis_type(myHandler):
     with pytest.raises(NotImplementedError):
@@ -19,14 +20,19 @@ def test_is_supported_axis_type(myHandler):
     for key in range(3):
         assert myHandler.isSupportedAxisType(key) is True
 
+
 @pytest.mark.dependency()
 def test_check_for_key(myHandler):
     with pytest.raises(ValueError):
         myHandler.checkForKey('dummy')
-    assert myHandler.checkForKey('dummy', data_="{dummy: 0}") is True
-    assert myHandler.checkForKey('notDummy', data_="{dummy: 0}", optional=True) is False
+    assert myHandler.checkForKey('dummy', data_={'dummy': 0}) is True
+    assert myHandler.checkForKey('notDummy', data_={'dummy': 0}, optional=True) is False
     with pytest.raises(KeyError):
-        myHandler.checkForKey('notDummy', data_="{dummy: 0}")
+        myHandler.checkForKey('notDummy', data_={'dummy': 0})
+    myHandler.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
+    assert myHandler.getKey(['axis', 'type'], myHandler.yamlData) == 'joint'
+    assert myHandler.checkForKey(['axis', 'type']) is True
+
 
 @pytest.mark.dependency(depends=["test_check_for_key"])
 def test_load_yaml_data(myHandler):
@@ -37,6 +43,7 @@ def test_load_yaml_data(myHandler):
     assert myHandler.yamlData is not None
     assert myHandler.checkForKey('yaml') is True
 
+
 @pytest.mark.dependency(depends=["test_check_for_key", "test_is_supported_axis_type"])
 def test_set_ecmc_axis_type(myHandler):
     with pytest.raises(ValueError) as e_info:
@@ -44,3 +51,26 @@ def test_set_ecmc_axis_type(myHandler):
     for key, value in myHandler.supportedAxisTypes.items():
         myHandler.setEcmcAxisType(key)
         assert myHandler.axisType == value
+
+
+def test_check_for_sync_plc(myHandler):
+    # h = YamlHandler()
+    # data = """
+    #     axis:
+    #         type: joint
+    #     sync:
+    #         enable: 1
+    # """
+    # h.yamlData = data
+    myHandler.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
+    assert myHandler.checkForSyncPlc() is True
+    # assert False
+
+
+def test_get_key(myHandler):
+    myHandler.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
+    assert myHandler.getKey(['axis', 'type'], myHandler.yamlData) == 'joint'
+
+
+def test_str2bool(myHandler):
+    assert myHandler.str2bool(1) is True
