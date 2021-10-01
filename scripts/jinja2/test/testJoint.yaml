@@ -21,7 +21,7 @@ sync:
 plc:
   enable: false
   externalCommands: false
-  file: test/plc2.plc
+  file: plc2.plc
   code:
     - if(ax2.traj.source){ax2.drv.enable:=ax1.drv.enable};
     - ax2.traj.setpos:=ax1.traj.setpos*0.5;
