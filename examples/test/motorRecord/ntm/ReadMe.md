@@ -1,5 +1,8 @@
 # NTM (New Target Monitor) field
 
+Test of motor branch torsten/210924-NTM_UPDATE 71adcae:
+https://github.com/EuropeanSpallationSource/motor/tree/torsten/210924-NTM_UPDATE
+
 From docs:
 
 The requirements on how the motor record processes a new target position while the motor is in motion are as follows;
@@ -20,21 +23,7 @@ Test:
 * new target positon    = 40
 * actual positon (when enter new target position) = 50
 
-Works sometimes but atleast one BUGG:
-
-if the new target position is the same as the starting target position it will not work. This will not work:
-
-* original target position = 40
-* target positon        = 70
-* new target positon    = 40
-* actual positon (when enter new targey position) = 50
-
-so "new target positon" needs to differ from "original target position"..
-
-if "new target positon" == "original target position" then motion will just stop. However when trying to move to a new positoin it will go to "new target positon" independent on which target position was entered.
-
-Same issue is both directions.
-
+Works!
 
 ## Case 1 NTM = NO
 
@@ -45,7 +34,7 @@ Test:
 
 The motion will be completed to the "target position" and then a new motion command will be issued to the "new target position"
 
-Same issue as with NTM==YES. IF "new target position" == "original target position" then the motion to the new target position will not be triggered.
+Issue if "new target position" == "original target position" then the motion to the new target position will not be triggered.
 
 Same issue is both directions.
 
