@@ -72,4 +72,4 @@ iocInit()
 dbl > pvs.log
 
 dbpf IOC_TEST:Axis1.SPAM 2047
-dbpf IOC_TEST:Axis1.NTM NTM_UPDATE
+dbpf IOC_TEST:Axis1.NTM UPDATE
