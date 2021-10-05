@@ -71,5 +71,21 @@ iocInit()
 
 dbl > pvs.log
 
-dbpf IOC_TEST:Axis1.SPAM 2047
-dbpf IOC_TEST:Axis1.NTM UPDATE
+# Some intressting PV:s
+# IOC_TEST:Axis1-TgtPosCmd:
+#   Target position for "MOVE_ABS" and "MOVE_REL"
+# IOC_TEST:Axis1-TgtVelCmd
+#   Target position for "MOVE_ABS" and "MOVE_REL"
+# IOC_TEST:Axis1-EnaCmd
+# IOC_TEST:Axis1-ExeCmd
+# IOC_TEST:Axis1-RstCmd
+# IOC_TEST:Axis1-MtnCmd
+# IOC_TEST:Axis1-MtnCmdData
+dbpf IOC_TEST:Axis1-TgtPosCmd 10
+dbpf IOC_TEST:Axis1-TgtVelCmd 5
+dbpf IOC_TEST:Axis1-EnaCmd 1
+
+dbpf IOC_TEST:Axis1-MtnCmd MOVE_ABS
+dbpf IOC_TEST:Axis1-MtnCmdData 0
+
+# dbpf IOC_TEST:Axis1-ExeCmd 1
