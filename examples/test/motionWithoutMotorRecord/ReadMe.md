@@ -8,6 +8,7 @@
 * IOC_TEST:Axis1-EnaCmd
 * IOC_TEST:Axis1-ExeCmd
 * IOC_TEST:Axis1-RstCmd
+* IOC_TEST:Axis1-StopCmd
 
 ### IOC_TEST:Axis1-MtnCmd (Motion Command)
 The motion command PV is used to define the type of movement and can take the following values:
@@ -21,7 +22,6 @@ Example:
 ```
 dbpf IOC_TEST:Axis1-MtnCmd MOVE_ABS
 ```
-
 
 ### IOC_TEST:Axis1-MtnCmdData (Motion Command Data)
 Parameter used in conjuction with "IOC_TEST:Axis1-MtnCmd".
@@ -63,15 +63,20 @@ dbpf IOC_TEST:Axis1-EnaCmd 1
 ```
 
 ### IOC_TEST:Axis1-ExeCmd (Execute Command)
-Command that will execute the motion command defined by "MtnCmd" and "MtnCmdData". If this bit is set to zero it will act as a stop command.
+A positive edge of exeute bit will start a new motion command based on:
+* TgtVelCmd (target velocity)
+* TgtPosCmd (target position)
+* MtnCmd  (Motion command)
+* MtnCmdData (Motion command param)
 
-Example: Stop axis
-```
-dbpf IOC_TEST:Axis1-ExaCmd 0
-```
+If the axis is busy then a positive edge of execute bit will update target position and 
+target velocity ("on the fly change"):
+* TgtVelCmd (target velocity)
+* TgtPosCmd (target position)
 
 Example: Trigger motion command
 ```
+dbpf IOC_TEST:Axis1-ExaCmd 0
 dbpf IOC_TEST:Axis1-ExaCmd 1
 ```
 
@@ -82,6 +87,17 @@ Example: Reset errors
 ```
 dbpf IOC_TEST:Axis1-RstCmd 1
 ```
+
+### IOC_TEST:Axis1-StopCmd (Stop Command)
+Command that will stop motion
+
+Note: New motion commands will be blocked if Stop bit is high.
+
+Example: Stop axis
+```
+dbpf IOC_TEST:Axis1-StopCmd 1
+```
+
 ### More...
 There are many more PV:s like status PV:s.. Descriptions will be added...
 
@@ -91,6 +107,7 @@ dbpf IOC_TEST:Axis1-TgtPosCmd 50
 dbpf IOC_TEST:Axis1-TgtVelCmd 10
 dbpf IOC_TEST:Axis1-MtnCmd MOVE_ABS
 dbpf IOC_TEST:Axis1-EnaCmd 1
+dbpf IOC_TEST:Axis1-ExaCmd 0
 # Wait for enabled
 dbpf IOC_TEST:Axis1-ExaCmd 1
 ```
