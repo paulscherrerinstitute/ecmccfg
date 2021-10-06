@@ -8,7 +8,7 @@
 * IOC_TEST:Axis1-EnaCmd
 * IOC_TEST:Axis1-ExeCmd
 * IOC_TEST:Axis1-RstCmd
-* IOC_TEST:Axis1-StopCmd
+* IOC_TEST:Axis1-StpCmd
 
 ### IOC_TEST:Axis1-MtnCmd (Motion Command)
 The motion command PV is used to define the type of movement and can take the following values:
@@ -88,14 +88,14 @@ Example: Reset errors
 dbpf IOC_TEST:Axis1-RstCmd 1
 ```
 
-### IOC_TEST:Axis1-StopCmd (Stop Command)
+### IOC_TEST:Axis1-StpCmd (Stop Command)
 Command that will stop motion
 
 Note: New motion commands will be blocked if Stop bit is high.
 
 Example: Stop axis
 ```
-dbpf IOC_TEST:Axis1-StopCmd 1
+dbpf IOC_TEST:Axis1-StpCmd 1
 ```
 
 ### More...
