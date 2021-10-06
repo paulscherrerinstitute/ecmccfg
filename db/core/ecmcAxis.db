@@ -352,7 +352,7 @@ record(bo,"${P}${AXIS_NAME}-ExeCmd"){
   field(TSE,  "0")
 }
 
-record(bo,"${P}${AXIS_NAME}-StopCmd"){
+record(bo,"${P}${AXIS_NAME}-StpCmd"){
   field(DESC, "${AXIS_NAME}: Stop cmd")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B2")
   field(ZNAM, "Not stop")
