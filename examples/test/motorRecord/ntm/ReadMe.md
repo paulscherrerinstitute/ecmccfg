@@ -34,10 +34,9 @@ Test:
 
 The motion will be completed to the "target position" and then a new motion command will be issued to the "new target position"
 
-Issue if "new target position" == "original target position" then the motion to the new target position will not be triggered.
+Works!
 
-Same issue is both directions.
+## Case 1 NTM = UPDATE
+Direct update of target position (on the fly). 
 
-## NTM = YES new target position > actual position
-
-Motor moves to old targetpos and stops then a new motion is initialized to the new target position
+Works!
