@@ -37,7 +37,7 @@ epicsEnvSet("ECMC_VELO",                  "18000.0")		      # 3000 rpm
 epicsEnvSet("ECMC_JOG_VEL",               "360")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "0.025")		      # CAREFULL, ATTACH NO LOAD WITH THAT HIGH ACC !!!!
-epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
+epicsEnvSet("ECMC_EMERG_DECEL",           "450000")             # Emergency deceleration
 epicsEnvSet("ECMC_MRES",                  "0.001")
 
 #Homing
