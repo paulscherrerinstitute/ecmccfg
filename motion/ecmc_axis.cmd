@@ -40,13 +40,11 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_ACCL=-1}>0',
 #- Use ECMC_ACCL if defined otherwise ECMC_ACCS_EGU_PER_S2
 ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCL,"'${ECMC_ACCL=EMPTY}'!='EMPTY'","", "#-")
 ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCS,"'${ECMC_ACCL=EMPTY}'=='EMPTY'","", "#-")
-
 ${ECMC_BLOCK_ACCL} ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime(${ECMC_AXIS_NO},${ECMC_VELO},${ECMC_ACCL=0})"
 ${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisAcc(${ECMC_AXIS_NO},${ECMC_ACCS_EGU_PER_S2=0})"
 ${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},${ECMC_DECS_EGU_PER_S2=${ECMC_ACCS_EGU_PER_S2=0}})"
 ecmcConfigOrDie "Cfg.SetAxisVel(${ECMC_AXIS_NO},${ECMC_VELO})"
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},${ECMC_EMERG_DECEL})"
-
 ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_FRM})"
 
