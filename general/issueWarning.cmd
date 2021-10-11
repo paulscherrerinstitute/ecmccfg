@@ -8,13 +8,13 @@
 #-d
 #-d    Arguments: 
 #-d      EXPR_STR         :  Expression.    
-#-d      WARNING_STR      :  Error Mesage (if EXPR is false)
+#-d      WARNING_STR      :  Error Message (if EXPR is true)
 #-d
 #-d   \file
 #-d */
 
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"${EXPR_STR}","", "#-")
 ${ECMC_EXE_CMD}############## WARNING ##################################################
-${ECMC_EXE_CMD}#${WARNING_STR = ""}
+${ECMC_EXE_CMD} # ${WARNING_STR=""}
 ${ECMC_EXE_CMD}#########################################################################
 epicsEnvUnset(ECMC_EXE_CMD)

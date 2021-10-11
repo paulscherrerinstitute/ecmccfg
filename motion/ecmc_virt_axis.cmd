@@ -30,7 +30,20 @@ ecmcConfigOrDie "Cfg.SetAxisModRange(${ECMC_AXIS_NO}, ${ECMC_MOD_RANGE})"
 ecmcConfigOrDie "Cfg.SetAxisModType(${ECMC_AXIS_NO}, ${ECMC_MOD_TYPE})"
 
 #- Trajectory
+#- Issue Warning if ECMC_ACCL is set. ECMC_ACCS_EGU_PER_S2 with unit EGU/s² should be used instead
+ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_ACCL=-1}>0',WARNING_STR='WARNING: ECMC_ACCL setting is deprecated. Please use ECMC_ACCS_EGU_PER_S2 instead..'"
+
+#- Use ECMC_ACCL if defined otherwise ECMC_ACCS_EGU_PER_S2
+ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCL,"'${ECMC_ACCL=EMPTY}'!='EMPTY'","", "#-")
+ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCS,"'${ECMC_ACCL=EMPTY}'=='EMPTY'","", "#-")
+
+${ECMC_BLOCK_ACCL} ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime(${ECMC_AXIS_NO},${ECMC_VELO},${ECMC_ACCL=0})"
+${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisAcc(${ECMC_AXIS_NO},${ECMC_ACCS_EGU_PER_S2=0})"
+${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},${ECMC_DECS_EGU_PER_S2=${ECMC_ACCS_EGU_PER_S2=0}})"
+ecmcConfigOrDie "Cfg.SetAxisVel(${ECMC_AXIS_NO},${ECMC_VELO})"
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},${ECMC_EMERG_DECEL})"
+
 ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime(${ECMC_AXIS_NO},${ECMC_VELO},${ECMC_ACCL})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_FRM})"
@@ -94,7 +107,10 @@ ecmcEpicsEnvSetCalc("ECMC_TEMP_SREV","if(abs(${ECMC_ENC_SCALE_DENOM=1})>0){RESUL
 ecmcEpicsEnvSetCalc("ECMC_TEMP_UREV","if(abs(${ECMC_ENC_SCALE_NUM=0})>0){RESULT:=abs(${ECMC_ENC_SCALE_NUM=0});} else {RESULT:=1.0};","%lf")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC},SREV=${ECMC_TEMP_SREV},UREV=${ECMC_TEMP_UREV}, ${ECMC_AXISFIELDINIT=""}")
+
+${ECMC_BLOCK_ACCL}dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord${ECMC_PVA}"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCL=${ECMC_ACCL=0}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC},SREV=${ECMC_TEMP_SREV},UREV=${ECMC_TEMP_UREV}, ${ECMC_AXISFIELDINIT=""}")
+${ECMC_BLOCK_ACCS}dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord${ECMC_PVA}"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME=${ECMC_MOTOR_NAME}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO}, DESC=${ECMC_DESC}, EGU=${ECMC_EGU}, PREC=${ECMC_PREC}, VELO=${ECMC_VELO}, JVEL=${ECMC_JOG_VEL}, JAR=${ECMC_JAR}, ACCS=${ECMC_ACCS_EGU_PER_S2=0}, RDBD=${ECMC_MON_AT_TARGET_TOL}, DLLM=${ECMC_SOFT_LOW_LIM}, DHLM=${ECMC_SOFT_HIGH_LIM}, HOMEPROC=${ECMC_HOME_PROC},SREV=${ECMC_TEMP_SREV},UREV=${ECMC_TEMP_UREV}, ${ECMC_AXISFIELDINIT=""}")
+
 epicsEnvSet("ECMC_AXISFIELDINIT",  "")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}"home.template",1,1)
@@ -103,3 +119,5 @@ dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}"home.template", "PREFIX=${ECMC
 #- Cleanup
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_TEMP_UREV)
+epicsEnvUnset(ECMC_BLOCK_ACCL)
+epicsEnvUnset(ECMC_BLOCK_ACCS)
