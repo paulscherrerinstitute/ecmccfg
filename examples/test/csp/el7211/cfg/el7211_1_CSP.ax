@@ -47,7 +47,7 @@ epicsEnvSet("ECMC_EC_DRV_WARNING",        "")                                   
 epicsEnvSet("ECMC_VELO",                  "1000.0")
 epicsEnvSet("ECMC_JOG_VEL",               "360")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
-epicsEnvSet("ECMC_ACCL",                  "1.0")
+epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "1000")
 epicsEnvSet("ECMC_EMERG_DECEL",           "1000")             # Emergency deceleration
 
 #Homing
