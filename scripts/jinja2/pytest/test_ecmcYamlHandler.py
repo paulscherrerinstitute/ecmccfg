@@ -46,7 +46,7 @@ def test_load_yaml_data(myHandler):
 
 @pytest.mark.dependency(depends=["test_check_for_key", "test_is_supported_axis_type"])
 def test_set_ecmc_axis_type(myHandler):
-    with pytest.raises(ValueError) as e_info:
+    with pytest.raises(ValueError):
         myHandler.setEcmcAxisType()
     for key, value in myHandler.supportedAxisTypes.items():
         myHandler.setEcmcAxisType(key)
@@ -72,5 +72,9 @@ def test_get_key(myHandler):
     assert myHandler.getKey(['axis', 'type'], myHandler.yamlData) == 'joint'
 
 
-def test_str2bool(myHandler):
-    assert myHandler.str2bool(1) is True
+@pytest.mark.parametrize("test_input,expected", [(1, True), (0, False), ("true", True), ("false", False)])
+def test_str2bool(myHandler, test_input, expected):
+    assert myHandler.str2bool(test_input) is expected
+    with pytest.raises(ValueError):
+        myHandler.str2bool('ja')
+        myHandler.str2bool('Nej')
