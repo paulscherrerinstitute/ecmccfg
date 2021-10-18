@@ -47,7 +47,7 @@ class YamlHandler:
     def getKey(self, key, data):
         if isinstance(key, list):
             for k in key:
-                data = self.getKey(k, data=data)  # if not None else None
+                data = self.getKey(k, data=data)
             return data
         return data[str(key)]
 
@@ -82,13 +82,10 @@ class YamlHandler:
 
     def getAxisType(self, type_=None):
         if type_ is None:
-            self.checkForKey('axis')
             try:
-                self.checkForKey('type', self.yamlData['axis'])
-                type_ = self.yamlData['axis']['type']
+                type_ = self.getKey(['axis', 'type'], self.yamlData)
             except KeyError:
-                type_ = '1'
-
+                type_ = 1
         return self.supportedAxisTypes[self.isSupportedAxisType(type_)]
 
     def isSupportedAxisType(self, type_=None):
@@ -106,8 +103,9 @@ class YamlHandler:
 
 
 if __name__ == '__main__':
-    pass
-    # h = YamlHandler()
+    h = YamlHandler()
+    print(h.getAxisType('j'))
+    print(h.getAxisType())
     #
     # h.yamlData = {'axis': {'type': 'joint'}}
     # print(h.checkForKey('axis'))
