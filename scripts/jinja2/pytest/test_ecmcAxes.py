@@ -16,7 +16,7 @@ def test_create(myAxis):
     myAxis.create()
     assert myAxis.config.axisType is 2
     with pytest.raises(NotImplementedError):
-        myAxis.axisconfig = '../test/axisTypeNotImplementedError.yaml'
+        myAxis.axisconfig = 'yaml_files/axisTypeNotImplementedError.yaml'
         myAxis.create()
 
     with pytest.raises(FileNotFoundError):
