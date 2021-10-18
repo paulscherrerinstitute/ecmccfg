@@ -45,7 +45,7 @@ def test_is_supported_axis_type(myHandler, test_input, expected):
 
 @pytest.mark.dependency()
 def test_check_for_key(myHandler):
-    with pytest.raises(TypeError):
+    with pytest.raises(KeyError):
         myHandler.checkForKey('dummy')
     assert myHandler.checkForKey('dummy', data_={'dummy': 0}) is True
     assert myHandler.checkForKey('notDummy', data_={'dummy': 0}, optional=True) is False
@@ -69,13 +69,10 @@ def test_load_yaml_data(myHandler):
 @pytest.mark.dependency(depends=["test_check_for_key", "test_is_supported_axis_type"])
 @pytest.mark.parametrize("test_input,expected", [(' d E b U g ', 0), ('joint', 1), ('e', 2)])
 def test_set_ecmc_axis_type(myHandler, test_input, expected):
-    with pytest.raises(TypeError):
+    with pytest.raises(KeyError):
         myHandler.setEcmcAxisType()
     myHandler.setEcmcAxisType(test_input)
     assert myHandler.axisType == expected
-    # for key, value in myHandler.supportedAxisTypes.items():
-    #     myHandler.setEcmcAxisType(key)
-    #     assert myHandler.axisType == value
 
 
 @pytest.mark.parametrize("test_input,expected", [
@@ -111,8 +108,7 @@ def test_check_for_plc_file(myHandler):
           rateMilliseconds: 1000
           file: test/plc2.plc
     '''
-    # This will fail for now, has to be fixed
-    # myHandler.checkForPlcFile()
+    myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is False
     myHandler.yamlData = {'plc': {'file': 'plc/empty.plc'}}
     myHandler.checkForPlcFile()

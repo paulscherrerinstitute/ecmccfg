@@ -3,8 +3,6 @@ import string
 from pathlib import Path
 
 
-# TODO: issue with initialization for self.yamlData = None, change to "{}" instead
-
 class YamlHandler:
     supportedAxisTypes = {
         '0': 0,
@@ -24,7 +22,7 @@ class YamlHandler:
     }
 
     def __init__(self):
-        self.yamlData = None
+        self.yamlData = {}
         self.hasVariables = False
         self.hasPlcFile = False
         self.axisType = None
@@ -47,8 +45,6 @@ class YamlHandler:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
 
     def getKey(self, key, data):
-        if data is None:
-            raise TypeError(f'cannot obtain key >> {key} << from data of type {type(data)}')
         if isinstance(key, list):
             for k in key:
                 data = self.getKey(k, data=data)  # if not None else None
@@ -110,28 +106,18 @@ class YamlHandler:
 
 
 if __name__ == '__main__':
-    h = YamlHandler()
-    print(h.isSupportedAxisType(0))
-    print(h.isSupportedAxisType('d eb ug '))
-    j = h.isSupportedAxisType('joint')
-    print(f'{j}, {type(j)}')
-    assert h.isSupportedAxisType('joint') is str('joint')
-    # h.yamlData = {'plc': {'file': 'pytest/yaml_files/joint.yaml'}}
-    # h.checkForPlcFile()
-    # print(h.hasPlcFile)
-    exit(1)
-
-    # print(h.checkForKey('dummy', data_="{'dummy': '0'}"))
-
-    h.yamlData = {'axis': {'type': 'joint'}}
-    print(h.checkForKey('axis'))
-    print(h.getKey('axis', h.yamlData))
-    h.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
-    print(h.getKey('sync', h.yamlData))
-    syncEna = h.getKey('enable', data=h.getKey('sync', h.yamlData))
-    print(h.str2bool(syncEna) == True)
-    print(h.getKey('noGood', data=h.getKey('sync', h.yamlData)))
-    # print(h.getKey(1, data_=h.getKey('sync')))
-    # print(h.getKey(['axis','type'], data_=h.getKey('foo')))
-    h.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
-    print(h.getKey(['axis', 'type']))
+    pass
+    # h = YamlHandler()
+    #
+    # h.yamlData = {'axis': {'type': 'joint'}}
+    # print(h.checkForKey('axis'))
+    # print(h.getKey('axis', h.yamlData))
+    # h.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
+    # print(h.getKey('sync', h.yamlData))
+    # syncEna = h.getKey('enable', data=h.getKey('sync', h.yamlData))
+    # print(h.str2bool(syncEna) == True)
+    # print(h.getKey('noGood', data=h.getKey('sync', h.yamlData)))
+    # # print(h.getKey(1, data_=h.getKey('sync')))
+    # # print(h.getKey(['axis','type'], data_=h.getKey('foo')))
+    # h.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
+    # print(h.getKey(['axis', 'type']))
