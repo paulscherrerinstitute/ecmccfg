@@ -74,6 +74,7 @@ def test_str2bool(myHandler, test_input, expected):
     assert myHandler.str2bool(test_input) is expected
     with pytest.raises(ValueError):
         myHandler.str2bool('ja')
+    with pytest.raises(ValueError):
         myHandler.str2bool('Nej')
 
 
@@ -91,3 +92,25 @@ def test_check_for_plc_file(myHandler):
     myHandler.yamlData = {'plc': {'file': 'plc/empty.plc'}}
     myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is True
+
+@pytest.mark.parametrize("test_input,expected", [
+    ('0', True),
+    ('debug', True),
+    ('1', True),
+    ('j', True),
+    ('joint', True),
+    ('  J o I n  T  ', True),
+    ('physical', True),
+    ('motor', True),
+    ('real', True),
+    ('2', True),
+    ('e', True),
+    ('ee', True),
+    ('end_effector', True),
+    ('endeffector', True),
+    ('virtual', True)
+])
+def test_is_supported_axis_type(myHandler, test_input, expected):
+    assert myHandler.isSupportedAxisType(test_input) is expected
+    with pytest.raises(NotImplementedError):
+        myHandler.isSupportedAxisType()
