@@ -76,9 +76,11 @@ class YamlHandler:
 
     def checkForPlcFile(self):
         self.hasPlcFile = False
-        if self.checkForKey(['plc', 'file'], optional=True):
+        try:
             plc_file = Path(self.getKey(['plc', 'file'], self.yamlData))
             self.hasPlcFile = plc_file.is_file()
+        except KeyError as err:
+            return
 
     def getAxisType(self, type_=None):
         if type_ is None:
