@@ -23,7 +23,7 @@ def test_is_supported_axis_type(myHandler):
 
 @pytest.mark.dependency()
 def test_check_for_key(myHandler):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         myHandler.checkForKey('dummy')
     assert myHandler.checkForKey('dummy', data_={'dummy': 0}) is True
     assert myHandler.checkForKey('notDummy', data_={'dummy': 0}, optional=True) is False
@@ -46,7 +46,7 @@ def test_load_yaml_data(myHandler):
 
 @pytest.mark.dependency(depends=["test_check_for_key", "test_is_supported_axis_type"])
 def test_set_ecmc_axis_type(myHandler):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         myHandler.setEcmcAxisType()
     for key, value in myHandler.supportedAxisTypes.items():
         myHandler.setEcmcAxisType(key)
@@ -54,10 +54,10 @@ def test_set_ecmc_axis_type(myHandler):
 
 
 @pytest.mark.parametrize("test_input,expected", [
-        ({'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}, True),
-        ({'axis': {'type': 'joint'}, 'sync': {'enable': 'false'}}, False),
-        ({'axis': {'type': 'joint'}}, False),
-    ])
+    ({'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}, True),
+    ({'axis': {'type': 'joint'}, 'sync': {'enable': 'false'}}, False),
+    ({'axis': {'type': 'joint'}}, False),
+])
 def test_check_for_sync_plc(myHandler, test_input, expected):
     myHandler.yamlData = test_input
     assert myHandler.checkForSyncPlc() is expected
@@ -75,3 +75,19 @@ def test_str2bool(myHandler, test_input, expected):
     with pytest.raises(ValueError):
         myHandler.str2bool('ja')
         myHandler.str2bool('Nej')
+
+
+def test_check_for_plc_file(myHandler):
+    '''
+        plc:
+          id: 2
+          enable: yes
+          rateMilliseconds: 1000
+          file: test/plc2.plc
+    '''
+    # This will fail for now, has to be fixed
+    # myHandler.checkForPlcFile()
+    assert myHandler.hasPlcFile is False
+    myHandler.yamlData = {'plc': {'file': 'plc/empty.plc'}}
+    myHandler.checkForPlcFile()
+    assert myHandler.hasPlcFile is True
