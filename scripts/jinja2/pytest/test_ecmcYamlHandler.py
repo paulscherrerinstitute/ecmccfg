@@ -117,7 +117,9 @@ def test_check_for_plc_file(myHandler):
     myHandler.yamlData = {'plc': {'file': 'plc/empty.plc'}}
     myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is True
-
+    myHandler.yamlData = {'plc': {'file': 'plc/fileNotFound.plc'}}
+    myHandler.checkForPlcFile()
+    assert myHandler.hasPlcFile is False
 
 @pytest.mark.parametrize("test_input,expected", [(' d E b U g ', 0), ('joint', 1), ('e', 2)])
 @pytest.mark.dependency(depends=["test_is_supported_axis_type"])
