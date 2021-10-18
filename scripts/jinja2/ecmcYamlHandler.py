@@ -57,13 +57,13 @@ class YamlHandler:
         try:
             self.getKey(key, data)
             return True
-        except KeyError:
+        except KeyError as err:
             if optional:
                 return False
             else:
-                raise
-        except ValueError:
-            raise
+                raise err
+        except ValueError as err:
+            raise err
 
     def checkForVariables(self):
         self.hasVariables = self.checkForKey('var', optional=True)
@@ -75,12 +75,11 @@ class YamlHandler:
             return False
 
     def checkForPlcFile(self):
-        self.hasPlcFile = False
         try:
             plc_file = Path(self.getKey(['plc', 'file'], self.yamlData))
             self.hasPlcFile = plc_file.is_file()
         except KeyError:
-            return
+            self.hasPlcFile = False
 
     def getAxisType(self, type_=None):
         if type_ is None:
