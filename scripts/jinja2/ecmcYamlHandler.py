@@ -69,17 +69,17 @@ class YamlHandler:
         self.hasVariables = self.checkForKey('var', optional=True)
 
     def checkForSyncPlc(self):
-        if self.checkForKey(['sync', 'enable'], optional=True):
-            if self.str2bool(self.getKey(['sync', 'enable'], self.yamlData)):
-                return True
-        return False
+        try:
+            return self.str2bool(self.getKey(['sync', 'enable'], self.yamlData))
+        except KeyError:
+            return False
 
     def checkForPlcFile(self):
         self.hasPlcFile = False
         try:
             plc_file = Path(self.getKey(['plc', 'file'], self.yamlData))
             self.hasPlcFile = plc_file.is_file()
-        except KeyError as err:
+        except KeyError:
             return
 
     def getAxisType(self, type_=None):
