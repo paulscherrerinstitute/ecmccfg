@@ -53,7 +53,12 @@ def test_set_ecmc_axis_type(myHandler):
         assert myHandler.axisType == value
 
 
-def test_check_for_sync_plc(myHandler):
+@pytest.mark.parametrize("test_input,expected", [
+        ({'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}, True),
+        ({'axis': {'type': 'joint'}, 'sync': {'enable': 'false'}}, False),
+        ({'axis': {'type': 'joint'}}, False),
+    ])
+def test_check_for_sync_plc(myHandler, test_input, expected):
     # h = YamlHandler()
     # data = """
     #     axis:
@@ -62,14 +67,17 @@ def test_check_for_sync_plc(myHandler):
     #         enable: 1
     # """
     # h.yamlData = data
-    myHandler.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
-    assert myHandler.checkForSyncPlc() is True
-    # assert False
+    # myHandler.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
+    myHandler.yamlData = test_input
+    assert myHandler.checkForSyncPlc() is expected
+
 
 @pytest.mark.parametrize("test_input", ['j', 42, float(3.14)])
 def test_get_key(myHandler, test_input):
     myHandler.yamlData = {'axis': {'type': test_input}, 'sync': {'enable': 'true'}}
     assert myHandler.getKey(['axis', 'type'], myHandler.yamlData) == test_input
+    # with pytest.raises(ValueError):
+    #     myHandler.getKey()
 
 
 @pytest.mark.parametrize("test_input,expected", [(1, True), (0, False), ("true", True), ("false", False)])
