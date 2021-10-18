@@ -8,17 +8,39 @@ def myHandler():
 
 
 @pytest.mark.dependency()
-def test_is_supported_axis_type(myHandler):
+@pytest.mark.parametrize("test_input,expected", [
+    (0, '0'),
+    ('0', '0'),
+    ('debug', 'debug'),
+    (1, '1'),
+    ('1', '1'),
+    ('j', 'j'),
+    ('joint', 'joint'),
+    ('  J o I n  T  ', 'joint'),
+    ('physical', 'physical'),
+    ('motor', 'motor'),
+    ('real', 'real'),
+    (2, '2'),
+    ('2', '2'),
+    ('e', 'e'),
+    ('ee', 'ee'),
+    ('end_effector', 'end_effector'),
+    ('endeffector', 'endeffector'),
+    ('virtual', 'virtual')
+])
+def test_is_supported_axis_type(myHandler, test_input, expected):
+    assert myHandler.isSupportedAxisType(test_input) == expected
     with pytest.raises(NotImplementedError):
+        myHandler.isSupportedAxisType()
+    with pytest.raises(NotImplementedError):
+        " empty call"
+        myHandler.isSupportedAxisType()
         " not implemented _string_"
         myHandler.isSupportedAxisType('NotImplementedError')
         " not implemented _int_"
         myHandler.isSupportedAxisType(1024)
         " not implemented _double_"
         myHandler.isSupportedAxisType(3.14)
-    ''' test for integer cast 0..2'''
-    for key in range(3):
-        assert myHandler.isSupportedAxisType(key) is True
 
 
 @pytest.mark.dependency()
@@ -45,12 +67,15 @@ def test_load_yaml_data(myHandler):
 
 
 @pytest.mark.dependency(depends=["test_check_for_key", "test_is_supported_axis_type"])
-def test_set_ecmc_axis_type(myHandler):
+@pytest.mark.parametrize("test_input,expected", [(' d E b U g ', 0), ('joint', 1), ('e', 2)])
+def test_set_ecmc_axis_type(myHandler, test_input, expected):
     with pytest.raises(TypeError):
         myHandler.setEcmcAxisType()
-    for key, value in myHandler.supportedAxisTypes.items():
-        myHandler.setEcmcAxisType(key)
-        assert myHandler.axisType == value
+    myHandler.setEcmcAxisType(test_input)
+    assert myHandler.axisType == expected
+    # for key, value in myHandler.supportedAxisTypes.items():
+    #     myHandler.setEcmcAxisType(key)
+    #     assert myHandler.axisType == value
 
 
 @pytest.mark.parametrize("test_input,expected", [
@@ -93,24 +118,12 @@ def test_check_for_plc_file(myHandler):
     myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is True
 
-@pytest.mark.parametrize("test_input,expected", [
-    ('0', True),
-    ('debug', True),
-    ('1', True),
-    ('j', True),
-    ('joint', True),
-    ('  J o I n  T  ', True),
-    ('physical', True),
-    ('motor', True),
-    ('real', True),
-    ('2', True),
-    ('e', True),
-    ('ee', True),
-    ('end_effector', True),
-    ('endeffector', True),
-    ('virtual', True)
-])
-def test_is_supported_axis_type(myHandler, test_input, expected):
-    assert myHandler.isSupportedAxisType(test_input) is expected
-    with pytest.raises(NotImplementedError):
-        myHandler.isSupportedAxisType()
+
+@pytest.mark.parametrize("test_input,expected", [(' d E b U g ', 0), ('joint', 1), ('e', 2)])
+@pytest.mark.dependency(depends=["test_is_supported_axis_type"])
+def test_get_axis_type(myHandler, test_input, expected):
+    ''' direct call '''
+    assert myHandler.getAxisType(test_input) is expected
+    ''' call via yamlData '''
+    myHandler.yamlData = {'axis': {'type': test_input}}
+    assert myHandler.getAxisType() is expected

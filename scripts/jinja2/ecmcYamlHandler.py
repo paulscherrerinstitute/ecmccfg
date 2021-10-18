@@ -2,6 +2,7 @@ import yaml
 import string
 from pathlib import Path
 
+
 # TODO: issue with initialization for self.yamlData = None, change to "{}" instead
 
 class YamlHandler:
@@ -72,8 +73,8 @@ class YamlHandler:
         self.hasVariables = self.checkForKey('var', optional=True)
 
     def checkForSyncPlc(self):
-        if self.checkForKey(['sync','enable'], optional=True):
-            if self.str2bool(self.getKey(['sync','enable'], self.yamlData)):
+        if self.checkForKey(['sync', 'enable'], optional=True):
+            if self.str2bool(self.getKey(['sync', 'enable'], self.yamlData)):
                 return True
         return False
 
@@ -83,17 +84,16 @@ class YamlHandler:
             plc_file = Path(self.getKey(['plc', 'file'], self.yamlData))
             self.hasPlcFile = plc_file.is_file()
 
-    def getAxisType(self):
-        self.checkForKey('axis')
-        try:
-            self.checkForKey('type', self.yamlData['axis'])
-            type_ = str(self.yamlData['axis']['type']).lower()
-        except KeyError:
-            type_ = '1'
+    def getAxisType(self, type_=None):
+        if type_ is None:
+            self.checkForKey('axis')
+            try:
+                self.checkForKey('type', self.yamlData['axis'])
+                type_ = self.yamlData['axis']['type']
+            except KeyError:
+                type_ = '1'
 
-        self.isSupportedAxisType(type_)
-
-        return self.supportedAxisTypes[type_]
+        return self.supportedAxisTypes[self.isSupportedAxisType(type_)]
 
     def isSupportedAxisType(self, type_=None):
         # make lower case and remove all white spaces
@@ -101,34 +101,36 @@ class YamlHandler:
         if type_str not in self.supportedAxisTypes:
             raise NotImplementedError(f'Axis type >> {type_str} << not implemented.\nSupported type are:\n'
                                       f'{yaml.dump(self.supportedAxisTypes)}')
-        return True
+        return type_str
 
     def setEcmcAxisType(self, type_=None):
         if type_ is None:
             type_ = self.getAxisType()
-        else:
-            self.isSupportedAxisType(type_)
-
-        self.axisType = self.supportedAxisTypes[str(type_)]
+        self.axisType = self.supportedAxisTypes[self.isSupportedAxisType(type_)]
 
 
 if __name__ == '__main__':
     h = YamlHandler()
+    print(h.isSupportedAxisType(0))
+    print(h.isSupportedAxisType('d eb ug '))
+    j = h.isSupportedAxisType('joint')
+    print(f'{j}, {type(j)}')
+    assert h.isSupportedAxisType('joint') is str('joint')
     # h.yamlData = {'plc': {'file': 'pytest/yaml_files/joint.yaml'}}
-    h.checkForPlcFile()
-    print(h.hasPlcFile)
+    # h.checkForPlcFile()
+    # print(h.hasPlcFile)
     exit(1)
 
     # print(h.checkForKey('dummy', data_="{'dummy': '0'}"))
 
     h.yamlData = {'axis': {'type': 'joint'}}
     print(h.checkForKey('axis'))
-    print(h.getKey('axis',h.yamlData))
+    print(h.getKey('axis', h.yamlData))
     h.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
-    print(h.getKey('sync',h.yamlData))
-    syncEna = h.getKey('enable', data=h.getKey('sync',h.yamlData))
+    print(h.getKey('sync', h.yamlData))
+    syncEna = h.getKey('enable', data=h.getKey('sync', h.yamlData))
     print(h.str2bool(syncEna) == True)
-    print(h.getKey('noGood', data=h.getKey('sync',h.yamlData)))
+    print(h.getKey('noGood', data=h.getKey('sync', h.yamlData)))
     # print(h.getKey(1, data_=h.getKey('sync')))
     # print(h.getKey(['axis','type'], data_=h.getKey('foo')))
     h.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
