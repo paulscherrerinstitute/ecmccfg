@@ -30,11 +30,10 @@ class YamlHandler:
     def str2bool(val) -> bool:
         true = ['true', '1', 't', 'y', 'yes']
         false = ['false', '0', 'f', 'n', 'no']
-        val = str(val)
-
-        if val.lower() in true:
+        val = str(val).lower()
+        if val in true:
             return True
-        elif val.lower() in false:
+        elif val in false:
             return False
         else:
             raise ValueError(f'unrecognized string >> {val} <<')
