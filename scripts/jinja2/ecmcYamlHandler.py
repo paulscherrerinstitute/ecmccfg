@@ -1,4 +1,5 @@
 import yaml
+import string
 from pathlib import Path
 
 # TODO: issue with initialization for self.yamlData = None, change to "{}" instead
@@ -16,7 +17,6 @@ class YamlHandler:
         '2': 2,
         'e': 2,
         'ee': 2,
-        'end effector': 2,
         'end_effector': 2,
         'endeffector': 2,
         'virtual': 2,
@@ -95,9 +95,11 @@ class YamlHandler:
 
         return self.supportedAxisTypes[type_]
 
-    def isSupportedAxisType(self, type_):
-        if str(type_) not in self.supportedAxisTypes:
-            raise NotImplementedError(f'Axis type >> {type_} << not implemented.\nSupported type are:\n'
+    def isSupportedAxisType(self, type_=None):
+        # make lower case and remove all white spaces
+        type_str = str(type_).lower().translate(str.maketrans('', '', string.whitespace))
+        if type_str not in self.supportedAxisTypes:
+            raise NotImplementedError(f'Axis type >> {type_str} << not implemented.\nSupported type are:\n'
                                       f'{yaml.dump(self.supportedAxisTypes)}')
         return True
 
