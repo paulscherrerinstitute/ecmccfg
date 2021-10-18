@@ -127,3 +127,11 @@ def test_get_axis_type(myHandler, test_input, expected):
     ''' call via yamlData '''
     myHandler.yamlData = {'axis': {'type': test_input}}
     assert myHandler.getAxisType() is expected
+
+def test_load_yaml_data(myHandler):
+    with pytest.raises(TypeError):
+        myHandler.loadYamlData()
+    with pytest.raises(FileNotFoundError):
+        myHandler.loadYamlData('yaml_files/fileNotFound.yaml')
+    myHandler.loadYamlData('yaml_files/joint.yaml')
+    assert myHandler.yamlData['axis']['type'] == 'joint'
