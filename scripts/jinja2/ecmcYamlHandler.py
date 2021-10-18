@@ -1,5 +1,7 @@
 import yaml
+from pathlib import Path
 
+# TODO: issue with initialization for self.yamlData = None, change to "{}" instead
 
 class YamlHandler:
     supportedAxisTypes = {
@@ -45,7 +47,7 @@ class YamlHandler:
 
     def getKey(self, key, data):
         if data is None:
-            raise ValueError(f'cannot obtain key >> {key} << from data of \'NoneType\'')
+            raise TypeError(f'cannot obtain key >> {key} << from data of type {type(data)}')
         if isinstance(key, list):
             for k in key:
                 data = self.getKey(k, data=data)  # if not None else None
@@ -76,12 +78,10 @@ class YamlHandler:
         return False
 
     def checkForPlcFile(self):
-        # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
-        try:
-            self.hasPlcFile = self.checkForKey('file', self.yamlData['plc']) and self.yamlData['plc'][
-                'file'] is not None
-        except:
-            pass
+        self.hasPlcFile = False
+        if self.checkForKey(['plc', 'file'], optional=True):
+            plc_file = Path(self.getKey(['plc', 'file'], self.yamlData))
+            self.hasPlcFile = plc_file.is_file()
 
     def getAxisType(self):
         self.checkForKey('axis')
@@ -112,6 +112,10 @@ class YamlHandler:
 
 if __name__ == '__main__':
     h = YamlHandler()
+    # h.yamlData = {'plc': {'file': 'pytest/yaml_files/joint.yaml'}}
+    h.checkForPlcFile()
+    print(h.hasPlcFile)
+    exit(1)
 
     # print(h.checkForKey('dummy', data_="{'dummy': '0'}"))
 
