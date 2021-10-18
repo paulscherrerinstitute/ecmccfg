@@ -66,10 +66,10 @@ def test_check_for_sync_plc(myHandler):
     assert myHandler.checkForSyncPlc() is True
     # assert False
 
-
-def test_get_key(myHandler):
-    myHandler.yamlData = {'axis': {'type': 'joint'}, 'sync': {'enable': 'true'}}
-    assert myHandler.getKey(['axis', 'type'], myHandler.yamlData) == 'joint'
+@pytest.mark.parametrize("test_input", ['j', 42, float(3.14)])
+def test_get_key(myHandler, test_input):
+    myHandler.yamlData = {'axis': {'type': test_input}, 'sync': {'enable': 'true'}}
+    assert myHandler.getKey(['axis', 'type'], myHandler.yamlData) == test_input
 
 
 @pytest.mark.parametrize("test_input,expected", [(1, True), (0, False), ("true", True), ("false", False)])
