@@ -101,7 +101,7 @@ record(ai, "$(PREFIX)$(MOTOR_NAME)-EncAct")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(PREFIX)$(MOTOR_NAME)-ErrId")
+record(longin, "$(PREFIX)$(MOTOR_NAME)-MR-ErrId")
 {
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))ErrId")

@@ -475,3 +475,12 @@ record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
   field(SCAN, "Passive")
   field(TSE,  "0")
 }
+
+record(longin,"${P}${AXIS_NAME}-ErrId"){
+  field(DESC, "${AXIS_NAME}: Error Id")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).errorid?")
+  field(SCAN, "I/O Intr")  
+  field(TSE,  "$(TSE=-2)")
+}
