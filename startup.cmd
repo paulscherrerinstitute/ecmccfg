@@ -23,9 +23,10 @@
 #- NAMING            = ClassicNaming
 #- EC_RATE           = 1000
 #- MODE              = FULL / DAQ
-#-    FULL: Init ecmc with support for both motion and DAQ (DEFAULT)
-#-    DAQ:  Init ecmc with support for only daq (not motion)
-#- PVA               = YES / NO
+#-    FULL:  Init ecmc with support for both motion and DAQ (DEFAULT)
+#-    DAQ:   Init ecmc with support for only daq (not motion)
+#-    NO_MR: Init ecmc with support for motion (without motor record) and DAQ
+#- PVA               = YES / NO#-    NO_MR: 
 #- TMP_DIR      = directory for temporary files
 #-
 #- [set by module]
@@ -72,8 +73,10 @@ epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
 #- call init-script, defaults to 'initAll'
 
 epicsEnvSet(ECMC_MODE, ${MODE=FULL})
-ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'=='FULL'","","# MODE == DAQ, DISABLING MOTION.")
+ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'!='DAQ'","","# MODE == DAQ, DISABLING MOTION.")
 epicsEnvShow(ECMC_SUPPORT_MOTION)
+ecmcEpicsEnvSetCalcTernary(ECMC_USE_MOTOR_RECORD, "'${ECMC_MODE=FULL}'=='FULL'","","# MODE != FULL, DISABLING MOTOR RECORD.")
+epicsEnvShow(ECMC_USE_MOTOR_RECORD)
 ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 
