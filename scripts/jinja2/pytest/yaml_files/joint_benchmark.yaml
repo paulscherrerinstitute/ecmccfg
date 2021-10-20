@@ -69,7 +69,8 @@ controller:
 trajectory:
   axis:
     velocity: 180
-    acceleration: 0.1
+    acceleration: 180
+    deceleration: 360
     # emergencyDeceleration: 0.05
   # jog:
   #   velocity: 90
