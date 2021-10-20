@@ -57,5 +57,5 @@ def test_render_vs_bechmark(myAxis):
         for line in lines:
             if 'Cfg.LinkEcEntryToObject(,' in line:
                 continue
-            cmd = re.search(r"\b(Cfg|Main).\w+", line).group()
+            cmd = re.search(r"\bCfg.\w+", line).group()
             assert cmd in myAxis.config.product
