@@ -1,0 +1,42 @@
+#- =============================================================================
+#- Drive
+#- =============================================================================
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax{{ axis.id|int }}.drv.control")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id|int }}.drv.status")"
+{# Todo: add more types, add default type #}
+{%- if axis.mode == 'CSV' %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id|int }}.drv.velocity")"
+{%- else %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id|int }}.drv.position")"
+{%- endif %}
+{%- if drive.reduceTorque %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque|int }}","ax{{ axis.id|int }}.drv.reducetorque")"
+{%- endif %}
+{%- if drive.reset %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reset|int }}","ax{{ axis.id|int }}.drv.reset")"
+{%- endif %}
+{%- if drive.warning %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.warning|int }}","ax{{ axis.id|int }}.drv.warning")"
+{%- endif %}
+{%- if drive.error %}
+{%- for bit in drive.error %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit|int }}","ax{{ axis.id|int }}.drv.alarm{{loop.index-1}}")"
+{%- endfor %}
+{%- endif %}
+
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom({{ axis.id|int }},{{ drive.denominator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum({{ axis.id|int }},{{ drive.numerator|float }})"
+{%- set brake=None if drive.brake is not defined else drive.brake %}
+ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime({{ axis.id|int }},{{ brake.openDelay|default(0)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id|int }},{{ brake.closeAhead|default(0)|int }})"
+
+#- Input sensors
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id|int }}.mon.lowlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id|int }}.mon.highlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id|int }}.mon.homesensor")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id|int }}.mon.extinterlock")"
+
+#- Output
+{%- set output = None if output is not defined else output %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id|int }}.drv.brake")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.health|default('') }}","ax{{ axis.id|int }}.health")"

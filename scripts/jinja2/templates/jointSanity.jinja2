@@ -1,0 +1,36 @@
+{%- block sanity -%}
+{%- set Error.caller = 'jointSanity' -%}
+{%- macro onError(msg='') -%}
+  {%- set Error.state = true -%}
+  {%- set Error.msg = msg -%}
+{%- endmacro -%}
+
+{#- ============== axis ==================================================== -#}
+{% include 'axisSanity.jinja2' %}
+{#- ============== drive =================================================== -#}
+{% include 'driveSanity.jinja2' %}
+{#- ============== input mappings ========================================== -#}
+{% include 'inputSanity.jinja2' %}
+{#- ============== encoder ================================================= -#}
+{% include 'encoderSanity.jinja2' %}
+{#- ============== controller ============================================== -#}
+{% include 'controllerSanity.jinja2' %}
+{#- ============== trajectory ============================================== -#}
+{% include 'trajectorySanity.jinja2' %}
+{#- ============== homing ================================================== -#}
+{% include 'homingSanity.jinja2' %}
+{#- ============== homing ================================================== -#}
+{% include 'epicsSanity.jinja2' %}
+{#- ============== The End ================================================= -#}
+{%- if not Error.state %}
+# ==============================================================================
+# axis config for axis {{ axis.id }}, {{ epics.name }}
+# ==> OK
+{% endif -%}
+
+{%- endblock -%}
+
+{#
+{%- extends "axisConfig.jinja2" if Error.state is false else "errorMessage.jinja2" -%}
+#}
+{%- extends "jointBody.jinja2" if Error.state is false else "errorMessage.jinja2" -%}

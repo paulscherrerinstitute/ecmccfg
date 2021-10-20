@@ -1,0 +1,16 @@
+#- ####################################################
+#-  JOINT
+#- ####################################################
+{# define namespace Error -#}
+{%- set Error = namespace(state=false) -%}
+
+{%- extends "jointSanity.jinja2" -%}
+
+{%- block sanity -%}
+{{super()}}
+{%- endblock -%}
+
+{% block body %}
+{{super()}}
+
+{% endblock %}
