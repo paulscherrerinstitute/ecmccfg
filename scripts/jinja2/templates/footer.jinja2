@@ -30,9 +30,12 @@ ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay({{ axis.id|int }},{{ velMonTime
 {%- set homingVelocity = None if homing.velocity is undefined else homing.velocity %}
 ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id|int }},{{ homingVelocity.to|default(0)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id|int }},{{ homingVelocity.from or homingVelocity.to |default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id|int }},${ECMC_HOME_SWITCH_POL=0})"
-ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id|int }},${ECMC_HOME_LATCH_COUNT_OFFSET=0.0})"
+ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id|int }},{{ homing.switchPolarity|default(0)|int}}"
+ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id|int }},{{ homing.latchCount|default(0)|int}})"
 ecmcConfigOrDie "Main.M{{ axis.id|int }}.fHomePosition={{ homing.position|default(0)|float }}"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable({{ axis.id|int }}, {{ homing.postMoveEnable|default(0)}})"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id|int }}, {{ homing.postMovePosition|default(0)}})"
+
 
 #- -----------------------------------------------------------------------------
 #- Axis records
