@@ -14,10 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true
+          fetch-depth: 0
 
-      - name: Initialize Python 3.7
+      - name: Initialize Python 3
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
