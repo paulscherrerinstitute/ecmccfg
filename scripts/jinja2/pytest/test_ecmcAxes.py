@@ -7,6 +7,18 @@ templates_path = f'{base_path}templates/'
 yaml_path = f'{base_path}pytest/yaml_files/'
 ref_path = f'{base_path}pytest/reference_files/'
 
+@pytest.mark.dependency()
+def test_init():
+    with pytest.raises(TypeError):
+        " no argument "
+        axis = EcmcAxis()
+        " config only "
+        axis = EcmcAxis(f'{yaml_path}joint.yaml1')
+    with pytest.raises(FileNotFoundError):
+        " config file not found "
+        axis = EcmcAxis(f'{yaml_path}FileNotFound.yaml', f'{templates_path}')
+        " config file not found "
+        axis = EcmcAxis(f'{yaml_path}joint.yaml', f'{templates_path}foobar')
 
 @pytest.fixture
 def myAxis():

@@ -7,13 +7,11 @@ from pathlib import Path
 class EcmcAxis(YamlHandler):
     def __init__(self, axisconfig, jinjatemplatedir):
         super().__init__()
-        c = Path(axisconfig)
-        if c.exists() and c.is_file():
+        if Path(axisconfig).is_file():
             self.axisconfig = axisconfig
         else:
             raise FileNotFoundError(f'axis configuration >> {axisconfig} << not found!')
-        p = Path(jinjatemplatedir)
-        if p.exists() and p.is_dir():
+        if Path(jinjatemplatedir).is_dir():
             self.jinjatemplatedir = jinjatemplatedir
         else:
             raise FileNotFoundError(f'template directory >> {jinjatemplatedir} << not found!')
