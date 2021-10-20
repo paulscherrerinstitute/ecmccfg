@@ -32,7 +32,7 @@ ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id|int }},{{ homingVelocity
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id|int }},{{ homingVelocity.from or homingVelocity.to |default(0)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id|int }},{{ homing.switchPolarity|default(0)|int}}"
 ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id|int }},{{ homing.latchCount|default(0)|int}})"
-ecmcConfigOrDie "Main.M{{ axis.id|int }}.fHomePosition={{ homing.position|default(0)|float }}"
+ecmcConfigOrDie "Cfg.SetAxisHomePosition({{ axis.id|int }},{{ homing.position|default(0)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable({{ axis.id|int }}, {{ homing.postMoveEnable|default(0)}})"
 ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id|int }}, {{ homing.postMovePosition|default(0)}})"
 
