@@ -1,10 +1,12 @@
 import pytest
-
+import re
 from ecmcAxes import EcmcAxis
 
 base_path = 'scripts/jinja2/'
 templates_path = f'{base_path}templates/'
 yaml_path = f'{base_path}pytest/yaml_files/'
+ref_path = f'{base_path}pytest/reference_files/'
+
 
 @pytest.fixture
 def myAxis():
@@ -43,3 +45,17 @@ def test_set_axis_template(myAxis):
     ''' render 2nd time with pre-rendered template '''
     myAxis.config.render(myAxis.yamlData)
     assert myAxis.config.product.strip() == "# var(foo) -> 3.14  1,  2,  3,  None,"
+
+
+@pytest.mark.dependency(depends=["test_create"])
+def test_render_vs_bechmark(myAxis):
+    myAxis.axisconfig = f'{yaml_path}joint_benchmark.yaml'
+    myAxis.create()
+    myAxis.config.render(myAxis.yamlData)
+    with open(f'{ref_path}joint.benchmark') as fp:
+        lines = fp.readlines()
+        for line in lines:
+            if 'Cfg.LinkEcEntryToObject(,' in line:
+                continue
+            cmd = re.search(r"\b(Cfg|Main).\w+", line).group()
+            assert cmd in myAxis.config.product
