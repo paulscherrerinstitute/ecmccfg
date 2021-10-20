@@ -128,7 +128,7 @@ ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay({{ axis.id|int }},{{ velMonTime
 #- Homing
 ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id|int }},${ECMC_HOME_SWITCH_POL=0})"
 ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id|int }},${ECMC_HOME_LATCH_COUNT_OFFSET=0.0})"
-ecmcConfigOrDie "Main.M{{ axis.id|int }}.fHomePosition={{ homing.position|default(0)|float }}"
+ecmcConfigOrDie "Cfg.SetAxisHomePosition({{ axis.id|int }},{{ homing.position|default(0)|float }})"
 
 #- Motor record init
 ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id|int }}, "6", "{{ axis.parameters|default('') }}")
