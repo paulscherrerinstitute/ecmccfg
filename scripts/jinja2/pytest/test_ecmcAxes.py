@@ -2,26 +2,29 @@ import pytest
 
 from ecmcAxes import EcmcAxis
 
+base_path = 'scripts/jinja2/'
+templates_path = f'{base_path}templates/'
+yaml_path = f'{base_path}pytest/yaml_files/'
 
 @pytest.fixture
 def myAxis():
-    return EcmcAxis('yaml_files/joint.yaml', '../templates/')
+    return EcmcAxis(f'{yaml_path}joint.yaml', f'{templates_path}')
 
 
 @pytest.mark.dependency()
 def test_create(myAxis):
     myAxis.create()
     assert myAxis.config.axisType is 1
-    myAxis.axisconfig = 'yaml_files/endEffector.yaml'
+    myAxis.axisconfig = f'{yaml_path}endEffector.yaml'
     myAxis.create()
     assert myAxis.config.axisType is 2
     with pytest.raises(NotImplementedError):
-        myAxis.axisconfig = 'yaml_files/axisTypeNotImplementedError.yaml'
+        myAxis.axisconfig = f'{yaml_path}axisTypeNotImplementedError.yaml'
         myAxis.create()
 
     with pytest.raises(FileNotFoundError):
-        newAxis = EcmcAxis('yaml_files/joint.yaml', '../notADir/')
-        newAxis = EcmcAxis('yaml_files/notAFile.yaml', '../templates/')
+        newAxis = EcmcAxis(f'{yaml_path}joint.yaml', '../notADir/')
+        newAxis = EcmcAxis(f'{yaml_path}notAFile.yaml', f'{templates_path}')
 
 
 @pytest.mark.dependency(depends=["test_create"])
