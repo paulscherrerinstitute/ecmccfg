@@ -3,7 +3,8 @@ name: jinja script tests
 on:
   push:
     branches:
-      - jinaj2  # Set a branch to deploy
+      - jinaj2
+      - v7.1
   pull_request:
 
 jobs:
