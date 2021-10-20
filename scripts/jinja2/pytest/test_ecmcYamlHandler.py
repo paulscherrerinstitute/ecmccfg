@@ -1,6 +1,9 @@
 import pytest
 from ecmcYamlHandler import YamlHandler
 
+base_path = 'scripts/jinja2/'
+templates_path = f'{base_path}templates/'
+yaml_path = f'{base_path}pytest/yaml_files/'
 
 @pytest.fixture
 def myHandler():
@@ -56,14 +59,14 @@ def test_check_for_key(myHandler):
     assert myHandler.checkForKey(['axis', 'type']) is True
 
 
-@pytest.mark.dependency(depends=["test_check_for_key"])
-def test_load_yaml_data(myHandler):
-    with pytest.raises(FileNotFoundError) as e_info:
-        myHandler.loadYamlData('fileNotFound.error')
-    assert myHandler.yamlData is None
-    myHandler.loadYamlData('../test/yamlHandlerTest.yaml')
-    assert myHandler.yamlData is not None
-    assert myHandler.checkForKey('yaml') is True
+# @pytest.mark.dependency(depends=["test_check_for_key"])
+# def test_load_yaml_data(myHandler):
+#     with pytest.raises(FileNotFoundError) as e_info:
+#         myHandler.loadYamlData('fileNotFound.error')
+#     assert myHandler.yamlData is None
+#     myHandler.loadYamlData('scripts/jinja2/pytest/yaml_files/yamlHandlerTest.yaml')
+#     assert myHandler.yamlData is not None
+#     assert myHandler.checkForKey('yaml') is True
 
 
 @pytest.mark.dependency(depends=["test_check_for_key", "test_is_supported_axis_type"])
@@ -108,10 +111,10 @@ def test_check_for_plc_file(myHandler):
     '''
     myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is False
-    myHandler.yamlData = {'plc': {'file': 'plc/empty.plc'}}
+    myHandler.yamlData = {'plc': {'file': f'{base_path}pytest/plc/empty.plc'}}
     myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is True
-    myHandler.yamlData = {'plc': {'file': 'plc/fileNotFound.plc'}}
+    myHandler.yamlData = {'plc': {'file': 'fileNotFound.plc'}}
     myHandler.checkForPlcFile()
     assert myHandler.hasPlcFile is False
 
@@ -128,6 +131,6 @@ def test_load_yaml_data(myHandler):
     with pytest.raises(TypeError):
         myHandler.loadYamlData()
     with pytest.raises(FileNotFoundError):
-        myHandler.loadYamlData('yaml_files/fileNotFound.yaml')
-    myHandler.loadYamlData('yaml_files/joint.yaml')
+        myHandler.loadYamlData(f'{yaml_path}fileNotFound.yaml')
+    myHandler.loadYamlData(f'{yaml_path}joint.yaml')
     assert myHandler.yamlData['axis']['type'] == 'joint'
