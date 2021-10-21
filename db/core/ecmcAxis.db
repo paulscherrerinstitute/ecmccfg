@@ -437,6 +437,8 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(DESC, "${AXIS_NAME}: Target Position Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targpos?")
+  field(DRVL, "${ECMC_SOFT_LOW_LIM=0}")
+  field(DRVH, "${ECMC_SOFT_HIGH_LIM=0}")
   field(SCAN, "Passive")
   field(TSE,  "0")
 }
@@ -446,6 +448,8 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(DESC, "${AXIS_NAME}: Target Velocity Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targvelo?")
+  field(DRVL, "-${ECMC_MON_VELO_MAX=0}")
+  field(DRVH, "${ECMC_MON_VELO_MAX=0}")
   field(SCAN, "Passive")
   field(TSE,  "0")
 }
