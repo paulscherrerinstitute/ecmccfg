@@ -40,7 +40,7 @@ ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id|int }}, {{ hom
 #- -----------------------------------------------------------------------------
 #- Axis records
 ecmcFileExist("ecmcAxis.db",1,1)
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id|int }},ECMC_SOFT_LOW_LIM={{ softlimits.backward|default(0)|float}},ECMC_SOFT_HIGH_LIM={{ softlimits.forward|default(0)|float}},ECMC_MON_VELO_MAX={{ velocity.max|default(0)|float}},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id|int }},ECMC_SOFT_LOW_LIM={{ softlimits.backward|default(0)|float if softlimits.enable|default(false)|int else 0|float}},ECMC_SOFT_HIGH_LIM={{ softlimits.forward|default(0)|float if softlimits.enable|default(false)|int else 0|float }},ECMC_MON_VELO_MAX={{ velocity.max|default(0)|float if velocity.enable|default(false)|int else 0|float }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 #- -----------------------------------------------------------------------------
 
 {%- set MR = None if epics.motorRecord is undefined else epics.motorRecord%}
