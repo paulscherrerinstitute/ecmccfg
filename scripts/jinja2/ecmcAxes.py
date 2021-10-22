@@ -76,8 +76,8 @@ if __name__ == '__main__':
     # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
     ''' if the config has a 'var' key, run renderer twice'''
     if axis.config.hasVariables:
-        axis.config.setTemplate(axis.config.render(axis.yamlData))
-    axis.config.render(axis.yamlData)
+        axis.config.setTemplate(axis.config.render(axis.config.yamlData))
+    axis.config.render(axis.config.yamlData)
     if axis.config.hasSyncPLC:
         plc = axis.config.axisPlc
         plc.checkForPlcFile()
