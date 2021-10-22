@@ -1,5 +1,5 @@
-file "ecmc_analogInput-chX"
+file "ecmc_analogInput-chX.template"
 {
   pattern { CH_ID,  KEY,   EGU,  PREC,  ESLO, suffix    }
-          { 01,     "Enc", "mm", 5,     1e-6, "PosAct"  }
+          { 01,     "Enc", "mm", 5,     1e-6, "-PosAct"  }
 }
