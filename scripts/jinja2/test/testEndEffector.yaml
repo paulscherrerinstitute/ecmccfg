@@ -8,6 +8,13 @@ var:
   drvSlave: 3
   encSlave: 17
 
+epics:
+  name: M1
+  # motorRecord: false
+  precision: 3
+  description: AMI8121 CSV
+  unit: deg
+
 motorRecord:
   name: EE1
   precision: 3

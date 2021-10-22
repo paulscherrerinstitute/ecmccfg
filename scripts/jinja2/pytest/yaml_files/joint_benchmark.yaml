@@ -70,7 +70,7 @@ trajectory:
   axis:
     velocity: 180
     acceleration: 180
-    deceleration: 360
+    deceleration: 180
     # emergencyDeceleration: 0.05
   # jog:
   #   velocity: 90
@@ -109,10 +109,10 @@ softlimits:
   backward: -7200
 
 monitoring:
-  # lag:
-  #   enable: false
-  #   tollerance: 5
-  #   time: 100
+#   lag:
+#     enable: false
+#     tollerance: 5
+#     time: 100
   target:
     enable: true
     tollerance: 0.125
