@@ -55,7 +55,7 @@ epicsEnvUnset(ECMC_EXE_CMD)
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
 epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
-epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_TEMPLATES}/")
+epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_DB}")
 #- define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
 epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #-
