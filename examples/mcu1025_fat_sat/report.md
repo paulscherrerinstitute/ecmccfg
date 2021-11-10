@@ -1,7 +1,7 @@
 # ecmc motion system test report
 
 * Data file   : /home/dev/tempdata/data.log
-* Date        : Wed Nov 10 10:50:21 CET 2021
+* Date        : Wed Nov 10 11:41:41 CET 2021
 * Author      : dev
 
 
@@ -237,15 +237,15 @@ Range | 0.04398 | 0.07330 |
 
 ## Summary
 
-**Low limit engage range    = 0.05864**
+**Low limit engage range    = 0.05864 [mm]**
 
-**Low limit disengage range = 0.07330**
+**Low limit disengage range = 0.07330 [mm]**
 
-**High limit engage range    = 0.04398**
+**High limit engage range    = 0.04398 [mm]**
 
-**High limit disengage range = 0.07330**
+**High limit disengage range = 0.07330 [mm]**
 
-**Range = -0.01466**
+**Total  travel range (engage to engage) = 90.81240 [mm]**
 
 
 # Resolver Performance
