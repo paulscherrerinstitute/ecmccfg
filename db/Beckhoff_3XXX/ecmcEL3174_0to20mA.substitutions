@@ -8,7 +8,7 @@ file "ecmc_analogInput-chX.template"
           {04,    6.5535447249E-4,  0,    "mA", 3,    0,   -1,   20,   21,   0,    "MAJOR", "MINOR", "MINOR", "MAJOR"}
 }
 
-file "ecmc_status-chX.template"
+file "ecmc_status_analog-chX.template"
 {
   pattern {CH_ID, KEY }
           {01,    "AI"}
