@@ -1,3 +1,12 @@
+#- statusword template
+#- MACROS
+#- mandatory
+#-  ECMC_P
+#-  KEY
+#-  CH_ID
+#- optional
+#-  sourceName, defaults to 'status'
+
 record(mbbiDirect,"${ECMC_P}${KEY=AI}${CH_ID}-Stat"){
   field(DESC, "$(HWTYPE): AI$(CH_ID): Status Word")
   field(PINI, "$(PINI=1)")
@@ -39,3 +48,4 @@ record(bi,"${ECMC_P}${KEY=AI}${CH_ID}-ErrAlrm"){
   field(OSV,  "MAJOR")
   field(TSE,  "$(TSE=-2)")
 }
+
