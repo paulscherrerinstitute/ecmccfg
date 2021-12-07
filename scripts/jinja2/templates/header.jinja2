@@ -18,4 +18,4 @@ ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id|int }},{{ trajectory.ax
 
 {%- set modulo = None if trajectory.modulo is not defined else trajectory.modulo %}
 ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id|int }}, {{ modulo.range|default(0)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id|int }}, {{ modulo.type|default(0)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id|int }}, {{ modulo.type|default(0)|int}})"

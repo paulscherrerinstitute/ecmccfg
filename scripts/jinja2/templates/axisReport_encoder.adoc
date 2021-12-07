@@ -1,0 +1,75 @@
+== encoder
+
+=== scaling and data
+
+Denominator: {{ encoder.denominator|default(1)|int }}
+
+Numerator: {{ encoder.numerator|default(0)|float }}
+
+The encoder uses a scaling of
+{{ encoder.denominator|default(1)|int }} encoder ticks / {{ encoder.numerator|default(0)|float }} {{egu}}.
+{% set typeStr = 'absolute' if encoder.type==1 else 'incremental'%}
+{%-set bits = encoder.bits if encoder.type==0 else encoder.absBits-%}
+The {{typeStr}} position information is encoded in {{bits}} bits.
+{%if encoder.absOffset != 0%}
+An offset of {{ encoder.absOffset|default(0)|float }} {{egu}} is applied.
+{%endif%}
+
+=== links
+
+==== core functions
+
+[cols="1,1"]
+|===
+|function | link
+
+|position
+|{{ encoder.position }}
+
+{%- if encoder.control is defined %}
+|control
+|{{encoder.control}}
+{%endif%}
+
+{%- if encoder.status is defined %}
+|status
+|{{encoder.status}}
+{%endif%}
+
+{%- if encoder.reset %}
+{%- set key = encoder.control ~ '.' ~ encoder.reset|int  %}
+|reset
+|{{ key|default('') }}
+{%- endif %}
+
+{%- if encoder.warning %}
+{%- set key = encoder.control ~ '.' ~ encoder.warning|int  %}
+|warning
+|{{ key|default('') }}
+{%- endif %}
+
+{%- if encoder.error %}
+{%- for bit in encoder.error %}
+|error bit {{loop.index-1}}
+|{{ encoder.status }}.{{ bit|int }}
+{%- endfor %}
+{%- endif %}
+
+|===
+
+=== type
+- encoder type: {{ encoder.type|default(0)|int }}
+
+=== filter parameter
+- velocity filter: {{ encoder.velocityFilterSize|default(100)|int}}
+{%if encoder.positionFilterEnable%}
+- position filter: {{ encoder.positionFilterSize|default(1)|int}}
+{%endif%}
+
+{%- set latch = None if encoder.latch is not defined else encoder.latch %}
+{%if encoder.latch is defined%}
+=== latching
+- latch position: {{ latch.position|default('') }}
+- latch control: {{ latch.control|default('') }}
+- latch status: {{ latch.status|default('') }}
+{%endif%}
