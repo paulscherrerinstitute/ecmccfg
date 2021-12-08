@@ -59,15 +59,36 @@ def test_set_axis_template(myAxis):
     assert myAxis.config.product.strip() == "# var(foo) -> 3.14  1,  2,  3,  None,"
 
 
+def getArgs(line):
+    arg = re.search(r"\b\(.*\)", line).group()
+    args = arg.translate({ord(c): None for c in '()" '}).split(',')
+    for i, v in enumerate(args):
+        try:
+            args[i] = float(v) if '.' in v else int(v)
+        except:
+            continue
+    return args
+
 @pytest.mark.dependency(depends=["test_create"])
 def test_render_vs_bechmark(myAxis):
     myAxis.axisconfig = f'{yaml_path}joint_benchmark.yaml'
     myAxis.create()
-    myAxis.config.render(myAxis.yamlData)
+    if myAxis.config.hasVariables:
+        myAxis.config.setTemplate(myAxis.config.render(myAxis.config.yamlData))
+    myAxis.config.render(myAxis.config.yamlData)
     with open(f'{ref_path}joint.benchmark') as fp:
         lines = fp.readlines()
         for line in lines:
+            # skip empty links
             if 'Cfg.LinkEcEntryToObject(,' in line:
                 continue
-            cmd = re.search(r"\bCfg.\w+", line).group()
-            assert cmd in myAxis.config.product
+            cmdOrg = re.search(r"\bCfg.\w+", line).group()
+            cmd = f'{cmdOrg}\('
+            args = getArgs(line)
+            if 'Cfg.LinkEcEntryToObject' in cmd:
+                cmd = args[1]
+
+            items = re.findall(f"^.*{cmd}.*$", myAxis.config.product, re.MULTILINE)
+            iArgs = getArgs(items[0])
+            assert cmdOrg in myAxis.config.product
+            assert iArgs == args

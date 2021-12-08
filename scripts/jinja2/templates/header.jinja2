@@ -1,8 +1,10 @@
 #- General
 {%- set drive = None if drive is undefined else drive %}
 {# TODO: switch for end effector vs joint #}
-ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},1,{{ drive.type|default(0)|int }})"
-{# TODO: ecmcConfigOrDie "Cfg.SetAxisTrajStartPos(${ECMC_AXIS_NO},0)" for end effector#}
+ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},{{ axis.type|int }},{{ drive.type|default(0)|int }})"
+{%- if axis.type|int == 2 %}
+ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id|int }},0)" for end effector
+{%- endif %}
 #- health --> see Output
 
 #- Trajectory
@@ -12,8 +14,8 @@ ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},1,{{ drive.type|default(0)|int
 ecmcConfigOrDie "Cfg.SetAxisAcc({{ axis.id|int }},{{ trajectory.axis.acceleration|float }})"
 ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id|int }},{{ deceleration|float }})"
 ecmcConfigOrDie "Cfg.SetAxisVel({{ axis.id|int }},{{ trajectory.axis.velocity|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id|int }},{{ trajectory.axis.emergencyDeceleration or maxDec |float }})"
+ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id|int }},{{ trajectory.axis.emergencyDeceleration or maxDec*10 |float }})"
 
 {%- set modulo = None if trajectory.modulo is not defined else trajectory.modulo %}
 ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id|int }}, {{ modulo.range|default(0)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id|int }}, {{ modulo.type|default(0)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id|int }}, {{ modulo.type|default(0)|int}})"

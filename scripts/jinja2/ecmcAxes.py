@@ -52,6 +52,7 @@ class EcmcCommonAxis(JinjaTemplate, YamlHandler):
             2: 'endEffector.jinja2',
         }
         self.read(axisTemplates[type_])
+        self.yamlData['axis']['type'] = type_
 
 
 class EcmcEndEffector(EcmcCommonAxis):
@@ -71,13 +72,14 @@ class EcmcJoint(EcmcCommonAxis):
 
 if __name__ == '__main__':
     # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
-    axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    axis = EcmcAxis('pytest/yaml_files/joint_benchmark.yaml', './templates/')
     axis.create()
     # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
     ''' if the config has a 'var' key, run renderer twice'''
     if axis.config.hasVariables:
-        axis.config.setTemplate(axis.config.render(axis.yamlData))
-    axis.config.render(axis.yamlData)
+        axis.config.setTemplate(axis.config.render(axis.config.yamlData))
+    axis.config.render(axis.config.yamlData)
     if axis.config.hasSyncPLC:
         plc = axis.config.axisPlc
         plc.checkForPlcFile()
@@ -88,6 +90,5 @@ if __name__ == '__main__':
             plc.config.setTemplate(plc.config.render(plc.yamlData))
         plc.config.render(plc.yamlData)
         axis.config.product += plc.config.product
-    # axis.config.show()
-    axis.config.write('test.txt')
-
+    axis.config.show()
+    # axis.config.write('test.txt')

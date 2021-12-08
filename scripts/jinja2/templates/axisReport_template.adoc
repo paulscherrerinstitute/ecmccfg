@@ -1,0 +1,142 @@
+= Axis Configuration
+:toc:
+:stem: latexmath
+
+created by {{author}} at {{date}}
+
+== axis
+
+[cols="1,1,3"]
+|===
+|*id*
+|{{axis.id}}
+|unique identifier
+
+|*type*
+|{{axis.type}}
+| 1=joint, 2=endeffector
+
+|*mode*
+|{{axis.mode}}
+|drive control mode, CSV=velocity or CSP=position
+
+|===
+
+{%- if axis.parameters is defined %}
+- additional parameters: +
+{{axis.parameters}}
+{%- endif %}
+
+== variables
+
+{%- if var is defined %}
+[cols="1,1"]
+|===
+|variable| value
+
+{% for v,val in var|dictsort %}
+    |{{v}}
+    |{{val}}
+{%endfor%}
+|===
+{%- endif %}
+
+== epics
+{%set egu %}
+stem:[\mathrm{ {{epics.unit}} }]
+{%endset%}
+
+This axis is linked to the PV *{{epics.name}}*. The engineering unit is {{egu}}, with a precision of {{epics.precision}} decimal places .
+
+{%if epics.motorRecord is defined%}
+{%if epics.motorRecord.enable is true%}
+The axis is configured *with* the motorRecord, the description is "{{epics.motorRecord.description}}"!
+{%endif%}
+{%if epics.motorRecord.fieldInit is defined%}
+Additional field initializations are active: +
+{{epics.motorRecord.fieldInit}}
+{%endif%}
+{%endif%}
+
+== trajectory generation
+{%set vu %}
+stem:[\mathrm{ {{epics.unit}} } \cdot \mathrm{ s }^{-1}]
+{%endset%}
+{%set au %}
+stem:[\mathrm{ {{epics.unit}} } \cdot \mathrm{ s }^{-2}]
+{%endset%}
+{%set ju %}
+stem:[\mathrm{ {{epics.unit}} } \cdot \mathrm{ s }^{-3}]
+{%endset%}
+
+{%- set modulo = None if trajectory.modulo is not defined else trajectory.modulo %}
+{%if trajectory.modulo is defined%}
+NOTE: This is a *modulo axis* with a range of {{ modulo.range|default(0)|float}}. Modulo type is set to *{{ modulo.type|default(0)|int}}*.
+{%endif%}
+
+{%- set deceleration = trajectory.axis.acceleration if trajectory.axis.deceleration is undefined else trajectory.axis.deceleration %}
+{%- set maxDec = trajectory.axis.acceleration if trajectory.axis.acceleration > deceleration else deceleration %}
+
+{%if trajectory.axis.deceleration is undefined%}
+WARNING: No explicit *deceleration* defined. +
+The deceleration is automatically set to {{deceleration|float}} {{au}}.
+{%endif%}
+
+{%if trajectory.axis.emergencyDeceleration is undefined%}
+WARNING: No explicit *emergency deceleration* defined. +
+The emergency deceleration is automatically set to {{maxDec*10 |float}} {{au}}.
+{%endif%}
+
+{#- catch unconfigured jog velocity and acceleration #}
+{%- set jog = None if trajectory.jog is undefined else trajectory.jog %}
+{#- set jog velocity to 1/10th of axis velocity if jog velocity is undefined #}
+{%- set jogVelocity=trajectory.axis.velocity/10 if jog.velocity is undefined else jog.velocity %}
+{#- use axis acceleration for jog id not explicitly defined #}
+{%- set jogacceleration=trajectory.axis.acceleration if jog.acceleration is undefined else jog.acceleration %}
+
+{%if trajectory.jog is undefined%}
+WARNING: No explicit *jog velocity* defined. +
+The jog velocity is automatically set to {{jogVelocity |float}} {{vu}}.
+{%endif%}
+
+{%if jog.acceleration is undefined%}
+WARNING: No explicit *jog.acceleration* defined. +
+The jog acceleration is automatically set to {{jogacceleration |float}} {{au}}.
+{%endif%}
+
+=== summary
+[cols="1,1,1"]
+|===
+|variable| value | unit
+
+|velocity
+|{{ trajectory.axis.velocity|float }}
+|{{vu}}
+
+|acceleration
+|{{ trajectory.axis.acceleration|float }}
+|{{au}}
+
+|jerk
+|{{ trajectory.axis.jerk|float }}
+|{{ju}}
+
+|deceleration
+|{{ deceleration|float }}
+|{au}}
+
+|emergency deceleration
+|{{ trajectory.axis.emergencyDeceleration or maxDec*10 |float }}
+|{{au}}
+
+|jog velocity
+|{{jogVelocity |float}}
+|{{vu}}
+
+|jog acceleration
+|{{jogacceleration |float}}
+|{{au}}
+|===
+
+{% include 'axisReport_drive.adoc' %}
+{% include 'axisReport_encoder.adoc' %}
