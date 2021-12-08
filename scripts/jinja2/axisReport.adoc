@@ -1,9 +1,9 @@
 = Axis Configuration
 :toc:
 
-:stem: latexmath
+:stem:
 
-created by Dr. Niko Kivel at 2021-12-08|09:20:11.099991
+created by Dr. Niko Kivel at 2021-12-08|11:34:36.488609
 
 == axis
 
@@ -45,7 +45,7 @@ powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 
 
 This axis is linked to the PV *M1*. The engineering unit is 
-stem:[\mathrm{ deg }]
+deg
 , with a precision of 3 decimal places .
 
 
@@ -62,29 +62,26 @@ NTM=1
 
 
 
-
-
-
 WARNING: No explicit *deceleration* defined. +
-The deceleration is automatically set to 180.0 
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-.
+The deceleration is automatically set to 180.0 stem:[
+deg
+\ s^-2].
 
 
 
 WARNING: No explicit *emergency deceleration* defined. +
-The emergency deceleration is automatically set to 1800.0 
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-.
+The emergency deceleration is automatically set to 1800.0 stem:[
+deg
+\ s^-2].
 
 
 
 
 
 WARNING: No explicit *jog.acceleration* defined. +
-The jog acceleration is automatically set to 180.0 
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-.
+The jog acceleration is automatically set to 180.0 stem:[
+deg
+\ s^-2].
 
 
 === summary
@@ -94,45 +91,45 @@ stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
 
 |velocity
 |180.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-1}]
-
+|stem:[
+deg
+\ s^-1]
 
 |acceleration
 |180.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-
+|stem:[
+deg
+\ s^-2]
 
 |jerk
 |1800.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-3}]
-
+|stem:[
+deg
+\ s^-3]
 
 |deceleration
 |180.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-
+|stem:[
+deg
+\ s^-2]
 
 |emergency deceleration
 |1800.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-
+|stem:[
+deg
+\ s^-2]
 
 |jog velocity
 |90.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-1}]
-
+|stem:[
+deg
+\ s^-1]
 
 |jog acceleration
 |180.0
-|
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
-
+|stem:[
+deg
+\ s^-2]
 |===
 
 == drive
@@ -143,9 +140,9 @@ Denominator: 2147483648
 
 Numerator: 2880000.0
 
-At full output (2147483648) the axis will theoretically move at 2880000.0 
-stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-1}]
-.
+At full output (2147483648) the axis will theoretically move at 2880000.0 stem:[
+deg
+\ s^-1].
 
 NOTE: This is used for internal scaling only, it does not mean the axis can actually reach such velocities! +
 Consult the drive manual for details.
@@ -228,7 +225,7 @@ Numerator: 360.0
 
 The encoder uses a scaling of
 1048576 encoder ticks / 360.0 
-stem:[\mathrm{ deg }]
+deg
 .
 The absolute position information is encoded in 25 bits.
 
