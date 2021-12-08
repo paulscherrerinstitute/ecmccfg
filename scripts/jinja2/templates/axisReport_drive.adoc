@@ -6,6 +6,11 @@ Denominator: {{ drive.denominator|default(1)|int }}
 
 Numerator: {{ drive.numerator|default(0)|float }}
 
+At full output ({{ drive.denominator|default(1)|int }}) the axis will theoretically move at {{ drive.numerator|default(0)|float }} {{vu}}.
+
+NOTE: This is used for internal scaling only, it does not mean the axis can actually reach such velocities! +
+Consult the drive manual for details.
+
 === links
 
 ==== core functions

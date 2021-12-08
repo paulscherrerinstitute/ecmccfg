@@ -1,0 +1,270 @@
+= Axis Configuration
+:toc:
+
+:stem: latexmath
+
+created by Dr. Niko Kivel at 2021-12-08|09:20:11.099991
+
+== axis
+
+[cols="1,1,3"]
+|===
+|key | value | remark
+
+|id
+|1
+|unique identifier
+
+|type
+|1
+| 1=joint, 2=endeffector
+
+|mode
+|CSV
+|drive control mode, CSV=velocity or CSP=position
+
+|===
+- additional parameters: +
+powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+
+== variables
+[cols="1,1"]
+|===
+|variable| value
+
+
+    |drive
+    |0
+
+    |encoder
+    |42
+
+|===
+
+== epics
+
+
+This axis is linked to the PV *M1*. The engineering unit is 
+stem:[\mathrm{ deg }]
+, with a precision of 3 decimal places .
+
+
+
+The axis is configured *with* the motorRecord, the description is "AM8111 CSV"!
+
+
+Additional field initializations are active: +
+NTM=1
+
+
+
+== trajectory generation
+
+
+
+
+
+
+WARNING: No explicit *deceleration* defined. +
+The deceleration is automatically set to 180.0 
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+.
+
+
+
+WARNING: No explicit *emergency deceleration* defined. +
+The emergency deceleration is automatically set to 1800.0 
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+.
+
+
+
+
+
+WARNING: No explicit *jog.acceleration* defined. +
+The jog acceleration is automatically set to 180.0 
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+.
+
+
+=== summary
+[cols="1,1,1"]
+|===
+|variable| value | unit
+
+|velocity
+|180.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-1}]
+
+
+|acceleration
+|180.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+
+
+|jerk
+|1800.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-3}]
+
+
+|deceleration
+|180.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+
+
+|emergency deceleration
+|1800.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+
+
+|jog velocity
+|90.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-1}]
+
+
+|jog acceleration
+|180.0
+|
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-2}]
+
+|===
+
+== drive
+
+=== scaling
+
+Denominator: 2147483648
+
+Numerator: 2880000.0
+
+At full output (2147483648) the axis will theoretically move at 2880000.0 
+stem:[\mathrm{ deg } \cdot \mathrm{ s }^{-1}]
+.
+
+NOTE: This is used for internal scaling only, it does not mean the axis can actually reach such velocities! +
+Consult the drive manual for details.
+
+=== links
+
+==== core functions
+
+[cols="1,1"]
+|===
+|function | link
+
+|control
+|ec0.s{{ var.drive }}.driveControl01
+
+|status
+|ec0.s{{ var.drive }}.driveStatus01
+
+|setpoint
+|ec0.s{{ var.drive }}.velocitySetpoint01
+|drive reset
+|ec0.s{{ var.drive }}.driveControl01.7
+|warning
+|ec0.s{{ var.drive }}.driveStatus01.7
+|error bit 0
+|ec0.s{{ var.drive }}.driveStatus01.3
+|===
+
+==== inputs
+
+|===
+|function | link
+
+|limit forward
+|ec0.s{{ var.drive }}.ONE.0
+
+|limit backward
+|ec0.s{{ var.drive }}.ONE.0
+
+|home
+|ec0.s{{ var.drive }}.ONE.0
+
+|interlock
+|ec0.s{{ var.drive }}.ONE.0
+|===
+
+==== output
+
+|===
+|function | link
+
+
+|brake
+|ec0.s42.binaryOutput07
+
+
+
+|health
+|ec0.s42.binaryOutput03
+
+|===
+
+
+=== brake
+
+
+.Timing
+NOTE:   Brake will open *0 cycles* after the amplifier powered up. +
+        The brake will engage *0 cycles* ahead of powering down the amplifier.
+
+CAUTION: Brakes are handled in EtherCAT cycles, rather than time!
+
+== encoder
+
+=== scaling and data
+
+Denominator: 1048576
+
+Numerator: 360.0
+
+The encoder uses a scaling of
+1048576 encoder ticks / 360.0 
+stem:[\mathrm{ deg }]
+.
+The absolute position information is encoded in 25 bits.
+
+
+=== links
+
+==== core functions
+
+[cols="1,1"]
+|===
+|function | link
+
+|position
+|ec0.s{{ var.encoder }}.positionActual01
+|control
+|ec0.s{{ var.encoder }}.encoderControl01
+
+|status
+|ec0.s{{ var.encoder }}.encoderStatus01
+
+|reset
+|ec0.s{{ var.encoder }}.encoderControl01.1
+|warning
+|ec0.s{{ var.encoder }}.encoderControl01.2
+|error bit 0
+|ec0.s{{ var.encoder }}.encoderStatus01.5
+|error bit 1
+|ec0.s{{ var.encoder }}.encoderStatus01.9
+|error bit 2
+|ec0.s{{ var.encoder }}.encoderStatus01.11
+
+|===
+
+=== type
+- encoder type: 1
+
+=== filter parameter
+- velocity filter: 100
+
