@@ -18,6 +18,7 @@ if __name__ == '__main__':
     axis.config.yamlData['date'] = datetime.datetime.today().isoformat("|")
     axis.config.render(axis.config.yamlData)
     axis.config.show()
+    axis.config.write("axisReport.adoc")
     axis.config.write("/tmp/axisReport.adoc")
 
     # if axis.config.hasSyncPLC:

@@ -1,5 +1,6 @@
 = Axis Configuration
 :toc:
+
 :stem: latexmath
 
 created by {{author}} at {{date}}
@@ -8,15 +9,17 @@ created by {{author}} at {{date}}
 
 [cols="1,1,3"]
 |===
-|*id*
+|key | value | remark
+
+|id
 |{{axis.id}}
 |unique identifier
 
-|*type*
+|type
 |{{axis.type}}
 | 1=joint, 2=endeffector
 
-|*mode*
+|mode
 |{{axis.mode}}
 |drive control mode, CSV=velocity or CSP=position
 
@@ -123,7 +126,7 @@ The jog acceleration is automatically set to {{jogacceleration |float}} {{au}}.
 
 |deceleration
 |{{ deceleration|float }}
-|{au}}
+|{{au}}
 
 |emergency deceleration
 |{{ trajectory.axis.emergencyDeceleration or maxDec*10 |float }}
