@@ -1,0 +1,34 @@
+##############################################################################
+## Example config for Micro-Epsilon ODC2520-46 
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "6")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=OptoODC2520_46mm"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
