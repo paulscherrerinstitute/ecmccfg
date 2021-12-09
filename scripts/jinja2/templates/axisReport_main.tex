@@ -1,0 +1,83 @@
+% !Author = kivel
+% !Date = 2021-12-08
+% !TEX spellcheck = us-US
+
+% Preamble
+\documentclass[12pt, a4paper, twoside]{scrartcl}
+\usepackage[utf8]{inputenc}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{color, colortbl}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{tocstyle}
+% float placement
+\usepackage{float}
+
+% ==============================================================================
+% definitions
+% ==============================================================================
+{# define _egu_#}
+{%-set egu -%}
+{{epics.unit}}
+{%-endset-%}
+
+{%-set vu -%}
+$\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-1}$
+{%-endset-%}
+
+{%-set au -%}
+$\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-2}$
+{%-endset-%}
+
+{%-set ju -%}
+$\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
+{%-endset-%}
+
+{% include 'axisReport_definitions.tex' %}
+
+
+% Document
+
+% TODO: add PSI conver page
+\title{Axis Configuration Report \\
+    \large {{device|default('default device')}}
+}
+\author{ {{-author-}} \thanks{Paul Scherrer Institute}}
+\date{ {{-date-}} }
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\tableofcontents
+
+\pagebreak
+
+
+
+{% include 'axisReport_axis.tex' %}
+
+{% include 'axisReport_var.tex' %}
+
+{% include 'axisReport_epics.tex' %}
+
+{% include 'axisReport_trajectory.tex' %}
+
+{% include 'axisReport_controller.tex' %}
+
+{% include 'axisReport_drive.tex' %}
+
+{% include 'axisReport_encoder.tex' %}
+
+{%if monitoring is defined%}
+  {% include 'axisReport_monitoring.tex'%}
+{%endif%}
+
+% TODO: homing
+
+\end{document}

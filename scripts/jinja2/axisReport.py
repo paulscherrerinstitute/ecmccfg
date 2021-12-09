@@ -21,6 +21,13 @@ if __name__ == '__main__':
     axis.config.write("axisReport.adoc")
     axis.config.write("/tmp/axisReport.adoc")
 
+
+    axis.config.read("axisReport_main.tex")
+
+    axis.config.render(axis.config.yamlData)
+    axis.config.show()
+    axis.config.write("/tmp/axisReport.tex")
+
     # if axis.config.hasSyncPLC:
     #     plc = axis.config.axisPlc
     #     plc.checkForPlcFile()

@@ -1,0 +1,47 @@
+% colors
+\definecolor{Gray}{gray}{0.9}
+
+{%raw%}
+\newcommand{\itemIndent}[2]{{\makebox[3cm]{#1:\hfill} #2}}
+{%endraw%}
+
+\newcommand{\messagebox}[2][warningsign]{
+\noindent
+\vskip12pt
+\begin{tabularx}{\textwidth}{c||X}
+  \begin{minipage}{0.1\linewidth}
+    \centering
+    {%raw%}
+    \includegraphics[width=12mm]{#1}
+    {%endraw%}
+  \end{minipage} &
+  \begin{minipage}{0.9\linewidth}
+    #2
+  \end{minipage} \\
+\end{tabularx}
+\vskip12pt
+}
+
+\newcommand{\warning}[1]{
+  {%raw%}
+    \messagebox[warningsign]{#1}
+  {%endraw%}
+}
+
+\newcommand{\note}[1]{
+  {%raw%}
+    \messagebox[notesign]{#1}
+  {%endraw%}
+}
+
+\newcommand{\caution}[1]{
+  {%raw%}
+    \messagebox[cautionsign]{#1}
+  {%endraw%}
+}
+
+\newcommand{\info}[1]{
+  {%raw%}
+    \messagebox[info]{#1}
+  {%endraw%}
+}
