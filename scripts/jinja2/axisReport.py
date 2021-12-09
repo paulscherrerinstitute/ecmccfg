@@ -21,6 +21,7 @@ if __name__ == '__main__':
     axis.config.write("axisReport.adoc")
     axis.config.write("/tmp/axisReport.adoc")
 
+    axis.config.yamlData['yamlFile'] = cli.cfgFile
 
     axis.config.read("axisReport_main.tex")
 

@@ -11,10 +11,15 @@
 \usepackage{color, colortbl}
 \usepackage{graphicx}
 \usepackage{tabularx}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{listings}
-\usepackage{tocstyle}
+%\usepackage{tocstyle}
 % float placement
 \usepackage{float}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+%% yaml syntax highlighting --> https://www.latex4technics.com/?note=187E
+{% include 'axisreport_yamlSyntax.tex' %}
 
 % ==============================================================================
 % definitions
@@ -41,7 +46,7 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 
 % Document
 
-% TODO: add PSI conver page
+% TODO: add PSI cover page
 \title{Axis Configuration Report \\
     \large {{device|default('default device')}}
 }
@@ -55,10 +60,8 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 \end{titlepage}
 
 \tableofcontents
-
+\vfill
 \pagebreak
-
-
 
 {% include 'axisReport_axis.tex' %}
 
@@ -79,5 +82,21 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 {%endif%}
 
 % TODO: homing
+\vfill
+\pagebreak
+\appendix
+
+\section{yaml configuration file}
+
+\lstset{numbers=left,
+  inputencoding=latin1,
+  basicstyle=\fontsize{8}{8}\selectfont\ttfamily,
+  keywordstyle=\color{blue},
+  breaklines=true,
+  showtabs=false,
+  showstringspaces=false
+}
+
+\lstinputlisting[language=yaml]{ {{-yamlFile}}}
 
 \end{document}
