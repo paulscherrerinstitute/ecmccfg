@@ -1,0 +1,26 @@
+\section{Axis}
+
+Table~\ref{tab:basic} summarizes the parameters of axis \textbf{ {{-axis.id-}}}.
+
+\begin{table}[H]
+\centering
+\caption{Key parameters.}
+\begin{tabularx}{\textwidth}{llX}
+\hline
+\rowcolor{Gray}
+\textbf{key} & \textbf{value} & \textbf{remark} \\
+\hline
+id           & {{axis.id}}    & unique identifier                \\
+type         & {{axis.type}}  & 1=joint, 2=endeffector                \\
+control mode & {{axis.mode}}  & drive control mode, CSV=velocity or CSP=position \\
+\hline
+\end{tabularx}
+\label{tab:basic}
+\end{table}
+
+{%- if axis.parameters is defined %}
+\begin{itemize}
+\item additional parameters: \\
+{{axis.parameters}}
+\end{itemize}
+{%- endif %}

@@ -1,0 +1,53 @@
+\section{Monitoring}
+
+{%if softlimits is defined %}
+\subsection{soft limits}
+
+{%if softlimits.enable%}
+\begin{table}[H]
+\centering
+\caption{Software limits for axis {{axis.id}}.}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{limit} & \textbf{position} \\
+\hline
+forward & {{ softlimits.forward|default(0)|float}}~{{egu}} \\
+backward & {{ softlimits.backward|default(0)|float}}~{{egu}} \\
+\hline
+\end{tabularx}
+\label{tab:softlimits}
+\end{table}
+{%else%}
+\warning{Softlimits are disabled!}
+{%endif%}
+
+{%endif%}
+
+\subsection{axis}
+{%- set monitoring = None if monitoring is undefined else monitoring %}
+{%- set lag = None if monitoring.lag is undefined else monitoring.lag %}
+{%if lag.enable%}
+Lag monitoring (following error) is enabled.
+The axis is allowed to deviate from the planned trajectory by $\pm$~{{ lag.tollerance|default(0.5)|float }}~{{egu}} for no more than {{ lag.time|default(10)|int }} cycles.
+{%else%}
+\warning{Lag monitoring is disabled!}
+{%endif%}
+
+{%- set target = None if monitoring.target is undefined else monitoring.target %}
+{%if target.enable%}
+Target monitoring is enabled.
+The axis is considered \emph{at target} as soon as the actual position is within $\pm$~{{ target.tollerance|default(0.5)|float }}~{{egu}} of the set point for more than {{ target.enable|default(false)|int }} cycles.
+{%else%}
+\warning{Target monitoring is disabled!}
+{%endif%}
+
+
+{%- set velocity = None if monitoring.velocity is undefined else monitoring.velocity %}
+{%if velocity.enable%}
+{%- set velMonTime = None if velocity.time is undefined else monitoring.velocity.time %}
+\info{The axis will fault if a velocity of {{ velocity.max|default(100)|float}}~{{vu}} is exceeded for more than
+{{ velMonTime.drive|default(100)|int }} on the drive or
+{{ velMonTime.trajectory|default(100)|int}} cycles for the trajectory, respectively.
+}
+{%endif%}

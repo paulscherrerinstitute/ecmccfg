@@ -1,0 +1,25 @@
+{%- if var is defined %}
+\section{Variables}
+
+\begin{table}[H]
+\centering
+\caption{Variables.}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{variable} & \textbf{value} \\
+\hline
+{% for v,val in var|dictsort %}
+{{v}}             & {{val}} \\
+{%endfor%}
+\hline
+\end{tabularx}
+\label{tab:var}
+\end{table}
+
+The following table~\ref{tab:var} lists the variables and their values.
+\info{Refer to this table when encountering in following sections of this document.\\
+Variables are most likely encounterd in links of the \emph{drive} and \emph{encoder} section.
+}
+
+{%- endif %}

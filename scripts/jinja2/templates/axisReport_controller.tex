@@ -1,0 +1,21 @@
+\section{Controller}
+
+ECMC uses a PID controller with feed forward.
+The controller parameters are given below.
+
+\begin{table}[H]
+\centering
+\caption{Controller PID parameters.}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{parameter} & \textbf{value} \\
+\hline
+$K_\textnormal{p}$ & {{ controller.Kp|float }} \\
+$K_\textnormal{i}$ & {{ controller.Ki|default(0)|float }} \\
+$K_\textnormal{d}$ & {{ controller.Kd|default(0)|float }} \\
+$K_\textnormal{ff}$ & {{ controller.Kff|default(1)|float }} \\
+\hline
+\end{tabularx}
+\label{tab:controller_pid}
+\end{table}
