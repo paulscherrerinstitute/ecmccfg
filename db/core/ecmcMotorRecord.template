@@ -334,6 +334,6 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-HomPos-RB") {
     field(SCAN, "I/O Intr")
 }
 
-record (asyn, "$(PREFIX)$(MOTOR_PORT):asyn")
+record (asyn, "$(PREFIX)$(MOTOR_NAME)-$(MOTOR_PORT)-asyn")
 {
 }
