@@ -1,0 +1,19 @@
+{#- require #}
+{%- macro requireCmd(mod, version, arguments) -%}
+    require {{ mod }} {{+ version -}}
+    {%- if arguments is defined -%}
+        , " {{- arguments -}} "
+    {%- endif %}
+{%- endmacro -%}
+
+{%- macro require(modules) %}
+{%- for module in modules %}
+    {%- if module.__class__.__name__ == 'dict' %}
+        {%- for m, v in module.items() -%}
+            {{- requireCmd(m, v.version, v.arguments) }}
+        {%- endfor %}
+    {%- else %}
+        {{- requireCmd(module) }}
+    {%- endif %}
+{% endfor %}
+{%- endmacro -%}
