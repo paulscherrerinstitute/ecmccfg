@@ -4,6 +4,8 @@
 {# load EPICS modules #}
 {{- iocsh.require(modules) -}}
 
+{{ ecmc.init(scripts) }}
+
 {#- Only a single master is supported by ecmccfg so far. #}
 {#- Make sure to provide the proper Macro #}
 {{- ecmc.reset() }}
@@ -17,7 +19,7 @@
 {{ ecmc.applyConfig() }}
 
 {#- include diagnostics  #}
-{{ iocsh.include(scripts.diagnostics) if scripts.diagnostics is defined }}
+{{ ecmc.addDiagnostics(scripts.diagnostics) }}
 
 {#- enable EtherCAT bus  #}
 {{ ecmc.setAppMode() }}
