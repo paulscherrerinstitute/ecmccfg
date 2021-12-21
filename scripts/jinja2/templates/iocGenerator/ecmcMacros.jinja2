@@ -14,6 +14,10 @@
     ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},{{ '0x%04x' % idx }},{{ '0x%02x' % subIdx }},{{ value |int }},{{ bytes|int }})"
 {%- endmacro %}
 
+{% macro include(file) %}
+{% include file %}
+{%- endmacro %}
+
 {# TODO: spilt into smaller macros  #}
 {% macro addSlave(slave) %}
     {%- if slave.__class__.__name__ == 'dict' %}
@@ -22,6 +26,7 @@
             {%- set slaveID.type = s %}
             {{- addSlaveCmd(slaveID.type,slaveID.this) }}
             {{- applyConfig(v.config) if v.config is defined }}
+            {{- include(v.include) if v.include is defined}}
         {%- endfor %}
     {%- else %}
         {%- set slaveID.this = slaveID.last + 1 %}
