@@ -18,7 +18,7 @@ file "ecmc_analogInput-chX.template"{
 }
 
 # channel status
-file "ecmc_status-chX.template"{
+file "ecmc_status_analog-chX.template"{
   pattern {CH_ID, KEY}
           {01,    "AI" }
           {02,    "AI" }

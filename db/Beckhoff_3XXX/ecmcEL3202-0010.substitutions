@@ -5,7 +5,7 @@ file "ecmc_analogInput-chX.template"
           {02,    0.01, 0,    "DegC", 3   }
 }
 
-file "ecmc_status-chX.template"
+file "ecmc_status_analog-chX.template"
 {
   pattern {CH_ID, KEY }
           {01,    "AI"}

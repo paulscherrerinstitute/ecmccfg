@@ -1,0 +1,15 @@
+record(mbbi,"${P}${AXIS_NAME}-Type"){
+    field(DESC, "Axis Type")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "BASE")
+    field(ONST, "REAL")
+    field(TWST, "VIRTUAL")
+    field(THST, "TRAJECTORY")
+    field(FRST, "ENCODER")
+    field(VAL,  "$(AXIS_TYPE=1)")
+    field(PINI, "YES")
+}

@@ -34,7 +34,7 @@ record(calc,"${ECMC_P}EntryCntr") {
 }
 
 record(mbbiDirect,"${ECMC_P}Stat_"){
-  field(DESC, "$(HWTYPE): Slave Status Word mbbiD")
+  field(DESC, "$(HWTYPE): Slave Stat Wd mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "${ECMC_P}Stat.VAL")
   field(FLNK, "${ECMC_P}Online.PROC")

@@ -20,7 +20,7 @@
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
 #- SCRIPTEXEC        = iocshLoad
-#- NAMING            = ClassicNaming
+#- NAMING            = mXsXXX (default), ClassicNaming, ESSnaming
 #- EC_RATE           = 1000
 #- MODE              = FULL / DAQ
 #-    FULL:  Init ecmc with support for both motion and DAQ (DEFAULT)
@@ -47,7 +47,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=7}"
+require ecmc        "${ECMC_VER=7.0.0}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
@@ -56,7 +56,7 @@ epicsEnvUnset(ECMC_EXE_CMD)
 #-------------------------------------------------------------------------------
 #- define default PATH for scripts and database/templates
 epicsEnvSet("ECMC_CONFIG_ROOT",     "${ecmccfg_DIR}")
-epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_TEMPLATES}/")
+epicsEnvSet("ECMC_CONFIG_DB",       "${ecmccfg_DB}")
 #- define command for script execution, PSI: <3.15 runScript(), else like for ESS: iocshLoad()
 epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #-
