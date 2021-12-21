@@ -1,28 +1,24 @@
 {% import 'iocshMacros.jinja2' as iocsh -%}
 {% import 'ecmcMacros.jinja2' as ecmc -%}
 
+{# load EPICS modules #}
 {{- iocsh.require(modules) -}}
 
-{# Only a single master is supported by ecmccfg so far. #}
-{# Make sure to provide the proper Macro #}
-{{ ecmc.reset() }}
+{#- Only a single master is supported by ecmccfg so far. #}
+{#- Make sure to provide the proper Macro #}
+{{- ecmc.reset() }}
+{#- add slaves  #}
 {%- for slave in masters[0].slaves %}
     {{- ecmc.addSlave(slave) -}}
 {% endfor %}
 #- slaves added at bus positions ==> {{ ecmc.slaveID.IDs }}
 
-# Apply hardware configuration
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+{# apply EtherCATConfig  -#}
+{{ ecmc.applyConfig() }}
 
-##############################################################################
-############# Configure diagnostics:
-
-#ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-#ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-#ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(1)"
+{#- include diagnostics  #}
+{{ iocsh.include(scripts.diagnostics) if scripts.diagnostics is defined }}
 
 # go active
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+
