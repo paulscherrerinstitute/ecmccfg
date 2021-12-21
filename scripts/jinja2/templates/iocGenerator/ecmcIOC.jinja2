@@ -19,6 +19,6 @@
 {#- include diagnostics  #}
 {{ iocsh.include(scripts.diagnostics) if scripts.diagnostics is defined }}
 
-# go active
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+{#- enable EtherCAT bus  #}
+{{ ecmc.setAppMode() }}
 
