@@ -1,7 +1,20 @@
 {% import 'iocshMacros.jinja2' as iocsh -%}
 
-{# namespace #}
+{# namespaces #}
 {% set slaveID = namespace(last=0, this=0, IDs=[], type='') %}
+{% set files = namespace(scripts={}) %}
+
+{# setScripts #}
+{% macro setScripts(scripts) -%}
+    {%- set files.scripts = scripts %}
+{%- endmacro %}
+
+{# callScript, will include the script if defined in 'files.scripts'. Requires `setScripts` to be executed. #}
+{% macro callScript(key) -%}
+    {%- if key in files.scripts %}
+        {{- iocsh.include(files.scripts[key]) }}
+    {% endif %}
+{%- endmacro %}
 
 {# abort #}
 {%- macro abort(error) %}
@@ -12,11 +25,6 @@
 {% macro reset() -%}
     {%- set slaveID.last = 0 %}
     {%- set slaveID.IDs = [] %}
-{%- endmacro %}
-
-{# init #}
-{% macro init(scripts) -%}
-    {{- iocsh.include(scripts.init) if scripts.init is defined }}
 {%- endmacro %}
 
 {# addSdo #}

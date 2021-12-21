@@ -12,14 +12,11 @@ modules:
       arguments: bar
 
 scripts:
-  diagnostics: scripts/diag.iocsh
   init: scripts/init.iocsh
-#scripts:
-#  - init: init.iocsh
-#  - preApply: preApplyConfig.iocsh
-#  - postApply: postApplyConfig.iocsh
-#  - diagnostics: 'diag.iocsh'
-#  - preInit: preInit.iocsh
+  diagnostics: scripts/diag.iocsh
+  preApply: scripts/preApplyConfig.iocsh
+  postApply: scripts/postApplyConfig.iocsh
+  preIocInit: scripts/preIocInit.iocsh
 
 ## EtherCAT
 # TODO: Tadejs ECMC will support multiple masters per IOC, how to associate slaves with masters?
@@ -48,5 +45,3 @@ masters:
 # TODO: when must `applyConfig` be called? Before the axes and PLCs, or is this all the same?
 # TODO: axes
 # TODO: PLCs
-
-# TODO: setAppmode
