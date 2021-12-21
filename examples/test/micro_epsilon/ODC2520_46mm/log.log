@@ -1,0 +1,412 @@
+registerChannelProviderLocal firstTime true
+#
+# Start at "2021-W48-Nov29-1103-03-CET"
+#
+# Version information:
+# European Spallation Source ERIC : iocsh.bash (3.3.0-PID-11354)
+#
+# --->--> snip -->--> 
+# Please Use Version and other environment variables
+# in order to report or debug this shell
+#
+# HOSTDISPLAY=""
+# WINDOWID=""
+# PWD="/home/dev/projects/e3-7.0.4/ecat/e3-ecmccfg/ecmccfg-dev/examples/test/micro_epsilon/ODC2520_46mm"
+# USER="dev"
+# LOGNAME="dev"
+# EPICS_HOST_ARCH="linux-x86_64"
+# EPICS_BASE="/home/dev/epics/base-7.0.4"
+# E3_REQUIRE_NAME="require"
+# E3_REQUIRE_VERSION="3.3.0"
+# E3_REQUIRE_LOCATION="/home/dev/epics/base-7.0.4/require/3.3.0"
+# E3_REQUIRE_BIN="/home/dev/epics/base-7.0.4/require/3.3.0/bin"
+# E3_REQUIRE_DB="/home/dev/epics/base-7.0.4/require/3.3.0/db"
+# E3_REQUIRE_DBD="/home/dev/epics/base-7.0.4/require/3.3.0/dbd"
+# E3_REQUIRE_INC="/home/dev/epics/base-7.0.4/require/3.3.0/include"
+# E3_REQUIRE_LIB="/home/dev/epics/base-7.0.4/require/3.3.0/lib"
+# EPICS_DRIVER_PATH="/home/dev/epics/base-7.0.4/require/3.3.0/siteMods:/home/dev/epics/base-7.0.4/require/3.3.0/siteApps"
+# EPICS_CA_AUTO_ADDR_LIST=""
+# EPICS_CA_ADDR_LIST=""
+# PATH="/home/dev/epics/base-7.0.4/require/3.3.0/bin:/home/dev/epics/base-7.0.4/bin/linux-x86_64:/home/dev/programs/root/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/dev/.local/bin:/home/dev/bin"
+# --->--> snip -->--> 
+#
+# Set REQUIRE_IOC for its internal PVs
+epicsEnvSet REQUIRE_IOC "REQMOD:mcag-epics4-11354"
+#
+# Enable an exit subroutine for sotfioc
+dbLoadRecords "/home/dev/epics/base-7.0.4/db/softIocExit.db" "IOC=REQMOD:mcag-epics4-11354"
+#
+# Set E3_IOCSH_TOP for the absolute path where iocsh.bash is executed.
+epicsEnvSet E3_IOCSH_TOP "/home/dev/projects/e3-7.0.4/ecat/e3-ecmccfg/ecmccfg-dev/examples/test/micro_epsilon/ODC2520_46mm"
+#
+# 
+# Load require module, which has the version 3.3.0
+# 
+dlload /home/dev/epics/base-7.0.4/require/3.3.0/lib/linux-x86_64/librequire.so
+dbLoadDatabase /home/dev/epics/base-7.0.4/require/3.3.0/dbd/require.dbd
+require_registerRecordDeviceDriver
+Loading module info records for require
+# 
+# Set E3_CMD_TOP for the absolute path where odc250_46.script exists
+epicsEnvSet E3_CMD_TOP "/home/dev/projects/e3-7.0.4/ecat/e3-ecmccfg/ecmccfg-dev/examples/test/micro_epsilon/ODC2520_46mm"
+#
+iocshLoad 'odc250_46.script',''
+##############################################################################
+## Example config for Micro-Epsilon ODC2520-46 
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"IOC_TEST")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"iocshLoad")
+require ecmccfg develop
+Module ecmccfg version develop found in /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/
+Loading library /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/lib/linux-x86_64/libecmccfg.so
+Loaded ecmccfg version develop
+Loading dbd file /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/dbd/ecmccfg.dbd
+Calling function ecmccfg_registerRecordDeviceDriver
+Loading module info records for ecmccfg
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+iocshLoad /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/startup.cmd, "IOC=IOC_TEST,ECMC_VER=develop"
+#==============================================================================
+# startup.cmd
+on error halt
+require ecmc        "develop"
+Module ecmc version develop found in /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmc/develop/
+Module ecmc depends on asyn 4.37.0
+Module asyn version 4.37.0 found in /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/asyn/4.37.0/
+Loading library /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/asyn/4.37.0/lib/linux-x86_64/libasyn.so
+Loaded asyn version 4.37.0
+Loading dbd file /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/asyn/4.37.0/dbd/asyn.dbd
+Calling function asyn_registerRecordDeviceDriver
+Loading module info records for asyn
+Module ecmc depends on exprtk 1.2.1
+Module exprtk version 1.2.1 found in /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/exprtk/1.2.1/
+Loading library /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/exprtk/1.2.1/lib/linux-x86_64/libexprtk.so
+Loaded exprtk version 1.2.1
+exprtk has no dbd file
+Loading module info records for exprtk
+Module ecmc depends on motor 7.0.4
+Module motor version 7.0.4 found in /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/motor/7.0.4/
+Module motor depends on asyn 4.37.0
+Module asyn version 4.37.0 already loaded
+Loading library /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/motor/7.0.4/lib/linux-x86_64/libmotor.so
+Loaded motor version 7.0.4
+Loading dbd file /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/motor/7.0.4/dbd/motor.dbd
+Calling function motor_registerRecordDeviceDriver
+Loading module info records for motor
+Loading library /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmc/develop/lib/linux-x86_64/libecmc.so
+Loaded ecmc version develop
+Loading dbd file /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmc/develop/dbd/ecmc.dbd
+Calling function ecmc_registerRecordDeviceDriver
+Loading module info records for ecmc
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'ecmcMotorRecord'='EthercatMC'", "require  EthercatMC 3.0.2 # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
+# Using ecmcMotorRecord motor record support.
+epicsEnvUnset(ECMC_EXE_CMD)
+epicsEnvSet("ECMC_CONFIG_ROOT",     "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/")
+epicsEnvSet("ECMC_CONFIG_DB",       "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/db")
+epicsEnvSet("SCRIPTEXEC",           "iocshLoad")
+epicsEnvSet("SM_PREFIX",            "IOC_TEST:")    # colon added since IOC is _not_ PREFIX
+epicsEnvSet("ECMC_PROC_HOOK",       "")
+epicsEnvSet(ECMC_MODE, FULL)
+ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'FULL'=='FULL'","","# MODE == DAQ, DISABLING MOTION.")
+epicsEnvShow(ECMC_SUPPORT_MOTION)
+ECMC_SUPPORT_MOTION=
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/initAll.cmd",1)
+iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/initAll.cmd"
+#==============================================================================
+# initAll.cmd
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/init.cmd",1)
+iocshLoad /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/init.cmd
+#==============================================================================
+# init.cmd
+epicsEnvSet("ECMC_ASYN_TIMEOUT",      1)                   # Asyn timeout
+epicsEnvSet("ECMC_ASYN_ADDR",         0)                   # Asyn Address
+epicsEnvSet("ECMC_MOTOR_PORT",        "NOT SET")
+epicsEnvSet("ECMC_ASYN_PORT",         "NOT SET")
+epicsEnvSet("ECMC_PREFIX",            "NOT SET")
+epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
+epicsEnvSet("ECMC_GEN_AX_RECORDS",    "NOT SET")
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",    "NOT SET")
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
+epicsEnvSet("ECMC_TSE",               -2)
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/initAxis.cmd",1)
+iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/initAxis.cmd"
+#==============================================================================
+# initAxis.cmd
+epicsEnvSet("ECMC_MOTOR_NAME",            "NOT SET")
+epicsEnvSet("ECMC_R",                     "NOT SET")
+epicsEnvSet("ECMC_AXIS_NO",               "NOT SET")
+epicsEnvSet("ECMC_DESC",                  "NOT SET")
+epicsEnvSet("ECMC_EGU",                   "NOT SET")       # Motor Record Unit
+epicsEnvSet("ECMC_PREC",                  "NOT SET")       # Motor Record Precision
+epicsEnvSet("ECMC_AXISCONFIG",            "NOT SET")       # Extra parameters to driver
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "NOT SET")       # Entry for axis health output (example: ec0.s1.BO_1.0)
+epicsEnvSet("ECMC_ENC_SCALE_NUM",         "NOT SET")
+epicsEnvSet("ECMC_ENC_SCALE_DENOM",       "NOT SET")
+epicsEnvSet("ECMC_ENC_BITS",              "NOT SET")
+epicsEnvSet("ECMC_ENC_TYPE",              "NOT SET")       # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "NOT SET")       # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_ENC_ABS_BITS",          "NOT SET")       # Absolute bit count (for absolute encoders) always least significant part
+epicsEnvSet("ECMC_ENC_ABS_OFFSET",        "NOT SET")       # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "")              # Ethercat entry for latch position (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "")              # Ethercat entry for latch control (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "")              # Ethercat entry for latch status (only valid for home seq 11,12)
+epicsEnvSet("ECMC_DRV_SCALE_NUM",         "NOT SET")
+epicsEnvSet("ECMC_DRV_SCALE_DENOM",       "NOT SET")
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "NOT SET")       # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "NOT SET")       # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "NOT SET")       # Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_BRAKE",          "NOT SET")       # Ethercat entry for brake output
+epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "NOT SET")       # Ethercat entry for reduce torque output
+epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "NOT SET")  # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "NOT SET")  # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_VELO",                  "NOT SET")
+epicsEnvSet("ECMC_JOG_VEL",               "NOT SET")
+epicsEnvSet("ECMC_JAR",                   "NOT SET")       # JAR defaults to VELO/ACCL
+epicsEnvSet("ECMC_ACCL",                  "NOT SET")
+epicsEnvSet("ECMC_EMERG_DECEL",           "NOT SET")       # Emergency deceleration
+epicsEnvSet("ECMC_HOME_PROC",              "NOT SET")
+epicsEnvSet("ECMC_HOME_POS",               "NOT SET")
+epicsEnvSet("ECMC_HOME_VEL_TO",            "NOT SET")
+epicsEnvSet("ECMC_HOME_VEL_FRM",           "NOT SET")
+epicsEnvSet("ECMC_HOME_ACC",               "NOT SET")
+epicsEnvSet("ECMC_HOME_DEC",               "NOT SET")
+epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","0")
+epicsEnvSet("ECMC_CNTRL_KP",              "NOT SET")
+epicsEnvSet("ECMC_CNTRL_KI",              "NOT SET")
+epicsEnvSet("ECMC_CNTRL_KD",              "NOT SET")
+epicsEnvSet("ECMC_CNTRL_KFF",             "NOT SET")
+epicsEnvSet("ECMC_EC_MON_LOWLIM",         "NOT SET")       #  Ethercat entry for low limit switch input
+epicsEnvSet("ECMC_EC_MON_HIGHLIM",        "NOT SET")       #  Ethercat entry for high limit switch inpuit
+epicsEnvSet("ECMC_EC_MON_HOME_SWITCH",    "NOT SET")       #  Ethercat entry for home switch input
+epicsEnvSet("ECMC_EC_MON_EXT_INTERLOCK",  "NOT SET")       #  Ethercat entry for external interlock input
+epicsEnvSet("ECMC_SOFT_LOW_LIM",          "NOT SET")
+epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "NOT SET")
+epicsEnvSet("ECMC_DXLM_ENABLE",           "NOT SET")
+epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "NOT SET")
+epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "NOT SET")
+epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "NOT SET")
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "NOT SET")
+epicsEnvSet("ECMC_MON_AT_TARGET_TIME",    "NOT SET")
+epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "NOT SET")
+epicsEnvSet("ECMC_MON_VELO_MAX",          "NOT SET")
+epicsEnvSet("ECMC_MON_VELO_MAX_TRAJ_TIME","NOT SET")
+epicsEnvSet("ECMC_MON_VELO_MAX_DRV_TIME", "NOT SET")
+epicsEnvSet("ECMC_MON_VELO_MAX_ENA",      "NOT SET")
+epicsEnvSet("ECMC_EGU",               "mm")
+epicsEnvSet("ECMC_PREC",              3)
+epicsEnvSet("ECMC_AXISFIELDINIT",     "")                  # Extra field init to motor record
+epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver
+############################################################
+############# ASYN Configuration:
+epicsEnvSet("ECMC_MOTOR_PORT"     "MCU1")
+epicsEnvSet("ECMC2021/11/29 11:03:03.490 
+ECMC Initializes.............
+2021/11/29 11:03:03.490 ESS Open Source EtherCAT Motion Control Epics Module2021/11/29 11:03:03.490 
+Mode: Configuration
+2021/11/29 11:03:03.491 OK
+2021/11/29 11:03:03.491 OK
+2021/11/29 11:03:03.491 OK
+2021/11/29 11:03:03.493 OK
+2021/11/29 11:03:03.505 OK
+2021/11/29 11:03:03.505 OK
+2021/11/29 11:03:03.505 OK
+_ASYN_PORT"      "MC_CPU1")
+epicsEnvSet("ECMC_PREFIX"         "IOC_TEST:")
+ecmcAsynPortDriverConfigure(MC_CPU1,1000,0,0,100)
+ecmcAsynPortDriverConfigure: portName = MC_CPU1, paramTableSize = 1000, disableAutoConnect = 0, priority = 0, defaultSampleRateMS = 100.000000
+asynOctetSetOutputEos(MC_CPU1, -1, ";\n")
+asynOctetSetInputEos(MC_CPU1, -1, ";\n")
+asynSetTraceMask(MC_CPU1, -1, 0x41)
+asynSetTraceIOMask(MC_CPU1, -1, 6)
+asynSetTraceInfoMask(MC_CPU1, -1, 1)
+ecmcMotorRecordCreateController(MCU1, MC_CPU1, "64", 200, 1000, "")
+############################################################
+############# Misc settings:
+# Disable function call trace printouts
+ecmcConfigOrDie "Cfg.SetEnableFuncCallDiag(0)"
+# Disable on change printouts from objects (enable for easy logging)
+ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,0)"
+# Choose to generate EPICS-records for EtherCAT-entries
+# (For records use ECMC_GEN_EC_RECORDS="-records" otherwise ECMC_GEN_EC_RECORDS="")
+epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
+# Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
+# (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
+epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
+# suffix for pva enabled scripts, templates and substitutions
+ecmcEpicsEnvSetCalcTernary(ECMC_PVA, "0", "Pva","")
+# Set EtherCAT frequency (defaults to 1000)
+ecmcConfigOrDie "Cfg.SetSampleRate(1000)"
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,   1000)
+ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS" ,1000/1000)
+# Update records in 10ms (100Hz) for FULL MODE and in EC_RATE for DAQ mode
+ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'FULL'=='DAQ'","1","10")
+epicsEnvSet("ECMC_P_SCRIPT",        "mXsXXX")
+ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "0>=0", "","#- ")
+ ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/addMaster.cmd",1)
+ iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/addMaster.cmd", "MASTER_ID=0"
+#===============================================================================
+# addMaster.cfg
+epicsEnvSet("ECMC_EC_MASTER_ID"          "0")
+# Claim master
+ecmcConfigOrDie "Cfg.EcSetMaster(0)"
+epicsEnvSet("ECMC_EC_MASTER_ID" ,0)
+epicsEnvSet("ECMC_TMP_DIR",         "/tmp/IOC_TEST/EcMaster_0/")
+system "mkdir -p /tmp/IOC_TEST/EcMaster_0/"
+epicsEnvSet("ECMC_TMP_DIR",         "/tmp/IOC_TEST/EcMaster_0/")
+system "mkdir -p /tmp/IOC_TEST/EcMaster_0/"
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/setDiagnostics.cmd",1)
+iocshLoad /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/setDiagnostics.cmd
+#==============================================================================
+# setDiagnostics.cmd
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+epicsEnvSet("ECMCCFG_INIT" ,"#")
+##############################################################################
+## Config hardware:
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "6")
+iocshLoad /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/addSlave.cmd, "SLAVE_ID=6, HW_DESC=OptoODC2520_46mm"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "6")
+epicsEnvSet("HW_DESC",            "OptoODC2520_46mm")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/ecmcOptoODC2520_46mm.cmd",1)
+iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/ecmcOptoODC2520_46mm.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "OptoODC2520_46mm")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x00000607")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0041eefd")
+ecmcFileExist(/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/slaveVerify.cmd,1)
+iocshLoad /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/slaveVerify.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_SLAVE2021/11/29 11:03:03.506 OK
+2021/11/29 11:03:03.507 OK
+2021/11/29 11:03:03.512 OK
+2021/11/29 11:03:03.512 OK
+2021/11/29 11:03:03.512 OK
+2021/11/29 11:03:03.512 OK
+2021/11/29 11:03:03.515 INFO: Locking memory
+2021/11/29 11:03:03.536 Starting up EtherCAT bus: 0 second(s). Max wait time 30 second(s).
+2021/11/29 11:03:03.616 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 6: Not operational (0x24011).
+2021/11/29 11:03:03.616 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2021/11/29 11:03:03.920 ../devEcmcSup/main/ecmcError.cpp/errorReset:103: NO_ERROR (0x0).
+2021/11/29 11:03:05.536 EtherCAT bus started!
+2021/11/29 11:03:05.536 OK
+2021/11/29 11:03:05.537 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAtIocBuild (0). Allow callbacks: true.
+Starting iocInit
+2021/11/29 11:03:05.537 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAtBeginning (1). Allow callbacks: true.
+2021/11/29 11:03:05.540 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterCallbackInit (2). Allow callbacks: true.
+2021/11/29 11:03:05.542 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterCaLinkInit (3). Allow callbacks: true.
+2021/11/29 11:03:05.542 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitDrvSup (4). Allow callbacks: true.
+2021/11/29 11:03:05.542 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitRecSup (5). Allow callbacks: true.
+2021/11/29 11:03:05.543 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitDevSup (6). Allow callbacks: true.
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.error.reset linked to record (asyn reason 1).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.error.msg linked to record (asyn reason 2).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.updated linked to record (asyn reason 3).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.slavestatus linked to record (asyn reason 4).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.masterstatus linked to record (asyn reason 5).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.slavecounter linked to record (asyn reason 6).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.memmapcounter linked to record (asyn reason 7).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.domainfailcountertotal linked to record (asyn reason 8).
+2021/11/29 11:03:05.544 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.entrycounter linked to record (asyn reason 9).
+2021/11/29 11:03:05.545 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.domainstatus linked to record (asyn reason 10).
+2021/11/29 11:03:05.545 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.ok linked to record (asyn reason 11).
+2021/11/29 11:03:05.545 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.ONE linked to record (asyn reason 12).
+2021/11/29 11:03:05.545 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.ZERO linked to record (asyn reason 13).
+2021/11/29 11:03:05.546 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.analogInput01 linked to record (asyn reason 14).
+2021/11/29 11:03:05.546 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.appmode linked to record (asyn reason 15).
+2021/11/29 11:03:05.546 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.error.id linked to record (asyn reason 16).
+2021/11/29 11:03:05.546 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.latency.min linked to record (asyn reason 17).
+2021/11/29 11:03:05.547 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.latency.max linked to record (asyn reason 18).
+2021/11/29 11:03:05.547 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.period.min linked to record (asyn reason 19).
+2021/11/29 11:03:05.547 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.period.max linked to record (asyn reason 20).
+2021/11/29 11:03:05.548 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.execute.min linked to record (asyn reason 21).
+2021/11/29 11:03:05.548 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.execute.max linked to record (asyn reason 22).
+2021/11/29 11:03:05.548 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.send.min linked to record (asyn reason 23).
+2021/11/29 11:03:05.549 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.send.max linked to record (asyn reason 24).
+2021/11/29 11:03:05.557 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitDatabase (7). Allow callbacks: true.
+2021/11/29 11:03:05.558 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterFinishDevSup (8). Allow callbacks: true.
+2021/11/29 11:03:06.070 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterScanInit (9). Allow callbacks: true.
+2021/11/29 11:03:06.070 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitialProcess (10). Allow callbacks: true.
+2021/11/29 11:03:06.073 ecmcAsynPortDriver:getEpicsState: EPICS state: Unknown state (11). Allow callbacks: true.
+2021/11/29 11:03:06.073 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterIocBuilt (12). Allow callbacks: true.
+2021/11/29 11:03:06.080 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAtIocRun (13). Allow callbacks: true.
+2021/11/29 11:03:06.081 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterDatabaseRunning (14). Allow callbacks: true.
+2021/11/29 11:03:06.081 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInterruptAccept (28). Allow callbacks: true.
+2021/11/29 11:03:06.081 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterCaServerRunning (15). Allow callbacks: true.
+2021/11/29 11:03:06.081 ecmcAsynPortDriver:getEpicsState: EPICS state: Unknown state (29). Allow callbacks: true.
+iocRun: All initialization complete
+2021/11/29 11:03:06.090 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterIocRunning (16). Allow callbacks: true.
+_VERIFY, "0==0", "","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,6,0x00000607,0x0041eefd)"
+ecmcEpicsEnvSetCalcTernary(ECMC_SLAVE_RESET, "0>0", "","#- ")
+epicsEnvUnset(ECMC_SLAVE_VERIFY)
+# SM3: PhysAddr 0x1280, DefaultSize    4, ControlRegister 0x20, Enable 1
+#   TxPDO 0x1a00 "Sample 0"
+#     PDO entry 0x6065:01, 32 bit, "Position of the first high-low edge"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x00000607,0x0041eefd,2,3,0x1a00,0x6065,0x1,S32,analogInput01,1)"
+# deduce what the prefix should be
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=6,HWTYPE=OptoODC2520_46mm"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "6","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s006")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s006-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/applySubstitutions.cmd" "SUBST_FILE=ecmcOptoODC2520_46mm.substitutions,ECMC_P=IOC_TEST:m0s006-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcOptoODC2520_46mm.substitutions,1,1)
+dbLoadTemplate(ecmcOptoODC2520_46mm.substitutions,"ECMC_P=IOC_TEST:m0s006-,ECMC_G=IOC_TEST:m0s006,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=6,HWTYPE=OptoODC2520_46mm,T_SMP_MS=10,TSE=-2,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s006-,ECMC_G=IOC_TEST:m0s006"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s006-,ECMC_G=IOC_TEST:m0s006,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=6,HWTYPE=OptoODC2520_46mm,T_SMP_MS=10,TSE=-2,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "6+1","%d")
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+##############################################################################
+############# Configure diagnostics:
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+# go active
+iocshLoad (/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/setAppMode.cmd)
+#==============================================================================
+# setAppMode.cmd
+ecmcFileExist("/home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/general.cmd",1)
+iocshLoad /home/dev/epics/base-7.0.4/require/3.3.0/siteMods/ecmccfg/develop/general.cmd
+#==============================================================================
+# general.cmd
+ecmcFileExist("ecmcGeneral.db",1,1)
+dbLoadRecords("ecmcGeneral.db","P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=-2,ECMC_PROC_HOOK=")
+# Examples of commands for info:
+# ecmcReport <level> or asynReport <level>
+# ecmcReport 3
+# ecmcGrepParam <pattern>
+# List all ecmc params for ethercat slave 2:
+# ecmcGrepParam *s2*
+#
+ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "0>=0", "","#- ")
+ ecmcFileExist("ecmcEc.db",1,1)
+ dbLoadRecords("ecmcEc.db","P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,T_SMP_MS=10,TSE=-2")
+ecmcConfigOrDie "Cfg.SetAppMode(1)"
+iocInit()
+############################################################################
+## EPICS R7.0.4-E3-7.0.4-patch
+## Rev. 2020-12-07T14:09+0100
+############################################################################
+# Set the IOC Prompt String One 
+epicsEnvSet IOCSH_PS1 "mcag-epics4-11354 > "
+#
+[?1034hmcag-epics4-11354 > 
