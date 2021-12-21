@@ -1,3 +1,5 @@
+{% import 'iocshMacros.jinja2' as iocsh -%}
+
 {% set slaveID = namespace(last=0, this=0, IDs=[], type='') %}
 
 {%- macro abort(error) %}
@@ -14,8 +16,9 @@
     ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},{{ '0x%04x' % idx }},{{ '0x%02x' % subIdx }},{{ value |int }},{{ bytes|int }})"
 {%- endmacro %}
 
-{% macro include(file) %}
-{% include file %}
+{% macro applyConfig() -%}
+# Apply hardware configuration
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 {%- endmacro %}
 
 {# TODO: spilt into smaller macros  #}
@@ -25,8 +28,8 @@
             {%- set slaveID.this = v.pos if v.pos is defined else slaveID.last + 1 %}
             {%- set slaveID.type = s %}
             {{- addSlaveCmd(slaveID.type,slaveID.this) }}
-            {{- applyConfig(v.config) if v.config is defined }}
-            {{- include(v.include) if v.include is defined}}
+            {{- applySlaveConfig(v.config) if v.config is defined }}
+            {{- iocsh.include(v.include) if v.include is defined}}
         {%- endfor %}
     {%- else %}
         {%- set slaveID.this = slaveID.last + 1 %}
@@ -47,7 +50,7 @@
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC={{ slave }}, SLAVE_ID={{ pos }}"
 {%- endmacro %}
 
-{%- macro applyConfig(config) %}
+{%- macro applySlaveConfig(config) %}
     {%- if config.__class__.__name__ == 'list' %}
         {%- for c in config %}
             {{- applyConfigCmd(c) }}

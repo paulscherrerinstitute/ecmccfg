@@ -11,6 +11,15 @@ modules:
   - module5:
       arguments: bar
 
+scripts:
+  diagnostics: scripts/diag.iocsh
+#scripts:
+#  - init: init.iocsh
+#  - preApply: preApplyConfig.iocsh
+#  - postApply: postApplyConfig.iocsh
+#  - diagnostics: 'diag.iocsh'
+#  - preInit: preInit.iocsh
+
 ## EtherCAT
 # TODO: Tadejs ECMC will support multiple masters per IOC, how to associate slaves with masters?
 masters:
@@ -31,11 +40,12 @@ masters:
       - EL5002: {config: [enc1, enc2]}
       - A-slave
       - 01-slave: {pos: 21}
-      - MonoDAQ-gMeter: {domain: 1, include: gMeter.iocsh}
+      - MonoDAQ-gMeter:
+          domain: 1
+          include: gMeter.iocsh
 
 # TODO: when must `applyConfig` be called? Before the axes and PLCs, or is this all the same?
 # TODO: axes
 # TODO: PLCs
 
-# TODO: diagnostics
 # TODO: setAppmode

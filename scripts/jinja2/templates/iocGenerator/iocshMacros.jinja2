@@ -17,3 +17,7 @@
     {%- endif %}
 {% endfor %}
 {%- endmacro -%}
+
+{% macro include(file) %}
+{% include file %}
+{%- endmacro %}
