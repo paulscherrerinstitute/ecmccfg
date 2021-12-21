@@ -1,14 +1,22 @@
 {% import 'iocshMacros.jinja2' as iocsh -%}
 
+{# namespace #}
 {% set slaveID = namespace(last=0, this=0, IDs=[], type='') %}
 
+{# abort #}
 {%- macro abort(error) %}
     {{ None['[ERROR] ' ~ error][0] }}
 {% endmacro -%}
 
+{# reset #}
 {% macro reset() -%}
     {%- set slaveID.last = 0 %}
     {%- set slaveID.IDs = [] %}
+{%- endmacro %}
+
+{# init #}
+{% macro init(scripts) -%}
+    {{- iocsh.include(scripts.init) if scripts.init is defined }}
 {%- endmacro %}
 
 {# addSdo #}
@@ -16,17 +24,30 @@
     ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},{{ '0x%04x' % idx }},{{ '0x%02x' % subIdx }},{{ value |int }},{{ bytes|int }})"
 {%- endmacro %}
 
+{# applyConfig #}
 {% macro applyConfig() -%}
 # Apply hardware configuration
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 {%- endmacro %}
 
+{# setAppMode #}
 {% macro setAppMode() -%}
 # go active
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 {%- endmacro %}
 
+{# addDiagnostics #}
+{% macro addDiagnostics(file) -%}
+{#- include diagnostics  #}
+    {%- if file is defined %}
+        {{- iocsh.include(file) }}
+    {%- else %}
+        {{ abort('addDiagnostics called w/o file!') }}
+    {%- endif %}
+{%- endmacro %}
+
 {# TODO: spilt into smaller macros  #}
+{# addSlave #}
 {% macro addSlave(slave) %}
     {%- if slave.__class__.__name__ == 'dict' %}
         {%- for s, v in slave.items() %}
@@ -55,6 +76,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC={{ slave }}, SLAVE_ID={{ pos }}"
 {%- endmacro %}
 
+{# applySlaveConfig #}
 {%- macro applySlaveConfig(config) %}
     {%- if config.__class__.__name__ == 'list' %}
         {%- for c in config %}
@@ -65,6 +87,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC={{ slave }}, SLAVE_ID={{ pos 
     {%- endif %}
 {%- endmacro %}
 
+{# applyConfigCmd #}
 {%- macro applyConfigCmd(file) %}
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID={{ slaveID.this }}, HW_DESC={{ slaveID.type }}, CONFIG={{ file }}"
 {%- endmacro %}

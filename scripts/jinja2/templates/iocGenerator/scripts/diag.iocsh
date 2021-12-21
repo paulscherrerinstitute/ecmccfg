@@ -1,0 +1,9 @@
+##############################################################################
+############# Configure diagnostics:
+
+#ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+#ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+#ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(1)"

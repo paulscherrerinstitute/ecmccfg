@@ -13,6 +13,7 @@ modules:
 
 scripts:
   diagnostics: scripts/diag.iocsh
+  init: scripts/init.iocsh
 #scripts:
 #  - init: init.iocsh
 #  - preApply: preApplyConfig.iocsh
