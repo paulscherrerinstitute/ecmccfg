@@ -31,7 +31,7 @@ masters:
       - EL5002: {config: [enc1, enc2]}
       - A-slave
       - 01-slave: {pos: 21}
-      - MonoDAQ-gMeter: {domain: 1}
+      - MonoDAQ-gMeter: {domain: 1, include: gMeter.iocsh}
 
 # TODO: when must `applyConfig` be called? Before the axes and PLCs, or is this all the same?
 # TODO: axes
