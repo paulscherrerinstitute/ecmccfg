@@ -21,6 +21,11 @@
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 {%- endmacro %}
 
+{% macro setAppMode() -%}
+# go active
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+{%- endmacro %}
+
 {# TODO: spilt into smaller macros  #}
 {% macro addSlave(slave) %}
     {%- if slave.__class__.__name__ == 'dict' %}
