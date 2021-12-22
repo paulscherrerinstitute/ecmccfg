@@ -1,5 +1,5 @@
 #-d /**
-#-d   \brief hardware script for EP5001-Encoder-LA11D01-06, 26-bit SSI
+#-d   \brief hardware script for EP5001-Encoder-LA11D01-06-26-bit_SSI
 #-d   \details RLS LA11D01, 26-bit, SSI, 1/4096 mm pitch
 #-d   \author Niko Kivel
 #-d   \file
