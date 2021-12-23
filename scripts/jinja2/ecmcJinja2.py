@@ -14,7 +14,7 @@ class JinjaCli:
         self.templatedir = args.templatedir
         self.outFile = Path(self.tmpDir, args.outfile)
         self.prodId = self.getProdId(args)
-        self.hwDb = Path(args.hardwaredb)
+        self.hwDb = Path(args.hardwaredb) if args.hardwaredb else None
         Path(self.outFile).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
 
     @staticmethod
@@ -45,18 +45,16 @@ class JinjaCli:
     @staticmethod
     def getFromArg(args) -> int:
         try:
-            prod_id = int(args.id, 0)
+            return int(args.id, 0)
         except:
             raise
-        return prod_id
 
     @staticmethod
     def getFromEnv(var) -> int:
         try:
-            prod_id = int(os.environ[var], 0)
+            return int(os.environ[var], 0)
         except KeyError as err:
-            raise err
-        return prod_id
+            return -1
 
     @classmethod
     def getProdId(cls, args) -> int:
