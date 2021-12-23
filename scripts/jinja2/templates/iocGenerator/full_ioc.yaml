@@ -1,6 +1,7 @@
-#===== just a brainstorm ioc-yaml for jinja2
+---
+# ===== just a brainstorm ioc-yaml for jinja2
 
-## list of modules to `require`
+# # list of modules to `require`
 modules:
   - ecmccfg: {version: v7.1RC1, arguments: "ECMC_VER=master,EC_RATE=500"}
   - module2: {version: kivel}
@@ -19,14 +20,15 @@ scripts:
   preIocInit: scripts/preIocInit.iocsh
 
 ## EtherCAT
-# TODO: Tadejs ECMC will support multiple masters per IOC, how to associate slaves with masters?
+# TODO: Tadejs ECMC will support multiple masters per IOC,
+# how to associate slaves with masters?
 masters:
-  - id: 0 # So far _not_ used!
-    cycletime: 2000 # in microseconds # TODO: feed back to `module`
-  # TODO: multiple domains per master! Howto define cycle times for domains?
-  # TODO: switch for DAQ-mode
+  - id: 0   # So far _not_ used!
+    cycletime: 2000   # in microseconds # TODO: feed back to `module`
+    # TODO: multiple domains per master! Howto define cycle times for domains?
+    # TODO: switch for DAQ-mode
 
-    #===== just a first idea to test `addSlave`
+    # ===== just a first idea to test `addSlave`
     slaves:
       - Z-slave
       - 99-slave
@@ -42,6 +44,7 @@ masters:
           domain: 1
           include: gMeter.iocsh
 
-# TODO: when must `applyConfig` be called? Before the axes and PLCs, or is this all the same?
+# TODO: when must `applyConfig` be called? Before the axes and PLCs,
+# or is this all the same?
 # TODO: axes
 # TODO: PLCs
