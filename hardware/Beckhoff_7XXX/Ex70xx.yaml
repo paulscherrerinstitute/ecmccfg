@@ -1,0 +1,6 @@
+0x1b773052: {type: EL7031, vendor: 0x2}
+0x1b7d3052: {type: EL7037, vendor: 0x2, f_u: 0.1}
+0x1b813052: {type: EL7041, vendor: 0x2}
+0x1b873052: {type: EL7047, vendor: 0x2, f_u: 0.1}
+0x1b814052: {type: EP7041-3102, vendor: 0x2}
+# more keys can be added as needed to the drive database
