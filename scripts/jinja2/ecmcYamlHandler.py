@@ -1,6 +1,9 @@
 import yaml
 import string
 from pathlib import Path
+import subprocess
+
+import ecmcYamlLinter
 
 
 class YamlHandler:
@@ -21,11 +24,12 @@ class YamlHandler:
         'virtual': 2,
     }
 
-    def __init__(self):
+    def __init__(self, relaxedLint=True):
         self.yamlData = {}
         self.hasVariables = False
         self.hasPlcFile = False
         self.axisType = None
+        self.relaxedLint = relaxedLint
 
     @staticmethod
     def str2bool(val) -> bool:
@@ -40,7 +44,12 @@ class YamlHandler:
             raise ValueError(f'unrecognized string >> {val} <<')
 
     def loadYamlData(self, file):
-        # open yaml file containing the PLC configuration
+        linter = ecmcYamlLinter.YamlLinter()
+        linter.run(file, relaxed=self.relaxedLint)
+        if linter.status == 1:
+            raise SyntaxError(f'{linter.msg}')
+        elif linter.status == 2:
+            print(f'yamllinter warnings:\n{linter.msg}')
         with open(file) as f:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -104,9 +113,13 @@ class YamlHandler:
 
 
 if __name__ == '__main__':
-    h = YamlHandler()
-    print(h.getAxisType('j'))
-    print(h.getAxisType())
+    h = YamlHandler(relaxedLint=False)
+
+    h.loadYamlData('pytest/yaml_files/joint_all.yaml')
+
+    # print(yaml.dump(h.yamlData))
+    # print(h.getAxisType('j'))
+    # print(h.getAxisType())
     #
     # h.yamlData = {'axis': {'type': 'joint'}}
     # print(h.checkForKey('axis'))
