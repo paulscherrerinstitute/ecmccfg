@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import yaml
 from jinja2 import Template
 
+import numpy as np
+import prepSampleData
+
 '''
 ISO230-2 data evaluation
 Data has target positions 't[n]', with n>=5. type(n)==int, min(n)==1
@@ -26,23 +29,11 @@ class ISO230:
     def __init__(self):
         self.data = []
         self.targets = {}
+        self.parameters = {}
         self.actualFwd = pd.DataFrame()
         self.actualBwd = pd.DataFrame()
-        # mean unidirectional positional deviation
         self.deviation = pd.DataFrame()
         self.results = {}
-        self.maxB = 0
-        self.avgB = 0
-        self.RFwd = 0
-        self.RBwd = 0
-        self.RAll = 0
-        self.EFwd = 0
-        self.EBwd = 0
-        self.EAll = 0
-        self.MAll = 0
-        self.AFwd = 0
-        self.ABwd = 0
-        self.AAll = 0
 
     def __str__(self):
         str = f'ISO230-2 evaluator\n' \
@@ -134,7 +125,7 @@ class ISO230:
         else:
             raise NotImplementedError(f'direction >{dir}< not implemented!')
 
-    def evalDeviation(self):
+    def evalDeviation(self, k=2):
         # deviation from target
         deviationFwd = self.actualFwd - self.actualFwd.columns
         deviationBwd = self.actualBwd - self.actualBwd.columns
@@ -187,21 +178,89 @@ class ISO230:
         d.append((self.deviation['xiFwd'] - 2 * self.deviation['siFwd']).min())
         d.append((self.deviation['xiBwd'] - 2 * self.deviation['siBwd']).min())
         self.results['AAll'] = max(d) - min(d)
+        '''
+            data for plotting
+        '''
+        self.deviation['ciuFwd'] = self.deviation['xiFwd'] + k * self.deviation['siFwd']
+        self.deviation['cilFwd'] = self.deviation['xiFwd'] - k * self.deviation['siFwd']
+        self.deviation['ciuBwd'] = self.deviation['xiBwd'] + k * self.deviation['siBwd']
+        self.deviation['cilBwd'] = self.deviation['xiBwd'] - k * self.deviation['siBwd']
 
-    def boxPlot(self):
-        rf = self.actualFwd - self.targets
-        rb = self.actualBwd - self.targets
+    def boxPlot(self,
+                factor=1000,
+                title='boxplot of bi-directional positioning',
+                x_label='target position (mm)',
+                y_label='deviation from target (um)'):
+        rf = (self.actualFwd - self.actualFwd.columns) * factor
+        rb = (self.actualBwd - self.actualBwd.columns) * factor
         res = pd.concat([rf, rb])
 
-        # res.boxplot(by='X')
-        print(res)
-        res.boxplot()
+        bplot = res.boxplot()
+        bplot.set_title(title)
+        bplot.set_xlabel(x_label)
+        bplot.set_ylabel(y_label)
+
+    def ISO230Plot(self, factor=1000, k=2,
+                   title='Bi-directional accuracy and repeatability of positioning',
+                   x_label='target position (mm)',
+                   y_label=r'deviation from target $\left(\mu m\right)$'):
+
+        # raw data, deviation from target position
+        rf = (self.actualFwd - self.actualFwd.columns) * factor
+        rb = (self.actualBwd - self.actualBwd.columns) * factor
+        # mean deviation
+        x_fwd = self.deviation['xiFwd'] * factor
+        x_bwd = self.deviation['xiBwd'] * factor
+        x_mean = self.deviation['xiAll'] * factor
+        # confidence interval with coverage factor k
+        conf = self.deviation[['ciuFwd', 'cilFwd', 'ciuBwd', 'cilBwd']] * factor
+        # weird 'hiding from legend' hack. Causes matplotlib warning
+        cols = ["_" + col for col in conf.columns]
+        cols[0] = r'$\bar{x}\uparrow\pm2s\uparrow \textnormal{or~} \bar{x}\downarrow\pm2s\downarrow$'
+        conf.columns = cols
+
+        # actual plotting
+        plt.rcParams['text.usetex'] = True  # use LaTeX for nice typesetting
+        fig, ax = plt.subplots()
+        ax.set_title(title)
+        ax.set_xlabel(x_label)
+        ax.set_ylabel(y_label)
+
+        # raw data, deviation from target position
+        rf.T.plot(ax=ax, style='o', fillstyle='none', markersize=5)
+        rb.T.plot(ax=ax, style='s', fillstyle='none', markersize=5)
+        # mean deviation
+        x_fwd.plot(ax=ax, label=r'$\bar{x}\uparrow$', style='k--')
+        x_bwd.plot(ax=ax, label=r'$\bar{x}\downarrow$', style='k--')
+        x_mean.plot(ax=ax, label=r'$\bar{x}$', style='k-', linewidth=2)
+        # confidence intervals
+        conf.plot(ax=ax, style='k-.', linewidth=1)
+        # get rid of 'i' in legend
+        h, l = plt.gca().get_legend_handles_labels()
+        labels = dict(zip(l, h))
+        labels = {i: labels[i] for i in labels if not i.isnumeric()}
+        plt.legend(labels.values(), labels.keys())
 
 
 if __name__ == "__main__":
+    data_file = 'data/sampleData.txt'
+
+    '''
+    redeclare 'offset'
+    '''
+    class MyData(prepSampleData.ISO230_2_Data):
+        def offset(self, p):
+            x = p / max(self.range) * 1 * np.pi
+            return np.sin(x) * self.reversal
+
+
+    prepData = MyData(i=11, j=23, axis_range=[-100, 100], reversal=.5, target_sigma=0.1, pos_sigma=0.1)
+    prepData.createData()
+    prepData.writeData('data/sampleData.txt')
+
     dat = ISO230()
 
-    dat.loadFile('data/sampleData.dat')
+    dat.loadFile(data_file)
 
     dat.getTargets()
 
@@ -209,72 +268,19 @@ if __name__ == "__main__":
 
     dat.evalDeviation()
 
-    # print(dat)
+    dat.ISO230Plot()
+    plt.show()
 
-    print(dat.actualFwd)
-
-    print(dat.actualBwd)
-
-    t = Template('reversal of axis:  {{res.maxB|round(res.prec)}}\n'
-                 'mean reversal:     {{res.avgB|round(res.prec)}}\n'
-                 'repeatability fwd: {{res.RFwd|round(res.prec)}}\n'
-                 'repeatability bwd: {{res.RBwd|round(res.prec)}}\n'
-                 'repeatability max: {{res.RAll|round(res.prec)}}\n'
-                 'E fwd:             {{res.EFwd|round(res.prec)}}\n'
-                 'E bwd:             {{res.EBwd|round(res.prec)}}\n'
-                 'E max:             {{res.EAll|round(res.prec)}}\n'
-                 'M max:             {{res.MAll|round(res.prec)}}\n'
-                 'accuracy fwd:      {{res.AFwd|round(res.prec)}}\n'
-                 'accuracy bwd:      {{res.ABwd|round(res.prec)}}\n'
-                 'accuracy max:      {{res.AAll|round(res.prec)}}')
-
-    dat.results['prec']=6
-    print(t.render(res=dat.results))
-
-    # dat.actualFwd.columns=[2,4,6,8,10]
-    # print(dat.actualFwd)
-    # print(dat.deviation['xiFwd'])
-    #
-    # pdf = (dat.actualFwd - dat.targets).T
-    # print(pdf)
-
-    #
-    # x=[]
-    # for p in dat.actualFwd.columns:
-    #     x.append(dat.targets[p])
-    # pdf['x'] = x
-    # ax = pdf.plot(x=pdf.index)
-    # mdf = dat.deviation['xiFwd']
-    # mdf['x'] = x
-    # mdf.plot(x='x', ax=ax)
-    # plt.show()
-
-    # print( (dat.actualFwd - dat.actualBwd).mean() )
-    # rel = dat.actualFwd - dat.targets
-    # print(rel)
-    # print(rel.mean())
-    # dat.deviation['fwd'] = rel.mean()
-    # print(dat.deviation)
-    #
-    # dat.getReference(dir='BWD')
-    # print(dat.bwd)
-
-    # res = pd.concat([dat.fwd, dat.bwd])
-    # print(res)
-    # res.boxplot()
-    # dat.boxPlot()
-    # plt.show()
-
-    # # dat.fwd.plot()
-    #
-    # positions = []
-    # for c in dat.bwd.columns:
-    #     print(dat.targets[c])
-    #     positions.append(dat.targets[c])
-    #
-    # plt.boxplot((dat.bwd - dat.targets),patch_artist=True, positions=positions)
-    #
-    # plt.boxplot((dat.fwd - dat.targets), positions=positions)
-    #
-    # (dat.bwd - dat.targets).boxplot(positions=positions)
-    # plt.show()
+    t = Template('reversal of axis:  {{res.maxB|round(par.prec|default(5))}}\n'
+                 'mean reversal:     {{res.avgB|round(par.prec|default(5))}}\n'
+                 'repeatability fwd: {{res.RFwd|round(par.prec|default(5))}}\n'
+                 'repeatability bwd: {{res.RBwd|round(par.prec|default(5))}}\n'
+                 'repeatability max: {{res.RAll|round(par.prec|default(5))}}\n'
+                 'E fwd:             {{res.EFwd|round(par.prec|default(5))}}\n'
+                 'E bwd:             {{res.EBwd|round(par.prec|default(5))}}\n'
+                 'E max:             {{res.EAll|round(par.prec|default(5))}}\n'
+                 'M max:             {{res.MAll|round(par.prec|default(5))}}\n'
+                 'accuracy fwd:      {{res.AFwd|round(par.prec|default(5))}}\n'
+                 'accuracy bwd:      {{res.ABwd|round(par.prec|default(5))}}\n'
+                 'accuracy max:      {{res.AAll|round(par.prec|default(5))}}')
+    print(t.render(res=dat.results, par=dat.parameters))
