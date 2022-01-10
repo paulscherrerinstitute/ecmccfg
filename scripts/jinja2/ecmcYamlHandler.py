@@ -24,12 +24,11 @@ class YamlHandler:
         'virtual': 2,
     }
 
-    def __init__(self, relaxedLint=True):
+    def __init__(self):
         self.yamlData = {}
         self.hasVariables = False
         self.hasPlcFile = False
         self.axisType = None
-        self.relaxedLint = relaxedLint
 
     @staticmethod
     def str2bool(val) -> bool:
@@ -43,9 +42,9 @@ class YamlHandler:
         else:
             raise ValueError(f'unrecognized string >> {val} <<')
 
-    def loadYamlData(self, file):
+    def loadYamlData(self, file, relaxed=True):
         linter = ecmcYamlLinter.YamlLinter()
-        linter.run(file, relaxed=self.relaxedLint)
+        linter.run(file, relaxed)
         if linter.status == 1:
             raise SyntaxError(f'{linter.msg}')
         elif linter.status == 2:
@@ -113,9 +112,9 @@ class YamlHandler:
 
 
 if __name__ == '__main__':
-    h = YamlHandler(relaxedLint=False)
+    h = YamlHandler()
 
-    h.loadYamlData('pytest/yaml_files/joint_all.yaml')
+    h.loadYamlData('pytest/yaml_files/joint_all.yaml', relaxed=False)
 
     # print(yaml.dump(h.yamlData))
     # print(h.getAxisType('j'))
