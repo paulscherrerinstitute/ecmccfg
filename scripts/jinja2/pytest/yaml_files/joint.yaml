@@ -1,4 +1,5 @@
 axis:
+  id: 1
   type: joint
 
 var:
