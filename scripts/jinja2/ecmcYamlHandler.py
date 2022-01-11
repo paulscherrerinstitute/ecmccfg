@@ -45,10 +45,6 @@ class YamlHandler:
     def loadYamlData(self, file, relaxed=True):
         linter = ecmcYamlLinter.YamlLinter()
         linter.run(file, relaxed)
-        if linter.status == 1:
-            raise SyntaxError(f'{linter.msg}')
-        elif linter.status == 2:
-            print(f'yamllinter warnings:\n{linter.msg}')
         with open(file) as f:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
 
