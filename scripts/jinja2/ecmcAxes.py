@@ -3,6 +3,8 @@ from ecmcJinja2 import JinjaTemplate
 from ecmcPlc import EcmcPlc, EcmcAxisPlc
 from pathlib import Path
 
+import ecmcConfigValidator
+
 
 class EcmcAxis(YamlHandler):
     def __init__(self, axisconfig, jinjatemplatedir):
@@ -17,8 +19,11 @@ class EcmcAxis(YamlHandler):
             raise FileNotFoundError(f'template directory >> {jinjatemplatedir} << not found!')
         self.config = None
 
-    def create(self):
+    def create(self, strict=False):
         self.loadYamlData(self.axisconfig)
+        v = ecmcConfigValidator.ConfigValidator(self.yamlData)
+        v.validate_axis(strict=strict)
+        # TODO: write validated and normalized data to 'yamlData'
         self.setEcmcAxisType()
         if self.axisType == 1:
             self.config = EcmcJoint(self.axisconfig, self.jinjatemplatedir)
