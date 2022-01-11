@@ -32,6 +32,8 @@ def test_create(myAxis):
     myAxis.axisconfig = f'{yaml_path}endEffector.yaml'
     myAxis.create()
     assert myAxis.config.axisType is 2
+    with pytest.raises(SyntaxError):
+        myAxis.create(strict=True)
     with pytest.raises(NotImplementedError):
         myAxis.axisconfig = f'{yaml_path}axisTypeNotImplementedError.yaml'
         myAxis.create()
