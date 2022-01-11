@@ -5,10 +5,12 @@ from cerberus import Validator
 
 import ecmcYamlSchema
 
+
 class Validated:
     '''
     data container
     '''
+
     def __init__(self, data=None):
         if data is None:
             self.data = {}
@@ -26,12 +28,14 @@ class Validated:
     def to_json(self):
         return json.dumps(self.data)
 
+
 class ConfigValidator:
     '''
     config validator
     args:
         document, type 'dict'
     '''
+
     def __init__(self, document):
         self.Schema = ecmcYamlSchema.Schema()
         self.document = document
@@ -56,14 +60,13 @@ class ConfigValidator:
             else:
                 print(e)
 
-    def write(self, outfile=None, format='yaml'):
-        if format.lower() == 'yaml':
+    def write(self, outfile=None, output_format='yaml'):
+        if output_format.lower() == 'yaml':
             text = self.validated.to_yaml()
-        elif format.lower() == 'json':
+        elif output_format.lower() == 'json':
             text = self.validated.to_json()
         else:
             raise NotImplementedError(f'unsupported output format, options are [yaml|json]')
-
 
         if outfile is None:
             out = sys.stdout
@@ -75,6 +78,7 @@ class ConfigValidator:
             if outfile is not None:
                 out.close()
 
+
 if __name__ == '__main__':
     file = 'pytest/yaml_files/joint_all.yaml'
     with open(file) as f:
@@ -85,4 +89,3 @@ if __name__ == '__main__':
 
     print(v.validated)
     print(type(v.validated))
-
