@@ -1,4 +1,6 @@
-import subprocess
+import yaml
+from yamllint.config import YamlLintConfig
+from yamllint import linter, cli
 
 relaxedRule = {
     "rules": {
@@ -41,50 +43,22 @@ relaxedRule = {
 
 
 class YamlLinter:
-
-    def __init__(self, file=None):
-        self.status = 0
-        self.msg = None
-        self.file = file
-
-    '''
-    call `yamllint` in subprocess and return exit code and stdout
-    exit codes:
-    0: OK
-    1: ERROR
-    2: WARNING
-    '''
-    def run(self, file=None, relaxed=False):
-        file = self.file if file is None else file
-        if file is None:
-            raise AttributeError(f'no input file provided')
-        procStr = f'yamllint -f colored --strict {file}'
+    @staticmethod
+    def run(file=None, relaxed=False):
+        conf = YamlLintConfig('extends: default')
         if relaxed:
-            procStr = f'{procStr} -d "{relaxedRule}"'
-        proc = subprocess.run(
-            procStr,
-            shell=True,
-            stdout=subprocess.PIPE,
-            encoding='utf8'
-        )
-        self.status = proc.returncode
-        self.msg = proc.stdout
+            conf = YamlLintConfig(yaml.dump(relaxedRule))
+        f = open(file)
+        gen = linter.run(f, conf)
+        status = cli.show_problems(gen, file, 'colored', False)
+        if status > 1:
+            raise SyntaxError(f'yamllint failed!\n')
 
 
 if __name__ == '__main__':
     # instance w/o file
     l = YamlLinter()
-    # call linter on file
-    l.run('pytest/yaml_files/joint_all.yaml')
 
-    print(f'MSG: {l.msg}')
+    l.run('pytest/yaml_files/linter_test_passRelaxed.yaml', relaxed=False)
 
-    # instance w/ file
-    l2 = YamlLinter('pytest/yaml_files/joint_perfectLint.yaml')
-    # call linter on self.file
-    l2.run()
-
-    # instance w/o file
-    # l3 = YamlLinter()
-    # call linter on None --> ERROR
-    # l3.lint()
+    # l.run('pytest/yaml_files/joint_all.yaml')

@@ -127,10 +127,11 @@ def test_get_axis_type(myHandler, test_input, expected):
     myHandler.yamlData = {'axis': {'type': test_input}}
     assert myHandler.getAxisType() == expected
 
+
 def test_load_yaml_data(myHandler):
-    with pytest.raises(TypeError):
-        myHandler.loadYamlData()
     with pytest.raises(FileNotFoundError):
         myHandler.loadYamlData(f'{yaml_path}fileNotFound.yaml')
-    myHandler.loadYamlData(f'{yaml_path}joint.yaml')
-    assert myHandler.yamlData['axis']['type'] == 'joint'
+    with pytest.raises(SyntaxError):
+        myHandler.loadYamlData(f'{yaml_path}linter_test_passRelaxed.yaml', relaxed=False)
+    myHandler.loadYamlData(f'{yaml_path}linter_test_passRelaxed.yaml', relaxed=True)
+    assert myHandler.yamlData['foo'] == 'bar'
