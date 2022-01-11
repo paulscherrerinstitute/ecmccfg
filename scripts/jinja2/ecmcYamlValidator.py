@@ -26,4 +26,4 @@ if __name__ == '__main__':
     v = ecmcConfigValidator.ConfigValidator(doc)
 
     v.validated.data = v.validate_axis(strict=args.strict)
-    v.write(args.output, format=args.format)
+    v.write(args.output, output_format=args.format)
