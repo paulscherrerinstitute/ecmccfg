@@ -1,39 +1,29 @@
+#! /usr/bin/env python
+
 import yaml
-from cerberus import Validator
+import argparse
 
-import ecmcYamlSchema
-
-
-class YamlValidator:
-    def __init__(self, document):
-        self.Schema = ecmcYamlSchema.Schema()
-        self.document = document
-        self.parsed = None
-        self.validated = {}
-        self.d = None
-        self.v = Validator(purge_unknown=True)
-
-    def get_axis_type(self):
-        schema = self.Schema.get_schema('axis')
-        if self.v.validate(self.document, schema):
-            return self.v.normalized(self.document)['axis']['type']
-        else:
-            raise SyntaxError(f'{yaml.dump(self.v.errors)}')
-
-    def validate_axis(self):
-        schema = self.Schema.get_schema(self.Schema.axisSchemaDict[self.get_axis_type()])
-        if self.v.validate(self.document, schema):
-            print(f'=================================\n'
-                  f'{yaml.dump(self.v.normalized(self.document))}'
-                  f'=================================')
-        else:
-            print(yaml.dump(self.v.errors))
-
+import ecmcConfigValidator
 
 if __name__ == '__main__':
-    file = 'pytest/yaml_files/joint_all.yaml'
-    with open(file) as f:
-        document = yaml.load(f, Loader=yaml.FullLoader)
-    v = YamlValidator(document)
+    ap = argparse.ArgumentParser()
 
-    v.validate_axis()
+    # Add the arguments to the parser
+    ap.add_argument('file', help='file to validate')
+    ap.add_argument("-t", "--type", required=False, default='axis',
+                    help="type to validate (i.e. 'axis')")
+    ap.add_argument("-o", "--output", required=False, default=None,
+                    help="output file, defaults to STDOUT")
+    ap.add_argument("-f", "--format", required=False, default='yaml',
+                    help="output format [yaml|json]")
+    ap.add_argument("-s", "--strict", action='store_true', default=False,
+                    help="strict validation (raise on error)")
+
+    args = ap.parse_args()
+
+    with open(args.file) as f:
+        doc = yaml.load(f, Loader=yaml.FullLoader)
+    v = ecmcConfigValidator.ConfigValidator(doc)
+
+    v.validated.data = v.validate_axis(strict=args.strict)
+    v.write(args.output, format=args.format)
