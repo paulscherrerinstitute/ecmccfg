@@ -3,23 +3,13 @@ import string
 from pathlib import Path
 
 
+import ecmcYamlLinter
+
+from ecmcYamlSchema import supportedAxisTypes
+
+
 class YamlHandler:
-    supportedAxisTypes = {
-        '0': 0,
-        'debug': 0,
-        '1': 1,
-        'j': 1,
-        'joint': 1,
-        'physical': 1,
-        'motor': 1,
-        'real': 1,
-        '2': 2,
-        'e': 2,
-        'ee': 2,
-        'end_effector': 2,
-        'endeffector': 2,
-        'virtual': 2,
-    }
+    supportedAxisTypes = supportedAxisTypes
 
     def __init__(self):
         self.yamlData = {}
@@ -39,10 +29,14 @@ class YamlHandler:
         else:
             raise ValueError(f'unrecognized string >> {val} <<')
 
-    def loadYamlData(self, file):
-        # open yaml file containing the PLC configuration
+    def loadYamlData(self, file, relaxed=True):
+        # lint the yaml file
+        linter = ecmcYamlLinter.YamlLinter()
+        linter.run(file, relaxed)
+        # load if lint OK
         with open(file) as f:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
+        # validate the data
 
     def getKey(self, key, data):
         if isinstance(key, list):
@@ -105,8 +99,12 @@ class YamlHandler:
 
 if __name__ == '__main__':
     h = YamlHandler()
-    print(h.getAxisType('j'))
-    print(h.getAxisType())
+
+    h.loadYamlData('pytest/yaml_files/joint_all.yaml', relaxed=False)
+
+    # print(yaml.dump(h.yamlData))
+    # print(h.getAxisType('j'))
+    # print(h.getAxisType())
     #
     # h.yamlData = {'axis': {'type': 'joint'}}
     # print(h.checkForKey('axis'))

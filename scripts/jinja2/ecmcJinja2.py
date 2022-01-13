@@ -1,6 +1,8 @@
 import argparse
 from pathlib import Path
+import os
 import jinja2
+
 
 
 class JinjaCli:
@@ -11,6 +13,8 @@ class JinjaCli:
         self.template = args.template
         self.templatedir = args.templatedir
         self.outFile = Path(self.tmpDir, args.outfile)
+        self.prodId = self.getProdId(args)
+        self.hwDb = Path(args.hardwaredb) if args.hardwaredb else None
         Path(self.outFile).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
 
     @staticmethod
@@ -29,7 +33,34 @@ class JinjaCli:
                         help="File containing the data/configuration.")
         ap.add_argument("-o", "--outfile", required=False, default='ecmcScriptFromYaml.txt',
                         help="File to use for output. Optional, defaults to stdout")
+        ap.add_argument("-i", "--id", required=False,
+                        help=f"This parameter only takes effect for hardware (slave). Product ID as reported by "
+                             "`ethercat slaves -v | grep \"Product code:\" | awk -F: '{ gsub(/ /,""); print $2 }'`"
+                             " if not specified, the script will obtain the ID from the environment ${"
+                             "ECMC_EC_PRODUCT_ID}.")
+        ap.add_argument("-H", "--hardwaredb", required=False,
+                        help="hardware database to use.")
         return ap.parse_args()
+
+    @staticmethod
+    def getFromArg(args) -> int:
+        try:
+            return int(args.id, 0)
+        except:
+            raise
+
+    @staticmethod
+    def getFromEnv(var) -> int:
+        try:
+            return int(os.environ[var], 0)
+        except KeyError as err:
+            return -1
+
+    @classmethod
+    def getProdId(cls, args) -> int:
+        if args.id is None:
+            return cls.getFromEnv("ECMC_EC_PRODUCT_ID")
+        return cls.getFromArg(args)
 
 
 class JinjaTemplate:

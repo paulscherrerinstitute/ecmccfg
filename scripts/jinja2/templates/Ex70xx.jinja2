@@ -1,0 +1,25 @@
+{# WARNING: subIdx MUST be as decimal integer _NOT_ hex int if it's not a variable!!! #}
+{% macro addSdo(idx, subIdx, value=0, bytes=2) -%}
+    ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},{{ '0x%04x' % idx }},{{ '0x%02x' % subIdx }},{{ value |int }},{{ bytes|int }})"
+{%- endmacro %}
+
+{#- TODO: For slaves with 2-channels need this to be a variable. Ex70x{1,7} is single channel only .. yet. #}
+{%- set sdo = 0x8010 -%}
+{#- run current #}
+{{ addSdo(sdo, 0x01, current.run |default(0)) }}
+{%- set I_hold = current.run|default(0) if current.hold is undefined else current.hold %}
+{#- holding current #}
+{{ addSdo(sdo, 0x02, I_hold |default(0)) }}
+{#- voltage #}
+{{ addSdo(sdo, 0x03, voltage*f_u|default(1) ) if voltage is defined  }}
+{#- coil resistance #}
+{{ addSdo(sdo, 0x04, resistance|default(0)*100) if resistance is defined }}
+{#- set full steps per rev, if not 200  #}
+{%- if steps |default(200)|int != 200 %}
+{{ addSdo(sdo, 0x06, steps |default(200)) }}
+{% else %}
+#- skipped setting full steps, as it's the default of the slave.
+{%- endif %}
+{#- inductace #}
+{{ addSdo(sdo, 0x0A, inductance|default(0)*100 ) if inductance is defined }}
+{# EOF #}
