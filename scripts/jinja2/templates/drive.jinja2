@@ -29,14 +29,3 @@ ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum({{ axis.id|int }},{{ drive.numerator|flo
 {%- set brake=None if drive.brake is not defined else drive.brake %}
 ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime({{ axis.id|int }},{{ brake.openDelay|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id|int }},{{ brake.closeAhead|default(0)|int }})"
-
-#- Input sensors
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id|int }}.mon.lowlim")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id|int }}.mon.highlim")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id|int }}.mon.homesensor")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id|int }}.mon.extinterlock")"
-
-#- Output
-{%- set output = None if output is not defined else output %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id|int }}.drv.brake")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.health|default('') }}","ax{{ axis.id|int }}.health")"
