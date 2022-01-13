@@ -1,0 +1,40 @@
+axis:
+  id: 2
+  type: virtual
+  mode: CSV
+
+var:
+  drive: 8
+
+epics:
+  name: M1_int
+  precision: 3
+  unit: mm
+  motorRecord:
+    enable: true
+    description: internal step counter
+
+encoder:
+  numerator: 1
+  denominator: 12800
+  type: 0         # Type: 0=Incremental, 1=Absolute
+  bits: 16        # Total bit count of encoder raw data
+  position: ec0.s{{ var.drive }}.positionActual01  # Ethercat entry for position input (encoder)
+
+trajectory:
+  axis:
+    velocity: 4
+    acceleration: .25
+
+input:
+  limit:
+    forward: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for low limit switch input
+    backward: ec0.s{{ var.drive }}.ONE.0   #  Ethercat entry for high limit switch input
+  home: ec0.s{{ var.drive }}.ONE.0         #  Ethercat entry for home switch input
+  interlock: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for interlock switch input
+
+softlimits:
+  enable: false
+  forward: 110
+  backward: 5
+
