@@ -3,7 +3,7 @@
 {# TODO: switch for end effector vs joint #}
 ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},{{ axis.type|int }},{{ drive.type|default(0)|int }})"
 {%- if axis.type|int == 2 %}
-ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id|int }},0)" for end effector
+ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id|int }},0)"
 {%- endif %}
 #- health --> see Output
 

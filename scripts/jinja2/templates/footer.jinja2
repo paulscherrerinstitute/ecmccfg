@@ -1,3 +1,14 @@
+#- Input sensors
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id|int }}.mon.lowlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id|int }}.mon.highlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id|int }}.mon.homesensor")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id|int }}.mon.extinterlock")"
+
+#- Output
+{%- set output = None if output is not defined else output %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id|int }}.drv.brake")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.health|default('') }}","ax{{ axis.id|int }}.health")"
+
 #- Soft limits
 {%- set softlimits = None if softlimits is undefined else softlimits %}
 ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd({{ axis.id|int }},{{ softlimits.backward|default(0)|float}})"
