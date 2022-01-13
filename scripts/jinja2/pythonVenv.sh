@@ -15,6 +15,6 @@ if [ -d "${ENV_DIR}" ]; then
 else
     python3 -m venv "${ENV_DIR}"
     . "${ENV_DIR}"/bin/activate
-    pip3 install pyyaml jinja2-cli
+    pip3 install wheel pyyaml jinja2-cli yamllint Cerberus
 fi
 
