@@ -10,6 +10,7 @@ EXCLUDE_VERSIONS = 3 7.0.3 7.0.4.1 7.0.5
 ARCH_FILTER =RHEL%
 ARCH_FILTER+=deb10%
 
+
 SCRIPTS+=startup.cmd
 
 HW_DIR = hardware/
