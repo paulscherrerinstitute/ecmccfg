@@ -7,10 +7,9 @@ import ecmcYamlSchema
 
 
 class Validated:
-    '''
+    """
     data container
-    '''
-
+    """
     def __init__(self, data=None):
         if data is None:
             self.data = {}
@@ -30,12 +29,11 @@ class Validated:
 
 
 class ConfigValidator:
-    '''
+    """
     config validator
     args:
         document, type 'dict'
-    '''
-
+    """
     def __init__(self, document):
         self.Schema = ecmcYamlSchema.Schema()
         self.document = document
