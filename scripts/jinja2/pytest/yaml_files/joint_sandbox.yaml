@@ -5,7 +5,7 @@ axis:
   parameters: 'powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;' # additional parameters
 
 var:
-  drive: 17
+  drive: 0
   encoder: 42
 
 epics:
@@ -88,32 +88,32 @@ input:
   interlock: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for interlock switch input
 
 output:
-  health: ec0.s31.binaryOutput03      # Ethercat entry for health output
-  brake:  ec0.s31.binaryOutput07      # Ethercat entry for brake output
+  health: ec0.s42.binaryOutput03      # Ethercat entry for health output
+#  brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
 
-# homing:
-#   type: 3
-#   position: 0
-#   postMoveEnable: false
-#   postMovePosition: 0
-#   switchPolarity: 0 ## 0: NC, 1: NO
-#   latchCount: 0
-#   velocity:
-#     to: 2.72
-#     # from: 3.14
-#   # acceleration: 2
-#   # deceleration: 5
+homing:
+  type: 3
+  position: 0
+  postMoveEnable: false
+  postMovePosition: 0
+  switchPolarity: 0 ## 0: NC, 1: NO
+  latchCount: 0
+  velocity:
+    to: 2.72
+    # from: 3.14
+  # acceleration: 2
+  # deceleration: 5
 
 softlimits:
-  enable: false
+  enable: true
   forward: 7200
   backward: -7200
 
 monitoring:
-#   lag:
-#     enable: false
-#     tollerance: 5
-#     time: 100
+  lag:
+    enable: true
+    tollerance: 5
+    time: 100
   target:
     enable: true
     tollerance: 0.125
