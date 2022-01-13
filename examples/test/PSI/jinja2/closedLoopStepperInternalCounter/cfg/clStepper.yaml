@@ -1,0 +1,122 @@
+axis:
+  id: 1
+  type: joint   # this is for future selection of axis type
+  mode: CSV     # supported mode, CSV and CSP
+  parameters: 'powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;' # additional parameters
+
+
+var:
+  drive: 8
+  enc: 9
+
+epics:
+  name: M1
+  precision: 3
+  unit: mm
+  motorRecord:
+    enable: true
+    # fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim'
+    fieldInit: 'NTM=1'
+    description: AM8111 CSV
+
+drive:
+  numerator: 10        # Fastest speed in engineering units (2000 full steps / s --> 10 rev/s --> 600 rpm)
+  denominator:  32768                            # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  control: ec0.s{{ var.drive }}.driveControl01
+  status: ec0.s{{ var.drive }}.driveStatus01
+  setpoint: ec0.s{{ var.drive }}.velocitySetpoint01
+  # reduceTorque: 2 # Reduce torque bit in drive control word
+  # brake:
+  #   openDelay: 0  # Brake timing parameter in cycles (default 1kHz)
+  #   closeAhead: 0 # Brake timing parameter in cycles (default 1kHz)
+  reset: 7        # Reset   (if no drive reset bit then leave empty)
+  warning: 7      # Warning (if no drive warning bit then leave empty)
+  error:          # max 3
+    - 3           # Error 0 (if no drive error bit then leave empty)
+  #   - 7           # Error 1 (if no drive error bit then leave empty)
+  #   - 14          # Error 2 (if no drive error bit then leave empty)
+
+encoder:
+  numerator: 1
+  denominator: 4096
+  type: 1         # Type: 0=Incremental, 1=Absolute
+  bits: 32        # Total bit count of encoder raw data
+  absBits: 26     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absOffset: -71.0    # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s{{ var.enc }}.positionActual01  # Ethercat entry for actual position input (encoder)
+  # control: ec0.s$(ENC_SLAVE).encoderControl01   # mandatory only if 'reset' is used
+  # status: ec0.s{{ var.drive }}.encoderStatus01     # mandatory only if 'warning' or 'error' are used
+  # reset: 1        # Reset   (optional)
+  # warning: 2      # Warning (optional)
+  # error:          # max 3 (optional)
+  #   - 5           # Error 0
+  #   - 9           # Error 1
+  #   - 11          # Error 2
+  # velocityFilterSize: 100
+  # positionFilterSize: 1
+  # positionFilterEnable: false
+  # latch:
+  #   position: ''
+  #   control: ''
+  #   status: ''
+
+controller:
+  Kp:  25
+  Ki:  0.001
+  # Kd:  0
+  # Kff: 1
+
+trajectory:
+  axis:
+    velocity: 4
+    acceleration: .25
+    # deceleration: 3600
+    # emergencyDeceleration: 0.05
+  # jog:
+  #   velocity: 90
+  #   acceleration: 0.1
+  # modulo:
+  #   range: 0
+  #   type: 0
+
+input:
+  limit:
+    forward: ec0.s{{ var.drive }}.driveStatus01.11    #  Ethercat entry for low limit switch input
+    backward: ec0.s{{ var.drive }}.driveStatus01.12   #  Ethercat entry for high limit switch input
+  home: ec0.s{{ var.drive }}.ONE.0         #  Ethercat entry for home switch input
+  interlock: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for interlock switch input
+
+# output:
+#   health: ''      # Ethercat entry for health output
+#   brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
+
+# homing:
+#   type: 3
+#   position: 0
+#   velocity:
+#     to: 2.72
+#     # from: 3.14
+#   # acceleration: 2
+#   # deceleration: 5
+
+softlimits:
+  enable: false
+  forward: 114
+  backward: 4
+
+monitoring:
+  # lag:
+  #   enable: false
+  #   tollerance: 5
+  #   time: 100
+  target:
+    enable: true
+    tollerance: 0.001
+    time: 100
+  velocity:
+    enable: true
+    max: 36000
+    time:
+      trajectory: 100
+      drive: 200
