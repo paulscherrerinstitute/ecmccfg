@@ -20,7 +20,7 @@ class EcmcAxis(YamlHandler):
         self.config = None
 
     def create(self, strict=False):
-        self.loadYamlData(self.axisconfig)
+        self.loadYamlData(self.axisconfig, lint=True)
         v = ecmcConfigValidator.ConfigValidator(self.yamlData)
         v.validate_axis(strict=strict)
         # TODO: write validated and normalized data to 'yamlData'

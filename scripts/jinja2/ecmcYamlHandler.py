@@ -29,14 +29,13 @@ class YamlHandler:
         else:
             raise ValueError(f'unrecognized string >> {val} <<')
 
-    def loadYamlData(self, file, relaxed=True):
-        # lint the yaml file
-        linter = ecmcYamlLinter.YamlLinter()
-        linter.run(file, relaxed)
-        # load if lint OK
+    def loadYamlData(self, file, lint=False, relaxed=True):
+        if lint:
+            # lint the yaml file
+            linter = ecmcYamlLinter.YamlLinter()
+            linter.run(file, relaxed)
         with open(file) as f:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
-        # validate the data
 
     def getKey(self, key, data):
         if isinstance(key, list):
