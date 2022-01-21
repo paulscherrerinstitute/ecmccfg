@@ -87,12 +87,11 @@ class ConfigValidator:
         raise SyntaxError if 'strict'
         """
         e = DictContainer(data=err)
-        msg = f'{color.RED}{color.BOLD}\nError:\n' \
-              f'{color.YELLOW}{e.to_yaml()}{color.END}'
+        msg = f'{color.YELLOW}{e.to_yaml()}{color.END}'
         if strict:
             raise SyntaxError(msg)
         else:
-            print(msg)
+            print(f'{color.PURPLE}{color.BOLD}\nWarning:{color.END}\n{msg}')
 
     def validate(self, document=None, schema=None, strict=False) -> dict:
         """
