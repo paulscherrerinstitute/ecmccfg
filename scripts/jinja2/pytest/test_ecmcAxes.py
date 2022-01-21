@@ -37,7 +37,6 @@ def test_create(myAxis):
     with pytest.raises(NotImplementedError):
         myAxis.axisconfig = f'{yaml_path}axisTypeNotImplementedError.yaml'
         myAxis.create()
-
     with pytest.raises(FileNotFoundError):
         newAxis = EcmcAxis(f'{yaml_path}joint.yaml', '../notADir/')
         newAxis = EcmcAxis(f'{yaml_path}notAFile.yaml', f'{templates_path}')
