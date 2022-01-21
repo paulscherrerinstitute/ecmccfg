@@ -78,7 +78,7 @@ class Schema:
         'required': True,
         'schema': {
             'id': {'required': True, 'type': 'integer', 'min': 1},
-            'type': {'type': 'integer', 'default': 'joint', 'coerce': lambda v: supportedAxisTypes[str(v).lower()]},
+            'type': {'type': 'integer', 'default': 'joint', 'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
             'features': {'type': 'dict', 'schema': {
