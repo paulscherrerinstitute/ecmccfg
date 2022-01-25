@@ -28,14 +28,15 @@ def myAxis():
 @pytest.mark.dependency()
 def test_create(myAxis):
     myAxis.create()
-    assert myAxis.config.axisType is 1
-    myAxis.axisconfig = f'{yaml_path}endEffector.yaml'
+    assert myAxis.axisType is 1
+    myAxis.config_file = f'{yaml_path}endEffector.yaml'
     myAxis.create()
-    assert myAxis.config.axisType is 2
+    assert myAxis.axisType is 2
+    myAxis.config_file = f'{yaml_path}ecmcAxis_SyntaxError.yaml'
     with pytest.raises(SyntaxError):
-        myAxis.create(strict=True)
+        myAxis.create()
     with pytest.raises(NotImplementedError):
-        myAxis.axisconfig = f'{yaml_path}axisTypeNotImplementedError.yaml'
+        myAxis.config_file = f'{yaml_path}axisTypeNotImplementedError.yaml'
         myAxis.create()
     with pytest.raises(FileNotFoundError):
         newAxis = EcmcAxis(f'{yaml_path}joint.yaml', '../notADir/')
@@ -47,7 +48,7 @@ def test_set_axis_template(myAxis):
     myAxis.create()
     assert myAxis.config.axisType is 1
     with pytest.raises(KeyError):
-        myAxis.config.setAxisTemplate(-1)  # load 'debug.jinja2'
+        myAxis.config.setAxisTemplate(-1)
     myAxis.config.setAxisTemplate(0)  # load 'debug.jinja2'
     assert myAxis.config.hasVariables
     ''' render w/o var '''
@@ -72,7 +73,7 @@ def getArgs(line):
 
 @pytest.mark.dependency(depends=["test_create"])
 def test_render_vs_bechmark(myAxis):
-    myAxis.axisconfig = f'{yaml_path}joint_benchmark.yaml'
+    myAxis.config_file = f'{yaml_path}joint_benchmark.yaml'
     myAxis.create()
     if myAxis.config.hasVariables:
         myAxis.config.setTemplate(myAxis.config.render(myAxis.config.yamlData))

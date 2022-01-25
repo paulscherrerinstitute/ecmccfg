@@ -74,11 +74,11 @@ class ConfigValidator:
         document, type == 'dict'
     """
 
-    def __init__(self, document):
+    def __init__(self):
         self.Schema = ecmcYamlSchema.Schema()
-        self.document = document
+        self.document = {}
         self.validated = DictContainer()
-        self.v = cerberus.Validator(purge_unknown=False, allow_unknown=True)
+        self.v = cerberus.Validator(purge_unknown=True, allow_unknown=False)
 
     @staticmethod
     def __yaml_dump_error(err, strict=False):
@@ -89,7 +89,7 @@ class ConfigValidator:
         e = DictContainer(data=err)
         msg = f'{color.YELLOW}{e.to_yaml()}{color.END}'
         if strict:
-            raise SyntaxError(msg)
+            raise SyntaxError(f'\n{msg}')
         else:
             print(f'{color.PURPLE}{color.BOLD}\nWarning:{color.END}\n{msg}')
 
@@ -123,7 +123,7 @@ class ConfigValidator:
                                       f'supported axis types are:\n'
                                       f'{color.GREEN}{ecmcYamlSchema.supportedAxisTypes.keys()}{color.END}')
 
-    def validate_axis(self, strict=False) -> dict:
+    def validate_axis(self, strict=True) -> dict:
         """
         validate the complete document against the internal axis type.
         """
@@ -132,7 +132,8 @@ class ConfigValidator:
 
 
 def main():
-    file = 'pytest/yaml_files/joint_all.yaml'
+    # file = 'pytest/yaml_files/joint_all.yaml'
+    file = 'pytest/yaml_files/joint_sandbox.yaml'
     # file = 'pytest/yaml_files/axisTypeNotImplementedError.yaml'
     with open(file) as f:
         doc = yaml.load(f, Loader=yaml.FullLoader)
@@ -140,7 +141,7 @@ def main():
 
     print(v.get_axis_type())
 
-    v.validated.data = v.validate_axis(strict=False)
+    v.validated.data = v.validate_axis(strict=True)
     # v.validated.data = v.validate_axis(strict=True)
 
     v.validated.write()
