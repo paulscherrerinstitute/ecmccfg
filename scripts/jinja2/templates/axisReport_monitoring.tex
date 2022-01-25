@@ -29,7 +29,7 @@ backward & {{ softlimits.backward|default(0)|float}}~{{egu}} \\
 {%- set lag = None if monitoring.lag is undefined else monitoring.lag %}
 {%if lag.enable%}
 Lag monitoring (following error) is enabled.
-The axis is allowed to deviate from the planned trajectory by $\pm$~{{ lag.tollerance|default(0.5)|float }}~{{egu}} for no more than {{ lag.time|default(10)|int }} cycles.
+The axis is allowed to deviate from the planned trajectory by $\pm$~{{ lag.tolerance|default(0.5)|float }}~{{egu}} for no more than {{ lag.time|default(10)|int }} cycles.
 {%else%}
 \warning{Lag monitoring is disabled!}
 {%endif%}
@@ -37,7 +37,7 @@ The axis is allowed to deviate from the planned trajectory by $\pm$~{{ lag.tolle
 {%- set target = None if monitoring.target is undefined else monitoring.target %}
 {%if target.enable%}
 Target monitoring is enabled.
-The axis is considered \emph{at target} as soon as the actual position is within $\pm$~{{ target.tollerance|default(0.5)|float }}~{{egu}} of the set point for more than {{ target.enable|default(false)|int }} cycles.
+The axis is considered \emph{at target} as soon as the actual position is within $\pm$~{{ target.tolerance|default(0.5)|float }}~{{egu}} of the set point for more than {{ target.enable|default(false)|int }} cycles.
 {%else%}
 \warning{Target monitoring is disabled!}
 {%endif%}

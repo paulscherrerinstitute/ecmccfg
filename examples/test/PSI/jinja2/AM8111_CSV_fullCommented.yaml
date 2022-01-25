@@ -99,11 +99,11 @@ input:
 monitoring:
   # lag:
   #   enable: false
-  #   tollerance: 5
+  #   tolerance: 5
   #   time: 100
   target:
     enable: true
-    tollerance: 0.125
+    tolerance: 0.125
     time: 100
   # velocity:
   #   enable: false

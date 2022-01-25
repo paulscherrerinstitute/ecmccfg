@@ -20,11 +20,11 @@ ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd({{ axis.id|int }},{{ softlimits.e
 {%- set monitoring = None if monitoring is undefined else monitoring %}
 {%- set lag = None if monitoring.lag is undefined else monitoring.lag %}
 ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id|int }},{{ lag.enable|default(false)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id|int }},{{ lag.tollerance|default(0.5)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id|int }},{{ lag.tolerance|default(0.5)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id|int }},{{ lag.time|default(10)|int }})"
 
 {%- set target = None if monitoring.target is undefined else monitoring.target %}
-ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tollerance|default(0.5)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tolerance|default(0.5)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id|int }},{{ target.time|default(10)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id|int }},{{ target.enable|default(false)|int }})"
 
@@ -68,7 +68,7 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id|int
 
 {%- set drive = None if drive is undefined else drive %}
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME={{ epics.name }}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, DESC='{{ MR.description|default('') }}', EGU={{ epics.unit|default('mm') }}, PREC={{ epics.precision|default(3)|int }}, VELO={{ trajectory.axis.velocity|float }}, JVEL={{ jogVelocity|float }}, JAR={{ jogacceleration|float }}, ACCL={{ trajectory.axis.acceleration|float }}, RDBD={{ target.tollerance|default(0.5)|float }}, DLLM={{ softlimits.backward|default(0)|float}}, DHLM={{ softlimits.forward|default(0)|float}}, HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }}, {{ MR.fieldInit|default('') }}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME={{ epics.name }}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, DESC='{{ MR.description|default('') }}', EGU={{ epics.unit|default('mm') }}, PREC={{ epics.precision|default(3)|int }}, VELO={{ trajectory.axis.velocity|float }}, JVEL={{ jogVelocity|float }}, JAR={{ jogacceleration|float }}, ACCL={{ trajectory.axis.acceleration|float }}, RDBD={{ target.tolerance|default(0.5)|float }}, DLLM={{ softlimits.backward|default(0)|float}}, DHLM={{ softlimits.forward|default(0)|float}}, HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }}, {{ MR.fieldInit|default('') }}")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
 dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, HOMEPROC={{ homing.type|default(0)|int }}, HOMEPOS={{ homing.position|default(0)|float }}, HVELTO={{ homingVelocity.to|default(0)|float }}, HVELFRM={{ homingVelocity.from or homingVelocity.to|default(0)|float }}, HOMEACC={{ homing.acceleration|default(0)|float }}, HOMEDEC={{ homing.deceleration or homing.acceleration|default(0) |float}}")
