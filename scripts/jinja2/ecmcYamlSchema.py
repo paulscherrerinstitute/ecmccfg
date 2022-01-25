@@ -101,7 +101,7 @@ class Schema:
 
     epicsSchema = {
         'type': 'dict',
-        'required': False,
+        'required': True,
         'schema': {
             'name': {'default': 'axis'},
             'precision': {'type': 'integer', 'min': 0, 'default': 3},
@@ -125,8 +125,8 @@ class Schema:
             'numerator': {'type': 'float', 'default': 0},
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
             'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
-            'setpoint': {'type': 'string'},
-            'control': {'type': 'string'},
+            'setpoint': {'required': True, 'type': 'string'},
+            'control': {'required': True, 'type': 'string'},
             'status': {'type': 'string'},
             'reduceTorqueEnable': {'type': 'boolean', 'dependencies': ['control', 'reduceTorque']},
             'reduceTorque': {'type': 'integer', 'min': 0, 'dependencies': ['control', 'reduceTorqueEnable']},
@@ -202,6 +202,7 @@ class Schema:
         'schema': {
             'source': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
             'axis': {
+                'required': True,
                 'type': 'dict',
                 'schema': {
                     'velocity': {'required': True, 'type': 'float'},

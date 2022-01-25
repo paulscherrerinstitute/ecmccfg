@@ -427,7 +427,7 @@ monitoring:
     enable: false
     # --> required: no, type: bool
     # ==> Cfg.SetAxisMonAtTargetTol(int axis_no, double value);
-    tollerance: 5
+    tolerance: 5
     # ==> Cfg.SetAxisMonAtTargetTime(int axis_no, int value);
     time: 100
     # --> required: no, type: int, min: 0, dependencies: ['enable']
@@ -437,7 +437,7 @@ monitoring:
     enable: true
     # --> required: no, type: bool
     # ==> Cfg.SetAxisMonPosLagTol(int axis_no, double value);
-    tollerance: 0.1252551
+    tolerance: 0.1252551
     # --> required: no, type: float, min: 0, dependencies: ['enable']
     # ==> Cfg.SetAxisMonPosLagTime(int axis_no, int value);
     time: 100

@@ -46,19 +46,22 @@ def test_create(myAxis):
 @pytest.mark.dependency(depends=["test_create"])
 def test_set_axis_template(myAxis):
     myAxis.create()
-    assert myAxis.config.axisType is 1
+    assert myAxis.axisType is 1
     with pytest.raises(KeyError):
-        myAxis.config.setAxisTemplate(-1)
-    myAxis.config.setAxisTemplate(0)  # load 'debug.jinja2'
-    assert myAxis.config.hasVariables
-    ''' render w/o var '''
-    myAxis.config.render(myAxis.yamlData)
-    assert myAxis.config.product.strip() == "# var(foo) -> {{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}"
-    ''' pre-render as new template '''
-    myAxis.config.setTemplate(myAxis.config.render(myAxis.yamlData))
-    ''' render 2nd time with pre-rendered template '''
-    myAxis.config.render(myAxis.yamlData)
-    assert myAxis.config.product.strip() == "# var(foo) -> 3.14  1,  2,  3,  None,"
+        myAxis.setAxisTemplate(-1)
+
+    myAxis.yamlHandler.yamlData = myAxis.v.validate_axis()  # validate the full axis schema
+    myAxis.yamlHandler.checkForVariables()
+    myAxis.setAxisTemplate(0)  # load 'debug.jinja2'
+    assert myAxis.yamlHandler.hasVariables
+    # ''' render w/o var '''
+    myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData)
+    assert myAxis.axisTemplate.product.strip() == "# var(foo) -> {{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}"
+    # ''' pre-render as new template '''
+    myAxis.axisTemplate.setTemplate(myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData))
+    # ''' render 2nd time with pre-rendered template '''
+    myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData)
+    assert myAxis.axisTemplate.product.strip() == "# var(foo) -> 3.14  1,  2,  3,  None,"
 
 
 def getArgs(line):
@@ -75,9 +78,11 @@ def getArgs(line):
 def test_render_vs_bechmark(myAxis):
     myAxis.config_file = f'{yaml_path}joint_benchmark.yaml'
     myAxis.create()
-    if myAxis.config.hasVariables:
-        myAxis.config.setTemplate(myAxis.config.render(myAxis.config.yamlData))
-    myAxis.config.render(myAxis.config.yamlData)
+    myAxis.make()
+    myAxis.yamlHandler.checkForVariables()
+    if myAxis.yamlHandler.hasVariables:
+        myAxis.axisTemplate.setTemplate(myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData))
+    myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData)
     with open(f'{ref_path}joint.benchmark') as fp:
         lines = fp.readlines()
         for line in lines:
@@ -90,7 +95,7 @@ def test_render_vs_bechmark(myAxis):
             if 'Cfg.LinkEcEntryToObject' in cmd:
                 cmd = args[1]
 
-            items = re.findall(f"^.*{cmd}.*$", myAxis.config.product, re.MULTILINE)
+            items = re.findall(f"^.*{cmd}.*$", myAxis.axisTemplate.product, re.MULTILINE)
             iArgs = getArgs(items[0])
-            assert cmdOrg in myAxis.config.product
+            assert cmdOrg in myAxis.axisTemplate.product
             assert iArgs == args

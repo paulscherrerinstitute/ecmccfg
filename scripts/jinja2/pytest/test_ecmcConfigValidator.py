@@ -15,7 +15,9 @@ def myValidator():
     file = f'{yaml_path}joint_all.yaml'
     with open(file) as f:
         doc = yaml.load(f, Loader=yaml.FullLoader)
-    return ecmcConfigValidator.ConfigValidator(doc)
+    validator = ecmcConfigValidator.ConfigValidator()
+    validator.document = doc
+    return validator
 
 
 def test_config_validator_init(myValidator):
