@@ -52,7 +52,6 @@ class Schema:
         else:
             raise NotImplementedError(f'unsupported input type >>{_type}<<')
 
-
     filterSchema = {
         'type': 'dict',
         'schema': {
@@ -78,7 +77,8 @@ class Schema:
         'required': True,
         'schema': {
             'id': {'required': True, 'type': 'integer', 'min': 1},
-            'type': {'type': 'integer', 'default': 'joint', 'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
+            'type': {'type': 'integer', 'default': 'joint',
+                     'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
             'features': {'type': 'dict', 'schema': {
@@ -133,10 +133,10 @@ class Schema:
             'brake': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean'},
+                    'enable': {'type': 'boolean', 'default': False},
                     'output': {'type': 'string', 'dependencies': ['enable']},
-                    'openDelay': {'type': 'integer', 'default': 0, 'min': 0, 'dependencies': ['enable']},
-                    'closeAhead': {'type': 'integer', 'default': 0, 'min': 0, 'dependencies': ['enable']}
+                    'openDelay': {'type': 'integer', 'min': 0, 'dependencies': ['enable']},
+                    'closeAhead': {'type': 'integer', 'min': 0, 'dependencies': ['enable']}
                 }
             },
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
@@ -254,9 +254,11 @@ class Schema:
         'type': 'dict',
         'required': False,
         'schema': {
-            'enable': {'type': 'boolean'},
+            'enable': {'required': True, 'type': 'boolean'},
             'externalCommands': {'type': 'boolean'},
             'filter': filterSchema,
+            'file': {'type': 'string'},
+            'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
     }
 
