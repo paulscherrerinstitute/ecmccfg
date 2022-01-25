@@ -328,10 +328,19 @@ plc:
 # --> required: no, type: dict
   # ==> Cfg.SetAxisPLCEnable(int master_axis_no, int value);
   enable: false
-  # --> required: no, type: bool
+  # --> required: yes, type: bool
   # ==> Cfg.SetAxisAllowCommandsFromPLC(int master_axis_no, int value);
   externalCommands: false
   # --> required: no, type: bool, dependencies: ['enable']
+  # code can be loaded from file or added directly in the config
+  ## plc-file to load
+  file: test/plc2.plc
+  # --> required: no, type: string
+  ## direct PLC-code, will _NOT_ take effect if `file` is present!
+  code:
+  # --> required: no, type: list, schema: {'type': 'string'}
+    - if(ax2.traj.source){ax2.drv.enable:=ax1.drv.enable};
+    - ax2.traj.setpos:=ax1.traj.setpos*0.5;
   filter:
   # --> required: no, type: dict, dependencies: ['plc.enable']
     velocity:
