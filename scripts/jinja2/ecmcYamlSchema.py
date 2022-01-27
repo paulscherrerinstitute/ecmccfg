@@ -27,7 +27,7 @@ class Schema:
             'controller',
             'trajectory',
             'input',
-            'plc',
+            'axisPlc',
             'homing',
             'softlimits',
             'monitoring'],
@@ -37,10 +37,20 @@ class Schema:
             'encoder',
             'trajectory',
             'input',
-            'plc',
+            'axisPlc',
             'homing',
             'softlimits',
             'monitoring']
+    }
+
+    """
+    schema for PLCs
+    WARNING: The PLC schema _must_ be the FIRST entry of the list!!!
+    """
+    plcSchemaDict = {
+        0: None,
+        1: ['plc'],
+        2: ['axisPlc', 'axis', 'encoder', 'trajectory']
     }
 
     def get_schema(self, keys):
@@ -251,13 +261,25 @@ class Schema:
         }
     }
 
-    plcSchema = {
+    axisPlcSchema = {
         'type': 'dict',
         'required': False,
         'schema': {
             'enable': {'required': True, 'type': 'boolean'},
             'externalCommands': {'type': 'boolean'},
             'filter': filterSchema,
+            'file': {'type': 'string'},
+            'code': {'type': 'list', 'schema': {'type': 'string'}},
+        }
+    }
+
+    plcSchema = {
+        'type': 'dict',
+        'required': True,
+        'schema': {
+            'id': {'required': True, 'type': 'integer'},
+            'enable': {'type': 'boolean'},
+            'rateMilliseconds': {'type': 'integer'},
             'file': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
@@ -363,6 +385,7 @@ class Schema:
         'controller': controllerSchema,
         'trajectory': trajectorySchema,
         'input': inputSchema,
+        'axisPlc': axisPlcSchema,
         'plc': plcSchema,
         'homing': homingSchema,
         'softlimits': softlimitsSchema,

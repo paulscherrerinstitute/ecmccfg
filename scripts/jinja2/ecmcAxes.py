@@ -4,7 +4,7 @@ import ecmcYamlHandler
 import ecmcJinja2
 import ecmcConfigValidator
 # TODO: revert to pure import for better tracing
-from ecmcPlc import EcmcPlc, EcmcAxisPlc
+# from ecmcPlc import EcmcPlc, EcmcAxisPlc
 
 
 class EcmcAxis:
@@ -54,33 +54,6 @@ class EcmcAxis:
         if self.yamlHandler.checkForKey('plc', optional=True) and self.yamlHandler.yamlData['plc']['enable']:
             self.hasSyncPLC = True
             # do all the PLC foo here
-
-
-# class EcmcCommonAxis(JinjaTemplate):
-#     def __init__(self, axisType, _jinjatemplatedir, yamlHandler):
-#         super(EcmcCommonAxis, self).__init__(directory=_jinjatemplatedir, templateFile=None)
-#         self.axisType = axisType
-#         self.yamlHandler = yamlHandler
-#         self.yamlHandler.checkForVariables()
-#         self.setAxisTemplate()
-#         self.hasSyncPLC = False
-#
-#         # TODO: Fix PLCs!
-#         # if self.yamlHandler.checkForKey('sync', optional=True) and self.yamlHandler.yamlData['sync']['enable']:
-#         #     self.hasSyncPLC = True
-#         #     self.axisPlc = EcmcPlc(_configuration, _jinjatemplatedir)
-#         #     self.axisPlc.create()
-#
-#     def setAxisTemplate(self, type_=None, template=None):
-#         if type_ is None:
-#             type_ = self.axisType
-#         axisTemplates = {
-#             0: 'debug.jinja2',
-#             1: 'joint.jinja2',
-#             2: 'endEffector.jinja2',
-#         }
-#         self.read(axisTemplates[type_])
-#         self.yamlHandler.yamlData['axis']['type'] = type_
 
 if __name__ == '__main__':
 

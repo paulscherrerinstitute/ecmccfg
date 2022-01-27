@@ -123,6 +123,14 @@ class ConfigValidator:
                                       f'supported axis types are:\n'
                                       f'{color.GREEN}{ecmcYamlSchema.supportedAxisTypes.keys()}{color.END}')
 
+    def get_plc_type(self) -> int:
+        """
+        return the integer plc type
+        """
+        if 'axis' in self.document:
+            return 2
+        return 1
+
     def validate_axis(self, strict=True) -> dict:
         """
         validate the complete document against the internal axis type.
@@ -130,6 +138,16 @@ class ConfigValidator:
         schema = self.Schema.get_schema(self.Schema.axisSchemaDict[self.get_axis_type()])
         return self.validate(schema=schema, strict=strict)
 
+    def validate_plc(self, strict=True) -> dict:
+        """
+        validate the plc document
+        replaces the plcSchemaDict key with 'plc'
+        """
+        schemaKey = self.Schema.plcSchemaDict[self.get_plc_type()]
+        schema = self.Schema.get_schema(schemaKey)
+        if 'plc' not in schema.keys():
+            schema['plc'] = schema.pop(schemaKey[0])
+        return self.validate(schema=schema, strict=strict)
 
 def main():
     # file = 'pytest/yaml_files/joint_all.yaml'
