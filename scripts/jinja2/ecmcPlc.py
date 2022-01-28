@@ -26,12 +26,6 @@ class EcmcPlc:
         self.plcTemplate = ecmcJinja2.JinjaTemplate(jinja_template_dir)
         self.v = ecmcConfigValidator.ConfigValidator()
 
-        # self.jinjatemplatedir = jinja_template_dir
-
-        # self.loadYamlData(config_file)
-        # self.checkForVariables()
-        # self.config = None
-
     def create(self):
         """
         plc object
@@ -47,10 +41,13 @@ class EcmcPlc:
         self.yamlHandler.yamlData = self.v.validate_plc()
         self.yamlHandler.checkForVariables()
         self.yamlHandler.checkForPlcFile()
-        print(f'has PLC file: {self.yamlHandler.hasPlcFile}')
+
         if self.yamlHandler.hasPlcFile:
             self.loadPlcFile()
         self.plcTemplate.read(self.plcTemplates[self.plc_type])
+        if self.yamlHandler.hasVariables:
+            self.plcTemplate.setTemplate(self.plcTemplate.render(self.yamlHandler.yamlData))
+        self.plcTemplate.render(self.yamlHandler.yamlData)
 
     def loadPlcFile(self):
         key = 'plc'
@@ -72,28 +69,7 @@ class EcmcPlc:
         return code
 
 
-# class EcmcCommonPlc(JinjaTemplate):
-#     def __init__(self, _jinjatemplatedir, _configuration):
-#         super(EcmcCommonPlc, self).__init__(directory=_jinjatemplatedir, templateFile=None)
-#         self.configuration = _configuration
-#         self.setPlcTemplate()
-#
-#     def setPlcTemplate(self, type_= 1, template = None):
-#         if 'axis' in self.configuration:
-#             type_ = 2
-#
-#         self.read(plcTemplates[type_])
-#
-# class EcmcAxisPlc(EcmcCommonPlc):
-#     def __init__(self, _configuration, _jinjatemplatedir):
-#         super(EcmcAxisPlc, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
-#
-#
-# class EcmcStandAlonePlc(EcmcCommonPlc):
-#     def __init__(self, _configuration, _jinjatemplatedir):
-#         super(EcmcStandAlonePlc, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
-
-if __name__ == '__main__':
+def main():
     plc = EcmcPlc('./test/testPlc.yaml', './templates/')
     # plc = EcmcPlc('pytest/yaml_files/joint_all.yaml', './templates/')
     # plc = EcmcPlc('./test/testJointWithPlc.yaml', './templates/')
@@ -101,9 +77,8 @@ if __name__ == '__main__':
     plc.make()
     print(plc.yamlHandler.yamlData)
     plc.plcTemplate.render(plc.yamlHandler.yamlData)
-    plc.plcTemplate.show()
+    plc.plcTemplate.showProduct()
 
-    # if plc.hasVariables:
-    #     plc.config.setTemplate(plc.config.render(plc.yamlData))
-    # plc.config.render(plc.yamlData)
-    # plc.config.show()
+
+if __name__ == '__main__':
+    main()

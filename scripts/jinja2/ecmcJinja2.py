@@ -1,5 +1,5 @@
 import argparse
-from pathlib import Path
+import pathlib
 import os
 import jinja2
 
@@ -8,14 +8,14 @@ import jinja2
 class JinjaCli:
     def __init__(self):
         args = self.getArgs()
-        self.tmpDir = Path(args.tmpdir)
-        self.cfgFile = Path(args.data)
+        self.tmpDir = pathlib.Path(args.tmpdir)
+        self.cfgFile = pathlib.Path(args.data)
         self.template = args.template
         self.templatedir = args.templatedir
-        self.outFile = Path(self.tmpDir, args.outfile)
+        self.outFile = pathlib.Path(self.tmpDir, args.outfile)
         self.prodId = self.getProdId(args)
-        self.hwDb = Path(args.hardwaredb) if args.hardwaredb else None
-        Path(self.outFile).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
+        self.hwDb = pathlib.Path(args.hardwaredb) if args.hardwaredb else None
+        pathlib.Path(self.outFile).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
 
     @staticmethod
     def getArgs():
@@ -66,7 +66,7 @@ class JinjaCli:
 class JinjaTemplate:
     def __init__(self, directory, templateFile=None):
         self.template = None
-        self.product = None
+        self.product = ""
         self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(directory)))
         if templateFile is not None:
             self.read(templateFile)
@@ -82,9 +82,9 @@ class JinjaTemplate:
         self.product = self.template.render(data)
         return self.product
 
-    def write(self, filename):
+    def writeProduct(self, filename):
         with open(filename, "w") as f:
             f.writelines(self.product)
 
-    def show(self):
+    def showProduct(self):
         print(self.product)
