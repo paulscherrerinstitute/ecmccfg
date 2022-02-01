@@ -7,7 +7,7 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id|int
 #- Output
 {%- set output = None if output is not defined else output %}
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id|int }}.drv.brake")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.health|default('') }}","ax{{ axis.id|int }}.health")"
+
 
 #- Soft limits
 {%- set softlimits = None if softlimits is undefined else softlimits %}

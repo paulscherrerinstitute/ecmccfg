@@ -63,12 +63,12 @@ class EcmcAxis:
 
 def main():
     # axis = EcmcAxis('pytest/yaml_files/joint.yaml', './templates/')
-    axis = EcmcAxis('pytest/yaml_files/joint_all.yaml', './templates/')
+    # axis = EcmcAxis('pytest/yaml_files/joint_all.yaml', './templates/')
     # axis = EcmcAxis('pytest/yaml_files/endEffector.yaml', './templates/')
     # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
     # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
     # axis = EcmcAxis('pytest/yaml_files/joint_benchmark.yaml', './templates/')
-    # axis = EcmcAxis('pytest/yaml_files/joint_sandbox.yaml', './templates/')
+    axis = EcmcAxis('pytest/yaml_files/joint_sandbox.yaml', './templates/')
     axis.create()
     axis.make()
 

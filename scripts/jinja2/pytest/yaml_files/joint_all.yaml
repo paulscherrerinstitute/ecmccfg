@@ -16,7 +16,7 @@ axis:
   # axis type: joint|endEffector, aka. real|virtual axis
   type: joint
   # --> required: no, default 'joint'
-  # supported control modes, CSV and CSP, so far
+  # supported control modes, CSV and CSP, so far >>> not in axis.template <<<
   mode: CSV
   # --> required: no, default 'CSV'
   # link for health status
@@ -24,7 +24,7 @@ axis:
   # --> required: no, type: string
   ## parameters are mostly for motorRecord,
   ## but might be ported to pure ecmc in the future.
-  parameters: 'powerAutoOnOff=2;'  # additional parameters
+  parameters: 'powerAutoOnOff=2;'  # additional parameters >>> not in axis.template <<<
   # --> required: no, default ''
   # some additional features
   features:
@@ -64,7 +64,7 @@ var:
 epics:
 # --> required: no
   # name of axis-PV, motorRecord and others
-  name: M1
+  name: TRX1
   # --> required: no, default: 'axis'
   # PREC of setpoint and readback PVs
   precision: 3
@@ -78,7 +78,7 @@ epics:
     # parameter to enable/disable the motorRecord
     enable: true  # even better, it can be disabled
     # --> required: no, type: bool, default: True
-    # list of fields and values for intialization (comma separated)
+    # list of fields and values for initialization (comma separated)
     fieldInit: 'NTM=1'
     # --> required: no, type: string
     # DESC

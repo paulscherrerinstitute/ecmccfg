@@ -1,16 +1,9 @@
 #- ####################################################
-#-  JOINT
+#-  JOINT, aka physical / real axis
 #- ####################################################
-{# define namespace Error -#}
-{%- set Error = namespace(state=false) -%}
 
-{%- extends "jointSanity.jinja2" -%}
-
-{%- block sanity -%}
-{{super()}}
-{%- endblock -%}
+{%- extends "jointBody.jinja2"  -%}
 
 {% block body %}
 {{super()}}
-
 {% endblock %}

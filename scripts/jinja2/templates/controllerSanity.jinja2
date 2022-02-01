@@ -1,7 +1,0 @@
-{#- check for controller key -#}
-{%- if controller is not defined %}
-  {{ onError('controller is mandatory') }}
-{#- check for Kp -#}
-{%- elif not controller.Kp %}
-  {{ onError('controller.Kp is mandatory') }}
-{%- endif %}

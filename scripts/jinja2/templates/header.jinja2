@@ -1,11 +1,12 @@
 #- General
+{#- drive is only present in type: 'joint' #}
 {%- set drive = None if drive is undefined else drive %}
-{# TODO: switch for end effector vs joint #}
 ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},{{ axis.type|int }},{{ drive.type|default(0)|int }})"
 {%- if axis.type|int == 2 %}
 ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id|int }},0)"
 {%- endif %}
-#- health --> see Output
+#- health output
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id|int }}.health")"
 
 #- Trajectory
 {%- set deceleration = trajectory.axis.acceleration if trajectory.axis.deceleration is undefined else trajectory.axis.deceleration %}
