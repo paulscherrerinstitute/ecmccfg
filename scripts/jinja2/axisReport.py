@@ -1,42 +1,35 @@
 import yaml
+
+import ecmcJinja2
+import ecmcAxes
+import pathlib
+
 import datetime
 
-from ecmcJinja2 import JinjaCli
-from ecmcAxes import EcmcAxis
+
+def main():
+    cli = ecmcJinja2.JinjaCli()
+    axis = ecmcAxes.EcmcAxis(cli.cfgFile, cli.templatedir)
+    axis.create()
+    axis.make()
+
+    axis.yamlHandler.yamlData['yamlFile'] = cli.cfgFile
+    # axis.yamlHandler.yamlData['author'] = "Dr. Niko Kivel"
+    # axis.yamlHandler.yamlData['date'] = datetime.datetime.today().isoformat("|")
+
+    axis.axisTemplate.read("axisReport_main.tex")
+    axis.axisTemplate.render(axis.yamlHandler.yamlData)
+    axis.axisTemplate.writeProduct(cli.outFile)
+
+    output_file = pathlib.Path.joinpath(cli.tmpDir, cli.cfgFile)
+    output_file.parent.mkdir(exist_ok=True, parents=True)
+    output_file.write_text(yaml.dump(axis.yamlHandler.yamlData))
+    # axis.v.validated.write(output_file)
+
+    print(f'output written to: {cli.outFile}')
+    print(f'to compile the LaTeX output run:\n'
+          f'docker run -v {cli.tmpDir}:/doc/ -t -i thomasweise/texlive pdflatex {cli.outFile.relative_to(cli.tmpDir)}')
+
 
 if __name__ == '__main__':
-    cli = JinjaCli()
-
-    # axis = EcmcAxis(cli.cfgFile, cli.templatedir)
-    axis = EcmcAxis('pytest/yaml_files/joint_benchmark.yaml', './templates/')
-    axis.create()
-    ''' if the config has a 'var' key, run renderer twice'''
-    if axis.config.hasVariables:
-        axis.config.setTemplate(axis.config.render(axis.config.yamlData))
-    axis.config.read("axisReport_template.adoc")
-    axis.config.yamlData['author'] = "Dr. Niko Kivel"
-    axis.config.yamlData['date'] = datetime.datetime.today().isoformat("|")
-    axis.config.render(axis.config.yamlData)
-    axis.config.show()
-    axis.config.write("axisReport.adoc")
-    axis.config.write("/tmp/axisReport.adoc")
-
-    axis.config.yamlData['yamlFile'] = cli.cfgFile
-
-    axis.config.read("axisReport_main.tex")
-
-    axis.config.render(axis.config.yamlData)
-    axis.config.show()
-    axis.config.write("/tmp/axisReport.tex")
-
-    # if axis.config.hasSyncPLC:
-    #     plc = axis.config.axisPlc
-    #     plc.checkForPlcFile()
-    #     plc.checkForVariables()
-    #     if plc.hasPlcFile:
-    #         plc.loadPlcFile()
-    #     if plc.hasVariables:
-    #         plc.config.setTemplate(plc.config.render(plc.yamlData))
-    #     plc.config.render(plc.yamlData)
-    #     axis.config.product += plc.config.product
-    # axis.config.write(cli.outFile)
+    main()

@@ -17,6 +17,8 @@
 % float placement
 \usepackage{float}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fontawesome5}
+
 
 %% yaml syntax highlighting --> https://www.latex4technics.com/?note=187E
 {% include 'axisreport_yamlSyntax.tex' %}
@@ -47,16 +49,26 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 % Document
 
 % TODO: add PSI cover page
-\title{Axis Configuration Report \\
-    \large {{device|default('default device')}}
-}
-\author{ {{-author-}} \thanks{Paul Scherrer Institute}}
-\date{ {{-date-}} }
+\title{Axis Configuration Report}
 
 \begin{document}
 
 \begin{titlepage}
-\maketitle
+  \maketitle
+  \vfill
+  \hrule
+  \begin{minipage}[t]{0.5\textwidth}
+    \vspace{2mm}
+    \large Author: {{ meta.author|default('') }}
+    {% if meta.date is defined %}
+    \large Date: {{ meta.date }} \\
+    {% endif %}
+    \large Facility: {{ meta.facility }} \\
+    \large Device: {{meta.device|default('default device')}}
+    \vspace{2mm}
+  \end{minipage}
+  \hrule
+  \vspace{2mm}
 \end{titlepage}
 
 \tableofcontents

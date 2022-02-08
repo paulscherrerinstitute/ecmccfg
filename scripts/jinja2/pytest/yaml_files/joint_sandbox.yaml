@@ -1,22 +1,29 @@
 ---
+#meta:
+#  author: Dr. K
+#  facility: EtherCAT Lab
+#  device: test axis
+#  date: yesterday
+
 # AXIS ========================================================================
 axis:
 # --> required: yes
   # unique ID, for all sorts of things
   id: 1
+#  fail
   # --> required: yes, type: int, min: 1
   # axis type: joint|endEffector, aka. real|virtual axis
-#  type: j
+  type: j
   # --> required: no, default 'joint'
   # supported control modes, CSV and CSP, so far
-#  mode: CSV
+  mode: CSV
   # --> required: no, default 'CSV'
   # link for health status
-#  healthOutput: ec0.s42.binaryOutput03
+  healthOutput: ec0.s42.binaryOutput03
   # --> required: no, type: string
   ## parameters are mostly for motorRecord,
   ## but might be ported to pure ecmc in the future.
-#  parameters: 'powerAutoOnOff=2;'  # additional parameters
+  parameters: 'powerAutoOnOff=2;'  # additional parameters
   # --> required: no, default ''
   # some additional features
   features:

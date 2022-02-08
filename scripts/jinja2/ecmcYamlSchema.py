@@ -30,7 +30,8 @@ class Schema:
             'axisPlc',
             'homing',
             'softlimits',
-            'monitoring'],
+            'monitoring',
+            'meta'],
         2: ['var',
             'axis',
             'epics',
@@ -40,7 +41,8 @@ class Schema:
             'axisPlc',
             'homing',
             'softlimits',
-            'monitoring']
+            'monitoring',
+            'meta']
     }
 
     """
@@ -61,6 +63,17 @@ class Schema:
             return {keys: self.grandSchema[keys]}
         else:
             raise NotImplementedError(f'unsupported input type >>{_type}<<')
+
+    metaSchema = {
+        'type': 'dict',
+        'default': {},
+        'schema': {
+            'author': {'type': 'string'},
+            'facility': {'type': 'string', 'default': 'SLS 2.0'},
+            'device': {'type': 'string'},
+            'date': {'type': 'string'}
+        }
+    }
 
     filterSchema = {
         'type': 'dict',
@@ -89,7 +102,7 @@ class Schema:
             'id': {'required': True, 'type': 'integer', 'min': 1},
             'type': {'type': 'integer', 'default': 'joint',
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
-            'mode': {'type': 'string', 'default': 'CSV', 'coerce': lambda v: v.upper()},
+            'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
             'features': {'type': 'dict', 'schema': {
                 'disableOnReset': {'type': 'boolean'},
@@ -389,5 +402,6 @@ class Schema:
         'plc': plcSchema,
         'homing': homingSchema,
         'softlimits': softlimitsSchema,
-        'monitoring': monitoringSchema
+        'monitoring': monitoringSchema,
+        'meta': metaSchema
     }

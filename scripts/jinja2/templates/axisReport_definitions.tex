@@ -12,7 +12,8 @@
   \begin{minipage}{0.1\linewidth}
     \centering
     {%raw%}
-    \includegraphics[width=12mm]{#1}
+    \faIcon{#1}
+%    \includegraphics[width=12mm]{#1}
     {%endraw%}
   \end{minipage} &
   \begin{minipage}{0.9\linewidth}
@@ -24,19 +25,19 @@
 
 \newcommand{\warning}[1]{
   {%raw%}
-    \messagebox[warningsign]{#1}
+    \messagebox[exclamation-triangle]{#1}
   {%endraw%}
 }
 
 \newcommand{\note}[1]{
   {%raw%}
-    \messagebox[notesign]{#1}
+    \messagebox[clipboard]{#1}
   {%endraw%}
 }
 
 \newcommand{\caution}[1]{
   {%raw%}
-    \messagebox[cautionsign]{#1}
+    \messagebox[exclamation]{#1}
   {%endraw%}
 }
 
