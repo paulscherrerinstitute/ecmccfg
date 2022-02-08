@@ -7,6 +7,23 @@
 # --> required: no, default 'foo' >>> can be omitted, but default will be set
 # --> required: no >>> can be omitted
 
+# META DATA====================================================================
+# mainly used for report generation
+meta:
+# --> required: no, type: dict, default: {}
+  # the author of this file
+  author: Dr. K
+  # --> required: no, type: string
+  # the facility the config is for
+  facility: EtherCAT Lab
+  # --> required: no, type: string, default: 'SLS 2.0'
+  # the device the config is for
+  device: test axis
+  # --> required: no, type: string
+  # date the config was created
+  date: yesterday
+  # --> required: no, type: string
+
 # AXIS ========================================================================
 axis:
 # --> required: yes
