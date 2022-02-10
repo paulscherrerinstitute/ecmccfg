@@ -3,18 +3,18 @@
 {%- set drive = None if drive is undefined else drive %}
 ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id|int }},{{ axis.type|int }},{{ drive.type|default(0)|int }})"
 {%- if axis.type|int == 2 %}
-    ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id|int }},0)"
+ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id|int }},0)"
 {%- endif %}
 #- health output
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id|int }}.health")"
 
 {%- if axis.features is defined %}
-    #- features
-    ecmcConfigOrDie Cfg.SetAxisDisableAtErrorReset({{ axis.id|int }}, {{ axis.features.disableOnReset|default|int }});
-    ecmcConfigOrDie Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id|int }}, {{ axis.features.AlarmAtHardLimits|default(0)|int }});
-    ecmcConfigOrDie Cfg.SetAxisBlockCom({{ axis.id|int }}, {{ axis.features.blockCom|default(0)|int }});
+#- features
+ecmcConfigOrDie Cfg.SetAxisDisableAtErrorReset({{ axis.id|int }}, {{ axis.features.disableOnReset|default|int }});
+ecmcConfigOrDie Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id|int }}, {{ axis.features.AlarmAtHardLimits|default(0)|int }});
+ecmcConfigOrDie Cfg.SetAxisBlockCom({{ axis.id|int }}, {{ axis.features.blockCom|default(0)|int }});
     {%- if axis.features.allowedFunctions is defined %}
-        #- allowed motion functions
-        ecmcConfigOrDie Cfg.SetAxisEnableMotionFunctions({{ axis.id|int }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})
+#- allowed motion functions
+ecmcConfigOrDie Cfg.SetAxisEnableMotionFunctions({{ axis.id|int }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})
     {% endif -%}
 {% endif -%}

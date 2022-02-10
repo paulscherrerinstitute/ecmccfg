@@ -143,10 +143,10 @@ drive:
     # ==> Cfg.SetAxisDrvBrakeCloseAheadTime(int axis_no, int aheadTime);
     closeAhead: 0   # Brake timing parameter in cycles (default 1 ms)
     # --> required: no, type: int, min: 0, dependencies: ['enable']
-  # control bit for 'reset'
+  # control bit for reset in 'control'
   reset: 7
   # --> required: no, type: int, min: 0, dependencies: ['control']
-  # status bit for 'warning'
+  # status bit for warning in 'status'
   warning: 7
   # --> required: no, type: int, min: 0, dependencies: ['status']
   # list of error bits in 'status'
@@ -160,7 +160,7 @@ drive:
 encoder:
 # --> required: yes, type: dict
   # ==> Cfg.SetAxisEncSourceType(int axis_no, int nValue);
-  source: 0  # {0: internal, 1: PLC}
+  source: 0       # {0: internal, 1: PLC}
   # --> required: no, type: int, default: 0, allowed: [0, 1]
   # ==> Cfg.SetAxisEncScaleNum(int axis_no, double value);
   numerator: 360.
@@ -207,9 +207,9 @@ encoder:
   # --> required: no, type: dict
     velocity:
     # --> required: no, type: dict
-      # ==> Cfg.SetAxisEncPosFilterEnable(int axis_no, int size);
+      # switch for velocity filter
       enable: false
-      # --> required: no, type: bool
+      # --> required: no, type: bool, default: False
       # ==> Cfg.SetAxisEncVelFilterSize(int axis_no, int size);
       size: 100
       # --> required: no, type: int, min: 0, dependencies: ['enable']
@@ -221,18 +221,18 @@ encoder:
       # ==> Cfg.SetAxisEncPosFilterSize(int axis_no, int size);
       size: 100
       # --> required: no, type: int, min: 0, dependencies: ['enable']
-  # latching
+  # latching links
   latch:
   # --> required: no, type: dict
-    # position of "index" in EGU
-    position: 1.23456789
-    # --> required: no
+    # link to latch position, most likely 'encoderLatchPostion01'
+    position: ec0.s{{ var.encoder }}.encoderLatchPostion01
+    # --> required: no, type: string
     # latch control bit in 'control'
-    control: ''
-    # --> required: no, dependencies: ['control']
+    control: 0
+    # --> required: no, type: integer
     # latch status bit in 'status'
-    status: ''
-    # --> required: no, dependencies: ['status']
+    status: 0
+    # --> required: no, type: integer
 
 # CONTROLLER ==================================================================
 # required for joint only

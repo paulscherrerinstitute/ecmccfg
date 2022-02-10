@@ -1,32 +1,49 @@
 #- =============================================================================
 #- Encoder
 #- =============================================================================
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax{{ axis.id|int }}.enc.actpos")"
-ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom({{ axis.id|int }},{{ encoder.denominator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncScaleNum({{ axis.id|int }},{{ encoder.numerator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncType({{ axis.id|int }},{{ encoder.type|default(0)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisEncBits({{ axis.id|int }},{{ encoder.bits|default(16)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisEncAbsBits({{ axis.id|int }},{{ encoder.absBits|default(0)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id|int }},{{ encoder.absOffset|default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize({{ axis.id|int }},{{ encoder.velocityFilterSize|default(100)|int}})"
-ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize({{ axis.id|int }},{{ encoder.positionFilterSize|default(1)|int}})"
-ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable({{ axis.id|int }},{{ encoder.positionFilterEnable|default('false')|int}})"
+{#- links #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax{{ axis.id }}.enc.actpos")"
+{%- if encoder.control %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax{{ axis.id }}.enc.control")"
+{%- endif %}
+{%- if encoder.status %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}","ax{{ axis.id }}.enc.status")"
+{%- endif %}
+{#- scaling #}
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom({{ axis.id }},{{ encoder.denominator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum({{ axis.id }},{{ encoder.numerator|float }})"
+{#- source #}
+ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }}, {{ encoder.source }})"
+{#- data #}
+ecmcConfigOrDie "Cfg.SetAxisEncType({{ axis.id }},{{ encoder.type }})"
+ecmcConfigOrDie "Cfg.SetAxisEncBits({{ axis.id }},{{ encoder.bits }})"
+ecmcConfigOrDie "Cfg.SetAxisEncAbsBits({{ axis.id }},{{ encoder.absBits }})"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id }},{{ encoder.absOffset }})"
+{%- if encoder.mask %}
+ecmcConfigOrDie "Cfg.SetAxisEncRawMask({{ axis.id }}, {{ encoder.mask|int }})"
+{%- endif %}
 {%- if encoder.reset %}
-{%- set key = encoder.control ~ '.' ~ encoder.reset|int  %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.reset }}","ax{{ axis.id }}.enc.reset")"
 {%- endif %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ key|default('') }}","ax{{ axis.id|int }}.enc.reset")"
-{%- if encoder.warning %}
-{%- set key = encoder.control ~ '.' ~ encoder.warning|int  %}
+{%- if drive.warning %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ drive.warning }}","ax{{ axis.id }}.enc.warning")"
 {%- endif %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ key|default('') }}","ax{{ axis.id|int }}.enc.warning")"
-{%- if encoder.error %}
-{%- for bit in encoder.error %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit|int }}","ax{{ axis.id|int }}.enc.alarm{{loop.index-1}}")"
-{%- endfor %}
+{%- if drive.error %}
+    {%- for bit in drive.error %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
+    {%- endfor %}
 {%- endif %}
-
-#- Encoder latching
-{%- set latch = None if encoder.latch is not defined else encoder.latch %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ latch.position|default('') }}","ax{{ axis.id|int }}.enc.latchpos")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ latch.control|default('') }}","ax{{ axis.id|int }}.enc.latchcontrol")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ latch.status|default('') }}","ax{{ axis.id|int }}.enc.latchstatus")"
+{%- if encoder.latch %}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.latch.position }}","ax{{ axis.id }}.enc.latchpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax{{ axis.id }}.enc.latchcontrol")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.status }}","ax{{ axis.id }}.enc.latchstatus")"
+{%- endif %}
+{%- if encoder.filter.velocity %}
+    {%- if encoder.filter.velocity.enable %}
+ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize({{ axis.id }},{{ encoder.filter.velocity.size|int}})"
+    {%- endif %}
+{%- endif %}
+{%- if encoder.filter.trajectory %}
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable({{ axis.id }},{{ encoder.filter.trajectory.enable|int}})"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize({{ axis.id }},{{ encoder.filter.trajectory.size|int}})"
+{%- endif %}

@@ -81,15 +81,15 @@ class Schema:
             'velocity': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'size': {'type': 'integer'}
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'size': {'required': True, 'type': 'integer'}
                 }
             },
             'trajectory': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'size': {'type': 'integer'}
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'size': {'required': True, 'type': 'integer'}
                 }
             }
         }
@@ -172,10 +172,10 @@ class Schema:
         'type': 'dict',
         'required': True,
         'schema': {
-            'source': {'type': 'integer', 'allowed': [0, 1]},
+            'source': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'numerator': {'type': 'float', 'default': 0.},
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
-            'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
+            'type': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'mask': {'type': 'string'},
             'bits': {'type': 'integer', 'min': 0, 'max': 64, 'default': 16},
             'absBits': {'type': 'integer', 'min': 0, 'max': 64, 'default': 25},
@@ -190,9 +190,9 @@ class Schema:
             'latch': {
                 'type': 'dict',
                 'schema': {
-                    'position': {'type': 'float', 'default': 0.},
-                    'control': {'type': 'string'},
-                    'status': {'type': 'string'},
+                    'position': {'required': True, 'type': 'string'},
+                    'control': {'type': 'integer', 'default': 0},
+                    'status': {'type': 'integer', 'default': 0},
                 }
             }
         }
