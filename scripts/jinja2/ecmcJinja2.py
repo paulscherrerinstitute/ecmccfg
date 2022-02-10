@@ -1,6 +1,8 @@
 import argparse
 import pathlib
 import os
+import textwrap
+
 import jinja2
 
 
@@ -79,7 +81,9 @@ class JinjaTemplate:
         self.template = jinja2.Template(template)
 
     def render(self, data):
-        self.product = self.template.render(data)
+        # remove leading whitespaces from all lines to allow indented templates
+        # https://stackoverflow.com/questions/31218253/trim-whitespace-from-multiple-lines
+        self.product = '\n'.join([line.strip() for line in self.template.render(data).splitlines()])
         return self.product
 
     def writeProduct(self, filename):
@@ -88,3 +92,4 @@ class JinjaTemplate:
 
     def showProduct(self):
         print(self.product)
+
