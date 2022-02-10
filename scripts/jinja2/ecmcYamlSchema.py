@@ -156,10 +156,10 @@ class Schema:
             'brake': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean', 'default': False},
-                    'output': {'type': 'string', 'dependencies': ['enable']},
-                    'openDelay': {'type': 'integer', 'min': 0, 'dependencies': ['enable']},
-                    'closeAhead': {'type': 'integer', 'min': 0, 'dependencies': ['enable']}
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'output': {'required': True, 'type': 'string'},
+                    'openDelay': {'type': 'integer', 'min': 0, 'default': 0},
+                    'closeAhead': {'type': 'integer', 'min': 0, 'default': 0}
                 }
             },
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},

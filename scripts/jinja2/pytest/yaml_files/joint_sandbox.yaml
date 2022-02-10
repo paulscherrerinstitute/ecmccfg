@@ -120,10 +120,10 @@ drive:
     output: ec0.s42.binaryOutput07       # Ethercat entry for brake output
     # --> required: no, type: string
     # ==> Cfg.SetAxisDrvBrakeOpenDelayTime(int axis_no, int delayTime);
-    openDelay: 0    # Brake timing parameter in cycles (default 1 ms)
+    openDelay: 100    # Brake timing parameter in cycles (default 1 ms)
     # --> required: no, type: int, min: 0, dependencies: ['enable']
     # ==> Cfg.SetAxisDrvBrakeCloseAheadTime(int axis_no, int aheadTime);
-    closeAhead: 0   # Brake timing parameter in cycles (default 1 ms)
+    closeAhead: 200   # Brake timing parameter in cycles (default 1 ms)
     # --> required: no, type: int, min: 0, dependencies: ['enable']
   # control bit for 'reset'
   reset: 7

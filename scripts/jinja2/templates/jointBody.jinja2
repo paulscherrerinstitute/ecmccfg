@@ -1,13 +1,12 @@
 {### JOINT ###}
 {%- block body -%}
-
 {% include 'axis.jinja2' %}
 {% include 'drive.jinja2' %}
+    {#-{% include 'header.jinja2' %}#}
 
-{#{% include 'header.jinja2' %}#}
-{#{% include 'controller.jinja2' %}#}
 {% include 'encoder.jinja2' %}
 
-{#{% include 'footer.jinja2' %}#}
+{% include 'controller.jinja2' %}
 
+    {#-{% include 'footer.jinja2' %}#}
 {%- endblock -%}
