@@ -342,31 +342,31 @@ class Schema:
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'tolerance': {'type': 'float'},
-                    'time': {'type': 'integer'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['tolerance', 'time']},
+                    'tolerance': {'type': 'float', 'min': 0.0},
+                    'time': {'type': 'integer', 'min': 0},
                 }
             },
             'target': {
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'tolerance': {'type': 'float'},
-                    'time': {'type': 'integer'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['tolerance', 'time']},
+                    'tolerance': {'type': 'float', 'min': 0.0},
+                    'time': {'type': 'integer', 'min': 0},
                 }
             },
             'velocity': {
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'max': {'type': 'float'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max','time']},
+                    'max': {'type': 'float', 'min': 0.0},
                     'time': {
                         'type': 'dict',
                         'schema': {
-                            'trajectory': {'type': 'integer'},
-                            'drive': {'type': 'integer'},
+                            'trajectory': {'required': True, 'type': 'integer', 'min': 0},
+                            'drive': {'type': 'integer', 'min': 0},
                         }
                     },
                 }
@@ -375,13 +375,13 @@ class Schema:
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'max': {'type': 'float'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max','time']},
+                    'max': {'type': 'float', 'min': 0.0},
                     'time': {
                         'type': 'dict',
                         'schema': {
-                            'trajectory': {'type': 'integer'},
-                            'drive': {'type': 'integer'},
+                            'trajectory': {'required': True, 'type': 'integer', 'min': 0},
+                            'drive': {'type': 'integer', 'min': 0},
                         }
                     },
                 }

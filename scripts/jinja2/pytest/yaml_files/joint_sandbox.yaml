@@ -416,26 +416,27 @@ softlimits:
 monitoring:
 # --> required: no, type: dict
   lag:
-  # --> required: no, type: dict
-    # ==> Cfg.SetAxisMonEnableAtTargetMon(int axis_no, int value);
-    enable: false
-    # --> required: no, type: bool
-    # ==> Cfg.SetAxisMonAtTargetTol(int axis_no, double value);
-    tolerance: 5
-    # ==> Cfg.SetAxisMonAtTargetTime(int axis_no, int value);
-    time: 100
-    # --> required: no, type: int, min: 0, dependencies: ['enable']
-  target:
-  # --> required: no, type: dict
+    # --> required: no, type: dict
     # ==> Cfg.SetAxisMonEnableLagMon(int axis_no, int value);
     enable: true
-    # --> required: no, type: bool
+    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
     # ==> Cfg.SetAxisMonPosLagTol(int axis_no, double value);
     tolerance: 0.1252551
-    # --> required: no, type: float, min: 0, dependencies: ['enable']
+    # --> required: no, type: float, min: 0
     # ==> Cfg.SetAxisMonPosLagTime(int axis_no, int value);
     time: 100
-    # --> required: no, type: int, min: 0, dependencies: ['enable']
+    # --> required: no, type: int, min: 0
+  target:
+  # --> required: no, type: dict
+    # ==> Cfg.SetAxisMonEnableAtTargetMon(int axis_no, int value);
+    enable: yes
+    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
+    # ==> Cfg.SetAxisMonAtTargetTol(int axis_no, double value);
+    tolerance: 5
+    # --> required: no, type: float, min: 0
+    # ==> Cfg.SetAxisMonAtTargetTime(int axis_no, int value);
+    time: 100
+    # --> required: no, type: int, min: 0
   velocity:
   # --> required: no, type: dict
     # ==> Cfg.SetAxisMonEnableMaxVel(int axis_no, int value);
@@ -445,26 +446,26 @@ monitoring:
     max: 36.72144288566
     # --> required: no, type: float, min: 0, dependencies: ['enable']
     time:
-    # --> required: no, type: dict
+    # --> required: no, type: dict, dependencies: ['max']
       # ==> Cfg.SetAxisMonMaxVelTrajILDelay(int axis_no, int value);
       trajectory: 100
-      # --> required: no, type: int, min: 0, dependencies: ['enable']
+      # --> required: yes, type: int, min: 0
       # ==> Cfg.SetAxisMonMaxVelDriveILDelay(int axis_no, int value);
       drive: 200
-      # --> required: no, type: int, min: 0, dependencies: ['enable']
+      # --> required: no, type: int, min: 0
   velocityDifference:
   # --> required: no, type: dict
     # ==> Cfg.SetAxisMonEnableVelocityDiff(int axis_no, int value);
-    enable: true
-    # --> required: no, type: bool
+    enable: yes
+    # --> required: yes, type: bool
     # ==> Cfg.SetAxisMonVelDiffTol(int axis_no, double value);
     max: 3.14159
     # --> required: no, type: float, min: 0, dependencies: ['enable']
     time:
-    # --> required: no, type: dict
+    # --> required: no, type: dict, dependencies: ['max']
       # ==> Cfg.SetAxisMonVelDiffTrajILDelay(int axis_no, int value);
       trajectory: 100
-      # --> required: no, type: int, min: 0, dependencies: ['enable']
+      # --> required: yes, type: int, min: 0
       # ==> Cfg.SetAxisMonVelDiffDriveILDelay(int axis_no, int value);
       drive: 200
-      # --> required: no, type: int, min: 0, dependencies: ['enable']
+      # --> required: no, type: int, min: 0, dependencies: ['max']
