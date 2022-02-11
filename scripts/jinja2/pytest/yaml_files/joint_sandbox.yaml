@@ -396,18 +396,17 @@ homing:
 # SOFTLIMITS ==================================================================
 softlimits:
 # --> required: no, type: dict
-  # TODO: needs OR in template for global switch, maybe coerce with Cerberus?
   ## GLOBAL ON/OFF
-  enable: false
+  enable: yes
   # --> required: no, type: bool
   # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
-  forwardEnable: true
+  forwardEnable: false
   # --> required: no, type: bool
   # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
   forward: 7200.0
   # --> required: no, type: float
   # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
-  backwardEnable: true
+  backwardEnable: no
   # --> required: no, type: bool
   # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
   backward: -7200.0

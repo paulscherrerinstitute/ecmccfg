@@ -326,11 +326,11 @@ class Schema:
         'type': 'dict',
         'required': False,
         'schema': {
-            'enable': {'type': 'boolean'},
-            'forwardEnable': {'type': 'boolean'},
-            'forward': {'type': 'float'},
-            'backwardEnable': {'type': 'boolean'},
-            'backward': {'type': 'float'},
+            'enable': {'required': True, 'type': 'boolean'},
+            'forwardEnable': {'type': 'boolean', 'dependencies': ['forward']},
+            'forward': {'type': 'float', 'dependencies': ['forwardEnable']},
+            'backwardEnable': {'type': 'boolean', 'dependencies': ['backward']},
+            'backward': {'type': 'float', 'dependencies': ['backwardEnable']},
         }
     }
 
