@@ -298,12 +298,12 @@ input:
     forward: ec0.s{{ var.drive }}.driveStatus01.9
     # --> required: yes, type: string
     # ==> Cfg.SetAxisMonLimitBwdPolarity(int axisIndex, int value);
-    forwardPolarity: 0
+    forwardPolarity: 1
     # --> required: no, type: int, allowed: [0, 1]
     backward: ec0.s{{ var.drive }}.driveStatus01.10
     # --> required: yes, type: string
     # ==> Cfg.SetAxisMonLimitFwdPolarity(int axisIndex, int value);
-    backwardPolarity: 0
+    backwardPolarity: 1
     # --> required: no, type: int, allowed: [0, 1]
     # ==> Cfg.SetAxisMonLatchLimit(int axis_no, int value);
     latchInput: false  # force full stop of axis before unlatching the input
@@ -312,14 +312,14 @@ input:
   home: ec0.s{{ var.drive }}.ONE.0
   # --> required: yes, type: string
   # ==> Cfg.SetAxisMonHomeSwitchPolarity(int axisIndex, int value);
-  homePolarity: 0
+  homePolarity: 1
   # --> required: no, type: int, allowed: [0, 1]
   # ==> Cfg.SetAxisMonEnableExtHWInterlock(int axis_no, int value);
   # link
   interlock: ec0.s{{ var.drive }}.ONE.0
   # --> required: yes, type: string
   # ==> Cfg.SetAxisMonExtHWInterlockPolarity(int axisIndex, int value);
-  interlockPolarity: 0
+  interlockPolarity: 1
   # --> required: no, type: int, allowed: [0, 1]
 
 # PLC =======================================================================++
