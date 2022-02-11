@@ -43,7 +43,7 @@ ${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},${ECMC_DECS_E
 ecmcConfigOrDie "Cfg.SetAxisJerk(${ECMC_AXIS_NO},${ECMC_JERK=0})"
 ecmcConfigOrDie "Cfg.SetAxisVel(${ECMC_AXIS_NO},${ECMC_VELO})"
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},${ECMC_EMERG_DECEL})"
-ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_FRM})"
 
 #- Encoder

@@ -10,7 +10,7 @@ ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime({{ axis.id|int }},{{ trajectory.axis.v
 {#- catch optional homing parameters #}
 {%- set homing = None if homing is not defined else homing%}
 {%- set homingVelocity = None if homing.velocity is not defined else homing.velocity %}
-ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id|int }},{{ homingVelocity.to|default(0)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam({{ axis.id|int }},{{ homingVelocity.to|default(0)|float }})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id|int }},{{ homingVelocity.from or homingVelocity.to |default(0)|float }})"
 
 {%- set modulo = None if trajectory.modulo is not defined else trajectory.modulo %}

@@ -130,7 +130,7 @@ ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions(1,1,0,0)"
 #Trajectory
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(1,100)"
 ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime(1,10,100)"
-ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam(1,10)"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(1,10)"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(1,5)"
 ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize(1,15)"
 ecmcConfig      "Cfg.SetAxisPLCTrajVelFilterSize(1,0)"
