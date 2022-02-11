@@ -224,13 +224,14 @@ class Schema:
         'required': True,
         'schema': {
             'source': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
+            'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
             'axis': {
                 'required': True,
                 'type': 'dict',
                 'schema': {
                     'velocity': {'required': True, 'type': 'float'},
                     'acceleration': {'required': True, 'type': 'float'},
-                    'jerk': {'type': 'float'},
+                    'jerk': {'type': 'float', 'default': 0},
                     'deceleration': {'type': 'float'},
                     'emergencyDeceleration': {'type': 'float'}
                 }
@@ -245,8 +246,8 @@ class Schema:
             'modulo': {
                 'type': 'dict',
                 'schema': {
-                    'range': {'type': 'float'},
-                    'type': {'type': 'integer', 'allowed': [0, 1, 2, 3]}
+                    'range': {'type': 'float', 'default': 0.},
+                    'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1, 2, 3]}
                 }
             },
         }

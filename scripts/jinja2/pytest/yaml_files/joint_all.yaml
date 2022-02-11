@@ -272,7 +272,7 @@ trajectory:
   # ==> Cfg.SetAxisTrajSourceType(int axis_no, int nValue);
   source: 0  # {0: internal, 1: PLC}
   # --> required: no, type: int, default: 0, allowed: [0, 1]
-  # ==> Cfg.CreateAxis(..., int trajType);
+  # ==> Cfg.CreateAxis(..., int trajType); | 0: trapezoidal, 1: jerk limited (ruckig)
   type: 1
   # --> required: no, type: int, default: 0, allowed: [0, 1]
   axis:
@@ -285,13 +285,13 @@ trajectory:
     # --> required: yes, type: float
     # ==> Cfg.SetAxisJerk(int axis_no, double value);
     jerk: 1800
-    # --> required: no, type: float
+    # --> required: no, type: float, default: 0
     # ==> Cfg.SetAxisDec(int axis_no, double value);
     deceleration: 360
     # --> required: no, type: float, default: 'acceleration'
     # ==> Cfg.SetAxisEmergDeceleration(int traj_no, double value);
     emergencyDeceleration: 720
-    # --> required: no, type: float, default: max(['acceleration', 'deceleration'])
+    # --> required: no, type: float, default: max(['acceleration', 'deceleration'])*10
   jog:
   # --> required: no, type: dict
     # ==> Cfg.SetAxisJogVel(int traj_no, double value);
