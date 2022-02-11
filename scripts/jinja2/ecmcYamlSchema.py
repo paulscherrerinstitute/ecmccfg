@@ -303,17 +303,16 @@ class Schema:
         'type': 'dict',
         'required': False,
         'schema': {
-            'type': {'type': 'integer'},
+            'type': {'required': True, 'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 21, 22, 25]},
             'position': {'type': 'float', 'default': 0.0},
-            'postMoveEnable': {'type': 'boolean'},
-            'postMovePosition': {'type': 'float'},
-            'switchPolarity': {'type': 'integer', 'allowed': [0, 1]},
-            'latchCount': {'type': 'integer'},
+            'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
+            'postMovePosition': {'type': 'float', 'dependencies': ['postMoveEnable']},
+            'latchCount': {'type': 'integer', 'min': 0},
             'velocity': {
                 'type': 'dict',
-                'required': False,
+                'required': True,
                 'schema': {
-                    'to': {'type': 'float'},
+                    'to': {'required': True, 'type': 'float'},
                     'from': {'type': 'float'},
                 }
             },

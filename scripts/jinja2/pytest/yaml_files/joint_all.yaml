@@ -383,36 +383,32 @@ plc:
 homing:
 # --> required: no, type: dict
   # types (https://github.com/icshwi/ecmccfg/tree/master/examples/test/homing)
-  type: 3
+  type: 3  # for EPICS template to send the correct motion command
   # --> required: yes, type: int, allowed: [0, 1, 2, 3, ...]
   # ==> Cfg.SetAxisHomePosition(int axis_no, double value);
-  position: 0
+  position: 0.314
   # --> required: no, type: float, default: 0
   # ==> Cfg.SetAxisHomePostMoveEnable(int axis_no, int value);
   postMoveEnable: false
   # --> required: no, type: bool
   # ==> Cfg.SetAxisHomePostMoveTargetPosition(int axis_no, int value);
-  postMovePosition: 0
+  postMovePosition: -2.72
   # --> required: no, type: float, default: 0
-  # TODO: why is the home switch polarity by default NC? It should be NO!
-  # ==> Cfg.setAxisMonHomeSwitchPolarity(int axisIndex, int value);
-  switchPolarity: 0
-  # --> required: no, type: int, allowed: [0, 1]
   # ==> Cfg.SetAxisHomeLatchCountOffset(int axis_no, int count);
-  latchCount: 0
-  # --> required: no, type: int
+  latchCount: 1
+  # --> required: no, type: int, min: 0
   velocity:
-  # --> required: no, type: dict
+  # --> required: yes, type: dict
     # ==> Cfg.SetAxisHomeVelTwordsCam(int axis_no, double value);
     to: 2.72
     # --> required: yes, type: float
     # ==> Cfg.SetAxisHomeVelOffCam(int axis_no, double value);
     from: 3.14
-    # --> required: yes, type: float
+    # --> required: no, type: float
   acceleration: 2.7
-  # --> required: yes, type: float
+  # --> required: no, type: float
   deceleration: 5.4
-  # --> required: yes, type: float
+  # --> required: no, type: float
   # ==> Cfg.SetAxisSeqTimeout(int axis_no, int value)
   timeout: 60000  # timeout in cycles (default 1 ms)
   # --> required: no, type: int

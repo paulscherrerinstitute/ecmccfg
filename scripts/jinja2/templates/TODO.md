@@ -17,3 +17,6 @@ The defintion type is `str`, but the iocsh-command expects `int`, make sure the 
   mask: '0xfff0'  # shift raw value by 4 bits and mask with 0xfff
   # --> required: no, type: str
 ```
+
+## homing
+The homing procedure it handed to the EPICS templates

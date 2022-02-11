@@ -306,7 +306,7 @@ input:
     backwardPolarity: 1
     # --> required: no, type: int, allowed: [0, 1]
     # ==> Cfg.SetAxisMonLatchLimit(int axis_no, int value);
-    latchInput: false  # force full stop of axis before unlatching the input
+    latchInput: true  # force full stop of axis before unlatching the input
     # --> required: no, type: bool
   # link
   home: ec0.s{{ var.drive }}.ONE.0
@@ -366,20 +366,16 @@ homing:
   type: 3
   # --> required: yes, type: int, allowed: [0, 1, 2, 3, ...]
   # ==> Cfg.SetAxisHomePosition(int axis_no, double value);
-  position: 0
+  position: 0.314
   # --> required: no, type: float, default: 0
   # ==> Cfg.SetAxisHomePostMoveEnable(int axis_no, int value);
-  postMoveEnable: false
+  postMoveEnable: yes
   # --> required: no, type: bool
   # ==> Cfg.SetAxisHomePostMoveTargetPosition(int axis_no, int value);
-  postMovePosition: 0
+  postMovePosition: 0.272
   # --> required: no, type: float, default: 0
-  # TODO: why is the home switch polarity by default NC? It should be NO!
-  # ==> Cfg.setAxisMonHomeSwitchPolarity(int axisIndex, int value);
-  switchPolarity: 0
-  # --> required: no, type: int, allowed: [0, 1]
   # ==> Cfg.SetAxisHomeLatchCountOffset(int axis_no, int count);
-  latchCount: 0
+  latchCount: 1
   # --> required: no, type: int
   velocity:
   # --> required: no, type: dict
@@ -387,7 +383,7 @@ homing:
     to: 2.72
     # --> required: yes, type: float
     # ==> Cfg.SetAxisHomeVelOffCam(int axis_no, double value);
-    from: 3.14
+    from: 0.157
     # --> required: yes, type: float
   acceleration: 2.7
   # --> required: yes, type: float
