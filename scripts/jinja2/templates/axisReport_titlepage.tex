@@ -1,0 +1,31 @@
+\author{ Author: {{ meta.author|default('nobody') }} \\
+    Facility: {{ meta.facility }}\vspace{40pt} \\
+    Device: {{meta.device|default('default device')}} \\
+    \texttt{Axis:~ {{- axis.id }} }
+    }
+
+\begin{titlepage}
+\BgThispage
+\newgeometry{left=1cm,right=4cm}
+\vspace*{2cm}
+\noindent
+\textcolor{white}{\bigsf ecmccfg\\axis configuration\\report}
+\vspace*{2.5cm}\par
+\noindent
+\begin{minipage}{0.35\linewidth}
+    \begin{flushright}
+        \printauthor
+    \end{flushright}
+\end{minipage} \hspace{15pt}
+%
+\begin{minipage}{0.02\linewidth}
+    \rule{1pt}{175pt}
+\end{minipage} \hspace{-10pt}
+%
+\begin{minipage}{0.6\linewidth}
+\vspace{5pt}
+    \begin{abstract}
+    \end{abstract}
+\end{minipage}
+\end{titlepage}
+\restoregeometry

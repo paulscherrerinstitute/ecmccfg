@@ -60,29 +60,29 @@ var:
 
 # EPICS =======================================================================
 # config parameters for the Epics part
-epics:
-# --> required: no
-  # name of axis-PV, motorRecord and others
-  name: M1
-  # --> required: no, default: 'axis'
-  # PREC of setpoint and readback PVs
-  precision: 3
-  # --> required: no, type: int, min: 0, default: 3
-  # EGU
-  unit: deg
-  # --> required: no, type: string, default: 'mm'
-  # specifics for the motorRecord
-  motorRecord:  # yes it's supported
-  # --> required: no, type: dict, default: {'enable': True}
-    # parameter to enable/disable the motorRecord
-    enable: true  # even better, it can be disabled
-    # --> required: no, type: bool, default: True
-    # list of fields and values for intialization (comma separated)
-    fieldInit: 'NTM=1'
-    # --> required: no, type: string
-    # DESC
-    description: exampleAxis
-    # --> required: no, type: string
+#epics:
+## --> required: no
+#  # name of axis-PV, motorRecord and others
+#  name: M1
+#  # --> required: no, default: 'axis'
+#  # PREC of setpoint and readback PVs
+#  precision: 3
+#  # --> required: no, type: int, min: 0, default: 3
+#  # EGU
+#  unit: deg
+#  # --> required: no, type: string, default: 'mm'
+#  # specifics for the motorRecord
+#  motorRecord:  # yes it's supported
+#  # --> required: no, type: dict, default: {'enable': True}
+#    # parameter to enable/disable the motorRecord
+#    enable: true  # even better, it can be disabled
+#    # --> required: no, type: bool, default: True
+#    # list of fields and values for intialization (comma separated)
+#    fieldInit: 'NTM=1'
+#    # --> required: no, type: string
+#    # DESC
+#    description: exampleAxis
+#    # --> required: no, type: string
 
 # DRIVE =======================================================================
 # required for joint only. Will be ignored for end effector!
@@ -360,112 +360,112 @@ input:
 #      # --> required: no, type: int, min: 0, dependencies: ['enable']
 
 # HOMING ======================================================================
-homing:
-# --> required: no, type: dict
-  # types (https://github.com/icshwi/ecmccfg/tree/master/examples/test/homing)
-  type: 3
-  # --> required: yes, type: int, allowed: [0, 1, 2, 3, ...]
-  # ==> Cfg.SetAxisHomePosition(int axis_no, double value);
-  position: 0.314
-  # --> required: no, type: float, default: 0
-  # ==> Cfg.SetAxisHomePostMoveEnable(int axis_no, int value);
-  postMoveEnable: yes
-  # --> required: no, type: bool
-  # ==> Cfg.SetAxisHomePostMoveTargetPosition(int axis_no, int value);
-  postMovePosition: 0.272
-  # --> required: no, type: float, default: 0
-  # ==> Cfg.SetAxisHomeLatchCountOffset(int axis_no, int count);
-  latchCount: 1
-  # --> required: no, type: int
-  velocity:
-  # --> required: no, type: dict
-    # ==> Cfg.SetAxisHomeVelTwordsCam(int axis_no, double value);
-    to: 2.72
-    # --> required: yes, type: float
-    # ==> Cfg.SetAxisHomeVelOffCam(int axis_no, double value);
-    from: 0.157
-    # --> required: yes, type: float
-  acceleration: 2.7
-  # --> required: yes, type: float
-  deceleration: 5.4
-  # --> required: yes, type: float
-  # ==> Cfg.SetAxisSeqTimeout(int axis_no, int value)
-  timeout: 60000  # timeout in cycles (default 1 ms)
-  # --> required: no, type: int
+#homing:
+## --> required: no, type: dict
+#  # types (https://github.com/icshwi/ecmccfg/tree/master/examples/test/homing)
+#  type: 3
+#  # --> required: yes, type: int, allowed: [0, 1, 2, 3, ...]
+#  # ==> Cfg.SetAxisHomePosition(int axis_no, double value);
+#  position: 0.314
+#  # --> required: no, type: float, default: 0
+#  # ==> Cfg.SetAxisHomePostMoveEnable(int axis_no, int value);
+#  postMoveEnable: yes
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisHomePostMoveTargetPosition(int axis_no, int value);
+#  postMovePosition: 0.272
+#  # --> required: no, type: float, default: 0
+#  # ==> Cfg.SetAxisHomeLatchCountOffset(int axis_no, int count);
+#  latchCount: 1
+#  # --> required: no, type: int
+#  velocity:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisHomeVelTwordsCam(int axis_no, double value);
+#    to: 2.72
+#    # --> required: yes, type: float
+#    # ==> Cfg.SetAxisHomeVelOffCam(int axis_no, double value);
+#    from: 0.157
+#    # --> required: yes, type: float
+#  acceleration: 2.7
+#  # --> required: yes, type: float
+#  deceleration: 5.4
+#  # --> required: yes, type: float
+#  # ==> Cfg.SetAxisSeqTimeout(int axis_no, int value)
+#  timeout: 60000  # timeout in cycles (default 1 ms)
+#  # --> required: no, type: int
 
 # SOFTLIMITS ==================================================================
-softlimits:
-# --> required: no, type: dict
-  ## GLOBAL ON/OFF
-  enable: yes
-  # --> required: no, type: bool
-  # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
-  forwardEnable: false
-  # --> required: no, type: bool
-  # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
-  forward: 7200.0
-  # --> required: no, type: float
-  # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
-  backwardEnable: no
-  # --> required: no, type: bool
-  # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
-  backward: -7200.0
-  # --> required: no, type: float
+#softlimits:
+## --> required: no, type: dict
+#  ## GLOBAL ON/OFF
+#  enable: yes
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
+#  forwardEnable: false
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
+#  forward: 7200.0
+#  # --> required: no, type: float
+#  # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
+#  backwardEnable: no
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
+#  backward: -7200.0
+#  # --> required: no, type: float
 
 # MONITORING ==================================================================
-monitoring:
-# --> required: no, type: dict
-  lag:
-    # --> required: no, type: dict
-    # ==> Cfg.SetAxisMonEnableLagMon(int axis_no, int value);
-    enable: true
-    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
-    # ==> Cfg.SetAxisMonPosLagTol(int axis_no, double value);
-    tolerance: 0.1252551
-    # --> required: no, type: float, min: 0
-    # ==> Cfg.SetAxisMonPosLagTime(int axis_no, int value);
-    time: 100
-    # --> required: no, type: int, min: 0
-  target:
-  # --> required: no, type: dict
-    # ==> Cfg.SetAxisMonEnableAtTargetMon(int axis_no, int value);
-    enable: yes
-    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
-    # ==> Cfg.SetAxisMonAtTargetTol(int axis_no, double value);
-    tolerance: 5
-    # --> required: no, type: float, min: 0
-    # ==> Cfg.SetAxisMonAtTargetTime(int axis_no, int value);
-    time: 100
-    # --> required: no, type: int, min: 0
-  velocity:
-  # --> required: no, type: dict
-    # ==> Cfg.SetAxisMonEnableMaxVel(int axis_no, int value);
-    enable: true
-    # --> required: no, type: bool
-    # ==> Cfg.SetAxisMonMaxVel(int axis_no, double value);
-    max: 36.72144288566
-    # --> required: no, type: float, min: 0, dependencies: ['enable']
-    time:
-    # --> required: no, type: dict, dependencies: ['max']
-      # ==> Cfg.SetAxisMonMaxVelTrajILDelay(int axis_no, int value);
-      trajectory: 100
-      # --> required: yes, type: int, min: 0
-      # ==> Cfg.SetAxisMonMaxVelDriveILDelay(int axis_no, int value);
-      drive: 200
-      # --> required: no, type: int, min: 0
-  velocityDifference:
-  # --> required: no, type: dict
-    # ==> Cfg.SetAxisMonEnableVelocityDiff(int axis_no, int value);
-    enable: yes
-    # --> required: yes, type: bool
-    # ==> Cfg.SetAxisMonVelDiffTol(int axis_no, double value);
-    max: 3.14159
-    # --> required: no, type: float, min: 0, dependencies: ['enable']
-    time:
-    # --> required: no, type: dict, dependencies: ['max']
-      # ==> Cfg.SetAxisMonVelDiffTrajILDelay(int axis_no, int value);
-      trajectory: 100
-      # --> required: yes, type: int, min: 0
-      # ==> Cfg.SetAxisMonVelDiffDriveILDelay(int axis_no, int value);
-      drive: 200
-      # --> required: no, type: int, min: 0, dependencies: ['max']
+#monitoring:
+## --> required: no, type: dict
+#  lag:
+#    # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableLagMon(int axis_no, int value);
+#    enable: true
+#    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
+#    # ==> Cfg.SetAxisMonPosLagTol(int axis_no, double value);
+#    tolerance: 0.1252551
+#    # --> required: no, type: float, min: 0
+#    # ==> Cfg.SetAxisMonPosLagTime(int axis_no, int value);
+#    time: 100
+#    # --> required: no, type: int, min: 0
+#  target:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableAtTargetMon(int axis_no, int value);
+#    enable: yes
+#    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
+#    # ==> Cfg.SetAxisMonAtTargetTol(int axis_no, double value);
+#    tolerance: 5
+#    # --> required: no, type: float, min: 0
+#    # ==> Cfg.SetAxisMonAtTargetTime(int axis_no, int value);
+#    time: 100
+#    # --> required: no, type: int, min: 0
+#  velocity:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableMaxVel(int axis_no, int value);
+#    enable: true
+#    # --> required: no, type: bool
+#    # ==> Cfg.SetAxisMonMaxVel(int axis_no, double value);
+#    max: 36.72144288566
+#    # --> required: no, type: float, min: 0, dependencies: ['enable']
+#    time:
+#    # --> required: no, type: dict, dependencies: ['max']
+#      # ==> Cfg.SetAxisMonMaxVelTrajILDelay(int axis_no, int value);
+#      trajectory: 100
+#      # --> required: yes, type: int, min: 0
+#      # ==> Cfg.SetAxisMonMaxVelDriveILDelay(int axis_no, int value);
+#      drive: 200
+#      # --> required: no, type: int, min: 0
+#  velocityDifference:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableVelocityDiff(int axis_no, int value);
+#    enable: yes
+#    # --> required: yes, type: bool
+#    # ==> Cfg.SetAxisMonVelDiffTol(int axis_no, double value);
+#    max: 3.14159
+#    # --> required: no, type: float, min: 0, dependencies: ['enable']
+#    time:
+#    # --> required: no, type: dict, dependencies: ['max']
+#      # ==> Cfg.SetAxisMonVelDiffTrajILDelay(int axis_no, int value);
+#      trajectory: 100
+#      # --> required: yes, type: int, min: 0
+#      # ==> Cfg.SetAxisMonVelDiffDriveILDelay(int axis_no, int value);
+#      drive: 200
+#      # --> required: no, type: int, min: 0, dependencies: ['max']

@@ -1,3 +1,4 @@
+{%- set softlimits = None if softlimits is undefined else softlimits %}
 {%- if softlimits.enable %}
     {%- if softlimits.forwardEnable or softlimits.backwardEnable %}
         #- =============================================================================

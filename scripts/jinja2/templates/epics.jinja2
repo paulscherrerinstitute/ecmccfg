@@ -1,0 +1,45 @@
+#- =============================================================================
+#- EPICS
+#- =============================================================================
+#- -----------------------------------------------------------------------------
+#- Axis records
+ecmcFileExist("ecmcAxis.db",1,1)
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+#- -----------------------------------------------------------------------------
+#- Motor record init
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, "6", "{{ axis.parameters|default('') }}")
+
+{#- catch unconfigured jog velocity and acceleration #}
+{%- set jog = None if trajectory.jog is undefined else trajectory.jog %}
+{#- set jog velocity to 1/10th of axis velocity if jog velocity is undefined #}
+{%- set jogVelocity=trajectory.axis.velocity/10 if jog.velocity is undefined else jog.velocity %}
+{#- use axis acceleration for jog id not explicitly defined #}
+{%- set jogAcceleration=trajectory.axis.acceleration if jog.acceleration is undefined else jog.acceleration %}
+
+{%- if monitoring is defined %}
+    {%- if monitoring.target is defined %}
+        {%- set rdbd = monitoring.target.tolerance %}
+    {%- else %}
+        {%- set rdbd = 0 %}
+    {%- endif %}
+{%- else %}
+    {%- set rdbd = 0 %}
+{%- endif %}
+
+{%- set softlimits = None if softlimits is undefined else softlimits %}
+{%- set drive = None if drive is undefined else drive %}
+{%- set homing = None if homing is undefined else homing %}
+
+ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,
+"PREFIX=${ECMC_PREFIX}, MOTOR_NAME={{ epics.name }}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},
+DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},
+VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCL={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ softlimits.backward|default(0)|float}},DHLM={{ softlimits.forward|default(0)|float}},HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }},{{ epics.motorRecord.fieldInit|default('') }}")
+#- -----------------------------------------------------------------------------
+#- Axis homing
+{%- if homing.type|default(0) > 0 %}
+    ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
+    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type }},HOMEPOS={{ homing.position }},HVELTO={{ homing.velocity.to }},HVELFRM={{ homing.velocity.from|default(homing.velocity.to) }},HOMEACC={{ homing.acceleration|default(trajectory.axis.acceleration) }},HOMEDEC={{ homing.deceleration|default(trajectory.axis.deceleration|default(trajectory.axis.acceleration)) }}")
+{%- endif %}
+#- Motor record init complete
+#- -----------------------------------------------------------------------------

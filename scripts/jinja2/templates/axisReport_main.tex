@@ -19,9 +19,12 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{fontawesome5}
 
+% title page
+\usepackage{geometry}
+\usepackage[some]{background}
 
 %% yaml syntax highlighting --> https://www.latex4technics.com/?note=187E
-{% include 'axisreport_yamlSyntax.tex' %}
+{% include 'axisReport_yamlSyntax.tex' %}
 
 % ==============================================================================
 % definitions
@@ -49,27 +52,10 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 % Document
 
 % TODO: add PSI cover page
-\title{Axis Configuration Report}
+%\title{Axis Configuration Report}
 
 \begin{document}
-
-\begin{titlepage}
-  \maketitle
-  \vfill
-  \hrule
-  \begin{minipage}[t]{0.5\textwidth}
-    \vspace{2mm}
-    \large Author: {{ meta.author|default('') }}
-    {% if meta.date is defined %}
-    \large Date: {{ meta.date }} \\
-    {% endif %}
-    \large Facility: {{ meta.facility }} \\
-    \large Device: {{meta.device|default('default device')}}
-    \vspace{2mm}
-  \end{minipage}
-  \hrule
-  \vspace{2mm}
-\end{titlepage}
+{% include 'axisReport_titlepage.tex' %}
 
 \tableofcontents
 \vfill
@@ -101,6 +87,8 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 
 \section{yaml configuration file}
 
+md5: {{ meta.md5 }}
+
 \lstset{numbers=left,
   inputencoding=latin1,
   basicstyle=\fontsize{8}{8}\selectfont\ttfamily,
@@ -110,6 +98,11 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
   showstringspaces=false
 }
 
-\lstinputlisting[language=yaml]{ {{-yamlFile}}}
+%\lstinputlisting[language=yaml]{ {{-yamlFile}}}
+\begin{lstlisting}[language=yaml]
+  axis:
+   test: 1
+{% include yamlFile %}
+\end{lstlisting}
 
 \end{document}

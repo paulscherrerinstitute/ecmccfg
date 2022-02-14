@@ -69,7 +69,7 @@ class JinjaTemplate:
     def __init__(self, directory, templateFile=None):
         self.template = None
         self.product = ""
-        self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(directory)))
+        self.env = jinja2.Environment(loader=jinja2.FileSystemLoader([str(directory),'/tmp']))
         if templateFile is not None:
             self.read(templateFile)
 
@@ -81,9 +81,15 @@ class JinjaTemplate:
         self.template = jinja2.Template(template)
 
     def render(self, data):
-        # remove leading whitespaces from all lines to allow indented templates
-        # https://stackoverflow.com/questions/31218253/trim-whitespace-from-multiple-lines
-        self.product = '\n'.join([line.strip() for line in self.template.render(data).splitlines()])
+        self.product = self.template.render(data)
+        return self.product
+
+    def lstrip(self):
+        """
+        remove leading whitespaces from all lines to allow indented templates
+        https://stackoverflow.com/questions/31218253/trim-whitespace-from-multiple-lines
+        """
+        self.product = '\n'.join([line.strip() for line in self.product.splitlines()])
         return self.product
 
     def writeProduct(self, filename):

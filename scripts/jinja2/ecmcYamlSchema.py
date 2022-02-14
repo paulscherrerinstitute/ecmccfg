@@ -71,7 +71,8 @@ class Schema:
             'author': {'type': 'string'},
             'facility': {'type': 'string', 'default': 'SLS 2.0'},
             'device': {'type': 'string'},
-            'date': {'type': 'string'}
+            'date': {'type': 'string'},
+            'md5': {'type': 'string'},
         }
     }
 
@@ -124,7 +125,8 @@ class Schema:
 
     epicsSchema = {
         'type': 'dict',
-        'required': True,
+        'required': False,
+        'default': {'name': 'axis'},
         'schema': {
             'name': {'default': 'axis'},
             'precision': {'type': 'integer', 'min': 0, 'default': 3},
@@ -360,7 +362,7 @@ class Schema:
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max','time']},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max', 'time']},
                     'max': {'type': 'float', 'min': 0.0},
                     'time': {
                         'type': 'dict',
@@ -375,7 +377,7 @@ class Schema:
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max','time']},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max', 'time']},
                     'max': {'type': 'float', 'min': 0.0},
                     'time': {
                         'type': 'dict',
