@@ -48,46 +48,42 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 
 {% include 'axisReport_definitions.tex' %}
 
-
-% Document
-
-% TODO: add PSI cover page
-%\title{Axis Configuration Report}
-
 \begin{document}
-{% include 'axisReport_titlepage.tex' %}
+  {% include 'axisReport_titlepage.tex' %}
 
-\tableofcontents
-\vfill
-\pagebreak
+  \tableofcontents
+  \vfill
+  \pagebreak
 
-{% include 'axisReport_axis.tex' %}
+  {% include 'axisReport_axis.tex' %}
 
-{% include 'axisReport_var.tex' %}
+  {% include 'axisReport_var.tex' %}
 
-{% include 'axisReport_epics.tex' %}
+  {% include 'axisReport_epics.tex' %}
 
-{% include 'axisReport_trajectory.tex' %}
+  {% include 'axisReport_trajectory.tex' %}
 
-{% include 'axisReport_controller.tex' %}
+  {%- if axis.type == 1 %}
+    {% include 'axisReport_controller.tex' %}
+    {% include 'axisReport_drive.tex' %}
+  {%endif%}
 
-{% include 'axisReport_drive.tex' %}
+  {% include 'axisReport_encoder.tex' %}
 
-{% include 'axisReport_encoder.tex' %}
+  {%if monitoring is defined%}
+    {% include 'axisReport_monitoring.tex'%}
+  {%endif%}
 
-{%if monitoring is defined%}
-  {% include 'axisReport_monitoring.tex'%}
-{%endif%}
-
-{% include 'axisReport_homing.tex' %}
+  {% include 'axisReport_homing.tex' %}
 
 \vfill
 \pagebreak
 \appendix
 
 \section{yaml configuration file}
+\label{configFileCode}
 
-md5: {{ meta.md5 }}
+\textbf{md5:}~{{ meta.md5|default('INVALID') }}
 
 \lstset{numbers=left,
   inputencoding=latin1,

@@ -1,9 +1,9 @@
 ---
-#meta:
-#  author: Dr. K
-#  facility: EtherCAT Lab
-#  device: test axis
-#  date: yesterday
+meta:
+  author: Dr. K
+  facility: EtherCAT Lab
+  device: test axis
+  date: yesterday
 
 # AXIS ========================================================================
 axis:
@@ -266,13 +266,13 @@ trajectory:
     acceleration: 180
     # --> required: yes, type: float
     # ==> Cfg.SetAxisJerk(int axis_no, double value);
-    jerk: 1800
+#    jerk: 1800
     # --> required: no, type: float
     # ==> Cfg.SetAxisDec(int axis_no, double value);
     deceleration: 360
     # --> required: no, type: float, default: 'acceleration'
     # ==> Cfg.SetAxisEmergDeceleration(int traj_no, double value);
-    emergencyDeceleration: 720
+#    emergencyDeceleration: 720
     # --> required: no, type: float, default: max(['acceleration', 'deceleration'])
   jog:
   # --> required: no, type: dict
@@ -280,15 +280,15 @@ trajectory:
     velocity: 90
     # --> required: no, type: float, default: 'trajectory.axis.velocity'
     # for motorRecord
-    acceleration: 90
-  modulo:
-  # --> required: no, type: dict, default: {range: 0, type: 0}
-    # ==> Cfg.SetAxisModRange(int axis_no, double range);
-    range: 180.
-    # --> required: no, type: float
-    # ==> Cfg.SetAxisModType(int axis_no, int type);
-    type: 2
-    # --> required: no, type: int, allowed: [0, 1, 2, 3]
+#    acceleration: 90
+#  modulo:
+#  # --> required: no, type: dict, default: {range: 0, type: 0}
+#    # ==> Cfg.SetAxisModRange(int axis_no, double range);
+#    range: 180.
+#    # --> required: no, type: float
+#    # ==> Cfg.SetAxisModType(int axis_no, int type);
+#    type: 2
+#    # --> required: no, type: int, allowed: [0, 1, 2, 3]
 
 # INPUT =======================================================================
 input:

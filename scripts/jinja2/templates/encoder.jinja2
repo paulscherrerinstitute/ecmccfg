@@ -25,11 +25,11 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id }},{{ encoder.absOffset }})"
 {%- if encoder.reset is defined %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.reset }}","ax{{ axis.id }}.enc.reset")"
 {%- endif %}
-{%- if drive.warning is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ drive.warning }}","ax{{ axis.id }}.enc.warning")"
+{%- if encoder.warning is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.warning }}","ax{{ axis.id }}.enc.warning")"
 {%- endif %}
-{%- if drive.error is defined %}
-    {%- for bit in drive.error %}
+{%- if encoder.error is defined %}
+    {%- for bit in encoder.error %}
         ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
     {%- endfor %}
 {%- endif %}
