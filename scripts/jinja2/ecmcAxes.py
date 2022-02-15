@@ -9,8 +9,8 @@ import ecmcPlc
 class EcmcAxis:
     axisTemplates = {
         0: 'debug.jinja2',
-        1: 'joint.jinja2',
-        2: 'endEffector.jinja2',
+        1: 'axis_main.jinja2',
+        2: 'axis_main.jinja2',
     }
 
     def __init__(self, config_file, jinja_template_dir):
