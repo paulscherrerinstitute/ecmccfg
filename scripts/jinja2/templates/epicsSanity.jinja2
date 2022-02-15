@@ -1,8 +1,0 @@
-{#- check for sane homing definition -#}
-{%- if epics is undefined %}
-  {{ onError('epics is mandatory') }}
-{%- endif %}
-
-{%- if epics.name is undefined %}
-  {{ onError('epics.name is mandatory') }}
-{%- endif %}
