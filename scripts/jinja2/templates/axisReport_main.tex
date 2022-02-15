@@ -24,7 +24,7 @@
 \usepackage[some]{background}
 
 %% yaml syntax highlighting --> https://www.latex4technics.com/?note=187E
-{% include 'axisReport_yamlSyntax.tex' %}
+{%- include 'axisReport_yamlSyntax.tex' %}
 
 % ==============================================================================
 % definitions
@@ -46,35 +46,39 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-2}$
 $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 {%-endset-%}
 
-{% include 'axisReport_definitions.tex' %}
+{%- include 'axisReport_definitions.tex' %}
 
 \begin{document}
-  {% include 'axisReport_titlepage.tex' %}
+  {%- include 'axisReport_titlepage.tex' %}
 
   \tableofcontents
   \vfill
   \pagebreak
 
-  {% include 'axisReport_axis.tex' %}
+  {%- include 'axisReport_axis.tex' %}
 
-  {% include 'axisReport_var.tex' %}
+  {%- include 'axisReport_var.tex' %}
 
-  {% include 'axisReport_epics.tex' %}
+  {%- include 'axisReport_epics.tex' %}
 
-  {% include 'axisReport_trajectory.tex' %}
+  {%- include 'axisReport_trajectory.tex' %}
 
   {%- if axis.type == 1 %}
-    {% include 'axisReport_controller.tex' %}
-    {% include 'axisReport_drive.tex' %}
-  {%endif%}
+    {%- include 'axisReport_controller.tex' %}
+    {%- include 'axisReport_drive.tex' %}
+  {%- endif %}
 
-  {% include 'axisReport_encoder.tex' %}
+  {%- include 'axisReport_encoder.tex' %}
 
-  {%if monitoring is defined%}
-    {% include 'axisReport_monitoring.tex'%}
-  {%endif%}
+  {%- if monitoring is defined %}
+    {%- include 'axisReport_monitoring.tex' %}
+  {%- endif %}
 
-  {% include 'axisReport_homing.tex' %}
+  {%- if plc is defined %}
+    {%- include 'axisReport_plc.tex' %}
+  {%- endif %}
+
+  {%- include 'axisReport_homing.tex' %}
 
 \vfill
 \pagebreak
@@ -95,7 +99,7 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 }
 
 \begin{lstlisting}[language=yaml]
-{% include yamlFile %}
+{%- include yamlFile %}
 \end{lstlisting}
 
 \end{document}

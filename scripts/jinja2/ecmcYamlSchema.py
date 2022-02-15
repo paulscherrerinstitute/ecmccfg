@@ -52,7 +52,7 @@ class Schema:
     plcSchemaDict = {
         0: None,
         1: ['plc'],
-        2: ['axisPlc', 'axis', 'encoder', 'trajectory']
+        2: ['axisPlc', 'axis', 'encoder', 'trajectory', 'var']
     }
 
     def get_schema(self, keys):
