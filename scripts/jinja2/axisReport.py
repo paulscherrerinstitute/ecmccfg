@@ -35,10 +35,6 @@ def main():
           f'docker run -v {cli.tmpDir}:/doc/ -t -i thomasweise/texlive pdflatex {cli.outFile.relative_to(cli.tmpDir)}\n'
           f'or use the mighty LaTeX-->PDF webUI docker by, Dr. K')
 
-    if axis.hasSyncPLC:
-        # print(axis.plc.yamlHandler.yamlData)
-        print(axis.yamlHandler.yamlData['plc'])
-
 
 if __name__ == '__main__':
     main()
