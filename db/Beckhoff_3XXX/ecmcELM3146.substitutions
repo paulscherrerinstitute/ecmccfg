@@ -1,20 +1,32 @@
-file "ecmc_analogInput-chX.template"{
-  pattern {CH_ID, ESLO,             EGU,  PREC}
-          {01,    3.0518509476E-4,  "V",  3   }
-          {02,    3.0518509476E-4,  "V",  3   }
-          {03,    3.0518509476E-4,  "V",  3   }
-          {04,    3.0518509476E-4,  "V",  3   }
-          {05,    3.0518509476E-4,  "V",  3   }
-          {06,    3.0518509476E-4,  "V",  3   }
+file "ecmc_analogInputArray-chX.template"
+{
+  pattern {CH_ID, DTYP,                FTVL   }
+          {01,    "asynInt32ArrayIn",  "LONG" }
+          {02,    "asynInt32ArrayIn",  "LONG" }
+          {03,    "asynInt32ArrayIn",  "LONG" }
+          {04,    "asynInt32ArrayIn",  "LONG" }
+          {05,    "asynInt32ArrayIn",  "LONG" }
+          {06,    "asynInt32ArrayIn",  "LONG" }
 }
 
-file "ecmc_status_analog-chX.template"
+file "ecmcELM360X-stat-chX.template"
 {
-  pattern {CH_ID, KEY }
-          {01,    "AI"}
-          {02,    "AI"}
-          {03,    "AI"}
-          {04,    "AI"}
-          {05,    "AI"}
-          {06,    "AI"}
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+}
+
+file "ecmc_controlWord-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,  sourceName, DESC             }
+          {01,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {02,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {03,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {04,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {05,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {06,    "AI", "-Ctrl", "control",   "AI Control Word"}
 }

@@ -13,7 +13,7 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3004")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50216dc9")
 epicsEnvSet("ECMC_OVER_SAMP_MAX"         "100")
-epicsEnvSet("ECMC_SAMP_TIME_MIN"         "50000")
+epicsEnvSet("ECMC_SAMP_TIME_MIN"         "100000")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
