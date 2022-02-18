@@ -1,11 +1,11 @@
 #-d /**
-#-d   \brief hardware script for EL3004
+#-d   \brief hardware script for ELM3004
 #-d   \details 4-channel analog input, voltage, ±30 V…±20 mV, 24 bit, 10 ksps
 #-d
 #-d   Minimum sample time          = 100000 ns (oversampling rate of 10 in 1 kHz ec rate)
 #-d   Maximum Oversampling factor  = 100       (if ec rate is 100 Hz then a NELM of 100 can be used)
 #-d
-#-d   \author Anders Sandstroem
+#-d   \author Niko Kivel
 #-d   \file
 #-d */
 
@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_OVER_SAMP_MAX"         "100")
 epicsEnvSet("ECMC_SAMP_TIME_MIN"         "100000")
 
 #- verify slave, including reset
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
 
 #- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE. MAX NELM is 100
 ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)

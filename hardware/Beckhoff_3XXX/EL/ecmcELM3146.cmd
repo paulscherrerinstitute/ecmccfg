@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_OVER_SAMP_MAX"         "20")
 epicsEnvSet("ECMC_SAMP_TIME_MIN"         "1000000")
 
 #- verify slave, including reset
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
 
 #- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE. MAX NELM is 20
 ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
