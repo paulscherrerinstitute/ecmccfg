@@ -74,28 +74,28 @@ def getArgs(line):
             continue
     return args
 
-@pytest.mark.dependency(depends=["test_create"])
-def test_render_vs_bechmark(myAxis):
-    myAxis.config_file = f'{yaml_path}joint_benchmark.yaml'
-    myAxis.create()
-    myAxis.make()
-    myAxis.yamlHandler.checkForVariables()
-    if myAxis.yamlHandler.hasVariables:
-        myAxis.axisTemplate.setTemplate(myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData))
-    myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData)
-    with open(f'{ref_path}joint.benchmark') as fp:
-        lines = fp.readlines()
-        for line in lines:
-            # skip empty links
-            if 'Cfg.LinkEcEntryToObject(,' in line:
-                continue
-            cmdOrg = re.search(r"\bCfg.\w+", line).group()
-            cmd = f'{cmdOrg}\('
-            args = getArgs(line)
-            if 'Cfg.LinkEcEntryToObject' in cmd:
-                cmd = args[1]
-
-            items = re.findall(f"^.*{cmd}.*$", myAxis.axisTemplate.product, re.MULTILINE)
-            iArgs = getArgs(items[0])
-            assert cmdOrg in myAxis.axisTemplate.product
-            assert iArgs == args
+# @pytest.mark.dependency(depends=["test_create"])
+# def test_render_vs_bechmark(myAxis):
+#     myAxis.config_file = f'{yaml_path}joint_benchmark.yaml'
+#     myAxis.create()
+#     myAxis.make()
+#     myAxis.yamlHandler.checkForVariables()
+#     if myAxis.yamlHandler.hasVariables:
+#         myAxis.axisTemplate.setTemplate(myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData))
+#     myAxis.axisTemplate.render(myAxis.yamlHandler.yamlData)
+#     with open(f'{ref_path}joint.benchmark') as fp:
+#         lines = fp.readlines()
+#         for line in lines:
+#             # skip empty links
+#             if 'Cfg.LinkEcEntryToObject(,' in line:
+#                 continue
+#             cmdOrg = re.search(r"\bCfg.\w+", line).group()
+#             cmd = f'{cmdOrg}\('
+#             args = getArgs(line)
+#             if 'Cfg.LinkEcEntryToObject' in cmd:
+#                 cmd = args[1]
+#
+#             items = re.findall(f"^.*{cmd}.*$", myAxis.axisTemplate.product, re.MULTILINE)
+#             iArgs = getArgs(items[0])
+#             assert cmdOrg in myAxis.axisTemplate.product
+#             assert iArgs == args
