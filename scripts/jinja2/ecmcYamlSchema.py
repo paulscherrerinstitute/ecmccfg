@@ -78,6 +78,7 @@ class Schema:
 
     filterSchema = {
         'type': 'dict',
+        'default': {},
         'schema': {
             'velocity': {
                 'type': 'dict',
