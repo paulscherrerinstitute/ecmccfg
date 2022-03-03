@@ -1,99 +1,79 @@
-from ecmcYamlHandler import *
-from ecmcJinja2 import JinjaTemplate
-from ecmcPlc import EcmcPlc, EcmcAxisPlc
-from pathlib import Path
+import pathlib
 
+import ecmcYamlHandler
+import ecmcJinja2
 import ecmcConfigValidator
+import ecmcPlc
 
 
-class EcmcAxis(YamlHandler):
-    def __init__(self, axisconfig, jinjatemplatedir):
-        super().__init__()
-        if Path(axisconfig).is_file():
-            self.axisconfig = axisconfig
-        else:
-            raise FileNotFoundError(f'axis configuration >> {axisconfig} << not found!')
-        if Path(jinjatemplatedir).is_dir():
-            self.jinjatemplatedir = jinjatemplatedir
-        else:
-            raise FileNotFoundError(f'template directory >> {jinjatemplatedir} << not found!')
-        self.config = None
+class EcmcAxis:
+    axisTemplates = {
+        0: 'debug.jinja2',
+        1: 'axis_main.jinja2',
+        2: 'axis_main.jinja2',
+    }
 
-    def create(self, strict=False):
-        self.loadYamlData(self.axisconfig, lint=True)
-        v = ecmcConfigValidator.ConfigValidator(self.yamlData)
-        v.validate_axis(strict=strict)
-        # TODO: write validated and normalized data to 'yamlData'
-        self.setEcmcAxisType()
-        if self.axisType == 1:
-            self.config = EcmcJoint(self.axisconfig, self.jinjatemplatedir)
-        elif self.axisType == 2:
-            self.config = EcmcEndEffector(self.axisconfig, self.jinjatemplatedir)
-        else:
-            ''' this should never happen, as setEcmcAxisType catches unsupported axisTypes '''
-            raise NotImplementedError(f'axis ot type >> {self.axisType} << not implemented')
+    def __init__(self, config_file, jinja_template_dir):
+        if not pathlib.Path(jinja_template_dir).is_dir():
+            raise FileNotFoundError(f'template directory >> {jinja_template_dir} << not found!')
+        if not pathlib.Path(config_file).is_file():
+            raise FileNotFoundError(f'axis configuration >> {config_file} << not found!')
 
-
-class EcmcCommonAxis(JinjaTemplate, YamlHandler):
-    def __init__(self, _jinjatemplatedir, _configuration):
-        super(EcmcCommonAxis, self).__init__(directory=_jinjatemplatedir, templateFile=None)
-        self.loadYamlData(_configuration)
-        self.setEcmcAxisType()
-        self.checkForVariables()
-        self.setAxisTemplate()
+        self.config_file = config_file
+        self.axisType = 1
         self.hasSyncPLC = False
+        self.yamlHandler = ecmcYamlHandler.YamlHandler()
+        self.axisTemplate = ecmcJinja2.JinjaTemplate(jinja_template_dir)
+        self.v = ecmcConfigValidator.ConfigValidator()
+        self.plc = ecmcPlc.EcmcPlc(config_file, jinja_template_dir)
+        self.data = ecmcConfigValidator.DictContainer()
 
-        if self.checkForKey('sync', optional=True) and self.yamlData['sync']['enable']:
+    def create(self):
+        """
+        axis object
+        """
+        self.yamlHandler.loadYamlData(self.config_file, lint=True)
+        self.v.document = self.yamlHandler.yamlData
+        self.axisType = self.v.get_axis_type()  # obtain axis type from data, this pre-validates the 'axis' key
+
+    def make(self):
+        """
+        wrapper around all steps needed to render an axis-script from a yaml-config
+        """
+        self.yamlHandler.yamlData = self.v.validate_axis()  # validate the full axis schema
+        self.yamlHandler.checkForVariables()
+        self.setAxisTemplate()
+        if self.yamlHandler.hasVariables:
+            self.axisTemplate.setTemplate(self.axisTemplate.render(self.yamlHandler.yamlData))
+        self.axisTemplate.render(self.yamlHandler.yamlData)
+        self.syncPLC()
+
+    def setAxisTemplate(self, axis_type=None):
+        if axis_type is None:
+            axis_type = self.axisType
+        self.axisTemplate.read(self.axisTemplates[axis_type])
+
+    def syncPLC(self):
+        if self.yamlHandler.checkForKey('plc', data_=self.v.document, optional=True):
             self.hasSyncPLC = True
-            self.axisPlc = EcmcPlc(_configuration, _jinjatemplatedir)
-            self.axisPlc.create()
-
-    def setAxisTemplate(self, type_=None, template=None):
-        if type_ is None:
-            type_ = self.axisType
-        axisTemplates = {
-            0: 'debug.jinja2',
-            1: 'joint.jinja2',
-            2: 'endEffector.jinja2',
-        }
-        self.read(axisTemplates[type_])
-        self.yamlData['axis']['type'] = type_
+            self.plc.create()
+            self.plc.make()
+            self.axisTemplate.product += self.plc.plcTemplate.product
 
 
-class EcmcEndEffector(EcmcCommonAxis):
-    def __init__(self, _configuration, _jinjatemplatedir):
-        super(EcmcEndEffector, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
-        self.pruneConfiguration()
+def main():
+    # axis = EcmcAxis('pytest/yaml_files/joint.yaml', './templates/')
+    # axis = EcmcAxis('pytest/yaml_files/joint_all.yaml', './templates/')
+    # axis = EcmcAxis('pytest/yaml_files/endEffector.yaml', './templates/')
+    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
+    # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
+    # axis = EcmcAxis('pytest/yaml_files/joint_benchmark.yaml', './templates/')
+    axis = EcmcAxis('pytest/yaml_files/joint_sandbox.yaml', './templates/')
+    axis.create()
+    axis.make()
 
-    def pruneConfiguration(self):
-        self.yamlData['drive'] = None
-        self.yamlData['controller'] = None
-
-
-class EcmcJoint(EcmcCommonAxis):
-    def __init__(self, _configuration, _jinjatemplatedir):
-        super(EcmcJoint, self).__init__(_jinjatemplatedir=_jinjatemplatedir, _configuration=_configuration)
+    axis.axisTemplate.showProduct()
 
 
 if __name__ == '__main__':
-    # axis = EcmcAxis('./test/testEndEffector.yaml', './templates/')
-    # axis = EcmcAxis('./test/testJoint.yaml', './templates/')
-    axis = EcmcAxis('pytest/yaml_files/joint_benchmark.yaml', './templates/')
-    axis.create()
-    # axis.config.setAxisTemplate(0) # load 'debug.jinja2'
-    ''' if the config has a 'var' key, run renderer twice'''
-    if axis.config.hasVariables:
-        axis.config.setTemplate(axis.config.render(axis.config.yamlData))
-    axis.config.render(axis.config.yamlData)
-    if axis.config.hasSyncPLC:
-        plc = axis.config.axisPlc
-        plc.checkForPlcFile()
-        plc.checkForVariables()
-        if plc.hasPlcFile:
-            plc.loadPlcFile()
-        if plc.hasVariables:
-            plc.config.setTemplate(plc.config.render(plc.yamlData))
-        plc.config.render(plc.yamlData)
-        axis.config.product += plc.config.product
-    axis.config.show()
-    # axis.config.write('test.txt')
+    main()

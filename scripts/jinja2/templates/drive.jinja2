@@ -1,31 +1,43 @@
 #- =============================================================================
 #- Drive
 #- =============================================================================
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax{{ axis.id|int }}.drv.control")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id|int }}.drv.status")"
-{# Todo: add more types, add default type #}
+{#- links #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax{{ axis.id }}.drv.control")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id }}.drv.status")"
+{#- Todo: add more types, add default type #}
 {%- if axis.mode == 'CSV' %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id|int }}.drv.velocity")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.velocity")"
 {%- else %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id|int }}.drv.position")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.position")"
 {%- endif %}
-{%- if drive.reduceTorque %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque|int }}","ax{{ axis.id|int }}.drv.reducetorque")"
+{%- if drive.reduceTorqueEnable %}
+    ecmcConfigOrDie "Cfg.SetAxisDrvReduceTorqueEnable(ax{{ axis.id }}, {{ drive.reduceTorqueEnable|int }})"
+    {%- if drive.reduceTorque is defined %}
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque }}","ax{{ axis.id }}.drv.reducetorque")"
+    {%- endif %}
 {%- endif %}
-{%- if drive.reset %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reset|int }}","ax{{ axis.id|int }}.drv.reset")"
+{%- if drive.reset is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reset }}","ax{{ axis.id }}.drv.reset")"
 {%- endif %}
-{%- if drive.warning %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.warning|int }}","ax{{ axis.id|int }}.drv.warning")"
+{%- if drive.warning is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.warning }}","ax{{ axis.id }}.drv.warning")"
 {%- endif %}
-{%- if drive.error %}
-{%- for bit in drive.error %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit|int }}","ax{{ axis.id|int }}.drv.alarm{{loop.index-1}}")"
-{%- endfor %}
+{%- if drive.error is defined %}
+    {%- for bit in drive.error %}
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit }}","ax{{ axis.id }}.drv.alarm{{loop.index0}}")"
+    {%- endfor %}
 {%- endif %}
-
-ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom({{ axis.id|int }},{{ drive.denominator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum({{ axis.id|int }},{{ drive.numerator|float }})"
-{%- set brake=None if drive.brake is not defined else drive.brake %}
-ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime({{ axis.id|int }},{{ brake.openDelay|default(0)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id|int }},{{ brake.closeAhead|default(0)|int }})"
+{#- scaling #}
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum({{ axis.id }},{{ drive.numerator }})"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom({{ axis.id }},{{ drive.denominator }})"
+{#- Brake #}
+{%- if drive.brake %}
+    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeEnable({{ axis.id }}, {{ drive.brake.enable|int }})"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.brake.output }}","ax{{ axis.id }}.drv.brake")"
+    {%- if drive.brake.closeAhead %}
+    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime({{ axis.id }},{{ drive.brake.openDelay }})"
+    {%- endif %}
+    {%- if drive.brake.closeAhead %}
+    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id }},{{ drive.brake.closeAhead }})"
+    {%- endif %}
+{%- endif %}

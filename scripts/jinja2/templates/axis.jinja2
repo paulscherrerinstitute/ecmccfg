@@ -1,0 +1,20 @@
+#- -=-=-=-=- axis
+{#- drive is only present in type: 'joint' #}
+{%- set drive = None if drive is undefined else drive %}
+ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type }},{{ drive.type|default(0)|int }},{{ trajectory.type }})"
+{%- if axis.type|int == 2 %}
+    ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id }},0)"
+{%- endif %}
+#- health output
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id }}.health")"
+
+{%- if axis.features is defined %}
+    #- features
+    ecmcConfigOrDie Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }});
+    ecmcConfigOrDie Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.AlarmAtHardLimits|default(0)|int }});
+    ecmcConfigOrDie Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }});
+    {%- if axis.features.allowedFunctions is defined %}
+        #- allowed motion functions
+        ecmcConfigOrDie Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})
+    {% endif -%}
+{% endif -%}

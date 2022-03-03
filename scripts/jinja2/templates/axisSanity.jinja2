@@ -1,6 +1,0 @@
-{#- check for axis key -#}
-{%- if axis is not defined %}
-  {{- onError('axis must be set!') }}
-{%- elif not axis.id %}
-  {{- onError('axis.id must be set!') }}
-{%- endif %}

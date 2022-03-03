@@ -17,9 +17,14 @@
 % float placement
 \usepackage{float}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fontawesome5}
+
+% title page
+\usepackage{geometry}
+\usepackage[some]{background}
 
 %% yaml syntax highlighting --> https://www.latex4technics.com/?note=187E
-{% include 'axisreport_yamlSyntax.tex' %}
+{%- include 'axisReport_yamlSyntax.tex' %}
 
 % ==============================================================================
 % definitions
@@ -41,53 +46,48 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-2}$
 $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
 {%-endset-%}
 
-{% include 'axisReport_definitions.tex' %}
-
-
-% Document
-
-% TODO: add PSI cover page
-\title{Axis Configuration Report \\
-    \large {{device|default('default device')}}
-}
-\author{ {{-author-}} \thanks{Paul Scherrer Institute}}
-\date{ {{-date-}} }
+{%- include 'axisReport_definitions.tex' %}
 
 \begin{document}
+  {%- include 'axisReport_titlepage.tex' %}
 
-\begin{titlepage}
-\maketitle
-\end{titlepage}
+  \tableofcontents
+  \vfill
+  \pagebreak
 
-\tableofcontents
-\vfill
-\pagebreak
+  {%- include 'axisReport_axis.tex' %}
 
-{% include 'axisReport_axis.tex' %}
+  {%- include 'axisReport_var.tex' %}
 
-{% include 'axisReport_var.tex' %}
+  {%- include 'axisReport_epics.tex' %}
 
-{% include 'axisReport_epics.tex' %}
+  {%- include 'axisReport_trajectory.tex' %}
 
-{% include 'axisReport_trajectory.tex' %}
+  {%- if axis.type == 1 %}
+    {%- include 'axisReport_controller.tex' %}
+    {%- include 'axisReport_drive.tex' %}
+  {%- endif %}
 
-{% include 'axisReport_controller.tex' %}
+  {%- include 'axisReport_encoder.tex' %}
 
-{% include 'axisReport_drive.tex' %}
+  {%- if monitoring is defined %}
+    {%- include 'axisReport_monitoring.tex' %}
+  {%- endif %}
 
-{% include 'axisReport_encoder.tex' %}
+  {%- if plc is defined %}
+    {%- include 'axisReport_plc.tex' %}
+  {%- endif %}
 
-{%if monitoring is defined%}
-  {% include 'axisReport_monitoring.tex'%}
-{%endif%}
-
-{% include 'axisReport_homing.tex' %}
+  {%- include 'axisReport_homing.tex' %}
 
 \vfill
 \pagebreak
 \appendix
 
 \section{yaml configuration file}
+\label{configFileCode}
+
+\textbf{md5:}~{{ meta.md5|default('INVALID') }}
 
 \lstset{numbers=left,
   inputencoding=latin1,
@@ -98,6 +98,8 @@ $\mathrm{ {{epics.unit}} }\cdot\mathrm{ s }^{-3}$
   showstringspaces=false
 }
 
-\lstinputlisting[language=yaml]{ {{-yamlFile}}}
+\begin{lstlisting}[language=yaml]
+{% include yamlFile %}
+\end{lstlisting}
 
 \end{document}

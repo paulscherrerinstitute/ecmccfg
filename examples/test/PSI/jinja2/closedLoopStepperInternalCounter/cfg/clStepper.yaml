@@ -108,11 +108,11 @@ softlimits:
 monitoring:
   # lag:
   #   enable: false
-  #   tollerance: 5
+  #   tolerance: 5
   #   time: 100
   target:
     enable: true
-    tollerance: 0.001
+    tolerance: 0.001
     time: 100
   velocity:
     enable: true

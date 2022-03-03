@@ -1,5 +1,21 @@
+#- =============================================================================
 #- Controller
-ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id|int }},{{ controller.Kp|float }})"
-ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id|int }},{{ controller.Ki|default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id|int }},{{ controller.Kd|default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id|int }},{{ controller.Kff|default(1)|float }})"
+#- =============================================================================
+ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id }},{{ controller.Kp }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id }},{{ controller.Ki }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id }},{{ controller.Kd }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
+{%- if controller.limits %}
+    {%- if controller.limits.minOutput is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisCntrlOutLL({{ axis.id }},{{ controller.limits.minOutput }});
+    {%- endif %}
+    {%- if controller.limits.maxOutput is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisCntrlOutHL({{ axis.id }},{{ controller.limits.maxOutput }});
+    {%- endif %}
+    {%- if controller.limits.minIntegral is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisCntrlIPartLL({{ axis.id }},{{ controller.limits.minIntegral }});
+    {%- endif %}
+    {%- if controller.limits.maxIntegral is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisCntrlIPartHL({{ axis.id }},{{ controller.limits.maxIntegral }});
+    {%- endif %}
+{%- endif  %}

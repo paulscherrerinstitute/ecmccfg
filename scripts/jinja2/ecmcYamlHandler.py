@@ -1,5 +1,6 @@
 import yaml
 import string
+import hashlib
 from pathlib import Path
 
 
@@ -16,6 +17,7 @@ class YamlHandler:
         self.hasVariables = False
         self.hasPlcFile = False
         self.axisType = None
+        self.md5 = None
 
     @staticmethod
     def str2bool(val) -> bool:
@@ -29,13 +31,28 @@ class YamlHandler:
         else:
             raise ValueError(f'unrecognized string >> {val} <<')
 
+    @staticmethod
+    def calculate_md5(file: Path) -> str:
+        md5_hash = hashlib.md5()
+        a_file = open(file, "rb")
+        content = a_file.read()
+        md5_hash.update(content)
+        return md5_hash.hexdigest()
+
     def loadYamlData(self, file, lint=False, relaxed=True):
         if lint:
             # lint the yaml file
             linter = ecmcYamlLinter.YamlLinter()
             linter.run(file, relaxed)
+
+        digest = self.calculate_md5(file)
+
         with open(file) as f:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
+
+        if not self.checkForKey('meta', optional=True):
+            self.yamlData['meta'] = {}
+        self.yamlData['meta']['md5'] = digest
 
     def getKey(self, key, data):
         if isinstance(key, list):

@@ -27,20 +27,32 @@ class Schema:
             'controller',
             'trajectory',
             'input',
-            'plc',
+            'axisPlc',
             'homing',
             'softlimits',
-            'monitoring'],
+            'monitoring',
+            'meta'],
         2: ['var',
             'axis',
             'epics',
             'encoder',
             'trajectory',
             'input',
-            'plc',
+            'axisPlc',
             'homing',
             'softlimits',
-            'monitoring']
+            'monitoring',
+            'meta']
+    }
+
+    """
+    schema for PLCs
+    WARNING: The PLC schema _must_ be the FIRST entry of the list!!!
+    """
+    plcSchemaDict = {
+        0: None,
+        1: ['plc'],
+        2: ['axisPlc', 'axis', 'encoder', 'trajectory', 'var']
     }
 
     def get_schema(self, keys):
@@ -52,22 +64,34 @@ class Schema:
         else:
             raise NotImplementedError(f'unsupported input type >>{_type}<<')
 
+    metaSchema = {
+        'type': 'dict',
+        'default': {},
+        'schema': {
+            'author': {'type': 'string'},
+            'facility': {'type': 'string', 'default': 'SLS 2.0'},
+            'device': {'type': 'string'},
+            'date': {'type': 'string'},
+            'md5': {'type': 'string'},
+        }
+    }
 
     filterSchema = {
         'type': 'dict',
+        'default': {},
         'schema': {
             'velocity': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'size': {'type': 'integer'}
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'size': {'required': True, 'type': 'integer'}
                 }
             },
             'trajectory': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'size': {'type': 'integer'}
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'size': {'required': True, 'type': 'integer'}
                 }
             }
         }
@@ -78,8 +102,9 @@ class Schema:
         'required': True,
         'schema': {
             'id': {'required': True, 'type': 'integer', 'min': 1},
-            'type': {'type': 'integer', 'default': 'joint', 'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
-            'mode': {'type': 'string', 'default': 'CSV', 'coerce': lambda v: v.upper()},
+            'type': {'type': 'integer', 'default': 'joint',
+                     'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
+            'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
             'features': {'type': 'dict', 'schema': {
                 'disableOnReset': {'type': 'boolean'},
@@ -102,6 +127,7 @@ class Schema:
     epicsSchema = {
         'type': 'dict',
         'required': False,
+        'default': {'name': 'axis'},
         'schema': {
             'name': {'default': 'axis'},
             'precision': {'type': 'integer', 'min': 0, 'default': 3},
@@ -125,18 +151,18 @@ class Schema:
             'numerator': {'type': 'float', 'default': 0},
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
             'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
-            'setpoint': {'type': 'string'},
-            'control': {'type': 'string'},
+            'setpoint': {'required': True, 'type': 'string'},
+            'control': {'required': True, 'type': 'string'},
             'status': {'type': 'string'},
             'reduceTorqueEnable': {'type': 'boolean', 'dependencies': ['control', 'reduceTorque']},
             'reduceTorque': {'type': 'integer', 'min': 0, 'dependencies': ['control', 'reduceTorqueEnable']},
             'brake': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'output': {'type': 'string', 'dependencies': ['enable']},
-                    'openDelay': {'type': 'integer', 'default': 0, 'min': 0, 'dependencies': ['enable']},
-                    'closeAhead': {'type': 'integer', 'default': 0, 'min': 0, 'dependencies': ['enable']}
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'output': {'required': True, 'type': 'string'},
+                    'openDelay': {'type': 'integer', 'min': 0, 'default': 0},
+                    'closeAhead': {'type': 'integer', 'min': 0, 'default': 0}
                 }
             },
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
@@ -149,10 +175,10 @@ class Schema:
         'type': 'dict',
         'required': True,
         'schema': {
-            'source': {'type': 'integer', 'allowed': [0, 1]},
+            'source': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'numerator': {'type': 'float', 'default': 0.},
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
-            'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
+            'type': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'mask': {'type': 'string'},
             'bits': {'type': 'integer', 'min': 0, 'max': 64, 'default': 16},
             'absBits': {'type': 'integer', 'min': 0, 'max': 64, 'default': 25},
@@ -167,9 +193,9 @@ class Schema:
             'latch': {
                 'type': 'dict',
                 'schema': {
-                    'position': {'type': 'float', 'default': 0.},
-                    'control': {'type': 'string'},
-                    'status': {'type': 'string'},
+                    'position': {'required': True, 'type': 'string'},
+                    'control': {'type': 'integer', 'default': 0},
+                    'status': {'type': 'integer', 'default': 0},
                 }
             }
         }
@@ -201,12 +227,14 @@ class Schema:
         'required': True,
         'schema': {
             'source': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
+            'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1]},
             'axis': {
+                'required': True,
                 'type': 'dict',
                 'schema': {
                     'velocity': {'required': True, 'type': 'float'},
                     'acceleration': {'required': True, 'type': 'float'},
-                    'jerk': {'type': 'float'},
+                    'jerk': {'type': 'float', 'default': 0},
                     'deceleration': {'type': 'float'},
                     'emergencyDeceleration': {'type': 'float'}
                 }
@@ -221,8 +249,8 @@ class Schema:
             'modulo': {
                 'type': 'dict',
                 'schema': {
-                    'range': {'type': 'float'},
-                    'type': {'type': 'integer', 'allowed': [0, 1, 2, 3]}
+                    'range': {'type': 'float', 'default': 0.},
+                    'type': {'type': 'integer', 'default': 0, 'allowed': [0, 1, 2, 3]}
                 }
             },
         }
@@ -250,13 +278,27 @@ class Schema:
         }
     }
 
-    plcSchema = {
+    axisPlcSchema = {
         'type': 'dict',
         'required': False,
         'schema': {
-            'enable': {'type': 'boolean'},
+            'enable': {'required': True, 'type': 'boolean'},
             'externalCommands': {'type': 'boolean'},
             'filter': filterSchema,
+            'file': {'type': 'string'},
+            'code': {'type': 'list', 'schema': {'type': 'string'}},
+        }
+    }
+
+    plcSchema = {
+        'type': 'dict',
+        'required': True,
+        'schema': {
+            'id': {'required': True, 'type': 'integer'},
+            'enable': {'type': 'boolean'},
+            'rateMilliseconds': {'type': 'integer'},
+            'file': {'type': 'string'},
+            'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
     }
 
@@ -264,17 +306,16 @@ class Schema:
         'type': 'dict',
         'required': False,
         'schema': {
-            'type': {'type': 'integer'},
+            'type': {'required': True, 'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 21, 22, 25]},
             'position': {'type': 'float', 'default': 0.0},
-            'postMoveEnable': {'type': 'boolean'},
-            'postMovePosition': {'type': 'float'},
-            'switchPolarity': {'type': 'integer', 'allowed': [0, 1]},
-            'latchCount': {'type': 'integer'},
+            'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
+            'postMovePosition': {'type': 'float', 'dependencies': ['postMoveEnable']},
+            'latchCount': {'type': 'integer', 'min': 0},
             'velocity': {
                 'type': 'dict',
-                'required': False,
+                'required': True,
                 'schema': {
-                    'to': {'type': 'float'},
+                    'to': {'required': True, 'type': 'float'},
                     'from': {'type': 'float'},
                 }
             },
@@ -288,11 +329,11 @@ class Schema:
         'type': 'dict',
         'required': False,
         'schema': {
-            'enable': {'type': 'boolean'},
-            'forwardEnable': {'type': 'boolean'},
-            'forward': {'type': 'float'},
-            'backwardEnable': {'type': 'boolean'},
-            'backward': {'type': 'float'},
+            'enable': {'required': True, 'type': 'boolean'},
+            'forwardEnable': {'type': 'boolean', 'dependencies': ['forward']},
+            'forward': {'type': 'float', 'dependencies': ['forwardEnable']},
+            'backwardEnable': {'type': 'boolean', 'dependencies': ['backward']},
+            'backward': {'type': 'float', 'dependencies': ['backwardEnable']},
         }
     }
 
@@ -303,32 +344,33 @@ class Schema:
             'lag': {
                 'type': 'dict',
                 'required': False,
+                'default': {'enable': False, 'tolerance': 0.0, 'time': 100},
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'tolerance': {'type': 'float'},
-                    'time': {'type': 'integer'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['tolerance', 'time']},
+                    'tolerance': {'type': 'float', 'min': 0.0},
+                    'time': {'type': 'integer', 'min': 0},
                 }
             },
             'target': {
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'tolerance': {'type': 'float'},
-                    'time': {'type': 'integer'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['tolerance', 'time']},
+                    'tolerance': {'type': 'float', 'min': 0.0},
+                    'time': {'type': 'integer', 'min': 0},
                 }
             },
             'velocity': {
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'max': {'type': 'float'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max', 'time']},
+                    'max': {'type': 'float', 'min': 0.0},
                     'time': {
                         'type': 'dict',
                         'schema': {
-                            'trajectory': {'type': 'integer'},
-                            'drive': {'type': 'integer'},
+                            'trajectory': {'required': True, 'type': 'integer', 'min': 0},
+                            'drive': {'type': 'integer', 'min': 0},
                         }
                     },
                 }
@@ -337,13 +379,13 @@ class Schema:
                 'type': 'dict',
                 'required': False,
                 'schema': {
-                    'enable': {'type': 'boolean'},
-                    'max': {'type': 'float'},
+                    'enable': {'required': True, 'type': 'boolean', 'dependencies': ['max', 'time']},
+                    'max': {'type': 'float', 'min': 0.0},
                     'time': {
                         'type': 'dict',
                         'schema': {
-                            'trajectory': {'type': 'integer'},
-                            'drive': {'type': 'integer'},
+                            'trajectory': {'required': True, 'type': 'integer', 'min': 0},
+                            'drive': {'type': 'integer', 'min': 0},
                         }
                     },
                 }
@@ -360,8 +402,10 @@ class Schema:
         'controller': controllerSchema,
         'trajectory': trajectorySchema,
         'input': inputSchema,
+        'axisPlc': axisPlcSchema,
         'plc': plcSchema,
         'homing': homingSchema,
         'softlimits': softlimitsSchema,
-        'monitoring': monitoringSchema
+        'monitoring': monitoringSchema,
+        'meta': metaSchema
     }
