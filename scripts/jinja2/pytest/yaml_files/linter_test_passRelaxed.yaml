@@ -1,0 +1,7 @@
+---
+# this will pass the linter in relaxed mode only!
+
+#raise a warning: lacking 'space' after '#'
+
+# raise an error: 'too many spaces before colon'
+foo : bar

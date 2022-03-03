@@ -1,6 +1,0 @@
-{#- check for sane homing definition -#}
-{%- if homing is defined %}
-  {%- if not(homing.type|default(0)>0 and homing.velocity if not defined) %}
-    {{ onError('homing w/o velocity.to') }}
-  {%- endif %}
-{%- endif %}

@@ -1,4 +1,5 @@
 axis:
+  id: 1
   type: joint
 
 var:
@@ -11,3 +12,25 @@ var:
     - 2
     - 3
     -
+
+drive:
+  control : ''
+  setpoint: ''
+
+encoder:
+  position: none
+
+input:
+  home: ''
+  interlock: ''
+  limit:
+    forward : ''
+    backward: ''
+
+trajectory:
+  axis:
+    velocity: 2.72
+    acceleration: 3.14
+
+epics:
+  name: joint.yaml

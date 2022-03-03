@@ -8,6 +8,13 @@ var:
   drvSlave: 3
   encSlave: 17
 
+epics:
+  name: M1
+  # motorRecord: false
+  precision: 3
+  description: AMI8121 CSV
+  unit: deg
+
 motorRecord:
   name: EE1
   precision: 3
@@ -38,9 +45,9 @@ input:
 monitoring:
   lag:
     enable: true
-    tollerance: 5
+    tolerance: 5
     time: 100
   target:
     enable: true
-    tollerance: 0.125
+    tolerance: 0.125
     time: 100

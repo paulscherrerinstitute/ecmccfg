@@ -1,31 +1,23 @@
 import yaml
 import string
+import hashlib
 from pathlib import Path
 
 
+import ecmcYamlLinter
+
+from ecmcYamlSchema import supportedAxisTypes
+
+
 class YamlHandler:
-    supportedAxisTypes = {
-        '0': 0,
-        'debug': 0,
-        '1': 1,
-        'j': 1,
-        'joint': 1,
-        'physical': 1,
-        'motor': 1,
-        'real': 1,
-        '2': 2,
-        'e': 2,
-        'ee': 2,
-        'end_effector': 2,
-        'endeffector': 2,
-        'virtual': 2,
-    }
+    supportedAxisTypes = supportedAxisTypes
 
     def __init__(self):
         self.yamlData = {}
         self.hasVariables = False
         self.hasPlcFile = False
         self.axisType = None
+        self.md5 = None
 
     @staticmethod
     def str2bool(val) -> bool:
@@ -39,10 +31,28 @@ class YamlHandler:
         else:
             raise ValueError(f'unrecognized string >> {val} <<')
 
-    def loadYamlData(self, file):
-        # open yaml file containing the PLC configuration
+    @staticmethod
+    def calculate_md5(file: Path) -> str:
+        md5_hash = hashlib.md5()
+        a_file = open(file, "rb")
+        content = a_file.read()
+        md5_hash.update(content)
+        return md5_hash.hexdigest()
+
+    def loadYamlData(self, file, lint=False, relaxed=True):
+        if lint:
+            # lint the yaml file
+            linter = ecmcYamlLinter.YamlLinter()
+            linter.run(file, relaxed)
+
+        digest = self.calculate_md5(file)
+
         with open(file) as f:
             self.yamlData = yaml.load(f, Loader=yaml.FullLoader)
+
+        if not self.checkForKey('meta', optional=True):
+            self.yamlData['meta'] = {}
+        self.yamlData['meta']['md5'] = digest
 
     def getKey(self, key, data):
         if isinstance(key, list):
@@ -105,8 +115,12 @@ class YamlHandler:
 
 if __name__ == '__main__':
     h = YamlHandler()
-    print(h.getAxisType('j'))
-    print(h.getAxisType())
+
+    h.loadYamlData('pytest/yaml_files/joint_all.yaml', relaxed=False)
+
+    # print(yaml.dump(h.yamlData))
+    # print(h.getAxisType('j'))
+    # print(h.getAxisType())
     #
     # h.yamlData = {'axis': {'type': 'joint'}}
     # print(h.checkForKey('axis'))

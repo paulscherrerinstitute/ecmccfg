@@ -1,0 +1,69 @@
+\section{Encoder}
+
+\subsection{scaling and data}
+
+The encoder uses a scaling of {{ encoder.denominator|default(1)|int }} encoder ticks / {{ encoder.numerator|default(0)|float }}~{{egu}}.
+{% set typeStr = 'absolute' if encoder.type==1 else 'incremental'%}
+{%-set bits = encoder.bits if encoder.type==0 else encoder.absBits-%}
+The {{typeStr}} position information is encoded in the {{bits}} least significant bits of the total {{encoder.bits}} bit data represented in \verb|{{encoder.position}}|.
+{%if encoder.absOffset != 0%}
+An offset of {{ encoder.absOffset|default(0)|float }}~{{egu}} is applied.
+{%endif%}
+
+\begin{itemize}
+  \itemsep0em
+  \item \itemIndent{Denominator}{ {{- encoder.denominator|default(1)|int }}}
+  \item \itemIndent{Numerator}{ {{- encoder.numerator|default(0)|float }}}
+\end{itemize}
+
+\subsection{links}
+
+\subsubsection{core functions}
+
+\begin{table}[H]
+\centering
+\caption{Core function links.}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{function} & \textbf{link} \\
+\hline
+position  & \verb|{{ encoder.position }}| \\
+{%- if encoder.control is defined %}
+control  & \verb|{{encoder.control}}| \\
+{%endif%}
+{%- if encoder.status is defined %}
+status  & \verb|{{encoder.status}}| \\
+{%endif%}
+{%- if encoder.reset %}
+{%- set key = encoder.control ~ '.' ~ encoder.reset|int  %}
+reset  & \verb|{{ key|default('') }}| \\
+{%- endif %}
+{%- if encoder.warning %}
+{%- set key = encoder.control ~ '.' ~ encoder.warning|int  %}
+warning  & \verb|{{ key|default('') }}| \\
+{%- endif %}
+{%- if encoder.error %}
+{%- for bit in encoder.error %}
+error bit {{loop.index-1}}  & \verb|{{ encoder.status }}.{{ bit|int }}| \\
+{%- endfor %}
+{%- endif %}
+\hline
+\end{tabularx}
+\label{tab:encoder_core}
+\end{table}
+
+
+\subsection{filter parameter}
+- velocity filter: {{ encoder.velocityFilterSize|default(100)|int}}
+{%if encoder.positionFilterEnable%}
+- position filter: {{ encoder.positionFilterSize|default(1)|int}}
+{%endif%}
+
+{%- set latch = None if encoder.latch is not defined else encoder.latch %}
+{%if encoder.latch is defined%}
+\subsection{latching}
+- latch position: {{ latch.position|default('') }}
+- latch control: {{ latch.control|default('') }}
+- latch status: {{ latch.status|default('') }}
+{%endif%}

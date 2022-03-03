@@ -1,0 +1,69 @@
+% colors
+\definecolor{Gray}{gray}{0.9}
+\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
+
+% font for title page
+\DeclareFixedFont{\bigsf}{T1}{phv}{b}{n}{1.0cm}
+
+{%raw%}
+\newcommand{\itemIndent}[2]{{\makebox[3cm]{#1:\hfill} #2}}
+{%endraw%}
+
+\newcommand{\messagebox}[3][warningsign]{
+\noindent
+\vskip12pt
+\begin{tabularx}{\textwidth}{c||X}
+  \begin{minipage}{0.1\linewidth}
+    \centering
+    {%raw%}
+    {\color{#2}
+        \faIcon{#1}
+    }
+%    \includegraphics[width=12mm]{#1}
+    {%endraw%}
+  \end{minipage} &
+  \begin{minipage}{0.9\linewidth}
+    #3
+  \end{minipage} \\
+\end{tabularx}
+\vskip12pt
+}
+
+\newcommand{\warning}[1]{
+  {%raw%}
+    \messagebox[exclamation-triangle]{Red}{#1}
+  {%endraw%}
+}
+
+\newcommand{\caution}[1]{
+  {%raw%}
+    \messagebox[exclamation]{YellowOrange}{#1}
+  {%endraw%}
+}
+
+\newcommand{\info}[1]{
+  {%raw%}
+    \messagebox[info]{PineGreen}{#1}
+  {%endraw%}
+}
+
+\newcommand{\note}[1]{
+  {%raw%}
+    \messagebox[clipboard]{Black}{#1}
+  {%endraw%}
+}
+
+\backgroundsetup{
+scale=1,
+angle=0,
+opacity=1,
+contents={\begin{tikzpicture}[remember picture,overlay]
+ \path [fill=titlepagecolor] (-0.5\paperwidth,5) rectangle (0.5\paperwidth,10);
+\end{tikzpicture}}
+}
+{% raw %}
+\makeatletter
+\def\printauthor{%
+    {\large \@author}}
+\makeatother
+{% endraw %}

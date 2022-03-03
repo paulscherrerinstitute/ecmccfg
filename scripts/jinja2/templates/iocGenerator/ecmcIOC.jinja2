@@ -1,0 +1,37 @@
+{% import 'iocshMacros.jinja2' as iocsh -%}
+{% import 'ecmcMacros.jinja2' as ecmc -%}
+{#- add scripts to namespace if defined  #}
+{{- ecmc.setScripts(scripts) if scripts is defined }}
+
+{# load EPICS modules #}
+{{- iocsh.require(modules) -}}
+
+{# call init script if defined #}
+{{- ecmc.callScript("init") }}
+
+{#- Only a single master is supported by ecmccfg so far. #}
+{#- Make sure to provide the proper Macro #}
+{{- ecmc.reset() }}
+{#- add slaves  #}
+{%- for slave in masters[0].slaves %}
+    {{- ecmc.addSlave(slave) -}}
+{% endfor %}
+#- slaves added at bus positions ==> {{ ecmc.slaveID.IDs }}
+
+{#- call preApply script if defined #}
+{{- ecmc.callScript("preApply") }}
+
+{#- apply EtherCATConfig -#}
+{{ ecmc.applyConfig() }}
+
+{#- call postApply script if defined #}
+{{- ecmc.callScript("postApply") }}
+
+{#- call diagnostics script if defined #}
+{{- ecmc.callScript("diagnostics") }}
+
+{#- enable EtherCAT bus  #}
+{{ ecmc.setAppMode() }}
+
+{#- call preInit script if defined #}
+{{- ecmc.callScript("preIocInit") }}
