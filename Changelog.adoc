@@ -1,3 +1,20 @@
-# ecmccfg changelog
+= ecmccfg changelog
+Dr. Niko Kivel <niko.kivel@psi.ch>
+:toc: left
+:toclevels: 2
 
-v7.0.0
+== v8_RC1
+
+=== config
+yaml based configs are now linted and schema validated.
+The configuration capabilities have been extended to end effector, aka virtual axes, sync PLCs, ...
+
+These features need to be tested for the v8 release!
+
+==== breaking
+- typo fixed: `tollerance` -> `tolerance`
+- structure has changed slightly
+
+=== dependencies
+
+- `ECMC` version `ruckig` (aka `v8`): Due to a fixed typo in the `ECMC` command set, which required a fix in the `jinja2` templates.
