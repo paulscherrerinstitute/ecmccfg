@@ -3,13 +3,11 @@ include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = v7.1_RC1
+LIBVERSION = v8_RC1
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS = 3 7.0.3 7.0.4.1 7.0.5
-ARCH_FILTER =RHEL%
+EXCLUDE_VERSIONS = 3 7.0.5
 ARCH_FILTER+=deb10%
-
 
 SCRIPTS+=startup.cmd
 
@@ -47,4 +45,3 @@ TEMPLATES+=$(wildcard ./db/*/*.subs)
 
 SOURCES += $(wildcard ./src/*.cpp)
 DBDS    += $(wildcard ./dbd/*.dbd)
-
