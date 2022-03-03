@@ -53,7 +53,7 @@ record(longin,"${P}${AXIS_NAME}-Stat"){
 record(calc,"${P}${AXIS_NAME}-SeqState") {
   field(DESC, "${AXIS_NAME}: Seq state")
   field(PINI, "$(PINI=1)")
-  field(CALC,"A>>20")
+  field(CALC,"A>>20 & 0x7")
   field(INPA,"${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-LastIlock.PROC")
 }
@@ -61,7 +61,7 @@ record(calc,"${P}${AXIS_NAME}-SeqState") {
 record(calc,"${P}${AXIS_NAME}-LastIlock") {
   field(DESC, "${AXIS_NAME}: Last interlock")
   field(PINI, "$(PINI=1)")
-  field(CALC, "A>>24")
+  field(CALC, "A>>24 & 0x7")
   field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-Stat_.PROC")
 }
@@ -270,7 +270,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
 #  field(FLNK, "${P}${AXIS_NAME}-inrealtime.PROC")
 #}
 
-#  // bit 18 sumilockfwd
+#  // bit 18 sumilockbwd
 #record(bi,"${P}${AXIS_NAME}-sumilockbwd"){
 #  field(DESC, "${AXIS_NAME}: sumilockbwd")
 #  field(INP,  "${P}${AXIS_NAME}-Stat_.BX")
@@ -347,6 +347,17 @@ record(bo,"${P}${AXIS_NAME}-ExeCmd"){
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B1")
   field(ZNAM, "Not Execute")
   field(ONAM, "Execute")
+  field(HIGH, 0.001)
+  field(SCAN, "Passive")
+  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-StpCmd"){
+  field(DESC, "${AXIS_NAME}: Stop cmd")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B2")
+  field(ZNAM, "Not stop")
+  field(ONAM, "Stop")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
@@ -354,7 +365,7 @@ record(bo,"${P}${AXIS_NAME}-ExeCmd"){
 
 record(bo,"${P}${AXIS_NAME}-RstCmd"){
   field(DESC, "${AXIS_NAME}: Reset cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B2")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B3")
   field(ZNAM, "Not Reset")
   field(ONAM, "Reset")
   field(SCAN, "Passive")
@@ -364,7 +375,7 @@ record(bo,"${P}${AXIS_NAME}-RstCmd"){
 
 record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
   field(DESC, "${AXIS_NAME}: Encoder source cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B3")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B4")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
   field(SCAN, "Passive")
@@ -374,7 +385,7 @@ record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
 
 record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
   field(DESC, "${AXIS_NAME}: Traj source cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B4")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B5")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
   field(SCAN, "Passive")
@@ -384,7 +395,7 @@ record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
 
 record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){    
   field(DESC, "${AXIS_NAME}: PLC enable cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B5")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B6")
   field(ZNAM, "disable")
   field(ONAM, "enable")
   field(SCAN, "Passive")
@@ -394,7 +405,7 @@ record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
 
 record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
   field(DESC, "${AXIS_NAME}: Allow cmd from PLCs")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B6")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B7")
   field(ZNAM, "Refuse")
   field(ONAM, "Allow")
   field(SCAN, "Passive")
@@ -404,7 +415,7 @@ record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
 
 record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B7")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B8")
   field(ZNAM, "Refuse")
   field(ONAM, "Allow")
   field(SCAN, "Passive")
@@ -414,10 +425,63 @@ record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
 
 record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B8")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B9")
   field(ZNAM, "Refuse")
   field(ONAM, "Allow")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
+}
+
+record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Target Position Cmd")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targpos?")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Target Velocity Cmd")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targvelo?")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Motion Command")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
+  field(ZRST, "NO_COMMAND")
+  field(ZRVL, 0)
+  field(ONST, "MOVE_VEL")
+  field(ONVL, 1)
+  field(TWST, "MOVE_REL")
+  field(TWVL, 2)
+  field(THST, "MOVE_ABS")
+  field(THVL, 3)
+  field(FRST, "MOVE_HOME")
+  field(FRVL, 10)
+}
+
+record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Motion Command Data Param")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).cmddata?")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(longin,"${P}${AXIS_NAME}-ErrId"){
+  field(DESC, "${AXIS_NAME}: Error Id")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).errorid?")
+  field(SCAN, "I/O Intr")  
+  field(TSE,  "$(TSE=-2)")
 }

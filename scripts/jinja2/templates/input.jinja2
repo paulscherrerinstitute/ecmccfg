@@ -1,0 +1,27 @@
+#- =============================================================================
+#- Input sensors
+#- =============================================================================
+{#- FWD #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id }}.mon.highlim")"
+{%- if input.limit.forwardPolarity %}
+    ecmcConfigOrDie "Cfg.SetAxisMonLimitFwdPolarity({{ axis.id }},{{ input.limit.forwardPolarity }})"
+{%- endif %}
+{#- BWD #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id }}.mon.lowlim")"
+{%- if input.limit.backwardPolarity %}
+    ecmcConfigOrDie "Cfg.SetAxisMonLimitBwdPolarity({{ axis.id }},{{ input.limit.backwardPolarity }})"
+{%- endif %}
+{#- latch limit switches, for debouncing  #}
+{%- if input.limit.latchInput %}
+ecmcConfigOrDie "Cfg.SetAxisMonLatchLimit({{ axis.id }},{{ input.limit.latchInput|int }})"
+{%- endif %}
+{#- Home #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id }}.mon.homesensor")"
+{%- if input.homePolarity %}
+    ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id }},{{ input.homePolarity }})"
+{%- endif %}
+{#- Interlock #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id }}.mon.extinterlock")"
+{%- if input.interlockPolarity %}
+    ecmcConfigOrDie "Cfg.SetAxisMonExtHWInterlockPolarity({{ axis.id }},{{ input.interlockPolarity }})"
+{%- endif %}

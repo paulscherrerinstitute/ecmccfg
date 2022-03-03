@@ -1,0 +1,8 @@
+current:
+  # TODO: check if we want current.run to be a mandatory parameter!
+  run: 4800       # mA, default 0 (ZERO) to overcome issue with the drive default of 5 A!
+#  hold: 1000      # mA, defaults to current.run
+#steps: 200        # full steps per revolution, default 200 (INFO: skipped if 200, as the drive default is 200)
+#voltage: 3146.1     # mV, default 4 V
+#resistance: 3.3   # Ohm 330
+#inductance: 4.3   # mH 430

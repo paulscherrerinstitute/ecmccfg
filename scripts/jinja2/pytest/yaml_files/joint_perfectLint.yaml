@@ -1,0 +1,128 @@
+---
+axis:
+  id: 1
+  type: joint   # this is for future selection of axis type
+  mode: CSV     # supported mode, CSV and CSP
+
+var:
+  drive: 0
+  encoder: 42
+
+epics:
+  name: M1
+  precision: 3
+  unit: deg
+  motorRecord:
+    enable: true
+    fieldInit: 'NTM=1'
+    description: AM8111 CSV
+
+drive:
+  numerator: 2880000        # Fastest speed in engineering units
+  denominator: 2147483648   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: 1                   # Stepper: 0. DS402: 1
+  control: ec0.s{{ var.drive }}.driveControl01
+  status: ec0.s{{ var.drive }}.driveStatus01
+  setpoint: ec0.s{{ var.drive }}.velocitySetpoint01
+  # reduceTorque: 2 # Reduce torque bit in drive control word
+  brake:
+    openDelay: 0    # Brake timing parameter in cycles (default 1kHz)
+    closeAhead: 0   # Brake timing parameter in cycles (default 1kHz)
+  reset: 7          # Reset   (if no drive reset bit then leave empty)
+  warning: 7        # Warning (if no drive warning bit then leave empty)
+  error:            # max 3
+    - 3             # Error 0 (if no drive error bit then leave empty)
+#    - 7           # Error 1 (if no drive error bit then leave empty)
+#    - 14          # Error 2 (if no drive error bit then leave empty)
+
+encoder:
+  numerator: 360
+  denominator: 1048576
+  type: 1         # Type: 0=Incremental, 1=Absolute
+  bits: 32        # Total bit count of encoder raw data
+  absBits: 25     # Absolute bit count (for absolute encoders)
+  absOffset: 0    # Encoder offset in eng units (for absolute encoders)
+  # Ethercat entry for actual position input (encoder)
+  position: ec0.s{{ var.encoder }}.positionActual01
+  # mandatory only if 'reset' is used
+  control: ec0.s{{ var.encoder }}.encoderControl01
+  # mandatory only if 'warning' or 'error' are used
+  status: ec0.s{{ var.encoder }}.encoderStatus01
+  reset: 1        # Reset   (optional)
+  warning: 2      # Warning (optional)
+  error:          # max 3 (optional)
+    - 5           # Error 0
+    - 9           # Error 1
+    - 11          # Error 2
+#  velocityFilterSize: 100
+#  positionFilterSize: 1
+#  positionFilterEnable: false
+#  latch:
+#    position: ''
+#    control: ''
+#    status: ''
+
+controller:
+  Kp: 90
+  Ki: 0.1
+  Kd: 0
+  Kff: 1
+
+trajectory:
+  axis:
+    velocity: 180
+    acceleration: 180
+    jerk: 1800
+    deceleration: 180
+    emergencyDeceleration: 0.05
+  jog:
+    velocity: 90
+#    acceleration: 90
+#  modulo:
+#   range: 0
+#   type: 0
+
+input:
+  limit:
+    forward: ec0.s{{ var.drive }}.ONE.0    #  low limit switch input
+    backward: ec0.s{{ var.drive }}.ONE.0   #  high limit switch input
+  home: ec0.s{{ var.drive }}.ONE.0         #  home switch input
+  interlock: ec0.s{{ var.drive }}.ONE.0    #  interlock switch input
+
+output:
+  health: ec0.s42.binaryOutput03      # Ethercat entry for health output
+  brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
+
+# homing:
+#   type: 3
+#   position: 0
+#   postMoveEnable: false
+#   postMovePosition: 0
+#   switchPolarity: 0 ## 0: NC, 1: NO
+#   latchCount: 0
+#   velocity:
+#     to: 2.72
+#     # from: 3.14
+#   # acceleration: 2
+#   # deceleration: 5
+
+softlimits:
+  enable: false
+  forward: 7200
+  backward: -7200
+
+monitoring:
+  lag:
+    enable: false
+    tolerance: 5
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.125
+    time: 100
+  velocity:
+    enable: true
+    max: 360
+    time:
+      trajectory: 100
+      drive: 200

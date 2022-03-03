@@ -30,7 +30,7 @@
 
 epicsEnvSet("ECMC_ASYN_TIMEOUT",      1)                   # Asyn timeout
 epicsEnvSet("ECMC_ASYN_ADDR",         0)                   # Asyn Address
-${ECMC_SUPPORT_MOTION=""}epicsEnvSet("ECMC_MOTOR_PORT",        "NOT SET")
+${ECMC_USE_MOTOR_RECORD=""}epicsEnvSet("ECMC_MOTOR_PORT",        "NOT SET")
 epicsEnvSet("ECMC_ASYN_PORT",         "NOT SET")
 epicsEnvSet("ECMC_PREFIX",            "NOT SET")
 epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
@@ -48,7 +48,7 @@ ${ECMC_SUPPORT_MOTION=""}ecmcFileExist("${ECMC_CONFIG_ROOT}initAxis.cmd",1)
 ${ECMC_SUPPORT_MOTION=""}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAxis.cmd"
 
 #- Additional parameters when motor Records are loaded
-${ECMC_SUPPORT_MOTION=""}epicsEnvSet("ECMC_EGU",               "mm")
-${ECMC_SUPPORT_MOTION=""}epicsEnvSet("ECMC_PREC",              3)
-${ECMC_SUPPORT_MOTION=""}epicsEnvSet("ECMC_AXISFIELDINIT",     "")                  # Extra field init to motor record
-${ECMC_SUPPORT_MOTION=""}epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver
+${ECMC_USE_MOTOR_RECORD=""}epicsEnvSet("ECMC_EGU",               "mm")
+${ECMC_USE_MOTOR_RECORD=""}epicsEnvSet("ECMC_PREC",              3)
+${ECMC_USE_MOTOR_RECORD=""}epicsEnvSet("ECMC_AXISFIELDINIT",     "")                  # Extra field init to motor record
+${ECMC_USE_MOTOR_RECORD=""}epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver

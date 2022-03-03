@@ -1,0 +1,94 @@
+axis:
+  id: 1
+  type: j   # this is for future selection of axis type
+  mode: CSV     # supported mode, CSV and CSP
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+
+# optional synchronization
+# Note: sync `plc` is on the top level!
+sync:
+  enable: true
+  encoder:
+    source: 1
+    filter:
+      enable: false
+      size: 10
+  trajectory:
+    source: 0
+    filter:
+      enable: false
+      size: 10
+plc:
+  enable: false
+  externalCommands: false
+  file: test/plc2.plc
+  code:
+    - if(ax2.traj.source){ax2.drv.enable:=ax1.drv.enable};
+    - ax2.traj.setpos:=ax1.traj.setpos*0.5;
+
+var:
+  drvSlave: 3
+  encSlave: 17
+  foo: '{{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}'
+  pi: 3.14
+  baz:
+    - 1
+    - 2
+    - 3
+    -
+
+epics:
+  name: 'M1: drv {{ var.drvSlave }}, enc {{ var.encSlave }}'
+  # motorRecord: false
+  precision: 3
+  description: AMI8121 CSV
+  unit: deg
+
+motorRecord:
+  name: 'M1: drv {{ var.drvSlave }}, enc {{ var.encSlave }}'
+  precision: 3
+  description: AMI8121 CSV
+  unit: deg
+
+drive:
+  numerator: 2880000                                  # Fastest speed of the drive in engineering units
+  denominator:  2147483648                            # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  control: ec0.s{{ var.drvSlave }}.driveControl01
+  status: ec0.s{{ var.drvSlave }}.driveStatus01
+  setpoint: ec0.s{{ var.drvSlave }}.velocitySetpoint01
+
+encoder:
+  numerator: 360
+  denominator: 1048576
+  type: 1         # Type: 0=Incremental, 1=Absolute
+  bits: 32        # Total bit count of encoder raw data
+  absBits: 32     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absOffset: 0    # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s{{ var.drvSlave }}.positionActual01  # EtherCAT entry for actual position input (encoder)
+
+controller:
+  Kp:  90
+  Ki:  0.01
+
+trajectory:
+  axis:
+    velocity: 1200
+    acceleration: 0.1
+
+input:
+  limit:
+    forward: ec0.s{{ var.drvSlave }}.binaryInputArray01.0    #  EtherCAT entry for low limit switch input
+    backward: ec0.s{{ var.drvSlave }}.binaryInputArray01.1   #  EtherCAT entry for high limit switch input
+  home: ec0.s{{ var.drvSlave }}.ONE.0                        #  EtherCAT entry for home switch input
+  interlock: ec0.s{{ var.encSlave }}.ONE.0                   #  EtherCAT entry for interlock switch input
+
+monitoring:
+  lag:
+    enable: true
+    tolerance: 5
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.125
+    time: 100

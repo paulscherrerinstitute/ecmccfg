@@ -1,0 +1,474 @@
+---
+
+meta:
+  author: Dr. K
+  facility: EtherCAT Lab
+  device: test axis
+  date: yesterday
+
+# AXIS ========================================================================
+axis:
+# --> required: yes
+  # unique ID, for all sorts of things
+  id: 1
+#  fail
+  # --> required: yes, type: int, min: 1
+  # axis type: joint|endEffector, aka. real|virtual axis
+  type: j
+  # --> required: no, default 'joint'
+  # supported control modes, CSV and CSP, so far
+  mode: CSV
+  # --> required: no, default 'CSV'
+  # link for health status
+  healthOutput: ec0.s42.binaryOutput03
+  # --> required: no, type: string
+  ## parameters are mostly for motorRecord,
+  ## but might be ported to pure ecmc in the future.
+  parameters: 'powerAutoOnOff=2;'  # additional parameters
+  # --> required: no, default ''
+  # some additional features
+  features:
+  # --> required: no, type: dict
+    # ==> Cfg.SetAxisDisableAtErrorReset(int axis_no, int disable);
+    disableOnReset: yes
+    # --> required: no, type: bool
+    # ==> Cfg.SetAxisEnableAlarmAtHardLimits(int axis_no, int nEnable);
+    AlarmAtHardLimits: false
+    # --> required: no, type: bool
+    # ==> Cfg.SetAxisBlockCom(int axis_no, int block);
+    blockCom: false
+    # --> required: no, type: bool
+    # ==> Cfg.SetAxisEnableMotionFunctions( int axisIndex,
+    #                                       int enablePos,
+    #                                       int enableConstVel,
+    #                                       int enableHome);
+    allowedFunctions:
+    # --> required: no, type: dict
+      positioning: true
+      # --> required: no, type: bool
+      constantVelocity: true
+      # --> required: no, type: bool
+      homing: true
+      # --> required: no, type: bool
+
+# VARIABLES ===================================================================
+# variables for recursive jijna2 templates
+## ec0.s{{ var.drive }}.driveControl01 --> ec0.s17.driveControl01
+## valid for AXIS _and_ PLC
+var:
+# --> required: no, type: dict
+  drive: 17
+  encoder: 42
+  pi: 3.14159
+
+# EPICS =======================================================================
+# config parameters for the Epics part
+#epics:
+## --> required: no
+#  # name of axis-PV, motorRecord and others
+#  name: M1
+#  # --> required: no, default: 'axis'
+#  # PREC of setpoint and readback PVs
+#  precision: 3
+#  # --> required: no, type: int, min: 0, default: 3
+#  # EGU
+#  unit: deg
+#  # --> required: no, type: string, default: 'mm'
+#  # specifics for the motorRecord
+#  motorRecord:  # yes it's supported
+#  # --> required: no, type: dict, default: {'enable': True}
+#    # parameter to enable/disable the motorRecord
+#    enable: true  # even better, it can be disabled
+#    # --> required: no, type: bool, default: True
+#    # list of fields and values for intialization (comma separated)
+#    fieldInit: 'NTM=1'
+#    # --> required: no, type: string
+#    # DESC
+#    description: exampleAxis
+#    # --> required: no, type: string
+
+# DRIVE =======================================================================
+# required for joint only. Will be ignored for end effector!
+drive:
+# --> required: yes, type: dict
+  # ==> Cfg.SetAxisDrvScaleNum(int axis_no, double value);
+  numerator: 2880000.          # Fastest speed in engineering units
+  # --> required: no, type: float, default: 0.
+  # ==> Cfg.SetAxisDrvScaleDenom(int axis_no, double value);
+  denominator: 2147483648    # I/O range
+  # --> required: no, type: int, default: 1, min: 1
+  # ==> Cfg.SetAxisDrvType(int axis_no, int type);
+  type: 1   # Stepper: 0 | DS402: 1 (DS402 = servos and adv stepper drives)
+  # --> required: no, type: int, default: 0, allowed: [0, 1]
+  # links
+  control: ec0.s{{ var.drive }}.driveControl01
+  # --> required: yes, type: string
+  status: ec0.s{{ var.drive }}.driveStatus01
+  # --> required: no, type: string
+  setpoint: ec0.s{{ var.drive }}.velocitySetpoint01
+  # --> required: yes, type: string
+  # ==> Cfg.SetAxisDrvReduceTorqueEnable(int axis_no, int enable);
+  reduceTorqueEnable: true
+  # --> required: no, type: bool, default: False, dependencies: ['control', 'reduceTorque']
+  # bit in 'drive.control' to address for torque reduction
+  reduceTorque: 2   # Reduce torque bit in drive control word
+  # --> required: no, type: int, min: 0, dependencies: ['control', 'reduceTorqueEnable']
+  # brake details
+  brake:
+  # --> required: no, type: dict
+    # ==> Cfg.SetAxisDrvBrakeEnable(int axis_no, int enable);
+    enable: false
+    # --> required: no, type: bool, default: False
+    # link
+    output: ec0.s42.binaryOutput07       # Ethercat entry for brake output
+    # --> required: no, type: string
+    # ==> Cfg.SetAxisDrvBrakeOpenDelayTime(int axis_no, int delayTime);
+    openDelay: 100    # Brake timing parameter in cycles (default 1 ms)
+    # --> required: no, type: int, min: 0, dependencies: ['enable']
+    # ==> Cfg.SetAxisDrvBrakeCloseAheadTime(int axis_no, int aheadTime);
+    closeAhead: 200   # Brake timing parameter in cycles (default 1 ms)
+    # --> required: no, type: int, min: 0, dependencies: ['enable']
+  # control bit for 'reset'
+  reset: 7
+  # --> required: no, type: int, min: 0, dependencies: ['control']
+  # status bit for 'warning'
+  warning: 7
+  # --> required: no, type: int, min: 0, dependencies: ['status']
+  # list of error bits in 'status'
+  error:
+  # --> required: no, type: list, maxlen: 3, dependencies: ['control']
+    - 3               # Error 0 (if no drive error bit then leave empty)
+    - 7               # Error 1 (if no drive error bit then leave empty)
+    - 14              # Error 2 (if no drive error bit then leave empty)
+
+# ENCODER =====================================================================
+encoder:
+# --> required: yes, type: dict
+  # ==> Cfg.SetAxisEncSourceType(int axis_no, int nValue);
+  source: 0       # {0: internal, 1: PLC}
+  # --> required: no, type: int, default: 0, allowed: [0, 1]
+  # ==> Cfg.SetAxisEncScaleNum(int axis_no, double value);
+  numerator: 360.
+  # --> required: no, type: float, default: 0.
+  # ==> Cfg.SetAxisEncScaleDenom(int axis_no, double value);
+  denominator: 1048576
+  # --> required: no, type: int, default: 1, min: 1
+  # ==> Cfg.SetAxisEncType(int axis_no, int value);
+  type: 1         # Type: 0=Incremental, 1=Absolute
+  # --> required: no, type: int, default: 0, allowed: [0, 1]
+  # ==> Cfg.SetAxisEncRawMask(int axis_no, int rawMask);
+  mask: '0xfff0'  # shift raw value by 4 bits and mask with 0xfff
+  # --> required: no, type: str
+  # ==> Cfg.SetAxisEncBits(int axis_no, int value);
+  bits: 32        # Total bit count of encoder raw data
+  # --> required: no, type: int, default: 16, min: 1, max: 64
+  # ==> Cfg.SetAxisEncAbsBits(int axis_no, int value);
+  absBits: 25     # Absolute bit count
+  # --> required: no, type: int, default: 25, min: 1, max: 64
+  # ==> Cfg.SetAxisEncOffset(int axis_no, double value);
+  absOffset: 0.0    # Encoder offset in eng units (for absolute encoders)
+  # --> required: no, type: float, default: 0.
+  # links
+  position: ec0.s{{ var.encoder }}.positionActual01
+  # --> required: yes, type: string
+  control: ec0.s{{ var.encoder }}.encoderControl01
+  # --> required: no, type: string
+  status: ec0.s{{ var.encoder }}.encoderStatus01
+  # --> required: no, type: string
+  # reset bit in 'control'
+  reset: 1
+  # --> required: no, type: int, min: 0, dependencies: ['control']
+  # warning bit in 'status'
+  warning: 2
+  # --> required: no, type: int, min: 0, dependencies: ['status']
+  # list of error bits in 'status'
+  error:
+  # --> required: no, type: list, maxlen: 3, schema: {'type': 'integer'}, dependencies: ['control']
+    - 5           # Error 0
+    - 9           # Error 1
+    - 11          # Error 2
+  # filter settings
+  filter:
+  # --> required: no, type: dict
+    velocity:
+    # --> required: no, type: dict
+      # switch for velocity filter
+      enable: false
+      # --> required: no, type: bool, default: False
+      # ==> Cfg.SetAxisEncVelFilterSize(int axis_no, int size);
+      size: 100
+      # --> required: no, type: int, min: 0
+    trajectory:
+    # --> required: no, type: dict
+      # ==> Cfg.setAxisEncPosFilterEnable(int axisIndex, int enable);
+      enable: false
+      # --> required: no, type: bool
+      # ==> Cfg.SetAxisEncPosFilterSize(int axis_no, int size);
+      size: 100
+      # --> required: no, type: int, min: 0
+  # latching
+  latch:
+  # --> required: no, type: dict
+    # link to latch position, most likely 'encoderLatchPostion01'
+    position: ec0.s{{ var.encoder }}.encoderLatchPostion01
+    # --> required: no, type: string
+    # latch control bit in 'control'
+    control: 7
+    # --> required: no, type: integer
+    # latch status bit in 'status'
+    status: 13
+    # --> required: no, type: integer
+
+# CONTROLLER ==================================================================
+# required for joint only
+controller:
+# --> required: yes, type: dict, default: {'controller': {'Kp': 1}}
+  # ==> Cfg.SetAxisCntrlKp(int axis_no, double value);
+  Kp: 90
+  # --> required: no, type: float, default: 1.
+  # ==> Cfg.SetAxisCntrlKi(int axis_no, double value);
+  Ki: 0.1
+  # --> required: no, type: float, default: 0.
+  # ==> Cfg.SetAxisCntrlKd(int axis_no, double value);
+  Kd: 0
+  # --> required: no, type: float, default: 0.
+  # ==> Cfg.SetAxisCntrlKff(int axis_no, double value);
+  Kff: 1
+  # --> required: no, type: float, default: 1.
+  limits:
+  # --> required: no, type: dict
+    # ==> Cfg.SetAxisCntrlOutLL(int axis_no, double value);
+    minOutput: 0
+    # --> required: no, type: float
+    # ==> Cfg.SetAxisCntrlOutHL(int axis_no, double value);
+    maxOutput: 31415.8
+    # --> required: no, type: float
+    # ==> Cfg.SetAxisCntrlIPartLL(int axis_no, double value);
+    minIntegral: 0
+    # --> required: no, type: float
+    # ==> Cfg.SetAxisCntrlIPartHL(int axis_no, double value);
+    maxIntegral: 271828.2
+    # --> required: no, type: float
+
+
+# TRAJECTORY ==================================================================
+trajectory:
+# --> required: yes, type: dict
+  # ==> Cfg.SetAxisTrajSourceType(int axis_no, int nValue);
+  source: 0  # {0: internal, 1: PLC}
+  # --> required: no, type: int, default: 0, allowed: [0, 1]
+  # ==> Cfg.CreateAxis(..., int trajType);
+  type: 1
+  # --> required: no, type: int, default: 0, allowed: [0, 1]
+  axis:
+  # --> required: yes, type: dict
+    # ==> Cfg.SetAxisVel(int axis_no, double value);
+    velocity: 180
+    # --> required: yes, type: float
+    # ==> Cfg.SetAxisAcc(int axis_no, double value);
+    acceleration: 180
+    # --> required: yes, type: float
+    # ==> Cfg.SetAxisJerk(int axis_no, double value);
+#    jerk: 1800
+    # --> required: no, type: float
+    # ==> Cfg.SetAxisDec(int axis_no, double value);
+    deceleration: 360
+    # --> required: no, type: float, default: 'acceleration'
+    # ==> Cfg.SetAxisEmergDeceleration(int traj_no, double value);
+#    emergencyDeceleration: 720
+    # --> required: no, type: float, default: max(['acceleration', 'deceleration'])
+  jog:
+  # --> required: no, type: dict
+    # ==> Cfg.SetAxisJogVel(int traj_no, double value);
+    velocity: 90
+    # --> required: no, type: float, default: 'trajectory.axis.velocity'
+    # for motorRecord
+#    acceleration: 90
+#  modulo:
+#  # --> required: no, type: dict, default: {range: 0, type: 0}
+#    # ==> Cfg.SetAxisModRange(int axis_no, double range);
+#    range: 180.
+#    # --> required: no, type: float
+#    # ==> Cfg.SetAxisModType(int axis_no, int type);
+#    type: 2
+#    # --> required: no, type: int, allowed: [0, 1, 2, 3]
+
+# INPUT =======================================================================
+input:
+# --> required: yes, type: dict
+  limit:
+  # --> required: yes, type: dict
+    forward: ec0.s{{ var.drive }}.driveStatus01.9
+    # --> required: yes, type: string
+    # ==> Cfg.SetAxisMonLimitBwdPolarity(int axisIndex, int value);
+    forwardPolarity: 1
+    # --> required: no, type: int, allowed: [0, 1]
+    backward: ec0.s{{ var.drive }}.driveStatus01.10
+    # --> required: yes, type: string
+    # ==> Cfg.SetAxisMonLimitFwdPolarity(int axisIndex, int value);
+    backwardPolarity: 1
+    # --> required: no, type: int, allowed: [0, 1]
+    # ==> Cfg.SetAxisMonLatchLimit(int axis_no, int value);
+    latchInput: true  # force full stop of axis before unlatching the input
+    # --> required: no, type: bool
+  # link
+  home: ec0.s{{ var.drive }}.ONE.0
+  # --> required: yes, type: string
+  # ==> Cfg.SetAxisMonHomeSwitchPolarity(int axisIndex, int value);
+  homePolarity: 1
+  # --> required: no, type: int, allowed: [0, 1]
+  # ==> Cfg.SetAxisMonEnableExtHWInterlock(int axis_no, int value);
+  # link
+  interlock: ec0.s{{ var.drive }}.ONE.0
+  # --> required: yes, type: string
+  # ==> Cfg.SetAxisMonExtHWInterlockPolarity(int axisIndex, int value);
+  interlockPolarity: 1
+  # --> required: no, type: int, allowed: [0, 1]
+
+# PLC =======================================================================++
+plc:
+# --> required: no, type: dict
+  # ==> Cfg.SetAxisPLCEnable(int master_axis_no, int value);
+  enable: false
+  # --> required: yes, type: bool
+  # ==> Cfg.SetAxisAllowCommandsFromPLC(int master_axis_no, int value);
+  externalCommands: false
+  # --> required: no, type: bool, dependencies: ['enable']
+  # code can be loaded from file or added directly in the config
+  ## plc-file to load
+  file: test/plc2.plc
+  # --> required: no, type: string
+  ## direct PLC-code, will _NOT_ take effect if `file` is present!
+  code:
+  # --> required: no, type: list, schema: {'type': 'string'}
+    - if(ax2.traj.source){ax2.drv.enable:=ax1.drv.enable};
+    - ax2.traj.setpos:=ax1.traj.setpos*0.5;
+  filter:
+  # --> required: no, type: dict, dependencies: ['plc.enable']
+    velocity:
+    # --> required: no, type: dict
+      # ==> Cfg.SetAxisPLCEncVelFilterEnable(int axis_no, int enable);
+      enable: false
+      # --> required: no, type: bool
+      # ==> Cfg.SetAxisPLCEncVelFilterSize(int axis_no, int size);
+      size: 100
+      # --> required: no, type: int, min: 0, dependencies: ['enable']
+    trajectory:
+    # --> required: no, type: dict
+      # ==> Cfg.SetAxisPLCTrajVelFilterEnable(int axis_no, int enable);
+      enable: false
+      # --> required: no, type: bool
+      # ==> Cfg.SetAxisPLCTrajVelFilterSize(int axis_no, int size);
+      size: 100
+      # --> required: no, type: int, min: 0, dependencies: ['enable']
+
+# HOMING ======================================================================
+#homing:
+## --> required: no, type: dict
+#  # types (https://github.com/icshwi/ecmccfg/tree/master/examples/test/homing)
+#  type: 3
+#  # --> required: yes, type: int, allowed: [0, 1, 2, 3, ...]
+#  # ==> Cfg.SetAxisHomePosition(int axis_no, double value);
+#  position: 0.314
+#  # --> required: no, type: float, default: 0
+#  # ==> Cfg.SetAxisHomePostMoveEnable(int axis_no, int value);
+#  postMoveEnable: yes
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisHomePostMoveTargetPosition(int axis_no, int value);
+#  postMovePosition: 0.272
+#  # --> required: no, type: float, default: 0
+#  # ==> Cfg.SetAxisHomeLatchCountOffset(int axis_no, int count);
+#  latchCount: 1
+#  # --> required: no, type: int
+#  velocity:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisHomeVelTwordsCam(int axis_no, double value);
+#    to: 2.72
+#    # --> required: yes, type: float
+#    # ==> Cfg.SetAxisHomeVelOffCam(int axis_no, double value);
+#    from: 0.157
+#    # --> required: yes, type: float
+#  acceleration: 2.7
+#  # --> required: yes, type: float
+#  deceleration: 5.4
+#  # --> required: yes, type: float
+#  # ==> Cfg.SetAxisSeqTimeout(int axis_no, int value)
+#  timeout: 60000  # timeout in cycles (default 1 ms)
+#  # --> required: no, type: int
+
+# SOFTLIMITS ==================================================================
+#softlimits:
+## --> required: no, type: dict
+#  ## GLOBAL ON/OFF
+#  enable: yes
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
+#  forwardEnable: false
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
+#  forward: 7200.0
+#  # --> required: no, type: float
+#  # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
+#  backwardEnable: no
+#  # --> required: no, type: bool
+#  # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
+#  backward: -7200.0
+#  # --> required: no, type: float
+
+# MONITORING ==================================================================
+#monitoring:
+## --> required: no, type: dict
+#  lag:
+#    # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableLagMon(int axis_no, int value);
+#    enable: true
+#    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
+#    # ==> Cfg.SetAxisMonPosLagTol(int axis_no, double value);
+#    tolerance: 0.1252551
+#    # --> required: no, type: float, min: 0
+#    # ==> Cfg.SetAxisMonPosLagTime(int axis_no, int value);
+#    time: 100
+#    # --> required: no, type: int, min: 0
+#  target:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableAtTargetMon(int axis_no, int value);
+#    enable: yes
+#    # --> required: yes, type: bool, dependencies: ['tolerance' 'time']
+#    # ==> Cfg.SetAxisMonAtTargetTol(int axis_no, double value);
+#    tolerance: 5
+#    # --> required: no, type: float, min: 0
+#    # ==> Cfg.SetAxisMonAtTargetTime(int axis_no, int value);
+#    time: 100
+#    # --> required: no, type: int, min: 0
+#  velocity:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableMaxVel(int axis_no, int value);
+#    enable: true
+#    # --> required: no, type: bool
+#    # ==> Cfg.SetAxisMonMaxVel(int axis_no, double value);
+#    max: 36.72144288566
+#    # --> required: no, type: float, min: 0, dependencies: ['enable']
+#    time:
+#    # --> required: no, type: dict, dependencies: ['max']
+#      # ==> Cfg.SetAxisMonMaxVelTrajILDelay(int axis_no, int value);
+#      trajectory: 100
+#      # --> required: yes, type: int, min: 0
+#      # ==> Cfg.SetAxisMonMaxVelDriveILDelay(int axis_no, int value);
+#      drive: 200
+#      # --> required: no, type: int, min: 0
+#  velocityDifference:
+#  # --> required: no, type: dict
+#    # ==> Cfg.SetAxisMonEnableVelocityDiff(int axis_no, int value);
+#    enable: yes
+#    # --> required: yes, type: bool
+#    # ==> Cfg.SetAxisMonVelDiffTol(int axis_no, double value);
+#    max: 3.14159
+#    # --> required: no, type: float, min: 0, dependencies: ['enable']
+#    time:
+#    # --> required: no, type: dict, dependencies: ['max']
+#      # ==> Cfg.SetAxisMonVelDiffTrajILDelay(int axis_no, int value);
+#      trajectory: 100
+#      # --> required: yes, type: int, min: 0
+#      # ==> Cfg.SetAxisMonVelDiffDriveILDelay(int axis_no, int value);
+#      drive: 200
+#      # --> required: no, type: int, min: 0, dependencies: ['max']

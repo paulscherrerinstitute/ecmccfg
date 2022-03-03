@@ -3,11 +3,13 @@ include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = master
+LIBVERSION = v7.1_RC1
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS = 3 7.0.5
-ARCH_FILTER=deb10%
+EXCLUDE_VERSIONS = 3 7.0.3 7.0.4.1 7.0.5
+ARCH_FILTER =RHEL%
+ARCH_FILTER+=deb10%
+
 
 SCRIPTS+=startup.cmd
 
@@ -27,6 +29,7 @@ SCRIPTS += $(foreach d,${DIRS}, $(wildcard $d/*/*.cmd))
 
 SCRIPTS+=$(wildcard ./scripts/*)
 SCRIPTS+=$(wildcard ./scripts/jinja2/*)
+SCRIPTS+=$(wildcard ./scripts/jinja2/templates/*.jinja2)
 SCRIPTS+=$(wildcard ./naming/*)
 SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)

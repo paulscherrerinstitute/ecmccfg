@@ -1,0 +1,44 @@
+
+{#- catch optional homing parameters #}
+{%- set homing = None if homing is undefined else homing%}
+{%- set homingVelocity = None if homing.velocity is undefined else homing.velocity %}
+
+
+{%if homing%}
+\section{Homing}
+{%set switch='normally open' if homing.switchPolarity|default(0)|int else 'normally closed'%}
+Homing is enabled to a switch with {{switch}} characteristic.
+The cam is approached with {{ homingVelocity.to|default(0)|float }}~{{vu}},
+the reversal velocity is {{ homingVelocity.from or homingVelocity.to |default(0)|float }}~{{vu}}.
+{%if not homing.switchPolarity|default(0)|int%}
+\warning{Home sensors should have normally open "NO" characteristic.}
+{%endif%}
+
+\begin{table}[H]
+\centering
+\caption{Homing parameters.}
+\begin{tabularx}{\textwidth}{llX}
+\hline
+\rowcolor{Gray}
+\textbf{key} & \textbf{value} & \textbf{unit} \\
+\hline
+velocity toward cam & {{ homingVelocity.to|default(0)|float }} & {{vu}} \\
+velocity off cam & {{ homingVelocity.from or homingVelocity.to |default(0)|float }} & {{vu}} \\
+sensor characteristic & {{switch}} & \\
+latch count & {{ homing.latchCount|default(0)|int}} & {{egu}} \\
+position & {{ homing.position|default(0)|float }} & {{egu}} \\
+{%if homing.postMoveEnable|default(0)%}
+post move target & {{ homing.postMovePosition|default(0)}} & {{egu}} \\
+{%endif%}
+\hline
+\end{tabularx}
+\label{tab:homing}
+\end{table}
+
+
+{%else%}
+{%if encoder.type==0%}
+\section{Homing}
+\warning{Ho homing with incremental encoder.}
+{%endif%}
+{%endif%}
