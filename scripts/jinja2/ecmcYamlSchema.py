@@ -344,6 +344,7 @@ class Schema:
             'lag': {
                 'type': 'dict',
                 'required': False,
+                'default': {'enable': False, 'tolerance': 0.0, 'time': 100},
                 'schema': {
                     'enable': {'required': True, 'type': 'boolean', 'dependencies': ['tolerance', 'time']},
                     'tolerance': {'type': 'float', 'min': 0.0},

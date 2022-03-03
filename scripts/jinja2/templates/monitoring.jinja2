@@ -10,6 +10,8 @@
         ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},{{ monitoring.lag.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id }},{{ monitoring.lag.tolerance }})"
         ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id }},{{ monitoring.lag.time }})"
+    {%- else  %}
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},0)"
     {%- endif %}
     {%- if target.enable %}
         #- at target if |target-actual|<{{ monitoring.target.tolerance }} for >{{ monitoring.target.time }} cycles
@@ -25,6 +27,8 @@
         {%- if monitoring.velocity.time.drive is defined %}
             ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay({{ axis.id }},{{ monitoring.velocity.time.drive }})"
         {%- endif  %}
+    {%- else %}
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id }},0)"
     {%- endif %}
     {%- if monitoring.velocityDifference is defined %}
         {%- if monitoring.velocityDifference.enable %}
