@@ -17,7 +17,9 @@ ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source }})"
 {#- data #}
 ecmcConfigOrDie "Cfg.SetAxisEncType({{ axis.id }},{{ encoder.type }})"
 ecmcConfigOrDie "Cfg.SetAxisEncBits({{ axis.id }},{{ encoder.bits }})"
-ecmcConfigOrDie "Cfg.SetAxisEncAbsBits({{ axis.id }},{{ encoder.absBits }})"
+{%- if encoder.type == 1  %}
+    ecmcConfigOrDie "Cfg.SetAxisEncAbsBits({{ axis.id }},{{ encoder.absBits }})"
+{%- endif  %}
 ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id }},{{ encoder.absOffset }})"
 {#-{%- if encoder.mask %}#}
 {#-ecmcConfigOrDie "Cfg.SetAxisEncRawMask({{ axis.id }}, {{ encoder.mask|int }})"#}
