@@ -24,7 +24,7 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }},
 {%- set homing = None if homing is undefined else homing %}
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCL={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ softlimits.backward|default(0)|float}},DHLM={{ softlimits.forward|default(0)|float}},HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }},{{ epics.motorRecord.fieldInit|default('') }}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ softlimits.backward|default(0)|float}},DHLM={{ softlimits.forward|default(0)|float}},HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }},{{ epics.motorRecord.fieldInit|default('') }}")
 #- -----------------------------------------------------------------------------
 #- Axis homing
 {%- if homing.type|default(0) > 0 %}
