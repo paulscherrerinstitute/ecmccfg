@@ -1,19 +1,19 @@
 #-d /**
-#-d   \brief hardware script for EL3604
-#-d   \details 4-channel 24bit analog input terminal for Condition Monitoring (IEPE) with oversampling
+#-d   \brief hardware script for ELM3004
+#-d   \details 4-channel analog input, voltage, ±30 V…±20 mV, 24 bit, 10 ksps
 #-d
-#-d   Minimum sample time          = 50000ns  (oversampling rate of 20 in 1kHz ec rate)
-#-d   Maximum Oversampling factor  = 100      (if ec rate is 200Hz then a NELM of 100 can be used)
+#-d   Minimum sample time          = 100000 ns (oversampling rate of 10 in 1 kHz ec rate)
+#-d   Maximum Oversampling factor  = 100       (if ec rate is 100 Hz then a NELM of 100 can be used)
 #-d
-#-d   \author Anders Sandstroem
+#-d   \author Niko Kivel
 #-d   \file
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3604")
+epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3004")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50219349")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50216dc9")
 epicsEnvSet("ECMC_OVER_SAMP_MAX"         "100")
-epicsEnvSet("ECMC_SAMP_TIME_MIN"         "50000")
+epicsEnvSet("ECMC_SAMP_TIME_MIN"         "100000")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
@@ -22,7 +22,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
 ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampFactOrDie.cmd, "OVER_SAMP_MAX=${ECMC_OVER_SAMP_MAX}, OVER_SAMP_REQ=${NELM}, EC_SAMP=${ECMC_EC_SAMPLE_RATE},HW_TYPE=${ECMC_EC_HWTYPE}, SLAVE_ID=${ECMC_EC_SLAVE_NUM}"
 
-#- Check valid minimum sampling time for a certain NELM and ECMC_EC_SAMPLE_RATE. Needs to higher than 50000
+#- Check valid minimum sampling time for a certain NELM and ECMC_EC_SAMPLE_RATE. Needs to higher than 100000
 ecmcFileExist(${ecmccfg_DIR}chkOverSampTimeOrDie.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampTimeOrDie.cmd, "SAMP_TIME_MIN=${ECMC_SAMP_TIME_MIN}, OVER_SAMP_REQ=${NELM}, EC_SAMP=${ECMC_EC_SAMPLE_RATE},HW_TYPE=${ECMC_EC_HWTYPE}, SLAVE_ID=${ECMC_EC_SLAVE_NUM}"
 
