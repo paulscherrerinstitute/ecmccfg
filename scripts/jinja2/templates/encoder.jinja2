@@ -29,7 +29,11 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id }},{{ encoder.absOffset }})"
 {%- endif %}
 {%- if encoder.error is defined %}
     {%- for bit in encoder.error %}
-        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
+        {%- if bit is string %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
+        {%- else  %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
+        {%- endif %}
     {%- endfor %}
 {%- endif %}
 {%- if encoder.latch %}

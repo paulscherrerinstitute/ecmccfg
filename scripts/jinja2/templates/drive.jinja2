@@ -24,7 +24,11 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id }}.d
 {%- endif %}
 {%- if drive.error is defined %}
     {%- for bit in drive.error %}
-        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit }}","ax{{ axis.id }}.drv.alarm{{loop.index0}}")"
+        {%- if bit is string %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax{{ axis.id }}.drv.alarm{{loop.index0}}")"
+        {%- else  %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit }}","ax{{ axis.id }}.drv.alarm{{loop.index0}}")"
+        {%- endif  %}
     {%- endfor %}
 {%- endif %}
 {#- scaling #}
