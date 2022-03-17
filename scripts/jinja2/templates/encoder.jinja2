@@ -6,9 +6,6 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax{{ axis.id 
 {%- if encoder.control %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax{{ axis.id }}.enc.control")"
 {%- endif %}
-{%- if encoder.status %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}","ax{{ axis.id }}.enc.status")"
-{%- endif %}
 {#- scaling #}
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom({{ axis.id }},{{ encoder.denominator|float }})"
 ecmcConfigOrDie "Cfg.SetAxisEncScaleNum({{ axis.id }},{{ encoder.numerator|float }})"
