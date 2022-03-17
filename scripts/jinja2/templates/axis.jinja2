@@ -10,11 +10,11 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
 
 {%- if axis.features is defined %}
     #- features
-    ecmcConfigOrDie Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }});
-    ecmcConfigOrDie Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.AlarmAtHardLimits|default(0)|int }});
-    ecmcConfigOrDie Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }});
+    ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.AlarmAtHardLimits|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
     {%- if axis.features.allowedFunctions is defined %}
         #- allowed motion functions
-        ecmcConfigOrDie Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})
+        ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
     {% endif -%}
 {% endif -%}
