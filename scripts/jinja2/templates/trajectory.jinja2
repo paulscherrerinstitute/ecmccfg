@@ -5,7 +5,7 @@
 ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source }})"
 {%- set deceleration = trajectory.axis.deceleration|default(trajectory.axis.acceleration) %}
 {%- set maxDec = [trajectory.axis.acceleration, deceleration]|max %}
-ecmcConfigOrDie "Cfg.SetAxisJerk({{ axis.id }},{{ trajectory.axis.jerk }})"
+ecmcConfigOrDie "Cfg.SetAxisJerk({{ axis.id }},{{ trajectory.axis.jerk|default(trajectory.axis.acceleration) }})"
 ecmcConfigOrDie "Cfg.SetAxisAcc({{ axis.id }},{{ trajectory.axis.acceleration }})"
 ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ deceleration|float }})"
 ecmcConfigOrDie "Cfg.SetAxisVel({{ axis.id }},{{ trajectory.axis.velocity }})"

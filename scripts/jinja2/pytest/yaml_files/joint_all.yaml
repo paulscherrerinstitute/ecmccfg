@@ -23,6 +23,8 @@ meta:
   # date the config was created
   date: yesterday
   # --> required: no, type: string
+  md5: <not_for_user_use!>
+  # --> required: no, type: string
 
 # AXIS ========================================================================
 axis:
@@ -42,7 +44,7 @@ axis:
   ## parameters are mostly for motorRecord,
   ## but might be ported to pure ecmc in the future.
   parameters: 'powerAutoOnOff=2;'  # additional parameters >>> not in axis.template <<<
-  # --> required: no, default ''
+  # --> required: no
   # some additional features
   features:
   # --> required: no, type: dict
@@ -50,7 +52,7 @@ axis:
     disableOnReset: false
     # --> required: no, type: bool
     # ==> Cfg.SetAxisEnableAlarmAtHardLimits(int axis_no, int nEnable);
-    AlarmAtHardLimits: false
+    alarmAtHardLimits: false
     # --> required: no, type: bool
     # ==> Cfg.SetAxisBlockCom(int axis_no, int block);
     blockCom: false
@@ -79,7 +81,7 @@ var:
 # EPICS =======================================================================
 # config parameters for the Epics part
 epics:
-# --> required: no
+# --> required: no, default: {'name': 'axis'}
   # name of axis-PV, motorRecord and others
   name: TRX1
   # --> required: no, default: 'axis'
@@ -149,12 +151,12 @@ drive:
   # status bit for warning in 'status'
   warning: 7
   # --> required: no, type: int, min: 0, dependencies: ['status']
-  # list of error bits in 'status'
+  # list of error bits in 'status', or if type==string, complete EC-link
   error:
-  # --> required: no, type: list, maxlen: 3, dependencies: ['control']
-    - 3               # Error 0 (if no drive error bit then leave empty)
-    - 7               # Error 1 (if no drive error bit then leave empty)
-    - 14              # Error 2 (if no drive error bit then leave empty)
+  # --> required: no, type: list, maxlen: 3, dependencies: ['control'], schema: {'anyof_type': ['integer', 'string']}
+    - 3                                         # Error 0
+    - 7                                         # Error 1
+    - ec0.s{{ var.encoder }}.encoderStatus01.0  # Error 2
 
 # ENCODER =====================================================================
 encoder:
@@ -196,15 +198,15 @@ encoder:
   # warning bit in 'status'
   warning: 2
   # --> required: no, type: int, min: 0, dependencies: ['status']
-  # list of error bits in 'status'
+  # list of error bits in 'status', or if type==string, complete EC-link
   error:
-  # --> required: no, type: list, maxlen: 3, schema: {'type': 'integer'}, dependencies: ['control']
-    - 5           # Error 0
-    - 9           # Error 1
-    - 11          # Error 2
+  # --> required: no, type: list, maxlen: 3, dependencies: ['control'], schema: {'anyof_type': ['integer', 'string']}
+    - 3                                     # Error 0
+    - 7                                     # Error 1
+    - ec0.s{{ var.drive }}.driveStatus01.0  # Error 2
   # filter settings
   filter:
-  # --> required: no, type: dict
+  # --> required: no, type: dict, default: {}
     velocity:
     # --> required: no, type: dict
       # switch for velocity filter
@@ -285,7 +287,7 @@ trajectory:
     # --> required: yes, type: float
     # ==> Cfg.SetAxisJerk(int axis_no, double value);
     jerk: 1800
-    # --> required: no, type: float, default: 0
+    # --> required: no, type: float, default: 'acceleration'
     # ==> Cfg.SetAxisDec(int axis_no, double value);
     deceleration: 360
     # --> required: no, type: float, default: 'acceleration'
@@ -390,10 +392,10 @@ homing:
   # --> required: no, type: float, default: 0
   # ==> Cfg.SetAxisHomePostMoveEnable(int axis_no, int value);
   postMoveEnable: false
-  # --> required: no, type: bool
+  # --> required: no, type: bool, dependencies: ['postMovePosition']
   # ==> Cfg.SetAxisHomePostMoveTargetPosition(int axis_no, int value);
   postMovePosition: -2.72
-  # --> required: no, type: float, default: 0
+  # --> required: no, type: float, default: 0, dependencies: ['postMoveEnable']
   # ==> Cfg.SetAxisHomeLatchCountOffset(int axis_no, int count);
   latchCount: 1
   # --> required: no, type: int, min: 0
@@ -416,28 +418,27 @@ homing:
 # SOFTLIMITS ==================================================================
 softlimits:
 # --> required: no, type: dict
-  # TODO: needs OR in template for global switch, maybe coerce with Cerberus?
   ## GLOBAL ON/OFF
   enable: false
-  # --> required: no, type: bool
+  # --> required: no, type: bool, default: False
   # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
   forwardEnable: true
-  # --> required: no, type: bool
+  # --> required: no, type: bool, dependencies: ['forward', 'enable']
   # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
   forward: 7200.0
-  # --> required: no, type: float
+  # --> required: no, type: float, dependencies: ['forwardEnable']
   # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
   backwardEnable: true
-  # --> required: no, type: bool
+  # --> required: no, type: bool, dependencies: ['backward', 'enable']
   # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
   backward: -7200.0
-  # --> required: no, type: float
+  # --> required: no, type: float, dependencies: ['backwardEnable']
 
 # MONITORING ==================================================================
 monitoring:
 # --> required: no, type: dict
   lag:
-    # --> required: no, type: dict
+    # --> required: no, type: dict, default: {'enable': False, 'tolerance': 0.0, 'time': 100}
     # ==> Cfg.SetAxisMonEnableLagMon(int axis_no, int value);
     enable: true
     # --> required: yes, type: bool, dependencies: ['tolerance' 'time']

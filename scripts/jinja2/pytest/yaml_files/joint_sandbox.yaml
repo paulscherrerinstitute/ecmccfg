@@ -33,10 +33,10 @@ axis:
     disableOnReset: yes
     # --> required: no, type: bool
     # ==> Cfg.SetAxisEnableAlarmAtHardLimits(int axis_no, int nEnable);
-    AlarmAtHardLimits: false
+    alarmAtHardLimits: yes
     # --> required: no, type: bool
     # ==> Cfg.SetAxisBlockCom(int axis_no, int block);
-    blockCom: false
+    blockCom: true
     # --> required: no, type: bool
     # ==> Cfg.SetAxisEnableMotionFunctions( int axisIndex,
     #                                       int enablePos,
@@ -139,7 +139,7 @@ drive:
   # --> required: no, type: list, maxlen: 3, dependencies: ['control']
     - 3               # Error 0 (if no drive error bit then leave empty)
     - 7               # Error 1 (if no drive error bit then leave empty)
-    - 14              # Error 2 (if no drive error bit then leave empty)
+    - ec0.s{{ var.encoder }}.encoderStatus01.0  # Error 2 (if no drive error bit then leave empty)
 
 # ENCODER =====================================================================
 encoder:
@@ -186,7 +186,7 @@ encoder:
   # --> required: no, type: list, maxlen: 3, schema: {'type': 'integer'}, dependencies: ['control']
     - 5           # Error 0
     - 9           # Error 1
-    - 11          # Error 2
+    - ec0.s{{ var.encoder }}.encoderStatus01.11          # Error 2
   # filter settings
   filter:
   # --> required: no, type: dict
@@ -397,23 +397,23 @@ plc:
 #  # --> required: no, type: int
 
 # SOFTLIMITS ==================================================================
-#softlimits:
-## --> required: no, type: dict
-#  ## GLOBAL ON/OFF
-#  enable: yes
-#  # --> required: no, type: bool
-#  # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
-#  forwardEnable: false
-#  # --> required: no, type: bool
-#  # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
-#  forward: 7200.0
-#  # --> required: no, type: float
-#  # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
-#  backwardEnable: no
-#  # --> required: no, type: bool
-#  # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
-#  backward: -7200.0
-#  # --> required: no, type: float
+softlimits:
+# --> required: no, type: dict
+  ## GLOBAL ON/OFF
+  enable: yes
+  # --> required: no, type: bool, default: False
+  # ==> Cfg.SetAxisEnableSoftLimitFwd(int axis_no, double value);
+  forwardEnable: yes
+  # --> required: no, type: bool
+  # ==> Cfg.SetAxisSoftLimitPosFwd(int axis_no, double value);
+  forward: 7200.0
+  # --> required: no, type: float
+  # ==> Cfg.SetAxisEnableSoftLimitBwd(int axis_no, double value);
+  backwardEnable: no
+  # --> required: no, type: bool
+  # ==> Cfg.SetAxisSoftLimitPosBwd(int axis_no, double value);
+  backward: -7200.0
+  # --> required: no, type: float
 
 # MONITORING ==================================================================
 #monitoring:

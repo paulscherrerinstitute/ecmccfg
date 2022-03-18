@@ -1,6 +1,6 @@
 #- -----------------------------------------------------------------------------
 #- Motor record init
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, "6", "{{ axis.parameters|default('') }}")
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, 6, "{{ axis.parameters|default('') }}")
 
 {#- catch unconfigured jog velocity and acceleration #}
 {%- set jog = None if trajectory.jog is undefined else trajectory.jog %}

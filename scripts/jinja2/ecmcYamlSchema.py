@@ -234,7 +234,7 @@ class Schema:
                 'schema': {
                     'velocity': {'required': True, 'type': 'float'},
                     'acceleration': {'required': True, 'type': 'float'},
-                    'jerk': {'type': 'float', 'default': 0},
+                    'jerk': {'type': 'float'},
                     'deceleration': {'type': 'float'},
                     'emergencyDeceleration': {'type': 'float'}
                 }
