@@ -328,11 +328,12 @@ class Schema:
     softlimitsSchema = {
         'type': 'dict',
         'required': False,
+        'default': {'enable': False},
         'schema': {
-            'enable': {'required': True, 'type': 'boolean'},
-            'forwardEnable': {'type': 'boolean', 'dependencies': ['forward']},
+            'enable': {'required': False, 'type': 'boolean'},
+            'forwardEnable': {'type': 'boolean', 'dependencies': ['forward', 'enable']},
             'forward': {'type': 'float', 'dependencies': ['forwardEnable']},
-            'backwardEnable': {'type': 'boolean', 'dependencies': ['backward']},
+            'backwardEnable': {'type': 'boolean', 'dependencies': ['backward', 'enable']},
             'backward': {'type': 'float', 'dependencies': ['backwardEnable']},
         }
     }
