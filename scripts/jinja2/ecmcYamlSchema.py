@@ -108,7 +108,7 @@ class Schema:
             'parameters': {'type': 'string'},
             'features': {'type': 'dict', 'schema': {
                 'disableOnReset': {'type': 'boolean'},
-                'AlarmAtHardLimits': {'type': 'boolean'},
+                'alarmAtHardLimits': {'type': 'boolean'},
                 'blockCom': {'type': 'boolean'},
                 'allowedFunctions': {'type': 'dict', 'schema': {
                     'positioning': {'type': 'boolean'},

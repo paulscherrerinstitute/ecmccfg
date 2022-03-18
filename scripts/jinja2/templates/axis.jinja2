@@ -11,7 +11,7 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
 {%- if axis.features is defined %}
     #- features
     ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }})"
-    ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.AlarmAtHardLimits|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.alarmAtHardLimits|default(0)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
     {%- if axis.features.allowedFunctions is defined %}
         #- allowed motion functions
