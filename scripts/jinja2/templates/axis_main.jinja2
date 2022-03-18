@@ -15,5 +15,9 @@
 {% include 'epicsAxis.jinja2' %}
 {%- if epics.motorRecord.enable %}
     {% include 'epicsMotorRecord.jinja2' %}
-{%endif%}
+{%- endif %}
+{#- this needs to be the command issued #}
+{%- if axis.features is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
+{%- endif %}
 

@@ -20,7 +20,7 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
         # ==> ecmcConfig "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }},0)"
         # -------------------------------------
     {%- endif %}
-    ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
+    {#- the `axis.features.blockCom` key is handled in the top-level template #}
     {%- if axis.features.allowedFunctions is defined %}
         #- allowed motion functions
         ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
