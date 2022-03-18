@@ -12,6 +12,14 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
     #- features
     ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.alarmAtHardLimits|default(0)|int }})"
+    {%- if axis.features.alarmAtHardLimits  %}
+        # -------------- WARNING --------------
+        # Axis {{ axis.id }} will go into error state upon limit switch trigger
+        # Recovery from this state is _only_ possible by manually disabling the
+        # 'SetAxisEnableAlarmAtHardLimits' feature.
+        # ==> ecmcConfig "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }},0)"
+        # -------------------------------------
+    {%- endif %}
     ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
     {%- if axis.features.allowedFunctions is defined %}
         #- allowed motion functions
