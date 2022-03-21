@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 7.0.0
+#- ECMC_VER          = 7.0.1
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -47,7 +47,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=7.0.0}"
+require ecmc        "${ECMC_VER=7.0.1}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
