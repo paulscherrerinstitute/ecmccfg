@@ -415,8 +415,8 @@ record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
 record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B8")
-  field(ZNAM, "Refuse")
-  field(ONAM, "Allow")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
@@ -425,8 +425,8 @@ record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
 record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B9")
-  field(ZNAM, "Refuse")
-  field(ONAM, "Allow")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
