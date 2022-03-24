@@ -101,7 +101,7 @@ class Schema:
         'type': 'dict',
         'required': True,
         'schema': {
-            'id': {'required': True, 'type': 'integer', 'min': 1},
+            'id': {'required': True, 'schema': {'anyof_type': ['integer', 'string']}},
             'type': {'type': 'integer', 'default': 'joint',
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
