@@ -16,7 +16,7 @@ on error halt
 
 #- setup python venv and run `plcYamlJinja2.py`
 #- MUST be in the same 'system'-context!!!
-system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}axisYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${FILE} -o ${FILE}.axis"
+system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}axisYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${FILE} -o ${ECMC_TMP_DIR}${FILE}.axis"
 
 #- check for ECMC-format PLC file and load the PLC
 ecmcFileExist("${ECMC_TMP_DIR}${FILE}.axis",1)
