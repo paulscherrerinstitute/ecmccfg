@@ -10,10 +10,10 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id }}.d
 {%- else %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.position")"
 {%- endif %}
-{%- if drive.reduceTorqueEnable %}
-    ecmcConfigOrDie "Cfg.SetAxisDrvReduceTorqueEnable(ax{{ axis.id }}, {{ drive.reduceTorqueEnable|int }})"
+{%- if drive.reduceTorqueEnable is defined %}
     {%- if drive.reduceTorque is defined %}
         ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque }}","ax{{ axis.id }}.drv.reducetorque")"
+        ecmcConfigOrDie "Cfg.SetAxisDrvReduceTorqueEnable({{ axis.id }}, {{ drive.reduceTorqueEnable|int }})"
     {%- endif %}
 {%- endif %}
 {%- if drive.reset is defined %}
