@@ -70,14 +70,6 @@ record(longin, "$(PREFIX)$(MOTOR_NAME)-Err")
     field(SCAN, "I/O Intr")
 }
 
-record(ai, "$(PREFIX)$(MOTOR_NAME)-VelAct")
-{
-    field(DTYP, "asynFloat64")
-    field(PREC, "$(PREC)")
-    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))VelAct")
-    field(SCAN, "I/O Intr")
-}
-
 record(ai, "$(PREFIX)$(MOTOR_NAME)-Vel-RB")
 {
     field(DTYP, "asynFloat64")
