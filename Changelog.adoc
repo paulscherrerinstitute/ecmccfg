@@ -1,3 +1,28 @@
 # ecmccfg changelog
 
+v8.0.0
+PVs changed:
+* EL7037_CSP:
+  - SyncErr-Alrm to SyncErrAlrm
+  - Stl-Alrm to StlAlrm
+  - Err-Alrm to ErrAlrm
+  - Wrn-Alrm to WrnAlrm
+
+ EL7037 (also EL7031):
+  - SyncErr-Alrm to SyncErrAlrm
+  - Stl-Alrm to StlAlrm
+  - Err-Alrm to ErrAlrm
+  - Wrn-Alrm to WrnAlrm
+
+ EL7332:
+  - SyncErr-Alrm to SyncErrAlrm
+  - Stl-Alrm to StlAlrm
+  - Err-Alrm to ErrAlrm
+  - Wrn-Alrm to WrnAlrm
+  - remove extra "-" before "Drv" in all PVs
+  - fix forward link
+
+
+
 v7.0.0
+
