@@ -8,7 +8,7 @@ PVs changed:
   - Err-Alrm to ErrAlrm
   - Wrn-Alrm to WrnAlrm
 
- EL7037 (also EL7031):
+ EL7037:
   - SyncErr-Alrm to SyncErrAlrm
   - Stl-Alrm to StlAlrm
   - Err-Alrm to ErrAlrm
@@ -19,9 +19,26 @@ PVs changed:
   - Stl-Alrm to StlAlrm
   - Err-Alrm to ErrAlrm
   - Wrn-Alrm to WrnAlrm
-  - remove extra "-" before "Drv" in all PVs
+  - remove extra "-" before "Drv" in all PVs (affect all EL7332 PV names)
   - fix forward link
 
+ EL7041-0052:
+  - SyncErr-Alrm to SyncErrAlrm
+  - Stl-Alrm to StlAlrm
+  - Err-Alrm to ErrAlrm
+  - Wrn-Alrm to WrnAlrm
+
+ EL7041-1000:
+  - SyncErr-Alrm to SyncErrAlrm
+  - Stl-Alrm to StlAlrm
+  - Err-Alrm to ErrAlrm
+  - Wrn-Alrm to WrnAlrm
+
+EL7041:
+  - SyncErr-Alrm to SyncErrAlrm
+  - Stl-Alrm to StlAlrm
+  - Err-Alrm to ErrAlrm
+  - Wrn-Alrm to WrnAlrm
 
 
 v7.0.0
