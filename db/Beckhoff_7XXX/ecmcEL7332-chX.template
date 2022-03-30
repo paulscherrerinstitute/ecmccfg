@@ -1,4 +1,4 @@
-record(ai,"${ECMC_P}-Drv${CH_ID}-Cmd-RB"){
+record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Control Word RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -7,7 +7,7 @@ record(ai,"${ECMC_P}-Drv${CH_ID}-Cmd-RB"){
   field(SCAN, "I/O Intr")
 }
 
-record(ao,"${ECMC_P}-Drv${CH_ID}-Cmd"){
+record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Control Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -15,7 +15,7 @@ record(ao,"${ECMC_P}-Drv${CH_ID}-Cmd"){
   field(PREC, "0")
 }
 
-record(ai,"${ECMC_P}-Drv${CH_ID}-Spd-RB"){
+record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Speed Setpoint RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -37,7 +37,7 @@ record(ai,"${ECMC_P}-Drv${CH_ID}-Spd-RB"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(ao,"${ECMC_P}-Drv${CH_ID}-Spd"){
+record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Speed Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -58,78 +58,78 @@ record(ao,"${ECMC_P}-Drv${CH_ID}-Spd"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
-record(mbbiDirect,"${ECMC_P}-Drv${CH_ID}-Stat"){
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-RdyToEna.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-RdyToEna.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-RdyToEna"){
+record(bi,"${ECMC_P}Drv${CH_ID}-RdyToEna"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Ready to Enable")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B0")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B0")
   field(ZNAM, "Not Ready")
   field(ONAM, "Ready")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-Rdy-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Rdy.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-Rdy"){
+record(bi,"${ECMC_P}Drv${CH_ID}-Rdy"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Enabled")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B1")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B1")
   field(ZNAM, "Not Ready")
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
 }
 
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-Wrn-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Warning")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B2")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B2")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-Err-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-Err-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Error")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B3")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-MovPos.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-MovPos.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-MovPos"){
+record(bi,"${ECMC_P}Drv${CH_ID}-MovPos"){
   field(DESC, "${HWTYPE}-${CH_ID}: Moving Positive")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B4")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B4")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-MovNeg.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-MovNeg.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-MovNeg"){
+record(bi,"${ECMC_P}Drv${CH_ID}-MovNeg"){
   field(DESC, "${HWTYPE}-${CH_ID}: Moving Negative")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B5")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B5")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-TqueRed.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-TqueRed.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-TqueRed"){
+record(bi,"${ECMC_P}Drv${CH_ID}-TqueRed"){
   field(DESC, "${HWTYPE}-${CH_ID}: Torque Reduced")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.B6")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B6")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-BI01.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")
 }
 
 ###########################################################################################
@@ -137,12 +137,12 @@ record(bi,"${ECMC_P}-Drv${CH_ID}-TqueRed"){
 # These 2 inputs are exposed in the status word of each channel which makes it appear like 4 inputs.
 # So the input "*1_Drv${CH_ID}-BI01" is the same as "*2_Drv${CH_ID}-BI01"
 ###########################################################################################
-record(bi,"${ECMC_P}-Drv${CH_ID}-BI01"){
+record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
   field(DESC, "${HWTYPE}-${CH_ID}: Digital Input 1")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BB")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BB")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-BI02.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02.PROC")
 }
 
 ###########################################################################################
@@ -150,17 +150,17 @@ record(bi,"${ECMC_P}-Drv${CH_ID}-BI01"){
 # These 2 inputs are exposed in the status word of each channel which makes it appear like 4 inputs.
 # So the input "*1_Drv${CH_ID}-BI01" is the same as "*2_Drv${CH_ID}-BI01"
 ###########################################################################################
-record(bi,"${ECMC_P}-Drv${CH_ID}-BI02"){
+record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
   field(DESC, "${HWTYPE}-${CH_ID}: Digital Input 2")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BC")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BC")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}-Drv${CH_ID}-SyncErr.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-SyncErrAlrm.PROC")
 }
 
-record(bi,"${ECMC_P}-Drv${CH_ID}-SyncErr-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-SyncErrAlrm"){
   field(DESC, "${HWTYPE}-${CH_ID}: Drive Sync Error")
-  field(INP,  "${ECMC_P}-Drv${CH_ID}-Stat.BD")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BD")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
