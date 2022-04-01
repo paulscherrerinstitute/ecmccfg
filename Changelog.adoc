@@ -5,6 +5,10 @@ Dr. Niko Kivel <niko.kivel@psi.ch>
 
 == v8_RC1
 
+=== EPICS
+==== template
+- removed `record(longin, "$(PREFIX)$(MOTOR_NAME)-Err")` from `ecmcMotorRecord.template`
+
 === config
 ==== features
 * yaml-based configs are now __linted__ and __schema validated__.
