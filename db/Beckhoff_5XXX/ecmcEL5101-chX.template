@@ -47,7 +47,7 @@ record(bi,"${ECMC_P}Enc${CH_ID}-SyncErrAlrm"){
 }
 
 # latching
-record(bo,    "${ECMC_P}Enc${CH_ID}-LtchAutRstSp"){
+record(bo,    "${ECMC_P}Enc${CH_ID}-LchAutRstSp"){
   field(DESC, "reset latch automatically")
   field(ZNAM, "off")
   field(ONAM, "on")
@@ -57,7 +57,7 @@ record(bo,    "${ECMC_P}Enc${CH_ID}-LtchAutRstSp"){
 record(calcout,   "${ECMC_P}Enc${CH_ID}-LtchAutRst") {
   field(DESC, "reset latch automatically calc")
   field(CALC, "A&&B?2:1")
-  field(INPA, "${ECMC_P}Enc${CH_ID}-LtchAutRstSp")
+  field(INPA, "${ECMC_P}Enc${CH_ID}-LchAutRstSp")
   field(INPB, "${ECMC_P}Enc${CH_ID}-ExtLtchOK CP")
   field(IVOA, "Don't drive outputs")
   field(OUT,  "${ECMC_P}Enc${CH_ID}-LtchRst.SELN PP")

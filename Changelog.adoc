@@ -3,12 +3,37 @@
 v8.0.0
 PVs changed:
 
+* Update of ecmcEL5101-chX.template
+  - LtchAutRstSp to LchAutRstSp
+  - affected terminals: 
+    - EL5101
+    - EL5101_32bit
+    - EL7031
+    - EP7041-3102
+    - EL7037
+    - EL7037
+    - EL7037_CSP
+    - EL7041-0052
+    - EL7037_CSP
+    - EP7041
+    - EL7041
+    - EL7041-1000
+    - EL7047
+
+
 * Update of ecmcEL7037-chX.template:
   - SyncErr-Alrm to SyncErrAlrm
   - Stl-Alrm to StlAlrm
   - Err-Alrm to ErrAlrm
   - Wrn-Alrm to WrnAlrm
-  - affected terminals EL7037_CSP, EL7031, EL7037,EL7041-0052, EL7041-1000, EL7041, EL7047
+  - affected terminals
+    - EL7031
+    - EL7037
+    - EL7041-0052
+    - EP7041
+    - EL7041
+    - EL7041-1000
+    - EL7047
  
 * Update of ecmcEL7332-chX.template:
   - SyncErr-Alrm to SyncErrAlrm
@@ -17,7 +42,8 @@ PVs changed:
   - Wrn-Alrm to WrnAlrm
   - remove extra "-" before "Drv" in all PVs (affect all EL7332 PV names)
   - fix forward link
-  - affected terminals EL7332
+  - affected terminals:
+    - EL7332
 
 v7.0.0
 
