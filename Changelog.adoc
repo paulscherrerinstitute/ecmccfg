@@ -2,6 +2,59 @@
 
 v8.0.0
 PVs changed:
+* Update ecmcEL60X2-chX.template
+  - Array to Arr
+  - affected terminals:
+    - EL6002
+    - EL6022
+
+* Update ecmcAxis.db
+  - Array to Arr
+  - affected PVs: ${P}${AXIS_NAME}-Array-Stat to ${P}${AXIS_NAME}-Arr-Stat
+
+
+* Update of ecmcEL5101-0011-chX.template
+  - Array to Arr
+  - affected terminals:
+    - EL5101-0011
+
+* Update of ecmc_binaryInputArray-chX.template:
+  - Array to Arr
+  - affected terminals:
+    - iPOS4808
+    - iPOS8020
+    - EP3744
+    - ILK
+    - ILK
+    - TOBAS
+    - AMI8121
+    - EP1816-3008
+
+* Update of ecmc_analogOutputArray-chX.template
+  - Array to Arr
+  - affected terminals:
+    - EL4732
+
+* Update of ecmc_binaryOutputArray-chX.template
+  - Array to Arr
+  - affected terminals:
+    - iPOS4808
+    - iPOS4808
+    - iPOS8020
+    - iPOS8020
+
+* Update of ecmc_analogInputArray-chX.template
+  - Array to Arr
+  - affected terminals:
+    - ELM3602
+    - ELM3146
+    - ELM3604
+    - EL3751
+    - ELM3704
+    - ELM3004
+    - EL3742
+    - EL3632
+    - EL3702
 
 * Update of ecmcEL5101-chX.template
   - LtchAutRstSp to LchAutRstSp
@@ -19,7 +72,6 @@ PVs changed:
     - EL7041
     - EL7041-1000
     - EL7047
-
 
 * Update of ecmcEL7037-chX.template:
   - SyncErr-Alrm to SyncErrAlrm

@@ -29,7 +29,7 @@ record(ai,"${P}${AXIS_NAME}-PosErr"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(waveform,"${P}${AXIS_NAME}-Array-Stat"){
+record(waveform,"${P}${AXIS_NAME}-Arr-Stat"){
   field(PINI, "1")
   field(DTYP, "asynInt8ArrayIn")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ax$(AXIS_NO).diagnostic?")
