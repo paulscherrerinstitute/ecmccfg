@@ -1,9 +1,8 @@
 include /ioc/tools/driver.makefile
-include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
 
-LIBVERSION = v8_RC1
+LIBVERSION = sls_girder
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS = 3 7.0.5
