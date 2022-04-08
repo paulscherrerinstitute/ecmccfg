@@ -213,11 +213,11 @@ record(bi,"${P}${AXIS_NAME}-EncSrcTyp-RB"){
   field(ONAM, "PLC")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-CmdFrmPLCCmd-RB.PROC")
 }
 
 #  // bit 13 Allow plc commands
-record(bi,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB"){
+record(bi,"${P}${AXIS_NAME}-CmdFrmPLCCmd-RB"){
   field(DESC, "${AXIS_NAME}: Allow PLC cmds")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BD")
   field(ZNAM, "Disabled")
@@ -402,7 +402,7 @@ record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
   field(TSE,  "0")
 }
 
-record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
+record(bo,"${P}${AXIS_NAME}-CmdFrmPLCCmd"){
   field(DESC, "${AXIS_NAME}: Allow cmd from PLCs")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B7")
   field(ZNAM, "Refuse")
