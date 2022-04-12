@@ -21,9 +21,9 @@ record(mbbiDirect,"${ECMC_P}CH${CH_ID}-StatW02"){
 record(bi,"${ECMC_P}CH${CH_ID}-EnaAct"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Enabled")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B0")
-    field(ZNAM, "Zero")
+    field(ZNAM, "Disabled")
     field(ONAM, "Enabled")
-    field(ZSV,  "NO_ALARM")
+    field(ZSV,  "MINOR")
     field(OSV,  "NO_ALARM")
     field(FLNK, "${ECMC_P}CH${CH_ID}-TripAlrm.PROC")
 }
@@ -31,7 +31,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-EnaAct"){
 record(bi,"${ECMC_P}CH${CH_ID}-TripAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Tripped")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B1")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Tripped")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -41,7 +41,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-TripAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-ShrtCircAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Short Circuit")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B2")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Short Circuit")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -51,7 +51,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-ShrtCircAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-OvrldAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Overload")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B3")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Overload")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -61,7 +61,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-OvrldAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-HwProtAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: HardwareProtection")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B4")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Hardware Protection")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -71,7 +71,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-HwProtAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-OvrVoltAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Overvoltage")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B5")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Overvoltage")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -81,7 +81,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-OvrVoltAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-UdrVoltAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Undervoltage")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B6")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Undervoltage")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -91,17 +91,17 @@ record(bi,"${ECMC_P}CH${CH_ID}-UdrVoltAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-CurrLvlAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Current Level Warning")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B7")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "CurrentLevelWarning")
     field(ZSV,  "NO_ALARM")
-    field(OSV,  "MAJOR")
+    field(OSV,  "MINOR")
     field(FLNK, "${ECMC_P}CH${CH_ID}-CoolDwnAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-CoolDwnAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Cool Down Lock")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B8")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Cool Down Lock")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -111,7 +111,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-CoolDwnAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-DisSwtchAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: DisabledBySwitch")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B9")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Disabled By Switch")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -121,7 +121,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-DisSwtchAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-DisBIAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Disabled By DI")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.BA")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Disabled By DI")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -131,7 +131,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-DisBIAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-DisPDOAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Disabled by PDO")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.BB")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Disabled By Output")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -141,7 +141,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-DisPDOAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-DiagAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Diag")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.BC")
-    field(ZNAM, "Zero")
+    field(ZNAM, "OK")
     field(ONAM, "Diag")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
@@ -151,8 +151,8 @@ record(bi,"${ECMC_P}CH${CH_ID}-DiagAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: State Device Switch")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B0")
-    field(ZNAM, "Zero")
-    field(ONAM, "One")
+    field(ZNAM, "OK")
+    field(ONAM, "Switch Alarm")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "NO_ALARM")
     field(FLNK, "${ECMC_P}CH${CH_ID}-BI.PROC")
@@ -164,15 +164,15 @@ record(bi,"${ECMC_P}CH${CH_ID}-BI"){
     field(ZNAM, "Zero")
     field(ONAM, "One")
     field(ZSV,  "NO_ALARM")
-    field(OSV,  "MAJOR")
+    field(OSV,  "NO_ALARM")
     field(FLNK, "${ECMC_P}CH${CH_ID}-ErrAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-ErrAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: Error")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B2")
-    field(ZNAM, "Zero")
-    field(ONAM, "One")
+    field(ZNAM, "no Error")
+    field(ONAM, "Error")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
     field(FLNK, "${ECMC_P}CH${CH_ID}-RstAlrm.PROC")
@@ -181,8 +181,8 @@ record(bi,"${ECMC_P}CH${CH_ID}-ErrAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-RstAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: State Reset")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B3")
-    field(ZNAM, "Zero")
-    field(ONAM, "One")
+    field(ZNAM, "OK")
+    field(ONAM, "Reset Alarm")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")
     field(FLNK, "${ECMC_P}CH${CH_ID}-SwtchAlrm.PROC")
@@ -191,8 +191,8 @@ record(bi,"${ECMC_P}CH${CH_ID}-RstAlrm"){
 record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
     field(DESC, "$(HWTYPE): CH${CH_ID}: State Switch")
     field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B4")
-    field(ZNAM, "Zero")
-    field(ONAM, "One")
+    field(ZNAM, "OK")
+    field(ONAM, "Switch Alarm")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")    
 }
@@ -216,7 +216,7 @@ record(ai,"${ECMC_P}CH${CH_ID}-CurrAct"){
     field(PINI, "$(PINI=1)")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).current${CH_ID}?")
-    field(PREC, "0")
+    field(PREC, "2")
     field(SCAN, "I/O Intr")
     field(LINR, "SLOPE")
     field(ESLO, "0.01")
@@ -230,7 +230,7 @@ record(ai,"${ECMC_P}CH${CH_ID}-VoltInAct"){
     field(PINI, "$(PINI=1)")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).voltageIn${CH_ID}?")
-    field(PREC, "0")
+    field(PREC, "1")
     field(SCAN, "I/O Intr")
     field(LINR, "SLOPE")
     field(ESLO, "0.1")
@@ -244,7 +244,7 @@ record(ai,"${ECMC_P}CH${CH_ID}-VoltOutAct"){
     field(PINI, "$(PINI=1)")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).voltageOut${CH_ID}?")
-    field(PREC, "0")
+    field(PREC, "1")
     field(SCAN, "I/O Intr")
     field(LINR, "SLOPE")
     field(ESLO, "0.1")
