@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "CapaNDCT6200")
+epicsEnvSet("ECMC_EC_HWTYPE"             "CapaNCDT6200")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x0000065e")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x003ea349")
 
@@ -27,8 +27,9 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 #-     PDO entry 0x6020:0b, 32 bit, "Channel 4"
 #- 
 
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x0,0x00,S16,gap01,0)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x03,S32,counter01,1)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x08,S32,analogInput01,1)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x09,S32,analogInput02,1)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x0a,S32,analogInput03,1)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x0b,S32,analogInput04,1)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x08,F32,analogInput01,1)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x09,F32,analogInput02,1)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x0a,F32,analogInput03,1)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x0b,F32,analogInput04,1)"
