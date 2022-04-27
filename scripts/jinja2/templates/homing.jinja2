@@ -7,11 +7,11 @@
         ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable({{ axis.id }},{{ homing.postMoveEnable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id }},{{ homing.postMovePosition|default(0)}})"
     {%- endif %}
-    {%- if homing.postMoveEnable %}
+    {%- if homing.latchCount is defined %}
         ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id }},{{ homing.latchCount }})"
     {%- endif %}
     {#- velocities  #}
-    ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id }},{{ homing.velocity.to }})"
+    ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam({{ axis.id }},{{ homing.velocity.to }})"
     ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id }},{{ homing.velocity.from|default(homing.velocity.to) }})"
     {%- if homing.timeout %}
         ecmcConfigOrDie "Cfg.SetAxisSeqTimeout({{ axis.id }},{{ homing.timeout }})"
