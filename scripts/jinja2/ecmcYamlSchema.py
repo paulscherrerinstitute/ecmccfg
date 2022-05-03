@@ -101,7 +101,11 @@ class Schema:
         'type': 'dict',
         'required': True,
         'schema': {
-            'id': {'required': True, 'schema': {'anyof_type': ['integer', 'string']}},
+            'id': {'oneof': [
+                {'type': 'integer'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*)?(\}|\))$'}
+            ]
+            },
             'type': {'type': 'integer', 'default': 'joint',
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
