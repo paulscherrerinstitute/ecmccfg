@@ -312,9 +312,12 @@ class Schema:
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
             ]
             },
-            # 'position': {'type': 'float', 'default': 0.0},
             'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
-            'postMovePosition': {'type': 'float', 'dependencies': ['postMoveEnable']},
+            'postMovePosition': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+            ]
+            },
             'latchCount': {'type': 'integer', 'min': 0},
             'velocity': {
                 'type': 'dict',
