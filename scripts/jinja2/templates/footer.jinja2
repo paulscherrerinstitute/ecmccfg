@@ -1,63 +1,63 @@
 #- Input sensors
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id|int }}.mon.lowlim")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id|int }}.mon.highlim")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id|int }}.mon.homesensor")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id|int }}.mon.extinterlock")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id }}.mon.lowlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id }}.mon.highlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id }}.mon.homesensor")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id }}.mon.extinterlock")"
 
 #- Output
 {%- set output = None if output is not defined else output %}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id|int }}.drv.brake")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ output.brake|default('') }}","ax{{ axis.id }}.drv.brake")"
 
 
 #- Soft limits
 {%- set softlimits = None if softlimits is undefined else softlimits %}
-ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd({{ axis.id|int }},{{ softlimits.backward|default(0)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd({{ axis.id|int }},{{ softlimits.enable|default(false)|int}})"
-ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd({{ axis.id|int }},{{ softlimits.forward|default(0)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd({{ axis.id|int }},{{ softlimits.enable|default(false)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd({{ axis.id }},{{ softlimits.backward|default(0)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd({{ axis.id }},{{ softlimits.enable|default(false)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd({{ axis.id }},{{ softlimits.forward|default(0)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd({{ axis.id }},{{ softlimits.enable|default(false)|int}})"
 
 #- Monitor
 {%- set monitoring = None if monitoring is undefined else monitoring %}
 {%- set lag = None if monitoring.lag is undefined else monitoring.lag %}
-ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id|int }},{{ lag.enable|default(false)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id|int }},{{ lag.tolerance|default(0.5)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id|int }},{{ lag.time|default(10)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},{{ lag.enable|default(false)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id }},{{ lag.tolerance|default(0.5)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id }},{{ lag.time|default(10)|int }})"
 
 {%- set target = None if monitoring.target is undefined else monitoring.target %}
-ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id|int }},{{ target.tolerance|default(0.5)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id|int }},{{ target.time|default(10)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id|int }},{{ target.enable|default(false)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id }},{{ target.tolerance|default(0.5)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id }},{{ target.time|default(10)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},{{ target.enable|default(false)|int }})"
 
 {%- set velocity = None if monitoring.velocity is undefined else monitoring.velocity %}
-ecmcConfigOrDie "Cfg.SetAxisMonMaxVel({{ axis.id|int }},{{ velocity.max|default(100)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id|int }},{{ velocity.enable|default(false)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVel({{ axis.id }},{{ velocity.max|default(100)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id }},{{ velocity.enable|default(false)|int}})"
 {%- set velMonTime = None if velocity.time is undefined else monitoring.velocity.time %}
-ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay({{ axis.id|int }},{{ velMonTime.drive|default(100)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay({{ axis.id|int }},{{ velMonTime.trajectory|default(100)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay({{ axis.id }},{{ velMonTime.drive|default(100)|int }})"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay({{ axis.id }},{{ velMonTime.trajectory|default(100)|int}})"
 
 #- Homing
 {#- catch optional homing parameters #}
 {%- set homing = None if homing is undefined else homing%}
 {%- set homingVelocity = None if homing.velocity is undefined else homing.velocity %}
-ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id|int }},{{ homingVelocity.to|default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id|int }},{{ homingVelocity.from or homingVelocity.to |default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id|int }},{{ homing.switchPolarity|default(0)|int}})"
-ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id|int }},{{ homing.latchCount|default(0)|int}})"
-ecmcConfigOrDie "Cfg.SetAxisHomePosition({{ axis.id|int }},{{ homing.position|default(0)|float }})"
-ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable({{ axis.id|int }}, {{ homing.postMoveEnable|default(0)}})"
-ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id|int }}, {{ homing.postMovePosition|default(0)}})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam({{ axis.id }},{{ homingVelocity.to|default(0)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id }},{{ homingVelocity.from or homingVelocity.to |default(0)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id }},{{ homing.switchPolarity|default(0)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id }},{{ homing.latchCount|default(0)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisHomePosition({{ axis.id }},{{ homing.position|default(0)|float }})"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable({{ axis.id }}, {{ homing.postMoveEnable|default(0)}})"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id }}, {{ homing.postMovePosition|default(0)}})"
 
 
 #- -----------------------------------------------------------------------------
 #- Axis records
 ecmcFileExist("ecmcAxis.db",1,1)
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 #- -----------------------------------------------------------------------------
 
 {%- set MR = None if epics.motorRecord is undefined else epics.motorRecord%}
 {%- if epics.motorRecord is undefined or MR.enable %}
 #- Motor record init
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id|int }}, "6", "{{ axis.parameters|default('') }}")
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, "6", "{{ axis.parameters|default('') }}")
 
 {#- catch unconfigured jog velocity and acceleration #}
 {%- set jog = None if trajectory.jog is undefined else trajectory.jog %}
@@ -68,10 +68,10 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id|int
 
 {%- set drive = None if drive is undefined else drive %}
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME={{ epics.name }}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, DESC='{{ MR.description|default('') }}', EGU={{ epics.unit|default('mm') }}, PREC={{ epics.precision|default(3)|int }}, VELO={{ trajectory.axis.velocity|float }}, JVEL={{ jogVelocity|float }}, JAR={{ jogacceleration|float }}, ACCL={{ trajectory.axis.acceleration|float }}, RDBD={{ target.tolerance|default(0.5)|float }}, DLLM={{ softlimits.backward|default(0)|float}}, DHLM={{ softlimits.forward|default(0)|float}}, HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }}, {{ MR.fieldInit|default('') }}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME={{ epics.name }}, MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }}, DESC='{{ MR.description|default('') }}', EGU={{ epics.unit|default('mm') }}, PREC={{ epics.precision|default(3)|int }}, VELO={{ trajectory.axis.velocity|float }}, JVEL={{ jogVelocity|float }}, JAR={{ jogacceleration|float }}, ACCL={{ trajectory.axis.acceleration|float }}, RDBD={{ target.tolerance|default(0.5)|float }}, DLLM={{ softlimits.backward|default(0)|float}}, DHLM={{ softlimits.forward|default(0)|float}}, HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }}, {{ MR.fieldInit|default('') }}")
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id|int }}, HOMEPROC={{ homing.type|default(0)|int }}, HOMEPOS={{ homing.position|default(0)|float }}, HVELTO={{ homingVelocity.to|default(0)|float }}, HVELFRM={{ homingVelocity.from or homingVelocity.to|default(0)|float }}, HOMEACC={{ homing.acceleration|default(0)|float }}, HOMEDEC={{ homing.deceleration or homing.acceleration|default(0) |float}}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }}, HOMEPROC={{ homing.type|default(0)|int }}, HOMEPOS={{ homing.position|default(0)|float }}, HVELTO={{ homingVelocity.to|default(0)|float }}, HVELFRM={{ homingVelocity.from or homingVelocity.to|default(0)|float }}, HOMEACC={{ homing.acceleration|default(0)|float }}, HOMEDEC={{ homing.deceleration or homing.acceleration|default(0) |float}}")
 #- Motor record init complete
 #- -----------------------------------------------------------------------------
 {%- endif %}

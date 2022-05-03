@@ -2,8 +2,6 @@ include /ioc/tools/driver.makefile
 
 MODULE=ecmccfg
 
-# LIBVERSION = sls_girder
-
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS = 3 7.0.5
 ARCH_FILTER=deb10%
