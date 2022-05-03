@@ -307,7 +307,12 @@ class Schema:
         'required': False,
         'schema': {
             'type': {'required': True, 'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 21, 22, 25]},
-            'position': {'type': 'float', 'default': 0.0},
+            'position': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+            ]
+            },
+            # 'position': {'type': 'float', 'default': 0.0},
             'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
             'postMovePosition': {'type': 'float', 'dependencies': ['postMoveEnable']},
             'latchCount': {'type': 'integer', 'min': 0},
