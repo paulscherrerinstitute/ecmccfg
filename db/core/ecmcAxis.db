@@ -503,4 +503,6 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).errorid?")
   field(SCAN, "I/O Intr")  
   field(TSE,  "$(TSE=-2)")
+  field(HIGH, 1)
+  field(HSV,  "MAJOR")
 }
