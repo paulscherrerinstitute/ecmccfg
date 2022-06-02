@@ -15,7 +15,7 @@
 #-d   \file
 #-d   \note Macros
 #-d   \param CH_ID       Channel ID, default 1, internally converted to two digit zero padded hex
-#-d   \param ECMC_PDO    PDO, default 0xa100
+#-d   \param ECMC_PDO    PDO, default 0x1a00
 #-d   \param ECMC_ENTRY  PDO entry, default 0x6000
 #-d   \param SYNC_MAN    Sync manager, default 3
 #-d */
