@@ -1,5 +1,5 @@
-record(waveform,"${ECMC_P}Ch${CH_ID}-ArrayIn"){
-  field(DESC, "$(HWTYPE): Serial $(CH_ID): Value Array [$(NELM)]")
+record(waveform,"${ECMC_P}Ch${CH_ID}-ArrIn"){
+  field(DESC, "$(HWTYPE): Serial $(CH_ID): Arr In [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt8ArrayIn")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.inputDataArray${CH_ID}?")
@@ -9,8 +9,8 @@ record(waveform,"${ECMC_P}Ch${CH_ID}-ArrayIn"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(waveform,"${ECMC_P}Ch${CH_ID}-ArrayOut"){
-  field(DESC, "$(HWTYPE): Serial $(CH_ID): ArrayOut [$(NELM)]")
+record(waveform,"${ECMC_P}Ch${CH_ID}-ArrOut"){
+  field(DESC, "$(HWTYPE): Serial $(CH_ID): Arr Out [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(SCAN, "Passive")
   field(DTYP, "asynInt8ArrayOut")
