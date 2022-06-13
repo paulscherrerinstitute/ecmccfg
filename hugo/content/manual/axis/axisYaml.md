@@ -91,7 +91,7 @@ epics:
   # unit: deg
   # motorRecord:
   #   enable: false
-  #   # fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim'
+  #   fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim'
   #   fieldInit: 'NTM=1'
   #   description: AM8111 CSV
 ```
@@ -143,8 +143,8 @@ mandatory
 - `denominator`: scaling denominator
 - `type`: type of encoder: `0`=incremental, `1`=absolute
 - `bits`: raw data bit count
-- `absBits`: 25     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
-- `absOffset`: 0    # Encoder offset in engineering units (for absolute encoders)
+- `absBits`: Absolute bit count (for absolute encoders) always least significant part of 'bits'
+- `absOffset`: Encoder offset in engineering units (for absolute encoders)
 - `position`: position entry
 
 optional
@@ -335,15 +335,20 @@ optional
 ## monitoring
 Three entities can be monitored, (1) lag, aka following error, (2) target, aka in position, (3) velocity.
 
+{{% notice info %}}
+It is highly advisable to always use the `lag` and `attarget` monitoring fo closed-loop axis.
+Failure to do so, will most likely results in unexpected behaviour.
+{{% /notice %}}
+
 optional
 
 - `lag`
   * `enable`: enable lag monitoring
-  * `tollerance`: tollerance in engineering units
+  * `tolerance`: tolerance in engineering units
   * `time`: time for the condition to be true in ms
 - `target`
   * `enable`: enable target monitoring
-  * `tollerance`: tollerance in engineering units
+  * `tolerance`: tolerance in engineering units
   * `time`: time for the condition to be true in ms
 - `velocity`
   * `enable`: enable velocity monitoring
@@ -356,11 +361,11 @@ optional
 monitoring:
   # lag:
   #   enable: false
-  #   tollerance: 5
+  #   tolerance: 5
   #   time: 100
   # target:
   #   enable: true
-  #   tollerance: 0.125
+  #   tolerance: 0.125
   #   time: 100
   # velocity:
   #   enable: false

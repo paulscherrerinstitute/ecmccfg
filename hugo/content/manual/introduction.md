@@ -8,6 +8,13 @@ chapter = false
 EtherCAT requires the field bus components (slaves) to be configured on the master.
 The master must know about the data exchanges with the slaves, this is referred to as **process image**.
 
+During IOC-startup, the requested configuration is validated against the actually present hardware on the bus.
+Mismatches will result in an error, the IOC will _not_ start.
+
+{{% notice warning %}}
+Blindly restarting the IOC, with only partially working EtherCAT hardware, will results in an inoperable IOC! Refer to the [troubleshooting guide](../troubleshooting) for details.
+{{% /notice %}}
+
 ### IOC structure
 The startup script has several steps:
 
