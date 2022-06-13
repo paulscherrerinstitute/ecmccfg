@@ -3,7 +3,7 @@ name: github pages
 on:
   push:
     branches:
-      - v8.1_RC1  # Set a branch to deploy
+      - v8_RC1  # Set a branch to deploy
   pull_request:
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/v8.1_RC1' }}
+        if: ${{ github.ref == 'refs/heads/v8_RC1' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./hugo/public
