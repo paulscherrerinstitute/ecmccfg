@@ -3,7 +3,7 @@ name: github pages
 on:
   push:
     branches:
-      - v7.1  # Set a branch to deploy
+      - v8.1_RC1  # Set a branch to deploy
   pull_request:
 
 jobs:

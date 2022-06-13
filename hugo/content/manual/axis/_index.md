@@ -13,3 +13,8 @@ Both types are classes in ECMC, the physical axis is a super-set of the virtual 
 Since v7, axes can be configured with yaml-files.
 This is a huge improvement over the classic configuration based on EPICS environment variables.
 For backward compatibility the classical configuration is still supported.
+
+#### linting and schema check
+From v8+ yaml files are linted for syntactic errors, observe the iocsh for warnings and errors.
+Additionally the schema of the yaml file is checked by Cerberus.
+This check will point out errors in the structure of the configuration as well as certain type errors.
