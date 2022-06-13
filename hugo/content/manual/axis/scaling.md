@@ -1,26 +1,26 @@
 +++  
 title = "axis scaling"
-weight = 14
+weight = 20
 chapter = false  
 +++
 
-## axis scaling
 By popular demand, the topic scaling will be discusses in closer detail.
 
-ECMC has to scaling factors for each joint, firstly the `drive` scaling, secondly the `encoder` scaling.
+ECMC has to scaling factors for each joint, firstly the [drive](#drive-scaling) scaling, secondly the [encoder](#encoder-scaling) scaling.
 
 {{% notice warning %}}
 Changes to the scaling have direct effects on the `Kp` of the PID-loop.
 If the drive scaling is changes, make sure to adjust the PID parameters accordingly.
 {{% /notice %}}
 
-### drive scaling
+## drive scaling
 Drive scaling deals with the relation of the drive output (typically a 16- or 32-bit register) to axis velocity.
+Scaling is similar, but slighlty different for [stepper drives](#stepper-motor-drives) and [servo drives](#servo-motor-drives)
 
-#### stepper motor drives
+### stepper motor drives
 The scaling for the Ex70xx slaves will be explained based on two very common examples.
 
-##### simple linear axis
+#### simple linear axis
 Assumptions:
 * 200 fullsteps/rev motor
 * lead screw pitch: 5 mm/rev
@@ -33,14 +33,14 @@ drive:
   denominator:  32768  # I/O range 2^15, because 16-bit register, half is forward, the other half is backward
 ```
 
-###### Explanation
+##### Explanation
 The `denominator` is `32768` because the `velocitySetpoint` is a 16-register for the Beckhoff stepper drives.
 Thus, half of the full range is reserved for positive (forward) motion, the remaining half for negative (backward) motion.
 This means that at full output the motor would receive 2000 fullsteps per second.
 It is irrelevant whether the motor can actually spin this fast as this a purely theoretical value!
 Since we have established that the motor spins at 10 rev/s at full output, the conversion to engineering units is trivial and yields 50 mm/s, based on the lead screw pitch.
 
-##### rotational axis
+#### rotational axis
 Assumptions:
 * 400 fullsteps/rev motor
 * drive train ratio: 180 rev/deg
@@ -53,19 +53,20 @@ drive:
   denominator:  32768  # I/O range 2^15, because 16-bit register, half is forward, the other half is backward
 ```
 
-###### Explanation
+##### Explanation
 As before, at full output, the motor receives 2000 fullsteps/s.
 This results on 5 rev/s, due to the higher step count of the motor.
 The drive train ratio is specified as 180 motor revolutions per degree on the output.
 Hence, 180 rev/deg divided by 5 rev/s yields a velocity of 37 deg/s.
 Again, this is _not_ the actual maximum velocity, it is purely theoretical scaling factor for the PID-loop!
 
-#### Beckhoff servor motor drives (Ex72xx)
-Note that the servo motor drives from Beckhoff use a 32-bit register for the velocity setpoint.
+### servo motor drives
+This section is based on the Beckhoff servo motor drives (Ex72xx), AX-drives or drives from other vendors might differ.
+The Ex72xx servo motor drives from Beckhoff use a 32-bit register for the velocity setpoint.
 Therefore, the `denominator` takes on a value of `2^31 = 2147483648`.
 
 As for the `numerator`, the situation is a bit more complicated.
-The `AM81xx` synchronous motors come with different pole counts, most have 3 pole pairs, some have 4.
+The `AM81xx` synchronous motors come with different pole counts, most have 3 pole pairs, but some have 4.
  Naturally, this results in a different scaling for either type.
 At full output a 3 pole pair motor would spin at 8000 revolutions per second!
 Respectively, the 4 pole pair motor will assume 6000 rev/s.
@@ -80,13 +81,13 @@ drive:
   denominator:  2147483648   # I/O range 2^31, because 32-bit register, half is forward, the other half is backward
 ```
 
-### encoder scaling
+## encoder scaling
 This scaling ratio describes the relation of encoder counts and engineering units of the axis.
 
 Unlike the drive scaling, the encoder scaling is much simpler.
 It represents merely the realtion between the observed counts on the encoder and the displacement of the load.
 
-#### closed-loop
+### closed-loop
 
 Scaling absolute encoders is simple.
 This example shows a 32-bit encoder with 4096 ticks/mm, for an axis operated in mm.
@@ -98,10 +99,10 @@ encoder:
   bits: 32        # Total bit count of encoder raw data
 ```
 
-##### Explanation
+#### Explanation
 none, this should be simple enough!
 
-#### open-loop
+### open-loop
 
 Obviously, for open-loop operation there is no encoder.
 In this case the internal step counter of the stepper motor drive is used as "encoder".
@@ -115,7 +116,7 @@ encoder:
   bits: 16        # Total bit count of encoder raw data
 ```
 
-##### Explanation
+#### Explanation
 The internal step counter operates in microsteps.
 For most drives this value assumes 64, if uncertain consult the respective manual of the drive.
 In case of a 200 fullsteps/rev motor, the `denominator` therefore will be set to `200*64=12800`.

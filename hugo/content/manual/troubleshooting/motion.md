@@ -4,7 +4,7 @@ weight = 12
 chapter = false  
 +++
 
-### motion
+### culprit
 
 From experience, very few issues are related to the EtherCAT hardware itself.
 Mostly the cabling or the actual motor/encoder hardware is to blame.
