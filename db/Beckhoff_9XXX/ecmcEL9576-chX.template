@@ -10,7 +10,7 @@ record(mbbiDirect,"${ECMC_P}CH${CH_ID}-Stat"){
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-OvrTmpAlrm"){
-  field(DESC, "$(HWTYPE): Over Temperature")
+  field(DESC, "Over Temperature")
   field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B0")
   field(ZNAM, "No Alarm")
   field(ONAM, "Over Temp")
@@ -20,7 +20,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-OvrTmpAlrm"){
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-I2TErrAlrm"){
-  field(DESC, "$(HWTYPE): I2T Error")
+  field(DESC, "I2T Error")
   field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B1")
   field(ZNAM, "No Alarm")
   field(ONAM, "I2T Error")
@@ -30,7 +30,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-I2TErrAlrm"){
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-I2TWrnAlrm"){
-  field(DESC, "$(HWTYPE): I2T Warning")
+  field(DESC, "I2T Warning")
   field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B2")
   field(ZNAM, "No Alarm")
   field(ONAM, "I2T Warning")
@@ -40,7 +40,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-I2TWrnAlrm"){
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-OvrVltAlrm"){
-  field(DESC, "$(HWTYPE): Over Voltage")
+  field(DESC, "Over Voltage")
   field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Over Voltage")
@@ -50,7 +50,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-OvrVltAlrm"){
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-UndrVltAlrm"){
-  field(DESC, "$(HWTYPE): Under Voltage")
+  field(DESC, "Under Voltage")
   field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B4")
   field(ZNAM, "No Alarm")
   field(ONAM, "Under Voltage")
@@ -60,7 +60,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-UndrVltAlrm"){
 }
 
 record(bi,"${ECMC_P}CH${CH_ID}-OnAct"){
-  field(DESC, "$(HWTYPE): Chopper On")
+  field(DESC, "Chopper On")
   field(INP,  "${ECMC_P}CH${CH_ID}-Stat.B5")
   field(ZNAM, "No Alarm")
   field(ONAM, "No Alarm")
@@ -69,70 +69,65 @@ record(bi,"${ECMC_P}CH${CH_ID}-OnAct"){
 }
 
 record(ai,"${ECMC_P}CH${CH_ID}-CurrAct"){
-  field(DESC, "$(HWTYPE): Current [raw]")
+  field(DESC, "Current")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).currentActualResistor${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
-  field(ESLO, "$(ESLO=1)")
-  field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=Raw)")
-  field(PREC, "0")
-  field(LOW,  "$(LOW=0)")
-  field(LOLO, "$(LOLO=0)")
-  field(HIGH, "$(HIGH=0)")
-  field(HIHI, "$(HIHI=0)")
-  field(HYST, "$(HYST=0)")
-  field(LLSV, "$(LLSV=NO_ALARM)")
-  field(LSV,  "$(LSV=NO_ALARM)")
-  field(HSV,  "$(HSV=NO_ALARM)")
-  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(ESLO, 0.001)
+  field(EOFF, 0)
+  field(EGU,  "A")
+  field(PREC, 3)
+  field(LOPR, 0)
+  field(HOPR, 10)
+  field(HIGH, 5)
+  field(HIHI, 8)
+  field(HYST, 0.1)
+  field(HSV,  "MINOR")
+  field(HHSV, "MAJOR")
   field(TSE,  "$(TSE=-2)")
 }
 
 record(ai,"${ECMC_P}CH${CH_ID}-DtyCyc"){
-  field(DESC, "$(HWTYPE): Duty Cycle [raw]")
+  field(DESC, "Duty Cycle")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).dutyCycle${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(LINR, "$(LINR=SLOPE)")
-  field(ESLO, "$(ESLO=1)")
-  field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=Raw)")
-  field(PREC, "0")
-  field(LOW,  "$(LOW=0)")
-  field(LOLO, "$(LOLO=0)")
-  field(HIGH, "$(HIGH=0)")
-  field(HIHI, "$(HIHI=0)")
-  field(HYST, "$(HYST=0)")
-  field(LLSV, "$(LLSV=NO_ALARM)")
-  field(LSV,  "$(LSV=NO_ALARM)")
-  field(HSV,  "$(HSV=NO_ALARM)")
-  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(EGU,  "%")
+  field(PREC, 0)
+  field(LOPR, 0)
+  field(HOPR, 100)
+  field(HIGH, 80)
+  field(HIHI, 90)
+  field(HYST, 1)
+  field(HSV,  "MINOR")
+  field(HHSV, "MAJOR")
   field(TSE,  "$(TSE=-2)")
 }
 
 record(ai,"${ECMC_P}CH${CH_ID}-VoltAct"){
-  field(DESC, "$(HWTYPE): Voltage Act [V]")
+  field(DESC, "Voltage")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).voltageActual${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "SLOPE")
-  field(ESLO, "0.001")
-  field(EOFF, "0")
-  field(EGU,  "V)")
-  field(PREC, "0")
-  field(LOW,  "$(LOW=0)")
-  field(LOLO, "$(LOLO=0)")
-  field(HIGH, "$(HIGH=0)")
-  field(HIHI, "$(HIHI=0)")
-  field(HYST, "$(HYST=0)")
-  field(LLSV, "$(LLSV=NO_ALARM)")
-  field(LSV,  "$(LSV=NO_ALARM)")
-  field(HSV,  "$(HSV=NO_ALARM)")
-  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(ESLO, 0.001)
+  field(EOFF, 0)
+  field(EGU,  "V")
+  field(PREC, 3)
+  field(LOPR, 0)
+  field(HOPR, 72)
+  field(LOW,  20)
+  field(LOLO, 18)
+  field(HIGH, 60)
+  field(HIHI, 70)
+  field(HYST, 0.1)
+  field(LLSV, "MAJOR")
+  field(LSV,  "MINOR")
+  field(HSV,  "MINOR")
+  field(HHSV, "MAJOR")
   field(TSE,  "$(TSE=-2)")
 }

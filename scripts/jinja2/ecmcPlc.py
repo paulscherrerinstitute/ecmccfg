@@ -1,43 +1,58 @@
+import pathlib
 import re
-from ecmcYamlHandler import *
-from ecmcJinja2 import JinjaTemplate
+
+import ecmcYamlHandler
+import ecmcJinja2
+import ecmcConfigValidator
 
 
-class EcmcPlc(YamlHandler, JinjaTemplate):
-    def __init__(self, plcconfig, jinjatemplate):
-        self.hasPlcFile = False
-        self.hasVariables = False
-        self.loadYamlData(plcconfig)
-        self.read(jinjatemplate)
-        self.sanityCheckPlc()
-        self.process()
+class EcmcPlc:
+    plcTemplates = {
+        0: 'debug.jinja2',
+        1: 'plc.jinja2',
+        2: 'axisSynchronization.jinja2',
+    }
 
-    def sanityCheckPlc(self):
-        if 'plc' not in self.yamlData:
-            raise
-        self.checkForFile()
-        self.checkForVariables()
+    def __init__(self, config_file, jinja_template_dir):
+        if not pathlib.Path(jinja_template_dir).is_dir():
+            raise FileNotFoundError(f'template directory >> {jinja_template_dir} << not found!')
+        if not pathlib.Path(config_file).is_file():
+            raise FileNotFoundError(f'axis configuration >> {config_file} << not found!')
 
-    def process(self):
-        if self.hasPlcFile:
+        self.config_file = config_file
+        self.plc_type = 1
+        self.yamlHandler = ecmcYamlHandler.YamlHandler()
+
+        self.plcTemplate = ecmcJinja2.JinjaTemplate(jinja_template_dir)
+        self.v = ecmcConfigValidator.ConfigValidator()
+
+    def create(self):
+        """
+        plc object
+        """
+        self.yamlHandler.loadYamlData(self.config_file, lint=True)
+        self.v.document = self.yamlHandler.yamlData
+        self.plc_type = self.v.get_plc_type()  # obtain plc type from data, this pre-validates the 'axis' key
+
+    def make(self):
+        """
+        wrapper
+        """
+        self.yamlHandler.yamlData = self.v.validate_plc()
+        self.yamlHandler.checkForVariables()
+        self.yamlHandler.checkForPlcFile()
+
+        if self.yamlHandler.hasPlcFile:
             self.loadPlcFile()
-        if self.hasVariables:
-            self.render(self.yamlData)
-            self.setTemplate(self.product)
-        self.render(self.yamlData)
-
-    def checkForFile(self):
-        # if the config contains a 'file', set the flag to trigger loading {{ plc.file }}
-        if 'file' in self.yamlData['plc'] and self.yamlData['plc']['file'] is not None:
-            self.hasPlcFile = True
-
-    def checkForVariables(self):
-        if 'var' in self.yamlData:
-            self.hasVariables = True
+        self.plcTemplate.read(self.plcTemplates[self.plc_type])
+        if self.yamlHandler.hasVariables:
+            self.plcTemplate.setTemplate(self.plcTemplate.render(self.yamlHandler.yamlData))
+        self.plcTemplate.render(self.yamlHandler.yamlData)
 
     def loadPlcFile(self):
-        # replace all 'plc.code' with the content of {{ plc.file }}
-        self.yamlData['plc']['code'] = self.readPlcFile(self.yamlData['plc']['file'])
+        key = 'plc'
+        # replace all 'code' with the content of {{ file }}
+        self.yamlHandler.yamlData[key]['code'] = self.readPlcFile(self.yamlHandler.yamlData[key]['file'])
 
     @staticmethod
     def readPlcFile(filename):
@@ -50,11 +65,20 @@ class EcmcPlc(YamlHandler, JinjaTemplate):
                 x = re.findall("^#.*", line)  # remove commented lines
                 if x:
                     continue
-                line = line.replace(";",
-                                    "|")  # statements are terminated with a pipe, but plc-files use a semi colon ';'
                 code.append(line)  # append whatever is left
         return code
 
+
+def main():
+    plc = EcmcPlc('./test/testPlc.yaml', './templates/')
+    # plc = EcmcPlc('pytest/yaml_files/joint_all.yaml', './templates/')
+    # plc = EcmcPlc('./test/testJointWithPlc.yaml', './templates/')
+    plc.create()
+    plc.make()
+    print(plc.yamlHandler.yamlData)
+    plc.plcTemplate.render(plc.yamlHandler.yamlData)
+    plc.plcTemplate.showProduct()
+
+
 if __name__ == '__main__':
-    plc = EcmcPlc('./test/testPlc.yaml')
-    print(yaml.dump(plc.yamlData))
+    main()

@@ -1,0 +1,36 @@
+axis:
+  id: 1
+  type: joint
+
+var:
+  drvSlave: 3
+  encSlave: 17
+  foo: '{{ var.bar }} {% for line in var.baz %} {{ line }}, {% endfor %}'
+  bar: 3.14
+  baz:
+    - 1
+    - 2
+    - 3
+    -
+
+drive:
+  control : ''
+  setpoint: ''
+
+encoder:
+  position: none
+
+input:
+  home: ''
+  interlock: ''
+  limit:
+    forward : ''
+    backward: ''
+
+trajectory:
+  axis:
+    velocity: 2.72
+    acceleration: 3.14
+
+epics:
+  name: joint.yaml

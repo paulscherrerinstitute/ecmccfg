@@ -1,0 +1,19 @@
+\section{PLC}
+
+This axis has a synchronization PLC defined in its configuration.
+The PLC is
+    {%- if plc.enable %}
+        \textbf{on}
+    {%- else %}
+        \textbf{off}
+    {%- endif %}
+by default.
+External commands are
+    {%- if plc.externalCommands|default(0)|int %}
+        \textbf{accepted}
+    {%- else %}
+        \textbf{rejected}
+    {%- endif %}
+by default.
+
+For details about the plc code refer to the \emph{plc} key of the config found here~\ref{configFileCode}.

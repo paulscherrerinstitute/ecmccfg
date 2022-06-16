@@ -26,7 +26,7 @@
 #-    FULL:  Init ecmc with support for both motion and DAQ (DEFAULT)
 #-    DAQ:   Init ecmc with support for only daq (not motion)
 #-    NO_MR: Init ecmc with support for motion (without motor record) and DAQ
-#- PVA               = YES / NO#-    NO_MR: 
+#- PVA               = YES / NO
 #- TMP_DIR      = directory for temporary files
 #-
 #- [set by module]

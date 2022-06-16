@@ -1,0 +1,16 @@
+\section{Epics}
+
+This axis is linked to the PV \textbf{ {{-epics.name-}}}.
+The engineering unit is {{egu}}, with a precision of {{epics.precision}} decimal places.
+
+{%if epics.motorRecord is defined%}
+{%if epics.motorRecord.enable is true%}
+The axis is configured \emph{with} the motorRecord, the description is "{{epics.motorRecord.description}}"!
+{%endif%}
+{%if epics.motorRecord.fieldInit is defined%}
+Additional field initializations are active:
+\begin{itemize}
+\item {{epics.motorRecord.fieldInit}}
+\end{itemize}
+{%endif%}
+{%endif%}

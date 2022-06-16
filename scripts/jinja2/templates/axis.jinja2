@@ -1,0 +1,28 @@
+#- -=-=-=-=- axis
+{#- drive is only present in type: 'joint' #}
+{%- set drive = None if drive is undefined else drive %}
+ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type }},{{ drive.type|default(0)|int }},{{ trajectory.type }})"
+{%- if axis.type|int == 2 %}
+    ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id }},0)"
+{%- endif %}
+#- health output
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id }}.health")"
+
+{%- if axis.features is defined %}
+    #- features
+    ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.alarmAtHardLimits|default(0)|int }})"
+    {%- if axis.features.alarmAtHardLimits  %}
+        # -------------- WARNING --------------
+        # Axis {{ axis.id }} will go into error state upon limit switch trigger
+        # Recovery from this state is _only_ possible by manually disabling the
+        # 'SetAxisEnableAlarmAtHardLimits' feature.
+        # ==> ecmcConfig "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }},0)"
+        # -------------------------------------
+    {%- endif %}
+    {#- the `axis.features.blockCom` key is handled in the top-level template #}
+    {%- if axis.features.allowedFunctions is defined %}
+        #- allowed motion functions
+        ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
+    {% endif -%}
+{% endif -%}

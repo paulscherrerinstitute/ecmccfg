@@ -1,4 +1,43 @@
-# ecmccfg changelog
+= ecmccfg changelog
+Dr. Niko Kivel <niko.kivel@psi.ch>
+:toc: left
+:toclevels: 2
+
+== v8_RC1
+
+=== EPICS
+==== template
+- removed `record(longin, "$(PREFIX)$(MOTOR_NAME)-Err")` from `ecmcMotorRecord.template`
+
+=== config
+==== features
+* yaml-based configs are now __linted__ and __schema validated__.
+* The configuration capabilities have been extended to
+  - end effector, aka virtual axes
+  - sync PLCs, ...
+* The `drive` and `encoder` keys had an `error` key with up to three bits. Those bits referred to the local `status` key. The feature was extended by a string handling in order to propagate errors of other slaves.
+
+.Example:
+This will use bits `3` and `7` of the `driveStatus01` and bit `0` of the `encoderStatus01`.
+[source,yaml]
+----
+drive:
+  status: ec0.s{{ var.drive }}.driveStatus01
+  error:
+    - 3               # Error 0
+    - 7               # Error 1
+    - ec0.s{{ var.encoder }}.encoderStatus01.0  # Error 2
+----
+
+These features need to be tested for the v8 release!
+
+==== breaking
+- typo fixed: `tollerance` -> `tolerance`
+- structure has changed slightly
+
+=== dependencies
+
+- `ECMC` version `ruckig` (aka `v8`): Due to a fixed typo in the `ECMC` command set, which required a fix in the `jinja2` templates.
 
 v8.0.0
 PVs changed:

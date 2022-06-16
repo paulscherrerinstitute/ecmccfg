@@ -18,10 +18,13 @@ Indent with 2 spaces.
 {{% /notice %}}
 
 ## introduction
-The config is processed by `jinja2`, the processor will complain if mandatory keys are missing. Likewise, missing optional keys are populated with default values.
+{{% notice info %}}
+`python 3.x` is required
+{{% /notice %}}
+The config is processed by a python script with a `jinja2` backend. The processor will complain if mandatory keys are missing. Likewise, missing optional keys are populated with default values.
 
 {{% notice info %}}
-The [scripts](../../../source/scripts/jinja2/) invoking the `jinja2` processor will create a `python` virtual environment and install the required libraries.
+The [script](../../../source/scripts/jinja2/loadyamlaxis/) invokes a python script which subsequently uses a `jinja2` processor to render the respective templates. The script will create a `python` virtual environment and install the required libraries automatically.
 {{% /notice %}}
 
 The configuration is separated into the following mandatory sections:
@@ -60,8 +63,13 @@ axis:
   # mode: CSV     # supported mode, CSV and CSP; WIP
   # parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 ```
-## motorRecord
-Epics motorRecord field configuration.
+
+## epics
+Epics configuration.
+
+{{% notice info %}}
+The Epics motorRecord can now be disabled.
+{{% /notice %}}
 
 mandatory
 
@@ -70,17 +78,22 @@ mandatory
 optional
 
 - `precision`: PREC field; default 3
-- `description`: DESC field; default ''
 - `unit`: EGU field; optional default mm
-- `fieldInit`: string with additional field initial values; default ''
+- `motorRecord`
+  * `enable`: set to false to disable motorRecord
+  * `description`: DESC field; default ''
+  * `fieldInit`: string with additional field initial values; default ''
 
 ```yaml
-motorRecord:
+epics:
   name: M1
   # precision: 3
-  # description: AM8111 CSV
   # unit: deg
-  # fieldInit: RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim
+  # motorRecord:
+  #   enable: false
+  #   fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim'
+  #   fieldInit: 'NTM=1'
+  #   description: AM8111 CSV
 ```
 
 ## drive
@@ -130,8 +143,8 @@ mandatory
 - `denominator`: scaling denominator
 - `type`: type of encoder: `0`=incremental, `1`=absolute
 - `bits`: raw data bit count
-- `absBits`: 25     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
-- `absOffset`: 0    # Encoder offset in engineering units (for absolute encoders)
+- `absBits`: Absolute bit count (for absolute encoders) always least significant part of 'bits'
+- `absOffset`: Encoder offset in engineering units (for absolute encoders)
 - `position`: position entry
 
 optional
@@ -199,6 +212,10 @@ controller:
 ## trajectory
 settings for the trajectory planning.
 
+{{% notice warning %}}
+*All* accelerations are now defined in EGU s^{-2}
+{{% /notice %}}
+
 mandatory
 
 - `axis`
@@ -219,7 +236,8 @@ optional
 trajectory:
   axis:
     velocity: 180
-    acceleration: 0.1
+    acceleration: 180
+    deceleration: 360
     # emergencyDeceleration: 0.05
   # jog:
   #   velocity: 90
@@ -272,7 +290,11 @@ In case a legacy system or temporary installation requires a incremental encoder
 optional
 
 - `type`: referencing procedure
-- `position`: position of the refernce mark in engineering units
+- `position`: position of the reference mark in engineering units
+- `postMoveEnable`: post homing move
+- `postMovePosition`: post homing move target
+- `switchPolarity`: home switch polarity, for NO switches
+- `latchCount`: latch counter
 - `velocity`: velocities
   * `to`: to the cam
   * `from`: off the cam
@@ -283,11 +305,15 @@ optional
 # homing:
 #   type: 3
 #   position: 0
+#   postMoveEnable: false
+#   postMovePosition: 0
+#   switchPolarity: 0 ## 0: NC, 1: NO
+#   latchCount: 0
 #   velocity:
 #     to: 2.72
-#     from: 3.14
-#   acceleration: 2
-#   deceleration: 5
+#     # from: 3.14
+#   # acceleration: 2
+#   # deceleration: 5
 ```
 
 ## softlimits
@@ -309,15 +335,20 @@ optional
 ## monitoring
 Three entities can be monitored, (1) lag, aka following error, (2) target, aka in position, (3) velocity.
 
+{{% notice info %}}
+It is highly advisable to always use the `lag` and `attarget` monitoring fo closed-loop axis.
+Failure to do so, will most likely results in unexpected behaviour.
+{{% /notice %}}
+
 optional
 
 - `lag`
   * `enable`: enable lag monitoring
-  * `tollerance`: tollerance in engineering units
+  * `tolerance`: tolerance in engineering units
   * `time`: time for the condition to be true in ms
 - `target`
   * `enable`: enable target monitoring
-  * `tollerance`: tollerance in engineering units
+  * `tolerance`: tolerance in engineering units
   * `time`: time for the condition to be true in ms
 - `velocity`
   * `enable`: enable velocity monitoring
@@ -330,11 +361,11 @@ optional
 monitoring:
   # lag:
   #   enable: false
-  #   tollerance: 5
+  #   tolerance: 5
   #   time: 100
   # target:
   #   enable: true
-  #   tollerance: 0.125
+  #   tolerance: 0.125
   #   time: 100
   # velocity:
   #   enable: false

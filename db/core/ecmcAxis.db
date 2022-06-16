@@ -3,9 +3,21 @@ record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos?")
-  field(PREC, "3")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
   field(DESC, "Axis ax$(AXIS_NO): Actual Position")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${P}${AXIS_NAME}-VelAct"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}/s")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -13,7 +25,8 @@ record(ai,"${P}${AXIS_NAME}-PosSet"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).setpos?")
-  field(PREC, "3")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
   field(DESC, "Axis ax$(AXIS_NO): Setpoint Position")
   field(TSE,  "$(TSE=-2)")
@@ -23,7 +36,8 @@ record(ai,"${P}${AXIS_NAME}-PosErr"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poserr?")
-  field(PREC, "3")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
   field(DESC, "Axis ax$(AXIS_NO): Following Error")
   field(TSE,  "$(TSE=-2)")
@@ -347,6 +361,7 @@ record(bo,"${P}${AXIS_NAME}-ExeCmd"){
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B1")
   field(ZNAM, "Not Execute")
   field(ONAM, "Execute")
+  field(HIGH, 0.001)
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
@@ -357,6 +372,7 @@ record(bo,"${P}${AXIS_NAME}-StpCmd"){
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B2")
   field(ZNAM, "Not stop")
   field(ONAM, "Stop")
+  field(HIGH, 0.001)
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
@@ -438,6 +454,8 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targpos?")
   field(SCAN, "Passive")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
   field(TSE,  "0")
 }
 
@@ -447,6 +465,8 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targvelo?")
   field(SCAN, "Passive")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}/s")
   field(TSE,  "0")
 }
 
@@ -483,4 +503,6 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).errorid?")
   field(SCAN, "I/O Intr")  
   field(TSE,  "$(TSE=-2)")
+  field(HIGH, 1)
+  field(HSV,  "MAJOR")
 }

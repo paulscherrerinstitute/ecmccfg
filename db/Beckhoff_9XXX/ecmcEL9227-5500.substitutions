@@ -1,4 +1,4 @@
-file "ecmcEL9227-5500-chx.template"
+file "ecmcEL9227-5500-chX.template"
 {
     pattern {CH_ID}
             {01   }
