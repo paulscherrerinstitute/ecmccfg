@@ -18,3 +18,9 @@ dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_
 #- This is an REAL axis == type 1
 ecmcFileExist("ecmcAxisType.db",1,1)
 dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=1")
+#- TrajType
+ecmcFileExist("ecmcTrajType.db",1,1)
+dbLoadRecords("ecmcTrajType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
+#- DrvType
+ecmcFileExist("ecmcDrvType.db",1,1)
+dbLoadRecords("ecmcDrvType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},DRV_TYPE=$(ECMC_DRV_TYPE=0)")
