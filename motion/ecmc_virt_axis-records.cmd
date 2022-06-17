@@ -17,10 +17,4 @@ ecmcFileExist("ecmcAxis.db",1,1)
 dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 #- This is an VIRT axis == type 2
 ecmcFileExist("ecmcAxisType.db",1,1)
-dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=2")
-#- TrajType
-ecmcFileExist("ecmcTrajType.db",1,1)
-dbLoadRecords("ecmcTrajType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
-#- DrvType is not applicable in a virt axis so set to 2 (="NA")
-ecmcFileExist("ecmcDrvType.db",1,1)
-dbLoadRecords("ecmcDrvType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},DRV_TYPE=2")
+dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=1,DRV_TYPE=2,TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")

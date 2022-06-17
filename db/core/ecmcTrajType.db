@@ -1,9 +1,0 @@
-record(mbbi,"${P}${AXIS_NAME}-TrajType"){
-    field(DESC, "Traj Type")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(ZRST, "TRAPETZ")
-    field(ONST, "RUCKIG")
-    field(VAL,  "$(TRAJ_TYPE=0)")
-    field(PINI, "YES")
-}
