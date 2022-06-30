@@ -34,7 +34,7 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 ecmcConfig "Cfg.SetAppMode(1)"
 
 # Below is a sequence describing what records to use for absolute positioning! 
-#mcu002> dbpf IOC_TEST:m0s000-Pos01-StartType 1
+#mcu002> dbpf IOC_TEST:m0s000-Pos01-StrtType 1
 #mcu002> dbpf IOC_TEST:m0s000-Pos01-AccCmd 1000
 #mcu002> dbpf IOC_TEST:m0s000-Pos01-DecCmd 1000
 #mcu002> dbpf IOC_TEST:m0s000-Pos01-VelCmd 500
@@ -57,7 +57,7 @@ ecmcConfig "Cfg.SetAppMode(1)"
 #-IOC_TEST:m0s000-Pos01-Ctrl
 #-IOC_TEST:m0s000-Pos01-PosCmd
 #-IOC_TEST:m0s000-Pos01-VelCmd
-#-IOC_TEST:m0s000-Pos01-StartType
+#-IOC_TEST:m0s000-Pos01-StrtType
 #-IOC_TEST:m0s000-Pos01-AccCmd
 #-IOC_TEST:m0s000-Pos01-DecCmd
 #-IOC_TEST:m0s000-Drv01-Ctrl
@@ -79,7 +79,7 @@ ecmcConfig "Cfg.SetAppMode(1)"
 #-IOC_TEST:m0s000-Pos01-Ctrl-RB
 #-IOC_TEST:m0s000-Pos01-PosCmd-RB
 #-IOC_TEST:m0s000-Pos01-VelCmd-RB
-#-IOC_TEST:m0s000-Pos01-StartType-RB
+#-IOC_TEST:m0s000-Pos01-StrtType-RB
 #-IOC_TEST:m0s000-Pos01-AccCmd-RB
 #-IOC_TEST:m0s000-Pos01-DecCmd-RB
 #-IOC_TEST:m0s000-Drv01-Ctrl-RB

@@ -66,41 +66,41 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
   field(DESC, "$(HWTYPE): Drive Warning")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B2")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(DESC, "$(HWTYPE): Drive Error")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Stl-Alrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-StlAlrm")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-Stl-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-StlAlrm"){
   field(DESC, "$(HWTYPE): Drive Motor Stall")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-SyncErr-Alrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-SyncErrAlrm")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-SyncErr-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-SyncErrAlrm"){
   field(DESC, "$(HWTYPE): Drive Sync Error")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BD")
   field(ZNAM, "No Alarm")

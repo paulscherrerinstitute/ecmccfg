@@ -75,7 +75,7 @@ record(ai,"$(P)MCU-ThdPrdMin"){
   field(EGU,  "ns")
 }
 
-record(ai,"$(P)MCU-ThdPrdMmax"){
+record(ai,"$(P)MCU-ThdPrdMax"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ecmc.thread.period.max?")

@@ -43,7 +43,7 @@ record(ai,"${P}${AXIS_NAME}-PosErr"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(waveform,"${P}${AXIS_NAME}-Array-Stat"){
+record(waveform,"${P}${AXIS_NAME}-Arr-Stat"){
   field(PINI, "1")
   field(DTYP, "asynInt8ArrayIn")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayIn/ax$(AXIS_NO).diagnostic?")
@@ -227,11 +227,11 @@ record(bi,"${P}${AXIS_NAME}-EncSrcTyp-RB"){
   field(ONAM, "PLC")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-CmdFrmPLCCmd-RB.PROC")
 }
 
 #  // bit 13 Allow plc commands
-record(bi,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd-RB"){
+record(bi,"${P}${AXIS_NAME}-CmdFrmPLCCmd-RB"){
   field(DESC, "${AXIS_NAME}: Allow PLC cmds")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BD")
   field(ZNAM, "Disabled")
@@ -418,7 +418,7 @@ record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
   field(TSE,  "0")
 }
 
-record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
+record(bo,"${P}${AXIS_NAME}-CmdFrmPLCCmd"){
   field(DESC, "${AXIS_NAME}: Allow cmd from PLCs")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B7")
   field(ZNAM, "Refuse")
@@ -431,8 +431,8 @@ record(bo,"${P}${AXIS_NAME}-AllwCmdFrmPLCCmd"){
 record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B8")
-  field(ZNAM, "Refuse")
-  field(ONAM, "Allow")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
@@ -441,8 +441,8 @@ record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
 record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B9")
-  field(ZNAM, "Refuse")
-  field(ONAM, "Allow")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")

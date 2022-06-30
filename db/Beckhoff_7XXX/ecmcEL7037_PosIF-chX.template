@@ -110,7 +110,7 @@ record(ao,"${ECMC_P}Pos${CH_ID}-VelCmd"){
   field(PREC, "0")
 }
 
-record(ai,"${ECMC_P}Pos${CH_ID}-StartType-RB"){
+record(ai,"${ECMC_P}Pos${CH_ID}-StrtType-RB"){
   field(DESC, "$(HWTYPE): PosIF Start Type RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -120,7 +120,7 @@ record(ai,"${ECMC_P}Pos${CH_ID}-StartType-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"${ECMC_P}Pos${CH_ID}-StartType"){
+record(ao,"${ECMC_P}Pos${CH_ID}-StrtType"){
   field(DESC, "$(HWTYPE): PosIF Start Type")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")

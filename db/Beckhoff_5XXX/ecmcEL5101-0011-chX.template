@@ -100,7 +100,7 @@ record(ai,"${ECMC_P}Enc${CH_ID}-PosCmd-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(waveform,"${ECMC_P}Enc${CH_ID}-PosAct-Array"){
+record(waveform,"${ECMC_P}Enc${CH_ID}-PosAct-Arr"){
   field(DESC, "$(HWTYPE): Actual position Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayIn)")
