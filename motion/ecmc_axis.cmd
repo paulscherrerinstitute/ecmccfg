@@ -27,7 +27,7 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_MRES=-1}>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
 
 #- General
-ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},1,${ECMC_DRV_TYPE})"
+ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},1,${ECMC_DRV_TYPE=0},${ECMC_TRAJ_TYPE=0})"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_AXIS_HEALTH},"ax${ECMC_AXIS_NO}.health")"
 ecmcConfigOrDie "Cfg.SetAxisModRange(${ECMC_AXIS_NO}, ${ECMC_MOD_RANGE=0})"
 ecmcConfigOrDie "Cfg.SetAxisModType(${ECMC_AXIS_NO}, ${ECMC_MOD_TYPE=0})"
@@ -43,9 +43,10 @@ ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCS,"'${ECMC_ACCL=EMPTY}'=='EMPTY'","", "
 ${ECMC_BLOCK_ACCL} ecmcConfigOrDie "Cfg.SetAxisVelAccDecTime(${ECMC_AXIS_NO},${ECMC_VELO},${ECMC_ACCL=0})"
 ${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisAcc(${ECMC_AXIS_NO},${ECMC_ACCS_EGU_PER_S2=0})"
 ${ECMC_BLOCK_ACCS} ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},${ECMC_DECS_EGU_PER_S2=${ECMC_ACCS_EGU_PER_S2=0}})"
+ecmcConfigOrDie "Cfg.SetAxisJerk(${ECMC_AXIS_NO},${ECMC_JERK=0})"
 ecmcConfigOrDie "Cfg.SetAxisVel(${ECMC_AXIS_NO},${ECMC_VELO})"
 ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},${ECMC_EMERG_DECEL})"
-ecmcConfigOrDie "Cfg.SetAxisHomeVelTwordsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_TO})"
 ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},${ECMC_HOME_VEL_FRM})"
 
 #- Controller

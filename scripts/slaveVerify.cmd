@@ -17,13 +17,13 @@ ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "${RESET=0}>0","","#- ")
 ${SLAVE_VERIFY}${SLAVE_RESET}ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
 
 #- read firmware version
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
 ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "${READ_FW=0}>0","","#- ")
 ${SLAVE_VERIFY}${SLAVE_FW}ecmcConfig "EcReadSdo(${ECMC_EC_SLAVE_NUM},0x100a,0x0,2)"
 ${SLAVE_VERIFY}${SLAVE_FW}ecmcEpicsEnvSetCalc("ECMC_EC_SLAVE_FW", "${ECMC_CONFIG_RETURN_VAL=0}", "0x%04x")
-${SLAVE_VERIFY}${SLAVE_FW}Firmware version: ${ECMC_EC_SLAVE_FW=0}
+${SLAVE_VERIFY}${SLAVE_FW}${ECMC_COMMENT=#}Firmware version: ${ECMC_EC_SLAVE_FW=0}
 
 #- reset envitronment
 epicsEnvUnset(SLAVE_VERIFY)
 epicsEnvUnset(SLAVE_RESET)
 epicsEnvUnset(SLAVE_FW)
-

@@ -1,0 +1,4 @@
+
+
+println('Raw encoder value:', ec_chk_bits(ec0.s3.positionActual01,0,11));
+
