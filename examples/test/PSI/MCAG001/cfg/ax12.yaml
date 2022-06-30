@@ -1,0 +1,64 @@
+axis:
+  id: 12
+  type: ee
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+
+epics:
+  name: sine
+  precision: 3
+  unit: a.u.
+  motorRecord:
+    enable: yes
+    description: "osci"
+
+encoder:
+  source: 1
+  position: ec0.s0.ONE.0
+
+trajectory:
+  axis:
+    type: 1
+    velocity: 1
+    acceleration: 10
+    jerk: 10
+
+input:
+  limit:
+    forward: ec0.s0.ONE.0
+    backward: ec0.s0.ONE.0
+  home: ec0.s0.ONE.0
+  interlock: ec0.s0.ONE.0
+
+monitoring:
+  lag:
+    enable: yes
+    tolerance: 2
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.1
+    time: 100
+  velocity:
+    enable: true
+    max: 60
+    time:
+      trajectory: 100
+      drive: 200
+
+
+plc:
+  enable: yes  # value at IOC start
+  externalCommands: yes # befehle von einer anderen PLC
+  code:
+    - ax12.enc.actpos:=ax12.traj.setpos;
+    - ax10.traj.setpos:=10*sin(ax12.traj.setpos);
+    - ax11.traj.setpos:=10*cos(ax12.traj.setpos);
+    - if(ax10.traj.source){ax10.drv.enable:=ax12.drv.enable};
+    - if(ax11.traj.source){ax11.drv.enable:=ax12.drv.enable};
+  filter:
+    velocity:
+      enable: false
+      size: 100
+    trajectory:
+      enable: false
+      size: 100
