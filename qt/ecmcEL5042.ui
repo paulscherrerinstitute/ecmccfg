@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>125</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>125</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcE_slave_frame.ui</string>
+   </property>
+  </widget>
+  <widget class="caFrame" name="caframe">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>40</y>
+     <width>125</width>
+     <height>420</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0">
+    <property name="margin">
+     <number>2</number>
+    </property>
+    <property name="spacing">
+     <number>4</number>
+    </property>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>channel 2</string>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+      <widget class="caFrame" name="caframe_3">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>15</y>
+         <width>120</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="macro">
+        <string notr="true">CH=2,IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType),CH_OFF=$(CH2_OFF)</string>
+       </property>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
+       </property>
+       <property name="visibilityCalc">
+        <string notr="true">!A</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(CH_OFF)</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <property name="margin">
+         <number>2</number>
+        </property>
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,3">
+          <item>
+           <widget class="caLabel" name="calabel_8">
+            <property name="text">
+             <string>pos:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="caLineEdit" name="calineedit_2">
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-PosAct</string>
+            </property>
+            <property name="background">
+             <color alpha="0">
+              <red>160</red>
+              <green>160</green>
+              <blue>164</blue>
+             </color>
+            </property>
+            <property name="colorMode">
+             <enum>caLineEdit::Static</enum>
+            </property>
+            <property name="precisionMode">
+             <enum>caLineEdit::User</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="gridLayout_3" columnstretch="10,0">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item row="0" column="1">
+           <widget class="caLed" name="caled_6">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="rectangular">
+             <bool>true</bool>
+            </property>
+            <property name="gradientEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="ledWidth">
+             <number>16</number>
+            </property>
+            <property name="ledHeight">
+             <number>16</number>
+            </property>
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-WrnAlrm</string>
+            </property>
+            <property name="colorMode">
+             <enum>caLed::Static</enum>
+            </property>
+            <property name="falseColor">
+             <color>
+              <red>170</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueColor">
+             <color>
+              <red>0</red>
+              <green>85</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueValue">
+             <string notr="true">0</string>
+            </property>
+            <property name="falseValue">
+             <string notr="true">1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="caLed" name="caled_8">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="rectangular">
+             <bool>true</bool>
+            </property>
+            <property name="gradientEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="ledWidth">
+             <number>16</number>
+            </property>
+            <property name="ledHeight">
+             <number>16</number>
+            </property>
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-RdyStat</string>
+            </property>
+            <property name="colorMode">
+             <enum>caLed::Static</enum>
+            </property>
+            <property name="falseColor">
+             <color>
+              <red>170</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueColor">
+             <color>
+              <red>0</red>
+              <green>85</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueValue">
+             <string notr="true">1</string>
+            </property>
+            <property name="falseValue">
+             <string notr="true">0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="caLed" name="caled_7">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="rectangular">
+             <bool>true</bool>
+            </property>
+            <property name="gradientEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="ledWidth">
+             <number>16</number>
+            </property>
+            <property name="ledHeight">
+             <number>16</number>
+            </property>
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-ErrAlrm</string>
+            </property>
+            <property name="colorMode">
+             <enum>caLed::Static</enum>
+            </property>
+            <property name="falseColor">
+             <color>
+              <red>170</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueColor">
+             <color>
+              <red>0</red>
+              <green>85</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueValue">
+             <string notr="true">0</string>
+            </property>
+            <property name="falseValue">
+             <string notr="true">1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="caLabel" name="calabel_10">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>error</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="caLabel" name="calabel_9">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>warning</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="caLabel" name="calabel_11">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>ready</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="title">
+       <string>channel 1</string>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+      <widget class="caFrame" name="caframe_2">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>15</y>
+         <width>120</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="macro">
+        <string notr="true">CH=1,IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType)</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="margin">
+         <number>2</number>
+        </property>
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3">
+          <item>
+           <widget class="caLabel" name="calabel_7">
+            <property name="text">
+             <string>pos:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="caLineEdit" name="calineedit">
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-PosAct</string>
+            </property>
+            <property name="background">
+             <color alpha="0">
+              <red>160</red>
+              <green>160</green>
+              <blue>164</blue>
+             </color>
+            </property>
+            <property name="colorMode">
+             <enum>caLineEdit::Static</enum>
+            </property>
+            <property name="precisionMode">
+             <enum>caLineEdit::User</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="gridLayout" columnstretch="10,3">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item row="1" column="0">
+           <widget class="caLabel" name="calabel_4">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>error</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="caLed" name="caled_3">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="rectangular">
+             <bool>true</bool>
+            </property>
+            <property name="gradientEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="ledWidth">
+             <number>16</number>
+            </property>
+            <property name="ledHeight">
+             <number>16</number>
+            </property>
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-WrnAlrm</string>
+            </property>
+            <property name="colorMode">
+             <enum>caLed::Static</enum>
+            </property>
+            <property name="falseColor">
+             <color>
+              <red>170</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueColor">
+             <color>
+              <red>0</red>
+              <green>85</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueValue">
+             <string notr="true">0</string>
+            </property>
+            <property name="falseValue">
+             <string notr="true">1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="caLed" name="caled_5">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="rectangular">
+             <bool>true</bool>
+            </property>
+            <property name="gradientEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="ledWidth">
+             <number>16</number>
+            </property>
+            <property name="ledHeight">
+             <number>16</number>
+            </property>
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-RdyStat</string>
+            </property>
+            <property name="colorMode">
+             <enum>caLed::Static</enum>
+            </property>
+            <property name="falseColor">
+             <color>
+              <red>170</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueColor">
+             <color>
+              <red>0</red>
+              <green>85</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueValue">
+             <string notr="true">1</string>
+            </property>
+            <property name="falseValue">
+             <string notr="true">0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="caLabel" name="calabel_6">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>ready</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="caLabel" name="calabel_5">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>warning</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="caLed" name="caled_4">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="rectangular">
+             <bool>true</bool>
+            </property>
+            <property name="gradientEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="ledWidth">
+             <number>16</number>
+            </property>
+            <property name="ledHeight">
+             <number>16</number>
+            </property>
+            <property name="channel" stdset="0">
+             <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-ErrAlrm</string>
+            </property>
+            <property name="colorMode">
+             <enum>caLed::Static</enum>
+            </property>
+            <property name="falseColor">
+             <color>
+              <red>170</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueColor">
+             <color>
+              <red>0</red>
+              <green>85</green>
+              <blue>0</blue>
+             </color>
+            </property>
+            <property name="trueValue">
+             <string notr="true">0</string>
+            </property>
+            <property name="falseValue">
+             <string notr="true">1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+  <customwidget>
+   <class>caLed</class>
+   <extends>QWidget</extends>
+   <header>caLed</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

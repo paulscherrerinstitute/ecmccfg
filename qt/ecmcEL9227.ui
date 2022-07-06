@@ -1,0 +1,1383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>125</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>125</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcE_slave_frame.ui</string>
+   </property>
+  </widget>
+  <widget class="QToolBox" name="toolBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>30</y>
+     <width>115</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="page">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>115</width>
+      <height>307</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <attribute name="label">
+     <string>Overview</string>
+    </attribute>
+    <widget class="caFrame" name="caframe">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>115</width>
+       <height>140</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">CH=1, IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+     </property>
+     <property name="background">
+      <color>
+       <red>154</red>
+       <green>154</green>
+       <blue>154</blue>
+      </color>
+     </property>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>111</width>
+        <height>140</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Channel 1</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,2">
+       <property name="margin">
+        <number>1</number>
+       </property>
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="caLabel" name="calabel_9">
+         <property name="text">
+          <string>Load</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="caLineEdit" name="calineedit_5">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-LoadAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>0</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="formatString">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="caLineEdit" name="calineedit_4">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CurrAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>2</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="caLabel" name="calabel_11">
+         <property name="text">
+          <string>Ui</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="caLabel" name="calabel_10">
+         <property name="text">
+          <string>I</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="caLineEdit" name="calineedit_6">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-VoltInAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>1</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="caLabel" name="calabel_15">
+         <property name="text">
+          <string>Uo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="caLineEdit" name="calineedit_7">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-VoltOutAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>1</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="caFrame" name="caframe_6">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>20</y>
+        <width>100</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="background">
+       <color>
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+      <property name="backgroundMode">
+       <enum>caFrame::Filled</enum>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::IfZero</enum>
+      </property>
+      <property name="visibilityMode">
+       <enum>caFrame::All</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-EnaAct</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="caLabel" name="calabel_3">
+         <property name="text">
+          <string>channel is
+powered</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="caLabel" name="calabel_4">
+         <property name="text">
+          <string>OFF</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="caFrame" name="caframe_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>150</y>
+       <width>115</width>
+       <height>140</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">CH=2, IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>111</width>
+        <height>140</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Channel 2</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,2">
+       <property name="margin">
+        <number>1</number>
+       </property>
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="caLabel" name="calabel_12">
+         <property name="text">
+          <string>Load</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="caLineEdit" name="calineedit_8">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-LoadAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>1</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::Channel</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="formatString">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="caLineEdit" name="calineedit_9">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CurrAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>2</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="caLabel" name="calabel_13">
+         <property name="text">
+          <string>Ui</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="caLabel" name="calabel_14">
+         <property name="text">
+          <string>I</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="caLineEdit" name="calineedit_10">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-VoltInAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>1</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="caLabel" name="calabel_16">
+         <property name="text">
+          <string>Uo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="caLineEdit" name="calineedit_11">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-VoltOutAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precision">
+          <number>1</number>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+         <property name="unitsEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="caFrame" name="caframe_5">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>20</y>
+        <width>100</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="background">
+       <color>
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+      <property name="backgroundMode">
+       <enum>caFrame::Filled</enum>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::IfZero</enum>
+      </property>
+      <property name="visibilityMode">
+       <enum>caFrame::All</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-EnaAct</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="caLabel" name="calabel">
+         <property name="text">
+          <string>channel is
+powered</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="caLabel" name="calabel_2">
+         <property name="text">
+          <string>OFF</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>115</width>
+      <height>307</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <attribute name="label">
+     <string>Stat Ch 1</string>
+    </attribute>
+    <widget class="caFrame" name="caframe_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>124</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">CH=1, IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+     </property>
+     <widget class="caMessageButton" name="camessagebutton_3">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>252</y>
+        <width>100</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>toggle</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-Ctrl-Swtch</string>
+      </property>
+      <property name="label">
+       <string notr="true">toggle</string>
+      </property>
+      <property name="foreground">
+       <color>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </property>
+      <property name="background">
+       <color>
+        <red>170</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+      <property name="releaseMessage">
+       <string notr="true">1</string>
+      </property>
+      <property name="pressMessage">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="caMessageButton" name="camessagebutton_4">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>274</y>
+        <width>100</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>toggle</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-Ctrl-Rst</string>
+      </property>
+      <property name="label">
+       <string notr="true">toggle</string>
+      </property>
+      <property name="releaseMessage">
+       <string notr="true">1</string>
+      </property>
+      <property name="pressMessage">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>111</width>
+        <height>250</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>status</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,1">
+       <property name="margin">
+        <number>1</number>
+       </property>
+       <item row="8" column="0">
+        <widget class="caLabel" name="calabel_39">
+         <property name="text">
+          <string>cool down</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="caLabel" name="calabel_40">
+         <property name="text">
+          <string>short</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="caLabel" name="calabel_18">
+         <property name="text">
+          <string>state</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="caLabel" name="calabel_41">
+         <property name="text">
+          <string>over U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="caLabel" name="calabel_42">
+         <property name="text">
+          <string>input</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="caLabel" name="calabel_43">
+         <property name="text">
+          <string>HW Prot</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="caLineEdit" name="calineedit_31">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CoolDwnAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="caLineEdit" name="calineedit_32">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisBIAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="caLineEdit" name="calineedit_12">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-TripAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="caLabel" name="calabel_44">
+         <property name="text">
+          <string>overload</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="caLabel" name="calabel_45">
+         <property name="text">
+          <string>under U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="caLineEdit" name="calineedit_33">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-UdrVoltAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="caLabel" name="calabel_46">
+         <property name="text">
+          <string>switch</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="caLineEdit" name="calineedit_34">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-OvrVoltAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="caLineEdit" name="calineedit_13">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-EnaAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="caLabel" name="calabel_28">
+         <property name="text">
+          <string>tripped</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="caLabel" name="calabel_47">
+         <property name="text">
+          <string>PDO</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="caLineEdit" name="calineedit_35">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-OvrldAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="caLineEdit" name="calineedit_36">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-HwProtAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="caLineEdit" name="calineedit_37">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisSwtchAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="caLineEdit" name="calineedit_14">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-ShrtCircAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="caLineEdit" name="calineedit_38">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisPDOAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="caLabel" name="calabel_48">
+         <property name="text">
+          <string>level</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="caLineEdit" name="calineedit_39">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CurrLvlAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>115</width>
+      <height>307</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <attribute name="label">
+     <string>Stat Ch 2</string>
+    </attribute>
+    <widget class="caFrame" name="caframe_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>124</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">CH=2, IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+     </property>
+     <widget class="caMessageButton" name="camessagebutton_2">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>274</y>
+        <width>100</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>toggle</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-Ctrl-Rst</string>
+      </property>
+      <property name="label">
+       <string notr="true">toggle</string>
+      </property>
+      <property name="releaseMessage">
+       <string notr="true">1</string>
+      </property>
+      <property name="pressMessage">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="caMessageButton" name="camessagebutton_5">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>250</y>
+        <width>100</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>toggle</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-Ctrl-Swtch</string>
+      </property>
+      <property name="label">
+       <string notr="true">toggle</string>
+      </property>
+      <property name="foreground">
+       <color>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </property>
+      <property name="background">
+       <color>
+        <red>170</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+      <property name="releaseMessage">
+       <string notr="true">1</string>
+      </property>
+      <property name="pressMessage">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>111</width>
+        <height>250</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>status</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,1">
+       <property name="margin">
+        <number>1</number>
+       </property>
+       <item row="8" column="0">
+        <widget class="caLabel" name="calabel_49">
+         <property name="text">
+          <string>cool down</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="caLabel" name="calabel_50">
+         <property name="text">
+          <string>short</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="caLabel" name="calabel_19">
+         <property name="text">
+          <string>state</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="caLabel" name="calabel_51">
+         <property name="text">
+          <string>over U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="caLabel" name="calabel_52">
+         <property name="text">
+          <string>input</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="caLabel" name="calabel_53">
+         <property name="text">
+          <string>HW Prot</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="caLineEdit" name="calineedit_40">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CoolDwnAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="caLineEdit" name="calineedit_41">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisBIAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="caLineEdit" name="calineedit_15">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-TripAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="caLabel" name="calabel_54">
+         <property name="text">
+          <string>overload</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="caLabel" name="calabel_55">
+         <property name="text">
+          <string>under U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="caLineEdit" name="calineedit_42">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-UdrVoltAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="caLabel" name="calabel_56">
+         <property name="text">
+          <string>switch</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="caLineEdit" name="calineedit_43">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-OvrVoltAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="caLineEdit" name="calineedit_16">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-EnaAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="caLabel" name="calabel_29">
+         <property name="text">
+          <string>tripped</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="caLabel" name="calabel_57">
+         <property name="text">
+          <string>PDO</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="caLineEdit" name="calineedit_44">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-OvrldAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="caLineEdit" name="calineedit_45">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-HwProtAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="caLineEdit" name="calineedit_46">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisSwtchAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="caLineEdit" name="calineedit_17">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-ShrtCircAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="caLineEdit" name="calineedit_47">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisPDOAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="caLabel" name="calabel_58">
+         <property name="text">
+          <string>level</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="caLineEdit" name="calineedit_48">
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CurrLvlAlrm</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Alarm_Static</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caMessageButton</class>
+   <extends>QPushButton</extends>
+   <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>125</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>125</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcE_slave_frame.ui</string>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>22</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI01</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_3">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>60</y>
+     <width>32</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BI01</string>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_4">
+   <property name="geometry">
+    <rect>
+     <x>86</x>
+     <y>60</y>
+     <width>32</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BI02</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_4">
+   <property name="geometry">
+    <rect>
+     <x>63</x>
+     <y>60</y>
+     <width>22</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI02</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_5">
+   <property name="geometry">
+    <rect>
+     <x>63</x>
+     <y>90</y>
+     <width>22</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI04</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_5">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>90</y>
+     <width>32</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BI03</string>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_6">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>90</y>
+     <width>22</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI03</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_6">
+   <property name="geometry">
+    <rect>
+     <x>86</x>
+     <y>90</y>
+     <width>32</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BI04</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+  <customwidget>
+   <class>caLed</class>
+   <extends>QWidget</extends>
+   <header>caLed</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
