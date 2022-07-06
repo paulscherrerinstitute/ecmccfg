@@ -5,7 +5,7 @@
 #-d   \file
 #-d */
 
-record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}"){
+record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Arr}"){
   info(asyn:READBACK,"1")
   field(DESC, "${DESC="${HWTYPE}: ${sourceName=BO}${CH_ID}: Array"}")
   field(PINI, "${PINI=1}")
@@ -16,7 +16,7 @@ record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}"){
 }
 
 
-record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Array}-RB"){
+record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Arr}-RB"){
   field(DESC, "${DESC="${HWTYPE}: BO${CH_ID}: Array RB"}")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")

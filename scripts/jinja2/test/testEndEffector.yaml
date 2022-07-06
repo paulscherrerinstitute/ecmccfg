@@ -1,0 +1,53 @@
+axis:
+  id: 17
+  type: end effector   # this is for future selection of axis type
+  mode: CSV     # supported mode, CSV and CSP
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+
+var:
+  drvSlave: 3
+  encSlave: 17
+
+epics:
+  name: M1
+  # motorRecord: false
+  precision: 3
+  description: AMI8121 CSV
+  unit: deg
+
+motorRecord:
+  name: EE1
+  precision: 3
+  description: test
+  unit: deg
+
+encoder:
+  numerator: 360
+  denominator: 1048576
+  type: 1         # Type: 0=Incremental, 1=Absolute
+  bits: 32        # Total bit count of encoder raw data
+  absBits: 32     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absOffset: 0    # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s$(DRV_SLAVE).positionActual01  # Ethercat entry for actual position input (encoder)
+
+trajectory:
+  axis:
+    velocity: 1200
+    acceleration: 0.1
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SLAVE).binaryInputArray01.0    #  Ethercat entry for low limit switch input
+    backward: ec0.s$(DRV_SLAVE).binaryInputArray01.1   #  Ethercat entry for high limit switch input
+  home: ec0.s$(DRV_SLAVE).ONE.0         #  Ethercat entry for home switch input
+  interlock: ec0.s$(ENC_SLAVE).ONE.0    #  Ethercat entry for interlock switch input
+
+monitoring:
+  lag:
+    enable: true
+    tolerance: 5
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.125
+    time: 100

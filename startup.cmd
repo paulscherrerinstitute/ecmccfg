@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 7.0.0
+#- ECMC_VER          = 8
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -23,8 +23,9 @@
 #- NAMING            = mXsXXX (default), ClassicNaming, ESSnaming
 #- EC_RATE           = 1000
 #- MODE              = FULL / DAQ
-#-    FULL: Init ecmc with support for both motion and DAQ (DEFAULT)
-#-    DAQ:  Init ecmc with support for only daq (not motion)
+#-    FULL:  Init ecmc with support for both motion and DAQ (DEFAULT)
+#-    DAQ:   Init ecmc with support for only daq (not motion)
+#-    NO_MR: Init ecmc with support for motion (without motor record) and DAQ
 #- PVA               = YES / NO
 #- TMP_DIR      = directory for temporary files
 #-
@@ -46,7 +47,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=7.0.0}"
+require ecmc        "${ECMC_VER=8}"
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
@@ -72,8 +73,10 @@ epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
 #- call init-script, defaults to 'initAll'
 
 epicsEnvSet(ECMC_MODE, ${MODE=FULL})
-ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'=='FULL'","","# MODE == DAQ, DISABLING MOTION.")
+ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'${ECMC_MODE=FULL}'!='DAQ'","","# MODE == DAQ, DISABLING MOTION.")
 epicsEnvShow(ECMC_SUPPORT_MOTION)
+ecmcEpicsEnvSetCalcTernary(ECMC_USE_MOTOR_RECORD, "'${ECMC_MODE=FULL}'=='FULL'","","# MODE != FULL, DISABLING MOTOR RECORD.")
+epicsEnvShow(ECMC_USE_MOTOR_RECORD)
 ecmcFileExist("${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}${INIT=initAll}.cmd"
 

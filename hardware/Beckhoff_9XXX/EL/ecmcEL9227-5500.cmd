@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x240b3052")
 
 #- verify slave
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=1"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=0"
 
 ###OCP RxPDO-Map Outputs###
 

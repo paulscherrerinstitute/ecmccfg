@@ -1,9 +1,6 @@
 include /ioc/tools/driver.makefile
-include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
 MODULE=ecmccfg
-
-LIBVERSION = master
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS = 3 7.0.5
@@ -27,6 +24,7 @@ SCRIPTS += $(foreach d,${DIRS}, $(wildcard $d/*/*.cmd))
 
 SCRIPTS+=$(wildcard ./scripts/*)
 SCRIPTS+=$(wildcard ./scripts/jinja2/*)
+SCRIPTS+=$(wildcard ./scripts/jinja2/templates/*.jinja2)
 SCRIPTS+=$(wildcard ./naming/*)
 SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
@@ -44,4 +42,3 @@ TEMPLATES+=$(wildcard ./db/*/*.subs)
 
 SOURCES += $(wildcard ./src/*.cpp)
 DBDS    += $(wildcard ./dbd/*.dbd)
-

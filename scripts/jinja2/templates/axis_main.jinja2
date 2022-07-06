@@ -1,0 +1,23 @@
+#- ####################################################
+#-  ECMC axis config, rendered from with jinja2
+#- ####################################################
+{% include 'axis.jinja2' %}
+{% include 'encoder.jinja2' %}
+    {%- if axis.type == 1 %}
+        {% include 'drive.jinja2' %}
+        {% include 'controller.jinja2' %}
+    {%endif%}
+{% include 'trajectory.jinja2' %}
+{% include 'input.jinja2' %}
+{% include 'homing.jinja2' %}
+{% include 'soft_limit.jinja2' %}
+{% include 'monitoring.jinja2' %}
+{% include 'epicsAxis.jinja2' %}
+{%- if epics.motorRecord.enable %}
+    {% include 'epicsMotorRecord.jinja2' %}
+{%- endif %}
+{#- this needs to be the command issued #}
+{%- if axis.features is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
+{%- endif %}
+

@@ -1,0 +1,113 @@
+\section{Drive}
+
+\subsection{scaling}
+
+At full output ({{ drive.denominator|default(1)|int }}) the axis will theoretically move at {{ drive.numerator|default(0)|float }}~{{vu}}.
+
+\begin{itemize}
+  \itemsep0em
+  \item \itemIndent{Denominator}{ {{- drive.denominator|default(1)|int }}}
+  \item \itemIndent{Numerator}{ {{- drive.numerator|default(0)|float }}}
+\end{itemize}
+
+\note{This is used for internal scaling only, it does not mean the axis can actually reach such velocities! \\
+Consult the drive manual for details.
+}
+
+\subsection{links}
+
+\subsubsection{core functions}
+
+\begin{table}[H]
+\centering
+\caption{Core function links.}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{function} & \textbf{link} \\
+\hline
+control & \verb|{{ drive.control }}| \\
+status & \verb|{{ drive.status }}| \\
+setpoint & \verb|{{ drive.setpoint }}| \\
+{%- if drive.reduceTorque %}
+reduced torque & \verb|{{ drive.control }}.{{ drive.reduceTorque|int }}| \\
+{%- endif %}
+{%- if drive.reset %}
+drive reset & \verb|{{ drive.control }}.{{ drive.reset|int }}| \\
+{%- endif %}
+{%- if drive.warning %}
+warning & \verb|{{ drive.status }}.{{ drive.warning|int }}| \\
+{%- endif %}
+{%- if drive.error %}
+{%- for bit in drive.error %}
+error bit {{loop.index-1}} & \verb|{{drive.status }}.{{ bit|int }}| \\
+{%- endfor %}
+{%- endif %}
+\hline
+\end{tabularx}
+\label{tab:drive_core}
+\end{table}
+
+
+
+\subsubsection{input}
+
+\begin{table}[H]
+\centering
+\caption{Input links}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{function} & \textbf{link} \\
+\hline
+limit forward & \verb|{{ input.limit.forward }}| \\
+limit backward & \verb|{{ input.limit.backward }}| \\
+home & \verb|{{ input.home }}| \\
+interlock & \verb|{{ input.interlock }}| \\
+\hline
+\end{tabularx}
+\label{tab:drive_input}
+\end{table}
+
+
+
+{%- set output = None if output is not defined else output %}
+{%if output.brake or output.health is defined%}
+\subsubsection{output}
+\begin{table}[H]
+\centering
+\caption{Output links}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\rowcolor{Gray}
+\textbf{function} & \textbf{link} \\
+\hline
+{%if output.brake is defined%}
+brake & \verb|{{ output.brake|default('') }}| \\
+{%endif%}
+
+{%if output.health is defined%}
+health & \verb|{{ output.health|default('') }}| \\
+{%endif%}
+\hline
+\end{tabularx}
+\label{tab:drive_output}
+\end{table}
+{%endif%}
+
+
+{%- set brake=None if drive.brake is not defined else drive.brake %}
+{%if drive.brake is undefined%}
+\note{brake not defined}
+{%-else%}
+\subsection{brake}
+{%if output.brake is undefined%}
+\warning{You forgot to define the output for the brake! \\
+Check the \texttt{output:}$\rightarrow$\texttt{brake:} section of the config file. \\
+}
+{%endif%}
+\note{Brake will open \emph{ {{-brake.openDelay|default(0)|int}} cycles} after the amplifier powered up. \\
+The brake will engage \emph{ {{-brake.closeAhead|default(0)|int}} cycles} ahead of powering down the amplifier.}
+
+\caution{Brakes are handled in EtherCAT cycles, rather than time!}
+{%endif%}

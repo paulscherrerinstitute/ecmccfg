@@ -1,0 +1,8 @@
+file "ecmc_analogInputFloat-chX.template"
+{
+  pattern { CH_ID,  KEY,   EGU,  PREC,  suffix    }
+          { 01,     "Enc", "um", 1,     "-PosAct"  }
+          { 02,     "Enc", "um", 1,     "-PosAct"  }
+          { 03,     "Enc", "um", 1,     "-PosAct"  }
+          { 04,     "Enc", "um", 1,     "-PosAct"  }
+}

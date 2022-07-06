@@ -16,7 +16,7 @@ epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "4096")
 epicsEnvSet("ECMC_ENC_TYPE"               "1")                        # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_BITS"               "25")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "25")                       # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
-epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "-175")                     # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "491455")                     # Encoder offset in eng units (for absolute encoders)
 
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.positionActual02")         # Ethercat entry for actual position input (encoder)
 epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   (if no encoder reset bit then leave empty)
@@ -46,8 +46,8 @@ epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s8.driveStatus01.2")      # Warni
 epicsEnvSet("ECMC_VELO",                  "5.0")
 epicsEnvSet("ECMC_JOG_VEL",               "5")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
-epicsEnvSet("ECMC_ACCL",                  "0.1")
-epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
+epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "10")
+epicsEnvSet("ECMC_EMERG_DECEL",           "100")             # Emergency deceleration
 
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "3")

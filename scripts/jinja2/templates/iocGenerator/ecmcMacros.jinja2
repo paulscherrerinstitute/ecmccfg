@@ -1,0 +1,101 @@
+{% import 'iocshMacros.jinja2' as iocsh -%}
+
+{# namespaces #}
+{% set slaveID = namespace(last=0, this=0, IDs=[], type='') %}
+{% set files = namespace(scripts={}) %}
+
+{# setScripts #}
+{% macro setScripts(scripts) -%}
+    {%- set files.scripts = scripts %}
+{%- endmacro %}
+
+{# callScript, will include the script if defined in 'files.scripts'. Requires `setScripts` to be executed. #}
+{% macro callScript(key) -%}
+    {%- if key in files.scripts %}
+        {{- iocsh.include(files.scripts[key]) }}
+    {% endif %}
+{%- endmacro %}
+
+{# abort #}
+{%- macro abort(error) %}
+    {{ None['[ERROR] ' ~ error][0] }}
+{% endmacro -%}
+
+{# reset #}
+{% macro reset() -%}
+    {%- set slaveID.last = 0 %}
+    {%- set slaveID.IDs = [] %}
+{%- endmacro %}
+
+{# addSdo #}
+{% macro addSdo(idx, subIdx, value=0, bytes=2) -%}
+    ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},{{ '0x%04x' % idx }},{{ '0x%02x' % subIdx }},{{ value |int }},{{ bytes|int }})"
+{%- endmacro %}
+
+{# applyConfig #}
+{% macro applyConfig() -%}
+# Apply hardware configuration
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+{%- endmacro %}
+
+{# setAppMode #}
+{% macro setAppMode() -%}
+# go active
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+{%- endmacro %}
+
+{# addDiagnostics #}
+{% macro addDiagnostics(file) -%}
+{#- include diagnostics  #}
+    {%- if file is defined %}
+        {{- iocsh.include(file) }}
+    {%- else %}
+        {{ abort('addDiagnostics called w/o file!') }}
+    {%- endif %}
+{%- endmacro %}
+
+{# TODO: spilt into smaller macros  #}
+{# addSlave #}
+{% macro addSlave(slave) %}
+    {%- if slave.__class__.__name__ == 'dict' %}
+        {%- for s, v in slave.items() %}
+            {%- set slaveID.this = v.pos if v.pos is defined else slaveID.last + 1 %}
+            {%- set slaveID.type = s %}
+            {{- addSlaveCmd(slaveID.type,slaveID.this) }}
+            {{- applySlaveConfig(v.config) if v.config is defined }}
+            {{- iocsh.include(v.include) if v.include is defined}}
+        {%- endfor %}
+    {%- else %}
+        {%- set slaveID.this = slaveID.last + 1 %}
+        {%- set slaveID.type = slave %}
+        {{- addSlaveCmd(slaveID.type,slaveID.this) }}
+    {%- endif %}
+    {# abort if the slave just added is a duplicate. #}
+    {#- TODO: would be nicer bail earlier #}
+    {%- if slaveID.this in slaveID.IDs %}
+        {{ abort("duplicate slaveID ==> " ~ slaveID.this) }}
+    {%- endif %}
+    {%- set slaveID.last = slaveID.this %}
+    {%- set __ = slaveID.IDs.append(slaveID.this) %}
+{%- endmacro %}
+
+{# addSlave #}
+{%- macro addSlaveCmd(slave, pos, master=0) %}
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC={{ slave }}, SLAVE_ID={{ pos }}"
+{%- endmacro %}
+
+{# applySlaveConfig #}
+{%- macro applySlaveConfig(config) %}
+    {%- if config.__class__.__name__ == 'list' %}
+        {%- for c in config %}
+            {{- applyConfigCmd(c) }}
+        {%- endfor %}
+    {%- else %}
+        {{- applyConfigCmd(config) }}
+    {%- endif %}
+{%- endmacro %}
+
+{# applyConfigCmd #}
+{%- macro applyConfigCmd(file) %}
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID={{ slaveID.this }}, HW_DESC={{ slaveID.type }}, CONFIG={{ file }}"
+{%- endmacro %}
