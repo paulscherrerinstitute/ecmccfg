@@ -186,7 +186,11 @@ class Schema:
             'mask': {'type': 'string'},
             'bits': {'type': 'integer', 'min': 0, 'max': 64, 'default': 16},
             'absBits': {'type': 'integer', 'min': 0, 'max': 64, 'default': 25},
-            'absOffset': {'type': 'float', 'default': 0.},
+            'absOffset': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+                ], 'default': 0.0
+            },
             'position': {'required': True, 'type': 'string'},
             'control': {'type': 'string'},
             'status': {'type': 'string'},
