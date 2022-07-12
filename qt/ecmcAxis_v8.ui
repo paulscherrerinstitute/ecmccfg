@@ -367,7 +367,7 @@
              <item row="1" column="2">
               <widget class="caLineEdit" name="calineedit_16">
                <property name="channel" stdset="0">
-                <string notr="true">$(SYS):$(Axis)-AllwCmdFrmPLCCmd-RB</string>
+                <string notr="true">$(SYS):$(Axis)-CmdFrmPLCCmd-RB</string>
                </property>
                <property name="precisionMode">
                 <enum>caLineEdit::Channel</enum>
@@ -402,7 +402,7 @@
                 <string>ext. commands:</string>
                </property>
                <property name="channel" stdset="0">
-                <string notr="true">$(SYS):$(Axis)-AllwCmdFrmPLCCmd</string>
+                <string notr="true">$(SYS):$(Axis)-CmdFrmPLCCmd</string>
                </property>
               </widget>
              </item>
