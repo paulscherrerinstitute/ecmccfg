@@ -1,0 +1,102 @@
+##############################################################################
+## Example config ESS crate of type MCU1025
+
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg 8.0.0
+
+# Epics Motor record driver that will be used:
+epicsEnvShow(ECMC_MR_MODULE)
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=add_2nd_encoder"
+
+##############################################################################
+## Configure hardware:
+
+ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025.cmd,1)
+$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# ADDITIONAL SETUP
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput02,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput08,1)"
+# END of ADDITIONAL SETUP
+
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+
+
+# Add second encoder 
+epicsEnvSet("ECMC_ENC_SCALE_NUM"          "60")
+epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "12800")
+epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bit count of encoder raw data
+epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
+epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s7.positionActual01")  # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning (if no encoder warning bit then leave empty)
+
+#- Encoder
+ecmcConfigOrDie "Cfg.AddAxisEnc(${ECMC_AXIS_NO})"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ACTPOS},"ax${ECMC_AXIS_NO}.enc.actpos")"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_DENOM})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_NUM})"
+ecmcConfigOrDie "Cfg.SetAxisEncType(${ECMC_AXIS_NO},${ECMC_ENC_TYPE})"
+ecmcConfigOrDie "Cfg.SetAxisEncBits(${ECMC_AXIS_NO},${ECMC_ENC_BITS})"
+ecmcConfigOrDie "Cfg.SetAxisEncAbsBits($(ECMC_AXIS_NO),${ECMC_ENC_ABS_BITS})"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset($(ECMC_AXIS_NO),${ECMC_ENC_ABS_OFFSET})"
+ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize($(ECMC_AXIS_NO),${ECMC_ENC_VEL_FILTER_SIZE=100})"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize($(ECMC_AXIS_NO),${ECMC_ENC_POS_FILTER_SIZE=1})"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable($(ECMC_AXIS_NO),${ECMC_ENC_POS_FILTER_ENABLE=0})"
+#
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_RESET=""},"ax${ECMC_AXIS_NO}.enc.reset")"
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ALARM_0=""},"ax${ECMC_AXIS_NO}.enc.alarm0")"
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ALARM_1=""},"ax${ECMC_AXIS_NO}.enc.alarm1")"
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ALARM_2=""},"ax${ECMC_AXIS_NO}.enc.alarm2")"
+#ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_WARNING=""},"ax${ECMC_AXIS_NO}.enc.warning")"
+
+
+##############################################################################
+## AXIS 2
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
+
+##############################################################################
+## PLC 0
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/encoder.plc, PLC_MACROS='AX_ID=1, DBG='")
+
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
