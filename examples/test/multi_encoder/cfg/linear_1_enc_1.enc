@@ -1,4 +1,4 @@
-# Second encoder
+# Add open loop counter as second encoder (index 1)
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "60")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "12800")
 epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
