@@ -3,15 +3,15 @@
 #- Arguments: n/a
 
 #-d /**
-#-d   \brief Script for configuring a physical axis.
-#-d   \details Configures a physical axis in ECMC, based on previously set environment variables.
+#-d   \brief Script for adding an extra encoder
+#-d   \details Configures a encoder object in ECMC, based on previously set environment variables.
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d   \note This script is typically called by \b addAxis.cmd, often via \b ecmc_axis-records.cmd
+#-d   \note This script is typically called by \b addEncoder.cmd
 #-d   \pre An axis definition for a physical axis has to be added/configured immediately before the call of this script.
 #-d */
 
-#- Encoder
+ecmcConfigOrDie "Cfg.AddAxisEnc(${ECMC_AXIS_NO})"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ACTPOS},"ax${ECMC_AXIS_NO}.enc.actpos")"
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_DENOM})"
 ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},${ECMC_ENC_SCALE_NUM})"
