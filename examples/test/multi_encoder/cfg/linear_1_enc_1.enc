@@ -12,4 +12,5 @@ epicsEnvSet("ECMC_EC_ENC_ALARM_1",             "")                         # Err
 epicsEnvSet("ECMC_EC_ENC_ALARM_2",             "")                         # Error 2 (if no encoder error bit then leave empty)
 epicsEnvSet("ECMC_EC_ENC_WARNING",             "")                         # Warning (if no encoder warning bit then leave empty)
 
-epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP",  "0")                        # Reference this new encoder to other encoder at startup (-1 will not reference)
+# This encoder (enc 1) will be refenced to encoder 0 at startup (set to -1 to disable)
+epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP",  "0")
