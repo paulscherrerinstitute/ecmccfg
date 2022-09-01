@@ -1,23 +1,23 @@
-#Asyn parameters for one axis
+#Asyn parameters for one encoder
 record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos$(ENC_NO)?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Position")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO)")
   field(TSE,  "$(TSE=-2)")
 }
 
 record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel$(ENC_NO)?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO)")
   field(TSE,  "$(TSE=-2)")
 }
 

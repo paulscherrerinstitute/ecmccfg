@@ -27,8 +27,8 @@ epicsEnvUnset(ECMC_EXE_CMD)
 epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 ecmcFileExist("${CONFIG}",1)
 ${SCRIPTEXEC} ${CONFIG} "${CFG_MACROS=""}"
-ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_enc.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_enc.cmd
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_enc${ECMC_GEN_EC_RECORDS}.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_enc${ECMC_GEN_EC_RECORDS}.cmd
 #- Clear env vars
 ecmcFileExist(${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_enc_unset"}.cmd,1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}${CLEAR_VARS_CMD="ecmc_enc_unset"}.cmd
