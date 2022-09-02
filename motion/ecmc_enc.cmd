@@ -35,10 +35,11 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_LATCH_CONTROL=""},"ax${EC
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_LATCH_STATUS=""},"ax${ECMC_AXIS_NO}.enc.latchstatus")"
 
 #- MULTI ENCODER SPECIFICS
-#- Get current encoder index beeing configured (index of encoder added)
+#- Get current encoder index beeing configured (index of encoder added), needed for PV names
 ecmcConfig "GetAxisEncConfigIndex($(ECMC_AXIS_NO))"
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
-ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC_CFG_ID},${ECMC_ENC_REF_TO_ENC_AT_STARTUP=-1})"
+ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC_REF_TO_ENC_AT_STARTUP=-1})"
 ecmcConfigOrDie "Cfg.SelectAxisEncPrimary($(ECMC_AXIS_NO),${ECMC_ENC_PRIMARY_ID=-1})"
 ecmcConfigOrDie "Cfg.SelectAxisEncHome($(ECMC_AXIS_NO),${ECMC_ENC_HOME_ID=-1})"
+ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome($(ECMC_AXIS_NO),${ECMC_ENC_REF_AT_HOME=-1})"

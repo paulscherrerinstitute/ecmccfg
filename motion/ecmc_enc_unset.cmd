@@ -30,3 +30,5 @@ epicsEnvUnset(ECMC_ENC_REF_TO_ENC_AT_STARTUP)
 epicsEnvUnset(ECMC_ENC_HOME_ID)
 epicsEnvUnset(ECMC_ENC_PRIMARY_ID)
 epicsEnvUnset(ECMC_ENC_CFG_ID)
+epicsEnvUnset(ECMC_ENC_REF_AT_HOME)
+
