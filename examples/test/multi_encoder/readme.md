@@ -38,6 +38,9 @@ epicsEnvSet("ECMC_ENC_HOME_ID",  "1")
 # Reference this encoder at homing (set to -1 to not change setting)
 epicsEnvSet("ECMC_ENC_REF_AT_HOME",  "0")
 
+# Maximum position diff between this encoder and primary (set to 0 to disable check)
+epicsEnvSet("ECMC_ENC_MAX_DIFF_TO_PRIM_ENC",  "0.005")
+
 # For incremental encoders these variables can be added/used (optional):
 epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "")                              # Ethercat entry for latch position (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "")                              # Ethercat entry for latch control (only valid for home seq 11,12)
@@ -102,6 +105,16 @@ ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC
 ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome($(ECMC_AXIS_NO),${ECMC_ENC_REF_AT_HOME=-1})"
 
 ```
+
+## Position diff between encoders interlock
+
+Prevent motion if difference between encoders are higher than the defined value:
+
+```
+ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc($(ECMC_AXIS_NO),${ECMC_ENC_MAX_DIFF_TO_PRIM_ENC=0})"
+```
+
+NOTE: check will only be made between encoders that are homed (or absolute, which are set to homed).
 
 # PVs:
 

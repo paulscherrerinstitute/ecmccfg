@@ -31,4 +31,4 @@ epicsEnvUnset(ECMC_ENC_HOME_ID)
 epicsEnvUnset(ECMC_ENC_PRIMARY_ID)
 epicsEnvUnset(ECMC_ENC_CFG_ID)
 epicsEnvUnset(ECMC_ENC_REF_AT_HOME)
-
+epicsEnvUnset(ECMC_ENC_MAX_DIFF_TO_PRIM_ENC)

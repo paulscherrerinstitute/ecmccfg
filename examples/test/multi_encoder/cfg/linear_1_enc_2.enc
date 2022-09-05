@@ -24,3 +24,6 @@ epicsEnvSet("ECMC_ENC_HOME_ID",  "1")
 
 # Reference this encoder at homing (set to -1 to not change setting)
 epicsEnvSet("ECMC_ENC_REF_AT_HOME",  "0")
+
+# Maximum position diff between this encoder and primary (set to 0 to disable)
+epicsEnvSet("ECMC_ENC_MAX_DIFF_TO_PRIM_ENC",  "0.01")
