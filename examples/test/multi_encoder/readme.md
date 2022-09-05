@@ -81,6 +81,8 @@ ecmcConfigOrDie "Cfg.SelectAxisEncHome($(ECMC_AXIS_NO),${ECMC_ENC_HOME_ID=-1})"
 ```
 NOTE: if a ECMC_ENC_HOME_ID=-1 the current value in ecmc will not be overwritten.
 
+The homing encoder will always be referenced, independent of the Cfg.SetAxisEncEnableRefAtHome().
+
 ## Config encoder
 
 The newest encoder created is autonatically set to be the one that recives configuration commands. 
