@@ -14,7 +14,7 @@ epicsEnvSet("ECMC_EC_ENC_ALARM_2",             "")                         # Err
 epicsEnvSet("ECMC_EC_ENC_WARNING",             "")                         # Warning (if no encoder warning bit then leave empty)
 
 # This encoder will be refenced to encoder 0 at startup (set to -1 to not change setting)
-epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP",  "-1")
+epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID",  "-1")
 
 # Encoder index for closed loop control (set to -1 to not change setting)
 epicsEnvSet("ECMC_ENC_PRIMARY_ID",  "-1")

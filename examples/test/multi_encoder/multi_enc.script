@@ -45,13 +45,13 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 # Add extra encoder to axis 1 (open loop counter)
 $(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
 # Add extra encoder to axis 1 (open loop counter)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
 # Add extra encoder to axis 1 (open loop counter)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_2.enc)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_2.enc)
 # Add extra encoder to axis 1 (open loop counter)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_2.enc)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_2.enc)
 # Add extra encoder to axis 1 (open loop counter)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
 
 ##############################################################################
 ## AXIS 2

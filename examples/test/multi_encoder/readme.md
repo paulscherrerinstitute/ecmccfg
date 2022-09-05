@@ -27,7 +27,7 @@ epicsEnvSet("ECMC_EC_ENC_ALARM_2",             "")                         # Err
 epicsEnvSet("ECMC_EC_ENC_WARNING",             "")                         # Warning (if no encoder warning bit then leave empty)
 
 # This encoder will be refenced to encoder 0 at startup (set to -1 to not change setting)
-epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP",  "-1")
+epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID",  "-1")
 
 # Encoder index for closed loop control (set to -1 to not change setting)
 epicsEnvSet("ECMC_ENC_PRIMARY_ID",  "-1")
@@ -54,6 +54,8 @@ epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","0")                            # Num
 The primary encoder is the encoder that is used in the ecmc-control loop.
 Any of the configured encoders can be used as primary encoder (but as default encoder 0 is used).
 
+Change of primary encoder can be done by setting the ECMC_ENC_PRIMARY_ID in the encoder configuration file 
+specified for addEncoder.cmd or by executing the follwoing ecmc command:
 ```
 ecmcConfigOrDie "Cfg.SelectAxisEncPrimary($(ECMC_AXIS_NO),${ECMC_ENC_PRIMARY_ID=-1})"
 
@@ -66,15 +68,14 @@ The homing encoder is the encoder that will be used for control during homing se
 Any of the configured encoders can be used as homing encoder (but as default encoder 0 is used).
 
 If homing encoder is different than primary encoder the following will happen at homing:
-1. The homing encoder will be referenced to the primary encoder to avoid any jump in the control.
-2. The homing encoder will be used for control (switch encoder).
-3. After homing, the primary encoder will be referenced to the value of the encoder used for homing.
-4. The primary encoder will again be used for control (switch back to primary encoder).
+1. The homing encoder will be used for control (switch encoder).
+2. The primary encoder will again be used for control (switch back to primary encoder).
 
-NOTE: The primaryu encoder will always be referenced to the value of the homing encoder independet if
-the ECMC_ENC_REF_AT_HOME=0 (described below).
+NOTE: Both steps above can result in step changes in position depending on the configuration.
 
-The following command can be used to select homing encoder index:
+Change of homing encoder can be done by setting the ECMC_ENC_HOME_ID in the encoder configuration file 
+specified for addEncoder.cmd or by executing the follwoing ecmc command:
+
 ```
 ecmcConfigOrDie "Cfg.SelectAxisEncHome($(ECMC_AXIS_NO),${ECMC_ENC_HOME_ID=-1})"
 ```
@@ -86,24 +87,24 @@ The newest encoder created is autonatically set to be the one that recives confi
 If configuration of a different encoder is needed then teh follwing command can be used:
 ```
 ecmcConfigOrDie "Cfg.SelectAxisEncConfig($(ECMC_AXIS_NO),${ECMC_ENC_CFG_ID=-1})"
-
 ```
 NOTE: if a ECMC_ENC_CFG_ID=-1 the current value in ecmc will not be overwritten.
 
 ## Ref/sync encoders to other encoder at startup
 
-At staretup encoders could be syncronized (set to same value as another encoder). This could be usefull in order to have same reading on all or some of your encoders at startup.
+At startup encoders can be syncronized (set to same value as another encoder). This could be usefull in order 
+to have same reading on all or some of your encoders at startup (for instance if one encoder is absolute).
 
+This can be configured by setting the ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID variable or by executing the following command:
 ```
-ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC_REF_TO_ENC_AT_STARTUP=-1})"
-
+ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID=-1})"
 ```
 
 ## Ref/sync encoders at homing
 
+After a sucessfull homing sequence the encoders can be referenced to homing encoder by setting the ECMC_ENC_REF_AT_HOME or by this ecmc command:
 ```
 ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome($(ECMC_AXIS_NO),${ECMC_ENC_REF_AT_HOME=-1})"
-
 ```
 
 ## Position diff between encoders interlock
@@ -114,9 +115,11 @@ Prevent motion if difference between encoders are higher than the defined value:
 ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc($(ECMC_AXIS_NO),${ECMC_ENC_MAX_DIFF_TO_PRIM_ENC=0})"
 ```
 
-NOTE: check will only be made between encoders that are homed (or absolute, which are set to homed).
+NOTE: check will only be made between encoders that are homed (or absolute, which are set to homed as default).
 
 # PVs:
+
+Two PV:s are created for each axis encoder object.
 
 Example: Encoder related PVs for 6 encoders:
 ```
