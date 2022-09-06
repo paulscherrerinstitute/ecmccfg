@@ -1,0 +1,2346 @@
+registerChannelProviderLocal firstTime true
+#
+# Start at "2022-W36-Sep06-1127-32-CEST"
+#
+# Version information:
+# European Spallation Source ERIC : iocsh.bash (3.4.0-PID-8748)
+#
+# --->--> snip -->--> 
+# Please Use Version and other environment variables
+# in order to report or debug this shell
+#
+# HOSTDISPLAY=""
+# WINDOWID=""
+# PWD="/home/pi/sources/e3-7.0.5/ecat/e3-ecmccfg/ecmccfg-dev/examples/test/multi_encoder/hw_mcu1021"
+# USER="pi"
+# LOGNAME="pi"
+# EPICS_HOST_ARCH="linux-arm"
+# EPICS_BASE="/home/pi/epics/base-7.0.5"
+# E3_REQUIRE_NAME="require"
+# E3_REQUIRE_VERSION="3.4.0"
+# E3_REQUIRE_LOCATION="/home/pi/epics/base-7.0.5/require/3.4.0"
+# E3_REQUIRE_BIN="/home/pi/epics/base-7.0.5/require/3.4.0/bin"
+# E3_REQUIRE_DB="/home/pi/epics/base-7.0.5/require/3.4.0/db"
+# E3_REQUIRE_DBD="/home/pi/epics/base-7.0.5/require/3.4.0/dbd"
+# E3_REQUIRE_INC="/home/pi/epics/base-7.0.5/require/3.4.0/include"
+# E3_REQUIRE_LIB="/home/pi/epics/base-7.0.5/require/3.4.0/lib"
+# EPICS_DRIVER_PATH="/home/pi/epics/base-7.0.5/require/3.4.0/siteMods:/home/pi/epics/base-7.0.5/require/3.4.0/siteApps"
+# EPICS_CA_AUTO_ADDR_LIST=""
+# EPICS_CA_ADDR_LIST=""
+# PATH="/home/pi/epics/base-7.0.5/require/3.4.0/bin:/home/pi/epics/base-7.0.5/bin/linux-arm:/home/pi/berryconda3/bin:/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games"
+# --->--> snip -->--> 
+#
+# Set REQUIRE_IOC for its internal PVs
+epicsEnvSet REQUIRE_IOC "REQMOD:raspberrypi-8748"
+#
+# Enable an exit subroutine for sotfioc
+dbLoadRecords "/home/pi/epics/base-7.0.5/db/softIocExit.db" "IOC=REQMOD:raspberrypi-8748"
+#
+# Set E3_IOCSH_TOP for the absolute path where iocsh.bash is executed.
+epicsEnvSet E3_IOCSH_TOP "/home/pi/sources/e3-7.0.5/ecat/e3-ecmccfg/ecmccfg-dev/examples/test/multi_encoder/hw_mcu1021"
+#
+# 
+# Load require module, which has the version 3.4.0
+# 
+dlload /home/pi/epics/base-7.0.5/require/3.4.0/lib/linux-arm/librequire.so
+dbLoadDatabase /home/pi/epics/base-7.0.5/require/3.4.0/dbd/require.dbd
+require_registerRecordDeviceDriver
+Loading module info records for require
+# 
+# Set E3_CMD_TOP for the absolute path where multi_enc_1021_coupler.script exists
+epicsEnvSet E3_CMD_TOP "/home/pi/sources/e3-7.0.5/ecat/e3-ecmccfg/ecmccfg-dev/examples/test/multi_encoder/hw_mcu1021"
+#
+iocshLoad 'multi_enc_1021_coupler.script',''
+##############################################################################
+## Example config ESS crate of type MCU1025 with extra encoders
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"IOC_TEST")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"iocshLoad")
+require ecmccfg add_multi_encoder
+Module ecmccfg version add_multi_encoder found in /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/
+Loading library /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/lib/linux-arm/libecmccfg.so
+Loaded ecmccfg version add_multi_encoder
+Loading dbd file /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/dbd/ecmccfg.dbd
+Calling function ecmccfg_registerRecordDeviceDriver
+Loading module info records for ecmccfg
+# Epics Motor record driver that will be used:
+epicsEnvShow(ECMC_MR_MODULE)
+ECMC_MR_MODULE is not an environment variable.
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/startup.cmd, "IOC=IOC_TEST,ECMC_VER=add_2nd_encoder"
+#==============================================================================
+# startup.cmd
+on error halt
+require ecmc        "add_2nd_encoder"
+Module ecmc version add_2nd_encoder found in /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmc/add_2nd_encoder/
+Module ecmc depends on asyn 4.41.0
+Module asyn version 4.41.0 found in /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/asyn/4.41.0/
+Loading library /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/asyn/4.41.0/lib/linux-arm/libasyn.so
+Loaded asyn version 4.41.0
+Loading dbd file /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/asyn/4.41.0/dbd/asyn.dbd
+Calling function asyn_registerRecordDeviceDriver
+Loading module info records for asyn
+Module ecmc depends on exprtk 1.2.1
+Module exprtk version 1.2.1 found in /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/exprtk/1.2.1/
+Loading library /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/exprtk/1.2.1/lib/linux-arm/libexprtk.so
+Loaded exprtk version 1.2.1
+exprtk has no dbd file
+Loading module info records for exprtk
+Module ecmc depends on motor develop
+Module motor version develop found in /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/motor/develop/
+Module motor depends on asyn 4.41.0
+Module asyn version 4.41.0 already loaded
+Loading library /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/motor/develop/lib/linux-arm/libmotor.so
+Loaded motor version develop
+Loading dbd file /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/motor/develop/dbd/motor.dbd
+Calling function motor_registerRecordDeviceDriver
+Loading module info records for motor
+Module ecmc depends on ruckig 1.0.0
+Module ruckig version 1.0.0 found in /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ruckig/1.0.0/
+Loading library /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ruckig/1.0.0/lib/linux-arm/libruckig.so
+Loaded ruckig version 1.0.0
+ruckig has no dbd file
+Loading module info records for ruckig
+Loading library /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmc/add_2nd_encoder/lib/linux-arm/libecmc.so
+Loaded ecmc version add_2nd_encoder
+Loading dbd file /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmc/add_2nd_encoder/dbd/ecmc.dbd
+Calling function ecmc_registerRecordDeviceDriver
+Loading module info records for ecmc
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'ecmcMotorRecord'='EthercatMC'", "require  EthercatMC 3.0.2 # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
+# Using ecmcMotorRecord motor record support.
+epicsEnvUnset(ECMC_EXE_CMD)
+epicsEnvSet("ECMC_CONFIG_ROOT",     "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/")
+epicsEnvSet("ECMC_CONFIG_DB",       "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/db")
+epicsEnvSet("SCRIPTEXEC",           "iocshLoad")
+epicsEnvSet("SM_PREFIX",            "IOC_TEST:")    # colon added since IOC is _not_ PREFIX
+epicsEnvSet("ECMC_PROC_HOOK",       "")
+epicsEnvSet(ECMC_MODE, FULL)
+ecmcEpicsEnvSetCalcTernary(ECMC_SUPPORT_MOTION, "'FULL'!='DAQ'","","# MODE == DAQ, DISABLING MOTION.")
+epicsEnvShow(ECMC_SUPPORT_MOTION)
+ECMC_SUPPORT_MOTION=
+ecmcEpicsEnvSetCalcTernary(ECMC_USE_MOTOR_RECORD, "'FULL'=='FULL'","","# MODE != FULL, DISABLING MOTOR RECORD.")
+epicsEnvShow(ECMC_USE_MOTOR_RECORD)
+ECMC_USE_MOTOR_RECORD=
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/initAll.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/initAll.cmd"
+#==============================================================================
+# initAll.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/init.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/init.cmd
+#==============================================================================
+# init.cmd
+epicsEnvSet("ECMC_ASYN_TIMEOUT",      1)                   # Asyn timeout
+epicsEnvSet("ECMC_ASYN_ADDR",         0)                   # Asyn Address
+epicsEnvSet("ECMC_MOTOR_PORT",        "NOT SET")
+epicsEnvSet("ECMC_ASYN_PORT",         "NOT SET")
+epicsEnvSet("ECMC_PREFIX",            "NOT SET")
+epicsEnvSet("ECMC_GEN_EC_RECORDS",    "NOT SET")
+epicsEnvSet("ECMC_GEN_AX_RECORDS",    "NOT SET")
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",    "NOT SET")
+epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
+epicsEnvSet("ECMC_TSE",               0)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/initAxis.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/initAxis.cmd"
+#==============================================================================
+# initAxis.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_unset.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_unset.cmd"
+#==============================================================================
+# ecmc_axis_unset.cmd
+epicsEnvUnset(ECMC_AXISCONFIG)
+epicsEnvUnset(ECMC_AXISFIELDINIT)
+epicsEnvUnset(ECMC_PREC)
+epicsEnvUnset(ECMC_EGU)
+epicsEnvUnset(ECMC_DESC)
+epicsEnvUnset(ECMC_R)
+epicsEnvUnset(ECMC_EC_AXIS_HEALTH)
+epicsEnvUnset(ECMC_MOD_RANGE)
+epicsEnvUnset(ECMC_MOD_TYPE)
+epicsEnvUnset(ECMC_EMERG_DECEL)
+epicsEnvUnset(ECMC_VELO)
+epicsEnvUnset(ECMC_ACCL)
+epicsEnvUnset(ECMC_ACCS_EGU_PER_S2)
+epicsEnvUnset(ECMC_HOME_VEL_TO)
+epicsEnvUnset(ECMC_HOME_VEL_FRM)
+epicsEnvUnset(ECMC_CNTRL_KP)
+epicsEnvUnset(ECMC_CNTRL_KI)
+epicsEnvUnset(ECMC_CNTRL_KD)
+epicsEnvUnset(ECMC_CNTRL_KFF)
+epicsEnvUnset(ECMC_EC_ENC_ACTPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCHPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_CONTROL)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_STATUS)
+epicsEnvUnset(ECMC_HOME_LATCH_COUNT_OFFSET)
+epicsEnvUnset(ECMC_ENC_SCALE_DENOM)
+epicsEnvUnset(ECMC_ENC_SCALE_NUM)
+epicsEnvUnset(ECMC_ENC_TYPE)
+epicsEnvUnset(ECMC_ENC_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_OFFSET)
+epicsEnvUnset(ECMC_ENC_VEL_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_ENABLE)
+epicsEnvUnset(ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID)
+epicsEnvUnset(ECMC_ENC_HOME_ID)
+epicsEnvUnset(ECMC_ENC_PRIMARY_ID)
+epicsEnvUnset(ECMC_ENC_CFG_ID)
+epicsEnvUnset(ECMC_ENC_MAX_DIFF_TO_PRIM_ENC)
+epicsEnvUnset(ECMC_EC_ENC_RESET)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_0)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_1)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_2)
+epicsEnvUnset(ECMC_EC_ENC_WARNING)
+epicsEnvUnset(ECMC_EC_DRV_CONTROL)
+epicsEnvUnset(ECMC_EC_DRV_STATUS)
+epicsEnvUnset(ECMC_EC_DRV_VELOCITY)
+epicsEnvUnset(ECMC_EC_DRV_BRAKE)
+epicsEnvUnset(ECMC_EC_DRV_REDUCE_TORQUE)
+epicsEnvUnset(ECMC_EC_DRV_RESET)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_0)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_1)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_2)
+epicsEnvUnset(ECMC_EC_DRV_WARNING)
+epicsEnvUnset(ECMC_DRV_SCALE_DENOM)
+epicsEnvUnset(ECMC_DRV_SCALE_NUM)
+epicsEnvUnset(ECMC_DRV_BRAKE_OPEN_DLY_TIME)
+epicsEnvUnset(ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME)
+epicsEnvUnset(ECMC_SOFT_LOW_LIM)
+epicsEnvUnset(ECMC_DXLM_ENABLE)
+epicsEnvUnset(ECMC_SOFT_HIGH_LIM)
+epicsEnvUnset(ECMC_DXLM_ENABLE)
+epicsEnvUnset(ECMC_EC_MON_LOWLIM)
+epicsEnvUnset(ECMC_EC_MON_HIGHLIM)
+epicsEnvUnset(ECMC_EC_MON_HOME_SWITCH)
+epicsEnvUnset(ECMC_EC_MON_EXT_INTERLOCK)
+epicsEnvUnset(ECMC_MON_AT_TARGET_TOL)
+epicsEnvUnset(ECMC_MON_AT_TARGET_TIME)
+epicsEnvUnset(ECMC_MON_AT_TARGET_ENA)
+epicsEnvUnset(ECMC_MON_LAG_MON_TOL)
+epicsEnvUnset(ECMC_MON_LAG_MON_TIME)
+epicsEnvUnset(ECMC_MON_LAG_MON_ENA)
+epicsEnvUnset(ECMC_MON_VELO_MAX)
+epicsEnvUnset(ECMC_MON_VELO_MAX_ENA)
+epicsEnvUnset(ECMC_MON_VELO_MAX_DRV_TIME)
+epicsEnvUnset(ECMC_MON_VELO_MAX_TRAJ_TIME)
+epicsEnvUnset(ECMC_JOG_VEL)
+epicsEnvUnset(ECMC_JAR)
+epicsEnvUnset(ECMC_HOME_PROC)
+epicsEnvUnset(ECMC_HOME_POS)
+epicsEnvUnset(ECMC_HOME_ACC)
+epicsEnvUnset(ECMC_HOME_DEC)
+epicsEnvUnset(ECMC_DRV_TYPE)
+epicsEnvUnset(ECMC_VELO)
+epicsEnvUnset(ECMC_SOFT_LOW_LIM)
+epicsEnvUnset(ECMC_SOFT_HIGH_LIM)
+epicsEnvUnset(ECMC_HOME_POS_MOVE_ENA)
+epicsEnvUnset(ECMC_HOME_POS_MOVE_TARG_POS)
+epicsEnvUnset(ECMC_TRAJ_TYPE)
+epicsEnvUnset(ECMC_JERK)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_sync_unset.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_sync_unset.cmd"
+#==============================================================================
+# ecmc_axis_sync_unset.cmd
+epicsEnvUnset(ECMC_CMD_FRM_OTHER_PLC_ENABLE)
+epicsEnvUnset(ECMC_CMD_AXIS_PLC_ENABLE)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_1)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_2)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_3)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_4)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_5)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_6)
+epicsEnvUnset(ECMC_AXIS_E2022/09/06 11:27:32.666 
+ECMC Initializes.............
+2022/09/06 11:27:32.666 ESS Open Source EtherCAT Motion Control Epics Module2022/09/06 11:27:32.666 
+Mode: Configuration
+2022/09/06 11:27:32.666 OK
+2022/09/06 11:27:32.667 OK
+2022/09/06 11:27:32.668 OK
+2022/09/06 11:27:32.670 OK
+2022/09/06 11:27:32.690 OK
+2022/09/06 11:27:32.691 OK
+2022/09/06 11:27:32.691 OK
+XPR_LINE_7)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_8)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_9)
+epicsEnvUnset(ECMC_AXIS_EXPR_LINE_10)
+epicsEnvUnset(ECMC_ENC_VELO_FILT_SIZE)
+epicsEnvUnset(ECMC_ENC_VELO_FILT_ENABLE)
+epicsEnvUnset(ECMC_ENC_SOURCE)
+epicsEnvUnset(ECMC_TRAJ_VELO_FILT_SIZE)
+epicsEnvUnset(ECMC_TRAJ_VELO_FILT_ENABLE)
+epicsEnvUnset(ECMC_TRAJ_SOURCE)
+epicsEnvSet("ECMC_EGU",               "mm")
+epicsEnvSet("ECMC_PREC",              3)
+epicsEnvSet("ECMC_AXISFIELDINIT",     "")                  # Extra field init to motor record
+epicsEnvSet("ECMC_AXISCONFIG",        "")                  # Extra parameters to driver
+############################################################
+############# ASYN Configuration:
+epicsEnvSet("ECMC_MOTOR_PORT"     "MCU1")
+epicsEnvSet("ECMC_ASYN_PORT"      "MC_CPU1")
+epicsEnvSet("ECMC_PREFIX"         "IOC_TEST:")
+ecmcAsynPortDriverConfigure(MC_CPU1,1000,0,0,100)
+ecmcAsynPortDriverConfigure: portName = MC_CPU1, paramTableSize = 1000, disableAutoConnect = 0, priority = 0, defaultSampleRateMS = 100.000000
+asynOctetSetOutputEos(MC_CPU1, -1, ";\n")
+asynOctetSetInputEos(MC_CPU1, -1, ";\n")
+asynSetTraceMask(MC_CPU1, -1, 0x41)
+asynSetTraceIOMask(MC_CPU1, -1, 6)
+asynSetTraceInfoMask(MC_CPU1, -1, 1)
+ecmcMotorRecordCreateController(MCU1, MC_CPU1, "64", 200, 1000, "")
+############################################################
+############# Misc settings:
+# Disable function call trace printouts
+ecmcConfigOrDie "Cfg.SetEnableFuncCallDiag(0)"
+# Disable on change printouts from objects (enable for easy logging)
+ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,0)"
+# Choose to generate EPICS-records for EtherCAT-entries
+# (For records use ECMC_GEN_EC_RECORDS="-records" otherwise ECMC_GEN_EC_RECORDS="")
+epicsEnvSet("ECMC_GEN_EC_RECORDS",          "-records")
+# Choose to generate EPICS-records for ax-entries (PosAct, SetPos,..)
+# (For records use ECMC_GEN_AX_RECORDS="-records" otherwise ECMC_GEN_AX_RECORDS="")
+epicsEnvSet("ECMC_GEN_AX_RECORDS",          "-records")
+# suffix for pva enabled scripts, templates and substitutions
+ecmcEpicsEnvSetCalcTernary(ECMC_PVA, "0", "Pva","")
+# Set EtherCAT frequency (defaults to 1000)
+ecmcConfigOrDie "Cfg.SetSampleRate(1000)"
+epicsEnvSet("ECMC_EC_SAMPLE_RATE" ,   1000)
+ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS" ,1000/1000)
+# Update records in 10ms (100Hz) for FULL MODE and in EC_RATE for DAQ mode
+ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'FULL'=='DAQ'","1","10")
+epicsEnvSet("ECMC_P_SCRIPT",        "mXsXXX")
+ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "0>=0", "","#- ")
+ ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addMaster.cmd",1)
+ iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addMaster.cmd", "MASTER_ID=0"
+#===============================================================================
+# addMaster.cfg
+epicsEnvSet("ECMC_EC_MASTER_ID"          "0")
+# Claim master
+ecmcConfigOrDie "Cfg.EcSetMaster(0)"
+epicsEnvSet("ECMC_EC_MASTER_ID" ,0)
+epicsEnvSet("ECMC_TMP_DIR",         "/tmp/IOC_TEST/EcMaster_0/")
+system "mkdir -p /tmp/IOC_TEST/EcMaster_0/"
+epicsEnvSet("ECMC_TMP_DIR",         "/tmp/IOC_TEST/EcMaster_0/")
+system "mkdir -p /tmp/IOC_TEST/EcMaster_0/"
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/setDiagnostics.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/setDiagnostics.cmd
+#==============================================================================
+# setDiagnostics.cmd
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+epicsEnvSet("ECMCCFG_INIT" ,"#")
+##############################################################################
+## Configure hardware:
+ecmcFileExist(/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcMCU1021_coupler.cmd,1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcMCU1021_coupler.cmd
+###################################################2022/09/06 11:27:32.692 OK
+2022/09/06 11:27:32.694 OK
+#########
+############# MCU1021:
+#Configure EK1100 coupler terminal
+epicsEnvSet(ECMC_EC_SLAVE_NUM,0)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=0, HW_DESC=EK1100"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "0")
+epicsEnvSet("HW_DESC",            "EK1100")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEK1100.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEK1100.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EK1100")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x044c2c52")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,0,0x2,0x044c2c52)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "0>0","","#- ")
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+ecmcConfigOrDie "Cfg.EcAddSlave(0,0,0x2,0x044c2c52)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=0,HWTYPE=EK1100"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "0","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s000")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s000-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEK1100.substitutions,ECMC_P=IOC_TEST:m0s000-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEK1100.substitutions,1,1)
+dbLoadTemplate(ecmcEK1100.substitutions,"ECMC_P=IOC_TEST:m0s000-,ECMC_G=IOC_TEST:m0s000,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=0,HWTYPE=EK1100,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s000-,ECMC_G=IOC_TEST:m0s000"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s000-,ECMC_G=IOC_TEST:m0s000,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=0,HWTYPE=EK1100,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "0+1","%d")
+#Configure EL1018 digital input terminal
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "0+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL1018"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "1")
+epicsEnvSet("HW_DESC",            "EL1018")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL1018.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL1018.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL1018")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x03fa3052")2022/09/06 11:27:32.701 OK
+2022/09/06 11:27:32.703 OK
+2022/09/06 11:27:32.703 OK
+2022/09/06 11:27:32.703 OK
+2022/09/06 11:27:32.703 OK
+2022/09/06 11:27:32.704 OK
+2022/09/06 11:27:32.704 OK
+2022/09/06 11:27:32.704 OK
+2022/09/06 11:27:32.704 OK
+
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,1,0x2,0x03fa3052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "0>0","","#- ")
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEX1008.cmd
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a00,0x6000,0x1,B1,binaryInput01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a01,0x6010,0x1,B1,binaryInput02)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a02,0x6020,0x1,B1,binaryInput03)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a03,0x6030,0x1,B1,binaryInput04)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a04,0x6040,0x1,B1,binaryInput05)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a05,0x6050,0x1,B1,binaryInput06)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a06,0x6060,0x1,B1,binaryInput07)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(1,0x2,0x03fa3052,2,0,0x1a07,0x6070,0x1,B1,binaryInput08)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=1,HWTYPE=EL1018"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "1","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s001")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s001-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL1018.substitutions,ECMC_P=IOC_TEST:m0s001-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL1018.substitutions,1,1)
+dbLoadTemplate(ecmcEL1018.substitutions,"ECMC_P=IOC_TEST:m0s001-,ECMC_G=IOC_TEST:m0s001,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=1,HWTYPE=EL1018,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s001-,ECMC_G=IOC_TEST:m0s001"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s001-,ECMC_G=IOC_TEST:m0s001,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=1,HWTYPE=EL1018,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "1+1","%d")
+#Configure EL2808 digital output terminal
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "1+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL2808"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "2")
+epicsEnvSet("HW_DESC",            "EL2808")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL2808.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL2808.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL2808")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0af83052")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveV2022/09/06 11:27:32.712 OK
+2022/09/06 11:27:32.714 OK
+2022/09/06 11:27:32.714 OK
+2022/09/06 11:27:32.714 OK
+2022/09/06 11:27:32.715 OK
+2022/09/06 11:27:32.715 OK
+2022/09/06 11:27:32.715 OK
+2022/09/06 11:27:32.715 OK
+2022/09/06 11:27:32.715 OK
+erify.cmd
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,2,0x2,0x0af83052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "0>0","","#- ")
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEX2008.cmd
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1600,0x7000,0x1,B1,binaryOutput01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1601,0x7010,0x1,B1,binaryOutput02)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1602,0x7020,0x1,B1,binaryOutput03)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1603,0x7030,0x1,B1,binaryOutput04)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1604,0x7040,0x1,B1,binaryOutput05)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1605,0x7050,0x1,B1,binaryOutput06)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1606,0x7060,0x1,B1,binaryOutput07)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(2,0x2,0x0af83052,1,0,0x1607,0x7070,0x1,B1,binaryOutput08)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=2,HWTYPE=EL2808"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "2","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s002")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s002-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL2808.substitutions,ECMC_P=IOC_TEST:m0s002-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL2808.substitutions,1,1)
+dbLoadTemplate(ecmcEL2808.substitutions,"ECMC_P=IOC_TEST:m0s002-,ECMC_G=IOC_TEST:m0s002,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=2,HWTYPE=EL2808,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s002-,ECMC_G=IOC_TEST:m0s002"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s002-,ECMC_G=IOC_TEST:m0s002,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=2,HWTYPE=EL2808,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "2+1","%d")
+# Save the slave number for later
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT", "2")
+#Configure EL5101 Incremental Encoder Interface
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "2+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL5101"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "3")
+epicsEnvSet("HW_DESC",            "EL5101")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL5101.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL5101.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL5101")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13ed3052")
+ecmcFileExist(/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/2022/09/06 11:27:32.725 OK
+2022/09/06 11:27:32.787 OK
+2022/09/06 11:27:32.789 OK
+2022/09/06 11:27:32.789 OK
+2022/09/06 11:27:32.789 OK
+2022/09/06 11:27:32.789 OK
+2022/09/06 11:27:32.789 OK
+slaveVerify.cmd,1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd "RESET=true"
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,3,0x2,0x13ed3052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "true>0","","#- ")
+ecmcConfigOrDie "Cfg.EcWriteSdo(3,0x1011,0x1,1684107116,4)"
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(3,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(3,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,encoderValue01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(3,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(3,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(3,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,encoderLatchPostion01)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=3,HWTYPE=EL5101"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "3","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s003")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s003-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL5101.substitutions,ECMC_P=IOC_TEST:m0s003-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL5101.substitutions,1,1)
+dbLoadTemplate(ecmcEL5101.substitutions,"ECMC_P=IOC_TEST:m0s003-,ECMC_G=IOC_TEST:m0s003,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=3,HWTYPE=EL5101,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s003-,ECMC_G=IOC_TEST:m0s003"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s003-,ECMC_G=IOC_TEST:m0s003,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=3,HWTYPE=EL5101,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "3+1","%d")
+#Configure EL5101 Incremental Encoder Interface
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "3+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL5101"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "4")
+epicsEnvSet("HW_DESC",            "EL5101")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL5101.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL5101.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL5101")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13ed3052")
+ecmcFileExist(/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd,1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd "RESET=true"
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(02022/09/06 11:27:32.797 OK
+2022/09/06 11:27:32.867 OK
+2022/09/06 11:27:32.869 OK
+2022/09/06 11:27:32.869 OK
+2022/09/06 11:27:32.869 OK
+2022/09/06 11:27:32.869 OK
+2022/09/06 11:27:32.869 OK
+2022/09/06 11:27:32.877 OK
+2022/09/06 11:27:32.878 OK
+,4,0x2,0x13ed3052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "true>0","","#- ")
+ecmcConfigOrDie "Cfg.EcWriteSdo(4,0x1011,0x1,1684107116,4)"
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x13ed3052,1,2,0x1600,0x7000,0x01,8,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x13ed3052,1,2,0x1600,0x7000,0x02,16,encoderValue01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x00,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x10,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x13ed3052,2,3,0x1a03,0x6010,0x20,16,encoderLatchPostion01)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=4,HWTYPE=EL5101"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "4","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s004")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s004-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL5101.substitutions,ECMC_P=IOC_TEST:m0s004-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL5101.substitutions,1,1)
+dbLoadTemplate(ecmcEL5101.substitutions,"ECMC_P=IOC_TEST:m0s004-,ECMC_G=IOC_TEST:m0s004,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=4,HWTYPE=EL5101,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s004-,ECMC_G=IOC_TEST:m0s004"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s004-,ECMC_G=IOC_TEST:m0s004,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=4,HWTYPE=EL5101,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "4+1","%d")
+# Configure EL9505 Power supply terminal 5V
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "4+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=5, HW_DESC=EL9505"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "5")
+epicsEnvSet("HW_DESC",            "EL9505")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL9505.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL9505.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL9505")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x25213052")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,5,0x2,0x25213052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "0>0","","#- ")
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(5,0x2,0x25213052,2,0,0x1a00,0x6000,0x1,1,powerOk01)"
+ecmcConfigO2022/09/06 11:27:32.879 OK
+2022/09/06 11:27:32.887 OK
+2022/09/06 11:27:32.888 OK
+2022/09/06 11:27:32.889 OK
+2022/09/06 11:27:32.889 OK
+2022/09/06 11:27:32.889 OK
+2022/09/06 11:27:32.889 OK
+2022/09/06 11:27:32.889 OK
+2022/09/06 11:27:32.889 OK
+rDie "Cfg.EcAddEntryComplete(5,0x2,0x25213052,2,0,0x1a00,0x6000,0x2,1,overload01)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=5,HWTYPE=EL9505"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "5","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s005")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s005-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL9505.substitutions,ECMC_P=IOC_TEST:m0s005-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL9505.substitutions,1,1)
+dbLoadTemplate(ecmcEL9505.substitutions,"ECMC_P=IOC_TEST:m0s005-,ECMC_G=IOC_TEST:m0s005,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=5,HWTYPE=EL9505,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s005-,ECMC_G=IOC_TEST:m0s005"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s005-,ECMC_G=IOC_TEST:m0s005,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=5,HWTYPE=EL9505,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "5+1","%d")
+# Configure EL1252 digital input terminal
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "5+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL1252"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "6")
+epicsEnvSet("HW_DESC",            "EL1252")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL1252.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL1252.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL1252")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x04e43052")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,6,0x2,0x04e43052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "0>0","","#- ")
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEX1002.cmd
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,0,0x1a00,0x6000,0x1,B1,binaryInput01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,0,0x1a01,0x6010,0x1,B1,binaryInput02)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,1,0x1a13,0x1d09,0xae,U8,status01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,1,0x1a13,0x1d09,0xaf,U8,status02)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,1,0x1a13,0x1d09,0xb0,U64,timestampLatchPositive01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,1,0x1a13,0x1d09,0xb8,U64,timestampLatchNegative01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,1,0x1a13,0x1d09,0xc0,U64,timestampLatchPositive02)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(6,0x2,0x04e43052,2,1,0x1a13,0x1d09,02022/09/06 11:27:32.889 OK
+2022/09/06 11:27:32.899 OK
+2022/09/06 11:27:33.007 OK
+xc8,U64,timestampLatchNegative02)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=6,HWTYPE=EL1252"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "6","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s006")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s006-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL1252.substitutions,ECMC_P=IOC_TEST:m0s006-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL1252.substitutions,1,1)
+dbLoadTemplate(ecmcEL1252.substitutions,"ECMC_P=IOC_TEST:m0s006-,ECMC_G=IOC_TEST:m0s006,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=6,HWTYPE=EL1252,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s006-,ECMC_G=IOC_TEST:m0s006"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s006-,ECMC_G=IOC_TEST:m0s006,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=6,HWTYPE=EL1252,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "6+1","%d")
+# Configure EL9410 Power supply with refresh of E-Bus.
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "6+1")
+#${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL9410"
+#Configure EL7037 stepper drive terminal, motor 1
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "7+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/configureSlave.cmd, "SLAVE_ID=8, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+#==============================================================================
+# configureSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "8")
+epicsEnvSet("HW_DESC",            "EL7037")
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd "SLAVE_ID=8, HW_DESC=EL7037, NELM=1"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "8")
+epicsEnvSet("HW_DESC",            "EL7037")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL7037")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b7d3052")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd "RESET=true"
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,8,0x2,0x1b7d3052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "true>0","","#- ")
+ecmcConfigOrDie "Cfg.EcWriteSdo(8,0x1011,0x1,1684107116,4)"
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEX70XX.cmd
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x2022/09/06 11:27:33.009 OK
+2022/09/06 11:27:33.009 OK
+2022/09/06 11:27:33.009 OK
+2022/09/06 11:27:33.009 OK
+2022/09/06 11:27:33.009 OK
+2022/09/06 11:27:33.010 OK
+2022/09/06 11:27:33.010 OK
+2022/09/06 11:27:33.010 OK
+2022/09/06 11:27:33.010 OK
+2022/09/06 11:27:33.010 OK
+2022/09/06 11:27:33.010 OK
+2022/09/06 11:27:33.010 OK
+1b7d3052,1,2,0x1600,0x7000,0x01,16,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,1,2,0x1600,0x7000,0x11,16,encoderValue01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,1,2,0x1602,0x7010,0x1,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,1,2,0x1604,0x7010,0x21,16,1,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x0,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(8,0x2,0x1b7d3052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0x5,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0xA,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0x8,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8012,0x9,0,1)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MASTER_ID=0,SLAVE_POS=8,HWTYPE=EL7037"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "8","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s008")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s008-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL7037.substitutions,ECMC_P=IOC_TEST:m0s008-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL7037.substitutions,1,1)
+dbLoadTemplate(ecmcEL7037.substitutions,"ECMC_P=IOC_TEST:m0s008-,ECMC_G=IOC_TEST:m0s008,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=8,HWTYPE=EL7037,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s008-,ECMC_G=IOC_TEST:m0s008"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s008-,ECMC_G=IOC_TEST:m0s008,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=8,HWTYPE=EL7037,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "8+1","%d")
+# apply config ${CONFIG} for ${HW_DESC}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd ""
+epicsEnvSet(I_MAX_MA_LOCAL,"1500")
+epicsEnvSet(I_RUN_MA_LOCAL,1000)
+epicsEnvSet(I_STDBY_MA_LOCAL,500)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/chkValidCurrentSetOrDie.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/chkValidCurrentSetOrDie.cmd "I_RUN_MA=1000,I_STDBY_MA=500,I_MAX_MA=1500"
+#==============================================================================
+# chkValidCurrentSetOrDie.cmd
+# Ensure running current is below max current otherwise exit
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "1000>1500 or 1000<=0", "ecmcExit Error: Run current setpoint to high or negative...","# Run current setting OK (1000)...")
+# Result: 
+# Run current setting OK (1000)...
+epicsEnvUnset(ECMC_EXE_CMD)
+# Ensure standby current is below max current otherwise exit
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "500>1500 or 500<0", "ecmcExit Error: Standby current setpoint to high 2022/09/06 11:27:33.019 OK
+2022/09/06 11:27:33.019 OK
+2022/09/06 11:27:33.019 OK
+2022/09/06 11:27:33.019 OK
+2022/09/06 11:27:33.019 OK
+2022/09/06 11:27:33.019 OK
+2022/09/06 11:27:33.022 OK
+2022/09/06 11:27:33.127 OK
+2022/09/06 11:27:33.129 OK
+2022/09/06 11:27:33.129 OK
+2022/09/06 11:27:33.130 OK
+2022/09/06 11:27:33.130 OK
+2022/09/06 11:27:33.130 OK
+2022/09/06 11:27:33.130 OK
+2022/09/06 11:27:33.131 OK
+2022/09/06 11:27:33.131 OK
+2022/09/06 11:27:33.131 OK
+2022/09/06 11:27:33.131 OK
+2022/09/06 11:27:33.131 OK
+2022/09/06 11:27:33.131 OK
+or negative...","# Standby current setting OK (500)...")
+# Result: 
+# Standby current setting OK (500)...
+epicsEnvUnset(ECMC_EXE_CMD)
+# Ensure standby current is below run current otherwise exit
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "500>1000", "ecmcExit Error: Standby current higher than run current...","# Standby current and run current setting OK (500<1000)...")
+# Result: 
+# Standby current and run current setting OK (500<1000)...
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8010,0x1,1000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8010,0x2,500,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8010,0x3,2400,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8010,0x4,175,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8010,0x6,200,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8010,0xA,330,2)"
+epicsEnvUnset("I_RUN_MA_LOCAL")
+epicsEnvUnset("I_STDBY_MA_LOCAL")
+epicsEnvUnset("I_MAX_MA_LOCAL")
+#Configure EL7037 stepper drive terminal, motor 2
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "8+1")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/configureSlave.cmd, "SLAVE_ID=9, HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+#==============================================================================
+# configureSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "9")
+epicsEnvSet("HW_DESC",            "EL7037")
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addSlave.cmd "SLAVE_ID=9, HW_DESC=EL7037, NELM=1"
+#==============================================================================
+# addSlave.cmd
+epicsEnvSet("ECMC_EC_SLAVE_NUM",  "9")
+epicsEnvSet("HW_DESC",            "EL7037")
+epicsEnvSet("P_SCRIPT",           "mXsXXX")
+# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037.cmd" "NELM=1"
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL7037")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b7d3052")
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/slaveVerify.cmd "RESET=true"
+ecmcEpicsEnvSetCalcTernary(SLAVE_VERIFY, "0==0","","#- ")
+ecmcConfigOrDie "Cfg.EcSlaveVerify(0,9,0x2,0x1b7d3052)"
+ecmcEpicsEnvSetCalcTernary(SLAVE_RESET, "true>0","","#- ")
+ecmcConfigOrDie "Cfg.EcWriteSdo(9,0x1011,0x1,1684107116,4)"
+epicsEnvSet(ECMC_EC_SLAVE_FW, "0x0000")
+ecmcEpicsEnvSetCalcTernary(SLAVE_FW, "0>0","","#- ")
+epicsEnvUnset(SLAVE_VERIFY)
+epicsEnvUnset(SLAVE_RESET)
+epicsEnvUnset(SLAVE_FW)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEX70XX.cmd
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,1,2,0x1600,0x7000,0x01,16,encoderControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,1,2,0x1600,0x7000,0x11,16,encoderValue01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,1,2,0x1602,0x7010,0x1,16,driveControl01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,1,2,0x1604,0x7010,0x21,16,1,velocitySetpoint01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x0,16,encoderStatus01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(9,0x2,0x1b7d3052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8012,0x5,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8012,0xA,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8012,0x8,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8012,0x9,0,1)"
+# deduce what the prefix should be
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd",1)
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcmXsXXX.cmd" "MAST2022/09/06 11:27:33.145 OK
+2022/09/06 11:27:33.145 OK
+2022/09/06 11:27:33.145 OK
+2022/09/06 11:27:33.145 OK
+2022/09/06 11:27:33.145 OK
+2022/09/06 11:27:33.146 OK
+2022/09/06 11:27:33.146 OK
+2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+ER_ID=0,SLAVE_POS=9,HWTYPE=EL7037"
+#==============================================================================
+# ecmcmXsXXX.cmd
+ecmcEpicsEnvSetCalc("sid", "9","%03d")
+ecmcEpicsEnvSetCalc("mid", "0","%01d")
+epicsEnvSet("ECMC_G",            "IOC_TEST:m0s009")
+epicsEnvSet("ECMC_P",            "IOC_TEST:m0s009-")
+epicsEnvUnset(sid)
+epicsEnvUnset(mid)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applySubstitutions.cmd" "SUBST_FILE=ecmcEL7037.substitutions,ECMC_P=IOC_TEST:m0s009-"
+#==============================================================================
+# applySubstitutions.cmd
+ecmcFileExist(ecmcEL7037.substitutions,1,1)
+dbLoadTemplate(ecmcEL7037.substitutions,"ECMC_P=IOC_TEST:m0s009-,ECMC_G=IOC_TEST:m0s009,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=9,HWTYPE=EL7037,T_SMP_MS=10,TSE=0,NELM=1")
+epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "True", "","#- ")
+iocshLoad "/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=IOC_TEST:m0s009-,ECMC_G=IOC_TEST:m0s009"
+#==============================================================================
+# applyTemplate.cmd
+ecmcFileExist(ecmcEcSlave.template,1,1)
+dbLoadRecords("ecmcEcSlave.template", "ECMC_P=IOC_TEST:m0s009-,ECMC_G=IOC_TEST:m0s009,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,SLAVE_POS=9,HWTYPE=EL7037,T_SMP_MS=10,TSE=0,")
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
+# increment SLAVE_ID
+ecmcEpicsEnvSetCalc("SLAVE_ID", "9+1","%d")
+# apply config ${CONFIG} for ${HW_DESC}
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd ""
+epicsEnvSet(I_MAX_MA_LOCAL,"1500")
+epicsEnvSet(I_RUN_MA_LOCAL,1000)
+epicsEnvSet(I_STDBY_MA_LOCAL,500)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/chkValidCurrentSetOrDie.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/chkValidCurrentSetOrDie.cmd "I_RUN_MA=1000,I_STDBY_MA=500,I_MAX_MA=1500"
+#==============================================================================
+# chkValidCurrentSetOrDie.cmd
+# Ensure running current is below max current otherwise exit
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "1000>1500 or 1000<=0", "ecmcExit Error: Run current setpoint to high or negative...","# Run current setting OK (1000)...")
+# Result: 
+# Run current setting OK (1000)...
+epicsEnvUnset(ECMC_EXE_CMD)
+# Ensure standby current is below max current otherwise exit
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "500>1500 or 500<0", "ecmcExit Error: Standby current setpoint to high or negative...","# Standby current setting OK (500)...")
+# Result: 
+# Standby current setting OK (500)...
+epicsEnvUnset(ECMC_EXE_CMD)
+# Ensure standby current is below run current otherwise exit
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "500>1000", "ecmcExit Error: Standby current higher than run current...","# Standby current and run current setting OK (500<1000)...")
+# Result: 
+# Standby current and run current setting OK (500<1000)...
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8010,0x1,1000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8010,0x2,500,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8010,0x3,2400,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8010,0x4,175,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8010,0x6,200,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8010,0xA,330,2)"
+epicsEnvUnset("I_RUN_MA_LOCAL")
+epicsEnvUnset("I_STDBY_MA_LOCAL")
+epicsEnvUnset("I_MAX_MA_LOCAL")
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+# ADDITIONAL SETUP
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput02,1)"
+ecmcConfigOrDie "Cfg2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+2022/09/06 11:27:33.147 OK
+.WriteEcEntryIDString(2,binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(2,binaryOutput08,1)"
+# END of ADDITIONAL SETUP
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "IOC_TEST")
+iocshLoad (/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+#==============================================================================
+# configureAxis.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'FULL'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+epicsEnvSet("ECMC_PREFIX"      "IOC_TEST:")
+ecmcFileExist("./cfg/linear_1.ax",1)
+iocshLoad ./cfg/linear_1.ax ""
+#General
+epicsEnvSet("ECMC_MOTOR_NAME",            "Axis1")
+epicsEnvSet("ECMC_R",                     "Axis1-")
+epicsEnvSet("ECMC_AXIS_NO",               "1")
+epicsEnvSet("ECMC_DESC",                  "MCU1021 Lower Axis (1)")
+epicsEnvSet("ECMC_EGU",                   "mm")                        # Motor Record Unit
+epicsEnvSet("ECMC_PREC",                  "3")                         # Motor Record Precision
+epicsEnvSet("ECMC_AXISCONFIG",            "")                          # Extra parameters to driver
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                          # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
+epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                         # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
+epicsEnvSet("ECMC_MOD_TYPE",              "0")                         # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
+#Encoder
+epicsEnvSet("ECMC_ENC_SCALE_NUM"          "-60")
+epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "2000")
+epicsEnvSet("ECMC_ENC_TYPE"               "0")                         # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_BITS"               "16")                        # Total bit count of encoder raw data
+epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                         # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
+epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                         # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s3.positionActual01")           # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                          # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                          # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                          # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                          # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                          # Warning (if no encoder warning bit then leave empty)
+#Drive
+epicsEnvSet("ECMC_DRV_TYPE"               "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+epicsEnvSet("ECMC_DRV_SCALE_NUM"          "600.0")                     # Fastest speed in engineering units
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "32768.0")                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s8.driveControl01.0")      # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s8.driveStatus01.1")       # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s8.velocitySetpoint01")  # Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s8.driveControl01.2")      # Ethercat entry for reduce torque output
+epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                          # Ethercat entry for brake output
+epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                    # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                    # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "ec0.s8.driveControl01.1")      # Reset
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "ec0.s8.driveStatus01.3")       # Error
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "ec0.s8.driveStatus01.7")       # Stall
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "ec0.s8.driveStatus01.14")      # Sync error
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s8.driveStatus01.2")       # Warning
+#Trajectory
+epicsEnvSet("ECMC_TRAJ_TYPE"              "1")                         # Trapetz: 0. S-Curve: 1
+epicsEnvSet("ECMC_VELO",                  "10.0")
+epicsEnvSet("ECMC_JOG_VEL",               "5")
+epicsEnvSet("ECMC_JAR",                   "0.0")                       # JAR defaults to VELO/ACCL
+epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "10")
+epicsEnvSet("ECMC_EMERG_DECEL",           "100")                       # Emergency deceleration
+epicsEnvSet("ECMC_JERK",                  "10.0")                      # Only valid for ECMC_TRAJ_TYPE==1
+#Homing
+epicsEnvSet("ECMC_HOME_PROC",             "3")
+epicsEnvSet("ECMC_HOME_POS",              "0.0")
+epicsEnvSet("ECMC_HOME_VEL_TO",           "5")
+epicsEnvSet("ECMC_HOME_VEL_FRM",          "4")
+epicsEnvSet("ECMC_HOME_ACC",              "21")
+epicsEnvSet("ECMC_HOME_DEC",              "100")
+epicsEnvSet("ECMC_HOME_POS_MOVE_ENA",     "0")                        # Enable move to position after successfull homing 
+epicsEnvSet("ECMC_HOME_POS_MOVE_TARG_POS","0")                        # Target position to go to after successfull homing
+#Controller
+epicsEnvSet("ECMC_CNTRL_KP",              "15.0")
+epicsEnvSet("ECMC_CNTRL_KI",              "0.02")
+epicsEnvSet("ECMC_CNTRL_KD",              "0.0")
+epicsEnvSet("ECMC_CNTRL_KFF",             "1.0")
+#Monitoring
+# Switches
+epicsEnvSet("ECMC_EC_MON_LOWLIM",         "ec0.s1.binaryInput02.0")           #  Ethercat entry for low limit switch input
+epicsEnvSet("ECMC_EC_MON_HIGHLIM",        "ec0.s1.binaryInput01.0")           #  Ethercat entry for high limit switch inpuit
+epicsEnvSet("ECMC_EC_MON_HOME_SWITCH",    "ec0.s1.binaryInput03.0")           #  Ethercat entry for home switch input
+epicsEnvSet("ECMC_EC_MON_EXT_INTERLOCK",  "ec0.s1.ONE.0")               #  Ethercat entry for external interlock input
+# Softlimits (disable with 0,0,0)
+epicsEnvSet("ECMC_SOFT_LOW_LIM",          "-20")
+epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "130")
+epicsEnvSet("ECMC_DXLM_ENABLE",           "1")
+# Position lag
+epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "1.0")
+epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "10")
+epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
+# At target
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.1")
+epicsEnvSet("ECMC_MON_AT_TARGET_TIME",     "100")
+epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
+# Velocity
+epicsEnvSet("ECMC_MON_VELO_MAX",          "100.0")
+epicsEnvSet("ECMC_MON_VELO_MAX_TRAJ_TIME","100")
+epicsEnvSet("ECMC_MON_VELO_MAX_DRV_TIME", "200")
+epicsEnvSet("ECMC_MON_VELO_MAX_ENA",      "1")
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addAxis.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addAxis.cmd
+#==============================================================================
+# addAxis.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'FULL'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis-records.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis-records.cmd
+#======================================2022/09/06 11:27:33.161 OK
+2022/09/06 11:27:33.161 OK
+2022/09/06 11:27:33.161 OK
+2022/09/06 11:27:33.161 OK
+2022/09/06 11:27:33.165 OK
+========================================
+# ecmc_axis-records.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis.cmd
+#==============================================================================
+# ecmc_axis.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(-60)<>0',SUCCESS_STR='ECMC_ENC_SCALE_NUM value OK == -60...',ERROR_STR='ECMC_ENC_SCALE_NUM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(-60)<>0","# ECMC_ENC_SCALE_NUM value OK == -60...", "ecmcExit Error: ECMC_ENC_SCALE_NUM == 0...")
+# ECMC_ENC_SCALE_NUM value OK == -60...
+epicsEnvUnset(ECMC_EXE_CMD)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(2000)<>0',SUCCESS_STR='ECMC_ENC_SCALE_DENOM value OK == 2000...',ERROR_STR='ECMC_ENC_SCALE_DENOM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(2000)<>0","# ECMC_ENC_SCALE_DENOM value OK == 2000...", "ecmcExit Error: ECMC_ENC_SCALE_DENOM == 0...")
+# ECMC_ENC_SCALE_DENOM value OK == 2000...
+epicsEnvUnset(ECMC_EXE_CMD)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(600.0)<>0',SUCCESS_STR='ECMC_DRV_SCALE_NUM value OK == 600.0...',ERROR_STR='ECMC_DRV_SCALE_NUM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(600.0)<>0","# ECMC_DRV_SCALE_NUM value OK == 600.0...", "ecmcExit Error: ECMC_DRV_SCALE_NUM == 0...")
+# ECMC_DRV_SCALE_NUM value OK == 600.0...
+epicsEnvUnset(ECMC_EXE_CMD)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(32768.0)<>0',SUCCESS_STR='ECMC_DRV_SCALE_DENOM value OK == 32768.0...',ERROR_STR='ECMC_DRV_SCALE_DENOM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(32768.0)<>0","# ECMC_DRV_SCALE_DENOM value OK == 32768.0...", "ecmcExit Error: ECMC_DRV_SCALE_DENOM == 0...")
+# ECMC_DRV_SCALE_DENOM value OK == 32768.0...
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd "EXPR_STR='-1>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
+#==============================================================================
+# issueWarning.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"-1>0","", "#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcConfigOrDie "Cfg.CreateAxis(1,1,0,1)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.health")"
+ecmcConfigOrDie "Cfg.SetAxisModRange(1, 0)"
+ecmcConfigOrDie "Cfg.SetAxisModType(1, 0)"
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd "EXPR_STR='-1>0',WARNING_STR='WARNING: ECMC_ACCL setting is deprecated. Please use ECMC_ACCS_EGU_PER_S2 instead..'"
+#==============================================================================
+# issueWarning.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"-1>0","", "#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCL,"'EMPTY'!='EMPTY'","", "#-")
+ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCS,"'EMPTY'=='EMPTY'","", "#-")
+ ecmcConfigOrDie "Cfg.SetAxisAcc(1,10)"
+ ecmcCo2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.165 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.166 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.167 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.168 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.169 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.170 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.171 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.172 OK
+2022/09/06 11:27:33.173 OK
+nfigOrDie "Cfg.SetAxisDec(1,10)"
+ecmcConfigOrDie "Cfg.SetAxisJerk(1,10.0)"
+ecmcConfigOrDie "Cfg.SetAxisVel(1,10.0)"
+ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(1,100)"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(1,5)"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(1,4)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKp(1,15.0)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKi(1,0.02)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKd(1,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKff(1,1.0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s3.positionActual01,"ax1.enc.actpos")"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(1,2000)"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(1,-60)"
+ecmcConfigOrDie "Cfg.SetAxisEncType(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncBits(1,16)"
+ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(1,100)"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(1,0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.reset")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.alarm0")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.alarm1")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.alarm2")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.warning")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.latchpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.latchcontrol")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.latchstatus")"
+ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchCountOffset(1,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(1,-1)"
+ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(1,-1)"
+ecmcConfigOrDie "Cfg.SelectAxisEncHome(1,-1)"
+ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(1,-1)"
+ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc(1,0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveControl01.0,"ax1.drv.control")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveStatus01.1,"ax1.drv.status")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.velocitySetpoint01,"ax1.drv.velocity")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.drv.position")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.drv.brake")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveControl01.2,"ax1.drv.reducetorque")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveControl01.1,"ax1.drv.reset")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveStatus01.3,"ax1.drv.alarm0")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveStatus01.7,"ax1.drv.alarm1")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveStatus01.14,"ax1.drv.alarm2")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.driveStatus01.2,"ax1.drv.warning")"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom(1,32768.0)"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum(1,600.0)"
+ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd(1,-20)"
+ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd(1,130)"
+ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd(1,1)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.binaryInput02.0,"ax1.mon.lowlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.binaryInput01.0,"ax1.mon.highlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.binaryInput03.0,"ax1.mon.homesensor")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.ONE.0,"ax1.mon.extinterlock")"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol(1,0.1)"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime(1,100)"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol(1,1.0)"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime(1,10)"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVel(1,100.0)"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay(1,200)"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(1,100)"
+ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisHomePosition(1,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMo2022/09/06 11:27:33.173 OK
+2022/09/06 11:27:33.173 OK
+2022/09/06 11:27:33.173 ecmcMotorRecord:: setIntegerParam(1 motorPowerAutoOnOff_)=2
+2022/09/06 11:27:33.173 ecmcMotorRecord:: setDoubleParam(1 motorPowerOnDelay_)=6
+2022/09/06 11:27:33.173 ecmcMotorRecord:: setDoubleParam(1 motorPowerOffDelay_=-1
+2022/09/06 11:27:33.174 ecmcMotorRecord:: udateMotorLimitsRO(1) enabledHighAndLow=1 valid=1 fValueHigh=130 fValueLow=-20
+2022/09/06 11:27:33.174 ecmcMotorRecord:: connected(1)
+2022/09/06 11:27:33.174 ecmcMotorRecord:: initialPoll(1) status=0
+veEnable(1, 0)"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(1, 0)"
+ ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_mr.cmd",1)
+ iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_mr.cmd
+#==============================================================================
+# ecmc_axis_mr.cmd
+ecmcMotorRecordCreateAxis(MCU1, "1", "6", )
+ecmcEpicsEnvSetCalc("ECMC_TEMP_SREV","if(abs(2000)>0){RESULT:=abs(2000);} else {RESULT:=1.0};","%d")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_UREV","if(abs(-60)>0){RESULT:=abs(-60);} else {RESULT:=1.0};","%lf")
+ecmcFileExist(ecmcMotorRecord.template,1,1)
+ dbLoadRecords(ecmcMotorRecord.template, "PREFIX=IOC_TEST:, MOTOR_NAME=Axis1, MOTOR_PORT=MCU1, AXIS_NO=1, DESC=MCU1021 Lower Axis (1), EGU=mm, PREC=3, VELO=10.0, JVEL=5, JAR=0.0, ACCS=10, RDBD=0.1, DLLM=-20, DHLM=130, HOMEPROC=3,SREV=2000,UREV=60.000000, ")
+epicsEnvSet("ECMC_AXISFIELDINIT",  "")
+ecmcFileExist(ecmcMotorRecordhome.template,1,1)
+dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=IOC_TEST:, MOTOR_NAME=Axis1, MOTOR_PORT=MCU1, AXIS_NO=1,HOMEPROC=3, HOMEPOS=0.0, HVELTO=5, HVELFRM=4, HOMEACC=21, HOMEDEC=100")
+epicsEnvUnset(ECMC_TEMP_SREV)
+epicsEnvUnset(ECMC_TEMP_UREV)
+epicsEnvUnset(ECMC_BLOCK_ACCL)
+epicsEnvUnset(ECMC_BLOCK_ACCS)
+# Add the default encoder 0
+epicsEnvSet(ECMC_ENC_CFG_ID,0)
+ecmcFileExist("ecmcAxis.db",1,1)
+dbLoadRecords("ecmcAxis.db","P=IOC_TEST:,AXIS_NAME=Axis1,AXIS_NO=1,ENC_NO=0,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=0")
+epicsEnvUnset(ECMC_ENC_CFG_ID)
+ecmcFileExist("ecmcAxisType.db",1,1)
+dbLoadRecords("ecmcAxisType.db","P=IOC_TEST:,AXIS_NAME=Axis1,AXIS_TYPE=1,DRV_TYPE=0,TRAJ_TYPE=1")
+ecmcFileExist(/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_unset.cmd,1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_unset.cmd
+#==============================================================================
+# ecmc_axis_unset.cmd
+epicsEnvUnset(ECMC_AXISCONFIG)
+epicsEnvUnset(ECMC_AXISFIELDINIT)
+epicsEnvUnset(ECMC_PREC)
+epicsEnvUnset(ECMC_EGU)
+epicsEnvUnset(ECMC_DESC)
+epicsEnvUnset(ECMC_R)
+epicsEnvUnset(ECMC_EC_AXIS_HEALTH)
+epicsEnvUnset(ECMC_MOD_RANGE)
+epicsEnvUnset(ECMC_MOD_TYPE)
+epicsEnvUnset(ECMC_EMERG_DECEL)
+epicsEnvUnset(ECMC_VELO)
+epicsEnvUnset(ECMC_ACCL)
+epicsEnvUnset(ECMC_ACCS_EGU_PER_S2)
+epicsEnvUnset(ECMC_HOME_VEL_TO)
+epicsEnvUnset(ECMC_HOME_VEL_FRM)
+epicsEnvUnset(ECMC_CNTRL_KP)
+epicsEnvUnset(ECMC_CNTRL_KI)
+epicsEnvUnset(ECMC_CNTRL_KD)
+epicsEnvUnset(ECMC_CNTRL_KFF)
+epicsEnvUnset(ECMC_EC_ENC_ACTPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCHPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_CONTROL)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_STATUS)
+epicsEnvUnset(ECMC_HOME_LATCH_COUNT_OFFSET)
+epicsEnvUnset(ECMC_ENC_SCALE_DENOM)
+epicsEnvUnset(ECMC_ENC_SCALE_NUM)
+epicsEnvUnset(ECMC_ENC_TYPE)
+epicsEnvUnset(ECMC_ENC_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_OFFSET)
+epicsEnvUnset(ECMC_ENC_VEL_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_ENABLE)
+epicsEnvUnset(ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID)
+epicsEnvUnset(ECMC_ENC_HOME_ID)
+epicsEnvUnset(ECMC_ENC_PRIMARY_ID)
+epicsEnvUnset(ECMC_ENC_CFG_ID)
+epicsEnvUnset(ECMC_ENC_MAX_DIFF_TO_PRIM_ENC)
+epicsEnvUnset(ECMC_EC_ENC_RESET)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_0)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_1)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_2)
+epicsEnvUnset(ECMC_EC_ENC_WARNING)
+epicsEnvUnset(ECMC_EC_DRV_CONTROL)
+epicsEnvUnset(ECMC_EC_DRV_STATUS)
+epicsEnvUnset(ECMC_EC_DRV_VELOCITY)
+epicsEnvUnset(ECMC_EC_DRV_BRAKE)
+epicsEnvUnset(ECMC_EC_DRV_REDUCE_TORQUE)
+epicsEnvUnset(ECMC_EC_DRV_RESET)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_0)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_1)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_2)
+epicsEnvUnset(ECMC_EC_DRV_WARNING)
+epicsEnvUnset(ECMC_DRV_SCALE_DENOM)
+epicsEnvUnset(ECMC_DRV_SCALE_NUM)
+epicsEnvUnset(ECMC_DRV_BRAKE_OPEN_DLY_TIME)
+epicsEnvUnset(ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME)
+epicsEnvUnset(ECMC_SOFT_LOW_LIM)
+epicsEnvUnset(ECMC_DXLM_ENABLE)
+epicsEnvUnset(ECMC_SOFT_HIGH_LIM)
+epicsEnvUnset(ECMC_DXLM_ENABLE)
+epicsEnvUnset(ECMC_EC_MON_LOWLIM)
+epicsEnvUnset(ECMC_EC_MON_HIGHLIM)
+epicsEnvUnset(ECMC_EC_MON_HOME_SWITCH)
+epicsEnvUnset(ECMC_EC_MON_EXT_INTERLOCK)
+epicsEnvUnset(ECMC_MON_AT_TARGET_TOL)
+epicsEnvUnset(ECMC_MON_AT_TARGET_TIME)
+epicsEnvUnset(ECMC_MON_AT_TARGET_ENA)
+epicsEnvUnset(ECMC_MON_LAG_MON_TOL)
+epicsEnvUnset(ECMC_MON_LAG_MON_TIME)
+epicsEnvUnset(ECMC_MON_LAG_MON_ENA)
+epicsEnvUnset(ECMC_MON_VELO_MAX)
+epicsEnvUnset(ECMC_MON_VELO_MAX_ENA)
+epicsEnvUnset(ECMC_MON_VELO_MAX_DRV_TIME)
+epicsEnvUnset(ECMC_MON_VELO_MAX_TRAJ_TIME)
+epicsEnvUnset(ECMC_JOG_VEL)
+epicsEnvUnset(ECMC_JAR)
+epicsEnvUnset(ECMC_HOME_PROC)
+epicsEnvUnset(ECMC_HOME_POS)
+epicsEnvUnset(ECMC_HOME_ACC)
+epicsEnvUnset(ECMC_HOME_DEC)
+epicsEnvUnset(ECMC_DRV_TYPE)
+epicsEnvUnset(ECMC_VELO)
+epicsEnvUnset(ECMC_SOFT_LOW_LIM)
+epicsEnvUnset(ECMC_SOFT_HIGH_LIM)
+epicsEnvUnset(ECMC_HOME_POS_MOVE_ENA)
+epicsEnvUnset(ECMC_HOME_POS_MOVE_TARG_POS)
+epicsEnvUnset(ECMC_TRAJ_TYPE)
+epicsEnvUnset(ECMC_JERK)
+epicsEnvSet("ECMC_PREFIX"      "IOC_TEST:")
+# Add extra encoder to axis 1 (open loop counter)
+iocshLoad (/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
+#==============================================================================
+# addEncoder.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'FULL'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+epicsEnvSet("ECMC_PREFIX"      "IOC_TEST:")
+ecmcFileExist("./cfg/linear_1_enc_1.enc",1)
+iocshLoad ./cfg/linear_1_enc_1.enc ""
+# Add open loop counter as second encoder (index 1)
+epicsEnvSet("ECMC_ENC_SCALE_NUM"               "60")
+epicsEnvSet("ECMC_ENC_SCALE_DENOM"             "12800")
+epicsEnvSet("ECMC_ENC_TYPE"                    "0")                        # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_BITS"                    "16")                       # Total bit count of encoder raw data
+epicsEnvSet("ECMC_ENC_ABS_BITS",               "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
+epicsEnvSet("ECMC_ENC_ABS_OFFSET"              "0")                        # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",              "ec0.s8.positionActual01")  # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",               "")                         # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",             "")                         # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",             "")                         # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",             "")                         # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",             "")                         # Warning (if no encoder warning bit then leave empty)
+# This encoder (enc 1) will be refenced to encoder 0 at startup (set to -1 to not change setting)
+epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID",  "-1")
+# Encoder index for closed loop control (set to -1 to not change setting)
+epicsEnvSet("ECMC_ENC_PRIMARY_ID",  "-1")
+# Encoder index for homing, the specified homing seq will be executed based on this enc. (set to -1 to not change setting)
+epicsEnvSet("ECMC_ENC_HOME_ID",  "1")
+# Reference this encoder ar homing (set to -1 to not change setting)
+epicsEnvSet("ECMC_ENC_REF_AT_HOME",  "1")
+# Maximum position diff between this encoder and primary (set to 0 to disable)
+epicsEnvSet("ECMC_ENC_MAX_DIFF_TO_PRIM_ENC",  "0.005")
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_enc-records.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_enc-records.cmd
+#==============================================================================
+# ecmc_enc-records.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/2022/09/06 11:27:33.192 OK
+2022/09/06 11:27:33.192 1
+2022/09/06 11:27:33.192 OK
+2022/09/06 11:27:33.192 OK
+2022/09/06 11:27:33.192 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.193 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.194 OK
+2022/09/06 11:27:33.195 OK
+2022/09/06 11:27:33.195 OK
+2022/09/06 11:27:33.195 OK
+2022/09/06 11:27:33.195 OK
+2022/09/06 11:27:33.195 OK
+add_multi_encoder/ecmc_enc.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_enc.cmd
+#==============================================================================
+# ecmc_enc.cmd
+ecmcConfigOrDie "Cfg.AddAxisEnc(1)"
+ecmcConfig "GetAxisEncConfigIndex(1)"
+# Current encoder index beeing configured
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ECMC_CONFIG_RETURN_VAL=1
+epicsEnvSet(ECMC_ENC_CFG_ID,1)
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s8.positionActual01,"ax1.enc.actpos")"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(1,12800)"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(1,60)"
+ecmcConfigOrDie "Cfg.SetAxisEncType(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncBits(1,16)"
+ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(1,100)"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(1,0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.reset")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.alarm0")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.alarm1")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.alarm2")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.warning")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.latchpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.latchcontrol")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax1.enc.latchstatus")"
+ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchCountOffset(1,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(1,-1)"
+ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(1,-1)"
+ecmcConfigOrDie "Cfg.SelectAxisEncHome(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(1,1)"
+ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc(1,0.005)"
+ecmcFileExist("ecmcEnc.db",1,1)
+dbLoadRecords("ecmcEnc.db","P=IOC_TEST:,AXIS_NAME=Axis1,AXIS_NO=1,ENC_NO=1,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=0")
+ecmcFileExist(/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_enc_unset.cmd,1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_enc_unset.cmd
+#==============================================================================
+# ecmc_enc_unset.cmd
+epicsEnvUnset(ECMC_EC_ENC_ACTPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCHPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_CONTROL)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_STATUS)
+epicsEnvUnset(ECMC_HOME_LATCH_COUNT_OFFSET)
+epicsEnvUnset(ECMC_ENC_SCALE_DENOM)
+epicsEnvUnset(ECMC_ENC_SCALE_NUM)
+epicsEnvUnset(ECMC_ENC_TYPE)
+epicsEnvUnset(ECMC_ENC_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_OFFSET)
+epicsEnvUnset(ECMC_ENC_VEL_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_ENABLE)
+epicsEnvUnset(ECMC_EC_ENC_RESET)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_0)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_1)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_2)
+epicsEnvUnset(ECMC_EC_ENC_WARNING)
+epicsEnvUnset(ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID)
+epicsEnvUnset(ECMC_ENC_HOME_ID)
+epicsEnvUnset(ECMC_ENC_PRIMARY_ID)
+epicsEnvUnset(ECMC_ENC_CFG_ID)
+epicsEnvUnset(ECMC_ENC_REF_AT_HOME)
+epicsEnvUnset(ECMC_ENC_MAX_DIFF_TO_PRIM_ENC)
+epicsEnvSet("ECMC_PREFIX"      "IOC_TEST:")
+# Add extra encoder to axis 1 (open loop counter)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
+# Add extra encoder to axis 1 (open loop counter)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_2.enc)
+# Add extra encoder to axis 1 (open loop counter)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_2.enc)
+# Add extra encoder to axis 1 (open loop counter)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/linear_1_enc_1.enc)
+##############################################################################
+## AXIS 2
+#
+epicsEnvSet("DEV",      "IOC_TEST")
+iocshLoad (/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
+#==============================================================================
+# configureAxis.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'FULL'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+epicsEnvSet("ECMC_PREFIX"      "IOC_TEST:")
+ecmcFileExist("./cfg/linear_2.ax",1)
+iocshLoad ./cfg/linear_2.ax ""
+#General
+epicsEnvSet("ECMC_MOTOR_NAME",            "Axis2")
+epicsEnvSet("ECMC_R",                     "Axis2-")
+epicsEnvSet("ECMC_AXIS_NO",               "2")
+epicsEnvSet("ECMC_DESC",                  "MCU1021 Upper Axis (2)")
+epicsEnvSet("ECMC_EGU",                   "mm")                       # Motor Record Unit
+epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Record Precision
+epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
+epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
+epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
+epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
+#Encoder
+epicsEnvSet("ECMC_ENC_SCALE_NUM"          "60")
+epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "2000")
+epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bit count of encoder raw data
+epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
+epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
+epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s4.positionActual01")          # Ethercat entry for actual position input (encoder)
+epicsEnvSet("ECMC_EC_ENC_RESET",          "")                         # Reset   (if no encoder reset bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_0",        "")                         # Error 0 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_1",        "")                         # Error 1 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 (if no encoder error bit then leave empty)
+epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning (if no encoder warning bit then leave empty)
+#Drive
+epicsEnvSet("ECMC_DRV_TYPE"               "0")                        # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+epicsEnvSet("ECMC_DRV_SCALE_NUM"          "-600.0")                   # Fastest speed in engineering units
+epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "32768.0")                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s9.driveControl01.0")     # Ethercat entry for control word or bit output
+epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s9.driveStatus01.1")      # Ethercat entry for status word or bit input
+epicsEnvSet("ECMC_EC_DRV_VELOCITY",       "ec0.s9.velocitySetpoint01") # Ethercat entry for velocity setpoint output
+epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s9.driveControl01.2")     # Ethercat entry for reduce torque output
+epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                         # Ethercat entry for brake output
+epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                   # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                   # Brake timing parameter in cycles (default 1kHz)
+epicsEnvSet("ECMC_EC_DRV_RESET",          "ec0.s9.driveControl01.1")     # Reset
+epicsEnvSet("ECMC_EC_DRV_ALARM_0",        "ec0.s9.driveStatus01.3")      # Error
+epicsEnvSet("ECMC_EC_DRV_ALARM_1",        "ec0.s9.driveStatus01.7")      # Stall
+epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "ec0.s9.driveStatus01.14")     # Sync error
+epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s9.driveStatus01.2")      # Warning
+#Trajectory
+epicsEnvSet("ECMC_VELO",                  "10.0")
+epicsEnvSet("ECMC_JOG_VEL",               "5")
+epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
+epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "10")
+epicsEnvSet("ECMC_EMERG_DECEL",           "100")             # Emergency deceleration
+#Homing
+epicsEnvSet("ECMC_HOME_PROC",             "3")
+epicsEnvSet("ECMC_HOME_POS",              "0.0")
+epicsEnvSet("ECMC_HOME_VEL_TO",           "5")
+epicsEnvSet("ECMC_HOME_VEL_FRM",          "4")
+epicsEnvSet("ECMC_HOME_ACC",              "21")
+epicsEnvSet("ECMC_HOME_DEC",              "100")
+epicsEnvSet("ECMC_HOME_POS_MOVE_ENA",     "0")                        # Enable move to position after successfull homing 
+epicsEnvSet("ECMC_HOME_POS_MOVE_TARG_POS","0")                        # Target position to go to after successfull homing
+#Controller
+epicsEnvSet("ECMC_CNTRL_KP",              "15.0")
+epicsEnvSet("ECMC_CNTRL_KI",              "0.02")
+epicsEnvSet("ECMC_CNTRL_KD",              "0.0")
+epicsEnvSet("ECMC_CNTRL_KFF",             "1.0")
+#Monitoring
+# Switches
+epicsEnvSet("ECMC_EC_MON_LOWLIM",         "ec0.s1.binaryInput06.0")           #  Ethercat entry for low limit switch input
+epicsEnvSet("ECMC_EC_MON_HIGHLIM",        "ec0.s1.binaryInput05.0")           #  Ethercat entry for high limit switch inpuit
+epicsEnvSet("ECMC_EC_MON_HOME_SWITCH",    "ec0.s1.binaryInput07.0")           #  Ethercat entry for home switch input
+epicsEnvSet("ECMC_EC_MON_EXT_INTERLOCK",  "ec0.s0.ONE.0")              #  Ethercat entry for external interlock input
+# Softlimits (disable with 0,0)
+epicsEnvSet("ECMC_SOFT_LOW_LIM",          "-130")
+epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "20")
+epicsEnvSet("ECMC_DXLM_ENABLE",           "1")
+# Position lag
+epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "1.0")
+epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "10")
+epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
+# At target
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.1")
+epicsEnvSet("ECMC_MON_AT_TARGET_TIME",     "100")
+epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
+# Velocity
+epicsEnvSet("ECMC_MON_VELO_MAX",          "100.0")
+epicsEnvSet("ECMC_MON_VELO_MAX_TRAJ_TIME","100")
+epicsEnvSet("ECMC_MON_VELO_MAX_DRV_TIME", "200")
+epicsEnvSet("ECMC_MON_VELO_MAX_ENA",      "1")
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addAxis.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/addAxis.cmd
+#==============================================================================
+# addAxis.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'FULL'='DAQ'","ecmcExit Error: ECMC started in DAQ mode. Motion not supported..","#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis-records.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis-records.cmd
+#==============================================================================
+# ecmc_axis-records.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis.cmd
+#==============================================================================
+# ecmc_axis.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(60)<>0',SUCCESS_STR='ECMC_ENC_SCALE_NUM value OK == 60...',ERROR_STR='ECMC_ENC_SCALE_NUM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(60)<>0","# ECMC_ENC_SCALE_NUM value OK == 60...", "ecmcExit Error: ECMC_ENC_SCALE_NUM == 0...")
+# ECMC_ENC_SCALE_NUM value OK == 60...
+epicsEnvUnset(ECMC_EXE_CMD)
+iocs2022/09/06 11:27:33.207 OK
+2022/09/06 11:27:33.207 OK
+2022/09/06 11:27:33.208 OK
+2022/09/06 11:27:33.208 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.210 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.211 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+hLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(2000)<>0',SUCCESS_STR='ECMC_ENC_SCALE_DENOM value OK == 2000...',ERROR_STR='ECMC_ENC_SCALE_DENOM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(2000)<>0","# ECMC_ENC_SCALE_DENOM value OK == 2000...", "ecmcExit Error: ECMC_ENC_SCALE_DENOM == 0...")
+# ECMC_ENC_SCALE_DENOM value OK == 2000...
+epicsEnvUnset(ECMC_EXE_CMD)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(-600.0)<>0',SUCCESS_STR='ECMC_DRV_SCALE_NUM value OK == -600.0...',ERROR_STR='ECMC_DRV_SCALE_NUM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(-600.0)<>0","# ECMC_DRV_SCALE_NUM value OK == -600.0...", "ecmcExit Error: ECMC_DRV_SCALE_NUM == 0...")
+# ECMC_DRV_SCALE_NUM value OK == -600.0...
+epicsEnvUnset(ECMC_EXE_CMD)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/verifyOrDie.cmd "EXPR_STR='abs(32768.0)<>0',SUCCESS_STR='ECMC_DRV_SCALE_DENOM value OK == 32768.0...',ERROR_STR='ECMC_DRV_SCALE_DENOM == 0...'"
+#==============================================================================
+# verifyOrDie.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"abs(32768.0)<>0","# ECMC_DRV_SCALE_DENOM value OK == 32768.0...", "ecmcExit Error: ECMC_DRV_SCALE_DENOM == 0...")
+# ECMC_DRV_SCALE_DENOM value OK == 32768.0...
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd "EXPR_STR='-1>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
+#==============================================================================
+# issueWarning.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"-1>0","", "#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcConfigOrDie "Cfg.CreateAxis(2,1,0,0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.health")"
+ecmcConfigOrDie "Cfg.SetAxisModRange(2, 0)"
+ecmcConfigOrDie "Cfg.SetAxisModType(2, 0)"
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/issueWarning.cmd "EXPR_STR='-1>0',WARNING_STR='WARNING: ECMC_ACCL setting is deprecated. Please use ECMC_ACCS_EGU_PER_S2 instead..'"
+#==============================================================================
+# issueWarning.cmd
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD,"-1>0","", "#-")
+epicsEnvUnset(ECMC_EXE_CMD)
+ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCL,"'EMPTY'!='EMPTY'","", "#-")
+ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_ACCS,"'EMPTY'=='EMPTY'","", "#-")
+ ecmcConfigOrDie "Cfg.SetAxisAcc(2,10)"
+ ecmcConfigOrDie "Cfg.SetAxisDec(2,10)"
+ecmcConfigOrDie "Cfg.SetAxisJerk(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisVel(2,10.0)"
+ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(2,100)"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(2,5)"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(2,4)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKp(2,15.0)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKi(2,0.02)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKd(2,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKff(2,1.0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s4.positionActual01,"ax2.enc.actpos")"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(2,2000)"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(2,60)"
+ecmcConfigOrDie "Cfg.SetAxisEncType(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncBits(2,16)"
+ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(2,100)"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(2,1)"
+ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(2,0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"a2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.212 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.213 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.214 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.215 OK
+2022/09/06 11:27:33.216 OK
+2022/09/06 11:27:33.216 OK
+2022/09/06 11:27:33.216 OK
+2022/09/06 11:27:33.216 OK
+2022/09/06 11:27:33.216 ecmcMotorRecord:: setIntegerParam(2 motorPowerAutoOnOff_)=2
+2022/09/06 11:27:33.216 ecmcMotorRecord:: setDoubleParam(2 motorPowerOnDelay_)=6
+2022/09/06 11:27:33.216 ecmcMotorRecord:: setDoubleParam(2 motorPowerOffDelay_=-1
+2022/09/06 11:27:33.217 ecmcMotorRecord:: udateMotorLimitsRO(2) enabledHighAndLow=1 valid=1 fValueHigh=20 fValueLow=-130
+2022/09/06 11:27:33.217 ecmcMotorRecord:: connected(2)
+2022/09/06 11:27:33.217 ecmcMotorRecord:: initialPoll(2) status=0
+x2.enc.reset")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.alarm0")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.alarm1")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.alarm2")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.warning")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.latchpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.latchcontrol")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.enc.latchstatus")"
+ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchCountOffset(2,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(2,-1)"
+ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(2,-1)"
+ecmcConfigOrDie "Cfg.SelectAxisEncHome(2,-1)"
+ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(2,-1)"
+ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc(2,0)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveControl01.0,"ax2.drv.control")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveStatus01.1,"ax2.drv.status")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.velocitySetpoint01,"ax2.drv.velocity")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.drv.position")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(,"ax2.drv.brake")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveControl01.2,"ax2.drv.reducetorque")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveControl01.1,"ax2.drv.reset")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveStatus01.3,"ax2.drv.alarm0")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveStatus01.7,"ax2.drv.alarm1")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveStatus01.14,"ax2.drv.alarm2")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s9.driveStatus01.2,"ax2.drv.warning")"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom(2,32768.0)"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum(2,-600.0)"
+ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd(2,-130)"
+ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd(2,1)"
+ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd(2,20)"
+ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd(2,1)"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.binaryInput06.0,"ax2.mon.lowlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.binaryInput05.0,"ax2.mon.highlim")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s1.binaryInput07.0,"ax2.mon.homesensor")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(ec0.s0.ONE.0,"ax2.mon.extinterlock")"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol(2,0.1)"
+ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime(2,100)"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon(2,1)"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol(2,1.0)"
+ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime(2,10)"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon(2,1)"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVel(2,100.0)"
+ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel(2,1)"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVelDriveILDelay(2,200)"
+ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(2,100)"
+ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisHomePosition(2,0.0)"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable(2, 0)"
+ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(2, 0)"
+ ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_mr.cmd",1)
+ iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_mr.cmd
+#==============================================================================
+# ecmc_axis_mr.cmd
+ecmcMotorRecordCreateAxis(MCU1, "2", "6", )
+ecmcEpicsEnvSetCalc("ECMC_TEMP_SREV","if(abs(2000)>0){RESULT:=abs(2000);} else {RESULT:=1.0};","%d")
+ecmcEpicsEnvSetCalc("ECMC_TEMP_UREV","if(abs(60)>0){RESULT:=abs(60);} else {RESULT:=1.0};","%lf")
+ecmcFileExist(ecmcMotorRecord.template,1,1)
+ dbLoadRecords(ecmcMotorRecord.template, "PREFIX=IOC_TEST:, MOTOR_NAME=Axis2, MOTOR_PORT=MCU1, AXIS_NO=2, DESC=MCU1021 Upper Axis (2), EGU=mm, PREC=3, VELO=10.0, JVEL=5, JAR=0.0, ACCS=10, RDBD=0.1, DLLM=-130, DHLM=20, HOMEPROC=3,SREV=2000,UREV=60.000000, ")
+epicsEnvSet("ECMC_AXISFIELDINIT",  "")
+ecmcFileExist(ecmcMotorRecordhome.template,1,1)
+dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=IOC_TEST:, MOTOR_NAME=Axis2, MOTOR_PORT=MCU1, AXIS_NO=2,HOMEPROC=3, HOMEPOS=0.0, HVELTO=5, HVELFRM=4, HOMEACC=21, HOMEDEC=100")
+epicsEnvUnset(ECMC_TEMP_SREV)
+epicsEnvUnset(ECMC_TEMP_UREV)
+epicsEnvUnset(ECMC_BLOCK_ACCL)
+epicsEnvUnset(ECMC_BLOCK_ACCS)
+# Add the default encoder 0
+epicsEnvSet(ECMC_ENC_CFG_ID,0)
+ecmcFileExist("ecmcAxis.db",1,1)
+dbLoadRecords("ecmcAxis.db","P=IOC_TEST:,AXIS_NAME=Axis2,AXIS_NO=2,ENC_NO=0,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=0")
+epicsEnvUnset(ECMC_ENC_CFG_ID)
+ecmcFileExist("ecmcAxisType.db",1,1)
+dbLoadRecords("ecmcAxisType.db","P=IOC_TEST:,AXIS_NAME=Axis2,AXIS_TYPE=1,DRV_TYPE=0,TRAJ_TYPE=0")
+ecmcFileExist(/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_unset.cmd,1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/ecmc_axis_unset.cmd
+#==============================================================================
+# ecmc_axis_unset.cmd
+epicsEnvUnset(ECMC_AXISCONFIG)
+epicsEnvUnset(ECMC_AXISFIELDINIT)
+epicsEnvUnset(ECMC_PREC)
+epicsEnvUnset(ECMC_EGU)
+epicsEnvUnset(ECMC_DESC)
+epicsEnvUnset(ECMC_R)
+epicsEnvUnset(ECMC_EC_AXIS_HEALTH)
+epicsEnvUnset(ECMC_MOD_RANGE)
+epicsEnvUnset(ECMC_MOD_TYPE)
+epicsEnvUnset(ECMC_EMERG_DECEL)
+epicsEnvUnset(ECMC_VELO)
+epicsEnvUnset(ECMC_ACCL)
+epicsEnvUnset(ECMC_ACCS_EGU_PER_S2)
+epicsEnvUnset(ECMC_HOME_VEL_TO)
+epicsEnvUnset(ECMC_HOME_VEL_FRM)
+epicsEnvUnset(ECMC_CNTRL_KP)
+epicsEnvUnset(ECMC_CNTRL_KI)
+epicsEnvUnset(ECMC_CNTRL_KD)
+epicsEnvUnset(ECMC_CNTRL_KFF)
+epicsEnvUnset(ECMC_EC_ENC_ACTPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCHPOS)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_CONTROL)
+epicsEnvUnset(ECMC_EC_ENC_LATCH_STATUS)
+epicsEnvUnset(ECMC_HOME_LATCH_COUNT_OFFSET)
+epicsEnvUnset(ECMC_ENC_SCALE_DENOM)
+epicsEnvUnset(ECMC_ENC_SCALE_NUM)
+epicsEnvUnset(ECMC_ENC_TYPE)
+epicsEnvUnset(ECMC_ENC_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_BITS)
+epicsEnvUnset(ECMC_ENC_ABS_OFFSET)
+epicsEnvUnset(ECMC_ENC_VEL_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_SIZE)
+epicsEnvUnset(ECMC_ENC_POS_FILTER_ENABLE)
+epicsEnvUnset(ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID)
+epicsEnvUnset(ECMC_ENC_HOME_ID)
+epicsEnvUnset(ECMC_ENC_PRIMARY_ID)
+epicsEnvUnset(ECMC_ENC_CFG_ID)
+epicsEnvUnset(ECMC_ENC_MAX_DIFF_TO_PRIM_ENC)
+epicsEnvUnset(ECMC_EC_ENC_RESET)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_0)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_1)
+epicsEnvUnset(ECMC_EC_ENC_ALARM_2)
+epicsEnvUnset(ECMC_EC_ENC_WARNING)
+epicsEnvUnset(ECMC_EC_DRV_CONTROL)
+epicsEnvUnset(ECMC_EC_DRV_STATUS)
+epicsEnvUnset(ECMC_EC_DRV_VELOCITY)
+epicsEnvUnset(ECMC_EC_DRV_BRAKE)
+epicsEnvUnset(ECMC_EC_DRV_REDUCE_TORQUE)
+epicsEnvUnset(ECMC_EC_DRV_RESET)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_0)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_1)
+epicsEnvUnset(ECMC_EC_DRV_ALARM_2)
+epicsEnvUnset(ECMC_EC_DRV_WARNING)
+epicsEnvUnset(ECMC_DRV_SCALE_DENOM)
+epicsEnvUnset(ECMC_DRV_SCALE_NUM)
+epicsEnvUnset(ECMC_DRV_BRAKE_OPEN_DLY_TIME)
+epicsEnvUnset(ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME)
+epicsEnvUnset(ECMC_SOFT_LOW_LIM)
+epicsEnvUnset(ECMC_DXLM_ENABLE)
+epicsEnvUnset(ECMC_SOFT_HIGH_LIM)
+epicsEnvUnset(ECMC_DXLM_ENABLE)
+epicsEnvUnset(ECMC_EC_MON_LOWLIM)
+epicsEnvUnset(ECMC_EC_MON_HIGHLIM)
+epicsEnvUnset(ECMC_EC_MON_HOME_SWITCH)
+epicsEnvUnset(ECMC_EC_MON_EXT_INTERLOCK)
+epicsEnvUnset(ECMC_MON_AT_TARGET_TOL)
+epicsEnvUnset(ECMC_MON_AT_TARGET_TIME)
+epicsEnvUnset(ECMC_MON_AT_TARGET_ENA)
+epicsEnvUnset(ECMC_MON_LAG_MON_TOL)
+epicsEnvUnset(ECMC_MON_LAG_MON_TIME)
+epicsEnvUnset(ECMC_MON_LAG_MON_ENA)
+epicsEnvUnset(ECMC_MON_VELO_MAX)
+epicsEnvUnset(ECMC_MON_VELO_MAX_ENA)
+epicsEnvUnset(ECMC_MON_VELO_MAX_DRV_TIME)
+epicsEnvUnset(ECMC_MON_VELO_MAX_TRAJ_TIME)
+epicsEnvUnset(ECMC_JOG_VEL)
+epicsEnvUnset(ECMC_JAR)
+epicsEnvUnset(ECMC_HOME_PROC)
+epicsEnvUnset(ECMC_HOME_POS)
+epicsEnvUnset(ECMC_HOME_ACC)
+epicsEnvUnset(ECMC_HOME_DEC)
+epicsEnvUnset(ECMC_DRV_TYPE)
+epicsEnvUnset(ECMC_VELO)
+epicsEnvUnset(ECMC_SOFT_LOW_LIM)
+epicsEnvUnset(ECMC_SOFT_HIGH_LIM)
+epicsEnvUnset(ECMC_HOME_POS_MOVE_ENA)
+epicsEnvUnset(ECMC_HOME_POS_MOVE_TARG_POS)
+epicsEnvUnset(ECMC_TRAJ_TYPE)
+epicsEnvUnset(ECMC_JERK)
+epicsEnvSet("ECMC_PREFIX"      "IOC_TEST:"2022/09/06 11:27:33.227 OK
+2022/09/06 11:27:33.227 OK
+2022/09/06 11:27:33.227 OK
+2022/09/06 11:27:33.227 OK
+2022/09/06 11:27:33.228 OK
+2022/09/06 11:27:33.228 OK
+2022/09/06 11:27:34.066 ecmcMotorRecord:: poll(1) mvnNRdy=1 bBusy=0 bExecute=0 bEnabled=0 atTarget=0 wf=0 ENC=0 fPos=0 fActPosition=0 time=0.000098
+2022/09/06 11:27:34.067 ecmcMotorRecord:: poll(1) bError=0 drvlocal.statusBinData.onChangeData.error=0x0
+2022/09/06 11:27:34.067 ecmcMotorRecord:: poll(1) callParamCallbacksUpdateError Error=4 old=-1 ErrID=0x0 old=0x0 Warn=0 nCmd=0 old=0 txt=NULL
+2022/09/06 11:27:34.067 ecmcMotorRecord:: poll(2) mvnNRdy=1 bBusy=0 bExecute=0 bEnabled=0 atTarget=0 wf=0 ENC=0 fPos=0 fActPosition=0 time=0.000042
+2022/09/06 11:27:34.067 ecmcMotorRecord:: poll(2) bError=0 drvlocal.statusBinData.onChangeData.error=0x0
+2022/09/06 11:27:34.067 ecmcMotorRecord:: poll(2) callParamCallbacksUpdateError Error=4 old=-1 ErrID=0x0 old=0x0 Warn=0 nCmd=0 old=0 txt=NULL
+2022/09/06 11:27:34.231 EtherCAT bus ready (not scaning).
+2022/09/06 11:27:34.232 INFO: Locking memory
+2022/09/06 11:27:34.267 ecmcMotorRecord:: poll(1) mvnNRdy=1 bBusy=0 bExecute=0 bEnabled=0 atTarget=0 wf=0 ENC=0 fPos=0 fActPosition=0 time=0.000021
+2022/09/06 11:27:34.268 ecmcMotorRecord:: poll(2) mvnNRdy=1 bBusy=0 bExecute=0 bEnabled=0 atTarget=0 wf=0 ENC=0 fPos=0 fActPosition=0 time=0.000012
+2022/09/06 11:27:34.332 ../devEcmcSup/motion/ecmcMonitor.cpp/checkLimits:507: ERROR_MON_BOTH_LIMIT_INTERLOCK (0x14c10).
+2022/09/06 11:27:34.332 ../devEcmcSup/motion/ecmcAxisReal.cpp/execute:188: ERROR_AXIS_HARDWARE_STATUS_NOT_OK (0x14315).
+2022/09/06 11:27:34.332 ../devEcmcSup/motion/ecmcMonitor.cpp/checkLimits:507: ERROR_MON_BOTH_LIMIT_INTERLOCK (0x14c10).
+2022/09/06 11:27:34.332 ../devEcmcSup/motion/ecmcAxisReal.cpp/execute:188: ERROR_AXIS_HARDWARE_STATUS_NOT_OK (0x14315).
+2022/09/06 11:27:34.332 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 0: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 1: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 2: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 3: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 4: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 5: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 6: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 8: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:374: ERROR: Slave 9: Not operational (0x24011).
+2022/09/06 11:27:34.333 ../devEcmcSup/ethercat/ecmcEcSlave.cpp/checkConfigState:379: ERROR_EC_SLAVE_NOT_OPERATIONAL (0x24011).
+2022/09/06 11:27:34.453 Starting up EtherCAT bus: 0 second(s). Max wait time 30 second(s).
+2022/09/06 11:27:34.468 ecmcMotorRecord:: poll(1) mvnNRdy=0 bBusy=0 bExecute=0 bEnabled=0 atTarget=1 wf=0 ENC=0 fPos=0 fActPosition=0 time=0.000012
+2022/09/06 11:27:34.468 ecmcMotorRecord:: poll(1) bError=1 drvlocal.statusBinData.onChangeData.error=0x14315
+2022/09/06 11:27:34.468 ecmcMotorRecord:: sErrorMessage(1)="ERROR_AXIS_HARDWARE_STATUS_NOT_OK"
+2022/09/06 11:27:34.468 ecmcMotorRecord:: poll(1) callParamCallbacksUpdateError Error=1 old=4 ErrID=0x14315 old=0x0 Warn=0 nCmd=0 old=0 txt=E: ERROR_AXIS_HARDWARE_STATUS_NOT_OK (0x14315)
+2022/09/06 11:27:34.468 ecmcMotorRecord:: poll(2) mvnNRdy=0 bBusy=0 bExecute=0 bEnabled=0 atTarget=1 wf=0 ENC=0 fPos=0 fActPosition=0 time=0.000006
+2022/09/06 11:27:34.468 ecmcMotorRecord:: poll(2) bError=1 drvlocal.statusBinData.onChangeData.error=0x14315
+2022/09/06 11:27:34.468 ecmcMotorRecord:: sErrorMessage(2)="ERROR_AXIS_HARDWARE_STATUS_NOT_OK"
+2022/09/06 11:27:34.468 ecmcMotorRecord:: poll(2) callParamCallbacksUpdateError Error=1 old=4 ErrID=0x14315 old=0x0 Warn=0 nCmd=0 old=0 txt=E: ERROR_AXIS_HARDWARE_STATUS_NOT_OK (0x14315)
+2022/09/06 11:27:35.394 ../devEcmcSup/motion/ecmcDriveBase.cpp/readEntries:366: WARNING (axis 1): Drive hardware in warning state.
+2022/09/06 11:27:35.453 Starting up EtherCAT bus: 1 second(s). Max wait time 30 second(s).
+2022/09/06 11:27:35.468 ecmcMotorRecord:: poll(1) LLS=0
+2022/09/06 11:27:35.468 ecmcMotorRecord:: poll(1) HLS=0
+2022/09/06 11:27:35.468 ecmcMotorRecord:: poll(2) HLS=0
+2022/09/06 11:27:35.631 ../devEcmcSup/motion/ecmcDriveBase.cpp/readEntries:366: WARNING (axis 2): Drive hardware in warning state.
+2022/09/06 11:27:35.836 ../devEcmcSup/main/ecmcError.cpp/errorReset:103: NO_ERROR (0x0).
+2022/09/06 11:27:35.836 ../devEcmcSup/main/ecmcError.cpp/errorReset:103: NO_ERROR (0x0).
+2022/09/06 11:27:35.836 ../devEcmcSup/main/ecmcError.cpp/errorReset:103: NO_ERROR (0x0).
+2022/09/06 11:27:35.836 ../devEcmcSup/main/ecmcError.cpp/errorReset:103: NO_ERROR (0x0).
+2022/09/06 11:27:35.836 ../devEcmcSup/main/ecmcError.cpp/errorReset:103: NO_ERROR (0x0).
+2022/09/06 11:27:36.468 ecmcMotorRecord:: poll(1) bError=0 drvlocal.statusBinData.onChangeData.error=0x0
+2022/09/06 11:27:36.468 ecmcMotorRecord:: poll(1) callParamCallbacksUpdateError Error=4 old=1 ErrID=0x0 old=0x14315 Warn=0 nCmd=0 old=0 txt=NULL
+2022/09/06 11:27:36.468 ecmcMotorRecord:: poll(2) bError=0 drvlocal.statusBinData.onChangeData.error=0x0
+2022/09/06 11:27:36.468 ecmcMotorRecord:: poll(2) callParamCallbacksUpdateError Error=4 old=1 ErrID=0x0 old=0x14315 Warn=0 nCmd=0 old=0 txt=NULL
+2022/09/06 11:27:37.453 EtherCAT bus started!
+2022/09/06 11:27:37.453 OK
+2022/09/06 11:27:37.453 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAtIocBuild (0). Allow callbacks: true.
+Starting iocInit
+2022/09/06 11:27:37.454 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAtBeginning (1). Allow callbacks: true.
+2022/09/06 11:27:37.483 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterCallbackInit (2). Allow callbacks: true.
+2022/09/06 11:27:37.493 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterCaLinkInit (3). Allow callbacks: true.
+2022/09/06 11:27:37.493 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitDrvSup (4). Allow callbacks: true.
+2022/09/06 11:27:37.494 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitRecSup (5). Allow callbacks: true.
+2022/09/06 11:27:37.501 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitDevSup (6). Allow callbacks: true.
+2022/09/06 11:27:37.508 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.positionActual01 linked to record (asyn reason 1).
+2022/09/06 11:27:37.509 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.encoderLatchPostion01 linked to record (asyn reason 2).
+2022/09/06 11:27:37.509 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.encoderControl01 linked to record (asyn reason 3).
+2022/09/06 11:27:37.510 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.encoderValue01 linked to record (asyn reason 4).
+2022/09/06 11:27:37.511 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.positionActual01 linked to record (asyn reason 5).
+2022/09/06 11:27:37.511 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.encoderLatchPostion01 linked to record (asyn reason 6).
+2022/09/06 11:27:37.512 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.encoderControl01 linked to record (asyn reason 7).
+2022/09/06 11:27:37.513 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.encoderValue01 linked to record (asyn reason 8).
+2022/09/06 11:27:37.514 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.timestampLatchPositive01 linked to record (asyn reason 9).
+2022/09/06 11:27:37.514 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.timestampLatchNegative01 linked to record (asyn reason 10).
+2022/09/06 11:27:37.515 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.timestampLatchPositive02 linked to record (asyn reason 11).
+2022/09/06 11:27:37.517 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.timestampLatchNegative02 linked to record (asyn reason 12).
+2022/09/06 11:27:37.518 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.driveControl01 linked to record (asyn reason 13).
+2022/09/06 11:27:37.519 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.velocitySetpoint01 linked to record (asyn reason 14).
+2022/09/06 11:27:37.520 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.positionActual01 linked to record (asyn reason 15).
+2022/09/06 11:27:37.521 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.encoderLatchPostion01 linked to record (asyn reason 16).
+2022/09/06 11:27:37.522 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.encoderControl01 linked to record (asyn reason 17).
+2022/09/06 11:27:37.524 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.encoderValue01 linked to record (asyn reason 18).
+2022/09/06 11:27:37.526 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.driveControl01 linked to record (asyn reason 19).
+2022/09/06 11:27:37.527 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.velocitySetpoint01 linked to record (asyn reason 20).
+2022/09/06 11:27:37.528 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.positionActual01 linked to record (asyn reason 21).
+2022/09/06 11:27:37.529 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.encoderLatchPostion01 linked to record (asyn reason 22).
+2022/09/06 11:27:37.530 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.encoderControl01 linked to record (asyn reason 23).
+2022/09/06 11:27:37.531 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.encoderValue01 linked to record (asyn reason 24).
+2022/09/06 11:27:37.534 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actpos0 linked to record (asyn reason 25).
+2022/09/06 11:27:37.535 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actvel0 linked to record (asyn reason 26).
+2022/09/06 11:27:37.536 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.setpos linked to record (asyn reason 27).
+2022/09/06 11:27:37.537 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.poserr linked to record (asyn reason 28).
+2022/09/06 11:27:37.538 ecmcAsynPortDriver:drvUserCreate: Parameter plcs.ax1.plc.error linked to record (asyn reason 29).
+2022/09/06 11:27:37.539 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actpos1 linked to record (asyn reason 30).
+2022/09/06 11:27:37.541 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actvel1 linked to record (asyn reason 31).
+2022/09/06 11:27:37.542 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.actpos0 linked to record (asyn reason 32).
+2022/09/06 11:27:37.543 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.actvel0 linked to record (asyn reason 33).
+2022/09/06 11:27:37.545 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.setpos linked to record (asyn reason 34).
+2022/09/06 11:27:37.546 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.poserr linked to record (asyn reason 35).
+2022/09/06 11:27:37.547 ecmcAsynPortDriver:drvUserCreate: Parameter plcs.ax2.plc.error linked to record (asyn reason 36).
+2022/09/06 11:27:37.548 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.appmode linked to record (asyn reason 37).
+2022/09/06 11:27:37.549 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.error.id linked to record (asyn reason 38).
+2022/09/06 11:27:37.550 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.latency.min linked to record (asyn reason 39).
+2022/09/06 11:27:37.551 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.latency.max linked to record (asyn reason 40).
+2022/09/06 11:27:37.552 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.period.min linked to record (asyn reason 41).
+2022/09/06 11:27:37.553 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.period.max linked to record (asyn reason 42).
+2022/09/06 11:27:37.554 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.execute.min linked to record (asyn reason 43).
+2022/09/06 11:27:37.556 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.execute.max linked to record (asyn reason 44).
+2022/09/06 11:27:37.559 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.send.min linked to record (asyn reason 45).
+2022/09/06 11:27:37.561 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.thread.send.max linked to record (asyn reason 46).
+2022/09/06 11:27:37.563 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput01 linked to record (asyn reason 47).
+2022/09/06 11:27:37.566 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput02 linked to record (asyn reason 48).
+2022/09/06 11:27:37.569 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput03 linked to record (asyn reason 49).
+2022/09/06 11:27:37.571 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput04 linked to record (asyn reason 50).
+2022/09/06 11:27:37.573 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput05 linked to record (asyn reason 51).
+2022/09/06 11:27:37.575 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput06 linked to record (asyn reason 52).
+2022/09/06 11:27:37.577 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput07 linked to record (asyn reason 53).
+2022/09/06 11:27:37.578 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.binaryInput08 linked to record (asyn reason 54).
+2022/09/06 11:27:37.580 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput01 linked to record (asyn reason 55).
+2022/09/06 11:27:37.582 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput02 linked to record (asyn reason 56).
+2022/09/06 11:27:37.584 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput03 linked to record (asyn reason 57).
+2022/09/06 11:27:37.587 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput04 linked to record (asyn reason 58).
+2022/09/06 11:27:37.589 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput05 linked to record (asyn reason 59).
+2022/09/06 11:27:37.590 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput06 linked to record (asyn reason 60).
+2022/09/06 11:27:37.592 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput07 linked to record (asyn reason 61).
+2022/09/06 11:27:37.594 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.binaryOutput08 linked to record (asyn reason 62).
+2022/09/06 11:27:37.598 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.powerOk01 linked to record (asyn reason 63).
+2022/09/06 11:27:37.600 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.overload01 linked to record (asyn reason 64).
+2022/09/06 11:27:37.602 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.binaryInput01 linked to record (asyn reason 65).
+2022/09/06 11:27:37.605 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.binaryInput02 linked to record (asyn reason 66).
+2022/09/06 11:27:37.608 ecmcAsynPortDriver:drvUserCreate: Parameter plcs.ax1.plc.enable linked to record (asyn reason 67).
+2022/09/06 11:27:37.611 ecmcAsynPortDriver:drvUserCreate: Parameter plcs.ax1.plc.firstscan linked to record (asyn reason 68).
+2022/09/06 11:27:37.613 ecmcAsynPortDriver:drvUserCreate: Parameter plcs.ax2.plc.enable linked to record (asyn reason 69).
+2022/09/06 11:27:37.617 ecmcAsynPortDriver:drvUserCreate: Parameter plcs.ax2.plc.firstscan linked to record (asyn reason 70).
+2022/09/06 11:27:37.620 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.ok linked to record (asyn reason 71).
+2022/09/06 11:27:37.623 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.diagnostic linked to record (asyn reason 72).
+2022/09/06 11:27:37.625 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.plc.expression linked to record (asyn reason 73).
+2022/09/06 11:27:37.626 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.diagnostic linked to record (asyn reason 74).
+2022/09/06 11:27:37.628 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.plc.expression linked to record (asyn reason 75).
+2022/09/06 11:27:37.630 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.error.msg linked to record (asyn reason 76).
+2022/09/06 11:27:37.632 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.updated linked to record (asyn reason 77).
+2022/09/06 11:27:37.633 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.command linked to record (asyn reason 78).
+2022/09/06 11:27:37.637 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.command linked to record (asyn reason 79).
+)
+##############################################################################
+## PLC 0
+#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/encoder.plc, PLC_MACROS='AX_ID=1, DBG='")
+##############################################################################
+############# Configure diagnostics:
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+# go active
+iocshLoad (/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/setAppMode.cmd)
+#==============================================================================
+# setAppMode.cmd
+ecmcFileExist("/home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/general.cmd",1)
+iocshLoad /home/pi/epics/base-7.0.5/require/3.4.0/siteMods/ecmccfg/add_multi_encoder/general.cmd
+#==============================================================================
+# general.cmd
+ecmcFileExist("ecmcGeneral.db",1,1)
+dbLoadRecords("ecmcGeneral.db","P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,T_SMP_MS=10,TSE=0,ECMC_PROC_HOOK=")
+# Examples of commands for info:
+# ecmcReport <level> or asynReport <level>
+# ecmcReport 3
+# ecmcGrepParam <pattern>
+# List all ecmc params for ethercat slave 2:
+# ecmcGrepParam *s2*
+#
+ecmcEpicsEnvSetCalcTernary(ECMC_MASTER_CMD, "0>=0", "","#- ")
+ ecmcFileExist("ecmcEc.db",1,1)
+ dbLoadRecords("ecmcEc.db","P=IOC_TEST:,ECMC_EC_MP=m,PORT=MC_CPU1,ADDR=0,TIMEOUT=1,MASTER_ID=0,T_SMP_MS=10,TSE=0")
+ecmcConfigOrDie "Cfg.SetAppMode(1)"
+# Set the IOC Prompt String One 
+epicsEnvSet IOCSH_PS1 "raspberrypi-8748 > "
+#
+# 
+iocInit
+############################################################################
+## EPICS R7.0.5-E3-7.0.5-patch
+## Rev. 2021-05-05T19:45+0200
+############################################################################
+ECATtimestamp aSubRecord: IOC_TEST:m0s006-BI01-TimeRiseTS
+ECATtimestamp aSubRecord: IOC_TEST:m0s006-BI01-TimeFallTS
+ECATtimestamp aSubRecord: IOC_TEST:m0s006-BI02-TimeRiseTS
+ECATtimestamp aSubRecord: IOC_TEST:m0s006-BI02-TimeFallTS
+2022/09/06 11:27:37.641 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s0.ONE linked to record (asyn reason 80).
+2022/09/06 11:27:37.644 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s0.ZERO linked to record (asyn reason 81).
+2022/09/06 11:27:37.646 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.ONE linked to record (asyn reason 82).
+2022/09/06 11:27:37.649 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.ZERO linked to record (asyn reason 83).
+2022/09/06 11:27:37.652 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.ONE linked to record (asyn reason 84).
+2022/09/06 11:27:37.655 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.ZERO linked to record (asyn reason 85).
+2022/09/06 11:27:37.658 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.ONE linked to record (asyn reason 86).
+2022/09/06 11:27:37.661 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.ZERO linked to record (asyn reason 87).
+2022/09/06 11:27:37.663 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.ONE linked to record (asyn reason 88).
+2022/09/06 11:27:37.666 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.ZERO linked to record (asyn reason 89).
+2022/09/06 11:27:37.668 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.ONE linked to record (asyn reason 90).
+2022/09/06 11:27:37.671 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.ZERO linked to record (asyn reason 91).
+2022/09/06 11:27:37.674 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.ONE linked to record (asyn reason 92).
+2022/09/06 11:27:37.677 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.ZERO linked to record (asyn reason 93).
+2022/09/06 11:27:37.680 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.ONE linked to record (asyn reason 94).
+2022/09/06 11:27:37.682 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.ZERO linked to record (asyn reason 95).
+2022/09/06 11:27:37.685 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.ONE linked to record (asyn reason 96).
+2022/09/06 11:27:37.688 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.ZERO linked to record (asyn reason 97).
+2022/09/06 11:27:37.692 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.cmddata linked to record (asyn reason 98).
+2022/09/06 11:27:37.695 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.cmddata linked to record (asyn reason 99).
+2022/09/06 11:27:37.697 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s0.slavestatus linked to record (asyn reason 100).
+2022/09/06 11:27:37.699 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.slavestatus linked to record (asyn reason 101).
+2022/09/06 11:27:37.702 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.slavestatus linked to record (asyn reason 102).
+2022/09/06 11:27:37.705 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.slavestatus linked to record (asyn reason 103).
+2022/09/06 11:27:37.708 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.slavestatus linked to record (asyn reason 104).
+2022/09/06 11:27:37.711 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s5.slavestatus linked to record (asyn reason 105).
+2022/09/06 11:27:37.714 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.slavestatus linked to record (asyn reason 106).
+2022/09/06 11:27:37.717 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.slavestatus linked to record (asyn reason 107).
+2022/09/06 11:27:37.719 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.slavestatus linked to record (asyn reason 108).
+2022/09/06 11:27:37.723 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.status linked to record (asyn reason 109).
+2022/09/06 11:27:37.725 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.errorid linked to record (asyn reason 110).
+2022/09/06 11:27:37.728 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.status linked to record (asyn reason 111).
+2022/09/06 11:27:37.731 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.errorid linked to record (asyn reason 112).
+2022/09/06 11:27:37.733 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.masterstatus linked to record (asyn reason 113).
+2022/09/06 11:27:37.736 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.slavecounter linked to record (asyn reason 114).
+2022/09/06 11:27:37.739 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.memmapcounter linked to record (asyn reason 115).
+2022/09/06 11:27:37.742 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.domainfailcountertotal linked to record (asyn reason 116).
+2022/09/06 11:27:37.745 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.entrycounter linked to record (asyn reason 117).
+2022/09/06 11:27:37.748 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.domainstatus linked to record (asyn reason 118).
+2022/09/06 11:27:37.751 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.control linked to record (asyn reason 119).
+2022/09/06 11:27:37.755 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.control linked to record (asyn reason 120).
+2022/09/06 11:27:37.759 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s3.encoderStatus01 linked to record (asyn reason 121).
+2022/09/06 11:27:37.762 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.encoderStatus01 linked to record (asyn reason 122).
+2022/09/06 11:27:37.766 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.status01 linked to record (asyn reason 123).
+2022/09/06 11:27:37.769 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s6.status02 linked to record (asyn reason 124).
+2022/09/06 11:27:37.772 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.driveStatus01 linked to record (asyn reason 125).
+2022/09/06 11:27:37.776 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s8.encoderStatus01 linked to record (asyn reason 126).
+2022/09/06 11:27:37.780 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.driveStatus01 linked to record (asyn reason 127).
+2022/09/06 11:27:37.783 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s9.encoderStatus01 linked to record (asyn reason 128).
+2022/09/06 11:27:37.819 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.targpos linked to record (asyn reason 129).
+2022/09/06 11:27:37.823 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.targvelo linked to record (asyn reason 130).
+2022/09/06 11:27:37.828 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.targpos linked to record (asyn reason 131).
+2022/09/06 11:27:37.832 ecmcAsynPortDriver:drvUserCreate: Parameter ax2.targvelo linked to record (asyn reason 132).
+2022/09/06 11:27:37.848 ecmcAsynPortDriver:drvUserCreate: Parameter ecmc.error.reset linked to record (asyn reason 133).
+2022/09/06 11:27:37.852 ecmcMotorRecord:: setIntegerParam(1 motorUpdateStatus_)=0
+2022/09/06 11:27:37.852 ecmcMotorRecord:: setIntegerParam(2 motorUpdateStatus_)=0
+2022/09/06 11:27:37.901 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitDatabase (7). Allow callbacks: true.
+2022/09/06 11:27:37.901 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterFinishDevSup (8). Allow callbacks: true.
+2022/09/06 11:27:38.439 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterScanInit (9). Allow callbacks: true.
+2022/09/06 11:27:38.440 ecmcMotorRecord:: setIntegerParam(1 HomProc_)=3 motorNotHomedProblem=0
+2022/09/06 11:27:38.440 ecmcMotorRecord:: setIntegerParam(2 HomProc_)=3 motorNotHomedProblem=0
+2022/09/06 11:27:38.442 ecmcMotorRecord:: setDoubleParam(1 HomPos_)=0.000000
+2022/09/06 11:27:38.442 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInitialProcess (10). Allow callbacks: true.
+2022/09/06 11:27:38.442 ecmcMotorRecord:: setDoubleParam(2 HomPos_)=0.000000
+2022/09/06 11:27:38.452 ecmcAsynPortDriver:getEpicsState: EPICS state: Unknown state (11). Allow callbacks: true.
+2022/09/06 11:27:38.452 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterIocBuilt (12). Allow callbacks: true.
+2022/09/06 11:27:38.513 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAtIocRun (13). Allow callbacks: true.
+2022/09/06 11:27:38.514 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterDatabaseRunning (14). Allow callbacks: true.
+2022/09/06 11:27:38.514 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterInterruptAccept (28). Allow callbacks: true.
+2022/09/06 11:27:38.514 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterCaServerRunning (15). Allow callbacks: true.
+2022/09/06 11:27:38.514 ecmcAsynPortDriver:getEpicsState: EPICS state: Unknown state (29). Allow callbacks: true.
+iocRun: All initialization complete
+2022/09/06 11:27:38.559 ecmcAsynPortDriver:getEpicsState: EPICS state: initHookAfterIocRunning (16). Allow callbacks: true.
+2022/09/06 11:27:37.852 [devMotorAsyn.c:439  IOC_TEST:Axis1] init_record IOC_TEST:Axis1 position=0.000000 encoderPos=0.000000 velocity=0.000000 MSTAstatus=0x0b02 flagsValue=0x3f flagsWritten=0x3f pmr->mflg=0x0
+2022/09/06 11:27:37.852 [devMotorAsyn.c:185  IOC_TEST:Axis1] init_controller IOC_TEST:Axis1 set encoder ratio=1.000000 status=0
+2022/09/06 11:27:37.852 [devMotorAsyn.c:266  IOC_TEST:Axis1] update_soft_limits IOC_TEST:Axis1 RawHLM_RO=130.000000 RawLLM_RO=-20.000000 valid=1 DHLM_RO=130.000000 DLLM_RO=-20.000000
+2022/09/06 11:27:37.852 [motorDevSup.c:327  IOC_TEST:Axis1] PositionRestoreNeeded IOC_TEST:Axis1 rstm=2 dval=0.000000 drbv=0.000000 pmr->rdbd=0.100000 rdbd=0.100000 pmr->mres=0.030000 pmr->mflg=0x3f dval_non_zero_pos_near_zero=0 ret=0
+2022/09/06 11:27:37.852 [motorRecord.cc:782  IOC_TEST:Axis1] init_re_init start neverPolled=0 stat=17 nsta=0
+2022/09/06 11:27:37.852 [motorRecord.cc:720  IOC_TEST:Axis1] enforceMinRetryDeadband spdb=0.100000 rdbd=0.100000 mres=0.030000
+2022/09/06 11:27:37.852 [motorRecord.cc:4484 IOC_TEST:Axis1] pmr->dhlm=130 softLimitRO=130
+2022/09/06 11:27:37.852 [motorRecord.cc:4545 IOC_TEST:Axis1] pmr->dllm=-20 softLimitRO=-20
+2022/09/06 11:27:37.852 [motorRecord.cc:833  IOC_TEST:Axis1] init_re_init  end dval=0.000000 drbv=0.000000 rdbd=0.100000 spdb=0.100000
+2022/09/06 11:27:37.852 [motorRecord.cc:968  IOC_TEST:Axis1] init_record process_reason="callbackdata + soft limits" dval=0.000000 drbv=0.000000 rdbd=0.100000 spdb=0.100000 stat=0 msta=0xb02 neverPolled=0
+2022/09/06 11:27:37.852 [devMotorAsyn.c:439  IOC_TEST:Axis2] init_record IOC_TEST:Axis2 position=0.000000 encoderPos=0.000000 velocity=0.000000 MSTAstatus=0x2b02 flagsValue=0x3f flagsWritten=0x3f pmr->mflg=0x0
+2022/09/06 11:27:37.852 [devMotorAsyn.c:185  IOC_TEST:Axis2] init_controller IOC_TEST:Axis2 set encoder ratio=1.000000 status=0
+2022/09/06 11:27:37.852 [devMotorAsyn.c:266  IOC_TEST:Axis2] update_soft_limits IOC_TEST:Axis2 RawHLM_RO=20.000000 RawLLM_RO=-130.000000 valid=1 DHLM_RO=20.000000 DLLM_RO=-130.000000
+2022/09/06 11:27:37.852 [motorDevSup.c:327  IOC_TEST:Axis2] PositionRestoreNeeded IOC_TEST:Axis2 rstm=2 dval=0.000000 drbv=0.000000 pmr->rdbd=0.100000 rdbd=0.100000 pmr->mres=0.030000 pmr->mflg=0x3f dval_non_zero_pos_near_zero=0 ret=0
+2022/09/06 11:27:37.852 [motorRecord.cc:782  IOC_TEST:Axis2] init_re_init start neverPolled=0 stat=17 nsta=0
+2022/09/06 11:27:37.852 [motorRecord.cc:720  IOC_TEST:Axis2] enforceMinRetryDeadband spdb=0.100000 rdbd=0.100000 mres=0.030000
+2022/09/06 11:27:37.852 [motorRecord.cc:4484 IOC_TEST:Axis2] pmr->dhlm=20 softLimitRO=20
+2022/09/06 11:27:37.852 [motorRecord.cc:4545 IOC_TEST:Axis2] pmr->dllm=-130 softLimitRO=-130
+2022/09/06 11:27:37.852 [motorRecord.cc:833  IOC_TEST:Axis2] init_re_init  end dval=0.000000 drbv=0.000000 rdbd=0.100000 spdb=0.100000
+2022/09/06 11:27:37.852 [motorRecord.cc:968  IOC_TEST:Axis2] init_record process_reason="callbackdata + soft limits" dval=0.000000 drbv=0.000000 rdbd=0.100000 spdb=0.100000 stat=0 msta=0x2b02 neverPolled=0
+raspberrypi-8748 > dbgrep *Pa[KosAct*
+IOC_TEST:m0s003-Enc01-PosAct
+IOC_TEST:m0s003-Enc01-LtchPosAct
+IOC_TEST:m0s004-Enc01-PosAct
+IOC_TEST:m0s004-Enc01-LtchPosAct
+IOC_TEST:m0s008-Enc01-PosAct
+IOC_TEST:m0s008-Enc01-LtchPosAct
+IOC_TEST:m0s009-Enc01-PosAct
+IOC_TEST:m0s009-Enc01-LtchPosAct
+IOC_TEST:Axis1-PosAct
+IOC_TEST:Axis1-PosAct01
+IOC_TEST:Axis2-PosAct
+raspberrypi-8748 > dbgf IOC_TEST:Axis1-PosAct01
+DBF_DOUBLE:         0         
+raspberrypi-8748 > dbgf IOC_TEST:Axis1-PosAct01[K[K
+DBF_DOUBLE:         0         
+raspberrypi-8748 > dbgf IOC_TEST:Axis1-PosAct
