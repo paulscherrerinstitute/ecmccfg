@@ -67,7 +67,7 @@ record(longin,"${P}${AXIS_NAME}-Stat"){
 record(calc,"${P}${AXIS_NAME}-SeqState") {
   field(DESC, "${AXIS_NAME}: Seq state")
   field(PINI, "$(PINI=1)")
-  field(CALC,"A>>20 & 0x7")
+  field(CALC,"A>>20 & 0xF")
   field(INPA,"${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-LastIlock.PROC")
 }
@@ -75,7 +75,7 @@ record(calc,"${P}${AXIS_NAME}-SeqState") {
 record(calc,"${P}${AXIS_NAME}-LastIlock") {
   field(DESC, "${AXIS_NAME}: Last interlock")
   field(PINI, "$(PINI=1)")
-  field(CALC, "A>>24 & 0x7")
+  field(CALC, "A>>24 & 0xFF")
   field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-Stat_.PROC")
 }
