@@ -119,6 +119,59 @@ ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc($(ECMC_AXIS_NO),${ECMC_ENC_MAX_D
 
 NOTE: check will only be made between encoders that are homed (or absolute, which are set to homed as default).
 
+## PLC functions
+
+The following plc functions can be used to set and get information related to multiple encoders:
+
+```
+   retvalue = mc_get_act_pos(
+                        <axIndex>,         : Axis index
+                        <encIndex>         : Encoder index                        
+                        );
+
+   Returns encoder position for any of the configured encoders of an axis.
+```
+
+```
+   retvalue = mc_set_prim_enc(
+                        <axIndex>,         : Axis index
+                        <encIndex>         : Encoder index                        
+                        );
+
+   Sets primary encoder index of the axis (the encoder used for control). 
+   The primary encoder can only be changed when the axis is not busy.
+
+   Returns motion axis error code.
+```
+
+```
+  retvalue = mc_get_prim_enc(
+                        <axIndex>,         : Axis index        
+                        );
+
+   Returns primary encoder index of the axis (the encoder used for control).
+```
+
+```    
+   retvalue = mc_set_home_enc(
+                        <axIndex>,         : Axis index
+                        <encIndex>         : Encoder index                        
+                        );
+
+   Sets homing encoder index of the axis (the encoder used for homing). 
+   The homing encoder can only be changed when the axis is not busy.
+
+   Returns motion axis error code.
+```
+
+```
+   retvalue = mc_get_home_enc(
+                        <axIndex>,         : Axis index        
+                        );
+
+   Returns homing encoder index of the axis (the encoder used for homing).
+```
+
 # PVs:
 
 Two PV:s are created for each axis encoder object.
@@ -145,8 +198,7 @@ IOC_TEST:Axis1-VelAct05
 # Use cases
 
 ## Linear and rotational encoder
+Allow to have both a liner and a rotational encoder configured.
 
-
-## Open loop and resolver (poro accuracy)
-
-
+## Open loop and resolver (poor accuracy)
+Use a poor accuracy feedback to supervise that motion is not blocked
