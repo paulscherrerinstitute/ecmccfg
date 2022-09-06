@@ -506,6 +506,46 @@ returns 0 if success or error code.
                         );
 
    Enables/disables motion functionalities. Returns error code.
+
+15. retvalue = mc_get_act_pos(
+                        <axIndex>,         : Axis index
+                        <encIndex>         : Encoder index                        
+                        );
+
+   Returns encoder position for any of the configured encoders of an axis.
+
+16. retvalue = mc_set_prim_enc(
+                        <axIndex>,         : Axis index
+                        <encIndex>         : Encoder index                        
+                        );
+
+   Sets primary encoder index of the axis (the encoder used for control). 
+   The primary encoder can only be changed when the axis is not busy.
+
+   Returns motion axis error code.
+
+17. retvalue = mc_get_prim_enc(
+                        <axIndex>,         : Axis index        
+                        );
+
+   Returns primary encoder index of the axis (the encoder used for control).
+    
+18. retvalue = mc_set_home_enc(
+                        <axIndex>,         : Axis index
+                        <encIndex>         : Encoder index                        
+                        );
+
+   Sets homing encoder index of the axis (the encoder used for homing). 
+   The homing encoder can only be changed when the axis is not busy.
+
+   Returns motion axis error code.
+
+19. retvalue = mc_get_home_enc(
+                        <axIndex>,         : Axis index        
+                        );
+
+   Returns homing encoder index of the axis (the encoder used for homing).
+
 ```
 ### Function Lib: Data Storage
 ```
