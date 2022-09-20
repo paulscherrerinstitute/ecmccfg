@@ -14,7 +14,7 @@ epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For posi
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "-60")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "4096")
 epicsEnvSet("ECMC_ENC_BITS"               "25")
-epicsEnvSet("ECMC_ENC_TYPE"               "1")                        # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_BITS"               "25")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "25")                       # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "-100")                     # Encoder offset in eng units (for absolute encoders)
@@ -38,9 +38,11 @@ epicsEnvSet("ECMC_JOG_VEL",               "5")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "10")
 epicsEnvSet("ECMC_EMERG_DECEL",           "100")             # Emergency deceleration
+epicsEnvSet("ECMC_ACCL",                  "0.5")
+
 
 #Homing
-epicsEnvSet("ECMC_HOME_PROC",             "$(SM_HOMEPROC=3)")
+epicsEnvSet("ECMC_HOME_PROC",             "$(SM_HOMEPROC=15)")
 epicsEnvSet("ECMC_HOME_POS",              "$(SM_HOMEPOS=0.0)")
 epicsEnvSet("ECMC_HOME_VEL_TO",           "$(SM_HVELTP=5)")
 epicsEnvSet("ECMC_HOME_VEL_FRM",          "$(SM_HVELTP=4)")
