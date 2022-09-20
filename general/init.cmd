@@ -41,7 +41,7 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS", "NOT SET")
 #- ECMC_TIME_SOURCE:
 #- = -2 for time stamp in ECMC (default).
 #- = 0 for time stamp in EPICS
-epicsEnvSet("ECMC_TSE",               -2)
+epicsEnvSet("ECMC_TSE",               0)
 
 #- Init all axis related variables
 ${ECMC_SUPPORT_MOTION=""}ecmcFileExist("${ECMC_CONFIG_ROOT}initAxis.cmd",1)
