@@ -1,5 +1,6 @@
 ##############################################################################
-## Example config for sync a motor to timing system
+## Example config for sync a motor to system time.
+## To be used togheter with mrf or ptp sync of system clock.
 
 ##############################################################################
 ## Initiation:
@@ -68,9 +69,6 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
 iocInit()
 
-dbpf $(IOC):xl.SPAM 0
-dbpf $(IOC):xr.SPAM 0
-dbpf $(IOC):xp.SPAM 0
-dbpf $(IOC):xg.SPAM 0
-dbpf $(IOC):amplitude.SPAM 0
 dbpf $(IOC):timing.SPAM 0
+dbpf $(IOC):phase.SPAM 0
+dbpf $(IOC):phys.SPAM 0

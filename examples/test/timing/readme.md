@@ -49,8 +49,8 @@ PLC code controls a few states:
 Now the phase axis can be controlled to any desired position/phase (not handled automatically right now).
 
 
-NOTES:
+NOTES (TODO):
 1. The external PLC setpoint of phys axis is written in phase.sax. The reason is that it needs to be executing all the time and the phys.sax is only executed after the source change.
 2. Since the execution flow there will always be an error of 0.360 deg in the phase axis. This corresponds to one cylcle at 360deg/s and is there because of the execution flow. To avoid this it could be possible to add a separate plc containing all syncs that is executed after the axes. Right now, to compensate for this the phase setpoint needs to be compensated with -0.36. So if the desired setpoint is 10 degrees then 9.64 should be entered.
-3. This demo does not take full advantage of dc-clocks (copensate for encoder dc time and drive dc-time). Need to look into.
+3. This demo does not take full advantage of dc-clocks (compensate for encoder dc time and drive dc-time). Need to look into....
 
