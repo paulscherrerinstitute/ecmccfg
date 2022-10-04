@@ -18,11 +18,10 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=mas
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "51")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7041-0052, CONFIG=-Motor-Nanotec-SCA5618X2804-A2"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7041-0052, CONFIG=-Motor-Amp-57TH76-4280"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
 
 epicsEnvSet("ECMC_AXIS_TIME_NUM",              "1")
 epicsEnvSet("ECMC_AXIS_PHASE_NUM",             "2")
