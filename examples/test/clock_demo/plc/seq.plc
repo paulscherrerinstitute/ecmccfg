@@ -1,0 +1,41 @@
+
+
+if(plc0.firstscan) {
+  println('State 0: trying to enable physical axis');
+}
+
+#State 0: Power physical axis
+if(static.state = 0) {
+  mc_power(${AX_PHYS},1);
+}
+
+if(ax${AX_PHYS}.drv.enabled and static.state=0) {
+  println('State 1: Move vel');
+  static.state:=1;
+}
+
+# State 1: Start move velo 360deg/s
+if(static.state = 1) {
+  mc_move_vel(${AX_PHYS},1,360,50,50);
+}
+
+if(static.counter<1000 and ax${AX_PHYS}.enc.actvelo<361 and ax${AX_PHYS}.enc.actvelo<359) {
+  static.counter:=static.counter+1;
+} else {
+  static.counter:=0;
+}
+
+if(static.counter>=100 and static.state=1) {
+  println('State 2: Power phase axis');
+  static.state:=2;
+  mc_power(${AX_PHASE},1)
+}
+
+if(ax${AX_PHASE}.drv.enabled and static.state=2) {
+  println('State 1: Phase axis enabled.. Change source of phys axis to ext');
+  ax${AX_PHYS}.traj.source:=1;
+  static.state:=3;
+}
+
+println('Axis ext setpoint: ', ax${AX_PHYS}.traj.extsetpos );
+println('Axis int setpoint: ', ax${AX_PHYS}.traj.setpos );
