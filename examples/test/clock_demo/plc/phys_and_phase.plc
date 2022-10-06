@@ -16,4 +16,4 @@ if(phase < -${MOD_RANGE}) {
 };
 
 ax${AX_PHASE}.enc.actpos:=phase;
-ax${AX_PHYS}.traj.setpos:=ax${AX_TIME}.enc.actpos-ax${AX_PHASE}.traj.setpos;
+ax${AX_PHYS}.traj.setpos:=${TIME_SOURCE}-ax${AX_PHASE}.traj.setpos;

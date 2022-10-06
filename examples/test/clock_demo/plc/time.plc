@@ -1,9 +1,9 @@
 global.currtime:=ec_get_time();
 
 global.nano    := global.currtime-trunc(global.currtime/1e9)*1e9;
-global.second  := ec_get_time_local_sec(global.currtime)+global.nanos/1E9;
-global.minute  := ec_get_time_local_min(global.currtime)+global.seconds/60;
-global.hour    := ec_get_time_local_hour(global.currtime)+global.minutes/60;
+global.second  := ec_get_time_local_sec(global.currtime)+global.nano/1E9;
+global.minute  := ec_get_time_local_min(global.currtime)+global.second/60;
+global.hour    := ec_get_time_local_hour(global.currtime)+global.minute/60;
 
 
 if(global.hour>12) {

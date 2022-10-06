@@ -1,11 +1,17 @@
+# MACROS needed:
+#  PLC_ID      : ID of this PLC
+#  AX_PHYS     : Axis index for physical axis
+#  AX_PHASE    : Axis index for virtual axis phase
+#  AX_VELO     : Nominal velo
+#  AX_ACC      : Acc and dec
 
-
-if(plc0.firstscan) {
+if(plc${PLC_ID}.firstscan) {
   println('State 0: trying to enable physical axis');
 }
 
-#State 0: Power physical axis
+#State 0: Power physical axis and home to 0
 if(static.state = 0) {
+  mc_home_pos(${AX_PHYS},1,15,1,1,0);
   mc_power(${AX_PHYS},1);
 }
 
@@ -14,19 +20,20 @@ if(ax${AX_PHYS}.drv.enabled and static.state=0) {
   static.state:=1;
 }
 
-# State 1: Start move velo 360deg/s
+# State 1: Start move velo ${AX_VELO}
 if(static.state = 1) {
-  mc_move_vel(${AX_PHYS},1,360,50,50);
+  mc_move_vel(${AX_PHYS},1,${AX_VELO},${AX_ACC},${AX_ACC});
 }
 
-if(static.counter<1000 and ax${AX_PHYS}.enc.actvelo<361 and ax${AX_PHYS}.enc.actvelo<359) {
+if(static.counter<1000 and ax${AX_PHYS}.enc.actvelo<${AX_VELO}*0.995 and ax${AX_PHYS}.enc.actvelo<${AX_VELO}*1.005) {
   static.counter:=static.counter+1;
 } else {
   static.counter:=0;
 }
 
+# Enable phase axis to get stable setpoint
 if(static.counter>=100 and static.state=1) {
-  println('State 2: Power phase axis');
+  println('State 2: Power phase axis (axis ${AX_PHASE})');
   static.state:=2;
   mc_power(${AX_PHASE},1)
 }
@@ -37,5 +44,5 @@ if(ax${AX_PHASE}.drv.enabled and static.state=2) {
   static.state:=3;
 }
 
-println('Axis ext setpoint: ', ax${AX_PHYS}.traj.extsetpos );
-println('Axis int setpoint: ', ax${AX_PHYS}.traj.setpos );
+# println('Axis ext setpoint: ', ax${AX_PHYS}.traj.extsetpos );
+# println('Axis int setpoint: ', ax${AX_PHYS}.traj.setpos );
