@@ -8,7 +8,12 @@ global.hour    := ec_get_time_local_hour(global.currtime)+global.minute/60;
 
 if(global.hour>12) {
   global.hour:=global.hour-12;
-}
+};
+
+if(global.mode=1) {
+  global.second:=trunc(global.second);
+  global.minute:=trunc(global.minute);
+};
 
 #print('Time: ', global.hour);
 #print(':', global.minute);
