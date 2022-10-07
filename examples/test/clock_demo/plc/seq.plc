@@ -56,6 +56,7 @@ if(ax${AX_PHASE}.drv.enabled and static.state=2) {
 # Move to phase 0
 if(static.state=3) {
   println('State 4: Move to 0 phase error');
+  mc_move_abs(${AX_PHASE},0,0,${AX_VELO},${AX_ACC}, ${AX_ACC});
   mc_move_abs(${AX_PHASE},1,0,${AX_VELO},${AX_ACC}, ${AX_ACC});
   static.state:=4;
   # disable this plc

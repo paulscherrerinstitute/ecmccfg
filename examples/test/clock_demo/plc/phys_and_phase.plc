@@ -2,17 +2,17 @@
 #  AX_PHYS     : Axis index for physical axis
 #  AX_PHASE    : Axis index for virtual axis phase
 #  TIME_SOURCE : Global variable for time source
-#  MOD_RANGE   : Range of motion (ex. 60 for minutes)
+#  AX_MOD      : Range of motion (ex. 60 for minutes)
 
 
 var phase:=${TIME_SOURCE}-ax${AX_PHYS}.enc.actpos;
 
-if(phase > ${MOD_RANGE}/2) {
-  phase:=-(${MOD_RANGE}-phase);
+if(phase > ${AX_MOD}/2) {
+  phase:=-(${AX_MOD}-phase);
 };
 
-if(phase < -${MOD_RANGE}) {
-  phase:=${MOD_RANGE}+phase;
+if(phase < -${AX_MOD}) {
+  phase:=${AX_MOD}+phase;
 };
 
 ax${AX_PHASE}.enc.actpos:=phase;
