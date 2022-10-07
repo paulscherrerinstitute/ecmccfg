@@ -11,19 +11,22 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg 8.0.0
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=8.0.0, EC_RATE=1000"
 
 ##############################################################################
 ## Config hardware:
 
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
 # Note NELM equals oversampling factor in this case
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "34")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3702, NELM=100"
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
+
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "10"}")
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
