@@ -58,6 +58,8 @@ if(static.state=3) {
   println('State 4: Move to 0 phase error');
   mc_move_abs(${AX_PHASE},1,0,${AX_VELO},${AX_ACC}, ${AX_ACC});
   static.state:=4;
+  # disable this plc
+  plc${PLC_ID}.enable:=0;
 }
 
 # println('Axis ext setpoint: ', ax${AX_PHYS}.traj.extsetpos );

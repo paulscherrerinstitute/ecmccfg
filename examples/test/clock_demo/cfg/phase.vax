@@ -25,19 +25,19 @@ epicsEnvSet("ECMC_EC_ENC_ALARM_2",        "")                         # Error 2 
 epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning (if no encoder warning bit then leave empty)
 
 #Trajectory
-epicsEnvSet("ECMC_VELO",                  "5.0")
-epicsEnvSet("ECMC_JOG_VEL",               "5")
+epicsEnvSet("ECMC_VELO",                  "${AX_VELO}")
+epicsEnvSet("ECMC_JOG_VEL",               "${AX_VELO}")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
-epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "10")
-epicsEnvSet("ECMC_EMERG_DECEL",           "100")             # Emergency deceleration
+ecmcEpicsEnvSetCalc("ECMC_ACCS_EGU_PER_S2", "${AX_VELO}/10")
+epicsEnvSet("ECMC_EMERG_DECEL",           "${AX_VELO}/10")             # Emergency deceleration
 
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "3")
 epicsEnvSet("ECMC_HOME_POS",              "0.0")
-epicsEnvSet("ECMC_HOME_VEL_TO",           "5")
-epicsEnvSet("ECMC_HOME_VEL_FRM",          "4")
-epicsEnvSet("ECMC_HOME_ACC",              "21")
-epicsEnvSet("ECMC_HOME_DEC",              "100")
+epicsEnvSet("ECMC_HOME_VEL_TO",           "${AX_VELO}/10")
+epicsEnvSet("ECMC_HOME_VEL_FRM",          "${AX_VELO}/10")
+epicsEnvSet("ECMC_HOME_ACC",              "${ECMC_ACCS_EGU_PER_S2}")
+epicsEnvSet("ECMC_HOME_DEC",              "${ECMC_ACCS_EGU_PER_S2}")
 epicsEnvSet("ECMC_HOME_POS_MOVE_ENA",     "0")                        # Enable move to position after successfull homing 
 epicsEnvSet("ECMC_HOME_POS_MOVE_TARG_POS","0")                        # Target position to go to after successfull homing
 
