@@ -26,7 +26,7 @@ epicsEnvSet("ECMC_EC_ENC_WARNING",        "")                         # Warning 
 
 #Drive
 epicsEnvSet("ECMC_DRV_TYPE",              "0")                         # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-ecmcEpicsEnvSetCalc("ECMC_DRV_SCALE_NUM" , "-${AX_MOD}*10")
+ecmcEpicsEnvSetCalc("ECMC_DRV_SCALE_NUM" , "-${AX_MOD}*10", "%lf")
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "32768.0")                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
 epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s${ECMC_EC_SLAVE_NUM_DRIVE}.driveControl01.0")      # Ethercat entry for control word or bit output
 epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s${ECMC_EC_SLAVE_NUM_DRIVE}.driveStatus01.1")       # Ethercat entry for status word or bit input
@@ -42,11 +42,11 @@ epicsEnvSet("ECMC_EC_DRV_ALARM_2",        "ec0.s${ECMC_EC_SLAVE_NUM_DRIVE}.drive
 epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s${ECMC_EC_SLAVE_NUM_DRIVE}.driveStatus01.2")       # Warning
 
 #Trajectory
-ecmcEpicsEnvSetCalc("ECMC_VELO",              "${AX_MOD}/20")
-ecmcEpicsEnvSetCalc("ECMC_JOG_VEL",           "${AX_MOD}/20")
+ecmcEpicsEnvSetCalc("ECMC_VELO",              "${AX_MOD}/20", "%lf")
+ecmcEpicsEnvSetCalc("ECMC_JOG_VEL",           "${AX_MOD}/20", "%lf")
 epicsEnvSet("ECMC_JAR",                   "0.0")                       #JAR defaults to VELO/ACCL
-ecmcEpicsEnvSetCalc("ECMC_ACCS_EGU_PER_S2",   "${AX_MOD}/100")
-ecmcEpicsEnvSetCalc("ECMC_EMERG_DECEL",       "${AX_MOD}/100")
+ecmcEpicsEnvSetCalc("ECMC_ACCS_EGU_PER_S2",   "${AX_MOD}/100", "%lf")
+ecmcEpicsEnvSetCalc("ECMC_EMERG_DECEL",       "${AX_MOD}/100", "%lf")
 
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "3")
