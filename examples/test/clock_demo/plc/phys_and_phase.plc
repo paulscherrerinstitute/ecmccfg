@@ -11,7 +11,7 @@ if(phase > ${AX_MOD}/2) {
   phase:=-(${AX_MOD}-phase);
 };
 
-if(phase < -${AX_MOD}) {
+if(phase < -${AX_MOD}/2) {
   phase:=${AX_MOD}+phase;
 };
 
