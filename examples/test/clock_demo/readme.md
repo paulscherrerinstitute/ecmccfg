@@ -6,12 +6,14 @@ The intention is that this configuration can be used togheter with ptp or mrf sy
 In total 8 axes are defined (4 physical and 4 virtual).
 
 Physical axes (running in modulo mode):
+
 1. Hour 0..12h
 3. Minute 0..60min
 5. Second 0..60s
 7. Parts of second 0..1s
 
 The virtual axes are used for calculating phase error between the actual time and the physical axis angle (actual position):
+
 2. Hour phase error [h]
 4. Minute phase error [min]
 6. Second phase error [s]
