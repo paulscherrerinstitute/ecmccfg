@@ -30,9 +30,19 @@ epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_AI",           "62")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_DESC=EL3702, NELM=${ECMC_OVER_SMP}"
 
+# DC mode
+rate)
+epicsEnvSet("SYNC0_SHIFT",   "500000")           # Shift time 
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM_AI},0x730,10000,${SYNC0_SHIFT=0},990000,0)"
+
 # EL4732
 epicsEnvSet("ECMC_EC_SLAVE_NUM_AO",           "63")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_DESC=EL4732, NELM=${ECMC_OVER_SMP}"
+
+# DC mode
+epicsEnvSet("SYNC0_SHIFT",   "-500000")      # Shift time 
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM_AO},0x730,10000,${SYNC0_SHIFT=0},990000,0)"
+
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 

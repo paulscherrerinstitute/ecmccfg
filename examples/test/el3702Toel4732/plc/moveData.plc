@@ -9,6 +9,10 @@ if(ec_mm_cp(0,2)) {
   println('Error: ', ec_get_err());
 };
 
+if(ec_mm_cp(1,3)) {
+  println('Error: ', ec_get_err());
+};
+
 if(static.cycles>1000) {
   println('Alive!!!!');
   static.cycles:=0;
