@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief hardware script for ecmcEL5042-Encoder-ch12-RL32BVS001C30V.cmd
 #-d   \details Parmetrization of EL5042  channel 1 for encoder RESOLUTE RL 32B VS 001C 30V
-#-d   \author Niko Kivel
+#-d   \author Istvan Mohacsi
 #-d   \file
 #-d */
 

@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief hardware script for Postial-S101B-1216-HES0-PRQ
-#-d   \details 16/12-bit, SSI, approx. 5.5e-3 deg/ticks
-#-d   \author Niko Kivel
+#-d   \details 16/12-bit, SSI, approx. 0.088 deg/tick
+#-d   \author Istvan Mohacsi
 #-d   \file
 #-d */
 
@@ -21,3 +21,5 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x11,28,
 
 #- SSI data length 28 bit
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x12,28,2)"
+
+
