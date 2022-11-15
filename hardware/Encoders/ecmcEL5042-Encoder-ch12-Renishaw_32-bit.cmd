@@ -7,12 +7,12 @@
 
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8008")     # CH1=0x8008. CH2=0x8018
 
-#- Call generic config file
+#- Call generic config file with memory offset
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmcEL5042-Encoder-Renishaw_32-bit.cmd
 
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8018")     # CH1=0x8008. CH2=0x8018
 
-#- Call generic config file
+#- Call generic config file with memory offset
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmcEL5042-Encoder-Renishaw_32-bit.cmd
 
 
