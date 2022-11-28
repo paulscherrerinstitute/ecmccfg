@@ -80,7 +80,9 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0xE")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Active
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
+ecmcEpicsEnvSetCalcTernary("ECMC_SKIP_ME", "'${ECMC_EC_HWTYPE}'='EL3312'", "#", "")
+${ECMC_SKIP_ME}ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
+epicsEnvUnset("ECMC_SKIP_ME")
 
 #- User scale offset
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x11")
@@ -96,13 +98,13 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 
 #- Limit 1 (not available for all EL33XX)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x13")
-epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
+ecmcEpicsEnvSetCalcTernary("ECMC_EC_SDO_SIZE", "'${ECMC_EC_HWTYPE}'='EL3314-0002'", "4", "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
 #- Limit 2 (not available for all EL33XX)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x14")
-epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
+ecmcEpicsEnvSetCalcTernary("ECMC_EC_SDO_SIZE", "'${ECMC_EC_HWTYPE}'='EL3314-0002'", "4", "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 

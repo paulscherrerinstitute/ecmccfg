@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL3314
-#-d   \details EL3314 | 4-channel thermocouple input terminal with open-circuit recognition
+#-d   \details EL3314 | 4-channel (16 bits) thermocouple input terminal with open-circuit recognition
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note SDOS
