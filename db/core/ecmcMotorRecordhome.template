@@ -1,6 +1,7 @@
 record(longout,"$(PREFIX)$(MOTOR_NAME)-HomProc") {
     field(DESC, "Homing Procedure")
-    field(VAL, "$(HOMEPROC=0)")
+    field(DOL, "$(PREFIX)$(MOTOR_NAME)-movHomCmd CP")
+    field(OMSL, "closed_loop")
     field(DTYP, "asynInt32")
     field(PINI, "YES")
     field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))HomProc")
