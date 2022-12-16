@@ -506,3 +506,66 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
   field(HIGH, 1)
   field(HSV,  "MAJOR")
 }
+
+record(mbbo,    "${P}${AXIS_NAME}-movVelCmd") {
+  field(DESC, "absolute move command data")
+  field(VAL,  "${VELPROC=0}")
+
+  field(ZRVL, 0)  field(ZRST, "normal")
+
+  field(FLNK, "${P}${AXIS_NAME}-MtnCmd_.PROC")
+}
+
+record(mbbo,    "${P}${AXIS_NAME}-movRelCmd") {
+  field(DESC, "absolute move command data")
+  field(VAL,  "${RELPROC=0}")
+
+  field(ZRVL, 0)  field(ZRST, "normal")
+
+  field(FLNK, "${P}${AXIS_NAME}-MtnCmd_.PROC")
+}
+
+record(mbbo,    "${P}${AXIS_NAME}-movAbsCmd") {
+  field(DESC, "absolute move command data")
+  field(VAL,  "${ABSPROC=0}")
+
+  field(ZRVL, 0)  field(ZRST, "normal")
+  field(ONVL, 1)  field(ONST, "gear in")
+
+  field(FLNK, "${P}${AXIS_NAME}-MtnCmd_.PROC")
+}
+
+record(mbbo,    "${P}${AXIS_NAME}-movHomCmd") {
+  field(DESC, "Homing procedure")
+  field(VAL,  "${HOMEPROC=0}")
+
+  field(ZRVL, 0)  field(ZRST, "Not Homable")
+  field(ONVL, 1)  field(ONST, "Backward LS")
+  field(TWVL, 2)  field(TWST, "Forward LS")
+  field(THVL, 3)  field(THST, "HS via backward LS")
+  field(FRVL, 4)  field(FRST, "HS via forward LS")
+  field(FVVL, 5)  field(FVST, "HS mid via backward LS")
+  field(SXVL, 6)  field(SXST, "HS mid via forward LS")
+  field(SVVL, 7)  field(SVST, "HS apporach backwards")
+  field(EIVL, 8)  field(EIST, "HS approach forward")
+  field(NIVL, 9)  field(NIST, "HS mid apporach backwards")
+  field(TEVL, 10) field(TEST, "HS mid approach forward")
+  field(ELVL, 11) field(ELST, "IndexN via backward LS")
+  field(TVVL, 12) field(TVST, "IndexN via via forward LS")
+  field(TTVL, 13) field(TTST, "HomeSwiLeftRight")
+  field(FTVL, 14) field(FTST, "Homable")
+  field(FFVL, 15) field(FFST, "Manual set position")
+
+  field(FLNK, "${P}${AXIS_NAME}-MtnCmd_.PROC")
+}
+
+record(calcout, "${P}${AXIS_NAME}-MtnCmd_") {
+  field(DESC, "determine the motion command data")
+  field(CALC, "L==1?A:(L==2?B:(L==3?C:(L==10?D:0)))")
+  field(INPA, "${P}${AXIS_NAME}-movVelCmd")
+  field(INPB, "${P}${AXIS_NAME}-movRelCmd")
+  field(INPC, "${P}${AXIS_NAME}-movAbsCmd")
+  field(INPD, "${P}${AXIS_NAME}-movHomCmd")
+  field(INPL, "${P}${AXIS_NAME}-MtnCmd.RVAL CP")
+  field(OUT,  "${P}${AXIS_NAME}-MtnCmdData PP")
+}
