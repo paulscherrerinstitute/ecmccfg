@@ -1,0 +1,46 @@
+#- manually load the ethercat lib, as this somehow fails on debian11
+dlload /usr/local/lib/libethercat.so
+
+#- ecmccfg, choose the versions for your environment5.000 mm/s
+require ecmccfg,mtncmd "ECMC_VER=multi_enc,EC_RATE=2000"
+# require ecmccfg,mtncmd "ECMC_VER=8,EC_RATE=500"
+
+epicsEnvSet("DEV", "X00AA-FOO-BAR")
+
+#- coupler
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EK1100"
+
+#- DI for HS
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL1018"
+
+#- DO for HS supply
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL2808"
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput08,1)"
+
+#- Drive for top axis
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL5101"
+#- Reverse encoder direction:
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x0e,1,1)"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+# Reverse motor direction:
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x9,1,1)"
+
+#- Axis configuration for top axis
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/ax1.yaml, DEV=${DEV}, DRV_SLAVE=4, ENC_SLAVE=3, ENC_CHANNEL=01"
+
+#- #############################################################################
+#- apply configuration
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyConfig.cmd
+#- #############################################################################
+#- go active
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
+
+#- be quiet
+asynSetTraceMask(MC_CPU1, -1, 0x01)
+asynSetTraceIOMask(MC_CPU1, -1, 6)
+asynSetTraceInfoMask(MC_CPU1, -1, 1)
+
+#- reset all errors
+ecmcConfigOrDie "ControllerErrorReset()"

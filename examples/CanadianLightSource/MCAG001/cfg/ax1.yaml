@@ -1,0 +1,109 @@
+axis:
+  id: 1
+  mode: CSV
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+
+var:
+  motorTempSlave: 9
+  motorTempCh: 1
+
+epics:
+  name: TRX1
+  precision: 3
+  unit: mm
+  motorRecord:
+    enable: yes
+    description: "top axis"
+#    fieldInit: ""
+
+drive:
+  numerator: 600                # 2000 steps/sec
+  denominator: 32768            # MAX_INT for a 16-bit register
+                                # always this for this stepper drive!
+  type: 0
+  control: ec0.s$(DRV_SLAVE).driveControl01
+  status: ec0.s$(DRV_SLAVE).driveStatus01
+  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01
+  reduceTorqueEnable: yes
+  reduceTorque: 2 # Reduce torque bit in drive control word
+  reset: 1        # Reset   (if no drive reset bit then leave empty)
+  warning: 7      # Warning (if no drive warning bit then leave empty)
+  error:          # max 3
+    - 3           # Error 0 (if no drive error bit then leave empty)
+
+encoder:
+  numerator: 60         # 1egu = 1mm
+  # Ethercat entry for close-loop
+  denominator: 2000    # Number of ticks when motor moves numerator (=1mm)
+                       # since enc.res. is 1nm: 1nm*1e6=1mm
+  type: 0              # Type: 0=Incremental, 1=Absolute
+  bits: 16             # Total bit count of encoder raw data
+  absOffset: 0         # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s$(ENC_SLAVE).positionActual$(ENC_CHANNEL)
+
+controller:
+  Kp: 10
+  Ki: 0.001
+
+trajectory:
+  type: 1
+  axis:
+    velocity: 20
+    acceleration: 60
+    jerk: 120
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SLAVE).driveStatus01.11   # 10836680  # Ecat entry for forward limit switch input
+    backward: ec0.s$(DRV_SLAVE).driveStatus01.12  # 21641480  # Ecat entry for bACKWARD limit switch input
+  home: ec0.s1.binaryInput01.0
+  interlock: ec0.s$(DRV_SLAVE).ONE.0
+
+homing:
+  type: 4
+  position: 30
+  postMoveEnable: yes
+  postMovePosition: ${MR_OFFSET=0}
+  velocity:
+    to: 5
+    from: 5
+  acceleration: 60
+  deceleration: 120
+
+
+softlimits:
+  enable: no
+  backwardEnable: yes
+  forwardEnable: yes
+  forward: 27.5
+  backward: -27.5
+
+monitoring:
+  lag:
+    enable: yes
+    tolerance: 2
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.1
+    time: 100
+  velocity:
+    enable: true
+    max: 60
+    time:
+      trajectory: 100
+      drive: 200
+
+plc:
+  enable: no  # value at IOC start, set to no for manual control, this is needed for a smooth coupling procedure
+  externalCommands: yes # allow command from other PLC
+  code:
+    - if(ax1.traj.source){ax1.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
+    - ax1.traj.setpos:=ax10.traj.setpos+ax11.traj.setpos/2; # calculate set pos for physical axis
+  filter:  # mandatory
+    velocity:
+      enable: false
+      size: 100
+    trajectory:
+      enable: false
+      size: 100

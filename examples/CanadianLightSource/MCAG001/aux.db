@@ -1,0 +1,87 @@
+record(dfanout, "${DEV}:HOME"){
+  field(VAL,  1)
+  field(OUTA, "${DEV}:TRX1.HOMF PP")
+  field(OUTB, "${DEV}:TRX2.HOMF PP")
+}
+
+record(dfanout, "${DEV}:GEAR_OUT"){
+#  field(OMSL, "supervisory")
+  field(VAL,  0)
+  field(OUTA, "${DEV}:TRX1-setCtrl PP")
+  field(OUTB, "${DEV}:TRX2-setCtrl PP")
+}
+
+record(seq,   "${DEV}:GEAR_IN"){
+  field(DO0,  0)
+  field(LNK0, "${DEV}:TRX1-EnaCmd PP")
+  field(DO1,  0)
+  field(LNK1, "${DEV}:TRX2-EnaCmd PP")
+  field(DLY2, 0.1)
+  field(DO2,  1)
+  field(LNK2, "${DEV}:center-EnaCmd PP")
+  field(DLY3, 0.1)
+  field(DO3,  1)
+  field(LNK3, "${DEV}:gap-EnaCmd PP")
+  field(DLY4, 0.1)
+  field(DO4,  0)
+  field(LNK4, "${DEV}:center-EnaCmd PP")
+  field(DLY5, 0.1)
+  field(DO5,  0)
+  field(LNK5, "${DEV}:gap-EnaCmd PP")
+  field(DO6,  1)
+  field(LNK6, "${DEV}:TRX1-setCtrl PP")
+  field(DO7,  1)
+  field(LNK7, "${DEV}:TRX2-setCtrl PP")
+}
+
+record(calcout, "${DEV}:HOMED-Stat_"){
+  field(INPA, "${DEV}:TRX1-Homed CP")
+  field(INPB, "${DEV}:TRX2-Homed CP")
+  field(CALC, "A&&B")
+  field(OUT,  "${DEV}:HOMED-Stat PP")
+}
+
+record(bi,    "${DEV}:HOMED-Stat"){
+  field(ZNAM, "not homed")
+  field(ONAM, "homed")
+  field(ZSV,  "MAJOR")
+}
+
+
+record(calcout, "${DEV}:GEAR_IN-Stat_"){
+  field(INPA, "${DEV}:TRX1-TrjSrcTyp-RB CP")
+  field(INPB, "${DEV}:TRX1-PLC-EnaCmd-RB CP")
+  field(INPC, "${DEV}:TRX1-CmdFrmPLCCmd-RB CP")
+  field(INPD, "${DEV}:TRX2-TrjSrcTyp-RB CP")
+  field(INPE, "${DEV}:TRX2-PLC-EnaCmd-RB CP")
+  field(INPF, "${DEV}:TRX2-CmdFrmPLCCmd-RB CP")
+  field(CALC, "A&&B&&C&&D&&E&&F")
+  field(OUT,  "${DEV}:GEAR_IN-Stat PP")
+}
+
+record(bi,    "${DEV}:GEAR_IN-Stat"){
+  field(ZNAM, "geared out")
+  field(ONAM, "geared in")
+}
+
+record(seq,   "${DEV}:OSC_IN"){
+  field(DO0,  0)
+  field(LNK0, "${DEV}:sine-EnaCmd PP")
+  field(DO1,  1)
+  field(LNK1, "${DEV}:gap-setCtrl PP")
+  field(DO2,  1)
+  field(LNK2, "${DEV}:center-setCtrl PP")
+  field(DO3,  1)
+  field(LNK3, "${DEV}:sine-MtnCmd PP")
+  field(DO4,  2)
+  field(LNK4, "${DEV}:sine-TgtVelCmd PP")
+}
+
+record(seq,   "${DEV}:OSC_OUT"){
+  field(DO0,  0)
+  field(LNK0, "${DEV}:gap-setCtrl PP")
+  field(DO1,  0)
+  field(LNK1, "${DEV}:center-setCtrl PP")
+}
+
+

@@ -1,0 +1,84 @@
+dlload /usr/local/lib/libethercat.so
+
+#require iocinfo
+
+require ecmccfg,mtncmd "ECMC_VER=multi_enc,EC_RATE=2000"
+# require ecmccfg,multi_enc "ECMC_VER=multi_enc,EC_RATE=500"
+# require ecmccfg,multi_enc "ECMC_VER=8,EC_RATE=500"
+# require ecmccfg,mtncmd "ECMC_VER=8,EC_RATE=500"
+
+
+require ECMC_EXTRA kiveln
+
+epicsEnvSet("DEV", "X00AA-FOO-BAR")
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EK1100"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL1018"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL2808"
+# Set all outputs to feed switches
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput01,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput02,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput03,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput04,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput05,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput06,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput07,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},binaryOutput08,1)"
+
+#- top axis
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL5101"
+# Reverse encoder direction:
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x0e,1,1)"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+# Reverse motor direction:
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x9,1,1)"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/ax1.yaml, DEV=${DEV}, DRV_SLAVE=4, ENC_SLAVE=3, ENC_CHANNEL=01"
+dbLoadTemplate("${ECMC_EXTRA_TEMPLATES}ctrl.subs","P=${DEV}:,AXIS_NAME=TRX1,AXIS_NO=1,PORT=${ECMC_ASYN_PORT}")
+
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL9410"
+
+#- bottom axis
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,       "HW_DESC=EL5101"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST4118L1804-B"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/ax2.yaml, DEV=${DEV}, DRV_SLAVE=7, ENC_SLAVE=6, ENC_CHANNEL=01"
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# dbLoadRecords(${ECMC_CONFIG_DB}ecmcMotorRecordhome.template, "PREFIX=X00AA-FOO-BAR:, MOTOR_NAME='TRX2', MOTOR_PORT=MCU1, AXIS_NO=2,HOMEPROC=4,HOMEPOS=30,HVELTO=10,HVELFRM=5,HOMEACC=200,HOMEDEC=200")
+
+# dbLoadRecords(mntCmdData.template, "PREFIX=X00AA-FOO-BAR:, MOTOR_NAME='TRX2', HOMEPROC=4, ABSPROC=1")
+
+dbLoadTemplate("${ECMC_EXTRA_TEMPLATES}ctrl.subs","P=${DEV}:,AXIS_NAME=TRX2,AXIS_NO=2,PORT=${ECMC_ASYN_PORT}")
+
+#- virtual axes
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/ax10.yaml, DEV=${DEV}"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/ax11.yaml, DEV=${DEV}"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/ax12.yaml, DEV=${DEV}"
+
+dbLoadTemplate("${ECMC_EXTRA_TEMPLATES}ctrl.subs","P=${DEV}:,AXIS_NAME=center,AXIS_NO=10,PORT=${ECMC_ASYN_PORT}")
+dbLoadTemplate("${ECMC_EXTRA_TEMPLATES}ctrl.subs","P=${DEV}:,AXIS_NAME=gap,AXIS_NO=11,PORT=${ECMC_ASYN_PORT}")
+
+#- #############################################################################
+#- apply configuration
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyConfig.cmd
+#- #############################################################################
+#- go active
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
+
+#- EXTRA EPICS STUFF
+
+dbLoadRecords aux.db "DEV=${DEV}"
+dbLoadRecords msgTxt.db "PREFIX=${DEV}:,MOTOR_NAME=TRX2,MOTOR_PORT=MCU1,AXIS_NO=2"
+
+
+#- be quiet
+asynSetTraceMask(MC_CPU1, -1, 0x01)
+asynSetTraceIOMask(MC_CPU1, -1, 6)
+asynSetTraceInfoMask(MC_CPU1, -1, 1)
+
+#- reset all errors
+ecmcConfigOrDie "ControllerErrorReset()"
+
