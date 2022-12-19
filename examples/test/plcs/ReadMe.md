@@ -86,12 +86,12 @@ Below the ECMC specific accessible variables and functions are listed:
 3.  ax<id>.counter               execution counter                (ro)
 4.  ax<id>.error                 error                            (ro)
 5.  ax<id>.allowplccmd           Allow writes to axis from PLC    (rw)
-6.  ax<id>.enc.actpos            actual position                  (ro)
+6.  ax<id>.enc.actpos            actual position                  (rw)
 7.  ax<id>.enc.extactpos         actual position from plc sync.
                                  expression                       (ro)
 8.  ax<id>.enc.actvel            actual velocity                  (ro)
 9.  ax<id>.enc.rawpos            actual raw position              (ro)
-10.  ax<id>.enc.source            internal source or expressions   (rw)
+10.  ax<id>.enc.source           internal source or expressions   (rw)
                                  source = 0: internal encoder
                                  source > 0: actual pos from expr
 11. ax<id>.enc.homed             encoder homed                    (rw)
