@@ -1,17 +1,12 @@
 #-d /**
-#-d   \brief hardware script for EL32XX-Sensor-chX_S+S_RegelTechnik_HTF50_PT100
-#-d   \details Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+#-d   \brief hardware script for ecmcEL33XX-Sensor-generic
+#-d   \details Parmetrization default SDO settings for EL33XX
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
-#- Type: PT100
-#- Range: -35 to 105 degC
-#- Connectiontype : 2 wire
-#- Cable length: 1.5m
-#- Cable area: 0.25mm²
+############# Parmetrization default SDO settings for EL33XX
 #
 #- Environment variables needed:
 #- -ECMC_EC_SDO_INDEX "0x80n0" where n is channel 0..3
@@ -39,7 +34,7 @@ epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
-#- Enable filter 
+#- Enable filter
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x6")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "1")  # Enabled
@@ -85,7 +80,9 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0xE")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Active
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
+ecmcEpicsEnvSetCalcTernary("ECMC_SKIP_ME", "'${ECMC_EC_HWTYPE}'='EL3312'", "#", "")
+${ECMC_SKIP_ME}ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
+epicsEnvUnset("ECMC_SKIP_ME")
 
 #- User scale offset
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x11")
@@ -101,28 +98,35 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 
 #- Limit 1 (not available for all EL33XX)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x13")
-epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
+ecmcEpicsEnvSetCalcTernary("ECMC_EC_SDO_SIZE", "'${ECMC_EC_HWTYPE}'='EL3314-0002'", "4", "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
 #- Limit 2 (not available for all EL33XX)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x14")
-epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
+ecmcEpicsEnvSetCalcTernary("ECMC_EC_SDO_SIZE", "'${ECMC_EC_HWTYPE}'='EL3314-0002'", "4", "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
 #- Filter settings
-#- 0 = 2.5Hz (default)
-#- 1 = 5Hz
-#- 2 = 10Hz
-#- 3 = 16.6Hz
-#- 4 = 20Hz
-#- 5 = 50Hz
-#- 6 = 60Hz
-#- 7 = 100Hz
+#-  Index   All EL33XX except EL3314-0002   EL3314-0002
+#- ------- ------------------------------- -------------
+#-      0   50 Hz                           2.5 Hz
+#-      1   60 Hz                           5 Hz
+#-      2   100 Hz                          10 Hz
+#-      3   500 Hz                          16.6 Hz
+#-      4   1 kHz                           20 Hz
+#-      5   2 kHz                           50 Hz
+#-      6   3.75 kHz                        60 Hz
+#-      7   7.5 kHz                         100 Hz
+#-      8   15 kHz
+#-      9   30 kHz
+#-     10   5 Hz
+#-     11   10 Hz
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x15")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
+#- NOTE: Per channel configuration is not possible. All channels use channel 1 setting.
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
 #- User calibration offset
