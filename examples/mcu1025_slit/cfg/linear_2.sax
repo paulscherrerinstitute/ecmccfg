@@ -16,11 +16,27 @@ epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",       "1")        # Enable Axis PLC
 # Executed in sync with axis (before)
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax3.traj.source){ax3.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax4.traj.source){ax4.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "ax2.mon.ilockfwd:=ax3.mon.lowlim and ax4.mon.highlim|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "ax2.mon.ilockbwd:=ax4.mon.lowlim and ax3.mon.highlim|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax2.enc.actpos:=ax4.enc.actpos-ax3.enc.actpos|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "static.ilFwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) < ax3.mon.highsoftlim-4) or not(ax3.mon.highsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "static.ilFwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) > ax4.mon.lowsoftlim+4) or not(ax4.mon.lowsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "static.ilBwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) > ax3.mon.lowsoftlim+4) or not(ax3.mon.lowsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "static.ilBwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) < ax4.mon.highsoftlim-4) or not(ax4.mon.highsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax2.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim and static.ilFwd1 and static.ilFwd2|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax2.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim and static.ilBwd1 and static.ilBwd2|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax2.enc.actpos:=ax4.enc.actpos-ax3.enc.actpos|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",           "")
+
+# This is xg axis
+#
+#     limit+      softlim+          xl           xr          softlim-    limít-
+#       |            |               |            |              |         |
+#                                     <----xg----->
+#                                          xp                                      
+# 
+# forward software ilock OK if
+# xp+xg/2 < xl_high_softlim
+# xp-xg/2 > xr_low_softlim
+# backward software ilock if
+# xp+xg/2 > xl_low_softlim
+# xp-xg/2 < xr_high_softlim
+# stop a bit earlier
+#

@@ -51,11 +51,12 @@ epicsEnvSet("ECMC_EC_MON_EXT_INTERLOCK",  "ec0.s1.ONE.0")            #  Ethercat
 # Softlimits (disable with 0,0)
 epicsEnvSet("ECMC_SOFT_LOW_LIM",          "0")
 epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "0")
+epicsEnvSet("ECMC_DXLM_ENABLE",           "0")
 
 # Position lag
 epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "0.5")
 epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "100")
-epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "0")
+epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
 
 # At target
 epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.3")
