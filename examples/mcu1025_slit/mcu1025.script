@@ -5,10 +5,10 @@
 ## Axis 2: Slit gap/opening (virt)
 ## Axis 3: Right blade (normal)
 ## Axis 4: Left blade (normal)
-## Axis 5: Timing (virt), connected to signal generator or timing system
-## Axis 6: Amplitude
-## Both gap and position are configuerd to oscillate in sinus. with freq.
-## set by axis 5 and amplitude defined by axis 6.
+##
+## Note:
+##  Softlimits of the virtual axes are derived from the softlimts of the physical axes dynamically (in the sync code).
+##  These softlimits are however set slightly more narrow, $(SOFT_OFFSET=2), in order to not trip the softlimits of the physical axes. 
 
 ##############################################################################
 ## Initiation:
@@ -22,7 +22,7 @@ require ecmccfg 8.0.0
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=8.0.0"
 
 ##############################################################################
 ## Configure hardware:
@@ -53,29 +53,29 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOut
 ## AXIS 3 (physical right motor)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_3.ax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_3.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/right.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/right.sax)
 
 ##############################################################################
 ## AXIS 4 (physical left motor)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_4.ax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_4.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/left.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/left.sax)
 
 ##############################################################################
 ## AXIS 1 (slit center position)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_1.vax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_1.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/center.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/center.sax)
 
 ##############################################################################
 ## AXIS 2 (slit opening)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/linear_2.vax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/linear_2.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/gap.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/gap.sax)
 
 ##############################################################################
 ############# Configure diagnostics:
