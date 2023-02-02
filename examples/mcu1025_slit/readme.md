@@ -25,29 +25,45 @@ This is the coordinate system (positive in left direction):
 
 ### Center
 ```
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "static.ilFwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) < ax4.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax4.mon.highsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "static.ilFwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) < ax3.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax3.mon.highsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "static.ilBwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) > ax4.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax4.mon.lowsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "static.ilBwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) > ax3.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax3.mon.lowsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax1.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim and static.ilFwd1 and static.ilFwd2|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax1.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim and static.ilBwd1 and static.ilBwd2|")
+# Dynamic softlimits
+
+# High softlimit is the MIN of SW_FW_BASED_ON_AX3 and SW_FW_BASED_ON_AX4
+epicsEnvSet(SW_FW_BASED_ON_AX3,"ax3.mon.highsoftlim + ax2.enc.actpos/2 - $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_FW_BASED_ON_AX4,"ax4.mon.highsoftlim - ax2.enc.actpos/2 - $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "ax1.mon.highsoftlim:=min(${SW_FW_BASED_ON_AX4},${SW_FW_BASED_ON_AX3})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax1.mon.highsoftlimenable:=ax4.mon.highsoftlimenable and ax3.mon.highsoftlimenable|")
+
+# Low softlimit is the MAX of SW_BW_BASED_ON_AX3 and SW_BW_BASED_ON_AX4
+epicsEnvSet(SW_BW_BASED_ON_AX3,"ax3.mon.lowsoftlim - ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_BW_BASED_ON_AX4,"ax4.mon.lowsoftlim + ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "ax1.mon.lowsoftlim:=max(${SW_BW_BASED_ON_AX3},${SW_BW_BASED_ON_AX4})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax1.mon.lowsoftlimenable:=ax4.mon.lowsoftlimenable and ax3.mon.lowsoftlimenable|")
 ```
 
 ### Gap
 ```
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "static.ilFwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) < ax4.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax4.mon.highsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "static.ilFwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) > ax3.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax3.mon.lowsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "static.ilBwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) > ax4.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax4.mon.lowsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "static.ilBwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) < ax3.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax3.mon.highsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax2.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim and static.ilFwd1 and static.ilFwd2|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax2.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim and static.ilBwd1 and static.ilBwd2|")
+# Dynamic softlimits
+
+# High softlimit is the MIN of SW_FW_BASED_ON_AX3 and SW_FW_BASED_ON_AX4, basically 2 times the minimum distance to softlimit
+epicsEnvSet(SW_FW_BASED_ON_AX3,"(ax1.enc.actpos - ax3.mon.lowsoftlim)* 2 - $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_FW_BASED_ON_AX4,"(ax4.mon.highsoftlim - ax1.enc.actpos)* 2 - $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "ax2.mon.highsoftlim:=min(${SW_FW_BASED_ON_AX4},${SW_FW_BASED_ON_AX3})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax2.mon.highsoftlimenable:=ax4.mon.highsoftlimenable and ax3.mon.highsoftlimenable|")
+
+# Low softlimit is the MAX of SW_BW_BASED_ON_AX3 and SW_BW_BASED_ON_AX4
+epicsEnvSet(SW_BW_BASED_ON_AX3,"(ax1.enc.actpos - ax3.mon.highsoftlim) * 2 + $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_BW_BASED_ON_AX4,"(ax4.mon.lowsoftlim - ax1.enc.actpos) *2 + $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "ax2.mon.lowsoftlim:=max(${SW_BW_BASED_ON_AX3},${SW_BW_BASED_ON_AX4})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax2.mon.lowsoftlimenable:=ax4.mon.lowsoftlimenable and ax3.mon.lowsoftlimenable|")
 ```
 
-# TODO
-Consider using the softlim of virt axes instead of plc-interlock
-```
-ax1.mon.highsoftlim
-ax1.mon.lowsoftlim
-ax2.mon.highsoftlim
-ax2.mon.lowsoftlim
-```
+# NOTES
+The subdir "cfg_plc_il" contains code that is doing the same thing but with plc interlock instead of softlimits. Then no softlimit alarm will be raised...

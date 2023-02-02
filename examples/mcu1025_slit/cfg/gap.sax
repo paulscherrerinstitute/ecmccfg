@@ -16,27 +16,40 @@ epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",       "1")        # Enable Axis PLC
 # Executed in sync with axis (before)
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax3.traj.source){ax3.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax4.traj.source){ax4.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "static.ilFwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) < ax4.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax4.mon.highsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "static.ilFwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) > ax3.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax3.mon.lowsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "static.ilBwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) > ax4.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax4.mon.lowsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "static.ilBwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) < ax3.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax3.mon.highsoftlimenable)|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax2.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim and static.ilFwd1 and static.ilFwd2|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax2.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim and static.ilBwd1 and static.ilBwd2|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax2.enc.actpos:=ax4.enc.actpos-ax3.enc.actpos|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",           "")
+
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "ax2.enc.actpos:=ax4.enc.actpos-ax3.enc.actpos|")
+
+# Dynamic softlimits
+# High softlimit is the MIN of SW_FW_BASED_ON_AX3 and SW_FW_BASED_ON_AX4. basically 2 times the minimum distance to softlimit
+epicsEnvSet(SW_FW_BASED_ON_AX3,"(ax1.enc.actpos - ax3.mon.lowsoftlim)* 2 - $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_FW_BASED_ON_AX4,"(ax4.mon.highsoftlim - ax1.enc.actpos)* 2 - $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "ax2.mon.highsoftlim:=min(${SW_FW_BASED_ON_AX4},${SW_FW_BASED_ON_AX3})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax2.mon.highsoftlimenable:=ax4.mon.highsoftlimenable and ax3.mon.highsoftlimenable|")
+
+# Low softlimit is the MAX of SW_BW_BASED_ON_AX3 and SW_BW_BASED_ON_AX4
+epicsEnvSet(SW_BW_BASED_ON_AX3,"(ax1.enc.actpos - ax3.mon.highsoftlim) * 2 + $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_BW_BASED_ON_AX4,"(ax4.mon.lowsoftlim - ax1.enc.actpos) *2 + $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "ax2.mon.lowsoftlim:=max(${SW_BW_BASED_ON_AX3},${SW_BW_BASED_ON_AX4})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax2.mon.lowsoftlimenable:=ax4.mon.lowsoftlimenable and ax3.mon.lowsoftlimenable|")
+
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax2.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim |")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax2.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim |")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")
 
 # This is xg axis
 #
-#     limit+      softlim+          xl           xr          softlim-    limít-
-#       |            |               |            |              |         |
-#                                     <----xg----->
-#                                          xp                                      
+#     limit+      softlim+          xl4            xr3          softlim-    limít-
+#       |            |               |              |              |         |
+#                                     <----xg2----->
+#                                          xp1                                      
 # 
-# forward software ilock OK if
-# xp+xg/2 < xl_high_softlim
-# xp-xg/2 > xr_low_softlim
-# backward software ilock if
-# xp+xg/2 > xl_low_softlim
-# xp-xg/2 < xr_high_softlim
-# stop a bit earlier
-#
+
+# Cleanup
+epicsEnvUnset(SW_FW_BASED_ON_AX3)
+epicsEnvUnset(SW_FW_BASED_ON_AX4)
+epicsEnvUnset(SW_BW_BASED_ON_AX3)
+epicsEnvUnset(SW_BW_BASED_ON_AX4)

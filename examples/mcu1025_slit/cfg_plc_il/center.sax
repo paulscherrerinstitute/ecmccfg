@@ -1,0 +1,50 @@
+
+############# Encoder
+epicsEnvSet("ECMC_ENC_SOURCE",                 "1")         # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")         # Enable velocity filter
+epicsEnvSet("ECMC_ENC_VELO_FILT_SIZE",         "10")        # Encoder velocity Low pass filter size
+
+############# Trajectory
+# 0 Internal, 1 from expression
+epicsEnvSet("ECMC_TRAJ_SOURCE",                "0")         # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_TRAJ_VELO_FILT_ENABLE",      "1")         # Enable velocity filter
+epicsEnvSet("ECMC_TRAJ_VELO_FILT_SIZE",        "10")        # Trajectory velocity Low pass filter size
+
+############# Commands
+epicsEnvSet("ECMC_CMD_FRM_OTHER_PLC_ENABLE",  "1")          # Allow commands from PLC
+epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",       "1")          # Enable Axis PLC
+# Each line below is appended to one single expression/source. 
+# Executed in sync with axis (before)
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax3.traj.source){ax3.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax4.traj.source){ax4.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "static.ilFwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) < ax4.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax4.mon.highsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "static.ilFwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) < ax3.mon.highsoftlim-$(SOFT_OFFSET=2)) or not(ax3.mon.highsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "static.ilBwd1:=((ax1.enc.actpos + ax2.enc.actpos/2) > ax4.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax4.mon.lowsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "static.ilBwd2:=((ax1.enc.actpos - ax2.enc.actpos/2) > ax3.mon.lowsoftlim+$(SOFT_OFFSET=2)) or not(ax3.mon.lowsoftlimenable)|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax1.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim and static.ilFwd1 and static.ilFwd2|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax1.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim and static.ilBwd1 and static.ilBwd2|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax1.enc.actpos:=(ax4.enc.actpos+ax3.enc.actpos)/2|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",           "")
+
+#
+#
+#     limit+      softlim+          xl           xr          softlim-    limít-
+#       |            |               |            |              |         |
+#                                     <----xg----->
+#                                          xp                                      
+# 
+# forward software ilock OK if
+# xp+xg/2 < xl_high_softlim
+# xp-xg/2 < xr_high_softlim
+# backward software ilock if
+# xp+xg/2 > xl_low_softlim
+# xp-xg/2 > xr_low_softlim
+# in ecmc syntax:
+# ax1.enc.actpos + ax2.enc.actpos/2 < ax4.mon.highsoftlim or !ax4.mon.highsoftlimenable
+# ax1.enc.actpos - ax2.enc.actpos/2 < ax3.mon.highsoftlim or !ax3.mon.highsoftlimenable
+# backward software ilock if 
+# ax1.enc.actpos + ax2.enc.actpos/2 > ax4.mon.highsoftlim or !ax4.mon.highsoftlimenable
+# ax1.enc.actpos - ax2.enc.actpos/2 > ax3.mon.highsoftlim or !ax3.mon.highsoftlimenable
+#
+# Then also make more narrow by $(SOFT_OFFSET=2) to avoid tripping the physical axes softlimits.
+#
