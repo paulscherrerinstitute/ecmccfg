@@ -10,6 +10,9 @@
 ##  Softlimits of the virtual axes are derived from the softlimts of the physical axes dynamically (in the sync code).
 ##  These softlimits are however set slightly more narrow, $(SOFT_OFFSET=2), in order to not trip the softlimits of the physical axes. 
 
+epicsEnvSet(SOFT_OFFSET,3)
+
+
 ##############################################################################
 ## Initiation:
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
@@ -22,7 +25,7 @@ require ecmccfg 8.0.0
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=8.0.0"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
 
 ##############################################################################
 ## Configure hardware:
@@ -79,6 +82,12 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/gap.sax)
 
 ##############################################################################
 ############# Configure diagnostics:
+
+# Disable alarms when at softlimit
+ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(1,0)"
+ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(2,0)"
+ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(3,0)"
+ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(4,0)"
 
 ##############################################################################
 ## PLC 0: 
