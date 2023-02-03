@@ -116,6 +116,3 @@ dbpf $(IOC):xl.SPAM 0
 dbpf $(IOC):xr.SPAM 0
 dbpf $(IOC):xp.SPAM 0
 dbpf $(IOC):xg.SPAM 0
-dbpf $(IOC):amplitude.SPAM 0
-dbpf $(IOC):timing.SPAM 0
-

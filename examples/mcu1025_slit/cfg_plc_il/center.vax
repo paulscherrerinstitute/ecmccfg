@@ -8,7 +8,7 @@ epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Re
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
 epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
-epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
+epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE larger than 0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
 
 #Encoder
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "1")
