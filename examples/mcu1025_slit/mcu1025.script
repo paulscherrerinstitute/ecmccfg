@@ -10,9 +10,11 @@
 ##  Softlimits of the virtual axes are derived from the softlimts of the physical axes dynamically (in the sync code).
 ##  These softlimits are however set slightly more narrow, $(SOFT_OFFSET=2), in order to not trip the softlimits of the physical axes. 
 
+# Apply offset
 epicsEnvSet(SOFT_OFFSET,3)
-epicsEnvSet(CFG,"cfg_plc_il")
 
+# Choose to use dynamic softlimits ("cfg_softlim") or dynamic plc interlocks ("cfg_plc_il")
+epicsEnvSet(CFG,"cfg_softlim")
 
 ##############################################################################
 ## Initiation:
@@ -92,7 +94,7 @@ ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(4,0)"
 
 ##############################################################################
 ## PLC 0: 
-#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./print_softlimits.plc, PLC_MACROS='DBG=,PLC_ID=0'")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./print_softlimits.plc, PLC_MACROS='DBG=,PLC_ID=0'")
 
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"

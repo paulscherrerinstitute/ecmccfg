@@ -1,4 +1,12 @@
-
+#  Coordinate system, this is gap axis, xg2
+#
+#     limit+      softlim+          xl4            xr3          softlim-    limít-
+#       |            |               |              |              |         |
+#                                     <----xg2----->
+#                                          xp1                                      
+# 
+# Then also make more narrow by $(SOFT_OFFSET=2) to avoid tripping the physical axes softlimits.
+#
 ############# Encoder
 epicsEnvSet("ECMC_ENC_SOURCE",                 "1")       # 0 Internal (from hardware), 1 from PLC
 epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")       # Enable velocity filter
@@ -40,13 +48,6 @@ epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax2.mon.ilockfwd:=ax3.mon.highli
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax2.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim |")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")
 
-# This is xg axis
-#
-#     limit+      softlim+          xl4            xr3          softlim-    limít-
-#       |            |               |              |              |         |
-#                                     <----xg2----->
-#                                          xp1                                      
-# 
 
 # Cleanup
 epicsEnvUnset(SW_FW_BASED_ON_AX3)
