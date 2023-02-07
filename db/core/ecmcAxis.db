@@ -505,4 +505,41 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
   field(TSE,  "$(TSE=-2)")
   field(HIGH, 1)
   field(HSV,  "MAJOR")
+  field(FLNK, "${P}${AXIS_NAME}-Err.PROC")
+}
+
+record(bi,"${P}${AXIS_NAME}-Err"){
+  field(DESC, "${AXIS_NAME}: Error")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${P}${AXIS_NAME}-ErrId.VAL")   
+  field(TSE,  "$(TSE=-2)")
+  field(ZNAM, "OK")
+  field(ONAM, "ERROR")
+  field(OSV,  "MAJOR")
+  field(ZSV,  "NO_ALARM")
+  field(VAL,  "0")
+}
+
+record(longin,"${P}${AXIS_NAME}-WrnId"){
+  field(DESC, "${AXIS_NAME}: Warning Id")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).warningid?")
+  field(SCAN, "I/O Intr")  
+  field(TSE,  "$(TSE=-2)")
+  field(HIGH, 1)
+  field(HSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-Wrn.PROC")
+}
+
+record(bi,"${P}${AXIS_NAME}-Wrn"){
+  field(DESC, "${AXIS_NAME}: Warning")
+  field(PINI, "$(PINI=1)")  
+  field(INP,  "${P}${AXIS_NAME}-WrnId.VAL")
+  field(TSE,  "$(TSE=-2)")
+  field(ZNAM, "OK")
+  field(ONAM, "WARNING")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(VAL,  "0")
 }
