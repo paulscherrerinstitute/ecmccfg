@@ -54,8 +54,10 @@ epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax1.mon.lowsoftlimenable:=ax4.mo
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax1.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim |")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax1.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim |")
 
-# Not used
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",           "")
+# Also enable gap axis
+#epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "if(ax1.drv.enable){ax2.drv.enable:=ax1.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")
+
 
 # Cleanup
 epicsEnvUnset(SW_FW_BASED_ON_AX3)
