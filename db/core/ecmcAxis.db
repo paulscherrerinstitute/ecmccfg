@@ -518,6 +518,7 @@ record(bi,"${P}${AXIS_NAME}-Err"){
   field(OSV,  "MAJOR")
   field(ZSV,  "NO_ALARM")
   field(VAL,  "0")
+  field(DTYP, "Raw Soft Channel")
 }
 
 record(longin,"${P}${AXIS_NAME}-WrnId"){
@@ -542,4 +543,5 @@ record(bi,"${P}${AXIS_NAME}-Wrn"){
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
   field(VAL,  "0")
+  field(DTYP, "Raw Soft Channel")
 }
