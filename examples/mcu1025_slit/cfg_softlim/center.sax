@@ -1,4 +1,14 @@
 
+#  Coordinate system, this is center axis, xp1
+#
+#     limit+      softlim+          xl4            xr3          softlim-    limít-
+#       |            |               |              |              |         |
+#                                     <----xg2----->
+#                                          xp1                                      
+# 
+# Then also make more narrow by $(SOFT_OFFSET=2) to avoid tripping the physical axes softlimits.
+#
+
 ############# Encoder
 epicsEnvSet("ECMC_ENC_SOURCE",                 "1")         # 0 Internal (from hardware), 1 from PLC
 epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")         # Enable velocity filter
@@ -33,8 +43,8 @@ epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "ax1.mon.highsoftlim:=min(${SW_FW
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax1.mon.highsoftlimenable:=ax4.mon.highsoftlimenable and ax3.mon.highsoftlimenable|")
 
 # Low softlimit is the MAX of SW_BW_BASED_ON_AX3 and SW_BW_BASED_ON_AX4
-epicsEnvSet(SW_BW_BASED_ON_AX3,"ax3.mon.lowsoftlim - ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
-epicsEnvSet(SW_BW_BASED_ON_AX4,"ax4.mon.lowsoftlim + ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_BW_BASED_ON_AX3,"ax3.mon.lowsoftlim + ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_BW_BASED_ON_AX4,"ax4.mon.lowsoftlim - ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "ax1.mon.lowsoftlim:=max(${SW_BW_BASED_ON_AX3},${SW_BW_BASED_ON_AX4})|")
 
 # Both softlimits of the physical axis must be enabled in order for this code to work
@@ -44,18 +54,10 @@ epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax1.mon.lowsoftlimenable:=ax4.mo
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax1.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim |")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax1.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim |")
 
-# Not used
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",           "")
+# Also enable gap axis
+#epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "if(ax1.drv.enable){ax2.drv.enable:=ax1.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")
 
-#  Coordinate system
-#
-#     limit+      softlim+          xl4            xr3          softlim-    limít-
-#       |            |               |              |              |         |
-#                                     <----xg2----->
-#                                          xp1                                      
-# 
-# Then also make more narrow by $(SOFT_OFFSET=2) to avoid tripping the physical axes softlimits.
-#
 
 # Cleanup
 epicsEnvUnset(SW_FW_BASED_ON_AX3)

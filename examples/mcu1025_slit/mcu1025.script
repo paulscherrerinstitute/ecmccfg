@@ -10,8 +10,11 @@
 ##  Softlimits of the virtual axes are derived from the softlimts of the physical axes dynamically (in the sync code).
 ##  These softlimits are however set slightly more narrow, $(SOFT_OFFSET=2), in order to not trip the softlimits of the physical axes. 
 
+# Apply offset
 epicsEnvSet(SOFT_OFFSET,3)
 
+# Choose to use dynamic softlimits ("cfg_softlim") or dynamic plc interlocks ("cfg_plc_il")
+epicsEnvSet(CFG,"cfg_softlim")
 
 ##############################################################################
 ## Initiation:
@@ -25,7 +28,7 @@ require ecmccfg 8.0.0
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=error_handling"
 
 ##############################################################################
 ## Configure hardware:
@@ -56,38 +59,38 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOut
 ## AXIS 3 (physical right motor)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/right.ax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/right.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./${CFG=cfg}/right.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/right.sax)
 
 ##############################################################################
 ## AXIS 4 (physical left motor)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/left.ax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/left.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./${CFG=cfg}/left.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/left.sax)
 
 ##############################################################################
 ## AXIS 1 (slit center position)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/center.vax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/center.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./${CFG=cfg}/center.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/center.sax)
 
 ##############################################################################
 ## AXIS 2 (slit opening)
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./cfg/gap.vax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./cfg/gap.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./${CFG=cfg}/gap.vax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/gap.sax)
 
 ##############################################################################
 ############# Configure diagnostics:
 
 # Disable alarms when at softlimit
-ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(1,0)"
-ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(2,0)"
-ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(3,0)"
-ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(4,0)"
+#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(1,0)"
+#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(2,0)"
+#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(3,0)"
+#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(4,0)"
 
 ##############################################################################
 ## PLC 0: 
@@ -105,9 +108,9 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
 
-asynSetTraceMask(MC_CPU1,-1,1)
-asynSetTraceIOMask(MC_CPU1,-1,6)
-asynSetTraceInfoMask(MC_CPU1,-1,1)
+#asynSetTraceMask(MC_CPU1,-1,1)
+#asynSetTraceIOMask(MC_CPU1,-1,6)
+#asynSetTraceInfoMask(MC_CPU1,-1,1)
 
 iocInit()
 
@@ -115,6 +118,3 @@ dbpf $(IOC):xl.SPAM 0
 dbpf $(IOC):xr.SPAM 0
 dbpf $(IOC):xp.SPAM 0
 dbpf $(IOC):xg.SPAM 0
-dbpf $(IOC):amplitude.SPAM 0
-dbpf $(IOC):timing.SPAM 0
-
