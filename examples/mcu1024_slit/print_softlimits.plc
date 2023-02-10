@@ -1,0 +1,2 @@
+#println( 'Soft-limit centre axis (1) : ', ax1.mon.lowsoftlim, '  ..',ax1.mon.highsoftlim );
+#println( 'Soft-limit gap axis    (2) : ', ax2.mon.lowsoftlim, '  ..',ax2.mon.highsoftlim );
