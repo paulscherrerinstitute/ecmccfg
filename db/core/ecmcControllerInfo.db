@@ -1,0 +1,5 @@
+# Debug message in IOC log
+record(stringout,"$(P)ControllerInfo") {
+    field(DESC, "Controller information")
+    field(VAL,  "ecmc_v${ECMC_VER}")
+}
