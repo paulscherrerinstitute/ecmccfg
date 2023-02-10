@@ -1,20 +1,5 @@
 ##############################################################################
-## Example config for ESS crate of type MCU1025
-## Slit demo:
-## Axis 1: Slit center position (virt)
-## Axis 2: Slit gap/opening (virt)
-## Axis 3: Right blade (normal)
-## Axis 4: Left blade (normal)
-##
-## Note:
-##  Softlimits of the virtual axes are derived from the softlimts of the physical axes dynamically (in the sync code).
-##  These softlimits are however set slightly more narrow, $(SOFT_OFFSET=2), in order to not trip the softlimits of the physical axes. 
-
-# Apply offset
-epicsEnvSet(SOFT_OFFSET,3)
-
-# Choose to use dynamic softlimits ("cfg_softlim") or dynamic plc interlocks ("cfg_plc_il")
-epicsEnvSet(CFG,"cfg_softlim")
+## Example config ESS crate of type MCU1025
 
 ##############################################################################
 ## Initiation:
@@ -28,7 +13,7 @@ require ecmccfg 8.0.0
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=error_handling"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=8.0.0"
 
 ##############################################################################
 ## Configure hardware MCU1024:
@@ -73,8 +58,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
-epicsEnvUnset("ECMC_EC_OVERSAMPLING_FACTOR")
-
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOutput01,1)"
@@ -88,46 +71,19 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_DIG_OUT},binaryOut
 # END of ADDITIONAL SETUP
 
 ##############################################################################
-## AXIS 3 (physical right motor)
+## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./${CFG=cfg}/right.ax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/right.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 
 ##############################################################################
-## AXIS 4 (physical left motor)
+## AXIS 2
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./${CFG=cfg}/left.ax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/left.sax)
-
-##############################################################################
-## AXIS 1 (slit center position)
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./${CFG=cfg}/center.vax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/center.sax)
-
-##############################################################################
-## AXIS 2 (slit opening)
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureVirtualAxis.cmd, CONFIG=./${CFG=cfg}/gap.vax)
-$(SCRIPTEXEC) ($(ecmccfg_DIR)applyAxisSynchronization.cmd, CONFIG=./${CFG=cfg}/gap.sax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_2.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
-
-# Disable alarms when at softlimit
-#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(1,0)"
-#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(2,0)"
-#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(3,0)"
-#ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtSoftLimit(4,0)"
-
-##############################################################################
-## PLC 0: 
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./print_softlimits.plc, PLC_MACROS='DBG=,PLC_ID=0'")
-
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
@@ -138,15 +94,3 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-
-
-#asynSetTraceMask(MC_CPU1,-1,1)
-#asynSetTraceIOMask(MC_CPU1,-1,6)
-#asynSetTraceInfoMask(MC_CPU1,-1,1)
-
-iocInit()
-
-dbpf $(IOC):xl.SPAM 0
-dbpf $(IOC):xr.SPAM 0
-dbpf $(IOC):xp.SPAM 0
-dbpf $(IOC):xg.SPAM 0
