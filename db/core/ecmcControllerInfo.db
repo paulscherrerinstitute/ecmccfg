@@ -1,7 +1,7 @@
 # Debug message in IOC log
 record(stringout,"$(P)MCU-Cfg-Info") {
     field(DESC, "Controller information")
-    field(VAL,  "ecmc_v${ECMC_VER}")
+    field(VAL,  "ecmc ${ECMC_VER}")
 }
 
 record(ao,"$(P)MCU-Cfg-EC-Mst") {
@@ -30,4 +30,14 @@ record(ao,"$(P)MCU-Cfg-PV-Time") {
     field(DESC, "Default PV update time")
     field(EGU, "ms")
     field(VAL, ${PV_TIME})
+}
+
+record(stringout,"$(P)MCU-Cfg-Mode") {
+    field(DESC, "ecmc mode")    
+    field(VAL, ${MCU_MODE=""})
+}
+
+record(stringout,"$(P)MCU-Cfg-PVA") {
+    field(DESC, "PVA enabled")    
+    field(VAL, ${MCU_PVA=""})
 }
