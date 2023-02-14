@@ -1,29 +1,49 @@
-# Debug message in IOC log
-record(stringout,"$(P)Axes-Cfgs") {
+
+# Records that is helpfull for debugging and udnerstanding the system (and dynamically build GUI if needed)
+
+# All configured axes 
+
+record(waveform,"$(P)AX-Cfgs") {
     field(DESC, "Configured Axes")
-    field(VAL,  "Axes: ${AXES_IDS}")
-    field(SCAN,"Passive")
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${AXES_IDS})    
 }
 
-record(stringout,"$(P)PLC-Cfgs") {
-    field(DESC, "Configured PLC:s")
-    field(VAL,  "${PLC_IDS}")
+record(waveform,"$(P)PLC-Cfgs") {
+    field(DESC, "Configured PLC:s")    
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${PLC_IDS})
 }
 
-record(stringout,"$(P)DS-Cfgs") {
+record(waveform,"$(P)DS-Cfgs") {
     field(DESC, "Configured Data Storages")
-    field(VAL,  "${DS_IDS}")
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${DS_IDS})
 }
 
-record(stringout,"$(P)Plg-Cfgs") {
-    field(DESC, "Configured Plugins")
-    field(VAL,  "${PLG_IDS}")
+record(waveform,"$(P)Plg-Cfgs") {
+    field(DESC, "Configured Plugins")    
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${PLG_IDS})
 }
 
-record(waveform,"$(P)EC-Cfgs") {
-    field(DESC, "Configured Ethercat Slaves")
-    field(VAL,  "${EC_IDS}")
-    field(NELM, "3000")
-    field(SCAN, "Passive")
-    field(FTVL, "CHAR")
+record(waveform,"$(P)EC${M_ID}-Slv-Cfgs") {    
+    field(DESC, "Configured EtherCAT slaves (array)")
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${EC_IDS})
+}
+
+record(ao,"$(P)EC-Mstr-Cfgs") {
+    field(DESC, "EtherCAT master ID")
+    field(VAL,  "${M_ID}")
+}
+
+record(stringout,"$(P)MCU-Name-Cfgs") {
+    field(DESC, "Naming standard script in use.")
+    field(VAL,  "${MCU_NAME=""}")
 }

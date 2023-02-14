@@ -54,3 +54,6 @@ ecmcFileExist(${SUBST_FILE="ecmcPlc.substitutions"},1,1)
 ecmcEpicsEnvSetCalc(ECMC_PLC_ID_2_CHARS, "${ECMC_PLC_ID}", "%02d")
 dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},Index2Char=${ECMC_PLC_ID_2_CHARS},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
 epicsEnvUnset(ECMC_PLC_ID_2_CHARS)
+
+#- Collect info
+epicsEnvSet(ECMC_PLCS_CFG,"${ECMC_PLCS_CFG=""}${ECMC_PLC_ID},")
