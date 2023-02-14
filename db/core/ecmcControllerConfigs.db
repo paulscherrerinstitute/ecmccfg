@@ -1,0 +1,29 @@
+# Debug message in IOC log
+record(stringout,"$(P)Axes-Cfgs") {
+    field(DESC, "Configured Axes")
+    field(VAL,  "Axes: ${AXES_IDS}")
+    field(SCAN,"Passive")
+}
+
+record(stringout,"$(P)PLC-Cfgs") {
+    field(DESC, "Configured PLC:s")
+    field(VAL,  "${PLC_IDS}")
+}
+
+record(stringout,"$(P)DS-Cfgs") {
+    field(DESC, "Configured Data Storages")
+    field(VAL,  "${DS_IDS}")
+}
+
+record(stringout,"$(P)Plg-Cfgs") {
+    field(DESC, "Configured Plugins")
+    field(VAL,  "${PLG_IDS}")
+}
+
+record(waveform,"$(P)EC-Cfgs") {
+    field(DESC, "Configured Ethercat Slaves")
+    field(VAL,  "${EC_IDS}")
+    field(NELM, "3000")
+    field(SCAN, "Passive")
+    field(FTVL, "CHAR")
+}

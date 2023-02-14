@@ -102,6 +102,9 @@ ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO}, ${ECMC_H
 ${ECMC_USE_MOTOR_RECORD} ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis_mr.cmd",1)
 ${ECMC_USE_MOTOR_RECORD} ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis_mr.cmd
 
+# Add ECMC_AXIS_NO to ECMC_AXES_CFG
+epicsEnvSet(ECMC_AXES_CFG,"${ECMC_AXES_CFG=${ECMC_AXIS_NO}} ${ECMC_AXIS_NO}")
+
 #- Cleanup
 epicsEnvUnset(ECMC_BLOCK_ACCL)
 epicsEnvUnset(ECMC_BLOCK_ACCS)
