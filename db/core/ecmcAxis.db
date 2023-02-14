@@ -546,7 +546,8 @@ record(bi,"${P}${AXIS_NAME}-Wrn"){
   field(DTYP, "Raw Soft Channel")
 }
 
-record(stringout,"${P}Ax$(AXIS_NO)-Name") {
+# For auto configuration of gui and similar
+record(stringout,"${P}MCU-Cfg-AX$(AXIS_NO)-Name") {
   field(DESC, "Name of axis $(AXIS_NO)")
   field(VAL,  "${P}${AXIS_NAME}")
 }

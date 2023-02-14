@@ -1,5 +1,33 @@
 # Debug message in IOC log
-record(stringout,"$(P)ControllerInfo") {
+record(stringout,"$(P)MCU-Cfg-Info") {
     field(DESC, "Controller information")
     field(VAL,  "ecmc_v${ECMC_VER}")
+}
+
+record(ao,"$(P)MCU-Cfg-EC-Mst") {
+    field(DESC, "EtherCAT master ID")
+    field(VAL,  "${M_ID}")
+}
+
+record(stringout,"$(P)MCU-Cfg-Naming") {
+    field(DESC, "Naming standard script in use.")
+    field(VAL,  "${MCU_NAME=""}")
+}
+
+record(ao,"$(P)MCU-Cfg-EC${M_ID}-Rate") {
+    field(DESC, "EtherCAT master sample rate")
+    field(EGU, "Hz")
+    field(VAL, ${M_RATE})
+}
+
+record(ao,"$(P)MCU-Cfg-EC${M_ID}-Time") {
+    field(DESC, "EtherCAT master sample time")    
+    field(EGU, "ms")
+    field(VAL, ${M_TIME})
+}
+
+record(ao,"$(P)MCU-Cfg-PV-Time") {
+    field(DESC, "Default PV update time")
+    field(EGU, "ms")
+    field(VAL, ${PV_TIME})
 }
