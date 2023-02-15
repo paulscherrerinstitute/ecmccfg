@@ -3,6 +3,7 @@
 
 # All configured axes 
 record(waveform,"$(P)MCU-Cfg-AX") {
+    field(PINI, "1")
     field(DESC, "Configured Axes")
     field(FTVL, "SHORT")
     field(NELM, "1000")
@@ -11,6 +12,7 @@ record(waveform,"$(P)MCU-Cfg-AX") {
 
 # All configured plcs 
 record(waveform,"$(P)MCU-Cfg-PLC") {
+    field(PINI, "1")
     field(DESC, "Configured PLC:s")    
     field(FTVL, "SHORT")
     field(NELM, "1000")
@@ -19,6 +21,7 @@ record(waveform,"$(P)MCU-Cfg-PLC") {
 
 # All configured data storages
 record(waveform,"$(P)MCU-Cfg-DS") {
+    field(PINI, "1")
     field(DESC, "Configured Data Storages")
     field(FTVL, "SHORT")
     field(NELM, "1000")
@@ -27,6 +30,7 @@ record(waveform,"$(P)MCU-Cfg-DS") {
 
 # All configured plugins
 record(waveform,"$(P)MCU-Cfg-PLG") {
+    field(PINI, "1")
     field(DESC, "Configured Plugins")    
     field(FTVL, "SHORT")
     field(NELM, "1000")
@@ -34,7 +38,8 @@ record(waveform,"$(P)MCU-Cfg-PLG") {
 }
 
 # All configured ethercat slaves
-record(waveform,"$(P)MCU-Cfg-EC-Slvs") {    
+record(waveform,"$(P)MCU-Cfg-EC-Slvs") {
+    field(PINI, "1")
     field(DESC, "Configured EtherCAT slaves")
     field(FTVL, "SHORT")
     field(NELM, "1000")
