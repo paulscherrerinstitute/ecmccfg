@@ -34,7 +34,7 @@ record(waveform,"$(P)MCU-Cfg-PLG") {
 }
 
 # All configured ethercat slaves
-record(waveform,"$(P)MCU-Cfg-EC${M_ID}-Slvs") {    
+record(waveform,"$(P)MCU-Cfg-EC-Slvs") {    
     field(DESC, "Configured EtherCAT slaves")
     field(FTVL, "SHORT")
     field(NELM, "1000")

@@ -1,9 +1,10 @@
-# Debug message in IOC log
+
 record(stringout,"$(P)MCU-Cfg-Info") {
     field(DESC, "Controller information")
     field(VAL,  "ecmc ${ECMC_VER}")
 }
 
+# M_ID=-1 if not selected
 record(ao,"$(P)MCU-Cfg-EC-Mst") {
     field(DESC, "EtherCAT master ID")
     field(VAL,  "${M_ID}")
@@ -14,14 +15,14 @@ record(stringout,"$(P)MCU-Cfg-Naming") {
     field(VAL,  "${MCU_NAME=""}")
 }
 
-record(ao,"$(P)MCU-Cfg-EC${M_ID}-Rate") {
-    field(DESC, "EtherCAT master sample rate")
+record(ao,"$(P)MCU-Cfg-Rate") {
+    field(DESC, "RT loop sample rate")
     field(EGU, "Hz")
     field(VAL, ${M_RATE})
 }
 
-record(ao,"$(P)MCU-Cfg-EC${M_ID}-Time") {
-    field(DESC, "EtherCAT master sample time")    
+record(ao,"$(P)MCU-Cfg-Time") {
+    field(DESC, "RT loop sample time")    
     field(EGU, "ms")
     field(VAL, ${M_TIME})
 }
