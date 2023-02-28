@@ -25,24 +25,24 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 require ecmccfg master
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=v8.1"
 
 ##############################################################################
 ## Configure hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "50")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "8")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_HOUR",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7041, CONFIG=-Motor-Amp-57TH76-4280"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "51")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "9")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_MINUTE",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7041-0052, CONFIG=-Motor-Amp-57TH76-4280"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "60")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "18")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_SECOND",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-Nanotec-ST2818S1006"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "61")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "19")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_NANO",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
 
@@ -188,8 +188,11 @@ ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled(${ECMC_AXIS_NANOS_NUM},
 
 ##############################################################################
 ## PLC 7: Nano
+
+system "cat ./plc/phys_and_phase.plc"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=7, SAMPLE_RATE_MS=1,FILE=./plc/phys_and_phase.plc,PLC_MACROS='AX_PHYS=${ECMC_AXIS_NANOS_NUM},AX_PHASE=${ECMC_AXIS_NANOS_NUM_P},TIME_SOURCE=global.nano,AX_MOD=${AX_MOD}'"
 
+system "cat ./plc/seq.plc"
 ##############################################################################
 ## PLC 8: Nano seq 
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=8, SAMPLE_RATE_MS=100,FILE=./plc/seq.plc,PLC_MACROS='AX_PHYS=${ECMC_AXIS_NANOS_NUM},AX_PHASE=${ECMC_AXIS_NANOS_NUM_P},AX_VELO=1,AX_ACC=0.1,PLC_ID=8,VELO_RAMP_ENA=1'"
