@@ -109,6 +109,7 @@
     <actions>
     </actions>
     <increment>0.1</increment>
+    <maximum>20000.0</maximum>
     <limits_from_pv>false</limits_from_pv>
   </widget>
   <widget type="label" version="2.0.0">
