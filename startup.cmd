@@ -48,6 +48,7 @@ on error halt
 #-------------------------------------------------------------------------------
 #- load required modules
 require ecmc        "${ECMC_VER=8.0.0}"
+
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
 ${ECMC_EXE_CMD}
@@ -63,6 +64,7 @@ epicsEnvSet("SCRIPTEXEC",           "${SCRIPTEXEC=iocshLoad}")
 #-------------------------------------------------------------------------------
 #- define IOC Prefix
 epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _not_ PREFIX
+
 #-
 #-------------------------------------------------------------------------------
 #- define the link to a PV that should be foward-linked after EC-frame is processes
@@ -122,6 +124,9 @@ system "mkdir -p ${ECMC_TMP_DIR}"
 #- Set default diag params
 ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
+
+# Load ecmc inforamtion into record
+dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No}")
 
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)

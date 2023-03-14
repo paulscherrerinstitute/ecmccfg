@@ -1,0 +1,44 @@
+
+record(stringout,"$(P)MCU-Cfg-Info") {
+    field(DESC, "Controller information")
+    field(VAL,  "ecmc ${ECMC_VER}")
+}
+
+# M_ID=-1 if not selected
+record(ao,"$(P)MCU-Cfg-EC-Mst") {
+    field(DESC, "EtherCAT master ID")
+    field(VAL,  "${M_ID}")
+}
+
+record(stringout,"$(P)MCU-Cfg-Naming") {
+    field(DESC, "Naming standard script in use.")
+    field(VAL,  "${MCU_NAME=""}")
+}
+
+record(ao,"$(P)MCU-Cfg-Rate") {
+    field(DESC, "RT loop sample rate")
+    field(EGU, "Hz")
+    field(VAL, ${M_RATE})
+}
+
+record(ao,"$(P)MCU-Cfg-Time") {
+    field(DESC, "RT loop sample time")    
+    field(EGU, "ms")
+    field(VAL, ${M_TIME})
+}
+
+record(ao,"$(P)MCU-Cfg-PV-Time") {
+    field(DESC, "Default PV update time")
+    field(EGU, "ms")
+    field(VAL, ${PV_TIME})
+}
+
+record(stringout,"$(P)MCU-Cfg-Mode") {
+    field(DESC, "ecmc mode")    
+    field(VAL, ${MCU_MODE=""})
+}
+
+record(stringout,"$(P)MCU-Cfg-PVA") {
+    field(DESC, "PVA enabled")    
+    field(VAL, ${MCU_PVA=""})
+}

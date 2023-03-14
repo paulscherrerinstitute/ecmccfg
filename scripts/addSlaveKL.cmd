@@ -31,4 +31,7 @@ ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "${DEFAULT_SUBS=True}", "","#- ")
 ${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}"
 epicsEnvUnset(DEFAULT_SUBS)
 
+#- Collect info
+epicsEnvSet(ECMC_EC_CFG,"${ECMC_EC_CFG=""}${ECMC_EC_SLAVE_NUM}, ")
+
 #- TODO: do you want the default stuff in, or not?

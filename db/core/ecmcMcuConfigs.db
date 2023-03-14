@@ -1,0 +1,47 @@
+
+# Records that is helpfull for debugging and udnerstanding the system (and dynamically build GUI if needed)
+
+# All configured axes 
+record(waveform,"$(P)MCU-Cfg-AX") {
+    field(PINI, "1")
+    field(DESC, "Configured Axes")
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${AXES_IDS})    
+}
+
+# All configured plcs 
+record(waveform,"$(P)MCU-Cfg-PLC") {
+    field(PINI, "1")
+    field(DESC, "Configured PLC:s")    
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${PLC_IDS})
+}
+
+# All configured data storages
+record(waveform,"$(P)MCU-Cfg-DS") {
+    field(PINI, "1")
+    field(DESC, "Configured Data Storages")
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${DS_IDS})
+}
+
+# All configured plugins
+record(waveform,"$(P)MCU-Cfg-PLG") {
+    field(PINI, "1")
+    field(DESC, "Configured Plugins")    
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${PLG_IDS})
+}
+
+# All configured ethercat slaves
+record(waveform,"$(P)MCU-Cfg-EC-Slvs") {
+    field(PINI, "1")
+    field(DESC, "Configured EtherCAT slaves")
+    field(FTVL, "SHORT")
+    field(NELM, "1000")
+    field(INP, ${EC_IDS})
+}

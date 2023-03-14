@@ -55,5 +55,8 @@ ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#
 ${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
 epicsEnvUnset(DEFAULT_SLAVE_PVS)
 
+#- Collect info
+epicsEnvSet(ECMC_EC_CFG,"${ECMC_EC_CFG=""}${ECMC_EC_SLAVE_NUM}, ")
+
 # increment SLAVE_ID
 ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")

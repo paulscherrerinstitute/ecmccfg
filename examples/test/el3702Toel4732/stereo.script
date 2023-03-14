@@ -24,11 +24,11 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg master
 require calc 3.7.4
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2, EC_RATE=1000"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master, EC_RATE=1000,MODE=DAQ"
 
 ##############################################################################
 ## Config hardware:
@@ -39,11 +39,11 @@ epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
 epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
 
 # EL3702 (empty subst file => no default records loaded)
-epicsEnvSet("ECMC_EC_SLAVE_NUM_AI",           "12")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_AI",           "2")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_DESC=EL3702, NELM=${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
 
 # EL4732 (empty subst file => no default records loaded)
-epicsEnvSet("ECMC_EC_SLAVE_NUM_AO",           "11")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_AO",           "1")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_DESC=EL4732, NELM=${ECMC_OVER_SMP}, SUBST_FILE=empty.substitutions"
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"

@@ -1,0 +1,67 @@
+
+#  Coordinate system, this is center axis, xp1
+#
+#     limit+      softlim+          xl4            xr3          softlim-    limít-
+#       |            |               |              |              |         |
+#                                     <----xg2----->
+#                                          xp1                                      
+# 
+# Then also make more narrow by $(SOFT_OFFSET=2) to avoid tripping the physical axes softlimits.
+#
+
+############# Encoder
+epicsEnvSet("ECMC_ENC_SOURCE",                 "1")         # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_ENC_VELO_FILT_ENABLE",       "1")         # Enable velocity filter
+epicsEnvSet("ECMC_ENC_VELO_FILT_SIZE",         "10")        # Encoder velocity Low pass filter size
+
+############# Trajectory
+# 0 Internal, 1 from expression
+epicsEnvSet("ECMC_TRAJ_SOURCE",                "0")         # 0 Internal (from hardware), 1 from PLC
+epicsEnvSet("ECMC_TRAJ_VELO_FILT_ENABLE",      "1")         # Enable velocity filter
+epicsEnvSet("ECMC_TRAJ_VELO_FILT_SIZE",        "10")        # Trajectory velocity Low pass filter size
+
+############# Commands
+epicsEnvSet("ECMC_CMD_FRM_OTHER_PLC_ENABLE",  "1")          # Allow commands from PLC
+epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",       "1")          # Enable Axis PLC
+# Each line below is appended to one single expression/source. 
+# Executed in sync with axis (before)
+
+# Enable of drives
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax3.traj.source){ax3.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax4.traj.source){ax4.drv.enable:=ax1.drv.enable+ax2.drv.enable|}|")
+
+# Act pos
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "ax1.enc.actpos:=(ax4.enc.actpos+ax3.enc.actpos)/2|")
+
+# Dynamic softlimits
+# High softlimit is the MIN of SW_FW_BASED_ON_AX3 and SW_FW_BASED_ON_AX4
+epicsEnvSet(SW_FW_BASED_ON_AX3,"ax3.mon.highsoftlim + ax2.enc.actpos/2 - $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_FW_BASED_ON_AX4,"ax4.mon.highsoftlim - ax2.enc.actpos/2 - $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "ax1.mon.highsoftlim:=min(${SW_FW_BASED_ON_AX4},${SW_FW_BASED_ON_AX3})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "ax1.mon.highsoftlimenable:=ax4.mon.highsoftlimenable and ax3.mon.highsoftlimenable|")
+
+# Low softlimit is the MAX of SW_BW_BASED_ON_AX3 and SW_BW_BASED_ON_AX4
+epicsEnvSet(SW_BW_BASED_ON_AX3,"ax3.mon.lowsoftlim + ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
+epicsEnvSet(SW_BW_BASED_ON_AX4,"ax4.mon.lowsoftlim - ax2.enc.actpos/2 + $(SOFT_OFFSET=2)")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "ax1.mon.lowsoftlim:=max(${SW_BW_BASED_ON_AX3},${SW_BW_BASED_ON_AX4})|")
+
+# Both softlimits of the physical axis must be enabled in order for this code to work
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_7",           "ax1.mon.lowsoftlimenable:=ax4.mon.lowsoftlimenable and ax3.mon.lowsoftlimenable|")
+
+# Hard limits
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_8",           "ax1.mon.ilockfwd:=ax3.mon.highlim and ax4.mon.highlim |")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_9",           "ax1.mon.ilockbwd:=ax3.mon.lowlim and ax4.mon.lowlim |")
+
+# Also enable gap axis
+#epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "if(ax1.drv.enable){ax2.drv.enable:=ax1.drv.enable|}|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_10",          "")
+
+
+# Cleanup
+epicsEnvUnset(SW_FW_BASED_ON_AX3)
+epicsEnvUnset(SW_FW_BASED_ON_AX4)
+epicsEnvUnset(SW_BW_BASED_ON_AX3)
+epicsEnvUnset(SW_BW_BASED_ON_AX4)
+

@@ -31,12 +31,44 @@ epicsEnvShow(ECMC_MR_MODULE)
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=error_handling"
 
 ##############################################################################
-## Configure hardware:
+## Configure hardware MCU1024:
 
-epicsEnvSet("ECMC_EC_OVERSAMPLING_FACTOR" ,"50")
+epicsEnvSet(ECMC_EC_SLAVE_NUM,-1)
 
-ecmcFileExist($(ecmccfg_DIR)ecmcMCU1025.cmd,1)
-$(SCRIPTEXEC) $(ecmccfg_DIR)ecmcMCU1025.cmd
+#Configure EL1808 digital input terminal
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL1808"
+
+#Configure EL2819 digital output terminal
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
+epicsEnvShow("ECMC_EC_SLAVE_NUM")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL2819"
+
+# Save the slave number for later
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DIG_OUT", "${ECMC_EC_SLAVE_NUM}")
+
+#Configure EL5002 2-channel SSI encoder terminal, motor 1
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL5002"
+
+#Configure Baumer encoder for EL5002 2-channel SSI encoder terminal (Channel 1)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "CONFIG=-Encoder-ch1-Baumer-BMMH30D1G24C1213P55"
+
+#Configure Baumer encoder for EL5002 2-channel SSI encoder terminal (Channel 2)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd "CONFIG=-Encoder-ch2-Baumer-BMMH30D1G24C1213P55"
+
+#Configure EL2014 digital output terminal
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
+epicsEnvShow("ECMC_EC_SLAVE_NUM")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL2014"
+
+#Configure EL7037 stepper drive terminal, motor 1
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7041-0052, CONFIG=-Motor-Nanotec-ST4118L1804-B, CFG_MACROS='I_RUN_MA=900,I_STDBY_MA=200'"
+
+#Configure EL7037 stepper drive terminal, motor 2
+ecmcEpicsEnvSetCalc(ECMC_EC_SLAVE_NUM, "${ECMC_EC_SLAVE_NUM}+1")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL7041-0052, CONFIG=-Motor-Nanotec-ST4118L1804-B, CFG_MACROS='I_RUN_MA=900,I_STDBY_MA=200"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
