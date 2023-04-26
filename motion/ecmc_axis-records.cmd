@@ -18,3 +18,7 @@ dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_
 #- This is an REAL axis == type 1
 ecmcFileExist("ecmcAxisType.db",1,1)
 dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=1,DRV_TYPE=$(ECMC_DRV_TYPE=0),TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
+
+#- special PVs for commissioning only add if the COMMISSIONG is set to 1 in startup.cmd
+${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
+${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},KP=${ECMC_CNTRL_KP},KI=${ECMC_CNTRL_KI},KD=${ECMC_CNTRL_KD},KFF=${ECMC_CNTRL_KFF}")

@@ -457,6 +457,7 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(TSE,  "0")
+  field(VAL,  0)
 }
 
 record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
@@ -468,6 +469,7 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(TSE,  "0")
+  field(VAL, "${VELO=0}")
 }
 
 record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
@@ -485,6 +487,7 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(THVL, 3)
   field(FRST, "MOVE_HOME")
   field(FRVL, 10)
+  field(VAL,  0)
 }
 
 record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
@@ -494,6 +497,7 @@ record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).cmddata?")
   field(SCAN, "Passive")
   field(TSE,  "0")
+  field(VAL,  0)
 }
 
 record(longin,"${P}${AXIS_NAME}-ErrId"){
@@ -613,4 +617,13 @@ record(calcout, "${P}${AXIS_NAME}-MtnCmd_") {
   field(INPD, "${P}${AXIS_NAME}-movHomCmd")
   field(INPL, "${P}${AXIS_NAME}-MtnCmd.RVAL CP")
   field(OUT,  "${P}${AXIS_NAME}-MtnCmdData PP")
+}
+
+record(ao,"${P}${AXIS_NAME}-Id"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Index")
+  field(SCAN, "Passive")
+  field(PREC, "0")
+  field(EGU,  "[]")
+  field(VAL,  ${AXIS_NO})
 }

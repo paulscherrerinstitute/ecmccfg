@@ -27,7 +27,8 @@
 #-    DAQ:   Init ecmc with support for only daq (not motion)
 #-    NO_MR: Init ecmc with support for motion (without motor record) and DAQ
 #- PVA               = YES / NO
-#- TMP_DIR      = directory for temporary files
+#- TMP_DIR           = directory for temporary files
+#- ENG_MODE          = 1/0. If ENG_MODE is set then PVs used for commissioning will be avaialble
 #-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
@@ -110,6 +111,11 @@ ${ECMC_MASTER_CMD} ecmcFileExist("${ECMC_CONFIG_ROOT}addMaster.cmd",1)
 ${ECMC_MASTER_CMD} ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
 epicsEnvSet("ECMC_EC_MASTER_ID" ,${MASTER_ID=0})
 
+#- Commissioning? load commissioning extra records for example controller pid params
+ecmcEpicsEnvSetCalcTernary(ECMC_ENG_MODE_CMD, "${ENG_MODE=0}>0", "","#- ")
+epicsEnvShow(ECMC_ENG_MODE_CMD)
+epicsEnvSet(ECMC_ENG_MODE,${ENG_MODE=0})
+
 #-------------------------------------------------------------------------------
 #- temp dir for file output
 epicsEnvSet("ECMC_TMP_DIR",         "${TMP_DIR=/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/")
@@ -126,7 +132,7 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 
 # Load ecmc inforamtion into record
-dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No}")
+dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0}")
 
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)

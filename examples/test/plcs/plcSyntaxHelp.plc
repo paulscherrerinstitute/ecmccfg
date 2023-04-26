@@ -152,13 +152,17 @@
 #   42. ax<id>.mon.highsoftlim       high soft limit                  (rw)
 #   43. ax<id>.mon.lowsoftlimenable  low soft limit enable            (rw)
 #   44. ax<id>.mon.highsoftlimenable high soft limit enable           (rw)
-#   45. ax<id>.blockcom              Enables/disables "set" commands   (rw)
+#   45. ax<id>.blockcom              Enables/disables "set" commands  (rw)
 #                                    via command parser (ascii commands)
 #                                    Statuses can still be read.
 #                                    Exceptions ("set"-commands) that 
 #                                    will work: 
 #                                    - "StopMotion(axid)"
 #                                    - "Cfg.SetAxisBlockCom(axid,block)"
+#   46. ax<id>.ctrl.kp               Set PID-controller kp            (rw)
+#   47. ax<id>.ctrl.ki               Set PID-controller ki            (rw)
+#   48. ax<id>.ctrl.kd               Set PID-controller kd            (rw)
+#   49. ax<id>.ctrl.kff              Set PID-controller kff           (rw)
 #
 #  PLC variables: 
 #   1.  plc<id>.enable               plc enable                       (rw)

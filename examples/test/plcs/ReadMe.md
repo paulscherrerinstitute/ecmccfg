@@ -171,6 +171,10 @@ Below the ECMC specific accessible variables and functions are listed:
                                  will work: 
                                  - "StopMotion(axid)"
                                  - "Cfg.SetAxisBlockCom(axid,block)"
+46. ax<id>.ctrl.kp               Set PID-controller kp            (rw)
+47. ax<id>.ctrl.ki               Set PID-controller ki            (rw)
+48. ax<id>.ctrl.kd               Set PID-controller kd            (rw)
+49. ax<id>.ctrl.kff              Set PID-controller kff           (rw)
 ```
 ### PLC variables: 
 ```
