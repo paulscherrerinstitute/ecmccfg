@@ -8,13 +8,17 @@ ecmcFileExist("ecmcAxis.db",1,1)
 dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }}")
 #- -----------------------------------------------------------------------------
 
-#- This is an REAL axis == type 1
 ecmcFileExist("ecmcAxisType.db",1,1)
-dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE=1,DRV_TYPE=$(ECMC_DRV_TYPE=0),TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
 
-#- special PVs for commissioning only add if the ECMC_ENG_MODE_CMD is set to 1 in startup.cmd
-${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
-${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},KP={{ controller.Kp }},KI={{ controller.Ki }},KD={{ controller.Kd }},KFF={{ controller.Kff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
-
+#- special PVs for commissioning only add if the ECMC_ENG_MODE_CMD is set to 1 in startup.cmd, Only load PID for physical axis
+{%- if axis.type == 1 %}
+   #- Physical axis
+   ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
+   ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},KP={{ controller.Kp }},KI={{ controller.Ki }},KD={{ controller.Kd }},KFF={{ controller.Kff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+   dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE={{ drive.type|default(0)|int }},TRAJ_TYPE={{ trajectory.type }}")
+{%- else%}
+   #- Virtual axis
+   dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE=-1,TRAJ_TYPE={{ trajectory.type }}")
+{%- endif%}
 #- Add ECMC_AXIS_NO to ECMC_AXES_CFG
 epicsEnvSet(ECMC_AXES_CFG,"${ECMC_AXES_CFG=""}{{ axis.id }}, " )

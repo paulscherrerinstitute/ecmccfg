@@ -448,8 +448,7 @@ record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(TSE,  "0")
 }
 
-record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
-  info(asyn:READBACK,"1")
+record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){  
   field(DESC, "${AXIS_NAME}: Target Position Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targpos?")
@@ -461,7 +460,6 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
 }
 
 record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
-  info(asyn:READBACK,"1")
   field(DESC, "${AXIS_NAME}: Target Velocity Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targvelo?")
@@ -473,7 +471,6 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
 }
 
 record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
-  info(asyn:READBACK,"1")
   field(DESC, "${AXIS_NAME}: Motion Command")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
@@ -490,8 +487,7 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(VAL,  0)
 }
 
-record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
-  info(asyn:READBACK,"1")
+record(longout,"${P}${AXIS_NAME}-MtnCmdData"){  
   field(DESC, "${AXIS_NAME}: Motion Command Data Param")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).cmddata?")
@@ -620,7 +616,6 @@ record(calcout, "${P}${AXIS_NAME}-MtnCmd_") {
 }
 
 record(ao,"${P}${AXIS_NAME}-Id"){
-  info(asyn:READBACK,"1")
   field(DESC, "${AXIS_NAME}: Index")
   field(SCAN, "Passive")
   field(PREC, "0")
