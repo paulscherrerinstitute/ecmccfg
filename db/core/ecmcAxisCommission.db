@@ -45,3 +45,14 @@ record(ao,"${P}${AXIS_NAME}-Ctrl-Kff"){
   field(TSE,  "0")
   field(VAL,  "${KFF=0}")
 }
+
+record(ao,"${P}${AXIS_NAME}-SetEncPosCmd"){  
+  field(DESC, "${AXIS_NAME}: Set Enc Pos")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).setencpos?")
+  field(SCAN, "Passive")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(TSE,  "0")
+  field(VAL,  0)
+}
