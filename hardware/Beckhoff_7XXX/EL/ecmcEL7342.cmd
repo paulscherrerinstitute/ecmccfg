@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7342
-#-d   \details EL7332 2 channel DC motor drive with incremental encoder feedback
+#-d   \details EL7342 2 channel DC motor drive with incremental encoder feedback
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note SDOS
