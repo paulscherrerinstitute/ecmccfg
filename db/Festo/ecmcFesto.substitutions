@@ -1,0 +1,6 @@
+# binaryOutArray01/02
+file "ecmc_binaryOutputArray-chX.template" { pattern
+  { CH_ID }
+  { 01    }
+  { 02    }
+}
