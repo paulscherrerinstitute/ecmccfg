@@ -18,6 +18,9 @@ dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_
 #- This is an REAL axis == type 1
 ecmcFileExist("ecmcAxisType.db",1,1)
 dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=1,DRV_TYPE=$(ECMC_DRV_TYPE=0),TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
+#-Add info in MCU namespace for auto gui generation
+ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO}")
 
 #- special PVs for commissioning only add if the COMMISSIONG is set to 1 in startup.cmd
 ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)

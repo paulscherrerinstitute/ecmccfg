@@ -1,0 +1,9 @@
+record(stringout,"$(P)MCU-AX${AXIS_NO}-Dev") {
+    field(DESC, "Device prefix of Axis")
+    field(VAL,  "${DEV})"
+}
+
+record(stringout,"$(P)MCU-AX${AXIS_NO}-Nam") {
+    field(DESC, "Device name of Axis")
+    field(VAL,  "${AXIS_NAME})"
+}
