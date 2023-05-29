@@ -18,3 +18,6 @@ dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_
 #- This is an VIRT axis == type 2
 ecmcFileExist("ecmcAxisType.db",1,1)
 dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=2,DRV_TYPE=2,TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
+#-Add info in MCU namespace for auto gui generation
+ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO}")

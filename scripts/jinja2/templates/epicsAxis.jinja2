@@ -22,3 +22,6 @@ ecmcFileExist("ecmcAxisType.db",1,1)
 {%- endif%}
 #- Add ECMC_AXIS_NO to ECMC_AXES_CFG
 epicsEnvSet(ECMC_AXES_CFG,"${ECMC_AXES_CFG=""}{{ axis.id }}, " )
+#-Add info in MCU namespace for auto gui generation
+ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }}")
