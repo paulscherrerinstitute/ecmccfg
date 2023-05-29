@@ -24,6 +24,9 @@ epicsEnvSet(ECMC_PLG_CFG,"[${ECMC_PLG_CFG=""}-1]")
 epicsEnvSet(ECMC_PLCS_CFG,"[${ECMC_PLCS_CFG=""}-1]")
 epicsEnvSet(ECMC_EC_CFG,"[${ECMC_EC_CFG=""}-1]")
 
+#- Temporary overwrite.. Need better concept to avoid too long strings
+epicsEnvSet(ECMC_EC_CFG,"[-1]")
+
 ecmcFileExist("ecmcMcuConfigs.db",1,1)
 dbLoadRecords("ecmcMcuConfigs.db","P=${ECMC_PREFIX},AXES_IDS='${ECMC_AXES_CFG=""}',PLC_IDS='${ECMC_PLCS_CFG=""}',DS_IDS='${ECMC_DS_CFG=""}', PLG_IDS='${ECMC_PLG_CFG=""}',M_ID=${ECMC_EC_MASTER_ID=-1} , EC_IDS='${ECMC_EC_CFG=""}'")
 
