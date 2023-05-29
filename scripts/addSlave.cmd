@@ -58,5 +58,22 @@ epicsEnvUnset(DEFAULT_SLAVE_PVS)
 #- Collect info
 epicsEnvSet(ECMC_EC_CFG,"${ECMC_EC_CFG=""}${ECMC_EC_SLAVE_NUM}, ")
 
+# Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", "","#- ")
+#- Next slave of the previous slave is this slave
+${ECMC_EXE_NEXT_SLV}dbLoadRecords(ecmcEcPrevSlave.db,"NEXT_SLAVE_ID=${ECMC_EC_SLAVE_NUM=-1},PREV_ECMC_P=${ECMC_PREV_ECMC_P=""}")
+epicsEnvUnset(ECMC_EXE_NEXT_SLV)
+
+#- If this is the first added slave then store value in P:m0-FrstSlv
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_EC_PREV_SLAVE_NUM=-1}<0", "","#- ")
+#- Next slave of the previous slave is this slave
+${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcEcFirstSlave.db,"P=${ECMC_PREFIX},ECMC_EC_MP=${ECMC_EC_MP=m},MASTER_ID=${ECMC_EC_MASTER_ID}")
+epicsEnvUnset(ECMC_EXE_FIRST_SLAVE)
+
+#- Store info to populate the ECMC_P-NxtSlv "pointer" of next added slave
+epicsEnvSet(ECMC_PREV_ECMC_P,${ECMC_P})
+epicsEnvSet(ECMC_EC_PREV_SLAVE_NUM,${ECMC_EC_SLAVE_NUM})
+
 # increment SLAVE_ID
 ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
+

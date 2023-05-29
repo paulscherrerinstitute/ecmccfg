@@ -158,3 +158,16 @@ record(stringin, "${ECMC_P}HWType"){
     }
   })
 }
+
+# This record is used to make an "pointer" to next slave
+# 1. First the record is registerd in this database
+# 2. This database is loaded at exe of addSlave.cmd
+# 3. This prefix (xxxxx:m0s00x) and slave ID are stored in epics env variables in addSlave.cmd
+# 4. The same record is also defined in ecmcEcPrevSlave.db but here with the ECMC_P from previous call to addSlave.cmd
+#    Resulting that VAL of m0s00(x-1) is initialized to the current slave id.
+# 5. The last slave in the chain will get a next slave value of -1 like initiated here  
+record(ao,"$(ECMC_P)-NxtSlv") {
+  field(DESC, "EtherCAT slave index of next slave")
+  field(VAL,  "-1")
+}
+
