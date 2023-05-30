@@ -1,18 +1,7 @@
-# ec0.s4.sdo.hw_enable.value
-record(ao,"$(ECMC_P)SDO-$(NAME)-Val"){
-  info(asyn:READBACK,"1")  
-  field(DTYP, "asynFloat64")
-  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.sdo.${NAME}.value?")
-  field(PREC, "$(PREC=3)")
-  field(SCAN, "Passive")
-  field(TSE,  "$(TSE=0)")
-}
-
 # ec0.s4.sdo.hw_enable.error
 record(ai,"$(ECMC_P)SDO-$(NAME)-ErrId"){
   field(DESC, "SDO error id")
-  field(PINI, "1")
-  field(DTYP, "asynFloat64")
+  field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=0))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.sdo.${NAME}.error?")
   field(PREC, "$(PREC=3)")
   field(SCAN, "I/O Intr")
@@ -22,7 +11,7 @@ record(ai,"$(ECMC_P)SDO-$(NAME)-ErrId"){
 # ec0.s4.sdo.hw_enable.busy
 record(bi,"$(ECMC_P)SDO-$(NAME)-Bsy"){
   field(DESC, "SDO object busy")
-  field(DTYP, "${DTYP=asynInt32}")
+  field(DTYP, "asynInt32")
   field(SCAN, "I/O Intr")
   field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.sdo.${NAME}.busy?")
   field(ZNAM, "Free")
@@ -35,7 +24,7 @@ record(bi,"$(ECMC_P)SDO-$(NAME)-Bsy"){
 # ec0.s4.sdo.hw_enable.writecmd
 record(bo,"$(ECMC_P)SDO-$(NAME)-WrtCmd"){
   field(DESC, "SDO write command")
-  field(DTYP, "${DTYP=asynInt32}")
+  field(DTYP, "asynInt32")
   field(SCAN, "Passive")
   field(OUT, "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.sdo.${NAME}.writecmd=")
   field(ZNAM, "idle")
@@ -48,7 +37,7 @@ record(bo,"$(ECMC_P)SDO-$(NAME)-WrtCmd"){
 # ec0.s4.sdo.hw_enable.readcmd
 record(bo,"$(ECMC_P)SDO-$(NAME)-RdCmd"){
   field(DESC, "SDO read command")
-  field(DTYP, "${DTYP=asynInt32}")
+  field(DTYP, "asynInt32")
   field(SCAN, "Passive")
   field(OUT, "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.sdo.${NAME}.readcmd=")
   field(ZNAM, "idle")
