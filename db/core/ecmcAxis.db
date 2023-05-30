@@ -546,12 +546,6 @@ record(bi,"${P}${AXIS_NAME}-Wrn"){
   field(DTYP, "Raw Soft Channel")
 }
 
-# For auto configuration of gui and similar
-record(stringout,"${P}MCU-Cfg-AX$(AXIS_NO)-Name") {
-  field(DESC, "Name of axis $(AXIS_NO)")
-  field(VAL,  "${P}${AXIS_NAME}")
-}
-
 record(mbbo,    "${P}${AXIS_NAME}-movVelCmd") {
   field(DESC, "absolute move command data")
   field(VAL,  "${VELPROC=0}")

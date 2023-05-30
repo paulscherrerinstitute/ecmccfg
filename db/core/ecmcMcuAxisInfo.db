@@ -1,9 +1,14 @@
-record(stringout,"$(P)MCU-AX${AXIS_NO}-Dev") {
-    field(DESC, "Device prefix of Axis")
-    field(VAL,  "${DEV})"
+record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-Pfx") {
+    field(DESC, "Prefix of Axis ${AXIS_NO}")
+    field(VAL,  "${DEV}")
 }
 
-record(stringout,"$(P)MCU-AX${AXIS_NO}-Nam") {
-    field(DESC, "Device name of Axis")
-    field(VAL,  "${AXIS_NAME})"
+record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-Nam") {
+    field(DESC, "Name of Axis ${AXIS_NO}")
+    field(VAL,  "${AXIS_NAME}")
+}
+
+record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-PfxNam") {
+    field(DESC, "Complete PV name of Axis ${AXIS_NO}")
+    field(VAL,  "${DEV}${AXIS_NAME}")
 }
