@@ -21,9 +21,8 @@ epicsEnvSet(ECMC_DS_CFG,"[${ECMC_DS_CFG=""}-1]")
 epicsEnvSet(ECMC_PLG_CFG,"[${ECMC_PLG_CFG=""}-1]")
 
 ecmcFileExist("ecmcMcuConfigs.db",1,1)
-dbLoadRecords("ecmcMcuConfigs.db","P=${ECMC_PREFIX},DS_IDS='${ECMC_DS_CFG=""}', PLG_IDS='${ECMC_PLG_CFG=""}',M_ID=${ECMC_EC_MASTER_ID=-1}")
+dbLoadRecords("ecmcMcuConfigs.db","P=${ECMC_PREFIX},PLG_IDS='${ECMC_PLG_CFG=""}',M_ID=${ECMC_EC_MASTER_ID=-1}")
 
-epicsEnvUnset(ECMC_DS_CFG)
 epicsEnvUnset(ECMC_PLG_CFG)
 
 #- START
