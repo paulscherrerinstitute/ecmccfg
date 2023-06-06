@@ -1,15 +1,6 @@
 
 # Records that is helpfull for debugging and udnerstanding the system (and dynamically build GUI if needed)
 
-# All configured axes 
-record(waveform,"$(P)MCU-Cfg-AX") {
-    field(PINI, "1")
-    field(DESC, "Configured Axes")
-    field(FTVL, "SHORT")
-    field(NELM, "1000")
-    field(INP, ${AXES_IDS})    
-}
-
 # All configured plcs 
 record(waveform,"$(P)MCU-Cfg-PLC") {
     field(PINI, "1")
