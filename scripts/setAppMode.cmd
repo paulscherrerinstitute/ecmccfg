@@ -19,14 +19,12 @@ ${ECMC_MASTER_CMD} dbLoadRecords("ecmcEc.db","P=${ECMC_PREFIX},ECMC_EC_MP=${ECMC
 #- Set -1 to mark last in chains
 epicsEnvSet(ECMC_DS_CFG,"[${ECMC_DS_CFG=""}-1]")
 epicsEnvSet(ECMC_PLG_CFG,"[${ECMC_PLG_CFG=""}-1]")
-epicsEnvSet(ECMC_PLCS_CFG,"[${ECMC_PLCS_CFG=""}-1]")
 
 ecmcFileExist("ecmcMcuConfigs.db",1,1)
-dbLoadRecords("ecmcMcuConfigs.db","P=${ECMC_PREFIX},PLC_IDS='${ECMC_PLCS_CFG=""}',DS_IDS='${ECMC_DS_CFG=""}', PLG_IDS='${ECMC_PLG_CFG=""}',M_ID=${ECMC_EC_MASTER_ID=-1}")
+dbLoadRecords("ecmcMcuConfigs.db","P=${ECMC_PREFIX},DS_IDS='${ECMC_DS_CFG=""}', PLG_IDS='${ECMC_PLG_CFG=""}',M_ID=${ECMC_EC_MASTER_ID=-1}")
 
 epicsEnvUnset(ECMC_DS_CFG)
 epicsEnvUnset(ECMC_PLG_CFG)
-epicsEnvUnset(ECMC_PLCS_CFG)
 
 #- START
 ecmcConfigOrDie "Cfg.SetAppMode(1)"

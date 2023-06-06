@@ -1,15 +1,6 @@
 
 # Records that is helpfull for debugging and udnerstanding the system (and dynamically build GUI if needed)
 
-# All configured plcs 
-record(waveform,"$(P)MCU-Cfg-PLC") {
-    field(PINI, "1")
-    field(DESC, "Configured PLC:s")    
-    field(FTVL, "SHORT")
-    field(NELM, "1000")
-    field(INP, ${PLC_IDS})
-}
-
 # All configured data storages
 record(waveform,"$(P)MCU-Cfg-DS") {
     field(PINI, "1")

@@ -52,8 +52,21 @@ ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 system "rm -f ${ECMC_TMP_FILE}"
 ecmcFileExist(${SUBST_FILE="ecmcPlc.substitutions"},1,1)
 ecmcEpicsEnvSetCalc(ECMC_PLC_ID_2_CHARS, "${ECMC_PLC_ID}", "%02d")
-dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},Index2Char=${ECMC_PLC_ID_2_CHARS},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,P=${ECMC_PREFIX},Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},Index2Char=${ECMC_PLC_ID_2_CHARS},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
 epicsEnvUnset(ECMC_PLC_ID_2_CHARS)
 
-#- Collect info
-epicsEnvSet(ECMC_PLCS_CFG,"${ECMC_PLCS_CFG=""}${ECMC_PLC_ID},")
+#- Below for facilitate auto gui generation
+# Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_PLC_OBJ_ID==-1)
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_AX,"${ECMC_PREV_PLC_OBJ_ID=-1}>=0", "","#- ")
+${ECMC_EXE_NEXT_AX}dbLoadRecords(ecmcPlcPrevPlc.db,"NEXT_OBJ_ID=${ECMC_PLC_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLC_P=""}")
+epicsEnvUnset(ECMC_EXE_NEXT_AX)
+
+#- If this is the first added slave then store value in P:MCU-Cfg-AX-FrstObj
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_PREV_PLC_OBJ_ID=-1}<0", "","#- ")
+${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcPlcFirstPlc.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${ECMC_PLC_ID}")
+epicsEnvUnset(ECMC_EXE_FIRST_SLAVE)
+
+#- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
+epicsEnvSet(ECMC_PREV_PLC_P,"$(ECMC_PREFIX)MCU-Cfg-PLC${ECMC_PLC_ID}-")
+epicsEnvSet(ECMC_PREV_PLC_OBJ_ID,${ECMC_PLC_ID})
+
