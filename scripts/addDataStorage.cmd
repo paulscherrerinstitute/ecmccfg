@@ -47,14 +47,16 @@ epicsEnvUnset(ECMC_DS_ID_2_CHARS)
 
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_DS_OBJ_ID==-1)
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_AX,"${ECMC_PREV_DS_OBJ_ID=-1}>=0", "","#- ")
-${ECMC_EXE_NEXT_AX}dbLoadRecords(ecmcDsPrevDs.db,"NEXT_OBJ_ID=${DS_ID=-1},PREV_ECMC_P=${ECMC_PREV_DS_P=""}")
-epicsEnvUnset(ECMC_EXE_NEXT_AX)
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_DS,"${ECMC_PREV_DS_OBJ_ID=-1}>=0", "","#- ")
+${ECMC_EXE_NEXT_DS}ecmcFileExist(ecmcDsPrevDs.db,1,1)
+${ECMC_EXE_NEXT_DS}dbLoadRecords(ecmcDsPrevDs.db,"NEXT_OBJ_ID=${DS_ID=-1},PREV_ECMC_P=${ECMC_PREV_DS_P=""}")
+epicsEnvUnset(ECMC_EXE_NEXT_DS)
 
 #- If this is the first added slave then store value in P:MCU-Cfg-AX-FrstObj
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_PREV_DS_OBJ_ID=-1}<0", "","#- ")
-${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcDsFirstDs.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${DS_ID}")
-epicsEnvUnset(ECMC_EXE_FIRST_SLAVE)
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_DS,"${ECMC_PREV_DS_OBJ_ID=-1}<0", "","#- ")
+${ECMC_EXE_FIRST_DS}ecmcFileExist(ecmcDsFirstDs.db,1,1)
+${ECMC_EXE_FIRST_DS}dbLoadRecords(ecmcDsFirstDs.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${DS_ID}")
+epicsEnvUnset(ECMC_EXE_FIRST_DS)
 
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
 epicsEnvSet(ECMC_PREV_DS_P,"$(ECMC_PREFIX)MCU-Cfg-DS${DS_ID}-")

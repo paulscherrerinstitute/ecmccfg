@@ -23,15 +23,18 @@ ${ECMC_PLUGIN_REPORT}ecmcConfigOrDie "Cfg.ReportPlugin(${PLUGIN_ID})"
 epicsEnvUnset(ECMC_PLUGIN_REPORT);
 
 #- Below for facilitate auto gui generation
+ecmcFileExist(ecmcPlg.template,1,1)
 dbLoadRecords(ecmcPlg.template, "P=${ECMC_PREFIX},Index=${PLUGIN_ID}")
 
 # Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_PLG_OBJ_ID==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}>=0", "","#- ")
+${ECMC_EXE_NEXT_PLG}ecmcFileExist(ecmcPlgPrevPlg.db,1,1)
 ${ECMC_EXE_NEXT_PLG}dbLoadRecords(ecmcPlgPrevPlg.db,"NEXT_OBJ_ID=${PLUGIN_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLG_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_PLG)
 
 #- If this is the first added slave then store value in P:MCU-Cfg-AX-FrstObj
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}<0", "","#- ")
+${ECMC_EXE_FIRST_PLG}ecmcFileExist(ecmcPlgFirstplg.db,1,1)
 ${ECMC_EXE_FIRST_PLG}dbLoadRecords(ecmcPlgFirstplg.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${PLUGIN_ID}")
 epicsEnvUnset(ECMC_EXE_FIRST_PLG)
 

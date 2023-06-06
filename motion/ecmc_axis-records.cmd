@@ -29,13 +29,15 @@ ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX}
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_AXIS_OBJ_ID==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_AX,"${ECMC_PREV_AXIS_OBJ_ID=-1}>=0", "","#- ")
+${ECMC_EXE_NEXT_AX}ecmcFileExist(ecmcAxPrevAxis.db,1,1)
 ${ECMC_EXE_NEXT_AX}dbLoadRecords(ecmcAxPrevAxis.db,"NEXT_OBJ_ID=${ECMC_AXIS_NO=-1},PREV_ECMC_P=${ECMC_PREV_AXIS_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_AX)
 
 #- If this is the first added slave then store value in P:MCU-Cfg-AX-FrstObj
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_PREV_AXIS_OBJ_ID=-1}<0", "","#- ")
-${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcAxFirstAxis.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${ECMC_AXIS_NO}")
-epicsEnvUnset(ECMC_EXE_FIRST_SLAVE)
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_AX,"${ECMC_PREV_AXIS_OBJ_ID=-1}<0", "","#- ")
+${ECMC_EXE_FIRST_AX}ecmcFileExist(ecmcAxFirstAxis.db,1,1)
+${ECMC_EXE_FIRST_AX}dbLoadRecords(ecmcAxFirstAxis.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${ECMC_AXIS_NO}")
+epicsEnvUnset(ECMC_EXE_FIRST_AX)
 
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
 epicsEnvSet(ECMC_PREV_AXIS_P,"$(ECMC_PREFIX)MCU-Cfg-AX${ECMC_AXIS_NO}-")
