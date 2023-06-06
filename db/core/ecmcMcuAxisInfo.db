@@ -12,3 +12,8 @@ record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-PfxNam") {
     field(DESC, "Complete PV name of Axis ${AXIS_NO}")
     field(VAL,  "${DEV}${AXIS_NAME}")
 }
+
+record(ao,"$(P)MCU-Cfg-AX${AXIS_NO}-NxtObjId") {
+    field(DESC, "Axis number of next axis")
+    field(VAL,  "$(NEXT_OBJ_ID=-1)")
+}

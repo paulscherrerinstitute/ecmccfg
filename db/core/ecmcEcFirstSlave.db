@@ -1,5 +1,5 @@
 # This db is only used to set the VAL field
-record(ao,"${P}MCU-Cfg-EC-FrstSlv") {
+record(ao,"${P}MCU-Cfg-EC-FrstObjId") {
   field(DESC, "Master: First slave ID")
   field(VAL,  "$(FIRST_SLAVE_ID=-1)")
 }

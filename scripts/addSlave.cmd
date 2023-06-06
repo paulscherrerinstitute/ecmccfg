@@ -61,7 +61,7 @@ ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", 
 ${ECMC_EXE_NEXT_SLV}dbLoadRecords(ecmcEcPrevSlave.db,"NEXT_SLAVE_ID=${ECMC_EC_SLAVE_NUM=-1},PREV_ECMC_P=${ECMC_PREV_ECMC_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_SLV)
 
-#- If this is the first added slave then store value in P:MCU-Cfg-EC-FrstSlv
+#- If this is the first added slave then store value in P:MCU-Cfg-EC-FrstObj
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_EC_PREV_SLAVE_NUM=-1}<0", "","#- ")
 #- Next slave of the previous slave is this slave
 ${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcEcFirstSlave.db,"P=${ECMC_PREFIX},FIRST_SLAVE_ID=${ECMC_EC_SLAVE_NUM}")
