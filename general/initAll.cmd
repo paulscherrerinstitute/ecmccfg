@@ -20,7 +20,7 @@ epicsEnvSet("ECMC_ASYN_PORT"      "${SM_ASYN_PORT=MC_CPU1}")
 epicsEnvSet("ECMC_PREFIX"         "${SM_PREFIX=IOC2:}")
 
 #- Create ECMC
-ecmcAsynPortDriverConfigure(${ECMC_ASYN_PORT},${ECMC_ASYN_PORT_MAX_PARAMS=1000},0,0,${ECMC_SAMPLE_RATE_MS=100})
+ecmcAsynPortDriverConfigure(${ECMC_ASYN_PORT},${ECMC_ASYN_PORT_MAX_PARAMS=1500},0,0,${ECMC_SAMPLE_RATE_MS=100})
 
 asynOctetSetOutputEos(${ECMC_ASYN_PORT}, -1, ";\n")
 asynOctetSetInputEos(${ECMC_ASYN_PORT}, -1, ";\n")
