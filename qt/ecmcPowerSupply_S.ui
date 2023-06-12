@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>100</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>100</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,1">
+    <item>
+     <widget class="caLineEdit" name="calineedit_4">
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(PS1_U)</string>
+      </property>
+      <property name="precision">
+       <number>1</number>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="caLineEdit" name="calineedit_5">
+      <property name="channel" stdset="0">
+       <string notr="true">$(PS1_U).EGU</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>280</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="5,1">
+    <item>
+     <widget class="caLineEdit" name="calineedit_6">
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(PS2_U)</string>
+      </property>
+      <property name="precision">
+       <number>1</number>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="caLineEdit" name="calineedit_7">
+      <property name="channel" stdset="0">
+       <string notr="true">$(PS2_U).EGU</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="caFrame" name="caframe_2">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>20</y>
+     <width>90</width>
+     <height>90</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="macro">
+    <string notr="true">State=$(PS1_State)</string>
+   </property>
+   <widget class="caImage" name="caimage_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="filename" stdset="0">
+     <string notr="true">PS_red.png</string>
+    </property>
+    <property name="visibility">
+     <enum>caImage::IfZero</enum>
+    </property>
+    <property name="visibilityCalc">
+     <string notr="true"/>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(State)</string>
+    </property>
+   </widget>
+   <widget class="caImage" name="caimage_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="filename" stdset="0">
+     <string notr="true">ecmcPS_green.png</string>
+    </property>
+    <property name="visibility">
+     <enum>caImage::IfNotZero</enum>
+    </property>
+    <property name="visibilityCalc">
+     <string notr="true"/>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(State)</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="caLabel" name="calabel_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>190</y>
+     <width>100</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PS 2</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>100</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PS 1</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="caFrame" name="caframe_3">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>200</y>
+     <width>90</width>
+     <height>90</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="macro">
+    <string notr="true">State=$(PS2_State)</string>
+   </property>
+   <widget class="caImage" name="caimage_5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="filename" stdset="0">
+     <string notr="true">PS_red.png</string>
+    </property>
+    <property name="visibility">
+     <enum>caImage::IfZero</enum>
+    </property>
+    <property name="visibilityCalc">
+     <string notr="true"/>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(State)</string>
+    </property>
+   </widget>
+   <widget class="caImage" name="caimage_6">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="filename" stdset="0">
+     <string notr="true">ecmcPS_green.png</string>
+    </property>
+    <property name="visibility">
+     <enum>caImage::IfNotZero</enum>
+    </property>
+    <property name="visibilityCalc">
+     <string notr="true"/>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(State)</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caImage</class>
+   <extends>QWidget</extends>
+   <header>caImage</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
