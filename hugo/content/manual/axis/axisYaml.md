@@ -139,7 +139,7 @@ drive:
 ## encoder
 mandatory
 
-- `numerator`: scaling numerator
+- `numerator`: scaling numerator, equivalent distance to the maximum drive frequency (default: 2000 Hz i.e. 2000 full steps), also effectively absolute maximum velocity
 - `denominator`: scaling denominator
 - `type`: type of encoder: `0`=incremental, `1`=absolute
 - `bits`: raw data bit count
@@ -188,6 +188,11 @@ encoder:
   #   status: ''
 ```
 
+optional
+
+- `velocityFilterSize`: Add filtering if the encoder is too coarse to reliably determine velocity each PLC cycle
+
+
 ## controller
 PID controller parameters
 
@@ -219,8 +224,8 @@ settings for the trajectory planning.
 mandatory
 
 - `axis`
-  - `velocity`: velocity setpoint the axis will be initialized to
-  - `acceleration`: acceleration setpoint for initialization
+  - `velocity`: velocity setpoint the axis will be initialized to (in EGU/sec)
+  - `acceleration`: acceleration setpoint for initialization (in EGU/sec2)
   - `emergencyDeceleration`: deceleration setpoint for emergencies. Defaults to acceleration setpoint if not specified.
 
 optional
