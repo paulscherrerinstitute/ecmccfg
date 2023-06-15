@@ -133,7 +133,7 @@ record(mbbiDirect,"$(P)ThdRTStat_"){
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ecmc.thread.status?")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
-  field(FLNK, "$(P)MCU-Thd-RTPrivOK.PROC")
+  field(FLNK, "$(P)MCU-ThdRTPrioOK.PROC")
 }
 
 record(bi,"$(P)MCU-ThdRTPrioOK"){
@@ -143,7 +143,7 @@ record(bi,"$(P)MCU-ThdRTPrioOK"){
   field(SCAN, "Passive")
   field(ONAM, "Yes")
   field(ZNAM, "No")
-  field(FLNK, "$(P)MCU-Thd-MemLockOK.PROC")
+  field(FLNK, "$(P)MCU-ThdMemLocked.PROC")
 }
 
 record(bi,"$(P)MCU-ThdMemLocked"){
