@@ -8,7 +8,7 @@
 #-d */
 
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "Festo-CMMT_ST")
+epicsEnvSet("ECMC_EC_HWTYPE"             "Festo-CMMT-ST")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x0000001d")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x007b5a25")
 
