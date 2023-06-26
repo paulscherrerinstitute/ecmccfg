@@ -60,6 +60,27 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
   field(HHSV, "$(HHSV=NO_ALARM)")
 }
 
+record(ao,"${ECMC_P}Drv${CH_ID}-Spd-PV"){
+  field(DESC, "$(HWTYPE): Drive Speed Setpoint PV")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).profileVelocitySetpoint${CH_ID}=")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=counts/s)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
 record(ao,"${ECMC_P}Drv${CH_ID}-Trq"){
   field(DESC, "$(HWTYPE): Drive Torque Setpoint")
   field(PINI, "$(PINI=1)")
@@ -144,8 +165,10 @@ record(mbbi,"${ECMC_P}Drv${CH_ID}-ModeAct"){
     field(EIST, "CSP")
     field(NIST, "CSV")
     field(TEST, "CST")
-    field(VAL,  "$(MODE_VAL=9)")
+    field(VAL,  "CSV")
     field(PINI, "YES")
+    field(DTYP,"asynUInt32Digital")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeStatus$(CH_ID)?")
 }
 
 record(mbbo,"${ECMC_P}Drv${CH_ID}-ModeCmd"){
@@ -172,9 +195,30 @@ record(mbbo,"${ECMC_P}Drv${CH_ID}-ModeCmd"){
     field(EIST, "CSP")
     field(NIST, "CSV")
     field(TEST, "CST")
-    field(VAL,  "$(MODE_VAL=9)")
+    field(VAL,  "CSV")
     field(PINI, "YES")
+    field(DTYP,"asynUInt32Digital")
+    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeControl$(CH_ID)=")
 }
+
+#record(ai,"${ECMC_P}Enc${CH_ID}-ModeAct"){
+#  field(DESC, "$(HWTYPE): Mode actual")
+#  field(PINI, "$(PINI=1)")
+#  field(DTYP, "asynInt32")
+#  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeStatus$(CH_ID)?")
+#  field(SCAN, "I/O Intr")
+#  field(TSE,  "$(TSE=-2)")
+#}
+#
+#record(ai,"${ECMC_P}Enc${CH_ID}-ModeCmd"){
+#  field(DESC, "$(HWTYPE): Mode cmd")
+#  field(PINI, "$(PINI=1)")
+#  field(DTYP, "asynInt32")
+#  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeControl$(CH_ID)?")
+#  field(SCAN, "I/O Intr")
+#  field(VAL,  "9")
+#  field(TSE,  "$(TSE=-2)")
+#}
 
 record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
