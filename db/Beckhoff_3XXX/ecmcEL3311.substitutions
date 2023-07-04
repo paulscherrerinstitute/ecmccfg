@@ -2,12 +2,10 @@ file "ecmc_analogInput-chX.template"
 {
   pattern {CH_ID, ESLO, EGU,  PREC}
           {01,    0.1,  DegC, 2   }
-          {02,    0.1,  DegC, 2   }
 }
 
 file "ecmc_status_analog-chX.template"
 {
   pattern {CH_ID}
           {01   }
-          {02   }
 }
