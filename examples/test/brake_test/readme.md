@@ -1,7 +1,7 @@
 # Test of brake functionality
 
 ## HW and config
-* Current config consists of a stepepr drive EL7031 and an EL2819 output.
+* Current config consists of a stepper drive EL7031 and an EL2819 output.
 * Output 1 of the EL2819 is used as a brake output
 * Input 1 of EL7031 is configured as HW-enable input (must be high to enable power to motor). 
 * Output 2 of EL2819 is connected to input 1 of EL7031 to contol HW-Enable
