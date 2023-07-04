@@ -247,6 +247,6 @@ if __name__ == '__main__':
     opentime      = float(sys.argv[7])
     closetime     = float(sys.argv[8])
     testBrake = ecmcBrakeTest(prefix,motorPvName,brakePvName,hwEnaPvName,limitsPvName,driveStatWd,opentime, closetime)
-    for i in range(1,1000):
+    while True:
         testBrake.testAll()
 
