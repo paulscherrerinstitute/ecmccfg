@@ -34,8 +34,8 @@ epicsEnvUnset(ECMC_EXE_NEXT_PLG)
 
 #- If this is the first added slave then store value in P:MCU-Cfg-AX-FrstObj
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}<0", "","#- ")
-${ECMC_EXE_FIRST_PLG}ecmcFileExist(ecmcPlgFirstplg.db,1,1)
-${ECMC_EXE_FIRST_PLG}dbLoadRecords(ecmcPlgFirstplg.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${PLUGIN_ID}")
+${ECMC_EXE_FIRST_PLG}ecmcFileExist(ecmcPlgFirstPlg.db,1,1)
+${ECMC_EXE_FIRST_PLG}dbLoadRecords(ecmcPlgFirstPlg.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${PLUGIN_ID}")
 epicsEnvUnset(ECMC_EXE_FIRST_PLG)
 
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
