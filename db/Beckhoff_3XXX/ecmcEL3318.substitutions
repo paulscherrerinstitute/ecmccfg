@@ -5,6 +5,10 @@ file "ecmc_analogInput-chX.template"
           {02,    0.1,  DegC, 2   }
           {03,    0.1,  DegC, 2   }
           {04,    0.1,  DegC, 2   }
+          {05,    0.1,  DegC, 2   }
+          {06,    0.1,  DegC, 2   }
+          {07,    0.1,  DegC, 2   }
+          {08,    0.1,  DegC, 2   }
 }
 
 file "ecmc_status_analog-chX.template"
@@ -14,4 +18,8 @@ file "ecmc_status_analog-chX.template"
           {02   }
           {03   }
           {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
 }
