@@ -21,5 +21,5 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x4,280,2)"
 #- Motor full steps count 200
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,200,2)"
 
-#- Coil inductance 1mH Ohm (unit 0.01mH)
+#- Coil inductance 1mH (unit 0.01mH)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0xA,100,2)"
