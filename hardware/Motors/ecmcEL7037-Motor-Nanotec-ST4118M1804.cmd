@@ -1,7 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Nanotec-ST4118M1804-B
 #-d   \details Parmetrization of EL7037 for motor Nanotec ST4118M184-B
-#-d   \author Carlos Doro Neto
 #-d   \file
 #-d */
 

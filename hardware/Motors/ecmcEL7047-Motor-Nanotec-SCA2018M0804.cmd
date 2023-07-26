@@ -2,7 +2,6 @@
 #-d   \brief hardware script for EL7047-Motor-Nanotec-SCA2018M0804
 #-d   \details Parmetrization of EL7047 for motor Nanotec-SCA2018M0804
 #-d   \author Anders Sandstroem
-#-d   \author Carlos Doro Neto
 #-d   \param I_MAX_MA     : (optional) Maximum current in mA (defaults to 800mA)
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to max current)
 #-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 100mA)

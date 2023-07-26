@@ -2,7 +2,6 @@
 #-d   \brief hardware script for EL7047-Motor-Nanotec-ST5918L1008 (parallel wiring)
 #-d   \details Parmetrization of EL7047 for motor Nanotec ST5918L1008 (parallel wiring)
 #-d   \author Anders Sandstroem
-#-d   \author Carlos Doro Neto
 #-d   \file
 #-d */
 

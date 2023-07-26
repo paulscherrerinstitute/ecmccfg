@@ -2,7 +2,6 @@
 #-d   \brief hardware script for EL7037-Motor-Nanotec-AS4118L1804
 #-d   \details Parmetrization of EL7037 for motor Nanotec AS4118L1804
 #-d   \author Julen Etxeberria (ported to ecmccfg by Javier Cereijo Garcia)
-#-d   \author Carlos Doro Neto
 #-d   \file
 #-d */
 

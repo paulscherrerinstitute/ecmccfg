@@ -1,7 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-0052-Motor-Phytron-VSS-57.200.2.5
 #-d   \details Parmetrization of EL7041-0052 for motor Phytron VSS 57.200.2.5
-#-d   \author Carlos Doro Neto
 #-d   \file
 #-d */
 

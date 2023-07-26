@@ -1,7 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Nanotec-ST2818M1006 (bipolar series wiring)
 #-d   \details Parmetrization of EL7041 for motor Nanotec ST2818M1006 (bipolar series wiring)
-#-d   \author Carlos Doro Neto
 #-d   \file
 #-d */
 

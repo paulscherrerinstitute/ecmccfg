@@ -2,7 +2,6 @@
 #-d   \brief hardware script for ecmcEL33XX-Sensor-generic
 #-d   \details Parmetrization default SDO settings for EL33XX
 #-d   \author Anders Sandstroem
-#-d   \author Carlos Doro Neto
 #-d   \file
 #-d */
 

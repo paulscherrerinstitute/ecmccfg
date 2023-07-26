@@ -2,7 +2,6 @@
 #-d   \brief hardware script for EL7037-Motor-Nanotec-ST4118L1804-B
 #-d   \details Parmetrization of EL7037 for motor Nanotec ST4118L184-B
 #-d   \author Anders Sandstroem
-#-d   \author Carlos Doro Neto
 #-d   \param I_MAX_MA     : (optional) Maximum current in mA (defaults to 1.5A)
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to max current)
 #-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 500mA)

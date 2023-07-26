@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief hardware script for EL3314-XXXX
 #-d   \details EL3314-XXXX | Generic script for EL3314-XXXX modules.
-#-d   \author Markus Kristensson, Carlos Doro Netos
+#-d   \author Markus Kristensson
 #-d   \file
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
