@@ -1,7 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-Nanotec-ST2818S1006 (unipolar or bipolar 1 winding wiring)
 #-d   \details Parmetrization of EL7047 for motor Nanotec ST2818S1006 (unipolar or bipolar 1 winding wiring)
-#-d   \author Javier Cereijo Garcia
 #-d   \file
 #-d */
 

@@ -1,7 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-Nanotec-ST5918L1008 (unipolar wiring)
 #-d   \details Parmetrization of EL7047 for motor Nanotec ST5918L1008 (unipolar wiring)
-#-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 

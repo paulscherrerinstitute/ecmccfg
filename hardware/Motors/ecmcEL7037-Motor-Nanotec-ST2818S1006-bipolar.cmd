@@ -1,6 +1,7 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Nanotec-ST2818S1006 (bipolar series wiring)
 #-d   \details Parmetrization of EL7037 for motor Nanotec ST2818S1006 (bipolar series wiring)
+#-d   \author Javier Cereijo Garcia
 #-d   \file
 #-d */
 

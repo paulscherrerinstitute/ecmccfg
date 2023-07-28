@@ -1,7 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Phytron-VSS-52.200.2.5
 #-d   \details Parmetrization of EL7037 for motor Phytron VSS 52.200.2.5
-#-d   \author Javier Cereijo Garcia
 #-d   \file
 #-d */
 
