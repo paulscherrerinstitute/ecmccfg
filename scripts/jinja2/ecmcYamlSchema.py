@@ -160,6 +160,8 @@ class Schema:
             'status': {'type': 'string'},
             'reduceTorqueEnable': {'type': 'boolean', 'dependencies': ['control', 'reduceTorque']},
             'reduceTorque': {'type': 'integer', 'min': 0, 'dependencies': ['control', 'reduceTorqueEnable']},
+            'enable': {'type': 'integer', 'min': 0, 'dependencies': ['control']},
+            'enabled': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
             'brake': {
                 'type': 'dict',
                 'schema': {

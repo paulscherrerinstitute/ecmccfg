@@ -2,8 +2,33 @@
 #- Drive
 #- =============================================================================
 {#- links #}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax{{ axis.id }}.drv.control")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id }}.drv.status")"
+
+{%- if drive.type == 0 %}
+    {#- For steppers, bits must be defined for control-enable and status-enabled #}
+    {%- if drive.enable is defined %}
+       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.enable|int }}","ax{{ axis.id }}.drv.control")"
+    {%- else %}
+       # WARNING: enable bit not defined. Using Beckhoff default bit, 0, for enable in control word
+       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.0","ax{{ axis.id }}.drv.control")"
+    {%- endif %}
+    {%- if drive.enabled is defined %}
+       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.enabled|int }}","ax{{ axis.id }}.drv.status")"
+    {%- else %}
+       # WARNING: status bit not defined. Using Beckhoff default bit, 1, for enabled in status word
+       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.1","ax{{ axis.id }}.drv.status")"
+    {%- endif %}
+{%- else %}
+    {#- DS402 #}
+    {%- if drive.enable is defined %}
+       # WARNING: enable control bit defined but not used in DS402 mode.
+    {%- endif %}
+    {%- if drive.enabled is defined %}
+       # WARNING: enabled status bit defined but not used in DS402 mode.
+    {%- endif %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax{{ axis.id }}.drv.control")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id }}.drv.status")"
+{%- endif %}
+
 {#- Todo: add more types, add default type #}
 {%- if axis.mode == 'CSV' %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.velocity")"
@@ -45,3 +70,4 @@ ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom({{ axis.id }},{{ drive.denominator }})
     ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id }},{{ drive.brake.closeAhead }})"
     {%- endif %}
 {%- endif %}
+
