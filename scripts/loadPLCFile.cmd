@@ -56,19 +56,19 @@ dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=
 epicsEnvUnset(ECMC_PLC_ID_2_CHARS)
 
 #- Below for facilitate auto gui generation
-# Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_PLC_OBJ_ID==-1)
+# Do not set NxtObj "pointer" if this is the first PLC (ECMC_PREV_PLC_OBJ_ID==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_PLC,"${ECMC_PREV_PLC_OBJ_ID=-1}>=0", "","#- ")
 ${ECMC_EXE_NEXT_PLC}ecmcFileExist(ecmcPlcPrevPlc.db,1,1)
 ${ECMC_EXE_NEXT_PLC}dbLoadRecords(ecmcPlcPrevPlc.db,"NEXT_OBJ_ID=${ECMC_PLC_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLC_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_PLC)
 
-#- If this is the first added slave then store value in P:MCU-Cfg-AX-FrstObj
+#- If this is the first added PLC then store value in P:MCU-Cfg-PLC-FrstObjId
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_PLC,"${ECMC_PREV_PLC_OBJ_ID=-1}<0", "","#- ")
 ${ECMC_EXE_FIRST_PLC}ecmcFileExist(ecmcPlcFirstPlc.db,1,1)
 ${ECMC_EXE_FIRST_PLC}dbLoadRecords(ecmcPlcFirstPlc.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${ECMC_PLC_ID}")
 epicsEnvUnset(ECMC_EXE_FIRST_PLC)
 
-#- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
+#- Store info to populate the ECMC_P-NxtObj "pointer" of next added PLC
 epicsEnvSet(ECMC_PREV_PLC_P,"$(ECMC_PREFIX)MCU-Cfg-PLC${ECMC_PLC_ID}-")
 epicsEnvSet(ECMC_PREV_PLC_OBJ_ID,${ECMC_PLC_ID})
 
