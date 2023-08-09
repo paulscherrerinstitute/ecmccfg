@@ -1,7 +1,7 @@
 #==============================================================================
 # chkValidCurrentSetOrDie.cmd
 #-d /**
-#-d   \brief Checks if requested run current and stanby current is less than max current and larger than 0
+#-d   \brief Checks if requested run current and standby current is less than max current and larger than 0
 #-d   need to use ecmcExit since iocsh command "exit" just stops reading current file.
 #-d
 #-d   \author Anders Sandstroem
