@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ecmcEL5042-Encoder-ch2-RLS-LA11-24bit.cmd
-#-d   \details Parmetrization of EL5042  channel 2 for encoder RLS LA11
+#-d   \details Parametrization of EL5042  channel 2 for encoder RLS LA11
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

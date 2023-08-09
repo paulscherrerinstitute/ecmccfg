@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Leadshine-57HS09 (series wiring)
-#-d   \details Parmetrization of EL7041 for motor Nanotec Leadshine Tecnology mod. 57HS09 (series wiring)
+#-d   \details Parametrization of EL7041 for motor Nanotec Leadshine Tecnology mod. 57HS09 (series wiring)
 #-d   \file
 #-d */
 

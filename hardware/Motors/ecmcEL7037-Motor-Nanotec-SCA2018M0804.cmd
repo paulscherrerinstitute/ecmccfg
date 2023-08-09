@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Nanotec-SCA2018M0804
-#-d   \details Parmetrization of EL7037 for motor Nanotec SCA2018M0804
+#-d   \details Parametrization of EL7037 for motor Nanotec SCA2018M0804
 #-d   \file
 #-d */
 

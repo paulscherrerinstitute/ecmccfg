@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7031-Motor-OrientalMotor-PK243B1-SG18
-#-d   \details Parmetrization of EL7031 for motor Oriental Motor PK243B1-SG18
+#-d   \details Parametrization of EL7031 for motor Oriental Motor PK243B1-SG18
 #-d   \author Orell Hürzeler
 #-d   \file
 #-d   \note Max current= 0.95 A

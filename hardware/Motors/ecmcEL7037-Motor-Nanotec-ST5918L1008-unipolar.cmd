@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Nanotec-ST5918L1008 (unipolar wiring)
-#-d   \details Parmetrization of EL7037 for motor Nanotec ST5918L1008 (unipolar wiring)
+#-d   \details Parametrization of EL7037 for motor Nanotec ST5918L1008 (unipolar wiring)
 #-d   \file
 #-d */
 

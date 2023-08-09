@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Trinamic-QMot-QSH4218-41-10-035_target
-#-d   \details Parmetrization of EL7037 for motor Nanotec ST4118L184-b
+#-d   \details Parametrization of EL7037 for motor Nanotec ST4118L184-b
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

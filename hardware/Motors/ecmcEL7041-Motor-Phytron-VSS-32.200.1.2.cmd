@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Phytron-VSS-32.200.1.2
-#-d   \details Parmetrization of EL7041 for motor Phytron VSS 32.200.1.2
+#-d   \details Parametrization of EL7041 for motor Phytron VSS 32.200.1.2
 #-d   \author Julen Etxeberria
 #-d   \file
 #-d */

@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Leadshine-57HS22 (parallel wiring)
-#-d   \details Parmetrization of EL7037 for motor Nanotec Leadshine Tecnology mod. 57HS22 (parallel wiring)
+#-d   \details Parametrization of EL7037 for motor Nanotec Leadshine Tecnology mod. 57HS22 (parallel wiring)
 #-d   \file
 #-d */
 

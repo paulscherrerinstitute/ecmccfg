@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for iPOS8020-Motor-Stoegra-SM107-3-18M12-Parallel-6A
-#-d   \details Parmetrization of technosoft IPOS8020 for motor Stoegra-SM107-3-18M12-Parallel (6A)
+#-d   \details Parametrization of technosoft IPOS8020 for motor Stoegra-SM107-3-18M12-Parallel (6A)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS8020 for Stoegra-SM107-3-18M12-Paralle (6A)
+#- ############ Parametrization of technosoft IPOS8020 for Stoegra-SM107-3-18M12-Paralle (6A)
 #-
 #-   Connection Parallel connection
 #-   Run current: 6A

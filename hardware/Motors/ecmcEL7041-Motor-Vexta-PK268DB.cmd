@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Vexta-PK268DB
-#-d   \details Parmetrization of EL7041 for Vexta PK268DB (WireScanner)
+#-d   \details Parametrization of EL7041 for Vexta PK268DB (WireScanner)
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Max current= 4.2 A

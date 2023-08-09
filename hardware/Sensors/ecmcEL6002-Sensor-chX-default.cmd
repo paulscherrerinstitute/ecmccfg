@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for EL6002-Sensor-chX-default
-#-d   \details Parmetrization Default SDO settings for EL6002 RS232 loop back test
+#-d   \details Parametrization Default SDO settings for EL6002 RS232 loop back test
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 ############################################################
-############# Parmetrization Default SDO settings for EL6002 chx
+############# Parametrization Default SDO settings for EL6002 chx
 #
 #- Environment variables needed:
 #- -ECMC_EC_SDO_INDEX "0x80n0" where n is channel 0..1

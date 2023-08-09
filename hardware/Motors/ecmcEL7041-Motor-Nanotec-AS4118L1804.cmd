@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-AS4118L1804
-#-d   \details Parmetrization of EL7041 for motor AS4118L1804
+#-d   \details Parametrization of EL7041 for motor AS4118L1804
 #-d   \file
 #-d */
 

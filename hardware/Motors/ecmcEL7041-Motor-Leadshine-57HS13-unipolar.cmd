@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Leadshine-57HS13 (unipolar wiring)
-#-d   \details Parmetrization of EL7041 for motor Nanotec Leadshine Tecnology mod. 57HS13 (unipolar wiring)
+#-d   \details Parametrization of EL7041 for motor Nanotec Leadshine Tecnology mod. 57HS13 (unipolar wiring)
 #-d   \file
 #-d */
 

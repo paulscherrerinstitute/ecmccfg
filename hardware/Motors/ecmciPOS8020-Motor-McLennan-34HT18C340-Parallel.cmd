@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for iPOS8020-Motor-McLennan-34HT18C340-Parallel
-#-d   \details Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
+#-d   \details Parametrization of technosoft IPOS8020 for motor McLennan-34HT18C340
 #-d   \author Anders Sandstroem
 #-d   \note Max current for this motor is set to 5600mA RMS = 5600*1.4=7800mA, drive allows 20000mA
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 5000mA)
@@ -10,7 +10,7 @@
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS8020 for motor McLennan-34HT18C340
+#- ############ Parametrization of technosoft IPOS8020 for motor McLennan-34HT18C340
 #-
 #-   Connection Parallel connection
 #-   Max current: 5.6A

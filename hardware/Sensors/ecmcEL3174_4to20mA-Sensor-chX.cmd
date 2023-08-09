@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL3174_4to20mA-Sensor-chX
-#-d   \details Parmetrization Default SDO settings for EL3174
+#-d   \details Parametrization Default SDO settings for EL3174
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:
@@ -9,7 +9,7 @@
 #-d */
 
 ############################################################
-############# Parmetrization Default SDO settings for EL3164
+############# Parametrization Default SDO settings for EL3164
 
 #- Input signal type
 #- 0x02 = +-10V (default)

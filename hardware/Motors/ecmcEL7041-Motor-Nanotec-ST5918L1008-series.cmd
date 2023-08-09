@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Nanotec-ST5918L1008 (series wiring)
-#-d   \details Parmetrization of EL7041 for motor Nanotec ST5918L1008 (series wiring)
+#-d   \details Parametrization of EL7041 for motor Nanotec ST5918L1008 (series wiring)
 #-d   \file
 #-d */
 

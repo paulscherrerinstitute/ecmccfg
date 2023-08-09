@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Nanotec-ST4118M1804-B
-#-d   \details Parmetrization of EL7041 for motor Nanotec ST4118M184-b
+#-d   \details Parametrization of EL7041 for motor Nanotec ST4118M184-b
 #-d   \author Julen Etxeberria (ported to ecmccfg by Javier Cereijo Garcia)
 #-d   \file
 #-d */

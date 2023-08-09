@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-Phytron-VSS-25.200.1.2
-#-d   \details Parmetrization of EL7047 for motor Phytron VSS 25.200.1.2
+#-d   \details Parametrization of EL7047 for motor Phytron VSS 25.200.1.2
 #-d   \file
 #-d */
 

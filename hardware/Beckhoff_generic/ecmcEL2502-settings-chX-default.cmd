@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL2502-settings-chX-default
-#-d   \details Parmetrization Default SDO settings for EL2502
+#-d   \details Parametrization Default SDO settings for EL2502
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \pre Environment variables needed:

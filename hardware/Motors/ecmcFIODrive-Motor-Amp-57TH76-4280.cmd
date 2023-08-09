@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for FIODrive-Motor-Amp-57TH76-4280
-#-d   \details Parmetrization of FIODrive for motor Amp-57TH76-4280
+#-d   \details Parametrization of FIODrive for motor Amp-57TH76-4280
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

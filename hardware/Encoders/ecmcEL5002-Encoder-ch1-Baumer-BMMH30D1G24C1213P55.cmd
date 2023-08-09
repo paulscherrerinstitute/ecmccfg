@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL5002-Encoder-ch1-Baumer-BMMH30D1G24C1213P55
-#-d   \details Parmetrization of EL5002  channel 1 for encoder Baumer BMMH30D1G24C12/13P55
+#-d   \details Parametrization of EL5002  channel 1 for encoder Baumer BMMH30D1G24C12/13P55
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

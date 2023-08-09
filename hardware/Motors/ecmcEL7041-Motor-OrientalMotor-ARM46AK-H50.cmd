@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-OrientalMotor-ARM24SAK-H50
-#-d   \details Parmetrization of EL7041 for motor OrientalMotor ARM24SAK-H50
+#-d   \details Parametrization of EL7041 for motor OrientalMotor ARM24SAK-H50
 #-d   \author Alvin Acerbo
 #-d   \file
 #-d   \note Max current per phase = 1.3 A

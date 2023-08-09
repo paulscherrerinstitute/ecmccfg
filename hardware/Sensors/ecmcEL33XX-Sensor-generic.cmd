@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for ecmcEL33XX-Sensor-generic
-#-d   \details Parmetrization default SDO settings for EL33XX
+#-d   \details Parametrization default SDO settings for EL33XX
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 ############################################################
-############# Parmetrization default SDO settings for EL33XX
+############# Parametrization default SDO settings for EL33XX
 #
 #- Environment variables needed:
 #- -ECMC_EC_SDO_INDEX "0x80n0" where n is channel 0..3

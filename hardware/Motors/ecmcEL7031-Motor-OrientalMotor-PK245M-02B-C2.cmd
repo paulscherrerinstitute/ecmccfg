@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7031-Motor-OrientalMotor-PK245M-02B-C2
-#-d   \details Parmetrization of EL7031 for motor OrientalMotor-PK245M-02B-C2
+#-d   \details Parametrization of EL7031 for motor OrientalMotor-PK245M-02B-C2
 #-d   \author Orell Hürzeler
 #-d   \file
 #-d   \note Unipolar Motor

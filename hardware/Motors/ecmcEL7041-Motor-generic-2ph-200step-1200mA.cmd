@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-generic-2ph-200step-1200mA
-#-d   \details Parmetrization of EL7041 for a generic 2 phase 200 step/rev motor rated at 1.2 A
+#-d   \details Parametrization of EL7041 for a generic 2 phase 200 step/rev motor rated at 1.2 A
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Max current= 1.2 A

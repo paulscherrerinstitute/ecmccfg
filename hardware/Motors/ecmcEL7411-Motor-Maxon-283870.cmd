@@ -3,7 +3,7 @@
 #-d /**
 #-d   \brief hardware script for EL7411-Motor-Maxon-283870
 #-d 
-#-d   \details Parmetrization of EL7411 for motor Maxon-283870
+#-d   \details Parametrization of EL7411 for motor Maxon-283870
 #-d 
 #-d   \note This config only configures the motor part of the EL7411. 
 #-d

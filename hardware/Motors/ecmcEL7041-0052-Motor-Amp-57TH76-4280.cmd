@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-0052-Motor-Amp-57TH76-4280
-#-d   \details Parmetrization of EL7041-0052 for motor Amp-57TH76-4280
+#-d   \details Parametrization of EL7041-0052 for motor Amp-57TH76-4280
 #-d   \author Anders Sandstrom
 #-d   \file
 #-d */

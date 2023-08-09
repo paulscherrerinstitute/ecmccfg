@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Nanotec-SCA5618X2804
-#-d   \details Parmetrization of EL7041 for motor Nanotec SCA5618X2804
+#-d   \details Parametrization of EL7041 for motor Nanotec SCA5618X2804
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

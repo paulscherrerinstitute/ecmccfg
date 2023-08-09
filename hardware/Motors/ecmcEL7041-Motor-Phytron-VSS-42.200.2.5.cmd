@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Phytron-VSS-42.200.2.5
-#-d   \details Parmetrization of EL7041 for motor Phytron VSS 42.200.2.5
+#-d   \details Parametrization of EL7041 for motor Phytron VSS 42.200.2.5
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

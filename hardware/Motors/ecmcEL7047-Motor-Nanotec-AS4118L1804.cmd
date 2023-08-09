@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-AS4118L1804
-#-d   \details Parmetrization of EL7047 for motor AS4118L1804
+#-d   \details Parametrization of EL7047 for motor AS4118L1804
 #-d   \author Julen Etxeberria
 #-d   \file
 #-d */

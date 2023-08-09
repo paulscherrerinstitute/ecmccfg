@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Nanotec-SCA2018M0804
-#-d   \details Parmetrization of EL7041 for motor Nanotec-SCA2018M0804
+#-d   \details Parametrization of EL7041 for motor Nanotec-SCA2018M0804
 #-d   \author Anders Sandstroem
 #-d   \param I_MAX_MA     : (optional) Maximum current in mA (defaults to 800mA)
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to max current)
