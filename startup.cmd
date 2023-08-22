@@ -29,6 +29,8 @@
 #- PVA               = YES / NO
 #- TMP_DIR           = directory for temporary files
 #- ENG_MODE          = 1/0. If ENG_MODE is set then PVs used for commissioning will be avaialble
+#- EC_TOOL_PATH = Path to ethercat tool defaults to ethercat tool in ECmasterECMC_DIR, 
+#- otherwise            "/opt/etherlab/bin/ethercat"
 #-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
@@ -40,6 +42,7 @@
 #- ECMC_PVA               = use pva, default NO
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
+#- ECMC_EC_TOOL_PATH     = path to ethercat tool
 
 #-
 #-------------------------------------------------------------------------------
@@ -133,6 +136,15 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 
 # Load ecmc inforamtion into record
 dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0}")
+
+#-------------------------------------------------------------------------------
+#- Set path to ethercat tool
+#- Set default
+epicsEnvSet(ECMC_EC_TOOL_PATH,{EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
+#- if ECmasterECMC_DIR is defined then use ethercat tool in installed module
+ecmcEpicsEnvSetCalcTernary(ECMC_USE_ECmasterECMC_DIR, "'${ECmasterECMC_DIR='empty'}'=='empty'", "#-","")
+${ECMC_USE_ECmasterECMC_DIR}epicsEnvSet(ECMC_EC_TOOL_PATH, "${ECmasterECMC_DIR}bin/${EPICS_HOST_ARCH}/ethercat")
+epicsEnvUnset(ECMC_USE_ECmasterECMC_DIR)
 
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)
