@@ -12,7 +12,7 @@ require ecmccfg sandst_a_MCS2,"IOC=$(IOC),ECMC_VER=sandst_a,EC_RATE=1000,MASTER_
 ##############################################################################
 ## Configure hardware
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "10")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
 #${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=MCS2, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=MCS2"
 
