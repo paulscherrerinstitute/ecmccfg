@@ -547,7 +547,7 @@ record(bi,"${P}${AXIS_NAME}-Wrn"){
 }
 
 record(mbbo,    "${P}${AXIS_NAME}-movVelCmd") {
-  field(DESC, "absolute move command data")
+  field(DESC, "velocity move command data")
   field(VAL,  "${VELPROC=0}")
 
   field(ZRVL, 0)  field(ZRST, "normal")
@@ -556,7 +556,7 @@ record(mbbo,    "${P}${AXIS_NAME}-movVelCmd") {
 }
 
 record(mbbo,    "${P}${AXIS_NAME}-movRelCmd") {
-  field(DESC, "absolute move command data")
+  field(DESC, "relative move command data")
   field(VAL,  "${RELPROC=0}")
 
   field(ZRVL, 0)  field(ZRST, "normal")
