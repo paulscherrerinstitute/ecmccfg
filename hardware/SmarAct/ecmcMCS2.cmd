@@ -1,14 +1,14 @@
 #-d /**
 #-d   \brief hardware script for MCS2
 #-d   \details SmarAct MCS2 piezo controller with EtherCAT interface
-#-d   \author Niko Kivel
+#-d   \author Niko Kivel, Anders Sandström
 #-d   \file
 #-d   \note SDOS
 #-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "MCS2")
-epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x00536d61")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00000001")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x00536d61")                                          
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00020d08")
 
 ecmcConfigOrDie "Cfg.EcSlaveVerify(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
 
