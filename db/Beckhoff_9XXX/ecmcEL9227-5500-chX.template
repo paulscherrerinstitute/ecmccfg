@@ -286,7 +286,7 @@ record(mbbiDirect,"${ECMC_P}CH${CH_ID}-Ctrl_-RB"){
 record(bi,"${ECMC_P}CH${CH_ID}-RstCmd-RB"){
     field(DESC, "$(HWTYPE): Reset RB")
     field(PINI, "$(PINI=1)")
-    field(INP,  "${ECMC_P}CH${CH_ID}-Ctrl_-RB.BO")
+    field(INP,  "${ECMC_P}CH${CH_ID}-Ctrl_-RB.B0")
     field(ZNAM, "Zero")
     field(ONAM, "One")
     field(FLNK, "${ECMC_P}CH${CH_ID}-SwtchCmd-RB.PROC")
