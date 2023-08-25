@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-Beckhoff-AS1050-0110
-#-d   \details Parmetrization of EL7047 for motor Beckhoff AS1050-0110
+#-d   \details Parametrization of EL7047 for motor Beckhoff AS1050-0110
 #-d   \author Maurizio Montis
 #-d   \file
 #-d   \note Torque: 1.2 Nm

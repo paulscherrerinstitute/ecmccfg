@@ -1,7 +1,7 @@
 #==============================================================================
 # chkValidCurrentSetOrDie.cmd
 #-d /**
-#-d   \brief Checks if requested run current and stanby current is less than max current and larget than 0
+#-d   \brief Checks if requested run current and standby current is less than max current and larger than 0
 #-d   need to use ecmcExit since iocsh command "exit" just stops reading current file.
 #-d
 #-d   \author Anders Sandstroem
@@ -15,13 +15,13 @@
 #-d*/
 
 # Ensure running current is below max current otherwise exit
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_RUN_MA=-1}>${I_MAX_MA=0} or ${I_RUN_MA=-1}<=0", "ecmcExit Error: Run current setpoint to high or negative...","# Run current setting OK (${I_RUN_MA_LOCAL=-1})...")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_RUN_MA=-1}>${I_MAX_MA=0} or ${I_RUN_MA=-1}<=0", "ecmcExit Error: Run current setpoint too high or negative...","# Run current setting OK (${I_RUN_MA_LOCAL=-1})...")
 # Result: 
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)
 
 # Ensure standby current is below max current otherwise exit
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_STDBY_MA=-1}>${I_MAX_MA=0} or ${I_STDBY_MA=-1}<0", "ecmcExit Error: Standby current setpoint to high or negative...","# Standby current setting OK (${I_STDBY_MA=-1})...")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_STDBY_MA=-1}>${I_MAX_MA=0} or ${I_STDBY_MA=-1}<0", "ecmcExit Error: Standby current setpoint too high or negative...","# Standby current setting OK (${I_STDBY_MA=-1})...")
 # Result: 
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)

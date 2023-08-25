@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-Amp-57TH76-4280
-#-d   \details Parmetrization of EL7047 for motor AMP-57TH76-4280
+#-d   \details Parametrization of EL7047 for motor AMP-57TH76-4280
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note Max current= 2.8 A

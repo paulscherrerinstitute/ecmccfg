@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-MotionKing23H2A8425
-#-d   \details Parmetrization of EL7047 for motor MotionKing23H2A8425
+#-d   \details Parametrization of EL7047 for motor MotionKing23H2A8425
 #-d   \author Markus Kristensson
 #-d   \file
 #-d */

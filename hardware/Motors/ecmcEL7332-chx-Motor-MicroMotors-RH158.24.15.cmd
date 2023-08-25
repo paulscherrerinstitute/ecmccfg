@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7332-chx-Motor-MicroMotors-RH158.24.15
-#-d   \details Parmetrization of EL7332 Ch x for MicroMotors-RH158.24.15
+#-d   \details Parametrization of EL7332 Ch x for MicroMotors-RH158.24.15
 #-d   Motor rated voltage      : 24V
 #-d   Current at nominal load  : 330mA
 #-d   Current without load     : 70mA

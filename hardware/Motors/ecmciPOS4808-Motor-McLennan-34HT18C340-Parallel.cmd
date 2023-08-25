@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for iPOS4808-Motor-McLennan-34HT18C340-Parallel
-#-d   \details Parmetrization of Technosoft iPOS4808 for motor McLennan-34HT18C340
+#-d   \details Parametrization of Technosoft iPOS4808 for motor McLennan-34HT18C340
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of Technosoft iPOS4808 for motor McLennan-34HT18C340
+#- ############ Parametrization of Technosoft iPOS4808 for motor McLennan-34HT18C340
 #-
 #-   Connection Parallel connection
 #-   Max current: 5.6A

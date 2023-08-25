@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL3632-Sensor-chX-MTS-PCB-608A11
-#-d   \details Parmetrization of EL3632 with sensor MTS PCB 608A11
+#-d   \details Parametrization of EL3632 with sensor MTS PCB 608A11
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:
@@ -9,7 +9,7 @@
 #-d */
 
 ############################################################
-############# Parmetrization of EL3632 with sensor MTS PCB 608A11
+############# Parametrization of EL3632 with sensor MTS PCB 608A11
 #- Type: Accelerometer
 #- Range: 0.5-10000Hz
 #- Sensitivity (+-15%): 10.2mV/(m/s/s)

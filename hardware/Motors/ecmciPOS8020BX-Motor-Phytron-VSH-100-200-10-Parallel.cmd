@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for iPOS8020-Motor-Phytron-VSH-100-200-10-Parallel
-#-d   \details Parmetrization of technosoft IPOS8020 for motor Phytron VSH.100.200.10 Parallel
+#-d   \details Parametrization of technosoft IPOS8020 for motor Phytron VSH.100.200.10 Parallel
 #-d   \author Anders Sandstroem
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 10000mA)
 #-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 1000mA)
@@ -9,7 +9,7 @@
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS8020 for Phytron VSH.100.200.10 Parallel (10A)
+#- ############ Parametrization of technosoft IPOS8020 for Phytron VSH.100.200.10 Parallel (10A)
 #-
 #-   Connection Parallel connection
 #-   NoMicroStepsPerStep=256

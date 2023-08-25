@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-AML-D42.3-1.8
-#-d   \details Parmetrization of EL7037 for motor AML-D42.3-1.8
+#-d   \details Parametrization of EL7037 for motor AML-D42.3-1.8
 #-d   Specs:
 #-d     Holding torque:        450 mNm
 #-d     Detent torque:         20 mNm

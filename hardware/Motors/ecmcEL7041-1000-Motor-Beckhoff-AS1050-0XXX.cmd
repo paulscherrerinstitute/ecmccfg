@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-1000-Motor-Beckhoff-AS1050-0XXX
-#-d   \details Parmetrization of EL7041-1000 for motor Beckhoff AS1050-0XXX
+#-d   \details Parametrization of EL7041-1000 for motor Beckhoff AS1050-0XXX
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Torque: 1.2 Nm

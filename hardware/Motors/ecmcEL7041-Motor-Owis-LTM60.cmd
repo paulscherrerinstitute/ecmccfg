@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Owis-LTM60
-#-d   \details Parmetrization of EL7041 for motor Owis LTM60
+#-d   \details Parametrization of EL7041 for motor Owis LTM60
 #-d   \author Julen Etxeberria Malkorra - Saeed Haghtalab
 #-d   \file
 #-d */

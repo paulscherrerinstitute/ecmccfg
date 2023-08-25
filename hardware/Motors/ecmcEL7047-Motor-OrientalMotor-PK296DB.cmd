@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-OrientalMotor-PK296DB
-#-d   \details Parmetrization of EL7047 for motor Oriental Motor PK296DB
+#-d   \details Parametrization of EL7047 for motor Oriental Motor PK296DB
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note Max current= 4.5 A

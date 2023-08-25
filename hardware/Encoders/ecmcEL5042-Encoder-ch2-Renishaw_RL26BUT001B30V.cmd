@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ecmcEL5042-Encoder-ch1-RL26BUT001B30V.cmd
-#-d   \details Parmetrization of EL5042  channel 1 for encoder RESOLUTE RL 26B UT 001B 30V
+#-d   \details Parametrization of EL5042  channel 1 for encoder RESOLUTE RL 26B UT 001B 30V
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

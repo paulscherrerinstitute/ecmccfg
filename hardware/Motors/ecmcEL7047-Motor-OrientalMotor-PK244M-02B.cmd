@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-OrientalMotor-PK244M-02B
-#-d   \details Parmetrization of EL7047 for motor Oriental Motor PK244M-02B
+#-d   \details Parametrization of EL7047 for motor Oriental Motor PK244M-02B
 #-d   \author Orell Hürzeler
 #-d   \file
 #-d   \note Max current= 2.4 A

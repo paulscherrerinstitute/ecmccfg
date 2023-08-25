@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ELM360X for +-5V range
-#-d   \details Parmetrization of ELM360X for +-5V range used for voltage measurement (not IEPE)
+#-d   \details Parametrization of ELM360X for +-5V range used for voltage measurement (not IEPE)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:

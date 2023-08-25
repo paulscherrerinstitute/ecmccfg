@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL6624-Sensor-chX_output
-#-d   \details Parmetrization of chX of EL6624 as a generic output
+#-d   \details Parametrization of chX of EL6624 as a generic output
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d    \pre Environment variables needed:

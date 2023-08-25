@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7201-Motor-Beckhoff-AM8121-0F00-0000
-#-d   \details Parmetrization of EL7201 for motor Beckhoff AM8121-F00-0000
+#-d   \details Parametrization of EL7201 for motor Beckhoff AM8121-F00-0000
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note For important parameters see TwinCAT CoE startup list for the motor terminal configuration.

@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7037-Motor-Mclennan-HT18C230
-#-d   \details Parmetrization of EL7037 for motor Mclennan-HT18C230
+#-d   \details Parametrization of EL7037 for motor Mclennan-HT18C230
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief hardware script for EL3312
 #-d   \details EL3312 | 2-channel thermocouple input terminal with open-circuit recognition
-#-d   \author Anders Sandstroem, Javier Cereijo Garcia, Carlos Doro Neto
+#-d   \author Anders Sandstroem, Javier Cereijo Garcia
 #-d   \file
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset

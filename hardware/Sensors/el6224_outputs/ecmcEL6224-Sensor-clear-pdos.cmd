@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL6624-Sensor-Clear All Pdos
-#-d   \details Parmetrization of all channels as inputs. Setup pdos
+#-d   \details Parametrization of all channels as inputs. Setup pdos
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d    \pre ECMC_EC_SLAVE_NUM   Slave number

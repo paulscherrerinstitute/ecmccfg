@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief hardware script for EL3318
 #-d   \details EL3318 | 8-channel (16 bits) thermocouple input terminal with open-circuit recognition
-#-d   \author Markus Kristensson, Carlos Doro Neto
+#-d   \author Markus Kristensson
 #-d   \file
 #-d   \note SDOS
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
