@@ -24,13 +24,12 @@ epicsEnvUnset(ECMC_PLUGIN_REPORT);
 
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first plugin (ECMC_PREV_PLG_OBJ_ID==-1)
-
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}>=0", "","#- ")
 ${ECMC_EXE_NEXT_PLG}ecmcFileExist(ecmcPlgPrevPlg.db,1,1)
 ${ECMC_EXE_NEXT_PLG}dbLoadRecords(ecmcPlgPrevPlg.db,"NEXT_OBJ_ID=${PLUGIN_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLG_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_PLG)
 
-#- If this is the first added slave then store value in P:MCU-Cfg-PLG-FrstObj
+#- If this is the first added plugin then store value in P:MCU-Cfg-PLG-FrstObjId
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}<0", "","#- ")
 ${ECMC_EXE_FIRST_PLG}ecmcFileExist(ecmcPlgFirstPlg.db,1,1)
 ${ECMC_EXE_FIRST_PLG}dbLoadRecords(ecmcPlgFirstPlg.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${PLUGIN_ID}")
