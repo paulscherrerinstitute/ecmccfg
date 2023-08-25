@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for iPOS4808-Motor-Nanotec-AS5918L4204-ENM24B
-#-d   \details Parmetrization of technosoft IPOS4808 for motor Oriental Motor PK296DB
+#-d   \details Parametrization of technosoft IPOS4808 for motor Oriental Motor PK296DB
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 #- ###########################################################
-#- ############ Parmetrization of technosoft IPOS4808 for motor Oriental Motor PK296DB
+#- ############ Parametrization of technosoft IPOS4808 for motor Oriental Motor PK296DB
 #-
 #-   Connection Parallel connection
 #-   Max current: 4.2A

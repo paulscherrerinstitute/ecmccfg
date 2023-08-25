@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for EL300X-Sensor-chX-default
-#-d   \details Parmetrization Default SDO settings for EL3602
+#-d   \details Parametrization Default SDO settings for EL3602
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 ############################################################
-############# Parmetrization Default SDO settings for EL3602
+############# Parametrization Default SDO settings for EL3602
 #
 #- Environment variables needed:
 #- -ECMC_EC_SDO_INDEX "0x80n0" where n is channel 0..3

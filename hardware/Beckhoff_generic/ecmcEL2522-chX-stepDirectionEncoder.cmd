@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL2522-chX-stepDirectionEncoder
-#-d   \details Parmetrization Default SDO settings for EL2522 in Encoder mode
+#-d   \details Parametrization Default SDO settings for EL2522 in Encoder mode
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note The variable "ECMC_EC_SDO_INDEX" needs to be set in advance of inlining this snippet.

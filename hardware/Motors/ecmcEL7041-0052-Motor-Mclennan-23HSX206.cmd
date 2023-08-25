@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-0052-Motor-Mclenan-23HSX206
-#-d   \details Parmetrization of EL7041-0052 for motor Mclenan-23HSX206
+#-d   \details Parametrization of EL7041-0052 for motor Mclenan-23HSX206
 #-d   \author Julen Etxeberria
 #-d   \file
 #-d */

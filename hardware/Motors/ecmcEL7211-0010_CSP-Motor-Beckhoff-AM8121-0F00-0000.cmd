@@ -1,6 +1,6 @@
 
 ############################################################
-############# Parmetrization of EL7211-0010 for motor AM8121-F00-0000
+############# Parametrization of EL7211-0010 for motor AM8121-F00-0000
 #
 # Note: For important parameters see TwinCAT CoE startup list for the 
 #       motor terminal configuration.

@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7332-ch1-Motor-Yaskawa-JKPM-9ZF
-#-d   \details Parmetrization of EL7332 Ch 1 for Yaskawa-JKPM-9ZF
+#-d   \details Parametrization of EL7332 Ch 1 for Yaskawa-JKPM-9ZF
 #-d   Rated voltage            : 12V
 #-d   Rated power              :
 #-d   Rated current            : 80mA      No data

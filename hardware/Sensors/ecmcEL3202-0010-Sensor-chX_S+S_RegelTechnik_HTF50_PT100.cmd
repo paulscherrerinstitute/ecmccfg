@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100
-#-d   \details Parmetrization of EL3201 for S+S Regeltechnik HFT50 PT100 sensor
+#-d   \details Parametrization of EL3201 for S+S Regeltechnik HFT50 PT100 sensor
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:
@@ -9,7 +9,7 @@
 #-d */
 
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 #- Type: PT100
 #- Range: -35 to 105 degC
 #- Connectiontype : 2 wire

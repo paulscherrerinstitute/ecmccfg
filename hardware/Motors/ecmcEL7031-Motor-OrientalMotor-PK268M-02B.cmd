@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7031-Motor-OrientalMotor-PK268M-02B
-#-d   \details Parmetrization of EL7031 for motor Oriental Motor PK268M-02B
+#-d   \details Parametrization of EL7031 for motor Oriental Motor PK268M-02B
 #-d   \author Orell Hürzeler
 #-d   \file
 #-d   \note Max current= 2 A

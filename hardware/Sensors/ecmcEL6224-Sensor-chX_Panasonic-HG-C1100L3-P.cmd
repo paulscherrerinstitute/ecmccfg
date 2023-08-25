@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL6624-Sensor-chX_Panasonic-HGC1100L3-P
-#-d   \details Parmetrization of EL6624 for Panasonic-HGC1100L3-P Laser distance sensor
+#-d   \details Parametrization of EL6624 for Panasonic-HGC1100L3-P Laser distance sensor
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d    \pre Environment variables needed:

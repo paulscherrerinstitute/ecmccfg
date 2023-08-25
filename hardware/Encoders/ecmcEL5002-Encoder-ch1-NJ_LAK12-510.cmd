@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL5002-Encoder-ch1-NJ_LAK12-510
-#-d   \details Parmetrization of EL5002  channel 1 for encoder Numerik Jena LAK
+#-d   \details Parametrization of EL5002  channel 1 for encoder Numerik Jena LAK
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note This encoder delivers 33-bit of data:

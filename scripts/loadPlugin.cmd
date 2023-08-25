@@ -3,7 +3,7 @@
 #- Arguments: FILE, PLUGIN_ID, [CONFIG], [REPORT]
 
 #-d /**
-#-d   \brief Script for loading a ecmc pluginfrom file.
+#-d   \brief Script for loading a ecmc plugin from file.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE      Filename of plugin shared lib (./ecmcPlugin_Advanced.so)
@@ -23,7 +23,8 @@ ${ECMC_PLUGIN_REPORT}ecmcConfigOrDie "Cfg.ReportPlugin(${PLUGIN_ID})"
 epicsEnvUnset(ECMC_PLUGIN_REPORT);
 
 #- Below for facilitate auto gui generation
-# Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_PLG_OBJ_ID==-1)
+# Do not set NxtObj "pointer" if this is the first plugin (ECMC_PREV_PLG_OBJ_ID==-1)
+
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}>=0", "","#- ")
 ${ECMC_EXE_NEXT_PLG}ecmcFileExist(ecmcPlgPrevPlg.db,1,1)
 ${ECMC_EXE_NEXT_PLG}dbLoadRecords(ecmcPlgPrevPlg.db,"NEXT_OBJ_ID=${PLUGIN_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLG_P=""}")

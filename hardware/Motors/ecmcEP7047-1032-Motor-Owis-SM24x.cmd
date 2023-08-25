@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EP7047-1032-Motor-Owis-SM24x
-#-d   \details Parmetrization of EP7047-1032 for motor Owis-SM24x
+#-d   \details Parametrization of EP7047-1032 for motor Owis-SM24x
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Max current = 1.5 A

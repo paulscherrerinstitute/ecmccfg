@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL4XXX-settings-chX-default
-#-d   \details Parmetrization Default SDO settings for EL4XXX
+#-d   \details Parametrization Default SDO settings for EL4XXX
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \pre Environment variables needed:

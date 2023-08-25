@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7332-ch1-Motor-Maxon-115146
-#-d   \details Parmetrization of EL7332 Ch 1 for Maxon-115146
+#-d   \details Parametrization of EL7332 Ch 1 for Maxon-115146
 #-d   Rated voltage            : 24V
 #-d   Rated power              : 2W
 #-d   Rated current            : 83mA
