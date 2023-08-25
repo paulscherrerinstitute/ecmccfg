@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for FIODrive-Motor-OrientalMotor-PK296DB
-#-d   \details Parmetrization of FIODrive for motor OrientalMotor PK296DB
+#-d   \details Parametrization of FIODrive for motor OrientalMotor PK296DB
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

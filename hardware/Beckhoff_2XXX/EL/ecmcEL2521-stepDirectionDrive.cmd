@@ -8,7 +8,7 @@
 
 
 #- ###########################################################
-#- ############ Parmetrization of EL2521 Step Direction interface to "external drive"
+#- ############ Parametrization of EL2521 Step Direction interface to "external drive"
 #-  Output frequency can be scaled with the factor in  8001:06 (see below)
 
 #-  Emergency ramp active (if the watchdog timer responds)

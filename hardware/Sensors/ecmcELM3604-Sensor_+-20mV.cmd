@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ELM3604 for +-20mV range
-#-d   \details Parmetrization of ELM3604 for +-20mV range (all 4 channels)
+#-d   \details Parametrization of ELM3604 for +-20mV range (all 4 channels)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:

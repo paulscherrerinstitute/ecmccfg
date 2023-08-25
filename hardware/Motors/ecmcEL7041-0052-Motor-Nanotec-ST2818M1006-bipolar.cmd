@@ -1,0 +1,1 @@
+ecmcEL7041-Motor-Nanotec-ST2818M1006-bipolar.cmd

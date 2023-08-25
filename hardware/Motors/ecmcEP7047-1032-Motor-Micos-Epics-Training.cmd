@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EP7047-1032-Motor-Micos
-#-d   \details Parmetrization of EP7047-1032 for motor Micos
+#-d   \details Parametrization of EP7047-1032 for motor Micos
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current = 1.5 A

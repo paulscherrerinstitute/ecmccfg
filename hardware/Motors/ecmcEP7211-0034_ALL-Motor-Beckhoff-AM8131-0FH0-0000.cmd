@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EP7211-0034-Motor-Beckhoff-AM8131-0FH0-0000
-#-d   \details Parmetrization of EP7211 for motor Beckhoff AM8131-0FH0-0000
+#-d   \details Parametrization of EP7211 for motor Beckhoff AM8131-0FH0-0000
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note For important parameters see TwinCAT CoE startup list for the motor terminal configuration.

@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-1000-Motor-Amp-57TH76-4280
-#-d   \details Parmetrization of EL7041-1000 for motor Amp-57TH76-4280
+#-d   \details Parametrization of EL7041-1000 for motor Amp-57TH76-4280
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note Phase Current: 2.8A A

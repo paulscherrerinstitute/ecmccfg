@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7211-9014-Motor-Beckhoff-AM8113-0F21-0000
-#-d   \details Parmetrization of EL7211 for motor Beckhoff AM8113-0F21-0000
+#-d   \details Parametrization of EL7211 for motor Beckhoff AM8113-0F21-0000
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note For important parameters see TwinCAT CoE startup list for the motor terminal configuration.

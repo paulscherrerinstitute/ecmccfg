@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL3602-Sensor-chX-default
-#-d   \details Parmetrization Default SDO settings for EL3602
+#-d   \details Parametrization Default SDO settings for EL3602
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:
@@ -9,7 +9,7 @@
 #-d */
 
 ############################################################
-############# Parmetrization Default SDO settings for EL3602
+############# Parametrization Default SDO settings for EL3602
 
 #- Enable user scale (default 0=disabled)
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")

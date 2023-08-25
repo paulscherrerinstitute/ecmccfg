@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ELM3602
-#-d   \details Parmetrization of ELM3602 for setting all channels to the selected RANGE
+#-d   \details Parametrization of ELM3602 for setting all channels to the selected RANGE
 #-d   \author Anders Sandstroem
 #-d   \file
 #-    \pre Environment variables needed:

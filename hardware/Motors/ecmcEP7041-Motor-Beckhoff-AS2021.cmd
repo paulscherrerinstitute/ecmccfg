@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EP7041-Motor-Beckhoff-AS2021
-#-d   \details Parmetrization of EL7041 for AS2021-XXXX
+#-d   \details Parametrization of EL7041 for AS2021-XXXX
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Unipolar Motor
