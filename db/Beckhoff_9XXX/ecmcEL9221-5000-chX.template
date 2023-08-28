@@ -106,3 +106,24 @@ record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
     field(ZSV,  "NO_ALARM")
     field(OSV,  "MAJOR")    
 }
+
+record(mbboDirect,"${ECMC_P}CH${CH_ID}-Ctrl_"){
+    field(DESC, "$(HWTYPE): Control Word")
+    field(DTYP, "asynUInt32Digital")
+    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}=")
+    field(SCAN, "Passive")
+}
+
+record(bo,"${ECMC_P}CH${CH_ID}-Ctrl-Rst"){
+    field(DESC, "$(HWTYPE): Reset")
+    field(OUT,  "${ECMC_P}CH${CH_ID}-Ctrl_.B0 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(bo,"${ECMC_P}CH${CH_ID}-Ctrl-Swtch"){
+    field(DESC, "$(HWTYPE): Switch")
+    field(OUT,  "${ECMC_P}CH${CH_ID}-Ctrl_.B1 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
