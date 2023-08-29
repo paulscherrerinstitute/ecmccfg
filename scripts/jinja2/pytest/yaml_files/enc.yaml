@@ -1,0 +1,10 @@
+
+encoder:
+  numerator: 360
+  denominator: 12800
+  type: 0         # Type: 0=Incremental, 1=Absolute
+  bits: 16        # Total bit count of encoder raw data
+  absOffset: 82.801    # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s{{ var.drive }}.positionActual01  # Ethercat entry for act-pos (encoder)
+
+

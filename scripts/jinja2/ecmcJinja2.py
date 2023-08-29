@@ -5,8 +5,6 @@ import textwrap
 
 import jinja2
 
-
-
 class JinjaCli:
     def __init__(self):
         args = self.getArgs()

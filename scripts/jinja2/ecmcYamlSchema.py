@@ -55,6 +55,10 @@ class Schema:
         2: ['axisPlc', 'axis', 'encoder', 'trajectory', 'var']
     }
 
+    encSchemaDict = {
+        0: ['encoder']
+    }
+
     def get_schema(self, keys):
         _type = type(keys)
         if _type is list:
