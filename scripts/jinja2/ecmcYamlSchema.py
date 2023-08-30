@@ -224,6 +224,15 @@ class Schema:
             'Ki': {'type': 'float', 'default': 0., 'min': 0},
             'Kd': {'type': 'float', 'default': 0., 'min': 0},
             'Kff': {'type': 'float', 'default': 1., 'min': 0},
+            'inner': {
+                'type': 'dict',
+                'schema': {
+                    'Kp': {'type': 'float', 'default': 1., 'min': 0},
+                    'Ki': {'type': 'float', 'default': 0., 'min': 0},
+                    'Kd': {'type': 'float', 'default': 0., 'min': 0},
+                    'tol': {'type': 'float', 'default': 0., 'min': 0},
+                }
+            },
             'limits': {
                 'type': 'dict',
                 'schema': {
