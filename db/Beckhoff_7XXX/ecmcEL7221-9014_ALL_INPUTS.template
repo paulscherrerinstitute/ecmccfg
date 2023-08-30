@@ -30,7 +30,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-STO01"){
-  field(DESC, "$(HWTYPE): Input 2")
+  field(DESC, "$(HWTYPE): STO status")
   field(INP,  "${ECMC_P}Drv${CH_ID}-InfoData2.B8")
   field(ZNAM, "STO")
   field(ONAM, "OK")
