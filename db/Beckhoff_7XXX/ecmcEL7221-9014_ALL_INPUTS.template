@@ -1,0 +1,39 @@
+# Special configuration when infodata 2 is configured to display digital inputs and STO:
+#     -Bit0: Digital Input 1 Level
+#     -Bit1: Digital Input 2 Level
+#     -Bit8: STO Input Level (STO variant, only)
+
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-InfoData2"){
+  field(DESC, "$(HWTYPE): Inputs")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).infoData02?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
+  field(DESC, "$(HWTYPE): Input 1")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-InfoData2.B0")
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
+  field(DESC, "$(HWTYPE): Input 2")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-InfoData2.B1")
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-STO01")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-STO01"){
+  field(DESC, "$(HWTYPE): Input 2")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-InfoData2.B8")
+  field(ZNAM, "STO")
+  field(ONAM, "OK")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+}
