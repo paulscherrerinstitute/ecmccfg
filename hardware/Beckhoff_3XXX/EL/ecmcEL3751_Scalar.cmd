@@ -11,7 +11,7 @@
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "EL3751")
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL3751_Scalar")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0ea73052")
 
