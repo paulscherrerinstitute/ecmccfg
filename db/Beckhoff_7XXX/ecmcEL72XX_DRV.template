@@ -1,5 +1,5 @@
 record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
-  field(DESC, "$(HWTYPE): Drive Control Word RB")
+  field(DESC, "$(HWTYPE): Drv Ctrl Wd RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}?")
@@ -9,7 +9,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
-  field(DESC, "$(HWTYPE): Drive Control Word")
+  field(DESC, "$(HWTYPE): Drv Cntl Wd")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
@@ -17,7 +17,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
 }
 
 record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
-  field(DESC, "$(HWTYPE): Drive Speed Setpoint RB")
+  field(DESC, "$(HWTYPE): Drv Speed SP RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}?")
@@ -41,7 +41,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
-  field(DESC, "$(HWTYPE): Drive Speed Setpoint")
+  field(DESC, "$(HWTYPE): Drv Spd SP")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}=")
@@ -63,7 +63,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
 }
 
 record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
-  field(DESC, "$(HWTYPE): Drive Status Word")
+  field(DESC, "$(HWTYPE): Drv Stat Wd")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
@@ -73,7 +73,7 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
-  field(DESC, "$(HWTYPE): Drive Warning")
+  field(DESC, "$(HWTYPE): Drv Warn")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
@@ -83,7 +83,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
-  field(DESC, "$(HWTYPE): Drive Error")
+  field(DESC, "$(HWTYPE): Drv Err")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
   field(ONAM, "Error")

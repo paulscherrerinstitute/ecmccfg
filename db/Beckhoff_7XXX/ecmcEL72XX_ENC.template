@@ -1,5 +1,5 @@
 record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
-  field(DESC, "$(HWTYPE): Enc Act Pos (Raw)")
+  field(DESC, "$(HWTYPE): ActPos Raw")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionActual${CH_ID}?")
