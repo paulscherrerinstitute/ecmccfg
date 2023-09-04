@@ -13,10 +13,10 @@
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "EL7221-9014_ALL_INPUTS")
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL7211-9014_ALL_INPUTS")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c353052")
-                                          
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b3052")
+                              
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 
