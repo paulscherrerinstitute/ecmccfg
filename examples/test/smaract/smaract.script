@@ -6,24 +6,30 @@
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg sandst_a_MCS2,"IOC=$(IOC),ECMC_VER=sandst_a,EC_RATE=1000,MASTER_ID=0"
+require ecmccfg sandst_a_MCS2,"IOC=$(IOC),ECMC_VER=v9.0.1_RC1,EC_RATE=1000,MASTER_ID=1"
 
 
 ##############################################################################
 ## Configure hardware
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-#${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=MCS2, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=MCS2"
+
+epicsEnvSet("MCS2_SLAVE_NUM",              "2")
+#${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ##############################################################################
-## AXIS 1
+## AXIS 1 (MCS2 CH1)
 #
-#epicsEnvSet("DEV",      "$(IOC)")
-#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7031.ax)
+epicsEnvSet("MCS2_CHID",              "1")
+
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/mcs2.ax)
+
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode01,8)"
+
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -33,10 +39,12 @@ ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 #ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
 #ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 ##############################################################################
 ############# go active:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
 iocInit()
+
+dbgrep *s00${MCS2_SLAVE_NUM}*

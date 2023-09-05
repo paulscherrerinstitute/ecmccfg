@@ -59,5 +59,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},MODE01,8)"
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},MODE02,8)"
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},MODE03,8)"
-
 ```
+
+# Anders notes
+In web configuration the default password is "smaract"
+
