@@ -31,8 +31,3 @@ $ make install
 
 ## ECMC
 * ecmc needs to be recompiled and installed after the patched etherlab master have been installed
-  
-
-
-
-
