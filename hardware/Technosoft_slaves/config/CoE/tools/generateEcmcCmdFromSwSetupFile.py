@@ -25,7 +25,7 @@ class techosoftSetupParser:
     outputFile=open(self.outputFileName,'w')
     startAdressFound=0
     print("WARNING: The Technosoft configuration file needs to be a pure setup file without any custom TML programs.")
-    print("Parsing technosoft setup file:" + self.inputFileName)
+    print("Parsing technosoft setup file: " + self.inputFileName)
     checksum=0;
     lineNumber=0;
     parameterCounter=0;
@@ -88,7 +88,7 @@ class techosoftSetupParser:
 
 def main():
   if len(sys.argv)!=3:
-    print(str(sys.argv[0]) + '<fileToParse> <outputFile>')
+    print(str(sys.argv[0]) + ' <fileToParse> <outputFile>')
     return
 
   tp=techosoftSetupParser()
