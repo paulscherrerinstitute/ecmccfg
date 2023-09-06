@@ -1,4 +1,3 @@
-
 Some notes regarding technosoft drives.
 The Technosoft drives are normally configured in an engineering tool called EasySetup or EasyMotion (running under windows).
 The configurations inlcude what kind of motor and encoder and so on that will be used. This configuration then can be downloaded over RS232 to the drive from the EasySetup/Motion software. The configurations made in EasySetup can be exported to a sw file containing the configured data. The sw file can be parsed and downloaded to the drive over ethercat instead of rs232 by accessing the sdos, 2063,2064,2065.
@@ -16,7 +15,3 @@ Workflow:
 
 4. Check that online and offline checksums match (see print outs from ecmcIPOS8020-Init.cmd)
 5. Now the new configuration is loaded! 
-
-
-
-

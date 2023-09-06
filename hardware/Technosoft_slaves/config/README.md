@@ -6,5 +6,3 @@ Download of configuration to technosoft drive can be done in 2 ways:
 
 The preferred way of downloading configurations are by FoE and are described in the FoE subdirectoy.
 If no FoE configuration exist, then check the CoE sub directory.
-
-
