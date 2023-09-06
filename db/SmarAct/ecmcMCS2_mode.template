@@ -33,7 +33,7 @@ record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeSet-RB"){
   field(SCAN, "I/O Intr")
 }
 
-record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeActual"){
+record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeAct"){
   field(DESC, "mode selector")
   field(DTYP, "asynUInt32Digital")
   field(ZRST, "None")

@@ -56,11 +56,35 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 
 #- this will switch to CSP mode, if those 3 lines are omitted, the MCS2 stays in operation mode '0', aka 'None' and has to manually switched to CSP mode.
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},MODE01,8)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},MODE02,8)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},MODE03,8)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},mode01,8)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},mode02,8)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_MCS2_SLAVE_NUM},mode03,8)"
 ```
 
 # Anders notes
-In web configuration the default password is "smaract"
+* In web configuration the default password is "smaract"
 
+## GUI
+```
+caqtdm -macro "IOC=c6025a,MasterID=0,SlaveID=002" ecmcMCS2.ui 
+```
+
+## Issues
+* Sometimes moves when startup, why?
+* Enabled in smaract service tool but not enabled over ethercat? WHY? Sometimes enabled at startup
+* Sometimes the 0x2000 SDO exists and sometimes not? WHY? Also similar problem for other adresses
+```
+[ 3459.292211] EtherCAT ERROR 1-main-2: SDO download 0x2000:00 (4 bytes) aborted.
+[ 3459.292219] EtherCAT ERROR 1-main-2: SDO abort message 0x06020000: "This object does not exist in the object directory"
+```
+* How to read the limits (virtual)?
+* 
+
+# status wd when in limit:
+```
+c6025a:m1s002-Drv01-Stat 0b00000000000000000001001000110111 Moving Fwd:
+c6025a:m1s002-Drv01-Stat 0b00000000000000000000101000110111 FwdLim:
+c6025a:m1s002-Drv01-Stat 0b00000000000000000000101000011000 Error:
+c6025a:m1s002-Drv01-Stat 0b00000000000000000001001000110111 Moving Bwd:
+c6025a:m1s002-Drv01-Stat 0b00000000000000000000001001010000 Error:
+```

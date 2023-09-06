@@ -5,7 +5,8 @@ epicsEnvSet("ECMC_AXIS_NO",               "1")
 epicsEnvSet("ECMC_DESC",                  "MCS2 ax 1")
 epicsEnvSet("ECMC_EGU",                   "nm")                        # Motor Record Unit
 epicsEnvSet("ECMC_PREC",                  "3")                         # Motor Record Precision
-epicsEnvSet("ECMC_AXISCONFIG",            "")                          # Extra parameters to driver
+epicsEnvSet("ECMC_AXISCONFIG",            "")                  # Extra parameters to driver
+epicsEnvSet("ECMC_AXISFIELDINIT",         "TWV=1000")
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                          # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
 epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
 epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
@@ -13,7 +14,7 @@ epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For posi
 #Encoder
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "1")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "1000")                     # According to manual
-epicsEnvSet("ECMC_ENC_TYPE"               "1")                        # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_BITS"               "32")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
@@ -43,8 +44,8 @@ epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                    # Brake t
 #epicsEnvSet("ECMC_EC_DRV_WARNING",        "ec0.s${MCS2_SLAVE_NUM}.driveStatus0${MCS2_CHID}.2")      # Warning
 
 #Trajectory
-epicsEnvSet("ECMC_VELO",                  "100000.0")
-epicsEnvSet("ECMC_JOG_VEL",               "100000")
+epicsEnvSet("ECMC_VELO",                  "10000.0")
+epicsEnvSet("ECMC_JOG_VEL",               "10000")
 epicsEnvSet("ECMC_JAR",                   "0.0")                       # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCS_EGU_PER_S2",       "100000")
 epicsEnvSet("ECMC_EMERG_DECEL",           "100")                       # Emergency deceleration

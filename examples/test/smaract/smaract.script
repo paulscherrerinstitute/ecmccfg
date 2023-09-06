@@ -8,14 +8,12 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
 require ecmccfg sandst_a_MCS2,"IOC=$(IOC),ECMC_VER=v9.0.1_RC1,EC_RATE=1000,MASTER_ID=1"
 
-
 ##############################################################################
 ## Configure hardware
 
-
 epicsEnvSet("MCS2_SLAVE_NUM",              "2")
-#${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2"
+#${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,CONFIG=-Motor-SLC2445ds-39"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,CONFIG=-Motor-SLC2445ds-39"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -28,8 +26,10 @@ epicsEnvSet("MCS2_CHID",              "1")
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/mcs2.ax)
 
+# Start in CSP
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode01,8)"
-
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode02,8)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode03,8)"
 
 ##############################################################################
 ############# Configure diagnostics:
