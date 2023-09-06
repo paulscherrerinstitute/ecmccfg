@@ -87,10 +87,6 @@ class techosoftSetupParser:
 
 
 def main():
-  if len(sys.argv)==1:
-    print(str(sys.argv[0]) + '<fileToParse> <outputFile>')
-    return
-
   if len(sys.argv)!=3:
     print(str(sys.argv[0]) + '<fileToParse> <outputFile>')
     return
