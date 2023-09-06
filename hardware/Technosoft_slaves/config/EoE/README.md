@@ -1,5 +1,5 @@
 # EoE support
-Note: This is WIP to try to configure Technosoft slaves over EoE instaed of RS232.
+Note: This is WIP to try to configure Technosoft slaves over EoE (Ethernet over EtherCAT) instaed of RS232.
 
 ## Etherlab master
 
