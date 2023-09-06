@@ -16,9 +16,6 @@ class techosoftSetupParser:
   def setOutputFileName(self,dataFileName):
     self.outputFileName=dataFileName
 
-  def setOutputFileName(self,dataFileName):
-    self.outputFileName=dataFileName
-
   def setEpicsSleepTime(self,time):
     self.epicsSleepTime=time
 
