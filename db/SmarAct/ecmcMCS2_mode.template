@@ -13,8 +13,7 @@ record(mbbo,  "${ECMC_P}Drv${CH_ID}-ModeSet"){
   field(EIVL, 8)
   field(OMSL, "supervisory")
   field(PINI,  "YES")
-  field(MDEL,  -1)
-  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).MODE${CH_ID}=")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).mode${CH_ID}=")
 }
 
 record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeSet-RB"){
@@ -30,11 +29,11 @@ record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeSet-RB"){
   field(SXVL, 6)
   field(EIST, "CSP")
   field(EIVL, 8)
-  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).MODE${CH_ID}?")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).mode${CH_ID}?")
   field(SCAN, "I/O Intr")
 }
 
-record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeActual"){
+record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeAct"){
   field(DESC, "mode selector")
   field(DTYP, "asynUInt32Digital")
   field(ZRST, "None")
