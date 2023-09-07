@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # coding: utf-8
 import sys
-import re
 import time
 
 class techosoftSetupParser:
@@ -11,34 +10,31 @@ class techosoftSetupParser:
     self.epicsSleepTime=0.01
 
   def setInputFileName(self,dataFileName):
-    self.inputFileName=dataFileName 
-
-  def setOutputFileName(self,dataFileName):
-    self.outputFileName=dataFileName 
+    self.inputFileName=dataFileName
 
   def setOutputFileName(self,dataFileName):
     self.outputFileName=dataFileName
 
   def setEpicsSleepTime(self,time):
-    self.epicsSleepTime=time  
+    self.epicsSleepTime=time
 
 
   def parse(self):
     inputFile=open(self.inputFileName,'r')
     outputFile=open(self.outputFileName,'w')
     startAdressFound=0
-    print "WARNING: The Technosoft configuration file needs to be a pure setup file without any custom TML programs."
-    print "Parsing technosoft setup file:" + self.inputFileName
+    print("WARNING: The Technosoft configuration file needs to be a pure setup file without any custom TML programs.")
+    print("Parsing technosoft setup file: " + self.inputFileName)
     checksum=0;
-    lineNumber=0;    
-    parameterCounter=0;    
+    lineNumber=0;
+    parameterCounter=0;
 
     for line in inputFile.readlines():
       lineNumber=lineNumber+1;
       line=line.strip()
 
       if len(line)==0:
-        print "Found end of setup-file at line number: "+ str(lineNumber)        
+        print("Found end of setup-file at line number: "+ str(lineNumber))
 
         low16bits = checksum & 0xffff
         stopAdress=startAdress + parameterCounter-1;
@@ -57,12 +53,12 @@ class techosoftSetupParser:
         outputFile.write('# NOTE: Reset drive command will return error -5 since no repsonse is sent back to the master! The drive will be reset anyway!\n')
         outputFile.write('ecmcConfig "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2080,0x0,1,2)"\n')
         outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
-        return  
+        return
 
-      if lineNumber==1:  
-        startAdress= int(line,16)        
+      if lineNumber==1:
+        startAdress= int(line,16)
         startAdressString='0x'+line+'0008'; # 0008 = 16 bit access, auto increment adress. See technosoft CoE manual ch16.4
-        print "Start adress is " + startAdressString 
+        print("Start adress is " + startAdressString)
         outputFile.write('#########################################################\n')
         outputFile.write('#  Parsing of Technosoft setup-file to ECMC format.\n')
         outputFile.write('#      Input file name: '+ self.inputFileName +'\n')
@@ -70,40 +66,34 @@ class techosoftSetupParser:
         outputFile.write('#      Output file name: '+ self.outputFileName +'\n')
         outputFile.write('#      Date: '+ time.strftime("%Y/%m/%d %H:%M:%S") +'\n')
         outputFile.write('#########################################################\n')
-        outputFile.write('ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2064,0x0,' + startAdressString+ ',4)"\n')  
+        outputFile.write('ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2064,0x0,' + startAdressString+ ',4)"\n')
         outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
         startAdressFound=1
         continue
 
       if lineNumber>1 and not startAdressFound:
-        print "Error: Start adress not found. Parsing aborted."
+        print("Error: Start adress not found. Parsing aborted.")
         return
 
-      print line + " length: " + str(len(line))
+      print(line + " length: " + str(len(line)))
       checksum=checksum+int(line,16)
       data='0x'+line
       outputFile.write('ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2065,0x0,' + data+ ',4)"\n')
       outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
       parameterCounter=parameterCounter+1
-    
+
     inputFile.close()
 
 
 def main():
-  if len(sys.argv)==1:
-    print str(sys.argv[0]) + '<fileToParse> <outputFile>'
-    return
-  
   if len(sys.argv)!=3:
-    print str(sys.argv[0]) + '<fileToParse> <outputFile>'
+    print(str(sys.argv[0]) + ' <fileToParse> <outputFile>')
     return
 
   tp=techosoftSetupParser()
   tp.setInputFileName(sys.argv[1])
   tp.setOutputFileName(sys.argv[2])
-  tp.parse() 
+  tp.parse()
 
 if __name__ == "__main__":
     main()
-
-

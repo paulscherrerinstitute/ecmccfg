@@ -1,5 +1,5 @@
 # EoE support
-Note: This is WIP to try to configure Technosoft slaves over EoE instaed of RS232.
+Note: This is WIP to try to configure Technosoft slaves over EoE (Ethernet over EtherCAT) instaed of RS232.
 
 ## Etherlab master
 
@@ -31,8 +31,3 @@ $ make install
 
 ## ECMC
 * ecmc needs to be recompiled and installed after the patched etherlab master have been installed
-  
-
-
-
-
