@@ -6,7 +6,7 @@
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg v9.0.1_RC1
+require ecmccfg v9.0.1_RC2
 
 ##############################################################################
 ## Configure hardware
@@ -31,13 +31,11 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM_BO",           "6")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_BO), HW_DESC=EL2008"
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_BO},binaryOutput02,1)"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_DRIVE), HW_DESC=EP7211-0034_ALL, CONFIG=-Motor-Beckhoff-AM8111-0F20-0000"
-
 # Limit torque to 50% of motor rated torque
 #- Rated current = 2710mA (see motor config file, "0x8011 0x12 Rated current (mA)")
 #- Set to 50% of 2710 = 1355mA   (0x8011 0x11 Max current (mA))
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,1355,4)"
+epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_DRIVE), HW_DESC=EP7211-0034_ALL, CONFIG=-Motor-Beckhoff-AM8111-0F20-0000,CFG_MACROS='I_MAX_MA=1355'"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
