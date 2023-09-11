@@ -1,7 +1,7 @@
 
 ############################################################
 ############# Parmetrization of EL72XX-XXXX for motor AM8121-0F00-0000
-#- Motor WITHOUT brake
+#- Motor WITH brake
 #-
 #- Note: For important parameters see TwinCAT CoE startup list for the 
 #-       motor terminal configuration.

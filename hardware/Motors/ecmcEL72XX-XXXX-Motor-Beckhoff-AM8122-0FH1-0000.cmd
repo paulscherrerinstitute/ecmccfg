@@ -1,10 +1,10 @@
-#-d /**
-#-d   \brief hardware script for EL7211-0010-Motor-Beckhoff-AM8122-0FH1-0000
-#-d   \details Parametrization of EL7211-0010 for motor Beckhoff AM8111-0FH1-0000
-#-d   \author Niko Kivel, A. Sandström
-#-d   \file
-#-d   \note For important parameters see TwinCAT CoE startup list for the motor terminal configuration.
-#-d 
+############################################################
+############# Parmetrization of EL72XX-XXXX for motor AM8122-0FH1-0000
+#- Motor WITH brake
+#-
+#- Note: For important parameters see TwinCAT CoE startup list for the 
+#-       motor terminal configuration.
+#-
 #- Macros (optional):
 #-d   \param I_MAX_MA : Maximum current in mA (defaults to 22400)
 #-d   \param I_RUN_MA : Running current in mA (defaults to 4000mA)
@@ -41,3 +41,8 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,150,4)"
 #- ###### Differs with brake:
 #- Rotor moment of inertia
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x18,325,4)"
+#- Application delay
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x12,25,2)"
+#- Release delay
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x11,8,2)"
+
