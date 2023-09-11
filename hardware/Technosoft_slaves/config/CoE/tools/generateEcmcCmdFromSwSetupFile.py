@@ -25,19 +25,19 @@ class techosoftSetupParser:
     startAdressFound=0
     print("WARNING: The Technosoft configuration file needs to be a pure setup file without any custom TML programs.")
     print("Parsing technosoft setup file: " + self.inputFileName)
-    checksum=0;
-    lineNumber=0;
-    parameterCounter=0;
+    checksum=0
+    lineNumber=0
+    parameterCounter=0
 
     for line in inputFile.readlines():
-      lineNumber=lineNumber+1;
+      lineNumber=lineNumber+1
       line=line.strip()
 
       if len(line)==0:
         print("Found end of setup-file at line number: "+ str(lineNumber))
 
         low16bits = checksum & 0xffff
-        stopAdress=startAdress + parameterCounter-1;
+        stopAdress=startAdress + parameterCounter-1
         outputFile.write('# Setup drive to calculate online checksum (' + '0x{:02x}'.format(startAdress) +':' + '0x{:02x}'.format(stopAdress) +'):\n')
         tempString='0x{:02x}'.format(stopAdress) + '{:02x}'.format(startAdress)  # From to adress
         outputFile.write('ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2069,0x0,'+ tempString +',4)"\n')
@@ -57,7 +57,7 @@ class techosoftSetupParser:
 
       if lineNumber==1:
         startAdress= int(line,16)
-        startAdressString='0x'+line+'0008'; # 0008 = 16 bit access, auto increment adress. See technosoft CoE manual ch16.4
+        startAdressString='0x'+line+'0008' # 0008 = 16 bit access, auto increment adress. See technosoft CoE manual ch16.4
         print("Start adress is " + startAdressString)
         outputFile.write('#########################################################\n')
         outputFile.write('#  Parsing of Technosoft setup-file to ECMC format.\n')
