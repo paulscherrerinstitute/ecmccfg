@@ -5,8 +5,6 @@
 If the max torque of the motor needs to be reduced then the SDO entry 0x8011:0x11 can be used.
 
 
-
-
 ## Example: Apply max 50% torque
 
 The rated current for the terminal is configured in  0x8011 0x12.
@@ -21,6 +19,12 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x12,2710,4)"
 ```
 In order to limit the motor to max 50% of rated torque the maximum current of the motor needs to be reduced to 50% of the nominal current, in this case 0.5*2710=1355mA. This value needs to be set in 0x8011:0x11
 
+Simplest alternative, add macro direct in slave config:
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_DRIVE), HW_DESC=EP7211-0034_ALL, CONFIG=-Motor-Beckhoff-AM8111-0F20-0000,CFG_MACROS='I_MAX_MA=1355'"
+```
+
+Or by setting SDO:
 ```
 #- 0x8011 0x11 Max current (mA)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,1355,4)"
@@ -28,6 +32,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,1355,4)"
 Now the motor torque output is limited to a maximum of 50% of the motor rated torque.
 
 IMPORTANT: Do not change the setting for rated current since that will make the scaling between current and torque wrong.
+
 
 # Digital inputs on E72XX-9014
 
