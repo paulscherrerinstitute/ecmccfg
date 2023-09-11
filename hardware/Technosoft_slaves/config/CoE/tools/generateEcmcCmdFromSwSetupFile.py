@@ -34,7 +34,8 @@ class techosoftSetupParser:
       line=line.strip()
 
       if len(line)==0:
-        print("Found end of setup-file at line number: "+ str(lineNumber))
+        print("Found end of block at line number: "+ str(lineNumber))
+        lineNumber=0
 
         low16bits = checksum & 0xffff
         stopAdress=startAdress + parameterCounter-1
@@ -42,6 +43,8 @@ class techosoftSetupParser:
         tempString='0x{:02x}'.format(stopAdress) + '{:02x}'.format(startAdress)  # From to adress
         outputFile.write('ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2069,0x0,'+ tempString +',4)"\n')
         outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
+
+        outputFile.write('\n')
         outputFile.write('#########################################################\n')
         outputFile.write('#      Total number of lines parsed: '+ str(parameterCounter) +'\n')
         outputFile.write('#      Offline calculated checksum: '+ '0x{:02x}'.format(low16bits) +' ('+ str(low16bits)+')\n')
@@ -49,23 +52,23 @@ class techosoftSetupParser:
         outputFile.write('ecmcConfig "EcReadSdo(${ECMC_EC_SLAVE_NUM},0x206A,0x0,2)"\n')
         outputFile.write('ecmcConfigOrDie "Cfg.EcVerifySdo(${ECMC_EC_SLAVE_NUM},0x206A,0x0,'+ '0x{:02x}'.format(low16bits) + ',2)"\n')
         outputFile.write('#########################################################\n')
-        outputFile.write('# Reset drive to apply settings:\n')
-        outputFile.write('# NOTE: Reset drive command will return error -5 since no repsonse is sent back to the master! The drive will be reset anyway!\n')
-        outputFile.write('ecmcConfig "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2080,0x0,1,2)"\n')
-        outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
-        return
+        outputFile.write('\n')
+        continue
 
       if lineNumber==1:
         startAdress= int(line,16)
         startAdressString='0x'+line+'0008' # 0008 = 16 bit access, auto increment adress. See technosoft CoE manual ch16.4
         print("Start adress is " + startAdressString)
+
         outputFile.write('#########################################################\n')
         outputFile.write('#  Parsing of Technosoft setup-file to ECMC format.\n')
         outputFile.write('#      Input file name: '+ self.inputFileName +'\n')
-        outputFile.write('#      Input file start adress: '+ '0x{:02x}'.format(startAdress) +'\n')
+        outputFile.write('#      Block start adress: '+ '0x{:02x}'.format(startAdress) +'\n')
         outputFile.write('#      Output file name: '+ self.outputFileName +'\n')
         outputFile.write('#      Date: '+ time.strftime("%Y/%m/%d %H:%M:%S") +'\n')
         outputFile.write('#########################################################\n')
+        outputFile.write('\n')
+
         outputFile.write('ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2064,0x0,' + startAdressString+ ',4)"\n')
         outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
         startAdressFound=1
@@ -82,6 +85,10 @@ class techosoftSetupParser:
       outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
       parameterCounter=parameterCounter+1
 
+    outputFile.write('# Reset drive to apply settings:\n')
+    outputFile.write('# NOTE: Reset drive command will return error -5 since no repsonse is sent back to the master! The drive will be reset anyway!\n')
+    outputFile.write('ecmcConfig "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2080,0x0,1,2)"\n')
+    outputFile.write('epicsThreadSleep(' + str(self.epicsSleepTime) +')\n') #Sadly needed for this drive for some reason?
     inputFile.close()
 
 
