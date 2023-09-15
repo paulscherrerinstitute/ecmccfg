@@ -23,6 +23,7 @@ record(waveform,"$(P)$(DS_DATA_ACT)") {
   field(NELM, "$(NELM)")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
+  field(PREC,  "$(PREC=3)")
 }
 
 record(longin,"$(P)$(DS_STAT)"){
