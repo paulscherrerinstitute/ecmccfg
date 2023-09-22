@@ -50,7 +50,7 @@ epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  #- Default = 0
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
 #- Baud rate
-#-    
+#-
 #- 300    : 1
 #- 600    : 2
 #- 1200   : 3
@@ -60,7 +60,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 #- 19200  : 7
 #- 38400  : 8
 #- 57600  : 9
-#- 115200 : 10 
+#- 115200 : 10
 
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x11")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
@@ -68,7 +68,7 @@ epicsEnvSet("ECMC_EC_SDO_VALUE",         "6")  #- Default = 6
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
 #- Data frame
-#-    
+#-
 #- 8N1 : 3  Default
 #- 8E1 : 4
 #- 8O1 : 5
@@ -78,7 +78,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_E
 #- 8N2 : 11
 #- 8E2 : 12
 #- 8O2 : 13
-#- 
+#-
 
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x15")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")

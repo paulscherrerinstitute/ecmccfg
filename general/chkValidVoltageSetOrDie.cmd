@@ -4,7 +4,7 @@
 #-d   \brief Ensure requested nominal voltage is less than max voltage and larger than 0
 #-d   need to use ecmcExit since iocsh command "exit" just stops reading current file.
 #-d
-#-d    Arguments: 
+#-d    Arguments:
 #-d      V_MAX_MV   :  Max voltage in mV
 #-d      V_NOM_MV   :  Nominal voltage in mV
 #-d

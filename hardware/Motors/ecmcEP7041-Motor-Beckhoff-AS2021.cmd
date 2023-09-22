@@ -5,7 +5,7 @@
 #-d   \file
 #-d   \note Unipolar Motor
 #-d   \note Max current per phase = 2.0 A
-#-d   \note Voltage = 24/50 V 
+#-d   \note Voltage = 24/50 V
 #-d   \note Inductance per phase = ? mH
 #-d   \note Resistance per phase = ? Ohm
 #-d   \note Basic step angle = 1.8 Degrees - 200 full steps count
@@ -28,4 +28,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,250,2)"
 
 #- Motor full steps count
 #ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,200,2)"
-

@@ -14,4 +14,3 @@ file "ecmc_status_analog-chX.template"
           {03,    "AI"}
           {04,    "AI"}
 }
-

@@ -2,7 +2,7 @@
 #-d   \brief hardware script for EL7332-ch2-Motor-Yaskawa-JKPM-9ZF
 #-d   \details Parametrization of EL7332 Ch 2 for Yaskawa-JKPM-9ZF
 #-d   Rated voltage            : 12V
-#-d   Rated power              :        
+#-d   Rated power              :
 #-d   Rated current            : 80mA      No data
 #-d   Velocity without load    : 1000Rpm   no data
 #-d   Coil resistance          : Measured appr0x 100Ohm (varies with angels du to brush)

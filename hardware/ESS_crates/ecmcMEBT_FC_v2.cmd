@@ -23,7 +23,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL2819"
 # Configure EL3214 4K. Ana. Eingang PT100 (RTD)
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL3214"
 
-#Configure EL3174 analog input configured to read 0 to 10V, NOTE: Use cutsom substitution file (ecmcEL7134_0to10V_FC.substitutions)! 
+#Configure EL3174 analog input configured to read 0 to 10V, NOTE: Use cutsom substitution file (ecmcEL7134_0to10V_FC.substitutions)!
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL3174_0to10V,SUBST_FILE=ecmc3174_0to10V_FC.substitutions"
 
 # Configure EL4134 analog output terminal 0-10V, NOTE: Use cutsom substitution file (ecmcEL4134_FC.substitutions)!

@@ -46,4 +46,3 @@ record(bi,"${ECMC_P}${KEY=AI}${CH_ID}-ErrAlrm"){
   field(OSV,  "MAJOR")
   field(TSE,  "$(TSE=-2)")
 }
-
