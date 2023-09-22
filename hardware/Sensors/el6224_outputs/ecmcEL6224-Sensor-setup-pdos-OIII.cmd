@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL6624-Sensor-setup-pdos-OIII.cmd
-#-d   \details Parmetrization:
+#-d   \details Parametrization:
 #-d      0    outputs 
 #-d      1..3 inputs
 #-d   \author Anders Sandstroem

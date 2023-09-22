@@ -148,6 +148,13 @@ class ConfigValidator:
         if 'plc' not in schema.keys():
             schema['plc'] = schema.pop(schemaKey[0])
         return self.validate(schema=schema, strict=strict)
+    
+    def  validate_enc(self, strict=True) -> dict:
+        """
+        validate the complete document
+        """
+        schema = self.Schema.get_schema(self.Schema.encSchemaDict[0])
+        return self.validate(schema=schema, strict=strict)
 
 def main():
     # file = 'pytest/yaml_files/joint_all.yaml'

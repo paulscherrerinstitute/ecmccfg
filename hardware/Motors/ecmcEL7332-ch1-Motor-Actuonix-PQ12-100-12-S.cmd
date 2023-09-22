@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7332-ch1-Actuonix-PQ12-100-12-S.cmd
-#-d   \details Parmetrization of EL7332 Ch 1 for Actuonix-PQ12-100-12-S.cmd
+#-d   \details Parametrization of EL7332 Ch 1 for Actuonix-PQ12-100-12-S.cmd
 #-d   Rated voltage            : 12V
 #-d   Rated power              : 2W
 #-d   Peak power point         : 40N @ 6mm/s

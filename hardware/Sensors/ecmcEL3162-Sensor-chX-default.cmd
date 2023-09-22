@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for EL3162-Sensor-chX-default
-#-d   \details Parmetrization Default SDO settings for EL3162
+#-d   \details Parametrization Default SDO settings for EL3162
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 ############################################################
-############# Parmetrization Default SDO settings for EL3162
+############# Parametrization Default SDO settings for EL3162
 #
 #- Environment variables needed:
 #- -ECMC_EC_SDO_INDEX "0x80n0" where n is channel 0..3

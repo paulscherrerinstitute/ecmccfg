@@ -1,0 +1,64 @@
+#- =============================================================================
+#- Encoder
+#- =============================================================================
+
+ecmcConfigOrDie "Cfg.AddAxisEnc(${ECMC_AXIS_NO})"
+#- Get current encoder index beeing configured (index of encoder added), needed for PV names
+ecmcConfig "GetAxisEncConfigIndex($(ECMC_AXIS_NO))"
+# Current encoder index beeing configured
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
+
+{#- links #}
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
+{%- if encoder.control %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax${ECMC_AXIS_NO}.enc.control")"
+{%- endif %}
+{#- scaling #}
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},{{ encoder.denominator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator|float }})"
+{#- source #}
+ecmcConfigOrDie "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},{{ encoder.source }})"
+{#- data #}
+ecmcConfigOrDie "Cfg.SetAxisEncType(${ECMC_AXIS_NO},{{ encoder.type }})"
+ecmcConfigOrDie "Cfg.SetAxisEncBits(${ECMC_AXIS_NO},{{ encoder.bits }})"
+{%- if encoder.type == 1  %}
+    ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(${ECMC_AXIS_NO},{{ encoder.absBits }})"
+{%- endif  %}
+ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
+{#-{%- if encoder.mask %}#}
+{#-ecmcConfigOrDie "Cfg.SetAxisEncRawMask(${ECMC_AXIS_NO}, {{ encoder.mask|int }})"#}
+{#-{%- endif %}#}
+{%- if encoder.reset is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.reset }}","ax${ECMC_AXIS_NO}.enc.reset")"
+{%- endif %}
+{%- if encoder.warning is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.warning }}","ax${ECMC_AXIS_NO}.enc.warning")"
+{%- endif %}
+{%- if encoder.error is defined %}
+    {%- for bit in encoder.error %}
+        {%- if bit is string %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax${ECMC_AXIS_NO}.enc.alarm{{loop.index0}}")"
+        {%- else  %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax${ECMC_AXIS_NO}.enc.alarm{{loop.index0}}")"
+        {%- endif %}
+    {%- endfor %}
+{%- endif %}
+{%- if encoder.latch %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.latch.position }}","ax${ECMC_AXIS_NO}.enc.latchpos")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax${ECMC_AXIS_NO}.enc.latchcontrol")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
+{%- endif %}
+{%- if encoder.filter.velocity %}
+    {%- if encoder.filter.velocity.enable %}
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size}})"
+    {%- endif %}
+{%- endif %}
+{%- if encoder.filter.trajectory %}
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int}})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
+{%- endif %}
+
+ecmcFileExist("ecmcEnc.db",1,1)
+dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},ENC_NO=${ECMC_ENC_CFG_ID},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+

@@ -1191,7 +1191,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -1284,7 +1284,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(8,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -1403,7 +1403,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -1497,7 +1497,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(9,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -1617,7 +1617,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",  2020/01/03 10:22:40.950 OK
 2020/01/03 10:22:40.950 OK
@@ -1711,7 +1711,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(10,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -1849,7 +1849,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -1943,7 +1943,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(11,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2062,7 +2062,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2156,7 +2156,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(12,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2294,7 +2294,7 @@ iocshLoad /epics/base-7.0.3.1/require/3.1.2/2020/01/03 10:22:41.388 OK
 2020/01/03 10:22:41.389 OK
 siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2508,7 +2508,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2602,7 +2602,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2720,7 +2720,7 @@ dbLoadTemplate(ecmcEL3202-0010.substitutions,"P=IOC_TEST:,PORT=MC_CPU1,ADDR=0,TI
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled
@@ -2814,7 +2814,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(15,0x8000,0x1B,3,2)"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 iocshLoad /epics/base-7.0.3.1/require/3.1.2/siteMods/ecmccfg/Julen_prl/ecmcEL3202-0010-Sensor-chX_S+S_RegelTechnik_HTF50_PT100.cmd
 ############################################################
-############# Parmetrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
+############# Parametrization of EL32X4 for S+S Regeltechnik HFT50 PT100 sensor
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x1")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "1")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")  # Disabled

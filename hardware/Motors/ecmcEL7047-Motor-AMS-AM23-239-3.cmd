@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-AMS-AM23-239-3
-#-d   \details Parmetrization of EL7047 for motor AMS-AM23-239-3
+#-d   \details Parametrization of EL7047 for motor AMS-AM23-239-3
 #-d   \author Julen Etxeberria
 #-d   \file
 #-d   \note Max current= 3.0 A

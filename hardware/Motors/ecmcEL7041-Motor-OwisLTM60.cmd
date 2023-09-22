@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ecmcEL7041-Motor-OwisLTM60.cmd
-#-d   \details Parmetrization of EL7041 for motor mounted to an OWIS LTM60 linear stage
+#-d   \details Parametrization of EL7041 for motor mounted to an OWIS LTM60 linear stage
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

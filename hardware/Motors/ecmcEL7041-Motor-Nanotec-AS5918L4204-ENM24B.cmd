@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7041-Motor-Nanotec-AS5918L4204-ENM24B
-#-d   \details Parmetrization of EL7041 for motor Nanotec AS5918L4204-ENM24B
+#-d   \details Parametrization of EL7041 for motor Nanotec AS5918L4204-ENM24B
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

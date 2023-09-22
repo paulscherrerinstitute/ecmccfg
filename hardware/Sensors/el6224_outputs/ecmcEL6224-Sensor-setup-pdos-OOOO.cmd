@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL6624-Sensor-setup-pdos-IIIO.cmd
-#-d   \details Parmetrization 0..2 as inputs and 3 as output. Setup pdos.
+#-d   \details Parametrization 0..2 as inputs and 3 as output. Setup pdos.
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d    \pre ECMC_EC_SLAVE_NUM   Slave number

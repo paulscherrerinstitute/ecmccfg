@@ -457,6 +457,8 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(EGU,  "${EGU=mm}")
   field(TSE,  "0")
   field(VAL,  0)
+  field(DRVL, ${P_DRVL=0})
+  field(DRVH, ${P_DRVH=0})
 }
 
 record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
@@ -468,6 +470,8 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(EGU,  "${EGU=mm}/s")
   field(TSE,  "0")
   field(VAL, "${VELO=0}")
+  field(DRVL, ${V_DRVL=0})
+  field(DRVH, ${V_DRVH=0})
 }
 
 record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){

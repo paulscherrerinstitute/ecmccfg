@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7047-Motor-Trinamic-QMot-QSH4218-41-10-035
-#-d   \details Parmetrization of EL7047 for motor Trinamic QMot-QSH4218-41-10-035
+#-d   \details Parametrization of EL7047 for motor Trinamic QMot-QSH4218-41-10-035
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

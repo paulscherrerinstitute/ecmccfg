@@ -1,0 +1,129 @@
+record(mbbiDirect,"${ECMC_P}CH${CH_ID}-StatW01"){
+    field(DESC, "$(HWTYPE): Status Word 1")
+    field(PINI, "$(PINI=1)")
+    field(DTYP, "asynUInt32Digital")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).status${CH_ID}?")
+    field(SCAN, "I/O Intr")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-StatW02.PROC")
+    field(SHFT, "0")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(mbbiDirect,"${ECMC_P}CH${CH_ID}-StatW02"){
+    field(DESC, "$(HWTYPE): Status Word 2")    
+    field(DTYP, "Raw Soft Channel")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.RVAL")    
+    field(FLNK, "${ECMC_P}CH${CH_ID}-EnaAct.PROC")
+    field(SHFT, "16")
+    field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-EnaAct"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Enabled")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B0")
+    field(ZNAM, "Disabled")
+    field(ONAM, "Enabled")
+    field(ZSV,  "MINOR")
+    field(OSV,  "NO_ALARM")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-TripAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-TripAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Tripped")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B1")
+    field(ZNAM, "OK")
+    field(ONAM, "Tripped")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-HwProtAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-HwProtAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: HardwareProtection")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B4")
+    field(ZNAM, "OK")
+    field(ONAM, "Hardware Protection")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-CurrLvlAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-CurrLvlAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Current Level Warning")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B7")
+    field(ZNAM, "OK")
+    field(ONAM, "CurrentLevelWarning")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MINOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-CoolDwnAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-CoolDwnAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Cool Down Lock")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.B8")
+    field(ZNAM, "OK")
+    field(ONAM, "Cool Down Lock")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-DiagAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-DiagAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Diag")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.BC")
+    field(ZNAM, "OK")
+    field(ONAM, "Diag")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-ErrAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-ErrAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: Error")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B2")
+    field(ZNAM, "no Error")
+    field(ONAM, "Error")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-RstAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-RstAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: State Reset")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B3")
+    field(ZNAM, "OK")
+    field(ONAM, "Reset Alarm")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+    field(FLNK, "${ECMC_P}CH${CH_ID}-SwtchAlrm.PROC")
+}
+
+record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
+    field(DESC, "$(HWTYPE): CH${CH_ID}: State Switch")
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW02.B4")
+    field(ZNAM, "OK")
+    field(ONAM, "Switch Alarm")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")    
+}
+
+record(mbboDirect,"${ECMC_P}CH${CH_ID}-Ctrl_"){
+    field(DESC, "$(HWTYPE): Control Word")
+    field(DTYP, "asynUInt32Digital")
+    field(OUT, "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).control${CH_ID}=")
+    field(SCAN, "Passive")
+}
+
+record(bo,"${ECMC_P}CH${CH_ID}-Ctrl-Rst"){
+    field(DESC, "$(HWTYPE): Reset")
+    field(OUT,  "${ECMC_P}CH${CH_ID}-Ctrl_.B0 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(bo,"${ECMC_P}CH${CH_ID}-Ctrl-Swtch"){
+    field(DESC, "$(HWTYPE): Switch")
+    field(OUT,  "${ECMC_P}CH${CH_ID}-Ctrl_.B1 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}

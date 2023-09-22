@@ -3,7 +3,7 @@
 #-d /**
 #-d   \brief hardware script for EL7411-Motor-Maxon-228456
 #-d 
-#-d   \details Parmetrization of EL7411 for motor Maxon-228456 incremental encoder (not hall sensors)
+#-d   \details Parametrization of EL7411 for motor Maxon-228456 incremental encoder (not hall sensors)
 #-d 
 #-d   \note This config only configures the encoder part of the EL7411.
 #-d

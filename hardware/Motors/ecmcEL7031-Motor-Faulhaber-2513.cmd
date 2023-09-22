@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EL7031-Motor-Faulhaber-2513
-#-d   \details Parmetrization of EL7031 for motor Faulhaber 2513
+#-d   \details Parametrization of EL7031 for motor Faulhaber 2513
 #-d   \author Orell Hürzeler
 #-d   \file
 #-d   \note Unipolar Motor

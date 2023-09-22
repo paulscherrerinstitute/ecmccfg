@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for EP6624-Sensor-Murr-emparro67
-#-d   \details Parmetrization of EP6624 for Murr emparro67 power supply
+#-d   \details Parametrization of EP6624 for Murr emparro67 power supply
 #-d   \author Niko Kivel
 #-d   \file
 #-d    \pre Environment variables needed:

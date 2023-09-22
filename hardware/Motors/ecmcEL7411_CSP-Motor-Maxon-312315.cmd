@@ -2,7 +2,7 @@
 # ecmcEL7411_CSP-Motor-Maxon-312315.cmd
 #-d /**
 #-d   \brief hardware script for EL7411-Motor-Maxon-312315
-#-d   \details Parmetrization of EL7411 for motor Maxon-312315 BLDC with hall and incremental encoder for CSP mode
+#-d   \details Parametrization of EL7411 for motor Maxon-312315 BLDC with hall and incremental encoder for CSP mode
 #-d 
 #-d   \note This config configures both motor and encoder part of EL7411
 #-d 
