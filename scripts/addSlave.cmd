@@ -73,4 +73,3 @@ epicsEnvSet(ECMC_EC_PREV_SLAVE_NUM,${ECMC_EC_SLAVE_NUM})
 
 # increment SLAVE_ID
 ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
-

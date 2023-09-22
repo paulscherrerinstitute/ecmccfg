@@ -8,9 +8,9 @@
 #-d   Velocity without load    : 440Rpm
 #-d   Gear ratio               : 1:14.14
 #-d   Coil resistance          : ?
-#-d   
+#-d
 #-d   SDO address 0x802x for Channel 1
-#-d   
+#-d
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

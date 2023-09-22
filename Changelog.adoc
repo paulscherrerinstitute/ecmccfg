@@ -8,7 +8,7 @@ PVs changed:
 
 * Update ecmcEL7037_PosIF-chX.template
 ** "StartType" to "StrtType", affetced terminals:
-***   EL7037 in position interface 
+***   EL7037 in position interface
 
 * Update ecmcEL60X2-chX.template
 ** "Array" to "Arr", affected terminals:
@@ -60,7 +60,7 @@ PVs changed:
 *** EL3702
 
 * Update of ecmcEL5101-chX.template
-** "LtchAutRstSp" to "LchAutRstSp", affected terminals: 
+** "LtchAutRstSp" to "LchAutRstSp", affected terminals:
 *** EL5101
 *** EL5101_32bit
 *** EL7031
@@ -88,7 +88,7 @@ PVs changed:
 *** EL7041
 *** EL7041-1000
 *** EL7047
- 
+
 * Update of ecmcEL7332-chX.template:
 ** "SyncErr-Alrm" to "SyncErrAlrm"
 ** "Stl-Alrm" to "StlAlrm"
@@ -136,4 +136,3 @@ These features need to be tested for the v8 release!
 - `ECMC` version `ruckig` (aka `v8`): Due to a fixed typo in the `ECMC` command set, which required a fix in the `jinja2` templates.
 
 v7.0.0
-

@@ -17,8 +17,8 @@
 #-d     Bakeout temperature:   200°C
 #-d     Step angle:            1.8°
 #-d     Step angle tolerance:  ±5%
-#-d     Lead length:           1.5m 
-#-d     
+#-d     Lead length:           1.5m
+#-d
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
@@ -28,7 +28,7 @@ epicsEnvSet(I_MAX_MA_LOCAL,"1000")
 epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=610})
 epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=87})
 
-#- Ensure valid current settings 
+#- Ensure valid current settings
 ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=${I_STDBY_MA_LOCAL},I_MAX_MA=${I_MAX_MA_LOCAL}"
 

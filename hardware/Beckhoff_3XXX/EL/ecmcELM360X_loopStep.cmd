@@ -1,12 +1,12 @@
 #- ecmcForLoop file for EL3702 oversampling PDOS
-#- 
-#-  Loop macro: 
+#-
+#-  Loop macro:
 #-    ECMC_LOOP_IDX    : Loop variable 1..OVERSAMPLING_FACTOR
 #-
-#-  Static macros (same for entire for loop): 
+#-  Static macros (same for entire for loop):
 #-  CH_ID            : Channel id
 #-  PDO_             : PDO
-#-  ENTRY            : Entry 
+#-  ENTRY            : Entry
 
 #- Convert to hex value with zero padding (subtract one since addresses start from 0)
 ecmcEpicsEnvSetCalc("ECMC_ENTRY_HEX_VALUE",${ECMC_LOOP_IDX},"%02x")

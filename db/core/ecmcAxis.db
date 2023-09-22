@@ -408,7 +408,7 @@ record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
   field(TSE,  "0")
 }
 
-record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){    
+record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
   field(DESC, "${AXIS_NAME}: PLC enable cmd")
   field(OUT,  "${P}${AXIS_NAME}-Cmd_.B6")
   field(ZNAM, "disable")
@@ -448,7 +448,7 @@ record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(TSE,  "0")
 }
 
-record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){  
+record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(DESC, "${AXIS_NAME}: Target Position Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targpos?")
@@ -487,7 +487,7 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(VAL,  0)
 }
 
-record(longout,"${P}${AXIS_NAME}-MtnCmdData"){  
+record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
   field(DESC, "${AXIS_NAME}: Motion Command Data Param")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).cmddata?")
@@ -501,7 +501,7 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).errorid?")
-  field(SCAN, "I/O Intr")  
+  field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
   field(HIGH, 1)
   field(HSV,  "MAJOR")
@@ -511,7 +511,7 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
 record(bi,"${P}${AXIS_NAME}-Err"){
   field(DESC, "${AXIS_NAME}: Error")
   field(PINI, "$(PINI=1)")
-  field(INP,  "${P}${AXIS_NAME}-ErrId.VAL")   
+  field(INP,  "${P}${AXIS_NAME}-ErrId.VAL")
   field(TSE,  "$(TSE=-2)")
   field(ZNAM, "OK")
   field(ONAM, "ERROR")
@@ -526,7 +526,7 @@ record(longin,"${P}${AXIS_NAME}-WrnId"){
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).warningid?")
-  field(SCAN, "I/O Intr")  
+  field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
   field(HIGH, 1)
   field(HSV,  "MINOR")
@@ -535,7 +535,7 @@ record(longin,"${P}${AXIS_NAME}-WrnId"){
 
 record(bi,"${P}${AXIS_NAME}-Wrn"){
   field(DESC, "${AXIS_NAME}: Warning")
-  field(PINI, "$(PINI=1)")  
+  field(PINI, "$(PINI=1)")
   field(INP,  "${P}${AXIS_NAME}-WrnId.VAL")
   field(TSE,  "$(TSE=-2)")
   field(ZNAM, "OK")

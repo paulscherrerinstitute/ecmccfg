@@ -41,7 +41,7 @@ epicsEnvSet(I_MAX_MA_LOCAL,"7800")
 epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=5000})
 epicsEnvSet(I_STDBY_MA_LOCAL,${I_STDBY_MA=2000})
 
-#- Ensure valid current settings 
+#- Ensure valid current settings
 ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=${I_STDBY_MA_LOCAL},I_MAX_MA=${I_MAX_MA_LOCAL}"
 

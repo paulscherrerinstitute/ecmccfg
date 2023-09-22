@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for iPOSXXXX
-#-d   \details 
+#-d   \details
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

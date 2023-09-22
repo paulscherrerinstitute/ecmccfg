@@ -71,4 +71,3 @@ epicsEnvUnset(ECMC_EXE_FIRST_PLC)
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added PLC
 epicsEnvSet(ECMC_PREV_PLC_P,"$(ECMC_PREFIX)MCU-Cfg-PLC${ECMC_PLC_ID}-")
 epicsEnvSet(ECMC_PREV_PLC_OBJ_ID,${ECMC_PLC_ID})
-

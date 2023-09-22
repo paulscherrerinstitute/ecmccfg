@@ -3,4 +3,3 @@ record(ao,"${P}MCU-Cfg-EC-FrstObjId") {
   field(DESC, "Master: First slave ID")
   field(VAL,  "$(FIRST_SLAVE_ID=-1)")
 }
-

@@ -288,4 +288,3 @@ record(ai,"${ECMC_P}Drv${CH_ID}-TorAct"){
   field(HHSV, "$(HHSV=NO_ALARM)")
   field(TSE,  "$(TSE=-2)")
 }
-

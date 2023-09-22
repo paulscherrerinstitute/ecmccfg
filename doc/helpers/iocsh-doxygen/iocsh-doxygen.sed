@@ -26,4 +26,3 @@
 }
 # Make all #- lines doxygen-able.
 s/^\s*#-d\( \|$\)//p
-
