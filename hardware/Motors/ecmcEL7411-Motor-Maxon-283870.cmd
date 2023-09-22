@@ -2,10 +2,10 @@
 # ecmcEL7411-Motor-Maxon-283870.cmd
 #-d /**
 #-d   \brief hardware script for EL7411-Motor-Maxon-283870
-#-d 
+#-d
 #-d   \details Parametrization of EL7411 for motor Maxon-283870
-#-d 
-#-d   \note This config only configures the motor part of the EL7411. 
+#-d
+#-d   \note This config only configures the motor part of the EL7411.
 #-d
 #-d   \param I_RUN_MA     : (optional) Running current in mA (defaults to 4000mA)
 #-d   \param I_MAX_MA     : (optional) Max current protection limit (max is 12000mA)
@@ -34,7 +34,7 @@
 #-d         pin 2 black  : L2
 #-d         pin 3 white  : L3
 #-d         pin 4        : NC
-#-d         
+#-d
 #-d     Pinout hall:
 #-d         pin 1 Yellow : hall 1
 #-d         pin 2 brown  : hall 2
@@ -46,7 +46,7 @@
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note For important parameters see TwinCAT CoE startup list for the motor terminal configuration.
-#-d */ 
+#-d */
 
 #- ###################### Verify current ######################################
 
@@ -57,12 +57,12 @@ ecmcEpicsEnvSetCalcTernary(I_MAX_MA_LOCAL, "${I_MAX_MA=${I_MAX_MA_LOCAL}}<${I_MA
 
 epicsEnvSet(I_RUN_MA_LOCAL,${I_RUN_MA=4000})
 
-#- Ensure valid current settings 
+#- Ensure valid current settings
 ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}chkValidCurrentSetOrDie.cmd "I_RUN_MA=${I_RUN_MA_LOCAL},I_STDBY_MA=0,I_MAX_MA=${I_MAX_MA_LOCAL}"
 
 #- ###################### MOTOR ######################################
-#- NOTE The Current control paarmeters are very important for FOC commutation. 
+#- NOTE The Current control paarmeters are very important for FOC commutation.
 #- If warning or error when commutating then slower control params could solve then problem
 #-
 #- Current loop I default 10 = 1ms
@@ -77,7 +77,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,50,4)"
 
 #- Nominal voltage = 48V
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x19,48000,4)"
-#- Commutation Find cummutation time default 9 = 0.9ms  
+#- Commutation Find cummutation time default 9 = 0.9ms
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x63,20,2)"
 #- Commutation type FOC with incremental encoder =1
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x64,1,1)"
@@ -101,7 +101,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x1b,11000,4)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x2F,48000,4)"
 #- Winding resistance 1.03 ohm (1030mOhm)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x30,1030,4)"
-#- Voltage constant:  1/231=0.00432 volt/rpm  
+#- Voltage constant:  1/231=0.00432 volt/rpm
 #ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x31,4320,4)"
 
 #- Motor thermal time constant = 3.96 s for WINDING!!

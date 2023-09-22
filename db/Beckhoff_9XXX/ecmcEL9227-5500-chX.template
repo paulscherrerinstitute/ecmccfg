@@ -10,9 +10,9 @@ record(mbbiDirect,"${ECMC_P}CH${CH_ID}-StatW01"){
 }
 
 record(mbbiDirect,"${ECMC_P}CH${CH_ID}-StatW02"){
-    field(DESC, "$(HWTYPE): Status Word 2")    
+    field(DESC, "$(HWTYPE): Status Word 2")
     field(DTYP, "Raw Soft Channel")
-    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.RVAL")    
+    field(INP,  "${ECMC_P}CH${CH_ID}-StatW01.RVAL")
     field(FLNK, "${ECMC_P}CH${CH_ID}-EnaAct.PROC")
     field(SHFT, "16")
     field(TSE,  "$(TSE=-2)")
@@ -194,7 +194,7 @@ record(bi,"${ECMC_P}CH${CH_ID}-SwtchAlrm"){
     field(ZNAM, "OK")
     field(ONAM, "Switch Alarm")
     field(ZSV,  "NO_ALARM")
-    field(OSV,  "MAJOR")    
+    field(OSV,  "MAJOR")
 }
 
 record(ai,"${ECMC_P}CH${CH_ID}-LoadAct"){

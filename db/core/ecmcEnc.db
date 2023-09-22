@@ -20,4 +20,3 @@ record(ai,"${P}${AXIS_NAME}-VelAct0$(ENC_NO)"){
   field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO)")
   field(TSE,  "$(TSE=-2)")
 }
-

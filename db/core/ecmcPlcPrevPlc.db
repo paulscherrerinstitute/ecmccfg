@@ -5,4 +5,3 @@
 record(ao,"$(PREV_ECMC_P)NxtObjId") {
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
 }
-

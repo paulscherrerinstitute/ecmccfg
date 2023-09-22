@@ -8,13 +8,12 @@
 #-d   Velocity without load    : 440Rpm
 #-d   Gear ratio               : 1:14.14
 #-d   Coil resistance          : ?
-#-d   
+#-d
 #-d   SDO address 0x803x for Channel 2
-#-d   
+#-d
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
 epicsEnvSet("ECMC_EC_SDO_ID",              "0x803")
 ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7332, CONFIG=-chx-Motor-MicroMotors-RH158.24.15"
-

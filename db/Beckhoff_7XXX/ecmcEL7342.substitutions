@@ -2,12 +2,12 @@ file "ecmcEL7342-chX.template"
 {
   pattern {CH_ID}
           {01   }
-          {02   }          
+          {02   }
 }
 
 file "ecmcEL5101-chX.template"
 {
   pattern {CH_ID}
           {01   }
-          {02   }          
+          {02   }
 }
