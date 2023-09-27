@@ -18,7 +18,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_ENC_SCALE
 #- ECMC_ENC_SCALE_DENOM
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_ENC_SCALE_DENOM})<>0',SUCCESS_STR='ECMC_ENC_SCALE_DENOM value OK == ${ECMC_ENC_SCALE_DENOM}...',ERROR_STR='ECMC_ENC_SCALE_DENOM == 0...'"
 
-#- Issue Warning if ECMC_MRES is set. MRES calculated bu SREV and UREV instead
+#- Issue Warning if ECMC_MRES is set. MRES calculated by SREV and UREV instead
 ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_MRES=-1}>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
 
