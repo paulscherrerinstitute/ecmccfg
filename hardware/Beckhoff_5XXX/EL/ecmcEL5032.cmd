@@ -12,6 +12,10 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13a83052")
 #- verify slave, including reset
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=false"
+#- slave returns an error on reset. Thus, we can't use the regualr `RESET=true` in this case
+#- reset slave manually
+# ==> disregard subsequent error for the SDO write to register 0x1011:01! <==
+ecmcConfig "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x1011,0x1,1684107116,4)"
 
 #- ###########################################################
 #- ############ Config PDOS: Channel 1
