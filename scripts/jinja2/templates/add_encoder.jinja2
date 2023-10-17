@@ -35,6 +35,9 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {%- if encoder.warning is defined %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.warning }}","ax${ECMC_AXIS_NO}.enc.warning")"
 {%- endif %}
+{%- if encoder.ready is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.ready }}","ax{{ axis.id }}.enc.ready")
+{%- endif %}
 {%- if encoder.error is defined %}
     {%- for bit in encoder.error %}
         {%- if bit is string %}

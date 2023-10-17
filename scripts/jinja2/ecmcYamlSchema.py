@@ -201,6 +201,7 @@ class Schema:
             'control': {'type': 'string'},
             'status': {'type': 'string'},
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
+            'ready': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
             'reset': {'type': 'integer', 'min': 0, 'dependencies': ['control']},
             'error': {'type': 'list', 'maxlength': 3, 'schema': {'anyof_type': ['integer', 'string']}, 'dependencies': ['status']},
             'filter': filterSchema,
