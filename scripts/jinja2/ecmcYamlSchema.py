@@ -197,6 +197,8 @@ class Schema:
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
                 ], 'default': 0.0
             },
+            'egu': {'type': 'string'},
+            'desc': {'type': 'string'},
             'position': {'required': True, 'type': 'string'},
             'control': {'type': 'string'},
             'status': {'type': 'string'},

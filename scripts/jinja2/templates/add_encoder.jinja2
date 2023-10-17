@@ -62,6 +62,16 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
 {%- endif %}
 
+{%- if encoder.egu %}
+    epicsEnvSet(ECMC_ENC_EGU,{{ encoder.egu }})
+{%- endif %}
+
+{%- if encoder.desc %}
+    epicsEnvSet(ECMC_ENC_DESC,{{ encoder.desc }})
+{%- endif %}
+
 ecmcFileExist("ecmcEnc.db",1,1)
-dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},ENC_NO=${ECMC_ENC_CFG_ID},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},ENC_NO=${ECMC_ENC_CFG_ID},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ECMC_ENC_EGU=},DESC=${ECMC_ENC_DESC=}")
+epicsEnvUnset(ECMC_ENC_DESC)
+epicsEnvUnset(ECMC_ENC_EGU)
 
