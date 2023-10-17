@@ -10,9 +10,20 @@
 #-d   \param EXE_RATE (optional) Execution rate [cycles] defaults 0 (same EC_RATE)
 #-d   \param EXE_OFFSET (optional) Execution offset cycles [cycles] defaults 0
 #-d   \param ALLOW_OFFLINE (optional) Allow domain to be offline defaults 0
+#-d
+#-d  note: Hardware changing state, on/off-line, can have negative affect
+#-d        other hardware and DC-clocks
 #-d */
+
 ecmcConfigOrDie "Cfg.EcAddDomain(${EXE_RATE=0},${EXE_OFFSET=0})"
 ecmcConfigOrDie "Cfg.EcSetDomainAllowOffline(${ALLOW_OFFLINE=0})"
+#- Write warning if needed
+ecmcEpicsEnvSetCalcTernary(WRITE_WARNING, "${ALLOW_OFFLINE=0}>0","","#-")
+${WRITE_WARNING="#-"}# 
+${WRITE_WARNING="#-"}# WARNING: Domains/slaves going on/off-line can affect other domains and DC-clocks. 
+${WRITE_WARNING="#-"}#
+epicsEnvUnset(WRITE_WARNING)
+
 #- Increase index of current domain
 ecmcEpicsEnvSetCalc(ECMC_EC_DOMAIN_CURRENT_ID,"${ECMC_EC_DOMAIN_CURRENT_ID=0}+1")
 ecmcFileExist("ecmcEcDomain.db",1,1)
