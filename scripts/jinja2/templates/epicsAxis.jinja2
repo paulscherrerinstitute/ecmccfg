@@ -7,19 +7,13 @@ ecmcFileExist("ecmcAxis.db",1,1)
 
 #- Set DRVX fields of TgtPosCmd and TgtVelCmd pvs if needed
 
-{%- if softlimits.enable %}
-    ecmcEpicsEnvSetCalcTernary(P_DRVL,"{{ softlimits.backwardEnable|default(0)|int }}>0",{{ softlimits.backward|default(0.0) }} ,0.0)
-    ecmcEpicsEnvSetCalcTernary(P_DRVH,"{{ softlimits.forwardEnable|default(0)|int }}>0",{{ softlimits.forward|default(0.0) }} ,0)
-{%- endif %}
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"{{ monitoring.velocity.enable|default(0)|int }}>0",-{{ monitoring.velocity.max|default(0.0) }} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"{{ monitoring.velocity.enable|default(0)|int }}>0",{{ monitoring.velocity.max|default(0.0) }} ,0)
 
 {%- set homing = None if homing is undefined else homing%}
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},P_DRVL=${P_DRVL=0},P_DRVH=${P_DRVH=0},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
 
 #- Cleanup if needed
-epicsEnvUnset(P_DRVL)
-epicsEnvUnset(P_DRVH)
 epicsEnvUnset(V_DRVL)
 epicsEnvUnset(V_DRVH)
 

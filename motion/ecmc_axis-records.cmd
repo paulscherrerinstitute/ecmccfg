@@ -15,14 +15,10 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis.cmd
 
 #- Check if softlimits and max velo should be applied by setting DRVL and DRVH field of AO records
-ecmcEpicsEnvSetCalcTernary(P_DRVL,"${ECMC_DXLM_ENABLE}>0",${ECMC_SOFT_LOW_LIM=0} ,0)
-ecmcEpicsEnvSetCalcTernary(P_DRVH,"${ECMC_DXLM_ENABLE}>0",${ECMC_SOFT_HIGH_LIM=0} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"${ECMC_MON_VELO_MAX_ENA}>0",-${ECMC_MON_VELO_MAX=0} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"${ECMC_MON_VELO_MAX_ENA}>0",${ECMC_MON_VELO_MAX=0} ,0)
 ecmcFileExist("ecmcAxis.db",1,1)
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC=0},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},P_DRVL=${P_DRVL},P_DRVH=${P_DRVH},V_DRVL=${V_DRVL},V_DRVH=${V_DRVH}")
-epicsEnvUnset(P_DRVL)
-epicsEnvUnset(P_DRVH)
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC=0},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},V_DRVL=${V_DRVL},V_DRVH=${V_DRVH}")
 epicsEnvUnset(V_DRVL)
 epicsEnvUnset(V_DRVH)
 
