@@ -6,7 +6,7 @@ record(ai,"${P}${AXIS_NAME}-PosAct0$(ENC_NO)"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO)")
+  field(DESC, ${DESC=""})
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -17,7 +17,7 @@ record(ai,"${P}${AXIS_NAME}-VelAct0$(ENC_NO)"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO)")
+  field(DESC, ${DESC=""})
   field(TSE,  "$(TSE=-2)")
 }
 
