@@ -1,0 +1,1 @@
+ecmcEL72XX-XXXX-Motor-Beckhoff-AM8122-0FH1-0000.cmd
