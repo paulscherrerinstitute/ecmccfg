@@ -1,0 +1,78 @@
+co##############################################################################
+## Example config for el7037
+
+require ecmccfg v9.0.1_RC2,"IOC=$(IOC),ECMC_VER=v9.0.1_RC2"
+
+##############################################################################
+## Configure hardware
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037"
+
+#- Set max current to 1000mA 
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,1500,2)"
+
+#- Reduced current 500mA
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,400,2)"
+
+#- Nominal voltage 24V (unit 10mV)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,2400,2)"
+
+#- Coil resistance 2.5 Ohm (unit 10mOhm)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x4,250,2)"
+
+#- Motor full steps count 200
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,200,2)"
+
+#- Coil inductance 3.54mH (unit 0.01mH)
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0xA,354,2)"
+
+# mode  velo
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x1,1,1)"
+
+# velo range
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x5,1,1)"
+
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,24000,2)"
+
+# Filter cut off
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x7,0,2)"
+
+# Current boosts (set to 0 according to beckhoff)
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x7,0,2)"
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x8,0,2)"
+
+# Current control keep 1/40 ratio
+# kp
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x1,400,2)"
+# ki
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x2,4,2)"
+
+# velo kp
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8013,0x1,0,2)"
+## velo ki
+#   ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8013,0x1,0,2)"
+
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7037_1.ax)
+
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

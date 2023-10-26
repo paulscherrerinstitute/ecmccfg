@@ -10,12 +10,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2025,0x0,3030,4)"
 
 #Stepper current in standby (open loop) 2A=>1638 (819*I)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x2026,0x0,1638,4)"
-
-
-
-
-
-
-
-
-

@@ -2,9 +2,9 @@
 # ecmcEL7411-Encoder-Maxon-228456.cmd
 #-d /**
 #-d   \brief hardware script for EL7411-Motor-Maxon-228456
-#-d 
+#-d
 #-d   \details Parametrization of EL7411 for motor Maxon-228456 incremental encoder (not hall sensors)
-#-d 
+#-d
 #-d   \note This config only configures the encoder part of the EL7411.
 #-d
 #-d   Encoder:
@@ -17,7 +17,7 @@
 #-d         Looking into the female connector with the red wire to the left. Pin 1 is the upper left, pin two lower left:
 #-d         1 3 5 7 9
 #-d         2 4 6 8 10
-#-d         
+#-d
 #-d         1    : NC
 #-d         2    : Vcc
 #-d         3    : Gnd
@@ -31,7 +31,7 @@
 #-d
 #-d   \author Anders Sandstroem
 #-d   \file
-#-d */ 
+#-d */
 
 #- ###################### ENCODER ######################################
 

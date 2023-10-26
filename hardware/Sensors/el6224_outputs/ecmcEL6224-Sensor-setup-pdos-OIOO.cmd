@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief hardware script for EL6624-Sensor-setup-pdos-OOII.cmd
 #-d   \details Parametrization:
-#-d      0,2,3 outputs 
+#-d      0,2,3 outputs
 #-d      1     inputs
 #-d   \author Anders Sandstroem
 #-d   \file

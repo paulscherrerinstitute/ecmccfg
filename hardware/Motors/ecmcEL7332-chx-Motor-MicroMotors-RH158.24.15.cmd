@@ -8,7 +8,7 @@
 #-d   Velocity without load    : 440Rpm
 #-d   Gear ratio               : 1:14.14
 #-d   Coil resistance          : ?
-#-d   
+#-d
 #-d   ECMC_EC_SDO_ID: SDO address 0x802 for Channel 1
 #-d   ECMC_EC_SDO_ID: SDO address 0x803 for Channel 2
 #-d
@@ -34,7 +34,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_ID}0,0x5,100,2)
 #- Reduced current negative 100mA
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_ID}0,0x6,100,2)"
 
-#- Nominal speed of teh motor at nominal voltage 300rpm 
+#- Nominal speed of teh motor at nominal voltage 300rpm
 #- Not accessible for EL7332. probably accessible for EL7432
 #-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_ID}0,0x8,300,2)"
 

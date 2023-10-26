@@ -56,4 +56,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x17,0,1
 #- 0: BiSS-C mode (default)
 #- 1: SSI mode
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x18,0,1)"
-
