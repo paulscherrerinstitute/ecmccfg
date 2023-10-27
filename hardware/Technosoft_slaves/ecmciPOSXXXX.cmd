@@ -174,7 +174,7 @@ epicsEnvUnset(ECMC_CH_ID)
 #############################################################
 ############# Settings:
 
-#Set velocity mode (9)
+#Set Cyclic Sync Velocity (CSV) mode (9)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6060,0x0,9,1)"
 epicsThreadSleep(0.01)
 #Set sample time 1*10^-3)
