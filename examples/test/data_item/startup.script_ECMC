@@ -1,0 +1,53 @@
+# ecmc test system
+# Anders Sandström
+
+require ecmccfg ILK,"EC_RATE=5000,ECMC_VER=ILK"
+
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
+
+# Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL3004"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL5001"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL1008"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+
+# Custom mdata access test
+#- /*Cfg.EcAddDataDT(
+#-     char *startEntryIDString,  (ec0.s1.AI1)
+#-     size_t   entryByteOffset,   byte offset from startEntry
+#-     size_t   entryBitOffset,    bit offset
+#-     int direction, (1==Output, 2==input)
+#-     char *dataType,            (S32)
+#-     char *id       (ec0.s1.hepp)
+#-     )*/
+#- 
+
+# Take first 4bits of encoder value
+#ecmcConfigOrDie "Cfg.EcAddDataDT(ec0.s4.positionActual01,0,0,2,B4,posAct01_b1)"
+#dbLoadRecords(./ecmcDataItem.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},Suffix=PosAct01_b1,sourceName=ec0.s4.posAct01_b1")
+
+# Take last 4bits of encoder values second byte (1byte and 4 bits offseted)
+#ecmcConfigOrDie "Cfg.EcAddDataDT(ec0.s4.positionActual01,1,4,2,B4,posAct01_b2)"
+#dbLoadRecords(./ecmcDataItem.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},Suffix=PosAct01_b2,sourceName=ec0.s4.posAct01_b2")
+
+
+
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# Configure Motion
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
+
+# Debug PLC
+#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=1000,FILE=./test.plc")
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
