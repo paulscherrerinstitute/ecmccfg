@@ -1,5 +1,5 @@
 #==============================================================================
-# addEcSdoRT.cmd
+# addEcDataItem.cmd
 #-d /**
 #-d   \brief Script for adding a ethercat data item.
 #-d    
@@ -28,8 +28,8 @@
 #-d
 #-d   \author Anders Sandström
 #-d   \file
-#-d   \param SLAVE_ID (optional) bus position, defaults to "ECMC_EC_SLAVE_NUM"
-#-d   \param START_ENTRY
+#-d   \param STRT_ENTRY_S_ID (optional) start entry bus position, defaults to "ECMC_EC_SLAVE_NUM"
+#-d   \param STRT_ENTRY_NAME
 #-d   \param OFFSET_BYTE (optional) defaults to 0
 #-d   \param OFFSET_BITS (optional) defaults to 0
 #-d   \param DIR output==1, input==2 (optional) defaults to input == 2
@@ -37,37 +37,16 @@
 #-d   \param NAME  name to be used for adressing and also suffix of PV name
 #-d   \param P_SCRIPT (optional) naming convention prefix script
 #-d   \param FIELDS (optional) Additional fileds for init record
+#-d   \param REC_TYPE (optional) AO,AI,BI,BO (default depends on DT)
 #-d */
 
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
-# Take first 4bits of encoder value
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${MASTER_ID=${ECMC_EC_MASTER_ID=0}}.s${SLAVE_ID=${ECMC_EC_SLAVE_ID}}.${START_ENTRY},${OFFSET_BYTE=0},${OFFSET_BITS=0},${DIR=2},${DT},${NAME})"
+ecmcConfigOrDie "Cfg.EcAddDataDT(ec${MASTER_ID=${ECMC_EC_MASTER_ID=0}}.s${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}}.${STRT_ENTRY_NAME},${OFFSET_BYTE=0},${OFFSET_BITS=0},${DIR=2},${DT},${NAME})"
 
-ecmcEpicsEnvSetCalcTernary(IS_INPUT, "'${DIR}'='2'","","#-")
-ecmcEpicsEnvSetCalcTernary(IS_OUTPUT, "'${DIR}'='1'","","#-")
+ecmcEpicsEnvSetCalcTernary(REC_TYPE_DEFAULT, "'${DIR}'='1'","AO","AI")
 
+ecmcFileExist("ecmcDataItem${REC_TYPE=${REC_TYPE_DEFAULT}}.db",1,1)
+dbLoadRecords(ecmcDataItem${REC_TYPE=${REC_TYPE_DEFAULT}}.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},M_ID=${MASTER_ID=${ECMC_EC_MASTER_ID=0}},S_ID=${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}},sourceName=${NAME},${FIELDS=""}")
 
-${IS_INPUT}dbLoadRecords(./ecmcDataItemAI.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},M_ID=${MASTER_ID=${ECMC_EC_MASTER_ID=0}},S_ID=${SLAVE_ID=${ECMC_EC_SLAVE_ID}},sourceName=${NAME},${FIELDS=""}")
-${IS_OUTPUT}dbLoadRecords(./ecmcDataItemAO.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},M_ID=${MASTER_ID=${ECMC_EC_MASTER_ID=0}},S_ID=${SLAVE_ID=${ECMC_EC_SLAVE_ID}},sourceName=${NAME},${FIELDS=""}")
-
-epicsEnvUnset(IS_INPUT)
-epicsEnvUnset(IS_OUTPUT)
-
-# Add async SDO 
-#ecmcConfigOrDie "Cfg.EcAddSdoAsync(${SLAVE_ID=0},${INDEX},${SUBINDEX},${DT},${NAME})"
-#
-## deduce what the prefix should be
-#ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
-#${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID=0},SLAVE_POS=${SLAVE_ID=0},HWTYPE=${ECMC_EC_HWTYPE}"
-#
-##- Load SDO control and status records
-#dbLoadRecords("ecmcSDOAsync.template","ECMC_P=${ECMC_P},MASTER_ID=${ECMC_MASTER_ID=0},SLAVE_POS=${SLAVE_ID=0},NAME=${NAME},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
-#
-##- Load SDO value record based on datatype
-#ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD_FLOAT, "'${DT}'='F32' or '${DT}'='F64' ","","#-")
-#ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD_INT, "'${DT}'='F32' or '${DT}'='F64' ","#-","")
-#${ECMC_EXE_CMD_INT}dbLoadRecords("ecmcSDOAsyncInt.template","ECMC_P=${ECMC_P},MASTER_ID=${ECMC_EC_MASTER_ID=0},SLAVE_POS=${SLAVE_ID=0},NAME=${NAME},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
-#${ECMC_EXE_CMD_FLOAT}dbLoadRecords("ecmcSDOAsyncFloat.template","ECMC_P=${ECMC_P},MASTER_ID=${ECMC_EC_MASTER_ID=0},SLAVE_POS=${SLAVE_ID=0},NAME=${NAME},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
-#epicsEnvUnset(ECMC_EXE_CMD_INT)
-#epicsEnvUnset(ECMC_EXE_CMD_FLOAT)
+epicsEnvUnset(REC_TYPE_DEFAULT)

@@ -1,0 +1,12 @@
+record(bi,"${ECMC_P}${sourceName}"){
+  field(DESC, "${DESC=}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "${DTYP=asynInt32}")
+  field(SCAN, "${SCAN=I/O Intr}")
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${M_ID}.s${S_ID}.${sourceName}?")
+  field(ZNAM, "${ZNAM=False}")
+  field(ONAM, "${ONAM=True}")
+  field(ZSV,  "${ZSV=NO_ALARM}")
+  field(OSV,  "${OSV=NO_ALARM}")
+  field(TSE,  "${TSE=-2}")
+}

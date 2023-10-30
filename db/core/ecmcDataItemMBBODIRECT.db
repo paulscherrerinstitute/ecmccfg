@@ -1,0 +1,20 @@
+
+
+record(mbboDirect,"${ECMC_P}${sourceName}"){
+  info(asyn:READBACK,"1")
+    field(DESC, "$(DESC=)")
+    field(PINI, "$(PINI=1)")
+    field(VAL,  "$(VAL=0)")
+    field(DTYP, "asynUInt32Digital")
+    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${M_ID}.s${S_ID}.${sourceName}?")
+}
+
+record(mbbi,"${ECMC_P}${sourceName}-RB"){
+    field(DESC, "$(DESC=)")
+    field(PINI, "$(PINI=1)")
+    field(VAL,  "$(VAL=0)")
+    field(DTYP, "asynUInt32Digital")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${M_ID}.s${S_ID}.${sourceName}?")
+    field(SCAN, "I/O Intr")
+    field(TSE,  "$(TSE=-2)")
+}
