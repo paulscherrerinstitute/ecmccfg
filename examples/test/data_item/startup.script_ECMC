@@ -14,6 +14,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CON
 ${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=0,DIR=2,DT=B4,NAME=PosAct01_b1,FIELDS='EGU=Counts'"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=1,OFFSET_BITS=0,DIR=2,DT=B4,NAME=PosAct01_b2,FIELDS='EGU=Counts'"
 
+#- "Cfg.EcSetEntryUpdateInRealtime(4,positionActual01,0)" //Command string to ecmcCmdParser.c\n
+
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 # Configure Motion
