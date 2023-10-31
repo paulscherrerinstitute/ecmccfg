@@ -3,8 +3,8 @@ record(mbbi,"${ECMC_P}${sourceName}"){
     field(DESC, "$(DESC=)" )
     field(PINI, "$(PINI=1)")
     field(VAL,  "$(VAL=0)")
-    field(DTYP, "asynUInt32Digital")
-    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${M_ID}.s${S_ID}.${sourceName}?")
+    field(DTYP, "$(DTYP=asynUInt32Digital)")
+    field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=$(DTYP=asynUInt32Digital)/ec${M_ID}.s${S_ID}.${sourceName}?")
     field(SCAN, "I/O Intr")
     field(TSE,  "$(TSE=-2)")
 }
