@@ -27,6 +27,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,
 ${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b12,FIELDS='EGU=Counts',REC_TYPE=MBBIDIRECT"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=1,DT=S32,NAME=PosAct01_b13,FIELDS='EGU=Counts',REC_TYPE=MBBODIRECT"
 
+#- "Cfg.EcSetEntryUpdateInRealtime(4,positionActual01,0)" //Command string to ecmcCmdParser.c\n
+
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 # Configure Motion
