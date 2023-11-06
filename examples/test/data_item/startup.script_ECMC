@@ -1,7 +1,7 @@
 # ecmc test system
 # Anders Sandström
 
-require ecmccfg ILK,"EC_RATE=5000,ECMC_VER=ILK"
+require ecmccfg v9.0.1_RC3,"EC_RATE=5000,ECMC_VER=v9.0.1_RC3"
 
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
 
@@ -12,21 +12,13 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL1008"
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
 
 # Add some ec data items that access first and second byte of positionActual01
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=0,RW=2,DT=B4,NAME=PosAct01_b1,FIELDS='EGU=Counts'"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=1,OFFSET_BITS=0,RW=2,DT=B4,NAME=PosAct01_b2,FIELDS='EGU=Counts'"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b3,FIELDS='EGU=Counts'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=0,OFFSET_BITS=3,RW=1,DT=S8,NAME=ONE_S8_1,FIELDS='EGU=Counts'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=2,OFFSET_BITS=0,RW=1,DT=U16,NAME=ONE_U16,FIELDS='EGU=Counts'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=0,OFFSET_BITS=0,RW=2,DT=U64,NAME=ONE_U64,FIELDS='EGU=Counts'"
 
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b4,FIELDS='EGU=Counts',REC_TYPE=AI"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=1,DT=S32,NAME=PosAct01_b5,FIELDS='EGU=Counts',REC_TYPE=AO"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b6,FIELDS='EGU=Counts',REC_TYPE=BI"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=1,DT=S32,NAME=PosAct01_b7,FIELDS='EGU=Counts',REC_TYPE=BO"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b8,FIELDS='EGU=Counts',REC_TYPE=LONGIN"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=1,DT=S32,NAME=PosAct01_b9,FIELDS='EGU=Counts',REC_TYPE=LONGOUT"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b10,FIELDS='EGU=Counts',REC_TYPE=MBBI"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=1,DT=S32,NAME=PosAct01_b11,FIELDS='EGU=Counts',REC_TYPE=MBBO"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=2,DT=S32,NAME=PosAct01_b12,FIELDS='EGU=Counts',REC_TYPE=MBBIDIRECT"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=positionActual01,OFFSET_BYTE=0,OFFSET_BITS=1,RW=1,DT=S32,NAME=PosAct01_b13,FIELDS='EGU=Counts',REC_TYPE=MBBODIRECT"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=velocitySetpoint01,OFFSET_BYTE=0,OFFSET_BITS=0,RW=1,DT=S16,NAME=VeloSet,FIELDS='EGU=Counts',REC_TYPE=AO"
+#${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=velocitySetpoint01,OFFSET_BYTE=1,OFFSET_BITS=0,RW=1,DT=S8,NAME=VeloSetAO,FIELDS='EGU=Counts',REC_TYPE=AO"
+#${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=velocitySetpoint01,OFFSET_BYTE=1,OFFSET_BITS=0,RW=2,DT=S8,NAME=VeloSetAI,FIELDS='EGU=Counts',REC_TYPE=AI"
+
 
 #- "Cfg.EcSetEntryUpdateInRealtime(4,positionActual01,0)" //Command string to ecmcCmdParser.c\n
 
@@ -34,7 +26,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 # Configure Motion
 epicsEnvSet("DEV",      "$(IOC)")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
+#${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
 
 # Debug PLC
 #$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=1000,FILE=./test.plc")
@@ -43,9 +35,9 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
