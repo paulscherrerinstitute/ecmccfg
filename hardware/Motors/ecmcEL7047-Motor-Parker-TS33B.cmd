@@ -1,5 +1,5 @@
 #-d /**
-#-d   \brief hardware script for EL7047-Motor-Parker-TS33b
+#-d   \brief hardware script for EL7047-Motor-Parker-TS33B
 #-d   \details Parametrization of EL7047 for motor Parker TS33B with series wiring
 #-d   \author Niko Kivel
 #-d   \file
