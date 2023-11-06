@@ -6,6 +6,7 @@ record(longout,"${ECMC_P}${sourceName}"){
   field(DTYP, "$(DTYP=asynUInt32Digital)")
   field(VAL,  "$(VAL=0)")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=1000}/TYPE=$(DTYP=asynUInt32Digital)/ec${M_ID}.s${S_ID}.${sourceName}?")
+  field(SCAN, "Passive")
 }
 
 
