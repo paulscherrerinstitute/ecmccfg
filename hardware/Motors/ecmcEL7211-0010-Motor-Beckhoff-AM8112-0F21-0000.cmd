@@ -109,4 +109,4 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,150,4)"
 #- 0x22: Brake reduced holdingvoltage = 0x00000000 0
 #- 0x23: Brake time to red.holding volt = 0x0bb8 3000
 #- 0x24: Motor temp sensor connection = ---
-#- 
+#-
