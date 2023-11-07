@@ -1,3 +1,4 @@
+# TODO: rename to match EL5032 and EL5042, and potentially more.
 record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
   field(PINI, "$(PINI=1)")
