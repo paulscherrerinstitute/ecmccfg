@@ -2,7 +2,18 @@
 record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos$(ENC_NO="")?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO=0)")
+  field(TSE,  "$(TSE=-2)")
+}
+# Velocity for the first encoder
+record(ai,"${P}${AXIS_NAME}-PosAct01"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos1?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
@@ -10,10 +21,11 @@ record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
+# Velocity for primary encoder
 record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel$(ENC_NO="")?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
@@ -21,6 +33,17 @@ record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
+# Velocity for the first encoder
+record(ai,"${P}${AXIS_NAME}-VelAct01"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel1?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}/s")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO=0)")
+  field(TSE,  "$(TSE=-2)")
+}
 record(ai,"${P}${AXIS_NAME}-PosSet"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
@@ -619,4 +642,30 @@ record(ao,"${P}${AXIS_NAME}-Id"){
   field(PREC, "0")
   field(EGU,  "[]")
   field(VAL,  ${AXIS_NO})
+}
+
+record(mbbo,  "${P}${AXIS_NAME}-SetEncIdCmd-RB"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Change encoder")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).primencid?")
+  field(ZRST, "NO_COMMAND")
+  field(ZRVL, 0)
+  field(ONST, "USE_ENC_1_CMD")
+  field(ONVL, 1)
+  field(TWST, "USE_ENC_2_CMD")
+  field(TWVL, 2)
+  field(THST, "USE_ENC_3_CMD")
+  field(THVL, 3)
+  field(FRST, "USE_ENC_4_CMD")
+  field(FRVL, 4)
+  field(FVST, "USE_ENC_5_CMD")
+  field(FVVL, 5)
+  field(SXST, "USE_ENC_6_CMD")
+  field(SXVL, 6)
+  field(SVST, "USE_ENC_7_CMD")
+  field(SVVL, 7)
+  field(EIST, "USE_ENC_8_CMD")
+  field(EIVL, 8)
+  field(VAL,  0)
 }
