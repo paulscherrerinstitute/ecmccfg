@@ -97,7 +97,15 @@ class Schema:
                     'enable': {'required': True, 'type': 'boolean'},
                     'size': {'required': True, 'type': 'integer'}
                 }
+            },
+            'position': {
+                'type': 'dict',
+                'schema': {
+                    'enable': {'required': True, 'type': 'boolean'},
+                    'size': {'required': True, 'type': 'integer'}
+                }
             }
+
         }
     }
 
@@ -214,6 +222,15 @@ class Schema:
                     'control': {'type': 'integer', 'default': 0},
                     'status': {'type': 'integer', 'default': 0},
                 }
+            },
+            'primary': {'type': 'integer', 'default': -1},
+            'home': {
+                'type': 'dict',
+                'schema': {
+                    'refToEncIDAtStartup': {'type': 'integer', 'default': -1},
+                    'refAtHome': {'type': 'integer', 'default': 0},
+                    'tolToPrim': {'type': 'float', 'default': 0},
+              }
             }
         }
     }

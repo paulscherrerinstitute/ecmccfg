@@ -21,3 +21,10 @@ record(ai,"${P}${AXIS_NAME}-VelAct0$(ENC_NO)"){
   field(TSE,  "$(TSE=-2)")
 }
 
+# Tha last added encoder is the same as teh number of encoders added
+record(longin,"${P}${AXIS_NAME}-EncCnt"){
+    field(DESC, "Encoder count")
+    field(VAL,  "$(ENC_NO=1)")
+    field(PINI, "YES")
+}
+

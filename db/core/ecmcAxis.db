@@ -6,7 +6,7 @@ record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO=0)")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Position")
   field(TSE,  "$(TSE=-2)")
 }
 # Velocity for the first encoder
@@ -17,7 +17,7 @@ record(ai,"${P}${AXIS_NAME}-PosAct01"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO=0)")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Position Enc 1")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -29,7 +29,7 @@ record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO=0)")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity ")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -41,7 +41,7 @@ record(ai,"${P}${AXIS_NAME}-VelAct01"){
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO=0)")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity Enc 1")
   field(TSE,  "$(TSE=-2)")
 }
 record(ai,"${P}${AXIS_NAME}-PosSet"){
@@ -668,4 +668,12 @@ record(mbbo,  "${P}${AXIS_NAME}-SetEncIdCmd-RB"){
   field(EIST, "USE_ENC_8_CMD")
   field(EIVL, 8)
   field(VAL,  0)
+}
+
+# Tha last added encoder is the same as teh number of encoders added 
+# (always first/one encoder if this template is used)
+record(longin,"${P}${AXIS_NAME}-EncCnt"){
+    field(DESC, "${AXIS_NAME} Encoder count")
+    field(VAL,  "1")
+    field(PINI, "YES")
 }

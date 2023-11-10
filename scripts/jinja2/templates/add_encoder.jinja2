@@ -62,6 +62,12 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
 {%- endif %}
 
+#- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
+{%- if encoder.filter.position %}
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int}})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
+{%- endif %}
+
 {%- if encoder.egu %}
     epicsEnvSet(ECMC_ENC_EGU,{{ encoder.egu }})
 {%- endif %}
@@ -70,8 +76,28 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     epicsEnvSet(ECMC_ENC_DESC,{{ encoder.desc }})
 {%- endif %}
 
+{%- if encoder.primary is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.primary }})"
+{%- endif %}
+
+{%- if encoder.home is defined %}
+    {%- if encoder.home.refToEncIDAtStartup is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.home.refToEncIDAtStartup }})"
+    {%- endif %}
+
+    {%- if encoder.home.refAtHome is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(${ECMC_AXIS_NO},{{ encoder.home.refAtHome }})"
+    {%- endif %}
+
+    {%- if encoder.home.tolToPrim is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc(${ECMC_AXIS_NO},{{ encoder.home.tolToPrim }})"
+    {%- endif %}
+
+    #-ecmcConfigOrDie "Cfg.SelectAxisEncHome(${ECMC_AXIS_NO},-1)"
+{%- endif %}
+
+
 ecmcFileExist("ecmcEnc.db",1,1)
 dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},ENC_NO=${ECMC_ENC_CFG_ID},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ECMC_ENC_EGU=},DESC=${ECMC_ENC_DESC=}")
 epicsEnvUnset(ECMC_ENC_DESC)
 epicsEnvUnset(ECMC_ENC_EGU)
-
