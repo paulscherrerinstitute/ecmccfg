@@ -3,11 +3,6 @@
 #- =============================================================================
 
 ecmcConfigOrDie "Cfg.AddAxisEnc(${ECMC_AXIS_NO})"
-#- Get current encoder index beeing configured (index of encoder added), needed for PV names
-ecmcConfig "GetAxisEncConfigIndex($(ECMC_AXIS_NO))"
-# Current encoder index beeing configured
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
 
 {% include 'encoder.jinja2' %}
 

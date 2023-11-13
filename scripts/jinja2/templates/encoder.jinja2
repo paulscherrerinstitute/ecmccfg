@@ -1,6 +1,13 @@
 #- =============================================================================
 #- Encoder
 #- =============================================================================
+
+#- Get current encoder index beeing configured (index of encoder added), needed for PV names
+ecmcConfig "GetAxisEncConfigIndex($(ECMC_AXIS_NO))"
+# Current encoder index beeing configured
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
+
 {#- links #}
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
 #- {%- if encoder.control %}
@@ -60,8 +67,11 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
 {%- endif %}
 
+#- Use this encoder as primary?!
 {%- if encoder.primary is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.primary }})"
+    {%- if encoder.primary >0 %}
+        ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
+    {%- endif %}
 {%- endif %}
 
 {%- if epics is defined %}
@@ -78,8 +88,6 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {%- if encoder.egu %}
     epicsEnvSet(ENC_DESC,'{{ encoder.desc }}')
 {%- endif %}
-
-
 
 {% if encoder.homing -%}
     #- =============================================================================
