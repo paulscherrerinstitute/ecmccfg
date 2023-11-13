@@ -1,8 +1,8 @@
 # Support for multiple encoders
 
 The ecmc axis object have support for multiple encoders. Currently, a maximum of 8 encoders can be configured for each axis.
-When creating an axis, encoder with index 0 will be created automatically. If more encoders are needed then the addEncoder.cmd command can be used.
-The encoder with index 0 is as default chosen as the primary encoder and also to be the encoder used for any homing sequence (however these can be changed).
+When creating an axis, encoder with index 1 will be created automatically. If more encoders are needed then the addEncoder.cmd command can be used.
+The encoder with index 1 is as default chosen as the primary encoder and also to be the encoder used for any homing sequence (however these can be changed).
 
 ```
 # Add extra encoder to axis 1 (open loop counter)
@@ -26,7 +26,7 @@ epicsEnvSet("ECMC_EC_ENC_ALARM_1",             "")                         # Err
 epicsEnvSet("ECMC_EC_ENC_ALARM_2",             "")                         # Error 2 (if no encoder error bit then leave empty)
 epicsEnvSet("ECMC_EC_ENC_WARNING",             "")                         # Warning (if no encoder warning bit then leave empty)
 
-# This encoder will be refenced to encoder 0 at startup (set to -1 to not change setting)
+# This encoder will be refenced to encoder 1 at startup (set to -1 to not change setting)
 epicsEnvSet("ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID",  "-1")
 
 # Encoder index for closed loop control (set to -1 to not change setting)
@@ -52,7 +52,7 @@ epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","0")                            # Num
 ## Primary encoder
 
 The primary encoder is the encoder that is used in the ecmc-control loop.
-Any of the configured encoders can be used as primary encoder (but as default encoder 0 is used).
+Any of the configured encoders can be used as primary encoder (but as default encoder 1 is used).
 
 Change of primary encoder can be done by setting the ECMC_ENC_PRIMARY_ID in the encoder configuration file 
 specified for addEncoder.cmd or by executing the follwoing ecmc command:
@@ -64,8 +64,10 @@ NOTE: if a ECMC_ENC_PRIMARY_ID=-1 the current value in ecmc will not be overwrit
 
 ## Homing encoder
 
+NOTE: Homing parameters for each encoder object can be defined. Therefore, this functionality is normaly not needed.
+
 The homing encoder is the encoder that will be used for control during homing sequence.
-Any of the configured encoders can be used as homing encoder (but as default encoder 0 is used).
+Any of the configured encoders can be used as homing encoder (but as default encoder 1 is used).
 
 If homing encoder is different than primary encoder the following will happen at homing:
 1. The homing encoder will be used for control (switch encoder).
