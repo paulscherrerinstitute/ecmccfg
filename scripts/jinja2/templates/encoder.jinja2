@@ -64,6 +64,23 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.primary }})"
 {%- endif %}
 
+{%- if epics is defined %}
+    {%- if epics.unit %}
+        epicsEnvSet(ENC_EGU,'{{ epics.unit }}')
+    {%- endif %}
+{%- endif %}
+
+#- If defined then use this EGU
+{%- if encoder.unit %}
+    epicsEnvSet(ENC_EGU,'{{ encoder.unit }}')
+{%- endif %}
+
+{%- if encoder.egu %}
+    epicsEnvSet(ENC_DESC,'{{ encoder.desc }}')
+{%- endif %}
+
+
+
 {% if encoder.homing -%}
     #- =============================================================================
     #- Homing

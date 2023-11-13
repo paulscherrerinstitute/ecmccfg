@@ -238,7 +238,7 @@ class Schema:
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
                 ], 'default': 0.0
             },
-            'egu': {'type': 'string'},
+            'unit': {'type': 'string'},
             'desc': {'type': 'string'},
             'position': {'required': True, 'type': 'string'},
             'control': {'type': 'string'},
@@ -257,7 +257,7 @@ class Schema:
                 }
             },
             'primary': {'type': 'integer', 'default': -1},
-            'homing': homingSchema,
+            'homing': homingSchema,            
         }
     }
 
