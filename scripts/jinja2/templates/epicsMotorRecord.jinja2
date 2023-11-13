@@ -36,9 +36,15 @@ ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
 dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }},{{ epics.motorRecord.fieldInit|default('') }}")
 #- -----------------------------------------------------------------------------
 #- Axis homing
+{%- if (homing) and (encoder.homing) %}
+   # ERROR: Duplicate homing parameters identified (homing and encoder.homing)
+   #        Homing parameters can only be defined at one place
+   ecmcExit
+{%- endif %}
+
 {%- if homing.type|default(0) > 0 %}
     ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
-    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type }},HOMEPOS={{ homing.position }},HVELTO={{ homing.velocity.to }},HVELFRM={{ homing.velocity.from|default(homing.velocity.to) }},HOMEACC={{ homing.acceleration|default(trajectory.axis.acceleration) }},HOMEDEC={{ homing.deceleration|default(trajectory.axis.deceleration|default(trajectory.axis.acceleration)) }}")
+    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC=${HOME_PROC=0},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
 {%- endif %}
 #- Motor record init complete
 #- -----------------------------------------------------------------------------
