@@ -26,3 +26,4 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
         ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
     {% endif -%}
 {% endif -%}
+epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})

@@ -2,56 +2,56 @@
 #- Encoder
 #- =============================================================================
 {#- links #}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax{{ axis.id }}.enc.actpos")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
 #- {%- if encoder.control %}
-#-     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax{{ axis.id }}.enc.control")"
+#-     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax${ECMC_AXIS_NO}.enc.control")"
 #- {%- endif %}
 {#- scaling #}
-ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom({{ axis.id }},{{ encoder.denominator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncScaleNum({{ axis.id }},{{ encoder.numerator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},{{ encoder.denominator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator|float }})"
 {#- source #}
-ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source }})"
+ecmcConfigOrDie "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},{{ encoder.source }})"
 {#- data #}
-ecmcConfigOrDie "Cfg.SetAxisEncType({{ axis.id }},{{ encoder.type }})"
-ecmcConfigOrDie "Cfg.SetAxisEncBits({{ axis.id }},{{ encoder.bits }})"
+ecmcConfigOrDie "Cfg.SetAxisEncType(${ECMC_AXIS_NO},{{ encoder.type }})"
+ecmcConfigOrDie "Cfg.SetAxisEncBits(${ECMC_AXIS_NO},{{ encoder.bits }})"
 {%- if encoder.type == 1  %}
-    ecmcConfigOrDie "Cfg.SetAxisEncAbsBits({{ axis.id }},{{ encoder.absBits }})"
+    ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(${ECMC_AXIS_NO},{{ encoder.absBits }})"
 {%- endif  %}
-ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id }},{{ encoder.absOffset }})"
+ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {#-{%- if encoder.mask %}#}
-{#-ecmcConfigOrDie "Cfg.SetAxisEncRawMask({{ axis.id }}, {{ encoder.mask|int }})"#}
+{#-ecmcConfigOrDie "Cfg.SetAxisEncRawMask(${ECMC_AXIS_NO}, {{ encoder.mask|int }})"#}
 {#-{%- endif %}#}
 {%- if encoder.reset is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.reset }}","ax{{ axis.id }}.enc.reset")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.reset }}","ax${ECMC_AXIS_NO}.enc.reset")"
 {%- endif %}
 {%- if encoder.warning is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.warning }}","ax{{ axis.id }}.enc.warning")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.warning }}","ax${ECMC_AXIS_NO}.enc.warning")"
 {%- endif %}
 {%- if encoder.ready is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.ready }}","ax{{ axis.id }}.enc.ready")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.ready }}","ax${ECMC_AXIS_NO}.enc.ready")"
 {%- endif %}
 {%- if encoder.error is defined %}
     {%- for bit in encoder.error %}
         {%- if bit is string %}
-            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax${ECMC_AXIS_NO}.enc.alarm{{loop.index0}}")"
         {%- else  %}
-            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax{{ axis.id }}.enc.alarm{{loop.index0}}")"
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ bit }}","ax${ECMC_AXIS_NO}.enc.alarm{{loop.index0}}")"
         {%- endif %}
     {%- endfor %}
 {%- endif %}
 {%- if encoder.latch %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.latch.position }}","ax{{ axis.id }}.enc.latchpos")"
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax{{ axis.id }}.enc.latchcontrol")"
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax{{ axis.id }}.enc.latchstatus")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.latch.position }}","ax${ECMC_AXIS_NO}.enc.latchpos")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax${ECMC_AXIS_NO}.enc.latchcontrol")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
 {%- endif %}
 {%- if encoder.filter.velocity %}
     {%- if encoder.filter.velocity.enable %}
-        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize({{ axis.id }},{{ encoder.filter.velocity.size}})"
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size}})"
     {%- endif %}
 {%- endif %}
 {%- if encoder.filter.trajectory %}
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable({{ axis.id }},{{ encoder.filter.trajectory.enable|int}})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize({{ axis.id }},{{ encoder.filter.trajectory.size}})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int}})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
 {%- endif %}
 
 #- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
@@ -64,18 +64,63 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset({{ axis.id }},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.primary }})"
 {%- endif %}
 
-{%- if encoder.home is defined %}
-    {%- if encoder.home.refToEncIDAtStartup is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.home.refToEncIDAtStartup }})"
+{% if encoder.homing -%}
+    #- =============================================================================
+    #- Homing
+    #- =============================================================================
+    {%- if encoder.homing.position is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisHomePosition(${ECMC_AXIS_NO},{{ encoder.homing.position }})"
+        epicsEnvSet(HOME_POS, {{ encoder.homing.position }})
+    {%- endif %}
+    {%- if encoder.homing.postMoveEnable %}
+        ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable(${ECMC_AXIS_NO},{{ encoder.homing.postMoveEnable|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO},{{ encoder.homing.postMovePosition|default(0)}})"
+        epicsEnvSet(POST_ENA, {{ encoder.homing.postMoveEnable|int }})
+        epicsEnvSet(POST_POS, {{ encoder.homing.postMovePosition|default(0) }})
+    {%- endif %}
+    {%- if encoder.homing.latchCount is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset(${ECMC_AXIS_NO},{{ encoder.homing.latchCount }})"
+    {%- endif %}
+    {#- velocities  #}
+    {%- if encoder.homing.velocity is defined %}
+        {%- if encoder.homing.velocity.to is defined %}
+            ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(${ECMC_AXIS_NO},{{ encoder.homing.velocity.to }})"
+            epicsEnvSet(VEL_TO_CAM, {{ encoder.homing.velocity.to }})
+            #- Set default of VEL_FRM_CAM to VEL_TO_CAM
+            epicsEnvSet(VEL_FRM_CAM, {{ encoder.homing.velocity.from|default(encoder.homing.velocity.to) }})
+            ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},{{ encoder.homing.velocity.from|default(encoder.homing.velocity.to) }})"
+        {%- endif %}
+    {%- endif %}
+        {%- if encoder.homing.timeout %}
+        ecmcConfigOrDie "Cfg.SetAxisSeqTimeout(${ECMC_AXIS_NO},{{ encoder.homing.timeout }})"
     {%- endif %}
 
-    {%- if encoder.home.refAtHome is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(${ECMC_AXIS_NO},{{ encoder.home.refAtHome }})"
+    {%- if encoder.homing.refToEncIDAtStartup is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup(${ECMC_AXIS_NO},{{ encoder.homing.refToEncIDAtStartup }})"
+        epicsEnvSet(REF_STRT, {{ encoder.homing.refToEncIDAtStartup }})
     {%- endif %}
 
-    {%- if encoder.home.tolToPrim is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc(${ECMC_AXIS_NO},{{ encoder.home.tolToPrim }})"
+    {%- if encoder.homing.refAtHome is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(${ECMC_AXIS_NO},{{ encoder.homing.refAtHome }})"
+        epicsEnvSet(REF_HME, {{ encoder.homing.refAtHome }})
     {%- endif %}
 
+    {%- if encoder.homing.tolToPrim is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc(${ECMC_AXIS_NO},{{ encoder.homing.tolToPrim }})"
+    {%- endif %}
+
+    {%- if encoder.homing.type is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisHomeSeqId(${ECMC_AXIS_NO},{{ encoder.homing.type }})"
+        epicsEnvSet(HOME_PROC, {{ encoder.homing.type }})
+    {%- endif %}
+    
     #-ecmcConfigOrDie "Cfg.SelectAxisEncHome(${ECMC_AXIS_NO},-1)"
+    
+    #- Need to write to env vars to also support legacy syntax ("homing." vs #encoder.homing.")
+    {%- if encoder.homing.acc is defined %}
+       epicsEnvSet(ACC, {{ encoder.homing.acc }})
+    {%- endif %}
+    {%- if encoder.homing.dec is defined %}
+       epicsEnvSet(DEC, {{ encoder.homing.dec }})
+    {%- endif %}
 {%- endif %}

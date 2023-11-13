@@ -109,6 +109,39 @@ class Schema:
         }
     }
 
+    homingSchema = {
+        'type': 'dict',
+        'required': False,
+        'schema': {
+            'type': {'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 21, 22, 25]},
+            'position': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+            ]
+            },
+            'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
+            'postMovePosition': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+            ]
+            },
+            'latchCount': {'type': 'integer', 'min': 0},
+            'velocity': {
+                'type': 'dict',
+                'schema': {
+                    'to': {'type': 'float'},
+                    'from': {'type': 'float'},
+                }
+            },
+            'acceleration': {'type': 'float'},
+            'deceleration': {'type': 'float'},
+            'timeout': {'type': 'integer'},
+            'refToEncIDAtStartup': {'type': 'integer', 'default': -1},
+            'refAtHome': {'type': 'integer', 'default': 0},
+            'tolToPrim': {'type': 'float', 'default': 0},
+        }
+    }
+
     axisSchema = {
         'type': 'dict',
         'required': True,
@@ -224,14 +257,7 @@ class Schema:
                 }
             },
             'primary': {'type': 'integer', 'default': -1},
-            'home': {
-                'type': 'dict',
-                'schema': {
-                    'refToEncIDAtStartup': {'type': 'integer', 'default': -1},
-                    'refAtHome': {'type': 'integer', 'default': 0},
-                    'tolToPrim': {'type': 'float', 'default': 0},
-              }
-            }
+            'homing': homingSchema,
         }
     }
 
@@ -342,37 +368,6 @@ class Schema:
             'rateMilliseconds': {'type': 'integer'},
             'file': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
-        }
-    }
-
-    homingSchema = {
-        'type': 'dict',
-        'required': False,
-        'schema': {
-            'type': {'required': True, 'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 21, 22, 25]},
-            'position': {'oneof': [
-                {'type': 'float'},
-                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
-            ]
-            },
-            'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
-            'postMovePosition': {'oneof': [
-                {'type': 'float'},
-                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
-            ]
-            },
-            'latchCount': {'type': 'integer', 'min': 0},
-            'velocity': {
-                'type': 'dict',
-                'required': True,
-                'schema': {
-                    'to': {'required': True, 'type': 'float'},
-                    'from': {'type': 'float'},
-                }
-            },
-            'acceleration': {'type': 'float'},
-            'deceleration': {'type': 'float'},
-            'timeout': {'type': 'integer'},
         }
     }
 
