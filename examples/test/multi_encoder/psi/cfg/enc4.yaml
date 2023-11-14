@@ -3,7 +3,7 @@ var:
 
 encoder:
   unit: mm
-  desc: Hepp
+  desc: openloop4
   numerator: 362
   denominator: 12800
   type: 1            # Type: 0=Incremental, 1=Absolute

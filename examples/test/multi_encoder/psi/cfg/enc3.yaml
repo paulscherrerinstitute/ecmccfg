@@ -3,7 +3,7 @@ var:
 
 encoder:                     # encoder group
   unit: mm
-  desc: openloop
+  desc: openloop3
   numerator: 361             # numerator scale
   denominator: 12800         # denominator scale
   type: 1                    # Type: 0=Incremental, 1=Absolute
