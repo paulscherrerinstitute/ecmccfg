@@ -117,7 +117,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Overview $(Axis)</string>
+    <string>Overview $(Axis):</string>
    </property>
    <widget class="caLabel" name="calabel_70">
     <property name="geometry">
@@ -2590,7 +2590,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -2599,9 +2599,9 @@
     <widget class="caTextEntry" name="catextentry_17">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>70</x>
        <y>70</y>
-       <width>51</width>
+       <width>41</width>
        <height>22</height>
       </rect>
      </property>
@@ -2623,6 +2623,12 @@
      <property name="channel" stdset="0">
       <string notr="true">$(SYS):$(Axis)-Ctrl-Kd</string>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
+     </property>
      <property name="keepFocus">
       <bool>true</bool>
      </property>
@@ -2630,9 +2636,9 @@
     <widget class="caLineEdit" name="calineedit_38">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>10</y>
-       <width>61</width>
+       <width>41</width>
        <height>22</height>
       </rect>
      </property>
@@ -2660,6 +2666,9 @@
      </property>
      <property name="colorMode">
       <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precision">
+      <number>3</number>
      </property>
      <property name="precisionMode">
       <enum>caLineEdit::Channel</enum>
@@ -2674,9 +2683,9 @@
     <widget class="caTextEntry" name="catextentry_14">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>70</x>
        <y>10</y>
-       <width>51</width>
+       <width>41</width>
        <height>22</height>
       </rect>
      </property>
@@ -2698,6 +2707,12 @@
      <property name="channel" stdset="0">
       <string notr="true">$(SYS):$(Axis)-Ctrl-Kp</string>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
+     </property>
      <property name="keepFocus">
       <bool>true</bool>
      </property>
@@ -2705,9 +2720,9 @@
     <widget class="caLineEdit" name="calineedit_39">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>40</y>
-       <width>61</width>
+       <width>41</width>
        <height>22</height>
       </rect>
      </property>
@@ -2736,6 +2751,9 @@
      <property name="colorMode">
       <enum>caLineEdit::Static</enum>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
      <property name="precisionMode">
       <enum>caLineEdit::Channel</enum>
      </property>
@@ -2749,9 +2767,9 @@
     <widget class="caTextEntry" name="catextentry_15">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>70</x>
        <y>40</y>
-       <width>51</width>
+       <width>41</width>
        <height>22</height>
       </rect>
      </property>
@@ -2772,6 +2790,12 @@
      </property>
      <property name="channel" stdset="0">
       <string notr="true">$(SYS):$(Axis)-Ctrl-Ki</string>
+     </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
      </property>
      <property name="keepFocus">
       <bool>true</bool>
@@ -2855,9 +2879,9 @@
     <widget class="caLineEdit" name="calineedit_40">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>70</y>
-       <width>61</width>
+       <width>41</width>
        <height>22</height>
       </rect>
      </property>
@@ -2886,6 +2910,9 @@
      <property name="colorMode">
       <enum>caLineEdit::Static</enum>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
      <property name="precisionMode">
       <enum>caLineEdit::Channel</enum>
      </property>
@@ -2899,9 +2926,9 @@
     <widget class="caStripPlot" name="castripplot_2">
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>110</x>
        <y>10</y>
-       <width>231</width>
+       <width>271</width>
        <height>221</height>
       </rect>
      </property>
@@ -3460,6 +3487,31 @@
        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
       </property>
      </widget>
+    </widget>
+    <widget class="caLabel" name="calabel_100">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>20</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Details:</string>
+     </property>
     </widget>
    </widget>
   </widget>
