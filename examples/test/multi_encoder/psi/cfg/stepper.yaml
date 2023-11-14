@@ -1,7 +1,7 @@
 axis:
   id: 1
   type: joint   # this is for future selection of axis type
-  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=2.0;
+#  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=2.0;
 
 var:
   drive: 4
@@ -35,6 +35,7 @@ drive:
 
 encoder:
   unit: mm
+  desc: openloop1
   numerator: 360
   denominator: 12800
   type: 1         # Type: 0=Incremental, 1=Absolute
@@ -52,8 +53,8 @@ controller:
 
 trajectory:
   axis:
-    velocity: 3500
-    acceleration: 3500
+    velocity: 360
+    acceleration: 360
 
 input:
   limit:
@@ -63,9 +64,9 @@ input:
   interlock: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for interlock switch input
 
 softlimits:
-  enable: no
-  backwardEnable: no
-  forwardEnable: no
+  enable: yes
+  backwardEnable: yes
+  forwardEnable: yes
   forward: 200000
   backward: -35000
 

@@ -2,7 +2,7 @@
 # Anders Sandström
 
 #require ecmccfg v9.0.1_RC3,"EC_RATE=5000,ECMC_VER=v9.0.1_RC3"
-require ecmccfg sandst_a,"EC_RATE=1000,ECMC_VER=sandst_a"
+require ecmccfg sandst_a,"EC_RATE=1000,ECMC_VER=sandst_a,ENG_MODE=1"
 
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
 

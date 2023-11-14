@@ -1,6 +1,8 @@
 # Use different scaling to be able to see difference between encoders
 epicsEnvSet("ECMC_ENC_SCALE_NUM"               "359")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"             "12800")
+epicsEnvSet("ECMC_ENC_DESC"                    "openloop2")              # Type: 0=Incremental, 1=Absolute
+epicsEnvSet("ECMC_ENC_EGU"                     "mm")              # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_TYPE"                    "0")                        # Type: 0=Incremental, 1=Absolute
 epicsEnvSet("ECMC_ENC_BITS"                    "16")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",               "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
