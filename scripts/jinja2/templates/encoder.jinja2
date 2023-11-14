@@ -85,7 +85,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     epicsEnvSet(ENC_EGU,'{{ encoder.unit }}')
 {%- endif %}
 
-{%- if encoder.egu %}
+{%- if encoder.desc %}
     epicsEnvSet(ENC_DESC,'{{ encoder.desc }}')
 {%- endif %}
 

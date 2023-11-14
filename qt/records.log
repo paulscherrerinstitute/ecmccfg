@@ -1,3 +1,15 @@
+
+  bool enableCmd          : 1;
+  bool executeCmd         : 1;
+  bool stopCmd            : 1;
+  bool resetCmd           : 1;
+  bool encSourceCmd       : 1;                        // 0 = internal, 1 = plc
+  bool trajSourceCmd      : 1;                        // 0 = internal, 1 = plc
+  bool plcEnableCmd       : 1;                        // 0 = disable, 1 = enable
+  bool plcCmdsAllowCmd    : 1;                        // 0 = not allow, 1 = allow
+  bool enableSoftLimitBwd : 1;
+  bool enableSoftLimitFwd : 1;
+
 c6025a:HEARTBEAT
 c6025a:START_CNT
 c6025a:CALCSTATUS
@@ -21,27 +33,26 @@ c6025a:5HZ_MODE
 c6025a:10HZ_MODE
 c6025a:GTIM_RESET
 c6025a:MCU-Cfg-Eng-Mode
-c6025a:m0s004-Enc01-LchAutRstSp
-c6025a:M1-EnaCmd
-c6025a:M1-ExeCmd
-c6025a:M1-StpCmd
-c6025a:M1-RstCmd
-c6025a:M1-EncSrcTyp-Cmd
-c6025a:M1-TrjSrcTyp-Cmd
-c6025a:M1-PLC-EnaCmd
-c6025a:M1-CmdFrmPLCCmd
-c6025a:M1-SftLimBwdEna
-c6025a:M1-SftLimFwdEna
-c6025a:MCU-ErrRst
+x c6025a:M1-EnaCmd
+x c6025a:M1-ExeCmd
+x c6025a:M1-StpCmd
+x c6025a:M1-RstCmd
+x c6025a:M1-EncSrcTyp-Cmd
+x c6025a:M1-TrjSrcTyp-Cmd
+x c6025a:M1-PLC-EnaCmd
+x c6025a:M1-CmdFrmPLCCmd
+x c6025a:M1-SftLimBwdEna
+x c6025a:M1-SftLimFwdEna
+x c6025a:MCU-ErrRst
 c6025a:STATUS
-c6025a:M1-Enc01-HmeProc
-c6025a:M1-Type
-c6025a:M1-DrvType
-c6025a:M1-TrajType
+x c6025a:M1-Enc01-HmeProc
+x c6025a:M1-Type
+x c6025a:M1-DrvType
+x c6025a:M1-TrajType
 c6025a:M1-HomProc-RB
-c6025a:M1-Enc02-HmeProc
-c6025a:M1-Enc03-HmeProc
-c6025a:M1-Enc04-HmeProc
+x c6025a:M1-Enc02-HmeProc
+x c6025a:M1-Enc03-HmeProc
+x c6025a:M1-Enc04-HmeProc
 c6025a:ACCESS
 c6025a:m0s004-Enc01-LtchCmd
 c6025a:M1-MtnCmd
@@ -338,17 +349,17 @@ c6025a:M1-VelAct
 c6025a:M1-PosSet
 c6025a:M1-PosErr
 c6025a:M1-PLC-Err
-c6025a:M1-Enc01-PosAct
-c6025a:M1-Enc01-VelAct
-c6025a:M1-Enc01-HmeVelToCam
-c6025a:M1-Enc01-HmeVelFrmCam
-c6025a:M1-Enc01-HmeAcc
-c6025a:M1-Enc01-HmeDec
-c6025a:M1-Enc01-HmePos
-c6025a:M1-Enc01-HmePstMveEna
-c6025a:M1-Enc01-HmePstMvePos
-c6025a:M1-Enc01-HmeRefAtStrtToEncId
-c6025a:M1-Enc01-HmeRefAtHme
+x c6025a:M1-Enc01-PosAct
+x c6025a:M1-Enc01-VelAct
+x c6025a:M1-Enc01-HmeVelToCam
+x c6025a:M1-Enc01-HmeVelFrmCam
+x c6025a:M1-Enc01-HmeAcc
+x c6025a:M1-Enc01-HmeDec
+x c6025a:M1-Enc01-HmePos
+x c6025a:M1-Enc01-HmePstMveEna
+x c6025a:M1-Enc01-HmePstMvePos
+x c6025a:M1-Enc01-HmeRefAtStrtToEncId
+x c6025a:M1-Enc01-HmeRefAtHme
 c6025a:M1-Vel-RB
 c6025a:M1-Acc-RB
 c6025a:M1-EncAct
@@ -368,39 +379,39 @@ c6025a:M1-CfgVMAX-RB
 c6025a:M1-CfgJVEL-RB
 c6025a:M1-CfgACCS-RB
 c6025a:M1-HomPos-RB
-c6025a:M1-Enc02-PosAct
-c6025a:M1-Enc02-VelAct
-c6025a:M1-Enc02-HmeVelToCam
-c6025a:M1-Enc02-HmeVelFrmCam
-c6025a:M1-Enc02-HmeAcc
-c6025a:M1-Enc02-HmeDec
-c6025a:M1-Enc02-HmePos
-c6025a:M1-Enc02-HmePstMveEna
-c6025a:M1-Enc02-HmePstMvePos
-c6025a:M1-Enc02-HmeRefAtStrtToEncId
-c6025a:M1-Enc02-HmeRefAtHme
-c6025a:M1-Enc03-PosAct
-c6025a:M1-Enc03-VelAct
-c6025a:M1-Enc03-HmeVelToCam
-c6025a:M1-Enc03-HmeVelFrmCam
-c6025a:M1-Enc03-HmeAcc
-c6025a:M1-Enc03-HmeDec
-c6025a:M1-Enc03-HmePos
-c6025a:M1-Enc03-HmePstMveEna
-c6025a:M1-Enc03-HmePstMvePos
-c6025a:M1-Enc03-HmeRefAtStrtToEncId
-c6025a:M1-Enc03-HmeRefAtHme
-c6025a:M1-Enc04-PosAct
-c6025a:M1-Enc04-VelAct
-c6025a:M1-Enc04-HmeVelToCam
-c6025a:M1-Enc04-HmeVelFrmCam
-c6025a:M1-Enc04-HmeAcc
-c6025a:M1-Enc04-HmeDec
-c6025a:M1-Enc04-HmePos
-c6025a:M1-Enc04-HmePstMveEna
-c6025a:M1-Enc04-HmePstMvePos
-c6025a:M1-Enc04-HmeRefAtStrtToEncId
-c6025a:M1-Enc04-HmeRefAtHme
+x c6025a:M1-Enc02-PosAct
+x c6025a:M1-Enc02-VelAct
+x c6025a:M1-Enc02-HmeVelToCam
+x c6025a:M1-Enc02-HmeVelFrmCam
+x c6025a:M1-Enc02-HmeAcc
+x c6025a:M1-Enc02-HmeDec
+x c6025a:M1-Enc02-HmePos
+x c6025a:M1-Enc02-HmePstMveEna
+x c6025a:M1-Enc02-HmePstMvePos
+x c6025a:M1-Enc02-HmeRefAtStrtToEncId
+x c6025a:M1-Enc02-HmeRefAtHme
+x c6025a:M1-Enc03-PosAct
+x c6025a:M1-Enc03-VelAct
+x c6025a:M1-Enc03-HmeVelToCam
+x c6025a:M1-Enc03-HmeVelFrmCam
+x c6025a:M1-Enc03-HmeAcc
+x c6025a:M1-Enc03-HmeDec
+x c6025a:M1-Enc03-HmePos
+x c6025a:M1-Enc03-HmePstMveEna
+x c6025a:M1-Enc03-HmePstMvePos
+x c6025a:M1-Enc03-HmeRefAtStrtToEncId
+x c6025a:M1-Enc03-HmeRefAtHme
+x c6025a:M1-Enc04-PosAct
+x c6025a:M1-Enc04-VelAct
+x c6025a:M1-Enc04-HmeVelToCam
+x c6025a:M1-Enc04-HmeVelFrmCam
+x c6025a:M1-Enc04-HmeAcc
+x c6025a:M1-Enc04-HmeDec
+x c6025a:M1-Enc04-HmePos
+x c6025a:M1-Enc04-HmePstMveEna
+x c6025a:M1-Enc04-HmePstMvePos
+x c6025a:M1-Enc04-HmeRefAtStrtToEncId
+x c6025a:M1-Enc04-HmeRefAtHme
 c6025a:MCU-AppMode
 c6025a:MCU-ErrId
 c6025a:MCU-ThdLatMin
@@ -414,3 +425,26 @@ c6025a:MCU-ThdSndMax
 c6025a:M1-MCU1-asyn
 c6025a:MCU-Cmd
 c6025a:M1
+
+  unsigned char enable        : 1;
+  unsigned char enabled       : 1;
+  unsigned char execute       : 1;
+  unsigned char busy          : 1;
+  unsigned char attarget      : 1;
+  unsigned char moving        : 1;
+  unsigned char limitfwd      : 1;
+  unsigned char limitbwd      : 1;
+  unsigned char homeswitch    : 1;
+  unsigned char homed         : 1;
+  unsigned char inrealtime    : 1;
+  unsigned char trajsource    : 1;
+  unsigned char encsource     : 1;
+  unsigned char plccmdallowed : 1;
+  unsigned char softlimfwdena : 1;
+  unsigned char softlimbwdena : 1;
+  unsigned char instartup     : 1;
+  unsigned char sumilockfwd   : 1;
+  unsigned char sumilockbwd   : 1;
+  unsigned char axisType      : 1;
+  unsigned char seqstate      : 4;
+  unsigned char lastilock     : 8;
