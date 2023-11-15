@@ -523,7 +523,7 @@ returns 0 if success or error code.
                         <encIndex>         : Encoder index                        
                         );
 
-   Sets primary encoder index of the axis (the encoder used for control). 
+   Sets primary and homing encoder index of the axis (the encoder used for control). 
    The primary encoder can only be changed when the axis is not busy.
 
    Returns motion axis error code.
