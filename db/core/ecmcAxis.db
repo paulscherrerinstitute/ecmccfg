@@ -624,7 +624,7 @@ record(mbbo,    "${P}${AXIS_NAME}-movAbsCmd") {
 
 record(mbbo,    "${P}${AXIS_NAME}-movHomCmd") {
   field(DESC, "Homing procedure")
-  field(VAL,  "${HOMEPROC=0}")
+  field(VAL,  "14")
 
   field(ZRVL, 0)  field(ZRST, "Not Homable")
   field(ONVL, 1)  field(ONST, "Backward LS")

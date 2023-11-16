@@ -13,100 +13,6 @@
   <property name="windowTitle">
    <string>ecmc expert axis</string>
   </property>
-  <widget class="caStripPlot" name="castripplot">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>681</width>
-     <height>611</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>4</pointsize>
-    </font>
-   </property>
-   <property name="channels" stdset="0">
-    <string>$(SYS):$(Axis)-PosAct;$(SYS):$(Axis)-PosSet</string>
-   </property>
-   <property name="period">
-    <double>30.000000000000000</double>
-   </property>
-   <property name="refreshRate" stdset="0">
-    <enum>caStripPlot::High</enum>
-   </property>
-   <property name="numberOfXticks" stdset="0">
-    <number>4</number>
-   </property>
-   <property name="YAxisScaling" stdset="0">
-    <enum>caStripPlot::autoScale</enum>
-   </property>
-   <property name="YaxisLimitsMax_1">
-    <double>600.000000000000000</double>
-   </property>
-   <property name="YaxisLimitsMin_1">
-    <double>200.000000000000000</double>
-   </property>
-   <property name="YaxisScalingMax_1" stdset="0">
-    <enum>caStripPlot::User</enum>
-   </property>
-   <property name="YaxisScalingMin_1" stdset="0">
-    <enum>caStripPlot::User</enum>
-   </property>
-   <property name="color_1">
-    <color>
-     <red>255</red>
-     <green>216</green>
-     <blue>217</blue>
-    </color>
-   </property>
-   <property name="YaxisLimitsMin_2">
-    <double>-100.000000000000000</double>
-   </property>
-   <property name="YaxisScalingMax_2" stdset="0">
-    <enum>caStripPlot::User</enum>
-   </property>
-   <property name="YaxisScalingMin_2" stdset="0">
-    <enum>caStripPlot::User</enum>
-   </property>
-   <property name="color_2">
-    <color>
-     <red>0</red>
-     <green>255</green>
-     <blue>0</blue>
-    </color>
-   </property>
-   <property name="YaxisLimitsMax_3">
-    <double>30.000000000000000</double>
-   </property>
-   <property name="YaxisLimitsMin_3">
-    <double>0.000000000000000</double>
-   </property>
-   <property name="YaxisScalingMax_3" stdset="0">
-    <enum>caStripPlot::User</enum>
-   </property>
-   <property name="YaxisScalingMin_3" stdset="0">
-    <enum>caStripPlot::User</enum>
-   </property>
-   <property name="color_3">
-    <color>
-     <red>159</red>
-     <green>207</green>
-     <blue>255</blue>
-    </color>
-   </property>
-   <property name="foreground">
-    <color alpha="0">
-     <red>133</red>
-     <green>190</green>
-     <blue>232</blue>
-    </color>
-   </property>
-   <property name="LegendEnabled">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
@@ -315,7 +221,7 @@
      </size>
     </property>
     <property name="text">
-     <string>Reset</string>
+     <string>error reset</string>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-ErrRst</string>
@@ -531,7 +437,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Stop</string>
+     <string>stop</string>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-StpCmd</string>
@@ -630,7 +536,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Exec</string>
+     <string>exec</string>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-ExeCmd</string>
@@ -703,19 +609,19 @@
       <x>270</x>
       <y>30</y>
       <width>51</width>
-      <height>20</height>
+      <height>22</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>22</width>
-      <height>20</height>
+      <height>22</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>16777215</width>
-      <height>20</height>
+      <height>22</height>
      </size>
     </property>
     <property name="rectangular">
@@ -791,19 +697,19 @@
       <x>220</x>
       <y>30</y>
       <width>51</width>
-      <height>20</height>
+      <height>22</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>22</width>
-      <height>20</height>
+      <height>22</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>16777215</width>
-      <height>20</height>
+      <height>22</height>
      </size>
     </property>
     <property name="rectangular">
@@ -2590,7 +2496,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -3022,50 +2928,6 @@
     <attribute name="title">
      <string>Encoders</string>
     </attribute>
-    <widget class="caLineEdit" name="calineedit_48">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>40</y>
-       <width>61</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">c6025a:M1-SetEncIdCmd-RB</string>
-     </property>
-     <property name="background">
-      <color alpha="222">
-       <red>192</red>
-       <green>192</green>
-       <blue>192</blue>
-      </color>
-     </property>
-     <property name="colorMode">
-      <enum>caLineEdit::Static</enum>
-     </property>
-     <property name="precisionMode">
-      <enum>caLineEdit::Channel</enum>
-     </property>
-     <property name="limitsMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="unitsEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="caLineEdit" name="calineedit_52">
      <property name="geometry">
       <rect>
@@ -3110,31 +2972,6 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="caLabel" name="calabel_99">
-     <property name="geometry">
-      <rect>
-       <x>-20</x>
-       <y>40</y>
-       <width>80</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Control:</string>
-     </property>
-    </widget>
     <widget class="caLabel" name="calabel_98">
      <property name="geometry">
       <rect>
@@ -3160,340 +2997,601 @@
       <string>Count:</string>
      </property>
     </widget>
-    <widget class="caFrame" name="caframe_14">
+    <widget class="QGroupBox" name="groupBox_5">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>190</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=08,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=8</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_27">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_12">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>150</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=06,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=6</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_26">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_10">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
+       <x>20</x>
        <y>110</y>
-       <width>71</width>
-       <height>31</height>
+       <width>161</width>
+       <height>121</height>
       </rect>
      </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=04,SYS=$(SYS),Axis=$(Axis)</string>
+     <property name="toolTip">
+      <string extracomment="The primary encoder is used for control."/>
      </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
+     <property name="title">
+      <string>Control:</string>
      </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=4</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_28">
+     <widget class="caLineEdit" name="calineedit_46">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
+        <x>70</x>
+        <y>30</y>
+        <width>81</width>
+        <height>16</height>
        </rect>
       </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
       </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
+      <property name="channel" stdset="0">
+       <string notr="true">c6025a:M1-SetEncIdCmd-RB</string>
       </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+      <property name="background">
+       <color alpha="222">
+        <red>192</red>
+        <green>192</green>
+        <blue>192</blue>
+       </color>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Static</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_101">
+      <property name="geometry">
+       <rect>
+        <x>-20</x>
+        <y>30</y>
+        <width>80</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Enc index:</string>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_51">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>70</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-VelAct</string>
+      </property>
+      <property name="background">
+       <color alpha="222">
+        <red>192</red>
+        <green>192</green>
+        <blue>192</blue>
+       </color>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Static</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_50">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>50</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-PosAct</string>
+      </property>
+      <property name="background">
+       <color alpha="222">
+        <red>192</red>
+        <green>192</green>
+        <blue>192</blue>
+       </color>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Static</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_102">
+      <property name="geometry">
+       <rect>
+        <x>-20</x>
+        <y>50</y>
+        <width>80</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Pos act: </string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_103">
+      <property name="geometry">
+       <rect>
+        <x>-20</x>
+        <y>70</y>
+        <width>80</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Vel act: </string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_65">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>90</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Set pos:</string>
+      </property>
+     </widget>
+     <widget class="caTextEntry" name="catextentry_16">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>90</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-SetEncPosCmd</string>
+      </property>
+      <property name="keepFocus">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
-    <widget class="caFrame" name="caframe_9">
+    <widget class="QGroupBox" name="groupBox_6">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>90</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=03,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=3</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_25">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_7">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>50</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=01,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=1</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_29">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_8">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>70</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=02,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=2</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_32">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_11">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>130</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=05,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=5</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_31">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_13">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>170</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">ENC_ID=07,SYS=$(SYS),Axis=$(Axis)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=7</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-EncCnt</string>
-     </property>
-     <widget class="caRelatedDisplay" name="carelateddisplay_30">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>61</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="labels">
-       <string>$(ENC_ID)</string>
-      </property>
-      <property name="files">
-       <string>ecmcAxisEncExpert_v1.ui</string>
-      </property>
-      <property name="args">
-       <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caLabel" name="calabel_100">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
+       <x>220</x>
        <y>20</y>
-       <width>80</width>
+       <width>120</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Details:</string>
+     </property>
+     <widget class="caFrame" name="caframe_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=02,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=2</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_32">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_11">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=05,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=5</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_31">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_12">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=06,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=6</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_26">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_13">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=07,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=7</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_30">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=03,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=3</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_25">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_10">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=04,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=4</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_28">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=01,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=1</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_29">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_14">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>170</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">ENC_ID=08,SYS=$(SYS),Axis=$(Axis)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=8</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-EncCnt</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay_27">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>$(ENC_ID)</string>
+       </property>
+       <property name="files">
+        <string>ecmcAxisEncExpert_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>ENC_ID=$(ENC_ID),SYS=$(SYS),Axis=$(Axis)</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Trajectory</string>
+    </attribute>
+    <widget class="caLabel" name="calabel_61">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>51</width>
        <height>20</height>
       </rect>
      </property>
@@ -3510,7 +3608,473 @@
       </size>
      </property>
      <property name="text">
-      <string>Details:</string>
+      <string>Acc:</string>
+     </property>
+    </widget>
+    <widget class="caTextEntry" name="catextentry_18">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>20</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-AccCmd</string>
+     </property>
+     <property name="keepFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caTextEntry" name="catextentry_19">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>50</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-DecCmd</string>
+     </property>
+     <property name="keepFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_66">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>51</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Dec:</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_36">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>80</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-PosSet</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_71">
+     <property name="geometry">
+      <rect>
+       <x>-10</x>
+       <y>80</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Setpoint:</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>681</width>
+     <height>631</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>Position</string>
+    </attribute>
+    <widget class="caStripPlot" name="castripplot">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>681</width>
+       <height>571</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>4</pointsize>
+      </font>
+     </property>
+     <property name="channels" stdset="0">
+      <string>$(SYS):$(Axis)-PosAct;$(SYS):$(Axis)-PosSet</string>
+     </property>
+     <property name="period">
+      <double>30.000000000000000</double>
+     </property>
+     <property name="refreshRate" stdset="0">
+      <enum>caStripPlot::High</enum>
+     </property>
+     <property name="numberOfXticks" stdset="0">
+      <number>4</number>
+     </property>
+     <property name="YAxisScaling" stdset="0">
+      <enum>caStripPlot::autoScale</enum>
+     </property>
+     <property name="YaxisLimitsMax_1">
+      <double>600.000000000000000</double>
+     </property>
+     <property name="YaxisLimitsMin_1">
+      <double>200.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_1" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_1" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_1">
+      <color>
+       <red>255</red>
+       <green>216</green>
+       <blue>217</blue>
+      </color>
+     </property>
+     <property name="YaxisLimitsMin_2">
+      <double>-100.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_2" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_2" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_2">
+      <color>
+       <red>0</red>
+       <green>255</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="YaxisLimitsMax_3">
+      <double>30.000000000000000</double>
+     </property>
+     <property name="YaxisLimitsMin_3">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_3" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_3" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_3">
+      <color>
+       <red>159</red>
+       <green>207</green>
+       <blue>255</blue>
+      </color>
+     </property>
+     <property name="foreground">
+      <color alpha="0">
+       <red>133</red>
+       <green>190</green>
+       <blue>232</blue>
+      </color>
+     </property>
+     <property name="LegendEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_5">
+    <attribute name="title">
+     <string>Error</string>
+    </attribute>
+    <widget class="caStripPlot" name="castripplot_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>681</width>
+       <height>571</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>4</pointsize>
+      </font>
+     </property>
+     <property name="channels" stdset="0">
+      <string>$(SYS):$(Axis)-PosErr</string>
+     </property>
+     <property name="period">
+      <double>30.000000000000000</double>
+     </property>
+     <property name="refreshRate" stdset="0">
+      <enum>caStripPlot::High</enum>
+     </property>
+     <property name="numberOfXticks" stdset="0">
+      <number>4</number>
+     </property>
+     <property name="YAxisScaling" stdset="0">
+      <enum>caStripPlot::autoScale</enum>
+     </property>
+     <property name="YaxisLimitsMax_1">
+      <double>600.000000000000000</double>
+     </property>
+     <property name="YaxisLimitsMin_1">
+      <double>200.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_1" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_1" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_1">
+      <color>
+       <red>255</red>
+       <green>216</green>
+       <blue>217</blue>
+      </color>
+     </property>
+     <property name="YaxisLimitsMin_2">
+      <double>-100.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_2" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_2" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_2">
+      <color>
+       <red>0</red>
+       <green>255</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="YaxisLimitsMax_3">
+      <double>30.000000000000000</double>
+     </property>
+     <property name="YaxisLimitsMin_3">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_3" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_3" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_3">
+      <color>
+       <red>159</red>
+       <green>207</green>
+       <blue>255</blue>
+      </color>
+     </property>
+     <property name="foreground">
+      <color alpha="0">
+       <red>133</red>
+       <green>190</green>
+       <blue>232</blue>
+      </color>
+     </property>
+     <property name="LegendEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_6">
+    <attribute name="title">
+     <string>Velocity</string>
+    </attribute>
+    <widget class="caStripPlot" name="castripplot_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>681</width>
+       <height>571</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>4</pointsize>
+      </font>
+     </property>
+     <property name="channels" stdset="0">
+      <string>$(SYS):$(Axis)-VelAct</string>
+     </property>
+     <property name="period">
+      <double>30.000000000000000</double>
+     </property>
+     <property name="refreshRate" stdset="0">
+      <enum>caStripPlot::High</enum>
+     </property>
+     <property name="numberOfXticks" stdset="0">
+      <number>4</number>
+     </property>
+     <property name="YAxisScaling" stdset="0">
+      <enum>caStripPlot::autoScale</enum>
+     </property>
+     <property name="YaxisLimitsMax_1">
+      <double>600.000000000000000</double>
+     </property>
+     <property name="YaxisLimitsMin_1">
+      <double>200.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_1" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_1" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_1">
+      <color>
+       <red>255</red>
+       <green>216</green>
+       <blue>217</blue>
+      </color>
+     </property>
+     <property name="YaxisLimitsMin_2">
+      <double>-100.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_2" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_2" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_2">
+      <color>
+       <red>0</red>
+       <green>255</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="YaxisLimitsMax_3">
+      <double>30.000000000000000</double>
+     </property>
+     <property name="YaxisLimitsMin_3">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="YaxisScalingMax_3" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="YaxisScalingMin_3" stdset="0">
+      <enum>caStripPlot::User</enum>
+     </property>
+     <property name="color_3">
+      <color>
+       <red>159</red>
+       <green>207</green>
+       <blue>255</blue>
+      </color>
+     </property>
+     <property name="foreground">
+      <color alpha="0">
+       <red>133</red>
+       <green>190</green>
+       <blue>232</blue>
+      </color>
+     </property>
+     <property name="LegendEnabled">
+      <bool>false</bool>
      </property>
     </widget>
    </widget>
