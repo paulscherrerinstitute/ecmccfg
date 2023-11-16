@@ -6,7 +6,7 @@
 #- by Niko Kivel, Paul Scherrer Institute, 2018
 #- email: niko.kivel@psi.ch
 #- and Anders Sandström, ESS, 2020
-#- email: anders.sandstrom@ess.eu
+#- email: anders.sandstroem@psi.ch
 #-
 #-###############################################################################
 #-
@@ -29,7 +29,7 @@
 #- PVA               = YES / NO
 #- TMP_DIR           = directory for temporary files
 #- ENG_MODE          = 1/0. If ENG_MODE is set then PVs used for commissioning will be avaialble
-#- EC_TOOL_PATH = Path to ethercat tool defaults to ethercat tool in ECmasterECMC_DIR, 
+#- EC_TOOL_PATH      = Path to ethercat tool defaults to ethercat tool in ECmasterECMC_DIR, 
 #- otherwise            "/opt/etherlab/bin/ethercat"
 #-
 #- [set by module]
@@ -42,7 +42,7 @@
 #- ECMC_PVA               = use pva, default NO
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
-#- ECMC_EC_TOOL_PATH     = path to ethercat tool
+#- ECMC_EC_TOOL_PATH      = path to ethercat tool
 
 #-
 #-------------------------------------------------------------------------------
