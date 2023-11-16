@@ -533,22 +533,6 @@ returns 0 if success or error code.
                         );
 
    Returns primary encoder index of the axis (the encoder used for control).
-    
-18. retvalue = mc_set_home_enc(
-                        <axIndex>,         : Axis index
-                        <encIndex>         : Encoder index                        
-                        );
-
-   Sets homing encoder index of the axis (the encoder used for homing). 
-   The homing encoder can only be changed when the axis is not busy.
-
-   Returns motion axis error code.
-
-19. retvalue = mc_get_home_enc(
-                        <axIndex>,         : Axis index        
-                        );
-
-   Returns homing encoder index of the axis (the encoder used for homing).
 
 ```
 ### Function Lib: Data Storage

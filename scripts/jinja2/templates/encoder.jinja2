@@ -139,7 +139,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
         epicsEnvSet(HOME_PROC, {{ encoder.homing.type }})
     {%- endif %}
     
-    #-ecmcConfigOrDie "Cfg.SelectAxisEncHome(${ECMC_AXIS_NO},-1)"
+    #- ecmcConfigOrDie "Cfg.SelectAxisEncHome(${ECMC_AXIS_NO},-1)"
     
     #- Need to write to env vars to also support legacy syntax ("homing." vs #encoder.homing.")
     {%- if encoder.homing.acc is defined %}

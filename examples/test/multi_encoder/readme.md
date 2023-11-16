@@ -62,29 +62,6 @@ ecmcConfigOrDie "Cfg.SelectAxisEncPrimary($(ECMC_AXIS_NO),${ECMC_ENC_PRIMARY_ID=
 ```
 NOTE: if a ECMC_ENC_PRIMARY_ID=-1 the current value in ecmc will not be overwritten.
 
-## Homing encoder
-
-NOTE: Homing parameters for each encoder object can be defined. Therefore, this functionality is normaly not needed.
-
-The homing encoder is the encoder that will be used for control during homing sequence.
-Any of the configured encoders can be used as homing encoder (but as default encoder 1 is used).
-
-If homing encoder is different than primary encoder the following will happen at homing:
-1. The homing encoder will be used for control (switch encoder).
-2. The primary encoder will again be used for control (switch back to primary encoder).
-
-NOTE: Both steps above can result in step changes in position depending on the configuration.
-
-Change of homing encoder can be done by setting the ECMC_ENC_HOME_ID in the encoder configuration file 
-specified for addEncoder.cmd or by executing the follwoing ecmc command:
-
-```
-ecmcConfigOrDie "Cfg.SelectAxisEncHome($(ECMC_AXIS_NO),${ECMC_ENC_HOME_ID=-1})"
-```
-NOTE: if a ECMC_ENC_HOME_ID=-1 the current value in ecmc will not be overwritten.
-
-The homing encoder will always be referenced, independent of the Cfg.SetAxisEncEnableRefAtHome().
-
 ## Config encoder
 
 The newest encoder created is autonatically set to be the one that recives configuration commands. 
@@ -152,26 +129,6 @@ The following plc functions can be used to set and get information related to mu
                         );
 
    Returns primary encoder index of the axis (the encoder used for control).
-```
-
-```    
-   retvalue = mc_set_home_enc(
-                        <axIndex>,         : Axis index
-                        <encIndex>         : Encoder index                        
-                        );
-
-   Sets homing encoder index of the axis (the encoder used for homing). 
-   The homing encoder can only be changed when the axis is not busy.
-
-   Returns motion axis error code.
-```
-
-```
-   retvalue = mc_get_home_enc(
-                        <axIndex>,         : Axis index        
-                        );
-
-   Returns homing encoder index of the axis (the encoder used for homing).
 ```
 
 # PVs:
