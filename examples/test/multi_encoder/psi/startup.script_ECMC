@@ -1,7 +1,7 @@
 # ecmc test system
 # Anders Sandström
 
-#require ecmccfg v9.0.1_RC3,"EC_RATE=5000,ECMC_VER=v9.0.1_RC3"
+#require ecmccfg v9.0.1_RC3,"EC_RATE=1000,ECMC_VER=v9.0.1_RC3,ENG_MODE=1"
 require ecmccfg sandst_a,"EC_RATE=1000,ECMC_VER=sandst_a,ENG_MODE=1"
 
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
@@ -21,7 +21,6 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
 
 # Add extra encoder to axis 1 (open loop counter)
 $(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/enc2.enc)
-
 # Add extra encoder to axis 1 (open loop counter)
 #system "cat ./cfg/stepper_openloop.yaml"
 $(SCRIPTEXEC) ($(ecmccfg_DIR)loadYamlEnc.cmd, FILE=./cfg/enc3.yaml)
@@ -30,6 +29,9 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)loadYamlEnc.cmd, FILE=./cfg/enc3.yaml)
 epicsEnvSet("DEV",      "$(IOC)")
 #system "cat ./cfg/encoder.yaml"
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,"FILE=cfg/enc4.yaml"
+
+
+#- $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1,FILE=./test.plc")
 
 # Other
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"

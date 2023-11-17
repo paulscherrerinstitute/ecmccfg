@@ -50,6 +50,13 @@ controller:
   Kp: 10
   Ki: 0.1
   Kd: 0.25
+  inner:
+    Kp: 5
+    Ki: 0.01
+    Kd: 0.55
+  deadband:
+    tol: 0.01
+    time: 10
 
 trajectory:
   axis:
@@ -77,7 +84,7 @@ monitoring:
     time: 100
   target:
     enable: yes
-    tolerance: 0.05
+    tolerance: 0.1
     time: 100
   velocity:
     enable: yes
