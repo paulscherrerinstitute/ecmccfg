@@ -272,6 +272,7 @@ class Schema:
             'Kff': {'type': 'float', 'default': 1., 'min': 0},
             'inner': {
                 'type': 'dict',
+                'required': False,
                 'schema': {
                     'Kp': {'type': 'float', 'default': 1., 'min': 0},
                     'Ki': {'type': 'float', 'default': 0., 'min': 0},
@@ -281,13 +282,22 @@ class Schema:
             },
             'limits': {
                 'type': 'dict',
+                'required': False,
                 'schema': {
                     'minOutput': {'type': 'float'},
                     'maxOutput': {'type': 'float'},
                     'minIntegral': {'type': 'float'},
-                    'maxIntegral': {'type': 'float'}
+                    'maxIntegral': {'type': 'float'},
                 }
-            }
+            },
+            'deadband': {
+                'type': 'dict',
+                'required': False,
+                'schema': {
+                    'tol': {'type': 'float', 'min': 0},
+                    'time': {'type': 'integer', 'min': 0},
+                }
+            },
         }
     }
 

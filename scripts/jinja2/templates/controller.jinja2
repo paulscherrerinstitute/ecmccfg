@@ -31,3 +31,9 @@ ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
         ecmcConfigOrDie "Cfg.SetAxisCntrlIPartHL({{ axis.id }},{{ controller.limits.maxIntegral }})"
     {%- endif %}
 {%- endif  %}
+
+#- Actually checked in ecmc monitor
+{%- if controller.deadband %}    
+    ecmcConfigOrDie "Cfg.SetAxisCntrlDeadband({{ axis.id }},{{ controller.deadband.tol }})"
+    ecmcConfigOrDie "Cfg.SetAxisCntrlDeadbandTime({{ axis.id }},{{ controller.deadband.time }})"
+{%- endif  %}
