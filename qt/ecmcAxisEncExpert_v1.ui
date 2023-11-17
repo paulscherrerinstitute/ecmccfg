@@ -741,7 +741,7 @@
      <string extracomment="The primary encoder is used for control."/>
     </property>
     <property name="title">
-     <string>Primary:</string>
+     <string>Control:</string>
     </property>
     <widget class="caLineEdit" name="calineedit_45">
      <property name="geometry">
@@ -987,9 +987,9 @@
    <widget class="caMessageButton" name="camessagebutton_4">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>20</x>
       <y>180</y>
-      <width>111</width>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
@@ -997,7 +997,7 @@
      <string extracomment="Use this enc"/>
     </property>
     <property name="text">
-     <string>Set as primary</string>
+     <string>Use this enc for control</string>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">c6025a:M1-SetEncIdCmd-RB</string>
