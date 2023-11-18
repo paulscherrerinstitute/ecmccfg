@@ -2,14 +2,14 @@
 # addDomain.cmd
 #-d /**
 #-d   \brief Script for adding an EtherCAT domain. 
-#-d   \note All EtherCAT entries generated after this command will be assigned 
-#-d    to the new domain.
 #-d
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param EXE_RATE (optional) Execution rate [cycles] defaults 0 (same EC_RATE)
 #-d   \param EXE_OFFSET (optional) Execution offset cycles [cycles] defaults 0
 #-d   \param ALLOW_OFFLINE (optional) Allow domain to be offline defaults 0
+#-d   \note All EtherCAT entries generated after this command will be assigned 
+#-d    to the new domain.
 #-d
 #-d  note: Hardware changing state, on/off-line, can have negative affect
 #-d        other hardware and DC-clocks
