@@ -1,5 +1,3 @@
 
 
-
-println('Zero ', ec0.s3.ZERO);
-
+ec0.s4.velocitySetpoint01:=-10;

@@ -1,0 +1,91 @@
+# Macros:
+#  AX_ID    : This axis id
+#  AX_NAME  : This axis name
+#  DRV_ID   : Slave id of drive
+#  OFFSET   : Offset
+
+axis:
+  id: ${AX_ID=1}
+  mode: CSV
+#  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+
+epics:
+  name: ${AX_NAME=Axis1}
+  precision: 4
+  unit: mm
+  motorRecord:
+    enable: true
+    description: ""
+    fieldInit: "RTRY=0,FOFF=Frozen"
+
+# Max scale is 8000Hz
+drive:
+  numerator: 2880000  #deg/s, Max speed is 8000 rev/sec for drive
+  denominator: 2147483648
+  type: 1                            # Stepper: 0, DS402: 1 (servos)
+  control: ec0.s$(DRV_ID).driveControl01
+  status: ec0.s$(DRV_ID).driveStatus01
+  setpoint: ec0.s$(DRV_ID).velocitySetpoint01
+  reset: 7
+
+
+# 0.02mm/rev (0.4mm pitch and gr of 20).
+# in data sheet it states 0.364mm pitch and gr of 20 (which is not true)
+encoder:
+  type: 1
+  position: ec0.s$(DRV_ID).positionActual01
+  numerator: 360
+  denominator: 1048576
+  bits: 32
+  absBits: 24
+  absOffset: $(OFFSET=0)
+  status: ec0.s$(DRV_ID).ONE
+#  error:
+#    - 7
+#  ready: 6
+
+controller:
+  Kp: 10.0
+  Ki: 0.01
+  Kd: 0.0
+
+trajectory:
+  source: 0
+  type: 1
+  axis:
+    velocity: 360
+    acceleration: 3600
+    decceleration: 3600
+
+input:
+  limit:
+#    forward: ec0.s$(DRV_ID).infoData02.1
+#    backward: ec0.s$(DRV_ID).infoData02.0
+    forward: ec0.s$(DRV_ID).ONE.1
+    backward: ec0.s$(DRV_ID).ONE.0
+  home: ec0.s$(DRV_ID).ONE.0
+  interlock: ec0.s$(DRV_ID).ONE.0
+
+softlimits:
+  enable: no
+  backwardEnable: yes
+  forwardEnable: yes
+  forward: 10
+  backward: -10
+
+monitoring:
+  lag:
+    enable: yes
+    tolerance: 5
+    time: 100
+  target:
+    enable: yes
+    tolerance: 0.1
+    time: 100
+  velocity:
+    enable: yes
+    max: 10000
+    time:
+      trajectory: 100
+      drive: 200
+

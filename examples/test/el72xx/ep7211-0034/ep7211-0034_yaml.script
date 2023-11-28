@@ -6,7 +6,7 @@
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg sandst_a_FB, "ECMC_VER=sandst_a,EC_RATE=1000"
+require ecmccfg v9.0.1_RC3, "ECMC_VER=sandst_a,EC_RATE=1000,ENG_MODE=1"
 
 ##############################################################################
 ## Configure hardware
@@ -39,16 +39,13 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7201_1.ax)
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd "FILE=./cfg/el7201_1.yaml,DRV_ID=$(ECMC_EC_SLAVE_NUM_DRIVE),AX_NAME='Axis1',AX_ID=1"
 
 ##############################################################################
 ############# Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
