@@ -3,9 +3,6 @@ axis:
   type: joint   # this is for future selection of axis type
 #  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=2.0;
 
-var:
-  drive: 4
-
 epics:
   name: M1
   precision: 3
@@ -19,11 +16,11 @@ drive:
   numerator: 3600     # Fastest speed in engineering units
   denominator: 32768  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 0             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-  control: ec0.s{{ var.drive }}.driveControl01
-  #enable: 0       # Enbale bit
-  status: ec0.s{{ var.drive }}.driveStatus01
-  #enabled: 1      # Enbaled bit
-  setpoint: ec0.s{{ var.drive }}.velocitySetpoint01
+  control: ec0.s${DRV_ID}.driveControl01
+  enable: 0       # Enbale bit
+  status: ec0.s${DRV_ID}.driveStatus01
+  enabled: 1      # Enbaled bit
+  setpoint: ec0.s${DRV_ID}.velocitySetpoint01
   reduceTorqueEnable: yes
   reduceTorque: 2 # Reduce torque bit in drive control word
   #reset: 1        # Reset   (if no drive reset bit then leave empty)
@@ -40,9 +37,9 @@ encoder:
   denominator: 12800
   type: 1         # Type: 0=Incremental, 1=Absolute
   bits: 16        # Total bit count of encoder raw data
-  absBits: 16        # Total bit count of encoder raw data
+  absBits: 16      # Total bit count of encoder raw data
   absOffset: 0    # Encoder offset in eng units (for absolute encoders)
-  position: ec0.s{{ var.drive }}.positionActual01  # Ethercat entry for act-pos (encoder)
+  position: ec0.s${DRV_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
   homing:
     type: 15
 
@@ -60,15 +57,15 @@ controller:
 
 trajectory:
   axis:
-    velocity: 360
+    velocity: 720
     acceleration: 360
 
 input:
   limit:
-    forward: ec0.s{{ var.drive }}.ONE.0     #  Ethercat entry for low limit switch input
-    backward: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for high limit switch input
-  home: ec0.s{{ var.drive }}.ONE.0         #  Ethercat entry for home switch input
-  interlock: ec0.s{{ var.drive }}.ONE.0    #  Ethercat entry for interlock switch input
+    forward: ec0.s${DRV_ID}.ONE.0     #  Ethercat entry for low limit switch input
+    backward: ec0.s${DRV_ID}.ONE.1    #  Ethercat entry for high limit switch input
+  home: ec0.s${DRV_ID}.ONE.2          #  Ethercat entry for home switch input
+  interlock: ec0.s${DRV_ID}.ONE.3     #  Ethercat entry for interlock switch input
 
 softlimits:
   enable: yes

@@ -1,16 +1,12 @@
 # ecmc test system
 # Anders Sandström
 
-#require ecmccfg v9.0.1_RC3,"EC_RATE=1000,ECMC_VER=v9.0.1_RC3,ENG_MODE=1"
-require ecmccfg sandst_a,"EC_RATE=1000,ECMC_VER=sandst_a,ENG_MODE=1"
+require ecmccfg v9.0.1_RC3,"EC_RATE=1000,ECMC_VER=v9.0.1_RC3,ENG_MODE=1"
 
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
 
 # Configure hardware
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL3004"
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL5001"
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL1008"
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=10, HW_DESC=EL7041, CONFIG=-Motor-Phytron-VSS-57.200.2.5"
 epicsEnvSet(DRV_ID, ${ECMC_EC_SLAVE_NUM})
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
