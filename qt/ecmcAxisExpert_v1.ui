@@ -2496,7 +2496,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -3028,7 +3028,7 @@
        </size>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">c6025a:M1-SetEncIdCmd-RB</string>
+       <string notr="true">$(SYS):$(Axis)-SetEncIdCmd-RB</string>
       </property>
       <property name="background">
        <color alpha="222">
@@ -3779,7 +3779,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab_4">
     <attribute name="title">
@@ -4082,6 +4082,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+  <customwidget>
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
@@ -4131,11 +4136,6 @@
    <class>caStripPlot</class>
    <extends>QwtPlot</extends>
    <header>caStripPlot</header>
-  </customwidget>
-  <customwidget>
-   <class>QwtPlot</class>
-   <extends>QFrame</extends>
-   <header>qwt_plot.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

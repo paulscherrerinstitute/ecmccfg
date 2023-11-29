@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Encoder $(ENC_ID):</string>
+    <string>Encoder:</string>
    </property>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
@@ -504,7 +504,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>30</y>
+      <y>40</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -523,7 +523,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>30</y>
+      <y>40</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -561,7 +561,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>50</y>
+      <y>60</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -599,7 +599,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>70</y>
+      <y>80</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -618,7 +618,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>70</y>
+      <y>80</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -656,7 +656,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>90</y>
+      <y>100</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -694,7 +694,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>90</y>
+      <y>100</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -713,7 +713,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>50</y>
+      <y>60</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -759,7 +759,7 @@
       </size>
      </property>
      <property name="channel" stdset="0">
-      <string notr="true">c6025a:M1-SetEncIdCmd-RB</string>
+      <string notr="true">$(SYS):$(Axis)-SetEncIdCmd-RB</string>
      </property>
      <property name="background">
       <color alpha="222">
@@ -997,10 +997,10 @@
      <string extracomment="Use this enc"/>
     </property>
     <property name="text">
-     <string>Use this enc for control</string>
+     <string>Set as primary</string>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">c6025a:M1-SetEncIdCmd-RB</string>
+     <string notr="true">$(SYS):$(Axis)-SetEncIdCmd-RB</string>
     </property>
     <property name="label">
      <string notr="true">Set as primary</string>
@@ -1013,6 +1013,51 @@
     </property>
     <property name="pressMessage">
      <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_82">
+    <property name="geometry">
+     <rect>
+      <x>-30</x>
+      <y>20</y>
+      <width>80</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Id:</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>18</y>
+      <width>111</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>$(ENC_ID)</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
     </property>
    </widget>
   </widget>
