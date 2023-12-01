@@ -23,12 +23,13 @@ drive:
   setpoint: ec0.s${DRV_ID}.velocitySetpoint01
   reduceTorqueEnable: yes
   reduceTorque: 2 # Reduce torque bit in drive control word
-  #reset: 1        # Reset   (if no drive reset bit then leave empty)
-  #warning: 2      # Warning (if no drive warning bit then leave empty)
-  #error:          # max 3
-  #  - 3           # Error 0 (if no drive error bit then leave empty)
-  #  - 7           # Error 0 (if no drive error bit then leave empty)
-  #  - 14          # Error 0 (if no drive error bit then leave empty)
+  reset: 1        # Reset   (if no drive reset bit then leave empty)
+  warning: 2      # Warning (if no drive warning bit then leave empty)
+  error:          # max 3
+    - 3           # Error 0 (if no drive error bit then leave empty)
+    - 7           # Error 0 (if no drive error bit then leave empty)
+    - 14          # Error 0 (if no drive error bit then leave empty)
+  interlock: ec0.s${DRV_ID}.ONE.5
 
 encoder:
   unit: mm
@@ -37,9 +38,10 @@ encoder:
   denominator: 12800
   type: 1         # Type: 0=Incremental, 1=Absolute
   bits: 16        # Total bit count of encoder raw data
-  absBits: 16      # Total bit count of encoder raw data
+  absBits: 16     # Total bit count of encoder raw data
   absOffset: 0    # Encoder offset in eng units (for absolute encoders)
   position: ec0.s${DRV_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
+  ready: ec0.s${DRV_ID}.ONE.4
   homing:
     type: 15
 
