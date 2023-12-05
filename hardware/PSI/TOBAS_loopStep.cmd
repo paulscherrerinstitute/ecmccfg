@@ -8,8 +8,7 @@
 #-    PDO_OFFSET     : PDO Offset value
 #-    PDO_ENTRY_LAST_2_DIGITS : Last two digits of PDO entry (Ch1 =01, Ch2=11)
 
-#- Convert to hex value with zero padding (subtract one since addresses start from 0)
+#- Convert to hex value with zero padding
 ecmcEpicsEnvSetCalc("ECMC_ENTRY_OFFSET_HEX_VALUE",${IDX},"%02x")
 ecmcEpicsEnvSetCalc("CH_ID",${IDX},"%02d")
-
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},${DIR=1},${SM=2},${PDO},${ENTRY},0x${ECMC_ENTRY_OFFSET_HEX_VALUE},${TYPE},${KEY}${CH_ID})"
