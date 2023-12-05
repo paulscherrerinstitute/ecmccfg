@@ -34,11 +34,16 @@
 #-d   \param REC_FIELDS      :  (optional) Additional fileds for record
 #-d   \param REC_TYPE        :  (optional) AO,AI,BI,BO,LONGIN,LONGOUT,
 #-d                                        MBBI,MBBO,MBBIDIRECT,MBBODIRECT (default AI or AO depending on RW)
+#-d   \param INIT_VAL        :  (optional) Value of data item
 #-d */
 
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
 ecmcConfigOrDie "Cfg.EcAddDataDT(ec${MASTER_ID=${ECMC_EC_MASTER_ID=0}}.s${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}}.${STRT_ENTRY_NAME},${OFFSET_BYTE=0},${OFFSET_BITS=0},${RW=2},${DT},${NAME})"
+
+ecmcEpicsEnvSetCalcTernary(WRITE_INIT_VAL,"'${INIT_VAL=NaN}'='NaN'","#-","")
+${WRITE_INIT_VAL}ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}},${NAME},${INIT_VAL=0})"
+epicsEnvUnset(WRITE_INIT_VAL)
 
 ecmcEpicsEnvSetCalcTernary(REC_TYPE_DEFAULT, "'${RW=2}'='1'","AO","AI")
 
