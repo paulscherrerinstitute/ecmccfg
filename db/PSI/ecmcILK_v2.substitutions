@@ -3,3 +3,10 @@ file "ecmcEcSlave.template"
   pattern {}
           {}
 }
+
+file "ecmcILK_v2.template"
+{
+  pattern {CH_ID, DTYP,              FTVL ,  KEY,        }
+          {01,    "asynInt8ArrayIn", "CHAR", "byteOutputBuff"  }
+          {02,    "asynInt8ArrayIn", "CHAR", "byteInputBuff" }
+}

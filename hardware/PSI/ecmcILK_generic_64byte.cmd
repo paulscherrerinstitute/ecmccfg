@@ -5,6 +5,10 @@
 #-d   \file
 #-d */
 
+
+#- size of buffer
+epicsEnvSet("ECMC_SIZE"     "${NELM=64}")
+
 #- 64byte Output buffer:
 #- =============================================================================
 #- SyncManager 2
@@ -18,8 +22,13 @@ epicsEnvSet("ECMC_EC_PDO"   "0x1600")
 epicsEnvSet("ECMC_EC_ENTRY" "0x2001")
 epicsEnvSet("ECMC_EC_TYPE"  "U8")
 epicsEnvSet("ECMC_EC_KEY"   "byteOutput")
+
+
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
-ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,64,1)
+ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,${ECMC_SIZE},1)
+
+# Memmap to view buffer
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.${ECMC_EC_KEY}01,${ECMC_SIZE},2,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.${ECMC_EC_KEY}Buff)"
 
 #- 64byte Input buffer:
 #- =============================================================================
@@ -35,7 +44,11 @@ epicsEnvSet("ECMC_EC_ENTRY" "0x2004")
 epicsEnvSet("ECMC_EC_TYPE"  "U8")
 epicsEnvSet("ECMC_EC_KEY"   "byteInput")
 ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
-ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,64,1)
+ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,${ECMC_SIZE},1)
+
+# Memmap to view buffer
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.${ECMC_EC_KEY}01,${ECMC_SIZE},2,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.${ECMC_EC_KEY}Buff)"
+
 
 #- kalt_r@sls129-sioc-ecatrilkts:~$ ethercat pdos -p11
 #- === Master 0, Slave 11 ===
