@@ -1,0 +1,1644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>721</width>
+    <height>395</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ecmc expert axis</string>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>21</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=01</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=02</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_3">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=03</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_4">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=04</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_5">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=05</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_6">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=06</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_7">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=07</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_8">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=08</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_9">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>30</y>
+     <width>94</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=14</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_10">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>30</y>
+     <width>94</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=13</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_11">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=11</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_12">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=16</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_13">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=12</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_14">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=09</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_15">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=10</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_16">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=15</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_17">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=22</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_18">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=21</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_19">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=19</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_20">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=24</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_21">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=20</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_22">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=17</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_23">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=18</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_24">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=23</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_25">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=30</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_26">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=29</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_28">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=27</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_29">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=32</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_30">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=28</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_31">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=25</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_32">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>30</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=26</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_33">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>30</y>
+     <width>31</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=31</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_27">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=38</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_34">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=54</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_35">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=47</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_36">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=56</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_37">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=51</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_38">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=49</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_39">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=40</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_40">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=36</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_41">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=43</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_42">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=48</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_43">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=46</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_44">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=37</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_45">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=50</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_46">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=35</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_47">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=55</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_48">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=52</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_49">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=64</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_50">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=59</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_51">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=58</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_52">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=61</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_53">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=42</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_54">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=41</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_55">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=34</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_56">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=53</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_57">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=60</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_58">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=39</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_59">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=45</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_60">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=44</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_61">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=33</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_62">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=57</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_63">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=63</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_64">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>210</y>
+     <width>21</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=62</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>141</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Buffer: $(Name)</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

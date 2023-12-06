@@ -6,8 +6,8 @@
 #-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "ILK_v2")
-epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x00505349")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00020000")
+epicsEnvSet("ECMC_EC_VENDOR_ID"          "0xe000001b")
+epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x00000034")
 
 #- verify slave
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
