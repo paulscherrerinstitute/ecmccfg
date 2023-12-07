@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>721</width>
-    <height>395</height>
+    <width>726</width>
+    <height>406</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,14 @@
   <widget class="caInclude" name="cainclude">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>30</y>
      <width>21</width>
-     <height>200</height>
+     <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=01</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=1</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -41,14 +41,14 @@
   <widget class="caInclude" name="cainclude_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>50</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=02</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=2</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -66,14 +66,14 @@
   <widget class="caInclude" name="cainclude_3">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>70</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=03</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=3</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -91,14 +91,14 @@
   <widget class="caInclude" name="cainclude_4">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>90</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=04</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=4</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -116,14 +116,14 @@
   <widget class="caInclude" name="cainclude_5">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>110</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=05</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=5</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -141,14 +141,14 @@
   <widget class="caInclude" name="cainclude_6">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>130</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=06</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=6</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -166,14 +166,14 @@
   <widget class="caInclude" name="cainclude_7">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>150</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=07</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=7</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -191,14 +191,14 @@
   <widget class="caInclude" name="cainclude_8">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>190</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=08</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=8</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -216,7 +216,7 @@
   <widget class="caInclude" name="cainclude_9">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>310</x>
      <y>30</y>
      <width>94</width>
      <height>185</height>
@@ -241,7 +241,7 @@
   <widget class="caInclude" name="cainclude_10">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>290</x>
      <y>30</y>
      <width>94</width>
      <height>185</height>
@@ -266,9 +266,9 @@
   <widget class="caInclude" name="cainclude_11">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>250</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -291,9 +291,9 @@
   <widget class="caInclude" name="cainclude_12">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>370</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -316,7 +316,7 @@
   <widget class="caInclude" name="cainclude_13">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>270</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
@@ -341,14 +341,14 @@
   <widget class="caInclude" name="cainclude_14">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>210</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=09</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=9</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcILK_v2_Byte.ui</string>
@@ -366,7 +366,7 @@
   <widget class="caInclude" name="cainclude_15">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>230</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
@@ -391,7 +391,7 @@
   <widget class="caInclude" name="cainclude_16">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>330</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
@@ -416,9 +416,9 @@
   <widget class="caInclude" name="cainclude_17">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>490</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -441,9 +441,9 @@
   <widget class="caInclude" name="cainclude_18">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>470</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -466,9 +466,9 @@
   <widget class="caInclude" name="cainclude_19">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>430</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -491,9 +491,9 @@
   <widget class="caInclude" name="cainclude_20">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>550</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -516,7 +516,7 @@
   <widget class="caInclude" name="cainclude_21">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>450</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
@@ -541,9 +541,9 @@
   <widget class="caInclude" name="cainclude_22">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>390</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -566,9 +566,9 @@
   <widget class="caInclude" name="cainclude_23">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>410</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -591,7 +591,7 @@
   <widget class="caInclude" name="cainclude_24">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>510</x>
      <y>30</y>
      <width>21</width>
      <height>185</height>
@@ -616,9 +616,9 @@
   <widget class="caInclude" name="cainclude_25">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>670</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -641,9 +641,9 @@
   <widget class="caInclude" name="cainclude_26">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>650</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -666,9 +666,9 @@
   <widget class="caInclude" name="cainclude_28">
    <property name="geometry">
     <rect>
-     <x>590</x>
+     <x>610</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -691,9 +691,9 @@
   <widget class="caInclude" name="cainclude_29">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>30</y>
-     <width>21</width>
+     <x>10</x>
+     <y>210</y>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -716,9 +716,9 @@
   <widget class="caInclude" name="cainclude_30">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>630</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -741,9 +741,9 @@
   <widget class="caInclude" name="cainclude_31">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>570</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -766,9 +766,9 @@
   <widget class="caInclude" name="cainclude_32">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>590</x>
      <y>30</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -791,9 +791,9 @@
   <widget class="caInclude" name="cainclude_33">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>690</x>
      <y>30</y>
-     <width>31</width>
+     <width>21</width>
      <height>185</height>
     </rect>
    </property>
@@ -816,9 +816,9 @@
   <widget class="caInclude" name="cainclude_27">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>130</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -841,9 +841,9 @@
   <widget class="caInclude" name="cainclude_34">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>490</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -866,9 +866,9 @@
   <widget class="caInclude" name="cainclude_35">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>330</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -891,9 +891,9 @@
   <widget class="caInclude" name="cainclude_36">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>550</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -916,9 +916,9 @@
   <widget class="caInclude" name="cainclude_37">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>430</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -941,9 +941,9 @@
   <widget class="caInclude" name="cainclude_38">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>390</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -966,9 +966,9 @@
   <widget class="caInclude" name="cainclude_39">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>190</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -991,9 +991,9 @@
   <widget class="caInclude" name="cainclude_40">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>90</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1016,9 +1016,9 @@
   <widget class="caInclude" name="cainclude_41">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>250</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1041,9 +1041,9 @@
   <widget class="caInclude" name="cainclude_42">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>370</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1066,7 +1066,7 @@
   <widget class="caInclude" name="cainclude_43">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>310</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1091,7 +1091,7 @@
   <widget class="caInclude" name="cainclude_44">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>110</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1116,9 +1116,9 @@
   <widget class="caInclude" name="cainclude_45">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>410</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1141,9 +1141,9 @@
   <widget class="caInclude" name="cainclude_46">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>70</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1166,7 +1166,7 @@
   <widget class="caInclude" name="cainclude_47">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>510</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1191,9 +1191,9 @@
   <widget class="caInclude" name="cainclude_48">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>450</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1213,37 +1213,12 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="caInclude" name="cainclude_49">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>210</y>
-     <width>21</width>
-     <height>185</height>
-    </rect>
-   </property>
-   <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=64</string>
-   </property>
-   <property name="filename" stdset="0">
-    <string notr="true">ecmcILK_v2_Byte.ui</string>
-   </property>
-   <property name="stacking">
-    <enum>caInclude::Column</enum>
-   </property>
-   <property name="numberOfItems" stdset="0">
-    <number>1</number>
-   </property>
-   <property name="adjustSizeToContents" stdset="0">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="caInclude" name="cainclude_50">
    <property name="geometry">
     <rect>
-     <x>590</x>
+     <x>610</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1266,9 +1241,9 @@
   <widget class="caInclude" name="cainclude_51">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>590</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1291,7 +1266,7 @@
   <widget class="caInclude" name="cainclude_52">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>650</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1316,9 +1291,9 @@
   <widget class="caInclude" name="cainclude_53">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>230</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1341,9 +1316,9 @@
   <widget class="caInclude" name="cainclude_54">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>210</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1366,9 +1341,9 @@
   <widget class="caInclude" name="cainclude_55">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>50</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1391,7 +1366,7 @@
   <widget class="caInclude" name="cainclude_56">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>470</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1416,9 +1391,9 @@
   <widget class="caInclude" name="cainclude_57">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>630</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1441,7 +1416,7 @@
   <widget class="caInclude" name="cainclude_58">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>150</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1466,7 +1441,7 @@
   <widget class="caInclude" name="cainclude_59">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>290</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1491,7 +1466,7 @@
   <widget class="caInclude" name="cainclude_60">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>270</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1516,9 +1491,9 @@
   <widget class="caInclude" name="cainclude_61">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1541,9 +1516,9 @@
   <widget class="caInclude" name="cainclude_62">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>570</x>
      <y>210</y>
-     <width>21</width>
+     <width>94</width>
      <height>185</height>
     </rect>
    </property>
@@ -1566,7 +1541,7 @@
   <widget class="caInclude" name="cainclude_63">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>690</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1591,7 +1566,7 @@
   <widget class="caInclude" name="cainclude_64">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>670</x>
      <y>210</y>
      <width>21</width>
      <height>185</height>
@@ -1624,6 +1599,31 @@
    </property>
    <property name="text">
     <string>Buffer: $(Name)</string>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_65">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>94</width>
+     <height>185</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=$(Name),CH=0</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcILK_v2_Byte.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Column</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>1</number>
+   </property>
+   <property name="adjustSizeToContents" stdset="0">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

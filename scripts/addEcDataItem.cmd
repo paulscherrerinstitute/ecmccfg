@@ -35,6 +35,7 @@
 #-d   \param REC_TYPE        :  (optional) AO,AI,BI,BO,LONGIN,LONGOUT,
 #-d                                        MBBI,MBBO,MBBIDIRECT,MBBODIRECT (default AI or AO depending on RW)
 #-d   \param INIT_VAL        :  (optional) Value of data item
+#-d   \param LOAD_RECS       :  (optional) Records will be loaded as default else set to "#-" 
 #-d */
 
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
@@ -47,7 +48,7 @@ epicsEnvUnset(WRITE_INIT_VAL)
 
 ecmcEpicsEnvSetCalcTernary(REC_TYPE_DEFAULT, "'${RW=2}'='1'","AO","AI")
 
-ecmcFileExist("ecmcDataItem${REC_TYPE=${REC_TYPE_DEFAULT}}.db",1,1)
-dbLoadRecords(ecmcDataItem${REC_TYPE=${REC_TYPE_DEFAULT}}.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},M_ID=${MASTER_ID=${ECMC_EC_MASTER_ID=0}},S_ID=${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}},sourceName=${NAME},${REC_FIELDS=""}")
+${LOAD_RECS=}ecmcFileExist("ecmcDataItem${REC_TYPE=${REC_TYPE_DEFAULT}}.db",1,1)
+${LOAD_RECS=}dbLoadRecords(ecmcDataItem${REC_TYPE=${REC_TYPE_DEFAULT}}.db,"ECMC_P=${ECMC_P},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},M_ID=${MASTER_ID=${ECMC_EC_MASTER_ID=0}},S_ID=${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}},sourceName=${NAME},${REC_FIELDS=""}")
 
 epicsEnvUnset(REC_TYPE_DEFAULT)

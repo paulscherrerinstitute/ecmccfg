@@ -7,7 +7,6 @@
 #-    CH_ID          : Channel id
 
 #- Convert to hex value with zero padding
-ecmcEpicsEnvSetCalc("CH_ID",${IDX},"%02d")
 
 #- Always input since only to see the resulting buffers
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=${KEY}${CH_ID},OFFSET_BYTE=0,OFFSET_BITS=0,RW=2,DT=U8,NAME=${KEY}${CH_ID}_Ptr"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=${KEY}${IDX},OFFSET_BYTE=0,OFFSET_BITS=0,RW=2,DT=U8,NAME=${KEY}${IDX}_Ptr"
