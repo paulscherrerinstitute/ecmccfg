@@ -5,5 +5,5 @@
 #-d   \file
 #-d */
 
-ecmcFileExist(${ecmccfg_DIR}ecmcILK_generic_buffer.cmd,1)
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcILK_generic_buffer.cmd "IN_SIZE=64,OUT_SIZE=64"
+ecmcFileExist(${ecmccfg_DIR}ecmcILK_v2_generic_buffer.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcILK_v2_generic_buffer.cmd "IN_SIZE=${NELM},OUT_SIZE={NELM}"

@@ -1,10 +1,4 @@
-#-d /**
-#-d   \brief template for analog input array
-#-d   \details single channel analog input array
-#-d   \author Anders Sandström
-#-d   \file
-#-d */
-
+# ILK data buffers
 record(waveform,"${ECMC_P}${KEY}"){
   field(DESC, "${HWTYPE}: AI$(CH_ID): Value Array [$(NELM)]")
   field(PINI, "${PINI=1}")

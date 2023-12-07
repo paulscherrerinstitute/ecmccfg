@@ -10,3 +10,4 @@ file "ecmcILK_v2.template"
           {01,    "asynInt8ArrayIn", "CHAR", "byteOutputBuff"  }
           {02,    "asynInt8ArrayIn", "CHAR", "byteInputBuff" }
 }
+
