@@ -7,49 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>738</width>
-    <height>976</height>
+    <height>161</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ecmc expert axis</string>
   </property>
-  <widget class="caInclude" name="cainclude">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>0</y>
-     <width>721</width>
-     <height>395</height>
-    </rect>
-   </property>
-   <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=byteInput</string>
-   </property>
-   <property name="filename" stdset="0">
-    <string notr="true">ecmcILK_v2_64byte_buffer.ui</string>
-   </property>
-  </widget>
-  <widget class="caInclude" name="cainclude_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>480</y>
-     <width>721</width>
-     <height>395</height>
-    </rect>
-   </property>
-   <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),Name=byteOutput</string>
-   </property>
-   <property name="filename" stdset="0">
-    <string notr="true">ecmcILK_v2_64byte_buffer.ui</string>
-   </property>
-  </widget>
   <widget class="caWaveTable" name="cawavetable">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>410</y>
+     <y>20</y>
      <width>731</width>
      <height>61</height>
     </rect>
@@ -673,9 +641,9 @@
   <widget class="caWaveTable" name="cawavetable_2">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>890</y>
-     <width>721</width>
+     <x>0</x>
+     <y>90</y>
+     <width>731</width>
      <height>61</height>
     </rect>
    </property>
@@ -1297,11 +1265,6 @@
   </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>caInclude</class>
-   <extends>QWidget</extends>
-   <header>caInclude</header>
-  </customwidget>
   <customwidget>
    <class>caWaveTable</class>
    <extends>QTableWidget</extends>
