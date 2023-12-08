@@ -43,6 +43,8 @@
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
 #- ECMC_EC_TOOL_PATH      = path to ethercat tool
+#- ECMC_SAMPLE_RATE_MS    = current record update rate in milli seconds
+#- ECMC_SAMPLE_RATE_MS_ORIGINAL = ECMC_SAMPLE_RATE_MS (used for restore to default if ECMC_SAMPLE_RATE_MS is changed)
 
 #-
 #-------------------------------------------------------------------------------
@@ -104,6 +106,8 @@ ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS" ,1000/${ECMC_EC_SAMPLE_RATE=1000})
 
 # Update records in 10ms (100Hz) for FULL MODE and in EC_RATE for DAQ mode
 ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'${ECMC_MODE=FULL}'=='DAQ'","${ECMC_EC_SAMPLE_RATE_MS}","10")
+epicsEnvSet(ECMC_SAMPLE_RATE_MS_ORIGINAL,${ECMC_SAMPLE_RATE_MS})
+
 #-
 #-------------------------------------------------------------------------------
 #- define naming convention script

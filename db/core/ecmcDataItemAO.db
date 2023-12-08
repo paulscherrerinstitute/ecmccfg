@@ -22,6 +22,7 @@ record(ao,"${ECMC_P}${sourceName}"){
   field(HSV,  "${HSV=NO_ALARM}")
   field(HHSV, "${HHSV=NO_ALARM}")
   field(TSE,  "${TSE=-2}")
+  field(VAL,  "${VAL=0}")
   field(SCAN, "Passive")
 }
 
