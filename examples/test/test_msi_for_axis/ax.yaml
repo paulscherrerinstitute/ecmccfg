@@ -1,21 +1,21 @@
 axis:
   id: ${AX_ID=1}
   type: ${AX_TYP=joint}   # this is for future selection of axis type
-#  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=2.0;
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=2.0;
 
 epics:
-  name: m${AX_ID}
-  precision: 3
-  unit: ${UNIT}
+  name: M${AX_ID=1}
+  precision: ${PREC=3}
+  unit: ${UNIT=mm}
   motorRecord:
     enable: yes
-    description: stepper motor ${AX_ID}
-    fieldInit: "VMAX=5000"
+    description: stepper motor ${AX_ID=1}
+    fieldInit: "VMAX=1000"
 
 drive:
-  numerator: 3600     # Fastest speed in engineering units
-  denominator: 32768  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-  type: 0             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  numerator: ${DRV_NUM=3600}     # Fastest speed in engineering units
+  denominator: ${DRV_NUM=32768}  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: ${DRV_TYP=0}             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s${DRV_ID}.driveControl01
   enable: 0           # Enbale bit
   status: ec0.s${DRV_ID}.driveStatus01
@@ -31,63 +31,61 @@ drive:
   #  - 14          # Error 0 (if no drive error bit then leave empty)
 
 encoder:
-  unit: mm
+  unit: ${UNIT=mm}
   desc: openloop1
   numerator: ${ENC_NUM=360}
-  denominator: ${ENC_DEN=360}
-  type: 1         # Type: 0=Incremental, 1=Absolute
-  bits: 16        # Total bit count of encoder raw data
-  absBits: 16      # Total bit count of encoder raw data
-  absOffset: 0    # Encoder offset in eng units (for absolute encoders)
-  position: ec0.s${DRV_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
+  denominator: ${ENC_DEN=12800}
+  type: ${ENC_TYP=0}          # Type: 0=Incremental, 1=Absolute
+  bits: ${ENC_BITS=16}        # Total bit count of encoder raw data
+  absBits: ${ENC_ABS_BITS=0}      # Total bit count of encoder raw data
+  absOffset: ${ENC_ABS=0}    # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s${ENC_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
   homing:
-    type: 15
+    type: ${ENC_HME_SEQ=15}
 
 controller:
-  Kp: 10
-  Ki: 0.1
-  Kd: 0.25
+  Kp: ${CNTR_KP=10}
+  Ki: ${CNTR_KI=0.01}
+  Kd: ${CNTR_KD=0}
   inner:
-    Kp: 5
-    Ki: 0.01
-    Kd: 0.55
+    Kp: ${CNTR_KP_i=10}
+    Ki: ${CNTR_KI_i=0.01}
+    Kd: ${CNTR_KD_i=1}
   deadband:
-    tol: 0.01
-    time: 10
+    tol: ${CNTR_DB_TOL=0.01}
+    time: ${CNTR_DB_TIME=100}
 
 trajectory:
   axis:
-    velocity: 720
-    acceleration: 360
+    velocity: ${TRJ_VEL=720}
+    acceleration: ${TRJ_ACC=720}
 
 input:
   limit:
-    forward: ec0.s${DRV_ID}.ONE.0     #  Ethercat entry for low limit switch input
-    backward: ec0.s${DRV_ID}.ONE.1    #  Ethercat entry for high limit switch input
-  home: ec0.s${DRV_ID}.ONE.2          #  Ethercat entry for home switch input
-  interlock: ec0.s${DRV_ID}.ONE.3     #  Ethercat entry for interlock switch input
+    forward: ${LIM_FWD=ec0.s${DRV_ID}.ONE.0}    #  Ethercat entry for low limit switch input
+    backward: ${LIM_BWD=ec0.s${DRV_ID}.ONE.1}   #  Ethercat entry for high limit switch input
+  home: ${HME_SWT=ec0.s${DRV_ID}.ONE.2}        #  Ethercat entry for home switch input
+  interlock: ${IL_SWT=ec0.s${DRV_ID}.ONE.3}   #  Ethercat entry for interlock switch input
 
 softlimits:
-  enable: yes
-  backwardEnable: yes
-  forwardEnable: yes
-  forward: 200000
-  backward: -35000
+  enable: ${SOFT_ENA=1}
+  backwardEnable: ${SOFT_FWD_ENA=1}
+  forwardEnable: ${SOFT_BWD_ENA=1}
+  forward: ${SOFT_FWD=1000}
+  backward: ${SOFT_BWD=-1000}
 
 monitoring:
   lag:
-    enable: yes
-    tolerance: 1
-    time: 100
+    enable: ${MON_LAG_ENA=1}
+    tolerance: ${MON_LAG_TOL=1}
+    time: ${MON_LAG_TIME=100}
   target:
-    enable: yes
-    tolerance: 0.1
-    time: 100
+    enable: ${MON_TRG_ENA=1}
+    tolerance: ${MON_TRG_TOL=0.1}
+    time: ${MON_TRG_TIME=100}
   velocity:
-    enable: yes
-    max: 4000
+    enable: ${MON_VEL_ENA=1}
+    max: ${MON_VEL_MAX=1000}
     time:
-      trajectory: 100
-      drive: 200
-#END
-
+      trajectory: ${MON_VEL_TTIME=100}
+      drive: ${MON_VEL_DTIME=200}

@@ -1,16 +1,20 @@
-# binary inputs
+# Test setup for 8 axes
 
 global
 {
     TEST1   =   YEPP,
     UNIT    =   "mm",
+    KP      =    100,
 }
 
 file "ax.yaml"{
-  pattern {AX_ID, ENC_NUM, ENC_DEN }
-          { 1   , 10        50     }
-          { 2   , 20        60     }
-          { 3   , 30        70     }
-          { 4   , 40        80     }
+  pattern {AX_ID, ENC_NUM, ENC_DEN  }
+          { 1   , 10       110      }
+          { 2   , 20       120      }
+          { 3   , 30       130      }
+          { 4   , 40       140      }
+          { 5   , 50       150      }
+          { 6   , 60       160      }
+          { 7   , 70       170      }
+          { 8   , 80       180      }
 }
-
