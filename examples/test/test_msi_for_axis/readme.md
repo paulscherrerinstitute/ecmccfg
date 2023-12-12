@@ -1,0 +1,4 @@
+# 
+
+msi -S test.subst 
+

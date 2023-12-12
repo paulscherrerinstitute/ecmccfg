@@ -1,0 +1,13 @@
+
+
+require ecmccfg, "ECMC_VER=9.0.0,MASTER_ID=-1"
+
+
+system "./multiAxis.sh test.subst ${ECMC_TMP_DIR} tempFile.ax"
+$(SCRIPTEXEC) ${ECMC_TMP_DIR}tempFile.ax0
+
+
+
+
+
+
