@@ -4,23 +4,23 @@ axis:
   parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=2.0;
 
 epics:
-  name: M${AX_ID=1}
+  name: ${NAME=M${AX_ID=1}}
   precision: ${PREC=3}
   unit: ${UNIT=mm}
   motorRecord:
-    enable: yes
-    description: stepper motor ${AX_ID=1}
+    enable: ${MR_ENA=yes}
+    description: ${DESC=Motor ${AX_ID=1}}
     fieldInit: "VMAX=1000"
 
 drive:
   numerator: ${DRV_NUM=3600}     # Fastest speed in engineering units
   denominator: ${DRV_NUM=32768}  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: ${DRV_TYP=0}             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-  control: ec0.s${DRV_ID}.driveControl01
+  control: ec0.s${DRV_SID}.driveControl${DRV_CH=01}
   enable: 0           # Enbale bit
-  status: ec0.s${DRV_ID}.driveStatus01
+  status: ec0.s${DRV_SID}.driveStatus${DRV_CH=01}
   enabled: 1          # Enbaled bit
-  setpoint: ec0.s${DRV_ID}.velocitySetpoint01
+  setpoint: ec0.s${DRV_SID}.velocitySetpoint${DRV_CH=01}
   reduceTorqueEnable: yes
   reduceTorque: 2  # Reduce torque bit in drive control word
   #reset: 1        # Reset   (if no drive reset bit then leave empty)
@@ -39,7 +39,7 @@ encoder:
   bits: ${ENC_BITS=16}        # Total bit count of encoder raw data
   absBits: ${ENC_ABS_BITS=0}      # Total bit count of encoder raw data
   absOffset: ${ENC_ABS=0}    # Encoder offset in eng units (for absolute encoders)
-  position: ec0.s${ENC_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
+  position: ec0.s${ENC_SID}.positionActual${ENC_CH=01}  # Ethercat entry for act-pos (encoder)
   homing:
     type: ${ENC_HME_SEQ=15}
 
@@ -62,17 +62,17 @@ trajectory:
 
 input:
   limit:
-    forward: ${LIM_FWD=ec0.s${DRV_ID}.ONE.0}    #  Ethercat entry for low limit switch input
-    backward: ${LIM_BWD=ec0.s${DRV_ID}.ONE.1}   #  Ethercat entry for high limit switch input
-  home: ${HME_SWT=ec0.s${DRV_ID}.ONE.2}        #  Ethercat entry for home switch input
-  interlock: ${IL_SWT=ec0.s${DRV_ID}.ONE.3}   #  Ethercat entry for interlock switch input
+    forward: ${LIM_FWD=ec0.s${DRV_SID}.ONE.0}    #  Ethercat entry for low limit switch input
+    backward: ${LIM_BWD=ec0.s${DRV_SID}.ONE.1}   #  Ethercat entry for high limit switch input
+  home: ${HME_SWT=ec0.s${DRV_SID}.ONE.2}        #  Ethercat entry for home switch input
+  interlock: ${IL_SWT=ec0.s${DRV_SID}.ONE.3}   #  Ethercat entry for interlock switch input
 
 softlimits:
-  enable: ${SOFT_ENA=1}
-  backwardEnable: ${SOFT_FWD_ENA=1}
-  forwardEnable: ${SOFT_BWD_ENA=1}
-  forward: ${SOFT_FWD=1000}
-  backward: ${SOFT_BWD=-1000}
+  enable: ${SFT_ENA=1}
+  backwardEnable: ${SFT_FWD_ENA=1}
+  forwardEnable: ${SFT_BWD_ENA=1}
+  forward: ${SFT_FWD=1000}
+  backward: ${SFT_BWD=-1000}
 
 monitoring:
   lag:
