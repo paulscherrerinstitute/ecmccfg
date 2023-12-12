@@ -1,0 +1,16 @@
+# binary inputs
+
+global
+{
+    TEST1   =   YEPP,
+    UNIT    =   "mm",
+}
+
+file "ax.yaml"{
+  pattern {AX_ID, ENC_NUM, ENC_DEN }
+          { 1   , 10        50     }
+          { 2   , 20        60     }
+          { 3   , 30        70     }
+          { 4   , 40        80     }
+}
+
