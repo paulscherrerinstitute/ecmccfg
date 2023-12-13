@@ -130,7 +130,7 @@ monitoring:
 ```
 
 ## IOC shell output
-
+```
 andst_a@c6025a:/ioc/c6025a/ecmccfg/examples/test/test_msi_for_axis$ sudo iocsh -7.0.6 startup.script 
 /usr/local/epics/base-7.0.6/bin/deb10-x86_64/softIocPVA -D /usr/local/epics/base-7.0.6/dbd/softIocPVA.dbd /tmp/iocsh.startup.4730
 # date="Wed Dec 13 10:54:44 CET 2023"
@@ -3894,6 +3894,6 @@ c6025a:M5
 c6025a:M6
 c6025a:M7
 c6025a:M8
-c6025a> ```
+c6025a>
 ```
 
