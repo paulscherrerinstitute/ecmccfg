@@ -1,0 +1,75 @@
+require ecmccfg sandst_a,"EC_RATE=1000,ECMC_VER=sandst_a"
+
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
+
+# Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL3004"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL5001"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL1008"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+epicsEnvSet(DRV_ID, ${ECMC_EC_SLAVE_NUM})
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+
+
+
+# Configure Motion
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
+
+# Add extra encoder to axis 1 (open loop counter)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/stepper_openloop.enc)
+
+# Add extra encoder to axis 1 (open loop counter)
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,   "FILE=cfg/encoder.yaml"
+
+
+## mode  velo
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8012,0x1,1,1)"
+#
+## velo range
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8012,0x5,1,1)"
+#
+#
+ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8010,0x1,700,2)"
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8010,0x2,400,2)"
+#
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8010,0x3,24000,2)"
+## 2.5Ohm (250)
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8010,0x4,250,2)"
+#
+## EMF ???
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8010,0x5,1354,2)"
+#
+## Filter cut off
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8011,0x7,0,2)"
+#
+## Current boosts (set to 0 according to beckhoff)
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8011,0x7,0,2)"
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8011,0x8,0,2)"
+#
+## Current control keep 1/40 ratio
+## kp
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8011,0x1,400,2)"
+## ki
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8011,0x2,4,2)"
+#
+## velo kp
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8013,0x1,0,2)"
+### velo ki
+#ecmcConfigOrDie "Cfg.EcAddSdo(4,0x8013,0x1,0,2)"
+
+# Debug PLC
+#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=1000,FILE=./test.plc")
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

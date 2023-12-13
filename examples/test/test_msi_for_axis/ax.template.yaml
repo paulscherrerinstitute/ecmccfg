@@ -23,12 +23,12 @@ drive:
   setpoint: ec0.s${DRV_SID}.velocitySetpoint${DRV_CH=01}
   reduceTorqueEnable: yes
   reduceTorque: 2  # Reduce torque bit in drive control word
-  #reset: 1        # Reset   (if no drive reset bit then leave empty)
-  #warning: 2      # Warning (if no drive warning bit then leave empty)
-  #error:          # max 3
-  #  - 3           # Error 0 (if no drive error bit then leave empty)
-  #  - 7           # Error 0 (if no drive error bit then leave empty)
-  #  - 14          # Error 0 (if no drive error bit then leave empty)
+  reset: 1        # Reset   (if no drive reset bit then leave empty)
+  warning: 2      # Warning (if no drive warning bit then leave empty)
+  error:          # max 3
+    - 3           # Error 0 (if no drive error bit then leave empty)
+    - 7           # Error 0 (if no drive error bit then leave empty)
+    - 14          # Error 0 (if no drive error bit then leave empty)
 
 encoder:
   unit: ${UNIT=mm}
@@ -68,23 +68,23 @@ input:
   interlock: ${IL_SWT=ec0.s${DRV_SID}.ONE.3}   #  Ethercat entry for interlock switch input
 
 softlimits:
-  enable: ${SFT_ENA=1}
-  backwardEnable: ${SFT_FWD_ENA=1}
-  forwardEnable: ${SFT_BWD_ENA=1}
+  enable: ${SFT_ENA=True}
+  backwardEnable: ${SFT_FWD_ENA=True}
+  forwardEnable: ${SFT_BWD_ENA=True}
   forward: ${SFT_FWD=1000}
   backward: ${SFT_BWD=-1000}
 
 monitoring:
   lag:
-    enable: ${MON_LAG_ENA=1}
+    enable: ${MON_LAG_ENA=True}
     tolerance: ${MON_LAG_TOL=1}
     time: ${MON_LAG_TIME=100}
   target:
-    enable: ${MON_TRG_ENA=1}
+    enable: ${MON_TRG_ENA=True}
     tolerance: ${MON_TRG_TOL=0.1}
     time: ${MON_TRG_TIME=100}
   velocity:
-    enable: ${MON_VEL_ENA=1}
+    enable: ${MON_VEL_ENA=True}
     max: ${MON_VEL_MAX=1000}
     time:
       trajectory: ${MON_VEL_TTIME=100}

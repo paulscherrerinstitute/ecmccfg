@@ -5,7 +5,7 @@ BEGIN{
     id=0;
     filename=f id;
     old_filename="xx";
-    filename_cmd=f ".cmd";
+    filename_cmd=f ".exe.cmd";
     axisFound=0;
 }
 {
@@ -17,6 +17,7 @@ BEGIN{
         axisFound=1;
         print "Write axis file: " filename;
         print "$(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd FILE=" filename  > filename_cmd;
+        print "system \"rm " filename "\"" > filename_cmd;
     }
     # Only print out if "axis:" is found
     if(axisFound) {
@@ -26,3 +27,4 @@ BEGIN{
 END{
     print "Generated " id  " files + ecmc cmd file.";
 }
+
