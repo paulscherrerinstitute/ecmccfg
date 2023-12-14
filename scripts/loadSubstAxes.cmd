@@ -1,5 +1,5 @@
 #==============================================================================
-# loadMultiAxis.cmd
+# loadSubstAxes.cmd
 #- Arguments: FILE
 
 #-d /**
@@ -8,7 +8,7 @@
 #-d   \file
 #-d   \param FILE Subsitution file , i.e. ./plc/ax.subs
 #-d   \code
-#-d     ${SCRIPTEXEC} ${ecmccfg_DIR}loadMultiAxis.cmd, "FILE=./ax.subs"
+#-d     ${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstAxes.cmd, "FILE=./ax.subs"
 #-d   \endcode
 #-d */
 

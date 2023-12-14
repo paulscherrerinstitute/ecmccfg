@@ -4,9 +4,10 @@ global
 {
     UNIT    =   "mm",
     KP      =    100,
+    DRV_SID =    4,
 }
 
-file "ax.template.yaml"{
+file "axes.template.yaml"{
   pattern {  AX_ID, ENC_NUM, ENC_DEN, ENC_SID, KD   }
           {  1,     10,      110,     2,       5.1  }
           {  2,     20,      120,     4,       5.2  }

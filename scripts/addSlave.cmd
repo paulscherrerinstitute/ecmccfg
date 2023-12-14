@@ -39,6 +39,11 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
+#- Ensure same slave is not added twice in a row
+ecmcEpicsEnvSetCalcTernary(ADD_SLAVE_EXIT,"${SLAVE_ID}==${ECMC_HW_OLD_SLAVE_ID=-100}","", "#-")
+${ADD_SLAVE_EXIT}exit # Warning: Adding same slave twice in a row is blocked.
+epicsEnvSet(ECMC_HW_OLD_SLAVE_ID,${SLAVE_ID})
+
 # add ${HW_DESC} to the bus at position ${SLAVE_ID}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1}"

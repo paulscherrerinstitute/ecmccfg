@@ -1,15 +1,14 @@
 
-require ecmccfg,sandst_a,"ECMC_VER=sandst_a,MASTER_ID=0"
+require ecmccfg,sandst_a,"ECMC_VER=v9.0.1_RC3,MASTER_ID=0"
+require ecmccomp,sandst_a
 
-# Configure hardware
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL3004"
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL5001"
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL1008"
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
-epicsEnvSet(DRV_SID, ${ECMC_EC_SLAVE_NUM})
+# Load Hardware based on substitution and templae
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstHw.cmd, "FILE=./hw.subst"
+
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
-${SCRIPTEXEC} ${ecmccfg_DIR}loadMultiAxis.cmd, "FILE=./test.subst"
+# Load Motion based on substitution and templae
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstAxes.cmd, "FILE=./axes.subst"
 
 # go active
 $(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
