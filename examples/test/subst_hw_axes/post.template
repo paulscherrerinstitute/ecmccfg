@@ -1,0 +1,6 @@
+
+#- Apply HW cfg
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+#- Go active
+$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
