@@ -42,11 +42,11 @@ epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 #- clear previous component type (ensure correct ECMC_EC_COMP_TYPE is set for the slave)
 epicsEnvUnset(ECMC_EC_COMP_TYPE)
 
-# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+#- add ${HW_DESC} to the bus at position ${SLAVE_ID}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1}"
 
-# deduce what the prefix should be
+#- deduce what the prefix should be
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE}"
 
