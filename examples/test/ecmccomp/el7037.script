@@ -1,7 +1,7 @@
 co##############################################################################
 ## Example config for el7037
 
-require ecmccfg v9.0.1_RC3,"ECMC_VER=v9.0.1_RC3"
+require ecmccfg sandst_a,"ECMC_VER=v9.0.1_RC3,ENG_MODE=1"
 
 # Load components lib
 require ecmccomp sandst_a
@@ -11,7 +11,8 @@ require ecmccomp sandst_a
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "12")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "SLAVE_ID=$(ECMC_EC_SLAVE_NUM),HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,CH_ID=1,MACROS='U_RUN_MV=16000,I_RUN_MA=500,I_STDBY_MA=100'"
+#- ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "SLAVE_ID=$(ECMC_EC_SLAVE_NUM),HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Series,CH_ID=1,MACROS='U_NOM_MV=24000,I_MAX_MA=2200,I_STDBY_MA=100'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Series,MACROS='U_NOM_MV=24000,I_MAX_MA=2200,I_STDBY_MA=100'"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
