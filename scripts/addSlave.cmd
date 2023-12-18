@@ -39,42 +39,41 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
-#- Ensure same slave is not added twice in a row
-ecmcEpicsEnvSetCalcTernary(BLOCK,"${SLAVE_ID}==${ECMC_HW_OLD_SLAVE_ID=-100}","#-", "")
-epicsEnvSet(ECMC_HW_OLD_SLAVE_ID,${SLAVE_ID})
+#- clear previous component type (ensure correct ECMC_EC_COMP_TYPE is set for the slave)
+epicsEnvUnset(ECMC_EC_COMP_TYPE)
 
 # add ${HW_DESC} to the bus at position ${SLAVE_ID}
-${BLOCK}ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
-${BLOCK}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1}"
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1}"
 
 # deduce what the prefix should be
-${BLOCK}ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
-${BLOCK}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE}"
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE}"
 
-${BLOCK}ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "${DEFAULT_SUBS=True}", "","#- ")
-${BLOCK}${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}"
-${BLOCK}epicsEnvUnset(DEFAULT_SUBS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "${DEFAULT_SUBS=True}", "","#- ")
+${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}"
+epicsEnvUnset(DEFAULT_SUBS)
 
-${BLOCK}ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
-${BLOCK}${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
-${BLOCK}epicsEnvUnset(DEFAULT_SLAVE_PVS)
+ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
+${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
+epicsEnvUnset(DEFAULT_SLAVE_PVS)
 
 #- Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
-${BLOCK}ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", "","#- ")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", "","#- ")
 #- Next slave of the previous slave is this slave
-${BLOCK}${ECMC_EXE_NEXT_SLV}dbLoadRecords(ecmcEcPrevSlave.db,"NEXT_SLAVE_ID=${ECMC_EC_SLAVE_NUM=-1},PREV_ECMC_P=${ECMC_PREV_ECMC_P=""}")
-${BLOCK}epicsEnvUnset(ECMC_EXE_NEXT_SLV)
+${ECMC_EXE_NEXT_SLV}dbLoadRecords(ecmcEcPrevSlave.db,"NEXT_SLAVE_ID=${ECMC_EC_SLAVE_NUM=-1},PREV_ECMC_P=${ECMC_PREV_ECMC_P=""}")
+epicsEnvUnset(ECMC_EXE_NEXT_SLV)
 
 #- If this is the first added slave then store value in P:MCU-Cfg-EC-FrstObjId
-${BLOCK}ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_EC_PREV_SLAVE_NUM=-1}<0", "","#- ")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_SLAVE,"${ECMC_EC_PREV_SLAVE_NUM=-1}<0", "","#- ")
 #- Next slave of the previous slave is this slave
-${BLOCK}${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcEcFirstSlave.db,"P=${ECMC_PREFIX},FIRST_SLAVE_ID=${ECMC_EC_SLAVE_NUM}")
-${BLOCK}epicsEnvUnset(ECMC_EXE_FIRST_SLAVE)
+${ECMC_EXE_FIRST_SLAVE}dbLoadRecords(ecmcEcFirstSlave.db,"P=${ECMC_PREFIX},FIRST_SLAVE_ID=${ECMC_EC_SLAVE_NUM}")
+epicsEnvUnset(ECMC_EXE_FIRST_SLAVE)
 
 #- Store info to populate the ECMC_P-NxtSlv "pointer" of next added slave
-${BLOCK}epicsEnvSet(ECMC_PREV_ECMC_P,${ECMC_P})
-${BLOCK}epicsEnvSet(ECMC_EC_PREV_SLAVE_NUM,${ECMC_EC_SLAVE_NUM})
+epicsEnvSet(ECMC_PREV_ECMC_P,${ECMC_P})
+epicsEnvSet(ECMC_EC_PREV_SLAVE_NUM,${ECMC_EC_SLAVE_NUM})
 
 # increment SLAVE_ID
-${BLOCK}ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
+ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
 
