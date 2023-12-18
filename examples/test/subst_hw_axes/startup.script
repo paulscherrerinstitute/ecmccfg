@@ -1,0 +1,15 @@
+
+require ecmccfg,sandst_a,"ECMC_VER=v9.0.1_RC3,MASTER_ID=0"
+require ecmccomp,sandst_a
+
+# Load Hardware based on substitution and templae
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstHw.cmd, "FILE=./hw.subst"
+
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# Load Motion based on substitution and templae
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstAxes.cmd, "FILE=./axes.subst"
+
+# go active
+$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
+

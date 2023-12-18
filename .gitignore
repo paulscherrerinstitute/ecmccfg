@@ -28,6 +28,7 @@ db/testAIs.db
 *Elmo*
 doc
 tools
+*.pyc
 
 .venv
 hugo/content/source/

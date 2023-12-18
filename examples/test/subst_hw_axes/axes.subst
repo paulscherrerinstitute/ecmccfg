@@ -1,0 +1,21 @@
+# Test setup for 8 axes
+
+global
+{
+    UNIT    =   "mm",
+    KP      =    100,
+    DRV_SID =    4,
+}
+
+file "axes.template.yaml"{
+  pattern {  AX_ID, ENC_NUM, ENC_DEN, ENC_SID, KD   }
+          {  1,     10,      110,     2,       5.1  }
+          {  2,     20,      120,     4,       5.2  }
+          {  3,     30,      130,     2,       5.3  }
+          {  4,     40,      140,     4,       5.4  }
+          {  5,     50,      150,     2,       5.5  }
+          {  6,     60,      160,     4,       5.6  }
+          {  7,     70,      170,     2,       5.7  }
+          {  8,     80,      180,     4,       5.8  }
+}
+

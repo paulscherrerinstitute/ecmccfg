@@ -30,6 +30,7 @@ if __name__ == '__main__':
         [dirs.remove(d) for d in list(dirs) if not files]
 
         for file in files:
+            print("File: " + file)
             outDir = mkDir(root, lstrip=0)
             df = doxyFile(Path(root, file), output=outDir)
             # df = doxyFile('./files/applyConfig.cmd')

@@ -58,7 +58,7 @@ ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#
 ${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
 epicsEnvUnset(DEFAULT_SLAVE_PVS)
 
-# Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
+#- Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", "","#- ")
 #- Next slave of the previous slave is this slave
 ${ECMC_EXE_NEXT_SLV}dbLoadRecords(ecmcEcPrevSlave.db,"NEXT_SLAVE_ID=${ECMC_EC_SLAVE_NUM=-1},PREV_ECMC_P=${ECMC_PREV_ECMC_P=""}")
