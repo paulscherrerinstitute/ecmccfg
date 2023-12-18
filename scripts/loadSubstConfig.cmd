@@ -11,11 +11,13 @@
 #-d   \endcode
 #-d */
 
-#- Parse subst and template with msi. Parse output to separetae axis files 
+#- Parse subst and template with msi. Parse output to separetae axis files
+ecmcFileExist(${ecmccfg_DIR}loadCompleteCfgSubst.sh,1,1)
 system "${ecmccfg_DIR}loadCompleteCfgSubst.sh ${FILE} ${ECMC_TMP_DIR} tempExe.cmd tempFile.ax ${ecmccfg_DIR} ${MACROS=''}"
 system "ls ${ECMC_TMP_DIR}"
 
 #- Execute the generated file (calling loadYamlAxis.cmd)
+ecmcFileExist(${ECMC_TMP_DIR}tempExe.cmd,1,1)
 $(SCRIPTEXEC) ${ECMC_TMP_DIR}tempExe.cmd
 
 #- Cleanup
