@@ -14,7 +14,10 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd, "FILE=./complete.subst"
 
 ```
 
+Note: The order of loading the template files are important. For instance the hw needs to be configured bfeore the motion.
+
 Subst file:
+
 ```
 
 global
