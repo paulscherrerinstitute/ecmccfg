@@ -1,9 +1,64 @@
 # Load hw and multiple axes based on subst and template file 
 
-The commands loadSubstHw.cmd and loadSubstAxes.cmd will configure hw and axes based on a substitution files by use of msi.
-The axes template file has to have the format of a normal ecmccfg yaml-axis. Loading of axes is made with the normal loadYamlAxis.cmd.
+Three commands for loading ecmc configurations based on substitution files:
+* loadSubstConfig.cmd: Load complete config (motion and other)
+* loadSubstHw.cmd : Load hw config
+* loadSubstAxes.cmd : : Load motion config
 
-## Example: Startup file 
+## Example: Most cfgs in one subst file
+```
+require ecmccfg,sandst_a,"ECMC_VER=v9.0.1_RC3,MASTER_ID=0"
+
+# Load configurations from subst file
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd, "FILE=./complete.subst"
+
+```
+
+Note: The order of loading the template files are important. For instance the hw needs to be configured bfeore the motion.
+
+Subst file:
+
+```
+
+global
+{
+    UNIT    =   "mm",
+    KP      =    100,
+    DRV_SID =    4,
+}
+
+# Initializations here
+file "pre.template"{}
+
+# Hw: Test setup for 5 slaves
+file "hw.template"{
+  pattern {  SLAVE_ID, HW_DESC, COMP,                                    COMP_CH, COMP_MACROS                   }
+          {  1,        EL3004,  -1,                                      -1,      -1                            }
+          {  2,        EL5001,  -1,                                      -1,      -1                            }
+          {  3,        EL1008,  -1,                                      -1,      -1                            }
+          {  4,        EL7031,  "Motor-OrientalMotor-PK267JB-Parallel",   1,      "I_MAX_MA=500,I_STDBY_MA=100" }
+          {  12,       EL7037,  "Motor-OrientalMotor-PK267JB-Parallel",   1,      "I_MAX_MA=500,I_STDBY_MA=100" }
+}
+
+# Motion: Test setup for 8 axes
+file "axes.template.yaml"{
+  pattern {  AX_ID, ENC_NUM, ENC_DEN, ENC_SID, KD   }
+          {  1,     10,      110,     2,       5.1  }
+          {  2,     20,      120,     4,       5.2  }
+          {  3,     30,      130,     2,       5.3  }
+          {  4,     40,      140,     4,       5.4  }
+          {  5,     50,      150,     2,       5.5  }
+          {  6,     60,      160,     4,       5.6  }
+          {  7,     70,      170,     2,       5.7  }
+          {  8,     80,      180,     4,       5.8  }
+}
+
+# Go to RT
+file "post.template"{}
+
+```
+
+## Example: Startup file for loading motion and hardware separate
 ```
 require ecmccfg,sandst_a,"ECMC_VER=v9.0.1_RC3,MASTER_ID=0"
 require ecmccomp,sandst_a

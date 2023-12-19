@@ -10,6 +10,7 @@
 epicsEnvSet("ECMC_EC_HWTYPE"             "EP7211-0034_ALL_FB")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b4052")
+epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"

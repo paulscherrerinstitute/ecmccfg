@@ -6,6 +6,9 @@ global
     DRV_SID =    4,
 }
 
+# Initializations here
+file "pre.template"{}
+
 # Hw: Test setup for 5 slaves
 file "hw.template"{
   pattern {  SLAVE_ID, HW_DESC, COMP,                                    COMP_CH, COMP_MACROS                   }
@@ -29,3 +32,5 @@ file "axes.template.yaml"{
           {  8,     80,      180,     4,       5.8  }
 }
 
+# Go to RT
+file "post.template"{}
