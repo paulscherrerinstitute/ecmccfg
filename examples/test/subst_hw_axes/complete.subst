@@ -12,7 +12,6 @@ file "pre.template"{
             {}
 }
 
-
 # Hw: Test setup for 5 slaves
 file "hw.template"{
   pattern {  SLAVE_ID, HW_DESC, COMP,                                    COMP_CH, COMP_MACROS                   }
