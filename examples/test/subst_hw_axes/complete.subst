@@ -7,11 +7,15 @@ global
 }
 
 # Initializations here
-file "pre.template"{}
+file "pre.template"{
+    pattern {}
+            {}
+}
 
 # Hw: Test setup for 5 slaves
 file "hw.template"{
   pattern {  SLAVE_ID, HW_DESC, COMP,                                    COMP_CH, COMP_MACROS                   }
+          {  1,        EL3004,  -1,                                      -1,      -1                            }
           {  1,        EL3004,  -1,                                      -1,      -1                            }
           {  2,        EL5001,  -1,                                      -1,      -1                            }
           {  3,        EL1008,  -1,                                      -1,      -1                            }
@@ -33,4 +37,8 @@ file "axes.template.yaml"{
 }
 
 # Go to RT
-file "post.template"{}
+file "post.template"{
+    pattern {}
+            {}
+}
+
