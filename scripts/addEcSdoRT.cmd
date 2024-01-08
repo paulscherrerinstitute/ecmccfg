@@ -14,7 +14,7 @@
 
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
-# Add async SDO 
+# Add async SDO
 ecmcConfigOrDie "Cfg.EcAddSdoAsync(${SLAVE_ID=0},${INDEX},${SUBINDEX},${DT},${NAME})"
 
 # deduce what the prefix should be

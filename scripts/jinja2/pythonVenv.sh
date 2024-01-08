@@ -17,4 +17,3 @@ else
     . "${ENV_DIR}"/bin/activate
     pip3 install wheel pyyaml jinja2-cli yamllint Cerberus
 fi
-

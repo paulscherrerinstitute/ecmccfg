@@ -10,5 +10,3 @@ On the configuration homepage scalings can be made (depending on what sensor you
 A seeting allowing the DT6230 to connect of ethercat is possible (rebbot needed).
 
 To set back to ethernet I think a CoE settings is availbale like other m&e sensors, check   "0x2100:01, rwrwrw, type 0830, 1 bit, "Ethernet/EtherCAT" "
-
-

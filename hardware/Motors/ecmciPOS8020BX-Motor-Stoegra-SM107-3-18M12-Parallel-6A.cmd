@@ -17,8 +17,8 @@
 #-
 #-
 #- ###########################################################
-#-d   I_RUN_SET:     Running current in amps (defualts to 10). Allowed range 0..14 
-#-d   I_STDBY_SET:   Stanbby current in amps (defualts to 1) 
+#-d   I_RUN_SET:     Running current in amps (defualts to 10). Allowed range 0..14
+#-d   I_STDBY_SET:   Stanbby current in amps (defualts to 1)
 #-d   I_MAX_PROT:    Max current protection limit (defaults to ECMC_I_RUN_SET + 3)
 
 ecmcFileExist("${ecmccfg_DIR}ecmciPOS8020BX-Motor-Stoegra-SM107-3-18M12-Parallel-XA.cmd")

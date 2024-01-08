@@ -53,7 +53,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-epicsEnvSet(ECMC_VER,${ECMC_VER=9.0.0})
+epicsEnvSet(ECMC_VER,${ECMC_VER=9.0.1})
 require ecmc "${ECMC_VER}"
 
 #- Require EthercatMC if used.

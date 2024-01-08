@@ -96,4 +96,3 @@ class JinjaTemplate:
 
     def showProduct(self):
         print(self.product)
-

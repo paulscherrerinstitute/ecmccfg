@@ -1,0 +1,57 @@
+# ecmc test system
+# Anders Sandström
+
+require ecmccfg v9.0.1_RC3,"EC_RATE=500,ECMC_VER=v9.0.1_RC2"
+
+epicsEnvSet("IOC" ,"$(IOC="ec-base-01:Test:")")
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+# Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031"
+#${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEP7047-1032-Motor-Micos-Epics-Training.cmd
+
+# Settings from ecmcEP7047-1032-Motor-Micos-Epics-Training.cmd but 24 volt and no induction setting
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,500,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,250,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,24000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x4,170,2)"
+
+
+# mode velo
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x1,1,1)"
+
+# velo range  1=2000, 3=8000
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x5,3,1)"
+
+# Filter cut off
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x7,0,2)"
+
+# Current boosts (set to 0 according to beckhoff), really makes a difference
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x7,0,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x8,0,2)"
+
+# Current control keep 1/40 ratio
+# kp
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x1,400,2)"
+# ki
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x2,4,2)"
+
+
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# Configure Motion
+epicsEnvSet("DEV",      "$(IOC)")
+epicsEnvSet("DRIVE_ID", "$(ECMC_EC_SLAVE_NUM)")
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear.ax, CFG_MACROS="DRIVE_ID=${ECMC_EC_SLAVE_NUM}")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear.ax)
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

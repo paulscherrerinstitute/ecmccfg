@@ -20,4 +20,3 @@ getDataIndex{
 	out "GetStorageDataIndex(\$1)";
 	in "%f";
 }
-

@@ -32,3 +32,5 @@ tools
 
 .venv
 hugo/content/source/
+
+*.pyc

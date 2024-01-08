@@ -25,7 +25,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 #-     PDO entry 0x6020:09, 32 bit, "Channel 2"
 #-     PDO entry 0x6020:0a, 32 bit, "Channel 3"
 #-     PDO entry 0x6020:0b, 32 bit, "Channel 4"
-#- 
+#-
 
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x0,0x00,S16,gap01,0)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6020,0x03,S32,counter01,1)"
