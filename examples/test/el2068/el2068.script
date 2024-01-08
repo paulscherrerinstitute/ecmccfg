@@ -1,0 +1,36 @@
+##############################################################################
+## Example config for EL2068
+
+require ecmccfg sandst_a "ECMC_VER=v9.0.1_RC3"
+
+##############################################################################
+## Config hardware:
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=13, HW_DESC=EL2068"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL2819"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
+
+dbpf c6025a:m0s013-BO01 1
+dbpf c6025a:m0s013-BO02 1
+dbpf c6025a:m0s013-BO03 1
+dbpf c6025a:m0s013-BO04 1
+dbpf c6025a:m0s013-BO05 1
+dbpf c6025a:m0s013-BO06 1
+dbpf c6025a:m0s013-BO07 1
+dbpf c6025a:m0s013-BO08 1
+
+dbpf c6025a:m0s014-BO01 1

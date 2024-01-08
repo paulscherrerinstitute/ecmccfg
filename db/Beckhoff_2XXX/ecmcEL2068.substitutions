@@ -1,0 +1,27 @@
+# Outputs
+file "ecmc_binaryOutput-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
+}
+
+# Overload status
+file "ecmcEL2068-statAlarm-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
+}
