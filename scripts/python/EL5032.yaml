@@ -1,0 +1,28 @@
+0x9008:
+  - 0x01: { type: uint8, desc: Encoder type }
+  - 0x03: { type: uint8, desc: Reference system }
+  - 0x11: { type: string, desc: Encoder designation }
+  - 0x12: { type: string, desc: Encoder ident number }
+  - 0x13: { type: string, desc: Encoder serial number }
+  - 0x14: { type: uint32, desc: Multiturn resolution }
+  - 0x15: { type: uint32, desc: Singleturn resolution }
+  - 0x16: { type: uint32, desc: Measuring step }
+  - 0x21: { type: bool, desc: Light source error supported }
+  - 0x22: { type: bool, desc: Signal amplitude error supported }
+  - 0x23: { type: bool, desc: Position error supported }
+  - 0x24: { type: bool, desc: Overvoltage error supported }
+  - 0x25: { type: bool, desc: Undervoltage error supported }
+  - 0x26: { type: bool, desc: Overcurrent error supported }
+  - 0x27: { type: bool, desc: Battery error supported }
+  - 0x31: { type: bool, desc: Frequency warning supported }
+  - 0x32: { type: bool, desc: Temperature warning supported }
+  - 0x33: { type: bool, desc: Light source warning supported }
+  - 0x34: { type: bool, desc: Battery warning supported }
+  - 0x35: { type: bool, desc: Reference Mark warning supported }
+  - 0x36: { type: bool, desc: Acyclic mode warning supported }
+  - 0x37: { type: bool, desc: Limit position warning supported }
+  - 0x38: { type: bool, desc: Not ready warning supported }
+  - 0x39: { type: bool, desc: Diagnostic warning supported }
+  - 0x43: { type: bool, desc: Temperature 1 (external) supported }
+  - 0x44: { type: bool, desc: Temperature 2 (internal) supported }
+  - 0x51: { type: bool, desc: Clock pulse periods }

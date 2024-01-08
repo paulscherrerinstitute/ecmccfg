@@ -1,0 +1,7 @@
+# use the EL5042 template, as the process image is identical
+file "ecmcEL5042-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
