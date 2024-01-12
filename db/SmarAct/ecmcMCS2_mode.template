@@ -69,6 +69,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-HmeDone"){
   field(ZNAM, "Not homed")
   field(ONAM, "Done")
   field(TSE,  "${TSE=-2}")
+  field(SCAN, "I/O Intr")
 }
 
 #- Control word RB after applying data items for homing and calibration
