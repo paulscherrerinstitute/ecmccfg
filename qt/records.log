@@ -1,0 +1,450 @@
+
+  bool enableCmd          : 1;
+  bool executeCmd         : 1;
+  bool stopCmd            : 1;
+  bool resetCmd           : 1;
+  bool encSourceCmd       : 1;                        // 0 = internal, 1 = plc
+  bool trajSourceCmd      : 1;                        // 0 = internal, 1 = plc
+  bool plcEnableCmd       : 1;                        // 0 = disable, 1 = enable
+  bool plcCmdsAllowCmd    : 1;                        // 0 = not allow, 1 = allow
+  bool enableSoftLimitBwd : 1;
+  bool enableSoftLimitFwd : 1;
+
+c6025a:HEARTBEAT
+c6025a:START_CNT
+c6025a:CALCSTATUS
+c6025a:m0s004-Enc01-LtchAutRst
+c6025a:M1-MtnCmd_
+c6025a:m0s004-Enc01-LtchRst
+c6025a:MCU-Cfg-Info
+c6025a:MCU-Cfg-Naming
+c6025a:MCU-Cfg-Mode
+c6025a:MCU-Cfg-PVA
+c6025a:MCU-Cfg-AX1-Pfx
+c6025a:MCU-Cfg-AX1-Nam
+c6025a:MCU-Cfg-AX1-PfxNam
+c6025a:M1-DbgStrToLOG
+c6025a:01HZ_MODE
+c6025a:02HZ_MODE
+c6025a:05HZ_MODE
+c6025a:1HZ_MODE
+c6025a:2HZ_MODE
+c6025a:5HZ_MODE
+c6025a:10HZ_MODE
+c6025a:GTIM_RESET
+c6025a:MCU-Cfg-Eng-Mode
+x c6025a:M1-EnaCmd
+x c6025a:M1-ExeCmd
+x c6025a:M1-StpCmd
+x c6025a:M1-RstCmd
+x c6025a:M1-EncSrcTyp-Cmd
+x c6025a:M1-TrjSrcTyp-Cmd
+x c6025a:M1-PLC-EnaCmd
+x c6025a:M1-CmdFrmPLCCmd
+x c6025a:M1-SftLimBwdEna
+x c6025a:M1-SftLimFwdEna
+x c6025a:MCU-ErrRst
+c6025a:STATUS
+x c6025a:M1-Enc01-HmeProc
+x c6025a:M1-Type
+x c6025a:M1-DrvType
+x c6025a:M1-TrajType
+c6025a:M1-HomProc-RB
+x c6025a:M1-Enc02-HmeProc
+x c6025a:M1-Enc03-HmeProc
+x c6025a:M1-Enc04-HmeProc
+c6025a:ACCESS
+c6025a:m0s004-Enc01-LtchCmd
+c6025a:M1-MtnCmd
+c6025a:M1-movVelCmd
+c6025a:M1-movRelCmd
+c6025a:M1-movAbsCmd
+c6025a:M1-movHomCmd
+c6025a:M1-SetEncIdCmd-RB
+c6025a:CA_UPD_TIME
+c6025a:FD_UPD_TIME
+c6025a:LOAD_UPD_TIME
+c6025a:MEM_UPD_TIME
+c6025a:MCU-Cfg-EC-Mst
+c6025a:MCU-Cfg-Rate
+c6025a:MCU-Cfg-Time
+c6025a:MCU-Cfg-PV-Time
+c6025a:m0s001-NxtObjId
+c6025a:MCU-Cfg-EC-FrstObjId
+c6025a:m0s002-NxtObjId
+c6025a:m0s003-NxtObjId
+c6025a:m0s004-Drv01-Cmd
+c6025a:m0s004-Drv01-Spd
+c6025a:m0s004-Enc01-Cmd
+c6025a:m0s004-Enc01-PosCmd
+c6025a:m0s004-NxtObjId
+c6025a:M1-TgtPosCmd
+c6025a:M1-TgtVelCmd
+c6025a:M1-Id
+c6025a:MCU-Cfg-AX1-NxtObjId
+c6025a:MCU-Cfg-AX-FrstObjId
+c6025a:M1-OFF_
+c6025a:M1-MRES_
+c6025a:m0s001-AI01-Stat
+c6025a:m0s001-AI02-Stat
+c6025a:m0s001-AI03-Stat
+c6025a:m0s001-AI04-Stat
+c6025a:m0s001-Stat_
+c6025a:m0s002-Enc01-Stat
+c6025a:m0s002-Stat_
+c6025a:m0s003-Stat_
+c6025a:m0s004-Drv01-Stat
+c6025a:m0s004-Enc01-Stat
+c6025a:m0s004-Stat_
+c6025a:M1-Stat_
+c6025a:ThdRTStat_
+c6025a:m0-Stat_
+c6025a:m0-Dom-Stat_
+c6025a:MODULES
+c6025a:VERSIONS
+c6025a:MOD_VER
+c6025a:require_ORIGIN
+c6025a:misc_ORIGIN
+c6025a:iocStats_ORIGIN
+c6025a:ST_SCRIPT
+c6025a:KERNEL_VERSION
+c6025a:OS_VERSION
+c6025a:EPICS_VERSION
+c6025a:APP_DIR
+c6025a:iocinfo_ORIGIN
+c6025a:caPutLog_ORIGIN
+c6025a:CAPUTLOG
+c6025a:ecmccfg_ORIGIN
+c6025a:ECmasterECMC_ORIGIN
+c6025a:calc_ORIGIN
+c6025a:asyn_ORIGIN
+c6025a:motorECMC_ORIGIN
+c6025a:ruckig_ORIGIN
+c6025a:ecmc_ORIGIN
+c6025a:M1-Arr-Stat
+c6025a:M1-PLC-Expr-RB
+c6025a:MCU-ErrMsg
+c6025a:MCU-Updated
+c6025a:GTIM_ERR_CNT
+c6025a:m0s001-Stat
+c6025a:m0s002-Stat
+c6025a:m0s003-Stat
+c6025a:m0s004-Stat
+c6025a:M1-Stat
+c6025a:M1-ErrId
+c6025a:M1-WrnId
+c6025a:M1-EncCnt
+c6025a:M1-MR-ErrId
+c6025a:M1-CfgRDBD-En-RB
+c6025a:M1-CfgPOSLAG-En-RB
+c6025a:M1-CfgDHLM-En-RB
+c6025a:M1-CfgDLLM-En-RB
+c6025a:m0-Stat
+c6025a:m0-SlvCntr
+c6025a:m0-MemmapCntr
+c6025a:m0-EntryCntr
+c6025a:m0-Dom-FailCntrTot
+c6025a:m0-Dom-Stat
+c6025a:m0s001-AI01-UndrLimAlrm
+c6025a:m0s001-AI01-OvrLimAlrm
+c6025a:m0s001-AI01-ErrAlrm
+c6025a:m0s001-AI02-UndrLimAlrm
+c6025a:m0s001-AI02-OvrLimAlrm
+c6025a:m0s001-AI02-ErrAlrm
+c6025a:m0s001-AI03-UndrLimAlrm
+c6025a:m0s001-AI03-OvrLimAlrm
+c6025a:m0s001-AI03-ErrAlrm
+c6025a:m0s001-AI04-UndrLimAlrm
+c6025a:m0s001-AI04-OvrLimAlrm
+c6025a:m0s001-AI04-ErrAlrm
+c6025a:m0s001-Online
+c6025a:m0s001-Operational
+c6025a:m0s001-Alstate-Init
+c6025a:m0s001-Alstate-Preop
+c6025a:m0s001-Alstate-Safeop
+c6025a:m0s001-Alstate-Op
+c6025a:m0s002-Enc01-DataAlrm
+c6025a:m0s002-Enc01-FrameAlrm
+c6025a:m0s002-Enc01-PowerAlrm
+c6025a:m0s002-Online
+c6025a:m0s002-Operational
+c6025a:m0s002-Alstate-Init
+c6025a:m0s002-Alstate-Preop
+c6025a:m0s002-Alstate-Safeop
+c6025a:m0s002-Alstate-Op
+c6025a:m0s003-BI01
+c6025a:m0s003-BI02
+c6025a:m0s003-BI03
+c6025a:m0s003-BI04
+c6025a:m0s003-BI05
+c6025a:m0s003-BI06
+c6025a:m0s003-BI07
+c6025a:m0s003-BI08
+c6025a:m0s003-Online
+c6025a:m0s003-Operational
+c6025a:m0s003-Alstate-Init
+c6025a:m0s003-Alstate-Preop
+c6025a:m0s003-Alstate-Safeop
+c6025a:m0s003-Alstate-Op
+c6025a:m0s004-Drv01-WrnAlrm
+c6025a:m0s004-Drv01-ErrAlrm
+c6025a:m0s004-Drv01-StlAlrm
+c6025a:m0s004-Drv01-SyncErrAlrm
+c6025a:m0s004-Enc01-ExtLtchOK
+c6025a:m0s004-Enc01-OpnCrctAlrm
+c6025a:m0s004-Enc01-WrnAlrm
+c6025a:m0s004-Enc01-SyncErrAlrm
+c6025a:m0s004-Online
+c6025a:m0s004-Operational
+c6025a:m0s004-Alstate-Init
+c6025a:m0s004-Alstate-Preop
+c6025a:m0s004-Alstate-Safeop
+c6025a:m0s004-Alstate-Op
+c6025a:M1-EnaCmd-RB
+c6025a:M1-EnaAct
+c6025a:M1-ExeCmd-RB
+c6025a:M1-Busy
+c6025a:M1-AtTarget
+c6025a:M1-Moving
+c6025a:M1-LimFwd
+c6025a:M1-LimBwd
+c6025a:M1-HomeSwitch
+c6025a:M1-Homed
+c6025a:M1-InRT
+c6025a:M1-TrjSrcTyp-RB
+c6025a:M1-EncSrcTyp-RB
+c6025a:M1-CmdFrmPLCCmd-RB
+c6025a:M1-SftLimFwdEna-RB
+c6025a:M1-SftLimBwdEna-RB
+c6025a:M1-PLC-EnaCmd-RB
+c6025a:M1-PLC-FirstScan
+c6025a:M1-Err
+c6025a:M1-Wrn
+c6025a:MCU-ThdRTPrioOK
+c6025a:MCU-ThdMemLocked
+c6025a:m0-LinkUp
+c6025a:m0-AlStates-Init
+c6025a:m0-AlStates-Preop
+c6025a:m0-AlStates-Safeop
+c6025a:m0-AlStates-Op
+c6025a:m0-Dom-RedunActive
+c6025a:m0-Dom-WC-Zero
+c6025a:m0-Dom-WC-Incomplete
+c6025a:m0-Dom-WC-Complete
+c6025a:m0-Stat-OK
+c6025a:FD_FREE
+c6025a:SCANMON_SEVR
+c6025a:m0s001-EntryCntr
+c6025a:m0s002-EntryCntr
+c6025a:m0s003-EntryCntr
+c6025a:m0s004-EntryCntr
+c6025a:M1-SeqState
+c6025a:M1-LastIlock
+c6025a:m0-SlvRsp
+c6025a:m0-Dom-WC
+c6025a:M1-Cmd_
+c6025a:m0s001-One
+c6025a:m0s001-Zero
+c6025a:m0s002-One
+c6025a:m0s002-Zero
+c6025a:m0s003-One
+c6025a:m0s003-Zero
+c6025a:m0s004-One
+c6025a:m0s004-Zero
+c6025a:M1-MtnCmdData
+c6025a:M1-DIR_
+c6025a:M1-ErrRst
+c6025a:READACF
+c6025a:SYSRESET
+c6025a:RESTART
+c6025a:01HZ_UPD_TIME
+c6025a:02HZ_UPD_TIME
+c6025a:05HZ_UPD_TIME
+c6025a:1HZ_UPD_TIME
+c6025a:2HZ_UPD_TIME
+c6025a:5HZ_UPD_TIME
+c6025a:10HZ_UPD_TIME
+c6025a:require_VERS
+c6025a:misc_VERS
+c6025a:iocStats_VERS
+c6025a:STARTTOD
+c6025a:TOD
+c6025a:STARTTIME
+c6025a:TIME
+c6025a:ST_SCRIPT1
+c6025a:ST_SCRIPT2
+c6025a:KERNEL_VERS
+c6025a:OS_VERS
+c6025a:EPICS_VERS
+c6025a:HOSTNAME
+c6025a:APP_DIR1
+c6025a:APP_DIR2
+c6025a:UPTIME
+c6025a:ENGINEER
+c6025a:LOCATION
+c6025a:CA_ADDR_LIST
+c6025a:CA_CONN_TIME
+c6025a:CA_AUTO_ADDR
+c6025a:CA_RPTR_PORT
+c6025a:CA_SRVR_PORT
+c6025a:CA_MAX_ARRAY
+c6025a:CA_SRCH_TIME
+c6025a:CA_BEAC_TIME
+c6025a:TIMEZONE
+c6025a:TS_NTP_INET
+c6025a:IOC_LOG_PORT
+c6025a:IOC_LOG_INET
+c6025a:HOST_ARCH
+c6025a:SHELLBOX
+c6025a:BOOTPC
+c6025a:GTIM_CUR_SRC
+c6025a:GTIM_EVT_SRC
+c6025a:GTIM_HI_SRC
+c6025a:iocinfo_VERS
+c6025a:caPutLog_VERS
+c6025a:ecmccfg_VERS
+c6025a:ECmasterECMC_VERS
+c6025a:calc_VERS
+c6025a:asyn_VERS
+c6025a:motorECMC_VERS
+c6025a:ruckig_VERS
+c6025a:ecmc_VERS
+c6025a:m0s001-HWType
+c6025a:m0s002-HWType
+c6025a:m0s003-HWType
+c6025a:m0s004-HWType
+c6025a:M1-MsgTxt
+c6025a:CA_CLNT_CNT
+c6025a:CA_CONN_CNT
+c6025a:CALINK_CNT
+c6025a:CALINK_BROKEN
+c6025a:CALINK_DISCON
+c6025a:RECORD_CNT
+c6025a:FD_MAX
+c6025a:FD_CNT
+c6025a:SYS_CPU_LOAD
+c6025a:LOAD
+c6025a:IOC_CPU_LOAD
+c6025a:CPU_CNT
+c6025a:SUSP_TASK_CNT
+c6025a:MEM_USED
+c6025a:MEM_FREE
+c6025a:MEM_MAX
+c6025a:PROCESS_ID
+c6025a:PARENT_ID
+c6025a:GTIM_TIME
+c6025a:m0s001-AI01
+c6025a:m0s001-AI02
+c6025a:m0s001-AI03
+c6025a:m0s001-AI04
+c6025a:m0s002-Enc01-PosAct
+c6025a:m0s004-Drv01-Cmd-RB
+c6025a:m0s004-Drv01-Spd-RB
+c6025a:m0s004-Enc01-PosAct
+c6025a:m0s004-Enc01-LtchPosAct
+c6025a:m0s004-Enc01-Cmd-RB
+c6025a:m0s004-Enc01-PosCmd-RB
+c6025a:M1-PosAct
+c6025a:M1-VelAct
+c6025a:M1-PosSet
+c6025a:M1-PosErr
+c6025a:M1-PLC-Err
+x c6025a:M1-Enc01-PosAct
+x c6025a:M1-Enc01-VelAct
+x c6025a:M1-Enc01-HmeVelToCam
+x c6025a:M1-Enc01-HmeVelFrmCam
+x c6025a:M1-Enc01-HmeAcc
+x c6025a:M1-Enc01-HmeDec
+x c6025a:M1-Enc01-HmePos
+x c6025a:M1-Enc01-HmePstMveEna
+x c6025a:M1-Enc01-HmePstMvePos
+x c6025a:M1-Enc01-HmeRefAtStrtToEncId
+x c6025a:M1-Enc01-HmeRefAtHme
+c6025a:M1-Vel-RB
+c6025a:M1-Acc-RB
+c6025a:M1-EncAct
+c6025a:M1-CfgSREV-RB
+c6025a:M1-CfgUREV-RB
+c6025a:M1-CfgPMIN-RB
+c6025a:M1-CfgPMAX-RB
+c6025a:M1-CfgSPDB-RB
+c6025a:M1-CfgRDBD-RB
+c6025a:M1-CfgRDBD-Tim-RB
+c6025a:M1-CfgPOSLAG-RB
+c6025a:M1-CfgPOSLAG-Tim-RB
+c6025a:M1-CfgDHLM-RB
+c6025a:M1-CfgDLLM-RB
+c6025a:M1-CfgVELO-RB
+c6025a:M1-CfgVMAX-RB
+c6025a:M1-CfgJVEL-RB
+c6025a:M1-CfgACCS-RB
+c6025a:M1-HomPos-RB
+x c6025a:M1-Enc02-PosAct
+x c6025a:M1-Enc02-VelAct
+x c6025a:M1-Enc02-HmeVelToCam
+x c6025a:M1-Enc02-HmeVelFrmCam
+x c6025a:M1-Enc02-HmeAcc
+x c6025a:M1-Enc02-HmeDec
+x c6025a:M1-Enc02-HmePos
+x c6025a:M1-Enc02-HmePstMveEna
+x c6025a:M1-Enc02-HmePstMvePos
+x c6025a:M1-Enc02-HmeRefAtStrtToEncId
+x c6025a:M1-Enc02-HmeRefAtHme
+x c6025a:M1-Enc03-PosAct
+x c6025a:M1-Enc03-VelAct
+x c6025a:M1-Enc03-HmeVelToCam
+x c6025a:M1-Enc03-HmeVelFrmCam
+x c6025a:M1-Enc03-HmeAcc
+x c6025a:M1-Enc03-HmeDec
+x c6025a:M1-Enc03-HmePos
+x c6025a:M1-Enc03-HmePstMveEna
+x c6025a:M1-Enc03-HmePstMvePos
+x c6025a:M1-Enc03-HmeRefAtStrtToEncId
+x c6025a:M1-Enc03-HmeRefAtHme
+x c6025a:M1-Enc04-PosAct
+x c6025a:M1-Enc04-VelAct
+x c6025a:M1-Enc04-HmeVelToCam
+x c6025a:M1-Enc04-HmeVelFrmCam
+x c6025a:M1-Enc04-HmeAcc
+x c6025a:M1-Enc04-HmeDec
+x c6025a:M1-Enc04-HmePos
+x c6025a:M1-Enc04-HmePstMveEna
+x c6025a:M1-Enc04-HmePstMvePos
+x c6025a:M1-Enc04-HmeRefAtStrtToEncId
+x c6025a:M1-Enc04-HmeRefAtHme
+c6025a:MCU-AppMode
+c6025a:MCU-ErrId
+c6025a:MCU-ThdLatMin
+c6025a:MCU-ThdLatMax
+c6025a:MCU-ThdPrdMin
+c6025a:MCU-ThdPrdMax
+c6025a:MCU-ThdExeMin
+c6025a:MCU-ThdExeMax
+c6025a:MCU-ThdSndMin
+c6025a:MCU-ThdSndMax
+c6025a:M1-MCU1-asyn
+c6025a:MCU-Cmd
+c6025a:M1
+
+  unsigned char enable        : 1;
+  unsigned char enabled       : 1;
+  unsigned char execute       : 1;
+  unsigned char busy          : 1;
+  unsigned char attarget      : 1;
+  unsigned char moving        : 1;
+  unsigned char limitfwd      : 1;
+  unsigned char limitbwd      : 1;
+  unsigned char homeswitch    : 1;
+  unsigned char homed         : 1;
+  unsigned char inrealtime    : 1;
+  unsigned char trajsource    : 1;
+  unsigned char encsource     : 1;
+  unsigned char plccmdallowed : 1;
+  unsigned char softlimfwdena : 1;
+  unsigned char softlimbwdena : 1;
+  unsigned char instartup     : 1;
+  unsigned char sumilockfwd   : 1;
+  unsigned char sumilockbwd   : 1;
+  unsigned char axisType      : 1;
+  unsigned char seqstate      : 4;
+  unsigned char lastilock     : 8;

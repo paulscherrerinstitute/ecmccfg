@@ -22,7 +22,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_DRV_SCALE
 #- ECMC_DRV_SCALE_DENOM
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}verifyOrDie.cmd "EXPR_STR='abs(${ECMC_DRV_SCALE_DENOM})<>0',SUCCESS_STR='ECMC_DRV_SCALE_DENOM value OK == ${ECMC_DRV_SCALE_DENOM}...',ERROR_STR='ECMC_DRV_SCALE_DENOM == 0...'"
 
-#- Issue Warning if ECMC_MRES is set. MRES calculated bu SREV and UREV instead
+#- Issue Warning if ECMC_MRES is set. MRES calculated by SREV and UREV instead
 ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${ECMC_MRES=-1}>0',WARNING_STR='WARNING: ECMC_MRES setting is deprecated and will not be used. (MRES will be calulated instead: ECMC_ENC_SCALE_NUM/ECMC_ENC_SCALE_DENOM).. '"
 
@@ -84,7 +84,6 @@ ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchCountOffset(${ECMC_AXIS_NO},${ECMC_HOME_
 #- Multi encoder support
 ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID=-1})"
 ecmcConfigOrDie "Cfg.SelectAxisEncPrimary($(ECMC_AXIS_NO),${ECMC_ENC_PRIMARY_ID=-1})"
-ecmcConfigOrDie "Cfg.SelectAxisEncHome($(ECMC_AXIS_NO),${ECMC_ENC_HOME_ID=-1})"
 ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome($(ECMC_AXIS_NO),${ECMC_ENC_REF_AT_HOME=-1})"
 ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc($(ECMC_AXIS_NO),${ECMC_ENC_MAX_DIFF_TO_PRIM_ENC=0})"
 

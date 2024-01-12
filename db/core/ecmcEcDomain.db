@@ -1,0 +1,74 @@
+#Domain
+record(longin,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-FailCntrTot"){
+  field(DESC, "Master: Domain fail counter")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).dom${DOM_ID=0}.domainfailcountertotal?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat"){
+  field(DESC, "Master: Domain Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).dom${DOM_ID=0}.domainstatus?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,  "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC") {
+  field(DESC, "Master: Domain Working Counter")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A>>16")
+  field(INPA, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat.VAL")
+  field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat_")
+}
+
+record(mbbiDirect,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat_"){
+  field(DESC, "Master: Domain Status Word mbbiD")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat.VAL")
+  field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-RedunActive.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-RedunActive"){
+  field(DESC, "Master: Domain redundancy active")
+  field(INP,  "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat_.B0")
+  field(ZNAM, "No redundancy")
+  field(ONAM, "Redundancy active")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC-Zero.PROC")
+}
+
+record(bi,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC-Zero"){
+  field(DESC, "Master: Domain Work Counter Zero")
+  field(INP,  "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat_.B1")
+  field(ZNAM, "Not EC_WC_ZERO")
+  field(ONAM, "EC_WC_ZERO")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC-Incomplete.PROC")
+}
+
+record(bi,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC-Incomplete"){
+  field(DESC, "Master: Domain Work Counter incomplete")
+  field(INP,  "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat_.B2")
+  field(ZNAM, "not EC_WC_INCOMPLETE")
+  field(ONAM, "EC_WC_INCOMPLETE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC-Complete.PROC")
+}
+
+record(bi,"${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-WC-Complete"){
+  field(DESC, "Master: Domain Work Counter complete")
+  field(INP,  "${P}${ECMC_EC_MP}${MASTER_ID}-Dom${DOM_ID=0}-Stat_.B3")
+  field(ZNAM, "not EC_WC_COMPLETE")
+  field(ONAM, "EC_WC_COMPLETE")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+}

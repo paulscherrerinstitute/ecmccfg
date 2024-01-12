@@ -20,4 +20,4 @@
 {%- if axis.features is defined %}
     ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
 {%- endif %}
-
+{% include 'axisCleanup.jinja2' %}

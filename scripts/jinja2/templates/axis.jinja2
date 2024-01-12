@@ -1,6 +1,7 @@
 #- -=-=-=-=- axis
 {#- drive is only present in type: 'joint' #}
 {%- set drive = None if drive is undefined else drive %}
+epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
 ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type }},{{ drive.type|default(0)|int }},{{ trajectory.type }})"
 {%- if axis.type|int == 2 %}
     ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id }},0)"

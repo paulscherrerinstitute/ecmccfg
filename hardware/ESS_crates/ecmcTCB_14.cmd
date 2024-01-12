@@ -29,7 +29,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=225, HW_DESC=EL2502"
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8000")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL2502-settings-chX-PRL.cmd
 
-# Configure channel 2 of EL2502                      
+# Configure channel 2 of EL2502
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8010")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL2502-settings-chX-PRL.cmd
 

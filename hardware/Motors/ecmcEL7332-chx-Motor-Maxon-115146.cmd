@@ -35,7 +35,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_ID}0,0x5,20,2)"
 #- Reduced current negative 100mA
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_ID}0,0x6,20,2)"
 
-#- Nominal speed of teh motor at nominal voltage 300rpm 
+#- Nominal speed of teh motor at nominal voltage 300rpm
 #- Not accessible for EL7332. probably accessible for EL7432
 #-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_ID}0,0x8,680,2)"
 

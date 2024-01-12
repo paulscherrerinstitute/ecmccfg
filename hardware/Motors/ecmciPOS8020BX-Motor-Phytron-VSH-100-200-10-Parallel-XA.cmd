@@ -4,8 +4,8 @@
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   Argumemts:
-#-d   I_RUN_SET:     Running current in amps (defualts to 10). Allowed range 0..14 
-#-d   I_STDBY_SET:   Stanbby current in amps (defualts to 1) 
+#-d   I_RUN_SET:     Running current in amps (defualts to 10). Allowed range 0..14
+#-d   I_STDBY_SET:   Stanbby current in amps (defualts to 1)
 #-d   I_MAX_PROT:    Max current protection limit (defaults to ECMC_I_RUN_SET+3)
 #-d */
 
@@ -36,7 +36,7 @@ epicsEnvSet("ECMC_TECHNOSOFT_CFG_HEX"          "0084")
 
 #- Ensure running current is below 14A otherwise exit
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${I_RUN_SET=10}>14 or ${I_RUN_SET=10}<=0", "ecmcExit Error: Current setpoint to high","# Current setting OK")
-# Result: 
+# Result:
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)
 

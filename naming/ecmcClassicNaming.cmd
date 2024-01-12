@@ -11,4 +11,3 @@
 #-d */
 
 epicsEnvSet("ECMC_P",            "${ECMC_PREFIX}ec${MASTER_ID}-s${SLAVE_POS}-${HWTYPE}")
-

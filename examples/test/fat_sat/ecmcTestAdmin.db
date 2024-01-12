@@ -1,0 +1,7 @@
+
+record(ao,"$(P)TestNumber"){
+  field(PREC, "0")
+  field(VAL,  "0")
+  field(SCAN, "Passive")
+  field(EGU,  "n[]")
+}

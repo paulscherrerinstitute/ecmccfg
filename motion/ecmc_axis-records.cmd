@@ -15,16 +15,15 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis.cmd
 
 #- Check if softlimits and max velo should be applied by setting DRVL and DRVH field of AO records
-ecmcEpicsEnvSetCalcTernary(P_DRVL,"${ECMC_DXLM_ENABLE}>0",${ECMC_SOFT_LOW_LIM=0} ,0)
-ecmcEpicsEnvSetCalcTernary(P_DRVH,"${ECMC_DXLM_ENABLE}>0",${ECMC_SOFT_HIGH_LIM=0} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"${ECMC_MON_VELO_MAX_ENA}>0",-${ECMC_MON_VELO_MAX=0} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"${ECMC_MON_VELO_MAX_ENA}>0",${ECMC_MON_VELO_MAX=0} ,0)
 ecmcFileExist("ecmcAxis.db",1,1)
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC=0},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},P_DRVL=${P_DRVL},P_DRVH=${P_DRVH},V_DRVL=${V_DRVL},V_DRVH=${V_DRVH}")
-epicsEnvUnset(P_DRVL)
-epicsEnvUnset(P_DRVH)
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC=0},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},V_DRVL=${V_DRVL},V_DRVH=${V_DRVH}")
 epicsEnvUnset(V_DRVL)
 epicsEnvUnset(V_DRVH)
+
+ecmcFileExist("ecmcEnc.db",1,1)
+dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},ENC_NO=${ECMC_ENC_CFG_ID=1},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ECMC_ENC_EGU=${ECMC_EGU=}},DESC=${ECMC_ENC_DESC=${ECMC_DESC=}},HOME_PROC=${ECMC_HOME_PROC=0},VEL_TO_CAM=${ECMC_HOME_VEL_TO=0},VEL_FRM_CAM=${ECMC_HOME_VEL_FRM=0},ACC=${ECMC_HOME_ACC=-1},DEC=${ECMC_HOME_DEC=-1},REF_HME=${ECMC_ENC_REF_AT_HOME=-1},REF_STRT=${ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID=-1},POST_ENA=${ECMC_HOME_POS_MOVE_ENA=-1},POST_POS=${ECMC_HOME_POS_MOVE_TARG_POS=0},POS=${ECMC_HOME_POS=0}")
 
 #- This is an REAL axis == type 1
 ecmcFileExist("ecmcAxisType.db",1,1)
@@ -35,7 +34,7 @@ dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME=
 
 #- special PVs for commissioning only add if the COMMISSIONG is set to 1 in startup.cmd
 ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
-${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},KP=${ECMC_CNTRL_KP},KI=${ECMC_CNTRL_KI},KD=${ECMC_CNTRL_KD},KFF=${ECMC_CNTRL_KFF}")
+${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},KP=${ECMC_CNTRL_KP},KI=${ECMC_CNTRL_KI},KD=${ECMC_CNTRL_KD},KFF=${ECMC_CNTRL_KFF},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
 
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_AXIS_OBJ_ID==-1)

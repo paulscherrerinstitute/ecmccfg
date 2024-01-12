@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>125</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>125</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">A_RF_LLRF_ELETTRATUNING_include_E_slave_frame.ui</string>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>175</y>
+     <width>122</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Info</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Drive</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1">
+        <property name="margin">
+         <number>1</number>
+        </property>
+        <item row="0" column="1">
+         <widget class="caLineEdit" name="calineedit_5">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::Channel</enum>
+          </property>
+          <property name="unitsEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="caLineEdit" name="calineedit_4">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::User</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="caLabel" name="calabel_11">
+          <property name="text">
+           <string>Voltage</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="caLabel" name="calabel_10">
+          <property name="text">
+           <string>Velocity</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="caLabel" name="calabel_9">
+          <property name="text">
+           <string>Torque</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="caLed" name="caled_Warning">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>4</width>
+            <height>12</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="rectangular">
+           <bool>true</bool>
+          </property>
+          <property name="gradientEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="ledHeight">
+           <number>10</number>
+          </property>
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Wrn-Alrm</string>
+          </property>
+          <property name="colorMode">
+           <enum>caLed::Static</enum>
+          </property>
+          <property name="falseColor">
+           <color>
+            <red>255</red>
+            <green>170</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueColor">
+           <color>
+            <red>0</red>
+            <green>85</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueValue">
+           <string notr="true">0</string>
+          </property>
+          <property name="falseValue">
+           <string notr="true">1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="caLed" name="caled_Error">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>4</width>
+            <height>12</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="rectangular">
+           <bool>true</bool>
+          </property>
+          <property name="gradientEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="ledHeight">
+           <number>10</number>
+          </property>
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Err-Alrm</string>
+          </property>
+          <property name="colorMode">
+           <enum>caLed::Static</enum>
+          </property>
+          <property name="falseColor">
+           <color>
+            <red>170</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueColor">
+           <color>
+            <red>0</red>
+            <green>85</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueValue">
+           <string notr="true">0</string>
+          </property>
+          <property name="falseValue">
+           <string notr="true">1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="caLabel" name="calabel_13">
+          <property name="text">
+           <string>Error</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="caLabel" name="calabel_14">
+          <property name="text">
+           <string>Warning</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="caLineEdit" name="calineedit_6">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::Channel</enum>
+          </property>
+          <property name="unitsEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="caLabel" name="calabel_15">
+          <property name="text">
+           <string>Temp</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="caLineEdit" name="calineedit_7">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::Channel</enum>
+          </property>
+          <property name="unitsEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Encoder</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout" columnstretch="1,1">
+        <property name="margin">
+         <number>1</number>
+        </property>
+        <property name="horizontalSpacing">
+         <number>6</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="caLabel" name="calabel_5">
+          <property name="text">
+           <string>positon</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="caLineEdit" name="calineedit">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::User</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Status</string>
+    </attribute>
+    <widget class="caByte" name="cabyte_2">
+     <property name="geometry">
+      <rect>
+       <x>35</x>
+       <y>5</y>
+       <width>20</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Tp01-Stat</string>
+     </property>
+     <property name="endBit">
+      <number>15</number>
+     </property>
+    </widget>
+    <widget class="caByte" name="cabyte">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>5</y>
+       <width>20</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
+     </property>
+     <property name="endBit">
+      <number>15</number>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+  <customwidget>
+   <class>caLed</class>
+   <extends>QWidget</extends>
+   <header>caLed</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+  <customwidget>
+   <class>caByte</class>
+   <extends>QWidget</extends>
+   <header>caByte</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

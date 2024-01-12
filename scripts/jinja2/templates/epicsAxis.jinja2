@@ -6,22 +6,30 @@
 ecmcFileExist("ecmcAxis.db",1,1)
 
 #- Set DRVX fields of TgtPosCmd and TgtVelCmd pvs if needed
-
-{%- if softlimits.enable %}
-    ecmcEpicsEnvSetCalcTernary(P_DRVL,"{{ softlimits.backwardEnable|default(0)|int }}>0",{{ softlimits.backward|default(0.0) }} ,0.0)
-    ecmcEpicsEnvSetCalcTernary(P_DRVH,"{{ softlimits.forwardEnable|default(0)|int }}>0",{{ softlimits.forward|default(0.0) }} ,0)
-{%- endif %}
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"{{ monitoring.velocity.enable|default(0)|int }}>0",-{{ monitoring.velocity.max|default(0.0) }} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"{{ monitoring.velocity.enable|default(0)|int }}>0",{{ monitoring.velocity.max|default(0.0) }} ,0)
 
 {%- set homing = None if homing is undefined else homing%}
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},P_DRVL=${P_DRVL=0},P_DRVH=${P_DRVH=0},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
-
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
 #- Cleanup if needed
-epicsEnvUnset(P_DRVL)
-epicsEnvUnset(P_DRVH)
 epicsEnvUnset(V_DRVL)
 epicsEnvUnset(V_DRVH)
+
+{%- if (homing) and (encoder.homing) %}
+   # ERROR: Duplicate homing parameters identified (homing and encoder.homing)
+   #        Homing parameters can only be defined at one place
+   ecmcExit
+{%- endif %}
+
+# Add encoder PVS (always encoder number 1 (first encoder))
+#- {%- if homing is defined %}
+#-    {% include 'homing.jinja2' %}
+#- {%- else %}
+#-    {% include 'encoder.jinja2' %}
+#- {%- endif %}
+
+ecmcFileExist("ecmcEnc.db",1,1)
+dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},ENC_NO=1,PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ENC_EGU=},DESC=${ENC_DESC=},HOME_PROC=${HOME_PROC=0},VEL_TO_CAM=${VEL_TO_CAM=0},VEL_FRM_CAM=${VEL_FRM_CAM=0},ACC=${ACC=-1},DEC=${DEC=-1},REF_HME=${REF_HME=-1},REF_STRT=${REF_STRT=-1},POST_ENA=${POST_ENA=-1},POST_POS=${POST_POS=0},POS=${HOME_POS=0}")
 
 #- -----------------------------------------------------------------------------
 #- Set ECMC_MOTOR_NAME needed by addEncoder script (if executed afterwards)
@@ -32,7 +40,7 @@ ecmcFileExist("ecmcAxisType.db",1,1)
 {%- if axis.type == 1 %}
    #- Physical axis
    ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
-   ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},KP={{ controller.Kp }},KI={{ controller.Ki }},KD={{ controller.Kd }},KFF={{ controller.Kff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
+   ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},KP={{ controller.Kp }},KI={{ controller.Ki }},KD={{ controller.Kd }},KFF={{ controller.Kff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")
    dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE={{ drive.type|default(0)|int }},TRAJ_TYPE={{ trajectory.type }}")
 {%- else%}
    #- Virtual axis

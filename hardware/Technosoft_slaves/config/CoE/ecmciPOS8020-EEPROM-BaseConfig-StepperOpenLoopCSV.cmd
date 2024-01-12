@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for iPOS8020-EEPROM-BaseConfig-StepperOpenLoopCSV
-#-d   \details 
+#-d   \details
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */

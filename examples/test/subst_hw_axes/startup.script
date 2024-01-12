@@ -1,0 +1,4 @@
+require ecmccfg,sandst_a,"ECMC_VER=v9.0.1_RC3,MASTER_ID=0"
+
+# Load configurations from subst file
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd, "FILE=./complete.subst"

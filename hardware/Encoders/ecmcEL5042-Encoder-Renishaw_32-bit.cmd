@@ -1,13 +1,15 @@
 #-d /**
-#-d   \brief hardware script for ecmcEL5042-Encoder-.cmd
+#-d   \brief hardware script for ecmcEL5042-Encoder-Renishaw-32bit.cmd
 #-d   \details
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \pre Need the following varibales:
 #-d   \pre ECMC_EC_SLAVE_NUM    Slave index
 #-d   \pre ECMC_EC_SDO_INDEX    0x8008 for CH1, 0x8018 for CH2
+#-d   \pre Optional variables:
+#-d   \pre CLK_FRQ      Com clock freq, defaults to 19 (=250kHz). See table below.
 #-d   \note Supply:     5 V
-#-d   \note Resolution: 22..26 bit TBD
+#-d   \note Resolution: 32 bit TBD
 #-d */
 
 #- 0x80p8:02: Disable Status Bits (default 0)
@@ -33,7 +35,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x12,50,
 #- 9: 1 MHz (Max for SSI)
 #- 17: 500 kHz
 #- 19: 250 kHz <--
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x13,19,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x13,${CLK_FRQ=19},1)"
 
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)
@@ -56,4 +58,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x17,0,1
 #- 0: BiSS-C mode (default)
 #- 1: SSI mode
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},0x18,0,1)"
-

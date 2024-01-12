@@ -6,6 +6,6 @@
 #-d */
 
 #- Set SDO for channel 2
-epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8010")     
+epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8010")
 #- load generic EL5002 for Posital-OCD-S101G-1416-S060-PRL
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmcEL5002-Encoder-Posital-OCD-S101G-1416-S060-PRL.cmd

@@ -1,0 +1,7 @@
+#4..20mA (0..32767)
+file "ecmc_analogOutput-chX.template"
+{
+  pattern {CH_ID, ESLO,           EOFF, EGU,  PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,    LSV,     HSV,     HHSV,    DRVL, DRVH}
+          {01,    3.0518509476E-4, 0,   "mA", 4,    -10, -10.1, 10,   10.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", -10,  10 }
+          {02,    3.0518509476E-4, 0,   "mA", 4,    -10, -10.1, 10,   10.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", -10,  10 }
+}

@@ -1,0 +1,40 @@
+# ecmc test system
+# Anders Sandström
+
+require ecmccfg ${ECMCCFG_VER=v9.0.1_RC3},"EC_RATE=1000,ECMC_VER=${ECMC_VER=v9.0.1_RC3},ENG_MODE=1"
+
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
+
+# Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${SLAVE_ID=12}, HW_DESC=EL7037, CONFIG=-Motor-Phytron-VSS-57.200.2.5"
+epicsEnvSet(DRV_ID, ${ECMC_EC_SLAVE_NUM})
+
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# Configure Motion
+epicsEnvSet("DEV",      "$(IOC)")
+#system "cat ./cfg/stepper.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
+
+# Add extra encoder to axis 1 (open loop counter)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)addEncoder.cmd, CONFIG=./cfg/enc2.enc)
+# Add extra encoder to axis 1 (open loop counter)
+#system "cat ./cfg/stepper_openloop.yaml"
+$(SCRIPTEXEC) ($(ecmccfg_DIR)loadYamlEnc.cmd, FILE=./cfg/enc3.yaml)
+
+# Add extra encoder to axis 1 (open loop counter)
+epicsEnvSet("DEV",      "$(IOC)")
+#system "cat ./cfg/encoder.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,"FILE=cfg/enc4.yaml"
+
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

@@ -3,9 +3,9 @@
 #-d /**
 #-d   \brief hardware script for EL7411-Motor-Maxon-312315
 #-d   \details Parametrization of EL7411 for motor Maxon-312315 BLDC with hall and incremental encoder for CSV mode
-#-d 
+#-d
 #-d   \note This config configures both motor and encoder part of EL7411
-#-d 
+#-d
 #-d   Operation mode is to use incremental encoder (not hall sensors)
 #-d
 #-d   Partnumber 312315 is a motor encoder combination consisting of:
