@@ -49,3 +49,57 @@ record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeAct"){
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeActual${CH_ID}?")
   field(SCAN, "I/O Intr")
 }
+
+record(bo,"${ECMC_P}Drv${CH_ID}-HmeExe"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Execute homing")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=100}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.driveHomeCmd${CH_ID}=")
+  field(ZNAM, "No home")
+  field(ONAM, "Home")
+  field(TSE,  "${TSE=-2}")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-HmeDone"){  
+  field(DESC, "Homing done")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=100}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.driveHomeDone${CH_ID}?")
+  field(ZNAM, "Not homed")
+  field(ONAM, "Done")
+  field(TSE,  "${TSE=-2}")
+}
+
+#- Control word RB after applying data items for homing and calibration
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Cmd2-RB"){
+  field(DESC, "${DESC=${HWTYPE}: Control WD 2 ${CH_ID} RB}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=100}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.driveControl${CH_ID}_RB?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "${TSE=-2}")
+}
+
+#record(bo,"${ECMC_P}Drv${CH_ID}-CalExe"){
+#  info(asyn:READBACK,"1")
+#  field(DESC, "Execute calibration")
+#  field(PINI, "1")
+#  field(DTYP, "asynInt32")
+#  field(OUT,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.driveCalibrationCmd${CH_ID}=")
+#  field(ZNAM, "No home")
+#  field(ONAM, "Home")
+#  field(TSE,  "${TSE=-2}")
+#}
+#
+#record(bi,"${ECMC_P}Drv${CH_ID}-CalDone"){  
+#  field(DESC, "Calibration done")
+#  field(PINI, "1")
+#  field(DTYP, "asynInt32")
+#  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.driveCalibrationDone${CH_ID}?")
+#  field(ZNAM, "Not homed")
+#  field(ONAM, "Done")
+#  field(TSE,  "${TSE=-2}")
+#}
+#
+

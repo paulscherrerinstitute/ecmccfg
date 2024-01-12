@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for smaract MCS2
 
-require ecmccfg sandst_a_MCS2,"IOC=$(IOC),ECMC_VER=v9.0.1_RC1,EC_RATE=1000,MASTER_ID=1"
+require ecmccfg sandst_a,"IOC=$(IOC),ECMC_VER=sandst_a,EC_RATE=1000,MASTER_ID=1"
 
 ##############################################################################
 ## Configure hardware
