@@ -6,7 +6,7 @@ require ecmccfg sandst_a_MCS2,"IOC=$(IOC),ECMC_VER=v9.0.1_RC1,EC_RATE=1000,MASTE
 ##############################################################################
 ## Configure hardware
 
-epicsEnvSet("MCS2_SLAVE_NUM",              "0")
+epicsEnvSet("MCS2_SLAVE_NUM",              "1")
 #${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,CONFIG=-Motor-SLC2445ds-39"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,CONFIG=-Motor-SLC2445ds-39"
 
