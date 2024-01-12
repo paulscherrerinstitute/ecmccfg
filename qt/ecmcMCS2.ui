@@ -46,9 +46,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
+     <y>40</y>
      <width>122</width>
-     <height>291</height>
+     <height>411</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -435,6 +435,62 @@
       </property>
      </widget>
     </widget>
+    <widget class="caToggleButton" name="catogglebutton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>100</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Exe home</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-HmeExe</string>
+     </property>
+    </widget>
+    <widget class="caLed" name="caled">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>280</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-HmeDone</string>
+     </property>
+     <property name="falseColor">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="trueColor">
+      <color>
+       <red>0</red>
+       <green>170</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>290</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Home done</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_6">
     <attribute name="title">
@@ -563,9 +619,9 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>120</y>
+     <y>40</y>
      <width>122</width>
-     <height>291</height>
+     <height>411</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -952,6 +1008,62 @@
       </property>
      </widget>
     </widget>
+    <widget class="caToggleButton" name="catogglebutton_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>100</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Exe home</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-HmeExe</string>
+     </property>
+    </widget>
+    <widget class="caLed" name="caled_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>280</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-HmeDone</string>
+     </property>
+     <property name="falseColor">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="trueColor">
+      <color>
+       <red>0</red>
+       <green>170</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>290</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Home done</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_8">
     <attribute name="title">
@@ -1077,9 +1189,9 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>120</y>
+     <y>40</y>
      <width>122</width>
-     <height>291</height>
+     <height>411</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -1466,6 +1578,62 @@
       </property>
      </widget>
     </widget>
+    <widget class="caToggleButton" name="catogglebutton_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>100</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Exe home</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-HmeExe</string>
+     </property>
+    </widget>
+    <widget class="caLed" name="caled_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>280</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-HmeDone</string>
+     </property>
+     <property name="falseColor">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="trueColor">
+      <color>
+       <red>0</red>
+       <green>170</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>290</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Home done</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_12">
     <attribute name="title">
@@ -1593,6 +1761,11 @@
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
+  </customwidget>
+  <customwidget>
+   <class>caToggleButton</class>
+   <extends>QCheckBox</extends>
+   <header>caToggleButton</header>
   </customwidget>
   <customwidget>
    <class>caFrame</class>
