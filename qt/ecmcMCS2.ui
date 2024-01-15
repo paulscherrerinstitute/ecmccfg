@@ -64,7 +64,7 @@
        <x>0</x>
        <y>10</y>
        <width>118</width>
-       <height>191</height>
+       <height>301</height>
       </rect>
      </property>
      <property name="title">
@@ -74,7 +74,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
+        <y>80</y>
         <width>91</width>
         <height>20</height>
        </rect>
@@ -103,7 +103,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>90</y>
+        <y>163</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -129,7 +129,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>113</y>
+        <y>186</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -148,7 +148,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>90</y>
+        <y>163</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -167,7 +167,7 @@
       <property name="geometry">
        <rect>
         <x>-10</x>
-        <y>20</y>
+        <y>30</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -186,7 +186,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>157</y>
+        <y>230</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -246,7 +246,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>137</y>
+        <y>210</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -306,7 +306,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>137</y>
+        <y>210</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -325,7 +325,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>157</y>
+        <y>230</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -344,7 +344,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>113</y>
+        <y>186</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -369,25 +369,195 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caMenu" name="camenu">
+     <widget class="caLabel" name="calabel_41">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>270</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Enabled</string>
+      </property>
+     </widget>
+     <widget class="caLed" name="caled_Warning_5">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>270</y>
+        <width>18</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>4</width>
+        <height>12</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="rectangular">
+       <bool>true</bool>
+      </property>
+      <property name="gradientEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="ledHeight">
+       <number>10</number>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-EnaAct</string>
+      </property>
+      <property name="colorMode">
+       <enum>caLed::Static</enum>
+      </property>
+      <property name="falseColor">
+       <color>
+        <red>107</red>
+        <green>107</green>
+        <blue>107</blue>
+       </color>
+      </property>
+      <property name="trueColor">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+       </color>
+      </property>
+      <property name="trueValue">
+       <string notr="true">1</string>
+      </property>
+      <property name="falseValue">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="caFrame" name="caframe_2">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>100</width>
+        <y>50</y>
+        <width>111</width>
         <height>21</height>
        </rect>
       </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-ModeSet</string>
+      <property name="visibility">
+       <enum>caFrame::IfZero</enum>
       </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-EnaAct</string>
+      </property>
+      <widget class="caMenu" name="camenu">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-ModeSet</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::IfNotZero</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-EnaAct</string>
+      </property>
+      <widget class="caToggleButton" name="catogglebutton_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>100</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Exe cmd</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-CmdExe</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cmd done</string>
+       </property>
+      </widget>
+      <widget class="caLed" name="caled_4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-CmdDone</string>
+       </property>
+       <property name="falseColor">
+        <color>
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="trueColor">
+        <color>
+         <red>0</red>
+         <green>170</green>
+         <blue>0</blue>
+        </color>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_6">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>200</y>
+       <y>320</y>
        <width>118</width>
        <height>51</height>
       </rect>
@@ -399,7 +569,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>20</y>
+        <y>30</y>
         <width>53</width>
         <height>20</height>
        </rect>
@@ -434,62 +604,6 @@
        <string>positon</string>
       </property>
      </widget>
-    </widget>
-    <widget class="caToggleButton" name="catogglebutton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>260</y>
-       <width>100</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Exe cmd</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-CmdExe</string>
-     </property>
-    </widget>
-    <widget class="caLed" name="caled">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>280</y>
-       <width>30</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-CmdDone</string>
-     </property>
-     <property name="falseColor">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-     <property name="trueColor">
-      <color>
-       <red>0</red>
-       <green>170</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>290</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Cmd done</string>
-     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_6">
@@ -637,7 +751,7 @@
        <x>0</x>
        <y>10</y>
        <width>118</width>
-       <height>191</height>
+       <height>301</height>
       </rect>
      </property>
      <property name="title">
@@ -647,7 +761,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
+        <y>80</y>
         <width>91</width>
         <height>20</height>
        </rect>
@@ -676,7 +790,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>90</y>
+        <y>163</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -702,7 +816,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>113</y>
+        <y>186</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -721,7 +835,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>90</y>
+        <y>163</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -740,7 +854,7 @@
       <property name="geometry">
        <rect>
         <x>-10</x>
-        <y>20</y>
+        <y>30</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -759,7 +873,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>157</y>
+        <y>230</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -819,7 +933,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>137</y>
+        <y>210</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -879,7 +993,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>137</y>
+        <y>210</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -898,7 +1012,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>157</y>
+        <y>230</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -917,7 +1031,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>113</y>
+        <y>186</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -942,25 +1056,195 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caMenu" name="camenu_2">
+     <widget class="caLabel" name="calabel_42">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>270</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Enabled</string>
+      </property>
+     </widget>
+     <widget class="caLed" name="caled_Warning_7">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>270</y>
+        <width>18</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>4</width>
+        <height>12</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="rectangular">
+       <bool>true</bool>
+      </property>
+      <property name="gradientEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="ledHeight">
+       <number>10</number>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-EnaAct</string>
+      </property>
+      <property name="colorMode">
+       <enum>caLed::Static</enum>
+      </property>
+      <property name="falseColor">
+       <color>
+        <red>107</red>
+        <green>107</green>
+        <blue>107</blue>
+       </color>
+      </property>
+      <property name="trueColor">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+       </color>
+      </property>
+      <property name="trueValue">
+       <string notr="true">1</string>
+      </property>
+      <property name="falseValue">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="caFrame" name="caframe_3">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>100</width>
+        <y>50</y>
+        <width>111</width>
         <height>21</height>
        </rect>
       </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-ModeSet</string>
+      <property name="visibility">
+       <enum>caFrame::IfZero</enum>
       </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-EnaAct</string>
+      </property>
+      <widget class="caMenu" name="camenu_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-ModeSet</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::IfNotZero</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-EnaAct</string>
+      </property>
+      <widget class="caToggleButton" name="catogglebutton_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>100</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Exe cmd</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-CmdExe</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cmd done</string>
+       </property>
+      </widget>
+      <widget class="caLed" name="caled_5">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-CmdDone</string>
+       </property>
+       <property name="falseColor">
+        <color>
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="trueColor">
+        <color>
+         <red>0</red>
+         <green>170</green>
+         <blue>0</blue>
+        </color>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>200</y>
+       <y>320</y>
        <width>118</width>
        <height>51</height>
       </rect>
@@ -972,7 +1256,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>20</y>
+        <y>30</y>
         <width>53</width>
         <height>20</height>
        </rect>
@@ -1007,62 +1291,6 @@
        <string>positon</string>
       </property>
      </widget>
-    </widget>
-    <widget class="caToggleButton" name="catogglebutton_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>260</y>
-       <width>100</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Exe cmd</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-CmdExe</string>
-     </property>
-    </widget>
-    <widget class="caLed" name="caled_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>280</y>
-       <width>30</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-CmdDone</string>
-     </property>
-     <property name="falseColor">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-     <property name="trueColor">
-      <color>
-       <red>0</red>
-       <green>170</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>290</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Cmd done</string>
-     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_8">
@@ -1207,7 +1435,7 @@
        <x>0</x>
        <y>10</y>
        <width>118</width>
-       <height>191</height>
+       <height>301</height>
       </rect>
      </property>
      <property name="title">
@@ -1217,7 +1445,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
+        <y>80</y>
         <width>91</width>
         <height>20</height>
        </rect>
@@ -1246,7 +1474,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>90</y>
+        <y>163</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -1272,7 +1500,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>113</y>
+        <y>186</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1291,7 +1519,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>90</y>
+        <y>163</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1310,7 +1538,7 @@
       <property name="geometry">
        <rect>
         <x>-10</x>
-        <y>20</y>
+        <y>30</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1329,7 +1557,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>157</y>
+        <y>230</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -1389,7 +1617,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>137</y>
+        <y>210</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -1449,7 +1677,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>137</y>
+        <y>210</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1468,7 +1696,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>157</y>
+        <y>230</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1487,7 +1715,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>113</y>
+        <y>186</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -1512,25 +1740,195 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caMenu" name="camenu_4">
+     <widget class="caLabel" name="calabel_43">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>270</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Enabled</string>
+      </property>
+     </widget>
+     <widget class="caLed" name="caled_Warning_8">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>270</y>
+        <width>18</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>4</width>
+        <height>12</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="rectangular">
+       <bool>true</bool>
+      </property>
+      <property name="gradientEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="ledHeight">
+       <number>10</number>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-EnaAct</string>
+      </property>
+      <property name="colorMode">
+       <enum>caLed::Static</enum>
+      </property>
+      <property name="falseColor">
+       <color>
+        <red>107</red>
+        <green>107</green>
+        <blue>107</blue>
+       </color>
+      </property>
+      <property name="trueColor">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+       </color>
+      </property>
+      <property name="trueValue">
+       <string notr="true">1</string>
+      </property>
+      <property name="falseValue">
+       <string notr="true">0</string>
+      </property>
+     </widget>
+     <widget class="caFrame" name="caframe_4">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>100</width>
+        <y>50</y>
+        <width>111</width>
         <height>21</height>
        </rect>
       </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-ModeSet</string>
+      <property name="visibility">
+       <enum>caFrame::IfZero</enum>
       </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-EnaAct</string>
+      </property>
+      <widget class="caMenu" name="camenu_3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-ModeSet</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caFrame" name="caframe_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::IfNotZero</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-EnaAct</string>
+      </property>
+      <widget class="caToggleButton" name="catogglebutton_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>100</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Exe cmd</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-CmdExe</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cmd done</string>
+       </property>
+      </widget>
+      <widget class="caLed" name="caled_6">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-CmdDone</string>
+       </property>
+       <property name="falseColor">
+        <color>
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="trueColor">
+        <color>
+         <red>0</red>
+         <green>170</green>
+         <blue>0</blue>
+        </color>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_12">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>200</y>
+       <y>320</y>
        <width>118</width>
        <height>51</height>
       </rect>
@@ -1542,7 +1940,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>20</y>
+        <y>30</y>
         <width>53</width>
         <height>20</height>
        </rect>
@@ -1577,62 +1975,6 @@
        <string>positon</string>
       </property>
      </widget>
-    </widget>
-    <widget class="caToggleButton" name="catogglebutton_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>260</y>
-       <width>100</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Exe cmd</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-CmdExe</string>
-     </property>
-    </widget>
-    <widget class="caLed" name="caled_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>280</y>
-       <width>30</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-CmdDone</string>
-     </property>
-     <property name="falseColor">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-     <property name="trueColor">
-      <color>
-       <red>0</red>
-       <green>170</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>290</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Cmd done</string>
-     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_12">

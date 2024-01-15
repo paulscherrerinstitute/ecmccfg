@@ -91,3 +91,12 @@ record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
   field(OSV,  "MAJOR")
   field(FLNK, "")
 }
+
+record(calc,"${ECMC_P}Drv${CH_ID}-EnaAct") {
+  field(DESC, "Drive enabled")
+  field(PINI, "$(PINI=1)")
+  field(CALC,"A && B && C")
+  field(INPA,"${ECMC_P}Drv${CH_ID}-Stat.B0 CP")
+  field(INPB,"${ECMC_P}Drv${CH_ID}-Stat.B1 CP")
+  field(INPC,"${ECMC_P}Drv${CH_ID}-Stat.B2 CP")
+}
