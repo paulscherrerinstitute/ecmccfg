@@ -44,10 +44,8 @@ epicsEnvSet(ECMC_MCS2_CHID,01)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x6040,0x00,16,driveControl${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x6060,0x00,16,mode${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x607a,0x00,32,1,positionSetpoint${ECMC_MCS2_CHID})"
-#- Add bits for homing: driveControl01.4
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,4,1,B1,driveHomeCmd${ECMC_MCS2_CHID})"
-#- Add bits for calibration: driveControl01.??
-#ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,???,1,B1,driveCalibrationCmd${ECMC_MCS2_CHID})"
+#- Add bits for exe device specific cmds: driveControl01.4
+ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,4,1,B1,driveCmdExe${ECMC_MCS2_CHID})"
 
 #- 0x1641 "csp/csv RxPDO"
 #- CH2
@@ -55,10 +53,8 @@ epicsEnvSet(ECMC_MCS2_CHID,02)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1641,0x6840,0x00,16,driveControl${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1641,0x6860,0x00,16,mode${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1641,0x687a,0x00,32,1,positionSetpoint${ECMC_MCS2_CHID})"
-#- Add bits for homing: driveControl02.4
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,4,1,B1,driveHomeCmd${ECMC_MCS2_CHID})"
-#- Add bits for calibration: driveControl02.??
-#ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,???,1,B1,driveCalibrationCmd${ECMC_MCS2_CHID})"
+#- Add bits for exe device specific cmds: driveControl02.4
+ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,4,1,B1,driveCmdExe${ECMC_MCS2_CHID})"
 
 #- 0x1681 "csp/csv RxPDO"
 #- CH3
@@ -66,10 +62,8 @@ epicsEnvSet(ECMC_MCS2_CHID,03)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1681,0x7040,0x00,16,driveControl${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1681,0x7060,0x00,16,mode${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1681,0x707a,0x00,32,1,positionSetpoint${ECMC_MCS2_CHID})"
-#- Add bits for homing: driveControl03.4
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,4,1,B1,driveHomeCmd${ECMC_MCS2_CHID})"
-#- Add bits for calibration: driveControl03.??
-#ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,???,1,B1,driveCalibrationCmd${ECMC_MCS2_CHID})"
+#- Add bits for exe device specific cmds: driveControl03.4
+ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,4,1,B1,driveCmdExe${ECMC_MCS2_CHID})"
 
 #- SyncManager 3
 #- 0x1a01 "csp/csv TxPDO"
@@ -78,8 +72,8 @@ epicsEnvSet(ECMC_MCS2_CHID,01)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6061,0x00,16,modeActual${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6041,0x00,16,driveStatus${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6064,0x00,32,1,positionActual${ECMC_MCS2_CHID})"
-#- Add bits for homing: driveStatus01.10 (1 byte 3 bits)
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveStatus${ECMC_MCS2_CHID},1,2,2,B1,driveHomeDone${ECMC_MCS2_CHID})"
+#- Add bits for exe device specific cmds: driveStatus01.10 (1 byte 3 bits)
+#-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveStatus${ECMC_MCS2_CHID},1,2,2,B1,driveCmdDone${ECMC_MCS2_CHID})"
 #- Check final control word (after applying data items)
 ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,0,2,U16,driveControl${ECMC_MCS2_CHID}_RB)"
 
@@ -89,8 +83,8 @@ epicsEnvSet(ECMC_MCS2_CHID,02)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a41,0x6861,0x00,16,modeActual${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a41,0x6841,0x00,16,driveStatus${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a41,0x6864,0x00,32,1,positionActual${ECMC_MCS2_CHID})"
-#- Add bits for homing: driveStatus02.10 (1 byte 3 bits)
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveStatus${ECMC_MCS2_CHID},1,2,2,B1,driveHomeDone${ECMC_MCS2_CHID})"
+#- Add bits for exe device specific cmds: driveStatus02.10 (1 byte 3 bits)
+#- ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveStatus${ECMC_MCS2_CHID},1,2,2,B1,driveCmdDone${ECMC_MCS2_CHID})"
 #- Check final control word (after applying data items)
 ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,0,2,U16,driveControl${ECMC_MCS2_CHID}_RB)"
 
@@ -100,8 +94,8 @@ epicsEnvSet(ECMC_MCS2_CHID,03)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a81,0x7061,0x00,16,modeActual${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a81,0x7041,0x00,16,driveStatus${ECMC_MCS2_CHID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a81,0x7064,0x00,32,1,positionActual${ECMC_MCS2_CHID})"
-#- Add bits for homing: driveStatus03.10 (1 byte 3 bits)
-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveStatus${ECMC_MCS2_CHID},1,2,2,B1,driveHomeDone${ECMC_MCS2_CHID})"
+#- Add bits for exe device specific cmds: driveStatus03.10 (1 byte 3 bits)
+#-ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveStatus${ECMC_MCS2_CHID},1,2,2,B1,driveCmdDone${ECMC_MCS2_CHID})"
 #- Check final control word (after applying data items)
 ecmcConfigOrDie "Cfg.EcAddDataDT(ec${ECMC_EC_MASTER_ID=0}.s${ECMC_EC_SLAVE_NUM}.driveControl${ECMC_MCS2_CHID},0,0,2,U16,driveControl${ECMC_MCS2_CHID}_RB)"
 
