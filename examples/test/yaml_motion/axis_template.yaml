@@ -50,6 +50,7 @@ encoder:
   position: ec0.s$(ENC_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
   control: ec0.s$(ENC_SLAVE).encoderControl01         # mandatory only if 'reset' is used
   status: ec0.s$(DRV_SLAVE).encoderStatus01           # mandatory only if 'warning' or 'error' are used
+  # ready: ec..                                       # Etehrcat entry for encoder ready
   # source: 0                                         # 0 = Encoder value from etehrcat hardware, 1 = Encoder value from PLC 
   # reset: 1                                          # Reset   (optional)
   # warning: 2                                        # Warning (optional)
