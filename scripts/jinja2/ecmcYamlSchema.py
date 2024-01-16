@@ -113,7 +113,7 @@ class Schema:
         'type': 'dict',
         'required': False,
         'schema': {
-            'type': {'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 21, 22, 25]},
+            'type': {'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 21, 22, 25, 26]},
             'position': {'oneof': [
                 {'type': 'float'},
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
@@ -139,6 +139,8 @@ class Schema:
             'refToEncIDAtStartup': {'type': 'integer', 'default': -1},
             'refAtHome': {'type': 'integer', 'default': 0},
             'tolToPrim': {'type': 'float', 'default': 0},
+            'trigg': {'type': 'string'},
+            'ready': {'type': 'string'},
         }
     }
 

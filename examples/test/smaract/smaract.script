@@ -19,7 +19,9 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 epicsEnvSet("MCS2_CHID",              "1")
 
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/mcs2.ax)
+#"-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/mcs2.ax)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml"
+
 
 # Start in CSP
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode01,8)"
