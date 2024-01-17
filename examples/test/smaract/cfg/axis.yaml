@@ -29,6 +29,7 @@ drive:
 #    - 14                                              # Error 2 (if no drive error bit then leave empty)
 
 encoder:
+  desc: Smaract encoder
   numerator: 1                                      # Scaling numerator example 360 deg/rev
   denominator: 1000                                   # Scaling denominator example 4096 ticks per 360 degree
   type: 0                                             # Type: 0=Incremental, 1=Absolute
