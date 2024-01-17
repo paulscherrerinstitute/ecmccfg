@@ -9,6 +9,21 @@ ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type }},{{ drive.type|defa
 #- health output
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id }}.health")"
 
+{%- if axis.autoMode is defined %}
+    {%- if axis.autoMode.modeSet is defined %}
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.autoMode.modeSet }}","ax${ECMC_AXIS_NO}.automodeset")"
+        {%- if axis.autoMode.modeAct is defined %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.autoMode.modeAct }}","ax${ECMC_AXIS_NO}.automodeact")"
+        {%- endif %}
+        {%- if axis.autoMode.modeCmdHome is defined %}
+            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdHoming({{ axis.id }},{{ axis.autoMode.modeCmdHome|default(0)|int }})"
+        {%- endif %}
+        {%- if axis.autoMode.modeCmdMotion is defined %}
+            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdMotion({{ axis.id }},{{ axis.autoMode.modeCmdMotion|default(0)|int }})"
+        {%- endif %}
+    {%- endif %}
+{%- endif %}
+
 {%- if axis.features is defined %}
     #- features
     ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }})"

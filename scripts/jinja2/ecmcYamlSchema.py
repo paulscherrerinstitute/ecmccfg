@@ -157,6 +157,12 @@ class Schema:
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
+            'autoMode': {'type': 'dict', 'schema': {
+                'modeSet': {'type': 'string'},
+                'modeAct': {'type': 'string'},
+                'modeCmdMotion': {'type': 'integer'},
+                'modeCmdHome': {'type': 'integer'},
+            }},
             'features': {'type': 'dict', 'schema': {
                 'disableOnReset': {'type': 'boolean'},
                 'alarmAtHardLimits': {'type': 'boolean'},
@@ -166,7 +172,7 @@ class Schema:
                     'constantVelocity': {'type': 'boolean'},
                     'homing': {'type': 'boolean'}
                 }}
-            }}
+            }}            
         }
     }
 
