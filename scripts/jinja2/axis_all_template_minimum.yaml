@@ -3,18 +3,18 @@ axis:
   type: joint                                         # this is for future selection of axis type
   # mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
   # parameters: 'axisPar' # additional parameters     # Additional params to motor record driver
-  # healthOutput: ec0...                              # Ethercat entry for health output
+  #healthOutput: ec0...                               # Ethercat entry for health output
   # autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
   #   modeSet: ec0..                                  # Ethercat entry drive mode write (set CSV,CSP,homing)
   #   modeAct: ec0..                                  # Ethercat entry drive mode reading (set CSV,CSP,homing)
   #   modeCmdMotion: 9                                # Drive mode value for normal motion (written to axis.drvMode.modeSet when normal motion)
   #   modeCmdHome: 10                                 # Drive mode value for when homing (written to axis.drvMode.modeSet when homing)
   # features:
-  #   blockCom: 0                                     # Block communication to axis
+  #   blockCom: false                                 # Block communication to axis
   #   allowedFunctions:
-  #     homing: 1                                     # Allow homing
-  #     constantVelocity: 1                           # Allow constant velocity
-  #     positioning: 1                                # Allow positioning
+  #     homing: true                                  # Allow homing
+  #     constantVelocity: true                        # Allow constant velocity
+  #     positioning: true                             # Allow positioning
 
 epics:
   name: M1                                            # Axis anme
@@ -23,20 +23,22 @@ epics:
   unit: mm                                            # Unit
   # motorRecord:
   #   enable: true
-  #   description; This is MR
+  #   description: This is MR
   #   fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
 
 drive:
   numerator: 360                                      # Fastest speed in engineering units
   denominator: 4096                                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
-#  type: 0                                            # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  # type: 0                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s$(DRV_SLAVE).driveControl01           # Control word ethercat entry
-#   enable: 0                                         # Enable bit index in control word (not used if DS402)
-#   enabled: 1                                        # Enabled bit index in status word (not used if DS402)
+  # enable: 0                                         # Enable bit index in control word (not used if DS402)
+  # enabled: 1                                        # Enabled bit index in status word (not used if DS402)
   status: ec0.s$(DRV_SLAVE).driveStatus01             # Status word ethercat entry
   setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
 #  reduceTorque: 2                                    # Reduce torque bit in drive control word
+#  reduceTorqueEnable: True                           # Enable reduce torque functionality
 #  brake:
+#    enable: true                                     # Enable brake 
 #    output: ec0...                                   # Ethercat link to brake output
 #    openDelay: 0                                     # Brake timing parameter in cycles (default 1kHz)
 #    closeAhead: 0                                    # Brake timing parameter in cycles (default 1kHz)
@@ -50,15 +52,15 @@ drive:
 encoder:
   numerator: 360                                      # Scaling numerator example 360 deg/rev
   denominator: 4096                                   # Scaling denominator example 4096 ticks per 360 degree
-  type: 0                                             # Type: 0=Incremental, 1=Absolute
+  # type: 0                                           # Type: 0=Incremental, 1=Absolute
   bits: 24                                            # Total bit count of encoder raw data
   # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
-  # mask: 0xFFF00                                     # Mask applied to raw encoder value
+  # mask: '0xFFF00'                                   # Mask applied to raw encoder value
   position: ec0.s$(ENC_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
   control: ec0.s$(ENC_SLAVE).encoderControl01         # mandatory only if 'reset' is used
   status: ec0.s$(DRV_SLAVE).encoderStatus01           # mandatory only if 'warning' or 'error' are used
-  # ready: ec..                                       # Etehrcat entry for encoder ready
+  # ready: 10                                         # Bit in encoder status word for encoder ready
   # source: 0                                         # 0 = Encoder value from etehrcat hardware, 1 = Encoder value from PLC
   # reset: 1                                          # Reset   (optional)
   # warning: 2                                        # Warning (optional)
@@ -69,14 +71,14 @@ encoder:
   # filter:
   #   velocity:
   #     size: 100                                     # Filter size for velocity
-  #     enable: 1                                     # enable velocity filter
+  #     enable: true                                  # enable velocity filter
   #   position:
   #     size: 100                                     # Filter size for encoder value
-  #     enable: 1                                     # enable encoder value filter
+  #     enable: true                                  # enable encoder value filter
   #  latch:
   #    position: ''                                   # Link to latched value. Used for some homing seqs
-  #    control: ''                                    # Latch control trigger ethercat entry bit. Used for some homing seqs
-  #    status: ''                                     # Latch status ethercat entry bit. Used for some homing seqs
+  #    control: 0                                     # Bit in encoder control word to arm latch. Used for some homing seqs
+  #    status: 0                                      # Bit in encoder status word for latch triggered status. Used for some homing seqs
   #  primary: 1                                       # Use this encoder as primary (for control)
   #  homing:
   #    type: 3                                        # Homing sequence type
@@ -120,7 +122,7 @@ trajectory:
     acceleration: 0.1                                 # Default acc for axis
     deceleration: 0.1                                 # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
-  #  jerk: 10                                         # Default jerk for axis
+    jerk: 10                                          # Default jerk for axis
   jog:
     velocity: 5                                       # Default velo fro JOG (motor record)
 #  modulo:
@@ -138,7 +140,7 @@ input:
   interlock: 'ec0.s$(ENC_SLAVE).ONE.0'                # Ethercat entry for interlock switch input
   # interlockPolarity: 0                              # Polarity of interlock switch
 
-# homing:                                             # Used for legacy support. Please define homing params per encoder instead
+# homing:
 #   type: 3                                           # Homing sequence type
 #   position: -30                                     # Position to reference encoder to
 #   velocity:
@@ -176,7 +178,7 @@ monitoring:
   #     trajectory: 100                               # Time allowed outside max velo before system init halt
   #     drive: 200                                    # Time allowed outside max velo before system disables drive
   # velocityDifference:
-  #   enable: 1                                       # Enable velocity diff monitoring (velo set vs velo act)
+  #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)
   #   max: 100                                        # Allowed max difference
   #   time:
   #     trajectory: 100                               # Time allowed outside max diff velo before system init halt
@@ -192,6 +194,6 @@ monitoring:
 #    velocity:                                        # Filter plc velo
 #      enable: false
 #      size: 100
-#    trajectory:                                      # Filter plc traj
+#    position:                                        # Filter plc traj
 #      enable: false
 #      size: 100

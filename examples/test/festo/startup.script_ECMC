@@ -1,8 +1,7 @@
 # ecmc test system
 # Anders Sandström
 
-#require ecmccfg sandst_aFestoCMMTST,"EC_RATE=500,ECMC_VER=v9_RC3,MASTER_ID=1,ENG_MODE=1"
-require ecmccfg sandst_aFestoCMMTST,"EC_RATE=500,ECMC_VER=v9.0.1_RC3,MASTER_ID=1,ENG_MODE=1"
+require ecmccfg v9.0.1_RC3,"EC_RATE=500,ECMC_VER=v9.0.1_RC3,MASTER_ID=1,ENG_MODE=1"
 
 epicsEnvSet("IOC" ,"$(IOC="ec-base-01:Test:")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
@@ -18,7 +17,10 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addEcSdoRT.cmd, "SLAVE_ID=${DRV_ID},INDEX=0x6060,SUB
 
 # Configure Motion
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/rotary.ax)
+#- $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/rotary.ax)
+#- ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=../yaml_motion/axis_template.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=../../../scripts/jinja2/axis_all_template.yaml"
+
 
 # Other
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
