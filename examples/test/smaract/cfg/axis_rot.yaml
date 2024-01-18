@@ -1,0 +1,112 @@
+axis:
+  id: 2                                               # Axis id
+  mode: CSP                                           # supported mode, CSV and CSP, defaults CSV
+  autoMode:                                           # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
+    modeSet: ec0.s${MCS2_SLAVE_NUM}.mode0${MCS2_CHID}  # Ethercat entry drive mode write (set CSV,CSP,homing)
+    modeAct: ec0.s${MCS2_SLAVE_NUM}.modeActual0${MCS2_CHID}  # Ethercat entry drive mode reading (set CSV,CSP,homing)
+    modeCmdMotion: 8                                  # 8 = CSP. Drive mode value for normal motion (written to axis.drvMode.modeSet when normal motion)
+    modeCmdHome: 6                                    # 6 = Homig, -1 = calibration . Drive mode value for when homing (written to axis.drvMode.modeSet when homing)
+
+epics:
+  name: Axis${MCS2_CHID}                              # Axis anme
+  precision: 3                                        # Decimal count
+  description: Smaract MCS2 test axis
+  unit: mdeq                                          # Unit
+  fieldInit: 'TWV=1000'                               # Extra config for Motor record
+
+drive:
+  numerator: 1                                        # Fastest speed in engineering units
+  denominator:  1000                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  control: ec0.s${MCS2_SLAVE_NUM}.driveControl0${MCS2_CHID}          # Control word ethercat entry
+  status: ec0.s${MCS2_SLAVE_NUM}.driveStatus0${MCS2_CHID}             # Status word ethercat entry
+  setpoint: ec0.s${MCS2_SLAVE_NUM}.positionSetpoint0${MCS2_CHID}      # Velocity setpoint if CSV. Position setpoint if CSP
+#  reset: 1                                            # Reset   (if no drive reset bit then leave empty)
+#  warning: 2                                          # Warning (if no drive warning bit then leave empty)
+#  error:                                              # max 3
+#    - 3                                               # Error 0 (if no drive error bit then leave empty)
+#    - 7                                               # Error 1 (if no drive error bit then leave empty)
+#    - 14                                              # Error 2 (if no drive error bit then leave empty)
+
+encoder:
+  desc: Smaract encoder
+  numerator: 1                                      # Scaling numerator example 360 deg/rev
+  denominator: 1000                                   # Scaling denominator example 4096 ticks per 360 degree
+  type: 0                                             # Type: 0=Incremental, 1=Absolute
+  bits: 32                                            # Total bit count of encoder raw data
+  absBits: 0                                          # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absOffset: 0                                        # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s${MCS2_SLAVE_NUM}.positionActual0${MCS2_CHID}        # Ethercat entry for actual position input (encoder)
+  homing:
+    type: 26                                          # Homing sequence type (trigger homing seq in drive)
+    position: -1000                                   # Position to reference encoder to
+    postMoveEnable: yes                               # Enable move after successfull homing
+    postMovePosition: 1000                            # Position to move to after successfull homing
+    trigg: ec0.s${MCS2_SLAVE_NUM}.driveCmdExe0${MCS2_CHID}.0   # Ethercat entry for triggering drive internal homing seq (seq id 26)
+    ready: ec0.s${MCS2_SLAVE_NUM}.driveStatus0${MCS2_CHID}.10 # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
+    refAtHome: 1
+    velocity:
+      to: 10000
+    acceleration: 10000
+    deceleration: 10000
+
+#controller:
+  # Kp:  15                                             # Kp proportinal gain
+  # Ki:  0.02                                           # Ki integral gain
+  # Kd:  0                                              # Kd derivative gain
+  # Kff: 1                                              # Feed forward gain
+  # deadband:
+  #   tol: 0.01                                       # Stop control if within this distance from target for the below time
+  #   time: 100
+  # limits:
+  #   minOutput: -100                                 # Minimum controller output
+  #   maxOutput: 100                                  # Maximum controller output
+  #   minIntegral: -100                               # Minimum integral output
+  #   maxIntegral: 100                                # Maximum integral output
+  # inner:
+  #   Kp: 0.1                                         # Kp for when close to target
+  #   Ki: 0.1                                         # Ki for when close to target
+  #   Kd: 0.1                                         # Kd for when close to target
+  #   tol: 0.1                                        # Distance from target for when inner PID params will be used, defaults to atTarget tol
+
+trajectory:
+  type: 0
+  axis:
+    velocity: 10000                                      # Default velo for axis
+    acceleration: 10000                                 # Default acc for axis
+    deceleration: 10000                                 # Default dec for axis
+    jerk: 10                                          # Default jerk for axis
+
+input:
+  limit:
+    forward: ec0.s$(MCS2_SLAVE_NUM).ONE.0                  # Ethercat entry for low limit switch input
+  #  forwardPolarity: 0                               # Polarity of forward limit switch
+    backward: ec0.s$(MCS2_SLAVE_NUM).ONE.0                 # Ethercat entry for high limit switch input
+  #  backwardPolarity: 0                              # Polarity of forward limit switch
+  home: 'ec0.s$(MCS2_SLAVE_NUM).ONE.0'                                            # Ethercat entry for home switch
+  # homePolarity: 0                                   # Polarity of home switch
+  interlock: 'ec0.s$(MCS2_SLAVE_NUM).ONE.0'                # Ethercat entry for interlock switch input
+  # interlockPolarity: 0                              # Polarity of interlock switch
+
+softlimits:
+  enable: false                                       # Enable soft limits
+  forward: 100                                        # Soft limit position fwd
+  forwardEnable: false                                # Soft limit position fwd enable
+  backward: -100                                      # Soft limit position bwd
+  backwardEnable: false                               # Soft limit position bwd enable
+
+monitoring:
+  lag:
+    enable: false                                     # Enable position lag monitoring (following error)
+    tolerance: 1000                                   # Allowed tolerance
+    time: 100                                         # Allowed time outside tolerance
+  target:
+    enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 100                                    # Allowed tolerance
+    time: 100                                         # Filter time inside tolerance to be at target
+  velocity:
+    enable: false                                   # Enable velocity monitoring
+    max: 100                                        # Allowed max velocity
+    time:
+      trajectory: 100                               # Time allowed outside max velo before system init halt
+      drive: 200                                    # Time allowed outside max velo before system disables drive

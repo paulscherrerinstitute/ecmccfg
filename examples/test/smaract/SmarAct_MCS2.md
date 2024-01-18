@@ -21,6 +21,8 @@ Try to mind mac to be able to register in packetfence:
 5. Then open MCS2 Service Tool connect to the device name.
 6. Click on the tab "Device Diagnostic" on the right side. Here you can find the MAC.
 
+NOTE:  Only one smaract software can be connected to a drive at the same time. Service tool and firmware uploader cannot be connected at the same time.
+
 # LAB MCS2 info
 * Device info: MCS2-00016017
 * IP when first powered: 192.168.1.200, (DHCP disabled)
@@ -56,7 +58,12 @@ caqtdm -macro "SYS=c6025a,IOC=c6025a,Axis=Axis1" ecmcAxisExpert_v1.ui
 caqtdm -macro "IOC=c6025a,MasterID=0,SlaveID=002" ecmcMCS2.ui 
 ```
 
-## Issues
+## Issues new firmware (dec2023 release)
+* If homing is running and disabled it will not stop
+* Sometime loose ethercat communication
+* Seems homing speed is actually homing acc. What is then th2 2 homing speed entries?
+
+## below issues with old firmware
 * Sometimes moves when startup, why?
 * Enabled in smaract service tool but not enabled over ethercat? WHY? Sometimes enabled at startup
 * Sometimes the 0x2000 SDO exists and sometimes not? WHY? Also similar problem for other adresses
