@@ -3001,9 +3001,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>110</y>
-       <width>161</width>
-       <height>121</height>
+       <y>60</y>
+       <width>181</width>
+       <height>171</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -3017,7 +3017,7 @@
        <rect>
         <x>70</x>
         <y>30</y>
-        <width>81</width>
+        <width>91</width>
         <height>16</height>
        </rect>
       </property>
@@ -3074,7 +3074,7 @@
        <rect>
         <x>70</x>
         <y>70</y>
-        <width>81</width>
+        <width>91</width>
         <height>16</height>
        </rect>
       </property>
@@ -3112,7 +3112,7 @@
        <rect>
         <x>70</x>
         <y>50</y>
-        <width>81</width>
+        <width>91</width>
         <height>16</height>
        </rect>
       </property>
@@ -3213,7 +3213,7 @@
        <rect>
         <x>70</x>
         <y>90</y>
-        <width>81</width>
+        <width>91</width>
         <height>20</height>
        </rect>
       </property>
@@ -3237,6 +3237,81 @@
       </property>
       <property name="keepFocus">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_16">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>140</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-TrjSrcTyp-RB</string>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_73">
+      <property name="geometry">
+       <rect>
+        <x>-20</x>
+        <y>120</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Source:</string>
+      </property>
+     </widget>
+     <widget class="caMenu" name="camenu_8">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>120</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-TrjSrcTyp-Cmd</string>
       </property>
      </widget>
     </widget>
@@ -3767,6 +3842,81 @@
       <string>Setpoint:</string>
      </property>
     </widget>
+    <widget class="caMenu" name="camenu_3">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-TrjSrcTyp-Cmd</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_14">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>140</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-TrjSrcTyp-RB</string>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_72">
+     <property name="geometry">
+      <rect>
+       <x>-10</x>
+       <y>120</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Source:</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QTabWidget" name="tabWidget_2">
@@ -4082,11 +4232,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QwtPlot</class>
-   <extends>QFrame</extends>
-   <header>qwt_plot.h</header>
-  </customwidget>
-  <customwidget>
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
@@ -4136,6 +4281,11 @@
    <class>caStripPlot</class>
    <extends>QwtPlot</extends>
    <header>caStripPlot</header>
+  </customwidget>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
