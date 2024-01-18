@@ -45,10 +45,10 @@ encoder:
     trigg: ec0.s${MCS2_SLAVE_NUM}.driveCmdExe0${MCS2_CHID}.0   # Ethercat entry for triggering drive internal homing seq (seq id 26)
     ready: ec0.s${MCS2_SLAVE_NUM}.driveStatus0${MCS2_CHID}.10 # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
     refAtHome: 1
-    velocity:
-      to: 10000
-    acceleration: 10000
-    deceleration: 10000
+#    velocity:
+#      to: 10000
+#    acceleration: 10000
+#    deceleration: 10000
 
 #controller:
   # Kp:  15                                             # Kp proportinal gain
