@@ -1,0 +1,33 @@
+# ecmc test system
+# Anders Sandström
+
+#require ecmccfg sandst_aFestoCMMTST,"EC_RATE=500,ECMC_VER=v9_RC3,MASTER_ID=1,ENG_MODE=1"
+require ecmccfg sandst_aFestoCMMTST,"EC_RATE=500,ECMC_VER=v9.0.1_RC3,MASTER_ID=1,ENG_MODE=1"
+
+epicsEnvSet("IOC" ,"$(IOC="ec-base-01:Test:")")
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+# Configuration loaded via FoE
+epicsEnvSet(DRV_ID,0)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${DRV_ID}, HW_DESC=Festo-CMMT-ST"
+
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# To check mode:
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcSdoRT.cmd, "SLAVE_ID=${DRV_ID},INDEX=0x6060,SUBINDEX=0x0,DT=U8,NAME=DrvMode"
+
+# Configure Motion
+epicsEnvSet("DEV",      "$(IOC)")
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/rotary.ax)
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
