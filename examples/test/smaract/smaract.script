@@ -11,6 +11,7 @@ epicsEnvSet("MCS2_SLAVE_NUM",              "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SLC1750ds,MACROS='HOME_VELO=1000'"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=2"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=3"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -26,7 +27,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_lin.yaml"
 ##############################################################################
 ## AXIS 1 (MCS2 CH1)
 #
-epicsEnvSet("MCS2_CHID",              "2")
+epicsEnvSet("MCS2_CHID",              "3")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_rot.yaml"
 
 # Start in CSP

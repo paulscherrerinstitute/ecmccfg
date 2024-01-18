@@ -767,7 +767,7 @@
        </rect>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-ModeAct</string>
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-ModeAct</string>
       </property>
       <property name="background">
        <color alpha="0">
