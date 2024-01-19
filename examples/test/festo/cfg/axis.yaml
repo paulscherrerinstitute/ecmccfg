@@ -25,13 +25,13 @@ epics:
 
 drive:
   numerator: 1                                        # Fastest speed in engineering units
-  denominator:  1000000                               # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  denominator: 1000000                                # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-  control: ec0.s$(DRV_SLAVE).driveControl01           # Control word ethercat entry
+  control: ec0.s$(DRV_ID).driveControl01              # Control word ethercat entry
   # enable: 0                                         # Enable bit index in control word (not used if DS402)
   # enabled: 1                                        # Enabled bit index in status word (not used if DS402)
-  status: ec0.s$(DRV_SLAVE).driveStatus01             # Status word ethercat entry
-  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
+  status: ec0.s$(DRV_ID).driveStatus01                # Status word ethercat entry
+  setpoint: ec0.s$(DRV_ID).velocitySetpoint01         # Velocity setpoint if CSV. Position setpoint if CSP
   # reduceTorque: 2                                   # Reduce torque bit in drive control word
   # brake:
   #   output: ec0...                                  # Ethercat link to brake output
@@ -52,9 +52,9 @@ encoder:
   # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
   # mask: 0xFFF00                                     # Mask applied to raw encoder value
-  position: ec0.s$(DRV_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
-  control: ec0.s$(DRV_SLAVE).encoderControl01         # mandatory only if 'reset' is used
-  status: ec0.s$(DRV_SLAVE).encoderStatus01           # mandatory only if 'warning' or 'error' are used
+  position: ec0.s$(DRV_ID).positionActual01        # Ethercat entry for actual position input (encoder)
+  control: ec0.s$(DRV_ID).encoderControl01         # mandatory only if 'reset' is used
+  status: ec0.s$(DRV_ID).encoderStatus01           # mandatory only if 'warning' or 'error' are used
   # ready: ec..                                       # Etehrcat entry for encoder ready
   # source: 0                                         # 0 = Encoder value from etehrcat hardware, 1 = Encoder value from PLC
   # reset: 1                                          # Reset   (optional)
@@ -92,7 +92,7 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp:  15                                             # Kp proportinal gain
+  Kp: 15                                              # Kp proportinal gain
   # Ki:  0.02                                         # Ki integral gain
   # Kd:  0                                            # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
@@ -126,13 +126,13 @@ trajectory:
 
 input:
   limit:
-    forward: ec0.s$(DRV_SLAVE).ONE.0                  # Ethercat entry for low limit switch input
+    forward: ec0.s$(DRV_ID).ONE.0                  # Ethercat entry for low limit switch input
   #  forwardPolarity: 0                               # Polarity of forward limit switch
-    backward: ec0.s$(DRV_SLAVE).ONE.0                 # Ethercat entry for high limit switch input
+    backward: ec0.s$(DRV_ID).ONE.0                 # Ethercat entry for high limit switch input
   #  backwardPolarity: 0                              # Polarity of forward limit switch
-  home: 'ec0.s$(MCS2_SLAVE_NUM).ONE.0'                # Ethercat entry for home switch
+  home: 'ec0.s$(DRV_ID).ONE.0'                # Ethercat entry for home switch
   # homePolarity: 0                                   # Polarity of home switch
-  interlock: 'ec0.s$(DRV_SLAVE).ONE.0'                # Ethercat entry for interlock switch input
+  interlock: 'ec0.s$(DRV_ID).ONE.0'                # Ethercat entry for interlock switch input
   # interlockPolarity: 0                              # Polarity of interlock switch
 
 # homing:

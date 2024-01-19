@@ -16,7 +16,7 @@ epics:
 
 drive:
   numerator: 1                                        # Fastest speed in engineering units
-  denominator:  1000                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  denominator: 1000                                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s${MCS2_SLAVE_NUM}.driveControl0${MCS2_CHID}          # Control word ethercat entry
   status: ec0.s${MCS2_SLAVE_NUM}.driveStatus0${MCS2_CHID}             # Status word ethercat entry
