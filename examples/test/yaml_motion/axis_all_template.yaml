@@ -98,8 +98,8 @@ encoder:
 
 controller:
   Kp: 15                                              # Kp proportinal gain
-  Ki:  0.02                                           # Ki integral gain
-  Kd:  0                                              # Kd derivative gain
+  Ki: 0.02                                            # Ki integral gain
+  Kd: 0                                               # Kd derivative gain
   Kff: 1                                              # Feed forward gain
   deadband:
     tol: 0.01                                         # Stop control if within this distance from target for the below time
@@ -185,8 +185,8 @@ monitoring:
       drive: 200                                      # Time allowed outside max diff velo before system disables drive
 
 plc:
-  enable: 1                                           # Enable axis plc
-  externalCommands: 1                                 # Allow axis to inputs from PLC
+  enable: true                                        # Enable axis plc
+  externalCommands: true                              # Allow axis to inputs from PLC
   code:                                               # Sync code
     - if(ax2.traj.source){ax2.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
     - ax2.traj.setpos:=ax10.traj.setpos-ax11.traj.setpos/2; # calculate set pos for physical axis

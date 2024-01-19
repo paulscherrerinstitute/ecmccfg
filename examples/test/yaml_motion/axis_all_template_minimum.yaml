@@ -19,8 +19,8 @@ axis:
 epics:
   name: M1                                            # Axis anme
   precision: 3                                        # Decimal count
-  description: very important motor axis              # Axis description
-  unit: mm                                            # Unit
+  # description: very important motor axis            # Axis description
+  # unit: mm                                          # Unit
   # motorRecord:
   #   enable: true
   #   description: This is MR
@@ -38,7 +38,7 @@ drive:
 #  reduceTorque: 2                                    # Reduce torque bit in drive control word
 #  reduceTorqueEnable: True                           # Enable reduce torque functionality
 #  brake:
-#    enable: true                                     # Enable brake 
+#    enable: true                                     # Enable brake
 #    output: ec0...                                   # Ethercat link to brake output
 #    openDelay: 0                                     # Brake timing parameter in cycles (default 1kHz)
 #    closeAhead: 0                                    # Brake timing parameter in cycles (default 1kHz)
@@ -98,8 +98,8 @@ encoder:
 
 controller:
   Kp: 15                                              # Kp proportinal gain
-  # Ki:  0.02                                         # Ki integral gain
-  # Kd:  0                                            # Kd derivative gain
+  # Ki: 0.02                                          # Ki integral gain
+  # Kd: 0                                             # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
   # deadband:
   #   tol: 0.01                                       # Stop control if within this distance from target for the below time
@@ -171,12 +171,12 @@ monitoring:
     enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
-  # velocity:
-  #   enable: false                                   # Enable velocity monitoring
-  #   max: 100                                        # Allowed max velocity
-  #   time:
-  #     trajectory: 100                               # Time allowed outside max velo before system init halt
-  #     drive: 200                                    # Time allowed outside max velo before system disables drive
+  velocity:
+    enable: false                                     # Enable velocity monitoring
+    max: 100                                          # Allowed max velocity
+    time:
+      trajectory: 100                                 # Time allowed outside max velo before system init halt
+      drive: 200                                      # Time allowed outside max velo before system disables drive
   # velocityDifference:
   #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)
   #   max: 100                                        # Allowed max difference
@@ -185,8 +185,8 @@ monitoring:
   #     drive: 200                                    # Time allowed outside max diff velo before system disables drive
 
 # plc:
-#   enable: 1                                         # Enable axis plc
-#   externalCommands: 1                               # Allow axis to inputs from PLC
+#   enable: true                                      # Enable axis plc
+#   externalCommands: true                            # Allow axis to inputs from PLC
 #  code:                                              # Sync code
 #    - if(ax2.traj.source){ax2.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
 #    - ax2.traj.setpos:=ax10.traj.setpos-ax11.traj.setpos/2; # calculate set pos for physical axis
