@@ -59,9 +59,11 @@ caqtdm -macro "IOC=c6025a,MasterID=0,SlaveID=002" ecmcMCS2.ui
 ```
 
 ## Issues new firmware (dec2023 release)
-* If homing is running and disabled it will not stop
+* If homing is running and disabled the motor will not stop.
 * Sometime loose ethercat communication
 * Seems homing speed is actually homing acc. What is then th2 2 homing speed entries?
+* Homing type seems not to exist: 0x60e3:0c, r-r-r-, int8, 8 bit, "SubIndex 012"
+* How to know if the system is calibrated or homed? Status word?
 
 ## below issues with old firmware
 * Sometimes moves when startup, why?
