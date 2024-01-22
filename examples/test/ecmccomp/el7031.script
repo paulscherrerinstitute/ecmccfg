@@ -1,0 +1,43 @@
+co##############################################################################
+## Example config for el7037
+
+require ecmccfg sandst_a,"ECMC_VER=sandst_a,ENG_MODE=1"
+
+# Load components lib
+require ecmccomp sandst_a
+
+##############################################################################
+## Configure hardware
+
+epicsEnvSet("DRV_SLAVE",              "4")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7031"
+
+#- Apply motor config with some cutom macros
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Series,MACROS='I_STDBY_MA=200,I_MAX_MA=1000'"
+
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_STDBY_MA=200,I_MAX_MA=1000,R_COIL_MOHM=1700'"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml"
+
+#-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7037_1.ax)
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+

@@ -19,7 +19,7 @@ epicsEnvSet("DEV",      "$(IOC)")
 system "cat ./cfg/stepper.yaml"
 #- ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/stepper.yaml"
 #- ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./axis_all_template.yaml"
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./axis_all_template_minimum.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_all_template_minimum.yaml"
 
 # Debug PLC 
 #$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=1000,FILE=./plc/test.plc")
