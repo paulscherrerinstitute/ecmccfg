@@ -117,6 +117,7 @@ controller:
 
 trajectory:
   type: 1                                             # Default 0 = trapetz, 1 = S-curve (ruckig)
+  source: 0                                           # 0 = take trajectory setpoint from axis traj object, 1 = trajectory setpoint from plc
   axis:
     velocity: 10                                      # Default velo for axis
     acceleration: 0.1                                 # Default acc for axis
@@ -187,6 +188,7 @@ monitoring:
 plc:
   enable: true                                        # Enable axis plc
   externalCommands: true                              # Allow axis to inputs from PLC
+  file: myplcfile.plc                                 # File with plc code
   code:                                               # Sync code
     - if(ax2.traj.source){ax2.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
     - ax2.traj.setpos:=ax10.traj.setpos-ax11.traj.setpos/2; # calculate set pos for physical axis
