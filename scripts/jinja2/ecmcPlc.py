@@ -50,8 +50,10 @@ class EcmcPlc:
         self.plcTemplate.render(self.yamlHandler.yamlData)
 
     def loadPlcFile(self):
+        # Disable functionality
+        return
         key = 'plc'
-        # replace all 'code' with the content of {{ file }}
+        # replace all 'code' with the content of {{ file }}        
         self.yamlHandler.yamlData[key]['code'] = self.readPlcFile(self.yamlHandler.yamlData[key]['file'])
 
     @staticmethod
@@ -59,6 +61,7 @@ class EcmcPlc:
         code = []
         with open(filename, "r") as f:
             for line in f:
+                print('line: ',line)
                 line = line.strip()  # strip new lines
                 if len(line) == 0:  # remove empty lines
                     continue

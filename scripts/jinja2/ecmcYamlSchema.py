@@ -396,6 +396,7 @@ class Schema:
             'filter': filterSchema,
             'velocity_filter': plcVeloFilterSchema,
             'file': {'type': 'string'},
+            'file_macros': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
     }

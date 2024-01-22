@@ -6,7 +6,14 @@
 ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|default(0)|int }})"
 
-#- PLC code
+
+#- loadAxisPLCFile.cmd as base. Any code defined in plc.code will be apended on the end.
+{%- if plc.file %}
+    ecmcFileExist(${ecmccfg_DIR}loadAxisPLCFile.cmd,1,1)
+    ${SCRIPTEXEC} ${ecmccfg_DIR}loadAxisPLCFile.cmd "AX_ID={{ axis.id }},FILE={{ plc.file }},PLC_MACROS='{{plc.file_macros|default('')}}'"
+{%- endif %}
+
+#- PLC code  (if fiel already loaded then the plc.code will be apended to the end)
 {%- if plc.code %}
     {%- for line in plc.code %}
         ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line|replace(';', '|') }}"
