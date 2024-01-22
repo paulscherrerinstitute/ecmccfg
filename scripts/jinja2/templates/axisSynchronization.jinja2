@@ -13,14 +13,36 @@ ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCo
     {%- endfor %}
 {%- endif %}
 
-#- PLC Encoder filter
-{%- set filter = None if plc.filter.velocity is undefined else plc.filter.velocity %}
-ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ filter.size|default(0)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
+#- PLC Encoder velocity filter
+{%- if plc.velocity_filter.encoder is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ plc.velocity_filter.encoder.size|default(1)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ plc.velocity_filter.encoder.enable|default(0)|int }})"    
+{%- else %}
+    # WARNING: Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x)
+    {%- set filter = None if plc.filter.velocity is undefined else plc.filter.velocity %}
+    ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ filter.size|default(1)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
+{%- endif %}
+
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|default(0)|int }})"
 
-#- PLC Trajectory filter
-{%- set filter = None if plc.filter.trajectory is undefined else plc.filter.trajectory %}
-ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ filter.size|default(0)|int }})"
-ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
+
+#- Move to different syntax becaosue of old bad naming
+#- PLC Encoder velocity velocity filter
+{%- if plc.velocity_filter.trajectory is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ plc.velocity_filter.trajectory.size|default(1)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ plc.velocity_filter.trajectory.enable|default(0)|int }})"    
+{%- else %}
+    # WARNING: Please use updated yaml syntax for trajectory velo filtering:  plc.velocity_filter.trajectory.x)
+    {%- if plc.filter.position %}
+        {%- set filter = None if plc.filter.position is undefined else plc.filter.position %}
+    {%- else %}
+        {%- if plc.filter.trajectory %}
+            {%- set filter = None if plc.filter.trajectory is undefined else plc.filter.trajectory %}
+        {%- endif %}
+    {%- endif %}
+    ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ filter.size|default(1)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
+{%- endif %}
+
 ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source|default(0)|int }})"

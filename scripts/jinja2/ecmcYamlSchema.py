@@ -80,32 +80,54 @@ class Schema:
         }
     }
 
+    plcVeloFilterSchema = {
+        'type': 'dict',
+        'required': False,
+        'default': {},
+        'schema': {
+            'trajectory': {
+                'type': 'dict',                    
+                'schema': {
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
+                }                
+            },
+            'encoder': {
+                'type': 'dict',                    
+                'schema': {
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
+                }                
+            }
+        }
+    }
+
     filterSchema = {
         'type': 'dict',
+        'required': False,
         'default': {},
         'schema': {
             'velocity': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean'},
-                    'size': {'required': True, 'type': 'integer'}
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
                 }
             },
             'trajectory': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean'},
-                    'size': {'required': True, 'type': 'integer'}
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
                 }
             },
             'position': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean'},
-                    'size': {'required': True, 'type': 'integer'}
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
                 }
             }
-
         }
     }
 
@@ -372,6 +394,7 @@ class Schema:
             'enable': {'required': True, 'type': 'boolean'},
             'externalCommands': {'type': 'boolean'},
             'filter': filterSchema,
+            'velocity_filter': plcVeloFilterSchema,
             'file': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
