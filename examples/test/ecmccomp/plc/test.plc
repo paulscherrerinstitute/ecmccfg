@@ -6,5 +6,5 @@ if(static.counter>${LIMIT}) {
     println('AX PLC: File');
   } else {
     println('PLC   : File');
-  }
-}
+  };
+};

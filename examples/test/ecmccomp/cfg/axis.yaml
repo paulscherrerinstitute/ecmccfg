@@ -188,9 +188,10 @@ plc:
   enable: true                                      # Enable axis plc
   externalCommands: true                            # Allow axis to inputs from PLC
   file: ${PLC_PATH}test.plc
-  macros: LIMIT=1000,TYPE=0
+  macros: LIMIT=1000,TYPE=0,DRV_SLAVE=${DRV_SLAVE}
   code:                                              # Sync code
-  - "if(static.counter==0){println('AX PLC: Appended');};" # calculate set pos for physical axis
+  - "if(static.counter_app>${LIMIT}){println('AX PLC: Appended');static.counter_app:=0;};" # calculate set pos for physical axis
+  - static.counter_app:=static.counter_app+1;
   - ec0.s$(DRV_SLAVE).ONE > 1; # Enable axis if one of master axes is enabled
   - ec0.s$(DRV_SLAVE).ZERO > 1; # calculate set pos for physical axis
   #filter:

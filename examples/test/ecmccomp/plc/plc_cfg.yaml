@@ -5,5 +5,5 @@ plc:
   file: ${PLC_PATH}test.plc
   macros: TYPE=1,LIMIT=10000
   code:
-  - "if(static.counter==0){println('PLC   : Appended');};" # calculate set pos for physical axis
-  - var temp:=1000;
+  - "if(static.counter_app>${LIMIT}){println('PLC:    Appended');static.counter_app:=0;};" # calculate set pos for physical axis
+  - static.counter_app:=static.counter_app+1;
