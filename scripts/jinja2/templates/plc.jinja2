@@ -7,21 +7,12 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${ECMC_PLC_RATE_}")
 epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
 {%- endif %}
 
-#- loadPLCFile.cmd as base. Any code defined in plc.code will be appended on the end after the last line of plc.file.
-{%- if plc.file %}
-    ecmcFileExist(${ecmccfg_DIR}loadPLCFile.cmd,1,1)
-    ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "PLC_ID={{ plc.id }},FILE={{ plc.file }},SAMPLE_RATE_MS=${ECMC_PLC_SAMPLE_RATE_MS},PLC_MACROS='{{plc.macros|default('')}}'"
+#- "Call" plc_merge.jinja2 to merge plc.file and plc.code, apply macros
+epicsEnvSet("OUTPUT_FILE" , "${TMP_PATH=/tmp}/PLC{{plc.id}}_temp.plc")
 
-    #- PLC code  (if plc.file already loaded then the plc.code will be appended to the end)
-    {%- if plc.code %}
-        {%- for line in plc.code %}
-            ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
-        {%- endfor %}
-    {%- endif %}
-{%- else %}  #- No plc.file so need to create a plc
+{% include 'plc_merge.jinja2' %}
 
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "PLC_ID={{plc.id}}, FILE=${OUTPUT_FILE}, PLC_MACROS='{{plc.macros|default('')}}'"
 
-{%- endif %}
-
-
-# THIS is not showing up in iocsh??? Must be truked by python.. Need to check..
+#- Cleanup
+system "rm -f ${OUTPUT_FILE}"

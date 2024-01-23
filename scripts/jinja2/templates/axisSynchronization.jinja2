@@ -6,60 +6,16 @@
 ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|default(0)|int }})"
 
-#-#################################################################
-#- Note
-#- Rewritten to not use the python jinja here. Reasons:
-#- 1. Need to be able to use macros in files and also in filename
-#- 2. Get en error when plc.file is not found
-#- 3. Append plc.code to plc.file
-#- Conclusion: A bit nasty but works..
 
-#- Build a file plc file of plc.file and plc.code and plc.macros
+#- "Call" plc_merge.jinja2 to merge plc.file and plc.code, apply macros
+epicsEnvSet("OUTPUT_FILE" , "${TMP_PATH=/tmp}/PLC{{axis.id}}_temp.plc")
 
-epicsEnvSet("ECMC_AX_ID_TEMP",          "{{ axis.id }}")
-epicsEnvSet("ECMC_TMP_SOURCE_FILE"      "${TMP_PATH=/tmp}/PLC${ECMC_AX_ID_TEMP}_SRC.plc")
-epicsEnvSet("ECMC_TMP_SOURCE_FILE_2"    "${TMP_PATH=/tmp}/PLC${ECMC_AX_ID_TEMP}_SRC_2.plc")
-epicsEnvSet("ECMC_TMP_OUT_FILE",        "${TMP_PATH=/tmp}/PLC${ECMC_AX_ID_TEMP}_OUT.plc")
+{% include 'plc_merge.jinja2' %}
 
-#- clear files (make sure no commands in files already)
-system "echo '' > ${ECMC_TMP_SOURCE_FILE}"
-system "echo '' > ${ECMC_TMP_OUT_FILE}"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadAxisPLCFile.cmd "AX_ID={{axis.id}}, FILE=${OUTPUT_FILE}, PLC_MACROS='{{plc.macros|default('')}}'"
 
-#- Build src file plc.file + plc.code
-{%- if plc.file %}
-    system "cat {{ plc.file }} > ${ECMC_TMP_SOURCE_FILE}"
-{%- endif %}
-
-#- Append plc.code ( hard to handle  ''' so replace to € and switch back in shell, not nice..)
-{%- if plc.code %}
-    {%- for line in plc.code %}
-        system "bash ${ecmccfg_DIR}appendCodeToPlc.sh '{{ line|replace('\'', '€') }}' ${ECMC_TMP_SOURCE_FILE} €"
-    {%- endfor %}    
-{%- endif %}
-
-# Source plc file:
-system "cat ${ECMC_TMP_SOURCE_FILE}"
-
-#- Convert file with optional macros (msi)
-ecmcFileExist("${FILE}",1)
-system "msi -V -M '{{plc.macros|default('')}}' -o ${ECMC_TMP_OUT_FILE} ${ECMC_TMP_SOURCE_FILE}"
-
-#- Printout parsed file?
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, ${PRINT_PLC_FILE=1}=1,"", "#-"  )
-${ECMC_EXE_CMD=""}########### Parsed PLC file:
-${ECMC_EXE_CMD=""}system "cat ${ECMC_TMP_OUT_FILE}"
-${ECMC_EXE_CMD=""}############ PLC file end
-${ECMC_EXE_CMD=""}#
-epicsEnvUnset(ECMC_EXE_CMD)
-
-ecmcFileExist("${ECMC_TMP_OUT_FILE}",1)
-ecmcConfigOrDie "Cfg.LoadAxisPLCFile(${ECMC_AX_ID_TEMP},${ECMC_TMP_OUT_FILE})"
-
-#- Remove parsed file after load
-system "rm -f ${ECMC_TMP_OUT_FILE}"
-system "rm -f ${ECMC_TMP_SOURCE_FILE}"
-system "rm -f ${ECMC_TMP_SOURCE_FILE}_2"
-epicsEnvUnset(ECMC_AX_ID_TEMP)
+#- Cleanup
+system "rm -f ${OUTPUT_FILE}"
 
 #- PLC Encoder velocity filter
 {%- if plc.velocity_filter.encoder is defined %}
@@ -74,8 +30,7 @@ epicsEnvUnset(ECMC_AX_ID_TEMP)
 
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|default(0)|int }})"
 
-
-#- Move to different syntax becaosue of old bad naming
+#- Move to different syntax because of old bad naming
 #- PLC Encoder velocity velocity filter
 {%- if plc.velocity_filter.trajectory is defined %}
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ plc.velocity_filter.trajectory.size|default(1)|int }})"
