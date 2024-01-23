@@ -27,6 +27,7 @@ epicsEnvSet("DEV",      "$(IOC)")
 epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
 
 
+#${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml, LIMIT=1000"
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml"
 
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd, "FILE=./plc/plc_cfg.yaml"

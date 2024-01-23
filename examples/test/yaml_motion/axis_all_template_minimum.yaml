@@ -189,7 +189,7 @@ monitoring:
 #   enable: true                                      # Enable axis plc
 #   externalCommands: true                            # Allow axis to take inputs from PLC
 #  file: myplcfile.plc                                # File with plc code
-#  macros: LIMIT=1000,TYPE=0                           # Macros to pass to plc.file and plc.code 
+#  macros: LIMIT=1000,TYPE=0                          # Macros to pass to plc.file and plc.code 
 #  code:                                              # Sync code (appended after plc.file)
 #    - if(ax2.traj.source){ax2.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
 #    - ax2.traj.setpos:=ax10.traj.setpos-ax11.traj.setpos/2; # calculate set pos for physical axis
