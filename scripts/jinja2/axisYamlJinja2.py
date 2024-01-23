@@ -15,6 +15,5 @@ def main():
     axis.make()
     axis.axisTemplate.writeProduct(cli.outFile)
 
-
 if __name__ == '__main__':
     main()

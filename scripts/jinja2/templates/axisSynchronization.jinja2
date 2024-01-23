@@ -6,23 +6,25 @@
 ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|default(0)|int }})"
 
+#- PLC code
+{%- if plc.code %}
+    {%- for line in plc.code %}
+        ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line|replace(';', '|') }}"
+    {%- endfor %}
+{%- endif %}
 
-#- "Call" plc_merge.jinja2 to merge plc.file and plc.code, apply macros
-epicsEnvSet("OUTPUT_FILE" , "${TMP_PATH=/tmp}/PLC{{axis.id}}_temp.plc")
 
-{% include 'plc_merge.jinja2' %}
-
-${SCRIPTEXEC} ${ecmccfg_DIR}loadAxisPLCFile.cmd "AX_ID={{axis.id}}, FILE=${OUTPUT_FILE}, PLC_MACROS='{{plc.macros|default('')}}'"
+#-${SCRIPTEXEC} ${ecmccfg_DIR}loadAxisPLCFile.cmd "AX_ID={{axis.id}}, FILE=${OUTPUT_FILE}, PLC_MACROS='{{plc.macros|default('')}}'"
 
 #- Cleanup
-system "rm -f ${OUTPUT_FILE}"
+#- system "rm -f ${OUTPUT_FILE}"
 
 #- PLC Encoder velocity filter
 {%- if plc.velocity_filter.encoder is defined %}
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ plc.velocity_filter.encoder.size|default(1)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ plc.velocity_filter.encoder.enable|default(0)|int }})"    
 {%- else %}
-    # WARNING: Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x)
+    # WARNING: Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x
     {%- set filter = None if plc.filter.velocity is undefined else plc.filter.velocity %}
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ filter.size|default(1)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ filter.enable|default(0)|int }})"
