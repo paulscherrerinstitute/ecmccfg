@@ -1,11 +1,12 @@
 #==============================================================================
 #- plc_merge.jinja2
-#- Arguments: OUTPUT_FILE
+#- Arguments: OUTPUT_FILE, OBJ_ID
 #-d /**
 #-d   \brief Snippet for merging plc.file and plc.code
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param OUTPUT_FILE Output file
+#-d   \param OBJ_ID Object ID
 #-d
 #-d Note
 #-d Rewritten since the jinja workflow was too restrictive:
@@ -14,17 +15,4 @@
 #-d 3. Append plc.code to plc.file
 #-d Conclusion: A bit nasty but works..
 
-#- clear files (make sure no commands in files already)
-system "echo '' > ${OUTPUT_FILE}"
 
-#- Build src file plc.file + plc.code
-{%- if plc.file %}
-    system "cat {{ plc.file }} > ${OUTPUT_FILE}"
-{%- endif %}
-
-#- Append plc.code ( hard to handle  ''' so replace to € and switch back in shell, not nice..)
-{%- if plc.code %}
-    {%- for line in plc.code %}
-        system "bash ${ecmccfg_DIR}appendCodeToPlc.sh '{{ line|replace('\'', '€') | replace('$', '£')}}' ${OUTPUT_FILE} € £"
-    {%- endfor %}    
-{%- endif %}
