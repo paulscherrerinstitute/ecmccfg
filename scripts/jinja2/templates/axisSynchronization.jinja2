@@ -6,12 +6,16 @@
 ecmcConfigOrDie "Cfg.SetAxisPLCEnable({{ axis.id }},{{ plc.enable|default(0)|int }})"
 ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCommands|default(0)|int }})"
 
-#- PLC code
-{%- if plc.code %}
-    {%- for line in plc.code %}
-        ecmcConfigOrDie "Cfg.AppendAxisPLCExpr({{ axis.id }})={{ line|replace(';', '|') }}"
-    {%- endfor %}
-{%- endif %}
+
+#- "Call" plc_merge.jinja2 to merge plc.file and plc.code, apply macros
+epicsEnvSet("OUTPUT_FILE" , "${TMP_PATH=/tmp}/PLC{{axis.id}}_temp.plc")
+
+{% include 'plc_merge.jinja2' %}
+
+${SCRIPTEXEC} ${ecmccfg_DIR}loadAxisPLCFile.cmd "AX_ID={{axis.id}}, FILE=${OUTPUT_FILE}, PLC_MACROS='{{plc.macros|default('')}}'"
+
+#- Cleanup
+system "rm -f ${OUTPUT_FILE}"
 
 #- PLC Encoder velocity filter
 {%- if plc.velocity_filter.encoder is defined %}
@@ -26,8 +30,7 @@ ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCo
 
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|default(0)|int }})"
 
-
-#- Move to different syntax becaosue of old bad naming
+#- Move to different syntax because of old bad naming
 #- PLC Encoder velocity velocity filter
 {%- if plc.velocity_filter.trajectory is defined %}
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ plc.velocity_filter.trajectory.size|default(1)|int }})"

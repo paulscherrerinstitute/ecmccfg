@@ -1,3 +1,5 @@
+#==============================================================================
+# loadYamlPlc.cmd
 #-d /**
 #-d   \brief Script for loading PLC from yaml file via `jinja2`
 #-d   \details adds a PLC, line by line, from a yaml-file, parsed by `jinja2`
