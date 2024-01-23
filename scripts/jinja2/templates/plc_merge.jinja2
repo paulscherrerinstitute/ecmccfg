@@ -25,6 +25,6 @@ system "echo '' > ${OUTPUT_FILE}"
 #- Append plc.code ( hard to handle  ''' so replace to € and switch back in shell, not nice..)
 {%- if plc.code %}
     {%- for line in plc.code %}
-        system "bash ${ecmccfg_DIR}appendCodeToPlc.sh '{{ line|replace('\'', '€') }}' ${OUTPUT_FILE} €"
+        system "bash ${ecmccfg_DIR}appendCodeToPlc.sh '{{ line|replace('\'', '€') | replace('$', '£')}}' ${OUTPUT_FILE} € £"
     {%- endfor %}    
 {%- endif %}
