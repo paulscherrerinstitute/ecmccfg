@@ -7,39 +7,21 @@ epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${ECMC_PLC_RATE_}")
 epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
 {%- endif %}
 
-#- Create a new PLC
-epicsEnvSet("PLC_ID", {{ plc.id }})
-ecmcConfigOrDie "Cfg.CreatePLC({{ plc.id }},${ECMC_PLC_SAMPLE_RATE_MS})"
+#- loadPLCFile.cmd as base. Any code defined in plc.code will be appended on the end after the last line of plc.file.
+{%- if plc.file %}
+    ecmcFileExist(${ecmccfg_DIR}loadPLCFile.cmd,1,1)
+    ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "PLC_ID={{ plc.id }},FILE={{ plc.file }},SAMPLE_RATE_MS=${ECMC_PLC_SAMPLE_RATE_MS},PLC_MACROS='{{plc.macros|default('')}}'"
 
-#- Add code
-{%- if plc.code %}
-{%- for line in plc.code %}
-ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
-{%- endfor %}
+    #- PLC code  (if plc.file already loaded then the plc.code will be appended to the end)
+    {%- if plc.code %}
+        {%- for line in plc.code %}
+            ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
+        {%- endfor %}
+    {%- endif %}
+{%- else %}  #- No plc.file so need to create a plc
+
+
 {%- endif %}
 
-#- Enable PLC
-ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable|default(1)|int }})"
 
-#- default PLC-PVs
-dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char={{ '%02d' % plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
-
-#- Below for facilitate auto gui generation
-# Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_PLC_OBJ_ID==-1)
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_PLC,"${ECMC_PREV_PLC_OBJ_ID=-1}>=0", "","#- ")
-${ECMC_EXE_NEXT_PLC}ecmcFileExist(ecmcPlcPrevPlc.db,1,1)
-${ECMC_EXE_NEXT_PLC}dbLoadRecords(ecmcPlcPrevPlc.db,"NEXT_OBJ_ID=${PLC_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLC_P=""}")
-epicsEnvUnset(ECMC_EXE_NEXT_PLC)
-
-#- If this is the first added slave then store value in P:MCU-Cfg-PLC-FrstObj
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_PLC,"${ECMC_PREV_PLC_OBJ_ID=-1}<0", "","#- ")
-${ECMC_EXE_FIRST_PLC}ecmcFileExist(ecmcPlcFirstPlc.db,1,1)
-${ECMC_EXE_FIRST_PLC}dbLoadRecords(ecmcPlcFirstPlc.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${PLC_ID}")
-epicsEnvUnset(ECMC_EXE_FIRST_PLC)
-
-#- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
-epicsEnvSet(ECMC_PREV_PLC_P,"$(ECMC_PREFIX)MCU-Cfg-PLC${PLC_ID}-")
-epicsEnvSet(ECMC_PREV_PLC_OBJ_ID,${PLC_ID})
-
-#- cleanup
-epicsEnvUnset(PLC_ID)
+# THIS is not showing up in iocsh??? Must be truked by python.. Need to check..

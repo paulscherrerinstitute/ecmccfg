@@ -396,7 +396,7 @@ class Schema:
             'filter': filterSchema,
             'velocity_filter': plcVeloFilterSchema,
             'file': {'type': 'string'},
-            'file_macros': {'type': 'string'},
+            'macros': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
     }
@@ -409,6 +409,7 @@ class Schema:
             'enable': {'type': 'boolean'},
             'rateMilliseconds': {'type': 'integer'},
             'file': {'type': 'string'},
+            'macros': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
     }
