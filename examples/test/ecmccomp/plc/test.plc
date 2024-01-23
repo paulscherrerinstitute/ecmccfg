@@ -1,0 +1,10 @@
+static.counter:=static.counter+1;
+
+if(static.counter>${LIMIT}) {  
+  static.counter:=0;
+  if(${TYPE}=0) {
+    println('AX PLC: File');
+  } else {
+    println('PLC   : File');
+  }
+}

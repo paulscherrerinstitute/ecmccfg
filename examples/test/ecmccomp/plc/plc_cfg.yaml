@@ -1,0 +1,9 @@
+plc:
+  id: 1
+  enable: yes
+  rateMilliseconds: 1
+  file: ${PLC_PATH}test.plc
+  macros: TYPE=1,LIMIT=10000
+  code:
+  - "if(static.counter==0){println('PLC   : Appended');};" # calculate set pos for physical axis
+  - var temp:=1000;

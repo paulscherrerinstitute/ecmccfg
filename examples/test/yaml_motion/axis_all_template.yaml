@@ -189,7 +189,8 @@ plc:
   enable: true                                        # Enable axis plc
   externalCommands: true                              # Allow axis to inputs from PLC
   file: myplcfile.plc                                 # File with plc code
-  code:                                               # Sync code
+  macros: LIMIT=1000,TYPE=0                           # Macros to pass to plc.file and plc.code
+  code:                                               # Sync code (appended after code in plc.file)
     - if(ax2.traj.source){ax2.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
     - ax2.traj.setpos:=ax10.traj.setpos-ax11.traj.setpos/2; # calculate set pos for physical axis
   velocity_filter:                                    # Filter used to smother velocity feedforward
@@ -198,7 +199,7 @@ plc:
       size: 100                                       # Filter size
     trajectory:                                       # Filter plc traj velo
       enable: false                                   # Filter enable
-      size: 100                                       # Filter size   
+      size: 100                                       # Filter size
 #  filter:                                            # Use "velocity_filter" instead since this naming is missleading and should be phased out
 #    velocity:                                        # Filter plc enc velo
 #      enable: false

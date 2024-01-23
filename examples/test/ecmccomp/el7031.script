@@ -1,4 +1,4 @@
-co##############################################################################
+##############################################################################
 ## Example config for el7037
 
 require ecmccfg sandst_a,"ECMC_VER=sandst_a,ENG_MODE=1"
@@ -24,9 +24,13 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
+epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
+
+
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml"
 
-#-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7037_1.ax)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd, "FILE=./plc/plc_cfg.yaml"
+
 
 ##############################################################################
 ############# Configure diagnostics:
