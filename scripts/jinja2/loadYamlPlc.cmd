@@ -16,42 +16,67 @@
 #- halt the ioc startup in case od an error
 on error halt
 
-#- Get plc.file (must do like this in order to allow macros in plc.file). Basically execute plc.file in iocsh to expand macros
-epicsEnvSet(GET_PLC_FILENAME_FILE,${ECMC_TMP_DIR}getPlcFilename.cmd)
-system "echo '' > ${GET_PLC_FILENAME_FILE}"
-system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcGetFileName.py ${FILE} ${GET_PLC_FILENAME_FILE}"
-ecmcFileExist("${GET_PLC_FILENAME_FILE}",1)
-${SCRIPTEXEC} "${GET_PLC_FILENAME_FILE}"
-system "rm -rf ${GET_PLC_FILENAME_FILE}"
-epicsEnvUnset(GET_PLC_FILENAME_FILE)
-# PLC filename (with expanded macros):
-epicsEnvShow(ECMC_PLC_FILENAME)
+# Step 1: Get macros from yaml file
+epicsEnvSet(FILE_TEMP_BASE,${ECMC_TMP_DIR}${FILE})
+epicsEnvSet(FILE_TEMP_1,${FILE_TEMP_BASE}_1)
+#- system "echo '' > ${FILE_TEMP_1}"
+system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcYamlGetMacros.py ${FILE} ${FILE_TEMP_1}"
+ecmcFileExist("${FILE_TEMP_1}",1)
+${SCRIPTEXEC} "${FILE_TEMP_1}"
+system "rm -rf ${FILE_TEMP_1}"
+epicsEnvUnset(FILE_TEMP_1)
 # PLC macros:
 epicsEnvShow(ECMC_PLC_MACROS)
 
-#- Set plc.file (write new yaml file)
-epicsEnvSet(UPDATED_YAML_FILE,${ECMC_TMP_DIR}${FILE}.filename)
-system "echo '' > ${UPDATED_YAML_FILE}"
-system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcSetFileName.py ${FILE} ${UPDATED_YAML_FILE} ${ECMC_PLC_FILENAME=}"
+# Step 2: Run msi with the macros from  step 1
+ecmcFileExist("${FILE}",1)
+epicsEnvSet(FILE_TEMP_2,${FILE_TEMP_BASE}_2)
+system "msi -M '${ECMC_PLC_MACROS=EMPTY}' -o ${FILE_TEMP_2} ${FILE}"
+
+# Step 3: Get Filename (need to check if filename contains other macros also). Bascally run the filename in this iocsh
+epicsEnvSet(FILE_TEMP_3,${FILE_TEMP_BASE}_3)
+system "echo '' > ${FILE_TEMP_3}"
+system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcGetFileName.py ${FILE_TEMP_2} ${FILE_TEMP_3}"
+ecmcFileExist("${FILE_TEMP_3}",1)
+#- Eval name
+${SCRIPTEXEC} "${FILE_TEMP_3}"
+system "rm -rf ${FILE_TEMP_3}"
+epicsEnvUnset(FILE_TEMP_3)
+# PLC filename (with expanded macros):
+epicsEnvShow(ECMC_PLC_FILENAME)
+
+# Step 4: Set plc.file (write new yaml file)
+epicsEnvSet(FILE_TEMP_4,${FILE_TEMP_BASE}_4)
+#-system "echo '' > ${FILE_TEMP_4}"
+system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcSetFileName.py ${FILE_TEMP_2} ${FILE_TEMP_4} ${ECMC_PLC_FILENAME=}"
+system "rm -rf ${FILE_TEMP_2}"
+epicsEnvUnset(FILE_TEMP_2)
 epicsEnvUnset(ECMC_PLC_FILENAME)
-ecmcFileExist("${UPDATED_YAML_FILE}",1)
+ecmcFileExist("${FILE_TEMP_4}",1)
 
-#- setup python venv and run `plcYamlJinja2.py`
+#- Step 5: setup python venv and run `plcYamlJinja2.py`
 #- MUST be in the same 'system'-context!!!
-system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}plcYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${UPDATED_YAML_FILE} -o ${ECMC_TMP_DIR}${FILE}.plc"
-system "rm -rf ${UPDATED_YAML_FILE}"
+epicsEnvSet(FILE_TEMP_5,${FILE_TEMP_BASE}_5)
+system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}plcYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${FILE_TEMP_4} -o ${FILE_TEMP_5}"
+system "rm -rf ${FILE_TEMP_4}"
+epicsEnvUnset(FILE_TEMP_4)
 
-#- run msi with the macros plc.macros
-ecmcFileExist("${ECMC_TMP_DIR}${FILE}.plc",1)
-epicsEnvSet(MSI_OUTPUT_FILE,"${ECMC_TMP_DIR}${FILE}.plc.msi")
-system "msi -M '${ECMC_PLC_MACROS=EMPTY}' -o ${MSI_OUTPUT_FILE} ${ECMC_TMP_DIR}${FILE}.plc"
-system "rm -rf ${ECMC_TMP_DIR}${FILE}.plc"
+#- Step 6: Run msi again on the output jinja2 script
+ecmcFileExist("${FILE}",1)
+epicsEnvSet(FILE_TEMP_6,${FILE_TEMP_BASE}_6)
+system "msi -M '${ECMC_PLC_MACROS=EMPTY}' -o ${FILE_TEMP_6} ${FILE_TEMP_5}"
+system "rm -rf ${FILE_TEMP_5}"
+epicsEnvUnset(FILE_TEMP_5)
+
+#- set device name, default to ${IOC}
+epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 
 #- check for ECMC-format PLC file and load the PLC
-ecmcFileExist("${MSI_OUTPUT_FILE}",1)
-#-system "cat ${MSI_OUTPUT_FILE}"
-${SCRIPTEXEC} "${MSI_OUTPUT_FILE}"
+ecmcFileExist("${FILE_TEMP_6}",1)
+system "cat ${FILE_TEMP_6}"
+${SCRIPTEXEC} "${FILE_TEMP_6}"
 
 #- cleanup
-system "rm -rf ${MSI_OUTPUT_FILE}"
-epicsEnvUnset(UPDATED_YAML_FILE)
+system "rm -rf ${FILE_TEMP_6}"
+epicsEnvUnset(FILE_TEMP_6)
+epicsEnvUnset(ECMC_PLC_MACROS)
