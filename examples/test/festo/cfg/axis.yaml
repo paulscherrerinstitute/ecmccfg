@@ -1,3 +1,5 @@
+macros:
+
 axis:
   id: 1                                               # Axis id
   type: joint                                         # this is for future selection of axis type
@@ -25,7 +27,7 @@ epics:
 
 drive:
   numerator: 1                                        # Fastest speed in engineering units
-  denominator: 1000000                                # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  denominator: 100000                                # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s$(DRV_ID).driveControl01              # Control word ethercat entry
   # enable: 0                                         # Enable bit index in control word (not used if DS402)
@@ -52,9 +54,9 @@ encoder:
   # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
   # mask: 0xFFF00                                     # Mask applied to raw encoder value
-  position: ec0.s$(DRV_ID).positionActual01        # Ethercat entry for actual position input (encoder)
-  control: ec0.s$(DRV_ID).encoderControl01         # mandatory only if 'reset' is used
-  status: ec0.s$(DRV_ID).encoderStatus01           # mandatory only if 'warning' or 'error' are used
+  position: ec0.s$(DRV_ID).positionActual01           # Ethercat entry for actual position input (encoder)
+  control: ec0.s$(DRV_ID).encoderControl01            # mandatory only if 'reset' is used
+  status: ec0.s$(DRV_ID).encoderStatus01              # mandatory only if 'warning' or 'error' are used
   # ready: ec..                                       # Etehrcat entry for encoder ready
   # source: 0                                         # 0 = Encoder value from etehrcat hardware, 1 = Encoder value from PLC
   # reset: 1                                          # Reset   (optional)
@@ -92,9 +94,9 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 15                                              # Kp proportinal gain
-  # Ki:  0.02                                         # Ki integral gain
-  # Kd:  0                                            # Kd derivative gain
+  Kp: 1                                              # Kp proportinal gain
+  Ki:  0.02                                         # Ki integral gain
+  Kd:  0                                            # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
   # deadband:
   #   tol: 0.01                                       # Stop control if within this distance from target for the below time
@@ -163,7 +165,7 @@ monitoring:
     tolerance: 0.5                                    # Allowed tolerance
     time: 100                                         # Allowed time outside tolerance
   target:
-    enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
+    enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
   velocity:
@@ -191,4 +193,4 @@ monitoring:
 #      size: 100                                       # Filter size
 #    trajectory:                                       # Filter plc traj velo
 #      enable: false                                   # Filter enable
-#      size: 100                                       # Filter size   
+#      size: 100                                       # Filter size

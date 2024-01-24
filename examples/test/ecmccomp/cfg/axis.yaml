@@ -55,7 +55,7 @@ encoder:
   numerator: 360                                      # Scaling numerator example 360 deg/rev
   denominator: 12800                                  # Scaling denominator example 4096 ticks per 360 degree
   # type: 0                                           # Type: 0=Incremental, 1=Absolute
-  bits: 24                                            # Total bit count of encoder raw data
+  bits: 16                                            # Total bit count of encoder raw data
   # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
   # mask: '0xFFF00'                                   # Mask applied to raw encoder value
@@ -99,9 +99,9 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 15                                              # Kp proportinal gain
-  # Ki: 0.02                                          # Ki integral gain
-  # Kd: 0                                             # Kd derivative gain
+  Kp: 1                                              # Kp proportinal gain
+  Ki: 0.02                                          # Ki integral gain
+  Kd: 0                                             # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
   # deadband:
   #   tol: 0.01                                       # Stop control if within this distance from target for the below time
@@ -120,9 +120,9 @@ controller:
 trajectory:
   # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
   axis:
-    velocity: 10                                      # Default velo for axis
-    acceleration: 0.1                                 # Default acc for axis
-    deceleration: 0.1                                 # Default dec for axis
+    velocity: 100                                     # Default velo for axis
+    acceleration: 100                                 # Default acc for axis
+    deceleration: 100                                 # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
     jerk: 10                                          # Default jerk for axis
   jog:
@@ -166,10 +166,9 @@ softlimits:
 
 monitoring:
   lag:
-    enable: false                                     # Enable position lag monitoring (following error)
-    tolerance: 0.5                                    # Allowed tolerance
-    time: 10                                          # Allowed time outside tolerance
-  target:
+    enable: true                                      # Enable position lag monitoring (following error)
+    tolerance: 2                                      # Allowed tolerance
+    time: 10                                          # Allowed time outside tolerance  target:
     enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
