@@ -1,6 +1,13 @@
 import yaml
 import sys
 
+'''
+Opens up a yaml cfg file reads the plc.file filename. This is needed in order to evaluate macros in the filename
+arg1: yaml cfg file
+arg2: output file wich can be executed in epics env (epicsEnvSet()). Value is is set in ECMC_PLC_FILENAME
+'''
+
+
 def main():
     if(len(sys.argv)<3):
         return
