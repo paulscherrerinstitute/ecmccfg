@@ -1,5 +1,6 @@
 import yaml
 import sys
+import pathlib
 
 '''
 Opens up a yaml cfg file reads the plc.file filename. This is needed in order to evaluate macros in the filename
@@ -14,6 +15,7 @@ def main():
 
     cfgfileName=sys.argv[1]
     outputfileName=sys.argv[2]
+    pathlib.Path(outputfileName).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
     outfile = open(outputfileName,'w')
     infile = open(cfgfileName, 'r')     
     yamldata = yaml.safe_load(infile)            

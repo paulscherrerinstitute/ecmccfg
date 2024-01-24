@@ -19,7 +19,7 @@ on error halt
 # Step 1: Get macros from yaml file
 epicsEnvSet(FILE_TEMP_BASE,${ECMC_TMP_DIR}${FILE})
 epicsEnvSet(FILE_TEMP_1,${FILE_TEMP_BASE}_1)
-system "echo '' > ${FILE_TEMP_1}"
+#- system "echo '' > ${FILE_TEMP_1}"
 system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcYamlGetMacros.py ${FILE} ${FILE_TEMP_1}"
 ecmcFileExist("${FILE_TEMP_1}",1)
 ${SCRIPTEXEC} "${FILE_TEMP_1}"
