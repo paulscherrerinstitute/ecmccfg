@@ -10,4 +10,4 @@
 
 
 # PLC yaml cfgs
-[yaml file all parameters](.plc/plc_all_template.yaml)
+[yaml file all parameters](./plc/plc_all_template.yaml)
