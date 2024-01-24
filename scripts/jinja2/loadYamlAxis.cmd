@@ -3,7 +3,7 @@
 #-d /**
 #-d   \brief Script for loading Axis from yaml file via `jinja2`
 #-d   \details adds an Axis, based on a yaml config file
-#-d   \author Niko Kivel
+#-d   \author Niko Kivel, Anders Sandström
 #-d   \file
 #-d   \param FILE the yaml-file containing the PLC definition
 #-d   \param DEV  the device name (optional, defaults to ${IOC}

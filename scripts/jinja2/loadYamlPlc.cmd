@@ -3,7 +3,7 @@
 #-d /**
 #-d   \brief Script for loading PLC from yaml file via `jinja2`
 #-d   \details adds a PLC, line by line, from a yaml-file, parsed by `jinja2`
-#-d   \author Niko Kivel
+#-d   \author Niko Kivel, Anders Sandström
 #-d   \file
 #-d   \param FILE the yaml-file containing the PLC definition
 #-d   \note Example calls:
