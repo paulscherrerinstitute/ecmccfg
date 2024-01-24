@@ -1,3 +1,5 @@
+macros: LIMIT=1000,TYPE=0                             # Macros to pass to this file (also plc.file)
+
 axis:
   id: 1                                               # Axis id
   type: joint                                         # this is for future selection of axis type
