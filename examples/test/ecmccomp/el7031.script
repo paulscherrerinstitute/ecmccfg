@@ -1,7 +1,7 @@
 ##############################################################################
-## Example config for el7037
+## Example config for el7031
 
-require ecmccfg sandst_a,"ECMC_VER=sandst_a,ENG_MODE=1"
+require ecmccfg v9.0.1_RC4,"ECMC_VER=v9.0.1_RC4,ENG_MODE=1"
 
 # Load components lib
 require ecmccomp sandst_a
