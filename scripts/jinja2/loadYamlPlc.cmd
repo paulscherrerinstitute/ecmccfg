@@ -31,7 +31,7 @@ epicsEnvShow(ECMC_PLC_MACROS)
 
 #- Set plc.file (write new yaml file)
 epicsEnvSet(UPDATED_YAML_FILE,${ECMC_TMP_DIR}${FILE}.filename)
-system "echo '' > ${UPDATED_YAML_FILE}"
+#-system "echo '' > ${UPDATED_YAML_FILE}"
 system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcSetFileName.py ${FILE} ${UPDATED_YAML_FILE} ${ECMC_PLC_FILENAME=}"
 epicsEnvUnset(ECMC_PLC_FILENAME)
 ecmcFileExist("${UPDATED_YAML_FILE}",1)

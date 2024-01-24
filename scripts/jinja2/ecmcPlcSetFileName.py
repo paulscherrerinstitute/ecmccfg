@@ -1,5 +1,6 @@
 import yaml
 import sys
+import pathlib
 
 def main():
     if(len(sys.argv)<3):
@@ -11,6 +12,7 @@ def main():
     if len(sys.argv)>3:
       filenameToSet=sys.argv[3]
     print('filenameToSet:' + filenameToSet)
+    pathlib.Path(outputfileName).parent.mkdir(parents=True, exist_ok=True)  # make sure the output path exists
     outfile = open(outputfileName,'w')
     infile = open(cfgfileName, 'r')  
     yamldata = yaml.safe_load(infile)            
