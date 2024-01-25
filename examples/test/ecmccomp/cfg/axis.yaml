@@ -1,4 +1,4 @@
-macros: LIMIT=1000,TYPE=0,DRV_SLAVE=${DRV_SLAVE}
+macros: LIMIT=10000,TYPE=0,DRV_SLAVE=${DRV_SLAVE}     # Macros for all below (evaluated before jinja linter)
 
 axis:
   id: 1                                               # Axis id
@@ -19,7 +19,7 @@ axis:
   #     positioning: true                             # Allow positioning
 
 epics:
-  name: M1                                            # Axis anme
+  name: Axis1                                         # Axis anme
   precision: 3                                        # Decimal count
   description: very important motor axis              # Axis description
   unit: mm                                            # Unit
@@ -186,21 +186,14 @@ monitoring:
   #     drive: 200                                    # Time allowed outside max diff velo before system disables drive
 
 plc:
-  enable: true                                      # Enable axis plc
-  externalCommands: true                            # Allow axis to inputs from PLC
+  enable: true                                        # Enable axis plc
+  externalCommands: true                              # Allow axis to inputs from PLC
   file: ${PLC_PATH}test.plc
-  code:                                              # Sync code
+  code:                                                # Sync code
   - "if(static.counter % ${LIMIT} == 0){println('AX PLC: Appended');static.counter:=0;};" # calculate set pos for physical axis
   - "if(not(static.plc_code_loaded)) {static.counter:=static.counter+1;};"
   - ec0.s$(DRV_SLAVE).ONE > 1; # Enable axis if one of master axes is enabled
   - ec0.s$(DRV_SLAVE).ZERO > 1; # calculate set pos for physical axis
-  #filter:
-  #  velocity:                                        # Filter plc velo
-  #    enable: false
-  #    size: 100
-  #  position:                                        # Filter plc traj
-  #    enable: false
-  #    size: 100
 #  velocity_filter:                                    # Filter used to smother velocity feedforward
 #    encoder:                                          # Filter plc enc velo
 #      enable: false                                   # Filter enable
