@@ -8,7 +8,6 @@ arg1: yaml cfg file
 arg2: output file wich can be executed in epics env (epicsEnvSet()). Value is is set in ECMC_PLC_FILENAME
 '''
 
-
 def main():
     if(len(sys.argv)<3):
         return
@@ -20,8 +19,10 @@ def main():
     infile = open(cfgfileName, 'r')     
     yamldata = yaml.safe_load(infile)            
     outfile.write("#- Temp command file for retriving plc file name from yaml cfg\n")
-    if 'macros' in yamldata.keys():
+    if 'macros' in yamldata.keys():      
         macros=yamldata['macros']
+        if macros is None:
+            macros = ''
         print('plc.macros: ' + macros)
         outfile.write("epicsEnvSet(ECMC_PLC_MACROS,\"" + macros + "\")\n")
 
