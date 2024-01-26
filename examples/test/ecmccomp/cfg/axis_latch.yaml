@@ -97,6 +97,7 @@ encoder:
   #    postMovePosition: 10                           # Position to move to after successfull homing
   #    trigg: ec0..                                   # Ethercat entry for triggering drive internal homing seq (seq id 26)
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
+    latchCount: 1
 
 controller:
   Kp: 1                                              # Kp proportinal gain

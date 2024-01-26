@@ -1,25 +1,21 @@
 ##############################################################################
 ## Example config for el7031
 
-require ecmccfg sandst_a,"ECMC_VER=sandst_a,ENG_MODE=1"
+require ecmccfg v9.0.1_RC4,"ECMC_VER=v9.0.1_RC4,ENG_MODE=1"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib
-require ecmccomp sandst_a
+require ecmccomp
 
 ##############################################################################
 ## Configure hardware
 
 epicsEnvSet("DRV_SLAVE",              "4")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7031"
-
-#- Apply motor config with some custom macros
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_STDBY_MA=200,I_MAX_MA=1000,R_COIL_MOHM=1700'"
 
 epicsEnvSet("ENC_SLAVE",              "14")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5042"
-
-#- Apply motor config with some custom macros
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-BISS-C"
 
 #Apply hardware configuration
