@@ -53,7 +53,7 @@ encoder:
   numerator: 360                                      # Scaling numerator example 360 deg/rev
   denominator: 4096                                   # Scaling denominator example 4096 ticks per 360 degree
   type: 0                                             # Type: 0=Incremental, 1=Absolute
-  bits: 24                                            # Total bit count of encoder raw data
+  bits: 16                                            # Total bit count of encoder raw data
   absBits: 0                                          # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   absOffset: 0                                        # Encoder offset in eng units (for absolute encoders)
   mask: '0xFFF00'                                     # Mask applied to raw encoder value
