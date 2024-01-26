@@ -1,10 +1,10 @@
 # ecmc test system
 # Anders Sandström
 
-#require ecmccfg v9.0.1_RC3,"EC_RATE=500,ECMC_VER=v9.0.1_RC3,MASTER_ID=1,ENG_MODE=1"
-require ecmccfg v9.0.1_RC4,"EC_RATE=500,ECMC_VER=v9.0.1_RC4,MASTER_ID=1,ENG_MODE=1"
+#require ecmccfg v9.0.1_RC4,"EC_RATE=500,ECMC_VER=v9.0.1_RC4,MASTER_ID=1,ENG_MODE=1"
+require ecmccfg v9.0.1_RC4,"EC_RATE=500,ECMC_VER=sandst_a,MASTER_ID=1,ENG_MODE=1"
 
-require ecmccomp sandst_a
+require ecmccomp
 
 epicsEnvSet("IOC" ,"$(IOC="c6025a")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
@@ -12,9 +12,10 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 # Configuration loaded via FoE
 epicsEnvSet(DRV_ID,0)
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${DRV_ID}, HW_DESC=Festo-CMMT-ST"
-#- ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1800,I_STDBY_MA=1000,L_COIL_UH=3300,R_COIL_MOHM=1750,U_NOM_MV=24000'"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Festo-EMMS-ST-42-S-SE-G2,MACROS='U_NOM_MV=24000'"
-
+#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1800,I_STDBY_MA=1000,L_COIL_UH=3300,R_COIL_MOHM=1750,U_NOM_MV=24000'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Festo-EMMS-ST-42-S-SE-G2,MACROS='U_NOM_MV=24000,I_MAX_MA=10,I_STDBY_MA=10'"
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-BISS-C,MACROS='CLK_FRQ_KHZ=2000'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-INC"
 
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
@@ -36,3 +37,5 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+
