@@ -2496,7 +2496,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -3916,6 +3916,144 @@
      <property name="text">
       <string>Source:</string>
      </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_7">
+    <attribute name="title">
+     <string>Motor Record</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_7">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>40</y>
+       <width>215</width>
+       <height>65</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>215</width>
+       <height>65</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>motorRecord</string>
+     </property>
+     <widget class="caLineEdit" name="calineedit_13">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>100</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis).RBV</string>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_32">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>20</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>readback:</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_33">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>40</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>setpoint:</string>
+      </property>
+     </widget>
+     <widget class="caRelatedDisplay" name="carelateddisplay_7">
+      <property name="geometry">
+       <rect>
+        <x>195</x>
+        <y>10</y>
+        <width>18</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="labels">
+       <string>R</string>
+      </property>
+      <property name="files">
+       <string>motorx_all.ui</string>
+      </property>
+      <property name="args">
+       <string>P=$(SYS):,M=$(Axis)</string>
+      </property>
+     </widget>
+     <widget class="caTextEntry" name="catextentry_6">
+      <property name="geometry">
+       <rect>
+        <x>91</x>
+        <y>41</y>
+        <width>65</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis).VAL</string>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_20">
+      <property name="geometry">
+       <rect>
+        <x>158</x>
+        <y>43</y>
+        <width>32</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis).EGU</string>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
