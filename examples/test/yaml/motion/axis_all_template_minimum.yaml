@@ -170,7 +170,7 @@ monitoring:
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Allowed time outside tolerance
   target:
-    enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
+    enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
   velocity:
