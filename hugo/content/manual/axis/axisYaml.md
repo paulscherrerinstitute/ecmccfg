@@ -30,10 +30,10 @@ The [script](../../../source/scripts/jinja2/loadyamlaxis/) invokes a python scri
 The configuration is separated into the following mandatory sections:
 
 - [axis](#axis)
-- [motorRecord](#motorRecord)
-- [drive](#drive)
+- [epics](#epics)
+- [drive (only mandatory for physical axis)](#drive)
 - [encoder](#encoder)
-- [controller](#encoder)
+- [controller](#controller)
 - [trajectory](#trajectory)
 - [input](#input)
 
@@ -41,6 +41,7 @@ in addition the following optional sections are available.
 
 - [output](#output)
 - [homing](#homing)
+- [softlimits](#softlimits)
 - [monitoring](#monitoring)
 
 Each sections provides an example, the optional keys are commented.
@@ -52,15 +53,17 @@ mandatory
 - `id`: unique numeric identifier of the axis
 
 optional
-- `type`: for future used
-- `mode`: operating mode of the drive; default CSV
+- `type`: type of the axis
+- `mode`: operating mode of the drive
 - `parameters`: additional parameters
 
 ```yaml
 axis:
   id: 1
-  # type: joint   # this is for future selection of axis type
-  # mode: CSV     # supported mode, CSV and CSP; WIP
+  # type: joint   # axis types:
+                  # 1 (equiv: physical, joint, j, motor, real)
+                  # 2 (equiv: virtual, end_effector, endeffector, ee, e)
+  # mode: CSV     # supported modes: CSV and CSP
   # parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 ```
 
@@ -97,7 +100,7 @@ epics:
 ```
 
 ## drive
-mandatory
+mandatory for physical axis
 
 - `numerator`: scaling numerator
 - `denominator`: scaling denominator
@@ -149,6 +152,7 @@ mandatory
 
 optional
 
+- `source`: position source, 0=from EC entry ; 1=from PLC
 - `control`: control word entry; mandatory when **reset** is set.
 - `status`: status word entry; mandatory when **error** or **warning** are set
 - `reset`: control word _bit_ to set in order to reset the encoder
@@ -171,6 +175,7 @@ encoder:
   absBits: 25     # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   absOffset: 0    # Encoder offset in eng units (for absolute encoders)
   position: ec0.s$(DRV_SLAVE).positionActual01  # Ethercat entry for actual position input (encoder)
+  # source: 0
   # control: ec0.s$(ENC_SLAVE).encoderControl01   # mandatory only if 'reset' is used
   # status: ec0.s$(DRV_SLAVE).encoderStatus01     # mandatory only if 'warning' or 'error' are used
   # reset: 1        # Reset   (optional)
@@ -226,10 +231,15 @@ mandatory
 - `axis`
   - `velocity`: velocity setpoint the axis will be initialized to (in EGU/sec)
   - `acceleration`: acceleration setpoint for initialization (in EGU/sec2)
-  - `emergencyDeceleration`: deceleration setpoint for emergencies. Defaults to acceleration setpoint if not specified.
 
 optional
 
+- `source`: source of position setpoint, 0=trajectory generator of axis ; 1=from PLC
+- `type`: type of velocity profile: 0=trapezoidal ; 1=scurve
+- `axis`
+  - `deceleration`: deccelerartion setpoint for initialization (in EGU/sec2)
+  - `emergencyDeceleration`: deceleration setpoint for emergencies. Defaults to acceleration setpoint if not specified.
+  - `jerk`: jerk for scurved profiles (in EGU/sec3)
 - `jog`
   * `velocity`: velocity setpoint the axis will be initialized to for jogging
   * `acceleration`: acceleration setpoint for initialization, for jogging
@@ -239,10 +249,13 @@ optional
 
 ```yaml
 trajectory:
+# source: 0
+# type: 0
   axis:
     velocity: 180
     acceleration: 180
-    deceleration: 360
+    # deceleration: 360
+    # jerk: 1.0
     # emergencyDeceleration: 0.05
   # jog:
   #   velocity: 90
