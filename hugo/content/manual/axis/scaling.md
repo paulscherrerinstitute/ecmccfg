@@ -29,7 +29,7 @@ Assumptions:
 
 ```yaml
 drive:
-  numerator: 50        # Fastest speed in engineering units (2000 full steps / s --> 10 rev/s * 50 mm/rev --> 50 mm/s)
+  numerator: 50        # Fastest speed in engineering units (2000 full steps / s --> 10 rev/s * 5 mm/rev --> 50 mm/s)
   denominator:  32768  # I/O range 2^15, because 16-bit register, half is forward, the other half is backward
 ```
 
@@ -43,22 +43,23 @@ Since we have established that the motor spins at 10 rev/s at full output, the c
 #### rotational axis
 Assumptions:
 * 400 fullsteps/rev motor
-* drive train ratio: 180 rev/deg
+* drive train ratio: 36 deg/rev
 * Register `0x8012:05` is set to `1` --> 2000 fullsteps max step rate (default for ECMC, check for other slaves!)
 * `velocitySetpoint` is in 16-bits.
 
 ```yaml
 drive:
-  numerator: 37        # Fastest speed in engineering units (2000 full steps / s --> 5 rev/s * (180 rev/deg)^-1 --> 37 deg/s)
+  numerator: 180       # Fastest speed in engineering units (2000 full steps / s --> 5 rev/s * 36 deg/rev --> 180 deg/s)
   denominator:  32768  # I/O range 2^15, because 16-bit register, half is forward, the other half is backward
 ```
 
 ##### Explanation
-As before, at full output, the motor receives 2000 fullsteps/s.
-This results on 5 rev/s, due to the higher step count of the motor.
-The drive train ratio is specified as 180 motor revolutions per degree on the output.
-Hence, 180 rev/deg divided by 5 rev/s yields a velocity of 37 deg/s.
-Again, this is _not_ the actual maximum velocity, it is purely theoretical scaling factor for the PID-loop!
+At full output, the motor receives 2000 fullsteps/s, which results in 5 rev/s
+due to the higher fullstep count of the motor. The drive train ratio is specified
+as 10 motor revolutions per 360 degree on the output or 36 deg/rev. Therefore,
+the resulting velocity of the motor in EGUs is 180 deg/s. Please note that
+this is _not_ the actual maximum velocity, but rather a theoretical scaling
+factor for the PID-loop.
 
 ### servo motor drives
 This section is based on the Beckhoff servo motor drives (Ex72xx), AX-drives or drives from other vendors might differ.
