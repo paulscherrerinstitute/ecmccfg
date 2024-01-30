@@ -44,10 +44,10 @@ dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX
 
 {%- if (encoder.homing) %}
     ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
-    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC=${HOME_PROC=0},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
+    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC=14,HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
 {%- endif %}
 
-{%- if homing.type|default(0) > 0 %}
+{%- if homing.type|default(14) > 0 %}
     ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
     dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC=${HOME_PROC=0},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
 {%- endif %}
