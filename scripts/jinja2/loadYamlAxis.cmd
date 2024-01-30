@@ -47,7 +47,7 @@ epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
 
 #- check for ECMC-format PLC file and load the PLC
 ecmcFileExist("${FILE_TEMP_3}",1)
-system "cat ${FILE_TEMP_3}"
+#- system "cat ${FILE_TEMP_3}"
 ${SCRIPTEXEC} "${FILE_TEMP_3}"
 
 #- cleanup
