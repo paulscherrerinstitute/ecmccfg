@@ -1,6 +1,7 @@
 
-require ecmccfg,sandst_a,"ECMC_VER=v9.0.1_RC3,MASTER_ID=0"
-require ecmccomp,sandst_a
+require ecmccfg,v9.0.1_RC4,"ECMC_VER=v9.0.1_RC4,MASTER_ID=0"
+require ecmccomp
+
 
 # Load Hardware based on substitution and templae
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstHw.cmd, "FILE=./hw.subst"
