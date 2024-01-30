@@ -4,7 +4,7 @@ axis:
   id: 1                                               # Axis id
   type: joint                                         # this is for future selection of axis type
   # mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
-  parameters: 'powerAutoOnOff=1;powerOnDelay=0.1;powerOffDelay=0.1;' # Additional params to motor record driver
+  parameters: 'powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;' # Additional params to motor record driver
   #healthOutput: ec0...                               # Ethercat entry for health output
   # autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
   #   modeSet: ec0..                                  # Ethercat entry drive mode write (set CSV,CSP,homing)
@@ -183,26 +183,10 @@ monitoring:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
+
   # velocityDifference:
   #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)
   #   max: 100                                        # Allowed max difference
   #   time:
   #     trajectory: 100                               # Time allowed outside max diff velo before system init halt
   #     drive: 200                                    # Time allowed outside max diff velo before system disables drive
-
-plc:
-  enable: true                                        # Enable axis plc
-  externalCommands: true                              # Allow axis to inputs from PLC
-  file: ${PLC_PATH}test.plc
-  code:                                                # Sync code
-  - "if(static.counter % ${LIMIT} == 0){println('AX PLC: Appended');static.counter:=0;};" # calculate set pos for physical axis
-  - "if(not(static.plc_code_loaded)) {static.counter:=static.counter+1;};"
-  - ec0.s$(DRV_SLAVE).ONE > 1; # Enable axis if one of master axes is enabled
-  - ec0.s$(DRV_SLAVE).ZERO > 1; # calculate set pos for physical axis
-#  velocity_filter:                                    # Filter used to smother velocity feedforward
-#    encoder:                                          # Filter plc enc velo
-#      enable: false                                   # Filter enable
-#      size: 100                                       # Filter size
-#    trajectory:                                       # Filter plc traj velo
-#      enable: false                                   # Filter enable
-#      size: 100                                       # Filter size

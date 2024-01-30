@@ -4,7 +4,7 @@ axis:
   id: 1                                               # Axis id
   type: joint                                         # this is for future selection of axis type
   # mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
-  # parameters: 'axisPar' # additional parameters     # Additional params to motor record driver
+  # parameters: 'axisPar'                             # Additional params to motor record driver
   #healthOutput: ec0...                               # Ethercat entry for health output
   # autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
   #   modeSet: ec0..                                  # Ethercat entry drive mode write (set CSV,CSP,homing)
@@ -178,6 +178,10 @@ monitoring:
     time:
       trajectory: 100                                 # Time allowed outside max velo before system init halt
       drive: 200                                      # Time allowed outside max velo before system disables drive
+  target:
+    enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 0.5                                    # Allowed tolerance
+    time: 10                                          # Filter time inside tolerance to be at target
   # velocityDifference:
   #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)
   #   max: 100                                        # Allowed max difference
