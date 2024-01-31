@@ -30,7 +30,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 #
 epicsEnvSet("DEV",      "$(IOC)")
 epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml,LIMIT=1000,TYPE=0"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041.yaml,LIMIT=1000,TYPE=0"
 
 ##############################################################################
 ## PLC 1

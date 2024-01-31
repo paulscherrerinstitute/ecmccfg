@@ -1,0 +1,207 @@
+macros: LIMIT=10000,TYPE=0,DRV_SLAVE=${DRV_SLAVE}     # Macros for all below (evaluated before jinja linter)
+
+axis:
+  id: 1                                               # Axis id
+  type: joint                                         # this is for future selection of axis type
+  # mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
+  # parameters: 'axisPar'                             # Additional params to motor record driver
+  #healthOutput: ec0...                               # Ethercat entry for health output
+  # autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
+  #   modeSet: ec0..                                  # Ethercat entry drive mode write (set CSV,CSP,homing)
+  #   modeAct: ec0..                                  # Ethercat entry drive mode reading (set CSV,CSP,homing)
+  #   modeCmdMotion: 9                                # Drive mode value for normal motion (written to axis.drvMode.modeSet when normal motion)
+  #   modeCmdHome: 10                                 # Drive mode value for when homing (written to axis.drvMode.modeSet when homing)
+  # features:
+  #   blockCom: false                                 # Block communication to axis
+  #   allowedFunctions:
+  #     homing: true                                  # Allow homing
+  #     constantVelocity: true                        # Allow constant velocity
+  #     positioning: true                             # Allow positioning
+
+epics:
+  name: Axis1                                         # Axis anme
+  precision: 3                                        # Decimal count
+  description: very important motor axis              # Axis description
+  unit: mm                                            # Unit
+  # motorRecord:
+  #   enable: true
+  #   description: This is MR
+  #   fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
+
+drive:
+  numerator: 3600                                     # Fastest speed in engineering units
+  denominator: 32768                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  # type: 0                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  control: ec0.s$(DRV_SLAVE).driveControl01           # Control word ethercat entry
+  enable: 0                                           # Enable bit index in control word (not used if DS402)
+  enabled: 1                                          # Enabled bit index in status word (not used if DS402)
+  status: ec0.s$(DRV_SLAVE).driveStatus01             # Status word ethercat entry
+  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
+#  reduceTorque: 2                                    # Reduce torque bit in drive control word
+#  reduceTorqueEnable: True                           # Enable reduce torque functionality
+#  brake:
+#    enable: true                                     # Enable brake
+#    output: ec0...                                   # Ethercat link to brake output
+#    openDelay: 0                                     # Brake timing parameter in cycles (default 1kHz)
+#    closeAhead: 0                                    # Brake timing parameter in cycles (default 1kHz)
+#  reset: 1                                           # Reset   (if no drive reset bit then leave empty)
+#  warning: 2                                         # Warning (if no drive warning bit then leave empty)
+#  error:                                             # max 3
+#    - 3                                              # Error 0 (if no drive error bit then leave empty)
+#    - 7                                              # Error 1 (if no drive error bit then leave empty)
+#    - 14                                             # Error 2 (if no drive error bit then leave empty)
+
+encoder:
+  numerator: 360                                      # Scaling numerator example 360 deg/rev
+  denominator: 12800                                  # Scaling denominator example 4096 ticks per 360 degree
+  # type: 0                                           # Type: 0=Incremental, 1=Absolute
+  bits: 16                                            # Total bit count of encoder raw data
+  # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
+  # mask: '0xFFF00'                                   # Mask applied to raw encoder value
+  position: ec0.s$(DRV_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
+  control: ec0.s$(DRV_SLAVE).encoderControl01         # mandatory only if 'reset' is used
+  status: ec0.s$(DRV_SLAVE).encoderStatus01           # mandatory only if 'warning' or 'error' are used
+  # ready: 10                                         # Bit in encoder status word for encoder ready
+  # source: 0                                         # 0 = Encoder value from etehrcat hardware, 1 = Encoder value from PLC
+  # reset: 1                                          # Reset   (optional)
+  # warning: 2                                        # Warning (optional)
+  # error:                                            # max 3 (optional)
+  #   - 5                                             # Error 0
+  #   - 9                                             # Error 1
+  #   - 11                                            # Error 2
+  # filter:
+  #   velocity:
+  #     size: 100                                     # Filter size for velocity
+  #     enable: true                                  # enable velocity filter
+  #   position:
+  #     size: 100                                     # Filter size for encoder value
+  #     enable: true                                  # enable encoder value filter
+  #  latch:
+  #    position: ''                                   # Link to latched value. Used for some homing seqs
+  #    control: 0                                     # Bit in encoder control word to arm latch. Used for some homing seqs
+  #    status: 0                                      # Bit in encoder status word for latch triggered status. Used for some homing seqs
+  #  primary: 1                                       # Use this encoder as primary (for control)
+  #  homing:
+  #    type: 3                                        # Homing sequence type
+  #    position: -30                                  # Position to reference encoder to
+  #    velocity:
+  #      to: 10                                       # Velocity to cam/sensor (used for some homing seqs)
+  #      from: 5                                      # Velocity from cam/sensor (used for some homing seqs)
+  #    acceleration: 20                               # Acceleration during homing
+  #    deceleration: 100                              # Deceleration during homing
+  #    refToEncIDAtStartup: 1                         # At startup then set the start value of this encoder to actpos of this encoder id
+  #    refAtHome: 1                                   # If homing is executed then set position of this encoder
+  #    tolToPrim: 0                                   # If set then this is the max allowed tolerance between prim encoder and this encoder
+  #    postMoveEnable: yes                            # Enable move after successfull homing
+  #    postMovePosition: 10                           # Position to move to after successfull homing
+  #    trigg: ec0..                                   # Ethercat entry for triggering drive internal homing seq (seq id 26)
+  #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
+
+controller:
+  Kp: 1                                              # Kp proportinal gain
+  Ki: 0.02                                          # Ki integral gain
+  Kd: 0                                             # Kd derivative gain
+  # Kff: 1                                            # Feed forward gain
+  # deadband:
+  #   tol: 0.01                                       # Stop control if within this distance from target for the below time
+  #   time: 100
+  # limits:
+  #   minOutput: -100                                 # Minimum controller output
+  #   maxOutput: 100                                  # Maximum controller output
+  #   minIntegral: -100                               # Minimum integral output
+  #   maxIntegral: 100                                # Maximum integral output
+  # inner:
+  #   Kp: 0.1                                         # Kp for when close to target
+  #   Ki: 0.1                                         # Ki for when close to target
+  #   Kd: 0.1                                         # Kd for when close to target
+  #   tol: 0.1                                        # Distance from target for when inner PID params will be used, defaults to atTarget tol
+
+trajectory:
+  # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
+  axis:
+    velocity: 100                                     # Default velo for axis
+    acceleration: 100                                 # Default acc for axis
+    deceleration: 100                                 # Default dec for axis
+    # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
+    jerk: 10                                          # Default jerk for axis
+  jog:
+    velocity: 5                                       # Default velo fro JOG (motor record)
+#  modulo:
+#    range: 360                                       # Modulo range 0..360
+#    type: 0                                          # Modulo type
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SLAVE).driveStatus01.12       # Ethercat entry for low limit switch input
+  #  forwardPolarity: 0                               # Polarity of forward limit switch
+    backward: ec0.s$(DRV_SLAVE).driveStatus01.11      # Ethercat entry for high limit switch input
+  #  backwardPolarity: 0                              # Polarity of forward limit switch
+  home: 'ec0.s$(DRV_SLAVE).ONE.0'                     # Ethercat entry for home switch
+  # homePolarity: 0                                   # Polarity of home switch
+  interlock: 'ec0.s$(DRV_SLAVE).ONE.0'                # Ethercat entry for interlock switch input
+  # interlockPolarity: 0                              # Polarity of interlock switch
+
+# homing:
+#   type: 3                                           # Homing sequence type
+#   position: -30                                     # Position to reference encoder to
+#   velocity:
+#     to: 10                                          # Velocity to cam/sensor (used for some homing seqs)
+#     from: 5                                         # Velocity from cam/sensor (used for some homing seqs)
+#   acc: 20                                           # Acceleration during homing
+#   dec: 100                                          # Deceleration during homing
+#   refToEncIDAtStartup: 1                            # At startup then set the start value of this encoder to actpos of this encoder id
+#   refAtHome: 1                                      # If homing is executed then set position of this encoder
+#   tolToPrim: 0                                      # If set then this is the max allowed tolerance between prim encoder and this encoder
+#   postMoveEnable: yes                               # Enable move after successfull homing
+#   postMovePosition: 10                              # Position to move to after successfull homing
+#   timeout: 100                                      # Sequence timeout
+
+softlimits:
+  enable: false                                       # Enable soft limits
+  forward: 100                                        # Soft limit position fwd
+  forwardEnable: false                                # Soft limit position fwd enable
+  backward: -100                                      # Soft limit position bwd
+  backwardEnable: false                               # Soft limit position bwd enable
+
+monitoring:
+  lag:
+    enable: true                                      # Enable position lag monitoring (following error)
+    tolerance: 2                                      # Allowed tolerance
+    time: 10                                          # Allowed time outside tolerance  target:
+    enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 0.5                                    # Allowed tolerance
+    time: 10                                          # Filter time inside tolerance to be at target
+  velocity:
+    enable: false                                     # Enable velocity monitoring
+    max: 100                                          # Allowed max velocity
+    time:
+      trajectory: 100                                 # Time allowed outside max velo before system init halt
+      drive: 200                                      # Time allowed outside max velo before system disables drive
+  target:
+    enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 0.5                                    # Allowed tolerance
+    time: 10                                          # Filter time inside tolerance to be at target
+  # velocityDifference:
+  #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)
+  #   max: 100                                        # Allowed max difference
+  #   time:
+  #     trajectory: 100                               # Time allowed outside max diff velo before system init halt
+  #     drive: 200                                    # Time allowed outside max diff velo before system disables drive
+
+plc:
+  enable: true                                        # Enable axis plc
+  externalCommands: true                              # Allow axis to inputs from PLC
+  file: ${PLC_PATH}test.plc
+  code:                                                # Sync code
+  - "if(static.counter % ${LIMIT} == 0){println('AX PLC: Appended');static.counter:=0;};" # calculate set pos for physical axis
+  - "if(not(static.plc_code_loaded)) {static.counter:=static.counter+1;};"
+  - ec0.s$(DRV_SLAVE).ONE > 1; # Enable axis if one of master axes is enabled
+  - ec0.s$(DRV_SLAVE).ZERO > 1; # calculate set pos for physical axis
+#  velocity_filter:                                    # Filter used to smother velocity feedforward
+#    encoder:                                          # Filter plc enc velo
+#      enable: false                                   # Filter enable
+#      size: 100                                       # Filter size
+#    trajectory:                                       # Filter plc traj velo
+#      enable: false                                   # Filter enable
+#      size: 100                                       # Filter size
