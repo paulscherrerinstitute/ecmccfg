@@ -14,7 +14,7 @@ epicsEnvSet("DRV_SLAVE",              "4")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7031"
 
 #- Apply motor config with some custom macros
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_STDBY_MA=200,I_MAX_MA=1000,R_COIL_MOHM=1700'"
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_STDBY_MA=200,I_MAX_MA=1000,R_COIL_MOHM=1700'"
 
 epicsEnvSet("ENC_SLAVE",              "14")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5042"

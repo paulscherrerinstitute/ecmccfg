@@ -99,9 +99,9 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 1                                              # Kp proportinal gain
-  Ki: 0.02                                          # Ki integral gain
-  Kd: 0                                             # Kd derivative gain
+  Kp: 10                                              # Kp proportinal gain
+  Ki: 0.2                                             # Ki integral gain
+  Kd: 0                                               # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
   # deadband:
   #   tol: 0.01                                       # Stop control if within this distance from target for the below time
@@ -169,9 +169,6 @@ monitoring:
     enable: true                                      # Enable position lag monitoring (following error)
     tolerance: 2                                      # Allowed tolerance
     time: 10                                          # Allowed time outside tolerance  target:
-    enable: false                                     # Enable at target monitoring (needs to be enabled if using motor record)
-    tolerance: 0.5                                    # Allowed tolerance
-    time: 10                                          # Filter time inside tolerance to be at target
   velocity:
     enable: false                                     # Enable velocity monitoring
     max: 100                                          # Allowed max velocity

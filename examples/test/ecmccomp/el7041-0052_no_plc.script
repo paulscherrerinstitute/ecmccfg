@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for el7031
 
-require ecmccfg v9.0.1_RC4,"ECMC_VER=v9.0.1_RC4,ENG_MODE=1"
+require ecmccfg v9.0.1_RC4,"ECMC_VER=sandst_a,ENG_MODE=1"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib
@@ -30,12 +30,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 #
 epicsEnvSet("DEV",      "$(IOC)")
 epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041.yaml,LIMIT=1000,TYPE=0"
-
-##############################################################################
-## PLC 1
-#
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd, "FILE=./plc/plc_cfg.yaml,LIMIT=5000,TYPE=1"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc.yaml,LIMIT=1000,TYPE=0"
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -50,3 +45,4 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
+#- ecmcConfig "Cfg.SetAxisErrorId(1,100000)"
