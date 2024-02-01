@@ -1,9 +1,15 @@
 #-d /**
 #-d   \brief hardware script for Anybus-CC-ETC-ILK
-#-d   \details LLRF ILK cfg of generic 64byte input and output buffers
+#-d   \details LLRF ILK cfg of generic buffer of configurable size
 #-d   \author Anders Sandstroem
 #-d   \file
+#-d   \param IN_SIZE (optional) Size of input buffer in bytes (defaults to 64) 
+#-d   \param OUT_SIZE (optional) Size of output buffer in bytes (defaults to 64) 
 #-d */
+
+
+#- size of buffer
+epicsEnvSet("ECMC_SIZE"     "${OUT_SIZE=64}")
 
 #- 64byte Output buffer:
 #- =============================================================================
@@ -17,9 +23,17 @@ epicsEnvSet("ECMC_EC_PDO"   "0x1600")
 #- RxPDO 0x1600 ""
 epicsEnvSet("ECMC_EC_ENTRY" "0x2001")
 epicsEnvSet("ECMC_EC_TYPE"  "U8")
-epicsEnvSet("ECMC_EC_KEY"   "byteOutput")
-ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
-ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,64,1)
+epicsEnvSet("ECMC_EC_KEY"   "sm${ECMC_EC_SM}.p0.e")
+
+ecmcEpicsEnvSetCalc(FOR_LAST_IDX,"${OUT_SIZE=64}-1")
+
+ecmcFileExist(${ecmccfg_DIR}ecmcILK_v2_loopStep.cmd,1)
+ecmcForLoop(${ecmccfg_DIR}ecmcILK_v2_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,0,${FOR_LAST_IDX},1)
+
+# Memmap to view buffer
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.${ECMC_EC_KEY}0,${ECMC_SIZE},2,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.byteOutputBuff)"
+
+epicsEnvSet("ECMC_SIZE"     "${IN_SIZE=64}")
 
 #- 64byte Input buffer:
 #- =============================================================================
@@ -33,9 +47,15 @@ epicsEnvSet("ECMC_EC_PDO"   "0x1a00")
 #- TxPDO 0x1a00 ""
 epicsEnvSet("ECMC_EC_ENTRY" "0x2004")
 epicsEnvSet("ECMC_EC_TYPE"  "U8")
-epicsEnvSet("ECMC_EC_KEY"   "byteInput")
-ecmcFileExist(${ecmccfg_DIR}TOBAS_loopStep.cmd,1)
-ecmcForLoop(${ecmccfg_DIR}TOBAS_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,1,64,1)
+epicsEnvSet("ECMC_EC_KEY"   "sm${ECMC_EC_SM}.p0.e")
+
+ecmcEpicsEnvSetCalc(FOR_LAST_IDX,"${OUT_SIZE=64}-1")
+
+ecmcFileExist(${ecmccfg_DIR}ecmcILK_v2_loopStep.cmd,1)
+ecmcForLoop(${ecmccfg_DIR}ecmcILK_v2_loopStep.cmd,"DIR=${ECMC_EC_DIR},SM=${ECMC_EC_SM},PDO=${ECMC_EC_PDO},ENTRY=${ECMC_EC_ENTRY},TYPE=${ECMC_EC_TYPE},KEY=${ECMC_EC_KEY}",IDX,0,${FOR_LAST_IDX},1)
+
+# Memmap to view buffer
+ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.${ECMC_EC_KEY}0,${ECMC_SIZE},2,U8,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.byteInputBuff)"
 
 #- kalt_r@sls129-sioc-ecatrilkts:~$ ethercat pdos -p11
 #- === Master 0, Slave 11 ===
