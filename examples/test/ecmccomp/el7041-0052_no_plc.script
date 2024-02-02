@@ -5,22 +5,28 @@ require ecmccfg v9.0.1_RC4,"ECMC_VER=sandst_a,ENG_MODE=1"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib
-require ecmccomp
+require ecmccomp sandst_a
 
 ##############################################################################
 ## Configure hardware
 
+#-epicsEnvSet("ENC_SLAVE_1",            "2")
+#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_1), HW_DESC=EL5001"
+#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
+
 epicsEnvSet("DRV_SLAVE",              "13")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
-
-#- Apply motor config with some custom macros
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230,STEPS=400'"
 
-epicsEnvSet("ENC_SLAVE",              "14")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5042"
+epicsEnvSet("ENC_SLAVE_2",            "14")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_2), HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
 
-#- Apply motor config with some custom macros
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit,CH_ID=1"
+epicsEnvSet("ENC_SLAVE_3",            "15")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_3), HW_DESC=EL5002"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=2"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -46,3 +52,4 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
 #- ecmcConfig "Cfg.SetAxisErrorId(1,100000)"
+

@@ -1,5 +1,5 @@
 ##############################################################################
-## Example config for el3602
+## Example config for el3602-0002
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
 ##       
 
@@ -13,9 +13,9 @@ require ecmccomp
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 
 # Note NELM equals oversampling factor in this case
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3602, NELM=${NELM=50}"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=16, HW_DESC=ELM3602-0002, NELM=${NELM=50}"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=AI-Generic-Range,CH_ID=1,MACROS='RANGE=+-10V'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=AI-Generic-Range,CH_ID=2,MACROS='RANGE=+-20mV'"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
@@ -32,4 +32,4 @@ ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
 ##############################################################################
 ############# Go active:
-$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
