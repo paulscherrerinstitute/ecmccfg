@@ -14,6 +14,7 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50219329")
 epicsEnvSet("ECMC_OVER_SAMP_MAX"         "100")
 epicsEnvSet("ECMC_SAMP_TIME_MIN"         "20000")
+epicsEnvSet("ECMC_EC_COMP_TYPE"          "ELM3602")
 
 #- Call generic for ELM3602
 < ${ecmccfg_DIR}ecmcELM3602-XXXX.cmd
