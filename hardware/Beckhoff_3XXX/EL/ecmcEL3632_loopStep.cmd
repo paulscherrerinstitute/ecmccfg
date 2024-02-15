@@ -1,9 +1,9 @@
 #- ecmcForLoop file for EL3632 oversampling PDOS
-#- 
-#-  Loop macro: 
+#-
+#-  Loop macro:
 #-    ECMC_LOOP_IDX  : Loop variable 1..OVERSAMPLING_FACTOR
 #-
-#-  Static macros (same for entire for loop): 
+#-  Static macros (same for entire for loop):
 #-    CH_ID          : Channel id
 #-    PDO_OFFSET     : PDO Offset value
 #-    PDO_ENTRY_LAST_2_DIGITS : Last two digits of PDO entry (Ch1 =01, Ch2=11)

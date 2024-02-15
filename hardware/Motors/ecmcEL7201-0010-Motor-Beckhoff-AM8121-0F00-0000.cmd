@@ -2,7 +2,7 @@
 ############################################################
 ############# Parametrization of EL7201 for motor AM8121-F00-0000
 #
-# Note: For important parameters see TwinCAT CoE startup list for the 
+# Note: For important parameters see TwinCAT CoE startup list for the
 #       motor terminal configuration.
 
 #Nominal voltage = 48V
@@ -33,4 +33,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x12,5,2)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,95,4)"
 #Velocity loop integral time = 150
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,150,4)"
-

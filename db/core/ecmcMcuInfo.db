@@ -22,7 +22,7 @@ record(ao,"$(P)MCU-Cfg-Rate") {
 }
 
 record(ao,"$(P)MCU-Cfg-Time") {
-    field(DESC, "RT loop sample time")    
+    field(DESC, "RT loop sample time")
     field(EGU, "ms")
     field(VAL, ${M_TIME})
 }
@@ -34,17 +34,17 @@ record(ao,"$(P)MCU-Cfg-PV-Time") {
 }
 
 record(stringout,"$(P)MCU-Cfg-Mode") {
-    field(DESC, "ecmc mode")    
+    field(DESC, "ecmc mode")
     field(VAL, ${MCU_MODE=""})
 }
 
 record(stringout,"$(P)MCU-Cfg-PVA") {
-    field(DESC, "PVA enabled")    
+    field(DESC, "PVA enabled")
     field(VAL, ${MCU_PVA=""})
 }
 
 record(bo,"$(P)MCU-Cfg-Eng-Mode") {
-    field(DESC, "Engineering MODE")    
+    field(DESC, "Engineering MODE")
     field(VAL, ${MCU_ENG=0})
     field(ONAM, "Yes")
     field(ZNAM, "No")

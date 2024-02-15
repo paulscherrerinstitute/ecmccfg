@@ -140,7 +140,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-TrqRed"){
   field(FLNK, "${ECMC_P}Dev-BI01")
 }
 
-# These are the same for both status words.. This tempalte will be loaded twice but the 
+# These are the same for both status words.. This tempalte will be loaded twice but the
 # recordnames are the same resulting in only one record
 record(bi,"${ECMC_P}Dev-BI01"){
   field(DESC, "$(HWTYPE): Digital Input 1")
@@ -152,7 +152,7 @@ record(bi,"${ECMC_P}Dev-BI01"){
   field(FLNK, "${ECMC_P}Dev-BI02")
 }
 
-# These are the same for both status words.. This tempalte will be loaded twice but the 
+# These are the same for both status words.. This tempalte will be loaded twice but the
 # recordnames are the same resulting in only one record
 record(bi,"${ECMC_P}Dev-BI02"){
   field(DESC, "$(HWTYPE): Digital Input 1")

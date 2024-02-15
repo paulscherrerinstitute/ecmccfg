@@ -7,7 +7,7 @@
 #-d
 #-d   Supported signal types (choose via SDO settings):
 #-d   * strain gauge:
-#-d      * quarter bridge           (350 Ohm + 120 Ohm, +-2/4/8/32 mV/V), half bridge (+-2/16 mV/V), 
+#-d      * quarter bridge           (350 Ohm + 120 Ohm, +-2/4/8/32 mV/V), half bridge (+-2/16 mV/V),
 #-d      * full bridge              (+-2/4/32 mV/V), internal bridge completion and supply adjustable 0…5 V (2-/3-/4-/5-/6-wire connection)
 #-d   * Voltage:    	            +-60/10/5/2.5/1.25 V, +-640/320/160/80/40/20 mV, 0…5/10 V (2-wire connection)
 #-d   * Current:	                +-20 mA, 0/4…20 mA, NAMUR NE43 (2-wire connection)
@@ -35,7 +35,7 @@ epicsEnvSet("ECMC_SAMP_TIME_MIN"         "100000")
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
 
-#- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE. MAX NELM is 100 
+#- Check valid oversampling factor (NELM) and ECMC_EC_SAMPLE_RATE. MAX NELM is 100
 ecmcFileExist(${ecmccfg_DIR}chkOverSampFactOrDie.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampFactOrDie.cmd, "OVER_SAMP_MAX=${ECMC_OVER_SAMP_MAX}, OVER_SAMP_REQ=${NELM}, EC_SAMP=${ECMC_EC_SAMPLE_RATE},HW_TYPE=${ECMC_EC_HWTYPE}, SLAVE_ID=${ECMC_EC_SLAVE_NUM}"
 
@@ -46,9 +46,9 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}chkOverSampTimeOrDie.cmd, "SAMP_TIME_MIN=${ECMC_SAMP
 #- ############ Calc memmap size (each element is 4 bytes (32bits))
 ecmcEpicsEnvSetCalc("ECMC_EC_ARRAY_BYTE_SIZE",${NELM=1}*4)
 
-#- Different pdo index depending on sampling rate.. 
+#- Different pdo index depending on sampling rate..
 #- NELM    PDO index dec
-#- 1       0xA01     1 
+#- 1       0xA01     1
 #- 2       0xA02     2
 #- 4       0xA03     3
 #- 5       0xA04     4
@@ -132,7 +132,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1603,0x7011,0x1,F32,tc_cold${ECMC_CH})"
 
 #-  Configuration for sync manager 3
-#- Calculate PDO of ch2. ECMC_PDO_TEMP=ECMC_PDO_TEMP+48 
+#- Calculate PDO of ch2. ECMC_PDO_TEMP=ECMC_PDO_TEMP+48
 #ecmcEpicsEnvSetCalc("ECMC_PDO_CH2",${ECMC_PDO_TEMP}+48,"0x1A%02x")
 ecmcEpicsEnvSetCalc("ECMC_PDO_CH2","${ECMC_PDO_TEMP}+48*(${ECMC_CH}-1)","0x1A%02x")
 epicsEnvShow(ECMC_PDO_CH2)

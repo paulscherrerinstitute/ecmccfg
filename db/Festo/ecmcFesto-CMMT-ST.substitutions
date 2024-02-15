@@ -2,4 +2,3 @@ file "ecmcFesto-CMM-ST.template" { pattern
   { CH_ID }
   { 01    }
 }
-

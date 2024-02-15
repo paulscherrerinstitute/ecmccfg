@@ -12,4 +12,3 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmcEL5042-Encoder-RLS-LA11DCB2D0KB.cmd
 epicsEnvSet("ECMC_EC_SDO_INDEX"               "0x8018")     # CH1=0x8008. CH2=0x8018
 #- Call generic config file
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmcEL5042-Encoder-RLS-LA11DCB2D0KB.cmd
-
