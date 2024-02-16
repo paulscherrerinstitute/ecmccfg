@@ -36,6 +36,7 @@
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
 #- ECMC_CONFIG_DB         = database directory of ${MODULE}
 #- EthercatMC_DB          = database directory of EthercatMC
+#- ECMC_EC_MASTER_ID      =  EtherCAT master id in use (for use in later scripts)
 #- ECMC_EC_SAMPLE_RATE    = EtherCAT bus sampling rate [Hz] (1000 default)
 #- ECMC_EC_SAMPLE_RATE_MS = EtherCAT bus sampling rate [ms] (1 default)
 #- ECMC_MODE              = ecmc mode. FULL/DAQ, Defaults to FULL
@@ -45,7 +46,6 @@
 #- ECMC_EC_TOOL_PATH      = path to ethercat tool
 #- ECMC_SAMPLE_RATE_MS    = current record update rate in milli seconds
 #- ECMC_SAMPLE_RATE_MS_ORIGINAL = ECMC_SAMPLE_RATE_MS (used for restore to default if ECMC_SAMPLE_RATE_MS is changed)
-
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
