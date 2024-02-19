@@ -2325,8 +2325,8 @@
     </property>
     <property name="trueColor">
      <color>
-      <red>0</red>
-      <green>85</green>
+      <red>255</red>
+      <green>0</green>
       <blue>0</blue>
      </color>
     </property>
@@ -2376,9 +2376,9 @@
     </property>
     <property name="falseColor">
      <color>
-      <red>160</red>
-      <green>160</green>
-      <blue>160</blue>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
      </color>
     </property>
     <property name="trueColor">
@@ -2453,9 +2453,9 @@
     </property>
     <property name="falseColor">
      <color>
-      <red>160</red>
-      <green>160</green>
-      <blue>160</blue>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
      </color>
     </property>
     <property name="trueColor">
