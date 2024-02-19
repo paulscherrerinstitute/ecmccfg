@@ -81,8 +81,8 @@ epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
 #-
 
 #-------------------------------------------------------------------------------
-#- Set max asyn param count
-epicsEnvSet("ECMC_ASYN_PORT_MAX_PARAMS",${MAX_PARAM_COUNT=1500})
+#- Set max asyn param count ECMC_ASYN_PORT_MAX_PARAMS can override
+epicsEnvSet("ECMC_ASYN_PORT_MAX_PARAMS",${ECMC_ASYN_PORT_MAX_PARAMS=${MAX_PARAM_COUNT=1500}})
 
 #-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
