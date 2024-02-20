@@ -141,6 +141,11 @@ input:
   # homePolarity: 0                                   # Polarity of home switch
   interlock: 'ec0.s$(ENC_SLAVE).ONE.0'                # Ethercat entry for interlock switch input
   # interlockPolarity: 0                              # Polarity of interlock switch
+  #analog:
+  #  interlock: 'ec0.s$(ENC_SLAVE).ONE'               # Ethercat entry for analog interlock
+  #  interlockPolarity: 1                             # 0: High value is bad, 1 = Low value is bad
+  #  rawLimit: 2000                                   # Analog raw limit
+  #  enable: true                                     # Enable analog interlock default true if analog.interlock is set
 
 # homing:
 #   type: 3                                           # Homing sequence type

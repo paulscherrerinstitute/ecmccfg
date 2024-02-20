@@ -384,6 +384,16 @@ class Schema:
             'homePolarity': {'type': 'integer', 'allowed': [0, 1]},
             'interlock': {'required': True, 'type': 'string'},
             'interlockPolarity': {'type': 'integer', 'allowed': [0, 1]},
+            'analog': {
+                'type': 'dict',
+                'required': False,
+                'schema': {
+                    'interlock': {'required': False, 'type': 'string'},
+                    'rawLimit': {'required': False, 'type': 'float'},
+                    'interlockPolarity': {'required': False, 'type': 'integer', 'allowed': [0, 1]},
+                    'enable': {'required': False, 'type': 'boolean'},
+                }
+            },
         }
     }
 

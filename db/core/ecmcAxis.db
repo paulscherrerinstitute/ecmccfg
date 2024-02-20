@@ -101,6 +101,14 @@ record(calc,"${P}${AXIS_NAME}-LastIlock") {
   field(PINI, "$(PINI=1)")
   field(CALC, "A>>24 & 0xFF")
   field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
+  field(FLNK, "${P}${AXIS_NAME}-Stat2Calc_.PROC")
+}
+
+record(calc,"${P}${AXIS_NAME}-Stat2Calc_") {
+  field(DESC, "${AXIS_NAME}: Shift stat 16 bits")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A>>16 & 0xFF")
+  field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-Stat_.PROC")
 }
 
@@ -284,12 +292,13 @@ record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}${AXIS_NAME}-Stat2_.PROC")
 }
 
 record(mbbiDirect,"${P}${AXIS_NAME}-Stat2_"){
   field(DESC, "${AXIS_NAME}: Status Word bit 16..32")
-  field(PINI, "$(PINI=1)")
-  field(INP,  "${P}${AXIS_NAME}-Stat.VAL")
+  field(PINI, "$(PINI=1)")  
+  field(INP,  "${P}${AXIS_NAME}-Stat2Calc_.VAL")
   field(FLNK, "${P}${AXIS_NAME}-InStartup.PROC")
   field(TSE,  "$(TSE=-2)")
 }
@@ -309,8 +318,8 @@ record(bi,"${P}${AXIS_NAME}-InStartup"){
 record(bi,"${P}${AXIS_NAME}-SumIlockFwd"){
   field(DESC, "${AXIS_NAME}: Sum. ilock fwd")
   field(INP,  "${P}${AXIS_NAME}-Stat2_.B1")
-  field(ZNAM, "Not ok")
-  field(ONAM, "OK")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
   field(FLNK, "${P}${AXIS_NAME}-SumIlockBwd.PROC")
@@ -320,8 +329,8 @@ record(bi,"${P}${AXIS_NAME}-SumIlockFwd"){
 record(bi,"${P}${AXIS_NAME}-SumIlockBwd"){
   field(DESC, "${AXIS_NAME}: Sum. ilock bwd")
   field(INP,  "${P}${AXIS_NAME}-Stat2_.B2")
-  field(ZNAM, "Not ok")
-  field(ONAM, "OK")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
 }

@@ -25,3 +25,21 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id }}.
 {%- if input.interlockPolarity %}
     ecmcConfigOrDie "Cfg.SetAxisMonExtHWInterlockPolarity({{ axis.id }},{{ input.interlockPolarity }})"
 {%- endif %}
+
+{#- Analog interlock like temperature sensors#}
+{%- if input.analog is defined%}
+    {%- if input.analog.interlock is defined%}
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.analog.interlock }},"ax{{ axis.id }}.mon.analoginterlock")"
+        {%- if input.analog.enable is defined%}
+            ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},{{ input.analog.enable|int|default(1)}})"
+        {%- else %}
+            ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},1)"
+        {%- endif %}
+        {%- if input.analog.interlockPolarity is defined %}
+            ecmcConfigOrDie "Cfg.SetAxisMonAnalogInterlockPolarity({{ axis.id }},{{ input.analog.interlockPolarity }})"
+        {%- endif %}
+        {%- if input.analog.rawLimit is defined%}
+            ecmcConfigOrDie "Cfg.SetAxisMonAnalogInterlockRawLimit({{ axis.id }},{{ input.analog.rawLimit }})"
+        {%- endif %}
+    {%- endif %}
+{%- endif %}

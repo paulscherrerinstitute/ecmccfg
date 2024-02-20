@@ -1167,9 +1167,9 @@
     </property>
     <property name="falseColor">
      <color>
-      <red>160</red>
-      <green>160</green>
-      <blue>160</blue>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
      </color>
     </property>
     <property name="trueColor">
@@ -1244,9 +1244,9 @@
     </property>
     <property name="falseColor">
      <color>
-      <red>160</red>
-      <green>160</green>
-      <blue>160</blue>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
      </color>
     </property>
     <property name="trueColor">
