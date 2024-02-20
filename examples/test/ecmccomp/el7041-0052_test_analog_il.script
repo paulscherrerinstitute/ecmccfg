@@ -1,11 +1,11 @@
 ##############################################################################
 ## Example config for el7031
 
-require ecmccfg sandst_a,"ECMC_VER=sandst_a,ENG_MODE=1,MAX_PARAM_COUNT=1000"
+require ecmccfg v9.0.1_RC4,"ECMC_VER=v9.0.1_RC4,ENG_MODE=1"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib
-require ecmccomp sandst_a
+require ecmccomp
 
 ##############################################################################
 ## Configure hardware
@@ -23,11 +23,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_2), HW_DESC=EL50
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
 
-#-epicsEnvSet("ENC_SLAVE_3",            "15")
-#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_3), HW_DESC=EL5002"
-#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
-#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=2"
-
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
@@ -36,7 +31,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 #
 epicsEnvSet("DEV",      "$(IOC)")
 epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc.yaml,LIMIT=1000,TYPE=0"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc_analog_il.yaml,LIMIT=1000,TYPE=0"
 
 ##############################################################################
 ############# Configure diagnostics:
