@@ -1,0 +1,68 @@
+##############################################################################
+## Example config for el7031
+
+require ecmccfg 9.1.0,"ECMC_VER=9.1.0,ENG_MODE=1,MAX_PARAM_COUNT=1000"
+
+epicsEnvSet(IOC,c6025a)
+# Load components lib
+require ecmccomp
+
+##############################################################################
+## Configure hardware
+
+epicsEnvSet("ENC_SLAVE",          "1")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
+
+epicsEnvSet("DRV_SLAVE",              "4")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=2800,I_STDBY_MA=500,U_NOM_MV=24000,R_COIL_MOHM=1500'"
+
+epicsEnvSet(ID,1)
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc.yaml,LIMIT=1000,TYPE=0"
+
+epicsEnvSet("DRV_SLAVE",              "5")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=2800,I_STDBY_MA=500,U_NOM_MV=24000,R_COIL_MOHM=1500'"
+
+
+
+epicsEnvSet(ID,2)
+##############################################################################
+## AXIS 2
+#
+epicsEnvSet("DEV",      "$(IOC)")
+epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc.yaml,LIMIT=1000,TYPE=0"
+
+##############################################################################
+## AXIS 3
+#
+epicsEnvSet("DEV",      "$(IOC)")
+epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/master.yaml"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+#- ecmcConfig "Cfg.SetAxisErrorId(1,100000)"
+
