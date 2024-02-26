@@ -1,0 +1,5 @@
+
+require ecmccomp,sandst_a
+
+#- Used to block execute addSlave.cmd for same axis id twice in a row
+epicsEnvSet(ECMC_COMP_SUBST_OLD_S_ID,-1)

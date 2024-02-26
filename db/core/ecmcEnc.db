@@ -1,22 +1,115 @@
 #Asyn parameters for one encoder
-record(ai,"${P}${AXIS_NAME}-PosAct0$(ENC_NO)"){
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-PosAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos$(ENC_NO)?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO)")
+  field(DESC, "${DESC=""}")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"${P}${AXIS_NAME}-VelAct0$(ENC_NO)"){
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-VelAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel$(ENC_NO)?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO)")
+  field(DESC, "${DESC=""}")
   field(TSE,  "$(TSE=-2)")
+}
+
+record(mbbi, "${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeProc") {
+  field(DESC, "Homing procedure")
+  field(VAL,  "${HOME_PROC=0}")
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(ZRVL, 0)  field(ZRST, "Not Homable")
+  field(ONVL, 1)  field(ONST, "Backward LS")
+  field(TWVL, 2)  field(TWST, "Forward LS")
+  field(THVL, 3)  field(THST, "HS via backward LS")
+  field(FRVL, 4)  field(FRST, "HS via forward LS")
+  field(FVVL, 5)  field(FVST, "HS mid via backward LS")
+  field(SXVL, 6)  field(SXST, "HS mid via forward LS")
+  field(SVVL, 7)  field(SVST, "HS apporach backwards")
+  field(EIVL, 8)  field(EIST, "HS approach forward")
+  field(NIVL, 9)  field(NIST, "HS mid apporach backwards")
+  field(TEVL, 10) field(TEST, "HS mid approach forward")
+  field(ELVL, 11) field(ELST, "IndexN via backward LS")
+  field(TVVL, 12) field(TVST, "IndexN via via forward LS")
+  field(TTVL, 13) field(TTST, "HomeSwiLeftRight")
+  field(FTVL, 14) field(FTST, "Use Enc Cfgs")
+  field(FFVL, 15) field(FFST, "Manual set position")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeVelToCam"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Velocity to cam")
+  field(VAL,  "${VEL_TO_CAM=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeVelFrmCam"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Velocity from cam")
+  field(VAL,  "${VEL_FRM_CAM=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeAcc"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Acceleration")
+  field(VAL,  "${ACC=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeDec"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Deceleration")
+  field(VAL,  "${DEC=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePos"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Position")
+  field(VAL,  "${POS=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePstMveEna"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Post Move Enabled")
+  field(VAL,  "${POST_ENA=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePstMvePos"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Post Move Position")
+  field(VAL,  "${POST_POS=0}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeRefAtStrtToEncId"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Ref this enc at start to this encId")
+  field(VAL,  "${REF_STRT=-1}")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeRefAtHme"){
+  field(PINI, "1")  
+  field(SCAN, "Passive")
+  field(DESC, "Ref this encoder at homing")
+  field(VAL,  "${REF_HME=-1}")
+}
+
+# The last added encoder is the same as teh number of encoders added
+record(longin,"${P}${AXIS_NAME}-EncCnt"){
+    field(DESC, "Encoder count")
+    field(VAL,  "$(ENC_NO=1)")
+    field(PINI, "YES")
 }

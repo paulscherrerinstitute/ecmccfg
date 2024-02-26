@@ -16,9 +16,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 
 #- common PDOs for status and control
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX70XX.cmd
-
-#- Max full step freq = 2000Hz (setting is 1)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x5,1,1)"
-
-#- Invert motor polarity = 0
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x9,0,1)"

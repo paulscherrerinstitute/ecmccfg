@@ -1,0 +1,8 @@
+plc:
+  id: 1
+  enable: yes
+  rateMilliseconds: 1
+  file: ${PLC_PATH}test.plc
+  code:
+  - "if(static.counter % ${LIMIT} == 0){println('PLC:    Appended');static.counter:=0;};" # calculate set pos for physical axis
+  - "if(not(static.plc_code_loaded)) {static.counter:=static.counter+1;};"

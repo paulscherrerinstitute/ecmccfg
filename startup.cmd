@@ -6,7 +6,7 @@
 #- by Niko Kivel, Paul Scherrer Institute, 2018
 #- email: niko.kivel@psi.ch
 #- and Anders Sandström, ESS, 2020
-#- email: anders.sandstrom@ess.eu
+#- email: anders.sandstroem@psi.ch
 #-
 #-###############################################################################
 #-
@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 9
+#- ECMC_VER          = 9.1.0
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -29,18 +29,24 @@
 #- PVA               = YES / NO
 #- TMP_DIR           = directory for temporary files
 #- ENG_MODE          = 1/0. If ENG_MODE is set then PVs used for commissioning will be avaialble
+#- EC_TOOL_PATH      = Path to ethercat tool defaults to ethercat tool in ECmasterECMC_DIR, 
+#- otherwise            "/opt/etherlab/bin/ethercat"
+#- MAX_PARAM_COUNT   = Maximum asyn param count, defaults to 1500
 #-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
 #- ECMC_CONFIG_DB         = database directory of ${MODULE}
 #- EthercatMC_DB          = database directory of EthercatMC
+#- ECMC_EC_MASTER_ID      =  EtherCAT master id in use (for use in later scripts)
 #- ECMC_EC_SAMPLE_RATE    = EtherCAT bus sampling rate [Hz] (1000 default)
 #- ECMC_EC_SAMPLE_RATE_MS = EtherCAT bus sampling rate [ms] (1 default)
 #- ECMC_MODE              = ecmc mode. FULL/DAQ, Defaults to FULL
 #- ECMC_PVA               = use pva, default NO
 #- ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
 #- ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
-
+#- ECMC_EC_TOOL_PATH      = path to ethercat tool
+#- ECMC_SAMPLE_RATE_MS    = current record update rate in milli seconds
+#- ECMC_SAMPLE_RATE_MS_ORIGINAL = ECMC_SAMPLE_RATE_MS (used for restore to default if ECMC_SAMPLE_RATE_MS is changed)
 #-
 #-------------------------------------------------------------------------------
 #- Halt on error (dbLoad*)
@@ -48,7 +54,8 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-require ecmc        "${ECMC_VER=9.0.0}"
+epicsEnvSet(ECMC_VER,${ECMC_VER=9.1.0})
+require ecmc "${ECMC_VER}"
 
 #- Require EthercatMC if used.
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "'${ECMC_MR_MODULE=ecmcMotorRecord}'='EthercatMC'", "require  EthercatMC ${EthercatMC_VER=3.0.2} # Using EthercatMC motor record support.","# Using ecmcMotorRecord motor record support.")
@@ -72,6 +79,11 @@ epicsEnvSet("SM_PREFIX",            "${IOC}:")    # colon added since IOC is _no
 #- This is for deterministic processing of data _after_ ECMC is done
 epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
 #-
+
+#-------------------------------------------------------------------------------
+#- Set max asyn param count ECMC_ASYN_PORT_MAX_PARAMS can override
+epicsEnvSet("ECMC_ASYN_PORT_MAX_PARAMS",${ECMC_ASYN_PORT_MAX_PARAMS=${MAX_PARAM_COUNT=1500}})
+
 #-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
 
@@ -100,6 +112,8 @@ ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS" ,1000/${ECMC_EC_SAMPLE_RATE=1000})
 
 # Update records in 10ms (100Hz) for FULL MODE and in EC_RATE for DAQ mode
 ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'${ECMC_MODE=FULL}'=='DAQ'","${ECMC_EC_SAMPLE_RATE_MS}","10")
+epicsEnvSet(ECMC_SAMPLE_RATE_MS_ORIGINAL,${ECMC_SAMPLE_RATE_MS})
+
 #-
 #-------------------------------------------------------------------------------
 #- define naming convention script
@@ -133,6 +147,15 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 
 # Load ecmc inforamtion into record
 dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0}")
+
+#-------------------------------------------------------------------------------
+#- Set path to ethercat tool
+#- Set default
+epicsEnvSet(ECMC_EC_TOOL_PATH,{EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
+#- if ECmasterECMC_DIR is defined then use ethercat tool in installed module
+ecmcEpicsEnvSetCalcTernary(ECMC_USE_ECmasterECMC_DIR, "'${ECmasterECMC_DIR='empty'}'=='empty'", "#-","")
+${ECMC_USE_ECmasterECMC_DIR}epicsEnvSet(ECMC_EC_TOOL_PATH, "${ECmasterECMC_DIR}bin/${EPICS_HOST_ARCH}/ethercat")
+epicsEnvUnset(ECMC_USE_ECmasterECMC_DIR)
 
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)

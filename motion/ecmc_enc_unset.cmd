@@ -7,6 +7,8 @@
 #-d */
 
 #- epicsEnvUnset(ECMC_AXIS_NO)
+epicsEnvUnset(ECMC_ENC_DESC)
+epicsEnvUnset(ECMC_ENC_EGU)
 epicsEnvUnset(ECMC_EC_ENC_ACTPOS)
 epicsEnvUnset(ECMC_EC_ENC_LATCHPOS)
 epicsEnvUnset(ECMC_EC_ENC_LATCH_CONTROL)

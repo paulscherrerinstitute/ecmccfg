@@ -73,6 +73,8 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ALARM_1=""},"ax${ECMC_AXI
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_ALARM_2=""},"ax${ECMC_AXIS_NO}.enc.alarm2")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_WARNING=""},"ax${ECMC_AXIS_NO}.enc.warning")"
 
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_READY=""},"ax${ECMC_AXIS_NO}.enc.ready")"
+
 #- Encoder latching
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_LATCHPOS=""},"ax${ECMC_AXIS_NO}.enc.latchpos")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_ENC_LATCH_CONTROL=""},"ax${ECMC_AXIS_NO}.enc.latchcontrol")"
@@ -82,7 +84,6 @@ ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchCountOffset(${ECMC_AXIS_NO},${ECMC_HOME_
 #- Multi encoder support
 ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup($(ECMC_AXIS_NO),${ECMC_ENC_REF_TO_ENC_AT_STARTUP_ID=-1})"
 ecmcConfigOrDie "Cfg.SelectAxisEncPrimary($(ECMC_AXIS_NO),${ECMC_ENC_PRIMARY_ID=-1})"
-ecmcConfigOrDie "Cfg.SelectAxisEncHome($(ECMC_AXIS_NO),${ECMC_ENC_HOME_ID=-1})"
 ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome($(ECMC_AXIS_NO),${ECMC_ENC_REF_AT_HOME=-1})"
 ecmcConfigOrDie "Cfg.SetAxisEncMaxDiffToPrimEnc($(ECMC_AXIS_NO),${ECMC_ENC_MAX_DIFF_TO_PRIM_ENC=0})"
 
@@ -91,8 +92,8 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_CONTROL},"ax${ECMC_AXIS_N
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_STATUS},"ax${ECMC_AXIS_NO}.drv.status")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_VELOCITY=""},"ax${ECMC_AXIS_NO}.drv.velocity")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_POSITION=""},"ax${ECMC_AXIS_NO}.drv.position")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_BRAKE},"ax${ECMC_AXIS_NO}.drv.brake")"
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_REDUCE_TORQUE},"ax${ECMC_AXIS_NO}.drv.reducetorque")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_BRAKE=""},"ax${ECMC_AXIS_NO}.drv.brake")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_REDUCE_TORQUE=""},"ax${ECMC_AXIS_NO}.drv.reducetorque")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_RESET=""},"ax${ECMC_AXIS_NO}.drv.reset")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_ALARM_0=""},"ax${ECMC_AXIS_NO}.drv.alarm0")"
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${ECMC_EC_DRV_ALARM_1=""},"ax${ECMC_AXIS_NO}.drv.alarm1")"

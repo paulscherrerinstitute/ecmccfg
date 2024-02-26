@@ -1,0 +1,93 @@
+record(mbbo,  "${ECMC_P}Drv${CH_ID}-ModeSet"){
+  field(DESC, "mode selector")
+  field(DTYP, "asynUInt32Digital")
+  field(ZRST, "None")
+  field(ZRVL, 0)
+  field(ONST, "Profile Position")
+  field(ONVL, 1)
+  field(TWST, "Cal")
+  field(TWVL, 65535)
+  field(SXST, "Homing")
+  field(SXVL, 6)
+  field(EIST, "CSP")
+  field(EIVL, 8)
+  field(OMSL, "supervisory")
+  field(PINI,  "YES")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).mode${CH_ID}=")
+}
+
+record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeSet-RB"){
+  field(DESC, "mode selector")
+  field(DTYP, "asynUInt32Digital")
+  field(ZRST, "None")
+  field(ZRVL, 0)
+  field(ONST, "Profile Position")
+  field(ONVL, 1)
+  field(TWST, "Cal")
+  field(TWVL, 65535)
+  field(SXST, "Homing")
+  field(SXVL, 6)
+  field(EIST, "CSP")
+  field(EIVL, 8)
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).mode${CH_ID}?")
+  field(SCAN, "I/O Intr")
+}
+
+record(mbbi,  "${ECMC_P}Drv${CH_ID}-ModeAct"){
+  field(DESC, "mode selector")
+  field(DTYP, "asynUInt32Digital")
+  field(ZRST, "None")
+  field(ZRVL, 0)
+  field(ONST, "Profile Position")
+  field(ONVL, 1)
+  field(TWST, "Cal")
+  field(TWVL, 65535)
+  field(SXST, "Homing")
+  field(SXVL, 6)
+  field(EIST, "CSP")
+  field(EIVL, 8)
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeActual${CH_ID}?")
+  field(SCAN, "I/O Intr")
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-CmdExe"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Execute cmd")
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=100}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.driveCmdExe${CH_ID}=")
+  field(ZNAM, "No execute")
+  field(ONAM, "Execute")
+  field(TSE,  "${TSE=-2}")
+}
+
+#record(bi,"${ECMC_P}Drv${CH_ID}-CmdDone"){  
+#  field(DESC, "Cmd done")
+#  field(PINI, "1")
+#  field(DTYP, "asynInt32")
+#  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=100}/TYPE=asynInt32/ec${MASTER_ID}.s${SLAVE_POS}.driveCmdDone${CH_ID}?")
+#  field(ZNAM, "Not done")
+#  field(ONAM, "Done")
+#  field(TSE,  "${TSE=-2}")
+#  field(SCAN, "I/O Intr")
+#}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-CmdDone"){
+  field(DESC, "$(HWTYPE): Cmd Done")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BA CP")
+  field(ZNAM, "Not done")
+  field(ONAM, "Done")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")  
+}
+
+#- Control word RB after applying data items for homing and calibration
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Cmd2-RB"){
+  field(DESC, "${DESC=${HWTYPE}: Control WD 2 ${CH_ID} RB}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=${T_SMP_MS=100}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.driveControl${CH_ID}_RB?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "${TSE=-2}")
+}
+

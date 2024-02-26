@@ -26,7 +26,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OPERATIONAL status of the slave&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType)</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcE_slave_frame.ui</string>

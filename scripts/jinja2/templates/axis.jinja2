@@ -1,12 +1,28 @@
 #- -=-=-=-=- axis
 {#- drive is only present in type: 'joint' #}
 {%- set drive = None if drive is undefined else drive %}
+epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
 ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type }},{{ drive.type|default(0)|int }},{{ trajectory.type }})"
 {%- if axis.type|int == 2 %}
     ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id }},0)"
 {%- endif %}
 #- health output
 ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id }}.health")"
+
+{%- if axis.autoMode is defined %}
+    {%- if axis.autoMode.modeSet is defined %}
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.autoMode.modeSet }}","ax${ECMC_AXIS_NO}.automodeset")"
+        {%- if axis.autoMode.modeAct is defined %}
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.autoMode.modeAct }}","ax${ECMC_AXIS_NO}.automodeact")"
+        {%- endif %}
+        {%- if axis.autoMode.modeCmdHome is defined %}
+            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdHoming({{ axis.id }},{{ axis.autoMode.modeCmdHome|default(0)|int }})"
+        {%- endif %}
+        {%- if axis.autoMode.modeCmdMotion is defined %}
+            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdMotion({{ axis.id }},{{ axis.autoMode.modeCmdMotion|default(0)|int }})"
+        {%- endif %}
+    {%- endif %}
+{%- endif %}
 
 {%- if axis.features is defined %}
     #- features

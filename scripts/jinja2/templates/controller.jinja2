@@ -5,17 +5,35 @@ ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id }},{{ controller.Kp }})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id }},{{ controller.Ki }})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id }},{{ controller.Kd }})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
+
+#- Set controller params for when near target
+{%- if controller.inner %}
+    {%- if controller.inner.tol is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisCntrlInnerParams({{ axis.id }},{{ controller.inner.Kp|default(0) }},{{ controller.inner.Ki|default(0) }},{{ controller.inner.Kd|default(0) }},{{ controller.inner.tol }})"
+    {%- else  %}
+         # WARNING: Controller inner tolerance not defined. 
+    {%- endif  %}
+{%- else  %}
+    # INFO: Inner controller not used. 
+{%- endif  %}
+
 {%- if controller.limits %}
     {%- if controller.limits.minOutput is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisCntrlOutLL({{ axis.id }},{{ controller.limits.minOutput }});
+        ecmcConfigOrDie "Cfg.SetAxisCntrlOutLL({{ axis.id }},{{ controller.limits.minOutput }})"
     {%- endif %}
     {%- if controller.limits.maxOutput is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisCntrlOutHL({{ axis.id }},{{ controller.limits.maxOutput }});
+        ecmcConfigOrDie "Cfg.SetAxisCntrlOutHL({{ axis.id }},{{ controller.limits.maxOutput }})"
     {%- endif %}
     {%- if controller.limits.minIntegral is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisCntrlIPartLL({{ axis.id }},{{ controller.limits.minIntegral }});
+        ecmcConfigOrDie "Cfg.SetAxisCntrlIPartLL({{ axis.id }},{{ controller.limits.minIntegral }})"
     {%- endif %}
     {%- if controller.limits.maxIntegral is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisCntrlIPartHL({{ axis.id }},{{ controller.limits.maxIntegral }});
+        ecmcConfigOrDie "Cfg.SetAxisCntrlIPartHL({{ axis.id }},{{ controller.limits.maxIntegral }})"
     {%- endif %}
+{%- endif  %}
+
+#- Actually checked in ecmc monitor
+{%- if controller.deadband %}    
+    ecmcConfigOrDie "Cfg.SetAxisCntrlDeadband({{ axis.id }},{{ controller.deadband.tol }})"
+    ecmcConfigOrDie "Cfg.SetAxisCntrlDeadbandTime({{ axis.id }},{{ controller.deadband.time }})"
 {%- endif  %}

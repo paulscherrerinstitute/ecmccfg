@@ -26,9 +26,9 @@ db/testAIs.db
 *LAB_MotionSystems*
 *Copley*
 *Elmo*
-qt
 doc
 tools
+*.pyc
 
 .venv
 hugo/content/source/

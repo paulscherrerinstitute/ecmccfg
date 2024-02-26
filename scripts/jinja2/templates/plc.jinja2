@@ -11,11 +11,11 @@ epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
 epicsEnvSet("PLC_ID", {{ plc.id }})
 ecmcConfigOrDie "Cfg.CreatePLC({{ plc.id }},${ECMC_PLC_SAMPLE_RATE_MS})"
 
-#- Add code
+#- PLC code
 {%- if plc.code %}
-{%- for line in plc.code %}
-ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
-{%- endfor %}
+    {%- for line in plc.code %}
+        ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
+    {%- endfor %}
 {%- endif %}
 
 #- Enable PLC

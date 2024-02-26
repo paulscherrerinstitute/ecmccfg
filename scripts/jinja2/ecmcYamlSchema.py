@@ -55,6 +55,10 @@ class Schema:
         2: ['axisPlc', 'axis', 'encoder', 'trajectory', 'var']
     }
 
+    encSchemaDict = {
+        0: ['encoder']
+    }
+
     def get_schema(self, keys):
         _type = type(keys)
         if _type is list:
@@ -76,24 +80,89 @@ class Schema:
         }
     }
 
+    plcVeloFilterSchema = {
+        'type': 'dict',
+        'required': False,
+        'default': {},
+        'schema': {
+            'trajectory': {
+                'type': 'dict',                    
+                'schema': {
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
+                }                
+            },
+            'encoder': {
+                'type': 'dict',                    
+                'schema': {
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
+                }                
+            }
+        }
+    }
+
     filterSchema = {
         'type': 'dict',
+        'required': False,
         'default': {},
         'schema': {
             'velocity': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean'},
-                    'size': {'required': True, 'type': 'integer'}
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
                 }
             },
             'trajectory': {
                 'type': 'dict',
                 'schema': {
-                    'enable': {'required': True, 'type': 'boolean'},
-                    'size': {'required': True, 'type': 'integer'}
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
+                }
+            },
+            'position': {
+                'type': 'dict',
+                'schema': {
+                    'enable': {'required': False, 'type': 'boolean'},
+                    'size': {'required': False, 'type': 'integer'}
                 }
             }
+        }
+    }
+
+    homingSchema = {
+        'type': 'dict',
+        'required': False,
+        'schema': {
+            'type': {'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 21, 22, 25, 26]},
+            'position': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+            ]
+            },
+            'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
+            'postMovePosition': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+            ]
+            },
+            'latchCount': {'type': 'integer', 'min': 0},
+            'velocity': {
+                'type': 'dict',
+                'schema': {
+                    'to': {'type': 'float'},
+                    'from': {'type': 'float'},
+                }
+            },
+            'acceleration': {'type': 'float'},
+            'deceleration': {'type': 'float'},
+            'timeout': {'type': 'integer'},
+            'refToEncIDAtStartup': {'type': 'integer', 'default': -1},
+            'refAtHome': {'type': 'integer', 'default': 0},
+            'tolToPrim': {'type': 'float', 'default': 0},
+            'trigg': {'type': 'string'},
+            'ready': {'type': 'string'},
         }
     }
 
@@ -110,6 +179,12 @@ class Schema:
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
+            'autoMode': {'type': 'dict', 'schema': {
+                'modeSet': {'type': 'string'},
+                'modeAct': {'type': 'string'},
+                'modeCmdMotion': {'type': 'integer'},
+                'modeCmdHome': {'type': 'integer'},
+            }},
             'features': {'type': 'dict', 'schema': {
                 'disableOnReset': {'type': 'boolean'},
                 'alarmAtHardLimits': {'type': 'boolean'},
@@ -119,7 +194,7 @@ class Schema:
                     'constantVelocity': {'type': 'boolean'},
                     'homing': {'type': 'boolean'}
                 }}
-            }}
+            }}            
         }
     }
 
@@ -160,6 +235,8 @@ class Schema:
             'status': {'type': 'string'},
             'reduceTorqueEnable': {'type': 'boolean', 'dependencies': ['control', 'reduceTorque']},
             'reduceTorque': {'type': 'integer', 'min': 0, 'dependencies': ['control', 'reduceTorqueEnable']},
+            'enable': {'type': 'integer', 'min': 0, 'dependencies': ['control']},
+            'enabled': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
             'brake': {
                 'type': 'dict',
                 'schema': {
@@ -191,10 +268,13 @@ class Schema:
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
                 ], 'default': 0.0
             },
+            'unit': {'type': 'string'},
+            'desc': {'type': 'string'},
             'position': {'required': True, 'type': 'string'},
             'control': {'type': 'string'},
             'status': {'type': 'string'},
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
+            'ready': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
             'reset': {'type': 'integer', 'min': 0, 'dependencies': ['control']},
             'error': {'type': 'list', 'maxlength': 3, 'schema': {'anyof_type': ['integer', 'string']}, 'dependencies': ['status']},
             'filter': filterSchema,
@@ -205,7 +285,9 @@ class Schema:
                     'control': {'type': 'integer', 'default': 0},
                     'status': {'type': 'integer', 'default': 0},
                 }
-            }
+            },
+            'primary': {'type': 'integer', 'default': -1},
+            'homing': homingSchema,            
         }
     }
 
@@ -218,15 +300,34 @@ class Schema:
             'Ki': {'type': 'float', 'default': 0., 'min': 0},
             'Kd': {'type': 'float', 'default': 0., 'min': 0},
             'Kff': {'type': 'float', 'default': 1., 'min': 0},
+            'inner': {
+                'type': 'dict',
+                'required': False,
+                'schema': {
+                    'Kp': {'type': 'float', 'default': 1., 'min': 0},
+                    'Ki': {'type': 'float', 'default': 0., 'min': 0},
+                    'Kd': {'type': 'float', 'default': 0., 'min': 0},
+                    'tol': {'type': 'float', 'default': 0., 'min': 0},
+                }
+            },
             'limits': {
                 'type': 'dict',
+                'required': False,
                 'schema': {
                     'minOutput': {'type': 'float'},
                     'maxOutput': {'type': 'float'},
                     'minIntegral': {'type': 'float'},
-                    'maxIntegral': {'type': 'float'}
+                    'maxIntegral': {'type': 'float'},
                 }
-            }
+            },
+            'deadband': {
+                'type': 'dict',
+                'required': False,
+                'schema': {
+                    'tol': {'type': 'float', 'min': 0},
+                    'time': {'type': 'integer', 'min': 0},
+                }
+            },
         }
     }
 
@@ -283,6 +384,16 @@ class Schema:
             'homePolarity': {'type': 'integer', 'allowed': [0, 1]},
             'interlock': {'required': True, 'type': 'string'},
             'interlockPolarity': {'type': 'integer', 'allowed': [0, 1]},
+            'analog': {
+                'type': 'dict',
+                'required': False,
+                'schema': {
+                    'interlock': {'required': False, 'type': 'string'},
+                    'rawLimit': {'required': False, 'type': 'float'},
+                    'interlockPolarity': {'required': False, 'type': 'integer', 'allowed': [0, 1]},
+                    'enable': {'required': False, 'type': 'boolean'},
+                }
+            },
         }
     }
 
@@ -293,7 +404,9 @@ class Schema:
             'enable': {'required': True, 'type': 'boolean'},
             'externalCommands': {'type': 'boolean'},
             'filter': filterSchema,
+            'velocity_filter': plcVeloFilterSchema,
             'file': {'type': 'string'},
+            'macros': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
         }
     }
@@ -306,38 +419,8 @@ class Schema:
             'enable': {'type': 'boolean'},
             'rateMilliseconds': {'type': 'integer'},
             'file': {'type': 'string'},
+            'macros': {'type': 'string'},
             'code': {'type': 'list', 'schema': {'type': 'string'}},
-        }
-    }
-
-    homingSchema = {
-        'type': 'dict',
-        'required': False,
-        'schema': {
-            'type': {'required': True, 'type': 'integer', 'allowed': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 21, 22, 25]},
-            'position': {'oneof': [
-                {'type': 'float'},
-                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
-            ]
-            },
-            'postMoveEnable': {'type': 'boolean', 'dependencies': ['postMovePosition']},
-            'postMovePosition': {'oneof': [
-                {'type': 'float'},
-                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
-            ]
-            },
-            'latchCount': {'type': 'integer', 'min': 0},
-            'velocity': {
-                'type': 'dict',
-                'required': True,
-                'schema': {
-                    'to': {'required': True, 'type': 'float'},
-                    'from': {'type': 'float'},
-                }
-            },
-            'acceleration': {'type': 'float'},
-            'deceleration': {'type': 'float'},
-            'timeout': {'type': 'integer'},
         }
     }
 

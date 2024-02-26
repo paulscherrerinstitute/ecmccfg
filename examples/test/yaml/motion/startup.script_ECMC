@@ -1,0 +1,36 @@
+# ecmc test config for yaml
+# Anders Sandström
+
+require ecmccfg sandst_a,"EC_RATE=500,ECMC_VER=v9.0.1_RC1"
+
+epicsEnvSet("IOC" ,"$(IOC="ec-base-01:Test:")")
+
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
+
+# Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# Configure Motion
+epicsEnvSet("DRV_SID",      "${ECMC_EC_SLAVE_ID}")
+epicsEnvSet("DEV",      "$(IOC)")
+system "cat ./cfg/stepper.yaml"
+#- ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/stepper.yaml"
+#- ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./axis_all_template.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_all_template_minimum.yaml"
+
+# Debug PLC 
+#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=1000,FILE=./plc/test.plc")
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

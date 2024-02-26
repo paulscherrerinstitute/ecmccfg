@@ -37,6 +37,7 @@ ECMC_SEQ_HOME_SET_POS                  = 15,
 ECMC_SEQ_HOME_LOW_LIM_SINGLE_TURN_ABS  = 21,
 ECMC_SEQ_HOME_HIGH_LIM_SINGLE_TURN_ABS = 22,
 ECMC_SEQ_HOME_SET_POS_2                = 25,
+ECMC_SEQ_HOME_TRIGG_EXTERN             = 26,
 ```
 
 ### ECMC_SEQ_HOME_NOT_VALID                = 0
@@ -178,6 +179,18 @@ epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                       # Number o
 
 ### ECMC_SEQ_HOME_SET_POS_2                  = 25, (setPosition)
 Sequence 25 is the same as 15 but not blocked by motor record. The sequence will just set a new position of the encoder without any movement.
+
+### ECMC_SEQ_HOME_TRIGG_EXTERN               = 26
+Trigger external homing sequence in drive. 
+1. Optional: set drive mode to homing (and wait for mode readback)
+3. Set trigg of homing (bit)
+4. Wait for homing ready (bit). Reference the ecmc encoder object on rising edge of the homing reday bit
+5. Optional: Change drive mode back to motion (and wait for mode readback)
+6. Optional: Init post move if configured
+
+Currently used for smaract:
+[smaracat example](../smaract/smaract.script)
+In this exmaple also the drive modes is automatically handled by ecmc.
 
 ## Setting polarity of home sensor
 For some of the sequenceses it could be usefull to change the polarity of the home sensor. That can be done with the follwoing command:

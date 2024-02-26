@@ -2,24 +2,48 @@
 record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos$(ENC_NO="")?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Position $(ENC_NO=0)")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Position")
   field(TSE,  "$(TSE=-2)")
 }
+## Velocity for the first encoder.. MOVE TO ecmcEnc.db
+#record(ai,"${P}${AXIS_NAME}-PosAct01"){
+#  field(PINI, "1")
+#  field(DTYP, "asynFloat64")
+#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos1?")
+#  field(PREC, "${PREC=3}")
+#  field(EGU,  "${EGU=mm}")
+#  field(SCAN, "I/O Intr")
+#  field(DESC, "Axis ax$(AXIS_NO): Actual Position Enc 1")
+#  field(TSE,  "$(TSE=-2)")
+#}
 
+# Velocity for primary encoder
 record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(PINI, "1")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel$(ENC_NO="")?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel?")
   field(PREC, "${PREC=3}")
   field(EGU,  "${EGU=mm}/s")
   field(SCAN, "I/O Intr")
-  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity $(ENC_NO=0)")
+  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity ")
   field(TSE,  "$(TSE=-2)")
 }
+
+# Velocity for the first encoder
+#record(ai,"${P}${AXIS_NAME}-VelAct01"){
+#  field(PINI, "1")
+#  field(DTYP, "asynFloat64")
+#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel1?")
+#  field(PREC, "${PREC=3}")
+#  field(EGU,  "${EGU=mm}/s")
+#  field(SCAN, "I/O Intr")
+#  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity Enc 1")
+#  field(TSE,  "$(TSE=-2)")
+#}
 
 record(ai,"${P}${AXIS_NAME}-PosSet"){
   field(PINI, "1")
@@ -76,6 +100,14 @@ record(calc,"${P}${AXIS_NAME}-LastIlock") {
   field(DESC, "${AXIS_NAME}: Last interlock")
   field(PINI, "$(PINI=1)")
   field(CALC, "A>>24 & 0xFF")
+  field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
+  field(FLNK, "${P}${AXIS_NAME}-Stat2Calc_.PROC")
+}
+
+record(calc,"${P}${AXIS_NAME}-Stat2Calc_") {
+  field(DESC, "${AXIS_NAME}: Shift stat 16 bits")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A>>16 & 0xFF")
   field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-Stat_.PROC")
 }
@@ -260,40 +292,61 @@ record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
   field(ONAM, "Enabled")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
+  field(FLNK, "${P}${AXIS_NAME}-Stat2_.PROC")
+}
+
+record(mbbiDirect,"${P}${AXIS_NAME}-Stat2_"){
+  field(DESC, "${AXIS_NAME}: Status Word bit 16..32")
+  field(PINI, "$(PINI=1)")  
+  field(INP,  "${P}${AXIS_NAME}-Stat2Calc_.VAL")
+  field(FLNK, "${P}${AXIS_NAME}-InStartup.PROC")
+  field(TSE,  "$(TSE=-2)")
 }
 
 #  // bit 16 inStartupPhase
-#record(bi,"${P}${AXIS_NAME}-instartup"){
-#  field(DESC, "${AXIS_NAME}: In startup phase")
-#  field(INP,  "${P}${AXIS_NAME}-Stat_.BX")
-#  field(ZNAM, "Started")
-#  field(ONAM, "In startup")
-#  field(ZSV,  "NO_ALARM")
-#  field(OSV,  "MINOR")
-#  field(FLNK, "${P}${AXIS_NAME}-inrealtime.PROC")
-#}
+record(bi,"${P}${AXIS_NAME}-InStartup"){
+  field(DESC, "${AXIS_NAME}: In startup phase")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B0")
+  field(ZNAM, "Started")
+  field(ONAM, "In startup")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-SumIlockFwd.PROC")
+}
 
-#  // bit 17 sumilockfwd
-#record(bi,"${P}${AXIS_NAME}-sumilockfwd"){
-#  field(DESC, "${AXIS_NAME}: sumilockfwd")
-#  field(INP,  "${P}${AXIS_NAME}-Stat_.BX")
+# // bit 17 sumilockfwd
+record(bi,"${P}${AXIS_NAME}-SumIlockFwd"){
+  field(DESC, "${AXIS_NAME}: Sum. ilock fwd")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B1")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-SumIlockBwd.PROC")
+}
+
+# // bit 18 sumilockbwd
+record(bi,"${P}${AXIS_NAME}-SumIlockBwd"){
+  field(DESC, "${AXIS_NAME}: Sum. ilock bwd")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B2")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+}
+
+# // bit 19 Axis type
+#record(bi,"${P}${AXIS_NAME}-Type"){
+#  field(DESC, "${AXIS_NAME}: Sum. ilock bwd")
+#  field(INP,  "${P}${AXIS_NAME}-Stat2_.B3")
 #  field(ZNAM, "Not ok")
 #  field(ONAM, "OK")
 #  field(ZSV,  "NO_ALARM")
 #  field(OSV,  "MINOR")
-#  field(FLNK, "${P}${AXIS_NAME}-inrealtime.PROC")
 #}
 
-#  // bit 18 sumilockbwd
-#record(bi,"${P}${AXIS_NAME}-sumilockbwd"){
-#  field(DESC, "${AXIS_NAME}: sumilockbwd")
-#  field(INP,  "${P}${AXIS_NAME}-Stat_.BX")
-#  field(ZNAM, "Not ok")
-#  field(ONAM, "OK")
-#  field(ZSV,  "NO_ALARM")
-#  field(OSV,  "MINOR")
-#  field(FLNK, "${P}${AXIS_NAME}-inrealtime.PROC")
-#}
+# End status word!
+####
 
 record(bi,"${P}${AXIS_NAME}-PLC-EnaCmd-RB"){
   field(DESC, "${AXIS_NAME}: Plc enable")
@@ -457,6 +510,8 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(EGU,  "${EGU=mm}")
   field(TSE,  "0")
   field(VAL,  0)
+  field(DRVL, ${P_DRVL=0})
+  field(DRVH, ${P_DRVH=0})
 }
 
 record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
@@ -468,6 +523,8 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(EGU,  "${EGU=mm}/s")
   field(TSE,  "0")
   field(VAL, "${VELO=0}")
+  field(DRVL, ${V_DRVL=0})
+  field(DRVH, ${V_DRVH=0})
 }
 
 record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
@@ -576,7 +633,7 @@ record(mbbo,    "${P}${AXIS_NAME}-movAbsCmd") {
 
 record(mbbo,    "${P}${AXIS_NAME}-movHomCmd") {
   field(DESC, "Homing procedure")
-  field(VAL,  "${HOMEPROC=0}")
+  field(VAL,  "14")
 
   field(ZRVL, 0)  field(ZRST, "Not Homable")
   field(ONVL, 1)  field(ONST, "Backward LS")
@@ -592,7 +649,7 @@ record(mbbo,    "${P}${AXIS_NAME}-movHomCmd") {
   field(ELVL, 11) field(ELST, "IndexN via backward LS")
   field(TVVL, 12) field(TVST, "IndexN via via forward LS")
   field(TTVL, 13) field(TTST, "HomeSwiLeftRight")
-  field(FTVL, 14) field(FTST, "Homable")
+  field(FTVL, 14) field(FTST, "Home with encoder cfgs")
   field(FFVL, 15) field(FFST, "Manual set position")
 
   field(FLNK, "${P}${AXIS_NAME}-MtnCmd_.PROC")
@@ -615,4 +672,38 @@ record(ao,"${P}${AXIS_NAME}-Id"){
   field(PREC, "0")
   field(EGU,  "[]")
   field(VAL,  ${AXIS_NO})
+}
+
+record(mbbo,  "${P}${AXIS_NAME}-SetEncIdCmd-RB"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Change encoder")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).primencid?")
+  field(ZRST, "NO_COMMAND")
+  field(ZRVL, 0)
+  field(ONST, "ENC_01")
+  field(ONVL, 1)
+  field(TWST, "ENC_02")
+  field(TWVL, 2)
+  field(THST, "ENC_03")
+  field(THVL, 3)
+  field(FRST, "ENC_04")
+  field(FRVL, 4)
+  field(FVST, "ENC_05")
+  field(FVVL, 5)
+  field(SXST, "ENC_06")
+  field(SXVL, 6)
+  field(SVST, "ENC_07")
+  field(SVVL, 7)
+  field(EIST, "ENC_08")
+  field(EIVL, 8)
+  field(VAL,  0)
+}
+
+# Tha last added encoder is the same as teh number of encoders added 
+# (always first/one encoder if this template is used)
+record(longin,"${P}${AXIS_NAME}-EncCnt"){
+    field(DESC, "${AXIS_NAME} Encoder count")
+    field(VAL,  "1")
+    field(PINI, "YES")
 }

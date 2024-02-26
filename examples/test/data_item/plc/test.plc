@@ -1,0 +1,2 @@
+ec0.s4.ONE_U8.TEST:=ec0.s4.ONE_U8.TEST+1;
+println('ec0.s4.ONE_U8.TEST=',ec0.s4.ONE_U8.TEST);

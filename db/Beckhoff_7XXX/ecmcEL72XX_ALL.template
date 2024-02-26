@@ -1,5 +1,5 @@
 record(ai,"${ECMC_P}Drv${CH_ID}-VelAct"){
-  field(DESC, "$(HWTYPE): Drive Actual Vel")
+  field(DESC, "$(HWTYPE): Drive Act Vel")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocityActual01?")

@@ -17,14 +17,14 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg sandst_a
 
 
 epicsEnvSet(ECMC_DEV_MODE, 1)  # Without verification and reset of slaves.
-epicsEnvSet(P_SCRIPT, mXsXXX)
+#epicsEnvSet(P_SCRIPT, mXsXXX)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
+#$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
 
 ##############################################################################
 ## Config hardware:

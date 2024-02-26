@@ -5,7 +5,6 @@ import ecmcYamlHandler
 import ecmcJinja2
 import ecmcConfigValidator
 
-
 class EcmcPlc:
     plcTemplates = {
         0: 'debug.jinja2',
@@ -51,8 +50,13 @@ class EcmcPlc:
 
     def loadPlcFile(self):
         key = 'plc'
-        # replace all 'code' with the content of {{ file }}
-        self.yamlHandler.yamlData[key]['code'] = self.readPlcFile(self.yamlHandler.yamlData[key]['file'])
+        # Append plc.code to end of plc.file
+        data={}
+        if 'file' in self.yamlHandler.yamlData[key].keys():                        
+            data = self.readPlcFile(self.yamlHandler.yamlData[key]['file'])
+        if 'code' in self.yamlHandler.yamlData[key].keys():                        
+            data = data + self.yamlHandler.yamlData[key]['code']
+        self.yamlHandler.yamlData[key]['code'] = data
 
     @staticmethod
     def readPlcFile(filename):

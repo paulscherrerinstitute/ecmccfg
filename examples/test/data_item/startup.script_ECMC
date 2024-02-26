@@ -1,0 +1,40 @@
+# ecmc test system
+# Anders Sandström
+
+require ecmccfg v9.0.1_RC4,"EC_RATE=5000,ECMC_VER=v9.0.1_RC4"
+
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
+
+# Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL3004"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL5001"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=3, HW_DESC=EL1008"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=4, HW_DESC=EL7031, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
+
+# Add some ec data items that access first and second byte of positionActual01
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=0,OFFSET_BITS=3,RW=1,DT=S8,NAME=ONE_S8_1,FIELDS='EGU=Counts'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=2,OFFSET_BITS=0,RW=1,DT=U16,NAME=ONE_U16,FIELDS='EGU=Counts'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=0,OFFSET_BITS=0,RW=2,DT=U64,NAME=ONE_U64,FIELDS='EGU=Counts'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=ONE,OFFSET_BYTE=0,OFFSET_BITS=0,RW=1,DT=U8,NAME=ONE_U8.TEST,FIELDS='EGU=Counts'"
+
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+# Configure Motion
+epicsEnvSet("DEV",      "$(IOC)")
+#${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper.yaml"
+
+# Debug PLC
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1000,FILE=./plc/test.plc")
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+ecmcGrepParam *TEST*
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

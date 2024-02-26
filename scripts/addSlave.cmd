@@ -39,11 +39,14 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
-# add ${HW_DESC} to the bus at position ${SLAVE_ID}
+#- clear previous component type (ensure correct ECMC_EC_COMP_TYPE is set for the slave)
+epicsEnvUnset(ECMC_EC_COMP_TYPE)
+
+#- add ${HW_DESC} to the bus at position ${SLAVE_ID}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1}"
 
-# deduce what the prefix should be
+#- deduce what the prefix should be
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE}"
 
@@ -55,7 +58,7 @@ ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#
 ${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
 epicsEnvUnset(DEFAULT_SLAVE_PVS)
 
-# Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
+#- Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", "","#- ")
 #- Next slave of the previous slave is this slave
 ${ECMC_EXE_NEXT_SLV}dbLoadRecords(ecmcEcPrevSlave.db,"NEXT_SLAVE_ID=${ECMC_EC_SLAVE_NUM=-1},PREV_ECMC_P=${ECMC_PREV_ECMC_P=""}")

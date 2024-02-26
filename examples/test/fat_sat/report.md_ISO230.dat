@@ -1,0 +1,77 @@
+TEST_DATA=# Input data file for ISO230-2 calcs derived from: /afs/psi.ch/user/s/sandst_a/myhome/projects/data/data.log
+# Mandatory variable definitions:
+#     TGT_DATA[<pos_id>]                : Target Position for <pos_id> (from TGT_SET_PV).
+#     REF_DATA_FWD[<pos_id>,<cycle_id>] : Fwd. dir. ref system position for <pos_id> and <cycle_id> (from <REF_PV>).
+#     REF_DATA_BWD[<pos_id>,<cycle_id>] : Bwd. dir. ref system position for <pos_id> and <cycle_id> (from <REF_PV>).
+# Optional variable definitions:
+#     UNIT                              : Unit for measurenments (optional, defualts to mm).
+#     CYCLES                            : ISO230-2 cycle count (optional, defaults to 5).
+#     POSITIONS                         : ISO230-2 position count (optional, defaults to 8).
+#     DEC                               : Decimal count for printouts (optional, defualts to 4). 
+#     REF_PV                            : Variable name filter for reference position value (optional).
+#     TEST_PV                           : Variable name filter for test number (optional).
+#     TGT_SET_PV                        : Variable name filter for position setpoint (optional).
+#
+REF_PV=sls-sioc-ecat01:m0s001-Enc01-PosAct
+TEST_PV=sls-sioc-ecat01:TestNumber
+TGT_SET_PV=sls-sioc-ecat01:M1-PosSet
+UNIT=mm
+CYCLES=5
+POSITIONS=5
+DEC=8
+TGT_DATA[1]=-10
+REF_DATA_FWD[1,1]=-10.0000990190
+TGT_DATA[2]=-4.88
+REF_DATA_FWD[2,1]=-4.8801030190
+TGT_DATA[3]=0.24
+REF_DATA_FWD[3,1]=.2399139810
+TGT_DATA[4]=5.36
+REF_DATA_FWD[4,1]=5.3599279810
+TGT_DATA[5]=10.48
+REF_DATA_FWD[5,1]=10.4798959810
+REF_DATA_FWD[1,2]=-10.0000940190
+REF_DATA_FWD[2,2]=-4.8801040190
+REF_DATA_FWD[3,2]=.2398979810
+REF_DATA_FWD[4,2]=5.3599079810
+REF_DATA_FWD[5,2]=10.4798739810
+REF_DATA_FWD[1,3]=-10.0000820190
+REF_DATA_FWD[2,3]=-4.8800950190
+REF_DATA_FWD[3,3]=.2399089810
+REF_DATA_FWD[4,3]=5.3599049810
+REF_DATA_FWD[5,3]=10.4798699810
+REF_DATA_FWD[1,4]=-10.0000910190
+REF_DATA_FWD[2,4]=-4.8801110190
+REF_DATA_FWD[3,4]=.2399239810
+REF_DATA_FWD[4,4]=5.3598969810
+REF_DATA_FWD[5,4]=10.4798589810
+REF_DATA_FWD[1,5]=-10.0000940190
+REF_DATA_FWD[2,5]=-4.8800930190
+REF_DATA_FWD[3,5]=.2399009810
+REF_DATA_FWD[4,5]=5.3599189810
+REF_DATA_FWD[5,5]=10.4798929810
+REF_DATA_BWD[1,1]=-10.0000810190
+REF_DATA_BWD[2,1]=-4.8800870190
+REF_DATA_BWD[3,1]=.2399279810
+REF_DATA_BWD[4,1]=5.3598979810
+REF_DATA_BWD[5,1]=10.4798999810
+REF_DATA_BWD[1,2]=-10.0001020190
+REF_DATA_BWD[2,2]=-4.8800970190
+REF_DATA_BWD[3,2]=.2399099810
+REF_DATA_BWD[4,2]=5.3599139810
+REF_DATA_BWD[5,2]=10.4798879810
+REF_DATA_BWD[1,3]=-10.0000870190
+REF_DATA_BWD[2,3]=-4.8800970190
+REF_DATA_BWD[3,3]=.2399119810
+REF_DATA_BWD[4,3]=5.3599139810
+REF_DATA_BWD[5,3]=10.4798709810
+REF_DATA_BWD[1,4]=-10.0000920190
+REF_DATA_BWD[2,4]=-4.8800950190
+REF_DATA_BWD[3,4]=.2399129810
+REF_DATA_BWD[4,4]=5.3599069810
+REF_DATA_BWD[5,4]=10.4798909810
+REF_DATA_BWD[1,5]=-10.0001000190
+REF_DATA_BWD[2,5]=-4.8800820190
+REF_DATA_BWD[3,5]=.2399129810
+REF_DATA_BWD[4,5]=5.3599219810
+REF_DATA_BWD[5,5]=10.4799029810
+  
