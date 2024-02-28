@@ -156,12 +156,13 @@ epicsEnvUnset("ECMC_SKIP_ME")
 #-      5   2 kHz                           50 Hz
 #-      6   3.75 kHz                        60 Hz
 #-      7   7.5 kHz                         100 Hz
-#-      8   15 kHz                          ???
-#-      9   30 kHz                          ???
-#-     10   5 Hz                            ???
-#-     11   10 Hz                           ???
-#-     12                                   ???
-#-     13                                   ???
+#-      8   15 kHz                          200 Hz
+#-      9   30 kHz                          400 hz
+#-     10   5 Hz                            800 Hz
+#-     11   10 Hz                           1000 Hz
+#-     12                                   2000 Hz
+#-     13                                   4000 Hz
+#-     20                                   50/60 Hz
 epicsEnvSet("ECMC_EC_SDO_INDEX_OFFSET",  "0x15")
 epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "0")
