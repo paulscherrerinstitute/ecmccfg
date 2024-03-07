@@ -326,32 +326,26 @@ record (asyn, "$(PREFIX)$(MOTOR_NAME)-$(MOTOR_PORT)-asyn")
 {
 }
 
-record(bi,"$(PREFIX)$(MOTOR_NAME)-TrgStpInp"){
-  #field(PINI, "1")
-  field(SCAN, "I/O Intr")
-  field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_STOPP")  
-  field(DTYP, "asynInt32")
-  field(FLNK, "$(PREFIX)$(MOTOR_NAME)-TrgStp")
-}
-
-record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStp"){
+#- If axis is in interlock then set motor STOP
+record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpFwd"){
   #field(PINI, "1")
   field(SCAN, "Passive")
-  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP")  
-  field(VAL,  "1")  
+  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
+  field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockFwd CP")
+  field(ZSV,  "OK")
+  field(OSV,  "STOP")
+  field(VAL,  "1")
+  field(OMSL, "closed_loop")
+
 }
 
-record(bi,"$(PREFIX)$(MOTOR_NAME)-TrgDisableInp"){
-  #field(PINI, "1")
-  field(SCAN, "I/O Intr")
-  field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_DISABLE")
-  field(FLNK, "$(PREFIX)$(MOTOR_NAME)-TrgDisable")
-}
-
-record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgDisable"){
+record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpBwd"){
   #field(PINI, "1")
   field(SCAN, "Passive")
-  field(OUT,  "$(PREFIX)$(MOTOR_NAME).CNEN")  
-  field(VAL,  "0")
+  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
+  field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
+  field(ZSV,  "OK")
+  field(OSV,  "STOP")
+  field(VAL,  "1")
+  field(OMSL, "closed_loop")
 }
