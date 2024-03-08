@@ -583,8 +583,7 @@ returns 0 if success or error code.
                         <axis_id>,         : Axis index
                         );
    
-   Set axis error that indicates that a slaved axis is in error state.
-
+   Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR 0x1432B).
 ```
 ### Function Lib: Data Storage
 ```
