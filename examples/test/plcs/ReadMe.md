@@ -577,7 +577,7 @@ returns 0 if success or error code.
                         <error_code>       : Error code to set
                         );
    
-   Sets an arbitrary errocode to an axis object.
+   Sets an arbitrary error code to an axis object.
 
 19. mc_set_slaved_axis_in_error(
                         <axis_id>,         : Axis index
