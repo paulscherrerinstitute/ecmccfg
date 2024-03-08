@@ -572,6 +572,19 @@ returns 0 if success or error code.
 
    Returns primary encoder index of the axis (the encoder used for control).
 
+18. mc_set_axis_error(
+                        <axis_id>,         : Axis index
+                        <error_code>       : Error code to set
+                        );
+   
+   Sets an arbitrary errocode to an axis object.
+
+19. mc_set_slaved_axis_in_error(
+                        <axis_id>,         : Axis index
+                        );
+   
+   Set axis error that indicates that a slaved axis is in error state.
+
 ```
 ### Function Lib: Data Storage
 ```
