@@ -391,6 +391,44 @@ Below the ECMC specific accessible variables and functions are listed:
 21. retvalue=ec_err_rst():
     Resets error code for ec_lib.
 ```
+
+### Function Lib: Master to Master communication (within same host)
+
+Support for communication between different ecmc ioc:s running on the same host.
+A shared memory buffer of 120 doubles can be accessed for read and write operations by alll ecmc ioc running on the same master.
+
+```
+1. retvalue = m2m_write(
+                      <index>,       : Mem buffer index (index must be 0..119)
+                      <value>):      : value to write
+   returns 0 if success or error code.
+   Write a value to an index of a common memory buffer accessible by all masters running on same host
+
+2. retvalue = m2m_read(<index>);     : Mem buffer index (index must be 0..119)
+                      
+   returns the value stored at index in the shared mem buffer.
+
+3. retvalue = m2m_stat();
+                      
+   returns 1 if connection to shared memory is OK, else 0 or a negative value with an errro code.
+
+4. m2m_err_rst();
+                      
+   reset any m2m error codes.
+
+5. retvalue = m2m_err_rst();
+                      
+   returns current m2m error code.
+
+6. retvalue = m2m_ioc_ec_ok(<master_index>);
+
+   returns status etehrcat status of another ecmc ioc (1==op, 0==not op, -1==error).
+
+7. retvalue = m2m_ioc_run(<master_index>);
+
+   checks of a certian master is running (negative master id is ioc:s without ec master).
+```
+
 ### Function Lib: Motion
 ```
 1. retvalue = mc_move_abs(
