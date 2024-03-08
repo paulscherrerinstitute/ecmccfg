@@ -100,6 +100,9 @@ ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a10,0x6005,0x1,U32,timestamp${ECMC_CH}_l32)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a10,0x6005,0x2,U32,timestamp${ECMC_CH}_u32)"
 
+#- Add an 64 bit dataitem on top of the 64 bits
+ecmcConfigOrDie "Cfg.EcAddDataDT(ec${MASTER_ID=${ECMC_EC_MASTER_ID=0}}.s${ECMC_EC_SLAVE_NUM}.timestamp01_l32,0,0,2,U64,timestamp01)"
+
 #-  CH 2
 epicsEnvSet("ECMC_CH"             "02")
 

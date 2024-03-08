@@ -160,7 +160,7 @@ record(ai,"${ECMC_P}Enc${CH_ID}-Cmd-RB"){
 }
 
 record(ao,"${ECMC_P}Enc${CH_ID}-PosCmd"){
-  field(DESC, "$(HWTYPE): Enc Counter Value Setpoint")
+  field(DESC, "$(HWTYPE): Enc Cnt Val Sp")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).encoderValue${CH_ID}=")
