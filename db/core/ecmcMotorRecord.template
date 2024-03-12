@@ -332,11 +332,10 @@ record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpFwd"){
   field(SCAN, "Passive")
   field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
   field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockFwd CP")
-  field(ZSV,  "OK")
-  field(OSV,  "STOP")
+  field(ZNAM,  "OK")
+  field(ONAM,  "STOP")
   field(VAL,  "1")
   field(OMSL, "closed_loop")
-
 }
 
 record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpBwd"){
@@ -344,8 +343,8 @@ record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpBwd"){
   field(SCAN, "Passive")
   field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
   field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
-  field(ZSV,  "OK")
-  field(OSV,  "STOP")
+  field(ZNAM,  "OK")
+  field(ONAM,  "STOP")
   field(VAL,  "1")
   field(OMSL, "closed_loop")
 }
