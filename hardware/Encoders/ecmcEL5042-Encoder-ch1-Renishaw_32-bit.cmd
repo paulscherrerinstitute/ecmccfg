@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for ecmcEL5042-Encoder-ch1-Renishaw-32bit.cmd
-#-d   \details Parametrization of EL5042  channel 1 for encoder Renisahw 32bit
+#-d   \details Parametrization of EL5042  channel 1 for encoder Renishaw 32bit
 #-d   \author Niko Kivel
 #-d   \file
 #-d */
