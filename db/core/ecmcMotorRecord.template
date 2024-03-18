@@ -374,7 +374,7 @@ record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgL2H"){
   field(CALC,  "A && B")
   field(OCAL,  "C")
   field(DOPT,  "Use OCAL")
-  field(OOPT,  "Transition To One")
+  field(OOPT,  "Transition To Non-zero")
   field(OUT,   "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq PP")
 }
 
