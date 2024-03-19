@@ -1,9 +1,10 @@
-require ecmccfg,ELM7231 "ENG_MODE=1,ECMC_VER=9.2.0"
+require ecmccfg,ELM7222 "ENG_MODE=1,ECMC_VER=9.2.0"
 
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=ELM7231-0010, SLAVE_ID=20, CONFIG=-Motor-Beckhoff-AM8123-1NH1-0000"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,      "HW_DESC=ELM7222-0010, SLAVE_ID=21"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd,   "CONFIG=-Motor-ch1-Beckhoff-AM8112-xFx1"
 
 epicsEnvSet("DRV_SLAVE", ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/AM8123.yaml, DEV=${DEV=${IOC}}, DRV_SLAVE=${DRV_SLAVE}"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,  "FILE=cfg/AM8112_ch1.yaml, DEV=${DEV=${IOC}}, DRV_SLAVE=${DRV_SLAVE}"
 
 #- #############################################################################
 #- apply configuration
