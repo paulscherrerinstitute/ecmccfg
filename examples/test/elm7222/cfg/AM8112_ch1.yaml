@@ -1,0 +1,71 @@
+axis:
+  id: 1
+  type: joint # this is for future selection of axis type
+  mode: CSV # supported mode, CSV and CSP
+
+epics:
+  name: axis
+  precision: 3
+  unit: deg
+  motorRecord:
+    enable: true
+    description: AM8112 CSV CH1
+
+drive:
+  numerator: 2880000 # Fastest speed in engineering units
+  denominator: 2147483648 # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: 1 # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  control: ec0.s$(DRV_SLAVE).driveControl01
+  status: ec0.s$(DRV_SLAVE).driveStatus01
+  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01
+  # control bit for reset in 'control'
+  reset: 7
+  # status bit for warning in 'status'
+  warning: 7
+  # list of error bits in 'status', or if type==string, complete EC-link
+  error:
+    - 3 # Error
+    - 7 # Warning as Error
+
+encoder:
+  numerator: 360
+  denominator: 1048576
+  type: 1 # Type: 0=Incremental, 1=Absolute
+  bits: 32 # Total bit count of encoder raw data
+  absBits: 25 # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absOffset: 0 # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s$(DRV_SLAVE).positionActual01 # Ethercat entry for actual position input (encoder)
+
+controller:
+  Kp: 15
+  Ki: 0.05
+
+trajectory:
+  type: 1
+  axis:
+    velocity: 18000 # 5000 rpm (web page), 7883 rpm (name plate) => 47298 deg/s
+    acceleration: 90000
+    jerk: 360000
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SLAVE).ONE.0 #  Ethercat entry for low limit switch input
+    backward: ec0.s$(DRV_SLAVE).ONE.0 #  Ethercat entry for high limit switch input
+  home: ec0.s$(DRV_SLAVE).ONE.0 #  Ethercat entry for home switch input
+  interlock: ec0.s$(DRV_SLAVE).ONE.0 #  Ethercat entry for interlock switch input
+
+monitoring:
+  lag:
+    enable: true
+    tolerance: 360
+    time: 100
+  target:
+    enable: yes
+    tolerance: 0.1
+    time: 100
+  velocity:
+    enable: true
+    max: 28000
+    time:
+      trajectory: 100
+      drive: 200
