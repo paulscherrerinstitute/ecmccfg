@@ -1,0 +1,130 @@
+record(mbboDirect,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Ctrl_"){
+    field(DESC, "$(HWTYPE):Enc BO Cntrl Wd")
+    field(DTYP, "asynUInt32Digital")
+    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).outputControl${BO_CH_ID}=")
+    field(SCAN, "Passive")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}"){
+    field(DESC, "$(HWTYPE): Set output")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Ctrl_.B0 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-ThrsEn"){
+    field(DESC, "$(HWTYPE): Enable thresholds")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Ctrl_.B1 PP")
+    field(ZNAM, "Zero")
+    field(ONAM, "One")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-TriState"){
+    field(DESC, "$(HWTYPE): Set Tri state")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Ctrl_.B2 PP")
+    field(ZNAM, "Normal")
+    field(ONAM, "Tri-state")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-ThrsCWDis"){
+    field(DESC, "$(HWTYPE): Disable threshold CW")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Ctrl_.B3 PP")
+    field(ZNAM, "Enable")
+    field(ONAM, "Disable")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-ThrsCCWDis"){
+    field(DESC, "$(HWTYPE): Disable threshold CCW")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Ctrl_.B4 PP")
+    field(ZNAM, "Enable")
+    field(ONAM, "Disable")
+}
+
+record(mbboDirect,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_"){
+    field(DESC, "$(HWTYPE):Enc BO State")
+    field(DTYP, "asynUInt32Digital")
+    field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).outputState${BO_CH_ID}=")
+    field(SCAN, "Passive")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State01"){
+    field(DESC, "$(HWTYPE): State 1")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B0 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State02"){
+    field(DESC, "$(HWTYPE): State 2")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B1 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State03"){
+    field(DESC, "$(HWTYPE): State 3")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B2 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State04"){
+    field(DESC, "$(HWTYPE): State 4")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B3 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State05"){
+    field(DESC, "$(HWTYPE): State 5")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B4 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State06"){
+    field(DESC, "$(HWTYPE): State 6")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B5 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State07"){
+    field(DESC, "$(HWTYPE): State 7")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B6 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(bo,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State08"){
+    field(DESC, "$(HWTYPE): State 8")
+    field(OUT,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-State_.B7 PP")
+    field(ZNAM, "FALSE")
+    field(ONAM, "TRUE")
+}
+
+record(mbbiDirect,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Stat_"){
+  field(DESC, "$(HWTYPE): Output Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).outputStatus${BO_CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-RB")
+  field(SHFT, "0")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-RB"){
+  field(DESC, "$(HWTYPE): Output status")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Stat_.B0")
+  field(ZNAM, "FALSE")
+  field(ONAM, "TRUE")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-TriState-RB")
+}
+
+record(bi,"${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-TriState-RB"){
+  field(DESC, "$(HWTYPE): Output status")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-BO${BO_CH_ID}-Stat_.B1")
+  field(ZNAM, "Normal")
+  field(ONAM, "Tri-state")
+}
