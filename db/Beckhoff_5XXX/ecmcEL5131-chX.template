@@ -30,6 +30,30 @@ record(bi,"${ECMC_P}Enc${CH_ID}-SetCntDne"){
   field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B2")
   field(ZNAM, "not done")
   field(ONAM, "done")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-CntUndFlw")
+}
+
+record(bi,"${ECMC_P}Enc${CH_ID}-CntUndFlw"){
+  field(DESC, "$(HWTYPE): Counter Underflow")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B3")
+  field(ZNAM, "OK")
+  field(ONAM, "Underflow")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-CntOvrFlw")
+}
+
+record(bi,"${ECMC_P}Enc${CH_ID}-CntOvrFlw"){
+  field(DESC, "$(HWTYPE): Counter Overflow")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B4")
+  field(ZNAM, "OK")
+  field(ONAM, "Overflow")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-BI-Stat")
+}
+
+record(bi,"${ECMC_P}Enc${CH_ID}-BI-Stat"){
+  field(DESC, "$(HWTYPE): Status input")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B5")
+  field(ZNAM, "FALSE")
+  field(ONAM, "TRUE")
   field(FLNK, "${ECMC_P}Enc${CH_ID}-OpnCrctAlrm")
 }
 
@@ -44,12 +68,21 @@ record(bi,"${ECMC_P}Enc${CH_ID}-OpnCrctAlrm"){
 }
 
 record(bi,"${ECMC_P}Enc${CH_ID}-WrnAlrm"){
-  field(DESC, "$(HWTYPE): Enc Extpltn Stall Alrm")
+  field(DESC, "$(HWTYPE): Extrapol stall")
   field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.B7")
-  field(ZNAM, "No Alarm")
-  field(ONAM, "Alarm")
+  field(ZNAM, "OK")
   field(ZSV,  "NO_ALARM")
+  field(ONAM, "Stall")
   field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-BI-Gate")
+}
+
+record(bi,"${ECMC_P}Enc${CH_ID}-BI-Gate"){
+  field(DESC, "$(HWTYPE): Gate input")
+  field(INP,  "${ECMC_P}Enc${CH_ID}-Stat.BB")
+  field(ZNAM, "no latch")
+  field(ONAM, "latched")
+  field(FLNK, "${ECMC_P}Enc${CH_ID}-OpnCrctAlrm")
 }
 
 # latching

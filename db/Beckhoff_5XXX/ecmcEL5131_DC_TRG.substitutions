@@ -57,7 +57,6 @@ file "ecmc_analogOutput-chX.template"{
           {"",    "Enc01",  "-BO02-Dur08", micros, 0,    "outputDuration02_08"}
 }
 
-
 # Output 1 Control
 file "ecmcEL5131-Trg-chX.template"{
   pattern {CH_ID, BO_CH_ID, KEY   }
@@ -65,7 +64,7 @@ file "ecmcEL5131-Trg-chX.template"{
           {"01",  02,       "Enc" }
 }
 
-#- BO Event count 
+# BO Event count 
 file "ecmc_analogOutput-chX.template"{
   pattern {CH_ID, KEY,      suffix,        EGU,  PREC, sourceName          }
           {"",    "Enc01",  "-BO01-ThrsCnt", "", 0,    "outputEventCount01"}
