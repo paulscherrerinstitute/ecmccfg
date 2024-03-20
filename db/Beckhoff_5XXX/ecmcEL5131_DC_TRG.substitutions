@@ -1,0 +1,81 @@
+file "ecmcEL5131-chX.template"
+{
+    pattern {CH_ID}
+            {01   }
+
+}
+
+# Output 1 Threshold
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        EGU,   PREC,   sourceName           }
+          {"",    "Enc01",  "-BO01-Thrs01", Cnts, 0,     "outputThreshold01_01"}
+          {"",    "Enc01",  "-BO01-Thrs02", Cnts, 0,     "outputThreshold01_02"}
+          {"",    "Enc01",  "-BO01-Thrs03", Cnts, 0,     "outputThreshold01_03"}
+          {"",    "Enc01",  "-BO01-Thrs04", Cnts, 0,     "outputThreshold01_04"}
+          {"",    "Enc01",  "-BO01-Thrs05", Cnts, 0,     "outputThreshold01_05"}
+          {"",    "Enc01",  "-BO01-Thrs06", Cnts, 0,     "outputThreshold01_06"}
+          {"",    "Enc01",  "-BO01-Thrs07", Cnts, 0,     "outputThreshold01_07"}
+          {"",    "Enc01",  "-BO01-Thrs08", Cnts, 0,     "outputThreshold01_08"}
+}
+
+# Output 2 Threshold
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        EGU,   PREC,   sourceName            }
+          {"",    "Enc01",  "-BO02-Thrs01", Cnts, 0,      "outputThreshold02_01"}
+          {"",    "Enc01",  "-BO02-Thrs02", Cnts, 0,      "outputThreshold02_02"}
+          {"",    "Enc01",  "-BO02-Thrs03", Cnts, 0,      "outputThreshold02_03"}
+          {"",    "Enc01",  "-BO02-Thrs04", Cnts, 0,      "outputThreshold02_04"}
+          {"",    "Enc01",  "-BO02-Thrs05", Cnts, 0,      "outputThreshold02_05"}
+          {"",    "Enc01",  "-BO02-Thrs06", Cnts, 0,      "outputThreshold02_06"}
+          {"",    "Enc01",  "-BO02-Thrs07", Cnts, 0,      "outputThreshold02_07"}
+          {"",    "Enc01",  "-BO02-Thrs08", Cnts, 0,      "outputThreshold02_08"}
+}
+
+# Output 1 Duration
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        EGU,    PREC,  sourceName           }
+          {"",    "Enc01",  "-BO01-Dur01", micros, 0,     "outputDuration01_01"}
+          {"",    "Enc01",  "-BO01-Dur02", micros, 0,     "outputDuration01_02"}
+          {"",    "Enc01",  "-BO01-Dur03", micros, 0,     "outputDuration01_03"}
+          {"",    "Enc01",  "-BO01-Dur04", micros, 0,     "outputDuration01_04"}
+          {"",    "Enc01",  "-BO01-Dur05", micros, 0,     "outputDuration01_05"}
+          {"",    "Enc01",  "-BO01-Dur06", micros, 0,     "outputDuration01_06"}
+          {"",    "Enc01",  "-BO01-Dur07", micros, 0,     "outputDuration01_07"}
+          {"",    "Enc01",  "-BO01-Dur08", micros, 0,     "outputDuration01_08"}
+}
+
+# Output 2 Duration
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        EGU,    PREC  sourceName           }
+          {"",    "Enc01",  "-BO02-Dur01", micros, 0,    "outputDuration02_01"}
+          {"",    "Enc01",  "-BO02-Dur02", micros, 0,    "outputDuration02_02"}
+          {"",    "Enc01",  "-BO02-Dur03", micros, 0,    "outputDuration02_03"}
+          {"",    "Enc01",  "-BO02-Dur04", micros, 0,    "outputDuration02_04"}
+          {"",    "Enc01",  "-BO02-Dur05", micros, 0,    "outputDuration02_05"}
+          {"",    "Enc01",  "-BO02-Dur06", micros, 0,    "outputDuration02_06"}
+          {"",    "Enc01",  "-BO02-Dur07", micros, 0,    "outputDuration02_07"}
+          {"",    "Enc01",  "-BO02-Dur08", micros, 0,    "outputDuration02_08"}
+}
+
+# Output 1 Control
+file "ecmcEL5131-Trg-chX.template"{
+  pattern {CH_ID, BO_CH_ID, KEY   }
+          {"01",  01,       "Enc" }
+          {"01",  02,       "Enc" }
+}
+
+# BO Event count 
+file "ecmc_analogOutput-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        EGU,  PREC, sourceName          }
+          {"",    "Enc01",  "-BO01-ThrsCnt", "", 0,    "outputEventCount01"}
+          {"",    "Enc01",  "-BO02-ThrsCnt", "", 0,    "outputEventCount02"}
+}
+
+# timestamp
+file "ecmc_timestamp_64-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        sourceName          }
+          {"",    "Enc01",  "-Time",       "timestamp01"       }
+          {"",    "Enc01",  "-TimeIdx",    "timestampIndex01"  }
+          {"",    "Enc01",  "-TimeLtch01", "timestampLatch01"  }
+          {"",    "Enc01",  "-TimeLtch02", "timestampLatch02"  }
+}
