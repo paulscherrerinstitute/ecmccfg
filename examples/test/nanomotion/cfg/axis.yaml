@@ -27,14 +27,14 @@ epics:
   #   fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
 
 drive:
-  numerator: 3600                                     # Fastest speed in engineering units
+  numerator: 35                                     # Fastest speed in engineering units
   denominator: 32768                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   # type: 0                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-  control: ec0.s$(DRV_SLAVE).driveControl01           # Control word ethercat entry
+  control: ec0.s$(DRV_SLAVE).ONE           # Control word ethercat entry
   enable: 0                                           # Enable bit index in control word (not used if DS402)
-  enabled: 1                                          # Enabled bit index in status word (not used if DS402)
-  status: ec0.s$(DRV_SLAVE).driveStatus01             # Status word ethercat entry
-  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
+  enabled: 0                                          # Enabled bit index in status word (not used if DS402)
+  status: ec0.s$(DRV_SLAVE).ONE             # Status word ethercat entry
+  setpoint: ec0.s$(DRV_SLAVE).analogOutput01      # Velocity setpoint if CSV. Position setpoint if CSP
 #  reduceTorque: 2                                    # Reduce torque bit in drive control word
 #  reduceTorqueEnable: True                           # Enable reduce torque functionality
 #  brake:
@@ -50,17 +50,17 @@ drive:
 #    - 14                                             # Error 2 (if no drive error bit then leave empty)
 
 encoder:
-  numerator: 360                                      # Scaling numerator example 360 deg/rev
-  denominator: 12800                                  # Scaling denominator example 4096 ticks per 360 degree
-  # type: 0                                           # Type: 0=Incremental, 1=Absolute
-  bits: 16                                            # Total bit count of encoder raw data
+  numerator: 1                                      # Scaling numerator example 360 deg/rev
+  denominator: 10000                                  # Scaling denominator example 4096 ticks per 360 degree
+  type: 0                                           # Type: 0=Incremental, 1=Absolute
+  bits: 32                                            # Total bit count of encoder raw data
   # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
   # mask: '0xFFF00'                                   # Mask applied to raw encoder value
-  position: ec0.s$(DRV_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
-  control: ec0.s$(DRV_SLAVE).encoderControl01         # mandatory only if 'reset' is used
-  status: ec0.s$(DRV_SLAVE).encoderStatus01           # mandatory only if 'warning' or 'error' are used
-  # ready: 10                                         # Bit in encoder status word for encoder ready
+  position: ec0.s$(ENC_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
+  #control: ec0.s$(ENC_SLAVE).ONE         # mandatory only if 'reset' is used
+  #status: ec0.s$(ENC_SLAVE).ONE           # mandatory only if 'warning' or 'error' are used
+  #ready: 1                                         # Bit in encoder status word for encoder ready
   # source: 0                                         # 0 = Encoder value from etehrcat hardware, 1 = Encoder value from PLC
   # reset: 1                                          # Reset   (optional)
   # warning: 2                                        # Warning (optional)
@@ -116,34 +116,34 @@ controller:
   #   tol: 0.1                                        # Distance from target for when inner PID params will be used, defaults to atTarget tol
 
 trajectory:
-  # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
+  type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
   axis:
-    velocity: 500                                     # Default velo for axis
-    acceleration: 2000                                # Default acc for axis
-    deceleration: 2000                                # Default dec for axis
+    velocity: 10                                     # Default velo for axis
+    acceleration: 100                                # Default acc for axis
+    deceleration: 100                                # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
     jerk: 10                                          # Default jerk for axis
   jog:
-    velocity: 5                                       # Default velo fro JOG (motor record)
+    velocity: 10                                       # Default velo fro JOG (motor record)
 #  modulo:
 #    range: 360                                       # Modulo range 0..360
 #    type: 0                                          # Modulo type
 
 input:
   limit:
-    forward: ec0.s$(DRV_SLAVE).driveStatus01.12       # Ethercat entry for low limit switch input
+    forward: ec0.s$(DRV_SLAVE).ONE.12       # Ethercat entry for low limit switch input
   #  forwardPolarity: 0                               # Polarity of forward limit switch
-    backward: ec0.s$(DRV_SLAVE).driveStatus01.11      # Ethercat entry for high limit switch input
+    backward: ec0.s$(DRV_SLAVE).ONE.11      # Ethercat entry for high limit switch input
   #  backwardPolarity: 0                              # Polarity of forward limit switch
   home: 'ec0.s$(DRV_SLAVE).ONE.0'                     # Ethercat entry for home switch
   # homePolarity: 0                                   # Polarity of home switch
-  interlock: 'ec0.s$(DRV_SLAVE).ONE.0'                # Ethercat entry for interlock switch input
+  interlock: 'ec0.s$(DRV_SLAVE).ONE.12'                # Ethercat entry for interlock switch input
   # interlockPolarity: 0                              # Polarity of interlock switch
-  analog:
-    interlock: 'ec0.s$(DRV_SLAVE).ZERO'               # Ethercat entry for analog interlock
-    #interlockPolarity: 1                              # 0: High value is bad, 1 = Low value is bad
-    rawLimit: 2000                                    # Analog raw limit
-    # enable: true
+  #analog:
+  #  interlock: 'ec0.s$(DRV_SLAVE).ZERO'               # Ethercat entry for analog interlock
+  #  #interlockPolarity: 1                              # 0: High value is bad, 1 = Low value is bad
+  #  rawLimit: 2000                                    # Analog raw limit
+  #  # enable: true
 # homing:
 #   type: 3                                           # Homing sequence type
 #   position: -30                                     # Position to reference encoder to
@@ -168,7 +168,7 @@ softlimits:
 
 monitoring:
   lag:
-    enable: true                                      # Enable position lag monitoring (following error)
+    enable: false                                      # Enable position lag monitoring (following error)
     tolerance: 3                                      # Allowed tolerance
     time: 10                                          # Allowed time outside tolerance  target:
   velocity:

@@ -1,9 +1,9 @@
 ##############################################################################
 ## Example config for el7031
 
+#epicsEnvSet(IOC,c6025a)
 require ecmccfg sandst_a "ENG_MODE=1"
 
-epicsEnvSet(IOC,c6025a)
 # Load components lib
 require ecmccomp
 
@@ -11,8 +11,8 @@ require ecmccomp
 ## Configure hardware
 
 
-epicsEnvSet("ENC_SLAVE_1",          "16")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_1), HW_DESC=EL5131_DC_TRG"
+epicsEnvSet("ENC_SLAVE",          "16")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5131_DC_TRG"
 
 epicsEnvSet("DRV_SLAVE",            "15")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL4132"
@@ -24,8 +24,7 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## AXIS 1
 #
 #epicsEnvSet("DEV",      "$(IOC)")
-#epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-#${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc_analog_il.yaml,LIMIT=1000,TYPE=0"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=cfg/axis.yaml,LIMIT=1000,TYPE=0"
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -33,9 +32,10 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+

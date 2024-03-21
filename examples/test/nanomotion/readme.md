@@ -20,3 +20,5 @@ LIK = Linear incremental
 N = RS422 with Interpolation 10 times
 1 = Customer specific
 2 = Scanning head with M3 thread
+
+Seems to have a resolution of 0.1micro meter (1mm/10000)
