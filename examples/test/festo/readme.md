@@ -15,3 +15,11 @@ Scalings are reverse engineered and could be tuned better.
 6. Press resart
 7. Answer yes to download parameters
 8. wait for restart, now etehrcat should be visible (etehrcat slaves)
+
+# Open loop
+Tghe drive will not update the openloop position if configured in CSV also confirmed by festo (support from festo in progress). However the eact velo updates.
+
+
+#  BISS
+
+* Seems will only work with 6MHz..
