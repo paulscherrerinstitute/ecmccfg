@@ -1,9 +1,9 @@
 # Notes
 
 * Enable input is GND switching => Need special output card.. EL2084, EL2088...
-* Velocity seems not to be linear with motion velo
-*
 
+* Velocity seems not to be linear with motion velo, drive scaling of 25mm/s for 32768 output seems to work for a target velo of 10mm/s, might need to be retuned if other velo is used..
+* Works rather well!
 
 # Equipment
 
@@ -22,3 +22,4 @@ N = RS422 with Interpolation 10 times
 2 = Scanning head with M3 thread
 
 Seems to have a resolution of 0.1micro meter (1mm/10000)
+
