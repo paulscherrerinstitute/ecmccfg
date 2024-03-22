@@ -21,5 +21,31 @@ Tghe drive will not update the openloop position if configured in CSV also confi
 
 
 #  BISS
-
 * Seems will only work with 6MHz..
+* Bit count divided into single turn and multiturn..
+
+# RLS LA11 test
+* Real scaling of LA11 is 1/4096mm, leadscrew pitch 1mm/rev 
+* Bit count = 26
+* This means that the drive will see 4096 ticks per rev => ST_BITS=12bits,ST_BITS=14bits, 
+* Seems to work!
+
+
+
+
+
+# Todo test generic scalings
+* 256 levels of microsetp=>51200 microsteps/rev for a 200 stepper
+* Set single tun count as close as possible = 16bits = 65536
+
+
+
+# Closed loop
+Get error about "closed loop not permissable" reasomn should be that commutation angle is unknown..
+
+
+
+
+
+
+
