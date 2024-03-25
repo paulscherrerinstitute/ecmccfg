@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>408</width>
-    <height>358</height>
+    <height>339</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,11 +16,6 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="font">
-   <font>
-    <pointsize>9</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -28,9 +23,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
-     <width>391</width>
-     <height>331</height>
+     <y>0</y>
+     <width>371</width>
+     <height>321</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -39,13 +34,8 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <property name="sizePolicy">
@@ -108,7 +98,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Error:</string>
+      <string>Error</string>
      </property>
     </widget>
     <widget class="caLabel" name="calabel_10">
@@ -167,7 +157,7 @@
     <widget class="caLed" name="caled_Warning">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>78</x>
        <y>200</y>
        <width>52</width>
        <height>12</height>
@@ -253,7 +243,7 @@
     <widget class="caLed" name="caled_Error">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>78</x>
        <y>182</y>
        <width>52</width>
        <height>12</height>
@@ -331,7 +321,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Warning:</string>
+      <string>Warning</string>
      </property>
     </widget>
     <widget class="caLineEdit" name="calineedit">
@@ -894,7 +884,6 @@
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -967,7 +956,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1016,7 +1004,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1029,13 +1016,13 @@
        <x>300</x>
        <y>20</y>
        <width>52</width>
-       <height>16</height>
+       <height>12</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Monospace</family>
-       <pointsize>10</pointsize>
+       <pointsize>8</pointsize>
        <stylestrategy>PreferDefault</stylestrategy>
       </font>
      </property>
@@ -1077,7 +1064,6 @@
      <property name="font">
       <font>
        <pointsize>9</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1087,16 +1073,16 @@
     <widget class="caLineEdit" name="calineedit_5">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>120</x>
        <y>20</y>
-       <width>51</width>
-       <height>16</height>
+       <width>120</width>
+       <height>12</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Monospace</family>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
        <stylestrategy>PreferDefault</stylestrategy>
       </font>
      </property>
@@ -1138,7 +1124,6 @@
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1225,14 +1210,10 @@
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
       <string>Drive is Referenced:</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
      </property>
     </widget>
     <widget class="caLabel" name="calabel_23">
@@ -1253,7 +1234,6 @@
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1302,7 +1282,6 @@
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1327,7 +1306,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1394,7 +1372,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1467,7 +1444,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1516,7 +1492,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1565,7 +1540,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1614,7 +1588,6 @@
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1639,7 +1612,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1712,7 +1684,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1722,7 +1693,7 @@
     <widget class="caLabel" name="calabel_49">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>20</y>
        <width>120</width>
        <height>20</height>
@@ -1737,7 +1708,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
@@ -1858,7 +1828,6 @@
      <property name="font">
       <font>
        <pointsize>11</pointsize>
-       <kerning>false</kerning>
       </font>
      </property>
      <property name="text">
