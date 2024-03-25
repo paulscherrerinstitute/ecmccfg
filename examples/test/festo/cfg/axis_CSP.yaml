@@ -19,7 +19,7 @@ axis:
 #       positioning: 1                                # Allow positioning
 
 epics:
-  name: Axis1                                         # Axis anme
+  name: Axis1                                         # Axis name
   precision: 3                                        # Decimal count
   description: Festo drive test                       # Axis description
   unit: deg                                            # Unit
@@ -50,10 +50,10 @@ encoder:
   numerator: 1                                        # Scaling numerator example 360 deg/rev
   denominator: 1000000                                # Scaling denominator example 4096 ticks per 360 degree
   type: 1                                             # Type: 0=Incremental, 1=Absolute
-  bits: 26                                            # Total bit count of encoder raw data
-  absBits: 26                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  bits: 32                                            # Total bit count of encoder raw data
+  absBits: 32                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
-  # mask: 0xFFF00                                     # Mask applied to raw encoder value
+  mask: '0x3FFFFFFFFFFFFFF'                                     # Mask applied to raw encoder value
   position: ec0.s$(DRV_ID).positionActual01           # Ethercat entry for actual position input (encoder)
   control: ec0.s$(DRV_ID).encoderControl01            # mandatory only if 'reset' is used
   status: ec0.s$(DRV_ID).encoderStatus01              # mandatory only if 'warning' or 'error' are used

@@ -30,7 +30,7 @@ Tghe drive will not update the openloop position if configured in CSV also confi
 * This means that the drive will see 4096 ticks per rev => ST_BITS=12bits,ST_BITS=14bits, 
 * Seems to work!
 
-
+    
 
 
 
@@ -44,6 +44,10 @@ Tghe drive will not update the openloop position if configured in CSV also confi
 Get error about "closed loop not permissable" reasomn should be that commutation angle is unknown..
 
 
+
+# GUI
+
+caqtdm -macro "IOC=c6025a-04,MasterID=1,SlaveID=000" ecmcCMMT-ST.ui 
 
 
 
