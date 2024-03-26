@@ -17,7 +17,14 @@ Scalings are reverse engineered and could be tuned better.
 8. wait for restart, now etehrcat should be visible (etehrcat slaves)
 
 # Open loop
-Tghe drive will not update the openloop position if configured in CSV also confirmed by festo (support from festo in progress). However the eact velo updates.
+The drive will not update the openloop position if configured in CSV also confirmed by festo (support from festo in progress). However the eact velo updates.
+
+# CSV Open loop with incremental encoder
+Works in CSV
+
+
+
+# Test open loop 
 
 
 #  BISS
@@ -30,7 +37,7 @@ Tghe drive will not update the openloop position if configured in CSV also confi
 * This means that the drive will see 4096 ticks per rev => ST_BITS=12bits,ST_BITS=14bits, 
 * Seems to work!
 
-    
+
 
 
 
