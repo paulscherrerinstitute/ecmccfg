@@ -3,7 +3,7 @@ macros:
 axis:
   id: 1                                               # Axis id
   type: joint                                         # this is for future selection of axis type
-  mode: CSP                                           # supported mode, CSV and CSP, defaults CSV
+#   mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
 #   parameters: 'axisPar' # additional parameters     # Additional params to motor record driver
 #   healthOutput: ec0...                              # Ethercat entry for health output
 #   autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
@@ -19,7 +19,7 @@ axis:
 #       positioning: 1                                # Allow positioning
 
 epics:
-  name: Axis1                                         # Axis name
+  name: Axis1                                         # Axis anme
   precision: 3                                        # Decimal count
   description: Festo drive test                       # Axis description
   unit: deg                                            # Unit
@@ -27,13 +27,13 @@ epics:
 
 drive:
   numerator: 1                                        # Fastest speed in engineering units
-  denominator: 1000000                                # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  denominator: 1000                                # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s$(DRV_ID).driveControl01              # Control word ethercat entry
   # enable: 0                                         # Enable bit index in control word (not used if DS402)
   # enabled: 1                                        # Enabled bit index in status word (not used if DS402)
   status: ec0.s$(DRV_ID).driveStatus01                # Status word ethercat entry
-  setpoint: ec0.s$(DRV_ID).positionSetpoint01         # Velocity setpoint if CSV. Position setpoint if CSP
+  setpoint: ec0.s$(DRV_ID).velocitySetpoint01         # Velocity setpoint if CSV. Position setpoint if CSP
   # reduceTorque: 2                                   # Reduce torque bit in drive control word
   # brake:
   #   output: ec0...                                  # Ethercat link to brake output
@@ -47,13 +47,13 @@ drive:
   #   - 14                                            # Error 2 (if no drive error bit then leave empty)
 
 encoder:
-  numerator: 1                                        # Scaling numerator example 360 deg/rev
+  numerator: 4                                        # Scaling numerator example 360 deg/rev
   denominator: 1000000                                # Scaling denominator example 4096 ticks per 360 degree
   type: 1                                             # Type: 0=Incremental, 1=Absolute
   bits: 32                                            # Total bit count of encoder raw data
-  absBits: 32                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
-  mask: '0x3FFFFFFFFFFFFFF'                                     # Mask applied to raw encoder value
+  # mask: 0xFFF00                                     # Mask applied to raw encoder value
   position: ec0.s$(DRV_ID).positionActual01           # Ethercat entry for actual position input (encoder)
   control: ec0.s$(DRV_ID).encoderControl01            # mandatory only if 'reset' is used
   status: ec0.s$(DRV_ID).encoderStatus01              # mandatory only if 'warning' or 'error' are used
