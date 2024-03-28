@@ -27,7 +27,7 @@ epics:
 
 drive:
   numerator: 1                                        # Fastest speed in engineering units
-  denominator: 1000                                # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  denominator: 1000                                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s$(DRV_ID).driveControl01              # Control word ethercat entry
   # enable: 0                                         # Enable bit index in control word (not used if DS402)
@@ -51,7 +51,7 @@ encoder:
   denominator: 1000000                                # Scaling denominator example 4096 ticks per 360 degree
   type: 1                                             # Type: 0=Incremental, 1=Absolute
   bits: 32                                            # Total bit count of encoder raw data
-  # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absBits: 32                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
   # mask: 0xFFF00                                     # Mask applied to raw encoder value
   position: ec0.s$(DRV_ID).positionActual01           # Ethercat entry for actual position input (encoder)

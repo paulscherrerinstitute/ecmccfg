@@ -11,7 +11,7 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 epicsEnvSet(DRV_ID,0)
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${DRV_ID}, HW_DESC=Festo-CMMT-ST"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=500,I_STDBY_MA=200,L_COIL_UH=1330,R_COIL_MOHM=750,U_NOM_MV=24000,ROT_INERTIA_GCM2=50'"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,MACROS='FORCE_CLK_FRQ_HZ=6000000,ST_BITS=12,MT_BITS=14,INV_DIR=1'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,MACROS='CLK_FRQ_KHZ=6000,ST_BITS=12,MT_BITS=14,INV_DIR=1'"
 
 ##- ########### MUST BE LAST ##############
 ##- Reinit drive (seems it needs to be like this..)

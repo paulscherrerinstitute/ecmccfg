@@ -1,7 +1,5 @@
-
 # Download config to drive over foe
 ethercat foe_write -m0 --position 10 paramPCK 
-
 
 # Scalings 
 Scalings are set in the CIA part of festo software. Deafult scalings:
@@ -25,12 +23,40 @@ encoder:
 5. Connect to drive in festo tool inside an open project
 6. Press resart
 7. Answer yes to download parameters
-8. wait for restart, now etehrcat should be visible (etehrcat slaves)
+8. wait for restart, now etehrcat should be visible (ethercat slaves)
+
+
+NOTE can also set the dip switch S2 to one (teh centre dip switch on top of the drive should be moved twoards the din-rail/wall direction)
 
 # Other
 
-* The sdo subindex in festo tool is in decimal!! 0x1234:13   => 0x1234:0xD 
+* The sdo subindex in festo tool is in decimal!! 0x1234:13   => 0x1234:0xD .. However in manual its all in hex..
 * Sometimes when the drive refuses to enable (stuck in enable state and not going to enabled state). This could be related to that festo softwarev has taken over control of the drive ("Plugin PLC-Control" is activated).
+* The Drive will not complain if a addSDO has a wrong size in some situations. Then the setting will just be ignored.  (UINT in festo tool is U16 in ecmc syntax)
+* Etehrcat as default can also set the dip switch S2 to one (teh centre dip switch on top of the drive should be moved twoards the din-rail/wall direction)
+* Sometimes the drive refuses to start because of reinitialization needed..
+
+# Inputs
+```
+ec0.s0.binaryInputWd01
+
+```
+Linked to epics records:
+* bit 16: Ctrl enable input X1A.6
+* bit 24: STO02 X1A.3
+* bit 25: STO01 X1A.2
+* bit 26: BI02 X1A.8
+* bit 27: BI01 X1A.7
+
+# Outputs
+```
+ec0.s0.binaryOutputWd01
+
+```
+Not linked to epics-records
+* bit 0: brake output
+* bit 16: Digital output 01
+* bit 17: Digital output 02
 
 # Open loop
 
