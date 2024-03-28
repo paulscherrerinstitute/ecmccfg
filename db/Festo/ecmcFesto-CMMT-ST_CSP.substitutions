@@ -1,9 +1,9 @@
-file "ecmcFesto-CMM-ST.template" { pattern
+file "ecmcFesto-CMMT-ST.template" { pattern
   { CH_ID }
   { 01    }
 }
 
-file "ecmcFesto-CMM-ST_Enc.template" { pattern
+file "ecmcFesto-CMMT-ST_Enc.template" { pattern
   { CH_ID }
   { 01    }
   { 02    }
