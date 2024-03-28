@@ -316,3 +316,133 @@ record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
   field(OSV,  "MAJOR")
   field(FLNK, "")
 }
+
+record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
+  field(DESC, "$(HWTYPE): Drive Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
+  field(PREC, "0")
+}
+
+record(longin,"${ECMC_P}Drv${CH_ID}-BIWd"){
+  field(DESC, "$(HWTYPE): Drive Input Wd")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryInputWd${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BIWdShft_.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,"${ECMC_P}Drv${CH_ID}-BIWdShft_") {
+  field(DESC, "$(HWTYPE): Drive Input wd shift")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A>>16")
+  field(INPA, "${ECMC_P}Drv${CH_ID}-BIWd.VAL")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BIWd_.PROC")
+}
+
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-BIWd_"){
+  field(DESC, "$(HWTYPE): Slv Stat Wd")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWdShft_.VAL")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BIEn.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BIEn"){
+  field(DESC, "$(HWTYPE): Ctrl Ena input")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.B0")
+  field(ZNAM, "Not Enable")
+  field(ONAM, "Enable")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-STO02.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-STO02"){
+  field(DESC, "$(HWTYPE): STO 02")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.B8")
+  field(ZNAM, "STO")
+  field(ONAM, "OP")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-STO01.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-STO01"){
+  field(DESC, "$(HWTYPE): STO 02")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.B9")
+  field(ZNAM, "STO")
+  field(ONAM, "OP")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
+  field(DESC, "$(HWTYPE): BI 02 (X1A.8)")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.BA")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
+  field(DESC, "$(HWTYPE): BI 01 (X1A.7)")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.BB")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")  
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-BO01"){
+  field(DESC, "$(HWTYPE): BO 01 (X1A.9)")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd_.PROC")  
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-BO02"){
+  field(DESC, "$(HWTYPE): BO 02 (X1A.10)")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd_.PROC")
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-BOBrk"){
+  field(DESC, "$(HWTYPE): BO Brake (X6.5)")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd_.PROC")
+}
+
+record(calc,"${ECMC_P}Drv${CH_ID}-BOWd_") {
+  field(DESC, "$(HWTYPE): Drive Outputs")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "(A)+(B<<16)+(C<<17)")
+  field(INPA, "${ECMC_P}Drv${CH_ID}-BOBrk.VAL")
+  field(INPB, "${ECMC_P}Drv${CH_ID}-BO01.VAL")
+  field(INPC, "${ECMC_P}Drv${CH_ID}-BO02.VAL")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd.PROC")
+}
+
+record(longout,"${ECMC_P}Drv${CH_ID}-BOWd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "$(HWTYPE): Drive Output Wd")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutputWd${CH_ID}=")  
+  field(DOL,  "${ECMC_P}Drv${CH_ID}-BOWd_")
+  field(OMSL, "closed_loop")  
+}
