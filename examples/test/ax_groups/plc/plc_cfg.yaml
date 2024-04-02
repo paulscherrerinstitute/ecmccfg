@@ -1,0 +1,5 @@
+plc:
+  id: 1
+  enable: yes
+  rateMilliseconds: 100
+  file: ${PLC_PATH}test.plc
