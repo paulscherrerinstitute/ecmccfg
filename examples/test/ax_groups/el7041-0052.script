@@ -44,7 +44,6 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_2.yaml,LIMIT
 
 ecmcConfigOrDie "Cfg.AddAxisGroup(test)"
 ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test)"
-ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test)"
 ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test)"
 
 ecmcConfig "GetAxisGroupIndexByName(test)"
