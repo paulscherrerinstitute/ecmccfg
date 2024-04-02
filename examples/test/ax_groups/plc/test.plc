@@ -105,13 +105,13 @@
 
 static.counter:=static.counter + 1;
 
-if(static.counter>10) {
-  static.toggle:=not(static.toggle);
-  mc_grp_set_enable(${GRP_ID=1},static.toggle);
-  mc_grp_set_traj_src(${GRP_ID=1},static.toggle);
-  mc_grp_set_enc_src(${GRP_ID=1},static.toggle);
-  mc_grp_set_error(${GRP_ID=1},static.toggle);
-}
+#if(static.counter>10) {
+#  static.toggle:=not(static.toggle);
+#  mc_grp_set_enable(${GRP_ID=1},static.toggle);
+#  mc_grp_set_traj_src(${GRP_ID=1},static.toggle);
+#  mc_grp_set_enc_src(${GRP_ID=1},static.toggle);
+#  mc_grp_set_error(${GRP_ID=1},static.toggle);
+#}
 
 println('get_enable: ', mc_grp_get_enable(${GRP_ID=1}));
 println('get_any_enable: ', mc_grp_get_any_enable(${GRP_ID=1}));
