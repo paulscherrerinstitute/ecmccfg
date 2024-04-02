@@ -30,14 +30,22 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc_analog_il.yaml,LIMIT=1000,TYPE=0"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_1.yaml,LIMIT=1000,TYPE=0"
+
+
+##############################################################################
+## AXIS 2: Virt only for test
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_2.yaml,LIMIT=1000,TYPE=0"
 
 ##############################################################################
 ## Group "test"
 
 ecmcConfigOrDie "Cfg.AddAxisGroup(test)"
 ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test)"
 
 ecmcConfig "GetAxisGroupIndexByName(test)"
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
