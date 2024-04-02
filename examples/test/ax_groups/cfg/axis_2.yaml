@@ -17,7 +17,7 @@ axis:
   #     positioning: true                             # Allow positioning
 
 epics:
-  name: Axis1                                         # Axis anme
+  name: Axis2                                         # Axis anme
   precision: 3                                        # Decimal count
   description: very important motor axis              # Axis description
   unit: mm                                            # Unit

@@ -44,11 +44,16 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_2.yaml,LIMIT
 
 ecmcConfigOrDie "Cfg.AddAxisGroup(test)"
 ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test)"
-ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test)"
+#ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test)"
 
 ecmcConfig "GetAxisGroupIndexByName(test)"
 epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 epicsEnvSet(GRP_ID,${ECMC_CONFIG_RETURN_VAL=0})
+
+
+ecmcConfigOrDie "Cfg.AddAxisGroup(test2)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test2)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test2)"
 
 ##############################################################################
 ## PLC 1
