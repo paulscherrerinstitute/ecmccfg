@@ -585,6 +585,116 @@ returns 0 if success or error code.
    
    Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR 0x1432B).
 ```
+### Function Lib: Motion Group
+
+```
+1.  mc_grp_get_enable(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if all axes in the group have the enable bit set, else false.
+   Note: The axes do not need to be enabled if this function returns true, see mc_grp_get_enabled().
+
+2.  mc_grp_get_any_enable(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if atleast one axis in the group has the enable bit set, else false.
+
+3.  mc_grp_get_enabled(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if all axes in the group are in enabled state, else false.
+
+4.  mc_grp_get_any_enabled(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if atleast one axis in the group is in enabled state, else false.
+
+5.  mc_grp_get_busy(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if all axes in the group are in busy state, else false.
+
+6.  mc_grp_get_any_busy(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if atleast one axis in the group is in busy state, else false.
+
+7.  mc_grp_get_any_error_id(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns error id if atleast one axis in the group is in error state, else zero.
+
+8.  mc_grp_set_enable(
+                     <grp_id>,         : Group index
+                     <enable>          : Enable state
+                     );
+   
+   Sets enable for all axes in group.
+   Returns 0 or error id.
+
+9.  mc_grp_set_traj_src(
+                     <grp_id>,         : Group index
+                     <source>          : Trajectory source (0 = internal, 1 = external/PLC )
+                     );
+   
+   Sets trajectory source for all axes in group.
+   Returns 0 or error id.
+
+10.  mc_grp_set_enc_src(
+                     <grp_id>,         : Group index
+                     <source>          : Encoder source (0 = internal, 1 = external/PLC )
+                     );
+   
+   Sets encoder source for all axes in group.
+   Returns 0 or error id.
+
+11.  mc_grp_reset_error(
+                     <grp_id>,         : Group index
+                     );
+   
+   Resets error of all axes in group.   
+
+12.  mc_grp_set_error(
+                     <grp_id>,         : Group index
+                     <error_id>        : Error Id
+                     );
+   
+   Set error id of all axes in group.
+
+13.  mc_grp_set_slaved_axis_in_error(
+                     <grp_id>,         : Group index
+                     );
+   
+   Set error id of all axes in group to ERROR_AXIS_SLAVED_AXIS_IN_ERROR (0x1432B)
+
+14.  mc_grp_halt(
+                     <grp_id>,         : Group index
+                     );
+   
+   Halt all axes in group (only works if traj source = internal/0)
+
+15.  mc_grp_axis_in_grp(
+                     <grp_id>,         : Group index
+                     <axis_id>,        : Axis index
+                     );
+   
+   Returns true if axis is in group, else false.
+
+16.  mc_grp_size(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns the number of axes in group.
+
+```
+
 ### Function Lib: Data Storage
 ```
 1. retvalue = ds_append_data(
