@@ -291,14 +291,16 @@ input:
 ## output
 Two outputs can be utilizes with `ECMC`.
 
+{{% notice info %}}
+The brake output was moved to the `drive` key, as it is directly coupled to the drive state.
+{{% /notice %}}
+
 optional
 - `health`: sum parameter for axis health
-- `brake`: brake output
 
 ```yaml
 # output:
 #   health: ''      # Ethercat entry for health output
-#   brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
 ```
 
 ## homing
