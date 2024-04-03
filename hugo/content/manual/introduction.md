@@ -94,9 +94,9 @@ In order to manually set `binaryOutput01` to `1` at startup, the following can b
 
 ##### adding a physical motor axis
 Axis configuration will is explained in details [here](../axis).
-The prefered way to confugre axes is with the `yaml` based configuration.
-It unifiyes the way, (1) physical axes, (2) virtual axes and (3) synchronization is handled.
-It is theoreticall possible to use a mix of `yaml` and classic configuration, but this is untested.
+The preferred way to confuser axes is with the `yaml` based configuration.
+It unifies the way, (1) physical axes, (2) virtual axes and (3) synchronization is handled.
+It is theoretically possible to use a mix of `yaml` and classic configuration, but this is untested.
 
   * yaml config
   ```bash
@@ -120,7 +120,7 @@ It is theoreticall possible to use a mix of `yaml` and classic configuration, bu
   ```   
 
 ##### loading a PLC from file
-The PLC functionionality is exmplained in detail here.
+The PLC functionality is explained in detail here.
 ECMC PLCs can be loaded from classical PLC files, from pure yaml files or from a yaml/PLC hybrid.
   * classic PLC-file
   ```bash
