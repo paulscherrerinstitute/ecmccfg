@@ -94,15 +94,18 @@ In order to manually set `binaryOutput01` to `1` at startup, the following can b
 
 ##### adding a physical motor axis
 Axis configuration will is explained in details [here](../axis).
+The prefered way to confugre axes is with the `yaml` based configuration.
+It unifiyes the way, (1) physical axes, (2) virtual axes and (3) synchronization is handled.
+It is theoreticall possible to use a mix of `yaml` and classic configuration, but this is untested.
 
+  * yaml config
+  ```bash
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=./cfg/ax1.yaml, DEV=${DEV}, DRV_SLAVE=4, ENC_SLAVE=3, ENC_CHANNEL=01"
+  ```
   * classic config
   ```bash
   epicsEnvSet("DEV",      "STEST-MYDEVICE")
   ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureAxis.cmd,  "CONFIG=./cfg/axis_1"
-  ```
-   * yaml config
-  ```bash
-  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addAxisYaml.cmd, "FILE=./AM8111_CSV_minimum.yaml, ECMC_TMPDIR=/tmp/"
   ```
 
 ##### adding a virtual motor axis
