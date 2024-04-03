@@ -110,13 +110,13 @@ It is theoretically possible to use a mix of `yaml` and classic configuration, b
 
 ##### adding a virtual motor axis
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/axis_11_virt"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureVirtualAxis.cmd,     "CONFIG=./cfg/axis_11_virt"
   ```
 
 ##### adding synchronization
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_1_sync"
-  ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_11_sync"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_1_sync"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_11_sync"
   ```   
 
 ##### loading a PLC from file
@@ -124,18 +124,18 @@ The PLC functionality is explained in detail here.
 ECMC PLCs can be loaded from classical PLC files, from pure yaml files or from a yaml/PLC hybrid.
   * classic PLC-file
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
   ```
   * pure yaml based PLC
   ```bash
-  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1.yaml"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd "FILE=./plc1.yaml"
   ```
   * yaml definition, with classic PLC-file, Note: `file` key in yaml config will overwrite anything in the `code` key!
   ```bash
-  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1File.yaml"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd "FILE=./plc1File.yaml"
   ```
 
 #### go active
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
   ```
