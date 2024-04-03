@@ -128,11 +128,11 @@ ECMC PLCs can be loaded from classical PLC files, from pure yaml files or from a
   ```
   * pure yaml based PLC
   ```bash
-  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1.yaml, ECMC_TMPDIR=/tmp/"
+  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1.yaml"
   ```
   * yaml definition, with classic PLC-file, Note: `file` key in yaml config will overwrite anything in the `code` key!
   ```bash
-  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1File.yaml, ECMC_TMPDIR=/tmp/"
+  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1File.yaml"
   ```
 
 #### go active
