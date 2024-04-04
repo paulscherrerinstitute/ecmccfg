@@ -1,0 +1,43 @@
+##############################################################################
+## Example config for EL2521 step direction drive
+
+##############################################################################
+## Initiation:
+
+require ecmccfg sandst_a "ENG_MODE=1"
+
+##############################################################################
+## Config hardware:
+#
+# 19  0:19  PREOP  +  EL9227-5500 �berstromschutz 24V DC, 2K., max. 10A (Summe), eins
+# 20  0:20  PREOP  +  EL2521 1K. Pulse Train Ausgang
+#
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=19, HW_DESC=EL9227-5500"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "HW_DESC=EL2521, CONFIG=-stepDirectionDrive"
+epicsEnvSet("DRV_ID","$(ECMC_EC_SLAVE_NUM)")
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## AXIS 1 
+#
+#epicsEnvSet("DEV",      "$(IOC)")
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el2521.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)loadYamlAxis.cmd, FILE=./cfg/axis_open_loop.yaml)
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+##############################################################################
+############# go active:
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+iocInit()
