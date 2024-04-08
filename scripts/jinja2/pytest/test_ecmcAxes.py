@@ -1,11 +1,14 @@
+import sys  
 import pytest
 import re
-from ecmcAxes import EcmcAxis
 
 base_path = 'scripts/jinja2/'
 templates_path = f'{base_path}templates/'
 yaml_path = f'{base_path}pytest/yaml_files/'
 ref_path = f'{base_path}pytest/reference_files/'
+
+sys.path.append(base_path)
+from ecmcAxes import EcmcAxis
 
 @pytest.mark.dependency()
 def test_init():
