@@ -94,45 +94,48 @@ In order to manually set `binaryOutput01` to `1` at startup, the following can b
 
 ##### adding a physical motor axis
 Axis configuration will is explained in details [here](../axis).
+The preferred way to confuser axes is with the `yaml` based configuration.
+It unifies the way, (1) physical axes, (2) virtual axes and (3) synchronization is handled.
+It is theoretically possible to use a mix of `yaml` and classic configuration, but this is untested.
 
+  * yaml config
+  ```bash
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=./cfg/ax1.yaml, DEV=${DEV}, DRV_SLAVE=4, ENC_SLAVE=3, ENC_CHANNEL=01"
+  ```
   * classic config
   ```bash
   epicsEnvSet("DEV",      "STEST-MYDEVICE")
   ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureAxis.cmd,  "CONFIG=./cfg/axis_1"
   ```
-   * yaml config
-  ```bash
-  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addAxisYaml.cmd, "FILE=./AM8111_CSV_minimum.yaml, ECMC_TMPDIR=/tmp/"
-  ```
 
 ##### adding a virtual motor axis
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/axis_11_virt"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureVirtualAxis.cmd,     "CONFIG=./cfg/axis_11_virt"
   ```
 
 ##### adding synchronization
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_1_sync"
-  ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_11_sync"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_1_sync"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_11_sync"
   ```   
 
 ##### loading a PLC from file
-The PLC functionionality is exmplained in detail here.
+The PLC functionality is explained in detail here.
 ECMC PLCs can be loaded from classical PLC files, from pure yaml files or from a yaml/PLC hybrid.
   * classic PLC-file
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
   ```
   * pure yaml based PLC
   ```bash
-  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1.yaml, ECMC_TMPDIR=/tmp/"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd "FILE=./plc1.yaml"
   ```
   * yaml definition, with classic PLC-file, Note: `file` key in yaml config will overwrite anything in the `code` key!
   ```bash
-  ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}loadYamlPlc.cmd" "FILE=./plc1File.yaml, ECMC_TMPDIR=/tmp/"
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd "FILE=./plc1File.yaml"
   ```
 
 #### go active
   ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+  ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
   ```

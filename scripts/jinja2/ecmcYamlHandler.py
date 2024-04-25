@@ -92,12 +92,6 @@ class YamlHandler:
         except KeyError:
             self.hasPlcFile = False
 
-        # Above will not catch error if wrong filename is set in plc.file
-        if 'plc' in self.yamlData.keys():
-            if 'file' in self.yamlData['plc'].keys():
-                if not len(self.hasPlcFile and self.yamlData['plc']['file']) > 0:
-                    raise FileNotFoundError("File not found: " + str(plc_file))
-
     def getAxisType(self, type_=None):
         if type_ is None:
             try:

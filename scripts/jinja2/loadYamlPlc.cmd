@@ -16,9 +16,6 @@
 #- halt the ioc startup in case od an error
 on error halt
 
-#- halt the ioc startup in case od an error
-on error halt
-
 # Step 1: Get Filename (need to check if filename contains other macros also). Bascally run the filename in this iocsh
 ecmcFileExist("${FILE}",1)
 epicsEnvSet(FILE_TEMP_BASE,${ECMC_TMP_DIR}${FILE})
