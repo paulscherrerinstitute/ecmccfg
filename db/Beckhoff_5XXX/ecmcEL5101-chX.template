@@ -76,8 +76,8 @@ record(seq, "${ECMC_P}Enc${CH_ID}-LtchRst") {
 record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): Enc Actl Pos (Raw)")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionActual${CH_ID}?")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT64TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).positionActual${CH_ID}?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
