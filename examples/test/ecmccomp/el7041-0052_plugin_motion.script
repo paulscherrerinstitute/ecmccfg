@@ -1,9 +1,9 @@
 ##############################################################################
 ## Example config for el7041
 
-require ecmccfg "ENG_MODE=1,MAX_PARAM_COUNT=1000"
-
 epicsEnvSet(IOC,c6025a)
+require ecmccfg "ECMC_VER=sandst_a,ENG_MODE=1,MAX_PARAM_COUNT=1000"
+
 # Load components lib
 require ecmccomp sandst_a
 
@@ -23,11 +23,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_2), HW_DESC=EL50
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
 
-#-epicsEnvSet("ENC_SLAVE_3",            "15")
-#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_3), HW_DESC=EL5002"
-#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
-#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=2"
-
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
@@ -35,8 +30,19 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc.yaml,LIMIT=1000,TYPE=0"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_plg_motion_1.yaml"
+
+##############################################################################
+## AXIS 2
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_plg_motion_2.yaml"
+
+##############################################################################
+## Load plugin: MOTION
+#
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=2000,DBG=0,ENA=1")
+require ecmc_plugin_motion test "${ECMC_PLUGIN_CONFIG}"
 
 ##############################################################################
 ############# Configure diagnostics:

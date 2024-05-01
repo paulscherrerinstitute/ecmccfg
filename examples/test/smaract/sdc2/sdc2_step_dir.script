@@ -4,7 +4,7 @@
 ##############################################################################
 ## Initiation:
 
-require ecmccfg sandst_a "ENG_MODE=1"
+require ecmccfg sandst_a "ENG_MODE=1,EC_RATE=500"
 
 ##############################################################################
 ## Config hardware:
