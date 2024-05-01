@@ -2,7 +2,7 @@ record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=UINT64TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).positionActual$(CH_ID)?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).positionActual$(CH_ID)?")
   field(SCAN, "I/O Intr")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
