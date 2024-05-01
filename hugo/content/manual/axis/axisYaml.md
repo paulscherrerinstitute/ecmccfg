@@ -291,14 +291,16 @@ input:
 ## output
 Two outputs can be utilizes with `ECMC`.
 
+{{% notice info %}}
+The brake output was moved to the `drive` key, as it is directly coupled to the drive state.
+{{% /notice %}}
+
 optional
 - `health`: sum parameter for axis health
-- `brake`: brake output
 
 ```yaml
 # output:
 #   health: ''      # Ethercat entry for health output
-#   brake: 'ec0.s42.binaryOutput07'       # Ethercat entry for brake output
 ```
 
 ## homing
@@ -339,23 +341,32 @@ Soft limits to propagate to the motorRecord.
 
 optional
 
-- `enable`: enable soft limits.
-- `forward`: soft limit in the forward direction
-- `backward`: soft limit in the backward direction
+- `enable`: global enable of soft limits.
+- `forwardEnable`: forward on/off.
+- `forward`: soft limit in the forward direction.
+- `backwardEnable`: backward on/off.
+- `backward`: soft limit in the backward direction.
 
 ```yaml
 # softlimits:
-#   enable: false
-#   forward: ''
-#   backward: ''
+#   enable: true
+#   forwardEnable: true # optional switch for forward direction
+#   forward: 300.0
+#   backwardEnable: true # optional switch for backward direction
+#   backward: 25.0
 ```
 
 ## monitoring
 Three entities can be monitored, (1) lag, aka following error, (2) target, aka in position, (3) velocity.
 
 {{% notice info %}}
-It is highly advisable to always use the `lag` and `attarget` monitoring fo closed-loop axis.
+It is highly advisable to always use the `lag` and `target` monitoring fo closed-loop axis.
 Failure to do so, will most likely results in unexpected behaviour.
+{{% /notice %}}
+
+{{% notice info %}}
+The `monitoring` key, **must** be included in the config, despite all features being optional.
+It's a means to let the integrator think twice to skip it all together.
 {{% /notice %}}
 
 optional

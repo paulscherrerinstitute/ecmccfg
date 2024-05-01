@@ -85,6 +85,16 @@ record(ai,"$(P)MCU-ThdPrdMax"){
   field(EGU,  "ns")
 }
 
+record(calc,"$(P)MCU-ThdFrqAvg") {
+  field(DESC, "Average thread freq")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "2E9/(A+B)")
+  field(INPA,"$(P)MCU-ThdPrdMin")
+  field(INPB,"$(P)MCU-ThdPrdMax CP")
+  field(EGU,  "Hz")
+  field(PREC, "3")
+}
+
 record(ai,"$(P)MCU-ThdExeMin"){
   field(PINI, "1")
   field(DTYP, "asynInt32")

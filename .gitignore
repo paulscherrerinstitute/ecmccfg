@@ -34,3 +34,5 @@ tools
 hugo/content/source/
 
 *.pyc
+
+.hugo_build.lock
