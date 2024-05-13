@@ -1,0 +1,58 @@
+if(plc0.firstscan) {
+  static.oneCycleTime:=150;
+  static.ffShiftTime:=10;
+  static.amp:=2;
+  static.first:=1;
+  static.trqFFgain:=1000;
+}
+
+if(static.first) {
+  ax${AX_ID=1}.traj.setpos:=ax${AX_ID=1}.enc.actpos;
+  ec${M_ID=0}.s${S_ID=0}.torqueOffset01:=0;
+};
+
+# start seq
+if (not(static.busy) and static.exe and not(static.exeOld)) {
+  static.startpos:=ax${AX_ID=1}.enc.actpos;
+  static.time:=0;
+  static.busy:=true;
+  static.first:=false;
+  println('New motion triggered from position: ', static.startpos);
+};
+
+if(static.busy) {
+ static.time:=static.time + 1;
+ # Shift position time
+ static.time_pos:=static.time - static.ffShiftTime; # start trq ff 10 cycles before
+ if(static.time_pos > 0 and static.time_pos < static.oneCycleTime) {
+   static.setpos:=static.startpos + static.amp + static.amp * cos(static.time_pos*pi/static.oneCycleTime-pi);
+   static.velo:=-static.amp*sin(static.time_pos*pi/static.oneCycleTime-pi);
+   static.acc:=-static.amp*cos(static.time_pos*pi/static.oneCycleTime-pi);
+ } else if(static.time_pos < 0) {
+   static.setpos := static.startpos;
+ } else if(static.time_pos > static.oneCycleTime) {
+   static.setpos := static.startpos + 2 * static.amp;
+ };
+ 
+ #Pos error
+ var newval:=ds_get_data(${ID},static.time) + ax${AX_ID=1}.enc.actpos-ax${AX_ID=1}.traj.setpos;
+ ds_set_data(${ID},static.time, newval);
+
+ static.trq:= -ds_get_data(${ID},static.time + static.ffShiftTime)*static.trqFFgain;
+
+ println('pos,vel,acc,trq: ', static.setpos, static.velo, static.acc, static.trq);
+ ax${AX_ID=1}.traj.setpos:= static.setpos;
+ ec${M_ID=0}.s${S_ID=0}.torqueOffset01:=static.trq;
+
+} else {
+  ec${M_ID=0}.s${S_ID=0}.torqueOffset01:=0;
+};
+
+if(static.time >= 185 and static.busy) {
+  static.busy:=false;
+  ec${M_ID=0}.s${S_ID=0}.torqueOffset01:=0;
+  ds_push_asyn(${ID});
+};
+
+static.exeOld:=static.exe;
+
