@@ -34,6 +34,16 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }},
 
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
 dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homing.type|default(0)|int }},SREV={{ drive.denominator|default(1)|int }},UREV={{ drive.numerator|default(0)|float }},{{ epics.motorRecord.fieldInit|default('') }}")
+
+#- PVT
+{%- if epics.motorRecord.pvt %}
+  dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epics.name }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR={{ axis.id }},PREC={{ epics.precision }},NPOINTS={{ epics.motorRecord.pvt.npoints | default(0) }},NREADBACK={{ epics.motorRecord.pvt.nreadback | default(0) }}")
+  #- Save some vars for loading of ecmcProfileMoveController.template in setAppMode.cmd 
+  ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_RB_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.nreadback | default(0) }}",{{ epics.motorRecord.pvt.nreadback | default(0) }} ,${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0})
+  ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.npoints | default(0) }}",{{ epics.motorRecord.pvt.npoints | default(0) }} ,${ECMC_MR_PVT_MAX_POINTS_IN_USE=0})
+  ecmcEpicsEnvSetCalc(ECMC_MR_PVT_AXES_COUNT_IN_USE,"${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}+1")
+{%- endif %}
+
 #- -----------------------------------------------------------------------------
 #- Axis homing
 {%- if (homing) and (encoder.homing) %}
