@@ -37,11 +37,16 @@ dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX
 
 #- PVT
 {%- if epics.motorRecord.pvt %}
+  #- Seems addr is axis id -1?
+  #-ecmcEpicsEnvSetCalc(ECMC_MR_PVT_ADR_NUM,"{{ axis.id }}-1")
+  #- Ensure not negative
+  #-ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_ADR_NUM,"${ECMC_MR_PVT_ADR_NUM=0}<0",0 ,${ECMC_MR_PVT_ADR_NUM=0})
   dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epics.name }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR={{ axis.id }},PREC={{ epics.precision }},NPOINTS={{ epics.motorRecord.pvt.npoints | default(0) }},NREADBACK={{ epics.motorRecord.pvt.nreadback | default(0) }}")
   #- Save some vars for loading of ecmcProfileMoveController.template in setAppMode.cmd 
   ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_RB_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.nreadback | default(0) }}",{{ epics.motorRecord.pvt.nreadback | default(0) }} ,${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0})
   ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.npoints | default(0) }}",{{ epics.motorRecord.pvt.npoints | default(0) }} ,${ECMC_MR_PVT_MAX_POINTS_IN_USE=0})
   ecmcEpicsEnvSetCalc(ECMC_MR_PVT_AXES_COUNT_IN_USE,"${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}+1")
+  #-epicsEnvUnset(ECMC_MR_PVT_ADR_NUM)
 {%- endif %}
 
 #- -----------------------------------------------------------------------------
