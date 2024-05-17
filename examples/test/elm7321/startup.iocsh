@@ -1,0 +1,21 @@
+require ecmccfg,ELM7231 "ENG_MODE=1,ECMC_VER=9.2.0"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=ELM7231-0010, SLAVE_ID=20, CONFIG=-Motor-Beckhoff-AM8123-1NH1-0000"
+
+epicsEnvSet("DRV_SLAVE", ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/AM8123.yaml, DEV=${DEV=${IOC}}, DRV_SLAVE=${DRV_SLAVE}"
+
+#- #############################################################################
+#- apply configuration
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyConfig.cmd
+#- #############################################################################
+#- go active
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
+
+#- be quiet
+asynSetTraceMask(MC_CPU1, -1, 0x01)
+asynSetTraceIOMask(MC_CPU1, -1, 6)
+asynSetTraceInfoMask(MC_CPU1, -1, 1)
+
+#- reset all errors
+ecmcConfigOrDie "ControllerErrorReset()"

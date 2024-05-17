@@ -169,11 +169,14 @@ file "ecmc_analogOutput-chX.template"{
           {20,    spareInput, spareInput   }
 }
 
-
 file "ecmc_analogInput-chX.template"{
   pattern {CH_ID, KEY,  sourceName,   ESLO,             EGU,    PREC}
           {01,    revision,  revision,     1,           "",     0   }
           {01,    identification,  identification,  1,  "",     0   }
+  }
+
+file "ecmc_analogInputFloat-chX.template"{
+  pattern {CH_ID, KEY,  sourceName,   ESLO,             EGU,    PREC}
           {01,    extS, extSensorVal, 1,                "n/a",  3   }
           {02,    extS, extSensorVal, 1,                "n/a",  3   }
           {03,    extS, extSensorVal, 1,                "n/a",  3   }

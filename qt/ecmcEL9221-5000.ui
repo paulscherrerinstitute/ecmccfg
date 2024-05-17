@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=000,CH=01</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcEK1100.ui</string>
@@ -31,321 +31,6 @@
    <property name="frameShape">
     <enum>caInclude::Box</enum>
    </property>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_4">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>111</width>
-     <height>250</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>status</string>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,1">
-    <property name="leftMargin">
-     <number>1</number>
-    </property>
-    <property name="topMargin">
-     <number>1</number>
-    </property>
-    <property name="rightMargin">
-     <number>1</number>
-    </property>
-    <property name="bottomMargin">
-     <number>1</number>
-    </property>
-    <item row="8" column="0">
-     <widget class="caLabel" name="calabel_49">
-      <property name="text">
-       <string>cool down</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="caLabel" name="calabel_50">
-      <property name="text">
-       <string>short</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="caLabel" name="calabel_19">
-      <property name="text">
-       <string>state</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="caLabel" name="calabel_51">
-      <property name="text">
-       <string>over U</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="0">
-     <widget class="caLabel" name="calabel_52">
-      <property name="text">
-       <string>input</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="caLabel" name="calabel_53">
-      <property name="text">
-       <string>HW Prot</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="caLineEdit" name="calineedit_40">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CoolDwnAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="1">
-     <widget class="caLineEdit" name="calineedit_41">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisBIAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="caLineEdit" name="calineedit_15">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-TripAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="caLabel" name="calabel_54">
-      <property name="text">
-       <string>overload</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="caLabel" name="calabel_55">
-      <property name="text">
-       <string>under U</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="caLineEdit" name="calineedit_42">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-UdrVoltAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="0">
-     <widget class="caLabel" name="calabel_56">
-      <property name="text">
-       <string>switch</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="caLineEdit" name="calineedit_43">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-OvrVoltAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="caLineEdit" name="calineedit_16">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-EnaAct</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="caLabel" name="calabel_29">
-      <property name="text">
-       <string>tripped</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="0">
-     <widget class="caLabel" name="calabel_57">
-      <property name="text">
-       <string>PDO</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="caLineEdit" name="calineedit_44">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-OvrldAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="caLineEdit" name="calineedit_45">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-HwProtAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="caLineEdit" name="calineedit_46">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisSwtchAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="caLineEdit" name="calineedit_17">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-ShrtCircAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="1">
-     <widget class="caLineEdit" name="calineedit_47">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-DisPDOAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="caLabel" name="calabel_58">
-      <property name="text">
-       <string>level</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="caLineEdit" name="calineedit_48">
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-CurrLvlAlrm</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Alarm_Static</enum>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
   <widget class="caMessageButton" name="camessagebutton_2">
    <property name="geometry">
@@ -357,13 +42,13 @@
     </rect>
    </property>
    <property name="text">
-    <string>toggle</string>
+    <string>toggle reset</string>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-Ctrl-Rst</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-Ctrl-Rst</string>
    </property>
    <property name="label">
-    <string notr="true">toggle</string>
+    <string notr="true">toggle reset</string>
    </property>
    <property name="releaseMessage">
     <string notr="true">1</string>
@@ -389,13 +74,13 @@
     </font>
    </property>
    <property name="text">
-    <string>toggle</string>
+    <string>toggle switch</string>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH0$(CH)-Ctrl-Swtch</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-Ctrl-Swtch</string>
    </property>
    <property name="label">
-    <string notr="true">toggle</string>
+    <string notr="true">toggle switch</string>
    </property>
    <property name="foreground">
     <color>
@@ -417,6 +102,505 @@
    <property name="pressMessage">
     <string notr="true">0</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>111</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>status</string>
+   </property>
+   <widget class="caLabel" name="calabel_59">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>110</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>cool down</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_20">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>27</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>state</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_62">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>150</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>diag</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_63">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>70</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>HW Prot</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_49">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>110</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-CoolDwnAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_50">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>150</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-DiagAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_18">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>46</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-TripAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_66">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>130</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>switch</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_19">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>27</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-EnaAct</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_30">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>46</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>tripped</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_54">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>70</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-HwProtAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_55">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>130</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-SwtchAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_68">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>90</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>level</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_57">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>90</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-CurrLvlAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_64">
+    <property name="geometry">
+     <rect>
+      <x>-9</x>
+      <y>170</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>error</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_51">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>170</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-ErrAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_65">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>190</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>reset</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_52">
+    <property name="geometry">
+     <rect>
+      <x>59</x>
+      <y>190</y>
+      <width>48</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+      <pointsize>10</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-CH01-RstAlrm</string>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>160</red>
+      <green>160</green>
+      <blue>164</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Alarm_Static</enum>
+    </property>
+   </widget>
   </widget>
  </widget>
  <customwidgets>

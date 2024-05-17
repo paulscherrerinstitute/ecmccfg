@@ -1,0 +1,79 @@
+0x9009:
+  - 0x01: { type: string, desc: Motor vendor }
+  - 0x02: { type: string, desc: Motor type }
+  - 0x03: { type: string, desc: Serial number }
+  - 0x04: { type: string, desc: Order number }
+  - 0x05: { type: string, desc: Type of motor }
+  - 0x06: { type: uint32, desc: Number of pole pairs }
+  - 0x07: { type: uint32, desc: Standstill current (rms) }
+  - 0x08: { type: uint32, desc: Rated current (rms) }
+  - 0x09: { type: uint32, desc: Peak current (rms) }
+  - 0x0a: { type: uint32, desc: Nominal voltage (rms) }
+  - 0x0b: { type: uint32, desc: Max voltage (rms) Maximum voltage }
+  - 0x0c: { type: uint32, desc: Max winding du/dt }
+  - 0x0d: { type: uint16, desc: Max torque }
+  - 0x0e: { type: uint16, desc: Torque constant }
+  - 0x0f: { type: uint32, desc: EMF (rms) }
+  - 0x10: { type: uint16, desc: Winding resistance }
+  - 0x13: { type: uint32, desc: Maximum velocity }
+  - 0x15: { type: uint16, desc: Motor temp warn level }
+  - 0x16: { type: uint16, desc: Motor temp shutdown level }
+  - 0x17: { type: uint16, desc: Time constant I2T model }
+
+0x8010:
+  - 0x12: { type: uint16, desc: Current loop integral time }
+  - 0x13: { type: uint16, desc: Current loop proportional gain }
+  - 0x14: { type: uint32, desc: Velocity loop integral time }
+  - 0x15: { type: uint32, desc: Velocity loop proportional gain }
+  - 0x29: { type: uint8, desc: Amplifier I2T warn level }
+  - 0x2a: { type: uint8, desc: Amplifier I2T error level }
+
+0x8011:
+  - 0x11: { type: uint32, desc: Maximum current }
+  - 0x12: { type: uint32, desc: Rated current }
+  - 0x13: { type: uint8, desc: Number of pole pairs }
+  - 0x15: { type: int16, desc: Commutation offset }
+  - 0x16: { type: uint32, desc: Torque constant }
+  - 0x18: { type: uint32, desc: Rotor moment of inertia }
+  - 0x19: { type: uint16, desc: Winding inductance }
+  - 0x1b: { type: uint32, desc: Motor speed limitation }
+  - 0x29: { type: uint8, desc: I2T warn level }
+  - 0x2a: { type: uint8, desc: I2T error level }
+  - 0x2b: { type: uint16, desc: Motor Temperature warn level }
+  - 0x2d: { type: uint16, desc: Motor thermal time constant }
+
+0x8012:
+  - 0x11: { type: uint16, desc: Release delay }
+  - 0x12: { type: uint16, desc: Application delay }
+  - 0x14: { type: uint16, desc: Brake moment of inertia }
+
+#0x010A:
+#  - 0x11: { type: uint8, desc: Amplifier I2T model load in % }
+#
+#0x011A:
+#  - 0x11: { type: uint8, desc: Motor I2T model load in % }
+
+#9009:01 Motor vendor
+#9009:02 Motor type STRING
+#9009:03 Serial number STRING
+#9009:04 Order number STRING
+#9009:05 Type of motor STRING
+#9009:06 Number of pole pairs UINT32 RO 0x00000
+#9009:07 Standstill current (rms) UINT32 RO 0x00000000
+#9009:08 Rated current (rms)
+#9009:09 Peak current (rms) UINT32 RO 0x00000000
+#9009:0A Nominal voltage (rms)
+#9009:0B Max voltage (rms) Maximum voltage
+#9009:0C Max winding du/dt Maximum permissible voltage rise on the winding
+#9009:0D Max torque Maximum torque
+#9009:0E Torque constant Torque constant
+#9009:0F EMF (rms) Countervoltage
+#9009:10 Winding resistance Ph-Ph
+#9009:11 Ld Ph-Ph Inductance in the direction of flow
+#9009:12 Lq Ph-Ph Inductance in torque forming direction
+#9009:13 Max speed Maximum velocity
+#9009:14 Moment of inertia Mass moment of inertia
+#9009:15 T motor warn limit Motor temperature warning threshold
+#9009:16 T motor shut down Motor temperature error threshold
+#9009:17 Time constant i2t Time constant I2T model
+#9009:18 Motor thermal constant Thermal time constant of the motor

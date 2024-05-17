@@ -325,3 +325,75 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-HomPos-RB") {
 record (asyn, "$(PREFIX)$(MOTOR_NAME)-$(MOTOR_PORT)-asyn")
 {
 }
+
+#- If axis is in interlock then set motor STOP
+#record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpFwd"){
+#  #field(PINI, "1")
+#  field(SCAN, "Passive")
+#  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
+#  field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockFwd CP")
+#  field(ZNAM,  "OK")
+#  field(ONAM,  "STOP")
+#  field(VAL,  "1")
+#  field(OMSL, "closed_loop")
+#}
+#
+#record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpBwd"){
+#  #field(PINI, "1")
+#  field(SCAN, "Passive")
+#  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
+#  field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
+#  field(ZNAM,  "OK")
+#  field(ONAM,  "STOP")
+#  field(VAL,  "1")
+#  field(OMSL, "closed_loop")
+#}
+
+record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L"){
+  #field(PINI, "1")
+  field(DESC, "Trigg MR Sync")
+  field(SCAN, "Passive")
+  field(INPA,  "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
+  field(INPB,  "$(PREFIX)$(MOTOR_NAME)-SumIlockFwd CP")
+  field(INPC,  "1")
+  field(CALC,  "A && B")
+  field(OCAL,  "C")
+  field(DOPT,  "Use OCAL")
+  field(OOPT,  "Transition To Zero")
+  field(OUT,   "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq PP")
+}
+
+
+record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgL2H"){
+  #field(PINI, "1")
+  field(DESC, "Trigg MR Sync")
+  field(SCAN, "Passive")
+  field(INPA,  "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
+  field(INPB,  "$(PREFIX)$(MOTOR_NAME)-SumIlockFwd CP")
+  field(INPC,  "1")
+  field(CALC,  "A && B")
+  field(OCAL,  "C")
+  field(DOPT,  "Use OCAL")
+  field(OOPT,  "Transition To Non-zero")
+  field(OUT,   "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq PP")
+}
+
+record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq") {
+    field(DESC, "Trigg MR Sync")
+    field(PINI, "1")
+
+    field(DO1,  "0")
+    field(DO2,  "1")
+    field(DO3,  "1")
+    field(DO4,  "0")
+
+    field(DLY1, "0.01")
+    field(DLY2, "0.01")
+    field(DLY3, "0.01")
+    field(DLY4, "0.01")
+
+    field(LNK1, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
+    field(LNK2, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
+    field(LNK3, "$(PREFIX)$(MOTOR_NAME).STOP PP")
+    field(LNK4, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
+}

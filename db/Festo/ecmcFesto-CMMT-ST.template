@@ -25,8 +25,8 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=V)")
-  field(PREC, "$(PREC=7)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
   field(HIGH, "$(HIGH=0)")
@@ -40,6 +40,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
+  info(asyn:READBACK,"1")
   field(DESC, "$(HWTYPE): Drive Speed Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -47,8 +48,8 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=counts/s)")
-  field(PREC, "$(PREC=7)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
   field(HIGH, "$(HIGH=0)")
@@ -61,6 +62,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-Spd-PV"){
+  info(asyn:READBACK,"1")
   field(DESC, "$(HWTYPE): Drive Speed Setpoint PV")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -68,8 +70,8 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd-PV"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=counts/s)")
-  field(PREC, "$(PREC=7)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=3)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
   field(HIGH, "$(HIGH=0)")
@@ -82,6 +84,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd-PV"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-Trq"){
+  info(asyn:READBACK,"1")
   field(DESC, "$(HWTYPE): Drive Torque Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -89,8 +92,8 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Trq"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=torque)")
-  field(PREC, "$(PREC=7)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=3)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
   field(HIGH, "$(HIGH=0)")
@@ -103,6 +106,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Trq"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-Pos"){
+  info(asyn:READBACK,"1")
   field(DESC, "$(HWTYPE): Drive Position Setpoint")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -110,7 +114,29 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Pos"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=counts)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=3)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(ao,"${ECMC_P}Drv${CH_ID}-TrqOff"){
+  info(asyn:READBACK,"1")
+  field(DESC, "$(HWTYPE): Tourqe offse")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).torqueOffset${CH_ID}=")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -129,7 +155,7 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -172,6 +198,7 @@ record(mbbi,"${ECMC_P}Drv${CH_ID}-ModeAct"){
 }
 
 record(mbbo,"${ECMC_P}Drv${CH_ID}-ModeCmd"){
+    info(asyn:READBACK,"1")
     field(DESC, "Mode Command")
     field(ZRVL, "0")
     field(ONVL, "1")
@@ -200,25 +227,6 @@ record(mbbo,"${ECMC_P}Drv${CH_ID}-ModeCmd"){
     field(DTYP,"asynUInt32Digital")
     field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeControl$(CH_ID)=")
 }
-
-#record(ai,"${ECMC_P}Enc${CH_ID}-ModeAct"){
-#  field(DESC, "$(HWTYPE): Mode actual")
-#  field(PINI, "$(PINI=1)")
-#  field(DTYP, "asynInt32")
-#  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeStatus$(CH_ID)?")
-#  field(SCAN, "I/O Intr")
-#  field(TSE,  "$(TSE=-2)")
-#}
-#
-#record(ai,"${ECMC_P}Enc${CH_ID}-ModeCmd"){
-#  field(DESC, "$(HWTYPE): Mode cmd")
-#  field(PINI, "$(PINI=1)")
-#  field(DTYP, "asynInt32")
-#  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).modeControl$(CH_ID)?")
-#  field(SCAN, "I/O Intr")
-#  field(VAL,  "9")
-#  field(TSE,  "$(TSE=-2)")
-#}
 
 record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual position")
@@ -266,7 +274,7 @@ record(ai,"${ECMC_P}Enc${CH_ID}-VelAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"${ECMC_P}Drv${CH_ID}-TorAct"){
+record(ai,"${ECMC_P}Drv${CH_ID}-TrqAct"){
   field(DESC, "$(HWTYPE): CH$(CH_ID): Actual torque")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
@@ -275,8 +283,8 @@ record(ai,"${ECMC_P}Drv${CH_ID}-TorAct"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=torque)")
-  field(PREC, "$(PREC=7)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=3)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
   field(HIGH, "$(HIGH=0)")
@@ -287,4 +295,154 @@ record(ai,"${ECMC_P}Drv${CH_ID}-TorAct"){
   field(HSV,  "$(HSV=NO_ALARM)")
   field(HHSV, "$(HHSV=NO_ALARM)")
   field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
+  field(DESC, "$(HWTYPE): Drv Warn")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
+  field(DESC, "$(HWTYPE): Drv Err")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "")
+}
+
+record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
+  field(DESC, "$(HWTYPE): Drive Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
+  field(PREC, "0")
+}
+
+record(longin,"${ECMC_P}Drv${CH_ID}-BIWd"){
+  field(DESC, "$(HWTYPE): Drive Input Wd")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryInputWd${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BIWdShft_.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(calc,"${ECMC_P}Drv${CH_ID}-BIWdShft_") {
+  field(DESC, "$(HWTYPE): Drive Input wd shift")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A>>16")
+  field(INPA, "${ECMC_P}Drv${CH_ID}-BIWd.VAL")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BIWd_.PROC")
+}
+
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-BIWd_"){
+  field(DESC, "$(HWTYPE): Slv Stat Wd")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWdShft_.VAL")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BIEn.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BIEn"){
+  field(DESC, "$(HWTYPE): Ctrl Ena input")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.B0")
+  field(ZNAM, "Not Enable")
+  field(ONAM, "Enable")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-STO02.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-STO02"){
+  field(DESC, "$(HWTYPE): STO 02")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.B8")
+  field(ZNAM, "STO")
+  field(ONAM, "OP")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-STO01.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-STO01"){
+  field(DESC, "$(HWTYPE): STO 02")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.B9")
+  field(ZNAM, "STO")
+  field(ONAM, "OP")
+  field(ZSV,  "MAJOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
+  field(DESC, "$(HWTYPE): BI 02 (X1A.8)")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.BA")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")  
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
+  field(DESC, "$(HWTYPE): BI 01 (X1A.7)")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BIWd_.BB")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")  
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-BO01"){
+  field(DESC, "$(HWTYPE): BO 01 (X1A.9)")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd_.PROC")  
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-BO02"){
+  field(DESC, "$(HWTYPE): BO 02 (X1A.10)")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd_.PROC")
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-BOBrk"){
+  field(DESC, "$(HWTYPE): BO Brake (X6.5)")
+  field(ZNAM, "ZERO")
+  field(ONAM, "ONE")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd_.PROC")
+}
+
+record(calc,"${ECMC_P}Drv${CH_ID}-BOWd_") {
+  field(DESC, "$(HWTYPE): Drive Outputs")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "(A)+(B<<16)+(C<<17)")
+  field(INPA, "${ECMC_P}Drv${CH_ID}-BOBrk.VAL")
+  field(INPB, "${ECMC_P}Drv${CH_ID}-BO01.VAL")
+  field(INPC, "${ECMC_P}Drv${CH_ID}-BO02.VAL")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BOWd.PROC")
+}
+
+record(longout,"${ECMC_P}Drv${CH_ID}-BOWd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "$(HWTYPE): Drive Output Wd")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutputWd${CH_ID}=")  
+  field(DOL,  "${ECMC_P}Drv${CH_ID}-BOWd_")
+  field(OMSL, "closed_loop")  
 }

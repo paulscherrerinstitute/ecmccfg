@@ -1,0 +1,78 @@
+##############################################################################
+## Example config for el7031
+
+require ecmccfg 9.4.0,"ECMC_VER=sandst_a,ENG_MODE=1"
+
+epicsEnvSet(IOC,c6025a)
+# Load components lib
+require ecmccomp
+
+##############################################################################
+## Configure hardware
+
+#-epicsEnvSet("ENC_SLAVE_1",          "2")
+#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_1), HW_DESC=EL5001"
+#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
+
+epicsEnvSet("DRV_SLAVE",              "13")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230,STEPS=400'"
+
+epicsEnvSet("ENC_SLAVE_2",            "14")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_2), HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+## AXIS 1
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_1.yaml,LIMIT=1000,TYPE=0"
+
+
+##############################################################################
+## AXIS 2: Virt only for test
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_2.yaml,LIMIT=1000,TYPE=0"
+
+##############################################################################
+## Group "test"
+
+ecmcConfigOrDie "Cfg.AddAxisGroup(test)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test)"
+#ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test)"
+
+ecmcConfig "GetAxisGroupIndexByName(test)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+epicsEnvSet(GRP_ID,${ECMC_CONFIG_RETURN_VAL=0})
+
+
+ecmcConfigOrDie "Cfg.AddAxisGroup(test2)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(1,test2)"
+ecmcConfigOrDie "Cfg.AddAxisToGroupByName(2,test2)"
+
+##############################################################################
+## PLC 1
+#
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlPlc.cmd, "FILE=./plc/plc_cfg.yaml,PLC_PATH=./plc/, GRP_ID=${GRP_ID=0}"
+
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+#- ecmcConfig "Cfg.SetAxisErrorId(1,100000)"
+

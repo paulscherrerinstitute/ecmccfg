@@ -391,6 +391,44 @@ Below the ECMC specific accessible variables and functions are listed:
 21. retvalue=ec_err_rst():
     Resets error code for ec_lib.
 ```
+
+### Function Lib: Master to Master communication (within same host)
+
+Support for communication between different ecmc ioc:s running on the same host.
+A shared memory buffer of 120 doubles can be accessed for read and write operations by alll ecmc ioc running on the same master.
+
+```
+1. retvalue = m2m_write(
+                      <index>,       : Mem buffer index (index must be 0..119)
+                      <value>):      : value to write
+   returns 0 if success or error code.
+   Write a value to an index of a common memory buffer accessible by all masters running on same host
+
+2. retvalue = m2m_read(<index>);     : Mem buffer index (index must be 0..119)
+                      
+   returns the value stored at index in the shared mem buffer.
+
+3. retvalue = m2m_stat();
+                      
+   returns 1 if connection to shared memory is OK, else 0 or a negative value with an errro code.
+
+4. m2m_err_rst();
+                      
+   reset any m2m error codes.
+
+5. retvalue = m2m_err_rst();
+                      
+   returns current m2m error code.
+
+6. retvalue = m2m_ioc_ec_ok(<master_index>);
+
+   returns status etehrcat status of another ecmc ioc (1==op, 0==not op, -1==error).
+
+7. retvalue = m2m_ioc_run(<master_index>);
+
+   checks of a certian master is running (negative master id is ioc:s without ec master).
+```
+
 ### Function Lib: Motion
 ```
 1. retvalue = mc_move_abs(
@@ -534,7 +572,129 @@ returns 0 if success or error code.
 
    Returns primary encoder index of the axis (the encoder used for control).
 
+18. mc_set_axis_error(
+                        <axis_id>,         : Axis index
+                        <error_code>       : Error code to set
+                        );
+   
+   Sets an arbitrary error code to an axis object.
+
+19. mc_set_slaved_axis_in_error(
+                        <axis_id>,         : Axis index
+                        );
+   
+   Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR 0x1432B).
 ```
+### Function Lib: Motion Group
+
+```
+1.  mc_grp_get_enable(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if all axes in the group have the enable bit set, else false.
+   Note: The axes do not need to be enabled if this function returns true, see mc_grp_get_enabled().
+
+2.  mc_grp_get_any_enable(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if atleast one axis in the group has the enable bit set, else false.
+
+3.  mc_grp_get_enabled(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if all axes in the group are in enabled state, else false.
+
+4.  mc_grp_get_any_enabled(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if atleast one axis in the group is in enabled state, else false.
+
+5.  mc_grp_get_busy(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if all axes in the group are in busy state, else false.
+
+6.  mc_grp_get_any_busy(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns true if atleast one axis in the group is in busy state, else false.
+
+7.  mc_grp_get_any_error_id(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns error id if atleast one axis in the group is in error state, else zero.
+
+8.  mc_grp_set_enable(
+                     <grp_id>,         : Group index
+                     <enable>          : Enable state
+                     );
+   
+   Sets enable for all axes in group.
+   Returns 0 or error id.
+
+9.  mc_grp_set_traj_src(
+                     <grp_id>,         : Group index
+                     <source>          : Trajectory source (0 = internal, 1 = external/PLC )
+                     );
+   
+   Sets trajectory source for all axes in group.
+   Returns 0 or error id.
+
+10.  mc_grp_set_enc_src(
+                     <grp_id>,         : Group index
+                     <source>          : Encoder source (0 = internal, 1 = external/PLC )
+                     );
+   
+   Sets encoder source for all axes in group.
+   Returns 0 or error id.
+
+11.  mc_grp_reset_error(
+                     <grp_id>,         : Group index
+                     );
+   
+   Resets error of all axes in group.   
+
+12.  mc_grp_set_error(
+                     <grp_id>,         : Group index
+                     <error_id>        : Error Id
+                     );
+   
+   Set error id of all axes in group.
+
+13.  mc_grp_set_slaved_axis_in_error(
+                     <grp_id>,         : Group index
+                     );
+   
+   Set error id of all axes in group to ERROR_AXIS_SLAVED_AXIS_IN_ERROR (0x1432B)
+
+14.  mc_grp_halt(
+                     <grp_id>,         : Group index
+                     );
+   
+   Halt all axes in group (only works if traj source = internal/0)
+
+15.  mc_grp_axis_in_grp(
+                     <grp_id>,         : Group index
+                     <axis_id>,        : Axis index
+                     );
+   
+   Returns true if axis is in group, else false.
+
+16.  mc_grp_size(
+                     <grp_id>,         : Group index
+                     );
+   
+   Returns the number of axes in group.
+
+```
+
 ### Function Lib: Data Storage
 ```
 1. retvalue = ds_append_data(

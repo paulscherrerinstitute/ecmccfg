@@ -3,6 +3,9 @@ axis:
   type: joint                                         # this is for future selection of axis type
   # mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
   # parameters: 'axisPar' # additional parameters     # Additional params to motor record driver
+  #                                                       "powerAutoOnOff=<value>;"  //2: What you want, 1:do not use, 0 to disable
+  #                                                       "powerOffDelay=<value>:"
+  #                                                       "powerOnDelay=<value>;"
   #healthOutput: ec0...                               # Ethercat entry for health output
   # autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
   #   modeSet: ec0..                                  # Ethercat entry drive mode write (set CSV,CSP,homing)

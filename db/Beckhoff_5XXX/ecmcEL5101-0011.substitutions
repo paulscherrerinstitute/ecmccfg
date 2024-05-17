@@ -3,3 +3,9 @@ file "ecmcEL5101-0011-chX.template"
   pattern { CH_ID, DTYP,             FTVL }
           { 01,    asynInt32ArrayIn, LONG }
 }
+
+# timestamp
+file "ecmc_timestamp_64-chX.template"{
+  pattern {CH_ID, KEY,      suffix,        sourceName         }
+          {"",    "Enc01",   "-Time",       "nextSyncTime"    }
+}

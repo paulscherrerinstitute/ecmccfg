@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>102</width>
+    <width>105</width>
     <height>402</height>
    </rect>
   </property>
@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>1</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>1</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>1</number>
+   </property>
+   <property name="bottomMargin">
     <number>1</number>
    </property>
    <item>
@@ -32,13 +41,22 @@
       <enum>QFrame::Panel</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
        <number>1</number>
       </property>
       <property name="spacing">
        <number>1</number>
       </property>
-      <item row="2" column="0">
+      <item row="1" column="0">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -51,31 +69,72 @@
         </property>
        </spacer>
       </item>
-      <item row="0" column="0">
-       <widget class="caLabel" name="calabel_12">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>25</height>
-         </size>
+      <item row="3" column="0">
+       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0" columnstretch="10,0">
+        <property name="leftMargin">
+         <number>2</number>
         </property>
-        <property name="text">
-         <string>Master[$(MasterID)]
-SlaveID[$(SlaveID)]</string>
+        <property name="topMargin">
+         <number>2</number>
         </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0" columnstretch="8,2">
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
         <property name="horizontalSpacing">
          <number>4</number>
         </property>
         <property name="verticalSpacing">
          <number>2</number>
         </property>
-        <property name="margin">
-         <number>2</number>
-        </property>
+        <item row="0" column="0">
+         <widget class="caLabel" name="calabel">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>online:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="caLed" name="caled_2">
+          <property name="rectangular">
+           <bool>true</bool>
+          </property>
+          <property name="gradientEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="ledWidth">
+           <number>16</number>
+          </property>
+          <property name="ledHeight">
+           <number>16</number>
+          </property>
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Operational</string>
+          </property>
+          <property name="falseColor">
+           <color>
+            <red>170</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueColor">
+           <color>
+            <red>0</red>
+            <green>85</green>
+            <blue>0</blue>
+           </color>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0">
          <widget class="caLabel" name="calabel_2">
           <property name="minimumSize">
@@ -125,65 +184,9 @@ SlaveID[$(SlaveID)]</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="caLabel" name="calabel">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>online:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="caLed" name="caled_2">
-          <property name="rectangular">
-           <bool>true</bool>
-          </property>
-          <property name="gradientEnabled">
-           <bool>false</bool>
-          </property>
-          <property name="ledWidth">
-           <number>16</number>
-          </property>
-          <property name="ledHeight">
-           <number>16</number>
-          </property>
-          <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Operational</string>
-          </property>
-          <property name="falseColor">
-           <color>
-            <red>170</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </property>
-          <property name="trueColor">
-           <color>
-            <red>0</red>
-            <green>85</green>
-            <blue>0</blue>
-           </color>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
-      <item row="1" column="0">
-       <widget class="Line" name="line">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
+      <item row="2" column="0">
        <widget class="Line" name="line_2">
         <property name="frameShadow">
          <enum>QFrame::Plain</enum>
@@ -193,12 +196,89 @@ SlaveID[$(SlaveID)]</string>
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="caFrame" name="caframe_2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <widget class="QWidget" name="horizontalLayoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>2</width>
+           <height>2</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+        </widget>
+        <widget class="caRelatedDisplay" name="carelateddisplay_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>20</width>
+           <height>10</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>10</width>
+           <height>10</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="labels">
+          <string/>
+         </property>
+         <property name="files">
+          <string>ecmcE_slave_frame_S_details.ui</string>
+         </property>
+         <property name="args">
+          <string>IOC=$(IOC),SlaveID=$(SlaveID),MasterID=$(MasterID);</string>
+         </property>
+        </widget>
+        <widget class="caLabel" name="calabel_14">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>96</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Master[$(MasterID)]
+SlaveID[$(SlaveID)]</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
+  </customwidget>
   <customwidget>
    <class>caFrame</class>
    <extends>QFrame</extends>

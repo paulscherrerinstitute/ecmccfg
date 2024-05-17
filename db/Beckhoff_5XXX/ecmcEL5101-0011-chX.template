@@ -104,7 +104,7 @@ record(waveform,"${ECMC_P}Enc${CH_ID}-PosAct-Arr"){
   field(DESC, "$(HWTYPE): Actual position Array [$(NELM)]")
   field(PINI, "$(PINI=1)")
   field(DTYP, "$(DTYP=asynInt16ArrayIn)")
-  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt16ArrayIn/ec$(MASTER_ID).s$(SLAVE_POS).mm.positionActualArray${CH_ID}?")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=${DTYP=asynInt16ArrayIn}/ec$(MASTER_ID).s$(SLAVE_POS).mm.positionActualArray${CH_ID}?")
   field(FTVL, "$(FTVL=SHORT)")
   field(NELM, "$(NELM)")
   field(SCAN, "I/O Intr")

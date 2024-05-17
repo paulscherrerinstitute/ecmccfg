@@ -14,6 +14,7 @@
 #-d   \param NELM (optional) Used for oversampling cards. Defaults to 1
 #-d   \param DEFAULT_SUBS (optional) option to disble default PVs for mapped PDOs
 #-d   \param DEFAULT_SLAVE_PVS (optional, caution!) basic slave PVs, i.e. ${ECMC_P}-Operational will be suppressed
+#-d   \param CALLED_FROM_CFG_SLAVE (optional) Set if called by configureSlave.cmd, default 0
 #-d   \note Example calls:
 #-d   \note - call w/o SLAVE_ID
 #-d   \code
@@ -34,6 +35,11 @@
 #-d   \pre A master has to be claimed by calling \b addMaster.cmd, which is typically done within the startup.script
 #-d   \post After all slaves have been added to the bus configuration, \b applyConfig.cmd has to be called.
 #-d */
+
+#- Only allow macro CONFIG if called from configureSlave.cmd  (avoid copy paste errors)
+ecmcIf("'${CONFIG=NAN}'!='NAN' and ${CALLED_FROM_CFG_SLAVE=0}!=1")
+${IF_TRUE}ecmcExit : Error: addSlave.script is not accepting CONFIG macro. Use configureSlave.cmd instead
+ecmcEndIf()
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
