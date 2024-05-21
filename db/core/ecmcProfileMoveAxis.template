@@ -15,7 +15,6 @@
 #   $(NREADBACK) - Maximum number of readback positions
 #   $(PORT)      - asyn port for this controller
 #   $(ADDR)      - asyn addr for this axis
-#   $(TIMEOUT=1) - asyn timeout for this axis
 #   $(PREC)      - Precision for this axis
 
 #
@@ -25,7 +24,7 @@ record(bo,"$(P)$(R)$(M)UseAxis") {
     field(DESC, "Use axis $(ADDR)?")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
-    field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))PROFILE_USE_AXIS")
+    field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_USE_AXIS")
     field(VAL,  "")
     field(ZNAM, "No")
     field(ONAM, "Yes")
@@ -36,7 +35,7 @@ record(bo,"$(P)$(R)$(M)UseAxis") {
 record(waveform,"$(P)$(R)$(M)Positions") {
     field(DESC, "Axis $(ADDR) positions")
     field(DTYP, "asynFloat64ArrayOut")
-    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))PROFILE_POSITIONS")
+    field(INP,  "@asyn($(PORT),$(ADDR))PROFILE_POSITIONS")
     field(NELM, "$(NPOINTS)")
     field(FTVL, "DOUBLE")
     field(PREC, "$(PREC)")
@@ -48,7 +47,7 @@ record(waveform,"$(P)$(R)$(M)Positions") {
 record(waveform,"$(P)$(R)$(M)Readbacks") {
     field(DESC, "Axis $(ADDR) readbacks")
     field(DTYP, "asynFloat64ArrayIn")
-    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))PROFILE_READBACKS")
+    field(INP,  "@asyn($(PORT),$(ADDR))PROFILE_READBACKS")
     field(NELM, "$(NREADBACK)")
     field(FTVL, "DOUBLE")
     field(PREC, "$(PREC)")
@@ -61,7 +60,7 @@ record(waveform,"$(P)$(R)$(M)Readbacks") {
 record(waveform,"$(P)$(R)$(M)FollowingErrors") {
     field(DESC, "Axis $(ADDR) following errors")
     field(DTYP, "asynFloat64ArrayIn")
-    field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))PROFILE_FOLLOWING_ERRORS")
+    field(INP,  "@asyn($(PORT),$(ADDR))PROFILE_FOLLOWING_ERRORS")
     field(NELM, "$(NREADBACK)")
     field(FTVL, "DOUBLE")
     field(PREC, "$(PREC)")

@@ -18,7 +18,7 @@ epicsEnvSet(NPULSES,${NPULSES=${NPOINTS=0}})
 epicsEnvSet(NAXES,${NAXES=${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}})
 
 #- Load pvt controller records if PVT is in use
-dbLoadRecords(ecmcProfileMoveController.template,"P=${ECMC_PREFIX},R=PVT-,PORT=${ECMC_MOTOR_PORT},NAXES=${NAXES},NPOINTS=${NPOINTS},NREADBACK=${NREADBACK},NPULSES=${NPULSES}")
+dbLoadRecords(ecmcProfileMoveController.template,"P=${ECMC_PREFIX},R=PVT-,PORT=${ECMC_MOTOR_PORT},NAXES=${NAXES},NPOINTS=${NPOINTS},NREADBACK=${NREADBACK},NPULSES=${NPULSES},ADDR=0")
 epicsEnvUnset(NREADBACK)
 epicsEnvUnset(NPOINTS)
 epicsEnvUnset(NPULSES)
