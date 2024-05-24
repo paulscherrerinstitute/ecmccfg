@@ -1,9 +1,9 @@
 ##############################################################################
 ## Example config for el7041
 
-require ecmccfg "ECMC_VER=PVT,ENG_MODE=1,MAX_PARAM_COUNT=1000"
-
 epicsEnvSet(IOC,c6025a)
+require ecmccfg PVT "ECMC_VER=PVT,ENG_MODE=1,MAX_PARAM_COUNT=1000"
+
 # Load components lib
 require ecmccomp
 
@@ -31,12 +31,26 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BIS
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
+
+#asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0xFF)
+#asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 0xFF)
+#asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 0xFF)
+#ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,1)"
+
+
+
 ##############################################################################
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
 epicsEnvSet("PLC_PATH",      "/ioc/c6025a/ecmccfg/examples/test/ecmccomp/plc/")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_plc.yaml,LIMIT=1000,TYPE=0"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_pvt.yaml"
+
+##############################################################################
+## PVT controller: Call after axes are configured in order to use default values configured in axes configs
+#
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}pvtControllerConfig.cmd
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -52,4 +66,11 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
 #- ecmcConfig "Cfg.SetAxisErrorId(1,100000)"
+
+
+#asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
+#asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
+#asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 1)
+#ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,1)"
+
 
