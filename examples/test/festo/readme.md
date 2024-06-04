@@ -2,6 +2,20 @@
 ethercat foe_write -m0 --position 10 paramPCK 
 
 # Scalings 
+
+
+## Increments
+
+In directory "inc"
+
+Scalings are set in the CIA part of festo software. Deafult scalings:
+*  Position : 1
+*  Velocity : 1
+
+##
+
+In directory "deg"
+
 Scalings are set in the CIA part of festo software. Deafult scalings:
 *  Position : 1E6
 *  Velocity : 1E3

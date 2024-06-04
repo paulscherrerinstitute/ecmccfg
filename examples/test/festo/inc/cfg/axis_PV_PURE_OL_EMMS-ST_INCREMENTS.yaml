@@ -26,8 +26,8 @@ epics:
   # fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
 
 drive:
-  numerator: 1                                        # Fastest speed in engineering units
-  denominator: 1000                                   # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  numerator: 360                                      # Fastest speed in engineering units
+  denominator: 16777216                               # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s$(DRV_ID).driveControl01              # Control word ethercat entry
   # enable: 0                                         # Enable bit index in control word (not used if DS402)
@@ -47,11 +47,11 @@ drive:
   #   - 14                                            # Error 2 (if no drive error bit then leave empty)
 
 encoder:
-  numerator: 1                                        # Scaling numerator example 360 deg/rev
-  denominator: 1000000                                # Scaling denominator example 4096 ticks per 360 degree
+  numerator: 360                                      # Scaling numerator example 360 deg/rev
+  denominator: 16777216                               # Scaling denominator example 16777216 ticks per 360 degree
   type: 1                                             # Type: 0=Incremental, 1=Absolute
   bits: 32                                            # Total bit count of encoder raw data
-  absBits: 32                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  # absBits: 0                                        # Absolute bit count (for absolute encoders) always least significant part of 'bits'
   # absOffset: 0                                      # Encoder offset in eng units (for absolute encoders)
   # mask: 0xFFF00                                     # Mask applied to raw encoder value
   position: ec0.s$(DRV_ID).positionActual01           # Ethercat entry for actual position input (encoder)
@@ -73,12 +73,12 @@ encoder:
   #     size: 100                                     # Filter size for encoder value
   #     enable: 1                                     # enable encoder value filter
   # latch:
-  #   position: ''                                   # Link to latched value. Used for some homing seqs
-  #   control: ''                                    # Latch control trigger ethercat entry bit. Used for some homing seqs
-  #   status: ''                                     # Latch status ethercat entry bit. Used for some homing seqs
-  # primary: 1                                       # Use this encoder as primary (for control)
+  #   position: ''                                    # Link to latched value. Used for some homing seqs
+  #   control: ''                                     # Latch control trigger ethercat entry bit. Used for some homing seqs
+  #   status: ''                                      # Latch status ethercat entry bit. Used for some homing seqs
+  # primary: 1                                        # Use this encoder as primary (for control)
   homing:
-    type: 0                                         # Homing sequence type
+    type: 0                                           # Homing sequence type
   #    position: -30                                  # Position to reference encoder to
   #    velocity:
   #      to: 10                                       # Velocity to cam/sensor (used for some homing seqs)
@@ -94,13 +94,13 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 1                                              # Kp proportinal gain
-  Ki:  0.02                                         # Ki integral gain
-  Kd:  0                                            # Kd derivative gain
+  Kp: 15                                               # Kp proportinal gain
+  Ki:  0.1                                              # Ki integral gain
+  Kd:  0                                              # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
-  # deadband:
-  #   tol: 0.01                                       # Stop control if within this distance from target for the below time
-  #   time: 100
+  deadband:
+    tol: 0.01                                       # Stop control if within this distance from target for the below time
+    time: 100
   # limits:
   #   minOutput: -100                                 # Minimum controller output
   #   maxOutput: 100                                  # Maximum controller output
@@ -115,7 +115,7 @@ controller:
 trajectory:
   # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
   axis:
-    velocity: 720                                      # Default velo for axis
+    velocity: 720                                     # Default velo for axis
     acceleration: 720                                 # Default acc for axis
     deceleration: 720                                 # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
@@ -123,18 +123,18 @@ trajectory:
   jog:
     velocity: 5                                       # Default velo fro JOG (motor record)
 #  modulo:
-#    range: 360                                        # Modulo range 0..360
-#    type: 0                                           # Modulo type
+#    range: 360                                       # Modulo range 0..360
+#    type: 0                                          # Modulo type
 
 input:
   limit:
-    forward: ec0.s$(DRV_ID).ONE.0                  # Ethercat entry for low limit switch input
+    forward: ec0.s$(DRV_ID).ONE.0                     # Ethercat entry for low limit switch input
   #  forwardPolarity: 0                               # Polarity of forward limit switch
-    backward: ec0.s$(DRV_ID).ONE.0                 # Ethercat entry for high limit switch input
+    backward: ec0.s$(DRV_ID).ONE.0                    # Ethercat entry for high limit switch input
   #  backwardPolarity: 0                              # Polarity of forward limit switch
-  home: 'ec0.s$(DRV_ID).ONE.0'                # Ethercat entry for home switch
+  home: 'ec0.s$(DRV_ID).ONE.0'                        # Ethercat entry for home switch
   # homePolarity: 0                                   # Polarity of home switch
-  interlock: 'ec0.s$(DRV_ID).ONE.0'                # Ethercat entry for interlock switch input
+  interlock: 'ec0.s$(DRV_ID).ONE.0'                   # Ethercat entry for interlock switch input
   # interlockPolarity: 0                              # Polarity of interlock switch
 
 # homing:
@@ -194,3 +194,4 @@ monitoring:
 #    trajectory:                                       # Filter plc traj velo
 #      enable: false                                   # Filter enable
 #      size: 100                                       # Filter size
+
