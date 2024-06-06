@@ -446,3 +446,34 @@ record(longout,"${ECMC_P}Drv${CH_ID}-BOWd"){
   field(DOL,  "${ECMC_P}Drv${CH_ID}-BOWd_")
   field(OMSL, "closed_loop")  
 }
+
+# ReInit drive
+record(seq, "${ECMC_P}Drv${CH_ID}-ReInitCmd") {
+
+  field(DESC, "Reinit drive")
+  field(SELM, "All")  
+  
+  field(DOL1, "0")
+  field(LNK1, "${ECMC_P}SDO-ReInitCmd-Val.VAL PP")
+  field(DLY1, "0.1")
+
+  field(DOL2, "0")
+  field(LNK2, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY2, "0.1")
+
+  field(DOL3, "1")
+  field(LNK3, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY3, "0.1")
+
+  field(DOL4, "1")
+  field(LNK4, "${ECMC_P}SDO-ReInitCmd-Val.VAL PP")
+  field(DLY4, "0.1")
+
+  field(DOL5, "0")
+  field(LNK6, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY6, "0.1")
+
+  field(DOL6, "1")
+  field(LNK6, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY6, "0.1")
+}

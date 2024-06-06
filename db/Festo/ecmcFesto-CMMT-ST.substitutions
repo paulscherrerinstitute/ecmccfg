@@ -3,8 +3,13 @@ file "ecmcFesto-CMMT-ST.template" { pattern
   { 01    }
 }
 
-file "ecmcFesto-CMMT-ST_Enc.template" { pattern
+file "ecmcFesto-CMMT-ST_Enc-chX.template" { pattern
   { CH_ID }
   { 01    }
   { 02    }
+}
+
+file "ecmcFesto-CMMT-ST_Enc.template" { pattern
+  { CH_ID }
+  { X     }
 }
