@@ -10,8 +10,9 @@ epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 # Configuration loaded via FoE
 epicsEnvSet(DRV_ID,0)
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${DRV_ID}, HW_DESC=Festo-CMMT-ST"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=600,I_STDBY_MA=100,L_COIL_UH=1330,R_COIL_MOHM=750,U_NOM_MV=24000,ROT_INERTIA_GCM2=50"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,MACROS='CLK_FRQ_KHZ=6000,ST_BITS=14,MT_BITS=12,INV_DIR=1'"
+
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Festo-EMMS-ST-42-S-SE-G2,MACROS='CIA402_UNIT=5'"
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-INC,MACROS='ST_ENC_RES=500'"
 
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
@@ -20,7 +21,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addEcSdoRT.cmd, "SLAVE_ID=${DRV_ID},INDEX=0x6060,SUB
 
 # Configure Motion
 epicsEnvSet("DEV",      "$(IOC)")
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_CSV_OL_OWIS_BISS_ST_BITS_WRONG.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_CSV_OL_EMMS-ST.yaml"
 
 # Other
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
@@ -30,11 +31,7 @@ ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
 ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
-
 # go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
 
-
-
-iocInit()
 
