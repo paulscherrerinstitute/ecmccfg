@@ -1,24 +1,50 @@
 # Download config to drive over foe
 ethercat foe_write -m0 --position 10 paramPCK 
 
-# Scalings 
 
+# IMPORTANT
+
+In openloop the drive will not report open loop position in CSV.. MUST use PV mode.. Less performance..
+
+# Scalings 
 
 ## Increments
 
 In directory "inc"
 
 Scalings are set in the CIA part of festo software. Deafult scalings:
-*  Position : 1
-*  Velocity : 1
+*  Position : 0
+*  Velocity : 0
 
-##
+For sacling in degrees:
+```
+drive:
+  numerator: 360                                        # Fastest speed in engineering units
+  denominator: 16777216                                 # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+...
+encoder:
+  numerator: 360                                        # Scaling numerator example 360 deg/rev
+  denominator: 16777216                                 # Scaling denominator example 4096 ticks per 360 degree
+```
+
+For sacling in fullsteps:
+```
+drive:
+  numerator: 200                                        # Fastest speed in engineering units
+  denominator: 16777216                                 # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+...
+encoder:
+  numerator: 200                                        # Scaling numerator example 360 deg/rev
+  denominator: 16777216                                 # Scaling denominator example 4096 ticks per 360 degree
+```
+
+## Degrees in CMMT-ST(do not use)
 
 In directory "deg"
 
 Scalings are set in the CIA part of festo software. Deafult scalings:
-*  Position : 1E6
-*  Velocity : 1E3
+*  Position : 1E-6
+*  Velocity : 1E-3
 
 ```
 drive:

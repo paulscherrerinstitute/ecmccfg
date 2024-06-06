@@ -5,7 +5,7 @@ require ecmccfg "ENG_MODE=1,MAX_PARAM_COUNT=1000"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib
-require ecmccomp sandst_a
+require ecmccomp
 
 ##############################################################################
 ## Configure hardware
