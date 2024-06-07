@@ -94,9 +94,9 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 0.5                                               # Kp proportinal gain
-  Ki:  0                                              # Ki integral gain
-  Kd:  0                                              # Kd derivative gain
+  Kp: 10                                              # Kp proportinal gain
+  Ki: 0.1                                             # Ki integral gain
+  Kd: 0                                               # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
   # deadband:
   #   tol: 0.01                                       # Stop control if within this distance from target for the below time
@@ -115,13 +115,13 @@ controller:
 trajectory:
   # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
   axis:
-    velocity: 720                                     # Default velo for axis
-    acceleration: 720                                 # Default acc for axis
-    deceleration: 720                                 # Default dec for axis
+    velocity: 2000                                    # Default velo for axis
+    acceleration: 1000                                # Default acc for axis
+    deceleration: 1000                                # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
     jerk: 10                                          # Default jerk for axis
   jog:
-    velocity: 5                                       # Default velo fro JOG (motor record)
+    velocity: 2000                                    # Default velo fro JOG (motor record)
 #  modulo:
 #    range: 360                                       # Modulo range 0..360
 #    type: 0                                          # Modulo type
