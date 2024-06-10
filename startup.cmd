@@ -160,3 +160,9 @@ epicsEnvUnset(ECMC_USE_ECmasterECMC_DIR)
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)
 epicsEnvSet("ECMCCFG_INIT" ,"#")
+
+#- Ensure start of app thread and apply cfg (ESS maybe don't have the atInit command)
+on error continue
+ecmcFileExist("${ECMC_CONFIG_ROOT}finalize.cmd",1)
+atInit "$(SCRIPTEXEC) ($(ECMC_CONFIG_ROOT)finalize.cmd)"
+on error halt

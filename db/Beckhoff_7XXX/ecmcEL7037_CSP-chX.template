@@ -66,8 +66,28 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-RdyToEna.PROC")
   field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-RdyToEna"){
+  field(DESC, "$(HWTYPE): Drv Rdy to Ena")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B0")
+  field(ZNAM, "Warning")
+  field(ONAM, "Ready")
+  field(ZSV,  "MINOR")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Rdy")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-Rdy"){
+  field(DESC, "$(HWTYPE): Drive not eady")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B1")
+  field(ZNAM, "Ready")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){

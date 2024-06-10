@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for el7041
 
-require ecmccfg "ECMC_VER=PVT,ENG_MODE=1,MAX_PARAM_COUNT=1000"
+require ecmccfg sandst_a "ENG_MODE=1,MAX_PARAM_COUNT=1000"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib

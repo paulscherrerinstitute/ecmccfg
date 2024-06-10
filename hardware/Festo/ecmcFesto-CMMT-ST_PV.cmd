@@ -11,7 +11,7 @@
 ecmcFileExist(${ecmccfg_DIR}ecmcFesto-CMMT-ST_PDO.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcFesto-CMMT-ST_PDO.cmd
 
-# Default to CSP
+# Default to PV
 #- -128 – Invalid
 #- -20 RT Record table
 #- -3 PJ Profile jog
@@ -23,5 +23,5 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcFesto-CMMT-ST_PDO.cmd
 #- 8 CSP Cyclic sync position
 #- 9 CSV Cyclic sync velocity
 #- 10 CST Cyclic sync torque
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6060,0x0,8,1)"
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},modeControl01,8)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6060,0x0,3,1)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},modeControl01,3)"
