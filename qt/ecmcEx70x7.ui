@@ -184,7 +184,7 @@ SlaveID[$(SlaveID)]</string>
     </rect>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string/>
    </property>
    <property name="rectangular">
     <bool>true</bool>
@@ -193,7 +193,7 @@ SlaveID[$(SlaveID)]</string>
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Err-Alrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-ErrAlrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -229,7 +229,7 @@ SlaveID[$(SlaveID)]</string>
     </rect>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string/>
    </property>
    <property name="rectangular">
     <bool>true</bool>
@@ -238,7 +238,7 @@ SlaveID[$(SlaveID)]</string>
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-SyncErr-Alrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-SyncErrAlrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -290,7 +290,7 @@ SlaveID[$(SlaveID)]</string>
     </rect>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string/>
    </property>
    <property name="rectangular">
     <bool>true</bool>
@@ -299,7 +299,7 @@ SlaveID[$(SlaveID)]</string>
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stl-Alrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-StlAlrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -351,7 +351,7 @@ SlaveID[$(SlaveID)]</string>
     </rect>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string/>
    </property>
    <property name="rectangular">
     <bool>true</bool>
@@ -360,7 +360,7 @@ SlaveID[$(SlaveID)]</string>
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Wrn-Alrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-WrnAlrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -440,7 +440,16 @@ SlaveID[$(SlaveID)]</string>
       <string>DI</string>
      </attribute>
      <layout class="QGridLayout" name="gridLayout_2">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
        <number>2</number>
       </property>
       <item row="0" column="0">
@@ -523,6 +532,128 @@ SlaveID[$(SlaveID)]</string>
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="caLabel" name="calabel_10">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>385</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>ready to ena</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_4">
+    <property name="geometry">
+     <rect>
+      <x>102</x>
+      <y>385</y>
+      <width>22</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-RdyToEna</string>
+    </property>
+    <property name="colorMode">
+     <enum>caLed::Static</enum>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>252</red>
+      <green>175</green>
+      <blue>62</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueValue">
+     <string notr="true">1</string>
+    </property>
+    <property name="falseValue">
+     <string notr="true">0</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_8">
+    <property name="geometry">
+     <rect>
+      <x>102</x>
+      <y>410</y>
+      <width>22</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Rdy</string>
+    </property>
+    <property name="colorMode">
+     <enum>caLed::Static</enum>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>252</red>
+      <green>175</green>
+      <blue>62</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueValue">
+     <string notr="true">1</string>
+    </property>
+    <property name="falseValue">
+     <string notr="true">0</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_11">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>410</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>ready</string>
+    </property>
    </widget>
   </widget>
   <zorder>frame</zorder>

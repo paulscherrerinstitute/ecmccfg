@@ -17,3 +17,6 @@ ${ECMC_MASTER_CMD} dbLoadRecords("ecmcEc.db","P=${ECMC_PREFIX},ECMC_EC_MP=${ECMC
 
 #- START
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
+
+#- For check in finalize.cmd if executed
+epicsEnvSet(ECMC_SET_APP_MODE_DONE,1)
