@@ -45,7 +45,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tab">
     <property name="sizePolicy">
@@ -55,7 +55,7 @@
      </sizepolicy>
     </property>
     <attribute name="title">
-     <string>General:</string>
+     <string>General</string>
     </attribute>
     <widget class="caLabel" name="calabel_9">
      <property name="geometry">
@@ -538,7 +538,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>0</y>
+       <y>10</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -568,7 +568,7 @@
      <property name="geometry">
       <rect>
        <x>150</x>
-       <y>0</y>
+       <y>10</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -598,7 +598,7 @@
      <property name="geometry">
       <rect>
        <x>260</x>
-       <y>0</y>
+       <y>10</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -1175,6 +1175,22 @@
      </property>
      <property name="text">
       <string>TxPDO toggle:</string>
+     </property>
+    </widget>
+    <widget class="caByteController" name="cabytecontroller">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>60</y>
+       <width>21</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Cmd</string>
+     </property>
+     <property name="endBit">
+      <number>16</number>
      </property>
     </widget>
    </widget>
@@ -2052,22 +2068,6 @@
       <double>-32000.000000000000000</double>
      </property>
     </widget>
-    <widget class="caToggleButton" name="catogglebutton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>330</y>
-       <width>100</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Enable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Cmd</string>
-     </property>
-    </widget>
     <widget class="caLed" name="caled_Error_2">
      <property name="geometry">
       <rect>
@@ -2191,8 +2191,8 @@
     <widget class="caLed" name="caled">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>350</y>
+       <x>100</x>
+       <y>330</y>
        <width>30</width>
        <height>30</height>
       </rect>
@@ -2336,6 +2336,76 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="caByteController" name="cabytecontroller_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>330</y>
+       <width>21</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Cmd</string>
+     </property>
+     <property name="endBit">
+      <number>1</number>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_8">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>330</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Enable</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_11">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>350</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
@@ -2351,9 +2421,9 @@
    <header>caTextEntry</header>
   </customwidget>
   <customwidget>
-   <class>caToggleButton</class>
-   <extends>QCheckBox</extends>
-   <header>caToggleButton</header>
+   <class>caByteController</class>
+   <extends>QWidget</extends>
+   <header>caByteController</header>
   </customwidget>
   <customwidget>
    <class>caLabel</class>
