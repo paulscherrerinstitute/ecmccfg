@@ -155,7 +155,7 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
@@ -297,17 +297,17 @@ record(ai,"${ECMC_P}Drv${CH_ID}-TrqAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
   field(DESC, "$(HWTYPE): Drv Warn")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(DESC, "$(HWTYPE): Drv Err")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
@@ -445,4 +445,35 @@ record(longout,"${ECMC_P}Drv${CH_ID}-BOWd"){
   field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).binaryOutputWd${CH_ID}=")  
   field(DOL,  "${ECMC_P}Drv${CH_ID}-BOWd_")
   field(OMSL, "closed_loop")  
+}
+
+# ReInit drive
+record(seq, "${ECMC_P}Drv${CH_ID}-ReInitCmd") {
+
+  field(DESC, "Reinit drive")
+  field(SELM, "All")  
+  
+  field(DOL1, "0")
+  field(LNK1, "${ECMC_P}SDO-ReInitCmd-Val.VAL PP")
+  field(DLY1, "0.1")
+
+  field(DOL2, "0")
+  field(LNK2, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY2, "0.1")
+
+  field(DOL3, "1")
+  field(LNK3, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY3, "0.1")
+
+  field(DOL4, "1")
+  field(LNK4, "${ECMC_P}SDO-ReInitCmd-Val.VAL PP")
+  field(DLY4, "0.1")
+
+  field(DOL5, "0")
+  field(LNK6, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY6, "0.1")
+
+  field(DOL6, "1")
+  field(LNK6, "${ECMC_P}SDO-ReInitCmd-WrtCmd.VAL PP")
+  field(DLY6, "0.1")
 }

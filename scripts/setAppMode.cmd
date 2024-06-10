@@ -27,3 +27,6 @@ epicsEnvUnset(ECMC_MR_PVT_CONTROLLER_CONFIGURED)
 
 #- START
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
+
+#- For check in finalize.cmd if executed
+epicsEnvSet(ECMC_SET_APP_MODE_DONE,1)

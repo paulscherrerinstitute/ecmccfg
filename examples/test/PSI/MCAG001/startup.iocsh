@@ -57,8 +57,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 
 #- EXTRA EPICS STUFF
 
-dbLoadRecords aux.db "DEV=${DEV}"
-
+dbLoadRecords extra.db "DEV=${DEV}"
 
 #- be quiet
 asynSetTraceMask(MC_CPU1, -1, 0x01)
