@@ -7,7 +7,7 @@
 
 # WARNING THIS CONFIGURATION IS ONLY INTENDED FOR MODE VES (PURE VOLTAGE MODE), MOST OF THE PDOS are not working
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "iPOS8020BX_U")
+epicsEnvSet("ECMC_EC_HWTYPE"             "iPOS8020BX_VOLT")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x000001a3")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x01bae7ad")
 
@@ -227,52 +227,3 @@ epicsThreadSleep(0.01)
 #Set action if communication is lost (Quickstop=3, Diasble voltage=2, Execute fault routine = 1, No action (continue running)=0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6007,0x0,3,2)"
 epicsThreadSleep(0.01)
-
-
-#-a/ecmc_hipa_fast_wire/legacy_drive$ 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ bash writeToEREF.sh 1000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ bash writeToEREF.sh 2000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ bash writeToEREF.sh 3000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ bash writeToEREF.sh 7000 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ bash writeToEREF.sh A000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ source writeToEREF.sh A000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ source writeToEREF.sh F000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ source writeToEREF.sh F00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ source writeToEREF.sh 0F00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A91000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A92000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A91000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A91000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ 
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A91000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A91000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FF00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ source writeToEREF.sh 0F00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat upload --type uint32 -m0 -p17 0x2064 0x0 
-#-0x02a90084 44630148
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FF00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FF11
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9F11F
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9F1FF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FFFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A90FFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A91FFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A92FFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A93FFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A90000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FFFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9F123
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FF23
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9F000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A90000
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A90FFF
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9F888
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A97D00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FD00
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A98300
-#-sandst_a@c6025a-04:/ioc/c6025a/ecmc_hipa_fast_wire/legacy_drive$ ethercat download --type uint32 -m0 -p17 0x2067 0x0 0x02A9FFFF^
--
