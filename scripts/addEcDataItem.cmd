@@ -40,6 +40,11 @@
 
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
+#- deduce what the prefix should be
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID=0},SLAVE_POS=${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}},HWTYPE=${ECMC_EC_HWTYPE=""}"
+
+#- deduce what the prefix should be
 ecmcConfigOrDie "Cfg.EcAddDataDT(ec${MASTER_ID=${ECMC_EC_MASTER_ID=0}}.s${STRT_ENTRY_S_ID=${ECMC_EC_SLAVE_NUM}}.${STRT_ENTRY_NAME},${OFFSET_BYTE=0},${OFFSET_BITS=0},${RW=2},${DT},${NAME})"
 
 ecmcEpicsEnvSetCalcTernary(WRITE_INIT_VAL,"'${INIT_VAL=NaN}'='NaN'","#-","")

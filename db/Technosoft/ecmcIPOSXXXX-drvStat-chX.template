@@ -1,5 +1,5 @@
 record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
-  field(DESC, "$(HWTYPE): Drive Status Word Ch${CH_ID}")
+  field(DESC, "$(HWTYPE): Drive Stat Word Ch${CH_ID}")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
@@ -39,7 +39,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-QStpAlrm"){
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-LimAlrm"){
-  field(DESC, "$(HWTYPE): Drive Internal Limit Active")
+  field(DESC, "$(HWTYPE): Drive Int Limit Active")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BB")
   field(ZNAM, "No Alarm")
   field(ONAM, "Limit Active")
