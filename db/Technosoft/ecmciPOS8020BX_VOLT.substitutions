@@ -19,7 +19,6 @@ file "ecmc_analogOutput-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,          sourceName,         DESC               }
           {01,    "Drv", "-Spd",          "velocitySetpoint", "Velocity setpoint"}
-          {01,    "Drv", "-TML-DataIfCfg","tmlComCfgIF",      "Data config"      }
 }
 
 # Drive Status word
@@ -80,3 +79,11 @@ file "ecmc_analogInput-chX.template"
           {01   }
           {02   }
 }
+
+# ecmcDS402Enable (analog drive feedback)
+file "ecmcDS402Enable-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}
+
