@@ -14,180 +14,16 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x01bae7ad")
 #- verify slave
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
-
-############# Clear sync managers:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1C12")
-epicsThreadSleep(0.01)
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1C13")
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1A00:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1A00")
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A00:01,0x60410010 (1614872592),download pdo 0x1A00 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,1614872592,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A00:02,0x60640020 (1617166368),download pdo 0x1A00 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,1617166368,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A00:00,0x03 (3),download pdo 0x1A00 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,2,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1A01:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1A01")
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-#Digital Inputs
-#<PS>,CoE,0x1A01:01,0x60FD0020 (),download pdo 0x1A01 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x60FD0020,4)"
-epicsThreadSleep(0.01)
-#Digital Outputs status#Set action if communication is lost (Quickstop=3, Diasble voltage=2, Execute fault routine = 1, No action (continue running)=0)
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x6007,0x0,3,2)"
-epicsThreadSleep(0.01)
-
-#<PS>,CoE,0x1A01:02,0x20450010 (),download pdo 0x1A01 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,0x20450010,4)"
-epicsThreadSleep(0.01)
-#Current Act
-#<PS>,CoE,0x1A01:02,0x60770010 (),download pdo 0x1A01 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x3,0x60770010,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A01:00,0x01 (1),download pdo 0x1A01 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,3,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1A02:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1A02")
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-#Analog input reference
-#<PS>,CoE,0x1A02:01,0x20460010 (),download pdo 0x1A02 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x20460010,4)"
-epicsThreadSleep(0.01)
-#Analog input feedback
-#<PS>,CoE,0x1A02:02,0x20470010 (),download pdo 0x1A02 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,0x20470010,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A02:02,0x20550010 (),download pdo 0x1A02 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x3,0x20550010,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A02:02,0x20580010 (),download pdo 0x1A02 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x4,0x20580010,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A02:00,0x01 (1),download pdo 0x1A02 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,4,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1A03:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1A03")
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-#Feedback connector 2 position (depends on setup loaded in drive)
-#<PS>,CoE,0x1A03:01,0x60630020 (),download pdo 0x1A03 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x60630020,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1A03:00,0x01 (1),download pdo 0x1A03 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,1,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1600:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1600")
-#<PS>,CoE,0x1600:00,0x00 (0),clear pdo 0x1600 entries
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1600:01,0x60400010 (1614807056),download pdo 0x1600 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,1614807056,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1600:02,0x60FF 0020 (1627324448),download pdo 0x1600 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,1627324448,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1600:00,0x02 (2),download pdo 0x1600 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,2,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1601:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1601")
-#<PS>,CoE,0x1601:00,0x00 (0),clear pdo 0x1601 entries
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-#Digital Outputs
-#<PS>,CoE,0x1601:01,0x60FE0120 (1627324448),download pdo 0x1601 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x60FE0120,4)"
-epicsThreadSleep(0.01)
-#Digital Outputs Mask
-#<PS>,CoE,0x1601:02,0x60FE0220 (1627324448),download pdo 0x1601 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,0x60FE0220,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1601:00,0x02 (2),download pdo 0x1601 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,2,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Configure PDO 0x1602:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1602")
-#<PS>,CoE,0x1602:00,0x00 (0),clear pdo 0x1602 entries
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,0,1)"
-epicsThreadSleep(0.01)
-# EREF 16 bit mapped to 0x2067 0x0 10
-#<PS>,CoE,0x1602:01,0x60FE0120 (1627324448),download pdo 0x1602 entry
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,0x20670020,4)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1602:00,0x02 (2),download pdo 0x1602 entry count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,1,1)"
-epicsThreadSleep(0.01)
-
-############################################################
-############# Set sync managers:
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1C12")
-#<PS>,CoE,0x1C12:01,0x1600 (5632),download pdo 0x1C12:01 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,5632,2)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1C12:01,0x1601 (5633),download pdo 0x1C12:02 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,5633,2)"
-#<PS>,CoE,0x1C12:01,0x1602 (5633),download pdo 0x1C12:03 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x3,5634,2)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1C12:00,0x01 (1),download pdo 0x1C12 count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,3,1)"
-epicsThreadSleep(0.01)
-
-epicsEnvSet("ECMC_SDO_INDEX",              "0x1C13")
-#<PS>,CoE,0x1C13:01,0x1A00 (6656),download pdo 0x1C13:01 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x1,6656,2)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1C13:02,0x1A01 (6657),download pdo 0x1C13:02 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x2,6657,2)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1C13:03,0x1A02 (6658),download pdo 0x1C13:03 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x3,0x1A02,2)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1C13:04,0x1A03 (6659),download pdo 0x1C13:04 index
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x4,0x1A03,2)"
-epicsThreadSleep(0.01)
-#<PS>,CoE,0x1C13:00,0x02 (2),download pdo 0x1C13 count
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},$(ECMC_SDO_INDEX),0x0,4,1)"
-#epicsThreadSleep(1.0)
-
 #############################################################
 ############# Configure PDOS:
 
 epicsEnvSet("ECMC_CH_ID",              "01")
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x6040,0x0,16,driveControl${ECMC_CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x60FF,0x0,32,1,velocitySetpoint${ECMC_CH_ID})"
+# NOT USED in voltage mode (MODE VES)
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x60FF,0x0,32,1,dummyVeloSet${ECMC_CH_ID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x60FE,0x1,32,binaryOutputArray${ECMC_CH_ID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x60FE,0x2,32,binaryOutputArrayMask${ECMC_CH_ID})"
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1602,0x2067,0x0,32,1,DATA_IF_${ECMC_CH_ID})"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1602,0x2067,0x0,32,1,tmlComIF${ECMC_CH_ID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6041,0x0,16,driveStatus${ECMC_CH_ID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6064,0x0,32,positionActual${ECMC_CH_ID})"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6077,0x0,16,currentActual${ECMC_CH_ID})"
@@ -200,24 +36,35 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a03,0x6063,0x0,32,positionActual02)"
 epicsEnvUnset(ECMC_CH_ID)
 
-# Special for access of EREF
+#- MAP EREF(h) as voltage setpoint
+# Special for access of EREF (output voltage)
 # CFG
-#0084=16 bit cfg
+# 0084=16 bit cfg
 # 02A9 is the address of EREF(H)
 # => write 0x2064 0x0 0x02A90084
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x2064,0x0,0x02A90084,4)"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=DATA_IF_01,OFFSET_BYTE=2,OFFSET_BITS=0,RW=1,DT=U16,NAME=DATA_IF_CFG_01"
-${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=DATA_IF_01,OFFSET_BYTE=0,OFFSET_BITS=0,RW=1,DT=S16,NAME=DATA_IF_DATA_01"
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=tmlComIF01,OFFSET_BYTE=2,OFFSET_BITS=0,RW=1,DT=U16,NAME=TML-ComCfgIF01"
+#- This is actuall the output voltage setpoint corresponfing to the velo setpoint (record loaded in subst later)
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=tmlComIF01,OFFSET_BYTE=0,OFFSET_BITS=0,RW=1,DT=S16,NAME=velocitySetpoint01, LOAD_RECS='#-'"
 #- Write adress 0x02A9 = 
-ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},DATA_IF_CFG_01,681)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},TML-ComCfgIF01,681)"
 #- Now direct access to EREF should be possible through DATA_IF_DATA_01
+
+# The tml trigger function cannot be mapped as PDO so need SDO async
+#- Trigger this TML function (1) every time drive is beeing enabled:
+#- EXTREF 0  // Take value from EREF(h)
+#- MODE VES  // Pure volateg mode
+#- UPD       // Update (use settings)
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcSdoRT.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM},INDEX=0x2006,SUBINDEX=0x0,DT=U16,NAME=TML-TrgFunc"
+#- Default trigger TML func 1:
+afterInit "dbpf ${ECMC_P}SDO-TML-TrgFunc-Val 1"
 
 #############################################################
 ############# Settings:
 
-#Set Cyclic Sync Velocity (CSV) mode (9)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6060,0x0,9,1)"
-epicsThreadSleep(0.01)
+#-#Set Cyclic Sync Velocity (CSV) mode (9)
+#-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6060,0x0,9,1)"
+#-epicsThreadSleep(0.01)
 #Set sample time 1*10^-3)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x60C2,0x1,1,1)"
 epicsThreadSleep(0.01)

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>383</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caStripPlot" name="castripplot">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>361</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="Title" stdset="0">
+    <string notr="true">Current</string>
+   </property>
+   <property name="channels" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-CurAct</string>
+   </property>
+   <property name="YAxisScaling" stdset="0">
+    <enum>caStripPlot::autoScale</enum>
+   </property>
+  </widget>
+  <widget class="caStripPlot" name="castripplot_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>361</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="Title" stdset="0">
+    <string notr="true">Voltage</string>
+   </property>
+   <property name="channels" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-VltAct</string>
+   </property>
+   <property name="YAxisScaling" stdset="0">
+    <enum>caStripPlot::autoScale</enum>
+   </property>
+  </widget>
+  <widget class="caStripPlot" name="castripplot_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>361</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="Title" stdset="0">
+    <string notr="true">Duty</string>
+   </property>
+   <property name="channels" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-CH01-DtyCyc</string>
+   </property>
+   <property name="YAxisScaling" stdset="0">
+    <enum>caStripPlot::autoScale</enum>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caStripPlot</class>
+   <extends>QwtPlot</extends>
+   <header>caStripPlot</header>
+  </customwidget>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

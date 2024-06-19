@@ -53,6 +53,9 @@ class techosoftSetupParser:
         outputFile.write('ecmcConfigOrDie "Cfg.EcVerifySdo(${ECMC_EC_SLAVE_NUM},0x206A,0x0,' + '0x{:02x}'.format(low16bits) + ',2)"\n')
         outputFile.write('#########################################################\n')
         outputFile.write('\n')
+        startAdressFound = 0
+        parameterCounter = 0
+        checksum = 0
         continue
 
       if lineNumber == 1:

@@ -29,35 +29,13 @@
     <string notr="true">A_RF_LLRF_ELETTRATUNING_include_E_slave_frame.ui</string>
    </property>
   </widget>
-  <widget class="caRelatedDisplay" name="CiA402_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>430</y>
-     <width>101</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="label">
-    <string notr="true"/>
-   </property>
-   <property name="labels">
-    <string>Expert</string>
-   </property>
-   <property name="files">
-    <string>ecmciPOSXXX_VOLT_expert.ui</string>
-   </property>
-   <property name="args">
-    <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(DRV),IOC=$(IOC);</string>
-   </property>
-  </widget>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>120</y>
+     <x>2</x>
+     <y>175</y>
      <width>122</width>
-     <height>251</height>
+     <height>221</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -101,7 +79,7 @@
         <item row="0" column="1">
          <widget class="caLineEdit" name="calineedit_5">
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-CurAct</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqAct</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -124,7 +102,7 @@
         <item row="1" column="1">
          <widget class="caLineEdit" name="calineedit_4">
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd-RB</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -158,7 +136,7 @@
         <item row="0" column="0">
          <widget class="caLabel" name="calabel_9">
           <property name="text">
-           <string>Current</string>
+           <string>Torque</string>
           </property>
          </widget>
         </item>
@@ -287,7 +265,7 @@
         <item row="2" column="1">
          <widget class="caLineEdit" name="calineedit_6">
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VltAct</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -317,7 +295,7 @@
         <item row="3" column="1">
          <widget class="caLineEdit" name="calineedit_7">
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TmpAct</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -437,13 +415,48 @@
     </widget>
    </widget>
   </widget>
+  <widget class="caLed" name="caled">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>430</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-STO01</string>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>255</red>
+     <green>0</green>
+     <blue>0</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>115</red>
+     <green>210</green>
+     <blue>22</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_16">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>440</y>
+     <width>52</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>STO</string>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>caRelatedDisplay</class>
-   <extends>QWidget</extends>
-   <header>caRelatedDisplay</header>
-  </customwidget>
   <customwidget>
    <class>caLabel</class>
    <extends>QLabel</extends>
