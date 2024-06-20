@@ -78,3 +78,10 @@ file "ecmc_analogInput-chX.template"
           {01   }
           {02   }
 }
+
+# ecmcDS402Enable (analog drive feedback)
+file "ecmcDS402Enable-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+}
