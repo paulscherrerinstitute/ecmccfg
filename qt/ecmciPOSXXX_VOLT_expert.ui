@@ -45,7 +45,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <property name="sizePolicy">
@@ -74,7 +74,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -559,7 +559,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>11</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -575,8 +575,8 @@
     <widget class="caLed" name="caled_6">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>310</y>
+       <x>310</x>
+       <y>260</y>
        <width>30</width>
        <height>30</height>
       </rect>
@@ -609,8 +609,8 @@
     <widget class="caLabel" name="calabel_64">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>310</y>
+       <x>340</x>
+       <y>260</y>
        <width>31</width>
        <height>20</height>
       </rect>
@@ -633,8 +633,8 @@
     <widget class="caLed" name="caled_7">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>330</y>
+       <x>310</x>
+       <y>280</y>
        <width>30</width>
        <height>30</height>
       </rect>
@@ -660,8 +660,8 @@
     <widget class="caLabel" name="calabel_65">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>330</y>
+       <x>340</x>
+       <y>280</y>
        <width>31</width>
        <height>20</height>
       </rect>
@@ -721,7 +721,7 @@
     <widget class="caLabel" name="calabel_11">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>70</x>
        <y>270</y>
        <width>111</width>
        <height>20</height>
@@ -1169,7 +1169,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1337,7 +1337,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>11</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1385,7 +1385,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1708,6 +1708,98 @@
        <enum>Qt::AutoText</enum>
       </property>
      </widget>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_6">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>281</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Ena</string>
+     </property>
+     <property name="label">
+      <string notr="true">Enable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_7">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>310</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Dis</string>
+     </property>
+     <property name="label">
+      <string notr="true">Disable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caByte" name="cabyte_4">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>280</y>
+       <width>20</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
+     </property>
+     <property name="startBit">
+      <number>2</number>
+     </property>
+     <property name="endBit">
+      <number>2</number>
+     </property>
+     <property name="foreground" stdset="0">
+      <color>
+       <red>0</red>
+       <green>85</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_8">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>340</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Reset</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">128</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_4">
@@ -2056,10 +2148,10 @@
       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
      </property>
      <property name="startBit">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="endBit">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="foreground" stdset="0">
       <color>
