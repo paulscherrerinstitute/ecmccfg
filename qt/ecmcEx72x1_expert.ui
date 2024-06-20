@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>412</width>
-    <height>500</height>
+    <height>502</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,7 +28,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>0</y>
+     <y>10</y>
      <width>391</width>
      <height>481</height>
     </rect>
@@ -45,7 +45,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <property name="sizePolicy">
@@ -132,7 +132,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Velocity 1:</string>
+      <string>Velocity:</string>
      </property>
     </widget>
     <widget class="caLineEdit" name="calineedit_9">
@@ -355,7 +355,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Positon 1:</string>
+      <string>Positon:</string>
      </property>
     </widget>
     <widget class="caTextEntry" name="catextentry_13">
@@ -572,218 +572,30 @@
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="caLed" name="caled_6">
+    <widget class="caLineEdit" name="calineedit_4">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>260</y>
-       <width>30</width>
-       <height>30</height>
+       <x>100</x>
+       <y>90</y>
+       <width>52</width>
+       <height>17</height>
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-ErrId</string>
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
      </property>
-     <property name="falseColor">
-      <color>
-       <red>0</red>
-       <green>85</green>
-       <blue>0</blue>
+     <property name="background">
+      <color alpha="0">
+       <red>160</red>
+       <green>160</green>
+       <blue>164</blue>
       </color>
      </property>
-     <property name="trueColor">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-     <property name="undefinedColor">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_64">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>260</y>
-       <width>31</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Error</string>
-     </property>
-    </widget>
-    <widget class="caLed" name="caled_7">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>280</y>
-       <width>30</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-Bsy</string>
-     </property>
-     <property name="falseColor">
-      <color>
-       <red>0</red>
-       <green>85</green>
-       <blue>0</blue>
-      </color>
-     </property>
-     <property name="trueColor">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_65">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>280</y>
-       <width>31</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Busy</string>
-     </property>
-    </widget>
-    <widget class="caTextEntry" name="catextentry_15">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>270</y>
-       <width>31</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-Val</string>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
      </property>
      <property name="precisionMode">
       <enum>caLineEdit::User</enum>
-     </property>
-     <property name="limitsMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="keepFocus">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_11">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>270</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Trigg TML function:</string>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_3">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>260</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-WrtCmd</string>
-     </property>
-     <property name="label">
-      <string notr="true">Write</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_4">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>290</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-RdCmd</string>
-     </property>
-     <property name="label">
-      <string notr="true">Read</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
      </property>
     </widget>
    </widget>
@@ -794,8 +606,8 @@
     <widget class="caLineEdit" name="calineedit_6">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>30</y>
+       <x>230</x>
+       <y>40</y>
        <width>52</width>
        <height>16</height>
       </rect>
@@ -830,8 +642,8 @@
     <widget class="caLineEdit" name="calineedit_5">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>30</y>
+       <x>100</x>
+       <y>40</y>
        <width>51</width>
        <height>16</height>
       </rect>
@@ -866,8 +678,8 @@
     <widget class="caTextEntry" name="catextentry_12">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>246</y>
+       <x>290</x>
+       <y>37</y>
        <width>61</width>
        <height>20</height>
       </rect>
@@ -905,9 +717,9 @@
      <property name="geometry">
       <rect>
        <x>310</x>
-       <y>55</y>
+       <y>65</y>
        <width>20</width>
-       <height>171</height>
+       <height>341</height>
       </rect>
      </property>
      <property name="font">
@@ -928,8 +740,8 @@
     <widget class="caLabel" name="calabel_50">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>30</y>
+       <x>250</x>
+       <y>10</y>
        <width>101</width>
        <height>20</height>
       </rect>
@@ -952,10 +764,10 @@
     <widget class="caByte" name="cabyte">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>55</y>
+       <x>130</x>
+       <y>65</y>
        <width>20</width>
-       <height>171</height>
+       <height>341</height>
       </rect>
      </property>
      <property name="font">
@@ -977,7 +789,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>30</y>
+       <y>10</y>
        <width>120</width>
        <height>20</height>
       </rect>
@@ -1002,9 +814,9 @@
      <property name="geometry">
       <rect>
        <x>340</x>
-       <y>55</y>
+       <y>65</y>
        <width>21</width>
-       <height>171</height>
+       <height>341</height>
       </rect>
      </property>
      <property name="channel" stdset="0">
@@ -1014,415 +826,13 @@
       <number>16</number>
      </property>
     </widget>
-    <widget class="caLabel" name="calabel_34">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>140</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_37">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>160</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_33">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>110</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_38">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>150</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_44">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>70</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Quic stop:</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_32">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>180</y>
-       <width>131</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_46">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>60</y>
-       <width>91</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Enable voltage:</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_35">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>90</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_40">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>200</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_48">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>100</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_45">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>210</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_47">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>120</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Fault reset:</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_41">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>170</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_43">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>80</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Enable operation:</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_36">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>50</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Switch on:</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_42">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>130</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Operation mode:</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_39">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>190</y>
-       <width>101</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
     <widget class="QSplitter" name="splitter">
      <property name="geometry">
       <rect>
-       <x>29</x>
-       <y>60</y>
+       <x>10</x>
+       <y>70</y>
        <width>111</width>
-       <height>161</height>
+       <height>331</height>
       </rect>
      </property>
      <property name="font">
@@ -1442,7 +852,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>8</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
@@ -1459,7 +869,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
@@ -1476,7 +886,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>9</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
@@ -1493,7 +903,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
@@ -1510,12 +920,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Voltage enabled:</string>
+       <string>Reserved</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_20">
@@ -1527,12 +937,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Quick stop(inv):</string>
+       <string>Reserved</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_22">
@@ -1544,7 +954,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>9</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
@@ -1561,12 +971,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Homing Warning:</string>
+       <string>Warning</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_23">
@@ -1578,12 +988,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>8</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Homing active:</string>
+       <string>reserved</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_27">
@@ -1595,12 +1005,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Remote:</string>
+       <string>reserved</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_25">
@@ -1612,12 +1022,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Traget reached:</string>
+       <string>TxPDo toggle</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_29">
@@ -1629,7 +1039,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
@@ -1646,12 +1056,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>7</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Setpoint ack:</string>
+       <string>Drive follows command</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_28">
@@ -1663,12 +1073,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Following error:</string>
+       <string>reserved</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_30">
@@ -1680,12 +1090,12 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Event has occured:</string>
+       <string>reserved</string>
       </property>
      </widget>
      <widget class="caLabel" name="calabel_26">
@@ -1697,23 +1107,71 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>4</pointsize>
+        <pointsize>10</pointsize>
         <kerning>false</kerning>
        </font>
       </property>
       <property name="text">
-       <string>Drive is Axis ON:</string>
+       <string>reserved</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
       </property>
      </widget>
     </widget>
+    <widget class="caMessageButton" name="camessagebutton_8">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>420</y>
+       <width>71</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Reset</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">128</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caByte" name="cabyte_4">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>415</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
+     </property>
+     <property name="startBit">
+      <number>2</number>
+     </property>
+     <property name="endBit">
+      <number>2</number>
+     </property>
+     <property name="foreground" stdset="0">
+      <color>
+       <red>0</red>
+       <green>85</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
     <widget class="caMessageButton" name="camessagebutton_6">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>281</y>
+       <x>130</x>
+       <y>420</y>
        <width>71</width>
        <height>22</height>
       </rect>
@@ -1734,8 +1192,8 @@
     <widget class="caMessageButton" name="camessagebutton_7">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>310</y>
+       <x>210</x>
+       <y>420</y>
        <width>71</width>
        <height>22</height>
       </rect>
@@ -1753,53 +1211,284 @@
       <string notr="true"/>
      </property>
     </widget>
-    <widget class="caByte" name="cabyte_4">
+    <widget class="QSplitter" name="splitter_2">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>280</y>
-       <width>20</width>
-       <height>41</height>
+       <x>220</x>
+       <y>70</y>
+       <width>81</width>
+       <height>341</height>
       </rect>
      </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="startBit">
-      <number>2</number>
-     </property>
-     <property name="endBit">
-      <number>2</number>
-     </property>
-     <property name="foreground" stdset="0">
-      <color>
-       <red>0</red>
-       <green>85</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_8">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>340</y>
-       <width>71</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
-     </property>
-     <property name="label">
-      <string notr="true">Reset</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">128</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
+     <widget class="caLabel" name="calabel_36">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Switch on:</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_46">
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Enable voltage:</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_44">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>reserved</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_43">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>6</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Enable operation:</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_35">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_48">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_33">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_47">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Fault reset:</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_42">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_34">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_38">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_37">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_41">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_32">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_39">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_40">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_45">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_4">
@@ -1819,7 +1508,7 @@
       <string notr="true">Current</string>
      </property>
      <property name="channels" stdset="0">
-      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv01-CurAct</string>
+      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqAct</string>
      </property>
      <property name="YAxisScaling" stdset="0">
       <enum>caStripPlot::autoScale</enum>
@@ -1838,47 +1527,10 @@
       <string notr="true">Voltage</string>
      </property>
      <property name="channels" stdset="0">
-      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VltAct</string>
+      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
      </property>
      <property name="YAxisScaling" stdset="0">
       <enum>caStripPlot::autoScale</enum>
-     </property>
-    </widget>
-    <widget class="caSlider" name="caslider">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>420</y>
-       <width>361</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="lowerBound">
-      <double>-32000.000000000000000</double>
-     </property>
-     <property name="upperBound">
-      <double>32000.000000000000000</double>
-     </property>
-     <property name="totalSteps">
-      <UInt>1000</UInt>
-     </property>
-     <property name="trough">
-      <bool>false</bool>
-     </property>
-     <property name="groove">
-      <bool>true</bool>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd</string>
-     </property>
-     <property name="direction">
-      <enum>caSlider::Right</enum>
-     </property>
-     <property name="maxValue">
-      <double>32000.000000000000000</double>
-     </property>
-     <property name="minValue">
-      <double>-32000.000000000000000</double>
      </property>
     </widget>
     <widget class="caLed" name="caled_Error_2">
@@ -2085,63 +1737,13 @@
       <enum>caLineEdit::User</enum>
      </property>
     </widget>
-    <widget class="caTextEntry" name="catextentry_19">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>390</y>
-       <width>61</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Monospace</family>
-       <pointsize>10</pointsize>
-       <stylestrategy>PreferDefault</stylestrategy>
-      </font>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd</string>
-     </property>
-     <property name="precisionMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="limitsMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="maxValue">
-      <double>32000.000000000000000</double>
-     </property>
-     <property name="minValue">
-      <double>-32000.000000000000000</double>
-     </property>
-     <property name="keepFocus">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="caByte" name="cabyte_3">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>339</y>
-       <width>20</width>
-       <height>41</height>
+       <x>9</x>
+       <y>335</y>
+       <width>91</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="channel" stdset="0">
@@ -2164,7 +1766,7 @@
     <widget class="caMessageButton" name="camessagebutton">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>340</y>
        <width>71</width>
        <height>22</height>
@@ -2186,7 +1788,7 @@
     <widget class="caMessageButton" name="camessagebutton_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>360</y>
        <width>71</width>
        <height>22</height>
@@ -2205,98 +1807,32 @@
       <string notr="true"/>
      </property>
     </widget>
-    <widget class="caMessageButton" name="camessagebutton_5">
+    <widget class="caMessageButton" name="camessagebutton_9">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>350</y>
+       <x>20</x>
+       <y>390</y>
        <width>71</width>
        <height>22</height>
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-WrtCmd</string>
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
      </property>
      <property name="label">
-      <string notr="true">Write</string>
+      <string notr="true">Reset</string>
      </property>
      <property name="releaseMessage">
-      <string notr="true">1</string>
+      <string notr="true">128</string>
      </property>
      <property name="pressMessage">
       <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caTextEntry" name="catextentry_18">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>350</y>
-       <width>41</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-TML-TrgFunc-Val</string>
-     </property>
-     <property name="precisionMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="limitsMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="keepFocus">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_12">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>330</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Trigg TML function:</string>
      </property>
     </widget>
    </widget>
   </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>caSlider</class>
-   <extends>QwtSlider</extends>
-   <header>caSlider</header>
-  </customwidget>
   <customwidget>
    <class>caTextEntry</class>
    <extends>caLineEdit</extends>
@@ -2341,11 +1877,6 @@
    <class>QwtPlot</class>
    <extends>QFrame</extends>
    <header>qwt_plot.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QwtSlider</class>
-   <extends>QWidget</extends>
-   <header>qwt_slider.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
