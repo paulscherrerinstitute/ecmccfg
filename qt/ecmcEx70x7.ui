@@ -161,8 +161,8 @@ SlaveID[$(SlaveID)]</string>
   <widget class="caLabel" name="calabel_3">
    <property name="geometry">
     <rect>
-     <x>5</x>
-     <y>285</y>
+     <x>2</x>
+     <y>265</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -171,14 +171,14 @@ SlaveID[$(SlaveID)]</string>
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
-    <string>drive error</string>
+    <string>drive error:</string>
    </property>
   </widget>
   <widget class="caLed" name="caled_3">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>285</y>
+     <x>100</x>
+     <y>265</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -222,8 +222,8 @@ SlaveID[$(SlaveID)]</string>
   <widget class="caLed" name="caled_6">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>310</y>
+     <x>100</x>
+     <y>290</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -267,8 +267,8 @@ SlaveID[$(SlaveID)]</string>
   <widget class="caLabel" name="calabel_7">
    <property name="geometry">
     <rect>
-     <x>5</x>
-     <y>310</y>
+     <x>2</x>
+     <y>290</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -277,14 +277,14 @@ SlaveID[$(SlaveID)]</string>
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
-    <string>sync error</string>
+    <string>sync error:</string>
    </property>
   </widget>
   <widget class="caLed" name="caled_5">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>335</y>
+     <x>100</x>
+     <y>315</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -328,8 +328,8 @@ SlaveID[$(SlaveID)]</string>
   <widget class="caLabel" name="calabel_6">
    <property name="geometry">
     <rect>
-     <x>5</x>
-     <y>335</y>
+     <x>2</x>
+     <y>315</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -338,14 +338,14 @@ SlaveID[$(SlaveID)]</string>
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
-    <string>stall alarm</string>
+    <string>stall alarm:</string>
    </property>
   </widget>
   <widget class="caLed" name="caled_7">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>360</y>
+     <x>100</x>
+     <y>340</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -389,8 +389,8 @@ SlaveID[$(SlaveID)]</string>
   <widget class="caLabel" name="calabel_8">
    <property name="geometry">
     <rect>
-     <x>5</x>
-     <y>360</y>
+     <x>2</x>
+     <y>340</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -399,7 +399,7 @@ SlaveID[$(SlaveID)]</string>
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
-    <string>drive warning</string>
+    <string>drive warning:</string>
    </property>
   </widget>
   <widget class="QFrame" name="frame">
@@ -536,8 +536,8 @@ SlaveID[$(SlaveID)]</string>
    <widget class="caLabel" name="calabel_10">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>385</y>
+      <x>2</x>
+      <y>365</y>
       <width>90</width>
       <height>22</height>
      </rect>
@@ -546,14 +546,14 @@ SlaveID[$(SlaveID)]</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
-     <string>ready to ena</string>
+     <string>ready to ena:</string>
     </property>
    </widget>
    <widget class="caLed" name="caled_4">
     <property name="geometry">
      <rect>
-      <x>102</x>
-      <y>385</y>
+      <x>100</x>
+      <y>365</y>
       <width>22</width>
       <height>22</height>
      </rect>
@@ -597,8 +597,8 @@ SlaveID[$(SlaveID)]</string>
    <widget class="caLed" name="caled_8">
     <property name="geometry">
      <rect>
-      <x>102</x>
-      <y>410</y>
+      <x>100</x>
+      <y>390</y>
       <width>22</width>
       <height>22</height>
      </rect>
@@ -642,8 +642,8 @@ SlaveID[$(SlaveID)]</string>
    <widget class="caLabel" name="calabel_11">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>410</y>
+      <x>2</x>
+      <y>390</y>
       <width>90</width>
       <height>22</height>
      </rect>
@@ -652,7 +652,68 @@ SlaveID[$(SlaveID)]</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
-     <string>ready</string>
+     <string>ready:</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_13">
+    <property name="geometry">
+     <rect>
+      <x>2</x>
+      <y>415</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>trq reduced:</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_9">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>415</y>
+      <width>22</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqRed</string>
+    </property>
+    <property name="colorMode">
+     <enum>caLed::Static</enum>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+     </color>
+    </property>
+    <property name="trueValue">
+     <string notr="true">1</string>
+    </property>
+    <property name="falseValue">
+     <string notr="true">0</string>
     </property>
    </widget>
   </widget>

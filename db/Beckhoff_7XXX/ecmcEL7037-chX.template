@@ -107,6 +107,16 @@ record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-TrqRed")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-TrqRed"){
+  field(DESC, "$(HWTYPE): Torque reduced")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B6")
+  field(ZNAM, "Normal")
+  field(ONAM, "Reduced")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
   field(FLNK, "${ECMC_P}Drv${CH_ID}-StlAlrm")
 }
 
