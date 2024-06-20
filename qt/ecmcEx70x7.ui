@@ -223,7 +223,7 @@ SlaveID[$(SlaveID)]</string>
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>290</y>
+     <y>288</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -268,7 +268,7 @@ SlaveID[$(SlaveID)]</string>
    <property name="geometry">
     <rect>
      <x>2</x>
-     <y>290</y>
+     <y>288</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -284,7 +284,7 @@ SlaveID[$(SlaveID)]</string>
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>315</y>
+     <y>311</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -329,7 +329,7 @@ SlaveID[$(SlaveID)]</string>
    <property name="geometry">
     <rect>
      <x>2</x>
-     <y>315</y>
+     <y>311</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -345,7 +345,7 @@ SlaveID[$(SlaveID)]</string>
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>340</y>
+     <y>334</y>
      <width>22</width>
      <height>22</height>
     </rect>
@@ -390,7 +390,7 @@ SlaveID[$(SlaveID)]</string>
    <property name="geometry">
     <rect>
      <x>2</x>
-     <y>340</y>
+     <y>334</y>
      <width>90</width>
      <height>22</height>
     </rect>
@@ -513,7 +513,7 @@ SlaveID[$(SlaveID)]</string>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Status</string>
+      <string>Stat</string>
      </attribute>
      <widget class="caByte" name="cabyte">
       <property name="geometry">
@@ -532,12 +532,84 @@ SlaveID[$(SlaveID)]</string>
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Ctrl</string>
+     </attribute>
+     <widget class="caMessageButton" name="camessagebutton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>130</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-RstCmd</string>
+      </property>
+      <property name="label">
+       <string notr="true">Reset</string>
+      </property>
+      <property name="releaseMessage">
+       <string notr="true">1</string>
+      </property>
+     </widget>
+     <widget class="caToggleButton" name="catogglebutton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>61</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enable</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-EnaCmd</string>
+      </property>
+     </widget>
+     <widget class="caToggleButton" name="catogglebutton_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>61</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Red trq</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqRedCmd</string>
+      </property>
+     </widget>
+     <widget class="caByteController" name="cabytecontroller">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>8</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
+      </property>
+      <property name="endBit">
+       <number>15</number>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="caLabel" name="calabel_10">
     <property name="geometry">
      <rect>
       <x>2</x>
-      <y>365</y>
+      <y>357</y>
       <width>90</width>
       <height>22</height>
      </rect>
@@ -553,7 +625,7 @@ SlaveID[$(SlaveID)]</string>
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>365</y>
+      <y>357</y>
       <width>22</width>
       <height>22</height>
      </rect>
@@ -598,7 +670,7 @@ SlaveID[$(SlaveID)]</string>
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>390</y>
+      <y>380</y>
       <width>22</width>
       <height>22</height>
      </rect>
@@ -643,7 +715,7 @@ SlaveID[$(SlaveID)]</string>
     <property name="geometry">
      <rect>
       <x>2</x>
-      <y>390</y>
+      <y>380</y>
       <width>90</width>
       <height>22</height>
      </rect>
@@ -659,7 +731,7 @@ SlaveID[$(SlaveID)]</string>
     <property name="geometry">
      <rect>
       <x>2</x>
-      <y>415</y>
+      <y>403</y>
       <width>90</width>
       <height>22</height>
      </rect>
@@ -675,7 +747,7 @@ SlaveID[$(SlaveID)]</string>
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>415</y>
+      <y>403</y>
       <width>22</width>
       <height>22</height>
      </rect>
@@ -716,6 +788,25 @@ SlaveID[$(SlaveID)]</string>
      <string notr="true">0</string>
     </property>
    </widget>
+   <widget class="caMessageButton" name="camessagebutton_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>427</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-RstCmd</string>
+    </property>
+    <property name="label">
+     <string notr="true">Reset</string>
+    </property>
+    <property name="releaseMessage">
+     <string notr="true">1</string>
+    </property>
+   </widget>
   </widget>
   <zorder>frame</zorder>
   <zorder>calabel_2</zorder>
@@ -735,6 +826,21 @@ SlaveID[$(SlaveID)]</string>
   <zorder>calabel_8</zorder>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>caMessageButton</class>
+   <extends>QPushButton</extends>
+   <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caToggleButton</class>
+   <extends>QCheckBox</extends>
+   <header>caToggleButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caByteController</class>
+   <extends>QWidget</extends>
+   <header>caByteController</header>
+  </customwidget>
   <customwidget>
    <class>caLabel</class>
    <extends>QLabel</extends>

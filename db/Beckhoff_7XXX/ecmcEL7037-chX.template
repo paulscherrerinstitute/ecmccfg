@@ -8,12 +8,43 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
+record(bo,"${ECMC_P}Drv${CH_ID}-EnaCmd"){
+  field(DESC, "Enable drive cmd")
+  field(OUT,  "${ECMC_P}Drv${CH_ID}-Cmd.B0")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Cmd.PROC")
+  field(TSE,  "0")
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-RstCmd"){
+  field(DESC, "Reset drive cmd")
+  field(OUT,  "${ECMC_P}Drv${CH_ID}-Cmd.B1")
+  field(ZNAM, "Idle")
+  field(ONAM, "Reset")
+  field(SCAN, "Passive")
+  field(HIGH, "0.01")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Cmd.PROC")
+  field(TSE,  "0")
+}
+
+record(bo,"${ECMC_P}Drv${CH_ID}-TrqRedCmd"){
+  field(DESC, "Reduce torque cmd")
+  field(OUT,  "${ECMC_P}Drv${CH_ID}-Cmd.B2")
+  field(ZNAM, "Normal")
+  field(ONAM, "Reduce")
+  field(SCAN, "Passive")  
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Cmd.PROC")
+  field(TSE,  "0")
+}
+
+record(mbboDirect,"${ECMC_P}Drv${CH_ID}-Cmd"){
   field(DESC, "$(HWTYPE): Drive Control Word")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
-  field(PREC, "0")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
+  field(TSE,  "0")
 }
 
 record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
