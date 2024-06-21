@@ -4,8 +4,18 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-OpEna.PROC")
   field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-OpEna"){
+  field(DESC, "$(HWTYPE): Operation Ena")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B2")
+  field(ZNAM, "Idle")
+  field(ONAM, "Operation")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
@@ -15,7 +25,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
@@ -25,7 +35,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-QStpAlrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-QStpAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-QStpAlrm"){
@@ -35,7 +45,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-QStpAlrm"){
   field(ONAM, "Q Stop OK")
   field(ZSV,  "MAJOR")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-LimAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-LimAlrm"){
@@ -45,7 +55,7 @@ record(bi,"${ECMC_P}Drv${CH_ID}-LimAlrm"){
   field(ONAM, "Limit Active")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-FlwAlrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-FlwAlrm.PROC")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-FlwAlrm"){

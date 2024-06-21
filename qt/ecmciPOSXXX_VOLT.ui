@@ -287,7 +287,7 @@
         <item row="2" column="1">
          <widget class="caLineEdit" name="calineedit_6">
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VltAct</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
           </property>
           <property name="background">
            <color alpha="0">

@@ -92,7 +92,6 @@ record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(FLNK, "")
 }
 
-
 record(seq, "${ECMC_P}Drv${CH_ID}-TrgDS402Ena") {
     field(DESC, "Trigg DS402 enable SM")    
     field(DO1,  "128")

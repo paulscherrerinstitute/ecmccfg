@@ -45,7 +45,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tab">
     <property name="sizePolicy">
@@ -74,7 +74,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
@@ -559,7 +559,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>11</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1169,7 +1169,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1337,7 +1337,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>11</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1385,7 +1385,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
@@ -1838,7 +1838,7 @@
       <string notr="true">Voltage</string>
      </property>
      <property name="channels" stdset="0">
-      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VltAct</string>
+      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
      </property>
      <property name="YAxisScaling" stdset="0">
       <enum>caStripPlot::autoScale</enum>
@@ -2037,7 +2037,7 @@
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VltAct</string>
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
      </property>
      <property name="background">
       <color alpha="0">
