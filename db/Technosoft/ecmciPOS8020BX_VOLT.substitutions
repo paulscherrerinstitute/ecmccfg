@@ -17,8 +17,8 @@ file "ecmc_controlWord-chX.template"
 # tmlComCfgIF should always be 0x02A9 (address of EREF(h))
 file "ecmc_analogOutput-chX.template"
 {
-  pattern {CH_ID, KEY,   suffix,          sourceName,         DESC               }
-          {01,    "Drv", "-Spd",          "velocitySetpoint", "Velocity setpoint"}
+  pattern {CH_ID, KEY,   suffix, sourceName,         DESC               , LINR,  ESLO  , PREC}
+          {01,    "Drv", "-Spd", "velocitySetpoint", "Velocity setpoint", SLOPE, 0.0015, 3   }
 }
 
 # Drive Status word

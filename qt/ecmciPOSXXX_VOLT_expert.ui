@@ -1854,10 +1854,19 @@
       </rect>
      </property>
      <property name="lowerBound">
-      <double>-32000.000000000000000</double>
+      <double>-48.000000000000000</double>
      </property>
      <property name="upperBound">
-      <double>32000.000000000000000</double>
+      <double>48.000000000000000</double>
+     </property>
+     <property name="scaleMaxMajor">
+      <number>1</number>
+     </property>
+     <property name="scaleMaxMinor">
+      <number>1</number>
+     </property>
+     <property name="scaleStepSize">
+      <double>0.010000000000000</double>
      </property>
      <property name="totalSteps">
       <UInt>1000</UInt>
@@ -1874,11 +1883,23 @@
      <property name="direction">
       <enum>caSlider::Right</enum>
      </property>
+     <property name="highLimitMode">
+      <enum>caSlider::User</enum>
+     </property>
      <property name="maxValue">
-      <double>32000.000000000000000</double>
+      <double>48.000000000000000</double>
+     </property>
+     <property name="lowLimitMode">
+      <enum>caSlider::User</enum>
      </property>
      <property name="minValue">
-      <double>-32000.000000000000000</double>
+      <double>-48.000000000000000</double>
+     </property>
+     <property name="precisionMode">
+      <enum>caSlider::User</enum>
+     </property>
+     <property name="precision">
+      <number>3</number>
      </property>
     </widget>
     <widget class="caLed" name="caled_Error_2">
@@ -2023,6 +2044,9 @@
      <property name="colorMode">
       <enum>caLineEdit::Static</enum>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
      <property name="precisionMode">
       <enum>caLineEdit::User</enum>
      </property>
@@ -2119,6 +2143,9 @@
      <property name="channel" stdset="0">
       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd</string>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
      <property name="precisionMode">
       <enum>caLineEdit::User</enum>
      </property>
@@ -2126,10 +2153,10 @@
       <enum>caLineEdit::User</enum>
      </property>
      <property name="maxValue">
-      <double>32000.000000000000000</double>
+      <double>48.000000000000000</double>
      </property>
      <property name="minValue">
-      <double>-32000.000000000000000</double>
+      <double>-48.000000000000000</double>
      </property>
      <property name="keepFocus">
       <bool>true</bool>
