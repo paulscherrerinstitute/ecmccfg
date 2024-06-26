@@ -46,9 +46,10 @@ ecmcFileExist("ecmcAxisType.db",1,1)
    #- Virtual axis
    dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE=-1,TRAJ_TYPE={{ trajectory.type }}")
 {%- endif%}
+
 #-Add info in MCU namespace for auto gui generation
 ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
-dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }}")
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }}, PREV_OBJ_ID=${ECMC_PREV_AXIS_OBJ_ID=-1}")
 
 epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
 
