@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>409</width>
+    <width>406</width>
     <height>503</height>
    </rect>
   </property>
@@ -727,6 +727,145 @@
       <string>C2</string>
      </property>
     </widget>
+    <widget class="caByteController" name="cabytecontroller">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>200</y>
+       <width>21</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
+     </property>
+     <property name="endBit">
+      <number>16</number>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_6">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>295</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Enable</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Ena</string>
+     </property>
+     <property name="label">
+      <string notr="true">Enable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caByte" name="cabyte_4">
+     <property name="geometry">
+      <rect>
+       <x>75</x>
+       <y>290</y>
+       <width>41</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
+     </property>
+     <property name="startBit">
+      <number>2</number>
+     </property>
+     <property name="endBit">
+      <number>2</number>
+     </property>
+     <property name="foreground" stdset="0">
+      <color>
+       <red>0</red>
+       <green>85</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_8">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>345</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Reset</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">128</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_7">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>315</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Disable</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Dis</string>
+     </property>
+     <property name="label">
+      <string notr="true">Disable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caTextEntry" name="catextentry">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>260</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
+     </property>
+    </widget>
+    <zorder>cabyte_4</zorder>
+    <zorder>cabyte_5</zorder>
+    <zorder>cabyte_7</zorder>
+    <zorder>cabyte_9</zorder>
+    <zorder>calabel_28</zorder>
+    <zorder>calabel_29</zorder>
+    <zorder>calabel_30</zorder>
+    <zorder>cabytecontroller</zorder>
+    <zorder>camessagebutton_6</zorder>
+    <zorder>camessagebutton_8</zorder>
+    <zorder>camessagebutton_7</zorder>
+    <zorder>catextentry</zorder>
    </widget>
   </widget>
   <widget class="QTabWidget" name="tabWidget_4">
@@ -1411,6 +1550,145 @@
       <string>C1</string>
      </property>
     </widget>
+    <widget class="caByteController" name="cabytecontroller_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>195</y>
+       <width>21</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd</string>
+     </property>
+     <property name="endBit">
+      <number>16</number>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_9">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>295</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Enable</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TrgDS402Ena</string>
+     </property>
+     <property name="label">
+      <string notr="true">Enable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_10">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>345</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Reset</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">128</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_11">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>315</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Disable</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TrgDS402Dis</string>
+     </property>
+     <property name="label">
+      <string notr="true">Disable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caByte" name="cabyte_14">
+     <property name="geometry">
+      <rect>
+       <x>75</x>
+       <y>290</y>
+       <width>41</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Stat</string>
+     </property>
+     <property name="startBit">
+      <number>2</number>
+     </property>
+     <property name="endBit">
+      <number>2</number>
+     </property>
+     <property name="foreground" stdset="0">
+      <color>
+       <red>0</red>
+       <green>85</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="caTextEntry" name="catextentry_2">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>260</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd</string>
+     </property>
+    </widget>
+    <zorder>cabyte_14</zorder>
+    <zorder>cabyte_6</zorder>
+    <zorder>cabyte_10</zorder>
+    <zorder>cabyte_11</zorder>
+    <zorder>calabel_31</zorder>
+    <zorder>calabel_36</zorder>
+    <zorder>calabel_37</zorder>
+    <zorder>cabytecontroller_2</zorder>
+    <zorder>camessagebutton_9</zorder>
+    <zorder>camessagebutton_10</zorder>
+    <zorder>camessagebutton_11</zorder>
+    <zorder>catextentry_2</zorder>
    </widget>
   </widget>
   <widget class="QTabWidget" name="tabWidget_5">
@@ -2095,6 +2373,145 @@
       <string>C1</string>
      </property>
     </widget>
+    <widget class="caByteController" name="cabytecontroller_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>195</y>
+       <width>21</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd</string>
+     </property>
+     <property name="endBit">
+      <number>16</number>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_12">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>295</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Enable</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-TrgDS402Ena</string>
+     </property>
+     <property name="label">
+      <string notr="true">Enable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_13">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>345</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Reset</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">128</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_14">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>315</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Disable</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-TrgDS402Dis</string>
+     </property>
+     <property name="label">
+      <string notr="true">Disable</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caByte" name="cabyte_15">
+     <property name="geometry">
+      <rect>
+       <x>75</x>
+       <y>290</y>
+       <width>41</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Stat</string>
+     </property>
+     <property name="startBit">
+      <number>2</number>
+     </property>
+     <property name="endBit">
+      <number>2</number>
+     </property>
+     <property name="foreground" stdset="0">
+      <color>
+       <red>0</red>
+       <green>85</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+    <widget class="caTextEntry" name="catextentry_3">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>260</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd</string>
+     </property>
+    </widget>
+    <zorder>cabyte_15</zorder>
+    <zorder>cabyte_8</zorder>
+    <zorder>cabyte_12</zorder>
+    <zorder>cabyte_13</zorder>
+    <zorder>calabel_38</zorder>
+    <zorder>calabel_39</zorder>
+    <zorder>calabel_40</zorder>
+    <zorder>cabytecontroller_3</zorder>
+    <zorder>camessagebutton_12</zorder>
+    <zorder>camessagebutton_13</zorder>
+    <zorder>camessagebutton_14</zorder>
+    <zorder>catextentry_3</zorder>
    </widget>
   </widget>
  </widget>
@@ -2105,9 +2522,24 @@
    <header>caMenu</header>
   </customwidget>
   <customwidget>
+   <class>caTextEntry</class>
+   <extends>caLineEdit</extends>
+   <header>caTextEntry</header>
+  </customwidget>
+  <customwidget>
+   <class>caMessageButton</class>
+   <extends>QPushButton</extends>
+   <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
    <class>caToggleButton</class>
    <extends>QCheckBox</extends>
    <header>caToggleButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caByteController</class>
+   <extends>QWidget</extends>
+   <header>caByteController</header>
   </customwidget>
   <customwidget>
    <class>caFrame</class>
