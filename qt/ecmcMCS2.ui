@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>406</width>
-    <height>503</height>
+    <width>384</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="caInclude" name="cainclude">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>240</x>
      <y>0</y>
      <width>141</width>
      <height>500</height>
@@ -45,10 +45,10 @@
   <widget class="QTabWidget" name="tabWidget_3">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>40</y>
+     <x>0</x>
+     <y>30</y>
      <width>122</width>
-     <height>411</height>
+     <height>421</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -64,7 +64,7 @@
        <x>0</x>
        <y>10</y>
        <width>118</width>
-       <height>301</height>
+       <height>321</height>
       </rect>
      </property>
      <property name="title">
@@ -102,10 +102,10 @@
      <widget class="caLineEdit" name="calineedit_12">
       <property name="geometry">
        <rect>
-        <x>62</x>
-        <y>163</y>
-        <width>53</width>
-        <height>17</height>
+        <x>64</x>
+        <y>190</y>
+        <width>51</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="channel" stdset="0">
@@ -128,8 +128,8 @@
      <widget class="caLabel" name="calabel_13">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>186</y>
+        <x>-10</x>
+        <y>210</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -147,8 +147,8 @@
      <widget class="caLabel" name="calabel_20">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>163</y>
+        <x>-10</x>
+        <y>180</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -186,7 +186,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>230</y>
+        <y>250</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -246,7 +246,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>210</y>
+        <y>230</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -305,8 +305,8 @@
      <widget class="caLabel" name="calabel_22">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>210</y>
+        <x>-10</x>
+        <y>230</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -324,8 +324,8 @@
      <widget class="caLabel" name="calabel_23">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>230</y>
+        <x>-10</x>
+        <y>250</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -344,7 +344,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>186</y>
+        <y>210</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -372,7 +372,7 @@
      <widget class="caLabel" name="calabel_41">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-10</x>
         <y>270</y>
         <width>60</width>
         <height>16</height>
@@ -552,12 +552,47 @@
        </property>
       </widget>
      </widget>
+     <widget class="caTextEntry" name="catextentry_6">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>160</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-PosCmd</string>
+      </property>
+     </widget>
+     <widget class="caRelatedDisplay" name="CiA402_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>290</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true"/>
+      </property>
+      <property name="labels">
+       <string>Expert</string>
+      </property>
+      <property name="files">
+       <string>ecmcMCS2_expert.ui</string>
+      </property>
+      <property name="args">
+       <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=1,IOC=$(IOC);</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_6">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>320</y>
+       <y>330</y>
        <width>118</width>
        <height>51</height>
       </rect>
@@ -608,7 +643,7 @@
    </widget>
    <widget class="QWidget" name="tab_6">
     <attribute name="title">
-     <string>Status</string>
+     <string>CiA402</string>
     </attribute>
     <widget class="caByte" name="cabyte_5">
      <property name="geometry">
@@ -871,10 +906,10 @@
   <widget class="QTabWidget" name="tabWidget_4">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>40</y>
+     <x>130</x>
+     <y>30</y>
      <width>122</width>
-     <height>411</height>
+     <height>421</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -890,7 +925,7 @@
        <x>0</x>
        <y>10</y>
        <width>118</width>
-       <height>301</height>
+       <height>321</height>
       </rect>
      </property>
      <property name="title">
@@ -928,10 +963,10 @@
      <widget class="caLineEdit" name="calineedit_15">
       <property name="geometry">
        <rect>
-        <x>62</x>
-        <y>163</y>
-        <width>53</width>
-        <height>17</height>
+        <x>64</x>
+        <y>190</y>
+        <width>51</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="channel" stdset="0">
@@ -954,8 +989,8 @@
      <widget class="caLabel" name="calabel_14">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>186</y>
+        <x>-10</x>
+        <y>210</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -973,8 +1008,8 @@
      <widget class="caLabel" name="calabel_24">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>163</y>
+        <x>-10</x>
+        <y>180</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1012,7 +1047,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>230</y>
+        <y>250</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -1072,7 +1107,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>210</y>
+        <y>230</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -1131,8 +1166,8 @@
      <widget class="caLabel" name="calabel_26">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>210</y>
+        <x>-10</x>
+        <y>230</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1150,8 +1185,8 @@
      <widget class="caLabel" name="calabel_27">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>230</y>
+        <x>-10</x>
+        <y>250</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1170,7 +1205,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>186</y>
+        <y>210</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -1198,7 +1233,7 @@
      <widget class="caLabel" name="calabel_42">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-10</x>
         <y>270</y>
         <width>60</width>
         <height>16</height>
@@ -1378,12 +1413,47 @@
        </property>
       </widget>
      </widget>
+     <widget class="caTextEntry" name="catextentry_5">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>160</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-PosCmd</string>
+      </property>
+     </widget>
+     <widget class="caRelatedDisplay" name="CiA402_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>290</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true"/>
+      </property>
+      <property name="labels">
+       <string>Expert</string>
+      </property>
+      <property name="files">
+       <string>ecmcMCS2_expert.ui</string>
+      </property>
+      <property name="args">
+       <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=2,IOC=$(IOC);</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>320</y>
+       <y>330</y>
        <width>118</width>
        <height>51</height>
       </rect>
@@ -1434,7 +1504,7 @@
    </widget>
    <widget class="QWidget" name="tab_8">
     <attribute name="title">
-     <string>Status</string>
+     <string>CiA402</string>
     </attribute>
     <widget class="caByte" name="cabyte_6">
      <property name="geometry">
@@ -1694,10 +1764,10 @@
   <widget class="QTabWidget" name="tabWidget_5">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>40</y>
+     <x>260</x>
+     <y>30</y>
      <width>122</width>
-     <height>411</height>
+     <height>421</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -1713,7 +1783,7 @@
        <x>0</x>
        <y>10</y>
        <width>118</width>
-       <height>301</height>
+       <height>321</height>
       </rect>
      </property>
      <property name="title">
@@ -1752,9 +1822,9 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>163</y>
-        <width>53</width>
-        <height>17</height>
+        <y>190</y>
+        <width>51</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="channel" stdset="0">
@@ -1777,8 +1847,8 @@
      <widget class="caLabel" name="calabel_16">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>186</y>
+        <x>-10</x>
+        <y>210</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1796,8 +1866,8 @@
      <widget class="caLabel" name="calabel_32">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>163</y>
+        <x>-10</x>
+        <y>180</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1835,7 +1905,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>230</y>
+        <y>250</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -1895,7 +1965,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>210</y>
+        <y>230</y>
         <width>18</width>
         <height>16</height>
        </rect>
@@ -1954,8 +2024,8 @@
      <widget class="caLabel" name="calabel_34">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>210</y>
+        <x>-10</x>
+        <y>230</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1973,8 +2043,8 @@
      <widget class="caLabel" name="calabel_35">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>230</y>
+        <x>-10</x>
+        <y>250</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -1993,7 +2063,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>186</y>
+        <y>210</y>
         <width>53</width>
         <height>17</height>
        </rect>
@@ -2021,7 +2091,7 @@
      <widget class="caLabel" name="calabel_43">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-10</x>
         <y>270</y>
         <width>60</width>
         <height>16</height>
@@ -2201,12 +2271,47 @@
        </property>
       </widget>
      </widget>
+     <widget class="caTextEntry" name="catextentry_4">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>160</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-PosCmd</string>
+      </property>
+     </widget>
+     <widget class="caRelatedDisplay" name="CiA402_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>290</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true"/>
+      </property>
+      <property name="labels">
+       <string>Expert</string>
+      </property>
+      <property name="files">
+       <string>ecmcMCS2_expert.ui</string>
+      </property>
+      <property name="args">
+       <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=3,IOC=$(IOC);</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_12">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>320</y>
+       <y>330</y>
        <width>118</width>
        <height>51</height>
       </rect>
@@ -2257,7 +2362,7 @@
    </widget>
    <widget class="QWidget" name="tab_12">
     <attribute name="title">
-     <string>Status</string>
+     <string>CiA402</string>
     </attribute>
     <widget class="caByte" name="cabyte_8">
      <property name="geometry">
@@ -2520,6 +2625,11 @@
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
+  </customwidget>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
   </customwidget>
   <customwidget>
    <class>caTextEntry</class>
