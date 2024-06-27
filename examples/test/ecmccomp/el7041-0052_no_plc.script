@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for el7041
 
-require ecmccfg sandst_a "ENG_MODE=1,MAX_PARAM_COUNT=1000"
+require ecmccfg v9.5.1_RC1 "ECMC_VER=v9.5.1_RC1,ENG_MODE=1,MAX_PARAM_COUNT=1000"
 
 epicsEnvSet(IOC,c6025a)
 # Load components lib
@@ -44,7 +44,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_pl
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
 ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
