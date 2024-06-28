@@ -1671,6 +1671,7 @@
       </property>
      </widget>
     </widget>
+    <zorder>splitter_2</zorder>
     <zorder>cabyte_4</zorder>
     <zorder>calineedit_6</zorder>
     <zorder>calineedit_5</zorder>
@@ -1680,22 +1681,6 @@
     <zorder>cabyte</zorder>
     <zorder>calabel_49</zorder>
     <zorder>cabytecontroller</zorder>
-    <zorder>calabel_34</zorder>
-    <zorder>calabel_37</zorder>
-    <zorder>calabel_33</zorder>
-    <zorder>calabel_38</zorder>
-    <zorder>calabel_44</zorder>
-    <zorder>calabel_32</zorder>
-    <zorder>calabel_46</zorder>
-    <zorder>calabel_35</zorder>
-    <zorder>calabel_40</zorder>
-    <zorder>calabel_48</zorder>
-    <zorder>calabel_47</zorder>
-    <zorder>calabel_41</zorder>
-    <zorder>calabel_43</zorder>
-    <zorder>calabel_36</zorder>
-    <zorder>calabel_42</zorder>
-    <zorder>calabel_39</zorder>
     <zorder>splitter</zorder>
     <zorder>camessagebutton_6</zorder>
     <zorder>camessagebutton_7</zorder>
@@ -1723,6 +1708,13 @@
      <property name="YAxisScaling" stdset="0">
       <enum>caStripPlot::autoScale</enum>
      </property>
+     <property name="foreground">
+      <color>
+       <red>238</red>
+       <green>238</green>
+       <blue>236</blue>
+      </color>
+     </property>
     </widget>
     <widget class="caStripPlot" name="castripplot_2">
      <property name="geometry">
@@ -1741,6 +1733,13 @@
      </property>
      <property name="YAxisScaling" stdset="0">
       <enum>caStripPlot::autoScale</enum>
+     </property>
+     <property name="foreground">
+      <color>
+       <red>243</red>
+       <green>243</green>
+       <blue>243</blue>
+      </color>
      </property>
     </widget>
     <widget class="caSlider" name="caslider">
