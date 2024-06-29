@@ -33,9 +33,9 @@
    <property name="geometry">
     <rect>
      <x>2</x>
-     <y>110</y>
+     <y>50</y>
      <width>122</width>
-     <height>251</height>
+     <height>311</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -388,7 +388,7 @@
       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
      </property>
      <property name="endBit">
-      <number>16</number>
+      <number>15</number>
      </property>
     </widget>
     <widget class="caMessageButton" name="camessagebutton_8">
@@ -449,7 +449,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Ena</string>
+      <string>Enable</string>
      </property>
      <property name="channel" stdset="0">
       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Ena</string>
@@ -474,7 +474,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Dis</string>
+      <string>Disable</string>
      </property>
      <property name="channel" stdset="0">
       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Dis</string>
