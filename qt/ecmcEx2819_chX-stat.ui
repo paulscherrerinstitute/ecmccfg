@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caLed" name="caled_3">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>73</y>
+     <width>17</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="ledWidth">
+    <number>15</number>
+   </property>
+   <property name="ledHeight">
+    <number>15</number>
+   </property>
+   <property name="channel" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BO$(ID)-RB</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_3">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>70</y>
+     <width>21</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>$(ID)</string>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_7">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>73</y>
+     <width>17</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="ledWidth">
+    <number>15</number>
+   </property>
+   <property name="ledHeight">
+    <number>15</number>
+   </property>
+   <property name="channel" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BO$(ID)-ShrtCircAlrm</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_4">
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>73</y>
+     <width>17</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="ledWidth">
+    <number>15</number>
+   </property>
+   <property name="ledHeight">
+    <number>15</number>
+   </property>
+   <property name="channel" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BO$(ID)-OvrTmpAlrm</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_5">
+   <property name="geometry">
+    <rect>
+     <x>134</x>
+     <y>73</y>
+     <width>17</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="ledWidth">
+    <number>15</number>
+   </property>
+   <property name="ledHeight">
+    <number>15</number>
+   </property>
+   <property name="channel" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BO$(ID)-OpnLdAlrm</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caLed" name="caled_6">
+   <property name="geometry">
+    <rect>
+     <x>152</x>
+     <y>73</y>
+     <width>17</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="rectangular">
+    <bool>true</bool>
+   </property>
+   <property name="gradientEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="ledWidth">
+    <number>15</number>
+   </property>
+   <property name="ledHeight">
+    <number>15</number>
+   </property>
+   <property name="channel" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BO$(ID)-OvrCurrAlrm</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLed::Static</enum>
+   </property>
+   <property name="falseColor">
+    <color>
+     <red>136</red>
+     <green>138</green>
+     <blue>133</blue>
+    </color>
+   </property>
+   <property name="trueColor">
+    <color>
+     <red>0</red>
+     <green>85</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caToggleButton" name="catogglebutton">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>71</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BO01</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BO$(ID)</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caToggleButton</class>
+   <extends>QCheckBox</extends>
+   <header>caToggleButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caLed</class>
+   <extends>QWidget</extends>
+   <header>caLed</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
