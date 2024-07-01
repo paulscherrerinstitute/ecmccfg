@@ -49,3 +49,27 @@ record(bo,"$(P)MCU-Cfg-Eng-Mode") {
     field(ONAM, "Yes")
     field(ZNAM, "No")
 }
+
+# This db is only used to set the VAL field
+record(ao,"${P}MCU-Cfg-PLC-FrstObjId") {
+  field(DESC, "First PLC ID")
+  field(VAL,  "$(FIRST_OBJ_ID=-1)")
+}
+
+# This db is only used to set the VAL field
+record(ao,"${P}MCU-Cfg-PLG-FrstObjId") {
+  field(DESC, "First PLG ID")
+  field(VAL,  "$(FIRST_OBJ_ID=-1)")
+}
+
+# This db is only used to set the VAL field
+record(ao,"${P}MCU-Cfg-DS-FrstObjId") {
+  field(DESC, "First DS ID")
+  field(VAL,  "$(FIRST_OBJ_ID=-1)")
+}
+
+# This db is only used to set the VAL field
+record(ao,"${P}MCU-Cfg-AX-FrstObjId") {
+  field(DESC, "First axis ID")
+  field(VAL,  "$(FIRST_OBJ_ID=-1)")
+}

@@ -41,6 +41,9 @@ ecmcIf("'${CONFIG=NAN}'!='NAN' and ${CALLED_FROM_CFG_SLAVE=0}!=1")
 ${IF_TRUE}ecmcExit : Error: addSlave.script is not accepting CONFIG macro. Use configureSlave.cmd instead
 ecmcEndIf()
 
+#-Clear panel data (ensure new)
+epicsEnvUnset(ECMC_HW_PANEL)
+
 epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
@@ -82,3 +85,5 @@ epicsEnvSet(ECMC_EC_PREV_SLAVE_NUM,${ECMC_EC_SLAVE_NUM})
 
 # increment SLAVE_ID
 ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
+
+ecmcEpicsEnvSetCalc(ECMC_ECSLAVE_COUNT, "$(ECMC_ECSLAVE_COUNT=0)+1")

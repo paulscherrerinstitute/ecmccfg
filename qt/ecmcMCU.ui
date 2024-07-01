@@ -550,7 +550,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>30</y>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -569,8 +569,8 @@
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>30</y>
-         <width>100</width>
+         <y>50</y>
+         <width>41</width>
          <height>16</height>
         </rect>
        </property>
@@ -603,27 +603,106 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="caShellCommand" name="cashellcommand">
+      <widget class="caLineEdit" name="calineedit_51">
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>50</y>
-         <width>101</width>
-         <height>21</height>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
         </rect>
        </property>
-       <property name="label">
-        <string notr="true">Expert</string>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
        </property>
-       <property name="labels">
-        <string>Open first axis</string>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-AX-Cnt</string>
        </property>
-       <property name="files">
-        <string>bash /ioc/modules/qt/ecmcOpenFirstAxis.sh</string>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
        </property>
-       <property name="args">
-        <string>$(SYS)</string>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
        </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_92">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Axis count:</string>
+       </property>
+      </widget>
+      <widget class="caFrame" name="caframe">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>45</y>
+         <width>66</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="macro">
+        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+       </property>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
+       </property>
+       <property name="visibilityCalc">
+        <string notr="true">A&gt;-1</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-AX-FrstObjId</string>
+       </property>
+       <widget class="caShellCommand" name="cashellcommand">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenFirstAxis.sh</string>
+        </property>
+        <property name="args">
+         <string>$(SYS)</string>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_5">
@@ -641,8 +720,8 @@
       <widget class="caLabel" name="calabel_93">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>30</y>
+         <x>15</x>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -660,8 +739,8 @@
       <widget class="caLineEdit" name="calineedit_52">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>30</y>
+         <x>125</x>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -695,6 +774,63 @@
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="caLineEdit" name="calineedit_55">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-PLC-Cnt</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_96">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>PLC count:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_6">
       <property name="geometry">
@@ -712,7 +848,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>30</y>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -731,7 +867,7 @@
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>30</y>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -765,6 +901,63 @@
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="caLineEdit" name="calineedit_56">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-PLG-Cnt</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_97">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Plugin count:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_7">
       <property name="geometry">
@@ -781,8 +974,8 @@
       <widget class="caLabel" name="calabel_95">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>30</y>
+         <x>15</x>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -800,8 +993,8 @@
       <widget class="caLineEdit" name="calineedit_54">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>30</y>
+         <x>125</x>
+         <y>50</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -834,6 +1027,436 @@
        <property name="unitsEnabled">
         <bool>true</bool>
        </property>
+      </widget>
+      <widget class="caLabel" name="calabel_98">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Ds count:</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_57">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-DS-Cnt</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>20</y>
+        <width>251</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>EtherCAT</string>
+      </property>
+      <widget class="caLabel" name="calabel_101">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>75</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Slave count:</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_60">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>75</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-Slv-Cnt</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_61">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>55</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-Dom-Cnt</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_102">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>55</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Domain count:</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_44">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>35</y>
+         <width>36</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_82">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>35</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Master ID:</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_103">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>95</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>First Slave:</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_62">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>95</y>
+         <width>36</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-FrstObjId</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caFrame" name="caframe_2">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>30</y>
+         <width>66</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="macro">
+        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+       </property>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
+       </property>
+       <property name="visibilityCalc">
+        <string notr="true">A&gt;-1</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+       </property>
+       <widget class="caShellCommand" name="cashellcommand_3">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
+        </property>
+        <property name="args">
+         <string>$(SYS)</string>
+        </property>
+       </widget>
+       <widget class="caFrame" name="caframe_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>66</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="macro">
+         <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        </property>
+        <property name="visibility">
+         <enum>caFrame::Calc</enum>
+        </property>
+        <property name="visibilityCalc">
+         <string notr="true">A&gt;-1</string>
+        </property>
+        <property name="channel" stdset="0">
+         <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+        </property>
+        <widget class="caShellCommand" name="cashellcommand_5">
+         <property name="geometry">
+          <rect>
+           <x>5</x>
+           <y>5</y>
+           <width>55</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="label">
+          <string notr="true">&gt;&gt;</string>
+         </property>
+         <property name="labels">
+          <string>Open first axis</string>
+         </property>
+         <property name="files">
+          <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
+         </property>
+         <property name="args">
+          <string>$(SYS)</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="caFrame" name="caframe_4">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>95</y>
+         <width>66</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="macro">
+        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+       </property>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
+       </property>
+       <property name="visibilityCalc">
+        <string notr="true">A&gt;-1</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-FrstObjId</string>
+       </property>
+       <widget class="caShellCommand" name="cashellcommand_4">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>0</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenFirstEcSlave.sh</string>
+        </property>
+        <property name="args">
+         <string>$(SYS)</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
@@ -1480,27 +2103,49 @@
         <string>Master ID:</string>
        </property>
       </widget>
-      <widget class="caShellCommand" name="cashellcommand_2">
+      <widget class="caFrame" name="caframe_5">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>60</y>
-         <width>101</width>
-         <height>21</height>
+         <x>45</x>
+         <y>50</y>
+         <width>106</width>
+         <height>26</height>
         </rect>
        </property>
-       <property name="label">
-        <string notr="true">Expert</string>
+       <property name="macro">
+        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
        </property>
-       <property name="labels">
-        <string>Open first axis</string>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
        </property>
-       <property name="files">
-        <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
+       <property name="visibilityCalc">
+        <string notr="true">A&gt;-1</string>
        </property>
-       <property name="args">
-        <string>$(SYS)</string>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
        </property>
+       <widget class="caShellCommand" name="cashellcommand_6">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>101</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">Expert</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
+        </property>
+        <property name="args">
+         <string>$(SYS)</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
@@ -1602,6 +2247,12 @@
    <class>caMessageButton</class>
    <extends>QPushButton</extends>
    <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>caLabel</class>

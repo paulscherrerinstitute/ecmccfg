@@ -26,3 +26,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcWatchDog.cmd
 
 # Peak current (to be overwritten by motor config)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,1000,4)"
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1")

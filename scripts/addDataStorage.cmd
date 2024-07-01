@@ -61,3 +61,5 @@ epicsEnvUnset(ECMC_EXE_FIRST_DS)
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added dataStorage
 epicsEnvSet(ECMC_PREV_DS_P,"$(ECMC_PREFIX)MCU-Cfg-DS${DS_ID}-")
 epicsEnvSet(ECMC_PREV_DS_OBJ_ID,${DS_ID})
+
+ecmcEpicsEnvSetCalc(ECMC_DS_COUNT, "$(ECMC_DS_COUNT=0)+1")

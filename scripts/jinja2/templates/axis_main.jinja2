@@ -21,3 +21,5 @@
     ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
 {%- endif %}
 {% include 'axisCleanup.jinja2' %}
+
+ecmcEpicsEnvSetCalc(ECMC_AXIS_COUNT, "$(ECMC_AXIS_COUNT=0)+1")
