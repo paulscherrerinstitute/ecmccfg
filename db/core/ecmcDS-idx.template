@@ -66,3 +66,8 @@ record(ao,"$(P)MCU-Cfg-DS${Index}-NxtObjId") {
     field(DESC, "DS number of next DS")
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
 }
+
+record(ao,"$(P)MCU-Cfg-DS${Index}-PrvObjId") {
+    field(DESC, "DS number of next DS")
+    field(VAL,  "$(PREV_OBJ_ID=-1)")
+}

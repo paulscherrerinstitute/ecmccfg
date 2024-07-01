@@ -995,7 +995,7 @@
         <rect>
          <x>125</x>
          <y>50</y>
-         <width>100</width>
+         <width>41</width>
          <height>16</height>
         </rect>
        </property>
@@ -1084,6 +1084,50 @@
        <property name="unitsEnabled">
         <bool>true</bool>
        </property>
+      </widget>
+      <widget class="caFrame" name="caframe_6">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>45</y>
+         <width>66</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="macro">
+        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+       </property>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
+       </property>
+       <property name="visibilityCalc">
+        <string notr="true">A&gt;-1</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(SYS):MCU-Cfg-DS-FrstObjId</string>
+       </property>
+       <widget class="caShellCommand" name="cashellcommand_2">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenFirstDS.sh</string>
+        </property>
+        <property name="args">
+         <string>$(SYS)</string>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_8">
