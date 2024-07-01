@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>115</width>
+    <height>25</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="caLed" name="caled_3">
    <property name="geometry">
     <rect>
-     <x>75</x>
-     <y>73</y>
+     <x>30</x>
+     <y>5</y>
      <width>17</width>
      <height>17</height>
     </rect>
@@ -58,9 +58,9 @@
   <widget class="caLabel" name="calabel_3">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>70</y>
-     <width>21</width>
+     <x>0</x>
+     <y>2</y>
+     <width>15</width>
      <height>22</height>
     </rect>
    </property>
@@ -71,8 +71,8 @@
   <widget class="caLed" name="caled_7">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>73</y>
+     <x>95</x>
+     <y>5</y>
      <width>17</width>
      <height>17</height>
     </rect>
@@ -104,8 +104,8 @@
    </property>
    <property name="trueColor">
     <color>
-     <red>0</red>
-     <green>85</green>
+     <red>255</red>
+     <green>0</green>
      <blue>0</blue>
     </color>
    </property>
@@ -113,8 +113,8 @@
   <widget class="caLed" name="caled_4">
    <property name="geometry">
     <rect>
-     <x>116</x>
-     <y>73</y>
+     <x>50</x>
+     <y>5</y>
      <width>17</width>
      <height>17</height>
     </rect>
@@ -146,8 +146,8 @@
    </property>
    <property name="trueColor">
     <color>
-     <red>0</red>
-     <green>85</green>
+     <red>255</red>
+     <green>0</green>
      <blue>0</blue>
     </color>
    </property>
@@ -155,8 +155,8 @@
   <widget class="caLed" name="caled_5">
    <property name="geometry">
     <rect>
-     <x>134</x>
-     <y>73</y>
+     <x>65</x>
+     <y>5</y>
      <width>17</width>
      <height>17</height>
     </rect>
@@ -188,8 +188,8 @@
    </property>
    <property name="trueColor">
     <color>
-     <red>0</red>
-     <green>85</green>
+     <red>255</red>
+     <green>0</green>
      <blue>0</blue>
     </color>
    </property>
@@ -197,8 +197,8 @@
   <widget class="caLed" name="caled_6">
    <property name="geometry">
     <rect>
-     <x>152</x>
-     <y>73</y>
+     <x>80</x>
+     <y>5</y>
      <width>17</width>
      <height>17</height>
     </rect>
@@ -230,8 +230,8 @@
    </property>
    <property name="trueColor">
     <color>
-     <red>0</red>
-     <green>85</green>
+     <red>255</red>
+     <green>0</green>
      <blue>0</blue>
     </color>
    </property>
@@ -239,8 +239,8 @@
   <widget class="caToggleButton" name="catogglebutton">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>71</y>
+     <x>15</x>
+     <y>3</y>
      <width>21</width>
      <height>21</height>
     </rect>
