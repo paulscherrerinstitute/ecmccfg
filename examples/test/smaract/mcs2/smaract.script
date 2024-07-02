@@ -1,13 +1,13 @@
 ##############################################################################
 ## Example config for smaract MCS2
 
-require ecmccfg v9.0.1_RC3,"IOC=$(IOC),ECMC_VER=sandst_a,EC_RATE=1000,MASTER_ID=1"
-require ecmccomp sandst_a
+require ecmccfg sandst_a "ECMC_VER=sandst_a,IOC=$(IOC),EC_RATE=1000"
+require ecmccomp
 
 ##############################################################################
 ## Configure hardware
 
-epicsEnvSet("MCS2_SLAVE_NUM",              "0")
+epicsEnvSet("MCS2_SLAVE_NUM",              "15")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SLC1750ds,MACROS='HOME_VELO=1000'"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=2"
@@ -25,7 +25,7 @@ epicsEnvSet("DEV",      "$(IOC)")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_lin.yaml"
 
 ##############################################################################
-## AXIS 1 (MCS2 CH1)
+## AXIS 3 (MCS2 CH1)
 #
 epicsEnvSet("MCS2_CHID",              "3")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_rot.yaml"
