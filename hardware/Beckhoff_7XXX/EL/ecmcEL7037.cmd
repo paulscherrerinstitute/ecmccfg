@@ -19,3 +19,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX70XX.cmd
 
 #- Error on loss of steps = 1
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0xA,1,1)"
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "Ex70x7")

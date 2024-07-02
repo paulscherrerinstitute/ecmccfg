@@ -156,3 +156,5 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM},mode03,8)"
 #ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x708F,0x01,1000,4)"
 #ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x708F,0x02,1,4)"
 
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "MCS2")

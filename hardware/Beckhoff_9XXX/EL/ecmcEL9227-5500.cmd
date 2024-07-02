@@ -103,3 +103,6 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 #-    PDO entry 0x6010:23, 16 bit, "Voltage In"
 #-    PDO entry 0x6010:24, 16 bit, "Voltage Out"
 #-
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "EL9227")
