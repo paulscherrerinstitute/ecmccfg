@@ -1859,7 +1859,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>495</y>
+     <y>500</y>
      <width>141</width>
      <height>20</height>
     </rect>
@@ -1885,6 +1885,28 @@
    </property>
    <property name="precisionMode">
     <enum>caLineEdit::User</enum>
+   </property>
+  </widget>
+  <widget class="replaceMacro" name="replacemacro">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>487</y>
+     <width>91</width>
+     <height>46</height>
+    </rect>
+   </property>
+   <property name="reloadOnChange">
+    <bool>true</bool>
+   </property>
+   <property name="displayMode" stdset="0">
+    <enum>replaceMacro::List</enum>
+   </property>
+   <property name="macroKey">
+    <string notr="true">ID</string>
+   </property>
+   <property name="macroValues">
+    <string>1;2;3</string>
    </property>
   </widget>
  </widget>
@@ -1938,6 +1960,11 @@
    <class>caByte</class>
    <extends>QWidget</extends>
    <header>caByte</header>
+  </customwidget>
+  <customwidget>
+   <class>replaceMacro</class>
+   <extends>QWidget</extends>
+   <header>replaceMacro</header>
   </customwidget>
   <customwidget>
    <class>QwtPlot</class>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
+    <width>125</width>
     <height>500</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="caInclude" name="cainclude">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>-15</x>
      <y>0</y>
      <width>141</width>
      <height>500</height>
@@ -56,7 +56,7 @@
    </property>
    <widget class="QWidget" name="tab_5">
     <attribute name="title">
-     <string>Info</string>
+     <string>Ch01</string>
     </attribute>
     <widget class="QGroupBox" name="groupBox_5">
      <property name="geometry">
@@ -643,283 +643,61 @@
    </widget>
    <widget class="QWidget" name="tab_6">
     <attribute name="title">
-     <string>CiA402</string>
+     <string>Ch02</string>
     </attribute>
-    <widget class="caByte" name="cabyte_5">
+    <widget class="QGroupBox" name="groupBox_9">
      <property name="geometry">
       <rect>
-       <x>5</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
+       <x>0</x>
+       <y>330</y>
+       <width>118</width>
+       <height>51</height>
       </rect>
      </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <property name="title">
+      <string>Encoder</string>
      </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
-     </property>
-     <property name="direction">
-      <enum>caByte::Down</enum>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
+     <widget class="caLineEdit" name="calineedit_5">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>30</y>
+        <width>53</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc02-PosAct</string>
+      </property>
+      <property name="background">
+       <color alpha="0">
+        <red>160</red>
+        <green>160</green>
+        <blue>164</blue>
+       </color>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Static</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_9">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>25</y>
+        <width>50</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>positon</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="caByte" name="cabyte_7">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd-RB</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_9">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd2-RB</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_28">
-     <property name="geometry">
-      <rect>
-       <x>-20</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>S</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_29">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>C1</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_30">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>C2</string>
-     </property>
-    </widget>
-    <widget class="caByteController" name="cabytecontroller">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>200</y>
-       <width>21</width>
-       <height>171</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
-     </property>
-     <property name="endBit">
-      <number>16</number>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_6">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>295</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Enable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Ena</string>
-     </property>
-     <property name="label">
-      <string notr="true">Enable</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_4">
-     <property name="geometry">
-      <rect>
-       <x>75</x>
-       <y>290</y>
-       <width>41</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stat</string>
-     </property>
-     <property name="startBit">
-      <number>2</number>
-     </property>
-     <property name="endBit">
-      <number>2</number>
-     </property>
-     <property name="foreground" stdset="0">
-      <color>
-       <red>0</red>
-       <green>85</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_8">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>345</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
-     </property>
-     <property name="label">
-      <string notr="true">Reset</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">128</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_7">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>315</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Disable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrgDS402Dis</string>
-     </property>
-     <property name="label">
-      <string notr="true">Disable</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caTextEntry" name="catextentry">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>260</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Cmd</string>
-     </property>
-    </widget>
-    <zorder>cabyte_4</zorder>
-    <zorder>cabyte_5</zorder>
-    <zorder>cabyte_7</zorder>
-    <zorder>cabyte_9</zorder>
-    <zorder>calabel_28</zorder>
-    <zorder>calabel_29</zorder>
-    <zorder>calabel_30</zorder>
-    <zorder>cabytecontroller</zorder>
-    <zorder>camessagebutton_6</zorder>
-    <zorder>camessagebutton_8</zorder>
-    <zorder>camessagebutton_7</zorder>
-    <zorder>catextentry</zorder>
-   </widget>
-  </widget>
-  <widget class="QTabWidget" name="tabWidget_4">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>30</y>
-     <width>122</width>
-     <height>421</height>
-    </rect>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="tab_7">
-    <attribute name="title">
-     <string>Info</string>
-    </attribute>
-    <widget class="QGroupBox" name="groupBox_7">
+    <widget class="QGroupBox" name="groupBox_10">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -931,7 +709,7 @@
      <property name="title">
       <string>Drive</string>
      </property>
-     <widget class="caLineEdit" name="calineedit_14">
+     <widget class="caLineEdit" name="calineedit_17">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -960,7 +738,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caLineEdit" name="calineedit_15">
+     <widget class="caLineEdit" name="calineedit_18">
       <property name="geometry">
        <rect>
         <x>64</x>
@@ -986,7 +764,7 @@
        <enum>caLineEdit::User</enum>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_14">
+     <widget class="caLabel" name="calabel_15">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1005,7 +783,7 @@
        <string>Cntrl WD</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_24">
+     <widget class="caLabel" name="calabel_28">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1024,7 +802,7 @@
        <string>PosSet:</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_25">
+     <widget class="caLabel" name="calabel_29">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1043,7 +821,7 @@
        <string>Mode</string>
       </property>
      </widget>
-     <widget class="caLed" name="caled_Warning_4">
+     <widget class="caLed" name="caled_Warning_9">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -1103,7 +881,7 @@
        <string notr="true">1</string>
       </property>
      </widget>
-     <widget class="caLed" name="caled_Error_4">
+     <widget class="caLed" name="caled_Error_5">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -1163,7 +941,7 @@
        <string notr="true">1</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_26">
+     <widget class="caLabel" name="calabel_30">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1182,7 +960,7 @@
        <string>Error</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_27">
+     <widget class="caLabel" name="calabel_44">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1201,7 +979,7 @@
        <string>Warning</string>
       </property>
      </widget>
-     <widget class="caLineEdit" name="calineedit_16">
+     <widget class="caLineEdit" name="calineedit_19">
       <property name="geometry">
        <rect>
         <x>62</x>
@@ -1230,7 +1008,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_42">
+     <widget class="caLabel" name="calabel_45">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1249,7 +1027,7 @@
        <string>Enabled</string>
       </property>
      </widget>
-     <widget class="caLed" name="caled_Warning_7">
+     <widget class="caLed" name="caled_Warning_10">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -1309,7 +1087,7 @@
        <string notr="true">0</string>
       </property>
      </widget>
-     <widget class="caFrame" name="caframe_3">
+     <widget class="caFrame" name="caframe_8">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1324,7 +1102,7 @@
       <property name="channel" stdset="0">
        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-EnaAct</string>
       </property>
-      <widget class="caMenu" name="camenu_2">
+      <widget class="caMenu" name="camenu_4">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -1341,7 +1119,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="caFrame" name="caframe_6">
+     <widget class="caFrame" name="caframe_9">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1356,7 +1134,7 @@
       <property name="channel" stdset="0">
        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-EnaAct</string>
       </property>
-      <widget class="caToggleButton" name="catogglebutton_5">
+      <widget class="caToggleButton" name="catogglebutton_7">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1372,7 +1150,7 @@
         <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-CmdExe</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="label_7">
        <property name="geometry">
         <rect>
          <x>30</x>
@@ -1385,7 +1163,7 @@
         <string>Cmd done</string>
        </property>
       </widget>
-      <widget class="caLed" name="caled_5">
+      <widget class="caLed" name="caled_7">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -1413,7 +1191,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="caTextEntry" name="catextentry_5">
+     <widget class="caTextEntry" name="catextentry_7">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -1426,7 +1204,7 @@
        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-PosCmd</string>
       </property>
      </widget>
-     <widget class="caRelatedDisplay" name="CiA402_3">
+     <widget class="caRelatedDisplay" name="CiA402_5">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1449,335 +1227,12 @@
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_8">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>330</y>
-       <width>118</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Encoder</string>
-     </property>
-     <widget class="caLineEdit" name="calineedit_4">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>30</y>
-        <width>53</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc02-PosAct</string>
-      </property>
-      <property name="background">
-       <color alpha="0">
-        <red>160</red>
-        <green>160</green>
-        <blue>164</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_8">
-      <property name="geometry">
-       <rect>
-        <x>3</x>
-        <y>25</y>
-        <width>50</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>positon</string>
-      </property>
-     </widget>
-    </widget>
    </widget>
-   <widget class="QWidget" name="tab_8">
+   <widget class="QWidget" name="tab">
     <attribute name="title">
-     <string>CiA402</string>
+     <string>Ch03</string>
     </attribute>
-    <widget class="caByte" name="cabyte_6">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Stat</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_10">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd-RB</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_11">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd2-RB</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_31">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>C2</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_36">
-     <property name="geometry">
-      <rect>
-       <x>-20</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>S</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_37">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>C1</string>
-     </property>
-    </widget>
-    <widget class="caByteController" name="cabytecontroller_2">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>195</y>
-       <width>21</width>
-       <height>171</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd</string>
-     </property>
-     <property name="endBit">
-      <number>16</number>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_9">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>295</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Enable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TrgDS402Ena</string>
-     </property>
-     <property name="label">
-      <string notr="true">Enable</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_10">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>345</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd</string>
-     </property>
-     <property name="label">
-      <string notr="true">Reset</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">128</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_11">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>315</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Disable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TrgDS402Dis</string>
-     </property>
-     <property name="label">
-      <string notr="true">Disable</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_14">
-     <property name="geometry">
-      <rect>
-       <x>75</x>
-       <y>290</y>
-       <width>41</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Stat</string>
-     </property>
-     <property name="startBit">
-      <number>2</number>
-     </property>
-     <property name="endBit">
-      <number>2</number>
-     </property>
-     <property name="foreground" stdset="0">
-      <color>
-       <red>0</red>
-       <green>85</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caTextEntry" name="catextentry_2">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>260</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-Cmd</string>
-     </property>
-    </widget>
-    <zorder>cabyte_14</zorder>
-    <zorder>cabyte_6</zorder>
-    <zorder>cabyte_10</zorder>
-    <zorder>cabyte_11</zorder>
-    <zorder>calabel_31</zorder>
-    <zorder>calabel_36</zorder>
-    <zorder>calabel_37</zorder>
-    <zorder>cabytecontroller_2</zorder>
-    <zorder>camessagebutton_9</zorder>
-    <zorder>camessagebutton_10</zorder>
-    <zorder>camessagebutton_11</zorder>
-    <zorder>catextentry_2</zorder>
-   </widget>
-  </widget>
-  <widget class="QTabWidget" name="tabWidget_5">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>30</y>
-     <width>122</width>
-     <height>421</height>
-    </rect>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="tab_11">
-    <attribute name="title">
-     <string>Info</string>
-    </attribute>
-    <widget class="QGroupBox" name="groupBox_11">
+    <widget class="QGroupBox" name="groupBox_13">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1789,7 +1244,7 @@
      <property name="title">
       <string>Drive</string>
      </property>
-     <widget class="caLineEdit" name="calineedit_20">
+     <widget class="caLineEdit" name="calineedit_26">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1818,7 +1273,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caLineEdit" name="calineedit_21">
+     <widget class="caLineEdit" name="calineedit_27">
       <property name="geometry">
        <rect>
         <x>62</x>
@@ -1844,7 +1299,7 @@
        <enum>caLineEdit::User</enum>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_16">
+     <widget class="caLabel" name="calabel_18">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1863,7 +1318,7 @@
        <string>Cntrl WD</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_32">
+     <widget class="caLabel" name="calabel_51">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1882,7 +1337,7 @@
        <string>PosSet:</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_33">
+     <widget class="caLabel" name="calabel_52">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -1901,7 +1356,7 @@
        <string>Mode</string>
       </property>
      </widget>
-     <widget class="caLed" name="caled_Warning_6">
+     <widget class="caLed" name="caled_Warning_13">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -1961,7 +1416,7 @@
        <string notr="true">1</string>
       </property>
      </widget>
-     <widget class="caLed" name="caled_Error_6">
+     <widget class="caLed" name="caled_Error_8">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -2021,7 +1476,7 @@
        <string notr="true">1</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_34">
+     <widget class="caLabel" name="calabel_53">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -2040,7 +1495,7 @@
        <string>Error</string>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_35">
+     <widget class="caLabel" name="calabel_54">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -2059,7 +1514,7 @@
        <string>Warning</string>
       </property>
      </widget>
-     <widget class="caLineEdit" name="calineedit_22">
+     <widget class="caLineEdit" name="calineedit_28">
       <property name="geometry">
        <rect>
         <x>62</x>
@@ -2088,7 +1543,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_43">
+     <widget class="caLabel" name="calabel_55">
       <property name="geometry">
        <rect>
         <x>-10</x>
@@ -2107,7 +1562,7 @@
        <string>Enabled</string>
       </property>
      </widget>
-     <widget class="caLed" name="caled_Warning_8">
+     <widget class="caLed" name="caled_Warning_14">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -2167,7 +1622,7 @@
        <string notr="true">0</string>
       </property>
      </widget>
-     <widget class="caFrame" name="caframe_4">
+     <widget class="caFrame" name="caframe_12">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -2182,7 +1637,7 @@
       <property name="channel" stdset="0">
        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-EnaAct</string>
       </property>
-      <widget class="caMenu" name="camenu_3">
+      <widget class="caMenu" name="camenu_6">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -2199,7 +1654,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="caFrame" name="caframe_7">
+     <widget class="caFrame" name="caframe_13">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -2214,7 +1669,7 @@
       <property name="channel" stdset="0">
        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-EnaAct</string>
       </property>
-      <widget class="caToggleButton" name="catogglebutton_6">
+      <widget class="caToggleButton" name="catogglebutton_9">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -2230,7 +1685,7 @@
         <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-CmdExe</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
          <x>30</x>
@@ -2243,7 +1698,7 @@
         <string>Cmd done</string>
        </property>
       </widget>
-      <widget class="caLed" name="caled_6">
+      <widget class="caLed" name="caled_9">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -2271,7 +1726,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="caTextEntry" name="catextentry_4">
+     <widget class="caTextEntry" name="catextentry_9">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -2284,7 +1739,7 @@
        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-PosCmd</string>
       </property>
      </widget>
-     <widget class="caRelatedDisplay" name="CiA402_4">
+     <widget class="caRelatedDisplay" name="CiA402_7">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -2307,7 +1762,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_12">
+    <widget class="QGroupBox" name="groupBox_14">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -2319,7 +1774,7 @@
      <property name="title">
       <string>Encoder</string>
      </property>
-     <widget class="caLineEdit" name="calineedit_6">
+     <widget class="caLineEdit" name="calineedit_7">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -2345,7 +1800,7 @@
        <enum>caLineEdit::User</enum>
       </property>
      </widget>
-     <widget class="caLabel" name="calabel_10">
+     <widget class="caLabel" name="calabel_11">
       <property name="geometry">
        <rect>
         <x>3</x>
@@ -2359,264 +1814,6 @@
       </property>
      </widget>
     </widget>
-   </widget>
-   <widget class="QWidget" name="tab_12">
-    <attribute name="title">
-     <string>CiA402</string>
-    </attribute>
-    <widget class="caByte" name="cabyte_8">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Stat</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_12">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd-RB</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_13">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>20</width>
-       <height>151</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 0: Ready to switch on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 1: Switched on &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 2: Operation enabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 3: Fault &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 4: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 5: Quick stop (inverse) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 6: Switch on disabled &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 7: Warning &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 8 + 9: reserved &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 10: TxPDOToggle (selection/deselection via 0x8010:01) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 11: Internal limit active &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 12: (Target value ignored) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'sans-serif';&quot;&gt;Bit 13 - 15: reserved&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd2-RB</string>
-     </property>
-     <property name="endBit">
-      <number>15</number>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_38">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>C2</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_39">
-     <property name="geometry">
-      <rect>
-       <x>-20</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>S</string>
-     </property>
-    </widget>
-    <widget class="caLabel" name="calabel_40">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>40</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>40</width>
-       <height>10</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>C1</string>
-     </property>
-    </widget>
-    <widget class="caByteController" name="cabytecontroller_3">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>195</y>
-       <width>21</width>
-       <height>171</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd</string>
-     </property>
-     <property name="endBit">
-      <number>16</number>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_12">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>295</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Enable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-TrgDS402Ena</string>
-     </property>
-     <property name="label">
-      <string notr="true">Enable</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_13">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>345</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd</string>
-     </property>
-     <property name="label">
-      <string notr="true">Reset</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">128</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caMessageButton" name="camessagebutton_14">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>315</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Disable</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-TrgDS402Dis</string>
-     </property>
-     <property name="label">
-      <string notr="true">Disable</string>
-     </property>
-     <property name="releaseMessage">
-      <string notr="true">1</string>
-     </property>
-     <property name="pressMessage">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="caByte" name="cabyte_15">
-     <property name="geometry">
-      <rect>
-       <x>75</x>
-       <y>290</y>
-       <width>41</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Stat</string>
-     </property>
-     <property name="startBit">
-      <number>2</number>
-     </property>
-     <property name="endBit">
-      <number>2</number>
-     </property>
-     <property name="foreground" stdset="0">
-      <color>
-       <red>0</red>
-       <green>85</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caTextEntry" name="catextentry_3">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>260</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv03-Cmd</string>
-     </property>
-    </widget>
-    <zorder>cabyte_15</zorder>
-    <zorder>cabyte_8</zorder>
-    <zorder>cabyte_12</zorder>
-    <zorder>cabyte_13</zorder>
-    <zorder>calabel_38</zorder>
-    <zorder>calabel_39</zorder>
-    <zorder>calabel_40</zorder>
-    <zorder>cabytecontroller_3</zorder>
-    <zorder>camessagebutton_12</zorder>
-    <zorder>camessagebutton_13</zorder>
-    <zorder>camessagebutton_14</zorder>
-    <zorder>catextentry_3</zorder>
    </widget>
   </widget>
  </widget>
@@ -2637,19 +1834,9 @@
    <header>caTextEntry</header>
   </customwidget>
   <customwidget>
-   <class>caMessageButton</class>
-   <extends>QPushButton</extends>
-   <header>caMessageButton</header>
-  </customwidget>
-  <customwidget>
    <class>caToggleButton</class>
    <extends>QCheckBox</extends>
    <header>caToggleButton</header>
-  </customwidget>
-  <customwidget>
-   <class>caByteController</class>
-   <extends>QWidget</extends>
-   <header>caByteController</header>
   </customwidget>
   <customwidget>
    <class>caFrame</class>
@@ -2676,11 +1863,6 @@
    <class>caLineEdit</class>
    <extends>QLineEdit</extends>
    <header>caLineEdit</header>
-  </customwidget>
-  <customwidget>
-   <class>caByte</class>
-   <extends>QWidget</extends>
-   <header>caByte</header>
   </customwidget>
  </customwidgets>
  <resources/>
