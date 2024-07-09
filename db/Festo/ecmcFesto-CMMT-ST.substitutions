@@ -13,3 +13,10 @@ file "ecmcFesto-CMMT-ST_Enc.template" { pattern
   { CH_ID }
   { X     }
 }
+
+# ecmcDS402Enable
+file "ecmcDS402Enable-chX.template"
+{
+  pattern {CH_ID}
+          {01   }                   
+}
