@@ -33,7 +33,7 @@
      <string>error reset</string>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(SYS):MCU-ErrRst</string>
+     <string notr="true">$(IOC):MCU-ErrRst</string>
     </property>
     <property name="label">
      <string notr="true">error reset</string>
@@ -133,7 +133,7 @@
         <string/>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Time</string>
+        <string notr="true">$(IOC):MCU-Cfg-Time</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -174,7 +174,7 @@
         <string/>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Rate</string>
+        <string notr="true">$(IOC):MCU-Cfg-Rate</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -231,7 +231,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -310,7 +310,7 @@
         <string/>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-PV-Time</string>
+        <string notr="true">$(IOC):MCU-Cfg-PV-Time</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -370,7 +370,7 @@
         <string/>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Mode</string>
+        <string notr="true">$(IOC):MCU-Cfg-Mode</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -440,7 +440,7 @@
         </rect>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Eng-Mode</string>
+        <string notr="true">$(IOC):MCU-Cfg-Eng-Mode</string>
        </property>
        <property name="falseColor">
         <color>
@@ -473,7 +473,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Info</string>
+        <string notr="true">$(IOC):MCU-Cfg-Info</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -511,7 +511,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Naming</string>
+        <string notr="true">$(IOC):MCU-Cfg-Naming</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -581,7 +581,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-AX-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-AX-FrstObjId</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -619,7 +619,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-AX-Cnt</string>
+        <string notr="true">$(IOC):MCU-Cfg-AX-Cnt</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -673,7 +673,7 @@
         <number>-2</number>
        </property>
        <property name="macro">
-        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
        </property>
        <property name="visibility">
         <enum>caFrame::Calc</enum>
@@ -682,7 +682,7 @@
         <string notr="true">A&gt;-1</string>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-AX-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-AX-FrstObjId</string>
        </property>
        <widget class="caShellCommand" name="cashellcommand">
         <property name="geometry">
@@ -703,7 +703,7 @@
          <string>bash /ioc/modules/qt/ecmcOpenFirstAxis.sh</string>
         </property>
         <property name="args">
-         <string>$(SYS)</string>
+         <string>$(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -755,7 +755,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-PLC-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-PLC-FrstObjId</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -793,7 +793,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-PLC-Cnt</string>
+        <string notr="true">$(IOC):MCU-Cfg-PLC-Cnt</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -844,7 +844,7 @@
         </rect>
        </property>
        <property name="macro">
-        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
        </property>
        <property name="visibility">
         <enum>caFrame::Calc</enum>
@@ -853,7 +853,7 @@
         <string notr="true">A&gt;-1</string>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-PLC-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-PLC-FrstObjId</string>
        </property>
        <widget class="caShellCommand" name="cashellcommand_7">
         <property name="geometry">
@@ -874,7 +874,7 @@
          <string>bash /ioc/modules/qt/ecmcOpenFirstPLC.sh</string>
         </property>
         <property name="args">
-         <string>$(SYS)</string>
+         <string>$(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -926,7 +926,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-PLG-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-PLG-FrstObjId</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -964,7 +964,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-PLG-Cnt</string>
+        <string notr="true">$(IOC):MCU-Cfg-PLG-Cnt</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1053,7 +1053,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-DS-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-DS-FrstObjId</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1110,7 +1110,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-DS-Cnt</string>
+        <string notr="true">$(IOC):MCU-Cfg-DS-Cnt</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1142,7 +1142,7 @@
         </rect>
        </property>
        <property name="macro">
-        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
        </property>
        <property name="visibility">
         <enum>caFrame::Calc</enum>
@@ -1151,7 +1151,7 @@
         <string notr="true">A&gt;-1</string>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-DS-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-DS-FrstObjId</string>
        </property>
        <widget class="caShellCommand" name="cashellcommand_2">
         <property name="geometry">
@@ -1172,7 +1172,7 @@
          <string>bash /ioc/modules/qt/ecmcOpenFirstDS.sh</string>
         </property>
         <property name="args">
-         <string>$(SYS)</string>
+         <string>$(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -1224,7 +1224,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Slv-Cnt</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Slv-Cnt</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1262,7 +1262,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Dom-Cnt</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Dom-Cnt</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1319,7 +1319,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1395,7 +1395,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-FrstObjId</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -1427,7 +1427,7 @@
         </rect>
        </property>
        <property name="macro">
-        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
        </property>
        <property name="visibility">
         <enum>caFrame::Calc</enum>
@@ -1436,7 +1436,7 @@
         <string notr="true">A&gt;-1</string>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
        </property>
        <widget class="caShellCommand" name="cashellcommand_3">
         <property name="geometry">
@@ -1457,7 +1457,7 @@
          <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
         </property>
         <property name="args">
-         <string>$(SYS)</string>
+         <string>$(IOC)</string>
         </property>
        </widget>
        <widget class="caFrame" name="caframe_3">
@@ -1470,7 +1470,7 @@
          </rect>
         </property>
         <property name="macro">
-         <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+         <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
         </property>
         <property name="visibility">
          <enum>caFrame::Calc</enum>
@@ -1479,7 +1479,7 @@
          <string notr="true">A&gt;-1</string>
         </property>
         <property name="channel" stdset="0">
-         <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+         <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
         </property>
         <widget class="caShellCommand" name="cashellcommand_5">
          <property name="geometry">
@@ -1500,7 +1500,7 @@
           <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
          </property>
          <property name="args">
-          <string>$(SYS)</string>
+          <string>$(IOC)</string>
          </property>
         </widget>
        </widget>
@@ -1515,7 +1515,7 @@
         </rect>
        </property>
        <property name="macro">
-        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
        </property>
        <property name="visibility">
         <enum>caFrame::Calc</enum>
@@ -1524,7 +1524,7 @@
         <string notr="true">A&gt;-1</string>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-FrstObjId</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-FrstObjId</string>
        </property>
        <widget class="caShellCommand" name="cashellcommand_4">
         <property name="geometry">
@@ -1545,7 +1545,7 @@
          <string>bash /ioc/modules/qt/ecmcOpenFirstEcSlave.sh</string>
         </property>
         <property name="args">
-         <string>$(SYS)</string>
+         <string>$(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -1560,7 +1560,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+       <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -1569,7 +1569,7 @@
        <string notr="true">0</string>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(SYS):MCU-Cfg-PLG-FrstObjId</string>
+       <string notr="true">$(IOC):MCU-Cfg-PLG-FrstObjId</string>
       </property>
       <widget class="caShellCommand" name="cashellcommand_8">
        <property name="geometry">
@@ -1590,7 +1590,7 @@
         <string>bash /ioc/modules/qt/ecmcOpenFirstPLG.sh</string>
        </property>
        <property name="args">
-        <string>$(SYS)</string>
+        <string>$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -1620,7 +1620,7 @@
        <string notr="true">Time[ns]</string>
       </property>
       <property name="channels" stdset="0">
-       <string>$(SYS):MCU-ThdPrdMax;$(SYS):MCU-ThdPrdMin</string>
+       <string>$(IOC):MCU-ThdPrdMax;$(IOC):MCU-ThdPrdMin</string>
       </property>
       <property name="period">
        <double>30.000000000000000</double>
@@ -1717,7 +1717,7 @@
        <string notr="true">Time[ns]</string>
       </property>
       <property name="channels" stdset="0">
-       <string>$(SYS):MCU-ThdLatMax;$(SYS):MCU-ThdLatMin</string>
+       <string>$(IOC):MCU-ThdLatMax;$(IOC):MCU-ThdLatMin</string>
       </property>
       <property name="period">
        <double>30.000000000000000</double>
@@ -1814,7 +1814,7 @@
        <string notr="true">Time[ns]</string>
       </property>
       <property name="channels" stdset="0">
-       <string>$(SYS):MCU-ThdExeMax;$(SYS):MCU-ThdExeMin</string>
+       <string>$(IOC):MCU-ThdExeMax;$(IOC):MCU-ThdExeMin</string>
       </property>
       <property name="period">
        <double>30.000000000000000</double>
@@ -1911,7 +1911,7 @@
        <string notr="true">Time[ns]</string>
       </property>
       <property name="channels" stdset="0">
-       <string>$(SYS):MCU-ThdSndMax;$(SYS):MCU-ThdSndMin</string>
+       <string>$(IOC):MCU-ThdSndMax;$(IOC):MCU-ThdSndMin</string>
       </property>
       <property name="period">
        <double>30.000000000000000</double>
@@ -2009,7 +2009,7 @@
         </rect>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-ThdRTPrioOK</string>
+        <string notr="true">$(IOC):MCU-ThdRTPrioOK</string>
        </property>
        <property name="falseColor">
         <color>
@@ -2064,7 +2064,7 @@
         <string/>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-ThdFrqAvg</string>
+        <string notr="true">$(IOC):MCU-ThdFrqAvg</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -2127,7 +2127,7 @@
         <string/>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-Rate</string>
+        <string notr="true">$(IOC):MCU-Cfg-Rate</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -2197,7 +2197,7 @@
         </size>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
        </property>
        <property name="background">
         <color alpha="222">
@@ -2248,7 +2248,7 @@
         </rect>
        </property>
        <property name="macro">
-        <string notr="true">SYS=$(SYS),IOC=$(IOC)</string>
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
        </property>
        <property name="visibility">
         <enum>caFrame::Calc</enum>
@@ -2257,7 +2257,7 @@
         <string notr="true">A&gt;-1</string>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(SYS):MCU-Cfg-EC-Mst</string>
+        <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
        </property>
        <widget class="caShellCommand" name="cashellcommand_6">
         <property name="geometry">
@@ -2278,7 +2278,7 @@
          <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
         </property>
         <property name="args">
-         <string>$(SYS)</string>
+         <string>$(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -2295,7 +2295,7 @@
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(SYS):MCU-ErrMsg</string>
+     <string notr="true">$(IOC):MCU-ErrMsg</string>
     </property>
     <property name="colorMode">
      <enum>caLineEdit::Default</enum>
@@ -2323,7 +2323,7 @@
      </size>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(SYS):MCU-ErrId</string>
+     <string notr="true">$(IOC):MCU-ErrId</string>
     </property>
     <property name="background">
      <color alpha="222">
