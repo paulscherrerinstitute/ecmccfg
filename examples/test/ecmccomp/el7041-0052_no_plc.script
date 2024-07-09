@@ -1,9 +1,8 @@
 ##############################################################################
 ## Example config for el7041
 
-require ecmccfg sandst_a "ENG_MODE=1,MAX_PARAM_COUNT=1000"
+require ecmccfg sandst_a "ECMC_VER=sandst_a,ENG_MODE=1,MAX_PARAM_COUNT=1000"
 
-epicsEnvSet(IOC,c6025a)
 # Load components lib
 require ecmccomp
 
@@ -23,7 +22,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_2), HW_DESC=EL50
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
 
-#-epicsEnvSet("ENC_SLAVE_3",            "15")
+#-epicsEnvSet("ENC_SLAVE_3",          "15")
 #-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_3), HW_DESC=EL5002"
 #-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
 #-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=2"
