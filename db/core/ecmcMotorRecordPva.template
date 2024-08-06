@@ -249,6 +249,7 @@ record(longin,"$(PREFIX)$(MOTOR_NAME)-CfgPOSLAG-En-RB") {
     field(DTYP, "asynInt32")
     field(INP,"@asyn($(MOTOR_PORT),$(AXIS_NO))CfgPOSLAG-En-RB")
     field(SCAN, "I/O Intr")
+}
 
 record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-RB") {
     field(DESC, "EC High Soft Limit RB")
