@@ -24,3 +24,17 @@ file "ecmc_controlWord-chX.template"
           {03,    "AI", "-Ctrl", "control",   "AI Control Word"}
           {04,    "AI", "-Ctrl", "control",   "AI Control Word"}
 }
+
+# timestamp
+file "ecmc_timestamp_32-chX.template"
+{
+  pattern {CH_ID, KEY,      suffix,        sourceName         }
+          {"",    "AI01",   "-Time_l32",   "timestamp01_l32"  }
+          {"",    "AI01",   "-Time_u32",   "timestamp01_u32"  }
+}
+
+file "ecmc_timestamp_64-chX.template"
+{
+  pattern {CH_ID, KEY,      suffix,        sourceName              }
+          {"",    "AI01",   "-Time",       "timestamp01"           }
+}
