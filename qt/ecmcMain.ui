@@ -1594,6 +1594,38 @@
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="groupBox_9">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>465</y>
+        <width>251</width>
+        <height>66</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>IOC</string>
+      </property>
+      <widget class="caRelatedDisplay" name="carelateddisplay">
+       <property name="geometry">
+        <rect>
+         <x>135</x>
+         <y>35</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="labels">
+        <string>iocStats</string>
+       </property>
+       <property name="files">
+        <string>iocStats.ui</string>
+       </property>
+       <property name="args">
+        <string>IOC=$(IOC)</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -2378,6 +2410,11 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
+  </customwidget>
   <customwidget>
    <class>caMessageButton</class>
    <extends>QPushButton</extends>
