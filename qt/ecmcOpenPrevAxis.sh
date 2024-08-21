@@ -1,3 +1,12 @@
+#!/bin/sh
+
+# Open panel for the prev configured motion axis
+#   Axis index is retrived from the PV $PREFIX:MCU-Cfg-AX$THIS_AX-PrvObjId
+
+# Arguments:
+#   1 : PREFIX
+#   2 : Current axis id
+
 PREFIX=$1
 THIS_AX=$2  
 AX_ID=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-AX$THIS_AX-PrvObjId | tr -d '"')

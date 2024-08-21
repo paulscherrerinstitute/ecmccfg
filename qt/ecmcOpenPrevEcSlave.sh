@@ -1,3 +1,11 @@
+#!/bin/sh
+
+# Open panel for prev EtherCAT slave 
+#   Slave index is retrived from the PV $PREFIX:m"$M_ID"s"$S_ID"-PrvObjId
+# Arguments:
+#   1 : PREFIX
+#   2 : Master index
+
 PREFIX=$1
 M_ID=$2
 echo "M_ID=$M_ID"

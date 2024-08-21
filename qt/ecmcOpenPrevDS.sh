@@ -1,3 +1,12 @@
+#!/bin/sh
+
+# Open panel for the prev configured DS
+#   DS index is retrived from the PV $PREFIX:MCU-Cfg-DS$ID-PrvObjId
+
+# Arguments:
+#   1 : PREFIX
+#   2 : Current DS id
+
 PREFIX=$1
 ID=$2
 ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-DS$ID-PrvObjId | tr -d '"')

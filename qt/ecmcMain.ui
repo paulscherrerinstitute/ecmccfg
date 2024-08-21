@@ -420,7 +420,7 @@
         <x>30</x>
         <y>215</y>
         <width>251</width>
-        <height>101</height>
+        <height>106</height>
        </rect>
       </property>
       <property name="title">
@@ -546,7 +546,7 @@
          <x>170</x>
          <y>45</y>
          <width>66</width>
-         <height>26</height>
+         <height>51</height>
         </rect>
        </property>
        <property name="toolTipDuration">
@@ -586,6 +586,60 @@
          <string>$(IOC)</string>
         </property>
        </widget>
+       <widget class="caShellCommand" name="cashellcommand_10">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>30</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenAxis.sh</string>
+        </property>
+        <property name="args">
+         <string>$(IOC)</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="caLabel" name="calabel_106">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>75</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Open Axis Id:</string>
+       </property>
+      </widget>
+      <widget class="caTextEntry" name="catextentry_2">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>75</y>
+         <width>36</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):MCU-Cfg-UI-AX-Id</string>
+       </property>
       </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_5">
@@ -594,7 +648,7 @@
         <x>300</x>
         <y>215</y>
         <width>251</width>
-        <height>101</height>
+        <height>106</height>
        </rect>
       </property>
       <property name="title">
@@ -763,7 +817,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>315</y>
+        <y>330</y>
         <width>251</width>
         <height>101</height>
        </rect>
@@ -890,7 +944,7 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>315</y>
+        <y>330</y>
         <width>251</width>
         <height>101</height>
        </rect>
@@ -1391,7 +1445,7 @@
          <x>165</x>
          <y>130</y>
          <width>66</width>
-         <height>26</height>
+         <height>56</height>
         </rect>
        </property>
        <property name="macro">
@@ -1423,6 +1477,28 @@
         </property>
         <property name="files">
          <string>bash /ioc/modules/qt/ecmcOpenFirstEcSlave.sh</string>
+        </property>
+        <property name="args">
+         <string>$(IOC)</string>
+        </property>
+       </widget>
+       <widget class="caShellCommand" name="cashellcommand_9">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>30</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenEcSlave.sh</string>
         </property>
         <property name="args">
          <string>$(IOC)</string>
@@ -1546,7 +1622,39 @@
         </size>
        </property>
        <property name="text">
-        <string>Time [s]:</string>
+        <string>Time [ms]:</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_105">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>160</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Open Slave Id:</string>
+       </property>
+      </widget>
+      <widget class="caTextEntry" name="catextentry">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>160</y>
+         <width>36</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):MCU-Cfg-UI-EC-SlvId</string>
        </property>
       </widget>
      </widget>
@@ -1598,7 +1706,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>425</y>
+        <y>440</y>
         <width>251</width>
         <height>91</height>
        </rect>
@@ -2543,6 +2651,11 @@
    <class>caRelatedDisplay</class>
    <extends>QWidget</extends>
    <header>caRelatedDisplay</header>
+  </customwidget>
+  <customwidget>
+   <class>caTextEntry</class>
+   <extends>caLineEdit</extends>
+   <header>caTextEntry</header>
   </customwidget>
   <customwidget>
    <class>caMessageButton</class>
