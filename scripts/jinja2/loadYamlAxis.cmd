@@ -58,3 +58,5 @@ epicsEnvUnset(FILE_TEMP_BASE)
 
 #- reset PREFIX
 epicsEnvSet("ECMC_PREFIX"      "${SM_PREFIX}")
+
+ecmcEpicsEnvSetCalc(ECMC_AXIS_COUNT, "$(ECMC_AXIS_COUNT=0)+1")
