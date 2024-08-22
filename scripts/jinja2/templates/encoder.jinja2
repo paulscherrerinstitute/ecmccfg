@@ -9,7 +9,20 @@ epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
 
 {#- links #}
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
+{%- if encoder.position is not defined %}
+    {%- if encoder.source == 0 %}
+      # Error: encoder.source set to internal but no encoder.position link specified. Two options:
+      #    1. Specify encoder.position link
+      #    2. Set encoder.source to external (=1) and make sure the encoder actual value is set by PLC code.
+      ecmcExit
+    {%- else  %}
+      # Warning: No encoder position link specified.
+    {%- endif  %}
+{%- else  %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
+{%- endif  %}
+
+#- The base control word is not used in ecmc. All other bits are linked based on the the control word, see below..
 #- {%- if encoder.control %}
 #-     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax${ECMC_AXIS_NO}.enc.control")"
 #- {%- endif %}

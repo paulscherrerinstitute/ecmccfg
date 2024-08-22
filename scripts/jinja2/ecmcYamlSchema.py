@@ -277,7 +277,7 @@ class Schema:
             },
             'unit': {'type': 'string'},
             'desc': {'type': 'string'},
-            'position': {'required': True, 'type': 'string'},
+            'position': {'type': 'string'},
             'control': {'type': 'string'},
             'status': {'type': 'string'},
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
