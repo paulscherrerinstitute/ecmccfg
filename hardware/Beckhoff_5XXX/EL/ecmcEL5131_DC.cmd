@@ -41,3 +41,6 @@ epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)
 #- The PDOs mapping for the outputs are very large (68 byte per channel) and not supported in this basic cfg
 #- For some reason the timestamps cannot be configured
 #- 0 assign activate word: x700
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "EL5131_DC_TRG")

@@ -33,3 +33,8 @@ record(ao,"$(Name)MCU-Cfg-PLC${Index}-NxtObjId") {
     field(DESC, "PLC number of next PLC")
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
 }
+
+record(ao,"$(P)MCU-Cfg-PLC${Index}-PrvObjId") {
+    field(DESC, "PLC number of prev PLC")
+    field(VAL,  "$(PREV_OBJ_ID=-1)")
+}

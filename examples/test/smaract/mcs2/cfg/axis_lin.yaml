@@ -73,12 +73,21 @@ softlimits:
 
 monitoring:
   lag:
+<<<<<<< HEAD
     enable: true                                      # Enable position lag monitoring (following error)
     tolerance: 20                                     # Allowed tolerance
     time: 100                                         # Allowed time outside tolerance
   target:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.1                                    # Allowed tolerance
+=======
+    enable: true                                     # Enable position lag monitoring (following error)
+    tolerance: 100                                   # Allowed tolerance
+    time: 100                                         # Allowed time outside tolerance
+  target:
+    enable: true                                     # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 20                                    # Allowed tolerance
+>>>>>>> master
     time: 100                                         # Filter time inside tolerance to be at target
   velocity:
     enable: false                                     # Enable velocity monitoring

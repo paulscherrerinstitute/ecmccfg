@@ -38,3 +38,5 @@ epicsEnvUnset(ECMC_EXE_FIRST_PLG)
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added plugin
 epicsEnvSet(ECMC_PREV_PLG_P,"$(ECMC_PREFIX)MCU-Cfg-PLG${PLUGIN_ID}-")
 epicsEnvSet(ECMC_PREV_PLG_OBJ_ID,${PLUGIN_ID})
+
+ecmcEpicsEnvSetCalc(ECMC_PLUGIN_COUNT, "$(ECMC_PLUGIN_COUNT=0)+1")

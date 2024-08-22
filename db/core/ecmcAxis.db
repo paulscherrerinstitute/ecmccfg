@@ -405,8 +405,16 @@ record(bo,"${P}${AXIS_NAME}-EnaCmd"){
   field(ZNAM, "Disable")
   field(ONAM, "Enable")
   field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-EnaCmd_.PROC")
   field(TSE,  "0")
+}
+
+record(seq, "${P}${AXIS_NAME}-EnaCmd_") {
+  field(DESC, "Disable Axis")    
+  field(DOL1, "${P}${AXIS_NAME}-Cmd_")  
+  field(DOL2, "${P}${AXIS_NAME}-EnaCmd")
+  field(LNK1, "${P}${AXIS_NAME}-Cmd_ PP")
+  field(LNK2, "${P}${AXIS_NAME}.CNEN PP")
 }
 
 record(bo,"${P}${AXIS_NAME}-ExeCmd"){
@@ -427,8 +435,16 @@ record(bo,"${P}${AXIS_NAME}-StpCmd"){
   field(ONAM, "Stop")
   field(HIGH, 0.001)
   field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-StpCmd_.PROC")
   field(TSE,  "0")
+}
+
+record(seq, "${P}${AXIS_NAME}-StpCmd_") {
+  field(DESC, "Stop Axis")    
+  field(DOL1, "${P}${AXIS_NAME}-Cmd_")  
+  field(DO2,  "1")
+  field(LNK1, "${P}${AXIS_NAME}-Cmd_ PP")
+  field(LNK2, "${P}${AXIS_NAME}.STOP PP")
 }
 
 record(bo,"${P}${AXIS_NAME}-RstCmd"){

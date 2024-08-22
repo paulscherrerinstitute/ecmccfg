@@ -40,3 +40,7 @@ ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(${ECMC_EC_STARTUP_DELAY=4000})"
 #     PDO entry 0x6110:01, 16 bit, "Statusword"
 #   TxPDO 0x1a51 "DRV TxPDO-Map Following error actual value Ch.2"
 #     PDO entry 0x6110:06, 32 bit, "Following error actual value"
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1")
+

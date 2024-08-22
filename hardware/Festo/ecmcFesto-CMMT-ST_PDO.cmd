@@ -48,3 +48,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addEcSdoRT.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM},INDEX
 
 #- Reinit drive (Async SDO)
 ${SCRIPTEXEC} ${ecmccfg_DIR}addEcSdoRT.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM},INDEX=0x2003,SUBINDEX=0x1,DT=S8,NAME=ReInitCmd"
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "CMMT-ST")

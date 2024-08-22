@@ -1,25 +1,16 @@
 ##############################################################################
 ## Example config for el5042
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
+require ecmccfg sandst_a "ECMC_VER=sandst_a"
 
 ##############################################################################
 ## Config hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "14")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5042"
 
-# Configure Wachendorff encoder on channel 1
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5042-Encoder-ch1-Wachendorff-WDGA36E-06-1218-SIA-B01-CB8.cmd
+#- Apply encoder config with some custom macros
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit,CH_ID=1"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -34,4 +25,3 @@ ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 ##############################################################################
 ## Go active:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-iocInit()

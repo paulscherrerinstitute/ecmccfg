@@ -15,3 +15,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x7010,0x3,8,1)"
 #- For twincat probably this is not an isue since the terminals are not goung from PROP to OP so often. 
 #- Conclusion: Need to contact Beckhoff. Probably firmware bug.
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(${ECMC_EC_STARTUP_DELAY=4000})"
+
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1")

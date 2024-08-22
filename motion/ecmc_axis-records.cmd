@@ -18,7 +18,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis.cmd
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"${ECMC_MON_VELO_MAX_ENA}>0",-${ECMC_MON_VELO_MAX=0} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"${ECMC_MON_VELO_MAX_ENA}>0",${ECMC_MON_VELO_MAX=0} ,0)
 ecmcFileExist("ecmcAxis.db",1,1)
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC=0},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},V_DRVL=${V_DRVL},V_DRVH=${V_DRVH}")
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC=${ECMC_HOME_PROC=0},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ECMC_EGU},PREC=${ECMC_PREC},V_DRVL=${V_DRVL},V_DRVH=${V_DRVH}")
 epicsEnvUnset(V_DRVL)
 epicsEnvUnset(V_DRVH)
 
@@ -30,7 +30,7 @@ ecmcFileExist("ecmcAxisType.db",1,1)
 dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_TYPE=1,DRV_TYPE=$(ECMC_DRV_TYPE=0),TRAJ_TYPE=$(ECMC_TRAJ_TYPE=0)")
 #-Add info in MCU namespace for auto gui generation
 ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
-dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO}")
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},PREV_OBJ_ID=${ECMC_PREV_AXIS_OBJ_ID=-1}")
 
 #- special PVs for commissioning only add if the COMMISSIONG is set to 1 in startup.cmd
 ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)

@@ -27,7 +27,7 @@ epicsEnvSet("DEV",      "$(IOC)")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_lin.yaml"
 
 ##############################################################################
-## AXIS 2 (MCS2 CH1)
+## AXIS 3 (MCS2 CH1)
 #
 epicsEnvSet("MCS2_CHID",              "3")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_rot.yaml"

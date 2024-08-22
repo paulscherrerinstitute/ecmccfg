@@ -18,3 +18,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 #- Configure PDOS
 ecmcFileExist("${ecmccfg_DIR}ecmcEL3174_pdos.cmd",1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3174_pdos.cmd
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "Ex3xx4")

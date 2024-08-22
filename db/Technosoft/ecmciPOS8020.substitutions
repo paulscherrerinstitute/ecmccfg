@@ -10,7 +10,7 @@ file "ecmc_analogInput-chX.template"
 file "ecmc_controlWord-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,  sourceName,     DESC                }
-          {01,    "Drv", "-Ctrl", "driveControl", "Drive Control Word"}
+          {01,    "Drv", "-Cmd", "driveControl", "Drive Control Word"}
 }
 
 # Drive Velocity setpoint
@@ -77,4 +77,11 @@ file "ecmc_analogInput-chX.template"
   pattern {CH_ID}
           {01   }
           {02   }
+}
+
+# ecmcDS402Enable (analog drive feedback)
+file "ecmcDS402Enable-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
 }

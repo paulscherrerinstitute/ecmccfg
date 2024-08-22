@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>134</width>
+    <height>617</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caLineEdit" name="calineedit_50">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>510</y>
+     <width>86</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>18</height>
+    </size>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-HWType</string>
+   </property>
+   <property name="background">
+    <color alpha="222">
+     <red>192</red>
+     <green>192</green>
+     <blue>192</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::User</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_96">
+   <property name="geometry">
+    <rect>
+     <x>-70</x>
+     <y>510</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Type:</string>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_97">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>555</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Next:</string>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_98">
+   <property name="geometry">
+    <rect>
+     <x>-65</x>
+     <y>555</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Prev:</string>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_99">
+   <property name="geometry">
+    <rect>
+     <x>-60</x>
+     <y>530</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Entries:</string>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_51">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>530</y>
+     <width>86</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>18</height>
+    </size>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-EntryCntr</string>
+   </property>
+   <property name="background">
+    <color alpha="222">
+     <red>192</red>
+     <green>192</green>
+     <blue>192</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::User</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude_2">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>5</y>
+     <width>125</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmc$(PANEL=GenericSlave).ui</string>
+   </property>
+   <property name="frameShape">
+    <enum>caInclude::Panel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="frameLineWidth">
+    <number>1</number>
+   </property>
+   <property name="frameColor">
+    <color>
+     <red>0</red>
+     <green>0</green>
+     <blue>0</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caFrame" name="caframe">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>570</y>
+     <width>51</width>
+     <height>46</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string notr="true">SYS=$(SYS),IOC=$(IOC),MasterID=$(MasterID), SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="visibility">
+    <enum>caFrame::Calc</enum>
+   </property>
+   <property name="visibilityCalc">
+    <string notr="true">A&gt;-1</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-PrvObjId</string>
+   </property>
+   <widget class="caShellCommand" name="cashellcommand_2">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>2</y>
+      <width>41</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="label">
+     <string notr="true">&lt;&lt;</string>
+    </property>
+    <property name="labels">
+     <string>Open first axis</string>
+    </property>
+    <property name="files">
+     <string>bash /ioc/modules/qt/ecmcOpenPrevEcSlave.sh</string>
+    </property>
+    <property name="args">
+     <string>$(SYS) $(MasterID) $(SlaveID)</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_53">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>25</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-PrvObjId</string>
+    </property>
+    <property name="background">
+     <color alpha="222">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::Channel</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="unitsEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="caFrame" name="caframe_2">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>570</y>
+     <width>56</width>
+     <height>46</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string notr="true">SYS=$(SYS),IOC=$(IOC),MasterID=$(MasterID), SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="visibility">
+    <enum>caFrame::Calc</enum>
+   </property>
+   <property name="visibilityCalc">
+    <string notr="true">A&gt;-1</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-NxtObjId</string>
+   </property>
+   <widget class="caShellCommand" name="cashellcommand_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>2</y>
+      <width>41</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="label">
+     <string notr="true">&gt;&gt;</string>
+    </property>
+    <property name="labels">
+     <string>Open first axis</string>
+    </property>
+    <property name="files">
+     <string>bash /ioc/modules/qt/ecmcOpenNextEcSlave.sh</string>
+    </property>
+    <property name="args">
+     <string>$(SYS) $(MasterID) $(SlaveID)</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_54">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>25</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-NxtObjId</string>
+    </property>
+    <property name="background">
+     <color alpha="222">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::Channel</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="unitsEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_52">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>570</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>18</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>$(SlaveID)</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true"/>
+   </property>
+   <property name="background">
+    <color alpha="222">
+     <red>192</red>
+     <green>192</green>
+     <blue>192</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::User</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+  <customwidget>
+   <class>caShellCommand</class>
+   <extends>QWidget</extends>
+   <header>caShellCommand</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

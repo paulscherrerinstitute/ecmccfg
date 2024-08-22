@@ -170,3 +170,13 @@ record(ao,"$(ECMC_P)NxtObjId") {
   field(DESC, "EtherCAT slave index of next slave")
   field(VAL,  "-1")
 }
+
+record(ao,"$(ECMC_P)PrvObjId") {
+  field(DESC, "EtherCAT slave index of prev slave")
+  field(VAL,  "${PREV_SLAVE_NUM=-1}")
+}
+
+record(stringin,"$(ECMC_P)PnlTyp") {
+  field(DESC, "Default panel type")
+  field(VAL,  "${PANEL=GenericSlave}")
+}
