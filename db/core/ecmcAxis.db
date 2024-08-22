@@ -9,17 +9,6 @@ record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(DESC, "Axis ax$(AXIS_NO): Actual Position")
   field(TSE,  "$(TSE=-2)")
 }
-## Velocity for the first encoder.. MOVE TO ecmcEnc.db
-#record(ai,"${P}${AXIS_NAME}-PosAct01"){
-#  field(PINI, "1")
-#  field(DTYP, "asynFloat64")
-#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos1?")
-#  field(PREC, "${PREC=3}")
-#  field(EGU,  "${EGU=mm}")
-#  field(SCAN, "I/O Intr")
-#  field(DESC, "Axis ax$(AXIS_NO): Actual Position Enc 1")
-#  field(TSE,  "$(TSE=-2)")
-#}
 
 # Velocity for primary encoder
 record(ai,"${P}${AXIS_NAME}-VelAct"){
@@ -32,18 +21,6 @@ record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(DESC, "Axis ax$(AXIS_NO): Actual Velocity ")
   field(TSE,  "$(TSE=-2)")
 }
-
-# Velocity for the first encoder
-#record(ai,"${P}${AXIS_NAME}-VelAct01"){
-#  field(PINI, "1")
-#  field(DTYP, "asynFloat64")
-#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel1?")
-#  field(PREC, "${PREC=3}")
-#  field(EGU,  "${EGU=mm}/s")
-#  field(SCAN, "I/O Intr")
-#  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity Enc 1")
-#  field(TSE,  "$(TSE=-2)")
-#}
 
 record(ai,"${P}${AXIS_NAME}-PosSet"){
   field(PINI, "1")
@@ -435,16 +412,8 @@ record(bo,"${P}${AXIS_NAME}-StpCmd"){
   field(ONAM, "Stop")
   field(HIGH, 0.001)
   field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-StpCmd_.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
-}
-
-record(seq, "${P}${AXIS_NAME}-StpCmd_") {
-  field(DESC, "Stop Axis")    
-  field(DOL1, "${P}${AXIS_NAME}-Cmd_")  
-  field(DO2,  "1")
-  field(LNK1, "${P}${AXIS_NAME}-Cmd_ PP")
-  field(LNK2, "${P}${AXIS_NAME}.STOP PP")
 }
 
 record(bo,"${P}${AXIS_NAME}-RstCmd"){

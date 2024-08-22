@@ -52,7 +52,7 @@ ${ECMC_EXE_NEXT_DS}ecmcFileExist(ecmcDsPrevDs.db,1,1)
 ${ECMC_EXE_NEXT_DS}dbLoadRecords(ecmcDsPrevDs.db,"NEXT_OBJ_ID=${DS_ID=-1},PREV_ECMC_P=${ECMC_PREV_DS_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_DS)
 
-#- If this is the first added dataStorage then store value in P:MCU-Cfg-AX-FrstObjId
+#- If this is the first added dataStorage then store value in P:MCU-Cfg-DS-FrstObjId
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_DS,"${ECMC_PREV_DS_OBJ_ID=-1}<0", "","#- ")
 ${ECMC_EXE_FIRST_DS}ecmcFileExist(ecmcDsFirstDs.db,1,1)
 ${ECMC_EXE_FIRST_DS}dbLoadRecords(ecmcDsFirstDs.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${DS_ID}")

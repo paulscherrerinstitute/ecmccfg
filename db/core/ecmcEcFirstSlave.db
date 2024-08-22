@@ -1,5 +1,11 @@
 # This db is only used to set the VAL field
-record(ao,"${P}MCU-Cfg-EC-FrstObjId") {
+record(ai,"${P}MCU-Cfg-EC-FrstObjId") {
   field(DESC, "Master: First slave ID")
+  field(VAL,  "$(FIRST_SLAVE_ID=-1)")
+}
+
+# This db is only used to set the VAL field
+record(ao,"${P}MCU-Cfg-UI-EC-SlvId") {
+  field(DESC, "UI: Ec slave to open panel for")
   field(VAL,  "$(FIRST_SLAVE_ID=-1)")
 }

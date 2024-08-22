@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# Open panel for the first configured motion axis
-#   Axis index is retrived from the PV $PREFIX:MCU-Cfg-AX-FrstObjId
+# Open panel for a motion axis
+#   Axis index is retrived from the PV $PREFIX:MCU-Cfg-UI-AX-Id
 
 # Arguments:
 #   1 : PREFIX
 
 PREFIX=$1
-AX_ID=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-AX-FrstObjId | tr -d '"')
+AX_ID=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-UI-AX-Id| tr -d '"')
 echo "AX_ID=$AX_ID"
 AX_PREFIX=$( caget -noname -nostat -nounit $PREFIX:MCU-Cfg-AX$AX_ID-Pfx | tr -d '"' | tr -d ":")
 echo "AX_PREFIX=$AX_PREFIX"
@@ -16,3 +16,5 @@ echo "AX_NAME=$AX_NAME"
 MACROS="SYS=$PREFIX,IOC=$AX_PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
 echo "MACROS=$MACROS"
 caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+
+

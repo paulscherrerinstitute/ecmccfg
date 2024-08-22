@@ -2,6 +2,6 @@
 # This record is already initialized by the previous call to loadPLCFile.cmd
 # Used to make a "pointer" between the PLC objects to be used to autoconfigure GUI
 # This db is only used to set the VAL field
-record(ao,"$(PREV_ECMC_P)NxtObjId") {
+record(ai,"$(PREV_ECMC_P)NxtObjId") {
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
 }

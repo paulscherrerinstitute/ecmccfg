@@ -13,12 +13,12 @@ record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-PfxNam") {
     field(VAL,  "${DEV}${AXIS_NAME}")
 }
 
-record(ao,"$(P)MCU-Cfg-AX${AXIS_NO}-NxtObjId") {
+record(ai,"$(P)MCU-Cfg-AX${AXIS_NO}-NxtObjId") {
     field(DESC, "Axis number of next axis")
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
 }
 
-record(ao,"$(P)MCU-Cfg-AX${AXIS_NO}-PrvObjId") {
+record(ai,"$(P)MCU-Cfg-AX${AXIS_NO}-PrvObjId") {
     field(DESC, "Axis number of prev axis")
     field(VAL,  "$(PREV_OBJ_ID=-1)")
 }
