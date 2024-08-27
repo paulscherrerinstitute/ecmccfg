@@ -37,6 +37,8 @@ record(motor, "$(PREFIX)$(MOTOR_NAME)") {
             "readback": {+channel:"RBV"}
         }
     })
+    $(ECMC_BLOCK_ARCHIVER=#)info(aa_policy, "default")
+    $(ECMC_BLOCK_ARCHIVER=#)info(archiver, "$(ECMC_ARCHIVER=)")
 }
 
 # The message text

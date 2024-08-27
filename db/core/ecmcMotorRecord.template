@@ -34,6 +34,8 @@ record(motor, "$(PREFIX)$(MOTOR_NAME)") {
     field(SREV, "$(SREV=1)")
     field(UREV, "$(UREV=1.0)")
     field(VMAX, "$(VMAX=0)")
+    $(ECMC_BLOCK_ARCHIVER=#)info(aa_policy, "default")
+    $(ECMC_BLOCK_ARCHIVER=#)info(archiver, "$(ECMC_ARCHIVER=)")
 }
 
 # The message text
