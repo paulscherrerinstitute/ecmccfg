@@ -9,7 +9,7 @@
 #-d   \file
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3604")
+epicsEnvSet("ECMC_EC_HWTYPE"             "ELM3604-0002")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x50219349")
 epicsEnvSet("ECMC_OVER_SAMP_MAX"         "100")

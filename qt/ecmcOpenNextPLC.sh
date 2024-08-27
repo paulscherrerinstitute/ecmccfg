@@ -1,3 +1,10 @@
+#!/bin/sh
+
+# Open panel for next PLC 
+#   PLC index is retrived from the PV $PREFIX:MCU-Cfg-PLC$ID-NxtObjId 
+# Arguments:
+#   1 : PREFIX
+
 PREFIX=$1
 ID=$2
 ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-PLC$ID-NxtObjId | tr -d '"')

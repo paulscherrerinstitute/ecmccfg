@@ -1,4 +1,4 @@
-#- -=-=-=-=- axis
+ #- -=-=-=-=- axis
 {#- drive is only present in type: 'joint' #}
 {%- set drive = None if drive is undefined else drive %}
 epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
@@ -40,5 +40,8 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
     {%- if axis.features.allowedFunctions is defined %}
         #- allowed motion functions
         ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
+    {% endif -%}
+    {%- if axis.features.allowSrcChangeWhenEnabled is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled({{ axis.id }},{{ axis.features.allowSrcChangeWhenEnabled|default(0)|int }})"
     {% endif -%}
 {% endif -%}

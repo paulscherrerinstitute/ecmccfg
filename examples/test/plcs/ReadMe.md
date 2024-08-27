@@ -693,6 +693,24 @@ returns 0 if success or error code.
    
    Returns the number of axes in group.
 
+
+17.  mc_grp_get_traj_src_ext(
+                      <grp_id>, : Group index
+                      );
+   
+   Returns true if all axes in the group have trajectory source set to external.
+
+18.  mc_grp_get_any_traj_src_ext(
+                      <grp_id>, : Group index
+                      );
+    Returns true if atleast one axis in the group have trajectory source set to external.
+
+19.  mc_grp_set_allow_src_change_when_enabled(
+                      <grp_id>, : Group index
+                      <allow>,  : Allow change of source
+                      );
+    Allow source change for trajectory and encoder when axis is enabled.
+
 ```
 
 ### Function Lib: Data Storage

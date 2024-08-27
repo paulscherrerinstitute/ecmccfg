@@ -14,6 +14,7 @@ axis:
     modeCmdHome: 10                                   # Drive mode value for when homing (written to axis.drvMode.modeSet when homing)
   features:
     blockCom: false                                   # Block communication to axis
+    allowSrcChangeWhenEnabled: false                  # Allow traj/enc sorce change when axis is enabled                      
     allowedFunctions:
       homing: true                                    # Allow homing
       constantVelocity: true                          # Allow constant velocity

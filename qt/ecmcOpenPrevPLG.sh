@@ -1,3 +1,10 @@
+#!/bin/sh
+
+# Open panel for prev plugin 
+#   Plugin index is retrived from the PV $PREFIX:MCU-Cfg-PLG$ID-PrvObjId 
+# Arguments:
+#   1 : PREFIX
+
 PREFIX=$1
 ID=$2
 ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-PLG$ID-PrvObjId | tr -d '"')

@@ -189,6 +189,7 @@ class Schema:
                 'disableOnReset': {'type': 'boolean'},
                 'alarmAtHardLimits': {'type': 'boolean'},
                 'blockCom': {'type': 'boolean'},
+                'allowSrcChangeWhenEnabled': {'type': 'boolean'},
                 'allowedFunctions': {'type': 'dict', 'schema': {
                     'positioning': {'type': 'boolean'},
                     'constantVelocity': {'type': 'boolean'},
@@ -270,7 +271,7 @@ class Schema:
             },
             'unit': {'type': 'string'},
             'desc': {'type': 'string'},
-            'position': {'required': True, 'type': 'string'},
+            'position': {'type': 'string'},
             'control': {'type': 'string'},
             'status': {'type': 'string'},
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
