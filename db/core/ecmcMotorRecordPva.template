@@ -31,14 +31,15 @@ record(motor, "$(PREFIX)$(MOTOR_NAME)") {
     field(RRES, "$(RRES=0)")
     field(SREV, "$(SREV=1)")
     field(UREV, "$(UREV=1.0)")
+
+    $(ECMC_BLOCK_ARCHIVER)info(aa_policy, "$(ECMC_ARCHIVER_POLICY)")
+    $(ECMC_BLOCK_ARCHIVER)info(archiver, "$(ECMC_ARCHIVER_CLUSTER)")
     info(Q:group, {
         "${PREFIX}axis${AXIS_NO}": {
             "setpoint": {+channel:"VAL"},
             "readback": {+channel:"RBV"}
         }
     })
-    $(ECMC_BLOCK_ARCHIVER=#)info(aa_policy, "default")
-    $(ECMC_BLOCK_ARCHIVER=#)info(archiver, "$(ECMC_ARCHIVER=)")
 }
 
 # The message text
@@ -46,6 +47,7 @@ record(stringin, "$(PREFIX)$(MOTOR_NAME)-MsgTxt") {
     field(DTYP, "asynOctetRead")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MOTOR_MESSAGE_TEXT")
     field(SCAN, "I/O Intr")
+
     info(Q:group, {
         "${PREFIX}axis${AXIS_NO}": {
             "MsgTxt": {+channel:"VAL"}
@@ -59,6 +61,7 @@ record(stringout, "$(PREFIX)$(MOTOR_NAME)-DbgStrToLOG") {
     field(VAL,  "")
     field(DTYP, "asynOctetWrite")
     field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))StrToLOG")
+
     info(Q:group, {
         "${PREFIX}axis${AXIS_NO}": {
             "DbgStrToLOG": {+channel:"VAL"}
@@ -82,6 +85,7 @@ record(longin, "$(PREFIX)$(MOTOR_NAME)-Err") {
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MCUErr")
     field(SCAN, "I/O Intr")
+
     info(Q:group, {
         "${PREFIX}axis${AXIS_NO}": {
             "Error": {+channel:"VAL"}
@@ -94,6 +98,7 @@ record(ai, "$(PREFIX)$(MOTOR_NAME)-VelAct") {
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))VelAct")
     field(SCAN, "I/O Intr")
+
     info(Q:group, {
         "${PREFIX}axis${AXIS_NO}": {
             "velocityActual": {+channel:"VAL"}
@@ -120,6 +125,7 @@ record(ai, "$(PREFIX)$(MOTOR_NAME)-EncAct") {
     field(PREC, "0")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))EncAct")
     field(SCAN, "I/O Intr")
+
     info(Q:group, {
         "${PREFIX}axis${AXIS_NO}": {
             "encoderActual": {+channel:"VAL"}
