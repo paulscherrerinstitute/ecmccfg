@@ -1,0 +1,60 @@
+# #######################
+# ecmc Function lib example
+#  The functions must be defined accordning to: 
+#  function <name>(<param1>,...<param5>) {
+#    <code body>;
+#  }
+#
+#  a function without params is also valid:
+#  function <name>() { <code>;}
+#
+#  "#" as a first char in a line is considered a comment.
+#  
+#  Can be used in a function:
+#  1. The parameters
+#  2. Other functions
+#  3. The normal ecmc function libs:
+#    * motion: mc_*
+#    * ethercat: ec_*
+#    * data storages: ds_*,
+#    * master 2 master: m2m_*
+#  4. the exprtk functions libs:
+#    * println
+#    * print
+#    * open
+#    * close
+#    * write
+#    * read",  
+#    * getline
+#    * eof
+#   5. vectors in teh calculations (but NOT as parameter or return value).
+#
+#  Can NOT be  used in a function:
+#  1. EtherCAT I/0 direct access ec<mid>.s<sid>.*
+#  2. Data storage variables: ds.*
+#  3. Motion variables: ax<axid>.*
+#  4. Static variables: static.*
+#  5. Global variables: global.*
+#  6. Vectors as parameter or return value (only first value will be used).
+#
+#
+function add(a,b,c,d,e) {
+  println('add:  ',  a+b+c+d+e);
+  return[a+b+c+d+e];
+};
+
+function prod(a,b,c,d,e) {  
+  println('add2: ',  add(a,b,c,d,e));
+  println('prod: ',  a*b*c*d*e);
+  return [a*b*c*d*e];
+};
+
+#function return1() {
+#  return [1];
+#}
+
+function retArray(a) {
+  var test[5]:={a,a,a,a,a};
+  println('test: ',test);
+  return [dot(test,test)];
+};

@@ -1,0 +1,13 @@
+
+static.counter:=static.counter+1;
+static.plc_code_loaded:=1;
+if(static.counter % ${LIMIT=10} == 0) {    
+  if(${TYPE=1}=0) {
+    println('AX PLC: File');
+  } else {
+    println('PLC   : File');
+  };
+  prod(1,2,3,4,5);
+
+  println('Array: ',retArray(2));
+};
