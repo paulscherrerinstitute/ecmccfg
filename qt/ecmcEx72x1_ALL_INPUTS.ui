@@ -103,7 +103,7 @@
        <property name="title">
         <string>Drive</string>
        </property>
-       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1">
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0">
         <property name="leftMargin">
          <number>1</number>
         </property>
@@ -116,6 +116,34 @@
         <property name="bottomMargin">
          <number>1</number>
         </property>
+        <item row="2" column="0">
+         <widget class="caLabel" name="calabel_11">
+          <property name="text">
+           <string>Voltage</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="caLabel" name="calabel_10">
+          <property name="text">
+           <string>Velocity</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="caLabel" name="calabel_13">
+          <property name="text">
+           <string>Error</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="caLabel" name="calabel_14">
+          <property name="text">
+           <string>Warning</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="1">
          <widget class="caLineEdit" name="calineedit_5">
           <property name="channel" stdset="0">
@@ -139,102 +167,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="caLineEdit" name="calineedit_4">
-          <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
-          </property>
-          <property name="background">
-           <color alpha="0">
-            <red>160</red>
-            <green>160</green>
-            <blue>164</blue>
-           </color>
-          </property>
-          <property name="colorMode">
-           <enum>caLineEdit::Static</enum>
-          </property>
-          <property name="precisionMode">
-           <enum>caLineEdit::User</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="caLabel" name="calabel_11">
-          <property name="text">
-           <string>Voltage</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="caLabel" name="calabel_10">
-          <property name="text">
-           <string>Velocity</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="caLabel" name="calabel_9">
-          <property name="text">
-           <string>Torque</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="caLed" name="caled_Warning">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>4</width>
-            <height>12</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="rectangular">
-           <bool>true</bool>
-          </property>
-          <property name="gradientEnabled">
-           <bool>false</bool>
-          </property>
-          <property name="ledHeight">
-           <number>10</number>
-          </property>
-          <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-WrnAlrm</string>
-          </property>
-          <property name="colorMode">
-           <enum>caLed::Static</enum>
-          </property>
-          <property name="falseColor">
-           <color>
-            <red>255</red>
-            <green>170</green>
-            <blue>0</blue>
-           </color>
-          </property>
-          <property name="trueColor">
-           <color>
-            <red>0</red>
-            <green>85</green>
-            <blue>0</blue>
-           </color>
-          </property>
-          <property name="trueValue">
-           <string notr="true">0</string>
-          </property>
-          <property name="falseValue">
-           <string notr="true">1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
+        <item row="3" column="1">
          <widget class="caLed" name="caled_Error">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
@@ -288,20 +221,6 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="caLabel" name="calabel_13">
-          <property name="text">
-           <string>Error</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="caLabel" name="calabel_14">
-          <property name="text">
-           <string>Warning</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
          <widget class="caLineEdit" name="calineedit_6">
           <property name="channel" stdset="0">
@@ -325,17 +244,10 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="caLabel" name="calabel_15">
-          <property name="text">
-           <string>Temp</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="caLineEdit" name="calineedit_7">
+        <item row="1" column="1">
+         <widget class="caLineEdit" name="calineedit_4">
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -348,10 +260,68 @@
            <enum>caLineEdit::Static</enum>
           </property>
           <property name="precisionMode">
-           <enum>caLineEdit::Channel</enum>
+           <enum>caLineEdit::User</enum>
           </property>
-          <property name="unitsEnabled">
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="caLabel" name="calabel_9">
+          <property name="text">
+           <string>Torque</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="caLed" name="caled_Warning">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>4</width>
+            <height>12</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="rectangular">
            <bool>true</bool>
+          </property>
+          <property name="gradientEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="ledHeight">
+           <number>10</number>
+          </property>
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-WrnAlrm</string>
+          </property>
+          <property name="colorMode">
+           <enum>caLed::Static</enum>
+          </property>
+          <property name="falseColor">
+           <color>
+            <red>255</red>
+            <green>170</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueColor">
+           <color>
+            <red>0</red>
+            <green>85</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="trueValue">
+           <string notr="true">0</string>
+          </property>
+          <property name="falseValue">
+           <string notr="true">1</string>
           </property>
          </widget>
         </item>
