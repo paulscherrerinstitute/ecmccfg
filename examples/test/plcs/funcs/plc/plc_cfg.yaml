@@ -1,9 +1,0 @@
-macros: LIMIT=1000,TYPE=1                             # Macros to pass to this file (also plc.file)
-plc:
-  id: 1
-  enable: yes
-  rateMilliseconds: 1
-  file: ${PLC_PATH}test.plc
-  code:
-  - "if(static.counter % ${LIMIT} == 0){println('PLC:    Appended');static.counter:=0;};" # calculate set pos for physical axis
-  - "if(not(static.plc_code_loaded)) {static.counter:=static.counter+1;};"
