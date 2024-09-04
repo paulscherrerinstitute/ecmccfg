@@ -1,0 +1,38 @@
+##############################################################################
+## Example config for el7031
+
+require ecmccfg v9.5.5_RC1,"ECMC_VER=v9.5.5_RC1,ENG_MODE=1"
+
+epicsEnvSet(IOC,c6025a)
+require ecmccomp
+
+##############################################################################
+#- Hardware
+
+epicsEnvSet("DRV_SLAVE",              "13")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
+
+#- Apply motor config with some custom macros
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230'"
+
+epicsEnvSet("ENC_SLAVE",              "14")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=1"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+#- AXIS 1
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis.yaml"
+
+##############################################################################
+#- PLC: Load plc and library to that PLC
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCFile.cmd,    "FILE=./plc/test.plc,     PLC_ID=1, SAMPLE_RATE_MS=10"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
+
+##############################################################################
+#- go active
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
