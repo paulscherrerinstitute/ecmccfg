@@ -9,6 +9,7 @@ axis:
   healthOutput: ec0...                                # Ethercat entry for health output
   feedSwitchesOutput: ec0...                          # Ethercat entry for fed switches
   feedSwitchesValue: 1                                # Value to write to axis.feedSwitchesOutput. Defaults to 1
+  group: testGroup                                    # Add axis to group (group will be created if not exists)
   autoMode:                                           # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
     modeSet: ec0..                                    # Ethercat entry drive mode write (set CSV,CSP,homing)
     modeAct: ec0..                                    # Ethercat entry drive mode reading (set CSV,CSP,homing)

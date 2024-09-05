@@ -182,6 +182,7 @@ class Schema:
             'healthOutput': {'type': 'string'},
             'feedSwitchesOutput': {'type': 'string'},
             'feedSwitchesValue': {'type': 'integer'},
+            'group': {'type': 'string'},
             'autoMode': {'type': 'dict', 'schema': {
                 'modeSet': {'type': 'string'},
                 'modeAct': {'type': 'string'},
