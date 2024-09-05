@@ -1,5 +1,5 @@
-## Add PLC function libs:
-Add possability to load function library to a plc object:
+## PLC function libs:
+Function libs can be loaded into ecmc-PLCs
 ```
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
 ```
