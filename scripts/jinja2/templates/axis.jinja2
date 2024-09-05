@@ -45,3 +45,8 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
         ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled({{ axis.id }},{{ axis.features.allowSrcChangeWhenEnabled|default(0)|int }})"
     {% endif -%}
 {% endif -%}
+
+#- Feed 24 volt to switches if needed
+{%- if axis.feedSwitchesOutput is defined %}
+  ecmcConfigOrDie "Cfg.WriteEcEntryEcPath({{ axis.feedSwitchesOutput}},{{ axis.feedSwitchesValue|default(1) }})"
+{%- endif %}

@@ -9,3 +9,4 @@ caput c6025a:PVT-Build 1
 # prepare a relative move
 caput c6025a:Axis1-TgtPosCmd 1000
 caput c6025a:Axis1-MtnCmd 2
+caput c6025a:Axis1.CNEN 1

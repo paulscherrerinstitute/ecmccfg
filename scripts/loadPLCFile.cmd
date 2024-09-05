@@ -14,6 +14,7 @@
 #-d   \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
 #-d   \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
 #-d   \param SUBST_FILE (optional) custom substitution file otherwise ecmccfg default will be loaded
+#-d   \param INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
@@ -34,7 +35,7 @@ epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc"
 
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
-system "msi -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} ${FILE}"
+system "msi -I ${INC=.} -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} ${FILE}"
 
 #- Printout parsed file?
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, ${PRINT_PLC_FILE=1}=1,"", "#-"  )

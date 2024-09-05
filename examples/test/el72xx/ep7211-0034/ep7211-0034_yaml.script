@@ -6,47 +6,26 @@
 epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg v9.0.1_RC3, "ECMC_VER=sandst_a,EC_RATE=1000,ENG_MODE=1"
+require ecmccfg v9.5.5_RC1, "ECMC_VER=v9.5.5_RC1,EC_RATE=1000,ENG_MODE=1"
+require ecmccomp
 
 ##############################################################################
 ## Configure hardware
 #- ethercat slaves
 #- Master0
-#-   0  0:0   PREOP  +  EK1100 EtherCAT-Koppler (2A E-Bus)
-#-   1  0:1   PREOP  +  EL3004 4K.Ana. Eingang  +/-10V
-#-   2  0:2   PREOP  +  EL5001 1K. SSI Encoder
-#-   3  0:3   PREOP  +  EL1008 8K. Dig. Eingang 24V, 3ms
-#-   4  0:4   PREOP  +  EL7031 1K. Schrittmotor-Endstufe (24V, 1.5A)
-#-   5  0:5   PREOP  +  EL7342 2K. DC-Motor-Endstufe (50V, 3.5A)
-#-   6  0:6   PREOP  +  EL2008 8K. Dig. Ausgang 24V, 0.5A
-#-   7  0:7   PREOP  +  EL6224 (IO Link Master)
-#-   8  0:8   PREOP  +  EL4732 2K. Ana. Ausgang +/-10V, Oversample
-#-   9  0:9   PREOP  +  EL3702 2K. Ana. Eingang +/-10V, DIFF, Oversample
-#-  10  0:10  PREOP  +  ELM3602-0002 2Ch. IEPE Sensor, 24 bit, high precision
-#-  11  0:11  PREOP  +  EP7211-0034 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
-#-  12  0:12  PREOP  +  EP7047-1032 1K. Schrittmotor-Endstufe (50V, 5A)
+#- 16  0:16  PREOP  +  EP7211-0034 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=16, HW_DESC=EP7211-0034_ALL_FB"
 
 # Limit torque to 50% of motor rated torque
 #- Rated current = 2710mA (see motor config file, "0x8011 0x12 Rated current (mA)")
 #- Set to 50% of 2710 = 1355mA   (0x8011 0x11 Max current (mA))
-epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_DRIVE), HW_DESC=EP7211-0034_ALL_FB, CONFIG=-Motor-Beckhoff-AM8111-0F20-0000,CFG_MACROS='I_MAX_MA=1355'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=Motor-Beckhoff-AM8111-XFX0,MACROS='I_MAX_MA=1335'"
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd     "FILE=./cfg/el7201_1.yaml, DRV_ID=$(ECMC_EC_SLAVE_NUM), AX_NAME='Axis1', AX_ID=1"
 
-#Apply hardware configuration
+#-Apply hardware configuration
+
+##############################################################################
+#- Go active
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-## AXIS 1
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd "FILE=./cfg/el7201_1.yaml,DRV_ID=$(ECMC_EC_SLAVE_NUM_DRIVE),AX_NAME='Axis1',AX_ID=1"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-# go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
