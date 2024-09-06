@@ -5,12 +5,14 @@
 #-d /**
 #-d   \brief Script for adding a PLC from file.
 #-d   \details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
-#-d   \author Niko Kivel
+#-d   \author Niko Kivel, Anders Sandström
 #-d   \file
 #-d   \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
-#-d   \param PLC_ID (optional) PLC number, default 0
+#-d   \param PLC_ID (optional) PLC number, default 0, or to next free PLC, the actual PLC Id is stored in ECMC_PLC_ID and can be used after this command
 #-d   \param SAMPLE_RATE_MS (optional) excecution rate, default 1000/EC_RATE
-#-d   \param PLC_MACROS (optional) Substitution macros for PLC code
+#-d   \param PLC_MACROS (optional) Substitution macros for PLC code. The macros "SELF_ID" and "SELF" are reserved:
+#-d          * "SELF_ID" = PLC Id of this plc
+#-d          * "SELF"    = "plc${SELF_ID}"
 #-d   \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
 #-d   \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
 #-d   \param SUBST_FILE (optional) custom substitution file otherwise ecmccfg default will be loaded
@@ -30,8 +32,10 @@ ecmcEpicsEnvSetCalc(ECMC_PLC_RATE_, "1000/${ECMC_EC_SAMPLE_RATE}", "%f")
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "${SAMPLE_RATE_MS=0}")
 ecmcEpicsEnvSetCalcTernary(ECMC_PLC_SAMPLE_RATE_MS, "${ECMC_PLC_SAMPLE_RATE_MS}>0", "${ECMC_PLC_SAMPLE_RATE_MS}","${ECMC_PLC_RATE_}")
 epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
-
 epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc")
+
+#- Add SELF and SELF_ID
+epicsEnvSet("PLC_MACROS",              "SELF_ID=${ECMC_PLC_ID}, SELF='plc${ECMC_PLC_ID}', ${PLC_MACROS=})
 
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
@@ -45,6 +49,7 @@ ${ECMC_EXE_CMD=""}############ PLC file end
 ${ECMC_EXE_CMD=""}#
 epicsEnvUnset(ECMC_EXE_CMD)
 
+#- Now load the file to ecmc
 ecmcFileExist("${ECMC_TMP_FILE}",1)
 ecmcConfigOrDie "Cfg.CreatePLC(${ECMC_PLC_ID},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
@@ -75,4 +80,5 @@ epicsEnvSet(ECMC_PREV_PLC_OBJ_ID,${ECMC_PLC_ID})
 
 ecmcEpicsEnvSetCalc(ECMC_PLC_COUNT, "$(ECMC_PLC_COUNT=0)+1")
 
-
+#- increment PLC_ID
+ecmcEpicsEnvSetCalc("PLC_ID", "${ECMC_PLC_ID}+1","%d")

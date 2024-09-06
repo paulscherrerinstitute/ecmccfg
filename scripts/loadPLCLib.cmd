@@ -9,7 +9,9 @@
 #-d   \file
 #-d   \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
 #-d   \param PLC_ID (optional) PLC number, default last loaded PLC
-#-d   \param PLC_MACROS (optional) Substitution macros for PLC code
+#-d   \param PLC_MACROS (optional) Substitution macros for PLC code. The macros "SELF_ID" and "SELF" are reserved:
+#-d          * "SELF_ID" = PLC Id of this plc
+#-d          * "SELF"    = "plc${SELF_ID}"
 #-d   \param INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
 #-d   \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
 #-d   \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
@@ -30,6 +32,9 @@ epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
 
 epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc")
 
+#- Add SELF and SELF_ID
+epicsEnvSet("PLC_MACROS",              "SELF_ID=${ECMC_PLC_ID}, SELF='plc${ECMC_PLC_ID}', ${PLC_MACROS=})
+
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
 system "msi -I ${INC=.} -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} ${FILE}"
@@ -42,6 +47,7 @@ ${ECMC_EXE_CMD=""}############ PLC-lib file end
 ${ECMC_EXE_CMD=""}#
 epicsEnvUnset(ECMC_EXE_CMD)
 
+#- Now load the file to ecmc
 ecmcFileExist("${ECMC_TMP_FILE}",1)
 ecmcConfigOrDie "Cfg.LoadPLCLibFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 
