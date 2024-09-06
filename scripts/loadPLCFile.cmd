@@ -10,9 +10,11 @@
 #-d   \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
 #-d   \param PLC_ID (optional) PLC number, default 0, or to next free PLC, the actual PLC Id is stored in ECMC_PLC_ID and can be used after this command
 #-d   \param SAMPLE_RATE_MS (optional) excecution rate, default 1000/EC_RATE
-#-d   \param PLC_MACROS (optional) Substitution macros for PLC code. The macros "SELF_ID" and "SELF" are reserved:
+#-d   \param PLC_MACROS (optional) Substitution macros for PLC code. The macros "SELF_ID","SELF",M_ID, and M are reserved:
 #-d          * "SELF_ID" = PLC Id of this plc
 #-d          * "SELF"    = "plc${SELF_ID}"
+#-d          * "M_ID"    = EtherCAT master ID
+#-d          * "M"       = "ec${M_ID}"
 #-d   \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
 #-d   \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
 #-d   \param SUBST_FILE (optional) custom substitution file otherwise ecmccfg default will be loaded
@@ -34,8 +36,8 @@ ecmcEpicsEnvSetCalcTernary(ECMC_PLC_SAMPLE_RATE_MS, "${ECMC_PLC_SAMPLE_RATE_MS}>
 epicsEnvUnset(ECMC_PLC_RATE_) # clean up, temp variable
 epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_PLC_ID}.plc")
 
-#- Add SELF and SELF_ID
-epicsEnvSet("PLC_MACROS",              "SELF_ID=${ECMC_PLC_ID}, SELF='plc${ECMC_PLC_ID}', ${PLC_MACROS=})
+#- Add SELF and SELF_ID, M_ID and M
+epicsEnvSet("PLC_MACROS",              "SELF_ID=${ECMC_PLC_ID}, SELF='plc${ECMC_PLC_ID}', M_ID=${ECMC_EC_MASTER_ID=0}, M='ec${ECMC_EC_MASTER_ID=0}', ${PLC_MACROS=}")
 
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
