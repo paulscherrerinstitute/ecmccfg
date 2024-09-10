@@ -1,3 +1,9 @@
++++  
+title = "modes"   
+weight = 15
+chapter = false  
++++  
+
 ## ecmc modes
 ecmc can be started in different modes by setting the MODE parameter to startup.cmd (or require ecmccfg):
 1. FULL

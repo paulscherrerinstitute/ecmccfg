@@ -1,3 +1,9 @@
++++  
+title = "Data Storage Buffer"   
+weight = 16
+chapter = false  
++++  
+
 ## Data storage examples
 This dir contains two examples: [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/test/dataStorage).
 
