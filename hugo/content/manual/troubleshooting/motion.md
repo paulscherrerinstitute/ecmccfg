@@ -4,34 +4,63 @@ weight = 12
 chapter = false  
 +++
 
-### culprit
 
-From experience, very few issues are related to the EtherCAT hardware itself.
-Mostly the cabling or the actual motor/encoder hardware is to blame.
+## BOTH_LIMITS error
+The "BOTH_LIMITS" error can be related to that limits switches are not powered with 24V. As standard at PSI, limts are feed from 24V outputs, normally an EL2819 terminal. Basically the ouptputs needs then to be set to 1 in order to power the switches. Check the schematics in order to find out which output that powers the switches for a certain axis and then use one the following approaches to set it to 1:
 
-Even more likely is human error, such as:
-* wrong scaling of the axis
-* writing to the wrong hardware (forgot to select the right slave in the axis config)
-* ...
+Define the output in axis yaml file:
+```
+axis:
+  id: 1                                               # Axis id
+  ...
+  feedSwitchesOutput: ec0.s5.binaryOutput02           # Ethercat entry for feed switches
+  ...
+```
 
-#### check the status
-Before anything is restarted or power cycled, check the status of the slaves.
-Either from a dedicated shell, or from within the `iocsh`.
+By using the commad Cfg.WriteEcEntryEcPath(ec\<master\_id\>.s\<slave\_id\>.binaryOutput\<id\>,\<value\>):
+```
+ecmcConfigOrDie "Cfg.WriteEcEntryEcPath(ec0.s5>.binaryOutput02,1)"
+```
 
-If all slaves are in 'OP' state, at least data is exchanged between the hardware and the master. 
+## Position Lag Error:
+A position lag error is normally genereated in the following situations:
+1. The motor torque is too low, making it hard for the motor to keep up with the setpoint.
+2. The scaling factors are wrong resulting in that the feed forward part of the controller is not working well.
+3. The velocity setpoint is too high resulting in motor stall (common for stepper motors).
+4. The velocity setpoint is higher than what the drive can achive (saturated velocity setpoint).
 
-Depending on the integrator and overview panel might exist.
-Consult this panel for further details.
-Remember, `red` is not necessarily a bad sign!
-It can also indicate that certain channels are not connected.
-Whether those channels _should_ be connected is beyond the scope of this guide.
+### 1. Motor torque to low
 
-#### restarting the IOC
+If possible, increase current to the motor.
 {{% notice warning %}}
-Blindly restarting the IOC, with only partially working EtherCAT hardware, WILL RESULT IN TOTAL FAILURE OF THE IOC!!!
+Before increase current to the motor, make sure that both motor and drive can handle the higher current. Extra care needs to be taken for vaccum applications.
 {{% /notice %}}
 
-Check the hardware BEFORE restarting the IOC!
+### 2. Scaling factors are wrong
+Check the scaling documentation [here](https://paulscherrerinstitute.github.io/ecmccfg/manual/axis/scaling/).
+One way to test if the scaling is correct is to set all controller parameters (except Kff) to 0 and then initiate a move. Basically the actual position of the axis should follow the setpoint closely with teh same slope. If the slope differs, then the scaling factors are wrong.
+
+### 3. The velocity setpoint is too high resulting in stall
+If a stepper motor stalls because of too high velocity there's a few thing that can be done in order to improve the ability to reach higehr velocities:
+1. Add a damper: This is nromally very effichient but not always possible.
+2. Tune controller parameters (both position loop in ecmc adn the controller loops in teh drive)
+3. If possible, test to increase or reduce current setpoint (make sure you do not burn the motor).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### force manual motion
 {{% notice warning %}}
@@ -48,20 +77,3 @@ For this however, the IOC needs to be reconfigured to _not_ link the hardware to
 6. Set `-Drv01-Cmd` to `1` and check the amplifier did enable, if you don't know how to check for an enabled amplifier, you should not use this command!
 7. After the amplifier is engaged, write a small number to `-Drv01-Spd`. Dependinf on the scaling, the number might be in the range of 1..1000.
 8. Observe the encoder, or in case of open-loop, the device itself.
-
-### BOTH_LIMITS error
-The "BOTH_LIMITS" error can be related to that limits switches are not powered with 24V. As standard at PSI, limts are feed from 24V outputs, normally an EL2819 terminal. Basically the ouptputs needs then to be set to 1 in order to power the switches. Check the schematics in order to find out which output that powers the switches for a certain axis and then use one the following approaches to set it to 1:
-
-Define the output in axis yaml file:
-```
-axis:
-  id: 1                                               # Axis id
-  ...
-  feedSwitchesOutput: ec0.s5.binaryOutput02           # Ethercat entry for feed switches
-  ...
-```
-
-By using the commad Cfg.WriteEcEntryEcPath(ec\<master\_id\>.s\<slave\_id\>.binaryOutput\<id\>,\<value\>):
-```
-ecmcConfigOrDie "Cfg.WriteEcEntryEcPath(ec0.s5>.binaryOutput02,1)"
-```

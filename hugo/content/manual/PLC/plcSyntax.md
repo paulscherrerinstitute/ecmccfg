@@ -244,7 +244,7 @@ Below the ECMC specific accessible variables and functions are listed:
 
 ### functions
 ####  Function Lib: EtherCAT
-```shell
+```C
 
 1. retvalue = ec_set_bit(
                         <value>,         : Value to change
@@ -429,7 +429,7 @@ Below the ECMC specific accessible variables and functions are listed:
 Support for communication between different ecmc ioc:s running on the same host.
 A shared memory buffer of 120 doubles can be accessed for read and write operations by alll ecmc ioc running on the same master.
 
-```
+```C
 1. retvalue = m2m_write(
                       <index>,       : Mem buffer index (index must be 0..119)
                       <value>):      : value to write
@@ -462,7 +462,7 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
 ```
 
 ####  Function Lib: Motion
-```
+```C
 1. retvalue = mc_move_abs(
                       <axIndex>,       : Axis index
                         <execute>,       : Trigger
@@ -620,7 +620,7 @@ returns 0 if success or error code.
 
 #### Function Lib: Motion Group
 
-```
+```C
 1.  mc_grp_get_enable(
                      <grp_id>,         : Group index
                      );
@@ -747,7 +747,7 @@ returns 0 if success or error code.
 ```
 
 #### Function Lib: Data Storage
-```
+```C
 1. retvalue = ds_append_data(
                         <dsIndex>,       : Data storage index
                         <data>,          : Data
