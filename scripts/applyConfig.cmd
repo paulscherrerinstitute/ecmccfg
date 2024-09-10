@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for applying bus configuration.
+#-d   \details Applies the EtherCAT configuration and caluclates data offsets in the process image.
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Example call:

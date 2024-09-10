@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for switching to operational mode.
+#-d   \details Restores record update rate to what was defined in startup.cmd
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

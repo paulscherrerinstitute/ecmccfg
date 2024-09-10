@@ -2,6 +2,7 @@
 # addEcSdoRT.cmd
 #-d /**
 #-d   \brief Script for adding asyn SDO object (access to SDO:s in realtime)
+#-d   \details Add SDO for async access during realtime operation
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param SLAVE_ID (optional) bus position
