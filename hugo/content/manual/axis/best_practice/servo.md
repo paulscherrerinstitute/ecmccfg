@@ -1,5 +1,5 @@
 +++  
-title = "Servo motor (Ex72xx)"
+title = "servo motor (Ex72xx)"
 weight = 20
 chapter = false  
 +++

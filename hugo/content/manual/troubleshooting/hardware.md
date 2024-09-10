@@ -1,5 +1,5 @@
 +++  
-title = "Hardware"   
+title = "hardware"   
 weight = 11
 chapter = false  
 +++

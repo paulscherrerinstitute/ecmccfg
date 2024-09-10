@@ -1,5 +1,5 @@
 +++  
-title = "Homing"   
+title = "axis homing"   
 weight = 25
 chapter = false  
 +++  

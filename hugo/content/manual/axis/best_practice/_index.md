@@ -1,5 +1,5 @@
 +++  
-title = "Axis Best Practice"   
+title = "axis best practice"   
 weight = 30
 chapter = false  
 +++  

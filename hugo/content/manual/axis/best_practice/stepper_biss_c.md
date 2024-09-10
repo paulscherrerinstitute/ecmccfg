@@ -1,5 +1,5 @@
 +++  
-title = "Stepper and BISS-C (EL7041, EL5042)"
+title = "stepper and biss-c (EL7041, EL5042)"
 weight = 15
 chapter = false  
 +++

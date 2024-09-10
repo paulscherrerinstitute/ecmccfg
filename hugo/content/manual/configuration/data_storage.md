@@ -1,5 +1,5 @@
 +++  
-title = "Data Storage Buffer"   
+title = "data storage buffer"   
 weight = 16
 chapter = false  
 +++  
