@@ -1,8 +1,8 @@
-<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.85.0"><meta name=description content><link rel=icon href=../../../images/favicon.png type=image/png><title>PLC syntax help :: ecmccfg</title><link href=../../../css/nucleus.css?1725963314 rel=stylesheet><link href=../../../css/fontawesome-all.min.css?1725963314 rel=stylesheet><link href=../../../css/hybrid.css?1725963314 rel=stylesheet><link href=../../../css/featherlight.min.css?1725963314 rel=stylesheet><link href=../../../css/perfect-scrollbar.min.css?1725963314 rel=stylesheet><link href=../../../css/auto-complete.css?1725963314 rel=stylesheet><link href=../../../css/atom-one-dark-reasonable.css?1725963314 rel=stylesheet><link href=../../../css/theme.css?1725963314 rel=stylesheet><link href=../../../css/tabs.css?1725963314 rel=stylesheet><link href=../../../css/hugo-theme.css?1725963314 rel=stylesheet><link href=../../../css/theme-green.css?1725963314 rel=stylesheet><script src=../../../js/jquery-3.3.1.min.js?1725963314></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}:not(pre)>code+span.copy-to-clipboard{display:none}</style></head><body data-url=../../../manual/plc/plcsyntax/><nav id=sidebar><div id=header-wrapper><div id=header><a id=logo href=../../../><svg id="layer" viewBox="0 0 600 300" sodipodi:docname="ecmcLogo_v2.svg" width="280" height="140" inkscape:version="1.1 (c4e8f9e, 2021-05-24)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs173"/><sodipodi:namedview id="namedview171" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" inkscape:pageshadow="2" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" showgrid="false" height="651" inkscape:zoom="1.6526077" inkscape:cx="286.51688" inkscape:cy="196.35634" inkscape:window-width="1680" inkscape:window-height="997" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="layer"/><style id="style108">.st0{fill:#e2001a}</style><g id="g10438" transform="translate(0,-5)"><polygon points="518.9,299.9 585,299.9 585,277.7 466,277.7 518.9,319.8" id="polygon110" transform="translate(-10.6,-217.1)"/><polygon class="st0" points="532.1,247 373.6,247 373.6,269.2 585,269.2 532.1,227.1" id="polygon112" transform="translate(-10.6,-217.1)"/><path d="m278.3 117c4.3.0 8.5-1 12.9-2.8l-6.4 21.5c-3.4.7-7.2 1.2-10.7 1.2-21.2.0-38.2-13.1-38.2-39.799998.0-25.1 17.7-37.7 38.2-37.7 6.8.0 10.8 1 17.3 2.4v19.8c-4-1.5-8.1-2.8-12.2-2.8-10.4.0-18.3 6.6-18.3 18.8C260.9 110.5 268.2 117 278.3 117" id="path146"/><path d="m330.5 76.900002h.2L337.6 101.5H323.5zM291.8 135.7h24.4l3.9-16.2h20.6l4.2 16.2h25.6L347.8 60.700002h-33.7z" id="path150"/><g id="g154" transform="translate(-10.6,-217.1)"><path d="m98.2 342.3c-1.8.8-3.6 1.5-6 1.5-4.4.0-6.1-2.5-6.1-9.2v-34.8h12.1v-7.9H86.1v-20.8h-9.7v20.8H67v7.9h9.4v37.9c0 10.4 4.7 14 13.6 14 2.7.0 5.9-.7 8.2-1.5z" id="path152"/></g><polygon points="20.6,351.6 59.6,351.6 59.6,342.8 30.7,342.8 30.7,314.2 56.9,314.2 56.9,305.4 30.7,305.4 30.7,279.7 58.1,279.7 58.1,270.9 20.6,270.9" id="polygon156" transform="translate(-10.6,-217.1)"/><g id="g166" transform="translate(-10.6,-217.1)"><path d="m106.4 351.6h9.7v-35.5c0-10.6 4.9-16 12.5-16 6.2.0 9.7 4 9.7 13.4v38h9.7v-40.9c0-12.9-6.9-18.8-17.2-18.8-6.8.0-11.9 3.9-14.4 8.9h-.2V271h-9.7v80.6z" id="path158"/><path d="m169.4 317.6c.2-13.8 5.8-18.4 12-18.4 7.7.0 11.6 6.1 11.6 18.4zm33.3 7.4v-5.2c0-17.3-7.4-28-20.7-28-14.7.0-22.8 11.8-22.8 30.3s8.1 30.3 23.7 30.3c5.9.0 11.9-1.3 16.5-3.5l-.5-8.8c-3.3 2.4-8.7 4.9-13.5 4.9-10.8.0-16.1-6.4-16.1-20z" id="path160"/><path d="m213.4 351.6h9.7v-31.2c0-12.8 5.3-19.3 12.8-19.3 1.3.0 2.5.1 3.7.3v-9.6c-8.7.0-13.6 2.9-16.8 10.1h-.2l-.3-9.2h-9.4c.1 4.2.5 8.4.5 12.7z" id="path162"/><path d="m445.9 353.4c6.1.0 11-4.9 11-11s-4.9-11-11-11-11 4.9-11 11 5 11 11 11m0-2.1c-4.6.0-8.3-3.7-8.3-8.9s3.7-8.9 8.3-8.9 8.3 3.7 8.3 8.9-3.7 8.9-8.3 8.9m-4.2-2.7h2.3v-5.4h1.4l3.2 5.4h2.4l-3.4-5.5c2-.2 3.3-1.2 3.3-3.4.0-2.6-1.6-3.7-4.6-3.7h-4.6zm2.3-10.7h2.1c1.2.0 2.5.2 2.5 1.7.0 1.7-1.2 1.9-2.6 1.9h-2z" id="path164"/></g><polygon points="425.5,352.7 401,352.7 401,299.9 373.6,299.9 373.6,277.7 452.9,277.7 452.9,299.9 425.5,299.9" id="polygon168" transform="translate(-10.6,-217.1)"/></g><g id="g800" transform="matrix(4,0,0,4,-195.14121,180.14531)"><g id="g772"><rect x="10" y="10" fill="#455a64" width="19" height="6" id="rect764"/><path fill="#455a64" d="m9 43h30v-2c0-1.1-.9-2-2-2H11c-1.1.0-2 .9-2 2z" id="path766"/><polygon fill="#455a64" points="39,13.8 34.8,16.4 29.8,13 34.8,9.6 39,12.2 41,9 34.7,5 23.1,13 34.7,21 41,17" id="polygon768"/><polygon fill="#455a64" points="9,11 18,39 25,39 16,11" id="polygon770"/></g><g id="g782"><g id="g776"><path fill="#ffc107" d="M22.6 30.9C22.2 30.3 21.6 30 20.9 30H19c-.7.0-1.3.3-1.7.9L12 39H28zM20 36c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" id="path774"/></g><path fill="#ffc107" d="m13 7c-3.3.0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" id="path778"/><path fill="#ffc107" d="m30 18h-3c-1.1.0-2-.9-2-2v-6c0-1.1.9-2 2-2h3z" id="path780"/></g></g><text style="font-style:normal;font-weight:400;font-size:64px;line-height:1.25;font-family:sans-serif;fill:#000;fill-opacity:1;stroke:none" x="173.54036" y="194.40018" id="text1068"><tspan sodipodi:role="line" id="tspan1066" x="173.54036" y="194.40018" style="font-style:oblique;font-variant:normal;font-weight:300;font-stretch:normal;font-size:64px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Light Oblique';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Motion Control</tspan><tspan sodipodi:role="line" x="173.54036" y="278.83731" style="font-style:oblique;font-variant:normal;font-weight:300;font-stretch:normal;font-size:64px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Light Oblique';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" id="tspan3794">config</tspan></text><g id="g7805" transform="matrix(0.34482759,0,0,0.34482759,82.203009,335.64429)"><path d="m112 4e2h48v56h-48z" fill="#666" id="path7620"/><path d="m112 415 7.544 7.544a25.456 25.456.0 0018 7.456A25.45 25.45.0 00160 416.537V4e2h-48z" fill="#565655" id="path7622"/><path d="m112 456-16 16v16h80v-16l-16-16z" fill="#3f484f" id="path7624"/><path d="M159.621 456A167.077 167.077.0 0196.2 471.8L96 472h80l-16-16z" fill="#2a3135" id="path7626"/><path d="m248 392h64v64h-64z" fill="#666" id="path7628"/><path d="m312 392h-64v17.17A36.285 36.285.0 00281.282 431a36.281 36.281.0 0025.655-10.627L312 415.311z" fill="#565655" id="path7630"/><path d="m248 456-16 16v16h96v-16l-16-16z" fill="#3f484f" id="path7632"/><path d="M308.819 456A191.323 191.323.0 01232 472h96l-16-16z" fill="#2a3135" id="path7634"/><path d="M152 80 136 96H88l48 40 48-40V64L136 24 88 64h48z" fill="#d1cfc3" id="path7636"/><path d="m169.143 80-27.429 27.428h-40L88 96h48l16-16-16-16H88l13.714-11.429h40z" fill="#b7b2a5" id="path7638"/><path d="m280 208 16 16h48l-48 40-48-40v-32l48-40 48 40h-48z" fill="#d1cfc3" id="path7640"/><path d="m262.857 208 27.429 27.428h40L344 224h-48l-16-16 16-16h48l-13.714-11.429h-40z" fill="#b7b2a5" id="path7642"/><path d="M216 64H320V96H216z" fill="#ffa511" id="path7644"/><path d="m294.873 82a26 26 0 004.072 14H320V64h-17.928a26.031 26.031.0 00-7.199 18z" fill="#f08015" id="path7646"/><path d="m365.373 51.833h45.255v192.333h-45.255z" fill="#ffa511" transform="matrix(0.707,-0.707,0.707,0.707,8.991,317.706)" id="path7648"/><path d="m304 96 11.555 11.555a26.129 26.129.0 0030.256-33.744L336 64z" fill="#f08015" id="path7650"/><path d="M480 240 305.941 414.059a33.941 33.941.0 01-24 9.941A33.941 33.941.0 01248 390.059a33.941 33.941.0 019.941-24L432 192z" fill="#ffa511" id="path7652"/><path d="m403.853 220.147a45.169 45.169.0 0052.22 43.78L480 240l-48-48z" fill="#f08015" id="path7654"/><path d="m440 232 32-32-25.762-25.762a45.173 45.173.0 00-38.124 25.876z" fill="#f08015" id="path7656"/><path d="m152 192h72v32h-72z" fill="#ffa511" id="path7658"/><path d="m152 224h21.9a25.973 25.973.0 00-3.153-32H152z" fill="#f08015" id="path7660"/><path d="m26.461 237.373h147.078v45.255H26.461z" fill="#ffa511" transform="matrix(0.707,-0.707,0.707,0.707,-154.558,146.863)" id="path7662"/><path d="m127.993 200.007a25.99 25.99.0 0028.381 35.619L168 224l-32-32z" fill="#f08015" id="path7664"/><path d="m32 328 89.373 89.373a22.627 22.627.0 0016 6.627A22.628 22.628.0 00160 401.373a22.627 22.627.0 00-6.627-16L64 296z" fill="#ffa511" id="path7666"/><path d="m64 296-32 32 21.739 21.739c1.074.1 2.161.157 3.261.157A34.9 34.9.0 0090.97 322.97z" fill="#f08015" id="path7668"/><path d="M64 328l25.558-25.558A34.9 34.9.0 0046.175 281.825L32 296z" fill="#f08015" id="path7670"/><g fill="#878784" id="g7684"><circle cx="56" cy="312" r="32" id="circle7672"/><circle cx="152" cy="208" r="24" id="circle7674"/><rect height="80" rx="16" width="32" x="216" y="168" id="rect7676"/><circle cx="448" cy="216" r="40" id="circle7678"/><rect height="80" rx="16" width="32" x="184" y="40" id="rect7680"/><circle cx="320" cy="80" r="24" id="circle7682"/></g><rect fill="#666" height="32" rx="16" width="32" x="152" y="64" id="rect7686"/><rect fill="#666" height="32" rx="16" width="32" x="248" y="192" id="rect7688"/><rect fill="#ededeb" height="32" rx="16" width="32" x="120" y="384" id="rect7690"/><rect fill="#ededeb" height="48" rx="24" width="48" x="256" y="368" id="rect7692"/><path d="M129.425 414.575A15.9 15.9.0 01128 408a15.979 15.979.0 0122.575-14.575A15.993 15.993.0 00120 4e2a15.991 15.991.0 009.425 14.575z" fill="#cececc" id="path7694"/><path d="M267.506 412.494A23.882 23.882.0 01264 4e2a24 24 0 0136.494-20.494A24 24 0 00256 392a23.985 23.985.0 0011.506 20.494z" fill="#cececc" id="path7696"/><path d="M74.268 285.732A31.994 31.994.0 0129.732 330.268 32 32 0 1074.268 285.732z" fill="#70706f" id="path7698"/><path d="M64 320H48v22.992a32.25 32.25.0 0016 0z" fill="#ffdc13" id="path7700"/><path d="M64 331.708A31.835 31.835.0 0148 336v6.987a32.173 32.173.0 0016 0z" fill="#e5af17" id="path7702"/><path d="m48 304h16v-22.992a32.25 32.25.0 00-16 0z" fill="#ffdc13" id="path7704"/><path d="m164.494 187.506a24 24 0 01-32.988 32.988 24 24 0 1032.988-32.988z" fill="#70706f" id="path7706"/><path d="M173.66 218.346 163.314 208 152 219.314l10.346 10.346a24.09 24.09.0 0011.314-11.314z" fill="#ffdc13" id="path7708"/><path d="m154.346 221.66 8 8a24.09 24.09.0 0011.314-11.314l-8-8a24.09 24.09.0 01-11.314 11.314z" fill="#e5af17" id="path7710"/><path d="M130.34 197.654 140.686 208 152 196.686 141.654 186.34a24.09 24.09.0 00-11.314 11.314z" fill="#ffdc13" id="path7712"/><path d="m472 184a40 40 0 01-56 56 40 40 0 1056-56z" fill="#70706f" id="path7714"/><path d="m456 232h-16v23.2a40.3 40.3.0 0016 0z" fill="#ffdc13" id="path7716"/><path d="M456 244.662A39.851 39.851.0 01440 248v7.183a39.935 39.935.0 0016 .015z" fill="#e5af17" id="path7718"/><path d="m440 2e2h16v-23.2a40.3 40.3.0 00-16 0z" fill="#ffdc13" id="path7720"/><path d="M270.575 193.425A15.921 15.921.0 01272 2e2a15.979 15.979.0 01-22.575 14.575A15.993 15.993.0 00280 208 15.99 15.99.0 00270.575 193.425z" fill="#565655" id="path7722"/><path d="M174.575 65.425A15.921 15.921.0 01176 72 15.979 15.979.0 01153.425 86.575 15.993 15.993.0 00184 80 15.99 15.99.0 00174.575 65.425z" fill="#565655" id="path7724"/><path d="M332.494 59.506A24 24 0 01299.506 92.494 24 24 0 10332.494 59.506z" fill="#70706f" id="path7726"/><path d="M330.346 58.34 320 68.686 331.314 80 341.66 69.654A24.09 24.09.0 00330.346 58.34z" fill="#ffdc13" id="path7728"/><path d="M341.656 69.659A24.107 24.107.0 00332.494 59.506 23.884 23.884.0 01336 72a24.182 24.182.0 01-.267 3.582z" fill="#e5af17" id="path7730"/><path d="M309.654 101.66 320 91.314 308.686 80 298.34 90.346a24.09 24.09.0 0011.314 11.314z" fill="#ffdc13" id="path7732"/><path d="M315.582 95.733A24.182 24.182.0 01312 96a23.884 23.884.0 01-12.494-3.506 24.107 24.107.0 0010.153 9.162z" fill="#e5af17" id="path7734"/><path d="M206.575 41.425A15.9 15.9.0 01208 48V96a15.979 15.979.0 01-22.575 14.575A15.993 15.993.0 00216 104V56a15.99 15.99.0 00-9.425-14.575z" fill="#70706f" id="path7736"/><path d="M238.575 169.425A15.9 15.9.0 01240 176v48a15.979 15.979.0 01-22.575 14.575A15.993 15.993.0 00248 232v-48a15.99 15.99.0 00-9.425-14.575z" fill="#70706f" id="path7738"/></g><g id="Flat" transform="matrix(0.34482907,0,0,0.34482907,-3.2758977,126.7241)"><path d="m207.997 104h-80V88l40-24h40z" fill="#f98500" id="path10515"/><path d="m207.997 152h-80v16l40 24h40z" fill="#f98500" id="path10517"/><path d="m207.997 80h32v96h-32z" fill="#ffb531" id="path10519"/><path d="m240 96h40a32 32 0 0132 32 32 32 0 01-32 32h-40z" fill="#f98500" id="path10521"/><rect fill="#f98500" height="304" rx="40" width="80" x="407.99701" y="24" id="rect10523"/><path d="m407.998 208h80v16h-80z" fill="#fa6d00" id="path10525"/><path d="M448 496H336v-64l16-24v-48a40 40 0 0140-40 40 40 0 0140 40v48l16 24z" fill="#ffb531" id="path10527"/><rect fill="#ff9419" height="16" rx="8" width="80" x="367.99799" y="424" id="rect10529"/><path d="m455.58 248.737-.124-.024a39.894 39.894.0 00-39.565 15.381L359.7 329.038a39.251 39.251.0 00-7 15.962 39.649 39.649.0 0031.712 46.267l.125.024A39.893 39.893.0 00424.1 375.905l56.2-64.943A39.235 39.235.0 00487.292 295 39.647 39.647.0 00455.58 248.737z" fill="#ffa912" id="path10531"/><path d="m477.3 91.66a38.456 38.456.0 01-14.08 9.8L359.9 142.87l-14.86 5.96-21.24 8.51a36.88 36.88.0 01-40-8.34l-.08-.09C268.5 133.69 268.04 108.36 282.69 92.34a38.622 38.622.0 0114.08-9.8l16.54-6.63 14.86-5.96 108.02-43.29a36.88 36.88.0 0140 8.34l.09.09c15.21 15.22 15.67 40.55 1.02 56.57z" fill="#ffb531" id="path10533"/><path d="m359.9 142.87-14.86 5.96-31.73-72.92 14.86-5.96z" fill="#f98500" id="path10535"/><path d="m336 464h-64a16.018 16.018.0 01-16-16v-24h16v24h64z" fill="#348fd9" id="path10537"/><path d="m336 496h-72a40.045 40.045.0 01-40-40v-32h16v32a24.027 24.027.0 0024 24h72z" fill="#f35244" id="path10539"/><path d="m207.997 488h-80l16-56h48z" fill="#cfcfcd" id="path10541"/><path d="m103.998 480h128v16h-128z" fill="#e0e0de" id="path10543"/><path d="m312 392v16a24.006 24.006.0 01-24 24H48A24 24 0 0124 408v-16z" fill="#e0e0de" id="path10545"/><path d="M312 256V392H24V256a24 24 0 0124-24h240a24.006 24.006.0 0124 24z" fill="#348fd9" id="path10547"/><path d="M312 256V392H106.31L269.02 232H288a24.006 24.006.0 0124 24z" fill="#3086cd" id="path10549"/><path d="m24 376h288v16H24z" fill="#3086cd" id="path10551"/><path d="m312 392v16a24.006 24.006.0 01-24 24H65.63l40.68-40z" fill="#d6d6d4" id="path10553"/><path d="m264 360v32h-68.29a32 32 0 10-55.42.0H72v-32h25.8a71.855 71.855.0 019.25-22.32L88.8 319.43l22.63-22.63 18.25 18.25A71.4 71.4.0 01152 305.81V280h32v25.81a71.6 71.6.0 0122.32 9.24l18.25-18.25 22.62 22.63-18.25 18.25a71.378 71.378.0 019.25 22.32z" fill="#f35244" id="path10555"/><path d="m47.998 256h16v16h-16z" fill="#62a9e6" id="path10557"/><path d="m47.998 288h16v48h-16z" fill="#62a9e6" id="path10559"/><g fill="#e64c3f" id="g10565"><path d="m136 376a31.791 31.791.0 004.29 16H72v-16z" id="path10561"/><path d="m264 376v16H195.71A31.892 31.892.0 002e2 376z" id="path10563"/></g></g></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.85.0"><meta name=description content><link rel=icon href=../../../images/favicon.png type=image/png><title>PLC syntax help :: ecmccfg</title><link href=../../../css/nucleus.css?1725968905 rel=stylesheet><link href=../../../css/fontawesome-all.min.css?1725968905 rel=stylesheet><link href=../../../css/hybrid.css?1725968905 rel=stylesheet><link href=../../../css/featherlight.min.css?1725968905 rel=stylesheet><link href=../../../css/perfect-scrollbar.min.css?1725968905 rel=stylesheet><link href=../../../css/auto-complete.css?1725968905 rel=stylesheet><link href=../../../css/atom-one-dark-reasonable.css?1725968905 rel=stylesheet><link href=../../../css/theme.css?1725968905 rel=stylesheet><link href=../../../css/tabs.css?1725968905 rel=stylesheet><link href=../../../css/hugo-theme.css?1725968905 rel=stylesheet><link href=../../../css/theme-green.css?1725968905 rel=stylesheet><script src=../../../js/jquery-3.3.1.min.js?1725968905></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}:not(pre)>code+span.copy-to-clipboard{display:none}</style></head><body data-url=../../../manual/plc/plcsyntax/><nav id=sidebar><div id=header-wrapper><div id=header><a id=logo href=../../../><svg id="layer" viewBox="0 0 600 300" sodipodi:docname="ecmcLogo_v2.svg" width="280" height="140" inkscape:version="1.1 (c4e8f9e, 2021-05-24)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs173"/><sodipodi:namedview id="namedview171" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" inkscape:pageshadow="2" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" showgrid="false" height="651" inkscape:zoom="1.6526077" inkscape:cx="286.51688" inkscape:cy="196.35634" inkscape:window-width="1680" inkscape:window-height="997" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="layer"/><style id="style108">.st0{fill:#e2001a}</style><g id="g10438" transform="translate(0,-5)"><polygon points="518.9,299.9 585,299.9 585,277.7 466,277.7 518.9,319.8" id="polygon110" transform="translate(-10.6,-217.1)"/><polygon class="st0" points="532.1,247 373.6,247 373.6,269.2 585,269.2 532.1,227.1" id="polygon112" transform="translate(-10.6,-217.1)"/><path d="m278.3 117c4.3.0 8.5-1 12.9-2.8l-6.4 21.5c-3.4.7-7.2 1.2-10.7 1.2-21.2.0-38.2-13.1-38.2-39.799998.0-25.1 17.7-37.7 38.2-37.7 6.8.0 10.8 1 17.3 2.4v19.8c-4-1.5-8.1-2.8-12.2-2.8-10.4.0-18.3 6.6-18.3 18.8C260.9 110.5 268.2 117 278.3 117" id="path146"/><path d="m330.5 76.900002h.2L337.6 101.5H323.5zM291.8 135.7h24.4l3.9-16.2h20.6l4.2 16.2h25.6L347.8 60.700002h-33.7z" id="path150"/><g id="g154" transform="translate(-10.6,-217.1)"><path d="m98.2 342.3c-1.8.8-3.6 1.5-6 1.5-4.4.0-6.1-2.5-6.1-9.2v-34.8h12.1v-7.9H86.1v-20.8h-9.7v20.8H67v7.9h9.4v37.9c0 10.4 4.7 14 13.6 14 2.7.0 5.9-.7 8.2-1.5z" id="path152"/></g><polygon points="20.6,351.6 59.6,351.6 59.6,342.8 30.7,342.8 30.7,314.2 56.9,314.2 56.9,305.4 30.7,305.4 30.7,279.7 58.1,279.7 58.1,270.9 20.6,270.9" id="polygon156" transform="translate(-10.6,-217.1)"/><g id="g166" transform="translate(-10.6,-217.1)"><path d="m106.4 351.6h9.7v-35.5c0-10.6 4.9-16 12.5-16 6.2.0 9.7 4 9.7 13.4v38h9.7v-40.9c0-12.9-6.9-18.8-17.2-18.8-6.8.0-11.9 3.9-14.4 8.9h-.2V271h-9.7v80.6z" id="path158"/><path d="m169.4 317.6c.2-13.8 5.8-18.4 12-18.4 7.7.0 11.6 6.1 11.6 18.4zm33.3 7.4v-5.2c0-17.3-7.4-28-20.7-28-14.7.0-22.8 11.8-22.8 30.3s8.1 30.3 23.7 30.3c5.9.0 11.9-1.3 16.5-3.5l-.5-8.8c-3.3 2.4-8.7 4.9-13.5 4.9-10.8.0-16.1-6.4-16.1-20z" id="path160"/><path d="m213.4 351.6h9.7v-31.2c0-12.8 5.3-19.3 12.8-19.3 1.3.0 2.5.1 3.7.3v-9.6c-8.7.0-13.6 2.9-16.8 10.1h-.2l-.3-9.2h-9.4c.1 4.2.5 8.4.5 12.7z" id="path162"/><path d="m445.9 353.4c6.1.0 11-4.9 11-11s-4.9-11-11-11-11 4.9-11 11 5 11 11 11m0-2.1c-4.6.0-8.3-3.7-8.3-8.9s3.7-8.9 8.3-8.9 8.3 3.7 8.3 8.9-3.7 8.9-8.3 8.9m-4.2-2.7h2.3v-5.4h1.4l3.2 5.4h2.4l-3.4-5.5c2-.2 3.3-1.2 3.3-3.4.0-2.6-1.6-3.7-4.6-3.7h-4.6zm2.3-10.7h2.1c1.2.0 2.5.2 2.5 1.7.0 1.7-1.2 1.9-2.6 1.9h-2z" id="path164"/></g><polygon points="425.5,352.7 401,352.7 401,299.9 373.6,299.9 373.6,277.7 452.9,277.7 452.9,299.9 425.5,299.9" id="polygon168" transform="translate(-10.6,-217.1)"/></g><g id="g800" transform="matrix(4,0,0,4,-195.14121,180.14531)"><g id="g772"><rect x="10" y="10" fill="#455a64" width="19" height="6" id="rect764"/><path fill="#455a64" d="m9 43h30v-2c0-1.1-.9-2-2-2H11c-1.1.0-2 .9-2 2z" id="path766"/><polygon fill="#455a64" points="39,13.8 34.8,16.4 29.8,13 34.8,9.6 39,12.2 41,9 34.7,5 23.1,13 34.7,21 41,17" id="polygon768"/><polygon fill="#455a64" points="9,11 18,39 25,39 16,11" id="polygon770"/></g><g id="g782"><g id="g776"><path fill="#ffc107" d="M22.6 30.9C22.2 30.3 21.6 30 20.9 30H19c-.7.0-1.3.3-1.7.9L12 39H28zM20 36c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" id="path774"/></g><path fill="#ffc107" d="m13 7c-3.3.0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 8c-1.1.0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" id="path778"/><path fill="#ffc107" d="m30 18h-3c-1.1.0-2-.9-2-2v-6c0-1.1.9-2 2-2h3z" id="path780"/></g></g><text style="font-style:normal;font-weight:400;font-size:64px;line-height:1.25;font-family:sans-serif;fill:#000;fill-opacity:1;stroke:none" x="173.54036" y="194.40018" id="text1068"><tspan sodipodi:role="line" id="tspan1066" x="173.54036" y="194.40018" style="font-style:oblique;font-variant:normal;font-weight:300;font-stretch:normal;font-size:64px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Light Oblique';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Motion Control</tspan><tspan sodipodi:role="line" x="173.54036" y="278.83731" style="font-style:oblique;font-variant:normal;font-weight:300;font-stretch:normal;font-size:64px;font-family:Helvetica;-inkscape-font-specification:'Helvetica Light Oblique';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" id="tspan3794">config</tspan></text><g id="g7805" transform="matrix(0.34482759,0,0,0.34482759,82.203009,335.64429)"><path d="m112 4e2h48v56h-48z" fill="#666" id="path7620"/><path d="m112 415 7.544 7.544a25.456 25.456.0 0018 7.456A25.45 25.45.0 00160 416.537V4e2h-48z" fill="#565655" id="path7622"/><path d="m112 456-16 16v16h80v-16l-16-16z" fill="#3f484f" id="path7624"/><path d="M159.621 456A167.077 167.077.0 0196.2 471.8L96 472h80l-16-16z" fill="#2a3135" id="path7626"/><path d="m248 392h64v64h-64z" fill="#666" id="path7628"/><path d="m312 392h-64v17.17A36.285 36.285.0 00281.282 431a36.281 36.281.0 0025.655-10.627L312 415.311z" fill="#565655" id="path7630"/><path d="m248 456-16 16v16h96v-16l-16-16z" fill="#3f484f" id="path7632"/><path d="M308.819 456A191.323 191.323.0 01232 472h96l-16-16z" fill="#2a3135" id="path7634"/><path d="M152 80 136 96H88l48 40 48-40V64L136 24 88 64h48z" fill="#d1cfc3" id="path7636"/><path d="m169.143 80-27.429 27.428h-40L88 96h48l16-16-16-16H88l13.714-11.429h40z" fill="#b7b2a5" id="path7638"/><path d="m280 208 16 16h48l-48 40-48-40v-32l48-40 48 40h-48z" fill="#d1cfc3" id="path7640"/><path d="m262.857 208 27.429 27.428h40L344 224h-48l-16-16 16-16h48l-13.714-11.429h-40z" fill="#b7b2a5" id="path7642"/><path d="M216 64H320V96H216z" fill="#ffa511" id="path7644"/><path d="m294.873 82a26 26 0 004.072 14H320V64h-17.928a26.031 26.031.0 00-7.199 18z" fill="#f08015" id="path7646"/><path d="m365.373 51.833h45.255v192.333h-45.255z" fill="#ffa511" transform="matrix(0.707,-0.707,0.707,0.707,8.991,317.706)" id="path7648"/><path d="m304 96 11.555 11.555a26.129 26.129.0 0030.256-33.744L336 64z" fill="#f08015" id="path7650"/><path d="M480 240 305.941 414.059a33.941 33.941.0 01-24 9.941A33.941 33.941.0 01248 390.059a33.941 33.941.0 019.941-24L432 192z" fill="#ffa511" id="path7652"/><path d="m403.853 220.147a45.169 45.169.0 0052.22 43.78L480 240l-48-48z" fill="#f08015" id="path7654"/><path d="m440 232 32-32-25.762-25.762a45.173 45.173.0 00-38.124 25.876z" fill="#f08015" id="path7656"/><path d="m152 192h72v32h-72z" fill="#ffa511" id="path7658"/><path d="m152 224h21.9a25.973 25.973.0 00-3.153-32H152z" fill="#f08015" id="path7660"/><path d="m26.461 237.373h147.078v45.255H26.461z" fill="#ffa511" transform="matrix(0.707,-0.707,0.707,0.707,-154.558,146.863)" id="path7662"/><path d="m127.993 200.007a25.99 25.99.0 0028.381 35.619L168 224l-32-32z" fill="#f08015" id="path7664"/><path d="m32 328 89.373 89.373a22.627 22.627.0 0016 6.627A22.628 22.628.0 00160 401.373a22.627 22.627.0 00-6.627-16L64 296z" fill="#ffa511" id="path7666"/><path d="m64 296-32 32 21.739 21.739c1.074.1 2.161.157 3.261.157A34.9 34.9.0 0090.97 322.97z" fill="#f08015" id="path7668"/><path d="M64 328l25.558-25.558A34.9 34.9.0 0046.175 281.825L32 296z" fill="#f08015" id="path7670"/><g fill="#878784" id="g7684"><circle cx="56" cy="312" r="32" id="circle7672"/><circle cx="152" cy="208" r="24" id="circle7674"/><rect height="80" rx="16" width="32" x="216" y="168" id="rect7676"/><circle cx="448" cy="216" r="40" id="circle7678"/><rect height="80" rx="16" width="32" x="184" y="40" id="rect7680"/><circle cx="320" cy="80" r="24" id="circle7682"/></g><rect fill="#666" height="32" rx="16" width="32" x="152" y="64" id="rect7686"/><rect fill="#666" height="32" rx="16" width="32" x="248" y="192" id="rect7688"/><rect fill="#ededeb" height="32" rx="16" width="32" x="120" y="384" id="rect7690"/><rect fill="#ededeb" height="48" rx="24" width="48" x="256" y="368" id="rect7692"/><path d="M129.425 414.575A15.9 15.9.0 01128 408a15.979 15.979.0 0122.575-14.575A15.993 15.993.0 00120 4e2a15.991 15.991.0 009.425 14.575z" fill="#cececc" id="path7694"/><path d="M267.506 412.494A23.882 23.882.0 01264 4e2a24 24 0 0136.494-20.494A24 24 0 00256 392a23.985 23.985.0 0011.506 20.494z" fill="#cececc" id="path7696"/><path d="M74.268 285.732A31.994 31.994.0 0129.732 330.268 32 32 0 1074.268 285.732z" fill="#70706f" id="path7698"/><path d="M64 320H48v22.992a32.25 32.25.0 0016 0z" fill="#ffdc13" id="path7700"/><path d="M64 331.708A31.835 31.835.0 0148 336v6.987a32.173 32.173.0 0016 0z" fill="#e5af17" id="path7702"/><path d="m48 304h16v-22.992a32.25 32.25.0 00-16 0z" fill="#ffdc13" id="path7704"/><path d="m164.494 187.506a24 24 0 01-32.988 32.988 24 24 0 1032.988-32.988z" fill="#70706f" id="path7706"/><path d="M173.66 218.346 163.314 208 152 219.314l10.346 10.346a24.09 24.09.0 0011.314-11.314z" fill="#ffdc13" id="path7708"/><path d="m154.346 221.66 8 8a24.09 24.09.0 0011.314-11.314l-8-8a24.09 24.09.0 01-11.314 11.314z" fill="#e5af17" id="path7710"/><path d="M130.34 197.654 140.686 208 152 196.686 141.654 186.34a24.09 24.09.0 00-11.314 11.314z" fill="#ffdc13" id="path7712"/><path d="m472 184a40 40 0 01-56 56 40 40 0 1056-56z" fill="#70706f" id="path7714"/><path d="m456 232h-16v23.2a40.3 40.3.0 0016 0z" fill="#ffdc13" id="path7716"/><path d="M456 244.662A39.851 39.851.0 01440 248v7.183a39.935 39.935.0 0016 .015z" fill="#e5af17" id="path7718"/><path d="m440 2e2h16v-23.2a40.3 40.3.0 00-16 0z" fill="#ffdc13" id="path7720"/><path d="M270.575 193.425A15.921 15.921.0 01272 2e2a15.979 15.979.0 01-22.575 14.575A15.993 15.993.0 00280 208 15.99 15.99.0 00270.575 193.425z" fill="#565655" id="path7722"/><path d="M174.575 65.425A15.921 15.921.0 01176 72 15.979 15.979.0 01153.425 86.575 15.993 15.993.0 00184 80 15.99 15.99.0 00174.575 65.425z" fill="#565655" id="path7724"/><path d="M332.494 59.506A24 24 0 01299.506 92.494 24 24 0 10332.494 59.506z" fill="#70706f" id="path7726"/><path d="M330.346 58.34 320 68.686 331.314 80 341.66 69.654A24.09 24.09.0 00330.346 58.34z" fill="#ffdc13" id="path7728"/><path d="M341.656 69.659A24.107 24.107.0 00332.494 59.506 23.884 23.884.0 01336 72a24.182 24.182.0 01-.267 3.582z" fill="#e5af17" id="path7730"/><path d="M309.654 101.66 320 91.314 308.686 80 298.34 90.346a24.09 24.09.0 0011.314 11.314z" fill="#ffdc13" id="path7732"/><path d="M315.582 95.733A24.182 24.182.0 01312 96a23.884 23.884.0 01-12.494-3.506 24.107 24.107.0 0010.153 9.162z" fill="#e5af17" id="path7734"/><path d="M206.575 41.425A15.9 15.9.0 01208 48V96a15.979 15.979.0 01-22.575 14.575A15.993 15.993.0 00216 104V56a15.99 15.99.0 00-9.425-14.575z" fill="#70706f" id="path7736"/><path d="M238.575 169.425A15.9 15.9.0 01240 176v48a15.979 15.979.0 01-22.575 14.575A15.993 15.993.0 00248 232v-48a15.99 15.99.0 00-9.425-14.575z" fill="#70706f" id="path7738"/></g><g id="Flat" transform="matrix(0.34482907,0,0,0.34482907,-3.2758977,126.7241)"><path d="m207.997 104h-80V88l40-24h40z" fill="#f98500" id="path10515"/><path d="m207.997 152h-80v16l40 24h40z" fill="#f98500" id="path10517"/><path d="m207.997 80h32v96h-32z" fill="#ffb531" id="path10519"/><path d="m240 96h40a32 32 0 0132 32 32 32 0 01-32 32h-40z" fill="#f98500" id="path10521"/><rect fill="#f98500" height="304" rx="40" width="80" x="407.99701" y="24" id="rect10523"/><path d="m407.998 208h80v16h-80z" fill="#fa6d00" id="path10525"/><path d="M448 496H336v-64l16-24v-48a40 40 0 0140-40 40 40 0 0140 40v48l16 24z" fill="#ffb531" id="path10527"/><rect fill="#ff9419" height="16" rx="8" width="80" x="367.99799" y="424" id="rect10529"/><path d="m455.58 248.737-.124-.024a39.894 39.894.0 00-39.565 15.381L359.7 329.038a39.251 39.251.0 00-7 15.962 39.649 39.649.0 0031.712 46.267l.125.024A39.893 39.893.0 00424.1 375.905l56.2-64.943A39.235 39.235.0 00487.292 295 39.647 39.647.0 00455.58 248.737z" fill="#ffa912" id="path10531"/><path d="m477.3 91.66a38.456 38.456.0 01-14.08 9.8L359.9 142.87l-14.86 5.96-21.24 8.51a36.88 36.88.0 01-40-8.34l-.08-.09C268.5 133.69 268.04 108.36 282.69 92.34a38.622 38.622.0 0114.08-9.8l16.54-6.63 14.86-5.96 108.02-43.29a36.88 36.88.0 0140 8.34l.09.09c15.21 15.22 15.67 40.55 1.02 56.57z" fill="#ffb531" id="path10533"/><path d="m359.9 142.87-14.86 5.96-31.73-72.92 14.86-5.96z" fill="#f98500" id="path10535"/><path d="m336 464h-64a16.018 16.018.0 01-16-16v-24h16v24h64z" fill="#348fd9" id="path10537"/><path d="m336 496h-72a40.045 40.045.0 01-40-40v-32h16v32a24.027 24.027.0 0024 24h72z" fill="#f35244" id="path10539"/><path d="m207.997 488h-80l16-56h48z" fill="#cfcfcd" id="path10541"/><path d="m103.998 480h128v16h-128z" fill="#e0e0de" id="path10543"/><path d="m312 392v16a24.006 24.006.0 01-24 24H48A24 24 0 0124 408v-16z" fill="#e0e0de" id="path10545"/><path d="M312 256V392H24V256a24 24 0 0124-24h240a24.006 24.006.0 0124 24z" fill="#348fd9" id="path10547"/><path d="M312 256V392H106.31L269.02 232H288a24.006 24.006.0 0124 24z" fill="#3086cd" id="path10549"/><path d="m24 376h288v16H24z" fill="#3086cd" id="path10551"/><path d="m312 392v16a24.006 24.006.0 01-24 24H65.63l40.68-40z" fill="#d6d6d4" id="path10553"/><path d="m264 360v32h-68.29a32 32 0 10-55.42.0H72v-32h25.8a71.855 71.855.0 019.25-22.32L88.8 319.43l22.63-22.63 18.25 18.25A71.4 71.4.0 01152 305.81V280h32v25.81a71.6 71.6.0 0122.32 9.24l18.25-18.25 22.62 22.63-18.25 18.25a71.378 71.378.0 019.25 22.32z" fill="#f35244" id="path10555"/><path d="m47.998 256h16v16h-16z" fill="#62a9e6" id="path10557"/><path d="m47.998 288h16v48h-16z" fill="#62a9e6" id="path10559"/><g fill="#e64c3f" id="g10565"><path d="m136 376a31.791 31.791.0 004.29 16H72v-16z" id="path10561"/><path d="m264 376v16H195.71A31.892 31.892.0 002e2 376z" id="path10563"/></g></g></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=../../../js/lunr.min.js?1725963314></script><script type=text/javascript src=../../../js/auto-complete.js?1725963314></script><script type=text/javascript>var baseurl="https://paulscherrerinstitute.github.io/ecmccfg/"</script><script type=text/javascript src=../../../js/search.js?1725963314></script></div><section id=homelinks><ul><li><a class=padding href=../../../><i class="fas fa-home"></i> Home</a></li></ul></section><div class=highlightable><ul class=topics><li data-nav-id=/manual/ title=manual class="dd-item
-parent"><a href=../../../manual/>manual</a><ul><li data-nav-id=/manual/build/ title="build at PSI" class=dd-item><a href=../../../manual/build/>build at PSI</a></li><li data-nav-id=/manual/introduction/ title=introduction class=dd-item><a href=../../../manual/introduction/>introduction</a></li><li data-nav-id=/manual/axis/ title=axis class=dd-item><a href=../../../manual/axis/>axis</a><ul><li data-nav-id=/manual/axis/best_practice/ title="Axis Best Practice" class=dd-item><a href=../../../manual/axis/best_practice/>Axis Best Practice</a><ul><li data-nav-id=/manual/axis/best_practice/servo/ title="Servo motor (Ex72xx)" class=dd-item><a href=../../../manual/axis/best_practice/servo/>Servo motor (Ex72xx)</a></li><li data-nav-id=/manual/axis/best_practice/stepper_biss_c/ title="Stepper and BISS-C (EL7041, EL5042)" class=dd-item><a href=../../../manual/axis/best_practice/stepper_biss_c/>Stepper and BISS-C (EL7041, EL5042)</a></li></ul></li><li data-nav-id=/manual/axis/axisyaml/ title="axis yaml configuration" class=dd-item><a href=../../../manual/axis/axisyaml/>axis yaml configuration</a></li><li data-nav-id=/manual/axis/axisplc/ title="axis PLC" class=dd-item><a href=../../../manual/axis/axisplc/>axis PLC</a></li><li data-nav-id=/manual/axis/scaling/ title="axis scaling" class=dd-item><a href=../../../manual/axis/scaling/>axis scaling</a></li><li data-nav-id=/manual/axis/direction/ title="direction of motion" class=dd-item><a href=../../../manual/axis/direction/>direction of motion</a></li></ul></li><li data-nav-id=/manual/troubleshooting/ title=troubleshooting class=dd-item><a href=../../../manual/troubleshooting/>troubleshooting</a><ul><li data-nav-id=/manual/troubleshooting/ethercatcli/ title="ethercat command line interface" class=dd-item><a href=../../../manual/troubleshooting/ethercatcli/>ethercat command line interface</a></li><li data-nav-id=/manual/troubleshooting/hardware/ title=Hardware class=dd-item><a href=../../../manual/troubleshooting/hardware/>Hardware</a></li><li data-nav-id=/manual/troubleshooting/motion/ title=motion class=dd-item><a href=../../../manual/troubleshooting/motion/>motion</a></li></ul></li><li data-nav-id=/manual/plc/ title=PLC class="dd-item
-parent"><a href=../../../manual/plc/>PLC</a><ul><li data-nav-id=/manual/plc/best_practice/ title="PLC Best practice" class=dd-item><a href=../../../manual/plc/best_practice/>PLC Best practice</a></li><li data-nav-id=/manual/plc/plcsyntax/ title="PLC syntax help" class="dd-item active"><a href=../../../manual/plc/plcsyntax/>PLC syntax help</a></li></ul></li></ul></li><li data-nav-id=/source/ title=source class=dd-item><a href=../../../source/>source</a><ul><li data-nav-id=/source/general/ title=general class=dd-item><a href=../../../source/general/>general</a><ul><li data-nav-id=/source/general/chkoversampfactordie/ title=chkOverSampFactOrDie.cmd class=dd-item><a href=../../../source/general/chkoversampfactordie/>chkOverSampFactOrDie.cmd</a></li><li data-nav-id=/source/general/chkoversamptimeordie/ title=chkOverSampTimeOrDie.cmd class=dd-item><a href=../../../source/general/chkoversamptimeordie/>chkOverSampTimeOrDie.cmd</a></li><li data-nav-id=/source/general/chkvalidcurrentsetordie/ title=chkValidCurrentSetOrDie.cmd class=dd-item><a href=../../../source/general/chkvalidcurrentsetordie/>chkValidCurrentSetOrDie.cmd</a></li><li data-nav-id=/source/general/chkvalidvoltagesetordie/ title=chkValidVoltageSetOrDie.cmd class=dd-item><a href=../../../source/general/chkvalidvoltagesetordie/>chkValidVoltageSetOrDie.cmd</a></li><li data-nav-id=/source/general/general/ title=general.cmd class=dd-item><a href=../../../source/general/general/>general.cmd</a></li><li data-nav-id=/source/general/generaldiagnostics/ title=generalDiagnostics.cmd class=dd-item><a href=../../../source/general/generaldiagnostics/>generalDiagnostics.cmd</a></li><li data-nav-id=/source/general/init/ title=init.cmd class=dd-item><a href=../../../source/general/init/>init.cmd</a></li><li data-nav-id=/source/general/initall/ title=initAll.cmd class=dd-item><a href=../../../source/general/initall/>initAll.cmd</a></li><li data-nav-id=/source/general/initaxis/ title=initAxis.cmd class=dd-item><a href=../../../source/general/initaxis/>initAxis.cmd</a></li><li data-nav-id=/source/general/issuewarning/ title=issueWarning.cmd class=dd-item><a href=../../../source/general/issuewarning/>issueWarning.cmd</a></li><li data-nav-id=/source/general/verifyordie/ title=verifyOrDie.cmd class=dd-item><a href=../../../source/general/verifyordie/>verifyOrDie.cmd</a></li></ul></li><li data-nav-id=/source/motion/ title=motion class=dd-item><a href=../../../source/motion/>motion</a><ul><li data-nav-id=/source/motion/ecmc_axis-records/ title=ecmc_axis-records.cmd class=dd-item><a href=../../../source/motion/ecmc_axis-records/>ecmc_axis-records.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis/ title=ecmc_axis.cmd class=dd-item><a href=../../../source/motion/ecmc_axis/>ecmc_axis.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_diag/ title=ecmc_axis_diag.cmd class=dd-item><a href=../../../source/motion/ecmc_axis_diag/>ecmc_axis_diag.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_mr/ title=ecmc_axis_mr.cmd class=dd-item><a href=../../../source/motion/ecmc_axis_mr/>ecmc_axis_mr.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_sync/ title=ecmc_axis_sync.cmd class=dd-item><a href=../../../source/motion/ecmc_axis_sync/>ecmc_axis_sync.cmd</a></li><li data-nav-id=/source/motion/ecmc_enc-records/ title=ecmc_enc-records.cmd class=dd-item><a href=../../../source/motion/ecmc_enc-records/>ecmc_enc-records.cmd</a></li><li data-nav-id=/source/motion/ecmc_enc/ title=ecmc_enc.cmd class=dd-item><a href=../../../source/motion/ecmc_enc/>ecmc_enc.cmd</a></li><li data-nav-id=/source/motion/ecmc_virt_axis-records/ title=ecmc_virt_axis-records.cmd class=dd-item><a href=../../../source/motion/ecmc_virt_axis-records/>ecmc_virt_axis-records.cmd</a></li><li data-nav-id=/source/motion/ecmc_virt_axis/ title=ecmc_virt_axis.cmd class=dd-item><a href=../../../source/motion/ecmc_virt_axis/>ecmc_virt_axis.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_sync_unset/ title class=dd-item><a href=../../../source/motion/ecmc_axis_sync_unset/></a></li><li data-nav-id=/source/motion/ecmc_axis_unset/ title class=dd-item><a href=../../../source/motion/ecmc_axis_unset/></a></li><li data-nav-id=/source/motion/ecmc_enc_unset/ title class=dd-item><a href=../../../source/motion/ecmc_enc_unset/></a></li><li data-nav-id=/source/motion/ecmc_virt_axis_unset/ title class=dd-item><a href=../../../source/motion/ecmc_virt_axis_unset/></a></li></ul></li><li data-nav-id=/source/naming/ title=naming class=dd-item><a href=../../../source/naming/>naming</a><ul><li data-nav-id=/source/naming/ecmcclassicnaming/ title=ecmcClassicNaming.cmd class=dd-item><a href=../../../source/naming/ecmcclassicnaming/>ecmcClassicNaming.cmd</a></li><li data-nav-id=/source/naming/ecmcessnaming/ title=ecmcESSnaming.cmd class=dd-item><a href=../../../source/naming/ecmcessnaming/>ecmcESSnaming.cmd</a></li><li data-nav-id=/source/naming/ecmcmxsxxx/ title=ecmcmXsXXX.cmd class=dd-item><a href=../../../source/naming/ecmcmxsxxx/>ecmcmXsXXX.cmd</a></li></ul></li><li data-nav-id=/source/scripts/ title=scripts class=dd-item><a href=../../../source/scripts/>scripts</a><ul><li data-nav-id=/source/scripts/addaxis/ title=addAxis.cmd class=dd-item><a href=../../../source/scripts/addaxis/>addAxis.cmd</a></li><li data-nav-id=/source/scripts/adddatastorage/ title=addDataStorage.cmd class=dd-item><a href=../../../source/scripts/adddatastorage/>addDataStorage.cmd</a></li><li data-nav-id=/source/scripts/adddomain/ title=addDomain.cmd class=dd-item><a href=../../../source/scripts/adddomain/>addDomain.cmd</a></li><li data-nav-id=/source/scripts/addecdataitem/ title=addEcDataItem.cmd class=dd-item><a href=../../../source/scripts/addecdataitem/>addEcDataItem.cmd</a></li><li data-nav-id=/source/scripts/addecsdort/ title=addEcSdoRT.cmd class=dd-item><a href=../../../source/scripts/addecsdort/>addEcSdoRT.cmd</a></li><li data-nav-id=/source/scripts/addencoder/ title=addEncoder.cmd class=dd-item><a href=../../../source/scripts/addencoder/>addEncoder.cmd</a></li><li data-nav-id=/source/scripts/addmaster/ title=addMaster.cmd class=dd-item><a href=../../../source/scripts/addmaster/>addMaster.cmd</a></li><li data-nav-id=/source/scripts/addslave/ title=addSlave.cmd class=dd-item><a href=../../../source/scripts/addslave/>addSlave.cmd</a></li><li data-nav-id=/source/scripts/addslavekl/ title=addSlaveKL.cmd class=dd-item><a href=../../../source/scripts/addslavekl/>addSlaveKL.cmd</a></li><li data-nav-id=/source/scripts/addvirtualaxis/ title=addVirtualAxis.cmd class=dd-item><a href=../../../source/scripts/addvirtualaxis/>addVirtualAxis.cmd</a></li><li data-nav-id=/source/scripts/applyaxissynchronization/ title=applyAxisSynchronization.cmd class=dd-item><a href=../../../source/scripts/applyaxissynchronization/>applyAxisSynchronization.cmd</a></li><li data-nav-id=/source/scripts/applyconfig/ title=applyConfig.cmd class=dd-item><a href=../../../source/scripts/applyconfig/>applyConfig.cmd</a></li><li data-nav-id=/source/scripts/applyslaveconfig/ title=applySlaveConfig.cmd class=dd-item><a href=../../../source/scripts/applyslaveconfig/>applySlaveConfig.cmd</a></li><li data-nav-id=/source/scripts/applyslavedcconfig/ title=applySlaveDCconfig.cmd class=dd-item><a href=../../../source/scripts/applyslavedcconfig/>applySlaveDCconfig.cmd</a></li><li data-nav-id=/source/scripts/applysubstitutions/ title=applySubstitutions.cmd class=dd-item><a href=../../../source/scripts/applysubstitutions/>applySubstitutions.cmd</a></li><li data-nav-id=/source/scripts/applytemplate/ title=applyTemplate.cmd class=dd-item><a href=../../../source/scripts/applytemplate/>applyTemplate.cmd</a></li><li data-nav-id=/source/scripts/configureaxis/ title=configureAxis.cmd class=dd-item><a href=../../../source/scripts/configureaxis/>configureAxis.cmd</a></li><li data-nav-id=/source/scripts/configureslave/ title=configureSlave.cmd class=dd-item><a href=../../../source/scripts/configureslave/>configureSlave.cmd</a></li><li data-nav-id=/source/scripts/configurevirtualaxis/ title=configureVirtualAxis.cmd class=dd-item><a href=../../../source/scripts/configurevirtualaxis/>configureVirtualAxis.cmd</a></li><li data-nav-id=/source/scripts/finalize/ title=finalize.cmd class=dd-item><a href=../../../source/scripts/finalize/>finalize.cmd</a></li><li data-nav-id=/source/scripts/jinja2/ title=jinja2 class=dd-item><a href=../../../source/scripts/jinja2/>jinja2</a><ul><li data-nav-id=/source/scripts/jinja2/loadyamlaxis/ title=loadYamlAxis.cmd class=dd-item><a href=../../../source/scripts/jinja2/loadyamlaxis/>loadYamlAxis.cmd</a></li><li data-nav-id=/source/scripts/jinja2/loadyamlenc/ title=loadYamlEnc.cmd class=dd-item><a href=../../../source/scripts/jinja2/loadyamlenc/>loadYamlEnc.cmd</a></li><li data-nav-id=/source/scripts/jinja2/loadyamlplc/ title=loadYamlPlc.cmd class=dd-item><a href=../../../source/scripts/jinja2/loadyamlplc/>loadYamlPlc.cmd</a></li></ul></li><li data-nav-id=/source/scripts/loadaxisplcfile/ title=loadAxisPLCFile.cmd class=dd-item><a href=../../../source/scripts/loadaxisplcfile/>loadAxisPLCFile.cmd</a></li><li data-nav-id=/source/scripts/loadplcfile/ title=loadPLCFile.cmd class=dd-item><a href=../../../source/scripts/loadplcfile/>loadPLCFile.cmd</a></li><li data-nav-id=/source/scripts/loadplclib/ title=loadPLCLib.cmd class=dd-item><a href=../../../source/scripts/loadplclib/>loadPLCLib.cmd</a></li><li data-nav-id=/source/scripts/loadplugin/ title=loadPlugin.cmd class=dd-item><a href=../../../source/scripts/loadplugin/>loadPlugin.cmd</a></li><li data-nav-id=/source/scripts/loadsubstaxes/ title=loadSubstAxes.cmd class=dd-item><a href=../../../source/scripts/loadsubstaxes/>loadSubstAxes.cmd</a></li><li data-nav-id=/source/scripts/loadsubstconfig/ title=loadSubstConfig.cmd class=dd-item><a href=../../../source/scripts/loadsubstconfig/>loadSubstConfig.cmd</a></li><li data-nav-id=/source/scripts/loadsubsthw/ title=loadSubstHw.cmd class=dd-item><a href=../../../source/scripts/loadsubsthw/>loadSubstHw.cmd</a></li><li data-nav-id=/source/scripts/restorerecordupdaterate/ title=restoreRecordUpdateRate.cmd class=dd-item><a href=../../../source/scripts/restorerecordupdaterate/>restoreRecordUpdateRate.cmd</a></li><li data-nav-id=/source/scripts/setappmode/ title=setAppMode.cmd class=dd-item><a href=../../../source/scripts/setappmode/>setAppMode.cmd</a></li><li data-nav-id=/source/scripts/setdiagnostics/ title=setDiagnostics.cmd class=dd-item><a href=../../../source/scripts/setdiagnostics/>setDiagnostics.cmd</a></li><li data-nav-id=/source/scripts/setrecordupdaterate/ title=setRecordUpdateRate.cmd class=dd-item><a href=../../../source/scripts/setrecordupdaterate/>setRecordUpdateRate.cmd</a></li><li data-nav-id=/source/scripts/slaveverify/ title=slaveVerify.cmd class=dd-item><a href=../../../source/scripts/slaveverify/>slaveVerify.cmd</a></li><li data-nav-id=/source/scripts/empty/ title class=dd-item><a href=../../../source/scripts/empty/></a></li></ul></li><li data-nav-id=/source/startup/ title class=dd-item><a href=../../../source/startup/></a></li></ul></li></ul><section id=footer><center><a class=github-button href=https://github.com/paulscherrerinstitute/ecmccfg/releases/latest data-icon=octicon-cloud-download aria-label="Download paulscherrerinstitute/ecmccfg on GitHub">Download</a>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=../../../js/lunr.min.js?1725968905></script><script type=text/javascript src=../../../js/auto-complete.js?1725968905></script><script type=text/javascript>var baseurl="https://paulscherrerinstitute.github.io/ecmccfg/"</script><script type=text/javascript src=../../../js/search.js?1725968905></script></div><section id=homelinks><ul><li><a class=padding href=../../../><i class="fas fa-home"></i> Home</a></li></ul></section><div class=highlightable><ul class=topics><li data-nav-id=/manual/ title=manual class="dd-item
+parent"><a href=../../../manual/>manual</a><ul><li data-nav-id=/manual/build/ title="build at PSI" class=dd-item><a href=../../../manual/build/>build at PSI</a></li><li data-nav-id=/manual/introduction/ title=introduction class=dd-item><a href=../../../manual/introduction/>introduction</a></li><li data-nav-id=/manual/axis/ title=axis class=dd-item><a href=../../../manual/axis/>axis</a><ul><li data-nav-id=/manual/axis/best_practice/ title="Axis Best Practice" class=dd-item><a href=../../../manual/axis/best_practice/>Axis Best Practice</a><ul><li data-nav-id=/manual/axis/best_practice/servo/ title="Servo motor (Ex72xx)" class=dd-item><a href=../../../manual/axis/best_practice/servo/>Servo motor (Ex72xx)</a></li><li data-nav-id=/manual/axis/best_practice/stepper_biss_c/ title="Stepper and BISS-C (EL7041, EL5042)" class=dd-item><a href=../../../manual/axis/best_practice/stepper_biss_c/>Stepper and BISS-C (EL7041, EL5042)</a></li></ul></li><li data-nav-id=/manual/axis/axisyaml/ title="axis yaml configuration" class=dd-item><a href=../../../manual/axis/axisyaml/>axis yaml configuration</a></li><li data-nav-id=/manual/axis/axisplc/ title="axis PLC" class=dd-item><a href=../../../manual/axis/axisplc/>axis PLC</a></li><li data-nav-id=/manual/axis/scaling/ title="axis scaling" class=dd-item><a href=../../../manual/axis/scaling/>axis scaling</a></li><li data-nav-id=/manual/axis/direction/ title="direction of motion" class=dd-item><a href=../../../manual/axis/direction/>direction of motion</a></li><li data-nav-id=/manual/axis/homing/ title class=dd-item><a href=../../../manual/axis/homing/></a></li></ul></li><li data-nav-id=/manual/troubleshooting/ title=troubleshooting class=dd-item><a href=../../../manual/troubleshooting/>troubleshooting</a><ul><li data-nav-id=/manual/troubleshooting/ethercatcli/ title="ethercat command line interface" class=dd-item><a href=../../../manual/troubleshooting/ethercatcli/>ethercat command line interface</a></li><li data-nav-id=/manual/troubleshooting/hardware/ title=Hardware class=dd-item><a href=../../../manual/troubleshooting/hardware/>Hardware</a></li><li data-nav-id=/manual/troubleshooting/motion/ title=motion class=dd-item><a href=../../../manual/troubleshooting/motion/>motion</a></li><li data-nav-id=/manual/troubleshooting/general/ title class=dd-item><a href=../../../manual/troubleshooting/general/></a></li></ul></li><li data-nav-id=/manual/plc/ title=PLC class="dd-item
+parent"><a href=../../../manual/plc/>PLC</a><ul><li data-nav-id=/manual/plc/best_practice/ title="PLC Best practice" class=dd-item><a href=../../../manual/plc/best_practice/>PLC Best practice</a></li><li data-nav-id=/manual/plc/plcsyntax/ title="PLC syntax help" class="dd-item active"><a href=../../../manual/plc/plcsyntax/>PLC syntax help</a></li></ul></li><li data-nav-id=/manual/configuration/data_storage/ title class=dd-item><a href=../../../manual/configuration/data_storage/></a></li><li data-nav-id=/manual/configuration/iocsh_utils/ title class=dd-item><a href=../../../manual/configuration/iocsh_utils/></a></li></ul></li><li data-nav-id=/source/ title=source class=dd-item><a href=../../../source/>source</a><ul><li data-nav-id=/source/general/ title=general class=dd-item><a href=../../../source/general/>general</a><ul><li data-nav-id=/source/general/chkoversampfactordie/ title=chkOverSampFactOrDie.cmd class=dd-item><a href=../../../source/general/chkoversampfactordie/>chkOverSampFactOrDie.cmd</a></li><li data-nav-id=/source/general/chkoversamptimeordie/ title=chkOverSampTimeOrDie.cmd class=dd-item><a href=../../../source/general/chkoversamptimeordie/>chkOverSampTimeOrDie.cmd</a></li><li data-nav-id=/source/general/chkvalidcurrentsetordie/ title=chkValidCurrentSetOrDie.cmd class=dd-item><a href=../../../source/general/chkvalidcurrentsetordie/>chkValidCurrentSetOrDie.cmd</a></li><li data-nav-id=/source/general/chkvalidvoltagesetordie/ title=chkValidVoltageSetOrDie.cmd class=dd-item><a href=../../../source/general/chkvalidvoltagesetordie/>chkValidVoltageSetOrDie.cmd</a></li><li data-nav-id=/source/general/general/ title=general.cmd class=dd-item><a href=../../../source/general/general/>general.cmd</a></li><li data-nav-id=/source/general/generaldiagnostics/ title=generalDiagnostics.cmd class=dd-item><a href=../../../source/general/generaldiagnostics/>generalDiagnostics.cmd</a></li><li data-nav-id=/source/general/init/ title=init.cmd class=dd-item><a href=../../../source/general/init/>init.cmd</a></li><li data-nav-id=/source/general/initall/ title=initAll.cmd class=dd-item><a href=../../../source/general/initall/>initAll.cmd</a></li><li data-nav-id=/source/general/initaxis/ title=initAxis.cmd class=dd-item><a href=../../../source/general/initaxis/>initAxis.cmd</a></li><li data-nav-id=/source/general/issuewarning/ title=issueWarning.cmd class=dd-item><a href=../../../source/general/issuewarning/>issueWarning.cmd</a></li><li data-nav-id=/source/general/verifyordie/ title=verifyOrDie.cmd class=dd-item><a href=../../../source/general/verifyordie/>verifyOrDie.cmd</a></li></ul></li><li data-nav-id=/source/motion/ title=motion class=dd-item><a href=../../../source/motion/>motion</a><ul><li data-nav-id=/source/motion/ecmc_axis-records/ title=ecmc_axis-records.cmd class=dd-item><a href=../../../source/motion/ecmc_axis-records/>ecmc_axis-records.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis/ title=ecmc_axis.cmd class=dd-item><a href=../../../source/motion/ecmc_axis/>ecmc_axis.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_diag/ title=ecmc_axis_diag.cmd class=dd-item><a href=../../../source/motion/ecmc_axis_diag/>ecmc_axis_diag.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_mr/ title=ecmc_axis_mr.cmd class=dd-item><a href=../../../source/motion/ecmc_axis_mr/>ecmc_axis_mr.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_sync/ title=ecmc_axis_sync.cmd class=dd-item><a href=../../../source/motion/ecmc_axis_sync/>ecmc_axis_sync.cmd</a></li><li data-nav-id=/source/motion/ecmc_enc-records/ title=ecmc_enc-records.cmd class=dd-item><a href=../../../source/motion/ecmc_enc-records/>ecmc_enc-records.cmd</a></li><li data-nav-id=/source/motion/ecmc_enc/ title=ecmc_enc.cmd class=dd-item><a href=../../../source/motion/ecmc_enc/>ecmc_enc.cmd</a></li><li data-nav-id=/source/motion/ecmc_virt_axis-records/ title=ecmc_virt_axis-records.cmd class=dd-item><a href=../../../source/motion/ecmc_virt_axis-records/>ecmc_virt_axis-records.cmd</a></li><li data-nav-id=/source/motion/ecmc_virt_axis/ title=ecmc_virt_axis.cmd class=dd-item><a href=../../../source/motion/ecmc_virt_axis/>ecmc_virt_axis.cmd</a></li><li data-nav-id=/source/motion/ecmc_axis_sync_unset/ title class=dd-item><a href=../../../source/motion/ecmc_axis_sync_unset/></a></li><li data-nav-id=/source/motion/ecmc_axis_unset/ title class=dd-item><a href=../../../source/motion/ecmc_axis_unset/></a></li><li data-nav-id=/source/motion/ecmc_enc_unset/ title class=dd-item><a href=../../../source/motion/ecmc_enc_unset/></a></li><li data-nav-id=/source/motion/ecmc_virt_axis_unset/ title class=dd-item><a href=../../../source/motion/ecmc_virt_axis_unset/></a></li></ul></li><li data-nav-id=/source/naming/ title=naming class=dd-item><a href=../../../source/naming/>naming</a><ul><li data-nav-id=/source/naming/ecmcclassicnaming/ title=ecmcClassicNaming.cmd class=dd-item><a href=../../../source/naming/ecmcclassicnaming/>ecmcClassicNaming.cmd</a></li><li data-nav-id=/source/naming/ecmcessnaming/ title=ecmcESSnaming.cmd class=dd-item><a href=../../../source/naming/ecmcessnaming/>ecmcESSnaming.cmd</a></li><li data-nav-id=/source/naming/ecmcmxsxxx/ title=ecmcmXsXXX.cmd class=dd-item><a href=../../../source/naming/ecmcmxsxxx/>ecmcmXsXXX.cmd</a></li></ul></li><li data-nav-id=/source/scripts/ title=scripts class=dd-item><a href=../../../source/scripts/>scripts</a><ul><li data-nav-id=/source/scripts/addaxis/ title=addAxis.cmd class=dd-item><a href=../../../source/scripts/addaxis/>addAxis.cmd</a></li><li data-nav-id=/source/scripts/adddatastorage/ title=addDataStorage.cmd class=dd-item><a href=../../../source/scripts/adddatastorage/>addDataStorage.cmd</a></li><li data-nav-id=/source/scripts/adddomain/ title=addDomain.cmd class=dd-item><a href=../../../source/scripts/adddomain/>addDomain.cmd</a></li><li data-nav-id=/source/scripts/addecdataitem/ title=addEcDataItem.cmd class=dd-item><a href=../../../source/scripts/addecdataitem/>addEcDataItem.cmd</a></li><li data-nav-id=/source/scripts/addecsdort/ title=addEcSdoRT.cmd class=dd-item><a href=../../../source/scripts/addecsdort/>addEcSdoRT.cmd</a></li><li data-nav-id=/source/scripts/addencoder/ title=addEncoder.cmd class=dd-item><a href=../../../source/scripts/addencoder/>addEncoder.cmd</a></li><li data-nav-id=/source/scripts/addmaster/ title=addMaster.cmd class=dd-item><a href=../../../source/scripts/addmaster/>addMaster.cmd</a></li><li data-nav-id=/source/scripts/addslave/ title=addSlave.cmd class=dd-item><a href=../../../source/scripts/addslave/>addSlave.cmd</a></li><li data-nav-id=/source/scripts/addslavekl/ title=addSlaveKL.cmd class=dd-item><a href=../../../source/scripts/addslavekl/>addSlaveKL.cmd</a></li><li data-nav-id=/source/scripts/addvirtualaxis/ title=addVirtualAxis.cmd class=dd-item><a href=../../../source/scripts/addvirtualaxis/>addVirtualAxis.cmd</a></li><li data-nav-id=/source/scripts/applyaxissynchronization/ title=applyAxisSynchronization.cmd class=dd-item><a href=../../../source/scripts/applyaxissynchronization/>applyAxisSynchronization.cmd</a></li><li data-nav-id=/source/scripts/applyconfig/ title=applyConfig.cmd class=dd-item><a href=../../../source/scripts/applyconfig/>applyConfig.cmd</a></li><li data-nav-id=/source/scripts/applyslaveconfig/ title=applySlaveConfig.cmd class=dd-item><a href=../../../source/scripts/applyslaveconfig/>applySlaveConfig.cmd</a></li><li data-nav-id=/source/scripts/applyslavedcconfig/ title=applySlaveDCconfig.cmd class=dd-item><a href=../../../source/scripts/applyslavedcconfig/>applySlaveDCconfig.cmd</a></li><li data-nav-id=/source/scripts/applysubstitutions/ title=applySubstitutions.cmd class=dd-item><a href=../../../source/scripts/applysubstitutions/>applySubstitutions.cmd</a></li><li data-nav-id=/source/scripts/applytemplate/ title=applyTemplate.cmd class=dd-item><a href=../../../source/scripts/applytemplate/>applyTemplate.cmd</a></li><li data-nav-id=/source/scripts/configureaxis/ title=configureAxis.cmd class=dd-item><a href=../../../source/scripts/configureaxis/>configureAxis.cmd</a></li><li data-nav-id=/source/scripts/configureslave/ title=configureSlave.cmd class=dd-item><a href=../../../source/scripts/configureslave/>configureSlave.cmd</a></li><li data-nav-id=/source/scripts/configurevirtualaxis/ title=configureVirtualAxis.cmd class=dd-item><a href=../../../source/scripts/configurevirtualaxis/>configureVirtualAxis.cmd</a></li><li data-nav-id=/source/scripts/finalize/ title=finalize.cmd class=dd-item><a href=../../../source/scripts/finalize/>finalize.cmd</a></li><li data-nav-id=/source/scripts/jinja2/ title=jinja2 class=dd-item><a href=../../../source/scripts/jinja2/>jinja2</a><ul><li data-nav-id=/source/scripts/jinja2/loadyamlaxis/ title=loadYamlAxis.cmd class=dd-item><a href=../../../source/scripts/jinja2/loadyamlaxis/>loadYamlAxis.cmd</a></li><li data-nav-id=/source/scripts/jinja2/loadyamlenc/ title=loadYamlEnc.cmd class=dd-item><a href=../../../source/scripts/jinja2/loadyamlenc/>loadYamlEnc.cmd</a></li><li data-nav-id=/source/scripts/jinja2/loadyamlplc/ title=loadYamlPlc.cmd class=dd-item><a href=../../../source/scripts/jinja2/loadyamlplc/>loadYamlPlc.cmd</a></li></ul></li><li data-nav-id=/source/scripts/loadaxisplcfile/ title=loadAxisPLCFile.cmd class=dd-item><a href=../../../source/scripts/loadaxisplcfile/>loadAxisPLCFile.cmd</a></li><li data-nav-id=/source/scripts/loadplcfile/ title=loadPLCFile.cmd class=dd-item><a href=../../../source/scripts/loadplcfile/>loadPLCFile.cmd</a></li><li data-nav-id=/source/scripts/loadplclib/ title=loadPLCLib.cmd class=dd-item><a href=../../../source/scripts/loadplclib/>loadPLCLib.cmd</a></li><li data-nav-id=/source/scripts/loadplugin/ title=loadPlugin.cmd class=dd-item><a href=../../../source/scripts/loadplugin/>loadPlugin.cmd</a></li><li data-nav-id=/source/scripts/loadsubstaxes/ title=loadSubstAxes.cmd class=dd-item><a href=../../../source/scripts/loadsubstaxes/>loadSubstAxes.cmd</a></li><li data-nav-id=/source/scripts/loadsubstconfig/ title=loadSubstConfig.cmd class=dd-item><a href=../../../source/scripts/loadsubstconfig/>loadSubstConfig.cmd</a></li><li data-nav-id=/source/scripts/loadsubsthw/ title=loadSubstHw.cmd class=dd-item><a href=../../../source/scripts/loadsubsthw/>loadSubstHw.cmd</a></li><li data-nav-id=/source/scripts/restorerecordupdaterate/ title=restoreRecordUpdateRate.cmd class=dd-item><a href=../../../source/scripts/restorerecordupdaterate/>restoreRecordUpdateRate.cmd</a></li><li data-nav-id=/source/scripts/setappmode/ title=setAppMode.cmd class=dd-item><a href=../../../source/scripts/setappmode/>setAppMode.cmd</a></li><li data-nav-id=/source/scripts/setdiagnostics/ title=setDiagnostics.cmd class=dd-item><a href=../../../source/scripts/setdiagnostics/>setDiagnostics.cmd</a></li><li data-nav-id=/source/scripts/setrecordupdaterate/ title=setRecordUpdateRate.cmd class=dd-item><a href=../../../source/scripts/setrecordupdaterate/>setRecordUpdateRate.cmd</a></li><li data-nav-id=/source/scripts/slaveverify/ title=slaveVerify.cmd class=dd-item><a href=../../../source/scripts/slaveverify/>slaveVerify.cmd</a></li><li data-nav-id=/source/scripts/empty/ title class=dd-item><a href=../../../source/scripts/empty/></a></li></ul></li><li data-nav-id=/source/startup/ title class=dd-item><a href=../../../source/startup/></a></li></ul></li></ul><section id=footer><center><a class=github-button href=https://github.com/paulscherrerinstitute/ecmccfg/releases/latest data-icon=octicon-cloud-download aria-label="Download paulscherrerinstitute/ecmccfg on GitHub">Download</a>
 <a class=github-button href=https://github.com/paulscherrerinstitute/ecmccfg data-icon=octicon-star data-show-count=true aria-label="Star paulscherrerinstitute/ecmccfg on GitHub">Star</a>
 <a class=github-button href=https://github.com/paulscherrerinstitute/ecmccfg/fork data-icon=octicon-repo-forked data-show-count=true aria-label="Fork paulscherrerinstitute/ecmccfg on GitHub">Fork</a><p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p><div>Icons made by <a href title=monkik>monkik</a> from <a href=https://www.flaticon.com/ title=Flaticon>www.flaticon.com</a></div></center><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
@@ -175,570 +175,570 @@ Everything after this char will be removed before compile.<div class="notices wa
 <span style=color:#75715e>#   5.  ds&lt;id&gt;.error                 Data storage class error         (ro)</span>
 <span style=color:#75715e>#   6.  ds&lt;id&gt;.clear                 Data buffer clear (set to zero)  (ro)</span>
 <span style=color:#75715e>#   7.  ds&lt;id&gt;.full                  True if data storage is full     (ro)</span>
-</code></pre></div><h3 id=functions-1>functions</h3><h4 id=function-lib-ethercat>Function Lib: EtherCAT</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>
-1. retvalue <span style=color:#f92672>=</span> ec_set_bit<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;bitindex&gt;       : Bit index 
-                        <span style=color:#f92672>)</span>;
+</code></pre></div><h3 id=functions-1>functions</h3><h4 id=function-lib-ethercat>Function Lib: EtherCAT</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C>
+<span style=color:#ae81ff>1.</span> retvalue <span style=color:#f92672>=</span> ec_set_bit(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>bitindex<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Bit index 
+                        );
    Sets bit at bitindex position of value. Returns the new value.
 
-2. retvalue <span style=color:#f92672>=</span> ec_wrt_bit<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;wrtValue&gt;,      : Value of bit to write
-                        &lt;bitindex&gt;       : Bit index 
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>2.</span> retvalue <span style=color:#f92672>=</span> ec_wrt_bit(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>wrtValue<span style=color:#f92672>&gt;</span>,      <span style=color:#f92672>:</span> Value of bit to write
+                        <span style=color:#f92672>&lt;</span>bitindex<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Bit index 
+                        );
    Write wrtValue to a bit at bitindex position of value. Returns the new value.
 
-3. retvalue <span style=color:#f92672>=</span> ec_wrt_bits<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;wrtValue&gt;,      : Value of bit to write
-                        &lt;startBit&gt;       : Start bit index <span style=color:#f92672>(</span>lsb is bit 0<span style=color:#f92672>)</span>
-                        &lt;stopBit&gt;        : Stop bit index 
-                        <span style=color:#f92672>)</span>;
-   Write wrtValue to a range of bits <span style=color:#f92672>(</span>statBit..stopBit<span style=color:#f92672>)</span> of value. Returns the new value.
+<span style=color:#ae81ff>3.</span> retvalue <span style=color:#f92672>=</span> ec_wrt_bits(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>wrtValue<span style=color:#f92672>&gt;</span>,      <span style=color:#f92672>:</span> Value of bit to write
+                        <span style=color:#f92672>&lt;</span>startBit<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Start bit index (lsb is bit <span style=color:#ae81ff>0</span>)
+                        <span style=color:#f92672>&lt;</span>stopBit<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Stop bit index 
+                        );
+   Write wrtValue to a range of <span style=color:#a6e22e>bits</span> (statBit..stopBit) of value. Returns the new value.
 
-4. retvalue <span style=color:#f92672>=</span> ec_clr_bit<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;bitindex&gt;       : Bit index 
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>4.</span> retvalue <span style=color:#f92672>=</span> ec_clr_bit(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>bitindex<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Bit index 
+                        );
    Clears bit at bitindex position of value. Returns the new value.
 
-5. retvalue <span style=color:#f92672>=</span> ec_flp_bit<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;bitindex&gt;       : Bit index 
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>5.</span> retvalue <span style=color:#f92672>=</span> ec_flp_bit(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>bitindex<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Bit index 
+                        );
    Flips bit at bitindex position of value. Returns the new value.
 
-6. retvalue <span style=color:#f92672>=</span> ec_chk_bit<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;bitindex&gt;       : Bit index 
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>6.</span> retvalue <span style=color:#f92672>=</span> ec_chk_bit(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>bitindex<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Bit index 
+                        );
    Checks bit at bitindex position of value. Returns the value of bit.
 
-7. retvalue <span style=color:#f92672>=</span> ec_chk_bits<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to change
-                        &lt;startBit&gt;       : Start bit index <span style=color:#f92672>(</span>lsb is bit 0<span style=color:#f92672>)</span>
-                        &lt;stopBit&gt;        : Stop bit index 
-                        <span style=color:#f92672>)</span>;
-   Checks range of bits <span style=color:#f92672>(</span>startBit..stopBit<span style=color:#f92672>)</span> of value. Returns the value of bits.
+<span style=color:#ae81ff>7.</span> retvalue <span style=color:#f92672>=</span> ec_chk_bits(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to change
+                        <span style=color:#f92672>&lt;</span>startBit<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Start bit index (lsb is bit <span style=color:#ae81ff>0</span>)
+                        <span style=color:#f92672>&lt;</span>stopBit<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Stop bit index 
+                        );
+   Checks range of <span style=color:#a6e22e>bits</span> (startBit..stopBit) of value. Returns the value of bits.
 
-8. retvalue <span style=color:#f92672>=</span> ec_print_hex<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to print
-                        &lt;startBit&gt;       : Start bit index 
-                        &lt;stopBit&gt;        : Stop bit index 
-                        <span style=color:#f92672>)</span>;
-   Prints &lt;startBit&gt; to &lt;stopBit&gt; of &lt;value&gt; in hex format 
+<span style=color:#ae81ff>8.</span> retvalue <span style=color:#f92672>=</span> ec_print_hex(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to print
+                        <span style=color:#f92672>&lt;</span>startBit<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Start bit index 
+                        <span style=color:#f92672>&lt;</span>stopBit<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Stop bit index 
+                        );
+   Prints <span style=color:#f92672>&lt;</span>startBit<span style=color:#f92672>&gt;</span> to <span style=color:#f92672>&lt;</span>stopBit<span style=color:#f92672>&gt;</span> of <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span> in hex format 
    Returns error code or <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success.
 
-9. retvalue <span style=color:#f92672>=</span> ec_print_bin<span style=color:#f92672>(</span>
-                        &lt;value&gt;,         : Value to print
-                        &lt;startBit&gt;       : Start bit index 
-                        &lt;stopBit&gt;        : Stop bit index 
-                        <span style=color:#f92672>)</span>;
-   Prints &lt;startBit&gt; to &lt;stopBit&gt; of &lt;value&gt; in bin format 
+<span style=color:#ae81ff>9.</span> retvalue <span style=color:#f92672>=</span> ec_print_bin(
+                        <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Value to print
+                        <span style=color:#f92672>&lt;</span>startBit<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Start bit index 
+                        <span style=color:#f92672>&lt;</span>stopBit<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Stop bit index 
+                        );
+   Prints <span style=color:#f92672>&lt;</span>startBit<span style=color:#f92672>&gt;</span> to <span style=color:#f92672>&lt;</span>stopBit<span style=color:#f92672>&gt;</span> of <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span> in bin format 
    Returns error code or <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success.
 
-10. retvalue <span style=color:#f92672>=</span> ec_mm_cp<span style=color:#f92672>(</span>
-                        &lt;srcId&gt;,         : Source memmap index
-                        &lt;sdestId&gt;        : Dest memmap index
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>10.</span> retvalue <span style=color:#f92672>=</span> ec_mm_cp(
+                        <span style=color:#f92672>&lt;</span>srcId<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Source memmap index
+                        <span style=color:#f92672>&lt;</span>sdestId<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Dest memmap index
+                        );
    Copies data from source memmap to dest memmap. The memmap ids are defined by the 
-   order they are created <span style=color:#f92672>(</span>starting at 0<span style=color:#f92672>)</span>. The smallest memmap size will define the
+   order they are created (starting at <span style=color:#ae81ff>0</span>). The smallest memmap size will define the
    amout of data copied. Returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>for</span> success or an error code.
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
 
-11. retvalue <span style=color:#f92672>=</span> ec_get_mm_type<span style=color:#f92672>(</span>
-                        &lt;srcId&gt;,         : Source memmap index
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>11.</span> retvalue <span style=color:#f92672>=</span> ec_get_mm_type(
+                        <span style=color:#f92672>&lt;</span>srcId<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Source memmap index
+                        );
    Returns data type of memmap:
-       0  <span style=color:#f92672>=</span> Not defined <span style=color:#f92672>(</span>Use <span style=color:#e6db74>&#34;Cfg.EcAddMemMapDT()&#34;</span> instead of <span style=color:#e6db74>&#34;Cfg.EcAddMemMap()&#34;</span><span style=color:#f92672>)</span>
-       1  <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Not valid <span style=color:#66d9ef>for</span> memmap<span style=color:#f92672>)</span>
-       2  <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Not valid <span style=color:#66d9ef>for</span> memmap<span style=color:#f92672>)</span>
-       3  <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Not valid <span style=color:#66d9ef>for</span> memmap<span style=color:#f92672>)</span>
-       4  <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Not valid <span style=color:#66d9ef>for</span> memmap<span style=color:#f92672>)</span>
-       5  <span style=color:#f92672>=</span> U8
-       6  <span style=color:#f92672>=</span> S8
-       7  <span style=color:#f92672>=</span> U16
-       8  <span style=color:#f92672>=</span> S16
-       9  <span style=color:#f92672>=</span> U32
-       10 <span style=color:#f92672>=</span> S32
-       11 <span style=color:#f92672>=</span> U64
-       12 <span style=color:#f92672>=</span> S64
-       13 <span style=color:#f92672>=</span> F32
-       14 <span style=color:#f92672>=</span> F64
+       <span style=color:#ae81ff>0</span>  <span style=color:#f92672>=</span> Not defined (Use <span style=color:#e6db74>&#34;Cfg.EcAddMemMapDT()&#34;</span> instead of <span style=color:#e6db74>&#34;Cfg.EcAddMemMap()&#34;</span>)
+       <span style=color:#ae81ff>1</span>  <span style=color:#f92672>=</span> (Not valid <span style=color:#66d9ef>for</span> memmap)
+       <span style=color:#ae81ff>2</span>  <span style=color:#f92672>=</span> (Not valid <span style=color:#66d9ef>for</span> memmap)
+       <span style=color:#ae81ff>3</span>  <span style=color:#f92672>=</span> (Not valid <span style=color:#66d9ef>for</span> memmap)
+       <span style=color:#ae81ff>4</span>  <span style=color:#f92672>=</span> (Not valid <span style=color:#66d9ef>for</span> memmap)
+       <span style=color:#ae81ff>5</span>  <span style=color:#f92672>=</span> U8
+       <span style=color:#ae81ff>6</span>  <span style=color:#f92672>=</span> S8
+       <span style=color:#ae81ff>7</span>  <span style=color:#f92672>=</span> U16
+       <span style=color:#ae81ff>8</span>  <span style=color:#f92672>=</span> S16
+       <span style=color:#ae81ff>9</span>  <span style=color:#f92672>=</span> U32
+       <span style=color:#ae81ff>10</span> <span style=color:#f92672>=</span> S32
+       <span style=color:#ae81ff>11</span> <span style=color:#f92672>=</span> U64
+       <span style=color:#ae81ff>12</span> <span style=color:#f92672>=</span> S64
+       <span style=color:#ae81ff>13</span> <span style=color:#f92672>=</span> F32
+       <span style=color:#ae81ff>14</span> <span style=color:#f92672>=</span> F64
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
 
-12. retvalue <span style=color:#f92672>=</span> ec_get_mm_data<span style=color:#f92672>(</span>
-                        &lt;srcId&gt;,       : Source memmap index
-                        &lt;index&gt;        : Index of data element 
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>12.</span> retvalue <span style=color:#f92672>=</span> ec_get_mm_data(
+                        <span style=color:#f92672>&lt;</span>srcId<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Source memmap index
+                        <span style=color:#f92672>&lt;</span>index<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Index of data element 
+                        );
    Reads data element at index from memmap with srcId and returns value.
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
-13. retvalue <span style=color:#f92672>=</span> ec_set_mm_data<span style=color:#f92672>(</span>
-                        &lt;srcId&gt;,       : Source memmap index
-                        &lt;index&gt;        : Index of data element 
-                        &lt;data&gt;         : Data to write
-                        <span style=color:#f92672>)</span>;
+<span style=color:#ae81ff>13.</span> retvalue <span style=color:#f92672>=</span> ec_set_mm_data(
+                        <span style=color:#f92672>&lt;</span>srcId<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Source memmap index
+                        <span style=color:#f92672>&lt;</span>index<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Index of data element 
+                        <span style=color:#f92672>&lt;</span>data<span style=color:#f92672>&gt;</span>         <span style=color:#f92672>:</span> Data to write
+                        );
    Writes data element at index from memmap with srcId. Returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>for</span> success or an error code.
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
-14. retvalue <span style=color:#f92672>=</span> ec_get_mm_size<span style=color:#f92672>(</span>
-                        &lt;srcId&gt;,       : Source memmap index
-                        <span style=color:#f92672>)</span>;
-   Returns number of elements <span style=color:#f92672>(</span>of type <span style=color:#e6db74>&#34;ec_get_mm_type()&#34;</span><span style=color:#f92672>)</span>in memmap with srcId. 
+<span style=color:#ae81ff>14.</span> retvalue <span style=color:#f92672>=</span> ec_get_mm_size(
+                        <span style=color:#f92672>&lt;</span>srcId<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Source memmap index
+                        );
+   Returns number of <span style=color:#a6e22e>elements</span> (of type <span style=color:#e6db74>&#34;ec_get_mm_type()&#34;)in memmap with srcId. </span>
    If <span style=color:#66d9ef>return</span> value is less than zero it should be considered to be an error code.
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
-14. retvalue <span style=color:#f92672>=</span> ec_mm_ds_append<span style=color:#f92672>(</span>
-                        &lt;mmId&gt;,       : Source memmap index
-                        &lt;dsId&gt;<span style=color:#f92672>)</span>;      : Destination data storage index
+<span style=color:#ae81ff>14.</span> retvalue <span style=color:#f92672>=</span> ec_mm_ds_append(
+                        <span style=color:#f92672>&lt;</span>mmId<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Source memmap index
+                        <span style=color:#f92672>&lt;</span>dsId<span style=color:#f92672>&gt;</span>);      <span style=color:#f92672>:</span> Destination data storage index
    Returns Error code or zero <span style=color:#66d9ef>if</span> success
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
-15. retvalue <span style=color:#f92672>=</span> ec_mm_append_to_ds_scale_offset<span style=color:#f92672>(</span>
-                        &lt;mmId&gt;,       : Source memmap index
-                        &lt;dsId&gt;        : Destination data storage index
-                        &lt;scale&gt;       : Scale 
-                        &lt;offset&gt;<span style=color:#f92672>)</span>;    : Offset  
+<span style=color:#ae81ff>15.</span> retvalue <span style=color:#f92672>=</span> ec_mm_append_to_ds_scale_offset(
+                        <span style=color:#f92672>&lt;</span>mmId<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Source memmap index
+                        <span style=color:#f92672>&lt;</span>dsId<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Destination data storage index
+                        <span style=color:#f92672>&lt;</span>scale<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Scale 
+                        <span style=color:#f92672>&lt;</span>offset<span style=color:#f92672>&gt;</span>);    <span style=color:#f92672>:</span> Offset  
 
    Returns Error code or zero <span style=color:#66d9ef>if</span> success
 
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
-16. retvalue <span style=color:#f92672>=</span> ec_mm_push_asyn<span style=color:#f92672>(</span>
-                      &lt;mmId&gt;<span style=color:#f92672>)</span>       : Source memmap index.
-    push memap data to epics <span style=color:#f92672>(</span>can be used <span style=color:#66d9ef>if</span> T_SMP_MS<span style=color:#f92672>=</span>-1 <span style=color:#66d9ef>for</span> the param<span style=color:#f92672>)</span>
-   Note: The mmId can be retrived by the bellow ecmc command <span style=color:#f92672>(</span>and feed into plc via macro<span style=color:#f92672>)</span>:
+<span style=color:#ae81ff>16.</span> retvalue <span style=color:#f92672>=</span> ec_mm_push_asyn(
+                      <span style=color:#f92672>&lt;</span>mmId<span style=color:#f92672>&gt;</span>)       <span style=color:#f92672>:</span> Source memmap index.
+    push memap data to epics (can be used <span style=color:#66d9ef>if</span> T_SMP_MS<span style=color:#f92672>=-</span><span style=color:#ae81ff>1</span> <span style=color:#66d9ef>for</span> the param)
+   Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro)<span style=color:#f92672>:</span>
       ecmcConfig <span style=color:#e6db74>&#34;EcGetMemMapId(ec0.s11.mm.analogInputArray01)&#34;</span>
-      epicsEnvSet<span style=color:#f92672>(</span>MM_CH_1_IN,<span style=color:#e6db74>${</span>ECMC_CONFIG_RETURN_VAL<span style=color:#e6db74>}</span><span style=color:#f92672>)</span>
+      epicsEnvSet(MM_CH_1_IN,<span style=color:#960050;background-color:#1e0010>$</span>{ECMC_CONFIG_RETURN_VAL})
 
-17. retvalue <span style=color:#f92672>=</span> ec_get_time<span style=color:#f92672>()</span>;
-   Returns current time in nano seconds <span style=color:#f92672>(</span>from <span style=color:#ae81ff>1</span> Jan 2000, same as EtherCAT DC:s<span style=color:#f92672>)</span>.
+<span style=color:#ae81ff>17.</span> retvalue <span style=color:#f92672>=</span> ec_get_time();
+   Returns current time in nano <span style=color:#a6e22e>seconds</span> (from <span style=color:#ae81ff>1</span> Jan <span style=color:#ae81ff>2000</span>, same as EtherCAT DC:s).
    If <span style=color:#66d9ef>return</span> value is less than zero it should be considered to be an error code.
 
-18. retvalue <span style=color:#f92672>=</span> ec_get_time_l32<span style=color:#f92672>()</span>;
-   Returns lower <span style=color:#ae81ff>32</span> bits of current time in nano seconds <span style=color:#f92672>(</span>from <span style=color:#ae81ff>1</span> Jan 2000, same as EtherCAT DC:s<span style=color:#f92672>)</span>.
+<span style=color:#ae81ff>18.</span> retvalue <span style=color:#f92672>=</span> ec_get_time_l32();
+   Returns lower <span style=color:#ae81ff>32</span> bits of current time in nano <span style=color:#a6e22e>seconds</span> (from <span style=color:#ae81ff>1</span> Jan <span style=color:#ae81ff>2000</span>, same as EtherCAT DC:s).
    If <span style=color:#66d9ef>return</span> value is less than zero it should be considered to be an error code.
 
-19. retvalue <span style=color:#f92672>=</span> ec_get_time_u32<span style=color:#f92672>()</span>;
-   Returns upper <span style=color:#ae81ff>32</span> bits of current time in nano seconds <span style=color:#f92672>(</span>from <span style=color:#ae81ff>1</span> Jan 2000, same as EtherCAT DC:s<span style=color:#f92672>)</span>.
+<span style=color:#ae81ff>19.</span> retvalue <span style=color:#f92672>=</span> ec_get_time_u32();
+   Returns upper <span style=color:#ae81ff>32</span> bits of current time in nano seconds (from <span style=color:#ae81ff>1</span> Jan <span style=color:#ae81ff>2000</span>, same as EtherCAT DC:s).
    If <span style=color:#66d9ef>return</span> value is less than zero it should be considered to be an error code.
 
-20. retvalue<span style=color:#f92672>=</span>ec_get_err<span style=color:#f92672>()</span>:
+<span style=color:#ae81ff>20.</span> retvalue<span style=color:#f92672>=</span>ec_get_err()<span style=color:#f92672>:</span>
     Returns error code from last lib call.
 
-21. retvalue<span style=color:#f92672>=</span>ec_err_rst<span style=color:#f92672>()</span>:
+<span style=color:#ae81ff>21.</span> retvalue<span style=color:#f92672>=</span>ec_err_rst()<span style=color:#f92672>:</span>
     Resets error code <span style=color:#66d9ef>for</span> ec_lib.
 </code></pre></div><h4 id=function-lib-master-to-master-communication-within-same-host>Function Lib: Master to Master communication (within same host)</h4><p>Support for communication between different ecmc ioc:s running on the same host.
-A shared memory buffer of 120 doubles can be accessed for read and write operations by alll ecmc ioc running on the same master.</p><pre><code>1. retvalue = m2m_write(
-                      &lt;index&gt;,       : Mem buffer index (index must be 0..119)
-                      &lt;value&gt;):      : value to write
-   returns 0 if success or error code.
+A shared memory buffer of 120 doubles can be accessed for read and write operations by alll ecmc ioc running on the same master.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=color:#ae81ff>1.</span> retvalue <span style=color:#f92672>=</span> m2m_write(
+                      <span style=color:#f92672>&lt;</span>index<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Mem buffer index (index must be <span style=color:#ae81ff>0..119</span>)
+                      <span style=color:#f92672>&lt;</span>value<span style=color:#f92672>&gt;</span>)<span style=color:#f92672>:</span>      <span style=color:#f92672>:</span> value to write
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
    Write a value to an index of a common memory buffer accessible by all masters running on same host
 
-2. retvalue = m2m_read(&lt;index&gt;);     : Mem buffer index (index must be 0..119)
+<span style=color:#ae81ff>2.</span> retvalue <span style=color:#f92672>=</span> m2m_read(<span style=color:#f92672>&lt;</span>index<span style=color:#f92672>&gt;</span>);     <span style=color:#f92672>:</span> Mem buffer index (index must be <span style=color:#ae81ff>0..119</span>)
                       
    returns the value stored at index in the shared mem buffer.
 
-3. retvalue = m2m_stat();
+<span style=color:#ae81ff>3.</span> retvalue <span style=color:#f92672>=</span> m2m_stat();
                       
-   returns 1 if connection to shared memory is OK, else 0 or a negative value with an errro code.
+   returns <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>if</span> connection to shared memory is OK, <span style=color:#66d9ef>else</span> <span style=color:#ae81ff>0</span> or a negative value with an errro code.
 
-4. m2m_err_rst();
+<span style=color:#ae81ff>4.</span> m2m_err_rst();
                       
    reset any m2m error codes.
 
-5. retvalue = m2m_err_rst();
+<span style=color:#ae81ff>5.</span> retvalue <span style=color:#f92672>=</span> m2m_err_rst();
                       
    returns current m2m error code.
 
-6. retvalue = m2m_ioc_ec_ok(&lt;master_index&gt;);
+<span style=color:#ae81ff>6.</span> retvalue <span style=color:#f92672>=</span> m2m_ioc_ec_ok(<span style=color:#f92672>&lt;</span>master_index<span style=color:#f92672>&gt;</span>);
 
-   returns status etehrcat status of another ecmc ioc (1==op, 0==not op, -1==error).
+   returns status etehrcat status of another ecmc <span style=color:#a6e22e>ioc</span> (<span style=color:#ae81ff>1</span><span style=color:#f92672>==</span>op, <span style=color:#ae81ff>0</span><span style=color:#f92672>==</span>not op, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>==</span>error).
 
-7. retvalue = m2m_ioc_run(&lt;master_index&gt;);
+<span style=color:#ae81ff>7.</span> retvalue <span style=color:#f92672>=</span> m2m_ioc_run(<span style=color:#f92672>&lt;</span>master_index<span style=color:#f92672>&gt;</span>);
 
    checks of a certian master is running (negative master id is ioc:s without ec master).
-</code></pre><h4 id=function-lib-motion>Function Lib: Motion</h4><pre><code>1. retvalue = mc_move_abs(
-                      &lt;axIndex&gt;,       : Axis index
-                        &lt;execute&gt;,       : Trigger
-                        &lt;pos&gt;,           : Target position
-                        &lt;vel&gt;,           : Target velocity
-                        &lt;acc&gt;,           : Acceleration
-                        &lt;dec&gt;            : Deceleration
-                        ):
+</code></pre></div><h4 id=function-lib-motion>Function Lib: Motion</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=color:#ae81ff>1.</span> retvalue <span style=color:#f92672>=</span> mc_move_abs(
+                      <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
+                        <span style=color:#f92672>&lt;</span>pos<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Target position
+                        <span style=color:#f92672>&lt;</span>vel<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Target velocity
+                        <span style=color:#f92672>&lt;</span>acc<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Acceleration
+                        <span style=color:#f92672>&lt;</span>dec<span style=color:#f92672>&gt;</span>            <span style=color:#f92672>:</span> Deceleration
+                        )<span style=color:#f92672>:</span>
    Absolute motion of axis.
-   Motion is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
    
-2. retvalue = mc_move_rel(
-                        &lt;axIndex&gt;,       : Axis index
-                        &lt;execute&gt;,       : Trigger
-                        &lt;pos&gt;,           : Target position
-                        &lt;vel&gt;,           : Target velocity
-                        &lt;acc&gt;,           : Acceleration
-                        &lt;dec&gt;            : Deceleration
+<span style=color:#ae81ff>2.</span> retvalue <span style=color:#f92672>=</span> mc_move_rel(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
+                        <span style=color:#f92672>&lt;</span>pos<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Target position
+                        <span style=color:#f92672>&lt;</span>vel<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Target velocity
+                        <span style=color:#f92672>&lt;</span>acc<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Acceleration
+                        <span style=color:#f92672>&lt;</span>dec<span style=color:#f92672>&gt;</span>            <span style=color:#f92672>:</span> Deceleration
                         );
-   Relative motion of axis &lt;axIndex&gt;.
-   Motion is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   Relative motion of axis <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>.
+   Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-3. retvalue = mc_move_ext_pos(
-                        &lt;axIndex&gt;,       : Axis index
-                        &lt;execute&gt;,       : Trigger
-                        &lt;vel&gt;,           : Target velocity
-                        &lt;acc&gt;,           : Acceleration
-                        &lt;dec&gt;            : Deceleration
+<span style=color:#ae81ff>3.</span> retvalue <span style=color:#f92672>=</span> mc_move_ext_pos(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
+                        <span style=color:#f92672>&lt;</span>vel<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Target velocity
+                        <span style=color:#f92672>&lt;</span>acc<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Acceleration
+                        <span style=color:#f92672>&lt;</span>dec<span style=color:#f92672>&gt;</span>            <span style=color:#f92672>:</span> Deceleration
                         );
    Move to current external plc position. Functions intended use is to 
-   move to the start position for syncronized axes. This command is exactly 
-   the same as issueing &quot;mc_move_pos()&quot; with the target postion ax&lt;id&gt;.traj.extsetpos.
-   Motion is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   move to the start position <span style=color:#66d9ef>for</span> syncronized axes. This command is exactly 
+   the same as issueing <span style=color:#e6db74>&#34;mc_move_pos()&#34;</span> with the target postion ax<span style=color:#f92672>&lt;</span>id<span style=color:#f92672>&gt;</span>.traj.extsetpos.
+   Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
 
-4. retvalue = mc_move_vel(
-                        &lt;axIndex&gt;,       : Axis index
-                        &lt;execute&gt;,       : Trigger
-                        &lt;vel&gt;,           : Target velocity
-                        &lt;acc&gt;,           : Acceleration
-                        &lt;dec&gt;            : Deceleration
+<span style=color:#ae81ff>4.</span> retvalue <span style=color:#f92672>=</span> mc_move_vel(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
+                        <span style=color:#f92672>&lt;</span>vel<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Target velocity
+                        <span style=color:#f92672>&lt;</span>acc<span style=color:#f92672>&gt;</span>,           <span style=color:#f92672>:</span> Acceleration
+                        <span style=color:#f92672>&lt;</span>dec<span style=color:#f92672>&gt;</span>            <span style=color:#f92672>:</span> Deceleration
                         );
-   Constant velocity motion of axis &lt;axIndex&gt;.
-   Motion is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   Constant velocity motion of axis <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>.
+   Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-5. retvalue = mc_home(
-                        &lt;axIndex&gt;,       : Axis index
-                        &lt;execute&gt;,       : Trigger
-                        &lt;seqId&gt;,         : Motion sequence
-                        &lt;velTwoardsCam&gt;, : Target Velocity twords cam
-                        &lt;velOffCam&gt;      : Target velocity off cam
+<span style=color:#ae81ff>5.</span> retvalue <span style=color:#f92672>=</span> mc_home(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
+                        <span style=color:#f92672>&lt;</span>seqId<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Motion sequence
+                        <span style=color:#f92672>&lt;</span>velTwoardsCam<span style=color:#f92672>&gt;</span>, <span style=color:#f92672>:</span> Target Velocity twords cam
+                        <span style=color:#f92672>&lt;</span>velOffCam<span style=color:#f92672>&gt;</span>      <span style=color:#f92672>:</span> Target velocity off cam
                         );
-   Perform a homing sequence of axis &lt;axIndex&gt;.
-   Motion is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   Perform a homing sequence of axis <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>.
+   Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-6. retvalue = mc_home_pos(
-                     &lt;axIndex&gt;,       : Axis index
-                     &lt;execute&gt;,       : Trigger
-                     &lt;seqId&gt;,         : Motion sequence
-                     &lt;velTwoardsCam&gt;, : Target Velocity twords cam
-                     &lt;velOffCam&gt;      : Target velocity off cam
-                     &lt;homePos&gt;        : Homing position
+<span style=color:#ae81ff>6.</span> retvalue <span style=color:#f92672>=</span> mc_home_pos(
+                     <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                     <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
+                     <span style=color:#f92672>&lt;</span>seqId<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Motion sequence
+                     <span style=color:#f92672>&lt;</span>velTwoardsCam<span style=color:#f92672>&gt;</span>, <span style=color:#f92672>:</span> Target Velocity twords cam
+                     <span style=color:#f92672>&lt;</span>velOffCam<span style=color:#f92672>&gt;</span>      <span style=color:#f92672>:</span> Target velocity off cam
+                     <span style=color:#f92672>&lt;</span>homePos<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Homing position
                      );
-Perform a homing sequence of axis &lt;axIndex&gt;
-Motion is triggerd with a positive edge on &lt;execute&gt; input.
-returns 0 if success or error code.
+Perform a homing sequence of axis <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>
+Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-7. retvalue = mc_halt(
-                        &lt;axIndex&gt;,       : Axis index
-                        &lt;execute&gt;,       : Trigger
+<span style=color:#ae81ff>7.</span> retvalue <span style=color:#f92672>=</span> mc_halt(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Trigger
                         );
-   Stop motion of axis &lt;axIndex&gt;.
-   Command is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   Stop motion of axis <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>.
+   Command is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-8. retvalue = mc_power(
-                        &lt;axIndex&gt;,       : Axis index
-                        &lt;enable&gt;,        : Enable power
+<span style=color:#ae81ff>8.</span> retvalue <span style=color:#f92672>=</span> mc_power(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>enable<span style=color:#f92672>&gt;</span>,        <span style=color:#f92672>:</span> Enable power
                         );
-   Enable power of  axis &lt;axIndex&gt;.
-   Motion is triggerd with a positive edge on &lt;execute&gt; input.
-   returns 0 if success or error code.
+   Enable power of  axis <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>.
+   Motion is triggerd with a positive edge on <span style=color:#f92672>&lt;</span>execute<span style=color:#f92672>&gt;</span> input.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-9. retvalue = mc_get_busy(
-                        &lt;axIndex&gt;,       : Axis index#                           
+<span style=color:#ae81ff>9.</span> retvalue <span style=color:#f92672>=</span> mc_get_busy(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index<span style=color:#960050;background-color:#1e0010>#</span>                           
                         );
-   Check if axis is busy.
-   returns busy state of axis (1 if busy and 0 if not busy).
+   Check <span style=color:#66d9ef>if</span> axis is busy.
+   returns busy state of axis (<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>if</span> busy and <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> not busy).
 
-10. retvalue = mc_get_homed(
-                        &lt;axIndex&gt;,       : Axis index#                           
+<span style=color:#ae81ff>10.</span> retvalue <span style=color:#f92672>=</span> mc_get_homed(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Axis index<span style=color:#960050;background-color:#1e0010>#</span>                           
                         );
-   Check if axis is homed.
-   returns state of homed flag of axis (1 if homed and 0 if not homed).
+   Check <span style=color:#66d9ef>if</span> axis is homed.
+   returns state of homed flag of axis (<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>if</span> homed and <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> not homed).
 
-11. retvalue = mc_get_err();
-   Returns error code for last lib call.
+<span style=color:#ae81ff>11.</span> retvalue <span style=color:#f92672>=</span> mc_get_err();
+   Returns error code <span style=color:#66d9ef>for</span> last lib call.
 
-12. retvalue = mc_reset(&lt;axIndex&gt;);
+<span style=color:#ae81ff>12.</span> retvalue <span style=color:#f92672>=</span> mc_reset(<span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>);
    Resets error of motion axis.
 
-13. retvalue = mc_get_axis_err(&lt;axIndex&gt;);
+<span style=color:#ae81ff>13.</span> retvalue <span style=color:#f92672>=</span> mc_get_axis_err(<span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>);
    Returns motion axis error code.
 
-14. retvalue = mc_set_enable_motion_funcs(
-                        &lt;axIndex&gt;,         : Axis index
-                        &lt;enablePos&gt;,       : Enable positioning
-                        &lt;enableVelo&gt;,      : Enable const velo
-                        &lt;enableHome&gt;,      : Enable const homing
+<span style=color:#ae81ff>14.</span> retvalue <span style=color:#f92672>=</span> mc_set_enable_motion_funcs(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>enablePos<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Enable positioning
+                        <span style=color:#f92672>&lt;</span>enableVelo<span style=color:#f92672>&gt;</span>,      <span style=color:#f92672>:</span> Enable <span style=color:#66d9ef>const</span> velo
+                        <span style=color:#f92672>&lt;</span>enableHome<span style=color:#f92672>&gt;</span>,      <span style=color:#f92672>:</span> Enable <span style=color:#66d9ef>const</span> homing
                         );
 
-   Enables/disables motion functionalities. Returns error code.
+   Enables<span style=color:#f92672>/</span>disables motion functionalities. Returns error code.
 
-15. retvalue = mc_get_act_pos(
-                        &lt;axIndex&gt;,         : Axis index
-                        &lt;encIndex&gt;         : Encoder index                        
+<span style=color:#ae81ff>15.</span> retvalue <span style=color:#f92672>=</span> mc_get_act_pos(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>encIndex<span style=color:#f92672>&gt;</span>         <span style=color:#f92672>:</span> Encoder index                        
                         );
 
-   Returns encoder position for any of the configured encoders of an axis.
+   Returns encoder position <span style=color:#66d9ef>for</span> any of the configured encoders of an axis.
 
-16. retvalue = mc_set_prim_enc(
-                        &lt;axIndex&gt;,         : Axis index
-                        &lt;encIndex&gt;         : Encoder index                        
+<span style=color:#ae81ff>16.</span> retvalue <span style=color:#f92672>=</span> mc_set_prim_enc(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>encIndex<span style=color:#f92672>&gt;</span>         <span style=color:#f92672>:</span> Encoder index                        
                         );
 
-   Sets primary and homing encoder index of the axis (the encoder used for control). 
+   Sets primary and homing encoder index of the <span style=color:#a6e22e>axis</span> (the encoder used <span style=color:#66d9ef>for</span> control). 
    The primary encoder can only be changed when the axis is not busy.
 
    Returns motion axis error code.
 
-17. retvalue = mc_get_prim_enc(
-                        &lt;axIndex&gt;,         : Axis index        
+<span style=color:#ae81ff>17.</span> retvalue <span style=color:#f92672>=</span> mc_get_prim_enc(
+                        <span style=color:#f92672>&lt;</span>axIndex<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Axis index        
                         );
 
-   Returns primary encoder index of the axis (the encoder used for control).
+   Returns primary encoder index of the <span style=color:#a6e22e>axis</span> (the encoder used <span style=color:#66d9ef>for</span> control).
 
-18. mc_set_axis_error(
-                        &lt;axis_id&gt;,         : Axis index
-                        &lt;error_code&gt;       : Error code to set
+<span style=color:#ae81ff>18.</span> mc_set_axis_error(
+                        <span style=color:#f92672>&lt;</span>axis_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Axis index
+                        <span style=color:#f92672>&lt;</span>error_code<span style=color:#f92672>&gt;</span>       <span style=color:#f92672>:</span> Error code to set
                         );
    
    Sets an arbitrary error code to an axis object.
 
-19. mc_set_slaved_axis_in_error(
-                        &lt;axis_id&gt;,         : Axis index
+<span style=color:#ae81ff>19.</span> mc_set_slaved_axis_in_error(
+                        <span style=color:#f92672>&lt;</span>axis_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Axis index
                         );
    
-   Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR 0x1432B).
-</code></pre><h4 id=function-lib-motion-group>Function Lib: Motion Group</h4><pre><code>1.  mc_grp_get_enable(
-                     &lt;grp_id&gt;,         : Group index
+   Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR <span style=color:#ae81ff>0x1432B</span>).
+</code></pre></div><h4 id=function-lib-motion-group>Function Lib: Motion Group</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=color:#ae81ff>1.</span>  mc_grp_get_enable(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns true if all axes in the group have the enable bit set, else false.
-   Note: The axes do not need to be enabled if this function returns true, see mc_grp_get_enabled().
+   Returns true <span style=color:#66d9ef>if</span> all axes in the group have the enable bit set, <span style=color:#66d9ef>else</span> false.
+   Note: The axes <span style=color:#66d9ef>do</span> not need to be enabled <span style=color:#66d9ef>if</span> this function returns true, see mc_grp_get_enabled().
 
-2.  mc_grp_get_any_enable(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>2.</span>  mc_grp_get_any_enable(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns true if atleast one axis in the group has the enable bit set, else false.
+   Returns true <span style=color:#66d9ef>if</span> atleast one axis in the group has the enable bit set, <span style=color:#66d9ef>else</span> false.
 
-3.  mc_grp_get_enabled(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>3.</span>  mc_grp_get_enabled(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns true if all axes in the group are in enabled state, else false.
+   Returns true <span style=color:#66d9ef>if</span> all axes in the group are in enabled state, <span style=color:#66d9ef>else</span> false.
 
-4.  mc_grp_get_any_enabled(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>4.</span>  mc_grp_get_any_enabled(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns true if atleast one axis in the group is in enabled state, else false.
+   Returns true <span style=color:#66d9ef>if</span> atleast one axis in the group is in enabled state, <span style=color:#66d9ef>else</span> false.
 
-5.  mc_grp_get_busy(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>5.</span>  mc_grp_get_busy(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns true if all axes in the group are in busy state, else false.
+   Returns true <span style=color:#66d9ef>if</span> all axes in the group are in busy state, <span style=color:#66d9ef>else</span> false.
 
-6.  mc_grp_get_any_busy(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>6.</span>  mc_grp_get_any_busy(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns true if atleast one axis in the group is in busy state, else false.
+   Returns true <span style=color:#66d9ef>if</span> atleast one axis in the group is in busy state, <span style=color:#66d9ef>else</span> false.
 
-7.  mc_grp_get_any_error_id(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>7.</span>  mc_grp_get_any_error_id(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Returns error id if atleast one axis in the group is in error state, else zero.
+   Returns error id <span style=color:#66d9ef>if</span> atleast one axis in the group is in error state, <span style=color:#66d9ef>else</span> zero.
 
-8.  mc_grp_set_enable(
-                     &lt;grp_id&gt;,         : Group index
-                     &lt;enable&gt;          : Enable state
+<span style=color:#ae81ff>8.</span>  mc_grp_set_enable(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
+                     <span style=color:#f92672>&lt;</span>enable<span style=color:#f92672>&gt;</span>          <span style=color:#f92672>:</span> Enable state
                      );
    
-   Sets enable for all axes in group.
-   Returns 0 or error id.
+   Sets enable <span style=color:#66d9ef>for</span> all axes in group.
+   Returns <span style=color:#ae81ff>0</span> or error id.
 
-9.  mc_grp_set_traj_src(
-                     &lt;grp_id&gt;,         : Group index
-                     &lt;source&gt;          : Trajectory source (0 = internal, 1 = external/PLC )
+<span style=color:#ae81ff>9.</span>  mc_grp_set_traj_src(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
+                     <span style=color:#f92672>&lt;</span>source<span style=color:#f92672>&gt;</span>          <span style=color:#f92672>:</span> Trajectory source (<span style=color:#ae81ff>0</span> <span style=color:#f92672>=</span> internal, <span style=color:#ae81ff>1</span> <span style=color:#f92672>=</span> external<span style=color:#f92672>/</span>PLC )
                      );
    
-   Sets trajectory source for all axes in group.
-   Returns 0 or error id.
+   Sets trajectory source <span style=color:#66d9ef>for</span> all axes in group.
+   Returns <span style=color:#ae81ff>0</span> or error id.
 
-10.  mc_grp_set_enc_src(
-                     &lt;grp_id&gt;,         : Group index
-                     &lt;source&gt;          : Encoder source (0 = internal, 1 = external/PLC )
+<span style=color:#ae81ff>10.</span>  mc_grp_set_enc_src(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
+                     <span style=color:#f92672>&lt;</span>source<span style=color:#f92672>&gt;</span>          <span style=color:#f92672>:</span> Encoder source (<span style=color:#ae81ff>0</span> <span style=color:#f92672>=</span> internal, <span style=color:#ae81ff>1</span> <span style=color:#f92672>=</span> external<span style=color:#f92672>/</span>PLC )
                      );
    
-   Sets encoder source for all axes in group.
-   Returns 0 or error id.
+   Sets encoder source <span style=color:#66d9ef>for</span> all axes in group.
+   Returns <span style=color:#ae81ff>0</span> or error id.
 
-11.  mc_grp_reset_error(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>11.</span>  mc_grp_reset_error(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
    Resets error of all axes in group.   
 
-12.  mc_grp_set_error(
-                     &lt;grp_id&gt;,         : Group index
-                     &lt;error_id&gt;        : Error Id
+<span style=color:#ae81ff>12.</span>  mc_grp_set_error(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
+                     <span style=color:#f92672>&lt;</span>error_id<span style=color:#f92672>&gt;</span>        <span style=color:#f92672>:</span> Error Id
                      );
    
    Set error id of all axes in group.
 
-13.  mc_grp_set_slaved_axis_in_error(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>13.</span>  mc_grp_set_slaved_axis_in_error(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Set error id of all axes in group to ERROR_AXIS_SLAVED_AXIS_IN_ERROR (0x1432B)
+   Set error id of all axes in group to <span style=color:#a6e22e>ERROR_AXIS_SLAVED_AXIS_IN_ERROR</span> (<span style=color:#ae81ff>0x1432B</span>)
 
-14.  mc_grp_halt(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>14.</span>  mc_grp_halt(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
-   Halt all axes in group (only works if traj source = internal/0)
+   Halt all axes in <span style=color:#a6e22e>group</span> (only works <span style=color:#66d9ef>if</span> traj source <span style=color:#f92672>=</span> internal<span style=color:#f92672>/</span><span style=color:#ae81ff>0</span>)
 
-15.  mc_grp_axis_in_grp(
-                     &lt;grp_id&gt;,         : Group index
-                     &lt;axis_id&gt;,        : Axis index
+<span style=color:#ae81ff>15.</span>  mc_grp_axis_in_grp(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
+                     <span style=color:#f92672>&lt;</span>axis_id<span style=color:#f92672>&gt;</span>,        <span style=color:#f92672>:</span> Axis index
                      );
    
-   Returns true if axis is in group, else false.
+   Returns true <span style=color:#66d9ef>if</span> axis is in group, <span style=color:#66d9ef>else</span> false.
 
-16.  mc_grp_size(
-                     &lt;grp_id&gt;,         : Group index
+<span style=color:#ae81ff>16.</span>  mc_grp_size(
+                     <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>,         <span style=color:#f92672>:</span> Group index
                      );
    
    Returns the number of axes in group.
 
 
-17.  mc_grp_get_traj_src_ext(
-                      &lt;grp_id&gt;, : Group index
+<span style=color:#ae81ff>17.</span>  mc_grp_get_traj_src_ext(
+                      <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>, <span style=color:#f92672>:</span> Group index
                       );
    
-   Returns true if all axes in the group have trajectory source set to external.
+   Returns true <span style=color:#66d9ef>if</span> all axes in the group have trajectory source set to external.
 
-18.  mc_grp_get_any_traj_src_ext(
-                      &lt;grp_id&gt;, : Group index
+<span style=color:#ae81ff>18.</span>  mc_grp_get_any_traj_src_ext(
+                      <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>, <span style=color:#f92672>:</span> Group index
                       );
-    Returns true if atleast one axis in the group have trajectory source set to external.
+    Returns true <span style=color:#66d9ef>if</span> atleast one axis in the group have trajectory source set to external.
 
-19.  mc_grp_set_allow_src_change_when_enabled(
-                      &lt;grp_id&gt;, : Group index
-                      &lt;allow&gt;,  : Allow change of source
+<span style=color:#ae81ff>19.</span>  mc_grp_set_allow_src_change_when_enabled(
+                      <span style=color:#f92672>&lt;</span>grp_id<span style=color:#f92672>&gt;</span>, <span style=color:#f92672>:</span> Group index
+                      <span style=color:#f92672>&lt;</span>allow<span style=color:#f92672>&gt;</span>,  <span style=color:#f92672>:</span> Allow change of source
                       );
-    Allow source change for trajectory and encoder when axis is enabled.
+    Allow source change <span style=color:#66d9ef>for</span> trajectory and encoder when axis is enabled.
 
-</code></pre><h4 id=function-lib-data-storage>Function Lib: Data Storage</h4><pre><code>1. retvalue = ds_append_data(
-                        &lt;dsIndex&gt;,       : Data storage index
-                        &lt;data&gt;,          : Data
+</code></pre></div><h4 id=function-lib-data-storage>Function Lib: Data Storage</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=color:#ae81ff>1.</span> retvalue <span style=color:#f92672>=</span> ds_append_data(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
+                        <span style=color:#f92672>&lt;</span>data<span style=color:#f92672>&gt;</span>,          <span style=color:#f92672>:</span> Data
                         );
    Append data to data storage.
-   returns 0 if success or error code.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-2. retvalue = ds_clear_data(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>2.</span> retvalue <span style=color:#f92672>=</span> ds_clear_data(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
    Clear data to data storage.
-   returns 0 if success or error code.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-3. retvalue = ds_get_data(
-                        &lt;dsIndex&gt;,       : Data storage index
-                        &lt;bufferIndex&gt;,   : Buffer index
+<span style=color:#ae81ff>3.</span> retvalue <span style=color:#f92672>=</span> ds_get_data(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
+                        <span style=color:#f92672>&lt;</span>bufferIndex<span style=color:#f92672>&gt;</span>,   <span style=color:#f92672>:</span> Buffer index
                         );
    Returns data from buffer.
 
-4. retvalue = ds_set_data(
-                        &lt;dsIndex&gt;,       : Data storage index
-                        &lt;bufferIndex&gt;,   : Buffer index
+<span style=color:#ae81ff>4.</span> retvalue <span style=color:#f92672>=</span> ds_set_data(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
+                        <span style=color:#f92672>&lt;</span>bufferIndex<span style=color:#f92672>&gt;</span>,   <span style=color:#f92672>:</span> Buffer index
                         );
    Sets data in data storage buffer.
-   returns 0 if success or error code.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-5. retvalue = ds_get_buff_id(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>5.</span> retvalue <span style=color:#f92672>=</span> ds_get_buff_id(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
    Returns current buffer index.
 
-6. retvalue = ds_set_buff_id(
-                        &lt;dsIndex&gt;,       : Data storage index
-                        &lt;bufferIndex&gt;,   : Buffer index
+<span style=color:#ae81ff>6.</span> retvalue <span style=color:#f92672>=</span> ds_set_buff_id(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
+                        <span style=color:#f92672>&lt;</span>bufferIndex<span style=color:#f92672>&gt;</span>,   <span style=color:#f92672>:</span> Buffer index
                         );
    Sets current buffer index in data storage buffer.
-   returns 0 if success or error code.
+   returns <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>if</span> success or error code.
 
-7. retvalue = ds_is_full(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>7.</span> retvalue <span style=color:#f92672>=</span> ds_is_full(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
-   Returns true if buffer is full.
+   Returns true <span style=color:#66d9ef>if</span> buffer is full.
 
-8. retvalue = ds_get_size(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>8.</span> retvalue <span style=color:#f92672>=</span> ds_get_size(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
    Returns buffer size of data storage.
 
-9. retvalue = ds_get_err()
-   Returns error code for last lib call.
+<span style=color:#ae81ff>9.</span> retvalue <span style=color:#f92672>=</span> ds_get_err()
+   Returns error code <span style=color:#66d9ef>for</span> last lib call.
 
-10. retvalue = ds_push_asyn(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>10.</span> retvalue <span style=color:#f92672>=</span> ds_push_asyn(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
-   Triggers push of all asyn parameters in ds to EPICS (including data). 
+   Triggers push of all asyn parameters in ds to <span style=color:#a6e22e>EPICS</span> (including data). 
 
-11. retvalue = ds_get_avg(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>11.</span> retvalue <span style=color:#f92672>=</span> ds_get_avg(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
    Returns average of the values in the data storage.
 
-12. retvalue = ds_get_min(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>12.</span> retvalue <span style=color:#f92672>=</span> ds_get_min(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
    Returns minimum of the values in the data storage.
 
-13. retvalue = ds_get_max(
-                        &lt;dsIndex&gt;,       : Data storage index
+<span style=color:#ae81ff>13.</span> retvalue <span style=color:#f92672>=</span> ds_get_max(
+                        <span style=color:#f92672>&lt;</span>dsIndex<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Data storage index
                         );
    Returns maximum of the values in the data storage.
 
-14. retvalue=ds_append_to_ds(
-                        &lt;dsFromId&gt;,       : Source data storage index
-                        &lt;dsFromDataId&gt;,   : Source data element index
-                        &lt;elements&gt;,       : Number of elements to copy 
-                        &lt;dsToId&gt;          : Destination data storage index
+<span style=color:#ae81ff>14.</span> retvalue<span style=color:#f92672>=</span>ds_append_to_ds(
+                        <span style=color:#f92672>&lt;</span>dsFromId<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Source data storage index
+                        <span style=color:#f92672>&lt;</span>dsFromDataId<span style=color:#f92672>&gt;</span>,   <span style=color:#f92672>:</span> Source data element index
+                        <span style=color:#f92672>&lt;</span>elements<span style=color:#f92672>&gt;</span>,       <span style=color:#f92672>:</span> Number of elements to copy 
+                        <span style=color:#f92672>&lt;</span>dsToId<span style=color:#f92672>&gt;</span>          <span style=color:#f92672>:</span> Destination data storage index
                         );
    Appends data at the current position of the destination data storage (dsToId). The data source is defined by (dsFromId) and the selected tion (dsFromDataId) and element count (elements).
 
-15. retvalue=ds_err_rst():
-   Resets error code for ds_lib.
+<span style=color:#ae81ff>15.</span> retvalue<span style=color:#f92672>=</span>ds_err_rst()<span style=color:#f92672>:</span>
+   Resets error code <span style=color:#66d9ef>for</span> ds_lib.
 
-</code></pre><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=../../../manual/plc/best_practice/ title="PLC Best practice"><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=../../../source/ title=source style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=../../../js/clipboard.min.js?1725963314></script><script src=../../../js/perfect-scrollbar.min.js?1725963314></script><script src=../../../js/perfect-scrollbar.jquery.min.js?1725963314></script><script src=../../../js/jquery.sticky.js?1725963314></script><script src=../../../js/featherlight.min.js?1725963314></script><script src=../../../js/highlight.pack.js?1725963314></script><script>hljs.initHighlightingOnLoad()</script><script src=../../../js/modernizr.custom-3.6.0.js?1725963314></script><script src=../../../js/learn.js?1725963314></script><script src=../../../js/hugo-learn.js?1725963314></script><script src=../../../mermaid/mermaid.js?1725963314></script><script>mermaid.initialize({startOnLoad:!0})</script></body></html>
+</code></pre></div><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=../../../manual/plc/best_practice/ title="PLC Best practice"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=../../../manual/configuration/data_storage/ title style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=../../../js/clipboard.min.js?1725968905></script><script src=../../../js/perfect-scrollbar.min.js?1725968905></script><script src=../../../js/perfect-scrollbar.jquery.min.js?1725968905></script><script src=../../../js/jquery.sticky.js?1725968905></script><script src=../../../js/featherlight.min.js?1725968905></script><script src=../../../js/highlight.pack.js?1725968905></script><script>hljs.initHighlightingOnLoad()</script><script src=../../../js/modernizr.custom-3.6.0.js?1725968905></script><script src=../../../js/learn.js?1725968905></script><script src=../../../js/hugo-learn.js?1725968905></script><script src=../../../mermaid/mermaid.js?1725968905></script><script>mermaid.initialize({startOnLoad:!0})</script></body></html>
