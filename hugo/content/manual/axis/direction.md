@@ -25,6 +25,8 @@ Consult the respective slave manual for the correct SDO.
 {{% /notice %}}
 
 ### encoder direction
+
+In many cases invertion of teh encoder value is possible in the ethercat slave. For EL5042, example below, the invertion leads to a very high number since the data size is 64bit. Therefore, it's advisable to switch sign in the axis configuration instead.
 ```shell
 # slave 7 {ecmcEL5042}
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=EL5042, CONFIG=-Encoder-ch12-Renishaw_RL26BUT001B30V"
