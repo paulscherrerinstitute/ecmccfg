@@ -18,3 +18,4 @@ For backward compatibility the classical configuration is still supported.
 From v8+ yaml files are linted for syntactic errors, observe the iocsh for warnings and errors.
 Additionally the schema of the yaml file is checked by Cerberus.
 This check will point out errors in the structure of the configuration as well as certain type errors.
+

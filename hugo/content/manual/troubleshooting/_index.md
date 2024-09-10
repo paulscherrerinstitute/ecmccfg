@@ -15,3 +15,6 @@ See a summary, incl. some examples of what possible [here](ethercatcli).
 
 ### [troubles with motors](motion)
 For motion related issues, a very short troubleshooting guide is provided [here](motion).
+
+### [troubles with hardware](hardware)
+For hardware related issues, a very short troubleshooting guide is provided [here](hardware).
