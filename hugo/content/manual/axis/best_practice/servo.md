@@ -1,10 +1,9 @@
 +++  
-title = "Servo motor, Ex72xx"
+title = "Servo motor (Ex72xx)"
 weight = 20
 chapter = false  
 +++
 
-# Configuration for Ex72xx-xxxx Example
 * Lab test stage (1mm/rev)
 * Motor : AM8111-0F20
 

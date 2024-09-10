@@ -1,10 +1,9 @@
 +++  
-title = "Stepper and BISS-C"
+title = "Stepper and BISS-C (EL7041, EL5042)"
 weight = 20
 chapter = false  
 +++
 
-# Configuration for EL7041-0052 and EL5042 example
 * Lab test stage (1mm/rev)
 * Lab 4 axis motion control box
 * RLS BISS-C linear encoder (absolute)
