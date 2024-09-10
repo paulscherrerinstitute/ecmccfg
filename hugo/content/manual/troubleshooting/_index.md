@@ -13,7 +13,7 @@ This guide should provide the basic means to diagnose simple errors and is by no
 A very powerful tool is provided through the command line.
 See a summary, incl. some examples of what possible [here](ethercatcli).
 
-### [general problems]general)
+### [general problems](general)
 For motion related issues, a very short troubleshooting guide is provided [here](motion).
 
 ### [troubles with motion](motion)

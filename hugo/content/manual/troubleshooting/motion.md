@@ -47,22 +47,7 @@ If a stepper motor stalls because of too high velocity there's a few thing that 
 3. If possible, test to increase or reduce current setpoint (make sure you do not burn the motor).
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### force manual motion
+## force manual motion
 {{% notice warning %}}
 This procedure is for experst only. You run the risk of destroying expansive devices! Limit switches are _not_ obeyed! YOU HAVE BEEN WARNED! 
 {{% /notice %}}
