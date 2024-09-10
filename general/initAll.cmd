@@ -3,7 +3,8 @@
 #- Arguments: n/a
 
 #-d /**
-#-d   \brief Script for basic ECMC setup.
+#-d   \brief Init main script
+#-d   \details Script for setting up the basic EPICS environment.
 #-d   \author Niko Kivel, Anders Sandstroem
 #-d   \file
 #-d */

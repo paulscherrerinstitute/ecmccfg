@@ -2,7 +2,8 @@
 # ecmc_virt_axis_unset.cmd
 #- Arguments: n/a
 #-d /**
-#-d   \brief Unsets all varaiables set by ecmc_virt_axis.cmd configuration snippet
+#-d   \brief Clears all varaibles releated to an virtual axis
+#-d   \details Unsets all varaiables set by ecmc_virt_axis.cmd configuration snippet
 #-d   \author Anders Sandstroem
 #-d */
 
