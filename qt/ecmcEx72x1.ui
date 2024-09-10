@@ -566,7 +566,7 @@
     <string>ecmcEx72x1_expert.ui</string>
    </property>
    <property name="args">
-    <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(DRV),IOC=$(IOC);</string>
+    <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=01,IOC=$(IOC);</string>
    </property>
   </widget>
  </widget>

@@ -48,3 +48,20 @@ For this however, the IOC needs to be reconfigured to _not_ link the hardware to
 6. Set `-Drv01-Cmd` to `1` and check the amplifier did enable, if you don't know how to check for an enabled amplifier, you should not use this command!
 7. After the amplifier is engaged, write a small number to `-Drv01-Spd`. Dependinf on the scaling, the number might be in the range of 1..1000.
 8. Observe the encoder, or in case of open-loop, the device itself.
+
+### BOTH_LIMITS error
+The "BOTH_LIMITS" error can be related to that limits switches are not powered with 24V. As standard at PSI, limts are feed from 24V outputs, normally an EL2819 terminal. Basically the ouptputs needs then to be set to 1 in order to power the switches. Check the schematics in order to find out which output that powers the switches for a certain axis and then use one the following approaches to set it to 1:
+
+Define the output in axis yaml file:
+```
+axis:
+  id: 1                                               # Axis id
+  ...
+  feedSwitchesOutput: ec0.s5.binaryOutput02           # Ethercat entry for feed switches
+  ...
+```
+
+By using the commad Cfg.WriteEcEntryEcPath(ec\<master\_id\>.s\<slave\_id\>.binaryOutput\<id\>,\<value\>):
+```
+ecmcConfigOrDie "Cfg.WriteEcEntryEcPath(ec0.s5>.binaryOutput02,1)"
+```
