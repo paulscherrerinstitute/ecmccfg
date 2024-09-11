@@ -4,7 +4,7 @@ weight = 26
 chapter = false  
 +++
 
-## introduction
+## Introduction
 Each axis can have a native PLC.
 This PLC can be e.g. used for interlocking or synchronisation.
 The axis PLC is part of the [yaml](axisyaml) config.

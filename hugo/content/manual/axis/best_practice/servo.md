@@ -42,7 +42,7 @@ encoder:
   absOffset: -1000
 ```
 
-### Drive scalings
+### drive scalings
 Max scale for motors depend on the pole count:
 * 6 pole: Max scale is 8000revs/s (in this case 8000mm/s)
 * 8 pole: Max scale is 6000revs/s

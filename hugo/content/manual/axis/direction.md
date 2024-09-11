@@ -26,22 +26,25 @@ Consult the respective slave manual for the correct SDO.
 
 ### encoder direction
 
-In many cases invertion of teh encoder value is possible in the ethercat slave. For EL5042, example below, the invertion leads to a very high number since the data size is 64bit. Therefore, it's advisable to switch sign in the axis configuration instead.
+In many cases inverstion of the encoder value is possible in the ethercat slave. 
+By using INV_DIR macro to applyComponent.cmd, the direction can be changed.
+
+{{% notice info %}}
+For EL5042, example below, the invertion leads to a very high number since the data size is 64bit. Therefore, it's advisable to switch sign in the axis configuration instead.
+{{% /notice %}}
+
 ```shell
 # slave 7 {ecmcEL5042}
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=EL5042, CONFIG=-Encoder-ch12-Renishaw_RL26BUT001B30V"
-# Reverse encoder direction of ch1
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x1,1,1)"
-# Reverse encoder direction of ch2
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8018,0x1,1,1)"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=1, MACROS='INV_DIR=1'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=2, MACROS='INV_DIR=1'"
 ```
 
 ### drive direction
 ```shell
 # slave 18 {ecmcEL7041}
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}configureSlave.cmd, "HW_DESC=EL7041, CONFIG=-Motor-Phytron-VSS-42.200.2.5"
-# Reverse motor direction:
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x9,1,1)"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper, MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230,INV_DIR=1'"
 ```
 
 ## ECMC scaling

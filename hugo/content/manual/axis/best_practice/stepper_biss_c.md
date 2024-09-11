@@ -12,7 +12,7 @@ chapter = false
 ## Scalings
 Config for scaling in mm, mm/s, mm/s2
 
-### Encoder scalings
+### encoder scalings
 Two encoders are configured:
 1. Closed loop: BISS-C. This is used as the default encoder for control
 2. Open loop: EL7041 Step counter
@@ -45,7 +45,7 @@ encoder:
     - 1                                                # Error 0
 ```
 
-#### Open loop (encoder 2)
+#### open loop (encoder 2)
 The EL7041 drive has a build in micro step counter (64 microsteps/fullstep):
 * encoder.numerator: Travels 1 mm/rev
 * encoder.denominator: Resolution: 200*64=12800 microsteps/rev = 12800 microsteps/mm
@@ -67,7 +67,7 @@ encoder:
     refToEncIDAtStartup: 1                    # Ref encoder at startup (to BISS value)
 
 ```
-### Drive scalings
+### drive scalings
 
 The EL7041 is default setup to operate in a velocity range of +-2000 full steps/s which then corresponds to the 16bit drive.setpoint parameter (ec0.s$(DRV_SID).velocitySetpoint01):
 * drive.numerator: Max velo = 2000 fullsteps/s == 10mm/s

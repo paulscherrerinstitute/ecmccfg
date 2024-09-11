@@ -177,7 +177,7 @@ Trigger external homing sequence in drive.
 6. Optional: Init post move if configured
 
 Currently used for smaract:
-[smaracat example](../smaract/smaract.script)
+[smaracat example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/test/smaract)
 In this exmaple also the drive modes is automatically handled by ecmc.
 
 ## Setting polarity of home sensor

@@ -13,7 +13,7 @@ Changes to the scaling have direct effects on the `Kp` of the PID-loop.
 If the drive scaling is changes, make sure to adjust the PID parameters accordingly.
 {{% /notice %}}
 
-## drive scaling
+## Drive scaling
 Drive scaling deals with the relation of the drive output (typically a 16- or 32-bit register) to axis velocity.
 Scaling is similar, but slighlty different for [stepper drives](#stepper-motor-drives) and [servo drives](#servo-motor-drives)
 
@@ -82,7 +82,7 @@ drive:
   denominator:  2147483648   # I/O range 2^31, because 32-bit register, half is forward, the other half is backward
 ```
 
-## encoder scaling
+## Encoder scaling
 This scaling ratio describes the relation of encoder counts and engineering units of the axis.
 
 Unlike the drive scaling, the encoder scaling is much simpler.
@@ -100,7 +100,7 @@ encoder:
   bits: 32        # Total bit count of encoder raw data
 ```
 
-#### Explanation
+#### explanation
 none, this should be simple enough!
 
 ### open-loop
