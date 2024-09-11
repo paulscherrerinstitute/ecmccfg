@@ -25,13 +25,12 @@ The EL9227-5500 is a 2 channel module and normally both channels needs to be ena
 If drive is in error or warning state, further information about the reason for the warning/error can be read from the drive terminal by using the ethercat command.
 
 {{% notice info %}}
-In order to use the etehrcat command, you must first login to the server where the ecmc IOC is running.
+In order to use the ethercat command, you must first login to the server where the ecmc IOC is running.
 {{% /notice %}}
 
 
-The diagnostic data can be read from register [Index A010 STM Diag data Ch.1](https://infosys.beckhoff.com/english.php?content=../content/1033/el70x1/2286662027.html&id=126846504617985959)
+The diagnostic data can be read from register [Index A010 STM Diag data Ch.1](https://infosys.beckhoff.com/english.php?content=../content/1033/el70x1/2286662027.html&id=126846504617985959) with the folowing syntax:
 
-The registers can be read with the folowing syntax:
 ```bash
 ethercat upload -m <master_index> -p <slave_index> --type uint8 0xA010 <subindex>
 ```
