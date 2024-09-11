@@ -81,7 +81,7 @@ After changing this value you also need to change the drive scaling in the axis 
 
 ## drive refuse to enable
 
-First check the dedicated hardware drive panel for diagnostics.
+First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state the diagnose the problem with the tool described in [hardware](hardware.md#el7041 error/warning)
 
 Possible reasons:
 1. For systems with safety, tripp off STO or power to the drive might be cut by contactor. Check status of safety system.
