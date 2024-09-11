@@ -30,7 +30,10 @@ A position lag error is normally genereated in the following situations:
 
 ### 1. motor torque to low
 
-If possible, increase current to the motor.
+1. First ensure that the mechanics are i good condition and not blocked (over the entire working range). If possible, measure needed torque with a torque meter.
+2. Check motor data, can the motor deliver the required torque at the required speed. If not, then a motor with higher torque is needed.
+3. Check the current setting of the motor. If possible increase the current setting to get a higher torque.
+
 {{% notice warning %}}
 Before increase current to the motor, make sure that both motor and drive can handle the higher current. Extra care needs to be taken for vaccum applications.
 {{% /notice %}}
@@ -81,10 +84,10 @@ After changing this value you also need to change the drive scaling in the axis 
 
 ## drive refuse to enable
 
-First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state the diagnose the problem with the tool described in [hardware](hardware.md#el7041 error/warning)
+First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state the diagnose the problem with the tool described in [hardware](hardware).
 
 Possible reasons:
-1. For systems with safety, tripp off STO or power to the drive might be cut by contactor. Check status of safety system.
+1. For systems with safety, tripp off STO or power to the drive removed by contactor. Check status of safety system.
 2. Over current protection of 48V tripped.
 3. No 48V connected.
 4. ecmc PLC disabaling axis, check PLC sources.
