@@ -30,7 +30,7 @@ In order to use the etehrcat command, you must first login to the server where t
 
 
 The diagnostic data can be read from register 0xA010:
-![0xA010](el7041_diag_regs.png)
+[0xA010](https://infosys.beckhoff.com/english.php?content=../content/1033/el70x1/2286662027.html&id=126846504617985959)
 
 The registers can be read with the folowing syntax:
 ```bash
