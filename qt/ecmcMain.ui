@@ -70,7 +70,7 @@
         <x>30</x>
         <y>20</y>
         <width>251</width>
-        <height>196</height>
+        <height>211</height>
        </rect>
       </property>
       <property name="title">
@@ -418,7 +418,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>215</y>
+        <y>235</y>
         <width>251</width>
         <height>106</height>
        </rect>
@@ -646,7 +646,7 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>215</y>
+        <y>235</y>
         <width>251</width>
         <height>106</height>
        </rect>
@@ -817,7 +817,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>330</y>
+        <y>350</y>
         <width>251</width>
         <height>101</height>
        </rect>
@@ -944,7 +944,7 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>330</y>
+        <y>350</y>
         <width>251</width>
         <height>101</height>
        </rect>
@@ -1117,7 +1117,7 @@
         <x>300</x>
         <y>20</y>
         <width>251</width>
-        <height>196</height>
+        <height>211</height>
        </rect>
       </property>
       <property name="title">
@@ -1657,6 +1657,60 @@
         <string notr="true">$(IOC):MCU-Cfg-UI-EC-SlvId</string>
        </property>
       </widget>
+      <widget class="caLabel" name="calabel_107">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>185</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Overview rows:</string>
+       </property>
+      </widget>
+      <widget class="caShellCommand" name="cashellcommand_11">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>185</y>
+         <width>55</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="label">
+        <string notr="true">&gt;&gt;</string>
+       </property>
+       <property name="labels">
+        <string>Open first axis</string>
+       </property>
+       <property name="files">
+        <string>bash /ioc/modules/qt/ecmcOpenEcOverview.sh</string>
+       </property>
+       <property name="args">
+        <string>$(IOC)</string>
+       </property>
+      </widget>
+      <widget class="caTextEntry" name="catextentry_3">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>185</y>
+         <width>36</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):MCU-Cfg-UI-EC-Rows</string>
+       </property>
+      </widget>
      </widget>
      <widget class="caFrame" name="caframe_8">
       <property name="geometry">
@@ -1706,7 +1760,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>440</y>
+        <y>460</y>
         <width>251</width>
         <height>91</height>
        </rect>
