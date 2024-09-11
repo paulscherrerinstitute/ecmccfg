@@ -19,7 +19,7 @@ The EL9221-5000 has one channel and can therefore only the top button is needed 
 #### el9227-5500 
 The EL9227-5500 is a 2 channel module and normally both channels needs to be enabled by pressing both the top and bottom long LED. if only one are pressed it could result in that the power to the communication is fine but the power to the i/o bus is lacking. This can result in starnge issues. Both EL9227-5500 and EL9221-5000 have dedicated panels whre status of the over current protection can be seen.
 
-### el7041
+### el7041 error/warning
 If drive is in error or warning state, further information about the reason for the warning/error can be read from the drive terminal by using the ethercat command. See [command line interface](ethercatcli) for more info.
 
 {{% notice info %}}
@@ -61,3 +61,67 @@ ethercat upload -m 0 -p 3 --type uint8  0xA010 0x8
 # Misc error
 ethercat upload -m 0 -p 3 --type uint8  0xA010 0x9
 ```
+
+The ecmccfg/utils/read_el70xx_diag.sh tool can also be used for reading the diagnostics:
+```bash
+bash read_el70xx_diag.sh <master_id> <slave_id>
+```
+
+Example: master 0, slave 3, drive under voltage warning
+```bash
+bash read_el7041_diag.sh 0 3
+
+#########################################################
+Reading EL70xx status at master id 0 and slave id 3:
+
+Saturated:
+0x00 0
+Over temperature:
+0x00 0
+Torque overload:
+0x00 0
+Under voltage:
+0x01 1
+Over voltage:
+0x00 0
+Short circuit A:
+0x00 0
+Short circuit B:
+0x00 0
+No control power:
+0x00 0
+Misc error:
+0x00 0
+
+#########################################################
+
+```
+Note: The tool ecmccfg/utils/PDO_read can also be used for reading the diagnostics.
+
+#### under voltage
+Under voltage could be that the drive voltage setting is 48V but the drive is only powered with 24V.
+
+The nominal voltage setting can be changed by the U_NOM_MV macro when applying the component (ecmccomp).
+
+Example: Set nominal voltage to 24V
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=24000, R_COIL_MOHM=1230'"
+
+```
+
+#### over voltage
+Over voltage could be that the drive voltage setting is 24V but the drive is powered with 48V.
+
+The nominal voltage setting can be changed by the U_NOM_MV macro when applying the component (ecmccomp).
+
+Example: Set nominal voltage to 48V
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230'"
+
+```
+
+{{% notice info %}}
+For the EL703x drives the nominal voltage must be set to 24V.
+{{% /notice %}}
