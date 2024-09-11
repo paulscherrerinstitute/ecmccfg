@@ -4,7 +4,7 @@
 
 #-d /**
 #-d   \brief Script for switching to operational mode.
-#-d   \details Restores record update rate to what was defined in startup.cmd
+#-d   \details Validates configuration, starts realtime thread and checks EtherCAT slaves are in OP.
 #-d   \author Niko Kivel
 #-d   \file
 #-d */
