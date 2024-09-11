@@ -1,6 +1,6 @@
 
 +++  
-title = "ethercat command line interface"   
+title = "general"   
 weight = 12
 chapter = false  
 +++
