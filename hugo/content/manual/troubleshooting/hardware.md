@@ -29,8 +29,7 @@ In order to use the etehrcat command, you must first login to the server where t
 {{% /notice %}}
 
 
-The diagnostic data can be read from register 0xA010:
-[0xA010](https://infosys.beckhoff.com/english.php?content=../content/1033/el70x1/2286662027.html&id=126846504617985959)
+The diagnostic data can be read from register [Index A010 STM Diag data Ch.1](https://infosys.beckhoff.com/english.php?content=../content/1033/el70x1/2286662027.html&id=126846504617985959)
 
 The registers can be read with the folowing syntax:
 ```bash
