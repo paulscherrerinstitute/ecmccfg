@@ -1,6 +1,6 @@
 +++  
 title = "motion"   
-weight = 12
+weight = 14
 chapter = false  
 +++
 
@@ -97,7 +97,7 @@ Possible reasons:
 
 ## force manual motion
 {{% notice warning %}}
-This procedure is for experst only. You run the risk of destroying expansive devices! Limit switches are _not_ obeyed! YOU HAVE BEEN WARNED! 
+This procedure is for experts only. You run the risk of destroying expansive devices! Limit switches are _not_ obeyed! YOU HAVE BEEN WARNED! 
 {{% /notice %}}
 In case the hardware is fine, the cables are checked, human error is mostly excluded, or the system used to work but doesn't work any longer, directly writing to the drive is possible.
 

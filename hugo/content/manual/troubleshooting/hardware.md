@@ -1,6 +1,6 @@
 +++  
 title = "hardware"   
-weight = 11
+weight = 13
 chapter = false  
 +++
 

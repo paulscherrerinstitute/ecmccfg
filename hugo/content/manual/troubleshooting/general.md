@@ -1,4 +1,10 @@
 
++++  
+title = "ethercat command line interface"   
+weight = 12
+chapter = false  
++++
+
 ### culprit
 
 From experience, very few issues are related to the EtherCAT hardware itself.

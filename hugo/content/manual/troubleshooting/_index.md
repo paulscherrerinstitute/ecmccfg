@@ -21,3 +21,6 @@ For motion related issues, a very short troubleshooting guide is provided [here]
 
 ### [troubles with hardware](hardware)
 For hardware related issues, a very short troubleshooting guide is provided [here](hardware).
+
+### [manual motion](manual)
+Trigger manual motion (without motion ecmc-axis).
