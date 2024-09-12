@@ -7,10 +7,10 @@ chapter = false
 ***
 
 ## Topics
-1. [both_limits error](#both_limits error)
-2. [position lag error, (following error), tuning](#position lag error (following error))
-3. [latency issues](#latency issues)
-4. [drive refuse to enable](#drive refuse to enable)
+1. [both_limits error](#both_limits-error)
+2. [position lag error, (following error), tuning](#position-lag-error)
+3. [latency issues](#latency-issues)
+4. [drive refuse to enable](#drive-refuse-to-enable)
 
 ---
 
@@ -31,8 +31,8 @@ By using the commad Cfg.WriteEcEntryEcPath(ec\<master\_id\>.s\<slave\_id\>.binar
 ecmcConfigOrDie "Cfg.WriteEcEntryEcPath(ec0.s5>.binaryOutput02,1)"
 ```
 
-## position lag error (following error)
-A position lag error is normally genereated in the following situations:
+## position lag error
+A position lag error (following error) can be genereated in the following situations:
 1. The motor torque is too low, making it hard for the motor to keep up with the setpoint.
 2. The scaling factors are wrong resulting in that the feed forward part of the controller is not working well.
 3. The velocity setpoint is too high resulting in motor stall (common for stepper motors).
@@ -75,7 +75,6 @@ For EL704x stepper drives are default setup to maximum veleocity range of +-2000
 After changing this value you also need to change the drive scaling in the axis yaml file.
 
 ## drive refuse to enable
-
 First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state the diagnose the problem with the tool described in [hardware](hardware).
 
 Possible reasons:
