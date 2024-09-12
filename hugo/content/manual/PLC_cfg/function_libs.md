@@ -42,7 +42,7 @@ function <name>() {
 * "#" as a first char in a line is considered a comment (the line will be removed before compile).
 * The lib file will be parsed through MSI allowing macro expansion, "include" and "subsitute" commands. For more info check [best practice](../best_practice) and msi documentation/help.
 
-### can be used in a functions
+### can be used in functions
 1. The parameters
 2. Other functions (also recursive)
 3. The normal ecmc function libs:
