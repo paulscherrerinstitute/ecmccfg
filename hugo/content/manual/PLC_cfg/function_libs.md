@@ -4,6 +4,7 @@ weight = 17
 chapter = false  
 +++
 
+## function libs
 Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd. The command takes these parameters:
 * FILE PLC: definition file, i.e. ./plc/homeSlit.plc
 * PLC_ID: (optional) PLC number, default last loaded PLC
@@ -17,19 +18,19 @@ Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd. The command t
 * PRINT_PLC_FILE: (optional) 1/0, printout msi parsed plc file (default enable(1)).
 
 Example:
-```
+```bash
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
 ```
 
 The functions must be defined accordning to this template (max 5 parameters):
-```
+```C
 function <name>(<param1>,...,<param5>) {
   <code body>;
 }
 ```
 
 also without param is allowed:
-```
+```C
 function <name>() {
   <code body>;
 }

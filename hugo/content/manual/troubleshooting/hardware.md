@@ -4,10 +4,13 @@ weight = 16
 chapter = false  
 +++
 
-### 1. [over current protection](#over current protection)
-### 2. [el7041 error/warning](#el7041 error/warning)
-### 3. [latency issues](#latency issues)
-
+***
+***
+## Topics
+1. [over current protection](#over current protection)
+2. [el7041 error/warning](#el7041 error/warning)
+3. [latency issues](#latency issues)
+---
 ### over current protection
 In the standard setup at PSI over current protection modules are used to feed 24V to both the ethercat communication bus (E-bus) and the power bus of the ethercat slaves. If the over current protection is not enabled then the ethercat slaves will not receive power.
 

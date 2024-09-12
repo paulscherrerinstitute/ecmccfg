@@ -1,11 +1,15 @@
 +++  
 title = "troubleshooting"   
-weight = 11
+weight = 15
 chapter = false  
 +++  
 
-## troubleshooting
+***
+## Topics
+{{% children %}}
+---
 
+## troubleshooting
 Due to the complexity an EtherCAT bus topology can assume, troubleshooting can be challenging.
 This guide should provide the basic means to diagnose simple errors and is by no means complete!
 

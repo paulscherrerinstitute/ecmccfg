@@ -4,6 +4,8 @@ weight = 15
 chapter = false  
 +++
 
+***
+
 ### EL70x1 Tuning
 
 For EL70x1 stepper drives the following parameters can be tuned:

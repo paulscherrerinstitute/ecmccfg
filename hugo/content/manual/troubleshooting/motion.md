@@ -4,10 +4,15 @@ weight = 14
 chapter = false  
 +++
 
-### 1. [both_limits error](#both_limits error)
-### 2. [position lag error, (following error), tuning](#position lag error (following error))
-### 3. [latency issues](#latency issues)
-### 4. [drive refuse to enable](#drive refuse to enable)
+***
+
+## Topics
+1. [both_limits error](#both_limits error)
+2. [position lag error, (following error), tuning](#position lag error (following error))
+3. [latency issues](#latency issues)
+4. [drive refuse to enable](#drive refuse to enable)
+
+---
 
 ## both_limits error
 The "BOTH_LIMITS" error can be related to that limits switches are not powered with 24V. As standard at PSI, limts are feed from 24V outputs, normally an EL2819 terminal. Basically the ouptputs needs then to be set to 1 in order to power the switches. Check the schematics in order to find out which output that powers the switches for a certain axis and then use one the following approaches to set it to 1:

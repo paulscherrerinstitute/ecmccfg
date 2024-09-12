@@ -4,6 +4,8 @@ weight = 13
 chapter = false  
 +++
 
+***
+
 ### `ethercat` CLI
 
 The IgH EtherCAT master provides a command line interface (CLI) which is a very powerful tool.

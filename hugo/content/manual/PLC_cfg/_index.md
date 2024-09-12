@@ -1,8 +1,15 @@
 +++  
 title = "PLC"   
-weight = 15
+weight = 12
 chapter = false  
 +++
+
+***
+## Topics
+{{% children %}}
+---
+
+## PLCs
 
 In `ECMC`, PLCs are a very powerful tool to handle EtherCAT data in real-time.
 
