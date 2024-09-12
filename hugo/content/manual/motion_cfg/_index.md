@@ -5,8 +5,6 @@ chapter = false
 +++
 
 ***
-
-***
 ## Topics
 {{% children %}}
 ---
