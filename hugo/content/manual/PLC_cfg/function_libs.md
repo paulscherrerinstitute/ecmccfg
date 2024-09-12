@@ -4,31 +4,54 @@ weight = 17
 chapter = false  
 +++
 
+Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd:
+```
+#  \brief Script for loading a PLC from lib from file.
+#  \details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
+#  \author Anders Sandström
+#  \file
+#  \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
+#  \param PLC_ID (optional) PLC number, default last loaded PLC
+#  \param PLC_MACROS (optional) Substitution macros for PLC code. The macros "SELF_ID","SELF",M_ID, and M are reserved:
+#         * "SELF_ID" = PLC Id of this plc
+#         * "SELF"    = "plc${SELF_ID}"
+#         * "M_ID"    = EtherCAT master ID
+#         * "M"       = "ec${M_ID}"
+#  \param INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
+#  \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
+#  \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
+#  \note Example call:
+#  \code
+#    ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCLib.cmd, "PLC_ID=0, FILE=./plc/test.plc_lib, SAMPLE_RATE_MS=100"
+#  \endcode
+```
 
-## PLC function libs:
-Function libs can be loaded into ecmc-PLCs
+Example:
 ```
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
 ```
-The functions must be defined accordning to template: 
+
+The functions must be defined accordning to this template (max 5 parameters):
 ```
-function <name>(<param1>,...<param5>) {
+function <name>(<param1>,...,<param5>) {
   <code body>;
 }
+```
 
 also without param is allowed:
+```
 function <name>() {
   <code body>;
 }
-
 ```
-* For syntax of the "code body", check the exprtk website.
+
 * Several functions can be defined in the same file.
+* For syntax of the "code body", check [plc syntax](plcSyntax) and the exprtk website.
 * The parameters aswell as the return value must be scalars, however, local vectors can be defined and used in calculations (initiations of vector can be done with MACROS, constants or parameters).
 * "#" as a first char in a line is considered a comment (the line will be removed before compile).
-* MSI: The lib file will be parsed through MSI allowing macro expansion, "include" and "subsitute" commands. For more info check the msi documentation/help.
-  
-### Can be used in a function:
+* The lib file will be parsed through MSI allowing macro expansion, "include" and "subsitute" commands. For more info check [best practice](best_practice) and msi documentation/help.
+
+### can be used in a functions
 1. The parameters
 2. Other functions (also recursive)
 3. The normal ecmc function libs:
@@ -47,7 +70,8 @@ function <name>() {
   * eof
  5. vectors in the calculations (but NOT as parameter or return value).
 
-### "ecmc variables" can _NOT_ be  used/accessed in a functions:
+### can _NOT_ be used in functions
+"ecmc variables" can _NOT_ be  used/accessed in functions:
 1. EtherCAT I/0 direct access ec<mid>.s<sid>.*
 2. Data storage variables: ds.*
 3. Motion variables: ax<axid>.*
@@ -55,7 +79,7 @@ function <name>() {
 5. Global variables: global.*
 6. Vectors as parameter or return value (only first value will be passed).
 
-### A function lib file example
+### example function lib file
 ```
 # Nothing fancy
 function add(a,b,c,d,e) {
@@ -88,3 +112,10 @@ function testm2m() {
   println('This is testmt2: elem 0: ',m2m_read(0));
 }
 ```
+
+### debugging
+Unfortunately debugging of function libs is not as easy as normal PLC:s since exprtk returns less infomation at compile failure.
+
+{{% notice tip %}}
+In order to troubleshoot, load the code as a normal PLC instead. This way you will get more diagnostics. Also remember, ecmc varaibles cannot be accessed in plc libs.
+{{% /notice %}}

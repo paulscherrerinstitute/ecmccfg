@@ -6,7 +6,7 @@ chapter = false
 
 In `ECMC`, PLCs are a very powerful tool to handle EtherCAT data in real-time.
 
-Since `ecmccfg` v7, the PLCs can be instantiated from:
+Since `ecmccfg` v7, the PLCs can be instantiated in 3 different ways:
 - [pure text files](#pure-text-files), classic ecmc PLC
 - [pure yaml](#pure-yaml) files or
 - text files, with [yaml header](#yaml-header).
