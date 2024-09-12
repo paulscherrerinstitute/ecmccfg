@@ -1,10 +1,14 @@
 +++  
 title = "hardware"   
-weight = 13
+weight = 16
 chapter = false  
 +++
 
-### over current protection el9227-5500, el9221-5000
+### 1. [over current protection](#over current protection)
+### 2. [el7041 error/warning](#el7041 error/warning)
+### 3. [latency issues](#latency issues)
+
+### over current protection
 In the standard setup at PSI over current protection modules are used to feed 24V to both the ethercat communication bus (E-bus) and the power bus of the ethercat slaves. If the over current protection is not enabled then the ethercat slaves will not receive power.
 
 First time, (and only first time), a system is in use, the overcurrent modules needs to be enabled in order to allow current to flow. Enabling is done by push buttons in the LED area of the module. The long horizontal LEDs are in fact buttons that can be used to activate or tripp the over current protection. 
@@ -125,6 +129,24 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepp
 {{% notice info %}}
 For the EL703x drives the nominal voltage must be set to 24V (ecmccomp handles this automatically).
 {{% /notice %}}
+
+### EL70x1 Tuning
+For EL70x1 stepper drives the following parameters can be tuned:
+* 8011:07 Ka factor 
+* 8011:08 Kd factor
+* 8011:01 Kp factor
+* 8011:02 Ki factor
+
+** 8011:07 Ka and 8011:08 Kd factor: **
+
+8011:07 Ka factor / 8011:08 Kd factor are “current boosts” during acceleration/deceleration.
+Default they are set to 100% which is way too high for most applications. Start by setting these parameters to 0.
+    
+** 8011:01 Kp  and 8011:02 Ki factor: **
+This is the current loop settings and this is also what affect the performance. The higher you set these registers, the stiffer the control loop.
+For most applications it is important to keep a ration of 40:1.
+Default is 400 / 10, if you want a stiffer loop, then change to f ex 800 / 20 and onwards.
+Increase until the motor misbehaves and go back to a safe setting.
 
 ### latency issues
 

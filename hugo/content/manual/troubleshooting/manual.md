@@ -1,6 +1,6 @@
 +++  
 title = "manual motion"   
-weight = 16
+weight = 17
 chapter = false  
 +++
 

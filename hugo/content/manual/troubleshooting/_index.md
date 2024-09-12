@@ -9,17 +9,20 @@ chapter = false
 Due to the complexity an EtherCAT bus topology can assume, troubleshooting can be challenging.
 This guide should provide the basic means to diagnose simple errors and is by no means complete!
 
+### [general problems](general)
+For motion related issues, a very short troubleshooting guide is provided [here](motion).
+
 ### [command line interface](ethercatcli)
 A very powerful tool is provided through the command line.
 See a summary, incl. some examples of what possible [here](ethercatcli).
 
-### [general problems](general)
+### [motion](motion)
 For motion related issues, a very short troubleshooting guide is provided [here](motion).
 
-### [troubles with motion](motion)
-For motion related issues, a very short troubleshooting guide is provided [here](motion).
+### [drive tuning](tuning)
+Tune drive control loops
 
-### [troubles with hardware](hardware)
+### [hardware](hardware)
 For hardware related issues, a very short troubleshooting guide is provided [here](hardware).
 
 ### [manual motion](manual)
