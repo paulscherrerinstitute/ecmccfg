@@ -1,5 +1,5 @@
 +++  
-title = "PLC cfg"   
+title = "PLC"   
 weight = 15
 chapter = false  
 +++  

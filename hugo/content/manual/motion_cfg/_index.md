@@ -1,5 +1,5 @@
 +++  
-title = "motion cfg"   
+title = "motion"   
 weight = 10
 chapter = false  
 +++  

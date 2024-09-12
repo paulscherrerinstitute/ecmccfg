@@ -1,5 +1,5 @@
 +++  
-title = "general cfg"   
+title = "general"   
 weight = 7
 chapter = false  
 +++  
@@ -7,4 +7,4 @@ chapter = false
 ## [startup.cmd](startup)
 ## [data storage](data_storage)
 ## [iocsh utils](iocsh_utils)
-## [ecmc command reference](ecmc_command_reference)
+## [ecmc command reference](ecmc_command_ref)

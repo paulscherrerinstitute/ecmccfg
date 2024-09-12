@@ -1,5 +1,5 @@
 +++  
-title = "PLC syntax help"
+title = "syntax"
 weight = 15
 chapter = false  
 +++

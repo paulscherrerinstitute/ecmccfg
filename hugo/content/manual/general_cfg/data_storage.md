@@ -4,7 +4,7 @@ weight = 16
 chapter = false  
 +++  
 
-## Data storage examples
+## data storage examples
 This dir contains two examples: [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/test/dataStorage).
 
 1. Continiously add value to data storage. Push to epics by hw trigger.
@@ -13,7 +13,7 @@ Data buffered data can be accessed by the "IOC_TEST:ds0-Data-Act" waveform pv (N
 
 Custom scale and offset can be applied to the stored values by MACROS (to the plc) in the startup file.
 
-### 1 Push to epics by hw trigger
+### 1 push to epics by hw trigger
 
 In this example the data stored in dataStorage 0 is pushed to epics at a falling edge of the axis 1 high limit.
 
@@ -51,7 +51,7 @@ static.highlimOld:=ax1.mon.highlim;
 
 ```
 
-### 2 Push to epics by epics pv trigger
+### 2 push to epics by epics pv trigger
 
 In this example the data stored in dataStorage 0 is pushed to epics at a rising edge of the "IOC_TEST:Set-PushDataTrigger-RB" pv.
 

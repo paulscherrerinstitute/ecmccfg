@@ -1,19 +1,19 @@
 +++  
-title = "axis scaling"
+title = "scaling"
 weight = 20
 chapter = false  
 +++
 
 By popular demand, the topic scaling will be discusses in closer detail.
 
-ECMC has to scaling factors for each joint, firstly the [drive](#drive-scaling) scaling, secondly the [encoder](#encoder-scaling) scaling.
+ecmc has to scaling factors for each joint, firstly the [drive](#drive-scaling) scaling, secondly the [encoder](#encoder-scaling) scaling.
 
 {{% notice warning %}}
 Changes to the scaling have direct effects on the `Kp` of the PID-loop.
 If the drive scaling is changes, make sure to adjust the PID parameters accordingly.
 {{% /notice %}}
 
-## Drive scaling
+## drive scaling
 Drive scaling deals with the relation of the drive output (typically a 16- or 32-bit register) to axis velocity.
 Scaling is similar, but slighlty different for [stepper drives](#stepper-motor-drives) and [servo drives](#servo-motor-drives)
 
@@ -33,7 +33,7 @@ drive:
   denominator:  32768  # I/O range 2^15, because 16-bit register, half is forward, the other half is backward
 ```
 
-##### Explanation
+##### explanation
 The `denominator` is `32768` because the `velocitySetpoint` is a 16-register for the Beckhoff stepper drives.
 Thus, half of the full range is reserved for positive (forward) motion, the remaining half for negative (backward) motion.
 This means that at full output the motor would receive 2000 fullsteps per second.
@@ -53,7 +53,7 @@ drive:
   denominator:  32768  # I/O range 2^15, because 16-bit register, half is forward, the other half is backward
 ```
 
-##### Explanation
+##### explanation
 At full output, the motor receives 2000 fullsteps/s, which results in 5 rev/s
 due to the higher fullstep count of the motor. The drive train ratio is specified
 as 10 motor revolutions per 360 degree on the output or 36 deg/rev. Therefore,
@@ -82,7 +82,7 @@ drive:
   denominator:  2147483648   # I/O range 2^31, because 32-bit register, half is forward, the other half is backward
 ```
 
-## Encoder scaling
+## encoder scaling
 This scaling ratio describes the relation of encoder counts and engineering units of the axis.
 
 Unlike the drive scaling, the encoder scaling is much simpler.
@@ -117,7 +117,7 @@ encoder:
   bits: 16        # Total bit count of encoder raw data
 ```
 
-#### Explanation
+#### explanation
 The internal step counter operates in microsteps.
 For most drives this value assumes 64, if uncertain consult the respective manual of the drive.
 In case of a 200 fullsteps/rev motor, the `denominator` therefore will be set to `200*64=12800`.

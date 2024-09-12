@@ -47,7 +47,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper, MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230,INV_DIR=1'"
 ```
 
-## ECMC scaling
+## ecmc scaling
 
 A negative numerator can be used to change the direction of motion.
 Refer to the [scaling](../scaling) section for details.

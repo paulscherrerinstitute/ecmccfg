@@ -9,7 +9,7 @@ chapter = false
 * RLS BISS-C linear encoder (absolute)
 * Open loop encoder (incremental)
 
-## Scalings
+## scalings
 Config for scaling in mm, mm/s, mm/s2
 
 ### encoder scalings
@@ -94,7 +94,7 @@ drive:
     - 14                                        # Error 2 (if no drive error bit then leave empty)
 ```
 
-## Switches
+## switches
 In standard setup switches are feed from 24V output, for the lab 4ax motion crate this is not the case.
 However, the configuration for feeding switches (axis.feedSwitchesOutput) have been added anyway:
 ```
@@ -103,3 +103,30 @@ axis:
   feedSwitchesOutput: ec0.s5.binaryOutput01           # Ethercat entry for feed switches
 
 ```
+
+At PSI, the limit switches are connected directlly to the 2 inputs of the EL70xx stepper drives and are accessible in the status word, bit 11 and 12: 
+```
+input:
+  limit:
+    forward: ec0.s$(DRV_SID).driveStatus01.12         # Ethercat entry for low limit switch input
+    backward: ec0.s$(DRV_SID).driveStatus01.11        # Ethercat entry for high limit switch input
+  home: 'ec0.s$(DRV_SID).ONE.0'                       # Ethercat entry for home switch
+  interlock: 'ec0.s$(DRV_SID).ONE.0'                  # Ethercat entry for interlock switch input
+```
+
+{{% notice warning %}}
+Always verify where the switches are connected in the electrical drawings.
+{{% /notice %}}
+
+All switches in the "input" section needs to be linked. If not used, then the simulation registers, "ONE" and "ZERO", can be used:
+* 32 bit register of ones (rw): ec\<master_id\>.s\<slave_id\>.ONE.<bit>
+* 32 bit register of zeros (rw): ec\<master_id\>.s\<slave_id\>.ZERO.<bit>
+
+Example, Use bit 1 in the ONE register of slave 1:
+```
+ec0.s1.ONE.1
+```
+
+{{% notice tip %}}
+If no ethercat slave is defined, slave number "-1" can be used: ec\<master_id\>.s-1.ONE.<bit>
+{{% /notice %}}

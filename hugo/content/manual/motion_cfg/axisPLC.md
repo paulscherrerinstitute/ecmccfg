@@ -1,5 +1,5 @@
 +++  
-title = "axis PLC"
+title = "PLC"
 weight = 26
 chapter = false  
 +++

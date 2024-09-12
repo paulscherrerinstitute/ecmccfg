@@ -1,5 +1,5 @@
 +++  
-title = "axis yaml configuration"
+title = "yaml configuration"
 weight = 15
 chapter = false  
 +++  

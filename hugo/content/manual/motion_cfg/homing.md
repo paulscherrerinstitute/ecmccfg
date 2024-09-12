@@ -1,10 +1,10 @@
 +++  
-title = "axis homing"   
+title = "homing"   
 weight = 25
 chapter = false  
 +++  
 
-## Homing
+## homing
 
 The follwoing sequences are available:
 ```
@@ -180,7 +180,7 @@ Currently used for smaract:
 [smaracat example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/test/smaract)
 In this exmaple also the drive modes is automatically handled by ecmc.
 
-## Setting polarity of home sensor
+## setting polarity of home sensor
 For some of the sequenceses it could be usefull to change the polarity of the home sensor. That can be done with the follwoing command:
 ```
 "Cfg.SetAxisMonHomeSwitchPolarity(int axisIndex, int polarity)";

@@ -7,16 +7,16 @@ chapter = false
 * Lab test stage (1mm/rev)
 * Motor : AM8111-0F20
 
-## Scalings
+### scalings
 Config for scaling in mm, mm/s, mm/s2
 
-## Motor AM8111-XFX0
+### motor AM8111-XFX0
 Data about the motor can be found here:
 https://infosys.beckhoff.com/english.php?content=../content/1033/am8100/index.html&id=
 
 Important for scaling factors in axis.yaml is the motor pole count. For the AM8111-XFX0 motor the pole count is 6.
 
-## Encoder scaling
+### encoder scaling
 Only the encoder integrated encoder is configured in this example. The specification of the encoder for a AM8111-0F20 motor:
 
 ```
@@ -63,7 +63,7 @@ drive:
   reset: 7
 ```
 
-## Switches
+### Switches
 In standard setup switches are feed from 24V output, for the lab 4ax motion crate this is not the case.
 However, the configuration for feeding switches (axis.feedSwitchesOutput) have been added anyway:
 ```
@@ -71,3 +71,5 @@ axis:
   id: ${AX_ID=1}
   feedSwitchesOutput: ec0.s$(BO_ID).binaryOutput01.0 # Ethercat entry for feed switches
 ```
+
+#### 

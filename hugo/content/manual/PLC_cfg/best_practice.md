@@ -4,7 +4,7 @@ weight = 10
 chapter = false  
 +++  
 
-## Best Practice
+## best practice
 Here you can find some best practice configurations for common usecases.
 * Macros
 * MSI include, substitute
@@ -12,7 +12,7 @@ Here you can find some best practice configurations for common usecases.
 
 The complete examples with starup files can be found [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice)
 
-### Macros
+### macros
 Use of macros makes the code more generic. When loading a PLC file with "loadPLCFile.cmd", custom macros can be defined in "PLC\_MACROS":
 ```shell
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cfg/, SAMPLE_RATE_MS=1000, PLC_MACROS='BO_S_ID=${ECMC_EC_SLAVE_NUM}'"
@@ -61,7 +61,7 @@ ec0.s10.binaryOutput01:=not(ec0.s10.binaryOutput01);
 #println('State: ', ec0.s10.binaryOutput01);
 ```
 
-### Include and substitute
+### include and substitute
 Since all PLC files and PLC libs are parsed through MSI the "include" and "substitute" commands can be used.
 
 When using the include command, the file location dir of the file must be added in the INC parameter when loading the PLC:
@@ -70,7 +70,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cf
 ```
 The "INC" parameter can contain several directories separated with a ":", making it possible to include PLC files from several locations/modules.
 
-#### Example: Toggle a few outputs 
+#### example: Toggle a few outputs 
 As a demo usecase let's consider that a few outputs needs to be toggled.
 NOTE: There are simpler ways to write this specifc code but it's used to demo how code can be divided.
 
@@ -102,7 +102,7 @@ The resulting code will toggle two different outputs, the state of the last outp
 
 NOTE: Macros cannot be used in the filename when including a file. Instead the dir should be defined in the INC param when loading the PLC, see above.
 
-### Printouts
+### printouts
 Adding a DBG macro can be usefull to be able to turn on/off printouts. Typically during commsioning it can be usefull to have many printouts but later when system goes into production, it could be a good idea to turn (some) printouts off.
 
 Example of a printout that can be turned on/off (default off)

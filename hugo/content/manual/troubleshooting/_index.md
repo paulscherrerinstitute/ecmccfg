@@ -10,7 +10,7 @@ Due to the complexity an EtherCAT bus topology can assume, troubleshooting can b
 This guide should provide the basic means to diagnose simple errors and is by no means complete!
 
 ### [general problems](general)
-For motion related issues, a very short troubleshooting guide is provided [here](motion).
+For general issues, a very short troubleshooting guide is provided [here](general).
 
 ### [command line interface](ethercatcli)
 A very powerful tool is provided through the command line.
