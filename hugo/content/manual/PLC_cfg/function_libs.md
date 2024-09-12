@@ -8,10 +8,10 @@ Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd. The command t
 * FILE PLC: definition file, i.e. ./plc/homeSlit.plc
 * PLC_ID: (optional) PLC number, default last loaded PLC
 * PLC_MACROS: (optional) Substitution macros for PLC code. The macros "SELF_ID","SELF",M_ID, and M are reserved:
-  * "SELF_ID" = PLC Id of this plc
-  * "SELF"    = "plc${SELF_ID}"
-  * "M_ID"    = EtherCAT master ID
-  * "M"       = "ec${M_ID}"
+  - "SELF_ID" = PLC Id of this plc
+  - "SELF"    = "plc${SELF_ID}"
+  - "M_ID"    = EtherCAT master ID
+  - "M"       = "ec${M_ID}"
 * INC: (optional) List of directories for include files to pass to MSI (if several paths then divide with ':').
 * TMP_PATH: (optional) directory to dump the temporary plc file after macro substitution
 * PRINT_PLC_FILE: (optional) 1/0, printout msi parsed plc file (default enable(1)).
