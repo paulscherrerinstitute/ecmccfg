@@ -4,28 +4,18 @@ weight = 17
 chapter = false  
 +++
 
-Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd:
+Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd. The command takes these parameters:
+* FILE PLC: definition file, i.e. ./plc/homeSlit.plc
+* PLC_ID: (optional) PLC number, default last loaded PLC
+* PLC_MACROS: (optional) Substitution macros for PLC code. The macros "SELF_ID","SELF",M_ID, and M are reserved:
+  * "SELF_ID" = PLC Id of this plc
+  * "SELF"    = "plc${SELF_ID}"
+  * "M_ID"    = EtherCAT master ID
+  * "M"       = "ec${M_ID}"
+* INC: (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
+* TMP_PATH: (optional) directory to dump the temporary plc file after macro substitution
+* PRINT_PLC_FILE: (optional) 1/0, printout msi parsed plc file (default enable(1)).
 ```
-#  \brief Script for loading a PLC from lib from file.
-#  \details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
-#  \author Anders Sandström
-#  \file
-#  \param FILE PLC definition file, i.e. ./plc/homeSlit.plc
-#  \param PLC_ID (optional) PLC number, default last loaded PLC
-#  \param PLC_MACROS (optional) Substitution macros for PLC code. The macros "SELF_ID","SELF",M_ID, and M are reserved:
-#         * "SELF_ID" = PLC Id of this plc
-#         * "SELF"    = "plc${SELF_ID}"
-#         * "M_ID"    = EtherCAT master ID
-#         * "M"       = "ec${M_ID}"
-#  \param INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
-#  \param TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
-#  \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
-#  \note Example call:
-#  \code
-#    ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCLib.cmd, "PLC_ID=0, FILE=./plc/test.plc_lib, SAMPLE_RATE_MS=100"
-#  \endcode
-```
-
 Example:
 ```
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
@@ -49,7 +39,7 @@ function <name>() {
 * For syntax of the "code body", check [plc syntax](../syntax) and the exprtk website.
 * The parameters aswell as the return value must be scalars, however, local vectors can be defined and used in calculations (initiations of vector can be done with MACROS, constants or parameters).
 * "#" as a first char in a line is considered a comment (the line will be removed before compile).
-* The lib file will be parsed through MSI allowing macro expansion, "include" and "subsitute" commands. For more info check [best practice](../best-practice) and msi documentation/help.
+* The lib file will be parsed through MSI allowing macro expansion, "include" and "subsitute" commands. For more info check [best practice](../best_practice) and msi documentation/help.
 
 ### can be used in a functions
 1. The parameters
