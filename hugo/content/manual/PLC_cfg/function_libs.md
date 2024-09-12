@@ -12,10 +12,10 @@ Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd. The command t
   * "SELF"    = "plc${SELF_ID}"
   * "M_ID"    = EtherCAT master ID
   * "M"       = "ec${M_ID}"
-* INC: (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
+* INC: (optional) List of directories for include files to pass to MSI (if several paths then divide with ':').
 * TMP_PATH: (optional) directory to dump the temporary plc file after macro substitution
 * PRINT_PLC_FILE: (optional) 1/0, printout msi parsed plc file (default enable(1)).
-```
+
 Example:
 ```
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
