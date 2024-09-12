@@ -4,6 +4,8 @@ weight = 20
 chapter = false  
 +++
 
+## setup
+* EP7211-0034 servo drive slave
 * Lab test stage (1mm/rev)
 * Motor : AM8111-0F20
 
@@ -63,7 +65,7 @@ drive:
   reset: 7
 ```
 
-### Switches
+### switches
 In standard setup switches are feed from 24V output, for the lab 4ax motion crate this is not the case.
 However, the configuration for feeding switches (axis.feedSwitchesOutput) have been added anyway:
 ```
@@ -71,5 +73,3 @@ axis:
   id: ${AX_ID=1}
   feedSwitchesOutput: ec0.s$(BO_ID).binaryOutput01.0 # Ethercat entry for feed switches
 ```
-
-#### 

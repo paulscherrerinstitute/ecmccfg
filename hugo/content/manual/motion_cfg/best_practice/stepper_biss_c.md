@@ -1,9 +1,12 @@
 +++  
-title = "stepper and biss-c (EL7041, EL5042)"
+title = "stepper and biss-c"
 weight = 15
 chapter = false  
 +++
 
+## setup
+* EL7041 stepper drive slave
+* EL5042 BISS-C encoder slave
 * Lab test stage (1mm/rev)
 * Lab 4 axis motion control box
 * RLS BISS-C linear encoder (absolute)

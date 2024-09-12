@@ -2,16 +2,25 @@
 title = "PLC"   
 weight = 15
 chapter = false  
-+++  
++++
 
 In `ECMC`, PLCs are a very powerful tool to handle EtherCAT data in real-time.
 
 Since `ecmccfg` v7, the PLCs can be instantiated from:
+- [pure text files](#pure-text-files), classic ecmc PLC
 - [pure yaml](#pure-yaml) files or
 - text files, with [yaml header](#yaml-header).
 
+## pure text files
+The simplest and most generic way to load plc file is by the loadPLCFile.cmd command:
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=<filename>, INC=<include_dirs>, SAMPLE_RATE_MS=<rate_ms>, PLC_MACROS='<custom_macros>'"
+```
+
+## pure yaml
+
 {{% notice info %}}
-Backwards compatibility for classic, text based PLCs is assured.
+Backwards compatibility for classic, text based PLCs is assured for yaml based.
 {{% /notice %}}
 
 {{% notice warning %}}
@@ -21,8 +30,6 @@ Backwards compatibility for classic, text based PLCs is assured.
 {{% notice tip %}}
 Indent with 2 spaces.
 {{% /notice %}}
-
-## pure yaml
 
 All keys are mandatory.
 

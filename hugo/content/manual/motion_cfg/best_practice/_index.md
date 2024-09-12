@@ -4,7 +4,7 @@ weight = 30
 chapter = false  
 +++  
 
-## Best Practice
+## best Practice
 Here you can find some best practice configurations for common usecases.
 The complete examples with starup files can be found [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice)
 
