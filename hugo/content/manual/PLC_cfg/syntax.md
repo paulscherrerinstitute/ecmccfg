@@ -748,6 +748,13 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
 #                       <allow>,  : Allow change of source
 #                       );
 #     Allow source change for trajectory and encoder when axis is enabled.
+#
+# 20.  mc_grp_sync_act_set(
+#                       <grp_id>, : Group index
+#                       <sync>,   : Sync yes or no
+#                       );
+#     1. Sync ecmc current setpoint with actual value (if not enabled and internal mode)
+#     2. Sync MR at next poll (maximum once).
 # 
 ```
 
