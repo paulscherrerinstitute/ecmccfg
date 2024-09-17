@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for EL7041 and EL5042
 
-require ecmccfg v9.5.5_RC1 "ECMC_VER=v9.5.5_RC1,ENG_MODE=1"
+require ecmccfg "ENG_MODE=1"
 require ecmccomp
 
 #- ############################################################################
@@ -59,7 +59,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
 # 0:10 - EL7041    1Ch Stepper
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
 
-#- #################################################################
-#- Go active
+#- ###########################################################################
+#- go active
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd

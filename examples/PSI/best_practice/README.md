@@ -2,7 +2,12 @@
 
 ## Motion
 
-### stepper and BISS_C
+### stepper and BISS-C
+* Stepper motor
+* RLS BISS encoder
+* Open loop encoder
+
+### stepper and BISS-C using hw substitution file
 * Stepper motor
 * RLS BISS encoder
 * Open loop encoder
