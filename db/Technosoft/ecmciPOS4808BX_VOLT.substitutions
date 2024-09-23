@@ -55,7 +55,7 @@ file "ecmc_binaryInputArray-chX.template"
 file "ecmc_analogInput-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,  sourceName,        LINR,    ESLO,      EGU, PREC }
-          {01,    "Drv", "-CurAct", "currentActual", "SLOPE", 0.0012210, "A", 3    }
+          {01,    "Drv", "-CurAct", "currentActual", "SLOPE", 0.0006105, "A", 3    }
 }
 
 # voltageActual, ESLO= 102.3/65520 (see manual)
