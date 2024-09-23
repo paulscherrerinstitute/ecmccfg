@@ -21,13 +21,14 @@ pattern { SLAVE_ID    HW_DESC       COMP                                COMP_CH 
 # Encoders
         { 2           EL5042        Encoder-Renishaw-26bit-BISS-C       1         ""}
         { 2           EL5042        Encoder-Renishaw-26bit-BISS-C       2         ""}
+        { 3           EL5042        -1                                 -1         -1}
 
-        { 3           EL5042        -1                                 -1        -1}
-
-# Drives
+# I/O
         {4            EL3204        -1                                 -1         -1}
         {5            EL2008        -1                                 -1         -1}
         {6            EL1008        -1                                 -1         -1}
+
+# Drives
         {7            EL7041-0052   Motor-Generic-2Phase-Stepper        1         "I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230"}
         {8            EL7041-0052   Motor-Generic-2Phase-Stepper        1         "I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230"}
         {9            EL7041-0052   -1                                 -1         -1}
