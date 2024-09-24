@@ -1,0 +1,35 @@
+##############################################################################
+## Example config for el5042 for SSI
+# Can not get the encoder to get ready in SSI mode..
+
+require ecmccfg "MASTER_ID=1"
+require ecmccomp
+
+##############################################################################
+## Config hardware:
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "14")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5042"
+
+#- Apply encoder config with some custom macros
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit,CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=26,CLK_FRQ_KHZ=1000"
+
+ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x14,0,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x2,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x3,1,1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x11,0,4)"
+
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
+##############################################################################
+## Go active:
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
