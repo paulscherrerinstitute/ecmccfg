@@ -17,7 +17,10 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 #- For some reason it's not working enabling status bits 0x80p8:02, therefore set ST to 28,
 #- else if set to 26 then the EL5042 will not report READY.
 #- These extra 2 LSB bits can be masked away in the axis yaml cfg with the encoder.mask = 0xFFFFFFC setting.
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=28,CLK_FRQ_KHZ=1000,CODING=0"
+#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=28,CLK_FRQ_KHZ=1000,CODING=0"
+
+#- Shift away the 2 status bits (ST_BITS=26, OFF_BITS=2, total 28bits)
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=26,CLK_FRQ_KHZ=1000,CODING=0,OFF_BITS=2"
 
 ##############################################################################
 ## Go active:
