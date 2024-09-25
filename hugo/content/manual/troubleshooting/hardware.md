@@ -172,9 +172,9 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-BISS-C,CH_
 * The entire SSI frame needs to covered in MT_BITS and ST_BITS (also status bits and startup bits), also see "Offset LSB Bit" above.
 * Enabling status bits by SDO (0x80p8:02) will not work, seems only valid for BISS-C (kind of hints this in manual).
 
-{{% warning %}}
+{{% notice warning %}}
 If the total bit count does not match, the READY bit of the EL5042 will be low (and soemtimes also error or warning).
-{{% /warning %}}
+{{% /notice %}}
 
 Example: 26bit RLS encoder with 2 status bits (set ST_BITS=28)
 ```
