@@ -2,10 +2,9 @@ MID=$1
 SID=$2
 CH_ID=$3
 
-echo "0xA0${CH_ID}0"
 echo ""
 echo "#########################################################"
-echo "Reading EL5042 ch $CH_ID status at master id $MID and slave id $SID:"
+echo "Reading EL5042 Ch $CH_ID status at master id $MID and slave id $SID:"
 echo ""
 echo "Power supply present:"
 ethercat upload -m $MID -p $SID --type uint8  0xA0${CH_ID}8 0x1
@@ -28,4 +27,3 @@ ethercat upload -m $MID -p $SID --type uint64  0xA0${CH_ID}8 0x11
 echo ""
 echo "#########################################################"
 echo ""
-
