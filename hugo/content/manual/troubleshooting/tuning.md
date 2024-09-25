@@ -25,3 +25,6 @@ For most applications it is important to keep a ration of 40:1.
 Default is 400 / 10, if you want a stiffer loop, then change to f ex 800 / 20 and onwards.
 Increase until the motor misbehaves and go back to a safe setting.
 
+### Backlash
+Tuning systems with backlash can be difficult. Sometimes a small D-part helps to reduce spikes in the centralized ecmc position loop controller output.
+

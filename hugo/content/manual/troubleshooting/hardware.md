@@ -10,6 +10,7 @@ chapter = false
 1. [over current protection](#over current protection)
 2. [el7041 error/warning](#el7041 error/warning)
 3. [latency issues](#latency issues)
+4. [latency issues](#latency issues)
 ---
 ### over current protection
 In the standard setup at PSI over current protection modules are used to feed 24V to both the ethercat communication bus (E-bus) and the power bus of the ethercat slaves. If the over current protection is not enabled then the ethercat slaves will not receive power.
@@ -151,6 +152,53 @@ For most applications it is important to keep a ration of 40:1.
 Default is 400 / 10, if you want a stiffer loop, then change to f ex 800 / 20 and onwards.
 Increase until the motor misbehaves and go back to a safe setting.
 
+### EL5042 configuration
+
+#### Offset LSB Bit [Bit] (0x80p8:17)
+When using the LSB offset setting, the same amout of bits needs to be subtracted from the ST_BITS or MT_BITS
+
+Example: 26bit RLS, no LSB offset
+```
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=1,OFF_BITS=0"
+```
+
+Example: 26bit RLS with 3 bits offset (ST_BITS=23, OFF_BITS=0)
+```
+#If the offset is needed then the sum of the bit's still need to match the bitcount of the encoder. Example: Offset 3 LSB bits, set ST_BITS=23 (26-3)
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-BISS-C,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=23,CLK_FRQ_KHZ=1000,OFF_BITS=3"
+```
+
+#### SSI on EL5042
+* The entire SSI frame needs to covered in MT_BITS and ST_BITS (also status bits and startup bits), also see "Offset LSB Bit" above.
+* Enabling status bits by SDO (0x80p8:02) will not work, seems only valid for BISS-C (kind of hints this in manual).
+
+{{% warning %}}
+If the total bit count does not match, the READY bit of the EL5042 will be low (and soemtimes also error or warning).
+{{% /warning %}}
+
+Example: 26bit RLS encoder with 2 status bits (set ST_BITS=28)
+```
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=28,CLK_FRQ_KHZ=1000,CODING=0"
+```
+Some SSI encoders, i.e. Posital kit SSI, also send startup bits. These also needs to be accounted for in the ST_BITS and MT_BITS.
+
+Example: Posital kit SSI encoder, KCD-S1X3B-1617-IE4F-GRQ
+```
+# Specs:
+#    Single turn bits 17
+#    Multiturn bits: 16
+#    Status bits: 2
+#    Startup bits 8 (zeros)
+# This then results in: 
+#     MT_BITS=16 + 8 = 24  (multi turn bits + startup bits) 
+#     ST_BITS=17 + 2 = 19  (single trun bits + status bits) 
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=24,ST_BITS=19"
+```
+
+The status bits can then be masked away by:
+1. Using the LSB offset (set to 2 and reduce ST_BITS to 26), then the status bits are shifted away already in EL5042 hardware. Then you cannot access teh status bits (to use from PLC or for interlock)
+2. Setting a mask in axis yaml file (encoder.mask: 0xFFFFFFC), in this case the encoder.absBits should not be used because it's automatically calculated by the mask command. Then you can reach the bits in the raw encoder value.
+
 ### latency issues
 
 High latency, more than 10% of the ethercat cycle time, can in worse case result, in lost ethercat frames, which of course is not an ideal situation. High latency of teh ecmc_rt thread can be related to:
@@ -185,7 +233,7 @@ The sample rate is defined when require ecmccfg (example set to 500Hz, instead o
 require ecmccfg "EC_RATE=500"
 ```
 {{% notice info %}}
-Theer are some restrictions on the sample rate. Normally, a rate in the range 100Hz-1Khz is a good choice. For other rates, please check the documentation of slaves in use.  
+There are some restrictions on the sample rate. Normally, a rate in the range 100Hz-1Khz is a good choice. For other rates, please check the documentation of slaves in use.  
 {{% /notice %}}
 
 ** Affinity**
@@ -211,4 +259,3 @@ afterInit "epicsThreadSetAffinity cbLow 6"
 {{% notice info %}}
 cbLow is created at iocInit, therefore the "epicsThreadSetAffinity" must be executed with the "afterInit" command.
 {{% /notice %}}
-
