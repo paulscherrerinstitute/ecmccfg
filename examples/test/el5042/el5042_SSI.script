@@ -1,6 +1,6 @@
 ##############################################################################
 ## Example config for el5042 for SSI
-# Can not get the encoder to get ready in SSI mode..
+## Encoder RLS on lab motion stage
 
 require ecmccfg "MASTER_ID=1"
 require ecmccomp
@@ -12,24 +12,14 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "14")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5042"
 
 #- Apply encoder config with some custom macros
-#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit,CH_ID=1"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=26,CLK_FRQ_KHZ=1000"
-
-ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x14,0,1)"
-ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x2,1,1)"
-ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x3,1,1)"
-ecmcConfigOrDie "Cfg.EcAddSdo(14,0x8008,0x11,0,4)"
-
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+#- The encoder is 26bit but also has two status bits, the two status bits are on the LSB side.. 
+#- This results in total of 28bits. 
+#- For some reason it's not working enabling status bits 0x80p8:02, therefore set ST to 28,
+#- else if set to 26 then the EL5042 will not report READY.
+#- These extra 2 LSB bits can be masked away in the axis yaml cfg with the encoder.mask = 0xFFFFFFC setting.
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=28,CLK_FRQ_KHZ=1000,CODING=0"
 
 ##############################################################################
 ## Go active:
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
