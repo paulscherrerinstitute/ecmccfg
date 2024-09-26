@@ -29,7 +29,7 @@ record(ai,"$(Name)$(PLC_ERROR)"){
   field(FLNK, "$(FLNK=)")
 }
 
-record(ao,"$(Name)MCU-Cfg-PLC${Index}-NxtObjId") {
+record(ai,"$(Name)MCU-Cfg-PLC${Index}-NxtObjId") {
     field(DESC, "PLC number of next PLC")
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
 }
