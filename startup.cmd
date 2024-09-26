@@ -149,6 +149,23 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0}")
 
 #-------------------------------------------------------------------------------
+#- Initialize links to first objects to -1
+ecmcFileExist(ecmcAxFirstAxis.db,1,1)
+dbLoadRecords(ecmcAxFirstAxis.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcEcFirstSlave.db,1,1)
+dbLoadRecords(ecmcEcFirstSlave.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcPlcFirstPlc.db,1,1)
+dbLoadRecords(ecmcPlcFirstPlc.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcPlgFirstPlg.db,1,1)
+dbLoadRecords(ecmcPlgFirstPlg.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcDsFirstDs.db,1,1)
+dbLoadRecords(ecmcDsFirstDs.db,"P=${ECMC_PREFIX}")
+
+#-------------------------------------------------------------------------------
 #- Set path to ethercat tool
 #- Set default
 epicsEnvSet(ECMC_EC_TOOL_PATH,{EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
