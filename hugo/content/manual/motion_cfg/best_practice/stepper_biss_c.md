@@ -48,6 +48,12 @@ encoder:
     - 1                                                # Error 0
 ```
 
+**Hardware configuration EL5042**
+
+{{% notice warning %}}
+Do not use the LSB offset functionality of the EL5042 (0x80p8:17). The same amount of ones ("1") will be shifted in as MSB which then normally leads to a higher position value, which is confusing. For more information see the troubleshootuing/hardware section.
+{{% /notice %}}
+
 #### open loop (encoder 2)
 The EL7041 drive has a build in micro step counter (64 microsteps/fullstep):
 * encoder.numerator: Travels 1 mm/rev

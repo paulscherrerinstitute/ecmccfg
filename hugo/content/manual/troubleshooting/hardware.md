@@ -8,8 +8,8 @@ chapter = false
 ***
 ## Topics
 1. [over current protection](#over-current-protection)
-2. [el7041 error/warning](#el7041-error/warning)
-3. [EL5042](el5042-configuration)
+2. [EL7041 error/warning](#EL7041-error/warning)
+3. [EL5042](EL5042-configuration)
 4. [latency issues](#latency-issues)
 
 ---
@@ -156,6 +156,11 @@ Increase until the motor misbehaves and go back to a safe setting.
 ### EL5042 configuration
 
 #### Offset LSB Bit [Bit] (0x80p8:17)
+
+{{% notice warning %}}
+When using the LSB offset, the same amount of ones ("1") will be shifted in as MSB. Therefore the LSB offset should normally not be used.
+{{% /notice %}}
+
 When using the LSB offset setting, the same amout of bits needs to be subtracted from the ST_BITS or MT_BITS
 
 Example: 26bit RLS, no LSB offset
@@ -199,6 +204,40 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=
 The status bits can then be masked away by:
 1. Using the LSB offset (set to 2 and reduce ST_BITS to 26), then the status bits are shifted away already in EL5042 hardware. Then you cannot access teh status bits (to use from PLC or for interlock)
 2. Setting a mask in axis yaml file (encoder.mask: 0xFFFFFFC), in this case the encoder.absBits should not be used because it's automatically calculated by the mask command. Then you can reach the bits in the raw encoder value.
+
+#### Diagnostics
+The diagnostic data can be read from register [Index A0p8 FB BiSS-C Diag data (for Ch.1, p = 0; Ch.2, p = 1)](https://infosys.beckhoff.com/english.php?content=../content/1033/el5042/4216754315.html&id=695067345900842552):
+
+The ecmccfg/utils/read_el5042_diag.sh tool can be used for reading the diagnostics:
+```bash
+bash read_el5042_diag.sh <master_id> <slave_id> <channel_id>
+```
+NOTE: The channel id starts at 0. First encoder channel is 0.
+
+Example: master 1, slave 14, channel 0
+```bash
+# first login to ecmc server
+$ bash read_el5042_diag.sh 1 14 0
+
+#########################################################
+Reading EL5042 Ch 0 status at master id 1 and slave id 14:
+
+Power supply present:
+0x01 1
+Error:
+0x00 0
+SDC Error:
+0x01 1
+WD Error:
+0x01 1
+Data valid:
+0x00 0
+Data raw value:
+0x0000000000000000 0
+
+#########################################################
+```
+Note: The tool ecmccfg/utils/PDO_read can also be used for reading the diagnostics.
 
 ### latency issues
 
