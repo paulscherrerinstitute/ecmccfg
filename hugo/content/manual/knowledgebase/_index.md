@@ -1,5 +1,5 @@
 +++  
-title = "troubleshooting"   
+title = "knowledge base"   
 weight = 15
 chapter = false  
 +++  
