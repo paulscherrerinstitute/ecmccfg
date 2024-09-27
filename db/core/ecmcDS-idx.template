@@ -71,3 +71,8 @@ record(ai,"$(P)MCU-Cfg-DS${Index}-PrvObjId") {
     field(DESC, "DS number of next DS")
     field(VAL,  "$(PREV_OBJ_ID=-1)")
 }
+
+record(stringin,"$(Name)$(DESC_NAME)") {
+    field(DESC, "DS Info")
+    field(VAL,  "${DESC=PLC ${index}}")
+}
