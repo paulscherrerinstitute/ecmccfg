@@ -19,6 +19,7 @@
 #-d   \param PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).
 #-d   \param SUBST_FILE (optional) custom substitution file otherwise ecmccfg default will be loaded
 #-d   \param INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with ':').
+#-d   \param DESC (optional) Description of PLC
 #-d   \note Example call:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd, "PLC_ID=0, FILE=./plc/homeSlit.plc, SAMPLE_RATE_MS=100"
@@ -60,7 +61,7 @@ ecmcConfigOrDie "Cfg.LoadPLCFile(${ECMC_PLC_ID},${ECMC_TMP_FILE})"
 system "rm -f ${ECMC_TMP_FILE}"
 ecmcFileExist(${SUBST_FILE="ecmcPlc.substitutions"},1,1)
 ecmcEpicsEnvSetCalc(ECMC_PLC_ID_2_CHARS, "${ECMC_PLC_ID}", "%02d")
-dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,P=${ECMC_PREFIX},Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},Index2Char=${ECMC_PLC_ID_2_CHARS},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},PREV_OBJ_ID=${ECMC_PREV_PLC_OBJ_ID=-1}")
+dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,P=${ECMC_PREFIX},Index=${ECMC_PLC_ID},Name=${ECMC_PREFIX},Index2Char=${ECMC_PLC_ID_2_CHARS},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},PREV_OBJ_ID=${ECMC_PREV_PLC_OBJ_ID=-1}, DESC='${DESC=PLC_${ECMC_PLC_ID}}'")
 epicsEnvUnset(ECMC_PLC_ID_2_CHARS)
 
 #- Below for facilitate auto gui generation
