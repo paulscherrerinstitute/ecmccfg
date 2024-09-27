@@ -1,6 +1,6 @@
 +++  
 title = "ecmc server"   
-weight = 14
+weight = 17
 chapter = false  
 +++
 
@@ -8,6 +8,7 @@ chapter = false
 ***
 ## Topics
 1. [latency issues](#latency-issues)
+2. [EtherCAT rate (EC_RATE)](#EtherCAT-rate-(EC_RATE))
 
 ---
 
@@ -45,7 +46,7 @@ The sample rate is defined when require ecmccfg (example set to 500Hz, instead o
 require ecmccfg "EC_RATE=500"
 ```
 {{% notice info %}}
-There are some restrictions on the sample rate. Normally, a rate in the range 100Hz-1Khz is a good choice. For other rates, please check the documentation of slaves in use.  
+There are some restrictions on the sample rate. Normally, a rate in the range 100Hz-1Khz is a good choice. For other rates, please check the documentation of slaves in use. See heading "EtherCAT rate" below for more information.
 {{% /notice %}}
 
 ** Affinity**
@@ -71,3 +72,41 @@ afterInit "epicsThreadSetAffinity cbLow 6"
 {{% notice info %}}
 cbLow is created at iocInit, therefore the "epicsThreadSetAffinity" must be executed with the "afterInit" command.
 {{% /notice %}}
+
+### EtherCAT rate (EC_RATE)
+The default EtherCAT frame rate in ecmc is set to 1kHz. For most applications this is however not needed and can therefore be reduced. A reduced EtherCAT rate reduces the load on the controller. In general, a good value for the frame rate is in the range 100Hz to 1kHz. For motion systems, a frame rate of 100Hz..500Hz is normally enough. Rates ouside the 100Hz..1kHz range is normally not a good idea, and some slaves might not support it. However, in special cases both lower and higher rates might be possible and required.
+
+Example: Set rate to 500Hz
+```
+require ecmccfg "EC_RATE=500"
+...
+```
+For more information see the chapter descriping startup.cmd.
+
+As a comparison, TwinCAT default EtherCAT rates are:
+* 100Hz for PLC
+* 500Hz for motion
+
+#### Lower rates
+Issues that could occour in rates below 100Hz:
+* triggering of slave watchdogs
+* issues with dc clock syncs (DC capabale slaves normally performes best with at a rate of atleast 500Hz)
+* some slaves might not support it
+
+#### Higher rates
+Issues that could occour in rates over 1000Kz:
+* missed frames
+* issues with dc clock syncs
+* some slaves might not support it.
+
+NOTE: Some slave might support a high rate but could have built in signal filters of several ms which then makes sampling at higher freqs unneccesarry/not needed.
+
+In order to successfully run an ecmc ethercat system at higher rates some tuning might be needed:
+* minimize slave count (and ensure that the slaves support it)
+* minimize amount of processing (PLC, motion)
+* use a performant host/controller
+* use native ethercat driver (igb, not generic)
+* only transfer the needed PVs to epics.
+* affinity: Use a dedicated core for the ecmc_rt thread and move other high prio threads to other cores. see "high load on system
+" above.
+* consider use of more than one domain

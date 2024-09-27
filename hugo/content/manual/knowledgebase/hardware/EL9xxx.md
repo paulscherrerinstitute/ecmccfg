@@ -17,7 +17,7 @@ In the standard setup at PSI over current protection modules are used to feed 24
 First time, (and only first time), a system is in use, the overcurrent modules needs to be enabled in order to allow current to flow. Enabling is done by push buttons in the LED area of the module. The long horizontal LEDs are in fact buttons that can be used to activate or tripp the over current protection. 
 
 {{% notice warning %}}
-Before pressing the buttons, check the electrical drawings. Make sure it's safe to power on the system.
+**Before pressing any button, check the electrical drawings and make sure it's safe to power on the system.**
 {{% /notice %}}
 
 #### el9221-5000
@@ -32,5 +32,5 @@ Some terminals are passive. Passive terminals are not EtherCAT slaves and do not
 The passive terminals will not show up as an EtherCAT slave when issueing the "ethercat slaves" command. However, they are normally visible in the electrical drawings. This could result in that the slave id in the electrical drawing is **NOT** corresponding to the EtherCAT slave index used when configuring ecmc. In worst case this could lead to that the wrong hardware/drive is configured.
 
 {{% notice warning %}}
-**When configuring ecmc, make sure the EtherCAT slave index is correct, do not blindly trust the electrical drawings since and passive terminal could introduce an shift in the slave indices.**
+**When configuring ecmc, make sure the EtherCAT slave index is correct, do not blindly trust the electrical drawings since a passive terminal could introduce an shift in the slave indices.**
 {{% /notice %}}

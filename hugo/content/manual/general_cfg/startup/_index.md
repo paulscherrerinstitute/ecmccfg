@@ -48,7 +48,4 @@ Normally these arguments are set when the module is required:
 require ecmccfg "ENG_MODE=1,MASTER_ID=2"
 ```
 
-### [set mode](modes)
-A very powerful tool is provided through the command line.
-See a summary, incl. some examples of what possible [here](ethercatcli).
 
