@@ -1,32 +1,30 @@
 record(bo,"$(Name)$(PLC_ENABLE)"){
   info(asyn:READBACK,"1")
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=PLC$(Index) enable)")
+  field(DESC, "PLC$(Index) enable")
   field(DTYP, "$(DTYP=asynInt32)")
   field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.enable?")
   field(ZNAM, "disable")
   field(ONAM, "enable")
   field(SCAN, "Passive")
-  field(FLNK, "$(FLNK=)")
 }
 
 record(ai,"$(Name)$(PLC_SCANTIME)"){
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=PLC$(Index) scantime)")
+  field(DESC, "PLC$(Index) scantime")
   field(DTYP, "$(DTYP=asynFloat64)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.scantime?")
   field(SCAN, "Passive")
+  field(PREC, "4")
   field(EGU,  "s")
-  field(FLNK, "$(FLNK=)")
 }
 
 record(ai,"$(Name)$(PLC_ERROR)"){
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=PLC$(Index) error)")
+  field(DESC, "PLC$(Index) error")
   field(DTYP, "$(DTYP=asynFloat64)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.error?")
   field(SCAN, "Passive")
-  field(FLNK, "$(FLNK=)")
 }
 
 record(ai,"$(Name)MCU-Cfg-PLC${Index}-NxtObjId") {
@@ -37,4 +35,9 @@ record(ai,"$(Name)MCU-Cfg-PLC${Index}-NxtObjId") {
 record(ao,"$(Name)MCU-Cfg-PLC${Index}-PrvObjId") {
     field(DESC, "PLC number of prev PLC")
     field(VAL,  "$(PREV_OBJ_ID=-1)")
+}
+
+record(stringin,"$(Name)$(DESC_NAME)") {
+    field(DESC, "PLC Info")
+    field(VAL,  "${DESC=PLC ${index}}")
 }
