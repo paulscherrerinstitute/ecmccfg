@@ -4,8 +4,6 @@ weight = 20
 chapter = false  
 +++
 
-***
-***
 ## Topics
 1. [over current protection](#over-current-protection)
 2. [passive terminals](#passive-terminals)

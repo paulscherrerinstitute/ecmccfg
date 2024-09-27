@@ -4,8 +4,6 @@ weight = 16
 chapter = false  
 +++
 
-***
-
 ### Tuning
 
 There are normally several control loops in an ecmc motion system:

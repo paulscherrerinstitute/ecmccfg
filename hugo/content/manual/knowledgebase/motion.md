@@ -4,8 +4,6 @@ weight = 14
 chapter = false  
 +++
 
-***
-
 ## Topics
 1. [both_limits error](#both_limits-error)
 2. [position lag error, (following error), tuning](#position-lag-error)
