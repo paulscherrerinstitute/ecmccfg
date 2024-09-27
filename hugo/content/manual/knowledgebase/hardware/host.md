@@ -90,7 +90,7 @@ As a comparison, TwinCAT default EtherCAT rates are:
 #### Lower rates
 Issues that could occour in rates below 100Hz:
 * triggering of slave watchdogs
-* issues with dc clock syncs (DC capabale slaves normally performes best with at a rate of atleast 500Hz)
+* issues with dc clock syncs (DC capabale slaves normally performs best with at a rate of atleast 500Hz)
 * some slaves might not support it
 
 #### Higher rates
