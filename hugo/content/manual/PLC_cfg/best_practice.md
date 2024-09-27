@@ -9,13 +9,14 @@ Here you can find some best practice configurations for common usecases.
 * Macros
 * MSI include, substitute
 * Printouts
+* Description
 
 The complete examples with starup files can be found [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice)
 
 ### macros
 Use of macros makes the code more generic. When loading a PLC file with "loadPLCFile.cmd", custom macros can be defined in "PLC\_MACROS":
 ```shell
-${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cfg/, SAMPLE_RATE_MS=1000, PLC_MACROS='BO_S_ID=${ECMC_EC_SLAVE_NUM}'"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cfg/, DESC='Test', SAMPLE_RATE_MS=1000, PLC_MACROS='BO_S_ID=${ECMC_EC_SLAVE_NUM}'"
 ```
 NOTE: ECMC\_EC\_SLAVE\_NUM expands to the ID of the last added slave.
 
@@ -66,7 +67,7 @@ Since all PLC files and PLC libs are parsed through MSI the "include" and "subst
 
 When using the include command, the file location dir of the file must be added in the INC parameter when loading the PLC:
 ```shell
-${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cfg/, SAMPLE_RATE_MS=1000, PLC_MACROS='BO_S_ID=${ECMC_EC_SLAVE_NUM}'"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cfg/, DESC='Test', SAMPLE_RATE_MS=1000, PLC_MACROS='BO_S_ID=${ECMC_EC_SLAVE_NUM}'"
 ```
 The "INC" parameter can contain several directories separated with a ":", making it possible to include PLC files from several locations/modules.
 
@@ -113,3 +114,15 @@ Will result in the below if setting the DBG='' (and some other macros, see above
 ```C
 println('Value: ', ec0.s10.binaryOutput01);
 ```
+
+### Description
+Always add a description when creating a PLC by setting the DESC macro when calling loadPLCFile.cmd.
+
+Example:
+```shell
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cfg/, DESC='Toggle some bits', SAMPLE_RATE_MS=1000, PLC_MACROS='BO_S_ID=${ECMC_EC_SLAVE_NUM}'"
+```
+
+{{% notice info %}}
+The description can maximum be 40 chars long.
+{{% /notice %}}
