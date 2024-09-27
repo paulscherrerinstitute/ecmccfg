@@ -9,7 +9,7 @@ chapter = false
 ## Topics
 1. [over current protection](#over-current-protection)
 2. [EL7041 error/warning](#EL7041-error/warning)
-3. [EL5042](EL5042-configuration)
+3. [EL5042](EL5042)
 4. [latency issues](#latency-issues)
 
 ---
@@ -153,7 +153,70 @@ For most applications it is important to keep a ration of 40:1.
 Default is 400 / 10, if you want a stiffer loop, then change to f ex 800 / 20 and onwards.
 Increase until the motor misbehaves and go back to a safe setting.
 
-### EL5042 configuration
+### EL5042
+
+#### No reading from EL5042
+
+Could be caused by:
+* Wrong settings (bit counts, ..), see futher below on this page (and also motion/best practice).
+* Bad electrical connection
+* Wrong power supply
+* Defect encoder
+* Long cabling lengths
+
+**Bad electrical connection**
+
+The serial communication performed by two RS422 channels, one for the clock and one for data. These channels can easily be measured with a scope:
+ * The clock should output periodic "bursts" with clock pulses with a short break in between. The bursts should appear in the same rate as the ethercat frame rate. And the frequency of the clock pulses should correspond with the setting in your startup script (normally 250kHz..10Mhz depending on configuration)
+ * The data channel should return bits in sync with the clock pulses.
+ 
+Lack of clock or data pulses could be caused by (in order of probability):
+1. short circuit or error in cabling
+2. defect/burt encoder
+3. No/wrong power supply
+4. faulty EL5042
+
+**Wrong power supply**
+Make sure the encoder is powered with the correct voltage. Most encoders require 5V, but there are also some that require 9V, 12V or 24V.
+
+{{% notice warning %}}
+Never apply a higher voltage than the specified operating voltage for the encoder.
+{{% /notice %}}
+
+The EL5042 can supply 5V or 9V. The default setting is 5V and in order to change the setting to 9V a special sequence need to be executed (see EL5042 manual).
+
+After ensureing that the encoder is correctly supplied, it's a good ide to measure the power consumption of the encoder and compare with the specified consumption. If the power consumption does not match, the encoder might be borken or a faulty cabling.
+
+**Long cable lengths**
+Long cable lengths can affect both power supply levels and the serial data channels.
+
+_Power supply:_
+
+Longer cables will normally also result in a higher voltage drops. Especaillay for 5V encoders this can be an issue. Make sure that the voltage are within the specified range by measuring the voltage level close to the encoder.
+
+If the voltage is to low (mainly for 5V encoders):
+1. Can cabling length be reduced
+2. Can cable impedance be reduced (higher area)
+3. Add a separate (5V) power supply with possabilities to adjust the voltage level to a slightly higher voltage. Make sure the voltage is not too high at the encoder end.
+
+_Serial communication:_
+The serial communication is also affected by the cable legth. For long cable lengths a reduction of the clock rate can be needed. The clock rate can be reduced by setting the CLK_FRQ_KHZ macro in the call to applyComponent.cmd (set clock freq. to 500kHz):
+
+```bash
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=1,MACROS='CLK_FRQ_KHZ=500'"
+```
+
+For EL5042 the following rates are availble:
+* 10 MHz
+* 5 MHz
+* 3.33 MHz
+* 2.5 MHz default for some encoders
+* 2 MHz
+* 1 MHz Max for SSI and default for some encoders
+* 500 kHz
+* 250 kHz
+
+NOTE: The closest freq. equal or higher than CLK_FRQ_KHZ will be selected.
 
 #### Offset LSB Bit [Bit] (0x80p8:17)
 
@@ -202,7 +265,7 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=
 ```
 
 The status bits can then be masked away by:
-1. Using the LSB offset (set to 2 and reduce ST_BITS to 26), then the status bits are shifted away already in EL5042 hardware. Then you cannot access teh status bits (to use from PLC or for interlock)
+1. Using the LSB offset (set to 2 and reduce ST_BITS to 26), then the status bits are shifted away already in EL5042 hardware. Then you cannot access the status bits (to use from PLC or for interlock)
 2. Setting a mask in axis yaml file (encoder.mask: 0xFFFFFFC), in this case the encoder.absBits should not be used because it's automatically calculated by the mask command. Then you can reach the bits in the raw encoder value.
 
 #### Diagnostics
@@ -241,7 +304,7 @@ Note: The tool ecmccfg/utils/PDO_read can also be used for reading the diagnosti
 
 ### latency issues
 
-High latency, more than 10% of the ethercat cycle time, can in worse case result, in lost ethercat frames, which of course is not an ideal situation. High latency of teh ecmc_rt thread can be related to:
+High latency, more than 10% of the ethercat cycle time, can in worse case result, in lost ethercat frames, which of course is not an ideal situation. High latency of the ecmc_rt thread can be related to:
 1. The generic device driver is used
 2. High load on system
 3. ... 
@@ -282,7 +345,7 @@ Setting the affinity of the ecmc realtiem thread can often improve the performac
 At PSI, core 0 is always isolated, do not move any threads to core 0.
 {{% /notice %}}
 
-In order to pin teh ecmc thread to a single core, add the following line to the startup script (after setAppMode.cmd):
+In order to pin the ecmc thread to a single core, add the following line to the startup script (after setAppMode.cmd):
 ```
 #- go active (create ecmc_rt)
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
