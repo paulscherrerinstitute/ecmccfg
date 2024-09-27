@@ -9,7 +9,7 @@ chapter = false
 {{% children %}}
 ---
 
-## troubleshooting
+## Knowledge base
 Due to the complexity an EtherCAT bus topology can assume, troubleshooting can be challenging.
 This guide should provide the basic means to diagnose simple errors and is by no means complete!
 
@@ -25,7 +25,3 @@ Tune drive control loops
 
 ### [hardware](hardware)
 For hardware related issues, a very short troubleshooting guide is provided [here](hardware).
-
-### [manual motion](manual)
-Trigger manual motion (without motion ecmc-axis).
-
