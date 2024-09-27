@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>scripts on ecmccfg</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/</link><description>Recent content in scripts on ecmccfg</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 27 Sep 2024 12:56:41 +0000</lastBuildDate><atom:link href="https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/index.xml" rel="self" type="application/rss+xml"/><item><title>addAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addaxis/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addaxis/</guid><description>description Script for adding axis EPICS PVs.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>scripts on ecmccfg</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/</link><description>Recent content in scripts on ecmccfg</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 27 Sep 2024 13:07:34 +0000</lastBuildDate><atom:link href="https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/index.xml" rel="self" type="application/rss+xml"/><item><title>addAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addaxis/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addaxis/</guid><description>description Script for adding axis EPICS PVs.
 details Adds an motion axis.
-author Niko Kivel</description></item><item><title>addDataStorage.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddatastorage/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddatastorage/</guid><description>description Script for adding dataStorage.
+author Niko Kivel</description></item><item><title>addDataStorage.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddatastorage/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddatastorage/</guid><description>description Script for adding dataStorage.
 details Adds dataStorage buffer.
 author Anders Sandstroem
 paramters DS_SIZE Size of data buffer.
@@ -9,17 +9,17 @@ DS_TYPE (optional), default 0, 0: Normal Buffer, 1: Ring Buffer, 2: FIFO Buffer
 SAMPLE_RATE_MS (optional), default 1
 DS_DEBUG (optional), default 0, 0: No debug printouts, 1: Debug printouts
 Example calls:
-call for 1000 elements at 10 Hz ${SCRIPTEXEC} ${ecmccfg_DIR}addDataStorage.cmd &amp;#34;DS_ID=1, DS_SIZE=1000, SAMPLE_RATE_MS=100&amp;#34;</description></item><item><title>addDomain.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddomain/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddomain/</guid><description>description Script for adding an EtherCAT domain.
+call for 1000 elements at 10 Hz ${SCRIPTEXEC} ${ecmccfg_DIR}addDataStorage.cmd &amp;#34;DS_ID=1, DS_SIZE=1000, SAMPLE_RATE_MS=100&amp;#34;</description></item><item><title>addDomain.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddomain/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/adddomain/</guid><description>description Script for adding an EtherCAT domain.
 details Adds an EtherCAt domain.
 author Anders Sandström
 paramters EXE_RATE (optional) Execution rate [cycles] defaults 0 (same EC_RATE)
 EXE_OFFSET (optional) Execution offset cycles [cycles] defaults 0
 ALLOW_OFFLINE (optional) Allow domain to be offline defaults 0
-All EtherCAT entries generated after this command will be assigned</description></item><item><title>addEcDataItem.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecdataitem/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecdataitem/</guid><description>description Script for adding a ethercat data item.
+All EtherCAT entries generated after this command will be assigned</description></item><item><title>addEcDataItem.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecdataitem/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecdataitem/</guid><description>description Script for adding a ethercat data item.
 details The ethercat data item allows for accessing alreday configured ethercat domain data in a flexible
-author Anders Sandström</description></item><item><title>addEcSdoRT.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecsdort/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecsdort/</guid><description>description Script for adding asyn SDO object (access to SDO:s in realtime)
+author Anders Sandström</description></item><item><title>addEcSdoRT.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecsdort/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addecsdort/</guid><description>description Script for adding asyn SDO object (access to SDO:s in realtime)
 details Add SDO for async access during realtime operation
-author Anders Sandström</description></item><item><title>addEncoder.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addencoder/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addencoder/</guid><description>description Script for adding an extra encoder to an axis.
+author Anders Sandström</description></item><item><title>addEncoder.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addencoder/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addencoder/</guid><description>description Script for adding an extra encoder to an axis.
 details Adds an encoder to the last configured axis.
 author Niko Kivel
 paramters CONFIG configuration file, i.e. ./cfg/axis_1_enc_2.enc
@@ -27,12 +27,12 @@ DEV (optional) device name, i.e. MOTOR1
 CLEAR_VARS_CMD (optional) Set to &amp;ldquo;empty&amp;rdquo; for not clear env vars (if vars needed for later use).
 CFG_MACROS (optional) Substitution macros for config file
 Example call:
-${SCRIPTEXEC} ${ecmccfg_DIR}addEncoder.cmd, &amp;#34;CONFIG=./cfg/linear_1_enc_3.enc&amp;#34;</description></item><item><title>addMaster.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addmaster/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addmaster/</guid><description>description Script for claiming a particular master.
+${SCRIPTEXEC} ${ecmccfg_DIR}addEncoder.cmd, &amp;#34;CONFIG=./cfg/linear_1_enc_3.enc&amp;#34;</description></item><item><title>addMaster.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addmaster/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addmaster/</guid><description>description Script for claiming a particular master.
 details Claims an EtherCAT master.
 author Niko Kivel
 paramters MASTER_ID (optional) master ID as shown by ethercat master.
 Example calls:
-call w/o MASTER_ID ${SCRIPTEXEC} ${ecmccfg_DIR}addMaster.cmd call w/ MASTER_ID, which claims the 4th master. ${SCRIPTEXEC} ${ecmccfg_DIR}addMaster.cmd, &amp;#34;MASTER_ID=3&amp;#34;</description></item><item><title>addSlave.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslave/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslave/</guid><description>description Script for adding a slave to the EtherCAT bus configuration.
+call w/o MASTER_ID ${SCRIPTEXEC} ${ecmccfg_DIR}addMaster.cmd call w/ MASTER_ID, which claims the 4th master. ${SCRIPTEXEC} ${ecmccfg_DIR}addMaster.cmd, &amp;#34;MASTER_ID=3&amp;#34;</description></item><item><title>addSlave.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslave/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslave/</guid><description>description Script for adding a slave to the EtherCAT bus configuration.
 details Adds the respective hardware to the bus configuration, adds specific and default PV to the EPICS database. For some/most slaves also a default
 author Niko Kivel
 paramters HW_DESC Hardware descriptor, i.e. EL1008
@@ -40,32 +40,32 @@ SLAVE_ID (optional) bus position
 SUBST_FILE (optional) substitution file
 P_SCRIPT (optional) naming convention prefix script
 NELM (optional) Used for oversampling cards. Defaults to 1
-DEFAULT_SUBS (optional) option to disble default PVs for mapped PDOs</description></item><item><title>addSlaveKL.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslavekl/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslavekl/</guid><description>description Script for adding a KL slave to the EtherCAT bus configuration of KL type.
+DEFAULT_SUBS (optional) option to disble default PVs for mapped PDOs</description></item><item><title>addSlaveKL.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslavekl/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addslavekl/</guid><description>description Script for adding a KL slave to the EtherCAT bus configuration of KL type.
 details Adds the respective hardware to the bus configuration, adds specific and default PV to the EPICS database. For some/most slaves also a default
 author Anders Sandstrom
 paramters HW_DESC Hardware descriptor, i.e. KL2032
 SLAVE_ID EtherCAT bus position of the BK1250 (or similar terminal)
-SLAVE_ID_KL KL-Bus index in two digit hex starting at zero for the first slave after BK1250 (or similar terminal)</description></item><item><title>addVirtualAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addvirtualaxis/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addvirtualaxis/</guid><description>description Script for adding axis EPICS PVs.
+SLAVE_ID_KL KL-Bus index in two digit hex starting at zero for the first slave after BK1250 (or similar terminal)</description></item><item><title>addVirtualAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addvirtualaxis/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/addvirtualaxis/</guid><description>description Script for adding axis EPICS PVs.
 details Adds an virtual axis with PVs.
-author Niko Kivel</description></item><item><title>applyAxisSynchronization.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyaxissynchronization/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyaxissynchronization/</guid><description>description Script for applying axis synchronization
+author Niko Kivel</description></item><item><title>applyAxisSynchronization.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyaxissynchronization/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyaxissynchronization/</guid><description>description Script for applying axis synchronization
 details Adds synchronization parameters to an axis provided by CONFIG.
 author Niko Kivel
 paramters CONFIG configuration file, i.e. ./cfg/linear_1.sax
 CLEAR_VARS_CMD (optional) Set to &amp;ldquo;empty&amp;rdquo; for not clear env vars (if needed vars for later use).
 Example call:
-${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, &amp;#34;CONFIG=./cfg/linear_1.sax&amp;#34;</description></item><item><title>applyConfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyconfig/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyconfig/</guid><description>description Script for applying bus configuration.
+${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, &amp;#34;CONFIG=./cfg/linear_1.sax&amp;#34;</description></item><item><title>applyConfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyconfig/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyconfig/</guid><description>description Script for applying bus configuration.
 details Applies the EtherCAT configuration and caluclates data offsets in the process image.
 author Niko Kivel
 Example call:
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cfg</description></item><item><title>applySlaveConfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslaveconfig/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslaveconfig/</guid><description>description Script for applying a specific slave configuration after the slave had been added manually.
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cfg</description></item><item><title>applySlaveConfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslaveconfig/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslaveconfig/</guid><description>description Script for applying a specific slave configuration after the slave had been added manually.
 details Apply configurations to a slave.
 author Niko Kivel
 Example call:
 call applySlaveConfig with CONFIG
 ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, &amp;#34;CONFIG=-Motor-Nanotec-ST4118L1804-B&amp;#34; call applySlaveConfig with LOCAL_CONFIG
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, &amp;#34;LOCAL_CONFIG=./myFancyServoConfig.cfg&amp;#34;</description></item><item><title>applySlaveDCconfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslavedcconfig/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslavedcconfig/</guid><description>description Script for applying dc config to slave
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, &amp;#34;LOCAL_CONFIG=./myFancyServoConfig.cfg&amp;#34;</description></item><item><title>applySlaveDCconfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslavedcconfig/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applyslavedcconfig/</guid><description>description Script for applying dc config to slave
 details Apply dc configurations to a slave.
-author Anders Sandstroem</description></item><item><title>applySubstitutions.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applysubstitutions/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applysubstitutions/</guid><description>description Script for applying substitution file
+author Anders Sandstroem</description></item><item><title>applySubstitutions.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applysubstitutions/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applysubstitutions/</guid><description>description Script for applying substitution file
 details Applies substitution from ${SUBST_FILE} with ${P_SCRIPT}
 author Niko Kivel
 paramters SUBST_FILE (optional) substitution file
@@ -73,14 +73,14 @@ ECMC_P PV prefix
 P_SCRIPT (optional) naming convention prefix script
 NELM (optional) Used for oversampling cards. Defaults to 1
 Example calls:
-call w/o SLAVE_ID ${SCRIPTEXEC} &amp;#34;${ECMC_CONFIG_ROOT}applySubstitutions.cmd&amp;#34; &amp;#34;SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}&amp;#34;</description></item><item><title>applyTemplate.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applytemplate/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applytemplate/</guid><description>description Script for applying a template
+call w/o SLAVE_ID ${SCRIPTEXEC} &amp;#34;${ECMC_CONFIG_ROOT}applySubstitutions.cmd&amp;#34; &amp;#34;SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}&amp;#34;</description></item><item><title>applyTemplate.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applytemplate/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/applytemplate/</guid><description>description Script for applying a template
 details Applies template from ${TEMPLATE_FILE} with ${P_SCRIPT}, PARAMS can be passed
 author Niko Kivel
 paramters TEMPLATE_FILE template file
 ECMC_P PV prefix
 PARAMS (optional) additional parameters
 Example calls:
-call w/o SLAVE_ID ${SCRIPTEXEC} &amp;#34;${ECMC_CONFIG_ROOT}applyTemplate.cmd&amp;#34; &amp;#34;TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P}&amp;#34;</description></item><item><title>configureAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureaxis/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureaxis/</guid><description>description Script for adding an axis with configuration.
+call w/o SLAVE_ID ${SCRIPTEXEC} &amp;#34;${ECMC_CONFIG_ROOT}applyTemplate.cmd&amp;#34; &amp;#34;TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P}&amp;#34;</description></item><item><title>configureAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureaxis/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureaxis/</guid><description>description Script for adding an axis with configuration.
 details Adds an axis to the configuration and applies parameters provided by CONFIG.
 author Niko Kivel
 paramters CONFIG configuration file, i.e. ./cfg/linear_1.pax
@@ -88,40 +88,40 @@ DEV (optional) device name, i.e. MOTOR1
 CLEAR_VARS_CMD (optional) Set to &amp;ldquo;empty&amp;rdquo; for not clear env vars (if vars needed for later use).
 CFG_MACROS (optional) Substitution macros for config file
 Example call:
-${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd, &amp;#34;CONFIG=./cfg/linear_1.pax&amp;#34;</description></item><item><title>configureSlave.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureslave/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureslave/</guid><description>description Script for adding a slave with dedicated slave configuration to the EtherCAT bus configuration.
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd, &amp;#34;CONFIG=./cfg/linear_1.pax&amp;#34;</description></item><item><title>configureSlave.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureslave/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configureslave/</guid><description>description Script for adding a slave with dedicated slave configuration to the EtherCAT bus configuration.
 details Adds the respective hardware to the bus configuration, adds specific and default PV to the EPICS database. Applies a specific slave configuration.
 author Niko Kivel
 paramters HW_DESC Hardware descriptor, i.e. EL7037
 CONFIG configuration file, i.e. -Motor-Nanotec-ST4118L1804-B
-The CONFIG together with the HW_DESC form the full filename which by definition is ecmc${HW_DESC}${CONFIG}.cmd, i.e.: ecmcEL7037-Motor-Nanotec-ST4118L1804-B.</description></item><item><title>configureVirtualAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configurevirtualaxis/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configurevirtualaxis/</guid><description>description Script for adding a virtual axis with configuration.
+The CONFIG together with the HW_DESC form the full filename which by definition is ecmc${HW_DESC}${CONFIG}.cmd, i.e.: ecmcEL7037-Motor-Nanotec-ST4118L1804-B.</description></item><item><title>configureVirtualAxis.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configurevirtualaxis/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/configurevirtualaxis/</guid><description>description Script for adding a virtual axis with configuration.
 details Adds a virtual axis to the configuration and applies parameters provided by CONFIG.
 author Niko Kivel
 paramters CONFIG configuration file, i.e. ./cfg/linear_11.vax
 DEV (optional) device name, i.e. GAP
 CLEAR_VARS_CMD (optional) Set to &amp;ldquo;empty&amp;rdquo; for not clear env vars (if needed vars for later use).
 Example call:
-${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd, &amp;#34;CONFIG=./cfg/linear_11.vax&amp;#34;</description></item><item><title>finalize.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/finalize/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/finalize/</guid><description>description Script for finalizing. Executed just before iocInit (atInit)
+${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd, &amp;#34;CONFIG=./cfg/linear_11.vax&amp;#34;</description></item><item><title>finalize.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/finalize/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/finalize/</guid><description>description Script for finalizing. Executed just before iocInit (atInit)
 details Script for finalizing. Executed just before iocInit (atInit).
-author Anders Sandström</description></item><item><title>loadAxisPLCFile.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadaxisplcfile/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadaxisplcfile/</guid><description>description Script for adding a PLC from file.
+author Anders Sandström</description></item><item><title>loadAxisPLCFile.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadaxisplcfile/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadaxisplcfile/</guid><description>description Script for adding a PLC from file.
 details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
 author Niko Kivel
 paramters FILE PLC definition file, i.e. ./plc/homeSlit.plc
 AX_ID (optional) Ax number, default 0
 PLC_MACROS (optional) Substitution macros for PLC code
 TMP_PATH (optional) directory to dump the temporary plc file after macro substitution
-PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).</description></item><item><title>loadPLCFile.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplcfile/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplcfile/</guid><description>description Script for adding a PLC from file.
+PRINT_PLC_FILE (optional) 1/0, printout msi parsed plc file (default enable(1)).</description></item><item><title>loadPLCFile.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplcfile/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplcfile/</guid><description>description Script for adding a PLC from file.
 details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
 author Niko Kivel, Anders Sandström
 paramters FILE PLC definition file, i.e. ./plc/homeSlit.plc
 PLC_ID (optional) PLC number, default 0, or to next free PLC, the actual PLC Id is stored in ECMC_PLC_ID and can be used after this command
 SAMPLE_RATE_MS (optional) excecution rate, default 1000/EC_RATE
-PLC_MACROS (optional) Substitution macros for PLC code.</description></item><item><title>loadPLCLib.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplclib/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplclib/</guid><description>description Script for loading a PLC from lib from file.
+PLC_MACROS (optional) Substitution macros for PLC code.</description></item><item><title>loadPLCLib.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplclib/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplclib/</guid><description>description Script for loading a PLC from lib from file.
 details Adds a PLC defined in FILE. Also adds PLC specific EPICS PVs, i.e. for enable/disable.
 author Anders Sandström
 paramters FILE PLC definition file, i.e. ./plc/homeSlit.plc
 PLC_ID (optional) PLC number, default last loaded PLC
 PLC_MACROS (optional) Substitution macros for PLC code. The macros &amp;ldquo;SELF_ID&amp;rdquo;,&amp;ldquo;SELF&amp;rdquo;,M_ID, and M are reserved:
-INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with &amp;lsquo;:').</description></item><item><title>loadPlugin.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplugin/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplugin/</guid><description>description Script for loading a ecmc plugin from file.
+INC (optional) List of directories for include files to pass to MSI (if several paths thendivide with &amp;lsquo;:').</description></item><item><title>loadPlugin.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplugin/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadplugin/</guid><description>description Script for loading a ecmc plugin from file.
 details Loads a ecmc-plugin from file.
 author Anders Sandström
 paramters FILE Filename of plugin shared lib (./ecmcPlugin_Advanced.so)
@@ -129,24 +129,24 @@ PLUGIN_ID Id of plugin to load
 CONFIG (optional) Configuration string sent to plugin at construct
 REPORT (optional) Printout information of loaded plugin if set to &amp;ldquo;1&amp;rdquo;
 Example call:
-${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, &amp;#34;PLUGIN_ID=0,FILE=./ecmcPlugin_Advanced.so,CONFIG=&amp;#39;PLUGIN CONFIGS GO HERE &amp;#39;</description></item><item><title>loadSubstAxes.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstaxes/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstaxes/</guid><description>description Script for adding multiple axes based on subst and template file
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, &amp;#34;PLUGIN_ID=0,FILE=./ecmcPlugin_Advanced.so,CONFIG=&amp;#39;PLUGIN CONFIGS GO HERE &amp;#39;</description></item><item><title>loadSubstAxes.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstaxes/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstaxes/</guid><description>description Script for adding multiple axes based on subst and template file
 details Configure multiple axes by using subst file
 author Anders Sandström
-${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstAxes.cmd, &amp;#34;FILE=./ax.subs&amp;#34;</description></item><item><title>loadSubstConfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstconfig/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstconfig/</guid><description>description Script for loading complete ecmc cfg based on subst files and templates
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstAxes.cmd, &amp;#34;FILE=./ax.subs&amp;#34;</description></item><item><title>loadSubstConfig.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstconfig/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubstconfig/</guid><description>description Script for loading complete ecmc cfg based on subst files and templates
 details Loads complete ecmc cfg based on subst files and templates
 author Anders Sandström
-${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd, &amp;#34;FILE=./cfg.subs&amp;#34;</description></item><item><title>loadSubstHw.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubsthw/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubsthw/</guid><description>description Script for adding multiple hw based on subst and template file
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd, &amp;#34;FILE=./cfg.subs&amp;#34;</description></item><item><title>loadSubstHw.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubsthw/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/loadsubsthw/</guid><description>description Script for adding multiple hw based on subst and template file
 details Loads hw cfg based on subst files and templates
 author Anders Sandström
-${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstHw.cmd, &amp;#34;FILE=./hw.subs&amp;#34;</description></item><item><title>restoreRecordUpdateRate.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/restorerecordupdaterate/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/restorerecordupdaterate/</guid><description>description Restores record update rate to what was defined in startup.cmd
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstHw.cmd, &amp;#34;FILE=./hw.subs&amp;#34;</description></item><item><title>restoreRecordUpdateRate.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/restorerecordupdaterate/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/restorerecordupdaterate/</guid><description>description Restores record update rate to what was defined in startup.cmd
 details Restores record update rate to what was defined in startup.cmd
-author Anders Sandström</description></item><item><title>setAppMode.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setappmode/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setappmode/</guid><description>description Script for switching to operational mode.
+author Anders Sandström</description></item><item><title>setAppMode.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setappmode/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setappmode/</guid><description>description Script for switching to operational mode.
 details Validates configuration, starts realtime thread and checks EtherCAT slaves are in OP.
-author Niko Kivel</description></item><item><title>setDiagnostics.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setdiagnostics/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setdiagnostics/</guid><description>description Script for enabling default diagnostics.
+author Niko Kivel</description></item><item><title>setDiagnostics.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setdiagnostics/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setdiagnostics/</guid><description>description Script for enabling default diagnostics.
 details Set some default values to diagostics
-author Niko Kivel</description></item><item><title>setRecordUpdateRate.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setrecordupdaterate/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setrecordupdaterate/</guid><description>description Script for changing record update rate
+author Niko Kivel</description></item><item><title>setRecordUpdateRate.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setrecordupdaterate/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/setrecordupdaterate/</guid><description>description Script for changing record update rate
 details Update record processing rate, all records created after this command will be updated in the specified rate.
-author Anders Sandström</description></item><item><title>slaveVerify.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/slaveverify/</link><pubDate>Fri, 27 Sep 2024 12:56:41 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/slaveverify/</guid><description>description ** script for slave verification and optional reset**
+author Anders Sandström</description></item><item><title>slaveVerify.cmd</title><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/slaveverify/</link><pubDate>Fri, 27 Sep 2024 13:07:34 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/slaveverify/</guid><description>description ** script for slave verification and optional reset**
 details will verify the slave identity and reset by writing to 0x1011, optionally read firmwre version from 0x100a
 author Niko Kivel
 Macros</description></item><item><title/><link>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/empty/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://paulscherrerinstitute.github.io/ecmccfg/source/scripts/empty/</guid><description/></item></channel></rss>
