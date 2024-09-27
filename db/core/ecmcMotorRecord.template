@@ -388,8 +388,7 @@ record(seq, "${PREFIX}${MOTOR_NAME}-StpCmd_") {
 ################################################################
 # Sync only
 record(longin,"${PREFIX}${MOTOR_NAME}-SyncMrCmd"){
-  field(DESC, "${MOTOR_NAME}: Sync MR")
-  field(PINI, "$(PINI=1)")
+  field(DESC, "${MOTOR_NAME}: Sync MR")  
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_SYNC")
   field(SCAN, "I/O Intr")
