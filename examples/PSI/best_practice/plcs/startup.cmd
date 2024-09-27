@@ -1,7 +1,7 @@
 ##############################################################################
 ## Simple example config for plcs
 
-require ecmccfg v9.5.5_RC1, "ECMC_VER=v9.5.5_RC1,ENG_MODE=1"
+require ecmccfg "ENG_MODE=1"
 
 #- ############################################################################
 #- Configure hardware
