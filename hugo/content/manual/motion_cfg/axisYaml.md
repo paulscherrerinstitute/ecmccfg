@@ -562,20 +562,6 @@ input:
     interlockPolarity: 1                              # 0: High value is bad, 1 = Low value is bad
     rawLimit: 2000                                    # Analog raw limit
     enable: true                                      # Enable analog interlock default true if analog.interlock is set
-# homing:
-#   type: 3                                           # Homing sequence type
-#   position: -30                                     # Position to reference encoder to
-#   velocity:
-#     to: 10                                          # Velocity to cam/sensor (used for some homing seqs)
-#     from: 5                                         # Velocity from cam/sensor (used for some homing seqs)
-#   acc: 20                                           # Acceleration during homing
-#   dec: 100                                          # Deceleration during homing
-#   refToEncIDAtStartup: 1                            # At startup then set the start value of this encoder to actpos of this encoder id
-#   refAtHome: 1                                      # If homing is executed then set position of this encoder
-#   tolToPrim: 0                                      # If set then this is the max allowed tolerance between prim encoder and this encoder
-#   postMoveEnable: yes                               # Enable move after successfull homing
-#   postMovePosition: 10                              # Position to move to after successfull homing
-#   timeout: 100                                      # Sequence timeout
 
 softlimits:
   enable: false                                       # Enable soft limits
