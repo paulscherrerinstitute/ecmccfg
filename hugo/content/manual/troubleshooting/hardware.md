@@ -9,7 +9,7 @@ chapter = false
 ## Topics
 1. [over current protection](#over-current-protection)
 2. [EL7041 error/warning](#EL7041-error/warning)
-3. [EL5042](EL5042)
+3. [EL5042](#EL5042)
 4. [latency issues](#latency-issues)
 
 ---
@@ -161,8 +161,10 @@ Could be caused by:
 * Wrong settings (bit counts, ..), see futher below on this page (and also motion/best practice).
 * Bad electrical connection
 * Wrong power supply
-* Defect encoder
+* Defect encoder or EL5042
 * Long cabling lengths
+
+Always start troubleshooting by checking the error, warning and ready bits and reading the EL5042 manual. Next step is to read the diagnostic SDO bits of the EL5042, see below under heading "Diagnostics".
 
 **Bad electrical connection**
 
@@ -174,9 +176,10 @@ Lack of clock or data pulses could be caused by (in order of probability):
 1. short circuit or error in cabling
 2. defect/burt encoder
 3. No/wrong power supply
-4. faulty EL5042
+4. defect EL5042 (if lack of clock pulses)
 
 **Wrong power supply**
+
 Make sure the encoder is powered with the correct voltage. Most encoders require 5V, but there are also some that require 9V, 12V or 24V.
 
 {{% notice warning %}}
@@ -185,9 +188,10 @@ Never apply a higher voltage than the specified operating voltage for the encode
 
 The EL5042 can supply 5V or 9V. The default setting is 5V and in order to change the setting to 9V a special sequence need to be executed (see EL5042 manual).
 
-After ensureing that the encoder is correctly supplied, it's a good ide to measure the power consumption of the encoder and compare with the specified consumption. If the power consumption does not match, the encoder might be borken or a faulty cabling.
+After ensureing that the encoder is correctly supplied, it's a good ide to measure the power consumption of the encoder and compare with the specified consumption. If the power consumption does not match, the encoder might be broken or a faulty cabling.
 
 **Long cable lengths**
+
 Long cable lengths can affect both power supply levels and the serial data channels.
 
 _Power supply:_
@@ -217,6 +221,41 @@ For EL5042 the following rates are availble:
 * 250 kHz
 
 NOTE: The closest freq. equal or higher than CLK_FRQ_KHZ will be selected.
+
+#### Diagnostics
+
+The diagnostic data can be read from register [Index A0p8 FB BiSS-C Diag data (for Ch.1, p = 0; Ch.2, p = 1)](https://infosys.beckhoff.com/english.php?content=../content/1033/el5042/4216754315.html&id=695067345900842552):
+
+The ecmccfg/utils/read_el5042_diag.sh tool can be used for reading the diagnostics:
+```bash
+bash read_el5042_diag.sh <master_id> <slave_id> <channel_id>
+```
+NOTE: The channel id starts at 0. First encoder channel is 0.
+
+Example: master 1, slave 14, channel 0
+```bash
+# first login to ecmc server
+$ bash read_el5042_diag.sh 1 14 0
+
+#########################################################
+Reading EL5042 Ch 0 status at master id 1 and slave id 14:
+
+Power supply present:
+0x01 1
+Error:
+0x00 0
+SDC Error:
+0x01 1
+WD Error:
+0x01 1
+Data valid:
+0x00 0
+Data raw value:
+0x0000000000000000 0
+
+#########################################################
+```
+Note: The tool ecmccfg/utils/PDO_read can also be used for reading the diagnostics.
 
 #### Offset LSB Bit [Bit] (0x80p8:17)
 
@@ -267,40 +306,6 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-SSI,CH_ID=
 The status bits can then be masked away by:
 1. Using the LSB offset (set to 2 and reduce ST_BITS to 26), then the status bits are shifted away already in EL5042 hardware. Then you cannot access the status bits (to use from PLC or for interlock)
 2. Setting a mask in axis yaml file (encoder.mask: 0xFFFFFFC), in this case the encoder.absBits should not be used because it's automatically calculated by the mask command. Then you can reach the bits in the raw encoder value.
-
-#### Diagnostics
-The diagnostic data can be read from register [Index A0p8 FB BiSS-C Diag data (for Ch.1, p = 0; Ch.2, p = 1)](https://infosys.beckhoff.com/english.php?content=../content/1033/el5042/4216754315.html&id=695067345900842552):
-
-The ecmccfg/utils/read_el5042_diag.sh tool can be used for reading the diagnostics:
-```bash
-bash read_el5042_diag.sh <master_id> <slave_id> <channel_id>
-```
-NOTE: The channel id starts at 0. First encoder channel is 0.
-
-Example: master 1, slave 14, channel 0
-```bash
-# first login to ecmc server
-$ bash read_el5042_diag.sh 1 14 0
-
-#########################################################
-Reading EL5042 Ch 0 status at master id 1 and slave id 14:
-
-Power supply present:
-0x01 1
-Error:
-0x00 0
-SDC Error:
-0x01 1
-WD Error:
-0x01 1
-Data valid:
-0x00 0
-Data raw value:
-0x0000000000000000 0
-
-#########################################################
-```
-Note: The tool ecmccfg/utils/PDO_read can also be used for reading the diagnostics.
 
 ### latency issues
 
