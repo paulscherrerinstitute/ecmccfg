@@ -18,11 +18,11 @@ As a comparison, TwinCAT default EtherCAT rates are:
 * 100Hz for PLC
 * 500Hz for motion
 
-See [ecmc_server](../knowledgebase/hardware/host/) for more information.
+See [ecmc_server](../../knowledgebase/hardware/host/) for more information.
 
 ## ecmc server setup
 * If possible, make sure you use the native igb ethercat driver.
 
 For more information see:
 * https://git.psi.ch/motion/ecmc_server_cfg
-* [ecmc_server](../knowledgebase/hardware/host) for more information.
+* [ecmc_server](../../knowledgebase/hardware/host/) for more information.
