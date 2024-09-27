@@ -23,5 +23,5 @@ Tuning systems with backlash can be difficult. Sometimes a small D-part helps to
 #### Velocity and Current loop
 These control loops need to be tuned in the drive.
 
-For EL70x1, see [EL70x1 tuning](../hardware/EL70x1)
+For EL70x1, see [EL70x1 tuning](../hardware/el70x1)
 For other drives, consult the dedicated manual.
