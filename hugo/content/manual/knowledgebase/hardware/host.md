@@ -94,7 +94,7 @@ Issues that could occour in rates below 100Hz:
 * some slaves might not support it
 
 #### Higher rates
-Issues that could occour in rates over 1000Kz:
+Issues that could occour in rates over 1Kz:
 * missed frames
 * issues with dc clock syncs
 * some slaves might not support it.
