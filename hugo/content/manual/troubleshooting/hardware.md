@@ -108,27 +108,31 @@ Misc error:
 Note: The tool ecmccfg/utils/PDO_read can also be used for reading the diagnostics.
 
 #### under voltage
-Under voltage could be that the drive voltage setting is 48V but the drive is only powered with 24V.
 
-The nominal voltage setting can be changed by the U_NOM_MV macro when applying the component (ecmccomp).
+Use a multimeter to verify that the voltage level corresponds to voltage levels described in the electrical drawings. If the voltage is correct, then the under voltage alarm could be related to worng setting of nominal drive voltage setting (48V but the drive is powered with 24V).
+
+The nominal drive voltage setting can be changed by the U_NOM_MV macro when applying the component (ecmccomp).
 
 Example: Set nominal voltage to 24V
 ```
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=24000, R_COIL_MOHM=1230'"
-
 ```
 
-#### over voltage
-Over voltage could be that the drive voltage setting is 24V but the drive is powered with 48V.
+{{% notice info %}}
+For the EL703x drives the nominal voltage must be set to 24V (ecmccomp handles this automatically).
+{{% /notice %}}
 
-The nominal voltage setting can be changed by the U_NOM_MV macro when applying the component (ecmccomp).
+#### over voltage
+
+Use a multimeter to verify that the voltage level corresponds to voltage levels described in the electrical drawings. If the voltage is correct, then the over voltage alarm could be related to worng setting of nominal drive voltage setting (24V but the drive is powered with 48V).
+
+The nominal drive voltage setting can be changed by the U_NOM_MV macro when applying the component (ecmccomp).
 
 Example: Set nominal voltage to 48V
 ```
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230'"
-
 ```
 
 {{% notice info %}}
