@@ -14,8 +14,8 @@ For detailed syntax help please visit the [exprtk website](https://github.com/Ar
 
 ### functions
 PLC do _not_ immediately write to the bus!
-The PLC will excecute synchronous to the cycle, or at an integer fraction of it.
-The prcessed data will be send to the bus with the next cycle.
+The PLC will execute synchronous to the cycle, or at an integer fraction of it.
+The processed data will be send to the bus with the next cycle.
 PLCs do _not_ delay the bus!
 
 ### statement terminator
@@ -25,7 +25,7 @@ Statements are terminated by a semicolon `;`
 All variables are initiated to `0`
 
 ### comments
-The hash charactoer `#` is reserved for comments.
+The hash character `#` is reserved for comments.
 Everything after this char will be removed before compile.
 {{% notice warning %}}
 `println('########');` will be seen by the compiler as `println('` !
@@ -66,7 +66,7 @@ Custom plc functions can be written in c in plugins.
 #  1. Assignment:
 #     ec0.s1.VALUE:=100;
 #
-#  2. if-else (note the equl sign):
+#  2. if-else (note the equal sign):
 #     if(ec0.s1.VALUE=100) {
 #       # code
 #     }
@@ -215,14 +215,14 @@ Custom plc functions can be written in c in plugins.
 ```shell
 # 1.  plc<id>.enable               plc enable                       (rw)
 #                                  (end exe with "plc<id>.enable:=0#"
-#                                  Could be usefull for startup
+#                                  Could be use full for startup
 #                                  sequences)
 # 2.  plc<id>.error                plc error                        (rw)
 #                                  Will be forwarded to user as
 #                                  controller error.
 # 3.  plc<id>.scantime             plc sample time in seconds       (ro)
 # 4.  plc<id>.firstscan            true during first plc scan only  (ro)
-#                                  usefull for initiations of variables
+#                                  use full for initiations of variables
 # 5.  ax<id>.plc.enable            Same as plc<id>.enable but for
 #                                  axis <id> sync plc.
 # 6.  ax<id>.plc.error             Same as plc<id>.error but for
@@ -319,9 +319,9 @@ Custom plc functions can be written in c in plugins.
 #                          );
 #     Copies data from source memmap to dest memmap. The memmap ids are defined by the 
 #     order they are created (starting at 0). The smallest memmap size will define the
-#     amout of data copied. Returns 0 for success or an error code.
+#     amount of data copied. Returns 0 for success or an error code.
 #  
-#     Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
+#     Note: The mmId can be retrieved by the bellow ecmc command (and feed into plc via macro):
 #        ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
 #        epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 #  

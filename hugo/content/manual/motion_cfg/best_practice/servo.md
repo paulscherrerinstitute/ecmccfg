@@ -9,7 +9,7 @@ chapter = false
 * Lab test stage (1mm/rev)
 * Motor : AM8111-0F20
 
-### scalings
+### scaling
 Config for scaling in mm, mm/s, mm/s2
 
 ### motor AM8111-XFX0
@@ -24,16 +24,16 @@ Only the encoder integrated encoder is configured in this example. The specifica
 ```
 One Cable Technology for power and feedback: feedback transmission via motor cable, no feedback cable necessary, electronic nameplate, multi-turn, absolute position within 4096 revolutions, 18 bit resolution.
 ```
-However, when connecting to an Ex72xx drive the single turn count will be 20bits and 12bits multiturn, resulting in a total of 32bits absolute bits.
+However, when connecting to an Ex72xx drive the single turn count will be 20bits and 12bits multi-turn, resulting in a total of 32bits absolute bits.
 
 * encoder.numerator: Travels 1 mm/rev
 * encoder.denominator: Resolution: 1048576 counts (20bits) per = 1mm
 * encoder.absBits: 32 bits (20bits+12bits)
 * encoder.type: Absolute (type 1)
-* ecnoder.absOffset: Offset to 0 position of linear stage (-1000 in this example)
+* encoder.absOffset: Offset to 0 position of linear stage (-1000 in this example)
 
 ```
-# The encoder on most motors are 20bit single turn and 12 bit multiturn (4096 turns)
+# The encoder on most motors are 20bit single turn and 12 bit multi-turn (4096 turns)
 encoder:
   type: 1
   position: ec0.s$(DRV_ID).positionActual01
@@ -44,7 +44,7 @@ encoder:
   absOffset: -1000
 ```
 
-### drive scalings
+### drive scaling
 Max scale for motors depend on the pole count:
 * 6 pole: Max scale is 8000revs/s (in this case 8000mm/s)
 * 8 pole: Max scale is 6000revs/s

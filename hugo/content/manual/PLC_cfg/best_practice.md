@@ -5,13 +5,13 @@ chapter = false
 +++  
 
 ## best practice
-Here you can find some best practice configurations for common usecases.
+Here you can find some best practice configurations for common use cases.
 * Macros
 * MSI include, substitute
 * Printouts
 * Description
 
-The complete examples with starup files can be found [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice)
+The complete examples with startup files can be found [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice)
 
 ### macros
 Use of macros makes the code more generic. When loading a PLC file with "loadPLCFile.cmd", custom macros can be defined in "PLC\_MACROS":
@@ -27,7 +27,7 @@ In addition to the custom macros, a few macros, that are often needed, are prede
 4. M        : ec<M\_ID>
 
 #### SELF_ID and SELF example
-A common usecase is that some initiation is needed, could be triggering of a custom homing sequence:
+A common use case is that some initiation is needed, could be triggering of a custom homing sequence:
 
 ```C
 if(${SELF}.firstscan) {
@@ -72,8 +72,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cf
 The "INC" parameter can contain several directories separated with a ":", making it possible to include PLC files from several locations/modules.
 
 #### example: Toggle a few outputs 
-As a demo usecase let's consider that a few outputs needs to be toggled.
-NOTE: There are simpler ways to write this specifc code but it's used to demo how code can be divided.
+As a demo use case let's consider that a few outputs needs to be toggled.
+NOTE: There are simpler ways to write this specific code but it's used to demo how code can be divided.
 
 Lets first define some code that toggles a bit (toggle\_output.plc\_inc):
 ```shell
@@ -104,7 +104,7 @@ The resulting code will toggle two different outputs, the state of the last outp
 NOTE: Macros cannot be used in the filename when including a file. Instead the dir should be defined in the INC param when loading the PLC, see above.
 
 ### printouts
-Adding a DBG macro can be usefull to be able to turn on/off printouts. Typically during commsioning it can be usefull to have many printouts but later when system goes into production, it could be a good idea to turn (some) printouts off.
+Adding a DBG macro can be use full to be able to turn on/off printouts. Typically during commissioning it can be use full to have many printouts but later when system goes into production, it could be a good idea to turn (some) printouts off.
 
 Example of a printout that can be turned on/off (default off)
 ```C

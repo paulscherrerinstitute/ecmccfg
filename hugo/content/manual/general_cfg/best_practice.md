@@ -5,7 +5,7 @@ chapter = false
 +++  
 
 ## EtherCAT rate (EC_RATE)
-The default EtherCAT frame rate in ecmc is set to 1kHz. For most applications this is however not needed and can therefore be reduced. A reduced EtherCAT rate reduces the load on the controller. In general, a good value for the frame rate is in the range 100Hz to 1kHz. For motion systems, a frame rate of 100Hz..500Hz is normally enough. Rates ouside the 100Hz..1kHz range is normally not a good idea, and some slaves might not support it. However, in special cases both lower and higher rates might be possible and required.
+The default EtherCAT frame rate in ecmc is set to 1kHz. For most applications this is however not needed and can therefore be reduced. A reduced EtherCAT rate reduces the load on the controller. In general, a good value for the frame rate is in the range 100Hz to 1kHz. For motion systems, a frame rate of 100Hz..500Hz is normally enough. Rates outside the 100Hz..1kHz range is normally not a good idea, and some slaves might not support it. However, in special cases both lower and higher rates might be possible and required.
 
 Example: Set rate to 500Hz
 ```

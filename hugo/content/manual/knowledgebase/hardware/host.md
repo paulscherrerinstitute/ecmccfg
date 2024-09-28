@@ -36,7 +36,7 @@ After editing the file, the host needs to be rebooted in order for the changes t
 #### high load on system
 
 ** Reduce sample rate**
-Reducing the ethercat cycle time is often very effichient when it comes to reduce latency. Do not run the ecmc systems faster than needed.
+Reducing the ethercat cycle time is often very efficient when it comes to reduce latency. Do not run the ecmc systems faster than needed.
 The default ecmc sample rate is 1Khz, which in many cases is not needed.
 
 The sample rate is defined when require ecmccfg (example set to 500Hz, instead of 1kHz):
@@ -48,7 +48,7 @@ There are some restrictions on the sample rate. Normally, a rate in the range 10
 {{% /notice %}}
 
 ** Affinity**
-Setting the affinity of the ecmc realtiem thread can often improve the performace. First check how many cores the controller has. 
+Setting the affinity of the ecmc realtime thread can often improve the performance. First check how many cores the controller has. 
 {{% notice warning %}}
 At PSI, core 0 is always isolated, do not move any threads to core 0.
 {{% /notice %}}
@@ -61,9 +61,9 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 #- Set affinity of ecmc_rt (core 5)
 epicsThreadSetAffinity ecmc_rt 5
 ```
-If more than one ecmc ioc is running on the server, then make sure the ecmc_rt threads run on differnt cores.
+If more than one ecmc ioc is running on the server, then make sure the ecmc_rt threads run on different cores.
 
-Also other threads might take a lot of resources, for instace the epics thread "cbLow": 
+Also other threads might take a lot of resources, for instance the epics thread "cbLow": 
 ```
 afterInit "epicsThreadSetAffinity cbLow 6"
 ```
@@ -72,32 +72,32 @@ cbLow is created at iocInit, therefore the "epicsThreadSetAffinity" must be exec
 {{% /notice %}}
 
 ### EtherCAT rate (EC_RATE)
-The default EtherCAT frame rate in ecmc is set to 1kHz. For most applications this is however not needed and can therefore be reduced. A reduced EtherCAT rate reduces the load on the controller. In general, a good value for the frame rate is in the range 100Hz to 1kHz. For motion systems, a frame rate of 100Hz..500Hz is normally enough. Rates ouside the 100Hz..1kHz range is normally not a good idea, and some slaves might not support it. However, in special cases both lower and higher rates might be possible and required.
+The default EtherCAT frame rate in ecmc is set to 1kHz. For most applications this is however not needed and can therefore be reduced. A reduced EtherCAT rate reduces the load on the controller. In general, a good value for the frame rate is in the range 100Hz to 1kHz. For motion systems, a frame rate of 100Hz..500Hz is normally enough. Rates outside the 100Hz..1kHz range is normally not a good idea, and some slaves might not support it. However, in special cases both lower and higher rates might be possible and required.
 
 Example: Set rate to 500Hz
 ```
 require ecmccfg "EC_RATE=500"
 ...
 ```
-For more information see the chapter descriping startup.cmd.
+For more information see the chapter describing startup.cmd.
 
 As a comparison, TwinCAT default EtherCAT rates are:
 * 100Hz for PLC
 * 500Hz for motion
 
 #### Lower rates
-Issues that could occour in rates below 100Hz:
+Issues that could occur in rates below 100Hz:
 * triggering of slave watchdogs
-* issues with dc clock syncs (DC capabale slaves normally performs best with at a rate of atleast 500Hz)
+* issues with dc clock syncs (DC capable slaves normally performs best with at a rate of at least 500Hz)
 * some slaves might not support it
 
 #### Higher rates
-Issues that could occour in rates over 1Kz:
+Issues that could occur in rates over 1Kz:
 * missed frames
 * issues with dc clock syncs
 * some slaves might not support it.
 
-NOTE: Some slave might support a high rate but could have built in signal filters of several ms which then makes sampling at higher freqs unneccesarry/not needed.
+NOTE: Some slave might support a high rate but could have built in signal filters of several ms which then makes sampling at higher freqs unnecessary/not needed.
 
 In order to successfully run an ecmc ethercat system at higher rates some tuning might be needed:
 * minimize slave count (and ensure that the slaves support it)

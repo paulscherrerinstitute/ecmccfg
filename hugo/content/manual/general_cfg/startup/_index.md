@@ -12,7 +12,7 @@ startup.cmd takes the following arguments:
  ECMC_VER          = 9.5.4
  EthercatMC_VER    = 3.0.2 (obsolete)
  INIT              = initAll
- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
+ MASTER_ID         = 0 <-- put negative number to disable master, aka non ec-mode
  SCRIPTEXEC        = iocshLoad
  NAMING            = mXsXXX (default), ClassicNaming, ESSnaming
  EC_RATE           = 1000
@@ -39,7 +39,7 @@ startup.cmd takes the following arguments:
  ECMC_SUPPORT_MOTION    = Variable to be used to block use of motion (""/empty=support motion or "#-"=disable motion)
  ECMC_TMP_DIR           = directory for temporary files, defaults to "/tmp/${IOC}/EcMaster_${ECMC_EC_MASTER_ID}}/"
  ECMC_EC_TOOL_PATH      = path to ethercat tool
- ECMC_SAMPLE_RATE_MS    = current record update rate in milli seconds
+ ECMC_SAMPLE_RATE_MS    = current record update rate in milliseconds
  ECMC_SAMPLE_RATE_MS_ORIGINAL = ECMC_SAMPLE_RATE_MS (used for restore to default if ECMC_SAMPLE_RATE_MS is changed)
 ```
 

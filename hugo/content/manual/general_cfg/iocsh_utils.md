@@ -48,7 +48,7 @@ ecmcEpicsEnvSetCalc("test2", "061+1+2+3+4+5*10.1", "This is the number: 0x%06x")
 epicsEnvShow("test2")
 test2=This is the number: 0x00007a
 
-#### Calculate scalings (floating point)
+#### Calculate scaling (floating point)
 epicsEnvSet("IORange",32768)
 # ecmcEpicsEnvSetCalc("scaling", "$(test1)/$(IORange)*10", "%lf")
 ecmcEpicsEnvSetCalc("scaling", "061/32768*10", "%lf")
@@ -87,7 +87,7 @@ result=0
 ```
 ### Iocsh function "ecmcEpicsEnvSetCalcTernary()"
  "ecmcEpicsEnvSetCalcTernary()" is used o evaluate expressions and set EPCIS environment variables to different strings.
- depending on if the expression evaluates to "true" or "false". Can be usefull for:
+ depending on if the expression evaluates to "true" or "false". Can be useful for:
  * Choose different files to load like plc-files, axis configurations, db-files or..
  * making conditional ecmc settings
  * ...

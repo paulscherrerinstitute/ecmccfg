@@ -22,7 +22,7 @@ Example:
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCLib.cmd,     "FILE=./plc/test.plc_lib, PLC_MACROS='OFFSET=3'"
 ```
 
-The functions must be defined accordning to this template (max 5 parameters):
+The functions must be defined according to this template (max 5 parameters):
 ```C
 function <name>(<param1>,...,<param5>) {
   <code body>;
@@ -38,9 +38,9 @@ function <name>() {
 
 * Several functions can be defined in the same file.
 * For syntax of the "code body", check [plc syntax](../syntax) and the exprtk website.
-* The parameters aswell as the return value must be scalars, however, local vectors can be defined and used in calculations (initiations of vector can be done with MACROS, constants or parameters).
+* The parameters as well as the return value must be scalars, however, local vectors can be defined and used in calculations (initiations of vector can be done with MACROS, constants or parameters).
 * "#" as a first char in a line is considered a comment (the line will be removed before compile).
-* The lib file will be parsed through MSI allowing macro expansion, "include" and "subsitute" commands. For more info check [best practice](../best_practice) and msi documentation/help.
+* The lib file will be parsed through MSI allowing macro expansion, "include" and "substitute" commands. For more info check [best practice](../best_practice) and msi documentation/help.
 
 ### can be used in functions
 1. The parameters
@@ -105,8 +105,8 @@ function testm2m() {
 ```
 
 ### debugging
-Unfortunately debugging of function libs is not as easy as normal PLC:s since exprtk returns less infomation at compile failure.
+Unfortunately debugging of function libs is not as easy as normal PLC:s since exprtk returns less information at compile failure.
 
 {{% notice tip %}}
-In order to troubleshoot, load the code as a normal PLC instead. This way you will get more diagnostics. Also remember, ecmc varaibles cannot be accessed in plc libs.
+In order to troubleshoot, load the code as a normal PLC instead. This way you will get more diagnostics. Also remember, ecmc variables cannot be accessed in plc libs.
 {{% /notice %}}

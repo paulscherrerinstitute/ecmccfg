@@ -42,7 +42,7 @@ All keys are mandatory.
 
 - `id`: PLC id, unique **uint**
 - `enable`: PLC enabled at start
-- `rateMilliseconds`: execution rate in ms. To execute every cycle, independant of cycle rate, use `-1`.
+- `rateMilliseconds`: execution rate in ms. To execute every cycle, independent of cycle rate, use `-1`.
 - `code`: dictionary of code lines.
 
 {{% notice note %}}
@@ -73,7 +73,7 @@ All keys are mandatory.
 
 - `id`: PLC id, unique **uint**
 - `enable`: PLC enabled at start
-- `rateMilliseconds`: execution rate in ms. To execute every cycle, independant of cycle rate, use `-1`.
+- `rateMilliseconds`: execution rate in ms. To execute every cycle, independent of cycle rate, use `-1`.
 - `file`: PLC text file to load.
 
 {{% notice warning %}}

@@ -7,8 +7,8 @@ chapter = false
 ## data storage examples
 This dir contains two examples: [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/test/dataStorage).
 
-1. Continiously add value to data storage. Push to epics by hw trigger.
-2. Continiously add value to data storage. Push to epics by epics pv trigger.
+1. Continuously add value to data storage. Push to epics by hw trigger.
+2. Continuously add value to data storage. Push to epics by epics pv trigger.
 Data buffered data can be accessed by the "IOC_TEST:ds0-Data-Act" waveform pv (NELM 10000)
 
 Custom scale and offset can be applied to the stored values by MACROS (to the plc) in the startup file.
@@ -17,7 +17,7 @@ Custom scale and offset can be applied to the stored values by MACROS (to the pl
 
 In this example the data stored in dataStorage 0 is pushed to epics at a falling edge of the axis 1 high limit.
 
-Example 1 is started with the following stratup file: "add_data_to_buffer_trigg_push_hw.script" 
+Example 1 is started with the following startup file: "add_data_to_buffer_trigg_push_hw.script" 
 
 ```
 iocsh.bash add_data_to_buffer_trigg_push_hw.script
@@ -55,7 +55,7 @@ static.highlimOld:=ax1.mon.highlim;
 
 In this example the data stored in dataStorage 0 is pushed to epics at a rising edge of the "IOC_TEST:Set-PushDataTrigger-RB" pv.
 
-Example 2 is started with the following stratup file: "add_data_to_buffer_trigg_push_hw.script" 
+Example 2 is started with the following startup file: "add_data_to_buffer_trigg_push_hw.script" 
 ```
 iocsh.bash add_data_to_buffer_trigg_push_epics.script
 ```

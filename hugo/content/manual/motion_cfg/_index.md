@@ -25,7 +25,7 @@ Additionally the schema of the yaml file is checked by Cerberus.
 This check will point out errors in the structure of the configuration as well as certain type errors.
 
 ### [plc yaml config](axisPLC)
-Syncronization configurations
+Synchronization configurations
 
 ### [scaling](scaling)
 Configuration of scaling

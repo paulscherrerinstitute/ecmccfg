@@ -69,7 +69,7 @@ Ethernet devices:
 If the link is `DOWN`, try bringing the network device up manually.
 This, can be done with `ip link set <nameOfNetworkDevice> up`
 
-If the device name is unkown, check with `ip link show` and search for the MAC the EtherCAT master is bound to.
+If the device name is unknown, check with `ip link show` and search for the MAC the EtherCAT master is bound to.
 
 ### `ethercat slaves`
 As the command suggest, this will provide a list of the EtherCAT slaves.
