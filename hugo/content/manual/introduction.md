@@ -12,7 +12,7 @@ During IOC-startup, the requested configuration is validated against the actuall
 Mismatches will result in an error, the IOC will _not_ start.
 
 {{% notice warning %}}
-Blindly restarting the IOC, with only partially working EtherCAT hardware, will results in an inoperable IOC! Refer to the [troubleshooting guide](../troubleshooting) for details.
+Blindly restarting the IOC, with only partially working EtherCAT hardware, will results in an inoperable IOC! If troubleshooting is needed then check out the [knowledge base](../knowledgebase) for details.
 {{% /notice %}}
 
 ### IOC structure

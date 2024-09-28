@@ -4,7 +4,7 @@ weight = 15
 chapter = false  
 +++  
 
-## ecmc modes
+### ecmc modes
 ecmc can be started in different modes by setting the MODE parameter to startup.cmd (or require ecmccfg):
 1. FULL
 2. DAQ
@@ -12,7 +12,7 @@ ecmc can be started in different modes by setting the MODE parameter to startup.
 
 A separate mode for commissioning is also available, called ENG_MODE.
 
-### mode==FULL (default)
+#### mode==FULL (default)
 
 In FULL mode all ecmc functionalities are supported, like motion, daq and plcs.
 
@@ -25,7 +25,7 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=dev
 $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
 ```
 
-### mode==DAQ
+#### mode==DAQ
 In DAQ mode, motion functionalities are disabled and the following commands are blocked:
 1. configureAxis.cmd
 2. configureVirtualAxis.cmd
@@ -44,11 +44,11 @@ NOTE: The default record update rate is set to 10ms in initAlll.cmd. For DAQ app
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",1)
 ```
 
-### mode==NO_MR
+#### mode==NO_MR
 
 In this mode all features are supported, but motor record will not be created for motion axes.
 
 
-### ENG_MODE
+#### ENG_MODE
 
 Setting the parameter ENG_MODE=1 will result in loading of extra PVs usefull for commissioning, i.e. controller parameters for motion axes.
