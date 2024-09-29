@@ -41,6 +41,8 @@ For this purpose scripts can be called for:
 * **adding and configure** while adding
 * **applying** a configuration to the previously added slaves
 
+In addition to these ecmccfg scripts also the ecmccomp repo that contains a component library can be used. Settings are then applied with the ecmccomp/applyComponent.cmd, see below examples.
+
 ##### examples
 The `addSlave` is used for simple slaves, a default configuration is automatically applied.
 In addition default PVs will created for the basic slave features, i.e. status.
@@ -109,17 +111,26 @@ It is theoretically possible to use a mix of `yaml` and classic configuration, b
   epicsEnvSet("DEV",      "STEST-MYDEVICE")
   ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,  "CONFIG=./cfg/axis_1"
   ```
+{{% notice tip %}}
+See [best practice](../motion_cfg/best_practice/) and [yaml cfg](../motion_cfg/axisyaml/) and for more information.
+{{% /notice %}}
 
 ##### adding a virtual motor axis
   ```bash
   ${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/axis_11_virt"
   ```
+{{% notice tip %}}
+See [best practice](../motion_cfg/best_practice/) and [yaml cfg](../motion_cfg/axisyaml/) and for more information.
+{{% /notice %}}
 
 ##### adding synchronization
   ```bash
   ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_1_sync"
   ${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/axis_11_sync"
   ```   
+{{% notice tip %}}
+See [best practice](../motion_cfg/best_practice/) and [yaml cfg](../motion_cfg/axisyaml/) and for more information.
+{{% /notice %}}
 
 ##### loading a PLC from file
 The PLC functionality is explained in detail here.
@@ -136,6 +147,9 @@ ECMC PLCs can be loaded from classical PLC files, from pure yaml files or from a
   ```bash
   ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlPlc.cmd "FILE=./plc1File.yaml"
   ```
+{{% notice tip %}}
+See [plc cfg](../plc_cfg/best_practice/) for more information.
+{{% /notice %}}
 
 #### go active
   ```bash

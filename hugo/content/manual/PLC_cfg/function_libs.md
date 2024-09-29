@@ -6,7 +6,7 @@ chapter = false
 
 ## function libs
 Function libraries can be loaded into ecmc PLCs by loadPLCLib.cmd. The command takes these parameters:
-* FILE PLC: definition file, i.e. ./plc/homeSlit.plc
+* FILE: definition file, i.e. ./plc/homeSlit.plc
 * PLC_ID: (optional) PLC number, default last loaded PLC
 * PLC_MACROS: (optional) Substitution macros for PLC code. The macros "SELF_ID","SELF",M_ID, and M are reserved:
   - "SELF_ID" = PLC Id of this plc

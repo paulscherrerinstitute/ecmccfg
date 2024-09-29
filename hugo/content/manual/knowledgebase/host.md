@@ -1,5 +1,5 @@
 +++  
-title = "ecmc server"   
+title = "host / ecmc server"   
 weight = 17
 chapter = false  
 +++
@@ -7,8 +7,6 @@ chapter = false
 ## Topics
 1. [latency issues](#latency-issues)
 2. [EtherCAT rate (EC_RATE)](#EtherCAT-rate-(EC_RATE))
-
----
 
 ### latency issues
 

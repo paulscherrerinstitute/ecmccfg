@@ -22,7 +22,7 @@ The ecmcMain.ui covers most parts of an ecmc system:
     - plugin objects
     - data storage objects
 
-The ecmcMain.ui is started with the following syntax:
+The panel is started with the following syntax:
 ```
 caqtdm -macro "IOC=<ioc_name>" ecmcMain.ui
 ```
