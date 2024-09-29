@@ -71,16 +71,20 @@ For EL70xx drives the velocity range can be configured to other values than the 
 [el70x1 speed range](../hardware/el70x1#speed-range) for setting other velocity range.
 
 ## drive refuse to enable
-First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state then, if an EL70x1 drive, diagnose the problem further with the tool described in [hardware](../hardware/el70x1).
+First check the dedicated hardware drive panel for diagnostics and errors/warnings.
+For EL70x1 drive diagnostics, check [el70x1](../hardware/el70x1).
 
 Possible reasons:
-1. For systems with safety, tripp off STO or power to the drive removed by contactor. Check status of safety system.
-2. Over current protection of 48V tripped.
+1. For systems equipped with motion safety (STO or power to the drive removed by contactor): Check status of safety system. Drives with STO:
+  * EL72xx-9xxx
+  * EP7211-0034
+  * Festo CMMT-S
+2. Over current protection of motor power (48V) tripped.
 3. No motor power connected (48V or24V).
 4. ecmc PLC disabling axis, check PLC sources.
-5. Motion axis in error state. Some errors prevent the axis from being enabled. Check axis error state
-6. Drive hardware enable input not set high (valid for EP7211-0034, EL70xx if special cfgs).
-7. Axis object configured with external interlock (yaml->input.interlock).
+5. Motion axis in error state. Some errors prevent the axis from being enabled. Check axis error state.
+6. Drive hardware enable input not set high (valid for EL70xx if special cfgs).
+7. Axis object configured with external interlock (yaml->input.interlock). 
 
 ## force manual motion
 {{% notice warning %}}

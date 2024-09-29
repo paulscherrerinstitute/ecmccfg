@@ -9,7 +9,7 @@ The EL51xx series covers incremental encoder interfaces:
 1. EL5101: 1 ch, diff rs422, ttl, 1MHz
 2. EL5101-0010: 1 ch, diff rs422, 5MHz
 3. EL5101-0011: 1 ch, diff rs422, 5MHz, oversampling 100kHz
-4. EL5112: 2 ch ABC or 1ch AB, rs422, 5MHz, **PSI standard**
+4. EL5112: 2 ch ABC or 1 ch AB, rs422, 5MHz, **PSI standard**
 5. EL5131: 1 ch, diff rs422, 5MHz, 2 digital outputs for cam/trigger
 
 ### General
