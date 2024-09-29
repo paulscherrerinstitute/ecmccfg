@@ -19,7 +19,7 @@ These terminals are very powerful since they can latch the time of the positive 
 
 **IMPORTANT**
 Sine the EL1252-0050 is a 5V terminal, it needs to be powered with **5V** if the terminal is powered with 24V, the terminal will burn. The simplest way to achieve a correct power supply is by adding an EL9505 (or similar) before the EL1252-0050.
-See above for more information [5v-and-24v-terminals](../elxxxx#5v-and-24v-terminals)
+See above for more information [5v-and-24v-terminals](../elxxxx#power-bus-5v-and-24v-terminals)
 
 {{% notice warning %}}
 **Make sure the EL1252-0050 has a 5V power supply by an EL9505 (or similar), before powering the system. If the terminal is powered with the normal 24V it will most likely break**

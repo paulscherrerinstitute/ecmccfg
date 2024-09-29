@@ -5,10 +5,10 @@ chapter = false
 +++
 
 ## Topics
-1. [latency issues](#latency-issues)
+1. [latency issues / lost frames](#latency-issues--lost-frames)
 2. [EtherCAT rate (EC_RATE)](#EtherCAT-rate-(EC_RATE))
 
-### latency issues
+### latency issues / lost frames
 
 High latency, more than 10% of the ethercat cycle time, can in worse case result, in lost ethercat frames, which of course is not an ideal situation. High latency of the ecmc_rt thread can be related to:
 1. The generic device driver is used

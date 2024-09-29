@@ -4,10 +4,10 @@ weight = 16
 chapter = false  
 +++
 
-# 5V and 24V terminals
-24V is the most common signal level for the terminals, however, a few terminals also support other voltage levels, for instance 5V.
+# Power bus - 5V or 24V terminals
+24V is the most common signal level for the terminals, however, some also support other voltage levels, for instance 5V, or 12V or....
 In that case, normally the terminal needs to be powered with the same voltage.
-For 5V terminals, normally this is handled by adding a EL9505 before the 5v terminal in the ethercat chain. The EL9505 will supply the power bus with 5V instead of the normal 24V .
+For 5V terminals, normally a EL9505 is added before the 5v terminal in the ethercat chain supplying the power bus with 5V.
 
 Example of slaves needing 5V power supply:
 * EL1124 

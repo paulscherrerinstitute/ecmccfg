@@ -6,8 +6,7 @@ chapter = false
 
 ## Topics
 1. [both_limits error](#both_limits-error)
-2. [position lag error, (following error), tuning](#position-lag-error)
-3. [latency issues](#latency-issues)
+2. [position lag error, (following error)](#position-lag-error)
 4. [drive refuse to enable](#drive-refuse-to-enable)
 5. [force manual motion](#force-manual-motion)
 
@@ -48,8 +47,8 @@ Before increase current to the motor, make sure that both motor and drive can ha
 {{% /notice %}}
 
 ### 2. scaling factors are wrong
-Check the scaling documentation [here](https://paulscherrerinstitute.github.io/ecmccfg/manual/axis/scaling/).
-One way to test if the scaling is correct is to set all controller parameters (except Kff) to 0 and then initiate a move. Basically the actual position of the axis should follow the setpoint closely with teh same slope. If the slope differs, then the scaling factors are wrong.
+Check the scaling documentation [here](../../motion_cfg/scaling/).
+One way to test if the scaling is correct is to set all controller parameters (except Kff) to 0 and then initiate a move. Basically the actual position of the axis should follow the setpoint closely with the same slope. If the slope differs, then the scaling factors are wrong.
 
 ### 3. the velocity setpoint is too high resulting in stall
 If a stepper motor stalls because of too high velocity there's a few thing that can be done in order to improve the ability to reach higher velocities:
@@ -62,24 +61,22 @@ Before increase current to the motor, make sure that both motor and drive can ha
 {{% /notice %}}
 
 ### 4. velocity higher than allowed by driver
-For EL704x stepper drives are default setup to maximum velocity range of +-2000 full-steps/s. The 16bit velocity setpoint that are sent to the drive corresponds to this range. Basically trying to write a higher value than that will saturate the velocity setpoint resulting in that the required speed is not achieved, resulting in position lag error. The speed range for the EL704x can however be changed by setting SDO 8012:05:
-```
-0 for 1000 full-steps/second
-1 for 2000 full-steps/second (default)
-2 for 4000 full-steps/second
-3 for 8000 full-steps/second
-4 for 16000 full-steps/second
-5 for 32000 full-steps/second
-```
-After changing this value you also need to change the drive scaling in the axis yaml file.
+The velocity setpoint of drives covers a certain velocity range:
+* EL70xx stepper drives default: 16bit setpoint that corresponds to a velocity range of +-2000full-steps/s.
+* EL72xx servo drives default: 32bit setpoint that corresponds to a velocity range of either +-6000Hz or +-8000Hz depending on the motor pole count.
+
+If a velocity outside the velocity range is requested, the velocity setpoint will be saturated and the requested velocity will not be reached resulting in a position lag error.
+
+For EL70xx drives the velocity range can be configured to other values than the default +-2000full-steps/s. See
+[el70x1 speed range](../hardware/el70x1#speed-range) for setting other velocity range.
 
 ## drive refuse to enable
-First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state the diagnose the problem with the tool described in [hardware](hardware).
+First check the dedicated hardware drive panel for diagnostics. If the drive is in warning or error state then, if an EL70x1 drive, diagnose the problem further with the tool described in [hardware](../hardware/el70x1).
 
 Possible reasons:
 1. For systems with safety, tripp off STO or power to the drive removed by contactor. Check status of safety system.
 2. Over current protection of 48V tripped.
-3. No 48V connected.
+3. No motor power connected (48V or24V).
 4. ecmc PLC disabling axis, check PLC sources.
 5. Motion axis in error state. Some errors prevent the axis from being enabled. Check axis error state
 6. Drive hardware enable input not set high (valid for EP7211-0034, EL70xx if special cfgs).
