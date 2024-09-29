@@ -6,11 +6,11 @@ chapter = false
 
 ## ECMC Iocsh Utilities
 
-### Iocsh function "ecmcEpicsEnvSetCalc()"
- "ecmcEpicsEnvSetCalc()" is used to evaluate expressions and set result to EPCIS environment variables. Usefull for calculate:
+### ecmcEpicsEnvSetCalc
+ "ecmcEpicsEnvSetCalc()" is used to evaluate expressions and set result to EPCIS environment variables. Useful for calculate:
   * slave offsets
-  * sdo/pdo adresses (also in hex)
-  * scalings in motion
+  * sdo/pdo addresses (also in hex)
+  * motion scaling
   * record fields
   * ...
   
@@ -31,11 +31,11 @@ ecmcEpicsEnvSetCalc -h
       Restrictions:
          - Some flags and/or width/precision combinations might not be supported.
          - Hex numbers in the expression is not allowed (but hex as output by formating is OK).
-         - Non floatingpoint values will be rounded to nearest int.
+         - Non floating point values will be rounded to nearest int.
 
 ```
 #### Examples:
-```
+```text
 #### Calculate addresses in HEX with specified width
 # ecmcEpicsEnvSetCalc("test2", "$(test1)+1+2+3+4+5*10.1", "%03x")
 ecmcEpicsEnvSetCalc("test2", "061+1+2+3+4+5*10.1", "%03x")
@@ -83,7 +83,7 @@ ecmcEpicsEnvSetCalc("result", "if('ecmcEL3002.cmd'='test.script') {RESULT:=1;}el
 epicsEnvShow("result")
 result=0
 ```
-### Iocsh function "ecmcEpicsEnvSetCalcTernary()"
+### ecmcEpicsEnvSetCalcTernary
  "ecmcEpicsEnvSetCalcTernary()" is used o evaluate expressions and set EPCIS environment variables to different strings.
  depending on if the expression evaluates to "true" or "false". Can be useful for:
  * Choose different files to load like plc-files, axis configurations, db-files or..
@@ -107,7 +107,7 @@ ecmcEpicsEnvSetCalcTernary -h
 
 ```
 #### Examples:
-```
+```text
 ### Simple true false
 epicsEnvSet("VALUE",10)
 # ecmcEpicsEnvSetCalcTernary("test_var", "${VALUE}+2+5/10","True","False")
@@ -134,32 +134,6 @@ epicsEnvShow("result")
 result=no_use_this_file.cfg
 ```
 
-### Use return value of ecmcConfig(OrDie):
-
-The return value from ecmcConfig(OrDie) is stored in the EPICS environment variable
-"ECMC_CONFIG_RETURN_VAL". This value can be used to make som dynamic configuration.
-All ASCII configuration commands for ecmcConfig(OrDie) can be used in the same way.
-
-#### Example: Read firmware version of an EL7037 stepper drive
-Note: SDO reads need to be before "SetAppMode(1)"
-```
-ecmcConfig "EcReadSdo(${ECMC_SLAVE_NUM},0x100a,0x0,2)"
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ECMC_CONFIG_RETURN_VAL=14640
-
-```
-The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields, name or alias for instance.. 
-
-### Example: Read "ID" PDO from EK1101 (shown in detail in aliasRecordFromPdoData.script)
-Note: PDO reads need to be after "SetAppMode(1)" since cyclic value
-```
-ecmcConfig "ReadEcEntryIDString(${ECMC_SLAVE_NUM},"ID")"
-## This is the value of the EK1101 ID switch
-epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
-ECMC_CONFIG_RETURN_VAL=1024
-```
-The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields, name or alias for instance.. 
-
 ### ecmcIf(\<expression\>,\<optional true macro\>,\<optional false macro\>)
 ecmcIf() set two macros depending on the value of the evaluated expression. If it evaluates to true:
 1. IF_TRUE=""        Allows execution of a line of code   
@@ -169,20 +143,19 @@ If expression evaluates to false:
 1. IF_TRUE="#-"      Block execution of a line of code
 2. IF_FALSE= ""      Allows execution of a line of code
 
-Note: These macros is the default names for the macros (but can be changed by assignment of the 2 last params in call to ecmcIf()):
+Note: These macros are the default names for the macros (but can be changed by assignment of the 2 last params in call to ecmcIf()):
 1. IF_TRUE for true
 2. IF_FALSE for false
 
-### ecmcIf
+### ecmcEndIf
+```text
+ecmcEndIf()
 ```
-ecmcEndIf(\<optional true macro\>,\<optional false macro\>)
-```
-
 The ecmcEndIf() command unsets the last used macros (for true and false), if different names are passed as arguments then then these macros are unset (for nested if statements).
 
-#### Example of of syntax
+#### Example of syntax
 Example 1:
-```
+```text
 ecmcIf("<expression>")
 ${IF_TRUE} # Code to execute if expression eval true
 #- else
@@ -190,7 +163,7 @@ ${IF_FALSE} # Code to execute if expression eval false
 ecmcEndIf()
 ```
 Example 2:
-```
+```text
 ecmcIf("$(VAL1)=$(VAL2)")
 ${IF_TRUE}epicsEnvSet(IS_EQUAL,"1")
 #- else
@@ -204,7 +177,7 @@ Useful for:
 * Large systems with many similar sub systems
 * Configuring hardware with many PDOs (oversampling)
 
-```
+```text
 "ecmcForLoop(<filename>, <macros>, <loopvar>, <from>, <to>, <step>)" to loop execution of file with a changing loop variable.
              <filename> : Filename to execute in for loop.
              <macros>   : Macros to feed to execution of file.
@@ -216,7 +189,7 @@ Useful for:
 ```
 Example ("ECMC_LOOP_IDX" as loop variable):
 
-```
+```text
 ecmcForLoop(./loopStep.cmd,"",ECMC_LOOP_IDX,1,5,1)
 ecmcEpicsEnvSetCalc("TESTING",1*10)
 epicsEnvShow("TESTING")
@@ -235,7 +208,7 @@ epicsEnvShow("TESTING")
 TESTING=50
 ```
 where "loopStep.cmd" file looks like this (note the use of "ECMC_LOOP_IDX"):
-```
+```text
 #- Commands tp execute in each loop of example ecmcForLoop.script
 ecmcEpicsEnvSetCalc("TESTING",${ECMC_LOOP_IDX}*10)
 epicsEnvShow("TESTING")
@@ -243,7 +216,7 @@ epicsEnvShow("TESTING")
 
 ### ecmcFileExist
 Useful for checking that configuration files really exist and then can be loaded.
-```
+```text
 ecmcFileExist(<filename>, <die>, <check EPICS dirs>, <dirs>)" to check if a file exists.
               <filename>          : Filename to check.
               <die>               : Exit EPICS if file not exist. Optional, defaults to 0.
@@ -252,7 +225,7 @@ ecmcFileExist(<filename>, <die>, <check EPICS dirs>, <dirs>)" to check if a file
 result will be stored in the EPICS environment variable "ECMC_FILE_EXIST_RETURN_VAL"
 ```
 Example:
-```
+```text
 ecmcFileExist("file_exist.cfg")
 epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ECMC_FILE_EXIST_RETURN_VAL=1
@@ -268,6 +241,32 @@ ecmcFileExist("ecmcEK1100.substitutions",0,0,"/home/")
 epicsEnvShow(ECMC_FILE_EXIST_RETURN_VAL)
 ECMC_FILE_EXIST_RETURN_VAL=0
 ```
+### Use return value of ecmcConfig(OrDie):
+
+The return value from ecmcConfig(OrDie) is stored in the EPICS environment variable
+"ECMC_CONFIG_RETURN_VAL". This value can be used to make som dynamic configuration.
+All ASCII configuration commands for ecmcConfig(OrDie) can be used in the same way.
+
+#### Example: Read firmware version of an EL7037 stepper drive
+Note: SDO reads need to be before "SetAppMode(1)"
+```text
+ecmcConfig "EcReadSdo(${ECMC_SLAVE_NUM},0x100a,0x0,2)"
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ECMC_CONFIG_RETURN_VAL=14640
+
+```
+The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields, name or alias for instance.. 
+
+### Example: Read "ID" PDO from EK1101 (shown in detail in aliasRecordFromPdoData.script)
+Note: PDO reads need to be after "SetAppMode(1)" since cyclic value
+```text
+ecmcConfig "ReadEcEntryIDString(${ECMC_SLAVE_NUM},"ID")"
+## This is the value of the EK1101 ID switch
+epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
+ECMC_CONFIG_RETURN_VAL=1024
+```
+The variable "ECMC_CONFIG_RETURN_VAL" then can be used to set record fields, name or alias for instance.. 
+
 ### Todo
 Add docs for:
 * ecmcConfigOrDie

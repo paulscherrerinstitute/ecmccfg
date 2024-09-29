@@ -9,7 +9,7 @@ These instructions only work at PSI!
 {{% /notice %}}
 
 ## Build at PSI, using driver.makefile
-by default this module is only build for RHEL7 and Epics >=R7.0.5
+by default this module is only build for Debian 10 and Epics >=R7.0.6
 
 ### build on login cluster
 ```bash

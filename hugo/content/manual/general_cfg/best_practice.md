@@ -21,7 +21,7 @@ As a comparison, TwinCAT default EtherCAT rates are:
 See [host/ecmc_server](../../knowledgebase/host/) for more information.
 
 ## ecmc server setup
-* If possible, make sure you use the native igb ethercat driver.
+* If possible, make sure the native igb ethercat driver is used.
 
 For more information see:
 * https://git.psi.ch/motion/ecmc_server_cfg

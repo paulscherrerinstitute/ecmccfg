@@ -10,7 +10,7 @@ chapter = false
 
 ### latency issues / lost frames
 
-High latency, more than 10% of the ethercat cycle time, can in worse case result, in lost ethercat frames, which of course is not an ideal situation. High latency of the ecmc_rt thread can be related to:
+High latency, more than 30% of the ethercat cycle time, can result in lost ethercat frames, which means data are lost. High latency of the ecmc_rt thread can be related to:
 1. The generic device driver is used
 2. High load on system
 3. ...
@@ -61,12 +61,16 @@ epicsThreadSetAffinity ecmc_rt 5
 ```
 If more than one ecmc ioc is running on the server, then make sure the ecmc_rt threads run on different cores.
 
-Also other threads might take a lot of resources, for instance the epics thread "cbLow": 
+Further tuning might include moving other cpu intensive threads to dedicated cores, for instance the epics thread ```cbLow```: 
 ```
 afterInit "epicsThreadSetAffinity cbLow 6"
 ```
 {{% notice info %}}
-cbLow is created at iocInit, therefore the "epicsThreadSetAffinity" must be executed with the "afterInit" command.
+```cbLow``` is created at iocInit, therefore the "epicsThreadSetAffinity" must be executed with the "afterInit" command.
+{{% /notice %}}
+
+{{% notice note %}}
+The affinity can also be set with the tools accessible in the EPICS module MCoreUtils.
 {{% /notice %}}
 
 ### EtherCAT rate (EC_RATE)
