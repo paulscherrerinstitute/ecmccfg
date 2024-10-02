@@ -105,6 +105,32 @@ epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.encoderStatus01.0")         # 
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                               # Number of latch/over/under-flow for home (home seq 11,12,21,22)
 ```
 
+yaml-based EL51xx:
+```
+encoder:
+  position: ec$(MASTER_ID).s$(ENC_SID).positionActual$(ENC_CHAN)
+  type: 0               # Type (0=Incremental, 1=Absolute)
+  numerator: -3.1415926 #
+  denominator: 118000   #
+  bits: 32              # Total bit count of encoder raw data
+  primary: 0
+  control:'ec$(MASTER_ID).s$(ENC_SID).encoderControl$(ENC_CHAN)'
+  status: 'ec$(MASTER_ID).s$(ENC_SID).encoderStatus$(ENC_CHAN)'
+  position: 0
+  latch:
+    position: 'ec$(MASTER_ID).s$(ENC_SID).encoderLatchPostion$(ENC_CHAN)' # Link to latched value. Used for some homing seqs
+    control: 0                                       # Bit in encoder control word to arm latch. Used for some homing seqs
+    status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
+  homing:
+    type: 11                # low limit, encoder index
+    latchCount: 1           # latch number to ref on (1=ref on first latch)
+```
+
+**Backround to the cfgs (control and status word for latching)**
+* bit 0 of control word is: 0x7000:01 - Enable latch on index
+* bit 0 of status word is: 0x6000:01 - Latch occured 
+
+
 ### ECMC_SEQ_HOME_HIGH_LIM_INDEX            = 12,
 1. Axis moves forward until high limit switch and stops
 2. Axis moves backward untill the predefined index signals (ECMC_HOME_LATCH_COUNT_OFFSET) from the encoder is encountered. Position is latched at the desired index position.
@@ -118,6 +144,32 @@ epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.encoderControl01.0")        # 
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.encoderStatus01.0")         # Ethercat entry for latch status (only valid for home seq 11,12)
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                               # Number of latch/over/under-flow for home (home seq 11,12,21,22)
 ```
+
+yaml-based EL51xx:
+```
+encoder:
+  position: ec$(MASTER_ID).s$(ENC_SID).positionActual$(ENC_CHAN)
+  type: 0               # Type (0=Incremental, 1=Absolute)
+  numerator: -3.1415926 #
+  denominator: 118000   #
+  bits: 32              # Total bit count of encoder raw data
+  primary: 0
+  control:'ec$(MASTER_ID).s$(ENC_SID).encoderControl$(ENC_CHAN)'
+  status: 'ec$(MASTER_ID).s$(ENC_SID).encoderStatus$(ENC_CHAN)'
+  position: 0
+  latch:
+    position: 'ec$(MASTER_ID).s$(ENC_SID).encoderLatchPostion$(ENC_CHAN)' # Link to latched value. Used for some homing seqs
+    control: 0                                       # Bit in encoder control word to arm latch. Used for some homing seqs
+    status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
+  homing:
+    type: 12                # high limit, encoder index
+    latchCount: 1           # latch number to ref on (1=ref on first latch)
+```
+
+**Backround to the cfgs (control and status word for latching)**
+* bit 0 of control word is: 0x7000:01 - Enable latch on index
+* bit 0 of status word is: 0x6000:01 - Latch occured 
+
 
 ### ECMC_SEQ_HOME_SET_POS                  = 15, (setPosition)
 Sequence 15 is resereved for save/restore functionality.  
