@@ -109,21 +109,21 @@ yaml-based EL51xx:
 ```
 encoder:
   position: ec$(MASTER_ID).s$(ENC_SID).positionActual$(ENC_CHAN)
-  type: 0               # Type (0=Incremental, 1=Absolute)
-  numerator: -3.1415926 #
-  denominator: 118000   #
-  bits: 32              # Total bit count of encoder raw data
+  type: 0                                                                 # Type (0=Incremental, 1=Absolute)
+  numerator: -3.1415926                                                   #
+  denominator: 118000                                                     #
+  bits: 32                                                                # Total bit count of encoder raw data
   primary: 0
-  control:'ec$(MASTER_ID).s$(ENC_SID).encoderControl$(ENC_CHAN)'
+  control: 'ec$(MASTER_ID).s$(ENC_SID).encoderControl$(ENC_CHAN)'
   status: 'ec$(MASTER_ID).s$(ENC_SID).encoderStatus$(ENC_CHAN)'
   position: 0
   latch:
     position: 'ec$(MASTER_ID).s$(ENC_SID).encoderLatchPostion$(ENC_CHAN)' # Link to latched value. Used for some homing seqs
-    control: 0                                       # Bit in encoder control word to arm latch. Used for some homing seqs
-    status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
+    control: 0                                                            # Bit in encoder control word to arm latch. Used for some homing seqs
+    status: 0                                                             # Bit in encoder status word for latch triggered status. Used for some homing seqs
   homing:
-    type: 11                # low limit, encoder index
-    latchCount: 1           # latch number to ref on (1=ref on first latch)
+    type: 11                                                              # low limit, encoder index
+    latchCount: 1                                                         # latch number to ref on (1=ref on first latch)
 ```
 
 **Backround to the cfgs (control and status word for latching)**
@@ -149,21 +149,21 @@ yaml-based EL51xx:
 ```
 encoder:
   position: ec$(MASTER_ID).s$(ENC_SID).positionActual$(ENC_CHAN)
-  type: 0               # Type (0=Incremental, 1=Absolute)
-  numerator: -3.1415926 #
-  denominator: 118000   #
-  bits: 32              # Total bit count of encoder raw data
+  type: 0                                                                 # Type (0=Incremental, 1=Absolute)
+  numerator: -3.1415926                                                   #
+  denominator: 118000                                                     #
+  bits: 32                                                                # Total bit count of encoder raw data
   primary: 0
-  control:'ec$(MASTER_ID).s$(ENC_SID).encoderControl$(ENC_CHAN)'
+  control: 'ec$(MASTER_ID).s$(ENC_SID).encoderControl$(ENC_CHAN)'
   status: 'ec$(MASTER_ID).s$(ENC_SID).encoderStatus$(ENC_CHAN)'
   position: 0
   latch:
     position: 'ec$(MASTER_ID).s$(ENC_SID).encoderLatchPostion$(ENC_CHAN)' # Link to latched value. Used for some homing seqs
-    control: 0                                       # Bit in encoder control word to arm latch. Used for some homing seqs
-    status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
+    control: 0                                                            # Bit in encoder control word to arm latch. Used for some homing seqs
+    status: 0                                                             # Bit in encoder status word for latch triggered status. Used for some homing seqs
   homing:
-    type: 12                # high limit, encoder index
-    latchCount: 1           # latch number to ref on (1=ref on first latch)
+    type: 12                                                              # high limit, encoder index
+    latchCount: 1                                                         # latch number to ref on (1=ref on first latch)
 ```
 
 **Backround to the cfgs (control and status word for latching)**
