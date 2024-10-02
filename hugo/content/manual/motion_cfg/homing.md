@@ -6,7 +6,7 @@ chapter = false
 
 ## homing
 
-The follwoing sequences are available:
+The following sequences are available:
 ```
 ECMC_SEQ_HOME_NOT_VALID                = 0,
 ECMC_SEQ_HOME_LOW_LIM                  = 1,
@@ -33,67 +33,67 @@ Not a valid homing sequence, can be used if encoder is absolute.
 
 ### ECMC_SEQ_HOME_LOW_LIM                  = 1,
 1. Axis moves backward until low limit switch and stops
-2. Axis moves forward untill edge detected in limit switch signal. Position is latched.
+2. Axis moves forward until edge detected in limit switch signal. Position is latched.
 3. Axis stops
 4. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 2. 
 
 ### ECMC_SEQ_HOME_HIGH_LIM                 = 2,
 1. Axis moves forward until high limit switch and stops
-2. Axis moves backward untill edge detected in limit switch signal. Position is latched.
+2. Axis moves backward until edge detected in limit switch signal. Position is latched.
 3. Axis stops
 4. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 2. 
 
 ### ECMC_SEQ_HOME_LOW_LIM_HOME             = 3,
 1. Axis moves backward until low limit switch and stops
-2. Axis moves forward untill edge detected in home switch signal. Position is latched.
+2. Axis moves forward until edge detected in home switch signal. Position is latched.
 3. Axis stops
 4. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 2. 
 
 ### ECMC_SEQ_HOME_HIGH_LIM_HOME            = 4,
 1. Axis moves forward until high limit switch and stops
-2. Axis moves backward untill edge detected in home switch signal. Position is latched.
+2. Axis moves backward until edge detected in home switch signal. Position is latched.
 3. Axis stops
 4. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 2. 
 
 ### ECMC_SEQ_HOME_LOW_LIM_HOME_HOME        = 5,
 1. Axis moves backward until low limit switch and stops
-2. Axis moves forward untill edge detected in home switch signal. Position is latched.
-3. Axis continues untill second edge of home sensor. Motion is stopped.
-4. Axis moves backward untill edge of home sensor. Position is latched.
+2. Axis moves forward until edge detected in home switch signal. Position is latched.
+3. Axis continues until second edge of home sensor. Motion is stopped.
+4. Axis moves backward until edge of home sensor. Position is latched.
 5. Homing is performed. ECMC_HOME_POS will be the new position at the center point of the two latched positions in step 2 and 4. 
 
 ### ECMC_SEQ_HOME_HIGH_LIM_HOME_HOME       = 6,
 1. Axis moves forward until low limit switch and stops
-2. Axis moves backward untill edge detected in home switch signal. Position is latched.
-3. Axis continues untill second edge of home sensor. Motion is stopped.
-4. Axis moves forward untill edge of home sensor. Position is latched.
+2. Axis moves backward until edge detected in home switch signal. Position is latched.
+3. Axis continues until second edge of home sensor. Motion is stopped.
+4. Axis moves forward until edge of home sensor. Position is latched.
 5. Homing is performed. ECMC_HOME_POS will be the new position at the center point of the two latched positions in step 2 and 4. 
 
 ### ECMC_SEQ_HOME_BWD_HOME                 = 7,
-1. Axis moves backward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+1. Axis moves backward until positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
 2. Axis stops
 3. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 1. 
 
 ### ECMC_SEQ_HOME_FWD_HOME                 = 8,
-1. Axis moves forward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+1. Axis moves forward until positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
 2. Axis stops
 3. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 1. 
 
 ### ECMC_SEQ_HOME_BWD_HOME_HOME            = 9,
-1. Axis moves backward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+1. Axis moves backward until positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
 2. Axis contiues to move until a negative edge of the home sensor is detected. Axis stops.
-3. Axis moves forward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+3. Axis moves forward until positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
 4. Homing is performed. ECMC_HOME_POS will be the new position at the center point of the two latched positions in step 2 and 4. 
 
 ### ECMC_SEQ_HOME_FWD_HOME_HOME            = 10,
-1. Axis moves forward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+1. Axis moves forward until positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
 2. Axis contiues to move until a negative edge of the home sensor is detected. Axis stops.
-3. Axis moves backward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+3. Axis moves backward until positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
 4. Homing is performed. ECMC_HOME_POS will be the new position at the center point of the two latched positions in step 2 and 4. 
 
 ### ECMC_SEQ_HOME_LOW_LIM_INDEX            = 11,
 1. Axis moves backward until low limit switch and stops
-2. Axis moves forward untill the predefined index signals (ECMC_HOME_LATCH_COUNT_OFFSET)from the encoder is encountered. Position is latched at the desired index position.
+2. Axis moves forward until the predefined index signals (ECMC_HOME_LATCH_COUNT_OFFSET)from the encoder is encountered. Position is latched at the desired index position.
 3. Axis stops
 4. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 2. 
 
@@ -133,7 +133,7 @@ encoder:
 
 ### ECMC_SEQ_HOME_HIGH_LIM_INDEX            = 12,
 1. Axis moves forward until high limit switch and stops
-2. Axis moves backward untill the predefined index signals (ECMC_HOME_LATCH_COUNT_OFFSET) from the encoder is encountered. Position is latched at the desired index position.
+2. Axis moves backward until the predefined index signals (ECMC_HOME_LATCH_COUNT_OFFSET) from the encoder is encountered. Position is latched at the desired index position.
 3. Axis stops
 4. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 2. 
 
@@ -191,9 +191,9 @@ caput IOC_TEST:Axis1.SET 0
 ### ECMC_SEQ_HOME_LOW_LIM_SINGLE_TURN_ABS  = 21,
 Indented use for resolvers (single turn absolute). Similar to seq 11 and 12.
 1. Axis moves backward until low limit switch and stops
-2. Axis moves forward untill limit switch change state 
+2. Axis moves forward until limit switch change state 
 3. Axis stops
-4. Homing is performed. The multi turn bits will be homed to the value of ECMC_HOME_POS also consiering a offset of turns defined in ECMC_HOME_LATCH_COUNT_OFFSET.
+4. Homing is performed. The multi-turn bits will be homed to the value of ECMC_HOME_POS also considering a offset of turns defined in ECMC_HOME_LATCH_COUNT_OFFSET.
 
 Some additional parameters are important for this homing sequence should work (example):
 ```
@@ -204,9 +204,9 @@ epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                       # Number o
 
 ### ECMC_SEQ_HOME_HIGH_LIM_SINGLE_TURN_ABS = 22,
 1. Axis moves forward until high limit switch and stops
-2. Axis moves backward untill limit switch change state 
+2. Axis moves backward until limit switch change state 
 3. Axis stops
-4. Homing is performed. The multi turn bits will be homed to the value of ECMC_HOME_POS also consiering a offset of turns defined in ECMC_HOME_LATCH_COUNT_OFFSET.
+4. Homing is performed. The multi turn bits will be homed to the value of ECMC_HOME_POS also considering a offset of turns defined in ECMC_HOME_LATCH_COUNT_OFFSET.
 
 Note: Only the multi turn bits are updated!
 
@@ -222,18 +222,18 @@ Sequence 25 is the same as 15 but not blocked by motor record. The sequence will
 
 ### ECMC_SEQ_HOME_TRIGG_EXTERN               = 26
 Trigger external homing sequence in drive. 
-1. Optional: set drive mode to homing (and wait for mode readback)
+1. Optional: set drive mode to homing (and wait for mode read-back)
 3. Set trigg of homing (bit)
-4. Wait for homing ready (bit). Reference the ecmc encoder object on rising edge of the homing reday bit
-5. Optional: Change drive mode back to motion (and wait for mode readback)
+4. Wait for homing ready (bit). Reference the ecmc encoder object on rising edge of the homing ready bit
+5. Optional: Change drive mode back to motion (and wait for mode read-back)
 6. Optional: Init post move if configured
 
 Currently used for smaract:
 [smaracat example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/test/smaract)
-In this exmaple also the drive modes is automatically handled by ecmc.
+In this example also the drive modes is automatically handled by ecmc.
 
 ## setting polarity of home sensor
-For some of the sequenceses it could be usefull to change the polarity of the home sensor. That can be done with the follwoing command:
+For some of the sequences it could be useful to change the polarity of the home sensor. That can be done with the following command:
 ```
 "Cfg.SetAxisMonHomeSwitchPolarity(int axisIndex, int polarity)";
 # polarity==0 is NC (default)

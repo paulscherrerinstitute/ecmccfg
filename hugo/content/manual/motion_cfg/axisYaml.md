@@ -62,7 +62,7 @@ axis:
   id: 1
   # type: joint   # axis types:
                   # 1 (equiv: physical, joint, j, motor, real)
-                  # 2 (equiv: virtual, end_effector, endeffector, ee, e)
+                  # 2 (equiv: virtual, end_effector, end-effector, ee, e)
   # mode: CSV     # supported modes: CSV and CSP
   # parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 ```
@@ -235,11 +235,11 @@ mandatory
 optional
 
 - `source`: source of position setpoint, 0=trajectory generator of axis ; 1=from PLC
-- `type`: type of velocity profile: 0=trapezoidal ; 1=scurve
+- `type`: type of velocity profile: 0=trapezoidal ; 1=s-curve
 - `axis`
-  - `deceleration`: deccelerartion setpoint for initialization (in EGU/sec2)
+  - `deceleration`: deceleration setpoint for initialization (in EGU/sec2)
   - `emergencyDeceleration`: deceleration setpoint for emergencies. Defaults to acceleration setpoint if not specified.
-  - `jerk`: jerk for scurved profiles (in EGU/sec3)
+  - `jerk`: jerk for s-curved profiles (in EGU/sec3)
 - `jog`
   * `velocity`: velocity setpoint the axis will be initialized to for jogging
   * `acceleration`: acceleration setpoint for initialization, for jogging
@@ -304,7 +304,7 @@ optional
 ```
 
 ## homing
-This section is should be obsolete at PSI, as for all new installation using EtherCAT, absoulte encoders are mandatory.
+This section is should be obsolete at PSI, as for all new installation using EtherCAT, absolute encoders are mandatory.
 In case a legacy system or temporary installation requires a incremental encoder, or even open loop operation, several procedures for referencing are available.
 
 optional
@@ -426,14 +426,14 @@ axis:
     modeCmdHome: 10                                   # Drive mode value for when homing (written to axis.drvMode.modeSet when homing)
   features:
     blockCom: false                                   # Block communication to axis
-    allowSrcChangeWhenEnabled: false                  # Allow traj/enc sorce change when axis is enabled                      
+    allowSrcChangeWhenEnabled: false                  # Allow traj/enc source change when axis is enabled                      
     allowedFunctions:
       homing: true                                    # Allow homing
       constantVelocity: true                          # Allow constant velocity
       positioning: true                               # Allow positioning
 
 epics:
-  name: M1                                            # Axis anme
+  name: M1                                            # Axis name
   precision: 3                                        # Decimal count
   description: very important motor axis              # Axis description
   unit: mm                                            # Unit
@@ -514,7 +514,7 @@ encoder:
     latchCount: 1                                     # latch number to ref on (1=ref on first latch)
 
 controller:
-  Kp: 15                                              # Kp proportinal gain
+  Kp: 15                                              # Kp proportional gain
   Ki: 0.02                                            # Ki integral gain
   Kd: 0                                               # Kd derivative gain
   Kff: 1                                              # Feed forward gain

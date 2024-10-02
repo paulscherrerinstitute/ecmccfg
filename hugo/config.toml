@@ -4,6 +4,7 @@ title = 'ecmccfg'
 theme = "hugo-theme-learn"
 relativeURLs = true
 canonifyURLs = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -15,3 +16,4 @@ canonifyURLs = true
   themeVariant = "green"
   # Set this to true to disable copy-to-clipboard button for inline code.
   disableInlineCopyToClipBoard = true
+  custom_css = ["css/custom.css"]

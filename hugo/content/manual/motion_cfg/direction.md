@@ -26,11 +26,11 @@ Consult the respective slave manual for the correct SDO.
 
 ### encoder direction
 
-In many cases inverstion of the encoder value is possible in the ethercat slave. 
+In many cases inversion of the encoder value is possible in the ethercat slave. 
 By using INV_DIR macro to applyComponent.cmd, the direction can be changed.
 
 {{% notice info %}}
-For EL5042, example below, the invertion leads to a very high number since the data size is 64bit. Therefore, it's advisable to switch sign in the axis configuration instead.
+For EL5042, example below, the inversion leads to a very high number since the data size is 64bit. Therefore, it's advisable to switch sign in the axis configuration instead.
 {{% /notice %}}
 
 ```shell

@@ -6,7 +6,7 @@ chapter = false
 
 ## Introduction
 Each axis can have a native PLC.
-This PLC can be e.g. used for interlocking or synchronisation.
+This PLC can be e.g. used for interlocking or synchronization.
 The axis PLC is part of the [yaml](axisyaml) config.
 The code can be provided [inline](#inline) or in a separate [file](#file).
 

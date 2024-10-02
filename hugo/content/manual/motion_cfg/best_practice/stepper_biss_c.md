@@ -15,7 +15,7 @@ chapter = false
 ## scalings
 Config for scaling in mm, mm/s, mm/s2
 
-### encoder scalings
+### encoder scaling
 Two encoders are configured:
 1. Closed loop: BISS-C. This is used as the default encoder for control
 2. Open loop: EL7041 Step counter
@@ -29,7 +29,7 @@ RLS BISS-C:
 * encoder.denominator: Resolution: 4096 counts per = 1mm
 * encoder.absBits: 26 bits
 * encoder.type: Absolute (type 1)
-* ecnoder.absOffset: Offset to 0 position of linear stage (-1408.794 in this example)
+* encoder.absOffset: Offset to 0 position of linear stage (-1408.794 in this example)
 
 ```
 encoder:
@@ -51,13 +51,13 @@ encoder:
 **Hardware configuration EL5042**
 
 {{% notice warning %}}
-Do not use the LSB offset functionality of the EL5042 (0x80p8:17). The same amount of ones ("1") will be shifted in as MSB which then normally leads to a higher position value, which is confusing. For more information see the troubleshootuing/hardware section.
+Do not use the LSB offset functionality of the EL5042 (0x80p8:17). The same amount of ones ("1") will be shifted in as MSB which then normally leads to a higher position value, which is confusing. For more information see the knowledge-base/hardware section.
 {{% /notice %}}
 
 #### open loop (encoder 2)
-The EL7041 drive has a build in micro step counter (64 microsteps/fullstep):
+The EL7041 drive has a build in micro step counter (64 micro-steps/full-step):
 * encoder.numerator: Travels 1 mm/rev
-* encoder.denominator: Resolution: 200*64=12800 microsteps/rev = 12800 microsteps/mm
+* encoder.denominator: Resolution: 200*64=12800 micro-steps/rev = 12800 micro-steps/mm
 * encoder.bits: The counter is 16bit (default)
 * encoder.type: Incremental (type 0)
 
@@ -79,13 +79,13 @@ encoder:
 ### drive scalings
 
 The EL7041 is default setup to operate in a velocity range of +-2000 full steps/s which then corresponds to the 16bit drive.setpoint parameter (ec0.s$(DRV_SID).velocitySetpoint01):
-* drive.numerator: Max velo = 2000 fullsteps/s == 10mm/s
+* drive.numerator: Max velo = 2000 full-steps/s == 10mm/s
 * drive.denominator: velocity setpoint is 16bit == +-15bit = 32768
 * drive.type: Stepper drive, set to 0
 
 ```
 drive:
-  numerator: 10                                 # Fastest speed in eng. units (2000 Fullsteps/s==10mm/s)
+  numerator: 10                                 # Fastest speed in eng. units (2000 Full-steps/s==10mm/s)
   denominator: 32768                            # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET (normally +-16bit)
   type: 0                                       # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   setpoint: ec0.s$(DRV_SID).velocitySetpoint01  # Velocity setpoint if CSV. Position setpoint if CSP
@@ -113,7 +113,7 @@ axis:
 
 ```
 
-At PSI, the limit switches are connected directlly to the 2 inputs of the EL70xx stepper drives and are accessible in the status word, bit 11 and 12: 
+At PSI, the limit switches are connected directly to the 2 inputs of the EL70xx stepper drives and are accessible in the status word, bit 11 and 12: 
 ```
 input:
   limit:

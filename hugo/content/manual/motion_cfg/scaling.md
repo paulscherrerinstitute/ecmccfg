@@ -15,16 +15,16 @@ If the drive scaling is changes, make sure to adjust the PID parameters accordin
 
 ## drive scaling
 Drive scaling deals with the relation of the drive output (typically a 16- or 32-bit register) to axis velocity.
-Scaling is similar, but slighlty different for [stepper drives](#stepper-motor-drives) and [servo drives](#servo-motor-drives)
+Scaling is similar, but slightly different for [stepper drives](#stepper-motor-drives) and [servo drives](#servo-motor-drives)
 
 ### stepper motor drives
 The scaling for the Ex70xx slaves will be explained based on two very common examples.
 
 #### simple linear axis
 Assumptions:
-* 200 fullsteps/rev motor
+* 200 full-steps/rev motor
 * lead screw pitch: 5 mm/rev
-* Register `0x8012:05` is set to `1` --> 2000 fullsteps max step rate (default for ECMC, check for other slaves!)
+* Register `0x8012:05` is set to `1` --> 2000 full-steps max step rate (default for ECMC, check for other slaves!)
 * `velocitySetpoint` is in 16-bits.
 
 ```yaml
@@ -36,15 +36,15 @@ drive:
 ##### explanation
 The `denominator` is `32768` because the `velocitySetpoint` is a 16-register for the Beckhoff stepper drives.
 Thus, half of the full range is reserved for positive (forward) motion, the remaining half for negative (backward) motion.
-This means that at full output the motor would receive 2000 fullsteps per second.
+This means that at full output the motor would receive 2000 full-steps per second.
 It is irrelevant whether the motor can actually spin this fast as this a purely theoretical value!
 Since we have established that the motor spins at 10 rev/s at full output, the conversion to engineering units is trivial and yields 50 mm/s, based on the lead screw pitch.
 
 #### rotational axis
 Assumptions:
-* 400 fullsteps/rev motor
+* 400 full-steps/rev motor
 * drive train ratio: 36 deg/rev
-* Register `0x8012:05` is set to `1` --> 2000 fullsteps max step rate (default for ECMC, check for other slaves!)
+* Register `0x8012:05` is set to `1` --> 2000 full-steps max step rate (default for ECMC, check for other slaves!)
 * `velocitySetpoint` is in 16-bits.
 
 ```yaml
@@ -54,8 +54,8 @@ drive:
 ```
 
 ##### explanation
-At full output, the motor receives 2000 fullsteps/s, which results in 5 rev/s
-due to the higher fullstep count of the motor. The drive train ratio is specified
+At full output, the motor receives 2000 full-steps/s, which results in 5 rev/s
+due to the higher full-step count of the motor. The drive train ratio is specified
 as 10 motor revolutions per 360 degree on the output or 36 deg/rev. Therefore,
 the resulting velocity of the motor in EGUs is 180 deg/s. Please note that
 this is _not_ the actual maximum velocity, but rather a theoretical scaling
@@ -86,7 +86,7 @@ drive:
 This scaling ratio describes the relation of encoder counts and engineering units of the axis.
 
 Unlike the drive scaling, the encoder scaling is much simpler.
-It represents merely the realtion between the observed counts on the encoder and the displacement of the load.
+It represents merely the relation between the observed counts on the encoder and the displacement of the load.
 
 ### closed-loop
 
@@ -112,15 +112,15 @@ In the example below such a case is presented, with an explanation.
 ```yaml
 encoder:
   numerator: 0.125    # 0.125 mm/rev lead screw
-  denominator: 12800  # 200 fullsteps/rev with 64 microsteps/fullstep
+  denominator: 12800  # 200 full-steps/rev with 64 micro-steps/full-step
   type: 0         # Type: 0=Incremental, 1=Absolute
   bits: 16        # Total bit count of encoder raw data
 ```
 
 #### explanation
-The internal step counter operates in microsteps.
+The internal step counter operates in micro-steps.
 For most drives this value assumes 64, if uncertain consult the respective manual of the drive.
-In case of a 200 fullsteps/rev motor, the `denominator` therefore will be set to `200*64=12800`.
+In case of a 200 full-steps/rev motor, the `denominator` therefore will be set to `200*64=12800`.
 As for the `numerator`, this is simply the displacement observed for one full motor revolution.
 As the step counter is incremental, the `type: 0` has to be set.
 The step counter is of type `uint16`, thus the `bits: 16` setting, which is important to handle the over-/underflow.
