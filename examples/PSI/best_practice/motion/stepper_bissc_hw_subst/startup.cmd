@@ -6,7 +6,7 @@ require ecmccomp
 
 ##############################################################################
 # - apply hardware configuration
-${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd,  "FILE=cfg/hw.subst"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd,  "FILE=cfg/hw.subs"
 
 ##############################################################################
 # - motion
