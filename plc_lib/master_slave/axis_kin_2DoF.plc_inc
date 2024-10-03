@@ -1,0 +1,13 @@
+#- Slave axes (normally physical/real axes): AX_S1, AX_S2
+var SLAVE_AXES[2] := {ax${AX_S1}.enc.actpos, ax${AX_S2}.enc.actpos};
+
+#- Master axes (normally virtual axes): AX_M1, AX_M2
+var MASTER_AXES[2] := {ax${AX_M1}.traj.setpos, ax${AX_M2}.traj.setpos};
+
+#- forward kinematics
+ax${AX_M1}.enc.actpos   := dot(FWD1, SLAVE_AXES);
+ax${AX_M2}.enc.actpos   := dot(FWD2, SLAVE_AXES);
+
+#- inverse kinematics
+ax${AX_S1}.traj.extsetpos := dot(INV1, MASTER_AXES);
+ax${AX_S2}.traj.extsetpos := dot(INV2, MASTER_AXES);

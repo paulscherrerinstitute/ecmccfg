@@ -1,0 +1,38 @@
+/*
+  PLC code to home an axis with an absoliye encoder which has ONE overflow in the range
+  If actual encoder value is higher than ${THRESHOLD} it will be referenced to current actual position - ${RANGE}.
+
+  NOTE: Make sure the default axis encoder scaling offset is made correct for the lower part of the raw values.
+
+  macros:
+    AX_ID     : ID of axis
+    ENC_ID    : ID of encoder (starts from 1)
+    THRESHOLD : Threshold to identfy overflow  (in EGU)
+    RANGE     : The total range of the encoder both multi turn and single turn (in EGU)
+    DBG       : Printout debug messages set to empty (DBG='')
+*/
+
+if(${SELF}.firstscan) {  
+  var plc:=${SELF_ID};
+  ${DBG=#}println('PLC ',plc,' Initiating homing seq for abs. encoder with overflow');
+};
+
+if(mc_get_enc_ready(${AX_ID=1},${ENC_ID=1}) and not(static.encoderHomed)) {
+  ${DBG=#}println('Checking if homing encoder is needed');
+
+  /* Set the new position if needed */
+  if(mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) > ${THRESHOLD=0}) {
+   ${DBG=#}println('Homing encoder to: ', mc_get_act_pos(${AX_ID=1},${ENC_ID=1})-${RANGE=0});
+   mc_set_act_pos(${AX_ID=1},${ENC_ID=1},mc_get_act_pos(${AX_ID=1},${ENC_ID=1})-${RANGE=0});
+  } else {
+    ${DBG=#}println('Homing not needed!');
+  };
+
+  static.encoderHomed${AX_ID=1}_${ENC_ID=1}:=1;
+}
+
+/* Do not allow power on axis if encoder is not homed*/
+if(not(static.encoderHomed${AX_ID=1}_${ENC_ID=1})) {
+    ${DBG=#}println('Waiting for encoder ready and homing...')
+    mc_power(${AX_ID=1},0);
+};

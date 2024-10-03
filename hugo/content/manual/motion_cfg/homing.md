@@ -288,3 +288,22 @@ if(not(static.encoderHomed${AX_ID=1}_${ENC_ID=1})) {
     mc_power(${AX_ID=1},0);
 };
 ```
+
+The code is accessible in file [here](https://github.com/paulscherrerinstitute/ecmccfg/plc_lib/home_abs_enc_overflow.plc_inc). The file is installed with ecmccfg anbd can be loaded from in ecmccfg_DIR.
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=${ecmccfg_DIR}home_abs_enc_overflow.plc_inc, SAMPLE_RATE_MS=1000, PLC_MACROS='DBG='"
+```
+
+The file can also be included in another plc file.
+
+Example: main.plc
+```
+# macros here or in PLC_MACROS in call to loadPLCFile.cmd:
+substitute(AX_ID=1,ENC_ID=1,RANGE=360,THRESHOLD=240)
+include "home_abs_enc_overflow.plc_inc"
+```
+
+Load the file with include dir:
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=${ecmccfg_DIR}, SAMPLE_RATE_MS=1000, PLC_MACROS='DBG='"
+```

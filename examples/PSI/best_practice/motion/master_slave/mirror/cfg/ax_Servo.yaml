@@ -1,0 +1,71 @@
+axis:
+  id: 12
+  mode: CSV
+
+epics:
+  name: AXIS
+  precision: 3
+  unit: deg
+  motorRecord:
+    enable: true
+    description: "Detector TR"
+
+drive:
+  numerator: 2160000 # Vmax 6000 rev/s * 360 deg/rev = 2160000 deg/s
+  denominator: 2147483648 # 32-bit MAX_INT for ECMC_EC_ALIAS_DRV_VELO_SET
+  type: 1 # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  control: ec$(MASTER_ID).s$(DRV_SLAVE).driveControl01
+  status: ec$(MASTER_ID).s$(DRV_SLAVE).driveStatus01
+  setpoint: ec$(MASTER_ID).s$(DRV_SLAVE).velocitySetpoint01
+  # control bit for reset in 'control'
+  reset: 7
+  # status bit for warning in 'status'
+  warning: 7
+  # list of error bits in 'status', or if type==string, complete EC-link
+#  error:
+#    - 3 # Error
+#    - 7 # Warning as Error
+
+encoder:
+  numerator: 360 # 360 deg/rev
+  denominator: 1048576 # 2**20 count/rev
+  type: 1 # Type: 0=Incremental, 1=Absolute
+  bits: 32 # Total bit count of encoder raw data
+  absBits: 32 # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  absOffset: 0 # Encoder offset in eng units (for absolute encoders)
+  position: ec$(MASTER_ID).s$(DRV_SLAVE).positionActual01 # Ethercat entry for actual position input (encoder)
+
+controller:
+  Kp: 10.0
+  Ki: 0.1
+  Kd: 0.0
+
+trajectory:
+  type: 1
+  axis:
+    velocity: 90 # 1000 rpm (name plate) => 6000 deg/s
+    acceleration: 900 
+    jerk: 900
+
+input:
+  limit:
+    forward: ec$(MASTER_ID).s$(DRV_SLAVE).ONE.0
+    backward: ec$(MASTER_ID).s$(DRV_SLAVE).ONE.0
+  home: ec$(MASTER_ID).s$(DRV_SLAVE).ONE.0
+  interlock: ec$(MASTER_ID).s$(DRV_SLAVE).ONE.0
+
+monitoring:
+  lag:
+    enable: true
+    tolerance: 360
+    time: 100
+  target:
+    enable: yes
+    tolerance: 0.1
+    time: 100
+  velocity:
+    enable: true
+    max: 1800
+    time:
+      trajectory: 100
+      drive: 200
