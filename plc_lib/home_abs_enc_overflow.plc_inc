@@ -1,5 +1,5 @@
 /*
-  PLC code to home an axis with an absoliye encoder which has ONE overflow in the range
+  PLC code to home an axis with an absolute encoder which has ONE overflow in the range
   If actual encoder value is higher than ${THRESHOLD} it will be referenced to current actual position - ${RANGE}.
 
   NOTE: Make sure the default axis encoder scaling offset is made correct for the lower part of the raw values.
@@ -7,7 +7,7 @@
   macros:
     AX_ID     : ID of axis
     ENC_ID    : ID of encoder (starts from 1)
-    THRESHOLD : Threshold to identfy overflow  (in EGU)
+    THRESHOLD : Threshold to identify overflow  (in EGU)
     RANGE     : The total range of the encoder both multi turn and single turn (in EGU)
     DBG       : Printout debug messages set to empty (DBG='')
 */

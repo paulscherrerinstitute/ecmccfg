@@ -250,7 +250,7 @@ However, for some situations it might be hard to adjust the encoder and then a s
 Example: 
 ```
 /*
-  PLC code to home an axis with an absoliye encoder which has ONE overflow in the range
+  PLC code to home an axis with an absolute encoder which has ONE overflow in the range
   If actual encoder value is higher than ${THRESHOLD} it will be referenced to current actual position - ${RANGE}.
 
   NOTE: Make sure the default axis encoder scaling offset is made correct for the lower part of the raw values.
@@ -258,7 +258,7 @@ Example:
   macros:
     AX_ID     : ID of axis
     ENC_ID    : ID of encoder (starts from 1)
-    THRESHOLD : Threshold to identfy overflow  (in EGU)
+    THRESHOLD : Threshold to identify overflow  (in EGU)
     RANGE     : The total range of the encoder both multi turn and single turn (in EGU)
     DBG       : Printout debug messages set to empty (DBG='')
 */
@@ -289,7 +289,7 @@ if(not(static.encoderHomed${AX_ID=1}_${ENC_ID=1})) {
 };
 ```
 
-The code is accessible in file [here](https://github.com/paulscherrerinstitute/ecmccfg/plc_lib/home_abs_enc_overflow.plc_inc). The file is installed with ecmccfg anbd can be loaded from in ecmccfg_DIR.
+The code is accessible in file [here](https://github.com/paulscherrerinstitute/ecmccfg/plc_lib/home_abs_enc_overflow.plc_inc). The file is installed with ecmccfg and can be loaded from in ecmccfg_DIR.
 ```
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=${ecmccfg_DIR}home_abs_enc_overflow.plc_inc, SAMPLE_RATE_MS=1000, PLC_MACROS='DBG='"
 ```
