@@ -586,11 +586,29 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
  
  15. retvalue = mc_get_act_pos(
                          <axIndex>,         : Axis index
-                         <encIndex>         : Encoder index                        
+                         <encIndex>         : Encoder index (starts from 1)
                          );
  
     Returns encoder position for any of the configured encoders of an axis.
+
+ 16. retvalue = mc_set_act_pos(
+                         <axIndex>,         : Axis index
+                         <encIndex>         : Encoder index (starts from 1)
+                         <position>         : position to set
+                         );
  
+    NOTE: Preferably executed when axis is disabled.
+    Returns 0 or error code.
+
+
+ 17. retvalue = mc_get_enc_ready(
+                         <axIndex>,         : Axis index
+                         <encIndex>         : Encoder index (starts from 1)
+                         <position>         : position to set
+                         );
+     
+    Returns 1 if encoder is ready, otherwise 0
+
  16. retvalue = mc_set_prim_enc(
                          <axIndex>,         : Axis index
                          <encIndex>         : Encoder index                        
