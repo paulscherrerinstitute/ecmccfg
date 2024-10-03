@@ -27,7 +27,7 @@ ECMC_SEQ_HOME_HIGH_LIM_SINGLE_TURN_ABS = 22,
 ECMC_SEQ_HOME_SET_POS_2                = 25,
 ECMC_SEQ_HOME_TRIGG_EXTERN             = 26,
 ```
-Additionally, for homing of absolute encooder with **ONE** overflow in the range, please check [here](#homing-of-absolute-encooder-with-one-overflow-in-the-range)
+Additionally, for homing of absolute encoder with **ONE** overflow in the range, please check [here](#homing-of-absolute-encoder-with-one-overflow-in-the-range)
 
 ### ECMC_SEQ_HOME_NOT_VALID                = 0
 Not a valid homing sequence, can be used if encoder is absolute.
@@ -241,7 +241,7 @@ For some of the sequences it could be useful to change the polarity of the home 
 # polarity==1 is NO
 ```
 
-## Homing of absolute encooder with **ONE** overflow in the range
+## Homing of absolute encoder with **ONE** overflow in the range
 
 
 **ALWAYS** adjust the absolute encoder so that no overflows occur within the motion range if possible.
