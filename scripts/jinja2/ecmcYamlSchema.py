@@ -262,7 +262,11 @@ class Schema:
         'required': True,
         'schema': {
             'source': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
-            'numerator': {'type': 'float', 'default': 0.},
+            'numerator': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+                ], 'default': 0.0
+            },
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
             'type': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'mask': {'type': 'string'},
