@@ -1,38 +1,57 @@
 /*
-  PLC code to home an axis with an absolute encoder which has ONE overflow in the range
-  If actual encoder value is higher than ${THRESHOLD} it will be referenced to current actual position - ${RANGE}.
+  PLC code to home an axis with an absolute encoder which has ONE overflow in the range.
+  Can be configured to handle 2 cases:
+   * DIR = -1 : If actual encoder value is lower than THRESHOLD it will be referenced to current actual position + RANGE.
+   * DIR = +1 : If actual encoder value is higher or equal to THRESHOLD it will be referenced to current actual position - RANGE.
+  
+  NOTE: Make sure the default axis encoder scaling offset is correct for the lower or upper part of the raw values (depending on DIR).
 
-  NOTE: Make sure the default axis encoder scaling offset is made correct for the lower part of the raw values.
+  The PLC-code can be included several times in the same file as long as the AX_ID and ENC_ID are unique. 
+  However, be carefull with PLC_DISABLE=1 since the entire PLC will be disabled (also other included files).
 
-  macros:
-    AX_ID     : ID of axis
-    ENC_ID    : ID of encoder (starts from 1)
-    THRESHOLD : Threshold to identify overflow  (in EGU)
-    RANGE     : The total range of the encoder both multi turn and single turn (in EGU)
-    DBG       : Printout debug messages set to empty (DBG='')
+  Macros:
+    AX_ID       : ID of axis
+    ENC_ID      : ID of encoder (starts from 1)
+    THRESHOLD   : Threshold to identify overflow  (in EGU)
+    RANGE       : The total range of the encoder both multi turn and single turn (in EGU)
+    DBG         : Printout debug messages set to empty (DBG='')
+    DIR         : Threshold direction
+                   -1 : Reference if value is below threshold (default)
+                   +1 : Reference if value is over or equal to threshold
+    PLC_DISABLE : Disable PLC when homing is finished. (default 0 = keep PLC running, safest if also other code is included)
 */
 
 if(${SELF}.firstscan) {  
   var plc:=${SELF_ID};
-  ${DBG=#}println('PLC ',plc,' Initiating homing seq for abs. encoder with overflow');
+  ${DBG=#}println('PLC ',plc,' Initiating homing seq for abs. encoder with overflow.');
 };
 
-if(mc_get_enc_ready(${AX_ID=1},${ENC_ID=1}) and not(static.encoderHomed)) {
-  ${DBG=#}println('Checking if homing encoder is needed');
-
-  /* Set the new position if needed */
-  if(mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) > ${THRESHOLD=0}) {
-   ${DBG=#}println('Homing encoder to: ', mc_get_act_pos(${AX_ID=1},${ENC_ID=1})-${RANGE=0});
-   mc_set_act_pos(${AX_ID=1},${ENC_ID=1},mc_get_act_pos(${AX_ID=1},${ENC_ID=1})-${RANGE=0});
-  } else {
-    ${DBG=#}println('Homing not needed!');
+if(mc_get_enc_ready(${AX_ID=1},${ENC_ID=1}) and not(static.encoderHomed_Ax${AX_ID=1}_Enc${ENC_ID=1})) {
+  var homeNeeded_Ax${AX_ID=1}_Enc${ENC_ID=1}:=0;
+  ${DBG=#}println('Checking if homing encoder is needed..');
+  
+  /* Home if below threshold */
+  if(${DIR=-1} < 0){
+    homeNeeded_Ax${AX_ID=1}_Enc${ENC_ID=1}:=mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) < ${THRESHOLD=0};
+  } else { /* Home if above threshold */
+    homeNeeded_Ax${AX_ID=1}_Enc${ENC_ID=1}:=mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) >= ${THRESHOLD=0};
   };
 
-  static.encoderHomed${AX_ID=1}_${ENC_ID=1}:=1;
-}
+  if(homeNeeded_Ax${AX_ID=1}_Enc${ENC_ID=1}) {
+    ${DBG=#}println('Homing encoder to: ', mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) + ${DIR=-1} *(-1) * ${RANGE=0});
+    mc_set_act_pos(${AX_ID=1},${ENC_ID=1},mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) + ${DIR=-1} * (-1) * ${RANGE=0});   
+  } else {
+    ${DBG=#}println('Homing not needed (axis in region of valid axis scaling).');
+  };
+  static.encoderHomed_Ax${AX_ID=1}_Enc${ENC_ID=1}:=1;
+
+  if(${PLC_DISABLE=0}>0) {
+    ${DBG=#}println('Disabling PLC.');
+    ${SELF}.enable:=0;
+  }
+};
 
 /* Do not allow power on axis if encoder is not homed*/
-if(not(static.encoderHomed${AX_ID=1}_${ENC_ID=1})) {
-    ${DBG=#}println('Waiting for encoder ready and homing...')
+if(not(static.encoderHomed_Ax${AX_ID=1}_Enc${ENC_ID=1})) {    
     mc_power(${AX_ID=1},0);
 };
