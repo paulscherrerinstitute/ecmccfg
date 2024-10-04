@@ -10,6 +10,7 @@ Here you can find some best practice configurations for common use cases.
 * MSI include, substitute
 * Printouts
 * Description
+* Common PLC code in ecmccfg/plc_lib
 
 The complete examples with startup files can be found [here](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice)
 
@@ -126,3 +127,10 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=.:./cf
 {{% notice info %}}
 The description can maximum be 40 chars long.
 {{% /notice %}}
+
+### Common PLC lib
+In ecmccfg/plc_lib some code snippets are accessible. These are installed in ecmccfg module and can be accesses in ${ecmccfg_DIR}.
+
+Sofar, the following code is accessible:
+* Homing of abs encoder with overflow
+* Synchronization kinematics and state machine (master-slave)

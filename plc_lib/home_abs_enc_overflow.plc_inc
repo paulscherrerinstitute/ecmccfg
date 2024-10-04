@@ -7,7 +7,7 @@
   NOTE: Make sure the default axis encoder scaling offset is correct for the lower or upper part of the raw values (depending on DIR).
 
   The PLC-code can be included several times in the same file as long as the AX_ID and ENC_ID are unique. 
-  However, be carefull with PLC_DISABLE=1 since the entire PLC will be disabled (also other included files).
+  However, be careful with PLC_DISABLE=1 since the entire PLC will be disabled (also other included files).
 
   Macros:
     AX_ID       : ID of axis

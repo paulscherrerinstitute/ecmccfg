@@ -1,7 +1,7 @@
 # Directory for common plc code snippets
 
 ## master_slave scripts
-PLC-files for syncronization can be found in the subdir "master_slave".
+PLC-files for synchronization can be found in the sub-dir "master_slave".
 ```
 axis_kin*plc_inc
 axis_sm.plc_inc
@@ -11,10 +11,13 @@ Examples can be found in examples/PSI/best_practice/motion/master_slave/
 ## Homing of abs encoder with ONE overflow in range
 home_abs_encoder_overflow.plc_inc
 
-With the following macros:
+
+With the following main.plc file (macros can also be passed through PLC_MACROS when loading the PLC):
 ```
-substitute "THRESHOLD=270,RANGE=360,DIR=1"
+substitute "THRESHOLD=30,RANGE=360,DBG='',DIR=-1"
+include "home_abs_enc_overflow.plc_inc"
 ```
+
 the code will look like this:
 ```
 /*
@@ -26,7 +29,7 @@ the code will look like this:
   NOTE: Make sure the default axis encoder scaling offset is correct for the lower or upper part of the raw values (depending on DIR).
 
   The PLC-code can be included several times in the same file as long as the AX_ID and ENC_ID are unique. 
-  However, be carefull with PLC_DISABLE=1 since the entire PLC will be disabled (also other included files).
+  However, be careful with PLC_DISABLE=1 since the entire PLC will be disabled (also other included files).
 
   Macros:
     AX_ID       : ID of axis
@@ -50,15 +53,15 @@ if(mc_get_enc_ready(1,1) and not(static.encoderHomed_Ax1_Enc1)) {
   println('Checking if homing encoder is needed..');
   
   /* Home if below threshold */
-  if(1 < 0){
-    homeNeeded_Ax1_Enc1:=mc_get_act_pos(1,1) < 270;
+  if(-1 < 0){
+    homeNeeded_Ax1_Enc1:=mc_get_act_pos(1,1) < 30;
   } else { /* Home if above threshold */
-    homeNeeded_Ax1_Enc1:=mc_get_act_pos(1,1) >= 270;
+    homeNeeded_Ax1_Enc1:=mc_get_act_pos(1,1) >= 30;
   };
 
   if(homeNeeded_Ax1_Enc1) {
-    println('Homing encoder to: ', mc_get_act_pos(1,1) + 1 *(-1) * 360);
-    mc_set_act_pos(1,1,mc_get_act_pos(1,1) + 1 * (-1) * 360);   
+    println('Homing encoder to: ', mc_get_act_pos(1,1) + -1 *(-1) * 360);
+    mc_set_act_pos(1,1,mc_get_act_pos(1,1) + -1 * (-1) * 360);   
   } else {
     println('Homing not needed (axis in region of valid axis scaling).');
   };
@@ -74,6 +77,4 @@ if(mc_get_enc_ready(1,1) and not(static.encoderHomed_Ax1_Enc1)) {
 if(not(static.encoderHomed_Ax1_Enc1)) {    
     mc_power(1,0);
 };
-
-
 ```
