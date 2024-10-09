@@ -1,12 +1,16 @@
 axis:
   id: 1                                               # Axis id
-  type: joint                                         # this is for future selection of axis type
+  #type: joint                                        # defaults to joint (physical axis), if not joint then virtual axis
   # mode: CSV                                         # supported mode, CSV and CSP, defaults CSV
   # parameters: 'axisPar' # additional parameters     # Additional params to motor record driver
   #                                                       "powerAutoOnOff=<value>;"  //2: What you want, 1:do not use, 0 to disable
   #                                                       "powerOffDelay=<value>:"
   #                                                       "powerOnDelay=<value>;"
   #healthOutput: ec0...                               # Ethercat entry for health output
+  #feedSwitchesOutput: ec0...                         # Ethercat entry for feed switches
+  #feedSwitchesValue: 1                               # Value to write to axis.feedSwitchesOutput. Defaults to 1
+  #group: testGroup                                   # Add axis to group (group will be created if not exists), 
+  #                                                     group id will be stored in GRP<axis.group>_ID for later use.
   # autoMode:                                         # Switch drive modes automaticaly for normal motion and homing (smaract for instance)
   #   modeSet: ec0..                                  # Ethercat entry drive mode write (set CSV,CSP,homing)
   #   modeAct: ec0..                                  # Ethercat entry drive mode reading (set CSV,CSP,homing)

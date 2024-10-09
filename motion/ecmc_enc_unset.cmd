@@ -2,7 +2,8 @@
 # ecmc_enc_unset.cmd
 #- Arguments: n/a
 #-d /**
-#-d   \brief Unsets all varaiables set by ecmc_enc.cmd configuration snippet
+#-d   \brief Clears all encoder related variables
+#-d   \details Unsets all varaiables set by ecmc_enc.cmd configuration snippet
 #-d   \author Anders Sandstroem
 #-d */
 

@@ -3,6 +3,7 @@
 #- Arguments: n/a
 #-d /**
 #-d   \brief Script for finalizing. Executed just before iocInit (atInit)
+#-d   \details Script for finalizing. Executed just before iocInit (atInit).
 #-d   \author Anders Sandström
 #-d   \file
 #-d */

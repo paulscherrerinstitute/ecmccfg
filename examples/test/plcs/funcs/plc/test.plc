@@ -1,0 +1,10 @@
+# Test PLC code for plc-libs
+static.counter:=static.counter+1;
+static.plc_code_loaded:=1;
+if(static.counter % ${LIMIT=10} == 0) {
+  # Call a few lib functions
+  prod(1,2,3,4,5);
+  println('This is main, testLocalArray: ',testLocalArray(2));
+  println('This is main, One:            ',one);  
+  testm2m();
+};

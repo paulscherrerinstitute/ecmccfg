@@ -3,7 +3,8 @@
 #- Arguments: n/a
 
 #-d /**
-#-d   \brief Script for loading motor record related databases and creating motor record axis object
+#-d   \brief Script for loading motor record related databases
+#-d   \details Script for loading motor record related databases and creating motor record axis object
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note This script is typically called by \b ecmc_axis.cmd, often via \b ecmc_axis-records.cmd

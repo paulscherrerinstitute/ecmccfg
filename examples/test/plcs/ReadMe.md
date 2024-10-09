@@ -99,7 +99,7 @@ Below the ECMC specific accessible variables and functions are listed:
 13. ax<id>.traj.setpos           curent trajectory setpoint       (rw)
 14. ax<id>.traj.targetpos        target position                  (rw)
 15. ax<id>.traj.extsetpos        current trajecrory setpoint from
-                                 plc sync. expression             (ro) 
+                                 plc sync. expression             (rw) 
 16. ax<id>.traj.targetvel        target velocity setpoint         (rw)
 17. ax<id>.traj.targetacc        target acceleration setpoint     (rw)
 18. ax<id>.traj.targetdec        target deceleration setpoint     (rw)

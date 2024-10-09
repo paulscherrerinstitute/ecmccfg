@@ -2,6 +2,7 @@
 # loadSubstConfig.cmd
 #-d /**
 #-d   \brief Script for loading complete ecmc cfg based on subst files and templates
+#-d   \details Loads complete ecmc cfg based on subst files and templates
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE Subsitution file , i.e. ./cfg.subs

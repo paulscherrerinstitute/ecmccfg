@@ -1,5 +1,6 @@
 #-d /**
 #-d   \brief Script for applying dc config to slave
+#-d   \details Apply dc configurations to a slave.
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \param SLAVE_ID Slave Id

@@ -12,6 +12,7 @@
 #-d   \param DS_TYPE (optional), default 0, 0: Normal Buffer, 1: Ring Buffer, 2: FIFO Buffer
 #-d   \param SAMPLE_RATE_MS (optional), default 1
 #-d   \param DS_DEBUG (optional), default 0, 0: No debug printouts, 1: Debug  printouts
+#-d   \param DESC (optional) Description of PLC
 #-d   \note Example calls:
 #-d   \note - call for 1000 elements at 10 Hz
 #-d   \code
@@ -42,7 +43,7 @@ ecmcConfigOrDie "Cfg.SetStorageEnablePrintouts(${ECMC_STORAGE_INDEX},${DS_DEBUG=
 
 ecmcFileExist(${SUBST_FILE="ecmcDS.substitutions"},1,1)
 ecmcEpicsEnvSetCalc(ECMC_DS_ID_2_CHARS, "${ECMC_STORAGE_INDEX}", "%02d")
-dbLoadTemplate(${SUBST_FILE="ecmcDS.substitutions"}, "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_STORAGE_INDEX},Index2Char=${ECMC_DS_ID_2_CHARS},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1},PREV_OBJ_ID=${ECMC_PREV_STORAGE_INDEX=-1}")
+dbLoadTemplate(${SUBST_FILE="ecmcDS.substitutions"}, "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_STORAGE_INDEX},Index2Char=${ECMC_DS_ID_2_CHARS},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1},PREV_OBJ_ID=${ECMC_PREV_STORAGE_INDEX=-1}, DESC='${DESC=DS_${ECMC_PLC_ID}}'")
 epicsEnvUnset(ECMC_DS_ID_2_CHARS)
 
 #- Below for facilitate auto gui generation

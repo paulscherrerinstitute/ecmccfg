@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for loading a ecmc plugin from file.
+#-d   \details Loads a ecmc-plugin from file.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE      Filename of plugin shared lib (./ecmcPlugin_Advanced.so)

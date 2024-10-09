@@ -36,7 +36,7 @@ Observe the CLI output for details.
 1. gawk at the beauty of the produced web-site :)
 
 ### editing the code
-* contend is found in the `content` directory
+* content is found in the `content` directory
 * mostly everything is done in markdown
 * the HUGO theme ["learn"](http://github.com/matcornic/hugo-theme-learn) is used. Follow the instructions [here](https://learn.netlify.app/en/) for examples and an overview of it's capabilities.
 * changes are reflected immediately in the browser after saving your changes.

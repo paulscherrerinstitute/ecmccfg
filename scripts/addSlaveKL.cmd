@@ -3,7 +3,7 @@
 #- Arguments: HW_DESC, SLAVE_ID, SLAVE_ID_KL
 
 #-d /**
-#-d   \brief Script for adding a slave to the EtherCAT bus configuration of KL type.
+#-d   \brief Script for adding a KL slave to the EtherCAT bus configuration of KL type.
 #-d   \details Adds the respective hardware to the bus configuration, adds specific and default PV to the EPICS database. For some/most slaves also a default
 #-d   \author Anders Sandstrom
 #-d   \file

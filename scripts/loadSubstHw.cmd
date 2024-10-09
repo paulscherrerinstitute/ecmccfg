@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for adding multiple hw based on subst and template file
+#-d   \details Loads hw cfg based on subst files and templates
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE Subsitution file , i.e. ./hw.subs

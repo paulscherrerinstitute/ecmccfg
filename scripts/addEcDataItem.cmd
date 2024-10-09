@@ -2,11 +2,8 @@
 # addEcDataItem.cmd
 #-d /**
 #-d   \brief Script for adding a ethercat data item.
-#-d    
-
-#-d   The ethercat data item allows for accessing alreday configured ethercat domain data in a flexible 
-#-d   way by defining a start entry, byte and bit offset and data type.
-#-d
+#-d   \details The ethercat data item allows for accessing alreday configured ethercat domain data in a flexible
+#-d   way by defining a start entry, byte and bit offset and data type. Basically it's a pointer directlly into the process image.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param STRT_ENTRY_S_ID :  (optional) start entry bus position, defaults to "ECMC_EC_SLAVE_NUM"

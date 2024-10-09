@@ -179,6 +179,10 @@ class Schema:
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
             'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
+            'healthOutput': {'type': 'string'},
+            'feedSwitchesOutput': {'type': 'string'},
+            'feedSwitchesValue': {'type': 'integer'},
+            'group': {'type': 'string'},
             'autoMode': {'type': 'dict', 'schema': {
                 'modeSet': {'type': 'string'},
                 'modeAct': {'type': 'string'},
