@@ -322,8 +322,8 @@ record (asyn, "$(PREFIX)$(MOTOR_NAME)-$(MOTOR_PORT)-asyn") {
 
 ################################################################
 # Sync and stop on interlock
-record(calcout, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L"){
-  #field(PINI, "1")
+record(calcout, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L") {
+    #field(PINI, "1")
     field(DESC, "Trigg MR Sync")
     field(SCAN, "Passive")
     field(INPA, "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
@@ -336,8 +336,8 @@ record(calcout, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L"){
     field(OUT,  "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq PP")
 }
 
-record(calcout, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgL2H"){
-  #field(PINI, "1")
+record(calcout, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgL2H") {
+    #field(PINI, "1")
     field(DESC, "Trigg MR Sync")
     field(SCAN, "Passive")
     field(INPA, "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
@@ -380,13 +380,13 @@ record(seq, "${PREFIX}${MOTOR_NAME}-StpCmd_") {
 
 ################################################################
 # Sync only
-record(longin,"${PREFIX}${MOTOR_NAME}-SyncMrCmd"){
-  field(DESC, "${MOTOR_NAME}: Sync MR")  
-  field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_SYNC")
-  field(SCAN, "I/O Intr")
-  field(FLNK, "${PREFIX}${MOTOR_NAME}-MR-SyncOnly.PROC")
-  field(TSE,  "$(TSE=-2)")
+record(longin, "${PREFIX}${MOTOR_NAME}-SyncMrCmd") {
+    field(DESC, "${MOTOR_NAME}: Sync MR")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_SYNC")
+    field(SCAN, "I/O Intr")
+    field(FLNK, "${PREFIX}${MOTOR_NAME}-MR-SyncOnly.PROC")
+    field(TSE,  "$(TSE=-2)")
 }
 
 record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncOnly") {
