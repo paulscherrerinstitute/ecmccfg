@@ -78,7 +78,7 @@ monitoring:
     time: 100
   velocity:
     enable: yes
-    max: 20
+    max: 50
     time:
       trajectory: 100
       drive: 200
