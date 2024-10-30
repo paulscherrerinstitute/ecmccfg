@@ -1762,11 +1762,11 @@
         <x>30</x>
         <y>460</y>
         <width>251</width>
-        <height>91</height>
+        <height>96</height>
        </rect>
       </property>
       <property name="title">
-       <string>IOC</string>
+       <string>IOC:</string>
       </property>
       <widget class="caRelatedDisplay" name="carelateddisplay">
        <property name="geometry">
@@ -1914,6 +1914,25 @@
        </property>
        <property name="args">
         <string/>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel">
+       <property name="geometry">
+        <rect>
+         <x>35</x>
+         <y>0</y>
+         <width>216</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>$(IOC)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </widget>
