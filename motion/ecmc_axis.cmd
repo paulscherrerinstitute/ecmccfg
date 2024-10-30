@@ -129,9 +129,15 @@ ecmcConfigOrDie "Cfg.SetAxisMonMaxVelTrajILDelay(${ECMC_AXIS_NO},${ECMC_MON_VELO
 
 #- Homing
 ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(${ECMC_AXIS_NO},${ECMC_HOME_SWITCH_POL=0})"
+ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset(${ECMC_AXIS_NO},${ECMC_HOME_LATCH_COUNT_OFFSET=0.0})"
 ecmcConfigOrDie "Cfg.SetAxisHomePosition(${ECMC_AXIS_NO},${ECMC_HOME_POS=0.0})"
 ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_ENA=0})"
 ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO}, ${ECMC_HOME_POS_MOVE_TARG_POS=0})"
+ecmcConfigOrDie "Cfg.SetAxisHomeSeqId(${ECMC_AXIS_NO},$(ECMC_HOME_PROC=14))"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam(${ECMC_AXIS_NO},$(ECMC_HOME_VEL_TO=0))"
+ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},$(ECMC_HOME_VEL_FRM=$(ECMC_HOME_VEL_TO=0)))"
+ecmcConfigOrDie "Cfg.SetAxisHomeAcc(${ECMC_AXIS_NO},${ECMC_HOME_ACC=0})"
+ecmcConfigOrDie "Cfg.SetAxisHomeDec(${ECMC_AXIS_NO},${ECMC_HOME_DEC=0})"
 
 #- Call motor record dedicated script  (Must be called here so ECMC_BLOCK_ACCL and ECMC_BLOCK_ACCS are correct)
 ${ECMC_USE_MOTOR_RECORD} ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis_mr.cmd",1)
@@ -141,3 +147,4 @@ ${ECMC_USE_MOTOR_RECORD} ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis_mr.cmd
 
 epicsEnvUnset(ECMC_BLOCK_ACCL)
 epicsEnvUnset(ECMC_BLOCK_ACCS)
+
