@@ -9,4 +9,8 @@ ecmcConfigOrDie "Cfg.AddAxisEnc(${ECMC_AXIS_NO})"
 ecmcFileExist("ecmcEnc.db",1,1)
 dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO},ENC_NO=${ECMC_ENC_CFG_ID},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ENC_EGU=},DESC=${ENC_DESC=},HOME_PROC=${HOME_PROC=0},VEL_TO_CAM=${VEL_TO_CAM=0},VEL_FRM_CAM=${VEL_FRM_CAM=0},ACC=${ACC=-1},DEC=${DEC=-1},REF_HME=${REF_HME=-1},REF_STRT=${REF_STRT=-1},POST_ENA=${POST_ENA=-1},POST_POS=${POST_POS=0},PREC=${ECMC_AXIS_PREC=3}")
 
+#- Links to PVs
+ecmcGetSlaveIdFromEcPath({{ encoder.position }}, ECMC_SID_TEMP)
+dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=Enc0${ECMC_ENC_CFG_ID}-CfgLnkPosAct,DESC={{ encoder.position }},SID=${ECMC_SID_TEMP=-1}")
+
 {% include 'axisCleanup.jinja2' %}

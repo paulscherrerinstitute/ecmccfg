@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>211</width>
-    <height>704</height>
+    <height>725</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>181</width>
-     <height>581</height>
+     <height>611</height>
     </rect>
    </property>
    <property name="title">
@@ -29,9 +29,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>320</y>
+      <y>310</y>
       <width>161</width>
-      <height>251</height>
+      <height>246</height>
      </rect>
     </property>
     <property name="title">
@@ -618,7 +618,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>40</y>
+      <y>45</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -637,7 +637,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>40</y>
+      <y>45</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -675,7 +675,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>60</y>
+      <y>65</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -713,7 +713,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>80</y>
+      <y>85</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -732,7 +732,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>80</y>
+      <y>85</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -770,7 +770,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>100</y>
+      <y>105</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -808,7 +808,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>100</y>
+      <y>105</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -827,7 +827,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>60</y>
+      <y>65</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1061,7 +1061,7 @@
     <property name="geometry">
      <rect>
       <x>62</x>
-      <y>130</y>
+      <y>125</y>
       <width>111</width>
       <height>20</height>
      </rect>
@@ -1083,7 +1083,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>130</y>
+      <y>125</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1102,7 +1102,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>180</y>
+      <y>175</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -1133,7 +1133,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>20</y>
+      <y>27</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1152,7 +1152,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>18</y>
+      <y>25</y>
       <width>111</width>
       <height>18</height>
      </rect>
@@ -1174,12 +1174,88 @@
      </color>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>555</y>
+      <width>161</width>
+      <height>56</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>HW</string>
+    </property>
+    <widget class="caLineEdit" name="calineedit_55">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>30</y>
+       <width>116</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-Enc$(ENC_ID)-CfgLnkPosAct.DESC</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caShellCommand" name="cashellcommand_2">
+     <property name="geometry">
+      <rect>
+       <x>125</x>
+       <y>25</y>
+       <width>31</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="label">
+      <string notr="true">&gt;&gt;</string>
+     </property>
+     <property name="labels">
+      <string>Open first axis</string>
+     </property>
+     <property name="files">
+      <string>bash /ioc/modules/qt/ecmcOpenEcSlaveGeneric.sh</string>
+     </property>
+     <property name="args">
+      <string>$(IOC) $(SYS):$(Axis)-Enc$(ENC_ID)-CfgLnkPosAct</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>600</y>
+     <y>625</y>
      <width>181</width>
      <height>91</height>
     </rect>
@@ -1322,6 +1398,11 @@
    <class>replaceMacro</class>
    <extends>QWidget</extends>
    <header>replaceMacro</header>
+  </customwidget>
+  <customwidget>
+   <class>caShellCommand</class>
+   <extends>QWidget</extends>
+   <header>caShellCommand</header>
   </customwidget>
  </customwidgets>
  <resources/>
