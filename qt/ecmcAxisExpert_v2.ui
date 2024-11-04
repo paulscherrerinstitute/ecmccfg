@@ -4966,10 +4966,10 @@
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>$(Axis)</string>
      </property>
      <property name="channel" stdset="0">
-      <string notr="true">$(Axis)</string>
+      <string notr="true"/>
      </property>
      <property name="colorMode">
       <enum>caLineEdit::Default</enum>
