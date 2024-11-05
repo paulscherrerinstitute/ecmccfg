@@ -1,0 +1,10 @@
+#UPDATE-FREQ=10
+#ENABLE-PASS=1
+#--------------------------------
+# this file contains ASR PVs of the motion controller
+# see startup.cmd
+#--------------------------------
+
+# Test
+$(IOC):Set-Ana-RB
+$(IOC):Set-Bin-RB
