@@ -490,7 +490,7 @@
        <string>ecmcGraph_v1.ui</string>
       </property>
       <property name="args">
-       <string>TITLE=Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
+       <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct,IOC=$(IOC)</string>
       </property>
      </widget>
      <widget class="caRelatedDisplay" name="carelateddisplay_4">
@@ -509,7 +509,7 @@
        <string>ecmcGraph_v1.ui</string>
       </property>
       <property name="args">
-       <string>TITLE=Actual Output,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd-RB</string>
+       <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Output,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd-RB,IOC=$(IOC)</string>
       </property>
      </widget>
     </widget>

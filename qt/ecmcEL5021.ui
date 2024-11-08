@@ -95,7 +95,7 @@
          <string>ecmcGraph_v1.ui</string>
         </property>
         <property name="args">
-         <string>TITLE=Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
+         <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct,IOC=$(IOC)</string>
         </property>
        </widget>
       </item>

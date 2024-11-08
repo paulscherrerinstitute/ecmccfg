@@ -28,9 +28,9 @@
    <property name="geometry">
     <rect>
      <x>5</x>
-     <y>10</y>
+     <y>30</y>
      <width>401</width>
-     <height>401</height>
+     <height>381</height>
     </rect>
    </property>
    <property name="Title" stdset="0">
@@ -108,6 +108,25 @@
    </property>
    <property name="text">
     <string>Value:</string>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>411</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text">
+    <string>IOC: $(IOC)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

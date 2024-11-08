@@ -1266,7 +1266,7 @@
      <string>ecmcGraph_v1.ui</string>
     </property>
     <property name="args">
-     <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Position,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-PosAct</string>
+     <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Position,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-PosAct,IOC=$(IOC)</string>
     </property>
    </widget>
    <widget class="caRelatedDisplay" name="carelateddisplay_2">
@@ -1285,7 +1285,7 @@
      <string>ecmcGraph_v1.ui</string>
     </property>
     <property name="args">
-     <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Velocity,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-VelAct</string>
+     <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Velocity,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-VelAct,IOC=$(IOC)</string>
     </property>
    </widget>
    <zorder>carelateddisplay</zorder>
