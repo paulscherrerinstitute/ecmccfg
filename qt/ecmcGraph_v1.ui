@@ -27,10 +27,10 @@
   <widget class="caStripPlot" name="castripplot">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>361</width>
-     <height>371</height>
+     <x>5</x>
+     <y>10</y>
+     <width>401</width>
+     <height>401</height>
     </rect>
    </property>
    <property name="Title" stdset="0">
@@ -60,9 +60,9 @@
   <widget class="caLineEdit" name="calineedit">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>415</y>
-     <width>171</width>
+     <x>65</x>
+     <y>420</y>
+     <width>216</width>
      <height>20</height>
     </rect>
    </property>
@@ -89,8 +89,8 @@
   <widget class="caLabel" name="calabel_5">
    <property name="geometry">
     <rect>
-     <x>25</x>
-     <y>415</y>
+     <x>-20</x>
+     <y>420</y>
      <width>80</width>
      <height>20</height>
     </rect>

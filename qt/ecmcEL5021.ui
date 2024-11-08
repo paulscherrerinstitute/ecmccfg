@@ -58,7 +58,7 @@
      <number>2</number>
     </property>
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3,0">
       <item>
        <widget class="caLabel" name="calabel_7">
         <property name="text">
@@ -83,6 +83,19 @@
         </property>
         <property name="precisionMode">
          <enum>caLineEdit::User</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="caRelatedDisplay" name="carelateddisplay_4">
+        <property name="labels">
+         <string>&gt;</string>
+        </property>
+        <property name="files">
+         <string>ecmcGraph_v1.ui</string>
+        </property>
+        <property name="args">
+         <string>TITLE=Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
         </property>
        </widget>
       </item>
@@ -307,6 +320,11 @@
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
+  </customwidget>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
   </customwidget>
   <customwidget>
    <class>caTextEntry</class>

@@ -380,7 +380,7 @@
      <widget class="caLabel" name="calabel_5">
       <property name="geometry">
        <rect>
-        <x>-20</x>
+        <x>-30</x>
         <y>120</y>
         <width>60</width>
         <height>22</height>
@@ -393,9 +393,9 @@
      <widget class="caLineEdit" name="calineedit_4">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>30</x>
         <y>125</y>
-        <width>60</width>
+        <width>56</width>
         <height>20</height>
        </rect>
       </property>
@@ -422,7 +422,7 @@
      <widget class="caLabel" name="calabel_12">
       <property name="geometry">
        <rect>
-        <x>-20</x>
+        <x>-30</x>
         <y>140</y>
         <width>60</width>
         <height>22</height>
@@ -448,7 +448,7 @@
      <widget class="caLineEdit" name="calineedit_5">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>30</x>
         <y>145</y>
         <width>60</width>
         <height>20</height>
@@ -472,6 +472,44 @@
       </property>
       <property name="precisionMode">
        <enum>caLineEdit::User</enum>
+      </property>
+     </widget>
+     <widget class="caRelatedDisplay" name="carelateddisplay_3">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>125</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="labels">
+       <string>&gt;</string>
+      </property>
+      <property name="files">
+       <string>ecmcGraph_v1.ui</string>
+      </property>
+      <property name="args">
+       <string>TITLE=Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
+      </property>
+     </widget>
+     <widget class="caRelatedDisplay" name="carelateddisplay_4">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>145</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="labels">
+       <string>&gt;</string>
+      </property>
+      <property name="files">
+       <string>ecmcGraph_v1.ui</string>
+      </property>
+      <property name="args">
+       <string>TITLE=Actual Output,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd-RB</string>
       </property>
      </widget>
     </widget>
@@ -565,6 +603,50 @@
       </property>
       <property name="endBit">
        <number>15</number>
+      </property>
+     </widget>
+     <widget class="caTextEntry" name="catextentry_13">
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>155</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Spd</string>
+      </property>
+      <property name="keepFocus">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_15">
+      <property name="geometry">
+       <rect>
+        <x>-20</x>
+        <y>155</y>
+        <width>60</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>out:</string>
       </property>
      </widget>
     </widget>
@@ -809,6 +891,16 @@
   <zorder>calabel_8</zorder>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
+  </customwidget>
+  <customwidget>
+   <class>caTextEntry</class>
+   <extends>caLineEdit</extends>
+   <header>caTextEntry</header>
+  </customwidget>
   <customwidget>
    <class>caMessageButton</class>
    <extends>QPushButton</extends>
