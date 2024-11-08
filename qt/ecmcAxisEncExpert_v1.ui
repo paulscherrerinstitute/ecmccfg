@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>211</width>
+    <width>200</width>
     <height>720</height>
    </rect>
   </property>
@@ -733,7 +733,7 @@
      <rect>
       <x>60</x>
       <y>85</y>
-      <width>111</width>
+      <width>96</width>
       <height>16</height>
      </rect>
     </property>
@@ -771,7 +771,7 @@
      <rect>
       <x>60</x>
       <y>105</y>
-      <width>111</width>
+      <width>96</width>
       <height>16</height>
      </rect>
     </property>
@@ -1179,7 +1179,7 @@
      <rect>
       <x>5</x>
       <y>550</y>
-      <width>161</width>
+      <width>166</width>
       <height>56</height>
      </rect>
     </property>
@@ -1250,6 +1250,63 @@
      </property>
     </widget>
    </widget>
+   <widget class="caRelatedDisplay" name="carelateddisplay">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>85</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="labels">
+     <string>&gt;</string>
+    </property>
+    <property name="files">
+     <string>ecmcGraph_v1.ui</string>
+    </property>
+    <property name="args">
+     <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Position,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-PosAct</string>
+    </property>
+   </widget>
+   <widget class="caRelatedDisplay" name="carelateddisplay_2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>105</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="labels">
+     <string>&gt;</string>
+    </property>
+    <property name="files">
+     <string>ecmcGraph_v1.ui</string>
+    </property>
+    <property name="args">
+     <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Velocity,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-VelAct</string>
+    </property>
+   </widget>
+   <zorder>carelateddisplay</zorder>
+   <zorder>groupBox_2</zorder>
+   <zorder>calabel_73</zorder>
+   <zorder>calineedit_46</zorder>
+   <zorder>calineedit_47</zorder>
+   <zorder>calabel_64</zorder>
+   <zorder>calineedit_37</zorder>
+   <zorder>calineedit_38</zorder>
+   <zorder>calabel_65</zorder>
+   <zorder>calabel_74</zorder>
+   <zorder>groupBox_3</zorder>
+   <zorder>calineedit_14</zorder>
+   <zorder>camenu_3</zorder>
+   <zorder>calabel_75</zorder>
+   <zorder>camessagebutton_4</zorder>
+   <zorder>calabel_82</zorder>
+   <zorder>calabel</zorder>
+   <zorder>groupBox_5</zorder>
+   <zorder>carelateddisplay_2</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
@@ -1378,6 +1435,11 @@
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
+  </customwidget>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
   </customwidget>
   <customwidget>
    <class>caMessageButton</class>
