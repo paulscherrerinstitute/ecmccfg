@@ -314,6 +314,45 @@
     </property>
    </widget>
   </widget>
+  <widget class="caLabel" name="calabel_10">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>145</y>
+     <width>51</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Latch pos:</string>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>163</y>
+     <width>86</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc01-LtchPosAct</string>
+   </property>
+   <property name="background">
+    <color alpha="0">
+     <red>160</red>
+     <green>160</green>
+     <blue>164</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::User</enum>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
