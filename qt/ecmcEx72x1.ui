@@ -320,7 +320,7 @@
            <string>ecmcGraph_v1.ui</string>
           </property>
           <property name="args">
-           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Torque,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqAct</string>
+           <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Torque,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqAct</string>
           </property>
          </widget>
         </item>
@@ -345,7 +345,7 @@
            <string>ecmcGraph_v1.ui</string>
           </property>
           <property name="args">
-           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Velocity,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
+           <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Velocity,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
           </property>
          </widget>
         </item>
@@ -370,7 +370,7 @@
            <string>ecmcGraph_v1.ui</string>
           </property>
           <property name="args">
-           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Voltage,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
+           <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Voltage,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
           </property>
          </widget>
         </item>
@@ -395,7 +395,7 @@
            <string>ecmcGraph_v1.ui</string>
           </property>
           <property name="args">
-           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Temperature,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
+           <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Temperature,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
           </property>
          </widget>
         </item>
@@ -471,7 +471,7 @@
            <string>ecmcGraph_v1.ui</string>
           </property>
           <property name="args">
-           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
+           <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
           </property>
          </widget>
         </item>
