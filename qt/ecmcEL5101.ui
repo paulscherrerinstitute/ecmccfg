@@ -88,6 +88,18 @@
       </item>
       <item>
        <widget class="caRelatedDisplay" name="carelateddisplay_3">
+        <property name="minimumSize">
+         <size>
+          <width>15</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>15</width>
+          <height>16</height>
+         </size>
+        </property>
         <property name="labels">
          <string>&gt;</string>
         </property>
@@ -299,7 +311,7 @@
      <x>5</x>
      <y>200</y>
      <width>115</width>
-     <height>101</height>
+     <height>111</height>
     </rect>
    </property>
    <property name="title">
@@ -309,7 +321,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>35</y>
+      <y>50</y>
       <width>105</width>
       <height>18</height>
      </rect>
@@ -328,7 +340,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>15</y>
+      <y>30</y>
       <width>105</width>
       <height>18</height>
      </rect>
@@ -341,7 +353,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>55</y>
+      <y>70</y>
       <width>75</width>
       <height>18</height>
      </rect>
@@ -360,7 +372,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>55</y>
+      <y>70</y>
       <width>22</width>
       <height>18</height>
      </rect>
@@ -411,7 +423,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>75</y>
+      <y>90</y>
       <width>60</width>
       <height>18</height>
      </rect>
@@ -437,7 +449,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>75</y>
+      <y>90</y>
       <width>40</width>
       <height>18</height>
      </rect>

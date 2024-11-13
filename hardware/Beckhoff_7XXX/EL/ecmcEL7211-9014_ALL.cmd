@@ -98,4 +98,4 @@ epicsEnvUnset(ECMC_TEMP_WHATCHDOG_2)
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(${ECMC_EC_STARTUP_DELAY=4000})"
 
 #- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1_ALL_INPUTS")
+epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1")

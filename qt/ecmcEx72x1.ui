@@ -13,22 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="caInclude" name="cainclude">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>125</width>
-     <height>500</height>
-    </rect>
-   </property>
-   <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
-   </property>
-   <property name="filename" stdset="0">
-    <string notr="true">A_RF_LLRF_ELETTRATUNING_include_E_slave_frame.ui</string>
-   </property>
-  </widget>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
@@ -63,7 +47,7 @@
        <property name="title">
         <string>Drive</string>
        </property>
-       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1">
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1,0">
         <property name="leftMargin">
          <number>1</number>
         </property>
@@ -76,6 +60,29 @@
         <property name="bottomMargin">
          <number>1</number>
         </property>
+        <item row="2" column="1">
+         <widget class="caLineEdit" name="calineedit_6">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::Channel</enum>
+          </property>
+          <property name="unitsEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="1">
          <widget class="caLineEdit" name="calineedit_5">
           <property name="channel" stdset="0">
@@ -119,13 +126,6 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="caLabel" name="calabel_11">
-          <property name="text">
-           <string>Voltage</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="caLabel" name="calabel_10">
           <property name="text">
@@ -133,10 +133,54 @@
           </property>
          </widget>
         </item>
+        <item row="4" column="0">
+         <widget class="caLabel" name="calabel_13">
+          <property name="text">
+           <string>Error</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="caLabel" name="calabel_9">
           <property name="text">
            <string>Torque</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="caLineEdit" name="calineedit_7">
+          <property name="channel" stdset="0">
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
+          </property>
+          <property name="background">
+           <color alpha="0">
+            <red>160</red>
+            <green>160</green>
+            <blue>164</blue>
+           </color>
+          </property>
+          <property name="colorMode">
+           <enum>caLineEdit::Static</enum>
+          </property>
+          <property name="precisionMode">
+           <enum>caLineEdit::Channel</enum>
+          </property>
+          <property name="unitsEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="caLabel" name="calabel_14">
+          <property name="text">
+           <string>Warning</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="caLabel" name="calabel_11">
+          <property name="text">
+           <string>Voltage</string>
           </property>
          </widget>
         </item>
@@ -248,43 +292,6 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="caLabel" name="calabel_13">
-          <property name="text">
-           <string>Error</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="caLabel" name="calabel_14">
-          <property name="text">
-           <string>Warning</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="caLineEdit" name="calineedit_6">
-          <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
-          </property>
-          <property name="background">
-           <color alpha="0">
-            <red>160</red>
-            <green>160</green>
-            <blue>164</blue>
-           </color>
-          </property>
-          <property name="colorMode">
-           <enum>caLineEdit::Static</enum>
-          </property>
-          <property name="precisionMode">
-           <enum>caLineEdit::Channel</enum>
-          </property>
-          <property name="unitsEnabled">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="0">
          <widget class="caLabel" name="calabel_15">
           <property name="text">
@@ -292,26 +299,103 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="caLineEdit" name="calineedit_7">
-          <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
+        <item row="0" column="2">
+         <widget class="caRelatedDisplay" name="carelateddisplay_4">
+          <property name="minimumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
           </property>
-          <property name="background">
-           <color alpha="0">
-            <red>160</red>
-            <green>160</green>
-            <blue>164</blue>
-           </color>
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
           </property>
-          <property name="colorMode">
-           <enum>caLineEdit::Static</enum>
+          <property name="labels">
+           <string>&gt;</string>
           </property>
-          <property name="precisionMode">
-           <enum>caLineEdit::Channel</enum>
+          <property name="files">
+           <string>ecmcGraph_v1.ui</string>
           </property>
-          <property name="unitsEnabled">
-           <bool>true</bool>
+          <property name="args">
+           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Torque,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-TrqAct</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="caRelatedDisplay" name="carelateddisplay_5">
+          <property name="minimumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="labels">
+           <string>&gt;</string>
+          </property>
+          <property name="files">
+           <string>ecmcGraph_v1.ui</string>
+          </property>
+          <property name="args">
+           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Velocity,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VelAct</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="caRelatedDisplay" name="carelateddisplay_8">
+          <property name="minimumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="labels">
+           <string>&gt;</string>
+          </property>
+          <property name="files">
+           <string>ecmcGraph_v1.ui</string>
+          </property>
+          <property name="args">
+           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Voltage,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="caRelatedDisplay" name="carelateddisplay_9">
+          <property name="minimumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="labels">
+           <string>&gt;</string>
+          </property>
+          <property name="files">
+           <string>ecmcGraph_v1.ui</string>
+          </property>
+          <property name="args">
+           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Temperature,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv02-TmpAct</string>
           </property>
          </widget>
         </item>
@@ -323,7 +407,7 @@
        <property name="title">
         <string>Encoder</string>
        </property>
-       <layout class="QGridLayout" name="gridLayout" columnstretch="1,1">
+       <layout class="QGridLayout" name="gridLayout" columnstretch="1,1,0">
         <property name="leftMargin">
          <number>1</number>
         </property>
@@ -363,6 +447,31 @@
           </property>
           <property name="precisionMode">
            <enum>caLineEdit::User</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="caRelatedDisplay" name="carelateddisplay_7">
+          <property name="minimumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="labels">
+           <string>&gt;</string>
+          </property>
+          <property name="files">
+           <string>ecmcGraph_v1.ui</string>
+          </property>
+          <property name="args">
+           <string>TITLE=m$(MasterID)s$(SlaveID).Drv01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct</string>
           </property>
          </widget>
         </item>
@@ -551,7 +660,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>430</y>
+     <y>425</y>
      <width>101</width>
      <height>21</height>
     </rect>
@@ -567,6 +676,22 @@
    </property>
    <property name="args">
     <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=01,IOC=$(IOC);</string>
+   </property>
+  </widget>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>128</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcE_slave_frame.ui</string>
    </property>
   </widget>
  </widget>
