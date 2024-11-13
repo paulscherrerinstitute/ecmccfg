@@ -694,6 +694,9 @@
     <string notr="true">ecmcE_slave_frame.ui</string>
    </property>
   </widget>
+  <zorder>cainclude</zorder>
+  <zorder>tabWidget</zorder>
+  <zorder>CiA402_2</zorder>
  </widget>
  <customwidgets>
   <customwidget>
