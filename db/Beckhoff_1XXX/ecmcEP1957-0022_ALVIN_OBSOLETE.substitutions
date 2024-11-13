@@ -1,0 +1,17 @@
+file "ecmc_status-chX.template" { pattern
+  { CH_ID, KEY }
+  { 1,     ""  }
+  { 2,     ""  }
+  { 3,     ""  }
+  { 4,     ""  }
+}
+
+file "ecmc_controlWord-chX.template" { pattern
+  { CH_ID }
+  { 1    }
+  { 2    }
+  { 3    }
+  { 4    }
+  { 5    }
+  { 6    }
+}
