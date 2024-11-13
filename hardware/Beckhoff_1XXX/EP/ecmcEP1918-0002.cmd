@@ -1,4 +1,4 @@
-epicsEnvSet("ECMC_EC_HWTYPE",        "EP1918-0002_ASM")
+epicsEnvSet("ECMC_EC_HWTYPE",        "EP1918-0002")
 epicsEnvSet("ECMC_EC_VENDOR_ID",     "0x00000002")
 epicsEnvSet("ECMC_EC_PRODUCT_ID",    "0x077e4052")
 
