@@ -4856,7 +4856,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>30</y>
+       <y>50</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -4881,7 +4881,7 @@
      <property name="geometry">
       <rect>
        <x>-5</x>
-       <y>30</y>
+       <y>50</y>
        <width>69</width>
        <height>18</height>
       </rect>
@@ -4900,7 +4900,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>50</y>
+       <y>70</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -4922,7 +4922,7 @@
      <property name="geometry">
       <rect>
        <x>-5</x>
-       <y>50</y>
+       <y>70</y>
        <width>69</width>
        <height>18</height>
       </rect>
@@ -4934,7 +4934,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Axis type:</string>
+      <string>Type:</string>
      </property>
     </widget>
     <widget class="caLabel" name="calabel_100">
@@ -4985,7 +4985,7 @@
      <property name="geometry">
       <rect>
        <x>125</x>
-       <y>80</y>
+       <y>105</y>
        <width>41</width>
        <height>21</height>
       </rect>
@@ -5007,7 +5007,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>80</y>
+       <y>105</y>
        <width>69</width>
        <height>18</height>
       </rect>
@@ -5026,7 +5026,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>105</y>
        <width>41</width>
        <height>21</height>
       </rect>
@@ -5042,6 +5042,50 @@
      </property>
      <property name="args">
       <string>$(SYS) $(AX_ID);</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_26">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>30</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>$(SYS)</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true"/>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Default</enum>
+     </property>
+     <property name="alarmHandling">
+      <enum>caLineEdit::onBackground</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_113">
+     <property name="geometry">
+      <rect>
+       <x>-5</x>
+       <y>30</y>
+       <width>69</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>69</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>DEV:</string>
      </property>
     </widget>
    </widget>
