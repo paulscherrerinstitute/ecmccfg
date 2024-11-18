@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>200</width>
-    <height>720</height>
+    <height>767</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>5</y>
      <width>181</width>
-     <height>611</height>
+     <height>651</height>
     </rect>
    </property>
    <property name="title">
@@ -29,7 +29,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
+      <y>345</y>
       <width>161</width>
       <height>236</height>
      </rect>
@@ -846,7 +846,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>210</y>
+      <y>240</y>
       <width>161</width>
       <height>101</height>
      </rect>
@@ -1033,7 +1033,7 @@
     <property name="geometry">
      <rect>
       <x>61</x>
-      <y>150</y>
+      <y>180</y>
       <width>111</width>
       <height>20</height>
      </rect>
@@ -1061,7 +1061,7 @@
     <property name="geometry">
      <rect>
       <x>62</x>
-      <y>125</y>
+      <y>155</y>
       <width>111</width>
       <height>20</height>
      </rect>
@@ -1083,7 +1083,7 @@
     <property name="geometry">
      <rect>
       <x>-30</x>
-      <y>125</y>
+      <y>155</y>
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1102,7 +1102,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>175</y>
+      <y>205</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -1178,7 +1178,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>550</y>
+      <y>585</y>
       <width>166</width>
       <height>56</height>
      </rect>
@@ -1288,6 +1288,69 @@
      <string>TITLE=Axis $(Axis).Enc$(ENC_ID): Actual Velocity,PV=$(SYS):$(Axis)-Enc$(ENC_ID)-VelAct,IOC=$(IOC)</string>
     </property>
    </widget>
+   <widget class="caLabel" name="calabel_85">
+    <property name="geometry">
+     <rect>
+      <x>-30</x>
+      <y>125</y>
+      <width>80</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Error Id:</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_56">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>125</y>
+      <width>96</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-Enc$(ENC_ID)-ErrId</string>
+    </property>
+    <property name="background">
+     <color alpha="222">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::Channel</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="unitsEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="formatType">
+     <enum>caLineEdit::hexadecimal</enum>
+    </property>
+   </widget>
    <zorder>carelateddisplay</zorder>
    <zorder>groupBox_2</zorder>
    <zorder>calabel_73</zorder>
@@ -1307,12 +1370,14 @@
    <zorder>calabel</zorder>
    <zorder>groupBox_5</zorder>
    <zorder>carelateddisplay_2</zorder>
+   <zorder>calabel_85</zorder>
+   <zorder>calineedit_56</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>620</y>
+     <y>660</y>
      <width>181</width>
      <height>91</height>
     </rect>
