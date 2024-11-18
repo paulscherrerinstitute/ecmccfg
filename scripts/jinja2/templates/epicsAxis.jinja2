@@ -57,7 +57,7 @@ ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX}
 
 #-Add info in MCU namespace for auto gui generation
 ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
-dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${DEV},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }}, PREV_OBJ_ID=${ECMC_PREV_AXIS_OBJ_ID=-1}")
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${DEV=${IOC}},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }}, PREV_OBJ_ID=${ECMC_PREV_AXIS_OBJ_ID=-1}")
 
 epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
 
