@@ -13,7 +13,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 
 #- NOTE USE HW_DESC = iPOS4808BX_2  (iPOS4808BX is for legacy)
 
-#- Apply component:
+#- Apply component: Oriental motor PKE244A
 #- For IPOS4808 some macros are mandatory:
 #-  * I_CTRL_GAIN   : Current loop gain
 #-  * I_CTRL_INT    : Current loop integrator gain 
