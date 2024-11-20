@@ -4,7 +4,7 @@ weight = 25
 chapter = false  
 +++  
 
-## homing
+# homing
 
 The following sequences are available:
 ```
@@ -27,6 +27,7 @@ ECMC_SEQ_HOME_HIGH_LIM_SINGLE_TURN_ABS = 22,
 ECMC_SEQ_HOME_SET_POS_2                = 25,
 ECMC_SEQ_HOME_TRIGG_EXTERN             = 26,
 ```
+Additionally, for homing of absolute encoder with **ONE** overflow in the range, please check [here](#homing-of-absolute-encoder-with-one-overflow-in-the-range)
 
 ### ECMC_SEQ_HOME_NOT_VALID                = 0
 Not a valid homing sequence, can be used if encoder is absolute.
@@ -238,4 +239,71 @@ For some of the sequences it could be useful to change the polarity of the home 
 "Cfg.SetAxisMonHomeSwitchPolarity(int axisIndex, int polarity)";
 # polarity==0 is NC (default)
 # polarity==1 is NO
+```
+
+## Homing of absolute encoder with **ONE** overflow in the range
+
+
+**ALWAYS** adjust the absolute encoder so that no overflows occur within the motion range if possible.
+However, for some situations it might be hard to adjust the encoder and then a special homing needs to be performed. No dedicated homing seq exists for this in ecmc but it can be handled in plc code (needs ecmc 9.6.2).
+
+Example: 
+```
+/*
+  PLC code to home an axis with an absolute encoder which has ONE overflow in the range
+  If actual encoder value is higher than ${THRESHOLD} it will be referenced to current actual position - ${RANGE}.
+
+  NOTE: Make sure the default axis encoder scaling offset is made correct for the lower part of the raw values.
+
+  macros:
+    AX_ID     : ID of axis
+    ENC_ID    : ID of encoder (starts from 1)
+    THRESHOLD : Threshold to identify overflow  (in EGU)
+    RANGE     : The total range of the encoder both multi turn and single turn (in EGU)
+    DBG       : Printout debug messages set to empty (DBG='')
+*/
+
+if(${SELF}.firstscan) {  
+  var plc:=${SELF_ID};
+  ${DBG=#}println('PLC ',plc,' Initiating homing seq for abs. encoder with overflow');
+};
+
+if(mc_get_enc_ready(${AX_ID=1},${ENC_ID=1}) and not(static.encoderHomed)) {
+  ${DBG=#}println('Checking if homing encoder is needed');
+
+  /* Set the new position if needed */
+  if(mc_get_act_pos(${AX_ID=1},${ENC_ID=1}) > ${THRESHOLD=0}) {
+   ${DBG=#}println('Homing encoder to: ', mc_get_act_pos(${AX_ID=1},${ENC_ID=1})-${RANGE=0});
+   mc_set_act_pos(${AX_ID=1},${ENC_ID=1},mc_get_act_pos(${AX_ID=1},${ENC_ID=1})-${RANGE=0});
+  } else {
+    ${DBG=#}println('Homing not needed!');
+  };
+
+  static.encoderHomed${AX_ID=1}_${ENC_ID=1}:=1;
+}
+
+/* Do not allow power on axis if encoder is not homed*/
+if(not(static.encoderHomed${AX_ID=1}_${ENC_ID=1})) {
+    ${DBG=#}println('Waiting for encoder ready and homing...')
+    mc_power(${AX_ID=1},0);
+};
+```
+
+The code is accessible in file [here](https://github.com/paulscherrerinstitute/ecmccfg/plc_lib/home_abs_enc_overflow.plc_inc). The file is installed with ecmccfg and can be loaded from in ecmccfg_DIR.
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=${ecmccfg_DIR}home_abs_enc_overflow.plc_inc, SAMPLE_RATE_MS=1000, PLC_MACROS='DBG='"
+```
+
+The file can also be included in another plc file.
+
+Example: main.plc
+```
+# macros here or in PLC_MACROS in call to loadPLCFile.cmd:
+substitute(AX_ID=1,ENC_ID=1,RANGE=360,THRESHOLD=240)
+include "home_abs_enc_overflow.plc_inc"
+```
+
+Load the file with include dir:
+```
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/main.plc, INC=${ecmccfg_DIR}, SAMPLE_RATE_MS=1000, PLC_MACROS='DBG='"
 ```

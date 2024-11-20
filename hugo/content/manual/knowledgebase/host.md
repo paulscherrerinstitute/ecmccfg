@@ -5,8 +5,15 @@ chapter = false
 +++
 
 ## Topics
-1. [latency issues / lost frames](#latency-issues--lost-frames)
-2. [EtherCAT rate (EC_RATE)](#EtherCAT-rate-(EC_RATE))
+1. [Prefered NICs](#Prefered-NICs)
+2. [latency issues / lost frames](#latency-issues--lost-frames)
+3. [EtherCAT rate (EC_RATE)](#EtherCAT-rate-(EC_RATE))
+
+### Prefered NICs
+
+igb driver (ec_igb):
+* Intel Corporation I210 Gigabit Network Connection (rev 03)
+* Intel Corporation I350 Gigabit Network Connection (rev 01)
 
 ### latency issues / lost frames
 

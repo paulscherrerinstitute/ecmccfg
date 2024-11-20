@@ -28,7 +28,7 @@ epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
 #- {%- endif %}
 {#- scaling #}
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},{{ encoder.denominator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator }})"
 {#- source #}
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},{{ encoder.source }})"
 {#- data #}

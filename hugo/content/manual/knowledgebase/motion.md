@@ -9,6 +9,7 @@ chapter = false
 2. [position lag error, (following error)](#position-lag-error)
 4. [drive refuse to enable](#drive-refuse-to-enable)
 5. [force manual motion](#force-manual-motion)
+6. [double limit switches](#double-limit-switches)
 
 ---
 
@@ -101,3 +102,31 @@ For this however, the IOC needs to be reconfigured to _not_ link the hardware to
 6. Set `-Drv01-Cmd` to `1` and check the amplifier did enable, if you don't know how to check for an enabled amplifier, you should not use this command!
 7. After the amplifier is engaged, write a small number to `-Drv01-Spd`. Depending on the scaling, the number might be in the range of 1..1000.
 8. Observe the encoder, or in case of open-loop, the device itself.
+
+
+## double limit switches
+Sometimes two limit switches are needed, but only one can be linked in the yaml configuration. A use case could be if two axes have overlapping ranges and a switch is used to prevent them from colliding.
+
+In order to configurethis a PLC needs to be added where the two limits switches are combined with a "and" (for normally closed switches) into one bit by the use of the simulation entries (ec<mid>.s<sid>.ONE or ec<mid>.s<sid>.ZERO). 
+
+1. Add a plc
+2. Choose a non used bit in the simulation emtry ec<mid>.s<sid>.ZERO (dummy 32bit memory area in ecmc initiated to 0). Any slave can be chooses but probbaly makes sense to use the drive slave.
+3. Add code to combine the two switches into one bit ("and"). Use ec_wrt_bit to set the value.
+4. Use the selected simulation bit in the yaml cfg.
+
+Example (use ec0.s2.ZERO.31 as combined limit switch):
+```
+# Master 0
+# Drive slave  3 (can be any slave)
+# Bit 31
+# Switch 1: ec0.s5.binaryInput01
+# Switch 2: ec0.s5.binaryInput02
+ec0.s3.ZERO:=ec_wrt_bit(ec0.s3.ZERO,ec0.s5.binaryInput01 and ec0.s5.binaryInput02,31);
+```
+Then use as forward or backward bit in yaml:
+```
+input:
+  limit:
+    forward: ec0.s2.ZERO.31     # In PLC "ec0.s5.binaryInput01 and ec0.s5.binaryInput02"
+    backward: ....
+```

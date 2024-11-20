@@ -11,7 +11,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x140b3052")
 
 #- verify slave, including reset
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
 
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x01,U16,encoderControl01)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x11,U32,encoderValue01)"
@@ -89,3 +89,6 @@ epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)
 
 #- Default panel
 epicsEnvSet("ECMC_HW_PANEL"              "EL5131_DC_TRG")
+
+#- Cleanup
+epicsEnvUnset(ECMC_SLAVE_RESET)

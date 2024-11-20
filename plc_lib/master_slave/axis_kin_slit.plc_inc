@@ -1,0 +1,25 @@
+#- KINEMATICS
+#- forward kinematics
+ax${AX_CEN}.enc.actpos:=(ax${AX_LO}.enc.actpos+ax${AX_HI}.enc.actpos)/2;
+ax${AX_GAP}.enc.actpos:=ax${AX_HI}.enc.actpos-ax${AX_LO}.enc.actpos;
+#- inverse kinematics (Note: use extsetpos to ensure write is to external setpoint)
+ax${AX_LO}.traj.extsetpos:=ax${AX_CEN}.traj.setpos-ax${AX_GAP}.traj.setpos/2;
+ax${AX_HI}.traj.extsetpos:=ax${AX_CEN}.traj.setpos+ax${AX_GAP}.traj.setpos/2;
+
+#- LIMIT FLAGS
+#- propagation of limit flags from Real to Virtual positioners
+ax${AX_CEN}.mon.ilockfwd:=ax${AX_LO}.mon.highlim and ax${AX_HI}.mon.highlim;
+ax${AX_CEN}.mon.ilockbwd:=ax${AX_LO}.mon.lowlim and ax${AX_HI}.mon.lowlim;
+ax${AX_GAP}.mon.ilockfwd:=ax${AX_LO}.mon.highlim and ax${AX_HI}.mon.highlim;
+ax${AX_GAP}.mon.ilockbwd:=ax${AX_LO}.mon.lowlim and ax${AX_HI}.mon.lowlim;
+
+#- SOFT LIMITS
+#- calculation of Virtual positioner soft limits based on Real positioner soft limits
+ax${AX_GAP}.mon.lowsoftlim  := 2*max(ax${AX_CEN}.enc.actpos-ax${AX_LO}.mon.highsoftlim, ax${AX_HI}.mon.lowsoftlim-ax${AX_CEN}.enc.actpos);
+ax${AX_GAP}.mon.highsoftlim := 2*min(ax${AX_CEN}.enc.actpos-ax${AX_LO}.mon.lowsoftlim, ax${AX_HI}.mon.highsoftlim-ax${AX_CEN}.enc.actpos);
+ax${AX_GAP}.mon.lowsoftlimenable := ax${AX_LO}.mon.lowsoftlimenable and ax${AX_HI}.mon.lowsoftlimenable;
+ax${AX_GAP}.mon.highsoftlimenable := ax${AX_LO}.mon.highsoftlimenable and ax${AX_HI}.mon.highsoftlimenable;
+ax${AX_CEN}.mon.lowsoftlim  := max(ax${AX_LO}.mon.lowsoftlim-ax${AX_GAP}.enc.actpos/2, ax${AX_HI}.mon.lowsoftlim+ax${AX_GAP}.enc.actpos/2);
+ax${AX_CEN}.mon.highsoftlim := min(ax${AX_LO}.mon.highsoftlim+ax${AX_GAP}.enc.actpos/2, ax${AX_HI}.mon.highsoftlim-ax${AX_GAP}.enc.actpos/2);
+ax${AX_CEN}.mon.lowsoftlimenable := ax${AX_LO}.mon.lowsoftlimenable and ax${AX_HI}.mon.lowsoftlimenable;
+ax${AX_CEN}.mon.highsoftlimenable := ax${AX_LO}.mon.highsoftlimenable and ax${AX_HI}.mon.highsoftlimenable;

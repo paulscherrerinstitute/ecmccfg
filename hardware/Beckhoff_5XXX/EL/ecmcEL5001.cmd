@@ -13,7 +13,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13893052")
 
 #- verify slave, including reset
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
 
 #- ###########################################################
 #- ############ Config PDOS:
@@ -23,3 +23,6 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 #- Default panel
 epicsEnvSet("ECMC_HW_PANEL"              "Ex5xx1")
+
+#- Cleanup
+epicsEnvUnset(ECMC_SLAVE_RESET)
