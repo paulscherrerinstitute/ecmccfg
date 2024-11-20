@@ -11,6 +11,8 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "5")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=iPOS4808BX_2"
 
+#- NOTE USE HW_DESC = iPOS4808BX_2  (iPOS4808BX is for legacy)
+
 #- Apply component:
 #- For IPOS4808 some macros are mandatory:
 #-  * I_CTRL_GAIN   : Current loop gain
