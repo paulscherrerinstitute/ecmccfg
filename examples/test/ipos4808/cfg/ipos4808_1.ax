@@ -1,6 +1,6 @@
 #General
-epicsEnvSet("ECMC_MOTOR_NAME",            "Axis1")
-epicsEnvSet("ECMC_R",                     "Axis1-")
+epicsEnvSet("ECMC_MOTOR_NAME",            "M1")
+epicsEnvSet("ECMC_R",                     "M1-")
 epicsEnvSet("ECMC_AXIS_NO",               "1")
 epicsEnvSet("ECMC_DESC",                  "IPOS4808 Test")
 epicsEnvSet("ECMC_EGU",                   "mm")                       # Motor Record Unit
@@ -8,7 +8,7 @@ epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Re
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.binaryOutput01.0)
 epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
-epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For positioning and MOD_RANGE>0: 0 = Normal, 1 = Always Fwd, 2 = Always Bwd, 3 = Closest Distance
+epicsEnvSet("ECMC_MOD_TYPE",              "0")
 
 #Encoder
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "360")
@@ -72,8 +72,8 @@ epicsEnvSet("ECMC_EC_MON_HOME_SWITCH",    "ec0.s$(ECMC_EC_SLAVE_NUM).ONE.0")    
 epicsEnvSet("ECMC_EC_MON_EXT_INTERLOCK",  "ec0.s$(ECMC_EC_SLAVE_NUM).ONE.0")           #  Ethercat entry for external interlock input
 
 # Softlimits (disable with 0,0,0)
-epicsEnvSet("ECMC_SOFT_LOW_LIM",          "$(SM_DLLM=0)")
-epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "$(SM_DHLM=0)")
+epicsEnvSet("ECMC_SOFT_LOW_LIM",          "0")
+epicsEnvSet("ECMC_SOFT_HIGH_LIM",         "0")
 epicsEnvSet("ECMC_DXLM_ENABLE",           "0")
 
 # Position lag
