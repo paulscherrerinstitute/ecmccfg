@@ -39,6 +39,7 @@ epicsEnvSet("PLC_MACROS",              "SELF_ID=${ECMC_PLC_ID}, SELF='plc${ECMC_
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
 system "msi -I ${INC=.} -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} ${FILE}"
+epicsEnvUnset(PLC_MACROS)
 
 #- Printout parsed file?
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, ${PRINT_PLC_FILE=1}=1,"", "#-"  )
