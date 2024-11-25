@@ -1,0 +1,24 @@
+##############################################################################
+## Example config for el7411 with maxon BLDC motor (incremental encoder, not hall)
+
+require ecmccfg "MASTER_ID=1"
+require ecmccomp sandst_a
+
+
+##############################################################################
+## Configure hardware
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=16, HW_DESC=EL7411"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-QMot-4208-61-04-013-DS, MACROS='I_MAX_MA=1000'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-INC,          MACROS='ST_ENC_RES=4096,INV_DIR=1'"
+
+##############################################################################
+## AXIS 1
+#
+#epicsEnvSet("DEV",      "$(IOC)")
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7411_1.ax)
+
+##############################################################################
+############# go active:
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
