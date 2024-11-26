@@ -24,4 +24,4 @@ ${EXE}ecmcExit Error: ecmccomp module not loaded and not found
 epicsEnvUnset(EXE)
 
 ecmcFileExist(${ecmccomp_DIR}applyComponent.cmd,1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=${COMP}, EC_COMP_TYPE=${EC_COMP_TYPE=${ECMC_EC_COMP_TYPE=${ECMC_EC_HWTYPE}}}, COMP_S_ID=${COMP_S_ID=${ECMC_EC_SLAVE_NUM=0}}, CH_ID=${CH_ID=1}, MACROS='${MACROS}'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=${COMP}, EC_COMP_TYPE=${EC_COMP_TYPE=${ECMC_EC_COMP_TYPE=${ECMC_EC_HWTYPE=NAN}}}, COMP_S_ID=${COMP_S_ID=${ECMC_EC_SLAVE_NUM=0}}, CH_ID=${CH_ID=1}, MACROS='${MACROS=}'"
