@@ -19,14 +19,12 @@ Blindly restarting the IOC, with only partially working EtherCAT hardware, will 
 The startup script has several steps:
 
 1. `require` [ecmccfg](#require-ecmccfg)
-1. [configure](#slave-configuration) the slaves on the EtherCAT bus
+2. [configure](#slave-configuration) the slaves on the EtherCAT bus
     - additional configuration
     - adding a physical motor axis
     - adding a virtual motor axis
     - adding synchronization
     - loading a PLC from file
-1. [apply](#apply-the-configuration) the configuration
-1. [go active](#go-active)
 
 #### require ecmccfg
   ```bash
@@ -70,7 +68,7 @@ This behaviour can be modified by arguments.
   ```bash
   # slave 8 {EL7037}, configure slave using applyComponent.cmd from ecmccomp module with optional SLAVE_ID.
   ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "HW_DESC=EL7037, SLAVE_ID=8"
-  ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=Motor-Generic-2Phase-Stepper, MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230'"
+  ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd   "COMP=Motor-Generic-2Phase-Stepper, MACROS='I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230'"
   # slave 9 {EL7037}, addSlave, with immediate call off applySlaveConfig
   # slave with global configuration
   ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,         "HW_DESC=EL7037"
@@ -81,11 +79,6 @@ This behaviour can be modified by arguments.
   ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${CFG_ROOT}AM8211_AGIR.cfg"
   ```
 
-#### apply the configuration
-The configured process image is applied to the master
-  ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-  ```
 
 ##### additional configuration
 Optionally, manual modifications can be made to the default configuration.
@@ -150,8 +143,3 @@ ECMC PLCs can be loaded from classical PLC files, from pure yaml files or from a
 {{% notice tip %}}
 See [plc cfg](../plc_cfg/best_practice/) for more information.
 {{% /notice %}}
-
-#### go active
-  ```bash
-  ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
-  ```
