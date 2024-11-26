@@ -2,7 +2,6 @@
 ## Example config for EL7041 and EL5042
 
 require ecmccfg "MODE=NO_MR,ENG_MODE=1,EC_RATE=100"
-require ecmccomp
 
 #- ############################################################################
 #- Master0
@@ -17,7 +16,6 @@ require ecmccomp
 #-   8  0:8   PREOP  +  EL7041 1Ch. Stepper motor output stage (50V, 5A)
 #-   9  0:9   PREOP  +  EL7041 1Ch. Stepper motor output stage (50V, 5A)
 #-  10  0:10  PREOP  +  EL7041 1Ch. Stepper motor output stage (50V, 5A)
-
 
 # 0:0  - EK1100    EtherCAT coupler
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EK1100"
@@ -58,8 +56,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
 
 # 0:10 - EL7041    1Ch Stepper
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7041-0052"
-
-#- ###########################################################################
-#- go active
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd

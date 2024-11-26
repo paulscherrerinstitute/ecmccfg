@@ -1,14 +1,13 @@
 
 epicsEnvSet("MASTER_ID", "0")
 
-require ecmccfg v9.5.5_RC1,"ENG_MODE=1,ECMC_VER=v9.5.5_RC1"
+require ecmccfg "ENG_MODE=1"
 require ecmccomp
 require ecmc_master_slave sandst_a
 
 #- #################################################################
 # only print error messages
 asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x01)
-
 
 ##############################################################################
 # - apply hardware configuration
@@ -68,15 +67,6 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCFile.cmd, "FILE=cfg/VFM.plc,PLC_ID=1,INC
 #- #############################################################################
 #- Temporary test
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=cfg/ax_Servo_angle.yaml, DRV_SLAVE=021"
-
-#- #################################################################
-#- apply the configuration
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}applyConfig.cmd
-
-
-#- #################################################################
-#- go active
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setAppMode.cmd
 
 require "calc"
 require "opticaltable","wang_x1"
