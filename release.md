@@ -1,3 +1,6 @@
+# 9.6.6
+* Add wrapper to ecmccomp/applyComponent.cmd
+
 # 9.6.5
 * Unset PLC_MACROS after loadPLCFile.cmd and loadPLCLib.cmd
 * Minor updates to manual
