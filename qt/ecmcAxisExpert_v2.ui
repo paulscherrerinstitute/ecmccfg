@@ -3362,7 +3362,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=05,SYS=$(SYS),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=04,SYS=$(SYS),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
