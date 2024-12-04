@@ -17,7 +17,7 @@ file "ecmc_controlWord-chX.template"
 file "ecmc_analogOutput-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,    sourceName,         DESC                     }
-          {01,    "Drv", "-VeloSet", "velocitySetpoint", "Drive Velocity setpoint"}
+          {01,    "Drv", "-Spd", "velocitySetpoint", "Drive Velocity setpoint"}
 }
 
 # Drive Status word

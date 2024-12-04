@@ -1,3 +1,6 @@
+# 9.6.7
+* Write target.enable also if false
+
 # 9.6.6
 * Add wrapper to ecmccomp/applyComponent.cmd (automatically requires ecmccomp)
 * Cleanup in PSI best practices.
@@ -9,3 +12,4 @@
 
 # Previous versions
 See https://github.com/epics-modules/ecmc/blob/master/RELEASE.md
+and https://github.com/paulscherrerinstitute/ecmccfg/blob/master/Changelog.adoc
