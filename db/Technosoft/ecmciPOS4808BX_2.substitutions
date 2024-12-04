@@ -16,8 +16,8 @@ file "ecmc_controlWord-chX.template"
 # Drive Velocity setpoint
 file "ecmc_analogOutput-chX.template"
 {
-  pattern {CH_ID, KEY,   suffix,    sourceName,         DESC                     }
-          {01,    "Drv", "-Spd", "velocitySetpoint", "Drive Velocity setpoint"}
+  pattern {CH_ID, KEY,   suffix,    sourceName,      EGU, DESC                     }
+          {01,    "Drv", "-Spd", "velocitySetpoint", RAW, "Drive Velocity setpoint"}
 }
 
 # Drive Status word
