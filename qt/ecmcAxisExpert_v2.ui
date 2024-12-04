@@ -3362,7 +3362,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=05,SYS=$(SYS),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=04,SYS=$(SYS),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4016,9 +4016,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>90</y>
        <width>336</width>
-       <height>156</height>
+       <height>151</height>
       </rect>
      </property>
      <property name="title">
@@ -4308,7 +4308,7 @@
        </size>
       </property>
       <property name="text">
-       <string>Mon limit home:</string>
+       <string>Mon home:</string>
       </property>
      </widget>
      <widget class="caLineEdit" name="calineedit_58">
@@ -4397,7 +4397,7 @@
        <x>10</x>
        <y>10</y>
        <width>215</width>
-       <height>65</height>
+       <height>76</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -4425,7 +4425,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>20</y>
+        <y>25</y>
         <width>100</width>
         <height>18</height>
        </rect>
@@ -4447,7 +4447,7 @@
       <property name="geometry">
        <rect>
         <x>5</x>
-        <y>20</y>
+        <y>25</y>
         <width>80</width>
         <height>18</height>
        </rect>
@@ -4460,7 +4460,7 @@
       <property name="geometry">
        <rect>
         <x>5</x>
-        <y>40</y>
+        <y>47</y>
         <width>80</width>
         <height>18</height>
        </rect>
@@ -4473,7 +4473,7 @@
       <property name="geometry">
        <rect>
         <x>195</x>
-        <y>10</y>
+        <y>25</y>
         <width>18</width>
         <height>18</height>
        </rect>
@@ -4492,7 +4492,7 @@
       <property name="geometry">
        <rect>
         <x>91</x>
-        <y>41</y>
+        <y>48</y>
         <width>65</width>
         <height>18</height>
        </rect>
@@ -4505,7 +4505,7 @@
       <property name="geometry">
        <rect>
         <x>158</x>
-        <y>43</y>
+        <y>50</y>
         <width>32</width>
         <height>18</height>
        </rect>
