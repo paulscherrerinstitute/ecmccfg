@@ -48,3 +48,6 @@ epicsThreadSleep(0.01)
 #Set action if communication is lost (Quickstop=3, Diasble voltage=2, Execute fault routine = 1, No action (continue running)=0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x6007,0x0,3,2)"
 epicsThreadSleep(0.01)
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "iPOSXXXX")

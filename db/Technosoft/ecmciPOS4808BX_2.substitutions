@@ -53,22 +53,22 @@ file "ecmc_binaryInputArray-chX.template"
 # currentActual
 file "ecmc_analogInput-chX.template"
 {
-  pattern {CH_ID, KEY,   suffix,  sourceName,      LINR,    ESLO,      EGU }
-          {01,    "Drv", "-Curr", "currentActual", "SLOPE", 0.0006105, "A" }
+  pattern {CH_ID, KEY,   suffix,    sourceName,      LINR,    ESLO,      EGU, PREC }
+          {01,    "Drv", "-TrqAct", "currentActual", "SLOPE", 0.0006105, "A", 3    }
 }
 
 # voltageActual, ESLO= 102.3/65520 (see manual)
 file "ecmc_analogInput-chX.template"
 {
-  pattern {CH_ID, KEY,   suffix,  sourceName,      LINR,    ESLO,      EGU }
-          {01,    "Drv", "-Volt", "voltageActual", "SLOPE", 0.0015614, "V" }
+  pattern {CH_ID, KEY,   suffix,    sourceName,      LINR,    ESLO,      EGU, PREC }
+          {01,    "Drv", "-VolAct", "voltageActual", "SLOPE", 0.0015614, "V", 3 }
 }
 
 # temperatureActual, ESLO= 102.3/65520 (see manual)
 file "ecmc_analogInput-chX.template"
 {
-  pattern {CH_ID, KEY,   suffix,  sourceName,          LINR,    ESLO,     EGU    }
-          {01,    "Drv", "-Temp", "temperatureActual", "SLOPE", 0.001221, "DegC" }
+  pattern {CH_ID, KEY,   suffix,    sourceName,          LINR,    ESLO,     EGU    ,PREC}
+          {01,    "Drv", "-TmpAct", "temperatureActual", "SLOPE", 0.001221, "DegC" ,2}
 }
 
 # analogInputActual (analog drive feedback)
