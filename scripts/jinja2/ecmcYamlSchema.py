@@ -277,6 +277,14 @@ class Schema:
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
                 ], 'default': 0.0
             },
+            'lookuptable': {
+                'type': 'dict',
+                'schema': {
+                    'filename': {'required': True, 'type': 'string'},
+                    'mask': {'type': 'string'},
+                    'enable': {'type': 'integer'},
+                }
+            },
             'unit': {'type': 'string'},
             'desc': {'type': 'string'},
             'position': {'type': 'string'},
