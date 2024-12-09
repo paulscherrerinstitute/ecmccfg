@@ -512,6 +512,10 @@ encoder:
     trigg: ec0..                                      # Ethercat entry for triggering drive internal homing seq (seq id 26)
     ready: ec0..                                      # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
     latchCount: 1                                     # latch number to ref on (1=ref on first latch)
+  lookuptable:
+    filename: ./cfg/enc.corr                          # Load correction lockuptable file (default enabled if loaded)
+#    enable: 1                                        # Enable correction table
+#    mask: '0x3FF'                                    # Encoder raw mask to apply correction (example single turn bits or period bits of EL5021)
 
 controller:
   Kp: 15                                              # Kp proportional gain
