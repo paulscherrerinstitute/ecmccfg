@@ -1,5 +1,6 @@
 # 9.6.7
 * Write target.enable also if false
+* Add support for encoder calibration by lookup tables
 
 # 9.6.6
 * Add wrapper to ecmccomp/applyComponent.cmd (automatically requires ecmccomp)
