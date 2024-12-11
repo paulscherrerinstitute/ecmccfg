@@ -42,11 +42,18 @@ encoder:
   warning: 0                                          # Warning (optional)
   error:                                              # max 3 (optional)
     - 1                                               # Error 0
+#  lookuptable:
+#    filename: ./cfg/enc.corr
+#    enable: True
+#    range: 100
 
 controller:
   Kp: 10                                              # Kp proportinal gain
   Ki: 0                                               # Ki integral gain
   Kd: 0                                               # Kd derivative gain
+  deadband:
+    tol: 0.005                                         # Stop control if within this distance from target for the below time
+    time: 100  
 
 trajectory:
   axis:
