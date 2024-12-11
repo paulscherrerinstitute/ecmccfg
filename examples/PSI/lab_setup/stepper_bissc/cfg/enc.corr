@@ -6,9 +6,11 @@
 # Created 2024-12-09
 #
 # This table simply just changes the gain in region -10..10. 
-# Outside this range it only a different offset will be applied.
+# Outside this range, a different offset will be applied.
 #
-
--10  -10
-0  0
-10  10
+PREC=5
+-10  -10.123456789
+0  0.123456789
+10  10.123456789
+PREC=6
+12345.67898 1234.56789
