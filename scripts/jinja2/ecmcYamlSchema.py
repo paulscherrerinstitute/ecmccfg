@@ -281,8 +281,8 @@ class Schema:
                 'type': 'dict',
                 'schema': {
                     'filename': {'required': True, 'type': 'string'},
-                    'mask': {'type': 'string'},
-                    'enable': {'type': 'integer'},
+                    'range': {'type': 'float'},
+                    'enable': {'type': 'boolean'},
                 }
             },
             'unit': {'type': 'string'},
