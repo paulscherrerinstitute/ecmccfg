@@ -170,11 +170,11 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 
 {%- if encoder.lookuptable is defined %}
     ecmcConfigOrDie "Cfg.LoadAxisEncLookupTable(${ECMC_AXIS_NO},{{ encoder.lookuptable.filename }})"
-    {%- if encoder.lookuptable.mask is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableRawPosMask(${ECMC_AXIS_NO},{{ encoder.lookuptable.mask }})"
+    {%- if encoder.lookuptable.range is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableRange(${ECMC_AXIS_NO},{{ encoder.lookuptable.range }})"
     {%- endif %}    
 
     {%- if encoder.lookuptable.enable is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableEnable(${ECMC_AXIS_NO},{{ encoder.lookuptable.enable }})"
+        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableEnable(${ECMC_AXIS_NO},{{ encoder.lookuptable.enable|int }})"
     {%- endif %}    
 {%- endif %}
