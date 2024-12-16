@@ -13,12 +13,16 @@
     {%- else  %}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},0)"
     {%- endif %}
+
     {%- if target.enable %}
         #- at target if |target-actual|<{{ monitoring.target.tolerance }} for >{{ monitoring.target.time }} cycles
         ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},{{ monitoring.target.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id }},{{ monitoring.target.tolerance }})"
         ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id }},{{ monitoring.target.time }})"
+    {%- else  %}
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},0)"
     {%- endif %}
+
     {%- if velocity.enable %}
         #- velocity: v_max = {{ monitoring.velocity.max}}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id }},{{ monitoring.velocity.enable|int }})"

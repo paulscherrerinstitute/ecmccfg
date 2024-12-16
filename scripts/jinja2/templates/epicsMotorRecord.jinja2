@@ -24,20 +24,30 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }},
 {%- if softlimits.enable %}
     {%- if softlimits.forward is defined and softlimits.forwardEnable %}
         {%- set DHLM = softlimits.forward %}
+        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}HLM={{ DHLM }},")
     {%- endif %}
     {%- if softlimits.backward is defined and softlimits.backwardEnable %}
         {%- set DLLM = softlimits.backward %}
+        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}LLM={{ DLLM }},")
     {%- endif %}
 {%- endif %}
 {%- set drive = None if drive is undefined else drive %}
 {%- set homing = None if homing is undefined else homing %}
 
-ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
+#- VMAX
+{%- if monitoring.velocity is defined %}
+  {%- if monitoring.velocity.enable|default(0)|int %}
+    epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}VMAX={{ monitoring.velocity.max }},")
+  {%- endif %}
+{%- endif %}
+
 ecmcEpicsEnvSetCalc(ECMC_TEMP_SREV,'abs({{ drive.denominator|default(1)|int }})')
 ecmcEpicsEnvSetCalc(ECMC_TEMP_UREV,'abs({{ drive.numerator|default(1)|float }})')
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homing.type|default(0)|int }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),{{ epics.motorRecord.fieldInit|default('') }}")
+ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homing.type|default(0)|int }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),{{ epics.motorRecord.fieldInit|default('') }},${ECMC_MR_TEMP_FIELDS=""}")
 epicsEnvUnset(ECMC_TEMP_UREV)
 epicsEnvUnset(ECMC_TEMP_SREV)
+epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
 #- -----------------------------------------------------------------------------
 #- Axis homing
 {%- if (homing) and (encoder.homing) %}
