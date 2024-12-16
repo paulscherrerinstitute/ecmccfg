@@ -1,0 +1,6 @@
+file G_DRV_table.template {
+pattern
+{ P              Q   T   LX   LZ    SX   SY   SZ    GEOM      M0X  M0Y       M1Y       M2X   M2Y      M2Z }
+{ X10SA-ES1-VFM: t   T   250  500   125  0    250   GEOCARS   ""   TRYR      TRYDW     ""    TRYUW    ""  }
+}
+

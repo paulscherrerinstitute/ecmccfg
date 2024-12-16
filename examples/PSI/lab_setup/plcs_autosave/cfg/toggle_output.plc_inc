@@ -1,0 +1,3 @@
+${M}.s${BO_S_ID}.binaryOutput${BO_CH}:=not(${M}.s${BO_S_ID}.binaryOutput${BO_CH});
+${DBG=#}println('State: ', ${M}.s${BO_S_ID}.binaryOutput${BO_CH});
+

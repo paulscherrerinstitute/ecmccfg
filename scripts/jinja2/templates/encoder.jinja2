@@ -28,7 +28,7 @@ epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
 #- {%- endif %}
 {#- scaling #}
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},{{ encoder.denominator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator }})"
 {#- source #}
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},{{ encoder.source }})"
 {#- data #}
@@ -168,3 +168,13 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     {%- endif %}
 {%- endif %}
 
+{%- if encoder.lookuptable is defined %}
+    ecmcConfigOrDie "Cfg.LoadAxisEncLookupTable(${ECMC_AXIS_NO},{{ encoder.lookuptable.filename }})"
+    {%- if encoder.lookuptable.range is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableRange(${ECMC_AXIS_NO},{{ encoder.lookuptable.range }})"
+    {%- endif %}    
+
+    {%- if encoder.lookuptable.enable is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableEnable(${ECMC_AXIS_NO},{{ encoder.lookuptable.enable|int }})"
+    {%- endif %}    
+{%- endif %}

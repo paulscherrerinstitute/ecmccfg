@@ -182,6 +182,7 @@ class Schema:
             'healthOutput': {'type': 'string'},
             'feedSwitchesOutput': {'type': 'string'},
             'feedSwitchesValue': {'type': 'integer'},
+            'group': {'type': 'string'},
             'autoMode': {'type': 'dict', 'schema': {
                 'modeSet': {'type': 'string'},
                 'modeAct': {'type': 'string'},
@@ -268,7 +269,11 @@ class Schema:
         'required': True,
         'schema': {
             'source': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
-            'numerator': {'type': 'float', 'default': 0.},
+            'numerator': {'oneof': [
+                {'type': 'float'},
+                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
+                ], 'default': 0.0
+            },
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
             'type': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'mask': {'type': 'string'},
@@ -278,6 +283,14 @@ class Schema:
                 {'type': 'float'},
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
                 ], 'default': 0.0
+            },
+            'lookuptable': {
+                'type': 'dict',
+                'schema': {
+                    'filename': {'required': True, 'type': 'string'},
+                    'range': {'type': 'float'},
+                    'enable': {'type': 'boolean'},
+                }
             },
             'unit': {'type': 'string'},
             'desc': {'type': 'string'},

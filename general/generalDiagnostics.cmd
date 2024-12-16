@@ -3,7 +3,8 @@
 #- Arguments: n/a
 
 #-d /**
-#-d   \brief Script for enabling general diagnostics
+#-d   \brief Script for general diagnostics
+#-d   \details Script for setting default diagnostics
 #-d   \author Niko Kivel, Anders Sandstroem
 #-d   \file
 #-d */

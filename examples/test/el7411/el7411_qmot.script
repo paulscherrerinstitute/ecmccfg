@@ -1,0 +1,12 @@
+##############################################################################
+## Example config for el7411 with Qmot BLDC motor (incremental encoder)
+## Note, the encoder needed to be inverted to fit motor rotation (otherwise the motor will act strange, however no real error..)
+
+require ecmccfg sandst_a "MASTER_ID=1,ENG_MODE=1"
+
+#-#############################################################################
+## Configure hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd         "SLAVE_ID=16, HW_DESC=EL7411"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd   "COMP=Motor-QMot-4208-61-04-013-DS, MACROS='I_MAX_MA=2000,VELO_KP=1000,VELO_TI=100,CURR_KP=100,CURR_TI=50'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd   "COMP=Encoder-Generic-INC,          MACROS='ST_ENC_RES=4096, INV_DIR=1'"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd     "FILE=./cfg/axis.yaml,              DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${ECMC_EC_SLAVE_NUM}"

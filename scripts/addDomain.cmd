@@ -2,7 +2,7 @@
 # addDomain.cmd
 #-d /**
 #-d   \brief Script for adding an EtherCAT domain. 
-#-d
+#-d   \details Adds an EtherCAt domain.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param EXE_RATE (optional) Execution rate [cycles] defaults 0 (same EC_RATE)

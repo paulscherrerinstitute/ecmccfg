@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for enabling default diagnostics.
+#-d   \details Set some default values to diagostics
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

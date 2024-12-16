@@ -1,42 +1,35 @@
-##############################################################################
-## Example config for iPOS4808
+#- #############################################################################
+#- Example config for iPOS4808
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg sandst_a "ENG_MODE=1"
+require ecmccomp sandst_a
 
-require ecmccfg master
+#- #############################################################################
+#- Configure hardware
 
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
-
-##############################################################################
-## Configure hardware
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "47")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "5")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=iPOS4808, CONFIG=-Motor-McLennan-34HT18C340-Parallel"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=iPOS4808BX_2"
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+#- NOTE USE HW_DESC = iPOS4808BX_2  (iPOS4808BX is for legacy)
 
-##############################################################################
-## AXIS 1
-#
-epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos4808_1.ax)
+#- Apply component: Oriental motor PKE244A
+#- For IPOS4808 some macros are mandatory:
+#-  * I_CTRL_GAIN   : Current loop gain
+#-  * I_CTRL_INT    : Current loop integrator gain 
+#-  * I_MAX_MA      : Mandatory if Motor-Generic-2Phase-Stepper is used
+#-  * I_STDBY_MA    : Mandatory if Motor-Generic-2Phase-Stepper is used
+#- The values can be taken from EasyMotionStudio or by trial and error (BTW, coil resistance and inductance are not used in the iPOS cfgs)
+#- After running a tuning test in EasyMotionStudio, a reset is needed (from easymotion studio or over SDO (see motor cfg scripts).)
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000,I_STDBY_MA=100,CURR_KP=1.0,CURR_TI=0.26'"
 
-##############################################################################
-############# Configure diagnostics:
+#- #############################################################################
+#- AXIS 1
+#- The reduced current will be applied automatically by the iPOS4808 (no links needed in axis cfgs)
+#- $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos4808_1.ax)
+${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,   "FILE=./cfg/axis.yaml,               DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${ECMC_EC_SLAVE_NUM}"
 
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+#- ###########################################################################
+#- go active
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
