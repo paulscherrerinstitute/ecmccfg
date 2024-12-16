@@ -22,7 +22,7 @@
 
 #- DS_SIZE  : Size of data buffer.
 #- [optional]
-#- DS_ID   = 0
+#- DS_ID   = 0 (Or next Id)
 #- DS_TYPE = 0
 #-   0: Normal Buffer. Fill from beginning (index 0). Stop when full.
 #-   1: Ring Buffer. Fill from beginning (index 0). Start over in beginning when full.
@@ -35,15 +35,15 @@
 #-   0: No debug printouts.
 #-   1: Debug  printouts.
 
-epicsEnvSet("ECMC_STORAGE_INDEX",   "${DS_ID=0}")
+epicsEnvSet("ECMC_DS_ID",   "${DS_ID=0}")
 epicsEnvSet("ECMC_STORAGE_SIZE",    "${DS_SIZE}")
-ecmcConfigOrDie "Cfg.CreateStorage(${ECMC_STORAGE_INDEX},${ECMC_STORAGE_SIZE},${DS_TYPE=0})"
-ecmcConfigOrDie "Cfg.ClearStorage(${ECMC_STORAGE_INDEX})"
-ecmcConfigOrDie "Cfg.SetStorageEnablePrintouts(${ECMC_STORAGE_INDEX},${DS_DEBUG=0})"
+ecmcConfigOrDie "Cfg.CreateStorage(${ECMC_DS_ID},${ECMC_STORAGE_SIZE},${DS_TYPE=0})"
+ecmcConfigOrDie "Cfg.ClearStorage(${ECMC_DS_ID})"
+ecmcConfigOrDie "Cfg.SetStorageEnablePrintouts(${ECMC_DS_ID},${DS_DEBUG=0})"
 
 ecmcFileExist(${SUBST_FILE="ecmcDS.substitutions"},1,1)
-ecmcEpicsEnvSetCalc(ECMC_DS_ID_2_CHARS, "${ECMC_STORAGE_INDEX}", "%02d")
-dbLoadTemplate(${SUBST_FILE="ecmcDS.substitutions"}, "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_STORAGE_INDEX},Index2Char=${ECMC_DS_ID_2_CHARS},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1},PREV_OBJ_ID=${ECMC_PREV_STORAGE_INDEX=-1}, DESC='${DESC=DS_${ECMC_PLC_ID}}'")
+ecmcEpicsEnvSetCalc(ECMC_DS_ID_2_CHARS, "${ECMC_DS_ID}", "%02d")
+dbLoadTemplate(${SUBST_FILE="ecmcDS.substitutions"}, "P=${ECMC_PREFIX}, PORT=${ECMC_ASYN_PORT}, ADDR=${ECMC_ASYN_ADDR}, TIMEOUT=${ECMC_ASYN_TIMEOUT},A=0,Index=${ECMC_DS_ID},Index2Char=${ECMC_DS_ID_2_CHARS},NELM=${ECMC_STORAGE_SIZE},T_SMP_MS=${SAMPLE_RATE_MS=1},PREV_OBJ_ID=${ECMC_PREV_STORAGE_INDEX=-1}, DESC='${DESC=DS_${ECMC_PLC_ID}}'")
 epicsEnvUnset(ECMC_DS_ID_2_CHARS)
 
 #- Below for facilitate auto gui generation
@@ -65,4 +65,6 @@ epicsEnvSet(ECMC_PREV_DS_OBJ_ID,${DS_ID})
 
 ecmcEpicsEnvSetCalc(ECMC_DS_COUNT, "$(ECMC_DS_COUNT=0)+1")
 
-epicsEnvSet(ECMC_PREV_STORAGE_INDEX,$(ECMC_STORAGE_INDEX=-1))
+epicsEnvSet(ECMC_PREV_STORAGE_INDEX,$(ECMC_DS_ID=-1))
+#- Load next DS at next available index
+ecmcEpicsEnvSetCalc(DS_ID, "$(DS_ID) + 1")
