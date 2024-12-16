@@ -1,0 +1,12 @@
+if(${SELF}.firstscan) {
+  # do some inits
+  var plc:=${SELF_ID};
+  ${DBG=#}println('PLC ',plc,' is starting up');
+};
+
+substitute "BO_CH=01"
+include "toggle_output.plc_inc"
+
+substitute "BO_CH=02, DBG="
+include "toggle_output.plc_inc"
+

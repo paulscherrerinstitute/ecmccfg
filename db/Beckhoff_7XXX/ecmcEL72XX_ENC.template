@@ -7,7 +7,7 @@ record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=V)")
+  field(EGU,  "$(EGU=RAW)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")

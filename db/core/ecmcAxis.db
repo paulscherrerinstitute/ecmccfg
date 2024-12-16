@@ -496,6 +496,16 @@ record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
   field(TSE,  "0")
 }
 
+record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
+  field(DESC, "${AXIS_NAME}: Enable printouts")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BA")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(TSE,  "0")
+}
+
 record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(DESC, "${AXIS_NAME}: Target Position Cmd")
   field(DTYP, "asynFloat64")

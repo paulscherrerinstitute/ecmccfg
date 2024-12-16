@@ -1,106 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>163</width>
-    <height>154</height>
+    <width>359</width>
+    <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="caFrame" name="caframe">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>51</width>
-      <height>46</height>
-     </rect>
-    </property>
-    <property name="macro">
-     <string notr="true">SYS=$(SYS),IOC=$(IOC),ID_1=$(ID_1),ID_2=$(ID_2)</string>
-    </property>
-    <property name="visibility">
-     <enum>caFrame::Calc</enum>
-    </property>
-    <property name="visibilityCalc">
-     <string notr="true">A&gt;-1</string>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(IOC):MCU-Cfg-PLC$(ID_1)-PrvObjId</string>
-    </property>
-    <widget class="caShellCommand" name="cashellcommand_2">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>2</y>
-       <width>41</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="label">
-      <string notr="true">&lt;&lt;</string>
-     </property>
-     <property name="labels">
-      <string>Open first axis</string>
-     </property>
-     <property name="files">
-      <string>bash /ioc/modules/qt/ecmcOpenPrevPLC.sh</string>
-     </property>
-     <property name="args">
-      <string>$(SYS) $(ID_1)</string>
-     </property>
-    </widget>
-    <widget class="caLineEdit" name="calineedit_53">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>25</y>
-       <width>41</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>18</height>
-      </size>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(IOC):MCU-Cfg-PLC$(ID_1)-PrvObjId</string>
-     </property>
-     <property name="background">
-      <color alpha="222">
-       <red>192</red>
-       <green>192</green>
-       <blue>192</blue>
-      </color>
-     </property>
-     <property name="colorMode">
-      <enum>caLineEdit::Static</enum>
-     </property>
-     <property name="precisionMode">
-      <enum>caLineEdit::Channel</enum>
-     </property>
-     <property name="limitsMode">
-      <enum>caLineEdit::User</enum>
-     </property>
-     <property name="unitsEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>205</x>
+     <y>75</y>
+     <width>146</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Navigation:</string>
+   </property>
    <widget class="caLabel" name="calabel_97">
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>45</y>
+      <y>30</y>
       <width>100</width>
       <height>16</height>
      </rect>
@@ -111,21 +40,103 @@
       <height>16</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>Next:</string>
     </property>
+    <property name="fontScaleMode">
+     <enum>ESimpleLabel::None</enum>
+    </property>
    </widget>
-   <widget class="caFrame" name="caframe_2">
+   <widget class="caLabel" name="calabel_98">
+    <property name="geometry">
+     <rect>
+      <x>-55</x>
+      <y>30</y>
+      <width>100</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Prev:</string>
+    </property>
+    <property name="fontScaleMode">
+     <enum>ESimpleLabel::None</enum>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_52">
+    <property name="geometry">
+     <rect>
+      <x>55</x>
+      <y>55</y>
+      <width>31</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>$(ID_1)</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true"/>
+    </property>
+    <property name="background">
+     <color alpha="222">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::Channel</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="fontScaleMode" stdset="0">
+     <enum>caLineEdit::WidthAndHeight</enum>
+    </property>
+    <property name="unitsEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="caFrame" name="caframe_3">
     <property name="geometry">
      <rect>
       <x>85</x>
-      <y>60</y>
-      <width>56</width>
-      <height>46</height>
+      <y>50</y>
+      <width>66</width>
+      <height>51</height>
      </rect>
     </property>
+    <property name="toolTipDuration">
+     <number>-2</number>
+    </property>
     <property name="macro">
-     <string notr="true">SYS=$(SYS),IOC=$(IOC),ID_1=$(ID_1),ID_2=$(ID_2)</string>
+     <string notr="true">SYS=$(IOC),IOC=$(IOC),ID_1=$(ID_1)</string>
     </property>
     <property name="visibility">
      <enum>caFrame::Calc</enum>
@@ -140,7 +151,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>2</y>
+       <y>5</y>
        <width>41</width>
        <height>18</height>
       </rect>
@@ -162,7 +173,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>25</y>
+       <y>30</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -197,12 +208,159 @@
      </property>
     </widget>
    </widget>
-   <widget class="caLabel" name="calabel_98">
+   <widget class="caFrame" name="caframe_4">
     <property name="geometry">
      <rect>
-      <x>-55</x>
-      <y>45</y>
-      <width>100</width>
+      <x>-5</x>
+      <y>50</y>
+      <width>66</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="toolTipDuration">
+     <number>-2</number>
+    </property>
+    <property name="macro">
+     <string notr="true">SYS=$(IOC),IOC=$(IOC),ID_1=$(ID_1)</string>
+    </property>
+    <property name="visibility">
+     <enum>caFrame::Calc</enum>
+    </property>
+    <property name="visibilityCalc">
+     <string notr="true">A&gt;-1</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):MCU-Cfg-PLC$(ID_1)-PrvObjId</string>
+    </property>
+    <widget class="caShellCommand" name="cashellcommand_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>5</y>
+       <width>41</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="label">
+      <string notr="true">&lt;&lt;</string>
+     </property>
+     <property name="labels">
+      <string>Open first axis</string>
+     </property>
+     <property name="files">
+      <string>bash /ioc/modules/qt/ecmcOpenPrevPLC.sh</string>
+     </property>
+     <property name="args">
+      <string>$(SYS) $(ID_1)</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_53">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):MCU-Cfg-PLC$(ID_1)-PrvObjId</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="caLineEdit" name="calineedit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>42</y>
+     <width>341</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):PLC$(ID_2)-Desc</string>
+   </property>
+   <property name="fontScaleMode" stdset="0">
+    <enum>caLineEdit::WidthAndHeight</enum>
+   </property>
+   <property name="formatType">
+    <enum>caLineEdit::string</enum>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>75</y>
+     <width>186</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Status/Control:</string>
+   </property>
+   <widget class="caLed" name="caled_2">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>25</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):PLC$(ID_2)-Err</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>170</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_105">
+    <property name="geometry">
+     <rect>
+      <x>-35</x>
+      <y>30</y>
+      <width>131</width>
       <height>16</height>
      </rect>
     </property>
@@ -212,16 +370,24 @@
       <height>16</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>Prev:</string>
+     <string>Error:</string>
+    </property>
+    <property name="fontScaleMode">
+     <enum>ESimpleLabel::None</enum>
     </property>
    </widget>
-   <widget class="caLineEdit" name="calineedit_52">
+   <widget class="caLineEdit" name="calineedit_63">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>60</y>
-      <width>31</width>
+      <x>110</x>
+      <y>55</y>
+      <width>56</width>
       <height>16</height>
      </rect>
     </property>
@@ -231,11 +397,8 @@
       <height>18</height>
      </size>
     </property>
-    <property name="text">
-     <string>$(ID_1)</string>
-    </property>
     <property name="channel" stdset="0">
-     <string notr="true"/>
+     <string notr="true">$(IOC):PLC$(ID_2)-ScanTime</string>
     </property>
     <property name="background">
      <color alpha="222">
@@ -257,27 +420,38 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="caToggleButton" name="catogglebutton">
+   <widget class="caLabel" name="calabel_104">
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>10</y>
-      <width>100</width>
-      <height>22</height>
+      <x>-35</x>
+      <y>55</y>
+      <width>131</width>
+      <height>16</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Enable</string>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
     </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(IOC):PLC$(ID_2)-EnaCmd</string>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Scan time [s]:</string>
+    </property>
+    <property name="fontScaleMode">
+     <enum>ESimpleLabel::None</enum>
     </property>
    </widget>
    <widget class="caLed" name="caled">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>5</y>
+      <x>135</x>
+      <y>75</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -293,18 +467,53 @@
      </color>
     </property>
    </widget>
+   <widget class="caToggleButton" name="catogglebutton">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>80</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Enable:   </string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):PLC$(ID_2)-EnaCmd</string>
+    </property>
+    <property name="fontScaleMode" stdset="0">
+     <enum>caToggleButton::None</enum>
+    </property>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="caLabel" name="calabel">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>163</width>
-     <height>25</height>
+     <x>10</x>
+     <y>20</y>
+     <width>181</width>
+     <height>21</height>
     </rect>
    </property>
+   <property name="text">
+    <string>PLC $(ID_1) description:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="fontScaleMode">
+    <enum>ESimpleLabel::Height</enum>
+   </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>

@@ -1,0 +1,19 @@
+#- Real axes: Y1 Y2 Y3 X1 X2
+var REAL_AXES[5] := {ax${AX_Y1}.enc.actpos, ax${AX_Y2}.enc.actpos, ax${AX_Y3}.enc.actpos, ax${AX_X1}.enc.actpos, ax${AX_X2}.enc.actpos};
+
+#- Virtual axes: X Y PITCH ROLL YAW
+var VIRT_AXES[5] := {ax${AX_TRX}.traj.setpos, ax${AX_TRY}.traj.setpos, ax${AX_PITCH}.traj.setpos, ax${AX_ROLL}.traj.setpos, ax${AX_YAW}.traj.setpos};
+
+#- forward kinematics
+ax${AX_TRX}.enc.actpos   := dot(FWD1, REAL_AXES);
+ax${AX_TRY}.enc.actpos   := dot(FWD2, REAL_AXES);
+ax${AX_PITCH}.enc.actpos := dot(FWD3, REAL_AXES);
+ax${AX_ROLL}.enc.actpos  := dot(FWD4, REAL_AXES);
+ax${AX_YAW}.enc.actpos   := dot(FWD5, REAL_AXES);
+
+#- inverse kinematics
+ax${AX_Y1}.traj.extsetpos := dot(INV1, VIRT_AXES);
+ax${AX_Y2}.traj.extsetpos := dot(INV2, VIRT_AXES);
+ax${AX_Y3}.traj.extsetpos := dot(INV3, VIRT_AXES);
+ax${AX_X1}.traj.extsetpos := dot(INV4, VIRT_AXES);
+ax${AX_X2}.traj.extsetpos := dot(INV5, VIRT_AXES);

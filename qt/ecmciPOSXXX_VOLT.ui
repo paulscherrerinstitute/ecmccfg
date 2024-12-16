@@ -13,27 +13,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="caInclude" name="cainclude">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>125</width>
-     <height>500</height>
-    </rect>
-   </property>
-   <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
-   </property>
-   <property name="filename" stdset="0">
-    <string notr="true">A_RF_LLRF_ELETTRATUNING_include_E_slave_frame.ui</string>
-   </property>
-  </widget>
   <widget class="caRelatedDisplay" name="CiA402_2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>430</y>
+     <y>420</y>
      <width>101</width>
      <height>21</height>
     </rect>
@@ -48,7 +32,7 @@
     <string>ecmciPOSXXX_VOLT_expert.ui</string>
    </property>
    <property name="args">
-    <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(DRV),IOC=$(IOC);</string>
+    <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=01,IOC=$(IOC);</string>
    </property>
   </widget>
   <widget class="QTabWidget" name="tabWidget">
@@ -545,6 +529,25 @@
     </widget>
    </widget>
   </widget>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>128</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcE_slave_frame.ui</string>
+   </property>
+  </widget>
+  <zorder>cainclude</zorder>
+  <zorder>CiA402_2</zorder>
+  <zorder>tabWidget</zorder>
  </widget>
  <customwidgets>
   <customwidget>

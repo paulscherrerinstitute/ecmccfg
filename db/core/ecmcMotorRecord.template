@@ -35,6 +35,7 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
     field(SREV, "$(SREV=1)")
     field(UREV, "$(UREV=1.0)")
     field(VMAX, "$(VMAX=0)")
+    field(SPAM, "$(SPAM=15)")
 }
 
 # The message text
@@ -326,6 +327,8 @@ record (asyn, "$(PREFIX)$(MOTOR_NAME)-$(MOTOR_PORT)-asyn")
 {
 }
 
+################################################################
+# Sync and stop on interlock
 record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L"){
   #field(PINI, "1")
   field(DESC, "Trigg MR Sync")
@@ -380,4 +383,26 @@ record(seq, "${PREFIX}${MOTOR_NAME}-StpCmd_") {
   field(DO2,  "1")
   field(LNK1, "")
   field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
+}
+
+################################################################
+# Sync only
+record(longin,"${PREFIX}${MOTOR_NAME}-SyncMrCmd"){
+  field(DESC, "${MOTOR_NAME}: Sync MR")  
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_SYNC")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-MR-SyncOnly.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncOnly") {
+    field(DESC, "Trigg MR Sync")
+    field(PINI, "1")
+    field(DO1,  "0")
+    field(DO2,  "1")
+    field(DLY1, "0.01")
+    field(DLY2, "0.01")
+    field(LNK1, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
+    field(LNK2, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
 }

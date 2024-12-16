@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for loading a ecmc plugin from file.
+#-d   \details Loads a ecmc-plugin from file.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE      Filename of plugin shared lib (./ecmcPlugin_Advanced.so)
@@ -16,6 +17,7 @@
 #-d   \endcode
 #-d */
 
+epicsEnvSet("ECMC_PLUGIN_ID",   "${PLUGIN_ID=0}")
 ecmcConfigOrDie "Cfg.LoadPlugin(${PLUGIN_ID},${FILE},${CONFIG=""})"
 #- Report if REPORT>0
 ecmcEpicsEnvSetCalcTernary("ECMC_PLUGIN_REPORT", "${REPORT=-1}>0","","#")
@@ -40,3 +42,6 @@ epicsEnvSet(ECMC_PREV_PLG_P,"$(ECMC_PREFIX)MCU-Cfg-PLG${PLUGIN_ID}-")
 epicsEnvSet(ECMC_PREV_PLG_OBJ_ID,${PLUGIN_ID})
 
 ecmcEpicsEnvSetCalc(ECMC_PLUGIN_COUNT, "$(ECMC_PLUGIN_COUNT=0)+1")
+
+#- Increment for next
+ecmcEpicsEnvSetCalc(PLUGIN_ID, "$(PLUGIN_ID) + 1")

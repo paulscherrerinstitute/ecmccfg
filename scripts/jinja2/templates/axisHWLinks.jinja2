@@ -1,0 +1,23 @@
+#- =============================================================================
+#- Add hw links to records
+#- Purpose: To be able to open hardware panels for an axis
+#- =============================================================================
+
+ecmcFileExist("ecmcAxisLinks.db",1,1)
+
+#- Drive
+{%- if axis.type == 1 %}
+  ecmcGetSlaveIdFromEcPath({{ drive.setpoint }}, ECMC_SID_TEMP)
+  dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkDrvPosSet,DESC={{ drive.setpoint }},SID=${ECMC_SID_TEMP=-1}")
+{%else%}
+  dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=Cfg-LnkDrvPosSet,DESC={{ NAN }},SID=${ECMC_SID_TEMP=-1}")
+{%endif%}
+
+#- Encoder objects are defined in 
+#- Monitor 
+ecmcGetSlaveIdFromEcPath({{ input.limit.forward }}, ECMC_SID_TEMP)
+dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkMonLimFwd,DESC={{ input.limit.forward }},SID=${ECMC_SID_TEMP=-1}")
+ecmcGetSlaveIdFromEcPath({{ input.limit.backward }}, ECMC_SID_TEMP)
+dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkMonLimBwd,DESC={{ input.limit.backward }},SID=${ECMC_SID_TEMP=-1}")
+ecmcGetSlaveIdFromEcPath({{ input.home }}, ECMC_SID_TEMP)
+dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkMonHme,DESC={{ input.home }},SID=${ECMC_SID_TEMP=-1}")

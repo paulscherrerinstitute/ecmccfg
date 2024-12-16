@@ -1,9 +1,9 @@
 #==============================================================================
 # general.cmd
 #- Arguments: n/a
-
 #-d /**
-#-d   \brief Script for adding general and master diagnostics EPICS PVs
+#-d   \brief Add general PVs
+#-d   \details Script for adding general and master diagnostics EPICS PVs
 #-d   \author Niko Kivel, Anders Sandstroem
 #-d   \file
 #-d */

@@ -1,9 +1,9 @@
 #==============================================================================
 # loadSubstAxes.cmd
 #- Arguments: FILE
-
 #-d /**
 #-d   \brief Script for adding multiple axes based on subst and template file
+#-d   \details Configure multiple axes by using subst file
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE Subsitution file , i.e. ./plc/ax.subs

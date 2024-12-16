@@ -3,7 +3,8 @@
 #- Arguments: n/a
 
 #-d /**
-#-d   \brief Script for setting up the basic AXIS environment.
+#-d   \brief init axis environment
+#-d   \details Script for setting up the basic AXIS environment.
 #-d   \author Niko Kivel, Anders Sandstroem
 #-d   \file
 #-d */
