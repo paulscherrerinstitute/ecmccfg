@@ -1,0 +1,5 @@
+# Slave id 
+record(stringin,"${P}${AXIS_NAME}-$(SUFFIX)") {
+    field(DESC, "${DESC=}")
+    field(VAL,  "${SID=-1}")
+}
