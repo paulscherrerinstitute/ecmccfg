@@ -130,3 +130,30 @@ input:
     forward: ec0.s2.ZERO.31     # In PLC "ec0.s5.binaryInput01 and ec0.s5.binaryInput02"
     backward: ....
 ```
+
+## yaml parser installation error
+
+ecmc yaml motion axis configururations depends on python venv with certain libs. The needed venv is installed in the "/tmp" dir when the first axis yaml file is loaded in a startup file. 
+
+If the ecmc-server is not allowed to install with pip, like in the machine networks, then the below error meassge is printed in iocsh and loading of the axis fails:
+```
+iocshLoad /gfa/.mounts/sls_ioc/modules/ecmccfg/9.6.8/R7.0.8/loadYamlAxis.cmd,     "FILE=cfg/servo-linear.yaml, ID=1, NAME=SERVO1, DESC=test, DRV_SLAVE=9"
+#==============================================================================
+# loadYamlAxis.cmd
+on error halt
+# Step 1: Get Filename (need to check if filename contains other macros also). Bascally run the filename in this iocsh
+ecmcFileExist("cfg/servo-linear.yaml",1)
+epicsEnvSet(FILE_TEMP_BASE,/tmp/X01DD-CPCL-FEMOT02/EcMaster_2/cfg/servo-linear.yaml)
+epicsEnvSet(FILE_TEMP_1,/tmp/X01DD-CPCL-FEMOT02/EcMaster_2/cfg/servo-linear.yaml_1)
+system ". /gfa/.mounts/sls_ioc/modules/ecmccfg/9.6.8/R7.0.8/pythonVenv.sh -d /tmp/X01DD-CPCL-FEMOT02/EcMaster_2/; python /gfa/.mounts/sls_ioc/modules/ecmccfg/9.6.8/R7.0.8/ecmcPlcGetFileName.py cfg/servo-linear.yaml /tmp/X01DD-CPCL-FEMOT02/EcMaster_2/cfg/servo-linear.yaml_1"
+Collecting wheel
+  Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/wheel/
+  Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/wheel/
+  Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/wheel/
+  ```
+
+PSI specific: The solution is to use the ecmc_server_cfg repo as described in it's readme.md. This repo enures that the correct python venv is copied after each boot and therefore the install is not needed at ioc startup.
+
+{{% notice info %}}
+In future release of ecmc/ecmccfg the yaml parser will be moved into ecmc (c++), making the python venv obsolete and not needed. This is WIP.
+{{% /notice %}}
