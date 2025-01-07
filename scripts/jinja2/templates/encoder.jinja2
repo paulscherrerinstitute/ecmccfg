@@ -178,3 +178,12 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
         ecmcConfigOrDie "Cfg.SetAxisEncLookupTableEnable(${ECMC_AXIS_NO},{{ encoder.lookuptable.enable|int }})"
     {%- endif %}    
 {%- endif %}
+
+{%- if encoder.delayComp is defined %}
+    {%- if encoder.delayComp.enable is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncDelayCyclesAndEnable(${ECMC_AXIS_NO},{{ encoder.delayComp.time }},{{encoder.delayComp.enable|int }})"
+    {%- else  %}
+        #- Auto enable if only delay is set.
+        ecmcConfigOrDie "Cfg.SetAxisEncDelayCyclesAndEnable(${ECMC_AXIS_NO},{{ encoder.delayComp.time }},1)"
+    {%- endif %}
+{%- endif %}

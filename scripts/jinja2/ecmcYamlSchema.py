@@ -286,6 +286,13 @@ class Schema:
                 }
             },
             'unit': {'type': 'string'},
+            'delayComp': {
+                'type': 'dict',
+                'schema': {
+                    'time': {'required': True, 'type': 'float'},
+                    'enable': {'type': 'boolean'},
+                }
+            },
             'desc': {'type': 'string'},
             'position': {'type': 'string'},
             'control': {'type': 'string'},
