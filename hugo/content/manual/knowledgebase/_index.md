@@ -1,6 +1,6 @@
 +++  
 title = "knowledge base"   
-weight = 15
+weight = 10
 chapter = false  
 +++  
 
