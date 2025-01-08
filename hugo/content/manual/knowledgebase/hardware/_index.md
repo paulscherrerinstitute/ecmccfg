@@ -11,7 +11,7 @@ chapter = false
 ### culprit
 
 From experience, very few issues are related to the EtherCAT hardware itself.
-Mostly the cabling or the actual motor/encoder hardware is to blame.
+Mostly the **cabling**, **missing power** or the actual motor/encoder hardware is to blame.
 
 Even more likely is human error, such as:
 * wrong scaling of the axis

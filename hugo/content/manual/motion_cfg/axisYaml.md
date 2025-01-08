@@ -512,6 +512,9 @@ encoder:
     trigg: ec0..                                      # Ethercat entry for triggering drive internal homing seq (seq id 26)
     ready: ec0..                                      # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
     latchCount: 1                                     # latch number to ref on (1=ref on first latch)
+  delayComp:                                          # Delay compensation for time between application of setpoint to reading of encoder (normally atleast 1 cycle)
+    time: 1.5                                         # Delay time between set and act [cycles]
+#    enable: true                                     # enable (defaults to 1 if not set)
   lookuptable:
     filename: ./cfg/enc.corr                          # Load correction lockuptable file (default enabled if loaded)
 #    enable: 1                                        # Enable correction table
