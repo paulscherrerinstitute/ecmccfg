@@ -1,6 +1,6 @@
 axis:
   id: ${AXIS_ID=1}                                    # Axis id
-  feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
+#  feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
 
 epics:
   name: ${AX_NAME=M1}                                 # Axis anme
@@ -42,6 +42,10 @@ encoder:
   warning: 0                                          # Warning (optional)
   error:                                              # max 3 (optional)
     - 1                                               # Error 0
+  delayComp:                                          # Delay compensation for time between application of setpoint to reading of encoder (normally atleast 2 cycles)
+    time: 0                                           # Delay time between set and act [cycles]
+    enable: true                                        # enable (defaults to 1 if not set)
+  
 
 controller:
   Kp: 10                                              # Kp proportinal gain
