@@ -33,13 +33,13 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=03,ECMC_PDO=0x1602
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=04,ECMC_PDO=0x1603,ECMC_ENTRY=0x7030,ECMC_ENTRY_OFFSET=0x1"
 
 #- ############ Config PDOS: Channel 5
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=05,ECMC_PDO=0x1600,ECMC_ENTRY=0x7040,ECMC_ENTRY_OFFSET=0x1"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=05,ECMC_PDO=0x1604,ECMC_ENTRY=0x7040,ECMC_ENTRY_OFFSET=0x1"
 
 #- ############ Config PDOS: Channel 6
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=06,ECMC_PDO=0x1600,ECMC_ENTRY=0x7050,ECMC_ENTRY_OFFSET=0x1"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=06,ECMC_PDO=0x1605,ECMC_ENTRY=0x7050,ECMC_ENTRY_OFFSET=0x1"
 
 #- ############ Config PDOS: Channel 7
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=07,ECMC_PDO=0x1600,ECMC_ENTRY=0x7060,ECMC_ENTRY_OFFSET=0x1"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=07,ECMC_PDO=0x1606,ECMC_ENTRY=0x7060,ECMC_ENTRY_OFFSET=0x1"
 
 #- ############ Config PDOS: Channel 8
-${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=08,ECMC_PDO=0x1600,ECMC_ENTRY=0x7070,ECMC_ENTRY_OFFSET=0x1"
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogOutput_16bit.cmd "CH_ID=08,ECMC_PDO=0x1607,ECMC_ENTRY=0x7070,ECMC_ENTRY_OFFSET=0x1"
