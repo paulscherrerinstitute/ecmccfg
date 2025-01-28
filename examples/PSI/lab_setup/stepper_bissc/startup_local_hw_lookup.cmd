@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for EL7041 and EL5042
 
-require ecmccfg "ENG_MODE=1,MASTER_ID=1"
+require ecmccfg "ECMC_VER=sandst_a,ENG_MODE=1,MASTER_ID=1"
 
 # 0:7 - EL7041    1Ch Stepper
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=14,HW_DESC=EL7041-0052"
@@ -17,6 +17,3 @@ epicsEnvSet(ENC_SID,${ECMC_EC_SLAVE_NUM})
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,   "FILE=./cfg/axis_lookup.yaml,     DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${DRV_SID}, ENC_SID=${ENC_SID}, ENC_CH=01"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_open_loop.yaml,   DEV=${IOC}, ENC_SID=${DRV_SID}"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_RLS_lookup.yaml,  DEV=${IOC}, ENC_SID=${ENC_SID}"
-
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=2000,DBG=0,ENA=1")
-require ecmc_plugin_motion "${ECMC_PLUGIN_CONFIG}"
