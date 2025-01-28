@@ -3,7 +3,7 @@ include /ioc/tools/driver.makefile
 MODULE=ecmccfg
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS = 3 7.0.5
+EXCLUDE_VERSIONS = 3 7.0.5 7.0.6 7.0.7
 ARCH_FILTER=deb%
 
 SCRIPTS+=startup.cmd
