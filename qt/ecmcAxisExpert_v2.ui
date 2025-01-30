@@ -2316,7 +2316,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -5000,7 +5000,7 @@
       <string>bash /ioc/modules/qt/ecmcOpenNextAxis.sh</string>
      </property>
      <property name="args">
-      <string>$(SYS) $(AX_ID);</string>
+      <string>$(IOC) $(AX_ID);</string>
      </property>
     </widget>
     <widget class="caLabel" name="calabel_104">
@@ -5041,7 +5041,7 @@
       <string>bash /ioc/modules/qt/ecmcOpenPrevAxis.sh</string>
      </property>
      <property name="args">
-      <string>$(SYS) $(AX_ID);</string>
+      <string>$(IOC) $(AX_ID);</string>
      </property>
     </widget>
     <widget class="caLineEdit" name="calineedit_26">
