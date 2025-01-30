@@ -2316,7 +2316,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -4040,10 +4040,10 @@
        <string>Open first axis</string>
       </property>
       <property name="files">
-       <string>bash /ioc/modules/qt/ecmcOpenEcSlaveGeneric.sh</string>
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
       </property>
       <property name="args">
-       <string>$(IOC) $(SYS):$(Axis)-CfgLnkDrvPosSet</string>
+       <string>EC_SLAVE_GENERIC $(IOC) $(SYS):$(Axis)-CfgLnkDrvPosSet</string>
       </property>
      </widget>
      <widget class="caShellCommand" name="cashellcommand_4">
@@ -4062,10 +4062,10 @@
        <string>Open first axis</string>
       </property>
       <property name="files">
-       <string>bash /ioc/modules/qt/ecmcOpenEcSlaveGeneric.sh</string>
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
       </property>
       <property name="args">
-       <string>$(IOC) $(SYS):$(Axis)-CfgLnkMonLimFwd</string>
+       <string>EC_SLAVE_GENERIC $(IOC) $(SYS):$(Axis)-CfgLnkMonLimFwd</string>
       </property>
      </widget>
      <widget class="caShellCommand" name="cashellcommand_5">
@@ -4084,10 +4084,10 @@
        <string>Open first axis</string>
       </property>
       <property name="files">
-       <string>bash /ioc/modules/qt/ecmcOpenEcSlaveGeneric.sh</string>
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
       </property>
       <property name="args">
-       <string>$(IOC) $(SYS):$(Axis)-CfgLnkMonLimBwd</string>
+       <string>EC_SLAVE_GENERIC $(IOC) $(SYS):$(Axis)-CfgLnkMonLimBwd</string>
       </property>
      </widget>
      <widget class="caShellCommand" name="cashellcommand_6">
@@ -4106,10 +4106,10 @@
        <string>Open first axis</string>
       </property>
       <property name="files">
-       <string>bash /ioc/modules/qt/ecmcOpenEcSlaveGeneric.sh</string>
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
       </property>
       <property name="args">
-       <string>$(IOC) $(SYS):$(Axis)-CfgLnkMonHme</string>
+       <string>EC_SLAVE_GENERIC $(IOC) $(SYS):$(Axis)-CfgLnkMonHme</string>
       </property>
      </widget>
      <widget class="caLineEdit" name="calineedit_55">
@@ -4997,10 +4997,10 @@
       <string>Open first axis</string>
      </property>
      <property name="files">
-      <string>bash /ioc/modules/qt/ecmcOpenNextAxis.sh</string>
+      <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
      </property>
      <property name="args">
-      <string>$(IOC) $(AX_ID);</string>
+      <string>AXIS_NEXT $(IOC) $(AX_ID);</string>
      </property>
     </widget>
     <widget class="caLabel" name="calabel_104">
@@ -5038,10 +5038,10 @@
       <string>Open first axis</string>
      </property>
      <property name="files">
-      <string>bash /ioc/modules/qt/ecmcOpenPrevAxis.sh</string>
+      <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
      </property>
      <property name="args">
-      <string>$(IOC) $(AX_ID);</string>
+      <string>AXIS_PREV $(IOC) $(AX_ID);</string>
      </property>
     </widget>
     <widget class="caLineEdit" name="calineedit_26">

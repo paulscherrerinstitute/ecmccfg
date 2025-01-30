@@ -580,10 +580,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenFirstAxis.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>AXIS_FIRST $(IOC)</string>
         </property>
        </widget>
        <widget class="caShellCommand" name="cashellcommand_10">
@@ -602,10 +602,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenAxis.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>AXIS $(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -805,10 +805,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenFirstPLC.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>PLC_FIRST $(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -1103,10 +1103,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenFirstDS.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>DS_FIRST $(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -1372,12 +1372,12 @@
        <property name="channel" stdset="0">
         <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
        </property>
-       <widget class="caShellCommand" name="cashellcommand_3">
+       <widget class="caShellCommand" name="cashellcommand_8">
         <property name="geometry">
          <rect>
           <x>5</x>
           <y>5</y>
-          <width>55</width>
+          <width>56</width>
           <height>18</height>
          </rect>
         </property>
@@ -1388,55 +1388,11 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>EC_EXP $(IOC)</string>
         </property>
-       </widget>
-       <widget class="caFrame" name="caframe_3">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>66</width>
-          <height>26</height>
-         </rect>
-        </property>
-        <property name="macro">
-         <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
-        </property>
-        <property name="visibility">
-         <enum>caFrame::Calc</enum>
-        </property>
-        <property name="visibilityCalc">
-         <string notr="true">A&gt;-1</string>
-        </property>
-        <property name="channel" stdset="0">
-         <string notr="true">$(IOC):MCU-Cfg-EC-Mst</string>
-        </property>
-        <widget class="caShellCommand" name="cashellcommand_5">
-         <property name="geometry">
-          <rect>
-           <x>5</x>
-           <y>5</y>
-           <width>55</width>
-           <height>18</height>
-          </rect>
-         </property>
-         <property name="label">
-          <string notr="true">&gt;&gt;</string>
-         </property>
-         <property name="labels">
-          <string>Open first axis</string>
-         </property>
-         <property name="files">
-          <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
-         </property>
-         <property name="args">
-          <string>$(IOC)</string>
-         </property>
-        </widget>
        </widget>
       </widget>
       <widget class="caFrame" name="caframe_4">
@@ -1476,10 +1432,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenFirstEcSlave.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>EC_SLAVE_FIRST $(IOC)</string>
         </property>
        </widget>
        <widget class="caShellCommand" name="cashellcommand_9">
@@ -1498,10 +1454,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenEcSlave.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>EC_SLAVE $(IOC)</string>
         </property>
        </widget>
       </widget>
@@ -1692,10 +1648,10 @@
         <string>Open first axis</string>
        </property>
        <property name="files">
-        <string>bash /ioc/modules/qt/ecmcOpenEcOverview.sh</string>
+        <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
        </property>
        <property name="args">
-        <string>$(IOC)</string>
+        <string>EC_OVERVIEW $(IOC)</string>
        </property>
       </widget>
       <widget class="caTextEntry" name="catextentry_3">
@@ -1733,28 +1689,6 @@
       <property name="channel" stdset="0">
        <string notr="true">$(IOC):MCU-Cfg-PLG-FrstObjId</string>
       </property>
-      <widget class="caShellCommand" name="cashellcommand_8">
-       <property name="geometry">
-        <rect>
-         <x>5</x>
-         <y>5</y>
-         <width>55</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="label">
-        <string notr="true">&gt;&gt;</string>
-       </property>
-       <property name="labels">
-        <string>Open first axis</string>
-       </property>
-       <property name="files">
-        <string>bash /ioc/modules/qt/ecmcOpenFirstPLG.sh</string>
-       </property>
-       <property name="args">
-        <string>$(IOC)</string>
-       </property>
-      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_9">
       <property name="geometry">
@@ -2617,10 +2551,10 @@
          <string>Open first axis</string>
         </property>
         <property name="files">
-         <string>bash /ioc/modules/qt/ecmcOpenEcExpert.sh</string>
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
         </property>
         <property name="args">
-         <string>$(IOC)</string>
+         <string>EC_EXP $(IOC)</string>
         </property>
        </widget>
       </widget>
