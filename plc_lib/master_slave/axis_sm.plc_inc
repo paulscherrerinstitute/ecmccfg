@@ -32,6 +32,7 @@ if(static.VMState==-1) {
 
     #- disable real motors
     mc_grp_set_enable(${GRP_ID_SA},0);
+    mc_grp_cnen_mr(${GRP_ID_SA},0);
 
     #- VMs in Internal mode, back to ground state
     mc_grp_set_traj_src(${GRP_ID_MA},0);
@@ -40,8 +41,8 @@ if(static.VMState==-1) {
     ${DBG=#}println('-1 -> 0');
     static.VMState:=0;
 
-    #- sync virtual axes. Motor record _ONLY_ syncs once in the next MR-poll.
-    mc_grp_sync_act_set(${GRP_ID_MA},1);
+    #- sync virtual axes
+    mc_grp_sync_mr(${GRP_ID_MA},1);
   };
   
   #- If RM Motion is occuring, and user commands VM motion: simply disable the VMs to void the command.
@@ -111,9 +112,11 @@ else if(static.VMState==1) {
     #- disable motors and set source
     if(mc_grp_get_any_enable(${GRP_ID_SA})) {
       mc_grp_set_enable(${GRP_ID_MA},0);
+      mc_grp_cnen_mr(${GRP_ID_MA},0);
       mc_grp_set_enable(${GRP_ID_SA},0);
+      mc_grp_cnen_mr(${GRP_ID_SA},0);
       mc_grp_set_traj_src(${GRP_ID_SA},0);
-    }
+    };
     
     #- once VMs are done, RMs need a bit longer to disable
     if( mc_grp_get_any_busy(${GRP_ID_SA})==0 and mc_grp_get_any_enabled(${GRP_ID_SA})==0) {
@@ -122,9 +125,10 @@ else if(static.VMState==1) {
       #- state change
       ${DBG=#}println('1 -> 0');
       static.VMState:=0;
-    };
 
-    #- sync real axes. Motor record _ONLY_ syncs once in the next MR-poll.
-    mc_grp_sync_act_set(${GRP_ID_SA},1);
+      #- sync real axes
+      mc_grp_sync_mr(${GRP_ID_SA},1);
+      mc_grp_stop_mr(${GRP_ID_SA},1);
+    };
   };
 };
