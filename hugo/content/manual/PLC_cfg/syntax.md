@@ -457,7 +457,7 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
  
  6. retvalue = m2m_ioc_ec_ok(<master_index>);
  
-    returns status etehrcat status of another ecmc ioc (1==op, 0==not op, -1==error).
+    returns status ethercat status of another ecmc ioc (1==op, 0==not op, -1==error).
  
  7. retvalue = m2m_ioc_run(<master_index>);
  
@@ -637,6 +637,27 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                          );
     
     Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR 0x1432B).
+ 20.  mc_mr_set_sync(
+                       <axis_id>, : Axis index
+                       <sync>,    : Sync yes or no (1 or 0)
+                       );
+     1. Sync ecmc current setpoint with actual value (if not enabled and internal mode)
+     2. Execute a motor record SYNC
+     Note: The command only triggers once per ecmc cycle (with the latest value written to sync)
+ 
+ 21.  mc_mr_set_stop(
+                       <axis_id>, : Axis index
+                       <stop>,    : Stop yes or no (1 or 0)
+                       );
+     1. Execute a motor record STOP
+     Note: The command only triggers once per ecmc cycle (with the latest value written to stop)
+
+ 22.  mc_mr_set_cnen(
+                       <axis_id>, : Axis index
+                       <enable>,  : Enable yes or no (1 or 0)
+                       );
+     1. Enable/disable motor record via CNEN field
+     Note: The command only triggers once per ecmc cycle (with the latest value written to enable)
 ```
 
 #### Motion Group
@@ -765,13 +786,27 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                        );
      Allow source change for trajectory and encoder when axis is enabled.
 
- 20.  mc_grp_sync_act_set(
+ 20.  mc_grp_mr_set_sync(
                        <grp_id>, : Group index
-                       <sync>,   : Sync yes or no
+                       <sync>,   : Sync yes or no (1 or 0)
                        );
      1. Sync ecmc current setpoint with actual value (if not enabled and internal mode)
-     2. Sync MR at next poll (maximum once).
+     2. Execute a motor record SYNC
+     Note: The command only triggers motor record maximum once per ecmc cycle (with the latest value written to sync)
  
+ 21.  mc_grp_mr_set_stop(
+                       <grp_id>, : Group index
+                       <stop>,   : Stop yes or no (1 or 0)
+                       );
+     1. Execute a motor record STOP
+     Note: The command only triggers motor record maximum once per ecmc cycle (with the latest value written to stop)
+
+ 22.  mc_grp_mr_set_cnen(
+                       <grp_id>, : Group index
+                       <enable>, : Enable yes or no (1 or 0)
+                       );
+     1. Enable/disable motor record via CNEN field
+     Note: The command only triggers motor record maximum once per ecmc cycle (with the latest value written to enable)
 ```
 
 #### Data Storage

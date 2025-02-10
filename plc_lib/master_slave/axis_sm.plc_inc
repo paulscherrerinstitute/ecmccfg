@@ -1,14 +1,14 @@
 #- Initial PLC values
 if(${SELF}.firstscan) {
-  static.counter:=0;
-  static.VMState:=-2;
+  static.counter :=  0;
+  static.VMState := -2;
 };
 
 #- this is needed because initially upon IocInit, motor busy flags are briefly enabled, and the first motorRecord poll at 100ms might cause issues
-if ( static.counter<0.105 ) {
+if ( static.counter < ${MR_DLY=0.105} ) {
   static.counter += ${SELF}.scantime;
 
-  if ( static.counter>=0.105) { static.VMState:=0 };
+  if ( static.counter >= ${MR_DLY=0.105}) { static.VMState:=0 };
 
   #- VMs in Internal mode, ready to listen
   mc_grp_set_traj_src(${GRP_ID_MA},0);
@@ -28,11 +28,13 @@ if(static.VMState==-1) {
   #- -1 -> 0
   #- Trigger Condition:
   #-  - all RM are not busy
-  if( mc_grp_get_any_busy(${GRP_ID_SA})==0 ) {
+  if( mc_grp_get_any_busy(${GRP_ID_SA}) == 0 ) {
 
-    #- disable real motors
+    #- disable motors
     mc_grp_set_enable(${GRP_ID_SA},0);
-    mc_grp_cnen_mr(${GRP_ID_SA},0);
+    mc_grp_mr_set_cnen(${GRP_ID_SA},0);
+    mc_grp_set_enable(${GRP_ID_MA},0);
+    mc_grp_mr_set_cnen(${GRP_ID_MA},0);
 
     #- VMs in Internal mode, back to ground state
     mc_grp_set_traj_src(${GRP_ID_MA},0);
@@ -42,7 +44,8 @@ if(static.VMState==-1) {
     static.VMState:=0;
 
     #- sync virtual axes
-    mc_grp_sync_mr(${GRP_ID_MA},1);
+    mc_grp_mr_set_sync(${GRP_ID_MA},1);
+    mc_grp_mr_set_stop(${GRP_ID_MA},1);
   };
   
   #- If RM Motion is occuring, and user commands VM motion: simply disable the VMs to void the command.
@@ -52,7 +55,7 @@ if(static.VMState==-1) {
 }
 
 #- State 0
-else if(static.VMState==0) {
+else if(static.VMState == 0) {
 
   #- 0 -> -1
   #- Trigger Condition:
@@ -60,7 +63,7 @@ else if(static.VMState==0) {
   #-  - all RM are in internal mode
   #-  - all VM are disabled
 
-  if( mc_grp_get_any_busy(${GRP_ID_SA})==1 and mc_grp_get_any_traj_src_ext(${GRP_ID_SA})==0 and mc_grp_get_any_enabled(${GRP_ID_MA})==0 ) {
+  if( mc_grp_get_any_busy(${GRP_ID_SA}) == 1 and mc_grp_get_any_traj_src_ext(${GRP_ID_SA}) == 0 and mc_grp_get_any_enabled(${GRP_ID_MA}) == 0 ) {
     #- VMs in PLC mode, so no following errors occur
     mc_grp_set_traj_src(${GRP_ID_MA},0);
 
@@ -75,9 +78,9 @@ else if(static.VMState==0) {
   else if( mc_grp_get_any_enabled(${GRP_ID_MA})==1 ) {
 
     #- Exit Condition: all axes are on
-    if( mc_grp_get_enabled(${GRP_ID_SA})==1 and mc_grp_get_enabled(${GRP_ID_MA})==1 and mc_grp_get_any_busy(${GRP_ID_SA})==0 ) {
+    if( mc_grp_get_enabled(${GRP_ID_SA}) == 1 and mc_grp_get_enabled(${GRP_ID_MA}) == 1 and mc_grp_get_any_busy(${GRP_ID_SA}) == 0 ) {
 
-      if( mc_grp_get_any_busy(${GRP_ID_MA})==1 ) {
+      if( mc_grp_get_any_busy(${GRP_ID_MA}) == 1 ) {
         mc_grp_set_traj_src(${GRP_ID_SA},1);
         #- state change
         ${DBG=#}println('0 -> 1');
@@ -98,7 +101,7 @@ else if(static.VMState==0) {
 }
 
 #- State 1 
-else if(static.VMState==1) {
+else if(static.VMState == 1) {
 
   #- Check if any slaved axis is in error state and forward to master axes
   if(mc_grp_get_any_error_id(${GRP_ID_SA})) {
@@ -107,19 +110,19 @@ else if(static.VMState==1) {
 
   #- basically a done test
   #- 1 -> 0
-  if( mc_grp_get_any_busy(${GRP_ID_MA})==0 ) {
+  if( mc_grp_get_any_busy(${GRP_ID_MA}) == 0 ) {
 
     #- disable motors and set source
-    if(mc_grp_get_any_enable(${GRP_ID_SA})) {
+    if( mc_grp_get_any_enable(${GRP_ID_SA}) ) {
       mc_grp_set_enable(${GRP_ID_MA},0);
-      mc_grp_cnen_mr(${GRP_ID_MA},0);
+      mc_grp_mr_set_cnen(${GRP_ID_MA},0);
       mc_grp_set_enable(${GRP_ID_SA},0);
-      mc_grp_cnen_mr(${GRP_ID_SA},0);
+      mc_grp_mr_set_cnen(${GRP_ID_SA},0);
       mc_grp_set_traj_src(${GRP_ID_SA},0);
     };
     
     #- once VMs are done, RMs need a bit longer to disable
-    if( mc_grp_get_any_busy(${GRP_ID_SA})==0 and mc_grp_get_any_enabled(${GRP_ID_SA})==0) {
+    if( mc_grp_get_any_busy(${GRP_ID_SA}) == 0 and mc_grp_get_any_enabled(${GRP_ID_SA}) == 0 ) {
       #- an interlock is raised since axes are stopped when disabling, it can be cleared this way.      
       mc_grp_reset_error(${GRP_ID_SA});
       #- state change
@@ -127,8 +130,8 @@ else if(static.VMState==1) {
       static.VMState:=0;
 
       #- sync real axes
-      mc_grp_sync_mr(${GRP_ID_SA},1);
-      mc_grp_stop_mr(${GRP_ID_SA},1);
+      mc_grp_mr_set_sync(${GRP_ID_SA},1);
+      mc_grp_mr_set_stop(${GRP_ID_SA},1);
     };
   };
 };
