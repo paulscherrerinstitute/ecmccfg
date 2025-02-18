@@ -625,19 +625,34 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
  
     Returns primary encoder index of the axis (the encoder used for control).
  
- 18. mc_set_axis_error(
+ 18.  mc_set_enc_homed(
+                       <axis_id>,    : Axis index
+                       <encoder_id>, : Encoder index
+                       <homed>,      : Homed (value to set)
+                      );
+     Sets homed bit of a certain encoder. Returns error code.
+
+ 19.  mc_get_enc_homed(
+                       <axis_id>,    : Axis index
+                       <encoder_id>, : Encoder index
+                      );
+     Returns homed bit of a certain encoder or an error code (negative number)
+
+
+ 20. mc_set_axis_error(
                          <axis_id>,         : Axis index
                          <error_code>       : Error code to set
                          );
     
     Sets an arbitrary error code to an axis object.
  
- 19. mc_set_slaved_axis_in_error(
+ 21. mc_set_slaved_axis_in_error(
                          <axis_id>,         : Axis index
                          );
     
     Set axis error that indicates that a slaved axis is in error state (ERROR_AXIS_SLAVED_AXIS_IN_ERROR 0x1432B).
- 20.  mc_mr_set_sync(
+
+ 22.  mc_mr_set_sync(
                        <axis_id>, : Axis index
                        <sync>,    : Sync yes or no (1 or 0)
                        );
@@ -645,14 +660,14 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
      2. Execute a motor record SYNC
      Note: The command only triggers once per ecmc cycle (with the latest value written to sync)
  
- 21.  mc_mr_set_stop(
+ 23.  mc_mr_set_stop(
                        <axis_id>, : Axis index
                        <stop>,    : Stop yes or no (1 or 0)
                        );
      1. Execute a motor record STOP
      Note: The command only triggers once per ecmc cycle (with the latest value written to stop)
 
- 22.  mc_mr_set_cnen(
+ 24.  mc_mr_set_cnen(
                        <axis_id>, : Axis index
                        <enable>,  : Enable yes or no (1 or 0)
                        );
