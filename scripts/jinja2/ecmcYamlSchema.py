@@ -514,6 +514,20 @@ class Schema:
                     },
                 }
             },
+            'stall': {
+                'type': 'dict',
+                'required': False,
+                'schema': {
+                    'enable': {'type': 'boolean'},
+                    'time': {
+                        'type': 'dict',
+                        'schema': {
+                            'timeout': {'type': 'integer', 'min': 0},
+                            'factor': {'type': 'float', 'min': 0},
+                        }
+                    },
+                }
+            },
         }
     }
 
