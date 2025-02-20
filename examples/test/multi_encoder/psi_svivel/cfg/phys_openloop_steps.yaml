@@ -20,14 +20,14 @@ epics:
   name: Axis1                                         # Axis anme
   precision: 3                                        # Decimal count
   description: very important motor axis              # Axis description
-  unit: mm                                            # Unit
+  unit: steps                                         # Unit
   #motorRecord:
   #  enable: false
   #   description: This is MR
   #   fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
 
 drive:
-  numerator: 3600                                     # Fastest speed in engineering units
+  numerator: 2000                                     # Fastest speed in engineering units
   denominator: 32768                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
   # type: 0                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   control: ec0.s$(DRV_SLAVE).driveControl01           # Control word ethercat entry
@@ -37,11 +37,6 @@ drive:
   setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
   reduceTorque: 2                                    # Reduce torque bit in drive control word
   reduceTorqueEnable: True                           # Enable reduce torque functionality
-#  brake:
-#    enable: true                                     # Enable brake
-#    output: ec0...                                   # Ethercat link to brake output
-#    openDelay: 0                                     # Brake timing parameter in cycles (default 1kHz)
-#    closeAhead: 0                                    # Brake timing parameter in cycles (default 1kHz)
 #  reset: 1                                           # Reset   (if no drive reset bit then leave empty)
 #  warning: 2                                         # Warning (if no drive warning bit then leave empty)
 #  error:                                             # max 3
@@ -50,7 +45,7 @@ drive:
 #    - 14                                             # Error 2 (if no drive error bit then leave empty)
 
 encoder:
-  numerator: 360                                      # Scaling numerator example 360 deg/rev
+  numerator: 200                                      # Scaling numerator example 360 deg/rev
   denominator: 12800                                  # Scaling denominator example 4096 ticks per 360 degree
   # type: 0                                           # Type: 0=Incremental, 1=Absolute
   bits: 16                                            # Total bit count of encoder raw data
@@ -100,20 +95,6 @@ controller:
   Kp: 10                                              # Kp proportinal gain
   Ki: 0.2                                             # Ki integral gain
   Kd: 0                                               # Kd derivative gain
-  # Kff: 1                                            # Feed forward gain
-  # deadband:
-  #   tol: 0.01                                       # Stop control if within this distance from target for the below time
-  #   time: 100
-  # limits:
-  #   minOutput: -100                                 # Minimum controller output
-  #   maxOutput: 100                                  # Maximum controller output
-  #   minIntegral: -100                               # Minimum integral output
-  #   maxIntegral: 100                                # Maximum integral output
-  # inner:
-  #   Kp: 0.1                                         # Kp for when close to target
-  #   Ki: 0.1                                         # Ki for when close to target
-  #   Kd: 0.1                                         # Kd for when close to target
-  #   tol: 0.1                                        # Distance from target for when inner PID params will be used, defaults to atTarget tol
 
 trajectory:
   # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
@@ -125,9 +106,6 @@ trajectory:
     jerk: 10                                          # Default jerk for axis
   jog:
     velocity: 5                                       # Default velo fro JOG (motor record)
-#  modulo:
-#    range: 360                                       # Modulo range 0..360
-#    type: 0                                          # Modulo type
 
 input:
   limit:
@@ -177,9 +155,18 @@ monitoring:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
-  # velocityDifference:
-  #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)
-  #   max: 100                                        # Allowed max difference
-  #   time:
-  #     trajectory: 100                               # Time allowed outside max diff velo before system init halt
-  #     drive: 200                                    # Time allowed outside max diff velo before system disables drive
+
+plc:
+  enable: true                                        # Enable axis plc
+  externalCommands: true                              # Allow axis to inputs from PLC
+  code:                                               # Sync code (appended after code in plc.file)
+    - ax1.enc.actpos:=ax2.enc.actpos*200;             # Enable axis if one of master axes is enabled
+    - ax1.traj.setpos:=ax2.traj.setpos*200;           # calculate set pos for physical axis
+  velocity_filter:                                    # Filter used to smother velocity feedforward
+    encoder:                                          # Filter plc enc velo
+      enable: false                                   # Filter enable
+      size: 100                                       # Filter size
+    trajectory:                                       # Filter plc traj velo
+      enable: false                                   # Filter enable
+      size: 100                                       # Filter size
+

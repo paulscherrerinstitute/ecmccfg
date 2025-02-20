@@ -482,6 +482,16 @@ record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(ZNAM, "Disable")
   field(ONAM, "Enable")
   field(SCAN, "Passive")
+  field(FLNK, "${P}${AXIS_NAME}-DbgPrntEna.PROC")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
+  field(DESC, "${AXIS_NAME}: Ena dbg prints")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BA")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
 }
@@ -534,8 +544,12 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(TWVL, 2)
   field(THST, "ABS")
   field(THVL, 3)
-  field(FRST, "HOME")
-  field(FRVL, 10)
+  field(FVST, "PVT_REL")
+  field(FVVL, 8)
+  field(SXST, "PVT_ABS")
+  field(SXVL, 9)
+  field(SVST, "HOME")
+  field(SVVL, 10)
   field(VAL,  0)
 }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>464</width>
-    <height>507</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1264,7 +1264,7 @@
      <x>10</x>
      <y>0</y>
      <width>211</width>
-     <height>251</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="title">
@@ -1696,14 +1696,14 @@
       <x>180</x>
       <y>30</y>
       <width>20</width>
-      <height>201</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-Cmd_</string>
     </property>
     <property name="endBit">
-     <number>9</number>
+     <number>10</number>
     </property>
    </widget>
    <widget class="QWidget" name="widget_22" native="true">
@@ -1991,9 +1991,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>260</y>
+     <y>300</y>
      <width>211</width>
-     <height>131</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="title">
@@ -2227,6 +2227,43 @@
      <string>Tgt vel cmd:</string>
     </property>
    </widget>
+  </widget>
+  <widget class="QWidget" name="widget_26" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>230</y>
+     <width>169</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>35</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_40">
+    <item row="0" column="0">
+     <widget class="caToggleButton" name="catogglebutton_43">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Ena debug printouts:</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-DbgPrntEna</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <customwidgets>

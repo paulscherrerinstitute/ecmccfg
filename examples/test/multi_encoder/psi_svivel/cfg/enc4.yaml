@@ -1,0 +1,27 @@
+var:
+  drive: 4
+
+encoder:
+  unit: mm
+  desc: openloop4
+  numerator: 362
+  denominator: 12800
+  type: 1            # Type: 0=Incremental, 1=Absolute
+  bits: 16           # Total bit count of encoder raw data
+  absBits: 16        # Total bit count of encoder raw data
+  absOffset: 0       # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s${DRV_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
+  primary: 1         # Use this encoder as primary (for control)
+  homing:
+    type: 3
+    position: -30
+    postMoveEnable: yes
+    postMovePosition: 10
+    velocity:
+      to: 10
+      from: 5
+    acceleration: 20
+    deceleration: 100
+    refToEncIDAtStartup: -1   # At startup then set the start value of this encoder to actpos of this encoder id
+    refAtHome: 1             # If homing is executed then set position of this encoder
+    tolToPrim: 0             # If set then this is the max allowed tolerance between prim encoder and this encoder

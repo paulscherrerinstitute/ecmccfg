@@ -222,7 +222,14 @@ class Schema:
                 'schema': {
                     'enable': {'type': 'boolean', 'default': True},
                     'fieldInit': {'type': 'string'},
-                    'description': {'type': 'string'}
+                    'description': {'type': 'string'},
+                    'pvt': {
+                        'type': 'dict',
+                        'schema': {
+                        'npoints': {'default': 0},
+                        'nreadback': {'default': 0},
+                        }
+                    }
                 }
             }
         }

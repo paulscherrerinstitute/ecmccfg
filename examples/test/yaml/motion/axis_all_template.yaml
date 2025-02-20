@@ -33,6 +33,9 @@ epics:
     enable: true
     description: This is MR
     fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
+    pvt:                                              # Profile move: profile velocity time
+      npoints: 100                                    # max number of points
+      nreadback: 100                                  # max number of readbacks
 
 drive:
   numerator: 360                                      # Fastest speed in engineering units

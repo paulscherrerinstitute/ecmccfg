@@ -48,6 +48,19 @@ dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX
 epicsEnvUnset(ECMC_TEMP_UREV)
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
+
+#- PVT
+{%- if epics.motorRecord.pvt %}
+  epicsEnvSet(ECMC_MR_PVT_FIRST_AXIS_ID,${ECMC_MR_PVT_FIRST_AXIS_ID={{ axis.id }}})
+  dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epics.name }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR={{ axis.id }},PREC={{ epics.precision }},NPOINTS={{ epics.motorRecord.pvt.npoints | default(0) }},NREADBACK={{ epics.motorRecord.pvt.nreadback | default(0) }}")
+  #- Enable PVT for axis
+  ecmcEnablePVTForAxis(${ECMC_MOTOR_PORT},{{ axis.id }},1)
+  #- Save some vars for loading of ecmcProfileMoveController.template in setAppMode.cmd 
+  ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_RB_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.nreadback | default(0) }}",{{ epics.motorRecord.pvt.nreadback | default(0) }} ,${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0})
+  ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.npoints | default(0) }}",{{ epics.motorRecord.pvt.npoints | default(0) }} ,${ECMC_MR_PVT_MAX_POINTS_IN_USE=0})
+  ecmcEpicsEnvSetCalc(ECMC_MR_PVT_AXES_COUNT_IN_USE,"${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}+1")
+{%- endif %}
+
 #- -----------------------------------------------------------------------------
 #- Axis homing
 {%- if (homing) and (encoder.homing) %}
