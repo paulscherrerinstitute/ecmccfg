@@ -86,7 +86,7 @@ function openEcSlave() {
 }
 
 function openEcSlaveGeneric() {
-  IOC=$1
+  PREFIX=$1
   SLAVE_ID_PV=$2
   
   # Get slave id to open from PV
@@ -99,12 +99,12 @@ function openEcSlaveGeneric() {
   echo "M_ID=$M_ID"
   
   # Get panel type
-  PV_NAME=$IOC":m"$M_ID"s"$S_ID"-PnlTyp"
+  PV_NAME=$PREFIX":m"$M_ID"s"$S_ID"-PnlTyp"
   PANEL=$( caget -noname -nostat $PV_NAME | tr -d '"')
   echo "PANEL=$PANEL"
   
   # Assemble macros string
-  MACROS="SYS=$IOC,IOC=$IOC,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
   
   caqtdm -macro $MACROS ecmcGenericSlaveOverview.ui
