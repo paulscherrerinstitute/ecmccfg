@@ -1,16 +1,31 @@
 #==============================================================================
 # loadLUTFile.cmd
 #- Arguments: FILE, [LUT_ID]
-
 #-d /**
-#-d   \brief Script for adding a lookup table (LUT) from file.
+#-d   \brief Script for craeting and adding a lookup table (LUT) from file.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE LUT definition file, i.e. ./plc/test.lut
-#-d   \param LUT_ID (optional) PLC number, default 0, or to next free PLC, the actual PLC Id is stored in ECMC_PLC_ID and can be used after this command
+#-d   \param LUT_ID (optional) LUT_ID Default the next free number. The actual id will be stored in "ECMC_LUT_ID" for use after this script.
+#-d
+#-d   Example:
+#-d   # Lookup table example (in this case for encoder corrections, but could be for anything when used in PLC)
+#-d   # * Col 1: Encoder position values [EGU]
+#-d   # * Col 2: Encoder correction values at the corresponding [EGU]
+#-d   # Created 2024-12-09
+#-d   #
+#-d   # The number needs to be comma or space separated (only one char).
+#-d   #
+#-d   # Precision can be changed with the PREC command, see below example.
+#-d   # All data read after/below a PREC command will be read with the new PREC.
+#-d   #
+#-d   PREC=5
+#-d   -10 -10.123456789
+#-d   0 0.123456789
+#-d   10 10.123456789
+#-d   PREC=6
+#-d   12.67898 12.3456789
 #-d */
-
-#- Create a new PLC 0 (Motion: Direct access through variables, I/O, global var, plc enable)
 
 epicsEnvSet("ECMC_LUT_ID",              "${LUT_ID=0}")
 
