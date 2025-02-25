@@ -73,3 +73,10 @@ record(ai,"${P}MCU-Cfg-AX-FrstObjId") {
   field(DESC, "First axis ID")
   field(VAL,  "$(FIRST_OBJ_ID=-1)")
 }
+
+record(bi,"${P}SS1-Loaded"){
+  field(DESC, "Plugin loaded")
+  field(VAL,   0)
+  field(ONAM, "1")
+  field(ZNAM, "0")
+}

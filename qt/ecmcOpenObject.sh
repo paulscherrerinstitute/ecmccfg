@@ -22,6 +22,7 @@
 #  PLG_FIRST        : CMD, PREFIX
 #  PLG_NEXT         : CMD, PREFIX THIS_PLG_ID
 #  PLG_PREV         : CMD, PREFIX THIS_PLG_ID
+#  PLG_SAFETY_GRP   : CMD, PREFIX GRP_ID
 
 CMD=$1
 
@@ -318,6 +319,22 @@ function openPLGPrev() {
   caqtdm -macro $MACROS ecmcPLGxx.ui
 }
 
+function openPLGSafetyGrp() {
+  PREFIX=$1
+  ID=$2
+  NAME=$( caget -noname -nostat -nounit -int $PREFIX:SS1-Grp$ID-Nam | tr -d '"')
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,SAFETY_GRP=$NAME"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
+}
+
+function openPLGSafetyMain() {
+  PREFIX=$1  
+  MACROS="SYS=$PREFIX,IOC=$PREFIX"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmc_plugin_safety_main.ui
+}
+
 # Parse commands
 case $CMD in
   "EC_EXP")
@@ -379,6 +396,12 @@ case $CMD in
   ;;
   "PLG_PREV")
   openPLGPrev $2 $3
+  ;;
+  "PLG_SAFETY_GRP")
+  openPLGSafetyGrp $2 $3
+  ;;
+  "PLG_SAFETY_MAIN")
+  openPLGSafetyMain $2
   ;;
 
   *) echo "Invalid command"
