@@ -2,27 +2,28 @@
 
 ########
 # Open ecmc objects with following args
-# CMD:                $1,  $2,    $3,         $4
-#  EC_EXP           : CMD, PREFIX 
-#  EC_OVERVIEW      : CMD, PREFIX
-#  EC_SLAVE         : CMD, PREFIX
-#  EC_SLAVE_FIRST   : CMD, PREFIX
-#  EC_SLAVE_NEXT    : CMD, PREFIX M_ID        S_ID
-#  EC_SLAVE_PREV    : CMD, PREFIX M_ID        S_ID
-#  EC_SLAVE_GENERIC : CMD, PREFIX S_ID_PV
-#  AXIS             : CMD, PREFIX
-#  AXIS_FIRST       : CMD, PREFIX
-#  AXIS_NEXT        : CMD, PREFIX THIS_AX_ID
-#  DS_FIRST         : CMD, PREFIX
-#  DS_NEXT          : CMD, PREFIX THIS_DS_ID
-#  DS_PREV          : CMD, PREFIX THIS_DS_ID
-#  PLC_FIRST        : CMD, PREFIX
-#  PLC_NEXT         : CMD, PREFIX THIS_PLC_ID
-#  PLC_PREV         : CMD, PREFIX THIS_PLC_ID
-#  PLG_FIRST        : CMD, PREFIX
-#  PLG_NEXT         : CMD, PREFIX THIS_PLG_ID
-#  PLG_PREV         : CMD, PREFIX THIS_PLG_ID
-#  PLG_SAFETY_GRP   : CMD, PREFIX GRP_ID
+# CMD:                   $1,  $2,    $3,         $4
+#  EC_EXP              : CMD, PREFIX 
+#  EC_OVERVIEW         : CMD, PREFIX
+#  EC_SLAVE            : CMD, PREFIX
+#  EC_SLAVE_FIRST      : CMD, PREFIX
+#  EC_SLAVE_NEXT       : CMD, PREFIX, M_ID        S_ID
+#  EC_SLAVE_PREV       : CMD, PREFIX, M_ID        S_ID
+#  EC_SLAVE_GENERIC    : CMD, PREFIX, S_ID_PV
+#  AXIS                : CMD, PREFIX
+#  AXIS_FIRST          : CMD, PREFIX
+#  AXIS_NEXT           : CMD, PREFIX, THIS_AX_ID
+#  DS_FIRST            : CMD, PREFIX
+#  DS_NEXT             : CMD, PREFIX, THIS_DS_ID
+#  DS_PREV             : CMD, PREFIX, THIS_DS_ID
+#  PLC_FIRST           : CMD, PREFIX
+#  PLC_NEXT            : CMD, PREFIX, THIS_PLC_ID
+#  PLC_PREV            : CMD, PREFIX, THIS_PLC_ID
+#  PLG_FIRST           : CMD, PREFIX
+#  PLG_NEXT            : CMD, PREFIX, THIS_PLG_ID
+#  PLG_PREV            : CMD, PREFIX, THIS_PLG_ID
+#  PLG_SAFETY_GRP      : CMD, PREFIX, GRP_ID
+#  PLG_SAFETY_GRP_AXIS : CMD, PREFIX, DEV,        AX_NAME
 
 CMD=$1
 
@@ -319,6 +320,7 @@ function openPLGPrev() {
   caqtdm -macro $MACROS ecmcPLGxx.ui
 }
 
+#- safety plugin related
 function openPLGSafetyGrp() {
   PREFIX=$1
   ID=$2
@@ -333,6 +335,15 @@ function openPLGSafetyMain() {
   MACROS="SYS=$PREFIX,IOC=$PREFIX"
   echo "MACROS=$MACROS"
   caqtdm -macro $MACROS ecmc_plugin_safety_main.ui
+}
+
+function openPLGSafetyGrpAxis() {
+  PREFIX=$1
+  DEV=$2
+  AX_NAME=$3
+  NAME=$( caget -noname -nostat -nounit -int $DEV:$AX_NAME-SS1-GrpNam | tr -d '"')
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,SAFETY_GRP=$NAME"
+  caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
 }
 
 # Parse commands
@@ -403,7 +414,9 @@ case $CMD in
   "PLG_SAFETY_MAIN")
   openPLGSafetyMain $2
   ;;
-
+  "PLG_SAFETY_GRP_AXIS")
+  openPLGSafetyGrpAxis $2 $3 $4
+  ;;
   *) echo "Invalid command"
   ;;
 esac

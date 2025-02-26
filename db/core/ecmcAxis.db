@@ -716,3 +716,16 @@ record(longin,"${P}${AXIS_NAME}-EncCnt"){
     field(VAL,  "1")
     field(PINI, "YES")
 }
+
+# Records to indicate if safety plg is in use for this axis
+record(stringin,"${P}${AXIS_NAME}-SS1-GrpNam") {
+    field(DESC, "Name of Saftey Grp ")
+    field(VAL,  "Disabled")
+}
+
+record(bi,"${P}${AXIS_NAME}-SS1-EnaAct"){
+  field(DESC, "Safety PLG active for this axis")
+  field(VAL,   0)
+  field(ONAM, "1")
+  field(ZNAM, "0")
+}

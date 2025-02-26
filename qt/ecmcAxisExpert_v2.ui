@@ -4524,6 +4524,50 @@
       </property>
      </widget>
     </widget>
+    <widget class="caFrame" name="caframe_15">
+     <property name="geometry">
+      <rect>
+       <x>255</x>
+       <y>55</y>
+       <width>91</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(SYS)</string>
+     </property>
+     <property name="visibility">
+      <enum>caFrame::Calc</enum>
+     </property>
+     <property name="visibilityCalc">
+      <string notr="true">A&gt;=1</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-SS1-EnaAct</string>
+     </property>
+     <widget class="caShellCommand" name="cashellcommand_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>76</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true">Safety</string>
+      </property>
+      <property name="labels">
+       <string>$(GRP_ID)</string>
+      </property>
+      <property name="files">
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+      </property>
+      <property name="args">
+       <string>PLG_SAFETY_GRP_AXIS $(IOC) $(SYS) $(Axis);</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QTabWidget" name="tabWidget_2">
@@ -4981,28 +5025,6 @@
       <enum>caLineEdit::User</enum>
      </property>
     </widget>
-    <widget class="caShellCommand" name="cashellcommand">
-     <property name="geometry">
-      <rect>
-       <x>125</x>
-       <y>105</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="label">
-      <string notr="true">&gt;</string>
-     </property>
-     <property name="labels">
-      <string>Open first axis</string>
-     </property>
-     <property name="files">
-      <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
-     </property>
-     <property name="args">
-      <string>AXIS_NEXT $(IOC) $(AX_ID);</string>
-     </property>
-    </widget>
     <widget class="caLabel" name="calabel_104">
      <property name="geometry">
       <rect>
@@ -5020,28 +5042,6 @@
      </property>
      <property name="text">
       <string>Axis</string>
-     </property>
-    </widget>
-    <widget class="caShellCommand" name="cashellcommand_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>105</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="label">
-      <string notr="true">&lt;</string>
-     </property>
-     <property name="labels">
-      <string>Open first axis</string>
-     </property>
-     <property name="files">
-      <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
-     </property>
-     <property name="args">
-      <string>AXIS_PREV $(IOC) $(AX_ID);</string>
      </property>
     </widget>
     <widget class="caLineEdit" name="calineedit_26">
@@ -5087,6 +5087,94 @@
      <property name="text">
       <string>DEV:</string>
      </property>
+    </widget>
+    <widget class="caFrame" name="caframe_16">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>61</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(SYS),AX_ID=$(AX_ID)</string>
+     </property>
+     <property name="visibility">
+      <enum>caFrame::Calc</enum>
+     </property>
+     <property name="visibilityCalc">
+      <string notr="true">A&gt;=0</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):MCU-Cfg-AX$(AX_ID)-PrvObjId</string>
+     </property>
+     <widget class="caShellCommand" name="cashellcommand_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true">&lt;</string>
+      </property>
+      <property name="labels">
+       <string>Open first axis</string>
+      </property>
+      <property name="files">
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+      </property>
+      <property name="args">
+       <string>AXIS_PREV $(IOC) $(AX_ID);</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="caFrame" name="caframe_17">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>100</y>
+       <width>61</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="macro">
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(SYS),AX_ID=$(AX_ID)</string>
+     </property>
+     <property name="visibility">
+      <enum>caFrame::Calc</enum>
+     </property>
+     <property name="visibilityCalc">
+      <string notr="true">A&gt;=0</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):MCU-Cfg-AX$(AX_ID)-NxtObjId</string>
+     </property>
+     <widget class="caShellCommand" name="cashellcommand">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true">&gt;</string>
+      </property>
+      <property name="labels">
+       <string>Open first axis</string>
+      </property>
+      <property name="files">
+       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+      </property>
+      <property name="args">
+       <string>AXIS_NEXT $(IOC) $(AX_ID);</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_9">

@@ -77,3 +77,6 @@ epicsEnvUnset(ECMC_EXE_FIRST_AX)
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added axis
 epicsEnvSet(ECMC_PREV_AXIS_P,"$(ECMC_PREFIX)MCU-Cfg-AX${ECMC_AXIS_NO}-")
 epicsEnvSet(ECMC_PREV_AXIS_OBJ_ID,${ECMC_AXIS_NO})
+
+#- Store axis name as env variable for later use
+epicsEnvSet(ECMC_MOTOR_{{axis.id}}_FULL_NAME, ${ECMC_PREFIX}{{ epics.name }})
