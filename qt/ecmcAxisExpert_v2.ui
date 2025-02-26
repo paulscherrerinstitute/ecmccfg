@@ -2320,7 +2320,7 @@
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
-     <string>Tuning</string>
+     <string>Ctrl</string>
     </attribute>
     <widget class="caTextEntry" name="catextentry_17">
      <property name="geometry">
@@ -2746,7 +2746,7 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Encoders</string>
+     <string>Enc</string>
     </attribute>
     <widget class="caLineEdit" name="calineedit_52">
      <property name="geometry">
@@ -3479,7 +3479,7 @@
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>Trajectory</string>
+     <string>Traj</string>
     </attribute>
     <widget class="caLabel" name="calabel_61">
      <property name="geometry">
@@ -4007,6 +4007,240 @@
       </property>
      </widget>
     </widget>
+    <widget class="QGroupBox" name="groupBox_7">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>0</y>
+       <width>161</width>
+       <height>166</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Safety</string>
+     </property>
+     <widget class="caLabel" name="calabel_119">
+      <property name="geometry">
+       <rect>
+        <x>-15</x>
+        <y>105</y>
+        <width>69</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>69</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Group</string>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_44">
+      <property name="geometry">
+       <rect>
+        <x>65</x>
+        <y>105</y>
+        <width>86</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-SS1-GrpNam</string>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Default</enum>
+      </property>
+      <property name="alarmHandling">
+       <enum>caLineEdit::onBackground</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+     </widget>
+     <widget class="caLed" name="caled">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>30</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-SS1-EnaAct</string>
+      </property>
+      <property name="trueColor">
+       <color>
+        <red>78</red>
+        <green>154</green>
+        <blue>6</blue>
+       </color>
+      </property>
+     </widget>
+     <widget class="caFrame" name="caframe_18">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>130</y>
+        <width>146</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="macro">
+       <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(SYS)</string>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A&gt;=1</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-SS1-EnaAct</string>
+      </property>
+      <widget class="caShellCommand" name="cashellcommand_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>5</y>
+         <width>136</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="label">
+        <string notr="true">Group</string>
+       </property>
+       <property name="labels">
+        <string>$(GRP_ID)</string>
+       </property>
+       <property name="files">
+        <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+       </property>
+       <property name="args">
+        <string>PLG_SAFETY_GRP_AXIS $(IOC) $(SYS) $(Axis);</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="caLabel" name="calabel_120">
+      <property name="geometry">
+       <rect>
+        <x>-5</x>
+        <y>35</y>
+        <width>69</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>69</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Enabled:</string>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_47">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>65</y>
+        <width>61</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-SS1-VelRestLim</string>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Default</enum>
+      </property>
+      <property name="alarmHandling">
+       <enum>caLineEdit::onBackground</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_122">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>65</y>
+        <width>71</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>69</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Vel. rest lim:</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_123">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>85</y>
+        <width>71</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>69</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Vel. max lim:</string>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_48">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>85</y>
+        <width>61</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(SYS):$(Axis)-SS1-VelMaxLim</string>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Default</enum>
+      </property>
+      <property name="alarmHandling">
+       <enum>caLineEdit::onBackground</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::Channel</enum>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_10">
     <attribute name="title">
@@ -4521,50 +4755,6 @@
       </property>
       <property name="unitsEnabled">
        <bool>true</bool>
-      </property>
-     </widget>
-    </widget>
-    <widget class="caFrame" name="caframe_15">
-     <property name="geometry">
-      <rect>
-       <x>255</x>
-       <y>55</y>
-       <width>91</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="macro">
-      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(SYS)</string>
-     </property>
-     <property name="visibility">
-      <enum>caFrame::Calc</enum>
-     </property>
-     <property name="visibilityCalc">
-      <string notr="true">A&gt;=1</string>
-     </property>
-     <property name="channel" stdset="0">
-      <string notr="true">$(SYS):$(Axis)-SS1-EnaAct</string>
-     </property>
-     <widget class="caShellCommand" name="cashellcommand_7">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>5</y>
-        <width>76</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="label">
-       <string notr="true">Safety</string>
-      </property>
-      <property name="labels">
-       <string>$(GRP_ID)</string>
-      </property>
-      <property name="files">
-       <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
-      </property>
-      <property name="args">
-       <string>PLG_SAFETY_GRP_AXIS $(IOC) $(SYS) $(Axis);</string>
       </property>
      </widget>
     </widget>

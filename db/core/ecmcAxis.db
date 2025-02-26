@@ -729,3 +729,13 @@ record(bi,"${P}${AXIS_NAME}-SS1-EnaAct"){
   field(ONAM, "1")
   field(ZNAM, "0")
 }
+
+record(ai,"${P}${AXIS_NAME}-SS1-VelMaxLim"){
+  field(DESC, "Velocity max limit (not safety...)")
+  field(VAL,  -1)
+}
+
+record(ai,"${P}${AXIS_NAME}-SS1-VelRestLim"){
+  field(DESC, "Velocity rest limit (not safety...)")
+  field(VAL,  -1)
+}
