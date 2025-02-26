@@ -98,6 +98,8 @@ else if(static.VMState == 0) {
         mc_grp_set_enable(${GRP_ID_SA},0);
         mc_grp_mr_set_cnen(${GRP_ID_MA},0);
         mc_grp_mr_set_cnen(${GRP_ID_SA},0);
+        mc_grp_mr_set_sync(${GRP_ID_MA},1);
+        mc_grp_mr_set_sync(${GRP_ID_SA},1);
         if(slave) {
           mc_grp_set_slaved_axis_in_error(${GRP_ID_MA});
         }
