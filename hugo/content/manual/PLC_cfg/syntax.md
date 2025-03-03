@@ -909,3 +909,13 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
     Resets error code for ds_lib.
  
 ```
+
+#### Lookup tables
+```
+ 1.  value = lut_get_value(
+                         <lutObjIndex>,       : Lookup table object index
+                         <index>              : Index to which a value should be interpolated
+                         );
+   
+   Returns an interpolated value from the lookup table object, with "lutObjIndex", for the position "index".
+```
