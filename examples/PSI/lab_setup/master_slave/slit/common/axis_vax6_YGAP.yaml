@@ -25,10 +25,10 @@ trajectory:
 
 input:
   limit:
-    forward: ec${M_ID=0}.s${DRV_SLAVE}.ONE.0              # unused
-    backward: ec${M_ID=0}.s${DRV_SLAVE}.ONE.0             # unused
-  home: ec${M_ID=0}.s${DRV_SLAVE}.ONE.0                   # unused
-  interlock: ec${M_ID=0}.s${DRV_SLAVE}.ONE.0              # unused
+    forward: ec${M_ID=0}.s-1.ONE.0              # unused
+    backward: ec${M_ID=0}.s-1.ONE.0             # unused
+  home: ec${M_ID=0}.s-1.ONE.0                   # unused
+  interlock: ec${M_ID=0}.s-1.ONE.0              # unused
 
 softlimits:
   enable: false

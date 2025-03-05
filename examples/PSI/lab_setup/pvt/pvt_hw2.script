@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for PVT
 
-require ecmccfg PVT "ECMC_VER=PVT,ENG_MODE=1,MASTER_ID=0"
+require ecmccfg sandst_a "ECMC_VER=sandst_a,ENG_MODE=1,MASTER_ID=0"
 
 #############################################################################
 #- add slaves
@@ -36,8 +36,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}pvtControllerConfig.cmd
 ##############################################################################
 #- Load plugin: MOTION
 #- bash startGui.sh MTEST04-MTN-ASM 0 "/tmp"
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=200,DBG=0,ENA=1")
-require ecmc_plugin_motion PVT "${ECMC_PLUGIN_CONFIG}"
+#epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=200,DBG=0,ENA=1")
+#require ecmc_plugin_motion PVT "${ECMC_PLUGIN_CONFIG}"
 
 #- asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
 #- asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
