@@ -90,5 +90,10 @@ monitoring:
       drive: 200                                      # Time allowed outside max velo before system disables drive
   target:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
-    tolerance: 0.01                                   # Allowed tolerance
-    time: 10                                          # Filter time inside tolerance to be at target
+    tolerance: 0.001                                  # Allowed tolerance
+    time: 1000                                        # Filter time inside tolerance to be at target
+  stall:
+    enable: True
+    time:
+      timeout: 10000
+      factor: 5.0

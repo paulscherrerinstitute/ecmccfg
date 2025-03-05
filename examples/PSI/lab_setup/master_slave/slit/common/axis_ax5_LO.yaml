@@ -48,8 +48,8 @@ input:
   limit:
     forward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.12   # 1119994 cnts // 55.9997 mm
     backward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.11  #   98010 cnts //  4.9005 mm
-  home: ec${M_ID=0}.s$(DRV_SLAVE).ONE.0                   # unused
-  interlock: ec${M_ID=0}.s$(DRV_SLAVE).ONE.0              # unused
+  home: ec${M_ID=0}.s-1.ONE.0                   # unused
+  interlock: ec${M_ID=0}.s-1.ONE.0                   # unused
 
 softlimits:
   enable: false

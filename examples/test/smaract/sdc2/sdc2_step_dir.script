@@ -3,7 +3,7 @@
 
 ##############################################################################
 ## Initiation:
-require ecmccfg sandst_a "ENG_MODE=1,EC_RATE=500"
+require ecmccfg v10.0.0_RC1 "ENG_MODE=1,EC_RATE=500,ECMC_VER=v10.0.0_RC1"
 
 ##############################################################################
 ## Config hardware:
@@ -12,7 +12,7 @@ require ecmccfg sandst_a "ENG_MODE=1,EC_RATE=500"
 # 20  0:20  PREOP  +  EL2521 1K. Pulse Train Ausgang
 #
 
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL9227-5500"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=20, HW_DESC=EL9227-5500"
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "HW_DESC=EL2521, CONFIG=-stepDirectionDrive"
 epicsEnvSet("DRV_ID","$(ECMC_EC_SLAVE_NUM)")
 
