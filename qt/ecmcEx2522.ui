@@ -97,7 +97,7 @@
            </rect>
           </property>
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-VeloSet</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-Spd</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -341,7 +341,7 @@
            <string>ecmcGraph_v1.ui</string>
           </property>
           <property name="args">
-           <string>TITLE=m$(MasterID)s$(SlaveID).VeloSet: Velocity Setpoint,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-VeloSet,IOC=$(IOC)</string>
+           <string>TITLE=m$(MasterID)s$(SlaveID).VeloSet: Velocity Setpoint,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-Spd,IOC=$(IOC)</string>
           </property>
          </widget>
         </widget>
@@ -360,14 +360,14 @@
          <widget class="caLineEdit" name="calineedit_3">
           <property name="geometry">
            <rect>
-            <x>69</x>
+            <x>60</x>
             <y>110</y>
-            <width>41</width>
+            <width>46</width>
             <height>18</height>
            </rect>
           </property>
           <property name="channel" stdset="0">
-           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosVal</string>
+           <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(CH_ID)-PosCmd</string>
           </property>
           <property name="background">
            <color alpha="0">
@@ -604,7 +604,7 @@
         </rect>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-VeloSet</string>
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-Spd</string>
        </property>
        <property name="background">
         <color alpha="0">
@@ -848,7 +848,7 @@
         <string>ecmcGraph_v1.ui</string>
        </property>
        <property name="args">
-        <string>TITLE=m$(MasterID)s$(SlaveID).VeloSet: Velocity Setpoint,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-VeloSet,IOC=$(IOC)</string>
+        <string>TITLE=m$(MasterID)s$(SlaveID).VeloSet: Velocity Setpoint,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv$(CH_ID)-Spd,IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -874,7 +874,7 @@
         </rect>
        </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosVal</string>
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(CH_ID)-PosCmd</string>
        </property>
        <property name="background">
         <color alpha="0">
