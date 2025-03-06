@@ -67,3 +67,5 @@ afterInit("# dbpf ${IOC}:m${ECMC_EC_MASTER_ID}s00${ECMC_EC_SLAVE_NUM}-Pos01-Ctrl
 #-${IOC}:m${ECMC_EC_MASTER_ID}s00${ECMC_EC_SLAVE_NUM}-Enc01-PosAct
 #-${IOC}:m${ECMC_EC_MASTER_ID}s00${ECMC_EC_SLAVE_NUM}-Enc01-LtchPosAct
 #-${IOC}:m${ECMC_EC_MASTER_ID}s00${ECMC_EC_SLAVE_NUM}-Enc01-Cmd-RB
+
+callbackSetQueueSize 3000

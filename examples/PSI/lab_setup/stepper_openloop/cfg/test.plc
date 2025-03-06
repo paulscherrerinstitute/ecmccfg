@@ -1,0 +1,22 @@
+   
+var errorCode:=0;
+
+# 1. retvalue = mc_move_abs(
+#                       <axIndex>,       : Axis index
+#                         <execute>,       : Trigger
+#                         <pos>,           : Target position
+#                         <vel>,           : Target velocity
+#                         <acc>,           : Acceleration
+#                         <dec>            : Deceleration
+#                         ):
+
+if(ax1.drv.enable and not(static.done))
+{
+  println('Executing move...');
+  errorCode=mc_move_abs(1,1,720,720,2000,2000);
+  if(errorCode){
+    println('Function mc_home() returned error: ', errorCode);
+    ${SELF}.error:=errorCode;
+  };
+  static.done:=1;
+};
