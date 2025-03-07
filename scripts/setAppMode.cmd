@@ -29,5 +29,9 @@ epicsEnvUnset(ECMC_MR_PVT_CONTROLLER_CONFIGURED)
 #- START
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
 
+#- Add some time before iocInit
+# Stabilize EtherCAT bus.....
+epicsThreadSleep ${ECMC_AFTER_EC_OK_DELAY=2}
+
 #- For check in finalize.cmd if executed
 epicsEnvSet(ECMC_SET_APP_MODE_DONE,1)
