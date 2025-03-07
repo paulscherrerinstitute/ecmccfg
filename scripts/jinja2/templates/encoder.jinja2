@@ -187,3 +187,9 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
         ecmcConfigOrDie "Cfg.SetAxisEncDelayCyclesAndEnable(${ECMC_AXIS_NO},{{ encoder.delayComp.time }},1)"
     {%- endif %}
 {%- endif %}
+
+{%- if encoder.useAsCSPDrvEnc is defined %}
+    {%- if encoder.primary >0 %}
+        ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
+    {%- endif %}
+{%- endif %}
