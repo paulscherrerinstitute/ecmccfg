@@ -3,7 +3,7 @@
 
 ##############################################################################
 ## Initiation:
-require ecmccfg "ENG_MODE=1,EC_RATE=500"
+require ecmccfg sandst_a "ENG_MODE=1,EC_RATE=500"
 
 ##############################################################################
 ## Config hardware:
@@ -21,6 +21,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Generic-Step-Dir,  M
 epicsEnvSet("DRV_ID","$(ECMC_EC_SLAVE_NUM)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)loadYamlAxis.cmd, FILE=./cfg/axis.yaml)
 
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=12,HW_DESC=EL2521"
-${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Generic-Step-Dir,  MACROS='MAX_FREQ=3000,FREQ_RES=0.1',CH_ID=1"
+#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=12,HW_DESC=EL2521"
+#-${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Generic-Step-Dir,  MACROS='MAX_FREQ=3000,FREQ_RES=0.1',CH_ID=1"
 
