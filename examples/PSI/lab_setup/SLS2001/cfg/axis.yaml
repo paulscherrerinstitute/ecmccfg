@@ -79,7 +79,7 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 1                                               # Kp proportinal gain
+  Kp: 10                                               # Kp proportinal gain
   Ki: 0                                               # Ki integral gain
   Kd: 0                                               # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
