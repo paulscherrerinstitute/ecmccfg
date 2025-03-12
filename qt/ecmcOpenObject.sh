@@ -2,26 +2,28 @@
 
 ########
 # Open ecmc objects with following args
-# CMD:                $1,  $2,    $3,         $4
-#  EC_EXP           : CMD, PREFIX 
-#  EC_OVERVIEW      : CMD, PREFIX
-#  EC_SLAVE         : CMD, PREFIX
-#  EC_SLAVE_FIRST   : CMD, PREFIX
-#  EC_SLAVE_NEXT    : CMD, PREFIX M_ID        S_ID
-#  EC_SLAVE_PREV    : CMD, PREFIX M_ID        S_ID
-#  EC_SLAVE_GENERIC : CMD, PREFIX S_ID_PV
-#  AXIS             : CMD, PREFIX
-#  AXIS_FIRST       : CMD, PREFIX
-#  AXIS_NEXT        : CMD, PREFIX THIS_AX_ID
-#  DS_FIRST         : CMD, PREFIX
-#  DS_NEXT          : CMD, PREFIX THIS_DS_ID
-#  DS_PREV          : CMD, PREFIX THIS_DS_ID
-#  PLC_FIRST        : CMD, PREFIX
-#  PLC_NEXT         : CMD, PREFIX THIS_PLC_ID
-#  PLC_PREV         : CMD, PREFIX THIS_PLC_ID
-#  PLG_FIRST        : CMD, PREFIX
-#  PLG_NEXT         : CMD, PREFIX THIS_PLG_ID
-#  PLG_PREV         : CMD, PREFIX THIS_PLG_ID
+# CMD:                   $1,  $2,    $3,         $4
+#  EC_EXP              : CMD, PREFIX 
+#  EC_OVERVIEW         : CMD, PREFIX
+#  EC_SLAVE            : CMD, PREFIX
+#  EC_SLAVE_FIRST      : CMD, PREFIX
+#  EC_SLAVE_NEXT       : CMD, PREFIX, M_ID        S_ID
+#  EC_SLAVE_PREV       : CMD, PREFIX, M_ID        S_ID
+#  EC_SLAVE_GENERIC    : CMD, PREFIX, S_ID_PV
+#  AXIS                : CMD, PREFIX
+#  AXIS_FIRST          : CMD, PREFIX
+#  AXIS_NEXT           : CMD, PREFIX, THIS_AX_ID
+#  DS_FIRST            : CMD, PREFIX
+#  DS_NEXT             : CMD, PREFIX, THIS_DS_ID
+#  DS_PREV             : CMD, PREFIX, THIS_DS_ID
+#  PLC_FIRST           : CMD, PREFIX
+#  PLC_NEXT            : CMD, PREFIX, THIS_PLC_ID
+#  PLC_PREV            : CMD, PREFIX, THIS_PLC_ID
+#  PLG_FIRST           : CMD, PREFIX
+#  PLG_NEXT            : CMD, PREFIX, THIS_PLG_ID
+#  PLG_PREV            : CMD, PREFIX, THIS_PLG_ID
+#  PLG_SAFETY_GRP      : CMD, PREFIX, GRP_ID
+#  PLG_SAFETY_GRP_AXIS : CMD, PREFIX, DEV,        AX_NAME
 
 CMD=$1
 
@@ -86,7 +88,7 @@ function openEcSlave() {
 }
 
 function openEcSlaveGeneric() {
-  IOC=$1
+  PREFIX=$1
   SLAVE_ID_PV=$2
   
   # Get slave id to open from PV
@@ -99,12 +101,12 @@ function openEcSlaveGeneric() {
   echo "M_ID=$M_ID"
   
   # Get panel type
-  PV_NAME=$IOC":m"$M_ID"s"$S_ID"-PnlTyp"
+  PV_NAME=$PREFIX":m"$M_ID"s"$S_ID"-PnlTyp"
   PANEL=$( caget -noname -nostat $PV_NAME | tr -d '"')
   echo "PANEL=$PANEL"
   
   # Assemble macros string
-  MACROS="SYS=$IOC,IOC=$IOC,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
   
   caqtdm -macro $MACROS ecmcGenericSlaveOverview.ui
@@ -318,6 +320,32 @@ function openPLGPrev() {
   caqtdm -macro $MACROS ecmcPLGxx.ui
 }
 
+#- safety plugin related
+function openPLGSafetyGrp() {
+  PREFIX=$1
+  ID=$2
+  NAME=$( caget -noname -nostat -nounit -int $PREFIX:SS1-Grp$ID-Nam | tr -d '"')
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,SAFETY_GRP=$NAME"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
+}
+
+function openPLGSafetyMain() {
+  PREFIX=$1  
+  MACROS="SYS=$PREFIX,IOC=$PREFIX"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmc_plugin_safety_main.ui
+}
+
+function openPLGSafetyGrpAxis() {
+  PREFIX=$1
+  DEV=$2
+  AX_NAME=$3
+  NAME=$( caget -noname -nostat -nounit -int $DEV:$AX_NAME-SS1-GrpNam | tr -d '"')
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,SAFETY_GRP=$NAME"
+  caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
+}
+
 # Parse commands
 case $CMD in
   "EC_EXP")
@@ -380,7 +408,15 @@ case $CMD in
   "PLG_PREV")
   openPLGPrev $2 $3
   ;;
-
+  "PLG_SAFETY_GRP")
+  openPLGSafetyGrp $2 $3
+  ;;
+  "PLG_SAFETY_MAIN")
+  openPLGSafetyMain $2
+  ;;
+  "PLG_SAFETY_GRP_AXIS")
+  openPLGSafetyGrpAxis $2 $3 $4
+  ;;
   *) echo "Invalid command"
   ;;
 esac

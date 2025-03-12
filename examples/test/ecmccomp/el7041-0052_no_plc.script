@@ -34,7 +34,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_pl
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
 ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 

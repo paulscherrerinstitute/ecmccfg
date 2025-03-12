@@ -1,10 +1,10 @@
 ##############################################################################
 ## Example config for EL7041 and EL5042
 
-require ecmccfg sandst_a "ECMC_VER=sandst_a,ENG_MODE=1,MASTER_ID=1"
+require ecmccfg v10.0.0_RC1 "ENG_MODE=1,MASTER_ID=0,ECMC_VER=v10.0.0_RC1"
 
 # 0:7 - EL7041    1Ch Stepper
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=14,HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=16,HW_DESC=EL7041-0052"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1500, I_STDBY_MA=1000, U_NOM_MV=48000, R_COIL_MOHM=1230'"
 epicsEnvSet(DRV_SID,${ECMC_EC_SLAVE_NUM})
 
@@ -16,3 +16,5 @@ epicsEnvSet(ENC_SID,${ECMC_EC_SLAVE_NUM})
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,   "FILE=./cfg/axis.yaml,          DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${DRV_SID}, ENC_SID=${ENC_SID}, ENC_CH=01"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_open_loop.yaml, DEV=${IOC}, ENC_SID=${DRV_SID}"
+
+ 

@@ -72,7 +72,7 @@ record(ai,"$(P)MCU-Cfg-DS${Index}-PrvObjId") {
     field(VAL,  "$(PREV_OBJ_ID=-1)")
 }
 
-record(stringin,"$(Name)$(DESC_NAME)") {
+record(stringin,"$(P)$(DESC_NAME)") {
     field(DESC, "DS Info")
-    field(VAL,  "${DESC=PLC ${index}}")
+    field(VAL,  "${DESC=DS ${index}}")
 }
