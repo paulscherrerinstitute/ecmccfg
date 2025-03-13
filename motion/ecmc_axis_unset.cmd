@@ -9,7 +9,6 @@
 
 #- epicsEnvUnset(ECMC_AXIS_NO)
 epicsEnvUnset(ECMC_AXISCONFIG)
-epicsEnvUnset(ECMC_AXISFIELDINIT)
 epicsEnvUnset(ECMC_PREC)
 epicsEnvUnset(ECMC_EGU)
 epicsEnvUnset(ECMC_DESC)
