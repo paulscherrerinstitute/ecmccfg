@@ -15,4 +15,4 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,0,0x1a00,0x6000,0x2,1,overload01)"
 
 #- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "EL9410")
+epicsEnvSet("ECMC_HW_PANEL"              "EL9505")

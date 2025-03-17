@@ -237,10 +237,10 @@
      <string>Open first axis</string>
     </property>
     <property name="files">
-     <string>bash /ioc/modules/qt/ecmcOpenPrevEcSlave.sh</string>
+     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
     </property>
     <property name="args">
-     <string>$(SYS) $(MasterID) $(SlaveID)</string>
+     <string>EC_SLAVE_PREV $(SYS) $(MasterID) $(SlaveID)</string>
     </property>
    </widget>
    <widget class="caLineEdit" name="calineedit_53">
@@ -319,10 +319,10 @@
      <string>Open first axis</string>
     </property>
     <property name="files">
-     <string>bash /ioc/modules/qt/ecmcOpenNextEcSlave.sh</string>
+     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
     </property>
     <property name="args">
-     <string>$(SYS) $(MasterID) $(SlaveID)</string>
+     <string>EC_SLAVE_NEXT $(SYS) $(MasterID) $(SlaveID)</string>
     </property>
    </widget>
    <widget class="caLineEdit" name="calineedit_54">

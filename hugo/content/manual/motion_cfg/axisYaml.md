@@ -598,6 +598,11 @@ monitoring:
     time:
       trajectory: 100                                 # Time allowed outside max diff velo before system init halt
       drive: 200                                      # Time allowed outside max diff velo before system disables drive
+  stall:
+    enable: True                                      # Enable stall monitoring. Attarget must be enabled for this functionallity
+    time:
+      timeout: 10000                                  # If not attarget after "timeout" cycles after trajectory generator is ready then drive will disable
+      factor: 5.0                                     # Measures duration of last motion command (busy high edge to busy low edge). The new timeout will be defined as this duration multiplied by this factor. The timeout finaly used for stall detection will be the longest (of time.timeout and calculated from time.factor).
 
 plc:
   enable: true                                        # Enable axis plc

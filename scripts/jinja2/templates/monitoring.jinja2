@@ -45,4 +45,16 @@
             {%- endif  %}
         {%- endif  %}
     {%- endif %}
+
+    {%- if monitoring.stall is defined %}
+        {%- if monitoring.stall.enable is defined %}
+            ecmcConfigOrDie "Cfg.SetAxisMonEnableStallMon({{ axis.id }},{{ monitoring.stall.enable|int }})"
+            {%- if monitoring.stall.time.timeout is defined %}
+                ecmcConfigOrDie "Cfg.SetAxisMonStallMinTimeOut({{ axis.id }},{{ monitoring.stall.time.timeout }})"
+            {%- endif  %}
+            {%- if monitoring.stall.time.factor is defined %}
+                ecmcConfigOrDie "Cfg.SetAxisMonStallTimeFactor({{ axis.id }},{{ monitoring.stall.time.factor }})"
+            {%- endif  %}
+        {%- endif  %}
+    {%- endif %}
 {%- endif %}

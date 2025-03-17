@@ -1243,10 +1243,10 @@
       <string>Open first axis</string>
      </property>
      <property name="files">
-      <string>bash /ioc/modules/qt/ecmcOpenEcSlaveGeneric.sh</string>
+      <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
      </property>
      <property name="args">
-      <string>$(IOC) $(SYS):$(Axis)-Enc$(ENC_ID)-CfgLnkPosAct</string>
+      <string>EC_SLAVE_GENERIC $(IOC) $(SYS):$(Axis)-Enc$(ENC_ID)-CfgLnkPosAct</string>
      </property>
     </widget>
    </widget>

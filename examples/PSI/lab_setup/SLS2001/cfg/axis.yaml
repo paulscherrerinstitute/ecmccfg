@@ -79,7 +79,7 @@ encoder:
   #    ready: ec0..                                   # Ethercat entry for readinf drive internal homing seq ready (seq id 26)
 
 controller:
-  Kp: 1                                               # Kp proportinal gain
+  Kp: 10                                               # Kp proportinal gain
   Ki: 0                                               # Ki integral gain
   Kd: 0                                               # Kd derivative gain
   # Kff: 1                                            # Feed forward gain
@@ -100,11 +100,11 @@ controller:
 trajectory:
   type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
   axis:
-    velocity: 100                                   # Default velo for axis
-    acceleration: 100                                # Default acc for axis
-    deceleration: 100                                # Default dec for axis
+    velocity: 1000                                   # Default velo for axis
+    acceleration: 5000                                # Default acc for axis
+    deceleration: 5000                                # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
-    jerk: 1000                                         # Default jerk for axis
+    jerk: 10000                                         # Default jerk for axis
   jog:
     velocity: 1000                                    # Default velo fro JOG (motor record)
 #  modulo:
@@ -161,7 +161,7 @@ monitoring:
       drive: 200                                      # Time allowed outside max velo before system disables drive
   target:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
-    tolerance: 5                                      # Allowed tolerance
+    tolerance: 1                                      # Allowed tolerance
     time: 100                                         # Filter time inside tolerance to be at target
   # velocityDifference:
   #   enable: true                                    # Enable velocity diff monitoring (velo set vs velo act)

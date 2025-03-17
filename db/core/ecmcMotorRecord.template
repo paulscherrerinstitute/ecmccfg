@@ -406,3 +406,95 @@ record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncOnly") {
     field(LNK1, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
     field(LNK2, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
 }
+
+# New: Commands from ecmc 2 MR (STOP, SYNC, CNEN)
+# typedef struct {
+#   unsigned char stopMRCmd      : 1;  // Trigger command
+#   unsigned char stopMRVal      : 1;  // STOP value
+#   unsigned char syncMRCmd      : 1;  // Trigger command
+#   unsigned char syncMRVal      : 1;  // SYNC value
+#   unsigned char cnenMRCmd      : 1;  // Trigger command
+#   unsigned char cnenMRVal      : 1;  // CNEN value
+#   unsigned int dummy           : 26;
+# } ecmcMRCmds;
+
+record(mbbiDirect,"${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd"){
+  field(DESC, "${MOTOR_NAME}: ECMC to MR cmds")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(ECMC_PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).mr_cmd?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop.PROC")
+}
+
+record(calc,  "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop") {
+  field(DESC, "${MOTOR_NAME}: MR Stop")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A & 0x1")
+  field(INPA, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync.PROC")
+}
+
+record(calc,  "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
+  field(DESC, "${MOTOR_NAME}: MR Sync")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A >> 2 & 0x1")
+  field(INPA, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen.PROC")
+}
+
+record(calc,  "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen") {
+  field(DESC, "${MOTOR_NAME}: MR Cnen")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A >> 4 & 0x1")
+  field(INPA, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd")
+}
+
+record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop_") {
+  field(DESC, "Axis: STOP")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop CP")
+  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B1")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
+}
+
+record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync_") {
+  field(DESC, "Axis: SYNC")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync CP")
+  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B3")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.SYNC PP")
+}
+
+record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen_") {
+  field(DESC, "Axis: CNEN")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen CP")
+  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B5")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
+}
+
+# Monitor of mbbi bits seems to not work?!
+#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stp") {
+#  field(DESC, "Axis: STOP")    
+#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B0 CP")
+#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B1 CP")
+#  field(LNK1, "")
+#  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
+#}
+#
+## Monitor Sync command and issue SYNC
+#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
+#  field(DESC, "Axis: SYNC")    
+#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B2 CP")
+#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B3 CP")
+#  field(LNK1, "")
+#  field(LNK2, "${PREFIX}${MOTOR_NAME}.SYNC PP")
+#}
+#
+## Monitor CNEN command and issue CNEN
+#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
+#  field(DESC, "Axis: CNEN")
+#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B4 CP")
+#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B5 CP")
+#  field(LNK1, "")
+#  field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
+#}

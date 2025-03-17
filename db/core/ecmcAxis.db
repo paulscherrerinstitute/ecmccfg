@@ -538,18 +538,18 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
   field(ZRST, "NO_COMMAND")
   field(ZRVL, 0)
-  field(ONST, "MOVE_VEL")
+  field(ONST, "VEL")
   field(ONVL, 1)
-  field(TWST, "MOVE_REL")
+  field(TWST, "REL")
   field(TWVL, 2)
-  field(THST, "MOVE_ABS")
+  field(THST, "ABS")
   field(THVL, 3)
-  field(FVST, "MOVE_PVT_REL")
+  field(FVST, "PVT_REL")
   field(FVVL, 8)
-  field(SXST, "MOVE_PVT_ABS")
+  field(SXST, "PVT_ABS")
   field(SXVL, 9)
-  field(FRST, "MOVE_HOME")
-  field(FRVL, 10)
+  field(SVST, "HOME")
+  field(SVVL, 10)
   field(VAL,  0)
 }
 
@@ -715,4 +715,27 @@ record(longin,"${P}${AXIS_NAME}-EncCnt"){
     field(DESC, "${AXIS_NAME} Encoder count")
     field(VAL,  "1")
     field(PINI, "YES")
+}
+
+# Records to indicate if safety plg is in use for this axis
+record(stringin,"${P}${AXIS_NAME}-SS1-GrpNam") {
+    field(DESC, "Name of Saftey Grp ")
+    field(VAL,  "Disabled")
+}
+
+record(bi,"${P}${AXIS_NAME}-SS1-EnaAct"){
+  field(DESC, "Safety PLG active for this axis")
+  field(VAL,   0)
+  field(ONAM, "1")
+  field(ZNAM, "0")
+}
+
+record(ai,"${P}${AXIS_NAME}-SS1-VelMaxLim"){
+  field(DESC, "Velocity max limit (not safety...)")
+  field(VAL,  -1)
+}
+
+record(ai,"${P}${AXIS_NAME}-SS1-VelRestLim"){
+  field(DESC, "Velocity rest limit (not safety...)")
+  field(VAL,  -1)
 }

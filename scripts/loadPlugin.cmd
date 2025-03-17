@@ -18,30 +18,30 @@
 #-d */
 
 epicsEnvSet("ECMC_PLUGIN_ID",   "${PLUGIN_ID=0}")
-ecmcConfigOrDie "Cfg.LoadPlugin(${PLUGIN_ID},${FILE},${CONFIG=""})"
+ecmcConfigOrDie "Cfg.LoadPlugin(${ECMC_PLUGIN_ID},${FILE},${CONFIG=""})"
 #- Report if REPORT>0
 ecmcEpicsEnvSetCalcTernary("ECMC_PLUGIN_REPORT", "${REPORT=-1}>0","","#")
-${ECMC_PLUGIN_REPORT}ecmcConfigOrDie "Cfg.ReportPlugin(${PLUGIN_ID})"
+${ECMC_PLUGIN_REPORT}ecmcConfigOrDie "Cfg.ReportPlugin(${ECMC_PLUGIN_ID})"
 epicsEnvUnset(ECMC_PLUGIN_REPORT);
 
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first plugin (ECMC_PREV_PLG_OBJ_ID==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}>=0", "","#- ")
 ${ECMC_EXE_NEXT_PLG}ecmcFileExist(ecmcPlgPrevPlg.db,1,1)
-${ECMC_EXE_NEXT_PLG}dbLoadRecords(ecmcPlgPrevPlg.db,"NEXT_OBJ_ID=${PLUGIN_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLG_P=""}")
+${ECMC_EXE_NEXT_PLG}dbLoadRecords(ecmcPlgPrevPlg.db,"NEXT_OBJ_ID=${ECMC_PLUGIN_ID=-1},PREV_ECMC_P=${ECMC_PREV_PLG_P=""}")
 epicsEnvUnset(ECMC_EXE_NEXT_PLG)
 
 #- If this is the first added plugin then store value in P:MCU-Cfg-PLG-FrstObjId
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_FIRST_PLG,"${ECMC_PREV_PLG_OBJ_ID=-1}<0", "","#- ")
 ${ECMC_EXE_FIRST_PLG}ecmcFileExist(ecmcPlgFirstPlg.db,1,1)
-${ECMC_EXE_FIRST_PLG}dbLoadRecords(ecmcPlgFirstPlg.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${PLUGIN_ID}")
+${ECMC_EXE_FIRST_PLG}dbLoadRecords(ecmcPlgFirstPlg.db,"P=${ECMC_PREFIX},FIRST_OBJ_ID=${ECMC_PLUGIN_ID}")
 epicsEnvUnset(ECMC_EXE_FIRST_PLG)
 
 #- Store info to populate the ECMC_P-NxtObj "pointer" of next added plugin
-epicsEnvSet(ECMC_PREV_PLG_P,"$(ECMC_PREFIX)MCU-Cfg-PLG${PLUGIN_ID}-")
-epicsEnvSet(ECMC_PREV_PLG_OBJ_ID,${PLUGIN_ID})
+epicsEnvSet(ECMC_PREV_PLG_P,"$(ECMC_PREFIX)MCU-Cfg-PLG${ECMC_PLUGIN_ID}-")
+epicsEnvSet(ECMC_PREV_PLG_OBJ_ID,${ECMC_PLUGIN_ID})
 
 ecmcEpicsEnvSetCalc(ECMC_PLUGIN_COUNT, "$(ECMC_PLUGIN_COUNT=0)+1")
 
 #- Increment for next
-ecmcEpicsEnvSetCalc(PLUGIN_ID, "$(PLUGIN_ID) + 1")
+ecmcEpicsEnvSetCalc(PLUGIN_ID, "$(ECMC_PLUGIN_ID) + 1")

@@ -13,11 +13,16 @@ python3 parse_ec_esi_xml.py -b ../../beckhoff_xml/ -d el70xx-0052 -r 0x00100034 
 #- List available devices and version in the xml lib
 python3 parse_ec_esi_xml.py -b ../../beckhoff_xml/ -l -o slask.txt
 ```
+sys.path.append('/opt/homebrew/opt/libxml2/lib/python3.13/site-packages/')
 
 ### Known issues
 * Outputfile seems not to be written. Pipe to file instead..
 * Outpuit need manual editing
 
+### New version.. WIP
+```
+python new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML/Beckhoff\ EL7xxx.xml --name "EL7047*" --rev "0x1000*" --output parsed_devices.json
+```
 
 ## Read EL70xx diagnostic, read_el70xx_diag.sh
 

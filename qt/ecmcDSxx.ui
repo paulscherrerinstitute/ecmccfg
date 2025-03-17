@@ -345,10 +345,10 @@
      <string>Open first axis</string>
     </property>
     <property name="files">
-     <string>bash /ioc/modules/qt/ecmcOpenNextDS.sh</string>
+     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
     </property>
     <property name="args">
-     <string>$(SYS) $(ID_1)</string>
+     <string>DS_NEXT $(SYS) $(ID_1)</string>
     </property>
    </widget>
    <widget class="caLineEdit" name="calineedit_54">
@@ -427,10 +427,10 @@
      <string>Open first axis</string>
     </property>
     <property name="files">
-     <string>bash /ioc/modules/qt/ecmcOpenPrevDS.sh</string>
+     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
     </property>
     <property name="args">
-     <string>$(SYS) $(ID_1)</string>
+     <string>DS_PREV $(SYS) $(ID_1)</string>
     </property>
    </widget>
    <widget class="caLineEdit" name="calineedit_53">
