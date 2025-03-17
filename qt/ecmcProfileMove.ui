@@ -1199,7 +1199,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M2),TITLE=Output_Trajectory, Y=$(P)$(R)M2Positions;M=$(P)$(M2),TITLE=Actual_Trajectory, Y=$(P)$(R)M2Readbacks;M=$(P)$(M2),TITLE=Following_Error, Y=$(P)$(R)M2FollowingErrors</string>
+      <string>M=$(P)$(M2),TITLE=Output_Trajectory, Y=$(P)$(M2)-$(R)Positions;M=$(P)$(M2),TITLE=Actual_Trajectory, Y=$(P)$(M2)-$(R)Readbacks;M=$(P)$(M2),TITLE=Following_Error, Y=$(P)$(M2)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
@@ -1238,7 +1238,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M3),TITLE=Output_Trajectory, Y=$(P)$(R)M3Positions;M=$(P)$(M3),TITLE=Actual_Trajectory, Y=$(P)$(R)M3Readbacks;M=$(P)$(M3),TITLE=Following_Error, Y=$(P)$(R)M3FollowingErrors</string>
+      <string>M=$(P)$(M3),TITLE=Output_Trajectory, Y=$(P)$(M3)-$(R)Positions;M=$(P)$(M3),TITLE=Actual_Trajectory, Y=$(P)$(M3)-$(R)Readbacks;M=$(P)$(M3),TITLE=Following_Error, Y=$(P)$(M3)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
@@ -1277,7 +1277,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M4),TITLE=Output_Trajectory, Y=$(P)$(R)M4Positions;M=$(P)$(M4),TITLE=Actual_Trajectory, Y=$(P)$(R)M4Readbacks;M=$(P)$(M4),TITLE=Following_Error, Y=$(P)$(R)M4FollowingErrors</string>
+      <string>M=$(P)$(M4),TITLE=Output_Trajectory, Y=$(P)$(M4)-$(R)Positions;M=$(P)$(M4),TITLE=Actual_Trajectory, Y=$(P)$(M4)-$(R)Readbacks;M=$(P)$(M4),TITLE=Following_Error, Y=$(P)$(M4)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
@@ -1316,7 +1316,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M5),TITLE=Output_Trajectory, Y=$(P)$(R)M5Positions;M=$(P)$(M5),TITLE=Actual_Trajectory, Y=$(P)$(R)M5Readbacks;M=$(P)$(M5),TITLE=Following_Error, Y=$(P)$(R)M5FollowingErrors</string>
+      <string>M=$(P)$(M5),TITLE=Output_Trajectory, Y=$(P)$(M5)-$(R)Positions;M=$(P)$(M5),TITLE=Actual_Trajectory, Y=$(P)$(M5)-$(R)Readbacks;M=$(P)$(M5),TITLE=Following_Error, Y=$(P)$(M5)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
@@ -1436,7 +1436,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M6),TITLE=Output_Trajectory, Y=$(P)$(R)M6Positions;M=$(P)$(M6),TITLE=Actual_Trajectory, Y=$(P)$(R)M6Readbacks;M=$(P)$(M6),TITLE=Following_Error, Y=$(P)$(R)M6FollowingErrors</string>
+      <string>M=$(P)$(M6),TITLE=Output_Trajectory, Y=$(P)$(M6)-$(R)Positions;M=$(P)$(M6),TITLE=Actual_Trajectory, Y=$(P)$(M6)-$(R)Readbacks;M=$(P)$(M6),TITLE=Following_Error, Y=$(P)$(M6)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
@@ -1556,7 +1556,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M7),TITLE=Output_Trajectory, Y=$(P)$(R)M7Positions;M=$(P)$(M7),TITLE=Actual_Trajectory, Y=$(P)$(R)M7Readbacks;M=$(P)$(M7),TITLE=Following_Error, Y=$(P)$(R)M7FollowingErrors</string>
+      <string>M=$(P)$(M7),TITLE=Output_Trajectory, Y=$(P)$(M7)-$(R)Positions;M=$(P)$(M7),TITLE=Actual_Trajectory, Y=$(P)$(M7)-$(R)Readbacks;M=$(P)$(M7),TITLE=Following_Error, Y=$(P)$(M7)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
@@ -1676,7 +1676,7 @@ border-radius: 2px;
       <string>trajectoryPlot.adl;trajectoryPlot.adl;trajectoryPlot.adl</string>
      </property>
      <property name="args">
-      <string>M=$(P)$(M8),TITLE=Output_Trajectory, Y=$(P)$(R)M8Positions;M=$(P)$(M8),TITLE=Actual_Trajectory, Y=$(P)$(R)M8Readbacks;M=$(P)$(M8),TITLE=Following_Error, Y=$(P)$(R)M8FollowingErrors</string>
+      <string>M=$(P)$(M8),TITLE=Output_Trajectory, Y=$(P)$(M8)-$(R)Positions;M=$(P)$(M8),TITLE=Actual_Trajectory, Y=$(P)$(M8)-$(R)Readbacks;M=$(P)$(M8),TITLE=Following_Error, Y=$(P)$(M8)-$(R)FollowingErrors</string>
      </property>
      <property name="stackingMode" stdset="0">
       <enum>caRowColMenu::Menu</enum>
