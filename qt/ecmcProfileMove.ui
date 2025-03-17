@@ -663,7 +663,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M2UseAxis</string>
+      <string notr="true">$(P)$(M2)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
@@ -693,7 +693,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M3UseAxis</string>
+      <string notr="true">$(P)$(M3)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
@@ -753,7 +753,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M4UseAxis</string>
+      <string notr="true">$(P)$(M4)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
@@ -783,7 +783,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M5UseAxis</string>
+      <string notr="true">$(P)$(M5)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
@@ -1335,7 +1335,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M6UseAxis</string>
+      <string notr="true">$(P)$(M6)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
@@ -1455,7 +1455,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M7UseAxis</string>
+      <string notr="true">$(P)$(M7)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
@@ -1575,7 +1575,7 @@ border-radius: 2px;
       </rect>
      </property>
      <property name="channel" stdset="0">
-      <string>$(P)$(R)M8UseAxis</string>
+      <string notr="true">$(P)$(M8)-$(R)UseAxis</string>
      </property>
      <property name="colorMode">
       <enum>caMenu::Static</enum>
