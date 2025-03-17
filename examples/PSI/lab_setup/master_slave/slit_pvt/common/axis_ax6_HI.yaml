@@ -1,0 +1,79 @@
+# https://paulscherrerinstitute.github.io/ecmccfg/manual/axis/axisyaml/
+
+axis:
+  id: 6
+  group: realAxes
+  mode: CSV
+  features:
+    allowSrcChangeWhenEnabled: true
+
+epics:
+  name: TR_HI
+  precision: 4
+  unit: mm
+  motorRecord:
+    description: "Hi"
+    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+
+drive:
+  numerator: 10                # max velo in EGU/s
+  denominator: 32768            # MAX_INT for a 16-bit register, always this for this stepper drive!
+  type: 0
+  control: ec${M_ID=0}.s$(DRV_SLAVE).driveControl01
+  status: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01
+  setpoint: ec${M_ID=0}.s$(DRV_SLAVE).velocitySetpoint01
+
+encoder:
+  numerator: 1          # 1egu = 1mm
+  denominator: 12800    # Number of ticks when motor moves numerator (=1mm): 1 mm / 50 nm = 20000
+  type: 0               # Type: 0=Incremental, 1=Absolute
+  bits: 16              # Total bit count of encoder raw data
+  absBits: 0            # Absolute bit count (for abs enc) always least significant part of 'bits'
+  absOffset: 0.0000     # Encoder offset in eng units (for absolute encoders)
+  position: ec${M_ID=0}.s$(ENC_SLAVE).positionActual$(ENC_CHANNEL)
+
+controller:
+  Kp: 2.000
+  Ki: 0.001
+  Kd: 0.000
+  Kff: 1.00
+
+trajectory:
+  axis:
+    velocity: 1.0
+    acceleration: 1.0
+    deceleration: 1.0
+
+input:
+  limit:
+    forward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.12   # 1111969 cnts // 55.5984 mm
+    backward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.11  #  109007 cnts //  5.4504 mm
+  home: ec${M_ID=0}.s-1.ONE.0                   # unused
+  interlock: ec${M_ID=0}.s-1.ONE.0                   # unused
+
+softlimits:
+  enable: false
+  backwardEnable: true
+  forwardEnable: true
+  forward: 55.4
+  backward: 5.7
+
+monitoring:
+  lag:
+    enable: true
+    tolerance: 0.05
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.05
+    time: 100
+  velocity:
+    enable: true
+    max: 5
+    time:
+      trajectory: 100
+      drive: 200
+
+plc:
+  enable: true
+  externalCommands: true

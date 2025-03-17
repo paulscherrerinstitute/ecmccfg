@@ -1,46 +1,10 @@
 ##############################################################################
 ## Example config for PVT
 
-require ecmccfg sandst_a "ECMC_VER=sandst_a,ENG_MODE=1,MASTER_ID=0"
-
-#############################################################################
-#- add slaves
-#- list of slaves (4 axis test motion box)
-#- Master1
-#-    0  0:0   PREOP  +  EK1100 EtherCAT Coupler (2A E-Bus)
-#-    1  0:1   PREOP  +  EL2068 8Ch. Dig Output 24V, 0.5A
-#-    2  0:2   PREOP  +  EL2819 16K. Dig. Ausgang 24V, 0,5A, Diagnose
-#-    3  0:3   PREOP  +  EL5001 1K. SSI Encoder
-#-    4  0:4   PREOP  +  EL6224 (IO Link Master)
-#-    5  0:5   PREOP  +  EL2008 8K. Dig. Ausgang 24V, 0.5A
-#-    6  0:6   PREOP  +  EL2522 2K. Pulse Train Ausgang
-#-    7  0:7   PREOP  +  EL5072 2Ch. Inductive sensor interface (LVDT, Half Bridge)
-#-    8  0:8   PREOP  +  EL1008 8K. Dig. Eingang 24V, 3ms
-#-    9  0:9   PREOP  +  EL5042 2Ch. BiSS-C Encoder
-#-   10  0:10  PREOP  +  EL6692 EtherCAT Bridge-Klemme (Prim�r)
-#-   11  0:11  PREOP  +  EK1100 EtherCAT-Koppler (2A E-Bus)
-#-   12  0:12  PREOP  +  EL7031 1K. Schrittmotor-Endstufe (24V, 1.5A)
-#-   13  0:13  PREOP  +  EL7201 1K. MDP742 Servo-Motor-Endstufe (50V, 4A)
-#-   14  0:14  PREOP  +  EL7041-0052 1Ch. Stepper motor output stage (50V, 5A)
-#-   15  0:15  PREOP  +  EL7342 2Ch. DC motor output stage (50V, 3.5A)
-#-   16  0:16  PREOP  +  EL7411 BLDC Terminal with incremental encoder/Hall, 50 V DC, 4.
-#-   17  0:17  PREOP  +  EL7211-9014 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
-#-   18  0:18  PREOP  +  EL9576 Bremschopper Klemme
+require ecmccfg pvt "ECMC_VER=pvt,ENG_MODE=1,MASTER_ID=0"
 
 # 0:14 - EL7041    1Ch Stepper
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,     "SLAVE_ID=14,HW_DESC=EL7041-0052"
-${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd    "COMP=Motor-Generic-2Phase-Stepper,    MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230,STEPS=400'"
-${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd, "FILE=./cfg/axis_pvt_hw2.yaml,DRV_SLAVE=$(ECMC_EC_SLAVE_NUM)"
-${SCRIPTEXEC} ${ecmccfg_DIR}pvtControllerConfig.cmd
-
-##############################################################################
-#- Load plugin: MOTION
-#- bash startGui.sh MTEST04-MTN-ASM 0 "/tmp"
-#epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=200,DBG=0,ENA=1")
-#require ecmc_plugin_motion PVT "${ECMC_PLUGIN_CONFIG}"
-
-#- asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x41)
-#- asynSetTraceIOMask(${ECMC_ASYN_PORT}, -1, 6)
-#- asynSetTraceInfoMask(${ECMC_ASYN_PORT}, -1, 1)
-#- ecmcConfigOrDie "Cfg.SetTraceMaskBit(15,1)"
-
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,            "SLAVE_ID=23,HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd       "COMP=Motor-Generic-2Phase-Stepper,             MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230,STEPS=400'"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,        "FILE=./cfg/axis_pvt_hw2.yaml,                  DRV_SLAVE=$(ECMC_EC_SLAVE_NUM)"
+${SCRIPTEXEC} ${ecmccfg_DIR}pvtControllerConfig.cmd  "TRG_EC_ENTRY=ec0.s$(ECMC_EC_SLAVE_NUM).ONE.31, TRG_DUR_S=0.15"
