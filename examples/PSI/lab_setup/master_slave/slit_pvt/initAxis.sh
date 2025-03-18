@@ -1,8 +1,8 @@
 
 # pos array
-caput -a c6025a-04:$1-PVT-Positions '0 1 2 3 5 6 7 8 7'
+caput -a c6025a-04:$1-PVT-Positions '0 1 2 3 5 6 7 8 7 6'
 # relative
-caput c6025a-04:PVT-MoveMode 1
+caput c6025a-04:PVT-MoveMode 0
 # Use axis
 caput c6025a-04:$1-PVT-UseAxis 1
 # build

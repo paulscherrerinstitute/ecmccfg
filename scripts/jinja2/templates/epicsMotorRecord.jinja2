@@ -59,6 +59,8 @@ epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
   ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_RB_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.nreadback | default(0) }}",{{ epics.motorRecord.pvt.nreadback | default(0) }} ,${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0})
   ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}<{{ epics.motorRecord.pvt.npoints | default(0) }}",{{ epics.motorRecord.pvt.npoints | default(0) }} ,${ECMC_MR_PVT_MAX_POINTS_IN_USE=0})
   ecmcEpicsEnvSetCalc(ECMC_MR_PVT_AXES_COUNT_IN_USE,"${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}+1")
+  #- Load cfg records for PVT axis (enable auto gui)
+  dbLoadRecords(ecmcProfileMoveMCUAxis.template,"IOC=$(IOC),DEV=${DEV=$(IOC)},AXIS_NAME={{ epics.name }},PVT_AXIS_NO=$(ECMC_MR_PVT_AXES_COUNT_IN_USE),AXIS_NO={{ axis.id }}")
 {%- endif %}
 
 #- -----------------------------------------------------------------------------

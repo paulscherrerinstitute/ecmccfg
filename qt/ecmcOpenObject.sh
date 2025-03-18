@@ -24,6 +24,7 @@
 #  PLG_PREV            : CMD, PREFIX, THIS_PLG_ID
 #  PLG_SAFETY_GRP      : CMD, PREFIX, GRP_ID
 #  PLG_SAFETY_GRP_AXIS : CMD, PREFIX, DEV,        AX_NAME
+#  PVT_MAIN            : CMD, PREFIX
 
 CMD=$1
 
@@ -346,6 +347,32 @@ function openPLGSafetyGrpAxis() {
   caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
 }
 
+function openPVTMain() {
+  #  c6025a-04:MCU-PVT-Cfg-AX1-Id
+  #  c6025a-04:MCU-PVT-Cfg-AX2-Id
+  #  c6025a-04:MCU-PVT-Cfg-AX1-Pfx
+  #  c6025a-04:MCU-PVT-Cfg-AX1-Nam
+  #  c6025a-04:MCU-PVT-Cfg-AX2-Pfx
+  #  c6025a-04:MCU-PVT-Cfg-AX2-Nam
+
+  IOC=$1
+  AX_COUNT=$( caget -noname -nostat -nounit -int $IOC:PVT-NumAxes | tr -d '"')
+  AXES=""
+  DEVS=""
+  for ((i = 1 ; i <= AX_COUNT ; i++ )); do 
+    M=$( caget -noname -nostat -nounit -int $IOC:MCU-PVT-Cfg-AX$i-Nam | tr -d '"')
+    D=$( caget -noname -nostat -nounit -int $IOC:MCU-PVT-Cfg-AX$i-Pfx | tr -d '"')
+    AXES="M$i=$M,$AXES"
+    DEVS="DEV$i=$D,$DEVS"
+  done
+  MACROS="IOC=$IOC,$AXES,$DEVS"
+  echo "Macro=$MACROS"
+  
+  caqtdm -macro "$MACROS" ecmcProfileMove.ui
+}
+
+
+
 # Parse commands
 case $CMD in
   "EC_EXP")
@@ -417,6 +444,10 @@ case $CMD in
   "PLG_SAFETY_GRP_AXIS")
   openPLGSafetyGrpAxis $2 $3 $4
   ;;
+  "PVT_MAIN")
+  openPVTMain $2
+  ;;
+
   *) echo "Invalid command"
   ;;
 esac
