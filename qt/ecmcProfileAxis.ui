@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>920</width>
+    <width>930</width>
     <height>20</height>
    </rect>
   </property>
@@ -23,7 +23,7 @@
     <rect>
      <x>-5</x>
      <y>0</y>
-     <width>920</width>
+     <width>931</width>
      <height>20</height>
     </rect>
    </property>
@@ -84,7 +84,7 @@
    <widget class="caLed" name="caled">
     <property name="geometry">
      <rect>
-      <x>790</x>
+      <x>820</x>
       <y>-5</y>
       <width>30</width>
       <height>30</height>
@@ -97,7 +97,7 @@
    <widget class="caLineEdit" name="caLineEdit_10">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>40</x>
       <y>0</y>
       <width>150</width>
       <height>20</height>
@@ -124,7 +124,7 @@
      </color>
     </property>
     <property name="colorMode">
-     <enum>caLineEdit::Static</enum>
+     <enum>caLineEdit::Default</enum>
     </property>
     <property name="precisionMode">
      <enum>caLineEdit::Channel</enum>
@@ -148,7 +148,7 @@
    <widget class="caMenu" name="caMenu_2">
     <property name="geometry">
      <rect>
-      <x>162</x>
+      <x>195</x>
       <y>0</y>
       <width>66</width>
       <height>20</height>
@@ -178,7 +178,7 @@
    <widget class="caLineEdit" name="caLineEdit_2">
     <property name="geometry">
      <rect>
-      <x>235</x>
+      <x>265</x>
       <y>0</y>
       <width>96</width>
       <height>20</height>
@@ -205,7 +205,7 @@
      </color>
     </property>
     <property name="colorMode">
-     <enum>caLineEdit::Static</enum>
+     <enum>caLineEdit::Default</enum>
     </property>
     <property name="precisionMode">
      <enum>caLineEdit::Channel</enum>
@@ -229,10 +229,10 @@
    <widget class="caLineEdit" name="calineedit_7">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>470</x>
       <y>0</y>
       <width>206</width>
-      <height>18</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="channel" stdset="0">
@@ -251,7 +251,7 @@
    <widget class="caRelatedDisplay" name="carelateddisplay_9">
     <property name="geometry">
      <rect>
-      <x>700</x>
+      <x>730</x>
       <y>0</y>
       <width>31</width>
       <height>18</height>
@@ -267,29 +267,10 @@
      <string>P=$(DEV):,M=$(M)</string>
     </property>
    </widget>
-   <widget class="caRelatedDisplay" name="carelateddisplay_10">
-    <property name="geometry">
-     <rect>
-      <x>735</x>
-      <y>0</y>
-      <width>31</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="labels">
-     <string>AX</string>
-    </property>
-    <property name="files">
-     <string>ecmcAxisExpert_v2.ui</string>
-    </property>
-    <property name="args">
-     <string>IOC=$(IOC),SYS=$(DEV),Axis=$(M)</string>
-    </property>
-   </widget>
    <widget class="caToggleButton" name="catogglebutton">
     <property name="geometry">
      <rect>
-      <x>775</x>
+      <x>805</x>
       <y>0</y>
       <width>26</width>
       <height>22</height>
@@ -302,10 +283,10 @@
    <widget class="caLineEdit" name="calineedit_4">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>385</x>
       <y>0</y>
-      <width>76</width>
-      <height>18</height>
+      <width>80</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -327,7 +308,7 @@
    <widget class="caMessageButton" name="camessagebutton_10">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>680</x>
       <y>0</y>
       <width>50</width>
       <height>18</height>
@@ -361,7 +342,7 @@
    <widget class="caRelatedDisplay" name="carelateddisplay_3">
     <property name="geometry">
      <rect>
-      <x>335</x>
+      <x>365</x>
       <y>0</y>
       <width>16</width>
       <height>21</height>
@@ -375,6 +356,63 @@
     </property>
     <property name="args">
      <string>TITLE=$(M): Actual Position,PV=$(DEV):$(M)-PosAct,IOC=$(IOC)</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>25</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>25</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(DEV):$(M)-Id</string>
+    </property>
+    <property name="background">
+     <color>
+      <red>187</red>
+      <green>187</green>
+      <blue>187</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Default</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="formatType">
+     <enum>caLineEdit::decimal</enum>
+    </property>
+   </widget>
+   <widget class="caShellCommand" name="cashellcommand_5">
+    <property name="geometry">
+     <rect>
+      <x>765</x>
+      <y>0</y>
+      <width>31</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="label">
+     <string notr="true">&gt;&gt;</string>
+    </property>
+    <property name="labels">
+     <string>Open first axis</string>
+    </property>
+    <property name="files">
+     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+    </property>
+    <property name="args">
+     <string>AXIS_NAME $(IOC) $(DEV) $(M)</string>
     </property>
    </widget>
   </widget>
@@ -415,6 +453,11 @@
    <class>caLineEdit</class>
    <extends>QLineEdit</extends>
    <header>caLineEdit</header>
+  </customwidget>
+  <customwidget>
+   <class>caShellCommand</class>
+   <extends>QWidget</extends>
+   <header>caShellCommand</header>
   </customwidget>
  </customwidgets>
  <resources/>

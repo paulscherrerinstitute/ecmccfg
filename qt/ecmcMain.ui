@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>610</width>
-    <height>724</height>
+    <height>752</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -420,7 +420,7 @@
         <x>30</x>
         <y>250</y>
         <width>251</width>
-        <height>106</height>
+        <height>131</height>
        </rect>
       </property>
       <property name="title">
@@ -641,6 +641,110 @@
         <string notr="true">$(IOC):MCU-Cfg-UI-AX-Id</string>
        </property>
       </widget>
+      <widget class="caLabel" name="calabel_100">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>PVT axis count:</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_58">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>100</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):PVT-NumAxes</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::Channel</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caFrame" name="caframe_3">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>95</y>
+         <width>66</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="toolTipDuration">
+        <number>-2</number>
+       </property>
+       <property name="macro">
+        <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
+       </property>
+       <property name="visibility">
+        <enum>caFrame::Calc</enum>
+       </property>
+       <property name="visibilityCalc">
+        <string notr="true">A&gt;-1</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):PVT-NumAxes</string>
+       </property>
+       <widget class="caShellCommand" name="cashellcommand_5">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>55</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="label">
+         <string notr="true">&gt;&gt;</string>
+        </property>
+        <property name="labels">
+         <string>Open first axis</string>
+        </property>
+        <property name="files">
+         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+        </property>
+        <property name="args">
+         <string>PVT_MAIN $(IOC)</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_5">
       <property name="geometry">
@@ -648,7 +752,7 @@
         <x>300</x>
         <y>250</y>
         <width>251</width>
-        <height>106</height>
+        <height>131</height>
        </rect>
       </property>
       <property name="title">
@@ -817,7 +921,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>365</y>
+        <y>385</y>
         <width>251</width>
         <height>101</height>
        </rect>
@@ -944,7 +1048,7 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>365</y>
+        <y>385</y>
         <width>251</width>
         <height>101</height>
        </rect>
@@ -1668,33 +1772,11 @@
        </property>
       </widget>
      </widget>
-     <widget class="caFrame" name="caframe_8">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>360</y>
-        <width>66</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="macro">
-       <string notr="true">SYS=$(IOC),IOC=$(IOC)</string>
-      </property>
-      <property name="visibility">
-       <enum>caFrame::Calc</enum>
-      </property>
-      <property name="visibilityCalc">
-       <string notr="true">0</string>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):MCU-Cfg-PLG-FrstObjId</string>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="groupBox_9">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>475</y>
+        <y>495</y>
         <width>251</width>
         <height>96</height>
        </rect>
@@ -1874,7 +1956,7 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>475</y>
+        <y>495</y>
         <width>251</width>
         <height>96</height>
        </rect>
