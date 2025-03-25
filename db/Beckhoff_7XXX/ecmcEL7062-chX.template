@@ -70,6 +70,26 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
+record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
+  field(DESC, "$(HWTYPE): Drv Warn")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
+  field(DESC, "$(HWTYPE): Drv Err")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "")
+}
+
 record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-BI-Arr"){
   field(DESC, "$(HWTYPE): Inputs")
   field(PINI, "$(PINI=1)")
@@ -79,7 +99,6 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-BI-Arr"){
   field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")
   field(TSE,  "$(TSE=-2)")
 }
-
 
 record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
   field(DESC, "$(HWTYPE): BI01")
