@@ -13,6 +13,7 @@
 #  AXIS                : CMD, PREFIX
 #  AXIS_FIRST          : CMD, PREFIX
 #  AXIS_NEXT           : CMD, PREFIX, THIS_AX_ID
+#  AXIS_NAME           : CMD, IOC DEV, AX_NAME
 #  DS_FIRST            : CMD, PREFIX
 #  DS_NEXT             : CMD, PREFIX, THIS_DS_ID
 #  DS_PREV             : CMD, PREFIX, THIS_DS_ID
@@ -24,6 +25,7 @@
 #  PLG_PREV            : CMD, PREFIX, THIS_PLG_ID
 #  PLG_SAFETY_GRP      : CMD, PREFIX, GRP_ID
 #  PLG_SAFETY_GRP_AXIS : CMD, PREFIX, DEV,        AX_NAME
+#  PVT_MAIN            : CMD, PREFIX
 
 CMD=$1
 
@@ -182,6 +184,19 @@ function openAxis() {
   caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
 }
 
+function openAxisByName() {
+  IOC=$1
+  AX_PREFIX=$2
+  AX_NAME=$3
+  echo "DEV=$AX_PREFIX"
+  echo "NAME=$AX_NAME"
+  # AX_ID is needed as macro in panel
+  AX_ID=$( caget -noname -nostat -nounit $AX_PREFIX:$AX_NAME-Id | tr -d '"')
+  MACROS="SYS=$AX_PREFIX,IOC=$IOC,Axis=$AX_NAME,AX_ID=$AX_ID"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+}
+
 function openFirstAxis() {
   PREFIX=$1
   AX_ID=$( getFirstAxisID $PREFIX)
@@ -211,7 +226,7 @@ function openNextAxis() {
 
 function openPrevAxis() {
   PREFIX=$1
-  THIS_AX=$2  
+  THIS_AX=$2
   AX_ID=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-AX$THIS_AX-PrvObjId | tr -d '"')
   echo "AX_ID=$AX_ID"
   AX_PREFIX=$( caget -noname -nostat -nounit $PREFIX:MCU-Cfg-AX$AX_ID-Pfx | tr -d '"' | tr -d ":")
@@ -346,6 +361,32 @@ function openPLGSafetyGrpAxis() {
   caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
 }
 
+function openPVTMain() {
+  #  c6025a-04:MCU-PVT-Cfg-AX1-Id
+  #  c6025a-04:MCU-PVT-Cfg-AX2-Id
+  #  c6025a-04:MCU-PVT-Cfg-AX1-Pfx
+  #  c6025a-04:MCU-PVT-Cfg-AX1-Nam
+  #  c6025a-04:MCU-PVT-Cfg-AX2-Pfx
+  #  c6025a-04:MCU-PVT-Cfg-AX2-Nam
+
+  IOC=$1
+  AX_COUNT=$( caget -noname -nostat -nounit -int $IOC:PVT-NumAxes | tr -d '"')
+  AXES=""
+  DEVS=""
+  for ((i = 1 ; i <= AX_COUNT ; i++ )); do 
+    M=$( caget -noname -nostat -nounit -int $IOC:MCU-PVT-Cfg-AX$i-Nam | tr -d '"')
+    D=$( caget -noname -nostat -nounit -int $IOC:MCU-PVT-Cfg-AX$i-Pfx | tr -d '"')
+    AXES="M$i=$M,$AXES"
+    DEVS="DEV$i=$D,$DEVS"
+  done
+  MACROS="IOC=$IOC,$AXES,$DEVS"
+  echo "Macro=$MACROS"
+  
+  caqtdm -macro "$MACROS" ecmcProfileMove.ui
+}
+
+
+
 # Parse commands
 case $CMD in
   "EC_EXP")
@@ -380,6 +421,9 @@ case $CMD in
   ;;
   "AXIS_PREV")
   openPrevAxis $2 $3
+  ;;
+  "AXIS_NAME")
+  openAxisByName $2 $3 $4
   ;;
   "DS_FIRST")
   openFirstDS $2
@@ -417,6 +461,10 @@ case $CMD in
   "PLG_SAFETY_GRP_AXIS")
   openPLGSafetyGrpAxis $2 $3 $4
   ;;
+  "PVT_MAIN")
+  openPVTMain $2
+  ;;
+
   *) echo "Invalid command"
   ;;
 esac

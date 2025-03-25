@@ -80,3 +80,9 @@ record(bi,"${P}SS1-Loaded"){
   field(ONAM, "1")
   field(ZNAM, "0")
 }
+
+# c6025a-04:PVT-NumAxes
+record(longout,"${P}PVT-NumAxes") {
+  field(DESC, "# of axes being used")
+  field(VAL,  "0")
+}
