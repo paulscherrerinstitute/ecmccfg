@@ -75,55 +75,11 @@
         <property name="title">
          <string>Drive</string>
         </property>
-        <widget class="caLineEdit" name="calineedit_4">
-         <property name="geometry">
-          <rect>
-           <x>70</x>
-           <y>45</y>
-           <width>41</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="channel" stdset="0">
-          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-VltAct</string>
-         </property>
-         <property name="background">
-          <color alpha="0">
-           <red>160</red>
-           <green>160</green>
-           <blue>164</blue>
-          </color>
-         </property>
-         <property name="colorMode">
-          <enum>caLineEdit::Static</enum>
-         </property>
-         <property name="precisionMode">
-          <enum>caLineEdit::User</enum>
-         </property>
-        </widget>
-        <widget class="caLabel" name="calabel_10">
-         <property name="geometry">
-          <rect>
-           <x>6</x>
-           <y>45</y>
-           <width>41</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Voltage</string>
-         </property>
-        </widget>
         <widget class="caLed" name="caled_Warning">
          <property name="geometry">
           <rect>
            <x>90</x>
-           <y>100</y>
+           <y>70</y>
            <width>18</width>
            <height>16</height>
           </rect>
@@ -183,7 +139,7 @@
          <property name="geometry">
           <rect>
            <x>90</x>
-           <y>80</y>
+           <y>50</y>
            <width>18</width>
            <height>16</height>
           </rect>
@@ -242,8 +198,8 @@
         <widget class="caLabel" name="calabel_13">
          <property name="geometry">
           <rect>
-           <x>5</x>
-           <y>80</y>
+           <x>-5</x>
+           <y>50</y>
            <width>41</width>
            <height>20</height>
           </rect>
@@ -260,55 +216,26 @@
         <widget class="caLabel" name="calabel_14">
          <property name="geometry">
           <rect>
-           <x>7</x>
-           <y>100</y>
+           <x>0</x>
+           <y>64</y>
            <width>41</width>
-           <height>20</height>
+           <height>26</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <pointsize>8</pointsize>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Warning</string>
-         </property>
-        </widget>
-        <widget class="caLineEdit" name="calineedit_6">
-         <property name="geometry">
-          <rect>
-           <x>96</x>
-           <y>63</y>
-           <width>18</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="channel" stdset="0">
-          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
-         </property>
-         <property name="background">
-          <color alpha="0">
-           <red>160</red>
-           <green>160</green>
-           <blue>164</blue>
-          </color>
-         </property>
-         <property name="colorMode">
-          <enum>caLineEdit::Static</enum>
-         </property>
-         <property name="precisionMode">
-          <enum>caLineEdit::Channel</enum>
-         </property>
-         <property name="unitsEnabled">
-          <bool>true</bool>
+          <string>Warn.</string>
          </property>
         </widget>
         <widget class="caLineEdit" name="calineedit_5">
          <property name="geometry">
           <rect>
-           <x>70</x>
-           <y>25</y>
+           <x>50</x>
+           <y>30</y>
            <width>41</width>
            <height>20</height>
           </rect>
@@ -316,8 +243,11 @@
          <property name="text">
           <string/>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
          <property name="channel" stdset="0">
-          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-TmpAct</string>
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-Spd-RB</string>
          </property>
          <property name="background">
           <color alpha="0">
@@ -336,84 +266,204 @@
         <widget class="caLabel" name="calabel_17">
          <property name="geometry">
           <rect>
-           <x>6</x>
-           <y>25</y>
+           <x>-5</x>
+           <y>30</y>
            <width>41</width>
            <height>20</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <pointsize>9</pointsize>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Temp</string>
+          <string>Vel</string>
          </property>
         </widget>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="geometry">
-         <rect>
-          <x>7</x>
-          <y>150</y>
-          <width>111</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Encoder</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout" columnstretch="1,1">
-         <property name="leftMargin">
-          <number>1</number>
+        <widget class="caLabel" name="calabel_18">
+         <property name="geometry">
+          <rect>
+           <x>5</x>
+           <y>85</y>
+           <width>36</width>
+           <height>26</height>
+          </rect>
          </property>
-         <property name="topMargin">
-          <number>1</number>
+         <property name="text">
+          <string>BI01</string>
          </property>
-         <property name="rightMargin">
-          <number>1</number>
+        </widget>
+        <widget class="caLabel" name="calabel_9">
+         <property name="geometry">
+          <rect>
+           <x>5</x>
+           <y>105</y>
+           <width>36</width>
+           <height>26</height>
+          </rect>
          </property>
-         <property name="bottomMargin">
-          <number>1</number>
+         <property name="text">
+          <string>BI02</string>
          </property>
-         <property name="horizontalSpacing">
-          <number>6</number>
+        </widget>
+        <widget class="caLed" name="caled_Error_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>110</y>
+           <width>18</width>
+           <height>16</height>
+          </rect>
          </property>
-         <item row="0" column="0">
-          <widget class="caLabel" name="calabel_5">
-           <property name="text">
-            <string>positon</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="caLineEdit" name="calineedit">
-           <property name="channel" stdset="0">
-            <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct</string>
-           </property>
-           <property name="background">
-            <color alpha="0">
-             <red>160</red>
-             <green>160</green>
-             <blue>164</blue>
-            </color>
-           </property>
-           <property name="colorMode">
-            <enum>caLineEdit::Static</enum>
-           </property>
-           <property name="precisionMode">
-            <enum>caLineEdit::User</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>4</width>
+           <height>12</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="rectangular">
+          <bool>true</bool>
+         </property>
+         <property name="gradientEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="ledHeight">
+          <number>10</number>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI01</string>
+         </property>
+         <property name="colorMode">
+          <enum>caLed::Static</enum>
+         </property>
+         <property name="falseColor">
+          <color>
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="trueColor">
+          <color>
+           <red>0</red>
+           <green>85</green>
+           <blue>0</blue>
+          </color>
+         </property>
+         <property name="trueValue">
+          <string notr="true">1</string>
+         </property>
+         <property name="falseValue">
+          <string notr="true">0</string>
+         </property>
+        </widget>
+        <widget class="caLed" name="caled_Error_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>90</y>
+           <width>18</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>4</width>
+           <height>12</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="rectangular">
+          <bool>true</bool>
+         </property>
+         <property name="gradientEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="ledHeight">
+          <number>10</number>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI02</string>
+         </property>
+         <property name="colorMode">
+          <enum>caLed::Static</enum>
+         </property>
+         <property name="falseColor">
+          <color>
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="trueColor">
+          <color>
+           <red>0</red>
+           <green>85</green>
+           <blue>0</blue>
+          </color>
+         </property>
+         <property name="trueValue">
+          <string notr="true">1</string>
+         </property>
+         <property name="falseValue">
+          <string notr="true">0</string>
+         </property>
+        </widget>
+        <widget class="caRelatedDisplay" name="carelateddisplay_4">
+         <property name="geometry">
+          <rect>
+           <x>95</x>
+           <y>30</y>
+           <width>15</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>15</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>15</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="labels">
+          <string>&gt;</string>
+         </property>
+         <property name="files">
+          <string>ecmcGraph_v1.ui</string>
+         </property>
+         <property name="args">
+          <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv$(DRV) Vel Set,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-Spd-RB</string>
+         </property>
+        </widget>
        </widget>
        <widget class="caRelatedDisplay" name="CiA402_2">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>220</y>
+          <y>305</y>
           <width>101</width>
           <height>21</height>
          </rect>
@@ -430,6 +480,165 @@
         <property name="args">
          <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(DRV),IOC=$(IOC);</string>
         </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>162</y>
+          <width>111</width>
+          <height>86</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Encoders</string>
+        </property>
+        <widget class="caLineEdit" name="calineedit_7">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>30</y>
+           <width>48</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+        </widget>
+        <widget class="caLabel" name="calabel_11">
+         <property name="geometry">
+          <rect>
+           <x>-15</x>
+           <y>30</y>
+           <width>49</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Prim</string>
+         </property>
+        </widget>
+        <widget class="caLineEdit" name="calineedit_3">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>55</y>
+           <width>48</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="channel" stdset="0">
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct02</string>
+         </property>
+         <property name="background">
+          <color alpha="0">
+           <red>160</red>
+           <green>160</green>
+           <blue>164</blue>
+          </color>
+         </property>
+         <property name="colorMode">
+          <enum>caLineEdit::Static</enum>
+         </property>
+         <property name="precisionMode">
+          <enum>caLineEdit::User</enum>
+         </property>
+        </widget>
+        <widget class="caLabel" name="calabel_7">
+         <property name="geometry">
+          <rect>
+           <x>-15</x>
+           <y>55</y>
+           <width>49</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Sec.</string>
+         </property>
+        </widget>
+        <widget class="caRelatedDisplay" name="carelateddisplay_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>30</y>
+           <width>15</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>15</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>15</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="labels">
+          <string>&gt;</string>
+         </property>
+         <property name="files">
+          <string>ecmcGraph_v1.ui</string>
+         </property>
+         <property name="args">
+          <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Enc$(DRV): Prim. Act Pos,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct</string>
+         </property>
+        </widget>
+        <widget class="caRelatedDisplay" name="carelateddisplay_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>15</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>15</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>15</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="labels">
+          <string>&gt;</string>
+         </property>
+         <property name="files">
+          <string>ecmcGraph_v1.ui</string>
+         </property>
+         <property name="args">
+          <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Enc$(DRV): Sec. Act Pos,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct02</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </item>
@@ -451,7 +660,7 @@
      <property name="macro">
       <string notr="true">DRV=02,IOC=$(IOC),SYS=$(SYS),MasterID=$(MasterID),SlaveID=$(SlaveID)</string>
      </property>
-     <widget class="QGroupBox" name="groupBox_3">
+     <widget class="QGroupBox" name="groupBox_2">
       <property name="geometry">
        <rect>
         <x>7</x>
@@ -463,102 +672,11 @@
       <property name="title">
        <string>Drive</string>
       </property>
-      <widget class="caLineEdit" name="calineedit_7">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>27</y>
-         <width>41</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="channel" stdset="0">
-        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-CurAct</string>
-       </property>
-       <property name="background">
-        <color alpha="0">
-         <red>160</red>
-         <green>160</green>
-         <blue>164</blue>
-        </color>
-       </property>
-       <property name="colorMode">
-        <enum>caLineEdit::Static</enum>
-       </property>
-       <property name="precisionMode">
-        <enum>caLineEdit::Channel</enum>
-       </property>
-       <property name="unitsEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="caLineEdit" name="calineedit_8">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>45</y>
-         <width>41</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="channel" stdset="0">
-        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-VltAct</string>
-       </property>
-       <property name="background">
-        <color alpha="0">
-         <red>160</red>
-         <green>160</green>
-         <blue>164</blue>
-        </color>
-       </property>
-       <property name="colorMode">
-        <enum>caLineEdit::Static</enum>
-       </property>
-       <property name="precisionMode">
-        <enum>caLineEdit::User</enum>
-       </property>
-      </widget>
-      <widget class="caLabel" name="calabel_11">
-       <property name="geometry">
-        <rect>
-         <x>6</x>
-         <y>45</y>
-         <width>41</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Voltage</string>
-       </property>
-      </widget>
-      <widget class="caLabel" name="calabel_12">
-       <property name="geometry">
-        <rect>
-         <x>5</x>
-         <y>27</y>
-         <width>41</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Current</string>
-       </property>
-      </widget>
       <widget class="caLed" name="caled_Warning_2">
        <property name="geometry">
         <rect>
          <x>90</x>
-         <y>100</y>
+         <y>70</y>
          <width>18</width>
          <height>16</height>
         </rect>
@@ -618,7 +736,7 @@
        <property name="geometry">
         <rect>
          <x>90</x>
-         <y>80</y>
+         <y>50</y>
          <width>18</width>
          <height>16</height>
         </rect>
@@ -677,8 +795,8 @@
       <widget class="caLabel" name="calabel_15">
        <property name="geometry">
         <rect>
-         <x>5</x>
-         <y>80</y>
+         <x>-5</x>
+         <y>50</y>
          <width>41</width>
          <height>20</height>
         </rect>
@@ -695,32 +813,38 @@
       <widget class="caLabel" name="calabel_16">
        <property name="geometry">
         <rect>
-         <x>7</x>
-         <y>100</y>
+         <x>0</x>
+         <y>64</y>
          <width>41</width>
-         <height>20</height>
+         <height>26</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>8</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Warning</string>
+        <string>Warn.</string>
        </property>
       </widget>
-      <widget class="caLineEdit" name="calineedit_9">
+      <widget class="caLineEdit" name="calineedit_6">
        <property name="geometry">
         <rect>
-         <x>96</x>
-         <y>63</y>
-         <width>18</width>
-         <height>16</height>
+         <x>50</x>
+         <y>30</y>
+         <width>41</width>
+         <height>20</height>
         </rect>
        </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
        <property name="channel" stdset="0">
-        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-VolAct</string>
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-Spd-RB</string>
        </property>
        <property name="background">
         <color alpha="0">
@@ -733,75 +857,210 @@
         <enum>caLineEdit::Static</enum>
        </property>
        <property name="precisionMode">
-        <enum>caLineEdit::Channel</enum>
-       </property>
-       <property name="unitsEnabled">
-        <bool>true</bool>
+        <enum>caLineEdit::User</enum>
        </property>
       </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="geometry">
-       <rect>
-        <x>7</x>
-        <y>150</y>
-        <width>111</width>
-        <height>48</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Encoder</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1">
-       <property name="leftMargin">
-        <number>1</number>
+      <widget class="caLabel" name="calabel_19">
+       <property name="geometry">
+        <rect>
+         <x>-5</x>
+         <y>30</y>
+         <width>41</width>
+         <height>20</height>
+        </rect>
        </property>
-       <property name="topMargin">
-        <number>1</number>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
        </property>
-       <property name="rightMargin">
-        <number>1</number>
+       <property name="text">
+        <string>Vel</string>
        </property>
-       <property name="bottomMargin">
-        <number>1</number>
+      </widget>
+      <widget class="caLabel" name="calabel_20">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>85</y>
+         <width>36</width>
+         <height>26</height>
+        </rect>
        </property>
-       <property name="horizontalSpacing">
-        <number>6</number>
+       <property name="text">
+        <string>BI01</string>
        </property>
-       <item row="0" column="0">
-        <widget class="caLabel" name="calabel_6">
-         <property name="text">
-          <string>positon</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="caLineEdit" name="calineedit_2">
-         <property name="channel" stdset="0">
-          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct</string>
-         </property>
-         <property name="background">
-          <color alpha="0">
-           <red>160</red>
-           <green>160</green>
-           <blue>164</blue>
-          </color>
-         </property>
-         <property name="colorMode">
-          <enum>caLineEdit::Static</enum>
-         </property>
-         <property name="precisionMode">
-          <enum>caLineEdit::User</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
+      <widget class="caLabel" name="calabel_10">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>105</y>
+         <width>36</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>BI02</string>
+       </property>
+      </widget>
+      <widget class="caLed" name="caled_Error_5">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>110</y>
+         <width>18</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>4</width>
+         <height>12</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="rectangular">
+        <bool>true</bool>
+       </property>
+       <property name="gradientEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="ledHeight">
+        <number>10</number>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI01</string>
+       </property>
+       <property name="colorMode">
+        <enum>caLed::Static</enum>
+       </property>
+       <property name="falseColor">
+        <color>
+         <red>160</red>
+         <green>160</green>
+         <blue>164</blue>
+        </color>
+       </property>
+       <property name="trueColor">
+        <color>
+         <red>0</red>
+         <green>85</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="trueValue">
+        <string notr="true">1</string>
+       </property>
+       <property name="falseValue">
+        <string notr="true">0</string>
+       </property>
+      </widget>
+      <widget class="caLed" name="caled_Error_6">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>90</y>
+         <width>18</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>4</width>
+         <height>12</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-Bus Power Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="rectangular">
+        <bool>true</bool>
+       </property>
+       <property name="gradientEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="ledHeight">
+        <number>10</number>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI02</string>
+       </property>
+       <property name="colorMode">
+        <enum>caLed::Static</enum>
+       </property>
+       <property name="falseColor">
+        <color>
+         <red>160</red>
+         <green>160</green>
+         <blue>164</blue>
+        </color>
+       </property>
+       <property name="trueColor">
+        <color>
+         <red>0</red>
+         <green>85</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="trueValue">
+        <string notr="true">1</string>
+       </property>
+       <property name="falseValue">
+        <string notr="true">0</string>
+       </property>
+      </widget>
+      <widget class="caRelatedDisplay" name="carelateddisplay_7">
+       <property name="geometry">
+        <rect>
+         <x>95</x>
+         <y>30</y>
+         <width>15</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>15</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>15</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="labels">
+        <string>&gt;</string>
+       </property>
+       <property name="files">
+        <string>ecmcGraph_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Drv$(DRV) Vel Set,PV=$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-Spd-RB</string>
+       </property>
+      </widget>
      </widget>
      <widget class="caRelatedDisplay" name="CiA402_3">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>220</y>
+        <y>305</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -813,11 +1072,170 @@
        <string>Expert</string>
       </property>
       <property name="files">
-       <string>ecmcEx73x2_expert.ui</string>
+       <string>ecmcEL7062_expert.ui</string>
       </property>
       <property name="args">
        <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(DRV),IOC=$(IOC);</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>162</y>
+        <width>111</width>
+        <height>86</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Encoders</string>
+      </property>
+      <widget class="caLineEdit" name="calineedit_8">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>30</y>
+         <width>48</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct</string>
+       </property>
+       <property name="background">
+        <color alpha="0">
+         <red>160</red>
+         <green>160</green>
+         <blue>164</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_12">
+       <property name="geometry">
+        <rect>
+         <x>-15</x>
+         <y>30</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Prim</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_4">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>55</y>
+         <width>48</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct02</string>
+       </property>
+       <property name="background">
+        <color alpha="0">
+         <red>160</red>
+         <green>160</green>
+         <blue>164</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_8">
+       <property name="geometry">
+        <rect>
+         <x>-15</x>
+         <y>55</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sec.</string>
+       </property>
+      </widget>
+      <widget class="caRelatedDisplay" name="carelateddisplay_8">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>30</y>
+         <width>15</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>15</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>15</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="labels">
+        <string>&gt;</string>
+       </property>
+       <property name="files">
+        <string>ecmcGraph_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Enc$(DRV): Prim. Act Pos,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct</string>
+       </property>
+      </widget>
+      <widget class="caRelatedDisplay" name="carelateddisplay_9">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>55</y>
+         <width>15</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>15</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>15</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="labels">
+        <string>&gt;</string>
+       </property>
+       <property name="files">
+        <string>ecmcGraph_v1.ui</string>
+       </property>
+       <property name="args">
+        <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Enc$(DRV): Sec. Act Pos,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc$(DRV)-PosAct02</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
