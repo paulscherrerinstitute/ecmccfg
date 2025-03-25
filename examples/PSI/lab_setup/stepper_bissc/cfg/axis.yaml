@@ -54,6 +54,7 @@ controller:
   Kd: 0                                               # Kd derivative gain
 
 trajectory:
+  type: 1
   axis:
     velocity: 2                                       # Default velo for axis
     acceleration: 2                                   # Default acc for axis

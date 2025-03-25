@@ -133,9 +133,9 @@ trajectory:
 
 input:
   limit:
-    forward: ec0.s$(DRV_SLAVE).ONE.0       # Ethercat entry for low limit switch input
+    forward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.12       # Ethercat entry for low limit switch input
   #  forwardPolarity: 0                               # Polarity of forward limit switch
-    backward: ec0.s$(DRV_SLAVE).ONE.0      # Ethercat entry for high limit switch input
+    backward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.11      # Ethercat entry for high limit switch input
   #  backwardPolarity: 0                              # Polarity of forward limit switch
   home: 'ec0.s$(DRV_SLAVE).ONE.0'                     # Ethercat entry for home switch
   # homePolarity: 0                                   # Polarity of home switch

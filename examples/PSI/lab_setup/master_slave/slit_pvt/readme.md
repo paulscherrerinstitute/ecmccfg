@@ -9,7 +9,7 @@ caqtdm -macro "IOC=c6025a" ecmcMain.ui
 
 ## Panel
 
-caqtdm -macro "P=c6025a-04:,R=PVT-,M1=CENTERY,M2=GAPY,TITLE=ecmc PVT test" ecmcProfileMove.ui
+caqtdm -macro "IOC=c6025a-04,CNT=2,DEV1=c6025a-04,DEV2=c6025a-04,M1=CENTERY,M2=GAPY,TITLE=ecmc PVT test" ecmcProfileMove.ui
 
 ## Set some values
 
