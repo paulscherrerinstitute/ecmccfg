@@ -70,19 +70,30 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(TSE,  "$(TSE=-2)")
 }
 
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-BI-Arr"){
+  field(DESC, "$(HWTYPE): Inputs")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).binaryInputs${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+
 record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
   field(DESC, "$(HWTYPE): BI01")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BB")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BI-Arr.B0")
   field(ZNAM, "Zero")
   field(ONAM, "One")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02.PROC")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
   field(DESC, "$(HWTYPE): BI02")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BC")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BI-Arr.B1")
   field(ZNAM, "Zero")
   field(ONAM, "One")
   field(ZSV,  "NO_ALARM")
