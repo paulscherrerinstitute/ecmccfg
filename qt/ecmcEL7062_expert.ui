@@ -61,7 +61,7 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>125</y>
+       <y>135</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -109,7 +109,7 @@
      <property name="geometry">
       <rect>
        <x>290</x>
-       <y>145</y>
+       <y>155</y>
        <width>52</width>
        <height>12</height>
       </rect>
@@ -169,7 +169,7 @@
      <property name="geometry">
       <rect>
        <x>290</x>
-       <y>125</y>
+       <y>135</y>
        <width>52</width>
        <height>12</height>
       </rect>
@@ -229,7 +229,7 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>145</y>
+       <y>155</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -531,7 +531,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>145</y>
+       <y>155</y>
        <width>18</width>
        <height>16</height>
       </rect>
@@ -591,7 +591,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>125</y>
+       <y>135</y>
        <width>18</width>
        <height>16</height>
       </rect>
@@ -651,7 +651,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>120</y>
+       <y>130</y>
        <width>36</width>
        <height>26</height>
       </rect>
@@ -664,7 +664,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>140</y>
+       <y>150</y>
        <width>36</width>
        <height>26</height>
       </rect>
@@ -764,6 +764,43 @@
      </property>
      <property name="args">
       <string>IOC=$(IOC),TITLE=m$(MasterID)s$(SlaveID).Enc$(ID): Prim. Act Pos,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc$(ID)-PosAct</string>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>100</y>
+       <width>31</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>$(ID)</string>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_8">
+     <property name="geometry">
+      <rect>
+       <x>-5</x>
+       <y>105</y>
+       <width>96</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Channel Id:</string>
      </property>
     </widget>
    </widget>
