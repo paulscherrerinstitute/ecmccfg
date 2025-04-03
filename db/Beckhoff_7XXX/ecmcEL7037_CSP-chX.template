@@ -17,7 +17,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
 }
 
 record(ai,"${ECMC_P}Drv${CH_ID}-PosCmd-RB"){
-  field(DESC, "$(HWTYPE): Posotion setpoint cmd RB")
+  field(DESC, "$(HWTYPE): Position setpoint cmd RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint${CH_ID}?")
@@ -40,7 +40,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-PosCmd-RB"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-PosCmd"){
-  field(DESC, "$(HWTYPE): Posotion setpoint cmd")
+  field(DESC, "$(HWTYPE): Position setpoint cmd")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint${CH_ID}=")

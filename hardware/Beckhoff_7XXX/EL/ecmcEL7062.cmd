@@ -160,14 +160,6 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x7010,0x3,9,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x7110,0x3,9,1)"
-#- ModeCSV
-#-    8: Cyclic synchronous position mode (CSP)
-#-    9: Cyclic synchronous velocity mode (CSV)
-#-    10: Cyclic synchronous torque mode (CST)
-#-    11: Cyclic synchronous torque mode with commutation angle (CSTCA)
-#-    131: Drive Motion Control (DMC)
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x7010,0x3,9,1)"
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x7010,0x3,9,1)"
 
 #- ############ Distributed clocks config
 ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/${ECMC_EC_SAMPLE_RATE=1000}*1E6)
