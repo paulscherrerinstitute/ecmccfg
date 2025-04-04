@@ -3,6 +3,164 @@ import json
 import argparse
 import fnmatch  # Ensure fnmatch is imported
 
+entryDict={
+  "Status"          : "Stat",
+  "Control"         : "Ctrl",
+  "Feedback"        : "Fb",
+  "Digital Input"   : "BI",
+  "digital Input"   : "BI",
+  "Digital Output"  : "BO",
+  "digital Output"  : "BO",
+  "Inputs"          : "Inp",
+  "Input"           : "Inp",
+  "Outputs"         : "Outp",
+  "Output"          : "Outp",
+  "Event"           : "Evt",
+  "Cycle"           : "Cycl",
+  "Counter"         : "Cntr",
+  "Buffer"          : "Buff",
+  "Short"           : "Shrt",
+  "Circuit"         : "Circ",
+  "Overflow"        : "Ovrflw",
+  "Underflow"       : "Undrflw",
+  "Order"           : "Ordr",
+  "State"           : "State",
+  "Manual"          : "Man",
+  "Extern"          : "Ext",
+  "Latch"           : "Ltch",
+  "Error"           : "Err",
+  "Value"           : "Val",
+  "Toggle"          : "Tgl",
+  "Timestamp"       : "Tme",
+  "Time"            : "Tme",
+  "Warning"         : "Wrn",
+  "Moving"          : "Mov",
+  "Positive"        : "Pos",
+  "Negative"        : "Neg",
+  "Torque"          : "Trq",
+  "Reduced"         : "Red",
+  "Reduce"          : "Red",
+  "Done"            : "Dne",
+  "Of"              : "",
+  "Ready"           : "Rdy",
+  "Enable"          : "Ena",
+  "Extrapolation"   : "Ext",
+  "Stall"           : "Stl",
+  "InfoData"        : "InfDta",
+  "Edge"            : "Edg",
+  "Reset"           : "Rst",
+  "Position"        : "Pos",
+  "Setpoint"        : "Set",
+  "Actual"          : "Act",
+  "Valid"           : "Vld",
+  "Inp"             : "BI",
+  "Busy"            : "Bsy",
+  "Channel"         : "Ch",
+  "Overtemperature" : "OvrTmp",
+  "Overcurrent"     : "OvrCurr",
+  "Open"            : "Opn",
+  "Load"            : "Ld",
+}
+
+pdoOutDict={
+  "DIG"             : "BO",
+  "ENC"             : "Enc",
+  "MTI"             : "BI",
+  "MTO"             : "BO",
+  "POS"             : "Pos",
+  "STM"             : "Drv",
+}
+
+pdoInpDict={
+  "DIG"             : "BI",
+  "ENC"             : "Enc",
+  "MTI"             : "BI",
+  "MTO"             : "BO",
+  "POS"             : "Pos",
+  "STM"             : "Drv",
+}
+
+devsNeedIndex={
+  "ENC"             : "Enc",
+  "MTI"             : "BI",
+  "MTO"             : "BO",
+  "POS"             : "Pos",
+  "STM"             : "Drv",
+}
+
+def checkPDODeviceAndChannel(name,input):
+    words = name.split()
+    devType=words[0]
+    devStr=devType
+    channelNumber = -1
+    if input:        
+        devType = checkPDODictInp(devType)
+    else:
+        devType = checkPDODictOut(devStr)
+    # Find the word "Channel" and get the next word as the number
+    for i in range(len(words) - 1):
+        if words[i] == "Channel" and words[i + 1].isdigit():
+            channelNumber = int(words[i + 1])
+            break
+    devStr = devType
+    # check if device should have a default "01" index
+    if channelNumber<0:
+        if words[0] in devsNeedIndex:
+           channelNumber = 1
+
+    if channelNumber>=0:
+        devStr = devStr + str(channelNumber).zfill(2)
+    print ("Dev: " + devStr)
+    return devType, devStr
+
+def convertName(dev, prefix, str):
+    str = charsAfterSpaceToUpper(str)
+    str = checkEntryDict(str)
+    str = twoUnderScoresToDash(str)
+    str = str.replace(" ", "")
+    # Remove devices in entry name (alrady included in prefix)
+    str = str.replace(dev, "")
+    str = prefix + "-" + str
+    str = str.replace("--", "-")
+    return str
+
+def charsAfterSpaceToUpper(str):
+    result = ""
+    lastchar=""
+    for char in str:
+        if lastchar == ' ':
+          char = char.upper()
+        result+=char
+        lastchar = char
+    return result
+
+def twoUnderScoresToDash(str):
+    return str.replace("__", "-")
+
+def checkEntryDict(str):
+    for key, value in entryDict.items():   
+      str=str.replace(key,value )
+    return str
+
+def checkPDODictInp(str):
+    for key, value in pdoInpDict.items():   
+      str=str.replace(key,value )
+    return str
+
+def checkPDODictOut(str):
+    for key, value in pdoOutDict.items():   
+      str=str.replace(key,value )
+    return str
+
+def removeVowles(str):
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    result = ""
+    for char in str:
+        if char not in vowels:
+            result+=char
+    return result
+
+
 def parse_revision_number(revision_text):
     # Convert hex revision number (e.g. #x00100000) to an integer
     if revision_text and revision_text.startswith("#x"):
@@ -89,6 +247,7 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 sm = txpdo.xpath('@Sm')[0] if txpdo.xpath('@Sm') else None  # Get Sm attribute, if present
                 index = to_hex(parse_revision_number(txpdo.xpath('Index/text()')[0])) if txpdo.xpath('Index/text()') else ''
                 name = txpdo.xpath('Name/text()')[0] if txpdo.xpath('Name/text()') else ''
+                dev, prefix = checkPDODeviceAndChannel(name,0)
                 exclude = to_hex(parse_revision_number(txpdo.xpath('Exclude/text()')[0])) if txpdo.xpath('Exclude/text()') else None
 
                 # For each Entry inside TxPdo
@@ -98,7 +257,7 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                         'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if entry.xpath('Index/text()') else '',
                         'subindex': to_hex(entry.xpath('SubIndex/text()')[0]) if entry.xpath('SubIndex/text()') else '',
                         'bitlen': entry.xpath('BitLen/text()')[0] if entry.xpath('BitLen/text()') else '',
-                        'name': entry.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
+                        'name': convertName(dev, prefix, entry.xpath('Name/text()')[0]) if entry.xpath('Name/text()') else '',
                         'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else ''
                     }
                     entries.append(entry_data)
@@ -120,8 +279,8 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 sm = rxpdo.xpath('@Sm')[0] if rxpdo.xpath('@Sm') else None  # Get Sm attribute, if present
                 index = to_hex(parse_revision_number(rxpdo.xpath('Index/text()')[0])) if rxpdo.xpath('Index/text()') else ''
                 name = rxpdo.xpath('Name/text()')[0] if rxpdo.xpath('Name/text()') else ''
+                dev, prefix = checkPDODeviceAndChannel(name,1)                
                 exclude = to_hex(parse_revision_number(rxpdo.xpath('Exclude/text()')[0])) if rxpdo.xpath('Exclude/text()') else None
-
                 # For each Entry inside RxPdo
                 entries = []
                 for entry in rxpdo.xpath('.//Entry'):
@@ -129,7 +288,7 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                         'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if entry.xpath('Index/text()') else '',
                         'subindex': to_hex(entry.xpath('SubIndex/text()')[0]) if entry.xpath('SubIndex/text()') else '',
                         'bitlen': entry.xpath('BitLen/text()')[0] if entry.xpath('BitLen/text()') else '',
-                        'name': entry.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
+                        'name': convertName(dev, prefix, entry.xpath('Name/text()')[0]) if entry.xpath('Name/text()') else '',
                         'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else ''
                     }
                     entries.append(entry_data)
