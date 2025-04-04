@@ -1,15 +1,15 @@
 ##############################################################################
 ## Example config for EL7041 and EL5042
 
-require ecmccfg v10.0.0_RC1 "ECMC_VER=v10.0.0_RC1,ENG_MODE=1,MASTER_ID=1"
+require ecmccfg  "ENG_MODE=1"
 
 # 0:7 - EL7041    1Ch Stepper
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=14,HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=23,HW_DESC=EL7041-0052"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1500, I_STDBY_MA=100, U_NOM_MV=48000, R_COIL_MOHM=1230'"
 epicsEnvSet(DRV_SID,${ECMC_EC_SLAVE_NUM})
 
 # 0:2  - EL5042    2Ch BiSS-C Encoder, RLS-LA11
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=9,HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=19,HW_DESC=EL5042"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=1"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=2"
 epicsEnvSet(ENC_SID,${ECMC_EC_SLAVE_NUM})
@@ -19,22 +19,20 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_open_loop.yaml, 
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_RLS_lookup.yaml,  DEV=${IOC}, ENC_SID=${ENC_SID}"
 #
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=2000,DBG=0,ENA=1")
-require ecmc_plugin_motion sandst_a "${ECMC_PLUGIN_CONFIG}"
+require ecmc_plugin_motion "${ECMC_PLUGIN_CONFIG}"
+
+require ecmc_plugin_daq
 
 #-#############################################################################
 #-# Load safety plugin
 #-
-require ecmc_plugin_safety sandst_a
-## Create SS1 group
-##-   EC_RAMP_DOWN_CMD   :   EtherCAT entry for ramp down command, input to ecmc (command from safety PLC/system)
-##-   EC_REST_STAT  :   EtherCAT entry for signaling that all axes in group are at rest, output from ecmc (feedback to safety PLC/system)
-##-   EC_RED_VEL_CMD     :   EtherCAT entry for reducing velocity, input to ecmc (command from safety PLC/system)
-##-   DELAY_MS           :   Time between ramp-down command and STO
-epicsEnvSet(RAMP_DOWN_CMD,"ec${ECMC_EC_MASTER_ID}.s${ENC_SID}.ONE.0")
-epicsEnvSet(REST_STAT,"ec${ECMC_EC_MASTER_ID}.s${ENC_SID}.ONE.1")
-epicsEnvSet(RED_VEL_CMD,"ec${ECMC_EC_MASTER_ID}.s${ENC_SID}.ONE.2")
+require ecmc_plugin_safety
+
+epicsEnvSet(EC_RAMP_DOWN_CMD,"ec${ECMC_EC_MASTER_ID}.s${ENC_SID}.ONE.0")
+epicsEnvSet(EC_AXES_AT_REST_STAT,"ec${ECMC_EC_MASTER_ID}.s${ENC_SID}.ZERO.0")
+epicsEnvSet(EC_AXES_LIM_VELO_CMD,"ec${ECMC_EC_MASTER_ID}.s${ENC_SID}.ONE.1")
 epicsEnvSet(SAFETY_TIMEOUT,500)
-${SCRIPTEXEC} ${ecmc_plugin_safety_DIR}addSS1Group.cmd "NAME=first,EC_RAMP_DOWN_CMD=${RAMP_DOWN_CMD},EC_REST_STAT=${REST_STAT},EC_RED_VEL_CMD=${RED_VEL_CMD=empty},DELAY_MS=${SAFETY_TIMEOUT}"
+${SCRIPTEXEC} ${ecmc_plugin_safety_DIR}addSS1Group.cmd "NAME=first,EC_RAMP_DOWN_CMD=${EC_RAMP_DOWN_CMD},EC_AXES_AT_REST_STAT=${EC_AXES_AT_REST_STAT},EC_AXES_LIM_VELO_CMD=${EC_AXES_LIM_VELO_CMD=empty},DELAY_MS=${SAFETY_TIMEOUT}"
 
 #- Add axis
 #-   AX_ID              :   Axis ID

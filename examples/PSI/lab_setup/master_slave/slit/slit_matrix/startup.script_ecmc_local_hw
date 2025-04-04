@@ -1,7 +1,5 @@
 #- Configuration scripts
-#require ecmccfg v10.0.0_RC1,"MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=v10.0.0_RC1"
-require ecmccfg sandst_a,"MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=sandst_a"
-#require ecmccfg,"MASTER_ID=0,ENG_MODE=1,EC_RATE=500"
+require ecmccfg "MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=sandst_a"
 
 #- Only output errors
 asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x01)
