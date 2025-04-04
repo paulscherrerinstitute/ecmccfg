@@ -17,7 +17,9 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=0, HW_DESC=EP7211-003
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd   "COMP=Motor-Beckhoff-AM8111-XFX0, MACROS='I_MAX_MA=1355'"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd     "FILE=./cfg/axis.yaml, DRV_ID=$(ECMC_EC_SLAVE_NUM), AX_NAME='Axis1', AX_ID=1"
 
-epicsEnvSet ECMC_EC_STARTUP_DELAY_EL72XX 0
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/ds402.plc, PLC_ID=1"
+
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(0)"
 
 #require ecmc_plugin_motion
 ##require ecmc_plugin_safety
@@ -25,6 +27,6 @@ epicsEnvSet ECMC_EC_STARTUP_DELAY_EL72XX 0
 #require ecmc_plugin_daq
 #require ecmc_plugin_socketcan
 #require ecmc_plugin_fft
-#
-libversionShow
+
+#libversionShow
 
