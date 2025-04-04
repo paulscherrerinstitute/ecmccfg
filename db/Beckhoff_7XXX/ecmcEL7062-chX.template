@@ -1,0 +1,190 @@
+record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
+  field(DESC, "$(HWTYPE): Drive Control Word RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(mbboDirect,"${ECMC_P}Drv${CH_ID}-Cmd"){
+  field(DESC, "$(HWTYPE): Drive Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
+  field(TSE,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
+  field(DESC, "$(HWTYPE): Drive Speed Setpoint RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=RAW)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
+  field(DESC, "$(HWTYPE): Drive Speed Setpoint")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).velocitySetpoint${CH_ID}=")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=RAW)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+}
+
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
+  field(DESC, "$(HWTYPE): Drive Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-RdyToEna.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
+  field(DESC, "$(HWTYPE): Drv Warn")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Warning")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
+  field(DESC, "$(HWTYPE): Drv Err")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Error")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MAJOR")
+  field(FLNK, "")
+}
+
+record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-BI-Arr"){
+  field(DESC, "$(HWTYPE): Inputs")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).binaryInputs${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
+  field(DESC, "$(HWTYPE): BI01")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BI-Arr.B0")
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02.PROC")
+}
+
+record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
+  field(DESC, "$(HWTYPE): BI02")
+  field(INP,  "${ECMC_P}Drv${CH_ID}-BI-Arr.B1")
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+}
+
+record(ai,"${ECMC_P}Enc${CH_ID}-PosAct"){
+  field(DESC, "$(HWTYPE): Enc Act Pos (Raw)")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).positionActual${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=Counts)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+# Secondary position
+record(ai,"${ECMC_P}Enc${CH_ID}-PosAct02"){
+  field(DESC, "$(HWTYPE): Sec Enc Act Pos (Raw)")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).positionActual${CH_ID}_2?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=Counts)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(seq, "${ECMC_P}Drv${CH_ID}-TrgDS402Ena") {
+    field(DESC, "Trigg DS402 enable SM")    
+    field(DO1,  "128")
+    field(DO2,  "6")
+    field(DO3,  "7")
+    field(DO4,  "15")
+    field(DLY1, "0.01")
+    field(DLY2, "0.01")
+    field(DLY3, "0.01")
+    field(DLY4, "0.01")
+    field(LNK1, "${ECMC_P}Drv${CH_ID}-Cmd PP")
+    field(LNK2, "${ECMC_P}Drv${CH_ID}-Cmd PP")
+    field(LNK3, "${ECMC_P}Drv${CH_ID}-Cmd PP")
+    field(LNK4, "${ECMC_P}Drv${CH_ID}-Cmd PP")
+}
+
+record(seq, "${ECMC_P}Drv${CH_ID}-TrgDS402Dis") {
+    field(DESC, "Trigg DS402 disable SM")    
+    field(DO1,  "0")
+    field(DLY1, "0.01")
+    field(LNK1, "${ECMC_P}Drv${CH_ID}-Cmd PP")
+}

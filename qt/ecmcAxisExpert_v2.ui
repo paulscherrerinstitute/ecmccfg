@@ -885,7 +885,7 @@
      <enum>caFrame::Calc</enum>
     </property>
     <property name="visibilityCalc">
-     <string notr="true">A==4</string>
+     <string notr="true">A&gt;40</string>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-MtnCmd</string>
@@ -5721,6 +5721,34 @@
      </property>
     </widget>
    </widget>
+  </widget>
+  <widget class="caMenu" name="camenu_9">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>645</y>
+     <width>211</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(SYS):$(Axis)-movHomCmd</string>
+   </property>
   </widget>
  </widget>
  <customwidgets>
