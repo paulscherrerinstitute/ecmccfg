@@ -1,18 +1,18 @@
 
 # Start scan motor/tuning
 Slave must be in OP and NOT enabled
-´´´
+```
 CH1:
 ethercat download -m0 -p3 0xfb00 0x1 --type octet_string "$(printf '\x07\x80')"
 CH2:
 ethercat download -m0 -p3 0xfb00 0x1 --type octet_string "$(printf '\x17\x80')"
-´´´
+```
 # Check progress
-´´´
+```
 ethercat upload -m0 -p3 0xfb00 0x2
 watch -n 0.1 ethercat upload -m0 -p3 0xfb00 0x2
 
-´´´
+```
     The value of register FB00:02 "Status" indicates the progress of the scan. The values 100dec...199dec correspond to 0...99 %.
 
 
@@ -22,46 +22,46 @@ watch -n 0.1 ethercat upload -m0 -p3 0xfb00 0x2
 
 
 # Upload inductance
-´´´
+```
 ethercat upload -m0 -p3 0x8011 0x19 --type uint16
 ethercat upload -m0 -p3 0x8111 0x19 --type uint16
-´´´
+```
 
 # Upload resistance
-´´´
+```
 ethercat upload -m0 -p3 0x8011 0x30 --type uint32
 ethercat upload -m0 -p3 0x8111 0x30 --type uint32
-´´´
+```
 
 # Current loop integral time
-´´´
+```
 ethercat upload -m0 -p3 0x8010 0x12 --type uint16
 ethercat upload -m0 -p3 0x8110 0x12 --type uint16
-´´´
+```
 
 # Current loop proportional gain
-´´´
+```
 ethercat upload -m0 -p3 0x8010 0x13 --type uint16
 ethercat upload -m0 -p3 0x8110 0x13 --type uint16
-´´´
+```
 
 # Velocity loop integral time
-´´´
+```
 ethercat upload -m0 -p3 0x8010 0x14 --type uint32
 ethercat upload -m0 -p3 0x8110 0x14 --type uint32
-´´´
+```
 
 # Velocity loop proportional gain
-´´´
+```
 ethercat upload -m0 -p3 0x8010 0x15 --type uint32
 ethercat upload -m0 -p3 0x8110 0x15 --type uint32
-´´´
+```
 
 # Position loop proportional gain
-´´´
+```
 ethercat upload -m0 -p3 0x8010 0x17 --type uint32
 ethercat upload -m0 -p3 0x8110 0x17 --type uint32
-´´´
+```
 
 # Voltage Constant
 Setting in CoE 0x8011:31 is in microV/min^-1
@@ -70,7 +70,7 @@ This corrsponds to 25028microV/min^-1 which is the setting in CoE
 
 # Other settings for AS2021 motor:
 
-´´´
+```
 PS	CoE	0x1A04 C 0	01 00 10 12 10 60	download pdo 0x1A04 entries
 PS	CoE	0x1A05 C 0	01 00 10 13 10 60	download pdo 0x1A05 entries
 PS	CoE	0x1A0D C 0	01 00 10 14 10 60	download pdo 0x1A0D entries
@@ -100,6 +100,6 @@ PS	CoE	0x8010:64	Stepper FOC with encoder (18)	DRV Amplifier Settings Ch.1 / Com
 PS	CoE	0x8010:17	0x0000000A (10)	DRV Amplifier Settings Ch.1 / Position loop proportional gain
 PS	CoE	0x8010:57	0x64 (100)	DRV Amplifier Settings Ch.1 / Position loop velocity feed forward gain
 PS	CoE	0x7010:03	Cyclic synchronous position mode (CSP) (8)	DRV Outputs Ch.1 / Modes of operation
-´´´
+```
 
 
