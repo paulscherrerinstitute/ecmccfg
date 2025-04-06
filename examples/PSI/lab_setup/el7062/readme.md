@@ -62,3 +62,12 @@ ethercat upload -m0 -p3 0x8110 0x15 --type uint32
 ethercat upload -m0 -p3 0x8010 0x17 --type uint32
 ethercat upload -m0 -p3 0x8110 0x17 --type uint32
 ´´´
+
+# Voltage Constant
+Setting in CoE 0x8011:31 is in microV/min^-1
+Example for Beckhoff AS2021 stepper. Data sheet Motor EMF Motor EMF 239 [mV/rad/s] 
+This corrsponds to 25028microV/min^-1 which is the setting in CoE
+
+
+
+
