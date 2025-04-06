@@ -101,5 +101,6 @@ PS	CoE	0x8010:17	0x0000000A (10)	DRV Amplifier Settings Ch.1 / Position loop pro
 PS	CoE	0x8010:57	0x64 (100)	DRV Amplifier Settings Ch.1 / Position loop velocity feed forward gain
 PS	CoE	0x7010:03	Cyclic synchronous position mode (CSP) (8)	DRV Outputs Ch.1 / Modes of operation
 ```
-
+link to motor:
+https://infosys.beckhoff.com/english.php?content=../content/1033/as2000/6286192267.html&id=
 
