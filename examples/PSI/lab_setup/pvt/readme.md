@@ -4,7 +4,7 @@
 
 ## Panel
 
-caqtdm -macro "P=c6025a:,R=PVT-,M1=Axis1,TITLE=ecmc PVT test" ecmcProfileMove.ui
+caqtdm -macro "P=c6025a-04:,R=PVT-,M1=Axis1,TITLE=ecmc PVT test" ecmcProfileMove.ui
 caqtdm -macro "P=c6015a-02:,R=PVT-,M1=Axis1,TITLE=ecmc PVT test" ecmcProfileMove.ui
 
 ## Set some values

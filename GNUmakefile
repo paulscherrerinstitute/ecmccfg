@@ -4,6 +4,7 @@ MODULE=ecmccfg
 
 BUILDCLASSES = Linux
 EXCLUDE_VERSIONS = 3 7.0.5 7.0.6 7.0.7 7.0.9
+
 ARCH_FILTER=deb10% deb12%
 
 SCRIPTS+=startup.cmd

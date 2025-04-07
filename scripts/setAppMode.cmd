@@ -26,12 +26,18 @@ ${IF_TRUE}epicsEnvUnset(ECMC_MR_PVT_AXES_COUNT_IN_USE)
 ecmcEndIf()
 epicsEnvUnset(ECMC_MR_PVT_CONTROLLER_CONFIGURED)
 
-#- START
+# EtherCAT bus startup delay (minimum startup time) [seconds->cycles]:
+ecmcEpicsEnvSetCalc("EC_DELAY_CYCLES" ,"${ECMC_EC_SAMPLE_RATE=1000}*${ECMC_EC_STARTUP_DELAY=0}")
+ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(${EC_DELAY_CYCLES=0})"
+epicsEnvUnset(EC_DELAY_CYCLES)
+epicsEnvUnset(ECMC_EC_STARTUP_DELAY)
+
+#- Start RT thread
 ecmcConfigOrDie "Cfg.SetAppMode(1)"
 
 #- Add some time before iocInit
 # Stabilize EtherCAT bus.....
-epicsThreadSleep ${ECMC_AFTER_EC_OK_DELAY=2}
+epicsThreadSleep ${ECMC_EC_STABILIZATION_TIME=2}
 
 #- For check in finalize.cmd if executed
 epicsEnvSet(ECMC_SET_APP_MODE_DONE,1)

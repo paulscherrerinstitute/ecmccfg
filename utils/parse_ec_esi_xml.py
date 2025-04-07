@@ -5,9 +5,10 @@
 #- Originally written for Dimaond light epics ethercat support:
 #- Rewritten/edited by Anders Sandström for use with ecmc
 
-import libxml2
 import sys
+#sys.path.append('/opt/homebrew/opt/libxml2/lib/python3.13/site-packages/')
 
+import libxml2
 reqs = set()
 base = None
 verbose = False

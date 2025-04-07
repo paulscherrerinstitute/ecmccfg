@@ -47,10 +47,10 @@ ecmcFileExist("ecmcAxisType.db",1,1)
    #- Physical axis
    ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCtrlParams.db",1,1)
    ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCtrlParams.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},KP={{ controller.Kp }},KI={{ controller.Ki }},KD={{ controller.Kd }},KFF={{ controller.Kff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")
-   dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE={{ drive.type|default(0)|int }},TRAJ_TYPE={{ trajectory.type }}")
+   dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE={{ drive.type|default(0)|int }},TRAJ_TYPE={{ trajectory.type }},DRV_MODE=${ECMC_AX_DRV_MODE=N/A}")
 {%- else%}
    #- Virtual axis
-   dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE=-1,TRAJ_TYPE={{ trajectory.type }}")
+   dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE=-1,TRAJ_TYPE={{ trajectory.type }},DRV_MODE=${ECMC_AX_DRV_MODE=N/A}")
 {%- endif%}
 ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
 ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")

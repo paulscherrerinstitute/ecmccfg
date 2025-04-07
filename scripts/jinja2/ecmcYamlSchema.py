@@ -177,7 +177,7 @@ class Schema:
             },
             'type': {'type': 'integer', 'default': 'joint',
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
-            'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
+            'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP', 'CSP_PC'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
             'healthOutput': {'type': 'string'},
             'feedSwitchesOutput': {'type': 'string'},
@@ -318,7 +318,8 @@ class Schema:
                 }
             },
             'primary': {'type': 'integer', 'default': -1},
-            'homing': homingSchema,            
+            'homing': homingSchema,
+            'useAsCSPDrvEnc': {'type': 'integer', 'default': -1},
         }
     }
 
