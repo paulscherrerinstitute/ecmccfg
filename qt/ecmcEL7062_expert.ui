@@ -1684,58 +1684,6 @@
     <attribute name="title">
      <string>Commissioning</string>
     </attribute>
-    <widget class="caStripPlot" name="castripplot">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>361</width>
-       <height>161</height>
-      </rect>
-     </property>
-     <property name="Title" stdset="0">
-      <string notr="true">Current</string>
-     </property>
-     <property name="channels" stdset="0">
-      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-TrqAct</string>
-     </property>
-     <property name="YAxisScaling" stdset="0">
-      <enum>caStripPlot::autoScale</enum>
-     </property>
-     <property name="foreground">
-      <color>
-       <red>244</red>
-       <green>244</green>
-       <blue>244</blue>
-      </color>
-     </property>
-    </widget>
-    <widget class="caStripPlot" name="castripplot_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>160</y>
-       <width>361</width>
-       <height>161</height>
-      </rect>
-     </property>
-     <property name="Title" stdset="0">
-      <string notr="true">Voltage</string>
-     </property>
-     <property name="channels" stdset="0">
-      <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-VolAct</string>
-     </property>
-     <property name="YAxisScaling" stdset="0">
-      <enum>caStripPlot::autoScale</enum>
-     </property>
-     <property name="foreground">
-      <color>
-       <red>244</red>
-       <green>244</green>
-       <blue>244</blue>
-      </color>
-     </property>
-    </widget>
     <widget class="caLed" name="caled_Error_2">
      <property name="geometry">
       <rect>
@@ -2031,6 +1979,161 @@
      <property name="pressMessage">
       <string notr="true"/>
      </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>171</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Autotune</string>
+     </property>
+     <widget class="caLineEdit" name="calineedit_35">
+      <property name="geometry">
+       <rect>
+        <x>105</x>
+        <y>30</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)-EcTool-Prgs</string>
+      </property>
+      <property name="background">
+       <color alpha="222">
+        <red>192</red>
+        <green>192</green>
+        <blue>192</blue>
+       </color>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Static</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_68">
+      <property name="geometry">
+       <rect>
+        <x>-15</x>
+        <y>30</y>
+        <width>100</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Progress</string>
+      </property>
+     </widget>
+     <widget class="caLabel" name="calabel_69">
+      <property name="geometry">
+       <rect>
+        <x>-15</x>
+        <y>50</y>
+        <width>100</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Status</string>
+      </property>
+     </widget>
+     <widget class="caLineEdit" name="calineedit_36">
+      <property name="geometry">
+       <rect>
+        <x>105</x>
+        <y>50</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>18</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)-EcTool-Stat</string>
+      </property>
+      <property name="background">
+       <color alpha="222">
+        <red>192</red>
+        <green>192</green>
+        <blue>192</blue>
+       </color>
+      </property>
+      <property name="colorMode">
+       <enum>caLineEdit::Static</enum>
+      </property>
+      <property name="precisionMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="limitsMode">
+       <enum>caLineEdit::User</enum>
+      </property>
+      <property name="unitsEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="caMessageButton" name="camessagebutton_3">
+      <property name="geometry">
+       <rect>
+        <x>25</x>
+        <y>75</y>
+        <width>136</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enable</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-TuneTrg</string>
+      </property>
+      <property name="label">
+       <string notr="true">Enable</string>
+      </property>
+      <property name="releaseMessage">
+       <string notr="true">1</string>
+      </property>
+      <property name="pressMessage">
+       <string notr="true"/>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

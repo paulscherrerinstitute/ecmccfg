@@ -189,3 +189,114 @@ record(bi,"${P}${ECMC_EC_MP}${MASTER_ID}-Stat-OK"){
   field(ZSV,  "MAJOR")
   field(OSV,  "NO_ALARM")
 }
+
+record(aSub, "${P}${ECMC_EC_MP}${MASTER_ID}-EcTool") {   
+
+    # A: Master ID   (double)
+    field(FTA,  "DOUBLE")
+    field(NOA,  "1")
+    field(INPA, "${MASTER_ID}")          
+    
+    # B: Command tune EL7062 drive
+    field(FTB,  "DOUBLE")
+    field(NOB,  "1")
+    field(INPB, "")
+    
+    # C: Spare
+    field(FTC,  "DOUBLE")
+    field(NOC,  "1")
+    field(INPC, "")
+    
+    # D: Slave ID    (double)
+    field(FTD,  "DOUBLE")
+    field(NOD,  "1")
+    field(INPD, "")
+    
+    # E: Channel ID  (double)
+    field(FTE,  "DOUBLE")
+    field(NOE,  "1")
+    field(INPE, "")
+
+    # F: sdoIndex    (double)
+    field(FTF,  "DOUBLE")
+    field(NOF,  "1")
+    field(INPF, "")
+    
+    # G: sdoSubIndex (double)
+    field(FTG,  "DOUBLE")
+    field(NOG,  "1")
+    field(INPG, "")
+    
+    # H: data type   (string)
+    field(FTH,  "STRING")
+    field(NOH,  "100")
+    field(INPH, "")
+    
+    # I: command specific arg   (double)
+    field(FTI,  "DOUBLE")
+    field(NOI,  "1")
+    field(INPI, "")
+
+    # R: epics version
+    field(FTR,  "STRING")
+    field(NOR,  "40")
+    field(INPR, "${P}${ECMC_EC_MP}${MASTER_ID}-Prefix.VAL")
+
+    # S: epics version
+    field(FTS,  "STRING")
+    field(NOS,  "40")
+    field(INPS, "${P}${ECMC_EC_MP}${MASTER_ID}-Epics-Ver.VAL")
+
+    # T: ecmccfg version
+    field(FTT,  "STRING")
+    field(NOT,  "40")
+    field(INPT, "${P}${ECMC_EC_MP}${MASTER_ID}-Ecmccfg-Ver.VAL")
+
+    # U: Trigger
+    field(FTU,  "DOUBLE")
+    field(NOU,  "1")
+    field(INPU, "")
+
+    # A: Status
+    field(FTVU,  "DOUBLE")
+    field(NOVA,  "1")
+    field(OUTA, "")    
+
+    field(INAM, "initEtherCATTool")
+    field(SNAM, "runEtherCATTool")
+    field(DESC, "Execute ethercat script")
+    field(FLNK, "${P}${ECMC_EC_MP}${MASTER_ID}-EcTool-Stat.PROC")
+}
+
+record(stringin,  "${P}${ECMC_EC_MP}${MASTER_ID}-Ecmccfg-Ver"){
+  field(VAL , "${ECMCCFG_VER}")
+  field(DESC, "ecmccfg version")    
+}
+
+record(stringin,  "${P}${ECMC_EC_MP}${MASTER_ID}-Epics-Ver"){
+  field(VAL , "${EPICS_VER}")
+  field(DESC, "Epics version")    
+}
+
+record(stringin,  "${P}${ECMC_EC_MP}${MASTER_ID}-Prefix"){
+  field(VAL , "${P}")
+  field(DESC, "Prefix")    
+}
+
+record(mbbi,  "${P}${ECMC_EC_MP}${MASTER_ID}-EcTool-Stat"){
+  #field(INP,  "${P}${ECMC_EC_MP}${MASTER_ID}-EcTool.VALA")
+  field(DESC, "Ec Tool status")
+  field(ZRST, "IDLE")
+  field(ZRVL, 0)
+  field(ONST, "BUSY")
+  field(ONVL, 1)
+  field(TWST, "ERROR")
+  field(TWVL, 2)
+  field(VAL,  0)
+}
+
+record(ai,  "${P}${ECMC_EC_MP}${MASTER_ID}-EcTool-Prgs"){
+  field(DESC, "Ec Tool progress")
+  field(EGU,  "%")
+  field(VAL,  0)
+}

@@ -168,7 +168,7 @@ dbLoadRecords(ecmcDsFirstDs.db,"P=${ECMC_PREFIX}")
 #-------------------------------------------------------------------------------
 #- Set path to ethercat tool
 #- Set default
-epicsEnvSet(ECMC_EC_TOOL_PATH,{EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
+epicsEnvSet(ECMC_EC_TOOL_PATH,${EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
 #- if ECmasterECMC_DIR is defined then use ethercat tool in installed module
 ecmcEpicsEnvSetCalcTernary(ECMC_USE_ECmasterECMC_DIR, "'${ECmasterECMC_DIR='empty'}'=='empty'", "#-","")
 ${ECMC_USE_ECmasterECMC_DIR}epicsEnvSet(ECMC_EC_TOOL_PATH, "${ECmasterECMC_DIR}bin/${EPICS_HOST_ARCH}/ethercat")

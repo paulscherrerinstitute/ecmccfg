@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>219</width>
-    <height>357</height>
+    <width>215</width>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -611,13 +611,143 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>315</y>
+      <width>181</width>
+      <height>76</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>EtherCAT tool</string>
+    </property>
+    <widget class="caLineEdit" name="calineedit_35">
+     <property name="geometry">
+      <rect>
+       <x>105</x>
+       <y>30</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):m$(MasterID)-EcTool-Prgs</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_68">
+     <property name="geometry">
+      <rect>
+       <x>-15</x>
+       <y>30</y>
+       <width>100</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Progress</string>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_69">
+     <property name="geometry">
+      <rect>
+       <x>-15</x>
+       <y>50</y>
+       <width>100</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Status</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_36">
+     <property name="geometry">
+      <rect>
+       <x>105</x>
+       <y>50</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):m$(MasterID)-EcTool-Stat</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>219</width>
+     <width>215</width>
      <height>25</height>
     </rect>
    </property>
