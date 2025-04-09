@@ -3,6 +3,20 @@
 
 Tool to read data from slaves (actually SDO data).
 
+## new esi parser
+```
+python new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML-4/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL73xx.xml --name "EL7342*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL73xx.xml --name "EL7342*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL7xxx.xml --name "EL7031*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL7xxx.xml --name "EL7031*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ ELxxx.xml --name "EL2819*" --rev "0x*" --output parsed_devices.json
+python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL2xxx.xml --name "EL2819*" --rev "0x*" --output parsed_devices.json
+```
+
 ## EtherCAT slave description file parser (ESI/XML) WIP
 
 Call:
