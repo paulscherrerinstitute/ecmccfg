@@ -1745,607 +1745,17 @@
        <x>10</x>
        <y>25</y>
        <width>366</width>
-       <height>211</height>
+       <height>241</height>
       </rect>
      </property>
      <property name="title">
       <string>Autotune</string>
      </property>
-     <widget class="caLineEdit" name="calineedit_35">
-      <property name="geometry">
-       <rect>
-        <x>105</x>
-        <y>65</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)-EcTool-Prgs</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_68">
-      <property name="geometry">
-       <rect>
-        <x>-15</x>
-        <y>65</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Progress</string>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_69">
-      <property name="geometry">
-       <rect>
-        <x>-15</x>
-        <y>85</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Status</string>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_36">
-      <property name="geometry">
-       <rect>
-        <x>105</x>
-        <y>85</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)-EcTool-Stat</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caMessageButton" name="camessagebutton_3">
-      <property name="geometry">
-       <rect>
-        <x>35</x>
-        <y>30</y>
-        <width>136</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Trigg auto tune</string>
-      </property>
-      <property name="channel" stdset="0">
-       <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-TuneTrg</string>
-      </property>
-      <property name="label">
-       <string notr="true">Trigg auto tune</string>
-      </property>
-      <property name="disableChannel" stdset="0">
-       <string/>
-      </property>
-      <property name="releaseMessage">
-       <string notr="true">1</string>
-      </property>
-      <property name="pressMessage">
-       <string notr="true"/>
-      </property>
-     </widget>
-     <widget class="caMessageButton" name="camessagebutton_4">
-      <property name="geometry">
-       <rect>
-        <x>205</x>
-        <y>30</y>
-        <width>136</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Trigg readback</string>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-TuneTrgRB</string>
-      </property>
-      <property name="label">
-       <string notr="true">Enable</string>
-      </property>
-      <property name="releaseMessage">
-       <string notr="true">1</string>
-      </property>
-      <property name="pressMessage">
-       <string notr="true"/>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_70">
-      <property name="geometry">
-       <rect>
-        <x>185</x>
-        <y>65</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Resistance [mOhm]</string>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_37">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>65</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-R</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_71">
-      <property name="geometry">
-       <rect>
-        <x>185</x>
-        <y>85</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Inductance [uL]</string>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_38">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>85</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-L</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_39">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>105</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-C-Ti</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_72">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>105</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Curr loop Ti</string>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_40">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>125</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-C-Kp</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_73">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>125</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Curr loop Kp</string>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_42">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>145</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-V-Ti</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_41">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>165</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-V-Kp</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_75">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>165</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Velo loop Kp</string>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_74">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>145</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Velo loop Ti</string>
-      </property>
-     </widget>
-     <widget class="caLabel" name="calabel_76">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>185</y>
-        <width>100</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Pos loop Kp</string>
-      </property>
-     </widget>
-     <widget class="caLineEdit" name="calineedit_43">
-      <property name="geometry">
-       <rect>
-        <x>300</x>
-        <y>185</y>
-        <width>51</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>18</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-P-Kp</string>
-      </property>
-      <property name="background">
-       <color alpha="222">
-        <red>192</red>
-        <green>192</green>
-        <blue>192</blue>
-       </color>
-      </property>
-      <property name="colorMode">
-       <enum>caLineEdit::Static</enum>
-      </property>
-      <property name="precisionMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="limitsMode">
-       <enum>caLineEdit::User</enum>
-      </property>
-      <property name="unitsEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
      <widget class="caByte" name="cabyte_3">
       <property name="geometry">
        <rect>
         <x>15</x>
-        <y>125</y>
+        <y>150</y>
         <width>91</width>
         <height>51</height>
        </rect>
@@ -2370,8 +1780,8 @@
      <widget class="caMessageButton" name="camessagebutton_9">
       <property name="geometry">
        <rect>
-        <x>26</x>
-        <y>180</y>
+        <x>25</x>
+        <y>210</y>
         <width>71</width>
         <height>22</height>
        </rect>
@@ -2393,7 +1803,7 @@
       <property name="geometry">
        <rect>
         <x>26</x>
-        <y>150</y>
+        <y>175</y>
         <width>71</width>
         <height>22</height>
        </rect>
@@ -2415,7 +1825,7 @@
       <property name="geometry">
        <rect>
         <x>26</x>
-        <y>130</y>
+        <y>155</y>
         <width>71</width>
         <height>22</height>
        </rect>
@@ -2436,8 +1846,8 @@
      <widget class="caLed" name="caled_Warning_2">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>180</y>
+        <x>110</x>
+        <y>200</y>
         <width>52</width>
         <height>12</height>
        </rect>
@@ -2496,8 +1906,8 @@
      <widget class="caLed" name="caled_Error_2">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>160</y>
+        <x>110</x>
+        <y>215</y>
         <width>52</width>
         <height>12</height>
        </rect>
@@ -2553,6 +1963,641 @@
        <string notr="true">1</string>
       </property>
      </widget>
+     <widget class="caFrame" name="caframe">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>30</y>
+        <width>331</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="visibility">
+       <enum>caFrame::Calc</enum>
+      </property>
+      <property name="visibilityCalc">
+       <string notr="true">A!=1</string>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(IOC):m$(MasterID)-EcTool-Stat</string>
+      </property>
+      <widget class="caMessageButton" name="camessagebutton_3">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>0</y>
+         <width>136</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Trigg auto tune</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string>$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-TuneTrg</string>
+       </property>
+       <property name="label">
+        <string notr="true">Trigg auto tune</string>
+       </property>
+       <property name="disableChannel" stdset="0">
+        <string/>
+       </property>
+       <property name="releaseMessage">
+        <string notr="true">1</string>
+       </property>
+       <property name="pressMessage">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="caMessageButton" name="camessagebutton_4">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>0</y>
+         <width>136</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Trigg readback</string>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-TuneTrgRB</string>
+       </property>
+       <property name="label">
+        <string notr="true">Enable</string>
+       </property>
+       <property name="releaseMessage">
+        <string notr="true">1</string>
+       </property>
+       <property name="pressMessage">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>55</y>
+        <width>146</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>EC Tool</string>
+      </property>
+      <widget class="caLineEdit" name="calineedit_36">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>50</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)-EcTool-Stat</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_35">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>30</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)-EcTool-Prgs</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_68">
+       <property name="geometry">
+        <rect>
+         <x>-50</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Progress</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_69">
+       <property name="geometry">
+        <rect>
+         <x>-50</x>
+         <y>50</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>55</y>
+        <width>171</width>
+        <height>176</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Params</string>
+      </property>
+      <widget class="caLineEdit" name="calineedit_43">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>150</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-P-Kp</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_37">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-R</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_41">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>130</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-V-Kp</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_76">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>150</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Pos loop Kp</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_70">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>30</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Resistance [mOhm]</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_72">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>70</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Curr loop Ti</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_75">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>130</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Velo loop Kp</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_74">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>110</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Velo loop Ti</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_73">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>90</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Curr loop Kp</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_40">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>90</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-C-Kp</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_42">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>110</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-V-Ti</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_71">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>50</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Inductance [uL]</string>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_39">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>70</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-C-Ti</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="caLineEdit" name="calineedit_38">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>50</y>
+         <width>51</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>18</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(ID)-Tune-L</string>
+       </property>
+       <property name="background">
+        <color alpha="222">
+         <red>192</red>
+         <green>192</green>
+         <blue>192</blue>
+        </color>
+       </property>
+       <property name="colorMode">
+        <enum>caLineEdit::Static</enum>
+       </property>
+       <property name="precisionMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="limitsMode">
+        <enum>caLineEdit::User</enum>
+       </property>
+       <property name="unitsEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="caLabel" name="calabel_11">
      <property name="geometry">
@@ -2595,9 +2640,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>245</y>
+       <y>275</y>
        <width>366</width>
-       <height>196</height>
+       <height>166</height>
       </rect>
      </property>
      <property name="Title" stdset="0">
@@ -2640,6 +2685,12 @@
    <class>caByteController</class>
    <extends>QWidget</extends>
    <header>caByteController</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>caLabel</class>
