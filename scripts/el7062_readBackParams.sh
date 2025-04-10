@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "EL7062: Executing readback of tuning parameters: Prefix=$4, Master=$1, Slave=$2, Ch=$3, "
 MID=$1
 SID=$2
@@ -84,9 +86,7 @@ caput "${PREFIX}m${MID}-EcTool-Prgs" 95 > /dev/null 2>&1
 
 # Send ecmccomp macros array
 echo "ecmccomp macros array: $ecmccompStr"
-
-echo "${PREFIX_PVS}-Arr $ecmccompStr"
-caput -S "${PREFIX_PVS}-Arr" "$ecmccompStr"
+caput -S "${PREFIX_PVS}-Arr" "$ecmccompStr" > /dev/null 2>&1
 
 # Progress
 caput "${PREFIX}m${MID}-EcTool-Prgs" 100 > /dev/null 2>&1

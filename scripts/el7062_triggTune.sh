@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "EL7062: Executing tuning: Prefix=$4, Master=$1, Slave=$2, Ch=$3, "
 MID=$1
 SID=$2
@@ -38,14 +39,10 @@ do
     progress=$(($status-100))
     #echo "Progress: $progress"
     caput "${PREFIX}m${MID}-EcTool-Prgs" $progress > /dev/null 2>&1
-
   fi
 
   if [[ $status -eq "0" ]]; then
-    #echo "Progress: Done"
-    caput "${PREFIX}m${MID}-EcTool-Stat" "IDLE" > /dev/null 2>&1
-    ok=1
-    break
+    break 1
   fi
 
   sleep 0.5
@@ -62,6 +59,13 @@ if [[ $ok -eq "0" ]]; then
   caput "${PREFIX}m${MID}-EcTool-Stat" "ERROR" > /dev/null 2>&1
   exit -1
 fi
+ 
+# Excute readback
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+$DIR/el7062_readBackParams.sh $MID $SID $CID $PREFIX
+
 echo "Tuning successfull"
 caput "${PREFIX}m${MID}-EcTool-Prgs" 100 > /dev/null 2>&1
 
+#echo "Progress: Done"
+caput "${PREFIX}m${MID}-EcTool-Stat" "IDLE" > /dev/null 2>&1
