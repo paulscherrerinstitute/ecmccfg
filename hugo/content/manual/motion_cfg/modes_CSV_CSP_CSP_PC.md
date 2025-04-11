@@ -5,9 +5,11 @@ chapter = false
 +++
 
 There's three different modes that can can be used in ecmc toghether with most drives:
-* CSV: Cyclic Sync. Velocity
-* CSP: Cyclic Sync. Position
-* CSP-PC: Cyclic Sync. Position with centralized position controller
+* CSV: Cyclic Sync. Velocity, (velocity setpoint sent to drive)
+* CSP: Cyclic Sync. Position, (position setpoint sent to drive)
+* CSP-PC: Cyclic Sync. Position with centralized position controller, (position setpoint sent to drive)
+
+Other modes also exist, like Cyclic Sync Torque (torque/current setpoint to drive), which also can be used. However, these modes are not supported by the ecmc axis object. Still these modes can be used from PLC code or from logic in EPICS.
 
 ### Control loops
 
@@ -77,7 +79,6 @@ encoder:
   primary: 1
   ...
 ```
-
 In CSP-PC, the ecmc position control loop are active and therefore the control parameters needs tuning.
 Since a position setpoint is sent to the drive, a PI controller is normally needed (both kp and ki needs tuning).
 Tuning of the control loops in the drive is sometimes also needed (depending on which hardware).
