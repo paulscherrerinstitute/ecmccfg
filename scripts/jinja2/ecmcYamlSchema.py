@@ -412,9 +412,9 @@ class Schema:
                     'latchInput': {'type': 'boolean'}
                 }
             },
-            'home': {'required': True, 'type': 'string'},
+            'home': {'required': False, 'type': 'string'},
             'homePolarity': {'type': 'integer', 'allowed': [0, 1]},
-            'interlock': {'required': True, 'type': 'string'},
+            'interlock': {'required': False, 'type': 'string'},
             'interlockPolarity': {'type': 'integer', 'allowed': [0, 1]},
             'analog': {
                 'type': 'dict',

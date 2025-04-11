@@ -23,3 +23,6 @@ These control loops need to be tuned in the drive.
 
 For EL70x1, see [EL70x1 Tuning](../hardware/el70x1/#tuning)
 For other drives, consult the dedicated manual.
+
+#### EL7062
+EL7062 have an autotune feature that works well. For more info see knowledge-base/hardware/el7062.
