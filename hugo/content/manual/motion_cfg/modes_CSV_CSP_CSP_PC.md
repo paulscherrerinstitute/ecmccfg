@@ -70,7 +70,7 @@ encoder:
   useAsCSPDrvEnc: 1    # use this encoder as CSP drive encoder
   ...
 ```
-Finally the encoder for the centralized loop must be defined. This is defined in the normal by adding an encoder that has the encoder.primary bit set;
+Finally the encoder for the centralized loop must be defined. This is defined in the normal by adding an encoder that has the encoder.primary bit set. The primary encoder is used for the centralized position loop:
 ```
 encoder:
   desc: Linear encoder
@@ -79,7 +79,7 @@ encoder:
   primary: 1
   ...
 ```
-In CSP-PC, the ecmc position control loop are active and therefore the control parameters needs tuning.
+In CSP-PC, the ecmc position control loop are active and therefore the ecmc position control parameters needs tuning.
 Since a position setpoint is sent to the drive, a PI controller is normally needed (both kp and ki needs tuning).
 Tuning of the control loops in the drive is sometimes also needed (depending on which hardware).
 
