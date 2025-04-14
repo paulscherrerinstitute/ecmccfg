@@ -1,8 +1,5 @@
 #-d /**
-#-d   \brief hardware script for EL7221-9014
-#-d   \details EP7221-9014 Servo terminal with OCT feedback, touch probe inputs and STO
-#-d   \author Alvin Acerbo, based on intial work by Anders Sandstroem and Niko Kivel
-#-d   
+#-d   \brief Generic script for ONE channel CSV for drives with STO, Ex72xx-9014 and EP72xx-0034
 #-d   \note This configuration exposes the 2 limit switches and STO status in infoData02:
 #-d         bit0: Input 1
 #-d         bit1: Input 2
@@ -13,10 +10,8 @@
 #-d   \param [out] SDO 0x1011:01 --> 1684107116 \b reset
 #-d */
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "EL7211-9014_ALL_INPUTS")
-epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
-epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b3052")
-epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
+#-d  Use this subst file
+epicsEnvSet("ECMC_SUBST_TYPE"            "EX72XX-9014_STD") 
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
@@ -51,11 +46,9 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 #- 0x1A03 DRV Torque actual value
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a03,0x6010,0x08,S16,torqueActual01)"
 #- 0x1A04 DRV Info data 1
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a04,0x6010,0x12,U16,infoData01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a04,0x6010,0x12,U16,voltageActual01)"
 #- 0x1A05 DRV Info data 2
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6010,0x13,U16,infoData02)"
-#- 0x1A06 DRV Following error actual value --> not really useful in CSV-mode
-#- ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a06,0x6010,0x09,S32,followingError01)"
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6010,0x13,U16,binaryInputs01)"
 #- 0x1A07 FB Touch probe status
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a07,0x6001,0x01,U16,touchProbeStatus01)"
 
@@ -63,11 +56,11 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/${ECMC_EC_SAMPLE_RATE=1000}*1E6)
 ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS_HALF",${ECMC_TEMP_PERIOD_NANO_SECS}/2)
 
-#- NOTE important the sync 1 period needs to be 0!
-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x700,${ECMC_TEMP_PERIOD_NANO_SECS},${ECMC_TEMP_PERIOD_NANO_SECS_HALF},0,0)"
+ecmcFileExist(${ecmccfg_DIR}applySlaveDCconfig.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd "ASSIGN_ACTIVATE=0x700,SYNC_0_CYCLE=${ECMC_TEMP_PERIOD_NANO_SECS}"
 
 # Peak current (to be overwritten by motor config)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,1000,4)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8011,0x11,100,4)"
 
 ecmcEpicsEnvSetCalc("ECMC_TEMP_WHATCHDOG_1",1000/${ECMC_EC_SAMPLE_RATE=1000}*1000)
 ecmcEpicsEnvSetCalc("ECMC_TEMP_WHATCHDOG_2",${ECMC_TEMP_WHATCHDOG_1}*10)
@@ -104,4 +97,4 @@ epicsEnvUnset(ECMC_TEMP_WHATCHDOG_2)
 epicsEnvSet(ECMC_EC_STARTUP_DELAY,${ECMC_EC_STARTUP_DELAY_EL72XX=10})
 
 #- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1_ALL_INPUTS")
+epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1-9014_STD")
