@@ -16,11 +16,17 @@ file "ecmc_analogInput-chX.template"
           {01,    "velocityActual", "Drv",  "-VelAct",  "Actual Vel", "a.u.", 9.5367e-7,  0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
           {01,    "torqueActual",   "Drv",  "-TrqAct",  "Actual Trq", "%",    0.1,        1,    -100, 100,  0,    -80,  80,   0,    0,    "NO_ALARM", "NO_ALARM", "MINOR",    "NO_ALARM"  }
           {01,    "infoData",       "Drv",  "-VolAct",  "InfoData1",  "V",    0.001,      1,    0,    60,   8,    20,   49,   50,   0.25, "MAJOR",    "MINOR",    "MINOR",    "MAJOR"  }
-          {02,    "infoData",       "Drv",  "-TmpAct",  "InfoData2",  "degC", 0.1,        1,    0,    50,   0,    0,    40,   50,   0.5,  "NO_ALARM", "NO_ALARM", "MINOR",    "MAJOR"  }
+}
+
+# Map infodata2 to binary inputs (digital input 1,2 and STO):
+file "ecmcEL7221-9014_ALL_INPUTS.template"
+{
+  pattern {CH_ID}
+          {01   }
 }
 
 file "ecmcEL72XX_TP.template"
 {
   pattern {CH_ID}
-          {01}
+          {01   }
 }

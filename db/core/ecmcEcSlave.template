@@ -10,7 +10,7 @@
 # bit 16..31            : entry counter
 
 record(longin,"${ECMC_P}Stat"){
-  field(DESC, "$(HWTYPE): Slv Stat Wd")
+  field(DESC, "Slv Stat Wd")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).slavestatus?")
@@ -21,7 +21,7 @@ record(longin,"${ECMC_P}Stat"){
 
 # Entry counter in 16 msb
 record(calc,"${ECMC_P}EntryCntr") {
-  field(DESC, "$(HWTYPE): Slv Ent Cnt")
+  field(DESC, "Slv Ent Cnt")
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>16")
   field(INPA,"${ECMC_P}Stat.VAL")
@@ -34,7 +34,7 @@ record(calc,"${ECMC_P}EntryCntr") {
 }
 
 record(mbbiDirect,"${ECMC_P}Stat_"){
-  field(DESC, "$(HWTYPE): Slv Stat Wd")
+  field(DESC, "Slv Stat Wd")
   field(PINI, "$(PINI=1)")
   field(INP,  "${ECMC_P}Stat.VAL")
   field(FLNK, "${ECMC_P}Online.PROC")
@@ -42,7 +42,7 @@ record(mbbiDirect,"${ECMC_P}Stat_"){
 }
 
 record(bi,"${ECMC_P}Online"){
-  field(DESC, "$(HWTYPE): Slv Online")
+  field(DESC, "Slv Online")
   field(INP,  "${ECMC_P}Stat_.B0")
   field(ZNAM, "Offline")
   field(ONAM, "Online")
@@ -57,7 +57,7 @@ record(bi,"${ECMC_P}Online"){
 }
 
 record(bi,"${ECMC_P}Operational"){
-  field(DESC, "$(HWTYPE): Slv OP")
+  field(DESC, "Slv OP")
   field(INP,  "${ECMC_P}Stat_.B1")
   field(ZNAM, "Not Operational")
   field(ONAM, "Operational")
@@ -72,7 +72,7 @@ record(bi,"${ECMC_P}Operational"){
 }
 
 record(bi,"${ECMC_P}Alstate-Init"){
-  field(DESC, "$(HWTYPE): Slv al INIT")
+  field(DESC, "Slv al INIT")
   field(INP,  "${ECMC_P}Stat_.B2")
   field(ZNAM, "Not INIT")
   field(ONAM, "INIT")
@@ -87,7 +87,7 @@ record(bi,"${ECMC_P}Alstate-Init"){
 }
 
 record(bi,"${ECMC_P}Alstate-Preop"){
-  field(DESC, "$(HWTYPE): Slv al PREOP")
+  field(DESC, "Slv al PREOP")
   field(INP,  "${ECMC_P}Stat_.B3")
   field(ZNAM, "Not PREOP")
   field(ONAM, "PREOP")
@@ -102,7 +102,7 @@ record(bi,"${ECMC_P}Alstate-Preop"){
 }
 
 record(bi,"${ECMC_P}Alstate-Safeop"){
-  field(DESC, "$(HWTYPE): Slv al SAFEOP")
+  field(DESC, "Slv al SAFEOP")
   field(INP,  "${ECMC_P}Stat_.B4")
   field(ZNAM, "Not SAFEOP")
   field(ONAM, "SAFEOP")
@@ -117,7 +117,7 @@ record(bi,"${ECMC_P}Alstate-Safeop"){
 }
 
 record(bi,"${ECMC_P}Alstate-Op"){
-  field(DESC, "$(HWTYPE): Slv al OP")
+  field(DESC, "Slv al OP")
   field(INP,  "${ECMC_P}Stat_.B5")
   field(ZNAM, "Not OP")
   field(ONAM, "OP")
@@ -132,7 +132,7 @@ record(bi,"${ECMC_P}Alstate-Op"){
 
 record(longout,"${ECMC_P}One"){
   info(asyn:READBACK,"1")
-  field(DESC, "$(HWTYPE): 32 bits (int=-1)")
+  field(DESC, "32 bits (int=-1)")
   field(TSE, -2)
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ONE?")
@@ -141,7 +141,7 @@ record(longout,"${ECMC_P}One"){
 
 record(longout,"${ECMC_P}Zero"){
   info(asyn:READBACK,"1")
-  field(DESC, "$(HWTYPE): 32 bits (int=0)")
+  field(DESC, "32 bits (int=0)")
   field(TSE, -2)
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).ZERO?")

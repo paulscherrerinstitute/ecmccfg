@@ -10,17 +10,17 @@ file "ecmcEL72XX_ENC.template"
           {01   }
 }
 
-file "ecmcAnalogIn.template"
+file "ecmc_analogInput-chX.template"
 {
-  pattern {ECMC_NAME,           SUFFIX,         DESC,         EGU,    ESLO,       PREC, LOPR, HOPR, LOLO, LOW,  HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV}
-          {"velocityActual01",  "Drv01_VelAct", "Actual Vel", "a.u.", 9.5367e-7,  0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
-          {"torqueActual01",    "Drv01_TrqAct", "Actual Trq", "%",    0.1,        1,    -100, 100,  0,    -80,  80,   0,    0,    "NO_ALARM", "NO_ALARM", "MINOR",    "NO_ALARM"  }
-          {"infoData01",        "Drv01_VolAct", "InfoData1",  "V",    0.001,      1,    0,    60,   8,    20,   49,   50,   0.25, "MAJOR",    "MINOR",    "MINOR",    "MAJOR"  }
-          {"infoData02",        "Drv01_TmpAct", "InfoData2",  "degC", 0.1,        1,    0,    50,   0,    0,    40,   50,   0.5,  "NO_ALARM", "NO_ALARM", "MINOR",    "MAJOR"  }
+  pattern {CH_ID, sourceName,       KEY,    suffix,     DESC,         EGU,    ESLO,       PREC, LOPR, HOPR, LOLO, LOW,  HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV}
+          {01,    "velocityActual", "Drv",  "-VelAct",  "Actual Vel", "a.u.", 9.5367e-7,  0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+          {01,    "torqueActual",   "Drv",  "-TrqAct",  "Actual Trq", "%",    0.1,        1,    -100, 100,  0,    -80,  80,   0,    0,    "NO_ALARM", "NO_ALARM", "MINOR",    "NO_ALARM"  }
+          {01,    "infoData",       "Drv",  "-VolAct",  "InfoData1",  "V",    0.001,      1,    0,    60,   8,    20,   49,   50,   0.25, "MAJOR",    "MINOR",    "MINOR",    "MAJOR"  }
+          {02,    "infoData",       "Drv",  "-TmpAct",  "InfoData2",  "degC", 0.1,        1,    0,    50,   0,    0,    40,   50,   0.5,  "NO_ALARM", "NO_ALARM", "MINOR",    "MAJOR"  }
 }
 
 file "ecmcEL72XX_TP.template"
 {
-  pattern {}
-          {}
+  pattern {CH_ID}
+          {01   }
 }
