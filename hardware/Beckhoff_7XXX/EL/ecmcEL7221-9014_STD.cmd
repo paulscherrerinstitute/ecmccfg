@@ -15,7 +15,7 @@
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL7211-9014_STD")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c353052")
-epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
+epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7221_OCT")
 
 #- Load standard cfg
 ecmcFileExist(${ecmccfg_DIR}ecmcEX72XX-9014_STD-ch01.cmd,1)
