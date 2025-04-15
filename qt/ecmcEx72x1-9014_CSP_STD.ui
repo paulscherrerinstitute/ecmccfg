@@ -663,7 +663,7 @@
     <string>Expert</string>
    </property>
    <property name="files">
-    <string>ecmcEx72x1_CSP_STD_expert.ui</string>
+    <string>ecmcEx72x1-9014_CSP_STD_expert.ui</string>
    </property>
    <property name="args">
     <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(DRV),IOC=$(IOC);</string>
