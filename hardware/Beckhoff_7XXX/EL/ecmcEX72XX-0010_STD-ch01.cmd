@@ -1,9 +1,8 @@
 #-d /**
-#-d   \brief Generic script for ONE channel CSP for drives with STO, Ex72xx-9014 and EP72xx-0034
-#-d   \note This configuration exposes the 2 limit switches and STO status in infoData02:
-#-d         bit0: Input 1
-#-d         bit1: Input 2
-#-d         bit8: STO
+#-d   \brief Generic script for ONE channel CSV for drives without STO, Ex72x1, Ex72x1-0010
+#-d   \note This configuration exposes the 2 limit switches in touchProbeStatus01:
+#-d         bit7 : Input 1
+#-d         bit15: Input 2
 #-d
 #-d   \file
 #-d   \note SDOS
@@ -11,7 +10,7 @@
 #-d */
 
 #-d  Use this subst file
-epicsEnvSet("ECMC_SUBST_TYPE"            "EX72XX-9014_CSP_STD") 
+epicsEnvSet("ECMC_SUBST_TYPE"            "EX72XX-0010_STD") 
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
@@ -24,20 +23,31 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 #-   6: Warnings: see docu for details
 #-   7: I2T Motor [%]
 #-   8: I2T Amplifier [%]
-#-   10: Input Levels (input 1,2, STO)
 
 #- info data 01: DC voltage [mV]
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x39,2,1)"
-#- info data 02: Inputs (digital input 1,2 and STO)
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3A,10,1)"
+
+#- info data 02: Dc-link voltage
+#-    Errors:
+#-    Bit0: ADC Error
+#-    Bit1: Overcurrent
+#-    Bit2: Undervoltage
+#-    Bit3: Overvoltage
+#-    Bit4: Overtemperature
+#-    Bit5: I2T Amplifier
+#-    Bit6: I2T Motor
+#-    Bit7: Encoder
+#-    Bit8: Watchdog
+ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3A,5,1)"
 
 #- SyncManager 2
 #- 0x1600 (default)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7010,0x01,16,driveControl01)"
-#- 0x1606 DRV Target position
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1606,0x7010,0x05,32,1,positionSetpoint01)"
+#- 0x1601 (default)
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7010,0x06,32,1,velocitySetpoint01)"
 #- 0x1605
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x7010,0x0A,16,1,torqueOffset01)"
+
 #- SyncManager 3
 #- 0x1A00 (default)
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x11,32,positionActual01)"
@@ -47,13 +57,11 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a02,0x6010,0x07,S32,velocityActual01)"
 #- 0x1A03 DRV Torque actual value
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a03,0x6010,0x08,S16,torqueActual01)"
-#- 0x1A04 DRV Info data 1
+#- 0x1A04 DRV Info data 1: DC-link voltage
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a04,0x6010,0x12,U16,voltageActual01)"
-#- 0x1A05 DRV Info data 2
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6010,0x13,U16,binaryInputs01)"
-#- 0x1A06 DRV Following error actual value
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a06,0x6010,0x09,S32,followingError01)"
-#- 0x1A07 FB Touch probe status
+#- 0x1A05 DRV Info data 2:  Drive errors
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a05,0x6010,0x13,U16,driveErrors01)"
+#- 0x1A07 FB Touch probe status:  limits
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a07,0x6001,0x01,U16,touchProbeStatus01)"
 
 #- ############ Distributed clocks config EP7221:
@@ -87,9 +95,6 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C32,0x2,${ECMC_TEMP_PERIOD
 #- Cycle time
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C33,0x2,${ECMC_TEMP_PERIOD_NANO_SECS},4)"
 
-#- Activly choose CSP mode
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x7010,0x3,8,1)"
-
 epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)
 epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS_HALF)
 epicsEnvUnset(ECMC_TEMP_WHATCHDOG_1)
@@ -104,4 +109,5 @@ epicsEnvUnset(ECMC_TEMP_WHATCHDOG_2)
 epicsEnvSet(ECMC_EC_STARTUP_DELAY,${ECMC_EC_STARTUP_DELAY_EL72XX=10})
 
 #- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1-9014_CSP_STD")
+epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1-0010_STD")
+
