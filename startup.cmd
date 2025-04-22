@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 10.0.7
+#- ECMC_VER          = 10.0.8
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -54,7 +54,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-epicsEnvSet(ECMC_VER,${ECMC_VER=10.0.7})
+epicsEnvSet(ECMC_VER,${ECMC_VER=10.0.8})
 require ecmc "${ECMC_VER}"
 
 #- Require EthercatMC if used.
