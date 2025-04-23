@@ -172,11 +172,15 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.LoadAxisEncLookupTable(${ECMC_AXIS_NO},{{ encoder.lookuptable.filename }})"
     {%- if encoder.lookuptable.range is defined %}
         ecmcConfigOrDie "Cfg.SetAxisEncLookupTableRange(${ECMC_AXIS_NO},{{ encoder.lookuptable.range }})"
-    {%- endif %}    
+    {%- endif %}
+
+    {%- if encoder.lookuptable.scale is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableScale(${ECMC_AXIS_NO},{{ encoder.lookuptable.scale }})"
+    {%- endif %}
 
     {%- if encoder.lookuptable.enable is defined %}
         ecmcConfigOrDie "Cfg.SetAxisEncLookupTableEnable(${ECMC_AXIS_NO},{{ encoder.lookuptable.enable|int }})"
-    {%- endif %}    
+    {%- endif %}
 {%- endif %}
 
 {%- if encoder.delayComp is defined %}
