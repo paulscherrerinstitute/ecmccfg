@@ -289,6 +289,7 @@ class Schema:
                 'schema': {
                     'filename': {'required': True, 'type': 'string'},
                     'range': {'type': 'float'},
+                    'scale': {'type': 'float'},
                     'enable': {'type': 'boolean'},
                 }
             },
