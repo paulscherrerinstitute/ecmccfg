@@ -20,7 +20,6 @@ if ( static.counter < ${MR_DLY=0.105} ) {
 # State  0: all RM and VM are off.
 # State  1: at least 1 VM is in motion, VM in charge.
 
-
 #- State -1
 if(static.VMState==-1) {
 
@@ -75,22 +74,19 @@ else if(static.VMState == 0) {
   #- 0 -> 1
   #- Trigger Condition:
   #-  - at least 1 VM is enabled
-  else if( mc_grp_get_any_enabled(${GRP_ID_MA})==1 ) {
-
+  else if( mc_grp_get_any_enabled(${GRP_ID_MA})==1 and mc_grp_get_any_error_id(${GRP_ID_SA})==0) {
     #- Exit Condition: all axes are on
     if( mc_grp_get_enabled(${GRP_ID_SA}) == 1 and mc_grp_get_enabled(${GRP_ID_MA}) == 1 and mc_grp_get_any_busy(${GRP_ID_SA}) == 0 ) {
-
       if( mc_grp_get_any_busy(${GRP_ID_MA}) == 1 ) {
         mc_grp_set_traj_src(${GRP_ID_SA},1);
         #- state change
         ${DBG=#}println('0 -> 1');
         static.VMState:=1;
-      };
+      };    
     }
-
     #- Actions: If Exit Conditions not met
     else {
-      #- enable motors
+      #- enable motors      
       var master:= mc_grp_set_enable(${GRP_ID_MA},1);
       var slave := mc_grp_set_enable(${GRP_ID_SA},1);
       if(slave or master) {
@@ -110,6 +106,8 @@ else if(static.VMState == 0) {
       #- halt real motors
       mc_grp_halt(${GRP_ID_SA});
     };
+  } else if(mc_grp_get_any_error_id(${GRP_ID_SA}) > 0) {
+    mc_grp_set_slaved_axis_in_error(${GRP_ID_MA});
   };
 }
 
