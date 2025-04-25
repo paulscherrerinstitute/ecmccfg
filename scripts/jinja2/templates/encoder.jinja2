@@ -64,20 +64,20 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax${ECMC_AXIS_NO}.enc.latchcontrol")"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
 {%- endif %}
-{%- if encoder.filter.velocity %}
-    {%- if encoder.filter.velocity.enable %}
-        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size}})"
-    {%- endif %}
+{%- if encoder.filter.velocity is defined %}    
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size|default(100) }})"    
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.velocity.enable|int|default(1) }})"
 {%- endif %}
-{%- if encoder.filter.trajectory %}
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int}})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
+{%- if encoder.filter.trajectory is defined %}
+    # WARNING:  Use "encoder.filter.position" instead of "encoder.filter.trajectory"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int|default(1) }})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size|default(10) }})"
 {%- endif %}
 
 #- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
-{%- if encoder.filter.position %}
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|int}})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size}})"
+{%- if encoder.filter.position is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|int|default(1) }})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size|default(10) }})"
 {%- endif %}
 
 #- Use this encoder as primary?!
