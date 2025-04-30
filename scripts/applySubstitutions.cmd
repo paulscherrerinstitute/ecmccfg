@@ -12,6 +12,7 @@
 #-d   \param SUBST_FILE (optional) substitution file
 #-d   \param P_SCRIPT (optional) naming convention prefix script
 #-d   \param NELM (optional) Used for oversampling cards. Defaults to 1
+#-d   \param MACROS: MACROS for subst file
 #-d   \note Example calls:
 #-d   \note - call w/o SLAVE_ID
 #-d   \code
@@ -23,4 +24,4 @@
 
 ecmcFileExist(${SUBST_FILE},1,1)
 #- TODO: for v7.0.0_RC1, substitute 'P=${ECMC_PREFIX}' by 'P=${ECMC_P}', needs all templates to be migrated before!
-dbLoadTemplate(${SUBST_FILE},"P=${ECMC_PREFIX},ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},NELM=${NELM=1}")
+dbLoadTemplate(${SUBST_FILE},"P=${ECMC_PREFIX},ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},NELM=${NELM=1},${MACROS=}")

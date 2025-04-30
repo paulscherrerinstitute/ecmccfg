@@ -165,13 +165,10 @@ record(bi,"$(P)MCU-ThdMemLocked"){
   field(ZNAM, "No")
 }
 
-# Updated last in updates cycles (for record with fastest update rate).
-# Can be used as trigger after all data have been updated.
-# T_SMP_MS is not supported for this record.
 record(waveform,"$(P)MCU-Updated"){
   field(PINI, "1")
   field(DTYP, "asynInt64ArrayIn")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt64ArrayIn/ecmc.updated?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_HOOK_MS=$(T_SMP_MS=1000))/TYPE=asynInt64ArrayIn/ecmc.updated?")
   field(FTVL, "UINT64")
   field(NELM, "1")
   field(SCAN, "I/O Intr")
