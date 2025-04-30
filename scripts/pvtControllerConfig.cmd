@@ -29,7 +29,12 @@ epicsEnvSet(N_TIME_POINTS,${N_TIME_POINTS=${ECMC_N_TIME_POINTS=0}})
 ecmcCreateProfile(${ECMC_MOTOR_PORT},${ECMC_N_TIME_POINTS})
 
 #- Load pvt controller records if PVT is in use
+ecmcFileExist("ecmcProfileMoveController.template",1,1)
 dbLoadRecords(ecmcProfileMoveController.template,"P=${ECMC_PREFIX},R=PVT-,PORT=${ECMC_MOTOR_PORT},NAXES=${NAXES},NPOINTS=${NPOINTS},NREADBACK=${NREADBACK},NPULSES=${NPULSES},ADDR=0")
+
+#- And the softtrigger (needs to be fast so in communication through ECMC_ASYN_PORT instead of ECMC_MOTOR_PORT)
+ecmcFileExist("ecmcPVTTrigger.template",1,1)
+dbLoadRecords(ecmcPVTTrigger.template,"P=${ECMC_PREFIX},R=PVT-,PORT=${ECMC_ASYN_PORT},T_SMP_MS=${ECMC_EC_SAMPLE_RATE_MS}")
 
 ecmcIf("'${TRG_EC_ENTRY=NAN}'!='NAN'")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${TRG_EC_ENTRY=NAN},pvtctrl.trigger.output)"
