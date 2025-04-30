@@ -33,7 +33,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 
 #- info data 01: DC voltage [mV]
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x39,2,1)"
-#- info data 01: Inputs (digital input 1,2 and STO)
+#- info data 02: Inputs (digital input 1,2 and STO)
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3A,10,1)"
 
 #- SyncManager 2

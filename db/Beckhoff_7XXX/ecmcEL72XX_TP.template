@@ -1,6 +1,6 @@
 #- Touch Probe status
 record(mbbiDirect,"${ECMC_P}Tp${CH_ID}-Stat"){
-  field(DESC, "$(HWTYPE): TP Stat Wd")
+  field(DESC, "TP Stat Wd")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).touchProbeStatus${CH_ID}?")
@@ -10,7 +10,7 @@ record(mbbiDirect,"${ECMC_P}Tp${CH_ID}-Stat"){
 }
 
 record(bi,"${ECMC_P}Tp${CH_ID}-BI01"){
-  field(DESC, "$(HWTYPE): TP Input 01")
+  field(DESC, "TP Input 01")
   field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B7")
   field(ZNAM, "False")
   field(ONAM, "True")
@@ -20,7 +20,7 @@ record(bi,"${ECMC_P}Tp${CH_ID}-BI01"){
 }
 
 record(bi,"${ECMC_P}Tp${CH_ID}-BI02"){
-  field(DESC, "$(HWTYPE): TP Input 01")
+  field(DESC, "TP Input 01")
   field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.BF")
   field(ZNAM, "False")
   field(ONAM, "True")

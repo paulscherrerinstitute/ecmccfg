@@ -1,3 +1,6 @@
+# 10.0.10
+* Fix encoder filter handling
+
 # 9.6.7
 * Write target.enable also if false
 * Add support for encoder calibration by lookup tables

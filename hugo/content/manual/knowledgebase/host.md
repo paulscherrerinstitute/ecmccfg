@@ -8,6 +8,7 @@ chapter = false
 1. [Prefered NICs](#Prefered-NICs)
 2. [latency issues / lost frames](#latency-issues--lost-frames)
 3. [EtherCAT rate (EC_RATE)](#EtherCAT-rate-(EC_RATE))
+4. [Debian 12](#(PSI-specific)-Debian-12)
 
 ### Prefered NICs
 
@@ -117,3 +118,7 @@ In order to successfully run an ecmc ethercat system at higher rates some tuning
 * affinity: Use a dedicated core for the ecmc_rt thread and move other high prio threads to other cores. see "high load on system
 " above.
 * consider use of more than one domain
+
+#### (PSI specific) Debian 12
+For debian 12 a different phyton venv needs to be copied to the tmp dir at startup.
+The venv can be found here: /ioc/NeedfulThings/ecmc_python_venv/.venv_deb12/

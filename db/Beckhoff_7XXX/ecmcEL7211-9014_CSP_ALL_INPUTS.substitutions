@@ -1,0 +1,32 @@
+file "ecmcEL72XX_DRV_CSP.template"
+{
+  pattern {CH_ID}
+          {01   }
+}
+
+file "ecmcEL72XX_ENC.template"
+{
+  pattern {CH_ID}
+          {01   }
+}
+
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, sourceName,       KEY,    suffix,     DESC,         EGU,    ESLO,       PREC, LOPR, HOPR, LOLO, LOW,  HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV}
+          {01,    "velocityActual", "Drv",  "-VelAct",  "Actual Vel", "a.u.", 9.5367e-7,  0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+          {01,    "torqueActual",   "Drv",  "-TrqAct",  "Actual Trq", "%",    0.1,        1,    -100, 100,  0,    -80,  80,   0,    0,    "NO_ALARM", "NO_ALARM", "MINOR",    "NO_ALARM"  }
+          {01,    "infoData",       "Drv",  "-VolAct",  "InfoData1",  "V",    0.001,      1,    0,    60,   8,    20,   49,   50,   0.25, "MAJOR",    "MINOR",    "MINOR",    "MAJOR"  }
+}
+
+# Map infodata2 to binary inputs (digital input 1,2 and STO):
+file "ecmcEL7221-9014_ALL_INPUTS.template"
+{
+  pattern {CH_ID}
+          {01   }
+}
+
+file "ecmcEL72XX_TP.template"
+{
+  pattern {CH_ID}
+          {01   }
+}

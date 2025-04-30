@@ -5,6 +5,13 @@ file "ecmcEL7062_CSP-chX.template"
           {02   }
 }
 
+file "ecmcEL7062_autoTune-chX.template"
+{
+  pattern {CH_ID, CH_ID_VAL}
+          {01,    1        }
+          {02,    2        }
+}
+
 #file "ecmc_analogInput-chX.template"
 #{
 #  pattern {CH_ID, sourceName,           KEY,   suffix,     DESC,                 EGU,        ESLO, PREC, LOPR, HOPR, LOLO, LOW,  HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV}
