@@ -1,11 +1,17 @@
 #==============================================================================
 # setAppMode.cmd
 #- Arguments: n/a
-
 #-d /**
 #-d   \brief Script for switching to operational mode.
 #-d   \details Validates configuration, starts realtime thread and checks EtherCAT slaves are in OP.
 #-d   \author Niko Kivel
+#-d
+#-d   Macros (optional):
+#-d     T_SMP_HOOK_MS  : Update rate of MCU-Updated PV [ms]
+#-d     PROC_HOOK      : Forward link pf MCU-Updated PV
+#-d     ECMC_PROC_HOOK : Same as PROC_HOOK
+#-d     T_SMP_MS       : Maximum sample time of other records loaded by this script [ms]
+#-d 
 #-d   \file
 #-d */
 ecmcFileExist("${ECMC_CONFIG_ROOT}general.cmd",1)

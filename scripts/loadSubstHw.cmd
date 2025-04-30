@@ -13,6 +13,14 @@
 #-d   \endcode
 #-d */
 
+#- Check if ecmccomp is loaded otherwise require it
+ecmcEpicsEnvSetCalcTernary(EXE,"'${ecmccomp_DIR=NAN}'=='NAN'","", "#-")
+${EXE}require ecmccomp ${ECMCCOMP_VER=''}
+#- Check again, now it should be there
+${EXE}ecmcEpicsEnvSetCalcTernary(EXE,"'${ecmccomp_DIR=NAN}'=='NAN'","", "#-")
+${EXE}ecmcExit Error: ecmccomp module not loaded and not found
+epicsEnvUnset(EXE)
+
 #- Parse subst and template with msi. Parse output to separetae axis files 
 ecmcFileExist(${ecmccfg_DIR}multiHw.sh,1,1)
 system "${ecmccfg_DIR}multiHw.sh ${FILE} ${ECMC_TMP_DIR} tempHw.cmd"

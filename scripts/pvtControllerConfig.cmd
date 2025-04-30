@@ -20,9 +20,9 @@ epicsEnvSet(NPOINTS,${NPOINTS=${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}})
 epicsEnvSet(NPULSES,${NPULSES=${NPOINTS=0}})
 epicsEnvSet(NAXES,${NAXES=${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}})
 
-#- Find max count of NPOINTS,NREADBACK, and NPULSES for allocation of time array 
+#- Find max count of NPOINTS, NREADBACK, and NPULSES for allocation of time and readback array's 
 ecmcEpicsEnvSetCalcTernary(ECMC_N_TIME_POINTS,"${NREADBACK}>${NPOINTS}",${NREADBACK},${NPOINTS})
-ecmcEpicsEnvSetCalcTernary(ECMC_N_TIME_POINTS,"${NPULSES}>${NREADBACK}",${NPULSES},${NREADBACK})
+ecmcEpicsEnvSetCalcTernary(ECMC_N_TIME_POINTS,"${NPULSES}>${ECMC_N_TIME_POINTS}",${NPULSES},${ECMC_N_TIME_POINTS})
 epicsEnvSet(N_TIME_POINTS,${N_TIME_POINTS=${ECMC_N_TIME_POINTS=0}})
 
 #- Call initailize() in model 3 driver
