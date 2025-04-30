@@ -20,6 +20,10 @@ As a comparison, TwinCAT default EtherCAT rates are:
 
 See [host/ecmc_server](../../knowledgebase/host/) for more information.
 
+{{% notice info %}}
+The EPICS PVs will update at a lower rate than the ethercat master rate. See PVProcessingRate.md for more information.
+{{% /notice %}}
+
 ## ecmc server setup
 * If possible, make sure the native igb ethercat driver is used.
 
