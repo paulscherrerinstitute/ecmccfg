@@ -1,5 +1,5 @@
 #- Configuration scripts
-require ecmccfg sandst_a ,"MASTER_ID=1,ENG_MODE=1,EC_RATE=500,ECMC_VER=sandst_a"
+require ecmccfg PVT ,"MASTER_ID=1,ENG_MODE=1,EC_RATE=500,ECMC_VER=PVT"
 #require ecmccfg,"MASTER_ID=0,ENG_MODE=1,EC_RATE=500"
 
 #- Only output errors
