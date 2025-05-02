@@ -2676,48 +2676,6 @@ border-radius: 2px;
       <enum>QFrame::NoFrame</enum>
      </property>
     </widget>
-    <widget class="caRelatedDisplay" name="caRelatedDisplay_10">
-     <property name="geometry">
-      <rect>
-       <x>875</x>
-       <y>245</y>
-       <width>66</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="label">
-      <string>More</string>
-     </property>
-     <property name="foreground">
-      <color>
-       <red>0</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-     <property name="background">
-      <color>
-       <red>115</red>
-       <green>223</green>
-       <blue>255</blue>
-      </color>
-     </property>
-     <property name="labels">
-      <string>XPS settings</string>
-     </property>
-     <property name="files">
-      <string>ecmcProfileMoveExpert.ui</string>
-     </property>
-     <property name="args">
-      <string>P=$(IOC),R=PVT-,TITLE=ecmc: $(TITLE),M1=$(M1),M2=$(M2),M3=$(M3),M4=$(M4),M5=$(M5),M6=$(M6),M7=$(M7),M8=$(M8)</string>
-     </property>
-     <property name="stackingMode" stdset="0">
-      <enum>caRowColMenu::Menu</enum>
-     </property>
-     <property name="removeParent" stdset="0">
-      <string>false</string>
-     </property>
-    </widget>
     <widget class="caLabel" name="caLabel_6">
      <property name="geometry">
       <rect>
