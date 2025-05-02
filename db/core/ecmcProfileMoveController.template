@@ -28,12 +28,20 @@ record(longout,"$(P)$(R)NumAxes") {
     field(VAL,  "$(NAXES)")
 }
 
+# Define with size of position array instead
 record(longout,"$(P)$(R)NumPoints") {
     field(DESC, "# of points in profile")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_NUM_POINTS")
     field(VAL,  "$(NPOINTS)")
+    field(DRVL, 1)
+    field(DRVH, ${MAX_SIZE})
+}
+
+record(longin,"$(P)$(R)MaxSize") {
+    field(DESC, "Max points/pulses in profile")    
+    field(VAL,  "$(MAX_SIZE)")
 }
 
 record(longin, "$(P)$(R)CurrentPoint") {
@@ -49,6 +57,8 @@ record(longout,"$(P)$(R)NumPulses") {
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_NUM_PULSES")
     field(VAL,  "$(NPULSES)")
+    field(DRVL, 0)
+    field(DRVH, ${MAX_SIZE})
 }
 
 record(longin,"$(P)$(R)NumActualPulses") {
@@ -64,6 +74,8 @@ record(longout, "$(P)$(R)StartPulses") {
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_START_PULSES")
     field(VAL, "1")
+    field(DRVL, 0)
+    field(DRVH, ${MAX_SIZE})
 }
 
 record(longout,"$(P)$(R)EndPulses") {
@@ -72,6 +84,8 @@ record(longout,"$(P)$(R)EndPulses") {
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_END_PULSES")
     field(VAL,  "$(NPOINTS)")
+    field(DRVL, 0)
+    field(DRVH, ${MAX_SIZE})
 }
 
 #
