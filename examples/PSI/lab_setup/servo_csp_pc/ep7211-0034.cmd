@@ -33,23 +33,11 @@
 #    needs to be different.
 #
 
-require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a"
+require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a,MASTER_ID=1"
 
-#- ############################################################################
-#- Configure hardware
-#- ethercat slaves
-#- Master0
-#- ...
-#- 16  0:16  PREOP  +  EP7211-0034 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
-#- ...
-
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=28, HW_DESC=EP7211-0034_CSP_ALL"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=12, HW_DESC=EP7211-0034_CSP_STD"
 #- Limit torque to 50% of motor rated torque.  Rated current = 2710mA, set to half I_MAX_MA=1355
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd   "COMP=Motor-Beckhoff-AM8111-XFX0, MACROS='I_MAX_MA=1355'"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd     "FILE=./cfg/axis_csp.yaml, DRV_ID=$(ECMC_EC_SLAVE_NUM), AX_NAME='Axis1', AX_ID=1"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlEnc.cmd      "FILE=./cfg/enc_sim_linear.yaml, DRV_ID=$(ECMC_EC_SLAVE_NUM)"
-
-#- Select encoder 1 as CSP encoder
-#ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(1,1)"
-
 
