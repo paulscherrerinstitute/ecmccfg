@@ -12,7 +12,7 @@
 #-d   \param MAX_POINTS_PULSES (optional) Number points in time array (defaults to max of NREADBACK and NPOINTS defined in axes cfg if this command is executed after axes are configured)
 #-d   \param TRG_EC_ENTRY  (optional) EtherCAT entry for trigger output, default to nothing (triggering disabled). Example: TRG_EC_ENTRY='ec0.23.binaryOutput02.0'
 #-d   \param TRG_DUR_S     (optional) Duration of trigger pulse defaults to 0.1 s. Example: TRG_DUR=0.2, 
-#-d   \param SOFT_TRG_FLNK (optional) Forward-link for soft trigger (PV name = <P>PVT-NumActualPulses)
+#-d   \param SOFT_TRG_FLNK (optional) Forward-link for soft trigger (PV name = <P>PVT-SftTrg)
 #-d */
 
 #- Handle default values
