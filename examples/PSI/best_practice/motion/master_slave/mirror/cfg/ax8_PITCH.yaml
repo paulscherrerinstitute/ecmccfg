@@ -21,7 +21,7 @@ trajectory:
   axis:
     velocity: 0.1
     acceleration: 0.5
-    decceleration: 0.5
+    deceleration: 0.5
 
 input:
   limit:
