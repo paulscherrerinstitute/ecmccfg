@@ -15,6 +15,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
 
 # Alias = 0
 ecmcConfigOrDie "Cfg.EcAddSlave(0,${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID})"
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "EK1100")

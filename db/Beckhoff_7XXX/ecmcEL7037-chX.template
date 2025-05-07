@@ -8,43 +8,12 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Cmd-RB"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bo,"${ECMC_P}Drv${CH_ID}-EnaCmd"){
-  field(DESC, "Enable drive cmd")
-  field(OUT,  "${ECMC_P}Drv${CH_ID}-Cmd.B0")
-  field(ZNAM, "Disable")
-  field(ONAM, "Enable")
-  field(SCAN, "Passive")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Cmd.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${ECMC_P}Drv${CH_ID}-RstCmd"){
-  field(DESC, "Reset drive cmd")
-  field(OUT,  "${ECMC_P}Drv${CH_ID}-Cmd.B1")
-  field(ZNAM, "Idle")
-  field(ONAM, "Reset")
-  field(SCAN, "Passive")
-  field(HIGH, "0.01")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Cmd.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${ECMC_P}Drv${CH_ID}-TrqRedCmd"){
-  field(DESC, "Reduce torque cmd")
-  field(OUT,  "${ECMC_P}Drv${CH_ID}-Cmd.B2")
-  field(ZNAM, "Normal")
-  field(ONAM, "Reduce")
-  field(SCAN, "Passive")  
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Cmd.PROC")
-  field(TSE,  "0")
-}
-
-record(mbboDirect,"${ECMC_P}Drv${CH_ID}-Cmd"){
+record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
   field(DESC, "$(HWTYPE): Drive Control Word")
   field(PINI, "$(PINI=1)")
-  field(DTYP, "asynUInt32Digital")
-  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
-  field(TSE,  "0")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).driveControl${CH_ID}=")
+  field(PREC, "0")
 }
 
 record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
@@ -56,7 +25,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=RAW)")
+  field(EGU,  "$(EGU=V)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -78,7 +47,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=RAW)")
+  field(EGU,  "$(EGU=V)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -97,28 +66,8 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-RdyToEna.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-RdyToEna"){
-  field(DESC, "$(HWTYPE): Drv Rdy to Ena")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B0")
-  field(ZNAM, "Warning")
-  field(ONAM, "Ready")
-  field(ZSV,  "MINOR")
-  field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Rdy")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-Rdy"){
-  field(DESC, "$(HWTYPE): Drive Ready")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B1")
-  field(ZNAM, "Warning")
-  field(ONAM, "Ready")
-  field(ZSV,  "MINOR")
-  field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
@@ -138,16 +87,6 @@ record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-TrqRed")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-TrqRed"){
-  field(DESC, "$(HWTYPE): Torque reduced")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B6")
-  field(ZNAM, "Normal")
-  field(ONAM, "Reduced")
-  field(ZSV,  "NO_ALARM")
-  field(OSV,  "NO_ALARM")
   field(FLNK, "${ECMC_P}Drv${CH_ID}-StlAlrm")
 }
 
@@ -168,26 +107,6 @@ record(bi,"${ECMC_P}Drv${CH_ID}-SyncErrAlrm"){
   field(ONAM, "Error")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI01")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-BI01"){
-  field(DESC, "$(HWTYPE): BI01")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BB")
-  field(ZNAM, "Zero")
-  field(ONAM, "One")
-  field(ZSV,  "NO_ALARM")
-  field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-BI02")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
-  field(DESC, "$(HWTYPE): BI02")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.BC")
-  field(ZNAM, "Zero")
-  field(ONAM, "One")
-  field(ZSV,  "NO_ALARM")
-  field(OSV,  "NO_ALARM")
 }
 
 # Encoder interface of EL70X7 are defined in ecmcEL5101-chX.template

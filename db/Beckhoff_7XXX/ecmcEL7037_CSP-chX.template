@@ -17,7 +17,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Cmd"){
 }
 
 record(ai,"${ECMC_P}Drv${CH_ID}-PosCmd-RB"){
-  field(DESC, "$(HWTYPE): Position setpoint cmd RB")
+  field(DESC, "$(HWTYPE): Posotion setpoint cmd RB")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint${CH_ID}?")
@@ -25,7 +25,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-PosCmd-RB"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=RAW)")
+  field(EGU,  "$(EGU=V)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -40,14 +40,14 @@ record(ai,"${ECMC_P}Drv${CH_ID}-PosCmd-RB"){
 }
 
 record(ao,"${ECMC_P}Drv${CH_ID}-PosCmd"){
-  field(DESC, "$(HWTYPE): Position setpoint cmd")
+  field(DESC, "$(HWTYPE): Posotion setpoint cmd")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).positionSetpoint${CH_ID}=")
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=RAW)")
+  field(EGU,  "$(EGU=V)")
   field(PREC, "$(PREC=7)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -66,28 +66,8 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-RdyToEna.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
   field(TSE,  "$(TSE=-2)")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-RdyToEna"){
-  field(DESC, "$(HWTYPE): Drv Rdy to Ena")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B0")
-  field(ZNAM, "Warning")
-  field(ONAM, "Ready")
-  field(ZSV,  "MINOR")
-  field(OSV,  "NO_ALARM")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-Rdy")
-}
-
-record(bi,"${ECMC_P}Drv${CH_ID}-Rdy"){
-  field(DESC, "$(HWTYPE): Drive not eady")
-  field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B1")
-  field(ZNAM, "Ready")
-  field(ONAM, "Warning")
-  field(ZSV,  "NO_ALARM")
-  field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm")
 }
 
 record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){

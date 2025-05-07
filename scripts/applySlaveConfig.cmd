@@ -4,7 +4,6 @@
 
 #-d /**
 #-d   \brief Script for applying a specific slave configuration after the slave had been added manually.
-#-d   \details Apply configurations to a slave.
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Example call:

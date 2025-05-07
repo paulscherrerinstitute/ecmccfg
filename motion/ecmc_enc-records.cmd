@@ -4,7 +4,6 @@
 
 #-d /**
 #-d   \brief Script for adding encoder related EPICS PVs.
-#-d   \details Script for adding an encoder to a previously created axis.
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note This script is typically called by \b addAxis.cmd

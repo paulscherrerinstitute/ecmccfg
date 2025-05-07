@@ -57,6 +57,7 @@ record(bi,"${ECMC_P}AccSOvrAlrm"){
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
   field(FLNK, "${ECMC_P}AccOvrRunAlrm")
+  RunAlrm")
 }
 
 record(bi,"${ECMC_P}-AccOvrRunAlrm"){

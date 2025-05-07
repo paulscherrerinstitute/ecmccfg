@@ -18,6 +18,10 @@ core.*
 *.d
 O.*
 ecmccfg.Makefile
+db/*/*.db
+db/ecmcDS.db
+db/empty.db
+db/testAIs.db
 
 *LAB_MotionSystems*
 *Copley*
@@ -32,4 +36,3 @@ hugo/content/source/
 *.pyc
 
 .hugo_build.lock
-hugo/public

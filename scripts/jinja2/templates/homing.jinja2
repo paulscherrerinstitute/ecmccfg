@@ -62,10 +62,8 @@
 
     {%- if homing.acc is defined %}
         epicsEnvSet(ACC, {{ homing.acc }})
-        ecmcConfigOrDie "Cfg.SetAxisHomeAcc({{ axis.id }},{{ homing.acc }})"
     {%- endif %}
     {%- if homing.dec is defined %}
         epicsEnvSet(DEC, {{ homing.dec }})
-        ecmcConfigOrDie "Cfg.SetAxisHomeDec({{ axis.id }},{{ homing.dec }})"
     {%- endif %}
 {%- endif %}

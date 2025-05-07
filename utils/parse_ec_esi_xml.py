@@ -2,16 +2,17 @@
 
 # need system python for libxml2 support with xpath
 
-#- Originally written for Dimaond light epics ethercat support:
-#- Rewritten/edited by Anders Sandström for use with ecmc
+#- Originally written by Dimaond Light EPICS EtherCAT support.
 
-import sys
-#sys.path.append('/opt/homebrew/opt/libxml2/lib/python3.13/site-packages/')
+#- Copied and rewritten/edited by Anders Sandström for use with ecmc (generating hardware support)
 
 import libxml2
+import sys
+
 reqs = set()
 base = None
 verbose = False
+printedPDOHeader = False
 
 def parseInt(text):
     if text.startswith("#x") or text.startswith("0x"):
@@ -71,7 +72,7 @@ def getSDOBitSize(node):
     bitlen= bitlen.replace(" ", "")
     return int(bitlen)
 
-def printEcmcAddEntry(vendor,product,pdo,entry,direction,updateInRT):
+def printEcmcAddEntry(vendor,product,pdo,entry,direction,updateInRT,outputfile):
     # <TxPdo Fixed="1" Sm="3">
     sm = pdo.prop("Sm")
     pdoName = getPdoName(pdo)
@@ -81,9 +82,9 @@ def printEcmcAddEntry(vendor,product,pdo,entry,direction,updateInRT):
     entrySubIndex = getEntrySubIndex(entry)
     dt = getEntryDataType(entry)
     dataLen = getEntryBitLen(entry)
-    print('ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},0x%x,0x%x,%d,%d,0x%x,0x%x,0x%x,%s_%d,%s,%d)' % (vendor, product, int(direction), int(sm), pdoIndex, entryIndex, entrySubIndex, dt, int(dataLen), entryName ,int(updateInRT) ))
+    print('ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},0x%x,0x%x,%d,%d,0x%x,0x%x,0x%x,%s_%d,%s,%d)' % (vendor, product, int(direction), int(sm), pdoIndex, entryIndex, entrySubIndex, dt, int(dataLen), entryName ,int(updateInRT) ),file=outputfile)
 
-def printEcmcAddEntryEmpty(vendor,product,pdo,entry,direction,emptyIndex):
+def printEcmcAddEntryEmpty(vendor,product,pdo,entry,direction,emptyIndex,outputfile):
     # <TxPdo Fixed="1" Sm="3">
     sm = int(pdo.prop("Sm"))
     pdoName = getPdoName(pdo)
@@ -91,69 +92,60 @@ def printEcmcAddEntryEmpty(vendor,product,pdo,entry,direction,emptyIndex):
     entryName = "ec${ECMC_EC_MASTER_ID}.s${ECMC_EC_SLAVE_NUM}.sm" + str(sm) + ".pdo" + str(pdo) + ".empty" + str(emptyIndex)
     entryIndex = getEntryIndex(entry)
     dataLen = getEntryBitLen(entry)
-    print(entry)
+    print(entry,file=outputfile)
 
-def printSDO(sdoObject,dtlist):
-    #print(sdoObject)
-    sdoName = getEntryName(sdoObject)
-    sdoIndex = getEntryIndex(sdoObject)
-    dt = getSDODataType(sdoObject)
-    dataLen = getSDOBitSize(sdoObject)
-    byteCount = dataLen/8
+def printPDOHeader(outputfile):
+    print("#- =================================== ",file=outputfile)
+    print("#- PDOs ",file=outputfile)
+    print("#-",file=outputfile)
+
+def printSDOHeader(outputfile):
+    print("",file=outputfile)
+    print("#- =================================== ",file=outputfile)
+    print("#- SDOs ",file=outputfile)
+    print("#-",file=outputfile)
+
+def printSDO(sdoObject,dtlist,outputfile):    
+    sdoName    = getEntryName(sdoObject)
+    sdoIndex   = getEntryIndex(sdoObject)
+    datatype   = getSDODataType(sdoObject)
+    dataLen    = getSDOBitSize(sdoObject)
+    byteCount  = dataLen/8
     bitsExByte = dataLen-byteCount*8
-    print("SDO 0x%x, %s (%d.%d), %s" % (sdoIndex,dt, byteCount, bitsExByte, sdoName))
-    # print recursive datatype
-    dtlist[dt].printRecursive(" ",dtlist)
+    print("#- SDO 0x%x, %s (%d.%d), %s" % (sdoIndex,datatype, byteCount, bitsExByte, sdoName),file=outputfile)
+    dtlist[datatype].printRecursive(" ",dtlist)
 
-class ecDataTypeSubItem:
-    def __init__(self):        
+class ecDataType:
+    def __init__(self,outputfile):
+        self.f = outputfile
         self.name = ""
         self.subIdx = -1
         self.bits = -1
         self.bitoffset = -1
         self.type = ""
+        self.subItems = []
+        self.bytes = -1
+
     def print(self, indentStr):
-        self.bytes=self.bits/8
-        print("%s 0x%x, %s %d.%d %d: %s" % (indentStr,self.subIdx,self.type, self.bytes, self.bits-self.bytes*8,self.bitoffset,self.name))
+        self.bytes = self.bits/8
+        if len(self.subItems) == 0 and self.subIdx >= 0:
+            print("#- %s 0x%02x %20s %5d.%d (%3d): %s" % (indentStr,self.subIdx, self.type, self.bytes, self.bits-self.bytes*8, self.bitoffset, self.name),file=self.f)
 
     # Loop until "native" type
     def printRecursive(self, indentStr, datatypelist):
-        self.bytes=self.bits/8
-        indent=indentStr
-        while not isinstance(datatypelist[self.type],ecDataTypeItem):            
-            datatypelist[self.type].print(indent)
-            indent = indent + "  "
-        print("%s 0x%x, %s %d.%d %d: %s" % (indentStr,self.subIdx,self.type, self.bytes, self.bits-self.bytes*8,self.bitoffset,self.name))
-        #print("%s %s %d.%d: %s" % (indentStr,self.type,self.bytes, self.bits-self.bytes*8, self.name))
-
-class ecDataTypeItem:
-    def __init__(self):
-        self.name = ""
-        self.bits = -1
-        self.subItems = []
-
-    def print(self, indentStr):
-        self.bytes=self.bits/8
-        print("%s %d.%d: %s" % (indentStr,self.bytes, self.bits-self.bytes*8, self.name))
+        self.bytes = self.bits/8
+        indent = indentStr
+        self.print(indent)
         for subItem in self.subItems:
-           subItem.print(indentStr+ "  ")
+            subItem.printRecursive(indent + "  ",datatypelist)
 
-    def printRecursive(self, indentStr, datatypelist):
-        self.bytes=self.bits/8
-        print("%s %d.%d: %s" % (indentStr,self.bytes, self.bits-self.bytes*8, self.name))
-        for subItem in self.subItems:
-           subItem.printRecursive(indentStr+ "  ",datatypelist)
-
-def parseDataType(dtnode):
-    dt = ecDataTypeItem()
+def parseDataType(dtnode,outputfilename):
+    dt = ecDataType(outputfilename)
     dt.name = dtnode.xpathEval("Name")[0].content
     dt.bits = int(dtnode.xpathEval("BitSize")[0].content)
     counter = 0
-    for subItemNode in dtnode.xpathEval("SubItem"):
-       #print ("subItemNode")
-       #print (subItemNode)
-      
-       subItem = ecDataTypeSubItem()
+    for subItemNode in dtnode.xpathEval("SubItem"):     
+       subItem = ecDataType(outputfilename)
        subItem.subIdxNode = subItemNode.xpathEval("SubIdx")
        if len(subItem.subIdxNode)>0:
            subItem.subIdx= int(subItem.subIdxNode[0].content)
@@ -166,9 +158,9 @@ def parseDataType(dtnode):
        dt.subItems.append(subItem)
        counter = counter+1
     return dt
-
     
-def parseFile(filename, output, list_devices, extraPdos):    
+def parseFile(filename, outputfile, list_devices, extraPdos):
+    printedPDOHeader = False
     doc = libxml2.parseFile(filename)
     vendor = parseInt(doc.xpathEval("//Vendor/Id")[0].content)
     for device in doc.xpathEval("//Device"):
@@ -213,10 +205,16 @@ def parseFile(filename, output, list_devices, extraPdos):
                             ai.append(getPdoName(txpdo) + "." + getEntryName(entry) )
                         else:
                             longin.append(getPdoName(txpdo) + "." + getEntryName(entry) )
-                        printEcmcAddEntry(vendor,product,txpdo,entry,2,1)
+                        if not printedPDOHeader:
+                            printPDOHeader(outputfile)
+                            printedPDOHeader = True
+                        printEcmcAddEntry(vendor,product,txpdo,entry,2,1,outputfile)
                     elif verbose or True:
-                        print("Ignoring entry in pdo %s" % getPdoName(txpdo))
-                        printEcmcAddEntryEmpty(vendor,product,txpdo,entry,2,emptyIndex)
+                        if not printedPDOHeader:
+                            printPDOHeader(outputfile)
+                            printedPDOHeader = True
+                        print("Ignoring entry in pdo %s" % getPdoName(txpdo),file=outputfile)
+                        printEcmcAddEntryEmpty(vendor,product,txpdo,entry,2,emptyIndex,outputfile)
                         emptyIndex = emptyIndex + 1
             emptyIndex = 0
             for rxpdo in device.xpathEval("RxPdo"):
@@ -232,23 +230,29 @@ def parseFile(filename, output, list_devices, extraPdos):
                             bo.append(getPdoName(rxpdo) + "." + getEntryName(entry) )
                         else:
                             longout.append(getPdoName(rxpdo) + "." + getEntryName(entry) )
-                        printEcmcAddEntry(vendor,product,rxpdo,entry,1,1)
+                        if not printedPDOHeader:
+                            printPDOHeader(outputfile)
+                            printedPDOHeader = True
+
+                        printEcmcAddEntry(vendor,product,rxpdo,entry,1,1,outputfile)
                     elif verbose:
-                        print("Ignoring entry in pdo %s" % getPdoName(txpdo))
-                        printEcmcAddEntryEmpty(vendor,product,rxpdo,entry,1,emptyIndex)
+                        if not printedPDOHeader:
+                            printPDOHeader(outputfile)
+                            printedPDOHeader = True
+                        print("Ignoring entry in pdo %s" % getPdoName(txpdo), file=outputfile)
+                        printEcmcAddEntryEmpty(vendor,product,rxpdo,entry,1,emptyIndex,outputfile)
                         emptyIndex = emptyIndex + 1
             
             for dtnode in device.xpathEval("Profile/Dictionary/DataTypes/DataType"):
-                dt = parseDataType(dtnode) 
+                dt = parseDataType(dtnode,outputfile)
                 dt.print("  ")
 
                 dataTypeList[dt.name] = dt
 
+            printSDOHeader(outputfile)
             for sdoObject in device.xpathEval("Profile/Dictionary/Objects/Object"):
-                printSDO(sdoObject,dataTypeList)
+                printSDO(sdoObject,dataTypeList,outputfile)
 
-
-            #makeTemplate(ai, longin, longout, bi, bo, output, base, devtype, revision, extraPdos)
 
 def usage(progname):
     print("%s: Generate hardware support for ecmc " % progname)
@@ -257,9 +261,9 @@ def usage(progname):
     print("   %s -b <xml-base-dir> -l  Lists the devices in the database" % progname)
     print("""
    %s -b <xml-base-dir> -d <device-type> -r <rev-no> [-p comma-separated-pdo-list] -o output-file
-       Generates a template in <output-file> for the given device and revision.
+       Generates a ecmc hw support snippet in <output-file> for the given device and revision.
        rev-no must be input as a hex number, e.g. 0x00100000
-       Use the -p argument to include additional pdos in the template
+       Use the -p argument to include additional pdos in the snippet
        """ % progname)
 
 def parsePdoassignments(s):
@@ -340,13 +344,16 @@ if __name__ == "__main__":
 
     assert(list_devices or len(reqs) == 1)
     import os
+    outputfile = open(output, "w")
     for f in os.listdir(base):
         if f.endswith("xml"):
             filename = os.path.join(base, f)
             if verbose:
                 print("Parsing %s" % filename)
-            parseFile(filename, output, list_devices,
+            parseFile(filename, outputfile, list_devices,
                       parsePdoassignments(pdoassignment))
+    outputfile.close()
+
 
 
 # loads chain description, outputs complete config file...

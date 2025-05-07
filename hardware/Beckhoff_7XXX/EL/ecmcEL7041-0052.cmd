@@ -17,6 +17,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 
 #- common PDOs for status and control
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX70XX.cmd
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "EL70x1")

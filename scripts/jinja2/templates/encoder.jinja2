@@ -9,26 +9,13 @@ epicsEnvShow(ECMC_CONFIG_RETURN_VAL)
 epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
 
 {#- links #}
-{%- if encoder.position is not defined %}
-    {%- if encoder.source == 0 %}
-      # Error: encoder.source set to internal but no encoder.position link specified. Two options:
-      #    1. Specify encoder.position link
-      #    2. Set encoder.source to external (=1) and make sure the encoder actual value is set by PLC code.
-      ecmcExit
-    {%- else  %}
-      # Warning: No encoder position link specified.
-    {%- endif  %}
-{%- else  %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
-{%- endif  %}
-
-#- The base control word is not used in ecmc. All other bits are linked based on the the control word, see below..
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
 #- {%- if encoder.control %}
 #-     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax${ECMC_AXIS_NO}.enc.control")"
 #- {%- endif %}
 {#- scaling #}
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},{{ encoder.denominator|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator }})"
+ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator|float }})"
 {#- source #}
 ecmcConfigOrDie "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},{{ encoder.source }})"
 {#- data #}
@@ -64,20 +51,20 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax${ECMC_AXIS_NO}.enc.latchcontrol")"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
 {%- endif %}
-{%- if encoder.filter.velocity is defined %}    
-        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size|default(100) }})"    
-        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.velocity.enable|int|default(1) }})"
+{%- if encoder.filter.velocity %}
+    {%- if encoder.filter.velocity.enable %}
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size}})"
+    {%- endif %}
 {%- endif %}
-{%- if encoder.filter.trajectory is defined %}
-    # WARNING:  Use "encoder.filter.position" instead of "encoder.filter.trajectory"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int|default(1) }})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size|default(10) }})"
+{%- if encoder.filter.trajectory %}
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int}})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size}})"
 {%- endif %}
 
 #- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
-{%- if encoder.filter.position is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|int|default(1) }})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size|default(10) }})"
+{%- if encoder.filter.position %}
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|int}})"
+    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size}})"
 {%- endif %}
 
 #- Use this encoder as primary?!
@@ -168,33 +155,3 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     {%- endif %}
 {%- endif %}
 
-{%- if encoder.lookuptable is defined %}
-    ecmcConfigOrDie "Cfg.LoadAxisEncLookupTable(${ECMC_AXIS_NO},{{ encoder.lookuptable.filename }})"
-    {%- if encoder.lookuptable.range is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableRange(${ECMC_AXIS_NO},{{ encoder.lookuptable.range }})"
-    {%- endif %}
-
-    {%- if encoder.lookuptable.scale is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableScale(${ECMC_AXIS_NO},{{ encoder.lookuptable.scale }})"
-    {%- endif %}
-
-    {%- if encoder.lookuptable.enable is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncLookupTableEnable(${ECMC_AXIS_NO},{{ encoder.lookuptable.enable|int }})"
-    {%- endif %}
-{%- endif %}
-
-{%- if encoder.delayComp is defined %}
-    {%- if encoder.delayComp.enable is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEncDelayCyclesAndEnable(${ECMC_AXIS_NO},{{ encoder.delayComp.time }},{{encoder.delayComp.enable|int }})"
-    {%- else  %}
-        #- Auto enable if only delay is set.
-        ecmcConfigOrDie "Cfg.SetAxisEncDelayCyclesAndEnable(${ECMC_AXIS_NO},{{ encoder.delayComp.time }},1)"
-    {%- endif %}
-{%- endif %}
-
-{%- if encoder.useAsCSPDrvEnc is defined %}
-    {%- if encoder.useAsCSPDrvEnc > 0 %}
-        ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
-        epicsEnvSet(ECMC_AX_DRV_MODE, "CSP_PC_ENC_0${ECMC_ENC_CFG_ID=1}")
-    {%- endif %}
-{%- endif %}

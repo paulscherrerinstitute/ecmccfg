@@ -11,7 +11,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13a83052")
 
 #- verify slave, including reset
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
-${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=false}"
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=false"
 #- slave returns an error on reset. Thus, we can't use the regualr `RESET=true` in this case
 #- reset slave manually
 # ==> disregard subsequent error for the SDO write to register 0x1011:01! <==
@@ -27,6 +27,3 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6010,0x1,16,encoderStatus02)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6010,0x11,64,positionActual02)"
-
-#- Cleanup
-epicsEnvUnset(ECMC_SLAVE_RESET)

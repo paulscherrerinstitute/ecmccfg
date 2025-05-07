@@ -85,16 +85,6 @@ record(ai,"$(P)MCU-ThdPrdMax"){
   field(EGU,  "ns")
 }
 
-record(calc,"$(P)MCU-ThdFrqAvg") {
-  field(DESC, "Average thread freq")
-  field(PINI, "$(PINI=1)")
-  field(CALC, "2E9/(A+B)")
-  field(INPA,"$(P)MCU-ThdPrdMin")
-  field(INPB,"$(P)MCU-ThdPrdMax CP")
-  field(EGU,  "Hz")
-  field(PREC, "3")
-}
-
 record(ai,"$(P)MCU-ThdExeMin"){
   field(PINI, "1")
   field(DTYP, "asynInt32")
@@ -165,19 +155,16 @@ record(bi,"$(P)MCU-ThdMemLocked"){
   field(ZNAM, "No")
 }
 
+# Updated last in updates cycles (for record with fastest update rate).
+# Can be used as trigger after all data have been updated.
+# T_SMP_MS is not supported for this record.
 record(waveform,"$(P)MCU-Updated"){
   field(PINI, "1")
   field(DTYP, "asynInt64ArrayIn")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_HOOK_MS=$(T_SMP_MS=1000))/TYPE=asynInt64ArrayIn/ecmc.updated?")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TYPE=asynInt64ArrayIn/ecmc.updated?")
   field(FTVL, "UINT64")
   field(NELM, "1")
   field(SCAN, "I/O Intr")
   field(TSE,  "$(TSE=-2)")
   field(FLNK, "${ECMC_PROC_HOOK=''}")
-}
-
-# This db is only used to set the VAL field
-record(ao,"${P}MCU-Cfg-UI-EC-Rows") {
-  field(DESC, "UI: Panel rows")
-  field(VAL,  "1")
 }

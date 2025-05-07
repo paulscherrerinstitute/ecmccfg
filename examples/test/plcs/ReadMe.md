@@ -99,7 +99,7 @@ Below the ECMC specific accessible variables and functions are listed:
 13. ax<id>.traj.setpos           curent trajectory setpoint       (rw)
 14. ax<id>.traj.targetpos        target position                  (rw)
 15. ax<id>.traj.extsetpos        current trajecrory setpoint from
-                                 plc sync. expression             (rw) 
+                                 plc sync. expression             (ro) 
 16. ax<id>.traj.targetvel        target velocity setpoint         (rw)
 17. ax<id>.traj.targetacc        target acceleration setpoint     (rw)
 18. ax<id>.traj.targetdec        target deceleration setpoint     (rw)
@@ -692,24 +692,6 @@ returns 0 if success or error code.
                      );
    
    Returns the number of axes in group.
-
-
-17.  mc_grp_get_traj_src_ext(
-                      <grp_id>, : Group index
-                      );
-   
-   Returns true if all axes in the group have trajectory source set to external.
-
-18.  mc_grp_get_any_traj_src_ext(
-                      <grp_id>, : Group index
-                      );
-    Returns true if atleast one axis in the group have trajectory source set to external.
-
-19.  mc_grp_set_allow_src_change_when_enabled(
-                      <grp_id>, : Group index
-                      <allow>,  : Allow change of source
-                      );
-    Allow source change for trajectory and encoder when axis is enabled.
 
 ```
 

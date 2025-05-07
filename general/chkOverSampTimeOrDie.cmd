@@ -1,10 +1,9 @@
 #==============================================================================
 # chkOverSampleTimeOrDie.cmd
 #-d /**
-#-d   \brief Validates the resulting sampling time for oversampling slaves.
+#-d   \brief Checks if the resulting sampling time for oversampling slaves is higher or equal to the minimum time.
 #-d   if not the exit IOC.
-#-d   \details Checks if the resulting sampling time for oversampling slaves is higher or equal to the minimum time.
-#-d   if not the exit IOC.
+#-d
 #-d   Some oversampling slaves might support higher oversampling rates if the ethercat cycletime is lowered.
 #-d   For instance a ELM3604 can support a NELM of 1000 if the ec sampling rate is 200Hz but only support NELM=20 if ec rate is 1kHz.
 #-d

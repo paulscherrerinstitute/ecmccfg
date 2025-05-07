@@ -57,6 +57,3 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 #Velocity direct
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8022,0x1,1,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8032,0x1,1,1)"
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex73x2")

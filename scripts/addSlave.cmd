@@ -1,6 +1,6 @@
 #==============================================================================
 # addSlave.cmd
-#- Arguments: HW_DESC, [SLAVE_ID = 0, SUBST_FILE, P_SCRIPT, NELM, DEFAULT_SUBS, DEFAULT_SLAVE_PVS, MACROS]
+#- Arguments: HW_DESC, [SLAVE_ID = 0, SUBST_FILE, P_SCRIPT, NELM, DEFAULT_SUBS, DEFAULT_SLAVE_PVS]
 
 #-d /**
 #-d   \brief Script for adding a slave to the EtherCAT bus configuration.
@@ -12,10 +12,9 @@
 #-d   \param SUBST_FILE (optional) substitution file
 #-d   \param P_SCRIPT (optional) naming convention prefix script
 #-d   \param NELM (optional) Used for oversampling cards. Defaults to 1
-#-d   \param DEFAULT_SUBS (optional) option to disable default PVs for mapped PDOs
+#-d   \param DEFAULT_SUBS (optional) option to disble default PVs for mapped PDOs
 #-d   \param DEFAULT_SLAVE_PVS (optional, caution!) basic slave PVs, i.e. ${ECMC_P}-Operational will be suppressed
 #-d   \param CALLED_FROM_CFG_SLAVE (optional) Set if called by configureSlave.cmd, default 0
-#-d   \param MACROS: MACROS for subst file
 #-d   \note Example calls:
 #-d   \note - call w/o SLAVE_ID
 #-d   \code
@@ -42,9 +41,6 @@ ecmcIf("'${CONFIG=NAN}'!='NAN' and ${CALLED_FROM_CFG_SLAVE=0}!=1")
 ${IF_TRUE}ecmcExit : Error: addSlave.script is not accepting CONFIG macro. Use configureSlave.cmd instead
 ecmcEndIf()
 
-#-Clear panel data (ensure new)
-epicsEnvUnset(ECMC_HW_PANEL)
-
 epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
@@ -61,7 +57,7 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${ECMC_EC_HWTYPE}"
 
 ecmcEpicsEnvSetCalcTernary(DEFAULT_SUBS, "${DEFAULT_SUBS=True}", "","#- ")
-${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P},MACROS='${MACROS=}'"
+${DEFAULT_SUBS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applySubstitutions.cmd" "SUBST_FILE=${SUBST_FILE=ecmc${ECMC_EC_HWTYPE}.substitutions},ECMC_P=${ECMC_P}"
 epicsEnvUnset(DEFAULT_SUBS)
 
 ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
@@ -86,5 +82,3 @@ epicsEnvSet(ECMC_EC_PREV_SLAVE_NUM,${ECMC_EC_SLAVE_NUM})
 
 # increment SLAVE_ID
 ecmcEpicsEnvSetCalc("SLAVE_ID", "${ECMC_EC_SLAVE_NUM}+1","%d")
-
-ecmcEpicsEnvSetCalc(ECMC_ECSLAVE_COUNT, "$(ECMC_ECSLAVE_COUNT=0)+1")

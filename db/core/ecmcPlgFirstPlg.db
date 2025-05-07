@@ -1,5 +1,5 @@
 # This db is only used to set the VAL field
-record(ai,"${P}MCU-Cfg-PLG-FrstObjId") {
+record(ao,"${P}MCU-Cfg-PLG-FrstObjId") {
   field(DESC, "First PLG ID")
   field(VAL,  "$(FIRST_OBJ_ID=-1)")
 }

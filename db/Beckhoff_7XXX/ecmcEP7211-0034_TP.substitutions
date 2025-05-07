@@ -7,7 +7,7 @@ file "ecmcEL72XX_DRV.template"
 file "ecmcEL72XX_ENC.template"
 {
   pattern {CH_ID}
-          {01   }
+          {01   }}
 }
 
 file "ecmcEL72XX_TP.template"

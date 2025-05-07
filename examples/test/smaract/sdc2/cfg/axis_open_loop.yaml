@@ -118,9 +118,9 @@ controller:
 trajectory:
   # type: 1                                           # Default 0 = trapetz, 1 = S-curve (ruckig)
   axis:
-    velocity: 100000                                   # Default velo for axis
-    acceleration: 200000                                # Default acc for axis
-    deceleration: 200000                                # Default dec for axis
+    velocity: 1000                                    # Default velo for axis
+    acceleration: 2000                                # Default acc for axis
+    deceleration: 2000                                # Default dec for axis
     # emergencyDeceleration: 0.05                     # Deceleration when axis in error state
     jerk: 100                                         # Default jerk for axis
   jog:
@@ -168,7 +168,7 @@ softlimits:
 
 monitoring:
   lag:
-    enable: false                                      # Enable position lag monitoring (following error)
+    enable: true                                      # Enable position lag monitoring (following error)
     tolerance: 10                                      # Allowed tolerance
     time: 10                                          # Allowed time outside tolerance  target:
   velocity:

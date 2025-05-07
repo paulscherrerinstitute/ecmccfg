@@ -3,7 +3,7 @@
 
 #-d /**
 #-d   \brief Script for adding Encoder from yaml file via `jinja2`
-#-d   \details adds an encoder to an axis, based on a yaml config file
+#-d   \details adds an Axis, based on a yaml config file
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param FILE the yaml-file containing the PLC definition

@@ -32,10 +32,8 @@
 {#- Todo: add more types, add default type #}
 {%- if axis.mode == 'CSV' %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.velocity")"
-    epicsEnvSet(ECMC_AX_DRV_MODE, ${ECMC_AX_DRV_MODE="CSV"})
 {%- else %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.position")"
-    epicsEnvSet(ECMC_AX_DRV_MODE, ${ECMC_AX_DRV_MODE="CSP"})
 {%- endif %}
 {%- if drive.reduceTorqueEnable is defined %}
     {%- if drive.reduceTorque is defined %}

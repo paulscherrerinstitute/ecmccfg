@@ -30,6 +30,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=03,ECMC_PDO=0x1a04,
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=04,ECMC_PDO=0x1a06,ECMC_ENTRY=0x6030"
 #- analog input Ch5
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=05,ECMC_PDO=0x1a08,ECMC_ENTRY=0x6040"
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex3255")

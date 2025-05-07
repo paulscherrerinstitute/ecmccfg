@@ -1,9 +1,9 @@
 #==============================================================================
 # issueWarning.cmd
 #-d /**
-#-d   \brief Issue a warning
-#-d   \details Generic verification script for expressions
+#-d   \brief Generic verification script for expressions
 #-d          if the evaluated expression is true then issue WARNING TEXT
+#-d
 #-d   \author Anders Sandstroem
 #-d
 #-d    Arguments:

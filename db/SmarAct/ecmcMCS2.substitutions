@@ -33,12 +33,3 @@ file "ecmcMCS2_custom.template"
           {02   }
           {03   }
 }
-
-# ecmcDS402Enable
-file "ecmcDS402Enable-chX.template"
-{
-  pattern {CH_ID}
-          {01   }
-          {02   }
-          {03   }                   
-}

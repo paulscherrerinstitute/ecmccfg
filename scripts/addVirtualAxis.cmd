@@ -4,7 +4,6 @@
 
 #-d /**
 #-d   \brief Script for adding axis EPICS PVs.
-#-d   \details Adds an virtual axis with PVs.
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

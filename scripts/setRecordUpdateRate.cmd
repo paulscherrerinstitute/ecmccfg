@@ -4,7 +4,6 @@
 
 #-d /**
 #-d   \brief Script for changing record update rate
-#-d   \details Update record processing rate, all records created after this command will be updated in the specified rate.
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param RATE_MS (optional) update rate in milli-seconds of any record loaded after this call, defaults to ethercat bus rate.

@@ -21,17 +21,6 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-VelAct"){
   field(TSE,  "$(TSE=-2)")
 }
 
-record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-ErrId"){
-  field(PINI, "1")
-  field(DTYP, "asynInt32")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enc.errid$(ENC_NO)?")
-  field(PREC, "${PREC=0}")
-  field(EGU,  "")
-  field(SCAN, "I/O Intr")
-  field(DESC, "${DESC=""}")
-  field(TSE,  "$(TSE=-2)")
-}
-
 record(mbbi, "${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeProc") {
   field(DESC, "Homing procedure")
   field(VAL,  "${HOME_PROC=0}")

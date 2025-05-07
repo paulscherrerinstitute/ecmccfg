@@ -1,5 +1,6 @@
 # Directory EL72XX drives
 
+
 # Reduction of torque
 If the max torque of the motor needs to be reduced then the SDO entry 0x8011:0x11 can be used.
 
@@ -54,44 +55,3 @@ The inputs might also be accessible in the touchProbe entries.
 ### Power supply
 Make sure the EL72XX have dc power, both for motor and 24v logic (the power contacts on the sides). The two bottom leds should light green.
 If 24V logic voltage is missing the terminal will look OK (no red leds) and No error seems to be possible to detect over ethercat. However, an enable command will result in a DS402 timeout after some seconds. In order to ensure that the motor have 24V dc, it needs to be placed beside a terminal that feeds it with this voltage (some terminals do not feed power in the side contacts, then a el9410 can be installed).
-
-# Tuning velo and current loop
-Normally teh default settings are fine but sometimes they need some tweaking.
-
-## Case  X01DA-CPCL-OPSL1
-Drive: EL7221-9014_ALL
-Motor: AM8121-1FH1
-
-### default in ecmccomp:
-```
-#- Velocity loop proportianal gain [mA/(rad/s)]
-epicsEnvSet(MOT_VELO_KP,95)
-
-#- Velocity loop integral time [0.1ms]
-epicsEnvSet(MOT_VELO_TI,150)
-```
-
-### default in ecmccfg
-```
-#- Velocity loop integral time
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,146,4)"
-#- Velocity loop proportianal gain
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,95,4)"
-
-```
-
-### needed cfg
-```
-#- Velocity loop integral time
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x14,150,4)"
-#- Velocity loop proportianal gain
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,146,4)"
-```
-
-### Default in twincat
-Same as "needed cfg".
-
-Seems at some time the default settimngs for this motor changed.
-
-Need to consider if an the values in ecmccfg and ecmccomp should be updated.
-

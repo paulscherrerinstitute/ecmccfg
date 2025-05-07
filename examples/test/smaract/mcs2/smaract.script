@@ -1,20 +1,17 @@
 ##############################################################################
 ## Example config for smaract MCS2
 
-require ecmccfg sandst_a "ECMC_VER=sandst_a,IOC=$(IOC),EC_RATE=1000,MASTER_ID=0,ENG_MODE=1"
-require ecmccomp
+require ecmccfg v9.0.1_RC3,"IOC=$(IOC),ECMC_VER=sandst_a,EC_RATE=1000,MASTER_ID=1"
+require ecmccomp sandst_a
 
 ##############################################################################
 ## Configure hardware
 
-${SCRIPTEXEC} ${ecmccfg_DIR}setRecordUpdateRate.cmd "RATE_MS=1"
-
-
-epicsEnvSet("MCS2_SLAVE_NUM",              "15")
+epicsEnvSet("MCS2_SLAVE_NUM",              "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SLC1750ds,MACROS='HOME_VELO=1000,HOME_ACC=1000'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SLC1750ds,MACROS='HOME_VELO=1000'"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=2"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=3,MACROS='HOME_VELO=10000,HOME_ACC=1000'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=3"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -24,13 +21,19 @@ ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 #
 epicsEnvSet("MCS2_CHID",              "1")
 epicsEnvSet("DEV",      "$(IOC)")
+#"-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/mcs2.ax)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_lin.yaml"
 
 ##############################################################################
-## AXIS 3 (MCS2 CH1)
+## AXIS 1 (MCS2 CH1)
 #
 epicsEnvSet("MCS2_CHID",              "3")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_rot.yaml"
+
+# Start in CSP
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode01,8)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode02,8)"
+ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${MCS2_SLAVE_NUM},mode03,8)"
 
 ##############################################################################
 ############# Configure diagnostics:

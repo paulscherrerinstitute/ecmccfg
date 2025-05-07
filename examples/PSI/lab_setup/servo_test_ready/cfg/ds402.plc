@@ -1,5 +1,0 @@
-println('-----------------------------------------')
-mc_power(1,1);
-println('Position : ',ec${M_ID=0}.s${S_ID=0}.positionActual01);
-println('Status   : ',ec${M_ID=0}.s${S_ID=0}.driveStatus01);
-println('Ready    : ',ec_chk_bit(ec${M_ID=0}.s${S_ID=0}.driveStatus01,0));

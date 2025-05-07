@@ -2,7 +2,6 @@
 # addEcSdoRT.cmd
 #-d /**
 #-d   \brief Script for adding asyn SDO object (access to SDO:s in realtime)
-#-d   \details Add SDO for async access during realtime operation
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param SLAVE_ID (optional) bus position
@@ -35,5 +34,3 @@ ${ECMC_EXE_CMD_FLOAT}ecmcFileExist("ecmcSDOAsyncFloat.template",1,1)
 ${ECMC_EXE_CMD_FLOAT}dbLoadRecords("ecmcSDOAsyncFloat.template","ECMC_P=${ECMC_P},MASTER_ID=${ECMC_EC_MASTER_ID=0},SLAVE_POS=${SLAVE_ID=0},NAME=${NAME},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}")
 epicsEnvUnset(ECMC_EXE_CMD_INT)
 epicsEnvUnset(ECMC_EXE_CMD_FLOAT)
-
-

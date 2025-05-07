@@ -4,7 +4,7 @@ file "ecmc_analogInputArray-chX.template"
           {01,    "asynInt32ArrayIn",  "LONG" }
 }
 
-file "ecmcEL3751_status-chX.template"
+file "ecmcELM360X-stat-chX.template"
 {
   pattern {CH_ID}
           {01   }

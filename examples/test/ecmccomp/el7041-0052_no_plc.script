@@ -1,13 +1,18 @@
 ##############################################################################
-## Example config for el7041
+## Example config for el7031
 
-require ecmccfg "ENG_MODE=1"
+require ecmccfg sandst_a,"ECMC_VER=sandst_a,ENG_MODE=1,MAX_PARAM_COUNT=1000"
 
+epicsEnvSet(IOC,c6025a)
 # Load components lib
-require ecmccomp
+require ecmccomp sandst_a
 
 ##############################################################################
 ## Configure hardware
+
+#-epicsEnvSet("ENC_SLAVE_1",          "2")
+#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_1), HW_DESC=EL5001"
+#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
 
 epicsEnvSet("DRV_SLAVE",              "13")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
@@ -17,6 +22,11 @@ epicsEnvSet("ENC_SLAVE_2",            "14")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_2), HW_DESC=EL5042"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
 ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
+
+#-epicsEnvSet("ENC_SLAVE_3",            "15")
+#-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE_3), HW_DESC=EL5002"
+#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=1"
+#-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-SSI,CH_ID=2"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -34,10 +44,12 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_el7041_no_pl
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
 ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
-##############################################################################
-############# Start RT thread:
+# go active
 $(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+
+#- ecmcConfig "Cfg.SetAxisErrorId(1,100000)"
+

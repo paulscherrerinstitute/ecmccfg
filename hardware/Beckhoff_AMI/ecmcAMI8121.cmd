@@ -43,6 +43,3 @@ epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)
 
 #- watchdog
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcWatchDog.cmd
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex72x1")

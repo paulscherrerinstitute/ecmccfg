@@ -2,8 +2,7 @@
 # ecmc_axis_unset.cmd
 #- Arguments: n/a
 #-d /**
-#-d   \brief Clears all motion related variables
-#-d   \details Unsets all varaiables set by ecmc_axis.cmd configuration snippet
+#-d   \brief Unsets all varaiables set by ecmc_axis.cmd configuration snippet
 #-d   \author Anders Sandstroem
 #-d */
 

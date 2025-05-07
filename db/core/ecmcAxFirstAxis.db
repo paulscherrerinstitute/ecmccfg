@@ -1,11 +1,5 @@
 # This db is only used to set the VAL field
-record(ai,"${P}MCU-Cfg-AX-FrstObjId") {
+record(ao,"${P}MCU-Cfg-AX-FrstObjId") {
   field(DESC, "First axis ID")
-  field(VAL,  "$(FIRST_OBJ_ID=-1)")
-}
-
-# This db is only used to set the VAL field
-record(ao,"${P}MCU-Cfg-UI-AX-Id") {
-  field(DESC, "UI: Axis Id to open panel for")
   field(VAL,  "$(FIRST_OBJ_ID=-1)")
 }

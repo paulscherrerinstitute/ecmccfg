@@ -87,7 +87,7 @@
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-ErrAlrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Err-Alrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -132,7 +132,7 @@
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-SyncErrAlrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-SyncErr-Alrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -193,7 +193,7 @@
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-StlAlrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Stl-Alrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>
@@ -254,7 +254,7 @@
     <bool>false</bool>
    </property>
    <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-WrnAlrm</string>
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv01-Wrn-Alrm</string>
    </property>
    <property name="colorMode">
     <enum>caLed::Static</enum>

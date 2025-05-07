@@ -3,8 +3,7 @@
 #- Arguments: n/a
 
 #-d /**
-#-d   \brief Initialization script
-#-d   \details Script for setting up the basic EPICS environment.
+#-d   \brief Script for setting up the basic EPICS environment.
 #-d   \author Niko Kivel, Anders Sandstroem
 #-d   \file
 #-d */

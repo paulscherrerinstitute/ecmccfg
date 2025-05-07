@@ -13,16 +13,12 @@
     {%- else  %}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},0)"
     {%- endif %}
-
     {%- if target.enable %}
         #- at target if |target-actual|<{{ monitoring.target.tolerance }} for >{{ monitoring.target.time }} cycles
         ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},{{ monitoring.target.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id }},{{ monitoring.target.tolerance }})"
         ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTime({{ axis.id }},{{ monitoring.target.time }})"
-    {%- else  %}
-        ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},0)"
     {%- endif %}
-
     {%- if velocity.enable %}
         #- velocity: v_max = {{ monitoring.velocity.max}}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id }},{{ monitoring.velocity.enable|int }})"
@@ -42,18 +38,6 @@
             ecmcConfigOrDie "Cfg.SetAxisMonVelDiffTrajILDelay({{ axis.id }},{{ monitoring.velocityDifference.time.trajectory }})"
             {%- if monitoring.velocity.time.drive is defined %}
                 ecmcConfigOrDie "Cfg.SetAxisMonVelDiffDriveILDelay({{ axis.id }},{{ monitoring.velocityDifference.time.drive }})"
-            {%- endif  %}
-        {%- endif  %}
-    {%- endif %}
-
-    {%- if monitoring.stall is defined %}
-        {%- if monitoring.stall.enable is defined %}
-            ecmcConfigOrDie "Cfg.SetAxisMonEnableStallMon({{ axis.id }},{{ monitoring.stall.enable|int }})"
-            {%- if monitoring.stall.time.timeout is defined %}
-                ecmcConfigOrDie "Cfg.SetAxisMonStallMinTimeOut({{ axis.id }},{{ monitoring.stall.time.timeout }})"
-            {%- endif  %}
-            {%- if monitoring.stall.time.factor is defined %}
-                ecmcConfigOrDie "Cfg.SetAxisMonStallTimeFactor({{ axis.id }},{{ monitoring.stall.time.factor }})"
             {%- endif  %}
         {%- endif  %}
     {%- endif %}

@@ -26,7 +26,7 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Spd-RB"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=RAW)")
+  field(EGU,  "$(EGU=)")
   field(PREC, "$(PREC=3)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -49,7 +49,7 @@ record(ao,"${ECMC_P}Drv${CH_ID}-Spd"){
   field(LINR, "$(LINR=SLOPE)")
   field(ESLO, "$(ESLO=1)")
   field(EOFF, "$(EOFF=0)")
-  field(EGU,  "$(EGU=RAW)")
+  field(EGU,  "$(EGU=)")
   field(PREC, "$(PREC=3)")
   field(LOW,  "$(LOW=0)")
   field(LOLO, "$(LOLO=0)")
@@ -68,21 +68,21 @@ record(mbbiDirect,"${ECMC_P}Drv${CH_ID}-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).driveStatus${CH_ID}?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-WrnAlrm.PROC")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Wrn-Alrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-WrnAlrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-Wrn-Alrm"){
   field(DESC, "$(HWTYPE): Drv Warn")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B7")
   field(ZNAM, "No Alarm")
   field(ONAM, "Warning")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
-  field(FLNK, "${ECMC_P}Drv${CH_ID}-ErrAlrm")
+  field(FLNK, "${ECMC_P}Drv${CH_ID}-Err-Alrm")
 }
 
-record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
+record(bi,"${ECMC_P}Drv${CH_ID}-Err-Alrm"){
   field(DESC, "$(HWTYPE): Drv Err")
   field(INP,  "${ECMC_P}Drv${CH_ID}-Stat.B3")
   field(ZNAM, "No Alarm")
@@ -90,27 +90,4 @@ record(bi,"${ECMC_P}Drv${CH_ID}-ErrAlrm"){
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MAJOR")
   field(FLNK, "")
-}
-
-record(seq, "${ECMC_P}Drv${CH_ID}-TrgDS402Ena") {
-    field(DESC, "Trigg DS402 enable SM")    
-    field(DO1,  "128")
-    field(DO2,  "6")
-    field(DO3,  "7")
-    field(DO4,  "15")
-    field(DLY1, "0.01")
-    field(DLY2, "0.01")
-    field(DLY3, "0.01")
-    field(DLY4, "0.01")
-    field(LNK1, "${ECMC_P}Drv${CH_ID}-Cmd PP")
-    field(LNK2, "${ECMC_P}Drv${CH_ID}-Cmd PP")
-    field(LNK3, "${ECMC_P}Drv${CH_ID}-Cmd PP")
-    field(LNK4, "${ECMC_P}Drv${CH_ID}-Cmd PP")
-}
-
-record(seq, "${ECMC_P}Drv${CH_ID}-TrgDS402Dis") {
-    field(DESC, "Trigg DS402 disable SM")    
-    field(DO1,  "0")
-    field(DLY1, "0.01")
-    field(LNK1, "${ECMC_P}Drv${CH_ID}-Cmd PP")
 }

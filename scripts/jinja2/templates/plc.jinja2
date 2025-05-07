@@ -43,5 +43,3 @@ epicsEnvSet(ECMC_PREV_PLC_OBJ_ID,${PLC_ID})
 
 #- cleanup
 epicsEnvUnset(PLC_ID)
-
-ecmcEpicsEnvSetCalc(ECMC_PLC_COUNT, "$(ECMC_PLC_COUNT=0)+1")

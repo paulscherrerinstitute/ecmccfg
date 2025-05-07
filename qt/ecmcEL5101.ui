@@ -42,23 +42,14 @@
     <string notr="true">CH=1,IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType)</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_7">
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>2</number>
     </property>
     <property name="spacing">
      <number>2</number>
     </property>
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3,0">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3">
       <item>
        <widget class="caLabel" name="calabel_7">
         <property name="text">
@@ -83,31 +74,6 @@
         </property>
         <property name="precisionMode">
          <enum>caLineEdit::User</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="caRelatedDisplay" name="carelateddisplay_3">
-        <property name="minimumSize">
-         <size>
-          <width>15</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>15</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="labels">
-         <string>&gt;</string>
-        </property>
-        <property name="files">
-         <string>ecmcGraph_v1.ui</string>
-        </property>
-        <property name="args">
-         <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct,IOC=$(IOC)</string>
         </property>
        </widget>
       </item>
@@ -311,7 +277,7 @@
      <x>5</x>
      <y>200</y>
      <width>115</width>
-     <height>111</height>
+     <height>101</height>
     </rect>
    </property>
    <property name="title">
@@ -321,7 +287,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>50</y>
+      <y>35</y>
       <width>105</width>
       <height>18</height>
      </rect>
@@ -340,7 +306,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>30</y>
+      <y>15</y>
       <width>105</width>
       <height>18</height>
      </rect>
@@ -353,7 +319,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>70</y>
+      <y>55</y>
       <width>75</width>
       <height>18</height>
      </rect>
@@ -372,7 +338,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>70</y>
+      <y>55</y>
       <width>22</width>
       <height>18</height>
      </rect>
@@ -423,7 +389,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>90</y>
+      <y>75</y>
       <width>60</width>
       <height>18</height>
      </rect>
@@ -449,7 +415,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>90</y>
+      <y>75</y>
       <width>40</width>
       <height>18</height>
      </rect>
@@ -468,11 +434,6 @@
    <class>caMenu</class>
    <extends>QComboBox</extends>
    <header>caMenu</header>
-  </customwidget>
-  <customwidget>
-   <class>caRelatedDisplay</class>
-   <extends>QWidget</extends>
-   <header>caRelatedDisplay</header>
   </customwidget>
   <customwidget>
    <class>caToggleButton</class>

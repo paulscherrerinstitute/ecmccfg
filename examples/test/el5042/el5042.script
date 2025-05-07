@@ -1,21 +1,37 @@
 ##############################################################################
 ## Example config for el5042
 
-require ecmccfg "MASTER_ID=1"
-require ecmccomp
+##############################################################################
+## Initiation:
+epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
+epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
+epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+
+require ecmccfg develop
+
+# run module startup.cmd (only needed at ESS  PSI auto call at require)
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
 
 ##############################################################################
 ## Config hardware:
 
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=14, HW_DESC=EL5042"
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5042"
 
-#- Apply encoder config with some custom macros
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C,CH_ID=1,OFF_BITS=0"
+# Configure Wachendorff encoder on channel 1
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL5042-Encoder-ch1-Wachendorff-WDGA36E-06-1218-SIA-B01-CB8.cmd
 
-#- If the offset is needed then the sum of the bit's still need to match the bitcount of the encoder. Example: Offset 3 LSB bits, set ST_BITS=23 (26-3)
-#- ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-Generic-BISS-C,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=23,CLK_FRQ_KHZ=1000,OFF_BITS=3"
+#Apply hardware configuration
+ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
 
 ##############################################################################
 ## Go active:
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
+$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
+iocInit()

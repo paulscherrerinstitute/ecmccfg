@@ -36,6 +36,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd
 #-  Set signal type
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x803D")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmc$(ECMC_EC_HWTYPE)-Sensor-chX.cmd
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex3xx4")

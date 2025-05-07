@@ -7,23 +7,9 @@
 ## Nice to know IMPORTANT!!
 
 * Seems smaract needs to be configured over TCPIP so needs also normal network connection
+* Unclear if supports open loop actuators
 * Does not support smaract I/O
 
-## Loading firmware 20240528 (may 2024 release)
-* Connect to drive with smaraactnetconfig (direct cable from drive to computer ethernet)
-* adapt ip adress of computer to be in same range
-* loading firmware MCS2_Release_2924_05_28.sfb with SmarAct FirmwareUpdater v1.5.13
-*
-
-### Things that changed / Issues with 20240528 firmware
- * Changes in CSP:
-  - Add sensors to be enabled (must not be in power save mode for CSP). So for vaccum need to run in PP (need to execute..)
-  - Needed to add interpolation period
-* No more need to write to F030 (automatic). Write to this index fails and ethercat bus wont start.
-* Sometimes an axis can get stuck in homing mode and enabled. Not possible to change mode or disable (not over ethercat and not over service tool). Maybe conflict between service tool and ethercat taking control?!
-* Homing velo scale changed with a factor 1000
-* Homing triggering (or any command triggering) bit updates changed. When executing a command a certain time must pass before the done flag is reliable. Now added check in ecmc to trigger on positive edge of done flag insted of just level.
-* Safe direction adress changed from 2002 to 200C
 
 ## Connect to a "new" smaract device first time
 

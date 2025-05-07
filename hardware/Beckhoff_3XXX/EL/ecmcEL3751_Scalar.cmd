@@ -33,5 +33,3 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 #- Cleanup
 epicsEnvUnset(ECMC_CH)
 
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "Ex3xx1")

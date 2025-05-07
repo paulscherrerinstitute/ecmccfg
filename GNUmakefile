@@ -3,9 +3,8 @@ include /ioc/tools/driver.makefile
 MODULE=ecmccfg
 
 BUILDCLASSES = Linux
-EXCLUDE_VERSIONS = 3 7.0.5 7.0.6 7.0.7
-
-ARCH_FILTER=deb10% deb12%
+EXCLUDE_VERSIONS = 3 7.0.5
+ARCH_FILTER=deb%
 
 SCRIPTS+=startup.cmd
 
@@ -31,12 +30,6 @@ SCRIPTS+=$(wildcard ./general/*)
 SCRIPTS+=$(wildcard ./hardware/*/*.cmd)
 SCRIPTS+=$(wildcard ./motion/*)
 SCRIPTS+=$(wildcard ./protocol/*)
-SCRIPTS+=$(wildcard ./plc_lib/*.plc)
-SCRIPTS+=$(wildcard ./plc_lib/*.plc_inc)
-SCRIPTS+=$(wildcard ./plc_lib/master_slave/*.plc)
-SCRIPTS+=$(wildcard ./plc_lib/master_slave/*.plc_inc)
-SCRIPTS+=$(wildcard ./plc_lib/twinsafe/*.plc)
-SCRIPTS+=$(wildcard ./plc_lib/twinsafe/*.plc_inc)
 
 TEMPLATES+=$(wildcard ./db/*.db)
 TEMPLATES+=$(wildcard ./db/*.template)

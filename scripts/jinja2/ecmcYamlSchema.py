@@ -177,12 +177,8 @@ class Schema:
             },
             'type': {'type': 'integer', 'default': 'joint',
                      'coerce': lambda v: supportedAxisTypes[str(v).lower().replace(" ", "")]},
-            'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP', 'CSP_PC'], 'coerce': lambda v: v.upper()},
+            'mode': {'type': 'string', 'default': 'CSV', 'allowed': ['CSV', 'CSP'], 'coerce': lambda v: v.upper()},
             'parameters': {'type': 'string'},
-            'healthOutput': {'type': 'string'},
-            'feedSwitchesOutput': {'type': 'string'},
-            'feedSwitchesValue': {'type': 'integer'},
-            'group': {'type': 'string'},
             'autoMode': {'type': 'dict', 'schema': {
                 'modeSet': {'type': 'string'},
                 'modeAct': {'type': 'string'},
@@ -193,7 +189,6 @@ class Schema:
                 'disableOnReset': {'type': 'boolean'},
                 'alarmAtHardLimits': {'type': 'boolean'},
                 'blockCom': {'type': 'boolean'},
-                'allowSrcChangeWhenEnabled': {'type': 'boolean'},
                 'allowedFunctions': {'type': 'dict', 'schema': {
                     'positioning': {'type': 'boolean'},
                     'constantVelocity': {'type': 'boolean'},
@@ -222,14 +217,7 @@ class Schema:
                 'schema': {
                     'enable': {'type': 'boolean', 'default': True},
                     'fieldInit': {'type': 'string'},
-                    'description': {'type': 'string'},
-                    'pvt': {
-                        'type': 'dict',
-                        'schema': {
-                        'npoints': {'default': 0},
-                        'nreadback': {'default': 0},
-                        }
-                    }
+                    'description': {'type': 'string'}
                 }
             }
         }
@@ -269,11 +257,7 @@ class Schema:
         'required': True,
         'schema': {
             'source': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
-            'numerator': {'oneof': [
-                {'type': 'float'},
-                {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
-                ], 'default': 0.0
-            },
+            'numerator': {'type': 'float', 'default': 0.},
             'denominator': {'type': 'integer', 'default': 1, 'min': 1},
             'type': {'type': 'integer', 'allowed': [0, 1], 'default': 0},
             'mask': {'type': 'string'},
@@ -284,25 +268,9 @@ class Schema:
                 {'type': 'string', 'regex': '^\$(\{|\()\w*(=\d*(\.\d*)?)?(\}|\))$'}
                 ], 'default': 0.0
             },
-            'lookuptable': {
-                'type': 'dict',
-                'schema': {
-                    'filename': {'required': True, 'type': 'string'},
-                    'range': {'type': 'float'},
-                    'scale': {'type': 'float'},
-                    'enable': {'type': 'boolean'},
-                }
-            },
             'unit': {'type': 'string'},
-            'delayComp': {
-                'type': 'dict',
-                'schema': {
-                    'time': {'required': True, 'type': 'float'},
-                    'enable': {'type': 'boolean'},
-                }
-            },
             'desc': {'type': 'string'},
-            'position': {'type': 'string'},
+            'position': {'required': True, 'type': 'string'},
             'control': {'type': 'string'},
             'status': {'type': 'string'},
             'warning': {'type': 'integer', 'min': 0, 'dependencies': ['status']},
@@ -319,8 +287,7 @@ class Schema:
                 }
             },
             'primary': {'type': 'integer', 'default': -1},
-            'homing': homingSchema,
-            'useAsCSPDrvEnc': {'type': 'integer', 'default': -1},
+            'homing': homingSchema,            
         }
     }
 
@@ -519,20 +486,6 @@ class Schema:
                         'schema': {
                             'trajectory': {'required': True, 'type': 'integer', 'min': 0},
                             'drive': {'type': 'integer', 'min': 0},
-                        }
-                    },
-                }
-            },
-            'stall': {
-                'type': 'dict',
-                'required': False,
-                'schema': {
-                    'enable': {'type': 'boolean'},
-                    'time': {
-                        'type': 'dict',
-                        'schema': {
-                            'timeout': {'type': 'integer', 'min': 0},
-                            'factor': {'type': 'float', 'min': 0},
                         }
                     },
                 }

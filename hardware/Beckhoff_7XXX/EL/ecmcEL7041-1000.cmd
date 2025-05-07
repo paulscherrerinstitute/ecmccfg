@@ -66,6 +66,3 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x45,6,1)"
 
 #-  8014:06 Coil current (v = 0, manual) [in percent of Imax of the driver, 5 A in this case!!!]
 #- ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8014,0x6,50,1)"
-
-#- Default panel
-epicsEnvSet("ECMC_HW_PANEL"              "EL70x1")
