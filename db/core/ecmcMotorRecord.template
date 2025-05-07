@@ -35,6 +35,7 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
     field(SREV, "$(SREV=1)")
     field(UREV, "$(UREV=1.0)")
     field(VMAX, "$(VMAX=0)")
+    field(SPAM, "$(SPAM=15)")
 }
 
 # The message text
@@ -326,29 +327,8 @@ record (asyn, "$(PREFIX)$(MOTOR_NAME)-$(MOTOR_PORT)-asyn")
 {
 }
 
-#- If axis is in interlock then set motor STOP
-#record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpFwd"){
-#  #field(PINI, "1")
-#  field(SCAN, "Passive")
-#  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
-#  field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockFwd CP")
-#  field(ZNAM,  "OK")
-#  field(ONAM,  "STOP")
-#  field(VAL,  "1")
-#  field(OMSL, "closed_loop")
-#}
-#
-#record(bo,"$(PREFIX)$(MOTOR_NAME)-TrgStpBwd"){
-#  #field(PINI, "1")
-#  field(SCAN, "Passive")
-#  field(OUT,  "$(PREFIX)$(MOTOR_NAME).STOP PP")
-#  field(DOL,  "$(PREFIX)$(MOTOR_NAME)-SumIlockBwd CP")
-#  field(ZNAM,  "OK")
-#  field(ONAM,  "STOP")
-#  field(VAL,  "1")
-#  field(OMSL, "closed_loop")
-#}
-
+################################################################
+# Sync and stop on interlock
 record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L"){
   #field(PINI, "1")
   field(DESC, "Trigg MR Sync")
@@ -362,7 +342,6 @@ record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgH2L"){
   field(OOPT,  "Transition To Zero")
   field(OUT,   "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq PP")
 }
-
 
 record(calcout,"$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgL2H"){
   #field(PINI, "1")
@@ -397,3 +376,125 @@ record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq") {
     field(LNK3, "$(PREFIX)$(MOTOR_NAME).STOP PP")
     field(LNK4, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
 }
+
+record(seq, "${PREFIX}${MOTOR_NAME}-StpCmd_") {
+  field(DESC, "Stop Axis")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-StpCmd CP")  
+  field(DO2,  "1")
+  field(LNK1, "")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
+}
+
+################################################################
+# Sync only
+record(longin,"${PREFIX}${MOTOR_NAME}-SyncMrCmd"){
+  field(DESC, "${MOTOR_NAME}: Sync MR")  
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))TRIGG_SYNC")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-MR-SyncOnly.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncOnly") {
+    field(DESC, "Trigg MR Sync")
+    field(PINI, "1")
+    field(DO1,  "0")
+    field(DO2,  "1")
+    field(DLY1, "0.01")
+    field(DLY2, "0.01")
+    field(LNK1, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
+    field(LNK2, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
+}
+
+# New: Commands from ecmc 2 MR (STOP, SYNC, CNEN)
+# typedef struct {
+#   unsigned char stopMRCmd      : 1;  // Trigger command
+#   unsigned char stopMRVal      : 1;  // STOP value
+#   unsigned char syncMRCmd      : 1;  // Trigger command
+#   unsigned char syncMRVal      : 1;  // SYNC value
+#   unsigned char cnenMRCmd      : 1;  // Trigger command
+#   unsigned char cnenMRVal      : 1;  // CNEN value
+#   unsigned int dummy           : 26;
+# } ecmcMRCmds;
+
+record(mbbiDirect,"${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd"){
+  field(DESC, "${MOTOR_NAME}: ECMC to MR cmds")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(ECMC_PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).mr_cmd?")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop.PROC")
+}
+
+record(calc,  "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop") {
+  field(DESC, "${MOTOR_NAME}: MR Stop")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A & 0x1")
+  field(INPA, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync.PROC")
+}
+
+record(calc,  "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
+  field(DESC, "${MOTOR_NAME}: MR Sync")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A >> 2 & 0x1")
+  field(INPA, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd")
+  field(FLNK, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen.PROC")
+}
+
+record(calc,  "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen") {
+  field(DESC, "${MOTOR_NAME}: MR Cnen")
+  field(PINI, "$(PINI=1)")
+  field(CALC, "A >> 4 & 0x1")
+  field(INPA, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd")
+}
+
+record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop_") {
+  field(DESC, "Axis: STOP")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stop CP")
+  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B1")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
+}
+
+record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync_") {
+  field(DESC, "Axis: SYNC")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync CP")
+  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B3")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.SYNC PP")
+}
+
+record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen_") {
+  field(DESC, "Axis: CNEN")    
+  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen CP")
+  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B5")
+  field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
+}
+
+# Monitor of mbbi bits seems to not work?!
+#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stp") {
+#  field(DESC, "Axis: STOP")    
+#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B0 CP")
+#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B1 CP")
+#  field(LNK1, "")
+#  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
+#}
+#
+## Monitor Sync command and issue SYNC
+#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
+#  field(DESC, "Axis: SYNC")    
+#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B2 CP")
+#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B3 CP")
+#  field(LNK1, "")
+#  field(LNK2, "${PREFIX}${MOTOR_NAME}.SYNC PP")
+#}
+#
+## Monitor CNEN command and issue CNEN
+#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
+#  field(DESC, "Axis: CNEN")
+#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B4 CP")
+#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B5 CP")
+#  field(LNK1, "")
+#  field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
+#}

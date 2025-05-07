@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for claiming a particular master.
+#-d   \details Claims an EtherCAT master.
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \param MASTER_ID (optional) master ID as shown by `ethercat master`.

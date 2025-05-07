@@ -39,10 +39,10 @@ ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|defaul
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ plc.velocity_filter.trajectory.enable|default(0)|int }})"    
 {%- else %}
     # WARNING: Please use updated yaml syntax for trajectory velo filtering:  plc.velocity_filter.trajectory.x)
-    {%- if plc.filter.position %}
+    {%- if plc.filter.position is defined %}
         {%- set filter = None if plc.filter.position is undefined else plc.filter.position %}
     {%- else %}
-        {%- if plc.filter.trajectory %}
+        {%- if plc.filter.trajectory is defined %}
             {%- set filter = None if plc.filter.trajectory is undefined else plc.filter.trajectory %}
         {%- endif %}
     {%- endif %}

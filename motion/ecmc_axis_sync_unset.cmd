@@ -2,7 +2,8 @@
 # ecmc_axis_sync_unset.cmd
 #- Arguments: n/a
 #-d /**
-#-d   \brief Unsets all varaiables set by ecmc_axis_sync.cmd configuration snippet
+#-d   \brief Clears all sync related varaiables
+#-d   \details Unsets all varaiables set by ecmc_axis_sync.cmd configuration snippet
 #-d   \author Anders Sandstroem
 #-d */
 

@@ -1,4 +1,4 @@
-#- -=-=-=-=- axis
+ #- -=-=-=-=- axis
 {#- drive is only present in type: 'joint' #}
 {%- set drive = None if drive is undefined else drive %}
 epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
@@ -41,4 +41,23 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
         #- allowed motion functions
         ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
     {% endif -%}
+    {%- if axis.features.allowSrcChangeWhenEnabled is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled({{ axis.id }},{{ axis.features.allowSrcChangeWhenEnabled|default(0)|int }})"
+    {% endif -%}
 {% endif -%}
+
+#- Feed 24 volt to switches if needed
+{%- if axis.feedSwitchesOutput is defined %}
+  ecmcConfigOrDie "Cfg.WriteEcEntryEcPath({{ axis.feedSwitchesOutput }},{{ axis.feedSwitchesValue|default(1) }})"
+{%- endif %}
+
+{%- if axis.group is defined %}
+  #- Add axis to group, create new group if does not exist
+  ecmcConfigOrDie "Cfg.AddAxisToGroupByName({{ axis.id }},{{ axis.group }},1)"
+  ecmcConfig "GetAxisGroupIndexByName({{ axis.group }})"
+  # Set group id to GRP_{{ axis.group }}_ID env to allow for later use in PLC-Code
+  epicsEnvSet(GRP_{{ axis.group }}_ID,${ECMC_CONFIG_RETURN_VAL=0})
+  ecmcIf("${GRP_{{ axis.group }}_ID=-1}<0")
+  ${IF_TRUE}ecmcExit : Error: Invalid axis group ID
+  ecmcEndIf()
+{%- endif %}

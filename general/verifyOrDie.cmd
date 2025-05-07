@@ -1,9 +1,9 @@
 #==============================================================================
 # verifyOrDie.cmd
 #-d  /**
-#-d   \brief Generic verification script for expressions
+#-d   \brief Generic verification script
+#-d   \details Generic verification script for expressions
 #-d          if the evaluated expression is true the execution will continue otherwise exit
-#-d
 #-d   \author Anders Sandstroem
 #-d
 #-d    Arguments:

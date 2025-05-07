@@ -1,0 +1,93 @@
+record(seq, "${ECMC_P}Drv${CH_ID}-TuneTrg") {
+    field(DESC, "Trigg tune seq")    
+    field(DO1,  "${MASTER_ID}")
+    field(DO2,  "70621")    # Command Tune drive EL7062 (70621 for execute, 70622 for teset)
+    field(DO3,  "${SLAVE_POS}")
+    field(DO4,  "${CH_ID}")
+    field(DO5,  "1")
+    field(DLY1, "0.01")
+    field(DLY2, "0.01")
+    field(DLY3, "0.01")
+    field(DLY4, "0.01")
+    field(DLY5, "0.01")
+    field(LNK1, "${P}m${MASTER_ID}-EcTool.A")    # Master ID
+    field(LNK2, "${P}m${MASTER_ID}-EcTool.B")    # Command
+    field(LNK3, "${P}m${MASTER_ID}-EcTool.D")    # Slave ID    
+    field(LNK4, "${P}m${MASTER_ID}-EcTool.E")    # CH ID
+    field(LNK5, "${P}m${MASTER_ID}-EcTool.U PP") # TRIGG
+}
+
+record(seq, "${ECMC_P}Drv${CH_ID}-TuneTrgRB") {
+    field(DESC, "Trigg tune RB")    
+    field(DO1,  "${MASTER_ID}")
+    field(DO2,  "70622")    # Command Tune drive EL7062 (70621 for execute, 70622 for teset)
+    field(DO3,  "${SLAVE_POS}")
+    field(DO4,  "${CH_ID}")
+    field(DO5,  "1")
+    field(DLY1, "0.01")
+    field(DLY2, "0.01")
+    field(DLY3, "0.01")
+    field(DLY4, "0.01")
+    field(DLY5, "0.01")
+    field(LNK1, "${P}m${MASTER_ID}-EcTool.A")    # Master ID
+    field(LNK2, "${P}m${MASTER_ID}-EcTool.B")    # Command
+    field(LNK3, "${P}m${MASTER_ID}-EcTool.D")    # Slave ID    
+    field(LNK4, "${P}m${MASTER_ID}-EcTool.E")    # CH ID
+    field(LNK5, "${P}m${MASTER_ID}-EcTool.U PP") # TRIGG
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-R"){
+  field(DESC, "Motor Resistance")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=mOhm)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-L"){
+  field(DESC, "Motor Inductance")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=microH)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-C-Kp"){
+  field(DESC, "Current loop ctrl Kp")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-C-Ti"){
+  field(DESC, "Current loop ctrl Ti")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-V-Kp"){
+  field(DESC, "Velocity loop ctrl Kp")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-V-Ti"){
+  field(DESC, "Velocity loop ctrl Ti")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-Tune-P-Kp"){
+  field(DESC, "Position loop ctrl Kp")
+  field(PINI, "$(PINI=1)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=0)")
+  field(VAL,  "0")
+}

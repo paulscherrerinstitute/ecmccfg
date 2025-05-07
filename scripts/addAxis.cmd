@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for adding axis EPICS PVs.
+#-d   \details Adds an motion axis.
 #-d   \author Niko Kivel
 #-d   \file
 #-d */
@@ -14,3 +15,4 @@ epicsEnvUnset(ECMC_EXE_CMD)
 
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc_axis${ECMC_GEN_EC_RECORDS}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc_axis${ECMC_GEN_EC_RECORDS}.cmd
+ecmcEpicsEnvSetCalc(ECMC_AXIS_COUNT, "$(ECMC_AXIS_COUNT=0)+1")

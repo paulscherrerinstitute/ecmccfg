@@ -2496,7 +2496,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -3311,7 +3311,7 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(SYS):$(Axis)-TrjSrcTyp-Cmd</string>
+       <string notr="true">$(SYS):$(Axis)-EncSrcTyp-Cmd</string>
       </property>
      </widget>
     </widget>

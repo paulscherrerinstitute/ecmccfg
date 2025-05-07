@@ -1,0 +1,38 @@
+file "ecmc_analogInputArray-chX.template"
+{
+  pattern {CH_ID, DTYP,                FTVL   }
+          {01,    "asynInt32ArrayIn",  "LONG" }
+          {02,    "asynInt32ArrayIn",  "LONG" }
+          {03,    "asynInt32ArrayIn",  "LONG" }
+          {04,    "asynInt32ArrayIn",  "LONG" }
+          {05,    "asynInt32ArrayIn",  "LONG" }
+          {06,    "asynInt32ArrayIn",  "LONG" }
+          {07,    "asynInt32ArrayIn",  "LONG" }
+          {08,    "asynInt32ArrayIn",  "LONG" }
+}
+
+file "ecmcELM360X-stat-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+          {03   }
+          {04   }
+          {05   }
+          {06   }
+          {07   }
+          {08   }
+}
+
+file "ecmc_controlWord-chX.template"
+{
+  pattern {CH_ID, KEY,   suffix,  sourceName, DESC             }
+          {01,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {02,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {03,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {04,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {05,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {06,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {07,    "AI", "-Ctrl", "control",   "AI Control Word"}
+          {08,    "AI", "-Ctrl", "control",   "AI Control Word"}
+}

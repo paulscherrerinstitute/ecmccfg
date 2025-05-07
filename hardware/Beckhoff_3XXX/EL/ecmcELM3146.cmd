@@ -221,3 +221,6 @@ epicsEnvUnset(ECMC_PDO_Ctrl)
 epicsEnvUnset(ECMC_PDO_Stat)
 epicsEnvUnset(ECMC_OVER_SAMP_MAX)
 epicsEnvUnset(ECMC_SAMP_TIME_MIN)
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "ELM3xx6")

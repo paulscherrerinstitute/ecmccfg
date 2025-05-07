@@ -1,0 +1,44 @@
+# ecmc test system
+# Anders Sandström
+
+require ecmccfg,"EC_RATE=1000,ENG_MODE=1"
+require ecmccomp
+
+epicsEnvSet("DRV_SLAVE",              "13")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(DRV_SLAVE), HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230,STEPS=400'"
+
+epicsEnvSet("ENC_SLAVE",            "14")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ENC_SLAVE), HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-24bit-BISS-C,CH_ID=2"
+
+$(SCRIPTEXEC) $(ecmccfg_DIR)applyConfig.cmd
+
+##############################################################################
+## AXIS 1: Open loop axis motor axis
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/phys_openloop_steps.yaml"
+
+##############################################################################
+## AXIS 2: Virtaul axis in degrees BISS encoder
+#
+epicsEnvSet("DEV",      "$(IOC)")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/virt_biss.yaml"
+
+#-$(SCRIPTEXEC) ($(ecmccfg_DIR)loadYamlEnc.cmd, FILE=./cfg/enc3.yaml)
+
+
+#- $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1,FILE=./test.plc")
+
+# Other
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd

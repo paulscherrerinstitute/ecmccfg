@@ -1,0 +1,16 @@
+################################################
+#
+# Lookup table correction file for test purpose
+# * Col 1: Encoder  position values [EGU]
+# * Col 2: Encoder correction values at the corresponding [EGU]
+# Created 2024-12-09
+#
+# This table simply just changes the gain in region -10..10. 
+# Outside this range, a different offset will be applied.
+#
+PREC=5
+-10 -10.123456789
+0 0.123456789
+10 10.123456789
+PREC=6
+12.67898 12.3456789

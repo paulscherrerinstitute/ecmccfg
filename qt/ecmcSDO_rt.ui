@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>299</width>
+    <height>28</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caFrame" name="caframe">
+   <property name="geometry">
+    <rect>
+     <x>35</x>
+     <y>0</y>
+     <width>281</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string notr="true">IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),SDO_Name=$(SDO_Name)</string>
+   </property>
+   <widget class="caTextEntry" name="catextentry_15">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>5</y>
+      <width>31</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-$(SDO_Name)-Val</string>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="keepFocus">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_64">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>5</y>
+      <width>31</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Error</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_6">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>0</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-$(SDO_Name)-ErrId</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="undefinedColor">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caFrame" name="caframe_2">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>0</y>
+      <width>106</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="macro">
+     <string notr="true">IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),SDO_Name=$(SDO_Name)</string>
+    </property>
+    <property name="visibility">
+     <enum>caFrame::IfZero</enum>
+    </property>
+    <property name="visibilityCalc">
+     <string notr="true"/>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-$(SDO_Name)-Bsy</string>
+    </property>
+    <widget class="caMessageButton" name="camessagebutton_3">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>5</y>
+       <width>51</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-$(SDO_Name)-WrtCmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Write</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="caMessageButton" name="camessagebutton_4">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>5</y>
+       <width>46</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-SDO-$(SDO_Name)-RdCmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Read</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">1</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="caLabel" name="calabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>5</y>
+     <width>90</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>$(SDO_Name):</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caTextEntry</class>
+   <extends>caLineEdit</extends>
+   <header>caTextEntry</header>
+  </customwidget>
+  <customwidget>
+   <class>caMessageButton</class>
+   <extends>QPushButton</extends>
+   <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caLed</class>
+   <extends>QWidget</extends>
+   <header>caLed</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

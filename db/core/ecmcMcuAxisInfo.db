@@ -1,6 +1,6 @@
 record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-Pfx") {
     field(DESC, "Prefix of Axis ${AXIS_NO}")
-    field(VAL,  "${DEV}")
+    field(VAL,  "${DEV}:")
 }
 
 record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-Nam") {
@@ -10,10 +10,15 @@ record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-Nam") {
 
 record(stringout,"$(P)MCU-Cfg-AX${AXIS_NO}-PfxNam") {
     field(DESC, "Complete PV name of Axis ${AXIS_NO}")
-    field(VAL,  "${DEV}${AXIS_NAME}")
+    field(VAL,  "${DEV}:${AXIS_NAME}")
 }
 
-record(ao,"$(P)MCU-Cfg-AX${AXIS_NO}-NxtObjId") {
+record(ai,"$(P)MCU-Cfg-AX${AXIS_NO}-NxtObjId") {
     field(DESC, "Axis number of next axis")
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
+}
+
+record(ai,"$(P)MCU-Cfg-AX${AXIS_NO}-PrvObjId") {
+    field(DESC, "Axis number of prev axis")
+    field(VAL,  "$(PREV_OBJ_ID=-1)")
 }

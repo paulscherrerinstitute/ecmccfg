@@ -1,0 +1,22 @@
+file "ecmcEL7062_CSP-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
+
+file "ecmcEL7062_autoTune-chX.template"
+{
+  pattern {CH_ID, CH_ID_VAL}
+          {01,    1        }
+          {02,    2        }
+}
+
+#file "ecmc_analogInput-chX.template"
+#{
+#  pattern {CH_ID, sourceName,           KEY,   suffix,     DESC,                 EGU,        ESLO, PREC, LOPR, HOPR, LOLO, LOW,  HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV}
+#          {01,    "voltageActual",     "Drv",  "-VltAct",  "Actual Voltage",     "V", 0.001, 0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+#          {01,    "temperatureActual", "Drv",  "-TmpAct",  "Actual Temperature", "C", 0.1,   0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+#          {02,    "voltageActual",     "Drv",  "-VolAct",  "Actual Voltage",     "V", 0.001, 0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+#          {02,    "temperatureActual", "Drv",  "-TmpAct",  "Actual Temperature", "C", 0.1,   0,    0,    0,    0,    0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"  }
+#}

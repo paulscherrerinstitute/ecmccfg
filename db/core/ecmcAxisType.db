@@ -35,3 +35,8 @@ record(mbbi,"${P}${AXIS_NAME}-TrajType"){
     field(VAL,  "$(TRAJ_TYPE=0)")
     field(PINI, "YES")
 }
+
+record(stringin,"${P}${AXIS_NAME}-DrvMode") {
+    field(DESC, "Drive mode ")
+    field(VAL,  "$(DRV_MODE=N/A)")
+}

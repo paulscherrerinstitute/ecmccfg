@@ -1,0 +1,22 @@
+
+#- Slave axes (normally physical/real axes): AX_S1, AX_S2, AX_S3, AX_S4, AX_S5, AX_S6
+var SLAVE_AXES[6] := {ax${AX_S1}.enc.actpos, ax${AX_S2}.enc.actpos, ax${AX_S3}.enc.actpos, ax${AX_S4}.enc.actpos, ax${AX_S5}.enc.actpos, ax${AX_S6}.enc.actpos};
+
+#- Master axes (normally virtual axes): AX_M1, AX_M2, AX_M3, AX_M4, AX_M5, AX_M6
+var MASTER_AXES[6] := {ax${AX_M1}.traj.setpos, ax${AX_M2}.traj.setpos, ax${AX_M3}.traj.setpos, ax${AX_M4}.traj.setpos, ax${AX_M5}.traj.setpos, ax${AX_M6}.traj.setpos};
+
+#- forward kinematics
+ax${AX_M1}.enc.actpos   := dot(FWD1, SLAVE_AXES);
+ax${AX_M2}.enc.actpos   := dot(FWD2, SLAVE_AXES);
+ax${AX_M3}.enc.actpos   := dot(FWD3, SLAVE_AXES);
+ax${AX_M4}.enc.actpos   := dot(FWD4, SLAVE_AXES);
+ax${AX_M5}.enc.actpos   := dot(FWD5, SLAVE_AXES);
+ax${AX_M6}.enc.actpos   := dot(FWD6, SLAVE_AXES);
+
+#- inverse kinematics
+ax${AX_S1}.traj.extsetpos := dot(INV1, MASTER_AXES);
+ax${AX_S2}.traj.extsetpos := dot(INV2, MASTER_AXES);
+ax${AX_S3}.traj.extsetpos := dot(INV3, MASTER_AXES);
+ax${AX_S4}.traj.extsetpos := dot(INV4, MASTER_AXES);
+ax${AX_S5}.traj.extsetpos := dot(INV5, MASTER_AXES);
+ax${AX_S6}.traj.extsetpos := dot(INV6, MASTER_AXES);

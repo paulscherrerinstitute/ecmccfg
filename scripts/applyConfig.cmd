@@ -4,6 +4,7 @@
 
 #-d /**
 #-d   \brief Script for applying bus configuration.
+#-d   \details Applies the EtherCAT configuration and caluclates data offsets in the process image.
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Example call:
@@ -14,3 +15,6 @@
 #-d */
 
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
+
+#- For check in finalize.cmd if executed
+epicsEnvSet(ECMC_EC_APPLY_CFG_DONE,1)

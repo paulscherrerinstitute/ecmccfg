@@ -3,8 +3,8 @@
 #- Arguments: CONFIG, [DEV], [CLEAR_VARS_CMD]
 
 #-d /**
-#-d   \brief Script for adding an axis with configuration.
-#-d   \details Adds an axis to the configuration and applies parameters provided by CONFIG.
+#-d   \brief Script for adding an extra encoder to an axis.
+#-d   \details Adds an encoder to the last configured axis.
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \param CONFIG configuration file, i.e. ./cfg/axis_1_enc_2.enc

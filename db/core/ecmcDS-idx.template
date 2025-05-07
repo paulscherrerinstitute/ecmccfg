@@ -62,7 +62,17 @@ record(bi,"$(P)$(DS_FULL)"){
   field(OSV,  "NO_ALARM")
 }
 
-record(ao,"$(P)MCU-Cfg-DS${Index}-NxtObjId") {
+record(ai,"$(P)MCU-Cfg-DS${Index}-NxtObjId") {
     field(DESC, "DS number of next DS")
     field(VAL,  "$(NEXT_OBJ_ID=-1)")
+}
+
+record(ai,"$(P)MCU-Cfg-DS${Index}-PrvObjId") {
+    field(DESC, "DS number of next DS")
+    field(VAL,  "$(PREV_OBJ_ID=-1)")
+}
+
+record(stringin,"$(P)$(DESC_NAME)") {
+    field(DESC, "DS Info")
+    field(VAL,  "${DESC=DS ${index}}")
 }

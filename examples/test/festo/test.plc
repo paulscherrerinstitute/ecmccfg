@@ -1,7 +1,0 @@
-println('Setpoint:        ',ec${M_ID=0}.s$(DRV_ID).positionSetpoint01);
-println('Actual position: ',ec${M_ID=0}.s$(DRV_ID).positionActual01);
-
-ec${M_ID=0}.s$(DRV_ID).positionSetpoint01:=ec${M_ID=0}.s$(DRV_ID).positionSetpoint01+1000;
-
-
-# 1382000.00000 = 1.382 6 decimals

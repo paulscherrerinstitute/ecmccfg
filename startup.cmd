@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 9.4.0
+#- ECMC_VER          = 10.0.10
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -54,7 +54,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-epicsEnvSet(ECMC_VER,${ECMC_VER=9.4.0})
+epicsEnvSet(ECMC_VER,${ECMC_VER=10.0.10})
 require ecmc "${ECMC_VER}"
 
 #- Require EthercatMC if used.
@@ -149,9 +149,26 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0}")
 
 #-------------------------------------------------------------------------------
+#- Initialize links to first objects to -1
+ecmcFileExist(ecmcAxFirstAxis.db,1,1)
+dbLoadRecords(ecmcAxFirstAxis.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcEcFirstSlave.db,1,1)
+dbLoadRecords(ecmcEcFirstSlave.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcPlcFirstPlc.db,1,1)
+dbLoadRecords(ecmcPlcFirstPlc.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcPlgFirstPlg.db,1,1)
+dbLoadRecords(ecmcPlgFirstPlg.db,"P=${ECMC_PREFIX}")
+
+ecmcFileExist(ecmcDsFirstDs.db,1,1)
+dbLoadRecords(ecmcDsFirstDs.db,"P=${ECMC_PREFIX}")
+
+#-------------------------------------------------------------------------------
 #- Set path to ethercat tool
 #- Set default
-epicsEnvSet(ECMC_EC_TOOL_PATH,{EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
+epicsEnvSet(ECMC_EC_TOOL_PATH,${EC_TOOL_PATH="/opt/etherlab/bin/ethercat"})
 #- if ECmasterECMC_DIR is defined then use ethercat tool in installed module
 ecmcEpicsEnvSetCalcTernary(ECMC_USE_ECmasterECMC_DIR, "'${ECmasterECMC_DIR='empty'}'=='empty'", "#-","")
 ${ECMC_USE_ECmasterECMC_DIR}epicsEnvSet(ECMC_EC_TOOL_PATH, "${ECmasterECMC_DIR}bin/${EPICS_HOST_ARCH}/ethercat")
@@ -160,3 +177,9 @@ epicsEnvUnset(ECMC_USE_ECmasterECMC_DIR)
 #-
 #- Ensure that this command is not executed twice (ESS vs PSI)
 epicsEnvSet("ECMCCFG_INIT" ,"#")
+
+#- Ensure start of app thread and apply cfg (ESS maybe don't have the atInit command)
+on error continue
+ecmcFileExist("${ECMC_CONFIG_ROOT}finalize.cmd",1)
+atInit "$(SCRIPTEXEC) ($(ECMC_CONFIG_ROOT)finalize.cmd)"
+on error halt

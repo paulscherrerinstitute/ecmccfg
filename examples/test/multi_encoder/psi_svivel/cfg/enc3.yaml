@@ -1,0 +1,51 @@
+var:
+  drive: 4
+
+encoder:                     # encoder group
+  unit: mm
+  desc: openloop3
+  numerator: 361             # numerator scale
+  denominator: 12800         # denominator scale
+  type: 1                    # Type: 0=Incremental, 1=Absolute
+  bits: 16                   # Total bit count of encoder raw data
+  absBits: 16                # Total bit count of encoder raw data
+  absOffset: 0               # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s${DRV_ID}.positionActual01  # Ethercat entry for act-pos (encoder)
+#  source: xx                # axis uses internal or external source
+#  mask: xx                  # Encoder mask
+  primary: 1                 # Use this encoder as primary (for control)
+#  control: xx               # Control word
+#  reset: xx                 # reset bit in control word
+#  status: xx                # status word
+#  warning: xx               # warning bit in status word
+#  error:                    # error group
+#       - xx                 # error in status word or other entry
+#       - xx                 # error in status word or other entry
+#       - xx                 # error in status word or other entry
+#  latch:                    # latch group
+#    position: xx            # Latch position
+#    control: xx             # latch control bit in encoder.control
+#    status: xx              # latch status bit in encoder.control
+#  filer:                    # filter group
+#    velocity:               # velocity group
+#      enable: xx            # enable velocity filter
+#      size: xx              # velocity filter size
+#    trajectory:             # actpos group
+#      enable: xx            # enable actpos filter
+#      size: xx              # velocity actpos size
+#    position:               # actpos group (NOTE: SAME as trajectory but better name)
+#      enable: xx            # enable actpos filter
+#      size: xx              # velocity actpos size
+  homing:
+#  type: 3
+#  position: -30
+#  postMoveEnable: yes
+#  postMovePosition: 10
+#  velocity:
+#    to: 10
+#    from: 5
+#  acceleration: 20
+#  deceleration: 100
+    refToEncIDAtStartup: 1   # At startup then set the start value of this encoder to actpos of this encoder id
+    refAtHome: 1             # If homing is executed then set position of this encoder
+    tolToPrim: 0             # If set then this is the max allowed tolerance between prim encoder and this encoder

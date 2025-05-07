@@ -9,17 +9,6 @@ record(ai,"${P}${AXIS_NAME}-PosAct"){
   field(DESC, "Axis ax$(AXIS_NO): Actual Position")
   field(TSE,  "$(TSE=-2)")
 }
-## Velocity for the first encoder.. MOVE TO ecmcEnc.db
-#record(ai,"${P}${AXIS_NAME}-PosAct01"){
-#  field(PINI, "1")
-#  field(DTYP, "asynFloat64")
-#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actpos1?")
-#  field(PREC, "${PREC=3}")
-#  field(EGU,  "${EGU=mm}")
-#  field(SCAN, "I/O Intr")
-#  field(DESC, "Axis ax$(AXIS_NO): Actual Position Enc 1")
-#  field(TSE,  "$(TSE=-2)")
-#}
 
 # Velocity for primary encoder
 record(ai,"${P}${AXIS_NAME}-VelAct"){
@@ -32,18 +21,6 @@ record(ai,"${P}${AXIS_NAME}-VelAct"){
   field(DESC, "Axis ax$(AXIS_NO): Actual Velocity ")
   field(TSE,  "$(TSE=-2)")
 }
-
-# Velocity for the first encoder
-#record(ai,"${P}${AXIS_NAME}-VelAct01"){
-#  field(PINI, "1")
-#  field(DTYP, "asynFloat64")
-#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).actvel1?")
-#  field(PREC, "${PREC=3}")
-#  field(EGU,  "${EGU=mm}/s")
-#  field(SCAN, "I/O Intr")
-#  field(DESC, "Axis ax$(AXIS_NO): Actual Velocity Enc 1")
-#  field(TSE,  "$(TSE=-2)")
-#}
 
 record(ai,"${P}${AXIS_NAME}-PosSet"){
   field(PINI, "1")
@@ -405,8 +382,16 @@ record(bo,"${P}${AXIS_NAME}-EnaCmd"){
   field(ZNAM, "Disable")
   field(ONAM, "Enable")
   field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-EnaCmd_.PROC")
   field(TSE,  "0")
+}
+
+record(seq, "${P}${AXIS_NAME}-EnaCmd_") {
+  field(DESC, "Disable Axis")    
+  field(DOL1, "${P}${AXIS_NAME}-Cmd_")  
+  field(DOL2, "${P}${AXIS_NAME}-EnaCmd")
+  field(LNK1, "${P}${AXIS_NAME}-Cmd_ PP")
+  field(LNK2, "${P}${AXIS_NAME}.CNEN PP")
 }
 
 record(bo,"${P}${AXIS_NAME}-ExeCmd"){
@@ -497,6 +482,26 @@ record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
   field(ZNAM, "Disable")
   field(ONAM, "Enable")
   field(SCAN, "Passive")
+  field(FLNK, "${P}${AXIS_NAME}-DbgPrntEna.PROC")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
+  field(DESC, "${AXIS_NAME}: Ena dbg prints")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BA")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
+  field(DESC, "${AXIS_NAME}: Enable printouts")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BA")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
 }
@@ -533,14 +538,18 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
   field(ZRST, "NO_COMMAND")
   field(ZRVL, 0)
-  field(ONST, "MOVE_VEL")
+  field(ONST, "VEL")
   field(ONVL, 1)
-  field(TWST, "MOVE_REL")
+  field(TWST, "REL")
   field(TWVL, 2)
-  field(THST, "MOVE_ABS")
+  field(THST, "ABS")
   field(THVL, 3)
-  field(FRST, "MOVE_HOME")
-  field(FRVL, 10)
+  field(FVST, "PVT_REL")
+  field(FVVL, 8)
+  field(SXST, "PVT_ABS")
+  field(SXVL, 9)
+  field(SVST, "HOME")
+  field(SVVL, 10)
   field(VAL,  0)
 }
 
@@ -706,4 +715,27 @@ record(longin,"${P}${AXIS_NAME}-EncCnt"){
     field(DESC, "${AXIS_NAME} Encoder count")
     field(VAL,  "1")
     field(PINI, "YES")
+}
+
+# Records to indicate if safety plg is in use for this axis
+record(stringin,"${P}${AXIS_NAME}-SS1-GrpNam") {
+    field(DESC, "Name of Saftey Grp ")
+    field(VAL,  "Disabled")
+}
+
+record(bi,"${P}${AXIS_NAME}-SS1-EnaAct"){
+  field(DESC, "Safety PLG active for this axis")
+  field(VAL,   0)
+  field(ONAM, "1")
+  field(ZNAM, "0")
+}
+
+record(ai,"${P}${AXIS_NAME}-SS1-VelMaxLim"){
+  field(DESC, "Velocity max limit (not safety...)")
+  field(VAL,  -1)
+}
+
+record(ai,"${P}${AXIS_NAME}-SS1-VelRestLim"){
+  field(DESC, "Velocity rest limit (not safety...)")
+  field(VAL,  -1)
 }

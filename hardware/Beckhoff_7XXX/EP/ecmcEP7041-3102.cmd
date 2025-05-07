@@ -23,3 +23,6 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x5,1,1)"
 
 #- Invert motor polarity = 0
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x9,0,1)"
+
+#- Default panel
+epicsEnvSet("ECMC_HW_PANEL"              "EL70x1")
