@@ -55,7 +55,7 @@ trajectory:
   axis:
     velocity: 10
     acceleration: 100
-    decceleration: 100
+    deceleration: 100
 
 input:
   limit:
