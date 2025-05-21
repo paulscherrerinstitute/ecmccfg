@@ -21,8 +21,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 #-   4: PCB temperature [0.1 °C]
 #-   5: Errors: see docu for details
 #-   6: Warnings: see docu for details
-#-   7: I2T Motor [%]
-#-   8: I2T Amplifier [%]
 
 #- info data 01: DC voltage [mV]
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x39,2,1)"
