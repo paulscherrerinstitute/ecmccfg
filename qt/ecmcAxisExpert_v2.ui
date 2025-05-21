@@ -2344,7 +2344,7 @@
        </rect>
       </property>
       <property name="text">
-       <string/>
+       <string>$(IOC)</string>
       </property>
       <property name="channel" stdset="0">
        <string notr="true"/>
@@ -4403,7 +4403,7 @@
         <string notr="true">Group</string>
        </property>
        <property name="labels">
-        <string>$(GRP_ID)</string>
+        <string/>
        </property>
        <property name="files">
         <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
