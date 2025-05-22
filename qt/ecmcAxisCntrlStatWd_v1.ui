@@ -1386,7 +1386,7 @@
      <x>10</x>
      <y>0</y>
      <width>211</width>
-     <height>291</height>
+     <height>311</height>
     </rect>
    </property>
    <property name="title">
@@ -1818,14 +1818,14 @@
       <x>180</x>
       <y>35</y>
       <width>20</width>
-      <height>221</height>
+      <height>261</height>
      </rect>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-Cmd_</string>
     </property>
     <property name="endBit">
-     <number>10</number>
+     <number>12</number>
     </property>
    </widget>
    <widget class="QWidget" name="widget_22" native="true">
@@ -2108,12 +2108,62 @@
      </item>
     </layout>
    </widget>
+   <widget class="caToggleButton" name="catogglebutton_44">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>260</y>
+      <width>131</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Tweak Bwd:</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkBwdCmd</string>
+    </property>
+   </widget>
+   <widget class="caToggleButton" name="catogglebutton_45">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>131</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Tweak Fwd:</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkFwdCmd</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>300</y>
+     <y>315</y>
      <width>211</width>
      <height>126</height>
     </rect>
