@@ -13,9 +13,9 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "12")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037"
 
 #- Apply motor config with some cutom macros
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Series,MACROS='I_STDBY_MA=200,I_MAX_MA=1000'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Series,MACROS='I_STDBY_MA=200,I_MAX_MA=1000'"
 
-#${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Series"
+#${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Series"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
