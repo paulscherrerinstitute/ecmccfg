@@ -310,6 +310,28 @@ record(bi,"${P}${AXIS_NAME}-SumIlockBwd"){
   field(ONAM, "Not OK")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-SftLimFwdIlock.PROC")
+}
+  
+# // bit 19 softlimilockfwd
+record(bi,"${P}${AXIS_NAME}-SftLimFwdIlock"){
+  field(DESC, "${AXIS_NAME}: Soft lim. fwd")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B3")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-SftLimBwdIlock.PROC")
+}
+
+# // bit 20 softlimilockbwd
+record(bi,"${P}${AXIS_NAME}-SftLimBwdIlock"){
+  field(DESC, "${AXIS_NAME}: Soft lim. bwd")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B4")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
 }
 
 # // bit 19 Axis type
