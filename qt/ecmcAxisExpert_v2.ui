@@ -885,10 +885,10 @@
      <enum>caFrame::Calc</enum>
     </property>
     <property name="visibilityCalc">
-     <string notr="true">A&gt;40</string>
+     <string notr="true">A==10</string>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(SYS):$(Axis)-MtnCmd</string>
+     <string notr="true">$(SYS):$(Axis)-MtnCmd.RVAL</string>
     </property>
     <widget class="caMenu" name="camenu_6">
      <property name="geometry">
@@ -1221,7 +1221,7 @@
      </size>
     </property>
     <property name="text">
-     <string>Moving</string>
+     <string>Moving:</string>
     </property>
    </widget>
    <widget class="caLabel" name="calabel_84">
@@ -1821,7 +1821,7 @@
      </size>
     </property>
     <property name="text">
-     <string>Busy</string>
+     <string>Busy:</string>
     </property>
    </widget>
    <widget class="caLed" name="caled_60">
@@ -2001,7 +2001,7 @@
    <widget class="caLabel" name="calabel_67">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>370</y>
       <width>80</width>
       <height>16</height>
@@ -2014,15 +2014,15 @@
      </size>
     </property>
     <property name="text">
-     <string>Last Ilock</string>
+     <string>Last Ilock:</string>
     </property>
    </widget>
    <widget class="caLineEdit" name="calineedit_37">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>125</x>
       <y>370</y>
-      <width>41</width>
+      <width>31</width>
       <height>16</height>
      </rect>
     </property>
@@ -2031,6 +2031,9 @@
       <width>16777215</width>
       <height>18</height>
      </size>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="channel" stdset="0">
      <string>$(SYS):$(Axis)-LastIlock</string>
@@ -2058,7 +2061,7 @@
    <widget class="caLabel" name="calabel_94">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>390</y>
       <width>80</width>
       <height>16</height>
@@ -2077,9 +2080,9 @@
    <widget class="caLineEdit" name="calineedit_45">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>125</x>
       <y>390</y>
-      <width>41</width>
+      <width>31</width>
       <height>16</height>
      </rect>
     </property>
@@ -2088,6 +2091,9 @@
       <width>16777215</width>
       <height>18</height>
      </size>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="channel" stdset="0">
      <string>$(SYS):$(Axis)-SeqState</string>
@@ -5837,34 +5843,6 @@
      </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="caMenu" name="camenu_9">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>645</y>
-     <width>211</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>22</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>22</height>
-    </size>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="channel" stdset="0">
-    <string notr="true">$(SYS):$(Axis)-movHomCmd</string>
-   </property>
   </widget>
  </widget>
  <customwidgets>

@@ -1003,6 +1003,9 @@
       <height>18</height>
      </size>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
     <property name="channel" stdset="0">
      <string>$(SYS):$(Axis)-LastIlock</string>
     </property>
@@ -1059,6 +1062,9 @@
       <width>16777215</width>
       <height>18</height>
      </size>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="channel" stdset="0">
      <string>$(SYS):$(Axis)-SeqState</string>
