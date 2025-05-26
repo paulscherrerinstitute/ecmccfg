@@ -125,7 +125,7 @@ else if(static.VMState == 1) {
   if(mc_grp_get_any_error_id(${GRP_ID_SA})) {
     mc_grp_set_slaved_axis_in_error(${GRP_ID_MA});
   };
-  
+
   # Keep enable if atleast one master axis is busy..
   # Will lead to mr error "enableAmplifier(<axisid>) failed" since plc overrides any disable from motor record
   if(mc_grp_get_any_busy(${GRP_ID_MA}) == 1) {
@@ -136,6 +136,26 @@ else if(static.VMState == 1) {
 
   #- Sync slaved axes enable with master axis enabled
   mc_grp_set_enable(${GRP_ID_SA},mc_grp_get_enable(${GRP_ID_MA}));
+
+
+  # If any of the slaved axes at a limit then switch state -1
+  if(mc_grp_get_any_at_limit(${GRP_ID_SA})) {
+    ${DBG=#}println('Physical axis at limit. Force state change to -1')
+    ${DBG=#}println('1 -> -1');
+    static.VMState:=-1;
+
+    mc_grp_set_traj_src(${GRP_ID_SA},0);
+    mc_grp_mr_set_sync(${GRP_ID_SA},1);
+    mc_grp_mr_set_stop(${GRP_ID_SA},1);
+    mc_grp_halt(${GRP_ID_SA});
+
+    #- sync real axes
+    mc_grp_mr_set_sync(${GRP_ID_SA},1);
+    mc_grp_mr_set_stop(${GRP_ID_SA},1);
+
+    # Set master axis in error state
+    mc_grp_set_slaved_axis_ilocked(${GRP_ID_MA});
+  };
 
   #- basically a done test
   #- 1 -> 0
