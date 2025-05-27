@@ -595,7 +595,7 @@
       <enum>caLineEdit::Static</enum>
      </property>
      <property name="precisionMode">
-      <enum>caLineEdit::User</enum>
+      <enum>caLineEdit::Channel</enum>
      </property>
     </widget>
     <widget class="caStripPlot" name="castripplot_3">
