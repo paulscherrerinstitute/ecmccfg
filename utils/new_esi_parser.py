@@ -11,6 +11,7 @@ entryDict={
   "digital Input"   : "BI",
   "Digital Output"  : "BO",
   "digital Output"  : "BO",
+  "Outputs Output"  : "BO",
   "Inputs"          : "Inp",
   "Input"           : "Inp",
   "Outputs"         : "Outp",
@@ -60,6 +61,7 @@ entryDict={
   "Overcurrent"     : "OvrCurr",
   "Open"            : "Opn",
   "Load"            : "Ld",
+  "Force"           : "Frce",
 }
 
 pdoOutDict={
@@ -90,6 +92,11 @@ devsNeedIndex={
   "MTO"             : "BO",
   "POS"             : "Pos",
   "STM"             : "Drv",
+}
+
+removeDictLast={
+  "Outp-Outp"       : "",
+  "Inp-Inp"        : "",
 }
 
 def removeTrailingHyphen(s: str) -> str:
@@ -142,13 +149,13 @@ def convertName(dev, prefix, str):
     str = checkEntryDict(str)
     str = twoUnderScoresToDash(str)
     str = str.replace(" ", "")
-    # Remove devices in entry name (alrady included in prefix)
+    # Remove devices in entry name (already included in prefix)
     str = str.replace(dev, "")
     str = prefix + "-" + str
     str = str.replace("--", "-")
     str = ifDigitLastMakeIt2Wide(str)
     str = removeTrailingHyphen(str)
-
+    str = checkRemoveDict(str,removeDictLast)
     return str
 
 def charsAfterSpaceToUpper(str):
@@ -166,6 +173,11 @@ def twoUnderScoresToDash(str):
 
 def checkEntryDict(str):
     for key, value in entryDict.items():   
+      str=str.replace(key,value )
+    return str
+
+def checkRemoveDict(str, dict):
+    for key, value in dict.items():   
       str=str.replace(key,value )
     return str
 
@@ -348,23 +360,92 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 slave['SyncManagers'].append(sync_mgr_info)
 
             # Add the device to the slaves list
-            slaves.append(slave)
-
+            slaves.append(slave)      
     return slaves
+
+def filterOnIndex(objs,filterString):
+    # filterString = "1,2,3,5"
+    # filterString = "all"
+    listAll = False
+    if len(filterString) > 0:
+        if filterString=='all':
+            listAll = True
+        else:
+            filterList= list(map(int, filterString.split(',')))
+            filterListLength = len(filterList)
+    else:
+        filterListLength = -1
+    listThis = False
+    objindex = 1
+    filterindex = 0
+    objsOutput = []
+    for obj in objs:
+        listThis = False
+        if listAll:
+            listThis = True
+        elif filterListLength > filterindex:
+            if filterList[filterindex] == objindex:
+                filterindex += 1
+                listThis = True
+        if listThis:
+            objsOutput.append(obj)
+        objindex += 1
+    return objsOutput
+
+def filtPdoMaps(slaves, filterString):
+    newSlaves = []
+    for slave in slaves:
+        newSlave=slave.copy()
+        newSlave['PDOmaps'] = []
+        newSlave['PDOmaps'] = filterOnIndex(slave['PDOmaps'], filterString)
+        print('PDOMaps length: ' + str(len(newSlave['PDOmaps'])))
+        newSlaves.append(newSlave)
+    slaves = newSlaves
+    return slaves
+
+def printPdoMaps(slaves):
+    slaveindex = 1
+    for slave in slaves:
+        print(str(slaveindex) + ': ' + 'Name : ' + slave['name'] + ', revision: ' + slave['revision'])
+        pdomapindex = 1
+        for pdoMap in slave['PDOmaps']:
+            print ('   '+ str(pdomapindex) + ': ' + pdoMap['name'])
+            pdomapindex += 1
+        slaveindex += 1
+
+def printPdo(slaves,pdo):
+    print('ee')
+
 
 def main():
     parser = argparse.ArgumentParser(description='Parse EtherCAT ESI XML and extract TxPDO, RxPDO, SyncManager, and DC modes.')
-    parser.add_argument('--file', required=True, help='Path to the ESI XML file')
-    parser.add_argument('--name', required=True, help='Slave name pattern (wildcard)')
-    parser.add_argument('--rev', required=True, help='Revision pattern (wildcard)')
-    parser.add_argument('--output', required=True, help='Output JSON file')
-
+    parser.add_argument('--file',        required=True, help='Path to the ESI XML file')
+    parser.add_argument('--name',        required=True, help='Slave name pattern (wildcard)')
+    parser.add_argument('--rev',         required=True, help='Revision pattern (wildcard)')
+    parser.add_argument('--filtSlaves',  required=False, help='Slaves filter (\'all\' for all or slave id integer comma separated list, \'1,2,5\' )')
+    parser.add_argument('--filtPdoMaps', required=False, help='PDO map filter (\'all\' for all or PDO map id integer comma separated list, \'1,2,5\' )')
+    parser.add_argument('--outputJSON',  required=False, help='Filename of output JSON file')
+    parser.add_argument('--outputECMC',  required=False, help='Filename-base of output ecmc hw support files')
+    
     args = parser.parse_args()
 
     slaves = parse_esi(args.file, args.name, args.rev)
 
-    with open(args.output, 'w') as f:
-        json.dump(slaves, f, indent=4)
+    # Filter slaves on "index"
+    #   args.filtSlaves = "1,5" or "all"
+    if args.filtSlaves:
+        slaves=filterOnIndex(slaves, args.filtSlaves)
+
+    # Filter pdoMaps on "index"
+    #   args.filtPdoMaps = "1,5" or "all"
+    if args.filtPdoMaps:
+        slaves=filtPdoMaps(slaves, args.filtPdoMaps)
+
+    if args.outputJSON is not None:
+        with open(args.outputJSON, 'w') as f:
+            json.dump(slaves, f, indent=4)
+    
+    printPdoMaps(slaves)
 
 if __name__ == "__main__":
     main()
