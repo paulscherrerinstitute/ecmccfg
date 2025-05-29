@@ -717,7 +717,7 @@
         <enum>caFrame::Calc</enum>
        </property>
        <property name="visibilityCalc">
-        <string notr="true">A&gt;-1</string>
+        <string notr="true">A&gt;0</string>
        </property>
        <property name="channel" stdset="0">
         <string notr="true">$(IOC):PVT-NumAxes</string>

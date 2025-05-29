@@ -27,45 +27,65 @@ record(longout,"$(P)$(R)NumAxes") {
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_NUM_AXES")
     field(VAL,  "$(NAXES)")
 }
+
+# Define with size of position array instead
 record(longout,"$(P)$(R)NumPoints") {
     field(DESC, "# of points in profile")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_NUM_POINTS")
     field(VAL,  "$(NPOINTS)")
+    field(DRVL, 1)
+    field(DRVH, ${MAX_SIZE})
 }
+
+record(longin,"$(P)$(R)MaxSize") {
+    field(DESC, "Max points/pulses in profile")    
+    field(VAL,  "$(MAX_SIZE)")
+}
+
 record(longin, "$(P)$(R)CurrentPoint") {
     field(DESC, "Current point in profile")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(PORT),$(ADDR))PROFILE_CURRENT_POINT")
     field(SCAN, "I/O Intr")
 }
+
 record(longout,"$(P)$(R)NumPulses") {
     field(DESC, "Number of output pulses")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_NUM_PULSES")
     field(VAL,  "$(NPULSES)")
+    field(DRVL, 0)
+    field(DRVH, ${MAX_SIZE})
 }
+
 record(longin,"$(P)$(R)NumActualPulses") {
     field(DESC, "Actual # of output pulses")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(PORT),$(ADDR))PROFILE_ACTUAL_PULSES")
     field(SCAN, "I/O Intr")
 }
+
 record(longout, "$(P)$(R)StartPulses") {
     field(DESC, "Point # to start pulses")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_START_PULSES")
     field(VAL, "1")
+    field(DRVL, 0)
+    field(DRVH, ${MAX_SIZE})
 }
+
 record(longout,"$(P)$(R)EndPulses") {
     field(DESC, "Point # to end pulses")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(PORT),$(ADDR))PROFILE_END_PULSES")
     field(VAL,  "$(NPOINTS)")
+    field(DRVL, 0)
+    field(DRVH, ${MAX_SIZE})
 }
 
 #
@@ -79,6 +99,7 @@ grecord(bo,"$(P)$(R)TimeMode") {
     field(ZNAM, "Fixed")
     field(ONAM, "Array")
 }
+
 grecord(ao,"$(P)$(R)FixedTime") {
     field(DESC, "Profile fixed time per point")
     field(PINI, "YES")
@@ -87,6 +108,7 @@ grecord(ao,"$(P)$(R)FixedTime") {
     field(VAL,  "1.")
     field(PREC, "3")
 }
+
 record(waveform,"$(P)$(R)Times") {
     field(DESC, "Profile time at each point")
     field(DTYP, "asynFloat64ArrayOut")
@@ -95,6 +117,7 @@ record(waveform,"$(P)$(R)Times") {
     field(FTVL, "DOUBLE")
     field(PREC, "3")
 }
+
 record(ao,"$(P)$(R)Acceleration") {
     field(DESC, "Profile Acceleration")
     field(PINI, "YES")
@@ -107,7 +130,7 @@ record(ao,"$(P)$(R)Acceleration") {
 #
 # PV for absolute/relative mode
 #
-grecord(bo,"$(P)$(R)MoveMode") {
+record(bo,"$(P)$(R)MoveMode") {
     field(DESC, "Profile move mode")
     field(PINI, "YES")
     field(DTYP, "asynInt32")
@@ -126,6 +149,7 @@ record(bo,"$(P)$(R)Build") {
     field(ZNAM, "Done")
     field(ONAM, "Build")
 }
+
 record(mbbi,"$(P)$(R)BuildState") {
     field(DESC,"Profile build state")
     field(DTYP, "asynInt32")
@@ -138,6 +162,7 @@ record(mbbi,"$(P)$(R)BuildState") {
     field(ONSV, "MINOR")
     field(SCAN, "I/O Intr")
 }
+
 record(mbbi,"$(P)$(R)BuildStatus") {
     field(DESC,"Profile build status")
     field(DTYP, "asynInt32")
@@ -153,6 +178,7 @@ record(mbbi,"$(P)$(R)BuildStatus") {
     field(TWSV, "MAJOR")
     field(SCAN, "I/O Intr")
 }
+
 record(waveform,"$(P)$(R)BuildMessage") {
     field(DESC, "Profile build message")
     field(DTYP, "asynOctetRead")
@@ -161,6 +187,7 @@ record(waveform,"$(P)$(R)BuildMessage") {
     field(NELM, "256")
     field(SCAN, "I/O Intr")
 }
+
 #
 # PVs to execute and abort the profile
 # changed from busy to bo record
@@ -171,6 +198,7 @@ record(bo,"$(P)$(R)Execute") {
     field(ZNAM, "Done")
     field(ONAM, "Execute")
 }
+
 record(mbbi,"$(P)$(R)ExecuteState") {
     field(DESC,"Profile execute state")
     field(DTYP, "asynInt32")
@@ -189,6 +217,7 @@ record(mbbi,"$(P)$(R)ExecuteState") {
     field(THSV, "MINOR")
     field(SCAN, "I/O Intr")
 }
+
 record(mbbi,"$(P)$(R)ExecuteStatus") {
     field(DESC, "Profile execute status")
     field(DTYP, "asynInt32")
@@ -210,6 +239,7 @@ record(mbbi,"$(P)$(R)ExecuteStatus") {
     field(FRSV, "MAJOR")
     field(SCAN, "I/O Intr")
 }
+
 record(waveform,"$(P)$(R)ExecuteMessage") {
     field(DESC, "Profile execute message")
     field(DTYP, "asynOctetRead")
@@ -218,6 +248,7 @@ record(waveform,"$(P)$(R)ExecuteMessage") {
     field(NELM, "256")
     field(SCAN, "I/O Intr")
 }
+
 record(bo,"$(P)$(R)Abort") {
     field(DESC, "Abort profile motion")
     field(DTYP, "asynInt32")
@@ -236,6 +267,7 @@ record(bo,"$(P)$(R)Readback") {
     field(ZNAM, "Done")
     field(ONAM, "Readback")
 }
+
 record(mbbi,"$(P)$(R)ReadbackState") {
     field(DESC, "Readback state")
     field(DTYP, "asynInt32")
@@ -248,6 +280,7 @@ record(mbbi,"$(P)$(R)ReadbackState") {
     field(ONSV, "MINOR")
     field(SCAN, "I/O Intr")
 }
+
 record(mbbi,"$(P)$(R)ReadbackStatus") {
     field(DESC, "Readback status")
     field(DTYP, "asynInt32")
@@ -263,6 +296,7 @@ record(mbbi,"$(P)$(R)ReadbackStatus") {
     field(TWSV, "MAJOR")
     field(SCAN, "I/O Intr")
 }
+
 record(waveform,"$(P)$(R)ReadbackMessage") {
     field(DESC, "Profile readback message")
     field(DTYP, "asynOctetRead")
@@ -271,4 +305,3 @@ record(waveform,"$(P)$(R)ReadbackMessage") {
     field(NELM, "256")
     field(SCAN, "I/O Intr")
 }
-

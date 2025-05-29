@@ -103,8 +103,30 @@ For this however, the IOC needs to be reconfigured to _not_ link the hardware to
 7. After the amplifier is engaged, write a small number to `-Drv01-Spd`. Depending on the scaling, the number might be in the range of 1..1000.
 8. Observe the encoder, or in case of open-loop, the device itself.
 
-
 ## double limit switches
+For axes with dual limit switches or where special logic is needed, limit switches can be overriden by the keyword "plcOverride":
+```
+...
+input:
+  limit:
+    forward: 'plcOverride'                            # Overridden, see plc code below
+    backward: 'plcOverride'                           # Overridden, see plc code below
+...
+```
+The limits then must be written to from PLC. Any logic can then be applied to to set the limits, example:
+```
+...
+plc:
+  enable: true                                        # Enable axis plc
+  externalCommands: true                              # Allow axis to inputs from PLC  
+  code:                                               # Sync code (appended after code in plc.file)
+    - ax${AX_ID=1}.mon.lowlim:=ec_chk_bit(ec0.s$(DRV_SID).binaryInputs01,0) and ec0.s2.analogInput01<1000;
+    - ax${AX_ID=1}.mon.highlim:=ec_chk_bit(ec0.s$(DRV_SID).binaryInputs01,1) and ec0.s33.binaryInput02;
+...
+```
+Note that in plc code the bits must be accessed with the ec_chk_bit()-command.
+
+## double limit switches legacy (still an option)
 Sometimes two limit switches are needed, but only one can be linked in the yaml configuration. A use case could be if two axes have overlapping ranges and a switch is used to prevent them from colliding.
 
 In order to configurethis a PLC needs to be added where the two limits switches are combined with a "and" (for normally closed switches) into one bit by the use of the simulation entries (ec<mid>.s<sid>.ONE or ec<mid>.s<sid>.ZERO). 

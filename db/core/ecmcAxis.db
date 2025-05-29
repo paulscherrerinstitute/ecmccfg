@@ -310,6 +310,28 @@ record(bi,"${P}${AXIS_NAME}-SumIlockBwd"){
   field(ONAM, "Not OK")
   field(ZSV,  "NO_ALARM")
   field(OSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-SftLimFwdIlock.PROC")
+}
+  
+# // bit 19 softlimilockfwd
+record(bi,"${P}${AXIS_NAME}-SftLimFwdIlock"){
+  field(DESC, "${AXIS_NAME}: Soft lim. fwd")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B3")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
+  field(FLNK, "${P}${AXIS_NAME}-SftLimBwdIlock.PROC")
+}
+
+# // bit 20 softlimilockbwd
+record(bi,"${P}${AXIS_NAME}-SftLimBwdIlock"){
+  field(DESC, "${AXIS_NAME}: Soft lim. bwd")
+  field(INP,  "${P}${AXIS_NAME}-Stat2_.B4")
+  field(ZNAM, "OK")
+  field(ONAM, "Not OK")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "MINOR")
 }
 
 # // bit 19 Axis type
@@ -496,14 +518,26 @@ record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
   field(TSE,  "0")
 }
 
-record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
-  field(DESC, "${AXIS_NAME}: Enable printouts")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BA")
-  field(ZNAM, "Disable")
-  field(ONAM, "Enable")
+record(bo,"${P}${AXIS_NAME}-TwkBwdCmd"){
+  field(DESC, "${AXIS_NAME}: Tweak BWD")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BB")
+  field(ZNAM, "Idle")
+  field(ONAM, "Tweak")
   field(SCAN, "Passive")
   field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
   field(TSE,  "0")
+  field(HIGH, 0.001)
+}
+
+record(bo,"${P}${AXIS_NAME}-TwkFwdCmd"){
+  field(DESC, "${AXIS_NAME}: Tweak BWD")
+  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BC")
+  field(ZNAM, "Idle")
+  field(ONAM, "Tweak")
+  field(SCAN, "Passive")
+  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
+  field(TSE,  "0")
+  field(HIGH, 0.001)
 }
 
 record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){

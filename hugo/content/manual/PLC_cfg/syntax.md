@@ -822,6 +822,32 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                        );
      1. Enable/disable motor record via CNEN field
      Note: The command only triggers motor record maximum once per ecmc cycle (with the latest value written to enable)
+
+ 23.  mc_grp_set_ignore_mr_status_check_at_disable(
+                                                   <grp_id>, : Group index
+                                                   <ignore>, : Ignore 1/0
+                                                   );
+     Ignore check of status when mr is disabling (avoid enableAmplifier(xx) failed") error
+
+ 23.  mc_grp_get_any_at_fwd_limit(
+                                  <grp_id>, : Group index
+                                  );
+     Returns true if any axis in the group is at a fwd limit switch, otherwise false.
+
+ 24.  mc_grp_get_any_at_bwd_limit(
+                       <grp_id>, : Group index                  
+                       );
+     Returns true if any axis in the group is at a bwd limit switch, otherwise false.
+
+ 25.  mc_grp_get_any_at_limit(
+                       <grp_id>, : Group index                  
+                       );
+     Returns true if any axis in the group is at a limit switch, otherwise false.
+ 
+ 26.  mc_grp_set_slaved_axis_ilocked(
+                       <grp_id>, : Group index                  
+                       );
+     Set slaved axis in interlock error.
 ```
 
 #### Data Storage

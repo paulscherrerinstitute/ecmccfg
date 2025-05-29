@@ -55,7 +55,7 @@ trajectory:
   axis:
     velocity: 0.1
     acceleration: 0.5           # accel. time 0.2 s
-    decceleration: 0.5          # deaccel. time 0.2 s
+    deceleration: 0.5           # decel. time 0.2 s
 
 input:
   limit:

@@ -46,7 +46,7 @@ trajectory:
   axis:
     velocity: 360
     acceleration: 3600
-    decceleration: 3600
+    deceleration: 3600
 
 input:
   limit:

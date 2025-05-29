@@ -105,7 +105,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_ID), HW_DESC=${HW_DE
 
 #- block if -1
 ecmcEpicsEnvSetCalcTernary(BLOCK,"'${COMP=-1}'=='-1' or ${COMP_CH=-1}==-1","#-", "")
-${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "SLAVE_ID=$(SLAVE_ID),HW_DESC=${HW_DESC},COMP=${COMP},CH_ID=${COMP_CH},MACROS='${COMP_MACROS}'"
+${BLOCK}${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "SLAVE_ID=$(SLAVE_ID),HW_DESC=${HW_DESC},COMP=${COMP},CH_ID=${COMP_CH},MACROS='${COMP_MACROS}'"
 
 ```
 

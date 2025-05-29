@@ -1,0 +1,10 @@
+# fast record for soft triggerings
+record(longin,"${P}${R}SftTrg"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))TYPE=asynInt32/T_SMP_MS=$(T_SMP_MS=1)/pvt.softtrigger?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "PVT Soft trigger")
+  field(TSE,  "$(TSE=-2)")
+  field(TSE,  "$(FLNK=)")
+}

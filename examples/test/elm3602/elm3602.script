@@ -15,7 +15,7 @@ epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 # Note NELM equals oversampling factor in this case
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3602, NELM=${NELM=50}"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=AI-Generic-Range,CH_ID=1,MACROS='RANGE=+-10V'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=AI-Generic-Range,CH_ID=1,MACROS='RANGE=+-10V'"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)

@@ -20,7 +20,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=16, HW_DESC=EP7211-00
 # Limit torque to 50% of motor rated torque
 #- Rated current = 2710mA (see motor config file, "0x8011 0x12 Rated current (mA)")
 #- Set to 50% of 2710 = 1355mA   (0x8011 0x11 Max current (mA))
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=Motor-Beckhoff-AM8111-XFX0,MACROS='I_MAX_MA=1335'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Beckhoff-AM8111-XFX0,MACROS='I_MAX_MA=1335'"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd     "FILE=./cfg/el7201_1.yaml, DRV_ID=$(ECMC_EC_SLAVE_NUM), AX_NAME='Axis1', AX_ID=1"
 
 #-Apply hardware configuration
