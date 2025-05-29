@@ -69,6 +69,8 @@ pdoOutDict={
   "MTO"             : "BO",
   "POS"             : "Pos",
   "STM"             : "Drv",
+  "Latch"           : "Ltch",
+  "Channel"         : "BO",
 }
 
 pdoInpDict={
@@ -78,6 +80,8 @@ pdoInpDict={
   "MTO"             : "BO",
   "POS"             : "Pos",
   "STM"             : "Drv",
+  "Latch"           : "Ltch",
+  "Channel"         : "BI",
 }
 
 devsNeedIndex={
@@ -87,6 +91,11 @@ devsNeedIndex={
   "POS"             : "Pos",
   "STM"             : "Drv",
 }
+
+def removeTrailingHyphen(s: str) -> str:
+    if s.endswith('-'):
+        return s[:-1]
+    return s
 
 def checkPDODeviceAndChannel(name,input):
     words = name.split()
@@ -113,6 +122,21 @@ def checkPDODeviceAndChannel(name,input):
     print ("Dev: " + devStr)
     return devType, devStr
 
+def ifDigitLastMakeIt2Wide(s):
+    i = len(s) - 1
+    # Leta baklänges efter där siffrorna tar slut
+    while i >= 0 and s[i].isdigit():
+        i -= 1
+
+    # Om det fanns siffror i slutet
+    if i < len(s) - 1:
+        prefix = s[:i+1]
+        number = s[i+1:]
+        return f"{prefix}{int(number):02d}"
+    else:
+        # Inga siffror i slutet, returnera originalsträngen
+        return s
+
 def convertName(dev, prefix, str):
     str = charsAfterSpaceToUpper(str)
     str = checkEntryDict(str)
@@ -122,6 +146,9 @@ def convertName(dev, prefix, str):
     str = str.replace(dev, "")
     str = prefix + "-" + str
     str = str.replace("--", "-")
+    str = ifDigitLastMakeIt2Wide(str)
+    str = removeTrailingHyphen(str)
+
     return str
 
 def charsAfterSpaceToUpper(str):
@@ -160,7 +187,6 @@ def removeVowles(str):
             result+=char
     return result
 
-
 def parse_revision_number(revision_text):
     # Convert hex revision number (e.g. #x00100000) to an integer
     if revision_text and revision_text.startswith("#x"):
@@ -169,6 +195,8 @@ def parse_revision_number(revision_text):
 
 def to_hex(value):
     """Function to convert values to hex format (with '0x' prefix)"""
+    if value is None:
+        return ""
     try:
         return hex(int(value))
     except ValueError:
@@ -253,11 +281,15 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 # For each Entry inside TxPdo
                 entries = []
                 for entry in txpdo.xpath('.//Entry'):
+                    print('index= ' + str(parse_revision_number(entry.xpath('Index/text()')[0])))
+                    print('subindex= ' + str((entry.xpath('SubIndex/text()'))))
+
                     entry_data = {
-                        'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if entry.xpath('Index/text()') else '',
-                        'subindex': to_hex(entry.xpath('SubIndex/text()')[0]) if entry.xpath('SubIndex/text()') else '',
+                        'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if parse_revision_number(entry.xpath('Index/text()')[0]) is not None else "",
+                        'subindex': to_hex(parse_revision_number(entry.xpath('SubIndex/text()')[0])) if len(entry.xpath('SubIndex/text()')) > 0 else '',
                         'bitlen': entry.xpath('BitLen/text()')[0] if entry.xpath('BitLen/text()') else '',
                         'name': convertName(dev, prefix, entry.xpath('Name/text()')[0]) if entry.xpath('Name/text()') else '',
+                        'desc' : entry.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
                         'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else ''
                     }
                     entries.append(entry_data)
@@ -285,10 +317,11 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 entries = []
                 for entry in rxpdo.xpath('.//Entry'):
                     entry_data = {
-                        'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if entry.xpath('Index/text()') else '',
-                        'subindex': to_hex(entry.xpath('SubIndex/text()')[0]) if entry.xpath('SubIndex/text()') else '',
+                        'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if parse_revision_number(entry.xpath('Index/text()')[0]) is not None else "",
+                        'subindex': to_hex(parse_revision_number(entry.xpath('SubIndex/text()')[0])) if len(entry.xpath('SubIndex/text()')) > 0 else '',
                         'bitlen': entry.xpath('BitLen/text()')[0] if entry.xpath('BitLen/text()') else '',
                         'name': convertName(dev, prefix, entry.xpath('Name/text()')[0]) if entry.xpath('Name/text()') else '',
+                        'desc' : entry.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
                         'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else ''
                     }
                     entries.append(entry_data)
