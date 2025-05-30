@@ -441,8 +441,49 @@ def findPdo(slaves,pdo_index_str):
     print('Pdo: ' + pdo_index_str + ' not found')
     return None
 
+def saveEcmc(slaves, filename_suffix):
+    for slave in slaves:
+        # Hardware cmd file
+        pdoMapIndex = 1
+        for pdoMap in slave['PDOmaps']:
+            cmd_rows = pdosToEcAddEntryDT(slaves, pdoMap)
+            slave_type =slave['name'].split()[0] + '_' + slave['revision'] + filename_suffix  # bad.. hardcoded (name="EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp")
+            print('HEPPEPEPE 888')
+            if pdoMapIndex > 1:
+                print('HEPPEPEPE')
+                slave_type += '_' + str(pdoMapIndex) 
+            with open('ecmc' + slave_type + '.cmd', "w") as f:
+                f.write(F"#-  ecmc hardware config for: { slave['name'] }\n")
+                f.write(F"#- { pdoMap['name'] }\n")
+                f.write('\n')
+                f.write(F"epicsEnvSet(\"ECMC_EC_HWTYPE\"             \"{ slave_type }\")\n")
+                f.write(F"epicsEnvSet(\"ECMC_EC_VENDOR_ID\"          \"0x2\")\n")  # bad hardcoded..
+                f.write(F"epicsEnvSet(\"ECMC_EC_PRODUCT_ID\"         \"{ slave['product_id'] }\")\n")
+                f.write(F"epicsEnvSet(\"ECMC_EC_REVISION\"           \"{ slave['revision'] }\")\n")
+                f.write('\n')
+                for row in cmd_rows:
+                    f.write(row + '\n')
+            pdoMapIndex += 1
+
+# generate ecmcConfigOrDie cmd
+def pdosToEcAddEntryDT(slaves, pdoMap):
+    cmd_rows=[]
+    # first check for selected alterative mappings
+    for sm in pdoMap['sm']:
+        sm_index=sm['index']
+        for pdo in sm['pdos']:
+            pdo_data=findPdo(slaves,pdo)
+            pdo_index=pdo_data['index']
+            for entry in mergeEntries(pdo_data['entries']):
+                cmd_rows.append(pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry))
+                sub_entry_id = 1
+                for subentry in entry['sub_entries']:
+                    cmd_rows.append(F'#- { sub_entry_id }: ' + pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,subentry) + ' # merged')
+                    sub_entry_id +=1
+    return cmd_rows
+
 # All in the alterative maps available after filtering
-def  printPdoMapData(slaves):
+def printPdoMapData(slaves):
     slaveindex = 1
     for slave in slaves:
         #print(str(slaveindex) + ': ' + 'Name : ' + slave['name'] + ', revision: ' + slave['revision'])
@@ -457,7 +498,12 @@ def  printPdoMapData(slaves):
                     pdo_index=pdo_data['index']
                     for entry in mergeEntries(pdo_data['entries']):
                         print(pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry))
-                        
+                        sub_entry_id = 1
+                        for subentry in entry['sub_entries']:
+                            print(F'#- { sub_entry_id }: ' + pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,subentry) + ' # merged')
+                            sub_entry_id +=1
+
+
 ecmcCfgOrDieStrPart1 ='ecmcConfigOrDie \"Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},'
 
 def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
@@ -467,7 +513,7 @@ def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
     ecmcCfgOrDieStrPart2 = F'{ dir },{ sm_index },{ pdo_index },{ entry['index'] },{ entry['subindex'] },{ getEntryDT(entry) },{ entry['name'] })\"'
     comment=''
     if len(entry['sub_entries']) > 0:
-        comment = ' # Merged entry'
+        comment = F' # { len(entry['sub_entries']) } merged entries:' 
     return ecmcCfgOrDieStrPart1 + ecmcCfgOrDieStrPart2 + comment
 
 # Merge data types below 8 bits
@@ -498,7 +544,20 @@ def mergeEntries(entries):
                     merge_in_progress = False
                     new_merge_entry['sub_entries'] = sub_entries.copy()
 
-                    # overwrite
+                    # If Array then remove index in end and add "Arr"
+                    if checkSubEntriesIsArray(sub_entries):
+                        dummy, dummy1, digitCount = numberInEnd(new_merge_entry['name'])
+                        if digitCount > 0:
+                            new_merge_entry['name'] = new_merge_entry['name'][:-digitCount] + 'Arr'
+                    else:         
+                        if checkOnlyLastPartOFNameDiffer(sub_entries):
+                            newNameList=new_merge_entry['name'].split('-')[:-1]
+                            newName=''
+                            for s in newNameList:
+                                newName+=s + '-'
+                            newName = newName[:-1] + '_'
+                            new_merge_entry['name'] = newName
+
                     new_merge_entry['data_type'] = bitLengthToUXINT(bitlen_curr_merge)
                     new_merge_entry['bitlen'] = str(bitlen_curr_merge)
                     new_entries_list.append(new_merge_entry)
@@ -508,6 +567,63 @@ def mergeEntries(entries):
     print(F'Processed { entry_count } entries with a total bitlegth of { total_bit_legth }' )
     return new_entries_list
 
+def numberInEnd(s):
+    i = len(s) - 1
+    digitCount = 0
+    # Leta baklänges efter där siffrorna tar slut
+    while i >= 0 and s[i].isdigit():
+        i -= 1
+        digitCount += 1
+    if i < len(s) - 1:
+        number = s[i+1:]
+        return True, int(number), digitCount
+    else:
+        return False , -1, 0
+
+# For merged entries. Example, in below remove "OutpBuffRst" from the top below
+#ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x7011,0x1,U8,BO02-Ctrl-OutpBuffRst)" # Merged entry (4)
+##- Merged    ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x7011,0x1,ERROR_BOOL_1,BO02-Ctrl-OutpBuffRst)"
+##- Merged    ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x7011,0x2,ERROR_BOOL_1,BO02-Ctrl-ManOutpState)"
+##- Merged    ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x7011,0x3,ERROR_BOOL_1,BO02-Ctrl-FrceOrdr)"
+##- Merged    ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1605,0x0,,ERROR__5,)"
+def checkOnlyLastPartOFNameDiffer(entries):
+    prefixOld=[]
+    firstEntry = True
+    for entry in entries:
+        # filter dummy fieds without name
+        if len(entry['name']) == 0:
+            continue
+        if firstEntry:
+           firstEntry = False
+           prefixOld = entry['name'].split('-')
+           prefixOld = prefixOld[:-1]   # remove last
+        else:
+            prefix = entry['name'].split('-')
+            prefix = prefix[:-1]
+            if prefix != prefixOld:
+                return False
+            prefixOld = prefix
+    return True
+
+# check if index in end increasing with 1, only check entries with name and datatype.. Remove empty
+def checkSubEntriesIsArray(entries):
+    firstEntry = True
+    numberOld = 0
+    for entry in entries:
+        # filter dummy fieds without name
+        if len(entry['name']) == 0:
+            continue
+        numInEnd, number, charCount = numberInEnd(entry['name'])
+        if not numInEnd:
+            return False
+        if firstEntry:
+           firstEntry = False
+           numberOld = numInEnd
+        else:
+            if number != (numberOld + 1):
+                return False
+            numberOld = number
+    return True
 
 def bitLengthToUXINT(bitlegth):
     match bitlegth:
@@ -535,23 +651,7 @@ def getEntryDT(entry):
             return 'S16'        
         case 'DINT':
             return 'S32'
-    return 'ERROR_' + entry['data_type'] + '_' + entry['bitlen'] 
-   
-
-# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7010,0x01,U16,driveControl01)"
-# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7010,0x06,S32,velocitySetpoint01)"
-# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x11,U32,positionActual01)"
-# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6010,0x01,U16,driveStatus01)"
-
-
-#      'index':
-#      'subindex':
-#      'bitlen':
-#      'name': 
-#      'desc' :
-#      'data_type':
-
-
+    return 'B'+ entry['bitlen'] 
 
 def main():
     parser = argparse.ArgumentParser(description='Parse EtherCAT ESI XML and extract TxPDO, RxPDO, SyncManager, and DC modes.')
@@ -580,9 +680,11 @@ def main():
     if args.outputJSON is not None:
         saveJSON(slaves,args.outputJSON)
     
-    printPdoMaps(slaves)
-    printPdoMapData(slaves)
+    #printPdoMaps(slaves)
+    #printPdoMapData(slaves)
 
+    if args.outputECMC is not None:
+        saveEcmc(slaves,args.outputECMC)
 
 if __name__ == "__main__":
     main()
