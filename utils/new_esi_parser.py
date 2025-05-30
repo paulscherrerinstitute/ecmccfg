@@ -293,16 +293,18 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 # For each Entry inside TxPdo
                 entries = []
                 for entry in txpdo.xpath('.//Entry'):
-                    print('index= ' + str(parse_revision_number(entry.xpath('Index/text()')[0])))
-                    print('subindex= ' + str((entry.xpath('SubIndex/text()'))))
+                    #print('1 index= ' + str(parse_revision_number(entry.xpath('Index/text()')[0])))
+                    #print('1 subindex= ' + str((entry.xpath('SubIndex/text()'))))
+                    #print('1: ' + str(parse_revision_number(entry.xpath('SubIndex/text()')[0])) if len(entry.xpath('SubIndex/text()')) > 0 else '',)
 
                     entry_data = {
                         'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if parse_revision_number(entry.xpath('Index/text()')[0]) is not None else "",
-                        'subindex': to_hex(parse_revision_number(entry.xpath('SubIndex/text()')[0])) if len(entry.xpath('SubIndex/text()')) > 0 else '',
+                        'subindex': str(to_hex(entry.xpath('SubIndex/text()')[0]) if len(entry.xpath('SubIndex/text()')) > 0 else ''),
                         'bitlen': entry.xpath('BitLen/text()')[0] if entry.xpath('BitLen/text()') else '',
                         'name': convertName(dev, prefix, entry.xpath('Name/text()')[0]) if entry.xpath('Name/text()') else '',
                         'desc' : entry.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
-                        'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else ''
+                        'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else '',
+                        'sub_entries': []
                     }
                     entries.append(entry_data)
 
@@ -323,18 +325,23 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                 sm = rxpdo.xpath('@Sm')[0] if rxpdo.xpath('@Sm') else None  # Get Sm attribute, if present
                 index = to_hex(parse_revision_number(rxpdo.xpath('Index/text()')[0])) if rxpdo.xpath('Index/text()') else ''
                 name = rxpdo.xpath('Name/text()')[0] if rxpdo.xpath('Name/text()') else ''
-                dev, prefix = checkPDODeviceAndChannel(name,1)                
+                dev, prefix = checkPDODeviceAndChannel(name,1)
                 exclude = to_hex(parse_revision_number(rxpdo.xpath('Exclude/text()')[0])) if rxpdo.xpath('Exclude/text()') else None
                 # For each Entry inside RxPdo
                 entries = []
                 for entry in rxpdo.xpath('.//Entry'):
+                    #print('2 index= ' + str(parse_revision_number(entry.xpath('Index/text()')[0])))
+                    #print('2 subindex= ' + str(to_hex(entry.xpath('SubIndex/text()')[0]) if len(entry.xpath('SubIndex/text()')) > 0 else '',))
+                    #print('2 ' + str(entry.xpath('SubIndex/text()')[0]) if len(entry.xpath('SubIndex/text()')) > 0 else '',)
+
                     entry_data = {
                         'index': to_hex(parse_revision_number(entry.xpath('Index/text()')[0])) if parse_revision_number(entry.xpath('Index/text()')[0]) is not None else "",
-                        'subindex': to_hex(parse_revision_number(entry.xpath('SubIndex/text()')[0])) if len(entry.xpath('SubIndex/text()')) > 0 else '',
+                        'subindex': str(to_hex(entry.xpath('SubIndex/text()')[0]) if len(entry.xpath('SubIndex/text()')) > 0 else ''),
                         'bitlen': entry.xpath('BitLen/text()')[0] if entry.xpath('BitLen/text()') else '',
                         'name': convertName(dev, prefix, entry.xpath('Name/text()')[0]) if entry.xpath('Name/text()') else '',
                         'desc' : entry.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
-                        'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else ''
+                        'data_type': entry.xpath('DataType/text()')[0] if entry.xpath('DataType/text()') else '',
+                        'sub_entries': []
                     }
                     entries.append(entry_data)
 
@@ -413,8 +420,137 @@ def printPdoMaps(slaves):
             pdomapindex += 1
         slaveindex += 1
 
-def printPdo(slaves,pdo):
-    print('ee')
+def saveJSON(slaves,filename):
+    with open(filename, 'w') as f:
+            json.dump(slaves, f, indent=4)
+
+def findPdo(slaves,pdo_index_str):
+    # Look in RX
+    for slave in slaves:
+       for pdo in slave['RxPDO']:
+           #print (str(pdo) + '\n')
+           if pdo['index']==pdo_index_str:
+                return pdo
+    # Look in TX
+    for slave in slaves:
+       for pdo in slave['TxPDO']:
+           #print (str(pdo) + '\n')
+           if pdo['index']==pdo_index_str:
+                return pdo
+    
+    print('Pdo: ' + pdo_index_str + ' not found')
+    return None
+
+# All in the alterative maps available after filtering
+def  printPdoMapData(slaves):
+    slaveindex = 1
+    for slave in slaves:
+        #print(str(slaveindex) + ': ' + 'Name : ' + slave['name'] + ', revision: ' + slave['revision'])
+        pdomapindex = 1
+        # first check for selected alterative mappings
+        for pdoMap in slave['PDOmaps']:
+            for sm in pdoMap['sm']:
+                sm_index=sm['index']
+                for pdo in sm['pdos']:
+                    pdo_data=findPdo(slaves,pdo)
+                    #print('Pdo data: ' + str(pdo_data))
+                    pdo_index=pdo_data['index']
+                    for entry in mergeEntries(pdo_data['entries']):
+                        print(pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry))
+                        
+ecmcCfgOrDieStrPart1 ='ecmcConfigOrDie \"Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},'
+
+def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
+    dir = 1 # intput
+    if sm_index=='1' or sm_index=='3':
+        dir=2 # output
+    ecmcCfgOrDieStrPart2 = F'{ dir },{ sm_index },{ pdo_index },{ entry['index'] },{ entry['subindex'] },{ getEntryDT(entry) },{ entry['name'] })\"'
+    comment=''
+    if len(entry['sub_entries']) > 0:
+        comment = ' # Merged entry'
+    return ecmcCfgOrDieStrPart1 + ecmcCfgOrDieStrPart2 + comment
+
+# Merge data types below 8 bits
+def mergeEntries(entries):
+    new_entries_list=[]
+    bitlen_curr_merge = 0
+    sub_entries = []
+    new_merge_entry = [] 
+    merge_in_progress = False
+    total_bit_legth = 0
+    entry_count = 0
+    for entry in entries:
+        # filter strange bit lengths and merge
+        bitlen = int(entry['bitlen'])
+        total_bit_legth += bitlen
+        entry_count += 1
+        if  bitlen != 8 and bitlen != 16 and bitlen != 32 and bitlen != 64:
+            if not merge_in_progress:
+                merge_in_progress = True
+                sub_entries = []
+                new_merge_entry=entry.copy()
+                bitlen_curr_merge = 0
+            sub_entries.append(entry.copy())
+            bitlen_curr_merge += bitlen
+  
+            if merge_in_progress:
+                if bitlen_curr_merge == 8 or bitlen_curr_merge == 16 or bitlen_curr_merge == 32 or bitlen_curr_merge == 64:
+                    merge_in_progress = False
+                    new_merge_entry['sub_entries'] = sub_entries.copy()
+
+                    # overwrite
+                    new_merge_entry['data_type'] = bitLengthToUXINT(bitlen_curr_merge)
+                    new_merge_entry['bitlen'] = str(bitlen_curr_merge)
+                    new_entries_list.append(new_merge_entry)
+        else:
+            # normal entry
+            new_entries_list.append(entry)
+    print(F'Processed { entry_count } entries with a total bitlegth of { total_bit_legth }' )
+    return new_entries_list
+
+
+def bitLengthToUXINT(bitlegth):
+    match bitlegth:
+        case 8:
+            return 'USINT'
+        case 16:
+            return 'UINT'
+        case 32:
+            return 'UDINT'
+        case 64:
+            return 'UXXX64'
+    return 'UXXXX'
+
+def getEntryDT(entry):
+    match entry['data_type']:
+        case 'USINT':
+            return 'U8'
+        case 'UINT':
+            return 'U16'
+        case 'UDINT':
+            return 'U32'
+        case 'SINT':
+            return 'S8'
+        case 'INT':
+            return 'S16'        
+        case 'DINT':
+            return 'S32'
+    return 'ERROR_' + entry['data_type'] + '_' + entry['bitlen'] 
+   
+
+# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7010,0x01,U16,driveControl01)"
+# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1601,0x7010,0x06,S32,velocitySetpoint01)"
+# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a00,0x6000,0x11,U32,positionActual01)"
+# ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6010,0x01,U16,driveStatus01)"
+
+
+#      'index':
+#      'subindex':
+#      'bitlen':
+#      'name': 
+#      'desc' :
+#      'data_type':
+
 
 
 def main():
@@ -431,7 +567,7 @@ def main():
 
     slaves = parse_esi(args.file, args.name, args.rev)
 
-    # Filter slaves on "index"
+    # Filter slaves on "index", applied after filtered with --name and --rev
     #   args.filtSlaves = "1,5" or "all"
     if args.filtSlaves:
         slaves=filterOnIndex(slaves, args.filtSlaves)
@@ -442,10 +578,11 @@ def main():
         slaves=filtPdoMaps(slaves, args.filtPdoMaps)
 
     if args.outputJSON is not None:
-        with open(args.outputJSON, 'w') as f:
-            json.dump(slaves, f, indent=4)
+        saveJSON(slaves,args.outputJSON)
     
     printPdoMaps(slaves)
+    printPdoMapData(slaves)
+
 
 if __name__ == "__main__":
     main()
