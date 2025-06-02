@@ -82,12 +82,12 @@ Not a valid homing sequence, can be used if encoder is absolute.
 5. Homing is performed. ECMC_HOME_POS will be the new position at the center point of the two latched positions in step 2 and 4. 
 
 ### ECMC_SEQ_HOME_BWD_HOME                 = 7,
-1. Axis moves backward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+1. Axis moves backward untill positive edge detected in home switch signal. Position is latched. (polarity of home sensor can be changed)
 2. Axis stops
 3. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 1. 
 
 ### ECMC_SEQ_HOME_FWD_HOME                 = 8,
-1. Axis moves forward untill positive edge detected in limit switch signal. Position is latched. (polarity of home sensor can be changed)
+1. Axis moves forward untill positive edge detected in home switch signal. Position is latched. (polarity of home sensor can be changed)
 2. Axis stops
 3. Homing is performed. ECMC_HOME_POS will be the new position at the position latched in step 1. 
 
