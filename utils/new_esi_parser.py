@@ -3,6 +3,8 @@ import json
 import argparse
 import fnmatch  # Ensure fnmatch is imported
 
+
+
 entryDict={
   "Status"          : "Stat",
   "Control"         : "Ctrl",
@@ -441,7 +443,8 @@ def findPdo(slaves,pdo_index_str):
     print('Pdo: ' + pdo_index_str + ' not found')
     return None
 
-def saveEcmc(slaves, filename_suffix):
+
+def saveEcmcCmdFiles(slaves, filename_suffix):
     for slave in slaves:
         # Hardware cmd file
         pdoMapIndex = 1
@@ -465,7 +468,44 @@ def saveEcmc(slaves, filename_suffix):
                     f.write(row + '\n')
             pdoMapIndex += 1
 
-# generate ecmcConfigOrDie cmd
+def saveEcmcSubstFiles(slaves,filename_suffix):
+   for slave in slaves:
+        # Hardware cmd file
+        pdoMapIndex = 1
+        for pdoMap in slave['PDOmaps']:
+            cmd_rows = pdosToEcSubst(slaves, pdoMap)
+            slave_type =slave['name'].split()[0] + '_' + slave['revision'] + filename_suffix  # bad.. hardcoded (name="EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp")
+            print('HEPPEPEPE 888')
+            if pdoMapIndex > 1:
+                print('HEPPEPEPE')
+                slave_type += '_' + str(pdoMapIndex) 
+            with open('ecmc' + slave_type + '.substitution', "w") as f:
+                f.write(F"#-  ecmc database for: { slave['name'] }\n")
+                f.write(F"#- { pdoMap['name'] }\n")
+                f.write('\n')
+                for row in cmd_rows:
+                    f.write(row + '\n')
+            pdoMapIndex += 1
+                
+def saveEcmc(slaves, filename_suffix):
+    saveEcmcCmdFiles(slaves, filename_suffix)
+    saveEcmcSubstFiles(slaves, filename_suffix)
+
+
+def mergeEntriesBelow8bits(slaves): 
+    for slave in slaves:
+        for pdoMap in slave['PDOmaps']:
+            for sm in pdoMap['sm']:
+                sm_index=sm['index']
+                for pdo in sm['pdos']:
+                    pdo_data=findPdo(slaves,pdo)                    
+                    pdo_index=pdo_data['index']
+                    newEntries= []
+                    for entry in mergeEntries(pdo_data['entries']):
+                        newEntries.append(entry)
+                    pdo_data['entries'] = newEntries
+    return slaves
+
 def pdosToEcAddEntryDT(slaves, pdoMap):
     cmd_rows=[]
     # first check for selected alterative mappings
@@ -474,13 +514,150 @@ def pdosToEcAddEntryDT(slaves, pdoMap):
         for pdo in sm['pdos']:
             pdo_data=findPdo(slaves,pdo)
             pdo_index=pdo_data['index']
-            for entry in mergeEntries(pdo_data['entries']):
+            for entry in pdo_data['entries']:
                 cmd_rows.append(pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry))
                 sub_entry_id = 1
                 for subentry in entry['sub_entries']:
                     cmd_rows.append(F'#- { sub_entry_id }: ' + pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,subentry) + ' # merged')
                     sub_entry_id +=1
     return cmd_rows
+
+def pdosToEcSubst(slaves, pdoMap):
+    ai_rows=[]
+    ao_rows=[]
+    bi_rows=[]
+    bo_rows=[]
+    mbbiDirect_rows=[]
+    mbboDirect_rows=[]
+    mbbiDirect_bi_rows=[]
+    mbboDirect_bo_rows=[]
+
+    # first check for selected alterative mappings
+    for sm in pdoMap['sm']:
+        sm_index=sm['index']
+        for pdo in sm['pdos']:
+            pdo_data=findPdo(slaves,pdo)
+            pdo_index=pdo_data['index']
+            for entry in pdo_data['entries']:
+                if len(entry['sub_entries']) > 0:
+                    # mbbiDirect or mbboDirect
+                    mbbxName = entry['name']                    
+                    sub_entry_bit_index = 0                    
+                    prev_bi_name = ""
+                    for sub_entry in entry['sub_entries']:
+                        if len(sub_entry['name']) == 0 or int(sub_entry['bitlen']) > 1: # dummy entry or not a binary
+                            sub_entry_bit_index += int(sub_entry['bitlen'])
+                            print ('WARNING: Skipping entry' + sub_entry['desc'])
+                            continue
+                        
+                        if sm_index=='0' or sm_index=='2': # Output
+                            #  pattern {    REC_NAME,              DESC,                  LNK_NAME,                              FLNK                            }'
+                            macros = F"{{ { sub_entry['name'] } , { sub_entry['desc'] } , { mbbxName }.B{ sub_entry_bit_index }, ${{ECMC_P}}{ mbbxName }.PROC }}"
+                            mbboDirect_bo_rows.append(macros)
+                        else: # Input                                                        
+                            #  pattern {    REC_NAME,              DESC,                  LNK_NAME,                              FLNK                                }'                            
+                            macros = F"{{ { sub_entry['name'] } , { sub_entry['desc'] } , { mbbxName }.B{ sub_entry_bit_index }, ${{ECMC_P}}{ prev_bi_name }.PROC }}"
+                            mbbiDirect_bi_rows.append(macros)
+                            prev_bi_name = sub_entry['name']
+                        sub_entry_bit_index += int(sub_entry['bitlen'])
+
+                    if sm_index=='0' or sm_index=='2': # Output
+                        #  pattern {    REC_NAME,     DESC,         }'                        
+                        macros = F"{{ { mbbxName }, { entry['desc'] } }}"
+                        mbboDirect_rows.append(macros)
+                    else: # Input
+                        #  pattern {    REC_NAME,     DESC,              FLNK                 }'
+                        macros = F"{{ { mbbxName }, { entry['desc'] }, { prev_bi_name }.PROC }}"
+                        mbbiDirect_rows.append(macros)
+                    continue
+
+                # avoid dummy
+                if len(entry['name']) == 0:
+                    continue
+
+                # normal data type
+                #  pattern {    REC_NAME,              DESC }
+                macros = F"{{ { entry['name'] } , { entry['desc'] } }}"
+                if int(entry['bitlen']) > 1:
+                    if sm_index=='0' or sm_index=='2':
+                        # Output                        
+                        ao_rows.append(macros)
+
+                    else:
+                        # Input
+                        ai_rows.append(macros)
+                else:
+                    # bitlength = 1
+                    if sm_index=='0' or sm_index=='2':
+                        # Output                        
+                        bo_rows.append(macros)
+
+                    else:
+                        # Input
+                        bi_rows.append(macros)
+    output_rows = []
+
+    #ecmc_ESI_mbboDirect_bo
+    output_rows.append('file "ecmc_ESI_mbboDirect_bo.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
+    for item in mbboDirect_bo_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    #ecmc_ESI_mbboDirect
+    output_rows.append('file "ecmc_ESI_mbboDirect.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC}')
+    for item in mbboDirect_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' + '\n')
+
+    #ecmc_ESI_mbbiDirect_bi
+    output_rows.append('file "ecmc_ESI_mbbiDirect_bi.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
+    for item in mbbiDirect_bi_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    #ecmc_ESI_mbbiDirect
+    output_rows.append('file "ecmc_ESI_mbbiDirect.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC, FLNK }')
+    for item in mbbiDirect_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    #ecmc_ESI_ai
+    output_rows.append('file "ecmc_ESI_ai.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC }')
+    for item in ai_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    #ecmc_ESI_ao
+    output_rows.append('file "ecmc_ESI_ao.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC }')
+    for item in ao_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    #bi_rows
+    output_rows.append('file "ecmc_ESI_bi.template" {' )
+    output_rows.append('    pattern { REC_NAME, DESC }')
+    for item in bi_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    #bo_rows
+    output_rows.append('file "ecmc_ESI_bo.template" {')
+    output_rows.append('    pattern { REC_NAME, DESC }')
+    for item in bo_rows:
+        output_rows.append('        ' + item)
+    output_rows.append('}' +  '\n')
+
+    return output_rows
+
+def entryToDBMacros(entry):
+    # REC_NAME, DESC, 
+    return F'{entry['name'], entry['name'] }'
 
 # All in the alterative maps available after filtering
 def printPdoMapData(slaves):
@@ -508,7 +685,7 @@ ecmcCfgOrDieStrPart1 ='ecmcConfigOrDie \"Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},$
 
 def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
     dir = 1 # intput
-    if sm_index=='1' or sm_index=='3':
+    if sm_index=='0' or sm_index=='2':
         dir=2 # output
     ecmcCfgOrDieStrPart2 = F'{ dir },{ sm_index },{ pdo_index },{ entry['index'] },{ entry['subindex'] },{ getEntryDT(entry) },{ entry['name'] })\"'
     comment=''
@@ -659,6 +836,7 @@ def main():
     parser.add_argument('--name',        required=True, help='Slave name pattern (wildcard)')
     parser.add_argument('--rev',         required=True, help='Revision pattern (wildcard)')
     parser.add_argument('--filtSlaves',  required=False, help='Slaves filter (\'all\' for all or slave id integer comma separated list, \'1,2,5\' )')
+    parser.add_argument('--mergeEntries', required=False, help='Merge entries below 8 bits')
     parser.add_argument('--filtPdoMaps', required=False, help='PDO map filter (\'all\' for all or PDO map id integer comma separated list, \'1,2,5\' )')
     parser.add_argument('--outputJSON',  required=False, help='Filename of output JSON file')
     parser.add_argument('--outputECMC',  required=False, help='Filename-base of output ecmc hw support files')
@@ -670,12 +848,16 @@ def main():
     # Filter slaves on "index", applied after filtered with --name and --rev
     #   args.filtSlaves = "1,5" or "all"
     if args.filtSlaves:
-        slaves=filterOnIndex(slaves, args.filtSlaves)
+        slaves = filterOnIndex(slaves, args.filtSlaves)
 
     # Filter pdoMaps on "index"
     #   args.filtPdoMaps = "1,5" or "all"
     if args.filtPdoMaps:
-        slaves=filtPdoMaps(slaves, args.filtPdoMaps)
+        slaves = filtPdoMaps(slaves, args.filtPdoMaps)
+
+    # Merge entrie below 8 bits
+    if args.mergeEntries:
+        slaves = mergeEntriesBelow8bits(slaves)
 
     if args.outputJSON is not None:
         saveJSON(slaves,args.outputJSON)

@@ -1,0 +1,16 @@
+#-d /**
+#-d   \brief template for binary input for use of ESI converter script 
+#-d */
+
+record(bi,"${ECMC_P}${REC_NAME}"){
+  field(DESC, "${DESC=}")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "${DTYP=asynInt32}")
+  field(SCAN, "${SCAN=I/O Intr}")
+  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=${T_SMP_MS=1000}/TYPE=${DTYP=asynInt32}/ec${MASTER_ID}.s${SLAVE_POS}.${REC_NAME}?")
+  field(ZNAM, "${ZNAM=False}")
+  field(ONAM, "${ONAM=True}")
+  field(ZSV,  "${ZSV=NO_ALARM}")
+  field(OSV,  "${OSV=NO_ALARM}")
+  field(TSE,  "${TSE=-2}")
+}
