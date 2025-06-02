@@ -23,7 +23,7 @@ Latest:
 # pip3 install lxm
 source ~/myhome/python/esi_parser/bin/activate
 python3 new_esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtSlaves "1" --filtPdoMaps "1,2,3,5" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
-
+python3 new_esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
 ```
 
 ## EtherCAT slave description file parser (ESI/XML) WIP

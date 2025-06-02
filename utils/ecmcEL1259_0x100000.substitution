@@ -1,5 +1,9 @@
 #-  ecmc database for: EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp
 #- Multi-Timestamping 8 Ch. 10x
+#-      ECMC_EC_HWTYPE:     EL1259_0x100000
+#-      ECMC_EC_VENDOR_ID:  0x2
+#-      ECMC_EC_PRODUCT_ID: 0x4eb3052
+#-      ECMC_EC_REVISION:   0x100000
 
 file "ecmc_ESI_mbboDirect_bo.template" {
     pattern { REC_NAME, DESC, LNK_NAME, FLNK }
@@ -527,13 +531,5 @@ file "ecmc_ESI_ao.template" {
         { BI06-Ctrl-OrdrCntr , Ctrl__Input order counter }
         { BI07-Ctrl-OrdrCntr , Ctrl__Input order counter }
         { BI08-Ctrl-OrdrCntr , Ctrl__Input order counter }
-}
-
-file "ecmc_ESI_bi.template" {
-    pattern { REC_NAME, DESC }
-}
-
-file "ecmc_ESI_bo.template" {
-    pattern { REC_NAME, DESC }
 }
 

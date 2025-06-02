@@ -451,9 +451,7 @@ def saveEcmcCmdFiles(slaves, filename_suffix):
         for pdoMap in slave['PDOmaps']:
             cmd_rows = pdosToEcAddEntryDT(slaves, pdoMap)
             slave_type =slave['name'].split()[0] + '_' + slave['revision'] + filename_suffix  # bad.. hardcoded (name="EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp")
-            print('HEPPEPEPE 888')
             if pdoMapIndex > 1:
-                print('HEPPEPEPE')
                 slave_type += '_' + str(pdoMapIndex) 
             with open('ecmc' + slave_type + '.cmd', "w") as f:
                 f.write(F"#-  ecmc hardware config for: { slave['name'] }\n")
@@ -475,13 +473,15 @@ def saveEcmcSubstFiles(slaves,filename_suffix):
         for pdoMap in slave['PDOmaps']:
             cmd_rows = pdosToEcSubst(slaves, pdoMap)
             slave_type =slave['name'].split()[0] + '_' + slave['revision'] + filename_suffix  # bad.. hardcoded (name="EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp")
-            print('HEPPEPEPE 888')
             if pdoMapIndex > 1:
-                print('HEPPEPEPE')
                 slave_type += '_' + str(pdoMapIndex) 
             with open('ecmc' + slave_type + '.substitution', "w") as f:
                 f.write(F"#-  ecmc database for: { slave['name'] }\n")
                 f.write(F"#- { pdoMap['name'] }\n")
+                f.write(F"#-      ECMC_EC_HWTYPE:     { slave_type }\n")
+                f.write(F"#-      ECMC_EC_VENDOR_ID:  0x2\n")  # bad hardcoded..
+                f.write(F"#-      ECMC_EC_PRODUCT_ID: { slave['product_id'] }\n")
+                f.write(F"#-      ECMC_EC_REVISION:   { slave['revision']   }\n")
                 f.write('\n')
                 for row in cmd_rows:
                     f.write(row + '\n')
@@ -490,7 +490,6 @@ def saveEcmcSubstFiles(slaves,filename_suffix):
 def saveEcmc(slaves, filename_suffix):
     saveEcmcCmdFiles(slaves, filename_suffix)
     saveEcmcSubstFiles(slaves, filename_suffix)
-
 
 def mergeEntriesBelow8bits(slaves): 
     for slave in slaves:
@@ -598,60 +597,68 @@ def pdosToEcSubst(slaves, pdoMap):
     output_rows = []
 
     #ecmc_ESI_mbboDirect_bo
-    output_rows.append('file "ecmc_ESI_mbboDirect_bo.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
-    for item in mbboDirect_bo_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(mbboDirect_bo_rows) > 0:
+        output_rows.append('file "ecmc_ESI_mbboDirect_bo.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
+        for item in mbboDirect_bo_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     #ecmc_ESI_mbboDirect
-    output_rows.append('file "ecmc_ESI_mbboDirect.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC}')
-    for item in mbboDirect_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' + '\n')
+    if len(mbboDirect_rows) > 0:
+        output_rows.append('file "ecmc_ESI_mbboDirect.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC}')
+        for item in mbboDirect_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' + '\n')
 
     #ecmc_ESI_mbbiDirect_bi
-    output_rows.append('file "ecmc_ESI_mbbiDirect_bi.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
-    for item in mbbiDirect_bi_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(mbbiDirect_bi_rows) > 0:
+        output_rows.append('file "ecmc_ESI_mbbiDirect_bi.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
+        for item in mbbiDirect_bi_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     #ecmc_ESI_mbbiDirect
-    output_rows.append('file "ecmc_ESI_mbbiDirect.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC, FLNK }')
-    for item in mbbiDirect_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(mbbiDirect_rows) > 0:
+        output_rows.append('file "ecmc_ESI_mbbiDirect.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC, FLNK }')
+        for item in mbbiDirect_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     #ecmc_ESI_ai
-    output_rows.append('file "ecmc_ESI_ai.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC }')
-    for item in ai_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(ai_rows) > 0:
+        output_rows.append('file "ecmc_ESI_ai.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC }')
+        for item in ai_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     #ecmc_ESI_ao
-    output_rows.append('file "ecmc_ESI_ao.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC }')
-    for item in ao_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(ao_rows) > 0:
+        output_rows.append('file "ecmc_ESI_ao.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC }')
+        for item in ao_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     #bi_rows
-    output_rows.append('file "ecmc_ESI_bi.template" {' )
-    output_rows.append('    pattern { REC_NAME, DESC }')
-    for item in bi_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(bi_rows) > 0:
+        output_rows.append('file "ecmc_ESI_bi.template" {' )
+        output_rows.append('    pattern { REC_NAME, DESC }')
+        for item in bi_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     #bo_rows
-    output_rows.append('file "ecmc_ESI_bo.template" {')
-    output_rows.append('    pattern { REC_NAME, DESC }')
-    for item in bo_rows:
-        output_rows.append('        ' + item)
-    output_rows.append('}' +  '\n')
+    if len(bo_rows) > 0:
+        output_rows.append('file "ecmc_ESI_bo.template" {')
+        output_rows.append('    pattern { REC_NAME, DESC }')
+        for item in bo_rows:
+            output_rows.append('        ' + item)
+        output_rows.append('}' +  '\n')
 
     return output_rows
 
