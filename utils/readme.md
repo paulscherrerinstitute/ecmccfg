@@ -18,10 +18,7 @@ python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL2xxx.xml --name 
 
 
 Latest:
-python3 new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML-4/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtSlaves "1" --filtPdoMaps "1"
-python3 new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML-4/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtPdoMaps "1,4"
-
-
+python3 new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML-4/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtSlaves "1" --filtPdoMaps "1,2,3,5" --outputJSON parsed_devices.json --outputECMC ""
 
 ```
 
