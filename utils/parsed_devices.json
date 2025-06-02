@@ -912,10 +912,10 @@
                     {
                         "index": "0x6081",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI01-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x6081",
@@ -987,6 +987,33 @@
                                 "name": "BI01-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x6081",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI01-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x6081",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI01-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -1589,10 +1616,10 @@
                     {
                         "index": "0x6091",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI02-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x6091",
@@ -1664,6 +1691,33 @@
                                 "name": "BI02-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x6091",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI02-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x6091",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI02-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -2266,10 +2320,10 @@
                     {
                         "index": "0x60a1",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI03-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x60a1",
@@ -2341,6 +2395,33 @@
                                 "name": "BI03-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60a1",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI03-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60a1",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI03-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -2943,10 +3024,10 @@
                     {
                         "index": "0x60b1",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI04-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x60b1",
@@ -3018,6 +3099,33 @@
                                 "name": "BI04-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60b1",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI04-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60b1",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI04-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -3620,10 +3728,10 @@
                     {
                         "index": "0x60c1",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI05-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x60c1",
@@ -3695,6 +3803,33 @@
                                 "name": "BI05-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60c1",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI05-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60c1",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI05-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -4297,10 +4432,10 @@
                     {
                         "index": "0x60d1",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI06-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x60d1",
@@ -4372,6 +4507,33 @@
                                 "name": "BI06-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60d1",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI06-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60d1",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI06-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -4974,10 +5136,10 @@
                     {
                         "index": "0x60e1",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI07-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x60e1",
@@ -5049,6 +5211,33 @@
                                 "name": "BI07-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60e1",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI07-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60e1",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI07-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -5651,10 +5840,10 @@
                     {
                         "index": "0x60f1",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BI08-EvtStateArr",
                         "desc": "Inputs__Input event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x60f1",
@@ -5726,6 +5915,33 @@
                                 "name": "BI08-EvtState08",
                                 "desc": "Inputs__Input event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60f1",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BI08-EvtState09",
+                                "desc": "Inputs__Input event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x60f1",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BI08-EvtState10",
+                                "desc": "Inputs__Input event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -7096,10 +7312,10 @@
                     {
                         "index": "0x7001",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO01-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7001",
@@ -7171,6 +7387,33 @@
                                 "name": "BO01-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7001",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO01-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7001",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO01-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -7773,10 +8016,10 @@
                     {
                         "index": "0x7011",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO02-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7011",
@@ -7848,6 +8091,33 @@
                                 "name": "BO02-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7011",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO02-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7011",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO02-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -8450,10 +8720,10 @@
                     {
                         "index": "0x7021",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO03-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7021",
@@ -8525,6 +8795,33 @@
                                 "name": "BO03-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7021",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO03-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7021",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO03-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -9127,10 +9424,10 @@
                     {
                         "index": "0x7031",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO04-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7031",
@@ -9202,6 +9499,33 @@
                                 "name": "BO04-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7031",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO04-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7031",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO04-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -9804,10 +10128,10 @@
                     {
                         "index": "0x7041",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO05-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7041",
@@ -9879,6 +10203,33 @@
                                 "name": "BO05-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7041",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO05-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7041",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO05-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -10481,10 +10832,10 @@
                     {
                         "index": "0x7051",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO06-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7051",
@@ -10556,6 +10907,33 @@
                                 "name": "BO06-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7051",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO06-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7051",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO06-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -11158,10 +11536,10 @@
                     {
                         "index": "0x7061",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO07-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7061",
@@ -11233,6 +11611,33 @@
                                 "name": "BO07-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7061",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO07-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7061",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO07-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]
@@ -11835,10 +12240,10 @@
                     {
                         "index": "0x7071",
                         "subindex": "0x21",
-                        "bitlen": "8",
+                        "bitlen": "32",
                         "name": "BO08-EvtStateArr",
                         "desc": "Outputs__Output event state 1",
-                        "data_type": "USINT",
+                        "data_type": "UDINT",
                         "sub_entries": [
                             {
                                 "index": "0x7071",
@@ -11910,6 +12315,33 @@
                                 "name": "BO08-EvtState08",
                                 "desc": "Outputs__Output event state 8",
                                 "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7071",
+                                "subindex": "0x29",
+                                "bitlen": "1",
+                                "name": "BO08-EvtState09",
+                                "desc": "Outputs__Output event state 9",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x7071",
+                                "subindex": "0x2a",
+                                "bitlen": "1",
+                                "name": "BO08-EvtState10",
+                                "desc": "Outputs__Output event state 10",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
+                                "index": "0x0",
+                                "subindex": "",
+                                "bitlen": "22",
+                                "name": "",
+                                "desc": "",
+                                "data_type": "",
                                 "sub_entries": []
                             }
                         ]

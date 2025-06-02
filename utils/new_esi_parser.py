@@ -680,7 +680,6 @@ def printPdoMapData(slaves):
                             print(F'#- { sub_entry_id }: ' + pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,subentry) + ' # merged')
                             sub_entry_id +=1
 
-
 ecmcCfgOrDieStrPart1 ='ecmcConfigOrDie \"Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},'
 
 def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
@@ -705,8 +704,7 @@ def mergeEntries(entries):
     for entry in entries:
         # filter strange bit lengths and merge
         bitlen = int(entry['bitlen'])
-        total_bit_legth += bitlen
-        entry_count += 1
+        total_bit_legth += bitlen        
         if  bitlen != 8 and bitlen != 16 and bitlen != 32 and bitlen != 64:
             if not merge_in_progress:
                 merge_in_progress = True
@@ -717,7 +715,12 @@ def mergeEntries(entries):
             bitlen_curr_merge += bitlen
   
             if merge_in_progress:
-                if bitlen_curr_merge == 8 or bitlen_curr_merge == 16 or bitlen_curr_merge == 32 or bitlen_curr_merge == 64:
+                # continue merge if NEXT entry bitlen < 8
+                nextEntryBitSize = 8  # dummy just to make the merge stop if last entry in list    
+                if len(entries) > entry_count:                    
+                    nextEntryBitSize = int(entries[entry_count + 1]['bitlen'])
+                
+                if (bitlen_curr_merge == 8 or bitlen_curr_merge == 16 or bitlen_curr_merge == 32 or bitlen_curr_merge == 64) and nextEntryBitSize >= 8:
                     merge_in_progress = False
                     new_merge_entry['sub_entries'] = sub_entries.copy()
 
@@ -741,6 +744,8 @@ def mergeEntries(entries):
         else:
             # normal entry
             new_entries_list.append(entry)
+        entry_count += 1
+
     print(F'Processed { entry_count } entries with a total bitlegth of { total_bit_legth }' )
     return new_entries_list
 

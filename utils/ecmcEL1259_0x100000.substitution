@@ -14,6 +14,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO01-EvtState06 , Outputs__Output event state 6 , BO01-EvtStateArr.B5, ${ECMC_P}BO01-EvtStateArr.PROC }
         { BO01-EvtState07 , Outputs__Output event state 7 , BO01-EvtStateArr.B6, ${ECMC_P}BO01-EvtStateArr.PROC }
         { BO01-EvtState08 , Outputs__Output event state 8 , BO01-EvtStateArr.B7, ${ECMC_P}BO01-EvtStateArr.PROC }
+        { BO01-EvtState09 , Outputs__Output event state 9 , BO01-EvtStateArr.B8, ${ECMC_P}BO01-EvtStateArr.PROC }
+        { BO01-EvtState10 , Outputs__Output event state 10 , BO01-EvtStateArr.B9, ${ECMC_P}BO01-EvtStateArr.PROC }
         { BO02-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO02-Ctrl_.B0, ${ECMC_P}BO02-Ctrl_.PROC }
         { BO02-Ctrl-ManOutpState , Ctrl__Manual output state , BO02-Ctrl_.B1, ${ECMC_P}BO02-Ctrl_.PROC }
         { BO02-Ctrl-FrceOrdr , Ctrl__Force order , BO02-Ctrl_.B2, ${ECMC_P}BO02-Ctrl_.PROC }
@@ -25,6 +27,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO02-EvtState06 , Outputs__Output event state 6 , BO02-EvtStateArr.B5, ${ECMC_P}BO02-EvtStateArr.PROC }
         { BO02-EvtState07 , Outputs__Output event state 7 , BO02-EvtStateArr.B6, ${ECMC_P}BO02-EvtStateArr.PROC }
         { BO02-EvtState08 , Outputs__Output event state 8 , BO02-EvtStateArr.B7, ${ECMC_P}BO02-EvtStateArr.PROC }
+        { BO02-EvtState09 , Outputs__Output event state 9 , BO02-EvtStateArr.B8, ${ECMC_P}BO02-EvtStateArr.PROC }
+        { BO02-EvtState10 , Outputs__Output event state 10 , BO02-EvtStateArr.B9, ${ECMC_P}BO02-EvtStateArr.PROC }
         { BO03-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO03-Ctrl_.B0, ${ECMC_P}BO03-Ctrl_.PROC }
         { BO03-Ctrl-ManOutpState , Ctrl__Manual output state , BO03-Ctrl_.B1, ${ECMC_P}BO03-Ctrl_.PROC }
         { BO03-Ctrl-FrceOrdr , Ctrl__Force order , BO03-Ctrl_.B2, ${ECMC_P}BO03-Ctrl_.PROC }
@@ -36,6 +40,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO03-EvtState06 , Outputs__Output event state 6 , BO03-EvtStateArr.B5, ${ECMC_P}BO03-EvtStateArr.PROC }
         { BO03-EvtState07 , Outputs__Output event state 7 , BO03-EvtStateArr.B6, ${ECMC_P}BO03-EvtStateArr.PROC }
         { BO03-EvtState08 , Outputs__Output event state 8 , BO03-EvtStateArr.B7, ${ECMC_P}BO03-EvtStateArr.PROC }
+        { BO03-EvtState09 , Outputs__Output event state 9 , BO03-EvtStateArr.B8, ${ECMC_P}BO03-EvtStateArr.PROC }
+        { BO03-EvtState10 , Outputs__Output event state 10 , BO03-EvtStateArr.B9, ${ECMC_P}BO03-EvtStateArr.PROC }
         { BO04-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO04-Ctrl_.B0, ${ECMC_P}BO04-Ctrl_.PROC }
         { BO04-Ctrl-ManOutpState , Ctrl__Manual output state , BO04-Ctrl_.B1, ${ECMC_P}BO04-Ctrl_.PROC }
         { BO04-Ctrl-FrceOrdr , Ctrl__Force order , BO04-Ctrl_.B2, ${ECMC_P}BO04-Ctrl_.PROC }
@@ -47,6 +53,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO04-EvtState06 , Outputs__Output event state 6 , BO04-EvtStateArr.B5, ${ECMC_P}BO04-EvtStateArr.PROC }
         { BO04-EvtState07 , Outputs__Output event state 7 , BO04-EvtStateArr.B6, ${ECMC_P}BO04-EvtStateArr.PROC }
         { BO04-EvtState08 , Outputs__Output event state 8 , BO04-EvtStateArr.B7, ${ECMC_P}BO04-EvtStateArr.PROC }
+        { BO04-EvtState09 , Outputs__Output event state 9 , BO04-EvtStateArr.B8, ${ECMC_P}BO04-EvtStateArr.PROC }
+        { BO04-EvtState10 , Outputs__Output event state 10 , BO04-EvtStateArr.B9, ${ECMC_P}BO04-EvtStateArr.PROC }
         { BO05-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO05-Ctrl_.B0, ${ECMC_P}BO05-Ctrl_.PROC }
         { BO05-Ctrl-ManOutpState , Ctrl__Manual output state , BO05-Ctrl_.B1, ${ECMC_P}BO05-Ctrl_.PROC }
         { BO05-Ctrl-FrceOrdr , Ctrl__Force order , BO05-Ctrl_.B2, ${ECMC_P}BO05-Ctrl_.PROC }
@@ -58,6 +66,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO05-EvtState06 , Outputs__Output event state 6 , BO05-EvtStateArr.B5, ${ECMC_P}BO05-EvtStateArr.PROC }
         { BO05-EvtState07 , Outputs__Output event state 7 , BO05-EvtStateArr.B6, ${ECMC_P}BO05-EvtStateArr.PROC }
         { BO05-EvtState08 , Outputs__Output event state 8 , BO05-EvtStateArr.B7, ${ECMC_P}BO05-EvtStateArr.PROC }
+        { BO05-EvtState09 , Outputs__Output event state 9 , BO05-EvtStateArr.B8, ${ECMC_P}BO05-EvtStateArr.PROC }
+        { BO05-EvtState10 , Outputs__Output event state 10 , BO05-EvtStateArr.B9, ${ECMC_P}BO05-EvtStateArr.PROC }
         { BO06-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO06-Ctrl_.B0, ${ECMC_P}BO06-Ctrl_.PROC }
         { BO06-Ctrl-ManOutpState , Ctrl__Manual output state , BO06-Ctrl_.B1, ${ECMC_P}BO06-Ctrl_.PROC }
         { BO06-Ctrl-FrceOrdr , Ctrl__Force order , BO06-Ctrl_.B2, ${ECMC_P}BO06-Ctrl_.PROC }
@@ -69,6 +79,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO06-EvtState06 , Outputs__Output event state 6 , BO06-EvtStateArr.B5, ${ECMC_P}BO06-EvtStateArr.PROC }
         { BO06-EvtState07 , Outputs__Output event state 7 , BO06-EvtStateArr.B6, ${ECMC_P}BO06-EvtStateArr.PROC }
         { BO06-EvtState08 , Outputs__Output event state 8 , BO06-EvtStateArr.B7, ${ECMC_P}BO06-EvtStateArr.PROC }
+        { BO06-EvtState09 , Outputs__Output event state 9 , BO06-EvtStateArr.B8, ${ECMC_P}BO06-EvtStateArr.PROC }
+        { BO06-EvtState10 , Outputs__Output event state 10 , BO06-EvtStateArr.B9, ${ECMC_P}BO06-EvtStateArr.PROC }
         { BO07-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO07-Ctrl_.B0, ${ECMC_P}BO07-Ctrl_.PROC }
         { BO07-Ctrl-ManOutpState , Ctrl__Manual output state , BO07-Ctrl_.B1, ${ECMC_P}BO07-Ctrl_.PROC }
         { BO07-Ctrl-FrceOrdr , Ctrl__Force order , BO07-Ctrl_.B2, ${ECMC_P}BO07-Ctrl_.PROC }
@@ -80,6 +92,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO07-EvtState06 , Outputs__Output event state 6 , BO07-EvtStateArr.B5, ${ECMC_P}BO07-EvtStateArr.PROC }
         { BO07-EvtState07 , Outputs__Output event state 7 , BO07-EvtStateArr.B6, ${ECMC_P}BO07-EvtStateArr.PROC }
         { BO07-EvtState08 , Outputs__Output event state 8 , BO07-EvtStateArr.B7, ${ECMC_P}BO07-EvtStateArr.PROC }
+        { BO07-EvtState09 , Outputs__Output event state 9 , BO07-EvtStateArr.B8, ${ECMC_P}BO07-EvtStateArr.PROC }
+        { BO07-EvtState10 , Outputs__Output event state 10 , BO07-EvtStateArr.B9, ${ECMC_P}BO07-EvtStateArr.PROC }
         { BO08-Ctrl-OutpBuffRst , Ctrl__Output buffer reset , BO08-Ctrl_.B0, ${ECMC_P}BO08-Ctrl_.PROC }
         { BO08-Ctrl-ManOutpState , Ctrl__Manual output state , BO08-Ctrl_.B1, ${ECMC_P}BO08-Ctrl_.PROC }
         { BO08-Ctrl-FrceOrdr , Ctrl__Force order , BO08-Ctrl_.B2, ${ECMC_P}BO08-Ctrl_.PROC }
@@ -91,6 +105,8 @@ file "ecmc_ESI_mbboDirect_bo.template" {
         { BO08-EvtState06 , Outputs__Output event state 6 , BO08-EvtStateArr.B5, ${ECMC_P}BO08-EvtStateArr.PROC }
         { BO08-EvtState07 , Outputs__Output event state 7 , BO08-EvtStateArr.B6, ${ECMC_P}BO08-EvtStateArr.PROC }
         { BO08-EvtState08 , Outputs__Output event state 8 , BO08-EvtStateArr.B7, ${ECMC_P}BO08-EvtStateArr.PROC }
+        { BO08-EvtState09 , Outputs__Output event state 9 , BO08-EvtStateArr.B8, ${ECMC_P}BO08-EvtStateArr.PROC }
+        { BO08-EvtState10 , Outputs__Output event state 10 , BO08-EvtStateArr.B9, ${ECMC_P}BO08-EvtStateArr.PROC }
         { BI01-Ctrl-BuffRst , Ctrl__Input buffer reset , BI01-Ctrl_.B0, ${ECMC_P}BI01-Ctrl_.PROC }
         { BI02-Ctrl-BuffRst , Ctrl__Input buffer reset , BI02-Ctrl_.B0, ${ECMC_P}BI02-Ctrl_.PROC }
         { BI03-Ctrl-BuffRst , Ctrl__Input buffer reset , BI03-Ctrl_.B0, ${ECMC_P}BI03-Ctrl_.PROC }
@@ -165,6 +181,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI01-EvtState06 , Inputs__Input event state 6 , BI01-EvtStateArr.B5, ${ECMC_P}BI01-EvtState05.PROC }
         { BI01-EvtState07 , Inputs__Input event state 7 , BI01-EvtStateArr.B6, ${ECMC_P}BI01-EvtState06.PROC }
         { BI01-EvtState08 , Inputs__Input event state 8 , BI01-EvtStateArr.B7, ${ECMC_P}BI01-EvtState07.PROC }
+        { BI01-EvtState09 , Inputs__Input event state 9 , BI01-EvtStateArr.B8, ${ECMC_P}BI01-EvtState08.PROC }
+        { BI01-EvtState10 , Inputs__Input event state 10 , BI01-EvtStateArr.B9, ${ECMC_P}BI01-EvtState09.PROC }
         { BI02-Stat-State , Status__Input state , BI02-Stat_.B0, ${ECMC_P}.PROC }
         { BI02-Stat-BuffOvrflw , Status__Input buffer overflow , BI02-Stat_.B1, ${ECMC_P}BI02-Stat-State.PROC }
         { BI02-EvtState01 , Inputs__Input event state 1 , BI02-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -175,6 +193,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI02-EvtState06 , Inputs__Input event state 6 , BI02-EvtStateArr.B5, ${ECMC_P}BI02-EvtState05.PROC }
         { BI02-EvtState07 , Inputs__Input event state 7 , BI02-EvtStateArr.B6, ${ECMC_P}BI02-EvtState06.PROC }
         { BI02-EvtState08 , Inputs__Input event state 8 , BI02-EvtStateArr.B7, ${ECMC_P}BI02-EvtState07.PROC }
+        { BI02-EvtState09 , Inputs__Input event state 9 , BI02-EvtStateArr.B8, ${ECMC_P}BI02-EvtState08.PROC }
+        { BI02-EvtState10 , Inputs__Input event state 10 , BI02-EvtStateArr.B9, ${ECMC_P}BI02-EvtState09.PROC }
         { BI03-Stat-State , Status__Input state , BI03-Stat_.B0, ${ECMC_P}.PROC }
         { BI03-Stat-BuffOvrflw , Status__Input buffer overflow , BI03-Stat_.B1, ${ECMC_P}BI03-Stat-State.PROC }
         { BI03-EvtState01 , Inputs__Input event state 1 , BI03-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -185,6 +205,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI03-EvtState06 , Inputs__Input event state 6 , BI03-EvtStateArr.B5, ${ECMC_P}BI03-EvtState05.PROC }
         { BI03-EvtState07 , Inputs__Input event state 7 , BI03-EvtStateArr.B6, ${ECMC_P}BI03-EvtState06.PROC }
         { BI03-EvtState08 , Inputs__Input event state 8 , BI03-EvtStateArr.B7, ${ECMC_P}BI03-EvtState07.PROC }
+        { BI03-EvtState09 , Inputs__Input event state 9 , BI03-EvtStateArr.B8, ${ECMC_P}BI03-EvtState08.PROC }
+        { BI03-EvtState10 , Inputs__Input event state 10 , BI03-EvtStateArr.B9, ${ECMC_P}BI03-EvtState09.PROC }
         { BI04-Stat-State , Status__Input state , BI04-Stat_.B0, ${ECMC_P}.PROC }
         { BI04-Stat-BuffOvrflw , Status__Input buffer overflow , BI04-Stat_.B1, ${ECMC_P}BI04-Stat-State.PROC }
         { BI04-EvtState01 , Inputs__Input event state 1 , BI04-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -195,6 +217,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI04-EvtState06 , Inputs__Input event state 6 , BI04-EvtStateArr.B5, ${ECMC_P}BI04-EvtState05.PROC }
         { BI04-EvtState07 , Inputs__Input event state 7 , BI04-EvtStateArr.B6, ${ECMC_P}BI04-EvtState06.PROC }
         { BI04-EvtState08 , Inputs__Input event state 8 , BI04-EvtStateArr.B7, ${ECMC_P}BI04-EvtState07.PROC }
+        { BI04-EvtState09 , Inputs__Input event state 9 , BI04-EvtStateArr.B8, ${ECMC_P}BI04-EvtState08.PROC }
+        { BI04-EvtState10 , Inputs__Input event state 10 , BI04-EvtStateArr.B9, ${ECMC_P}BI04-EvtState09.PROC }
         { BI05-Stat-State , Status__Input state , BI05-Stat_.B0, ${ECMC_P}.PROC }
         { BI05-Stat-BuffOvrflw , Status__Input buffer overflow , BI05-Stat_.B1, ${ECMC_P}BI05-Stat-State.PROC }
         { BI05-EvtState01 , Inputs__Input event state 1 , BI05-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -205,6 +229,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI05-EvtState06 , Inputs__Input event state 6 , BI05-EvtStateArr.B5, ${ECMC_P}BI05-EvtState05.PROC }
         { BI05-EvtState07 , Inputs__Input event state 7 , BI05-EvtStateArr.B6, ${ECMC_P}BI05-EvtState06.PROC }
         { BI05-EvtState08 , Inputs__Input event state 8 , BI05-EvtStateArr.B7, ${ECMC_P}BI05-EvtState07.PROC }
+        { BI05-EvtState09 , Inputs__Input event state 9 , BI05-EvtStateArr.B8, ${ECMC_P}BI05-EvtState08.PROC }
+        { BI05-EvtState10 , Inputs__Input event state 10 , BI05-EvtStateArr.B9, ${ECMC_P}BI05-EvtState09.PROC }
         { BI06-Stat-State , Status__Input state , BI06-Stat_.B0, ${ECMC_P}.PROC }
         { BI06-Stat-BuffOvrflw , Status__Input buffer overflow , BI06-Stat_.B1, ${ECMC_P}BI06-Stat-State.PROC }
         { BI06-EvtState01 , Inputs__Input event state 1 , BI06-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -215,6 +241,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI06-EvtState06 , Inputs__Input event state 6 , BI06-EvtStateArr.B5, ${ECMC_P}BI06-EvtState05.PROC }
         { BI06-EvtState07 , Inputs__Input event state 7 , BI06-EvtStateArr.B6, ${ECMC_P}BI06-EvtState06.PROC }
         { BI06-EvtState08 , Inputs__Input event state 8 , BI06-EvtStateArr.B7, ${ECMC_P}BI06-EvtState07.PROC }
+        { BI06-EvtState09 , Inputs__Input event state 9 , BI06-EvtStateArr.B8, ${ECMC_P}BI06-EvtState08.PROC }
+        { BI06-EvtState10 , Inputs__Input event state 10 , BI06-EvtStateArr.B9, ${ECMC_P}BI06-EvtState09.PROC }
         { BI07-Stat-State , Status__Input state , BI07-Stat_.B0, ${ECMC_P}.PROC }
         { BI07-Stat-BuffOvrflw , Status__Input buffer overflow , BI07-Stat_.B1, ${ECMC_P}BI07-Stat-State.PROC }
         { BI07-EvtState01 , Inputs__Input event state 1 , BI07-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -225,6 +253,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI07-EvtState06 , Inputs__Input event state 6 , BI07-EvtStateArr.B5, ${ECMC_P}BI07-EvtState05.PROC }
         { BI07-EvtState07 , Inputs__Input event state 7 , BI07-EvtStateArr.B6, ${ECMC_P}BI07-EvtState06.PROC }
         { BI07-EvtState08 , Inputs__Input event state 8 , BI07-EvtStateArr.B7, ${ECMC_P}BI07-EvtState07.PROC }
+        { BI07-EvtState09 , Inputs__Input event state 9 , BI07-EvtStateArr.B8, ${ECMC_P}BI07-EvtState08.PROC }
+        { BI07-EvtState10 , Inputs__Input event state 10 , BI07-EvtStateArr.B9, ${ECMC_P}BI07-EvtState09.PROC }
         { BI08-Stat-State , Status__Input state , BI08-Stat_.B0, ${ECMC_P}.PROC }
         { BI08-Stat-BuffOvrflw , Status__Input buffer overflow , BI08-Stat_.B1, ${ECMC_P}BI08-Stat-State.PROC }
         { BI08-EvtState01 , Inputs__Input event state 1 , BI08-EvtStateArr.B0, ${ECMC_P}.PROC }
@@ -235,6 +265,8 @@ file "ecmc_ESI_mbbiDirect_bi.template" {
         { BI08-EvtState06 , Inputs__Input event state 6 , BI08-EvtStateArr.B5, ${ECMC_P}BI08-EvtState05.PROC }
         { BI08-EvtState07 , Inputs__Input event state 7 , BI08-EvtStateArr.B6, ${ECMC_P}BI08-EvtState06.PROC }
         { BI08-EvtState08 , Inputs__Input event state 8 , BI08-EvtStateArr.B7, ${ECMC_P}BI08-EvtState07.PROC }
+        { BI08-EvtState09 , Inputs__Input event state 9 , BI08-EvtStateArr.B8, ${ECMC_P}BI08-EvtState08.PROC }
+        { BI08-EvtState10 , Inputs__Input event state 10 , BI08-EvtStateArr.B9, ${ECMC_P}BI08-EvtState09.PROC }
 }
 
 file "ecmc_ESI_mbbiDirect.template" {
@@ -248,21 +280,21 @@ file "ecmc_ESI_mbbiDirect.template" {
         { BO07-Stat_, Status__Output short circuit, BO07-Stat-OutpState.PROC }
         { BO08-Stat_, Status__Output short circuit, BO08-Stat-OutpState.PROC }
         { BI01-Stat_, Status__Input state, BI01-Stat-BuffOvrflw.PROC }
-        { BI01-EvtStateArr, Inputs__Input event state 1, BI01-EvtState08.PROC }
+        { BI01-EvtStateArr, Inputs__Input event state 1, BI01-EvtState10.PROC }
         { BI02-Stat_, Status__Input state, BI02-Stat-BuffOvrflw.PROC }
-        { BI02-EvtStateArr, Inputs__Input event state 1, BI02-EvtState08.PROC }
+        { BI02-EvtStateArr, Inputs__Input event state 1, BI02-EvtState10.PROC }
         { BI03-Stat_, Status__Input state, BI03-Stat-BuffOvrflw.PROC }
-        { BI03-EvtStateArr, Inputs__Input event state 1, BI03-EvtState08.PROC }
+        { BI03-EvtStateArr, Inputs__Input event state 1, BI03-EvtState10.PROC }
         { BI04-Stat_, Status__Input state, BI04-Stat-BuffOvrflw.PROC }
-        { BI04-EvtStateArr, Inputs__Input event state 1, BI04-EvtState08.PROC }
+        { BI04-EvtStateArr, Inputs__Input event state 1, BI04-EvtState10.PROC }
         { BI05-Stat_, Status__Input state, BI05-Stat-BuffOvrflw.PROC }
-        { BI05-EvtStateArr, Inputs__Input event state 1, BI05-EvtState08.PROC }
+        { BI05-EvtStateArr, Inputs__Input event state 1, BI05-EvtState10.PROC }
         { BI06-Stat_, Status__Input state, BI06-Stat-BuffOvrflw.PROC }
-        { BI06-EvtStateArr, Inputs__Input event state 1, BI06-EvtState08.PROC }
+        { BI06-EvtStateArr, Inputs__Input event state 1, BI06-EvtState10.PROC }
         { BI07-Stat_, Status__Input state, BI07-Stat-BuffOvrflw.PROC }
-        { BI07-EvtStateArr, Inputs__Input event state 1, BI07-EvtState08.PROC }
+        { BI07-EvtStateArr, Inputs__Input event state 1, BI07-EvtState10.PROC }
         { BI08-Stat_, Status__Input state, BI08-Stat-BuffOvrflw.PROC }
-        { BI08-EvtStateArr, Inputs__Input event state 1, BI08-EvtState08.PROC }
+        { BI08-EvtStateArr, Inputs__Input event state 1, BI08-EvtState10.PROC }
 }
 
 file "ecmc_ESI_ai.template" {
