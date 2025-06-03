@@ -1,5 +1,5 @@
 +++  
-title = "EL70x1"   
+title = "EL72xx"   
 weight = 23
 chapter = false  
 +++
