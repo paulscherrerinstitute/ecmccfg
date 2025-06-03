@@ -3,7 +3,8 @@ import json
 import argparse
 import fnmatch  # Ensure fnmatch is imported
 
-
+# Example:
+# python3 new_esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
 
 entryDict={
   "Status"          : "Stat",
@@ -100,6 +101,11 @@ removeDictLast={
   "Outp-Outp"       : "",
   "Inp-Inp"        : "",
 }
+
+dummyEntryIndex = 0
+last_entry_index = ''
+last_entry_sub_index = ''
+
 
 def removeTrailingHyphen(s: str) -> str:
     if s.endswith('-'):
@@ -475,7 +481,7 @@ def saveEcmcSubstFiles(slaves,filename_suffix):
             slave_type =slave['name'].split()[0] + '_' + slave['revision'] + filename_suffix  # bad.. hardcoded (name="EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp")
             if pdoMapIndex > 1:
                 slave_type += '_' + str(pdoMapIndex) 
-            with open('ecmc' + slave_type + '.substitution', "w") as f:
+            with open('ecmc' + slave_type + '.substitutions', "w") as f:
                 f.write(F"#-  ecmc database for: { slave['name'] }\n")
                 f.write(F"#- { pdoMap['name'] }\n")
                 f.write(F"#-      ECMC_EC_HWTYPE:     { slave_type }\n")
@@ -550,23 +556,23 @@ def pdosToEcSubst(slaves, pdoMap):
                             continue
                         
                         if sm_index=='0' or sm_index=='2': # Output
-                            #  pattern {    REC_NAME,              DESC,                  LNK_NAME,                              FLNK                            }'
-                            macros = F"{{ { sub_entry['name'] } , { sub_entry['desc'] } , { mbbxName }.B{ sub_entry_bit_index }, ${{ECMC_P}}{ mbbxName }.PROC }}"
+                            #  pattern {   REC_NAME,                DESC,                         LNK_NAME,                                       FLNK                          }'
+                            macros = F"{{ { sub_entry['name'] } , \"{ sub_entry['desc'][:40] }\" , { mbbxName }.B{ hex(sub_entry_bit_index)[2:] }, ${{ECMC_P}}{ mbbxName }.PROC }}"
                             mbboDirect_bo_rows.append(macros)
                         else: # Input                                                        
-                            #  pattern {    REC_NAME,              DESC,                  LNK_NAME,                              FLNK                                }'                            
-                            macros = F"{{ { sub_entry['name'] } , { sub_entry['desc'] } , { mbbxName }.B{ sub_entry_bit_index }, ${{ECMC_P}}{ prev_bi_name }.PROC }}"
+                            #  pattern {   REC_NAME,                DESC  ,                       LNK_NAME,                                       FLNK                          }'                            
+                            macros = F"{{ { sub_entry['name'] } , \"{ sub_entry['desc'][:40] }\", { mbbxName }.B{ hex(sub_entry_bit_index)[2:] }, ${{ECMC_P}}{ prev_bi_name }.PROC }}"
                             mbbiDirect_bi_rows.append(macros)
                             prev_bi_name = sub_entry['name']
                         sub_entry_bit_index += int(sub_entry['bitlen'])
 
                     if sm_index=='0' or sm_index=='2': # Output
-                        #  pattern {    REC_NAME,     DESC,         }'                        
-                        macros = F"{{ { mbbxName }, { entry['desc'] } }}"
+                        #  pattern {    REC_NAME,       DESC,         }'                        
+                        macros = F"{{ { mbbxName }, \"{ entry['desc'][:40] }\" }}"
                         mbboDirect_rows.append(macros)
                     else: # Input
-                        #  pattern {    REC_NAME,     DESC,              FLNK                 }'
-                        macros = F"{{ { mbbxName }, { entry['desc'] }, { prev_bi_name }.PROC }}"
+                        #  pattern {    REC_NAME,       DESC,                   FLNK                 }'
+                        macros = F"{{ { mbbxName }, \"{ entry['desc'][:40] }\", { prev_bi_name }.PROC }}"
                         mbbiDirect_rows.append(macros)
                     continue
 
@@ -575,8 +581,8 @@ def pdosToEcSubst(slaves, pdoMap):
                     continue
 
                 # normal data type
-                #  pattern {    REC_NAME,              DESC }
-                macros = F"{{ { entry['name'] } , { entry['desc'] } }}"
+                #  pattern {    REC_NAME,             DESC }
+                macros = F"{{ { entry['name'] } , \"{ entry['desc'][:40] }\" }}"
                 if int(entry['bitlen']) > 1:
                     if sm_index=='0' or sm_index=='2':
                         # Output                        
@@ -690,13 +696,29 @@ def printPdoMapData(slaves):
 ecmcCfgOrDieStrPart1 ='ecmcConfigOrDie \"Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},'
 
 def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
-    dir = 1 # intput
+    global last_entry_index, last_entry_sub_index, dummyEntryIndex
+    dir = 2 # intput
     if sm_index=='0' or sm_index=='2':
-        dir=2 # output
-    ecmcCfgOrDieStrPart2 = F'{ dir },{ sm_index },{ pdo_index },{ entry['index'] },{ entry['subindex'] },{ getEntryDT(entry) },{ entry['name'] })\"'
+        dir = 1 # output
+    name = entry['name']
+    if len(name) == 0:
+        name = 'dummy_' + str(dummyEntryIndex)
+        dummyEntryIndex += 1
+
+    # If dummy entry then use last entry index and increase subindex by 1
+    entry_index = entry['index']
+    entry_sub_index = entry['subindex']
+    if entry['index'] == '0x0':
+        entry_index = last_entry_index
+        entry_sub_index = hex(int(last_entry_sub_index,16) + 1)
+
+    ecmcCfgOrDieStrPart2 = F'{ dir },{ sm_index },{ pdo_index },{ entry_index },{ entry_sub_index },{ getEntryDT(entry) },{ name })\"'
     comment=''
     if len(entry['sub_entries']) > 0:
         comment = F' # { len(entry['sub_entries']) } merged entries:' 
+    
+    last_entry_index = entry_index
+    last_entry_sub_index = entry_sub_index
     return ecmcCfgOrDieStrPart1 + ecmcCfgOrDieStrPart2 + comment
 
 # Merge data types below 8 bits
@@ -753,7 +775,7 @@ def mergeEntries(entries):
             new_entries_list.append(entry)
         entry_count += 1
 
-    print(F'Processed { entry_count } entries with a total bitlegth of { total_bit_legth }' )
+    #print(F'Processed { entry_count } entries with a total bitlegth of { total_bit_legth }' )
     return new_entries_list
 
 def numberInEnd(s):
@@ -840,6 +862,16 @@ def getEntryDT(entry):
             return 'S16'        
         case 'DINT':
             return 'S32'
+        
+    if int(entry['bitlen']) == 8:
+        return 'U8'
+    if int(entry['bitlen']) == 16:
+        return 'U16'
+    if int(entry['bitlen']) == 32:
+        return 'U32'
+    if int(entry['bitlen']) == 64:
+        return 'U64'
+    
     return 'B'+ entry['bitlen'] 
 
 def main():
