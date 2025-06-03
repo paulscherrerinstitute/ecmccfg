@@ -2,7 +2,7 @@
     {
         "name": "EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp",
         "product_id": "0x4eb3052",
-        "revision": "0x100000",
+        "revision": "0x120000",
         "PDOmaps": [
             {
                 "name": "Multi-Timestamping 8 Ch. 10x",
@@ -99,8 +99,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO01-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -180,8 +180,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO02-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -261,8 +261,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO03-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -342,8 +342,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO04-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -423,8 +423,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO05-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -504,8 +504,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO06-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -585,8 +585,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO07-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -666,8 +666,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "11",
-                                "name": "",
-                                "desc": "",
+                                "name": "BO08-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -747,8 +747,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI01-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -1019,8 +1019,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI01-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -1189,8 +1189,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI01-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -1305,8 +1305,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI01-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -1411,8 +1411,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI02-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -1683,8 +1683,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI02-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -1853,8 +1853,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI02-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -1969,8 +1969,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI02-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -2075,8 +2075,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI03-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -2347,8 +2347,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI03-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -2517,8 +2517,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI03-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -2633,8 +2633,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI03-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -2739,8 +2739,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI04-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -3011,8 +3011,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI04-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -3181,8 +3181,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI04-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -3297,8 +3297,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI04-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -3403,8 +3403,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI05-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -3675,8 +3675,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI05-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -3845,8 +3845,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI05-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -3961,8 +3961,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI05-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -4067,8 +4067,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI06-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -4339,8 +4339,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI06-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -4509,8 +4509,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI06-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -4625,8 +4625,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI06-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -4731,8 +4731,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI07-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -5003,8 +5003,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI07-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -5173,8 +5173,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI07-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -5289,8 +5289,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI07-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -5395,8 +5395,8 @@
                                 "index": "0x0",
                                 "subindex": "",
                                 "bitlen": "4",
-                                "name": "",
-                                "desc": "",
+                                "name": "BI08-Stat",
+                                "desc": "Status__",
                                 "data_type": "",
                                 "sub_entries": []
                             },
@@ -5667,8 +5667,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI08-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -5837,8 +5837,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI08-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -5953,8 +5953,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "4",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI08-Stat",
+                        "desc": "Status__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -6824,11 +6824,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7001",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO01-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO01-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -6856,8 +6865,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7096,11 +7105,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7001",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO01-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7126,8 +7144,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7266,11 +7284,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7001",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO01-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7296,8 +7323,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7382,11 +7409,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7001",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO01-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7412,8 +7448,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7488,11 +7524,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7011",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO02-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO02-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -7520,8 +7565,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7760,11 +7805,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7011",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO02-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7790,8 +7844,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7930,11 +7984,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7011",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO02-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -7960,8 +8023,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8046,11 +8109,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7011",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO02-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8076,8 +8148,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8152,11 +8224,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7021",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO03-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO03-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -8184,8 +8265,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8424,11 +8505,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7021",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO03-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8454,8 +8544,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8594,11 +8684,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7021",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO03-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8624,8 +8723,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8710,11 +8809,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7021",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO03-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8740,8 +8848,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -8816,11 +8924,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7031",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO04-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO04-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -8848,8 +8965,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9088,11 +9205,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7031",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO04-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9118,8 +9244,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9258,11 +9384,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7031",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO04-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9288,8 +9423,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9374,11 +9509,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7031",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO04-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9404,8 +9548,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9480,11 +9624,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7041",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO05-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO05-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -9512,8 +9665,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9752,11 +9905,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7041",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO05-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9782,8 +9944,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9922,11 +10084,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7041",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO05-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -9952,8 +10123,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10038,11 +10209,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7041",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO05-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10068,8 +10248,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10144,11 +10324,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7051",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO06-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO06-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -10176,8 +10365,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10416,11 +10605,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7051",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO06-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10446,8 +10644,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10586,11 +10784,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7051",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO06-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10616,8 +10823,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10702,11 +10909,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7051",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO06-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10732,8 +10948,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -10808,11 +11024,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7061",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO07-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO07-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -10840,8 +11065,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11080,11 +11305,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7061",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO07-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11110,8 +11344,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11250,11 +11484,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7061",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO07-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11280,8 +11523,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11366,11 +11609,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7061",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO07-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11396,8 +11648,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11472,11 +11724,20 @@
                                 "sub_entries": []
                             },
                             {
+                                "index": "0x7071",
+                                "subindex": "0x4",
+                                "bitlen": "1",
+                                "name": "BO08-Ctrl-EnaManOperation",
+                                "desc": "Ctrl__Enable manual operation",
+                                "data_type": "BOOL",
+                                "sub_entries": []
+                            },
+                            {
                                 "index": "0x0",
                                 "subindex": "",
-                                "bitlen": "5",
-                                "name": "",
-                                "desc": "",
+                                "bitlen": "4",
+                                "name": "BO08-Ctrl",
+                                "desc": "Ctrl__",
                                 "data_type": "",
                                 "sub_entries": []
                             }
@@ -11504,8 +11765,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11744,11 +12005,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7071",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO08-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11774,8 +12044,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11914,11 +12184,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7071",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO08-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -11944,8 +12223,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -12030,11 +12309,20 @@
                         "sub_entries": []
                     },
                     {
+                        "index": "0x7071",
+                        "subindex": "0x4",
+                        "bitlen": "1",
+                        "name": "BO08-Ctrl-EnaManOperation",
+                        "desc": "Ctrl__Enable manual operation",
+                        "data_type": "BOOL",
+                        "sub_entries": []
+                    },
+                    {
                         "index": "0x0",
                         "subindex": "",
-                        "bitlen": "5",
-                        "name": "",
-                        "desc": "",
+                        "bitlen": "4",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -12060,8 +12348,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BO08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     },
@@ -12141,8 +12429,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI01-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12195,8 +12483,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI02-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12249,8 +12537,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI03-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12303,8 +12591,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI04-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12357,8 +12645,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI05-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12411,8 +12699,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI06-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12465,8 +12753,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI07-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12519,8 +12807,8 @@
                         "index": "0x0",
                         "subindex": "",
                         "bitlen": "8",
-                        "name": "",
-                        "desc": "",
+                        "name": "BI08-Ctrl",
+                        "desc": "Ctrl__",
                         "data_type": "",
                         "sub_entries": []
                     }
@@ -12949,6 +13237,17 @@
                         "sub_entries": []
                     }
                 ]
+            }
+        ],
+        "dc": [
+            {
+                "name": "DC",
+                "desc": "DC-Synchron",
+                "assign_activate": "0x300",
+                "cycle_time_sync0": "1000000",
+                "shift_time_sync0": "0",
+                "cycle_time_sync1": "0",
+                "shift_time_sync1": "0"
             }
         ]
     }

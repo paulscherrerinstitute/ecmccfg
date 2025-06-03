@@ -4,6 +4,7 @@
 
 record(bi,"${ECMC_P}${REC_NAME}"){
   field(DESC, "${DESC=}")
+  field(PINI, "${PINI=YES}")
   field(INP,  "${ECMC_P}${LNK_NAME}")
   field(ZNAM, "${ZNAM=Zero}")
   field(ONAM, "${ONAM=One}")

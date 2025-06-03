@@ -7,7 +7,6 @@ record(bo,"${ECMC_P}${REC_NAME}"){
   info(asyn:READBACK,"1")
   field(PINI, "${PINI=YES}")
   field(DESC, "${DESC=}")
-  field(DTYP, "${DTYP=asynInt32}")
   field(OUT,  "${ECMC_P}${LNK_NAME}")
   field(ZNAM, "${ZNAM=Zero}")
   field(ONAM, "${ONAM=One}")
@@ -17,14 +16,13 @@ record(bo,"${ECMC_P}${REC_NAME}"){
   field(FLNK, "${FLNK=}")
 }
 
-record(bi,"${ECMC_P}${REC_NAME}-RB")
-{
-  field(PINI, "YES")
-  field(DESC, "${DESC=}")
-  field(DTYP, "${DTYP=asynInt32}")
-  field(SCAN, "${SCAN=I/O Intr}")
-  field(INP,  "${ECMC_P}${LNK_NAME}")
-  field(ZNAM, "${ZNAM=Zero}")
-  field(ONAM, "${ONAM=One}")
-  field(TSE,  "${TSE=-2}")
-}
+#record(bi,"${ECMC_P}${REC_NAME}-RB")
+#{
+#  field(PINI, "YES")
+#  field(DESC, "${DESC=}")
+#  field(SCAN, "${SCAN=I/O Intr}")
+#  field(INP,  "${ECMC_P}${LNK_NAME}")
+#  field(ZNAM, "${ZNAM=Zero}")
+#  field(ONAM, "${ONAM=One}")
+#  field(TSE,  "${TSE=-2}")
+#}

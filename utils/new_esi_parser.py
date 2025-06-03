@@ -235,7 +235,7 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
         devtype = device.xpath("Type")[0].text if device.xpath("Type") else None
         product_code = device.xpath("Type/@ProductCode")[0] if device.xpath("Type/@ProductCode") else None
         revision_raw = device.xpath("Type/@RevisionNo")[0] if device.xpath("Type/@RevisionNo") else None
-
+        
         print(f"Checking device: {device_name}, raw revision: {revision_raw}")  # Debugging print
 
         revision = parse_revision_number(revision_raw)
@@ -373,9 +373,34 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
                     'DCMode': sync_mgr.xpath('DCMode/text()')[0] if sync_mgr.xpath('DCMode/text()') else 'None'
                 }
                 slave['SyncManagers'].append(sync_mgr_info)
-
+            
+            #check DC
+			#        <OpMode>
+			#			<Name>DC</Name>
+			#			<Desc>DC-Synchron</Desc>
+			#			<AssignActivate>#x300</AssignActivate>
+			#			<CycleTimeSync0 Factor="0">1000000</CycleTimeSync0>
+			#			<ShiftTimeSync0 Input="0">0</ShiftTimeSync0>
+			#			<CycleTimeSync1 Factor="-1">0</CycleTimeSync1>
+			#			<ShiftTimeSync1>0</ShiftTimeSync1>
+			#		</OpMode>
+            # This is just test
+            slave['dc'] = []
+            print(f"Searching for DC clock settings for device {device_name}")
+            for dc in device.xpath('.//Dc'):
+                for opMode in dc.xpath('.//OpMode'):
+                    dc = {
+                        'name' : opMode.xpath('Name/text()')[0] if entry.xpath('Name/text()') else '',
+                        'desc' : opMode.xpath('Desc/text()')[0] if entry.xpath('Name/text()') else '',
+                        'assign_activate' : to_hex(parse_revision_number(opMode.xpath('AssignActivate/text()')[0])) if entry.xpath('Name/text()') else '',
+                        'cycle_time_sync0' : opMode.xpath('CycleTimeSync0/text()')[0] if entry.xpath('Name/text()') else '',                        
+                        'shift_time_sync0' : opMode.xpath('ShiftTimeSync0/text()')[0] if entry.xpath('Name/text()') else '',
+                        'cycle_time_sync1' : opMode.xpath('CycleTimeSync1/text()')[0] if entry.xpath('Name/text()') else '',
+                        'shift_time_sync1' : opMode.xpath('ShiftTimeSync1/text()')[0] if entry.xpath('Name/text()') else '',
+                    }
+                    slave['dc'].append(dc)
             # Add the device to the slaves list
-            slaves.append(slave)      
+            slaves.append(slave)
     return slaves
 
 def filterOnIndex(objs,filterString):
@@ -453,6 +478,7 @@ def findPdo(slaves,pdo_index_str):
 def saveEcmcCmdFiles(slaves, filename_suffix):
     for slave in slaves:
         # Hardware cmd file
+        dc_cfgs = generateDcCfgsToHwSnippet(slave)
         pdoMapIndex = 1
         for pdoMap in slave['PDOmaps']:
             cmd_rows = pdosToEcAddEntryDT(slaves, pdoMap)
@@ -469,6 +495,9 @@ def saveEcmcCmdFiles(slaves, filename_suffix):
                 f.write(F"epicsEnvSet(\"ECMC_EC_REVISION\"           \"{ slave['revision'] }\")\n")
                 f.write('\n')
                 for row in cmd_rows:
+                    f.write(row + '\n')
+                f.write('\n')
+                for row in dc_cfgs:
                     f.write(row + '\n')
             pdoMapIndex += 1
 
@@ -527,6 +556,22 @@ def pdosToEcAddEntryDT(slaves, pdoMap):
                     sub_entry_id +=1
     return cmd_rows
 
+# just for simple dc cfgs.. 
+def generateDcCfgsToHwSnippet(slave):
+    cmd_rows = []
+    
+    # default to first cfg    
+    if slave['dc'] is None:
+        return None
+    dc = slave['dc'][0]
+
+    cmd_rows.append("ecmcFileExist(${ecmccfg_DIR}applySlaveDCconfig.cmd,1)")
+    cmd_rows.append("ecmcEpicsEnvSetCalc(\"ECMC_TEMP_PERIOD_NANO_SECS\",1000/${ECMC_EC_SAMPLE_RATE=1000}*1E6)")
+    cmd_rows.append(F"${{SCRIPTEXEC}} ${{ecmccfg_DIR}}applySlaveDCconfig.cmd \"ASSIGN_ACTIVATE={ dc['assign_activate'] },SYNC_0_CYCLE=${{ECMC_TEMP_PERIOD_NANO_SECS}},SYNC_1_CYCLE=${{ECMC_TEMP_PERIOD_NANO_SECS}}\"")
+    cmd_rows.append("epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)")
+    return cmd_rows
+
+
 def pdosToEcSubst(slaves, pdoMap):
     ai_rows=[]
     ao_rows=[]
@@ -557,22 +602,22 @@ def pdosToEcSubst(slaves, pdoMap):
                         
                         if sm_index=='0' or sm_index=='2': # Output
                             #  pattern {   REC_NAME,                DESC,                         LNK_NAME,                                       FLNK                          }'
-                            macros = F"{{ { sub_entry['name'] } , \"{ sub_entry['desc'][:40] }\" , { mbbxName }.B{ hex(sub_entry_bit_index)[2:] }, ${{ECMC_P}}{ mbbxName }.PROC }}"
+                            macros = F"{{\"{ sub_entry['name'] }\", \"{ sub_entry['desc'][:40] }\" , \"{ mbbxName }.B{ hex(sub_entry_bit_index)[2:] }\", \"${{ECMC_P}}{ mbbxName }.PROC\"}}"
                             mbboDirect_bo_rows.append(macros)
                         else: # Input                                                        
                             #  pattern {   REC_NAME,                DESC  ,                       LNK_NAME,                                       FLNK                          }'                            
-                            macros = F"{{ { sub_entry['name'] } , \"{ sub_entry['desc'][:40] }\", { mbbxName }.B{ hex(sub_entry_bit_index)[2:] }, ${{ECMC_P}}{ prev_bi_name }.PROC }}"
+                            macros = F"{{\"{ sub_entry['name'] }\", \"{ sub_entry['desc'][:40] }\", \"{ mbbxName }.B{ hex(sub_entry_bit_index)[2:] }\", \"${{ECMC_P}}{ prev_bi_name }.PROC\"}}"
                             mbbiDirect_bi_rows.append(macros)
                             prev_bi_name = sub_entry['name']
                         sub_entry_bit_index += int(sub_entry['bitlen'])
 
                     if sm_index=='0' or sm_index=='2': # Output
                         #  pattern {    REC_NAME,       DESC,         }'                        
-                        macros = F"{{ { mbbxName }, \"{ entry['desc'][:40] }\" }}"
+                        macros = F"{{\"{ mbbxName }\", \"{ entry['desc'][:40] }\"}}"
                         mbboDirect_rows.append(macros)
                     else: # Input
                         #  pattern {    REC_NAME,       DESC,                   FLNK                 }'
-                        macros = F"{{ { mbbxName }, \"{ entry['desc'][:40] }\", { prev_bi_name }.PROC }}"
+                        macros = F"{{\"{ mbbxName }\", \"{ entry['desc'][:40] }\", \"{ prev_bi_name }.PROC\"}}"
                         mbbiDirect_rows.append(macros)
                     continue
 
@@ -582,7 +627,7 @@ def pdosToEcSubst(slaves, pdoMap):
 
                 # normal data type
                 #  pattern {    REC_NAME,             DESC }
-                macros = F"{{ { entry['name'] } , \"{ entry['desc'][:40] }\" }}"
+                macros = F"{{\"{ entry['name'] }\", \"{ entry['desc'][:40] }\" }}"
                 if int(entry['bitlen']) > 1:
                     if sm_index=='0' or sm_index=='2':
                         # Output                        
@@ -752,14 +797,13 @@ def mergeEntries(entries):
                 if (bitlen_curr_merge == 8 or bitlen_curr_merge == 16 or bitlen_curr_merge == 32 or bitlen_curr_merge == 64) and nextEntryBitSize >= 8:
                     merge_in_progress = False
                     new_merge_entry['sub_entries'] = sub_entries.copy()
-
+                    
                     # If Array then remove index in end and add "Arr"
                     if checkSubEntriesIsArray(sub_entries):
                         dummy, dummy1, digitCount = numberInEnd(new_merge_entry['name'])
                         if digitCount > 0:
                             new_merge_entry['name'] = new_merge_entry['name'][:-digitCount] + 'Arr'
-                    else:         
-                        if checkOnlyLastPartOFNameDiffer(sub_entries):
+                    elif checkOnlyLastPartOFNameDiffer(sub_entries) or len(new_merge_entry['name'].split('-')) > 2:
                             newNameList=new_merge_entry['name'].split('-')[:-1]
                             newName=''
                             for s in newNameList:
