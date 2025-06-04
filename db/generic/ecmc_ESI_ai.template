@@ -6,7 +6,7 @@ record(ai,"${ECMC_P}${REC_NAME}"){
   field(DESC, "${DESC=}")
   field(PINI, "${PINI=1}")
   field(DTYP, "${DTYP=asynInt32}")
-  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=${DTYP=asynInt32}/ec${MASTER_ID}.s${SLAVE_POS}.${REC_NAME}?")
+  field(INP,  "@asyn(${PORT},${ADDR=0},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=${DTYP=asynInt32}/ec${MASTER_ID}.s${SLAVE_POS}.${SRC_NAME}?")
   field(SCAN, "I/O Intr")
   field(LINR, "${LINR=SLOPE}")
   field(ESLO, "${ESLO=1}")
