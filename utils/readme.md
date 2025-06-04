@@ -14,6 +14,40 @@ source ~/myhome/python/esi_parser/bin/activate
 python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtSlaves "1" --filtPdoMaps "1,2,3,5" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
 python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
 python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL72xx.xml --name "EL7211*" --rev "*" --filtSlaves "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
+
+
+ 1122  mv qt/ecmcEL1259_CH8_EV10.ui qt/ecmcEL1259_0x120000_CH8_EV10.ui 
+ 1123  git status
+ 1124  git mv utils/ecmcEL1259_0x120000_CH2_EV1.cmd utils/ecmcEL1259_0x120000_CH2_EV10.cmd
+ 1125  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1126  cd utils/
+ 1127  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1128   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "9" --outputJSON parsed_devices.json --outputECMC "_CH2_EV10" --mergeEntries 1
+ 1129  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1130   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "11" --outputJSON parsed_devices.json --outputECMC "_CH2_EV2" --mergeEntries 1
+ 1131  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1132   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "10" --outputJSON parsed_devices.json --outputECMC "_CH2_EV5" --mergeEntries 1
+ 1133  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1134   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "16" --outputJSON parsed_devices.json --outputECMC "_CH1_EV1" --mergeEntries 1
+ 1135   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "15" --filtPdoMaps "16" --outputJSON parsed_devices.json --outputECMC "_CH1_EV2" --mergeEntries 1
+ 1136   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "15" --filtPdoMaps "15" --outputJSON parsed_devices.json --outputECMC "_CH1_EV2" --mergeEntries 1
+ 1137  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1138   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "15" --filtPdoMaps "15" --outputJSON parsed_devices.json --outputECMC "_CH1_EV2" --mergeEntries 1
+ 1139   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "15" --outputJSON parsed_devices.json --outputECMC "_CH1_EV2" --mergeEntries 1
+ 1140   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "14" --outputJSON parsed_devices.json --outputECMC "_CH1_EV5" --mergeEntries 1
+ 1141   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "13" --outputJSON parsed_devices.json --outputECMC "_CH1_EV10" --mergeEntries 1
+ 1142  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1143   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "8" --outputJSON parsed_devices.json --outputECMC "_CH4_EV1" --mergeEntries 1
+ 1144   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "7" --outputJSON parsed_devices.json --outputECMC "_CH4_EV2" --mergeEntries 1
+ 1145   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "6" --outputJSON parsed_devices.json --outputECMC "_CH4_EV5" --mergeEntries 1
+ 1146   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "5" --outputJSON parsed_devices.json --outputECMC "_CH4_EV10" --mergeEntries 1
+ 1147  python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*"
+ 1148   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "4" --outputJSON parsed_devices.json --outputECMC "_CH8_EV1" --mergeEntries 1
+ 1149   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "3" --outputJSON parsed_devices.json --outputECMC "_CH8_EV2" --mergeEntries 1
+ 1150   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "2" --outputJSON parsed_devices.json --outputECMC "_CH8_EV5" --mergeEntries 1
+ 1151   python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x12000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "_CH8_EV10" --mergeEntries 1
+
+
 ```
 ## Read EL70xx diagnostic, read_el70xx_diag.sh
 

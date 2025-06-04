@@ -961,7 +961,7 @@ def main():
     if args.outputJSON is not None:
         saveJSON(slaves,args.outputJSON)
     
-    #printPdoMaps(slaves)
+    printPdoMaps(slaves)
     #printPdoMapData(slaves)
 
     if args.outputECMC is not None:

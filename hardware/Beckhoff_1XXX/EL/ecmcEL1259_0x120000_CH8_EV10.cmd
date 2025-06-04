@@ -1,7 +1,7 @@
 #-  ecmc hardware config for: EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp
 #- Multi-Timestamping 8 Ch. 10x
 
-epicsEnvSet("ECMC_EC_HWTYPE"             "EL1259_0x120000")
+epicsEnvSet("ECMC_EC_HWTYPE"             "EL1259_0x120000_CH8_EV10")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x4eb3052")
 epicsEnvSet("ECMC_EC_REVISION"           "0x120000")
