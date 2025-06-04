@@ -6,530 +6,530 @@
 #-      ECMC_EC_REVISION:   0x100000
 
 file "ecmc_ESI_mbboDirect_bo.template" {
-    pattern { REC_NAME, DESC, LNK_NAME, FLNK }
-        {"BO01-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO01-Ctrl_.B0", "${ECMC_P}BO01-Ctrl_.PROC"}
-        {"BO01-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO01-Ctrl_.B1", "${ECMC_P}BO01-Ctrl_.PROC"}
-        {"BO01-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO01-Ctrl_.B2", "${ECMC_P}BO01-Ctrl_.PROC"}
-        {"BO01-EvtState01", "Outputs__Output event state 1" , "BO01-EvtStateArr.B0", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState02", "Outputs__Output event state 2" , "BO01-EvtStateArr.B1", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState03", "Outputs__Output event state 3" , "BO01-EvtStateArr.B2", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState04", "Outputs__Output event state 4" , "BO01-EvtStateArr.B3", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState05", "Outputs__Output event state 5" , "BO01-EvtStateArr.B4", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState06", "Outputs__Output event state 6" , "BO01-EvtStateArr.B5", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState07", "Outputs__Output event state 7" , "BO01-EvtStateArr.B6", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState08", "Outputs__Output event state 8" , "BO01-EvtStateArr.B7", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState09", "Outputs__Output event state 9" , "BO01-EvtStateArr.B8", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO01-EvtState10", "Outputs__Output event state 10" , "BO01-EvtStateArr.B9", "${ECMC_P}BO01-EvtStateArr.PROC"}
-        {"BO02-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO02-Ctrl_.B0", "${ECMC_P}BO02-Ctrl_.PROC"}
-        {"BO02-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO02-Ctrl_.B1", "${ECMC_P}BO02-Ctrl_.PROC"}
-        {"BO02-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO02-Ctrl_.B2", "${ECMC_P}BO02-Ctrl_.PROC"}
-        {"BO02-EvtState01", "Outputs__Output event state 1" , "BO02-EvtStateArr.B0", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState02", "Outputs__Output event state 2" , "BO02-EvtStateArr.B1", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState03", "Outputs__Output event state 3" , "BO02-EvtStateArr.B2", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState04", "Outputs__Output event state 4" , "BO02-EvtStateArr.B3", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState05", "Outputs__Output event state 5" , "BO02-EvtStateArr.B4", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState06", "Outputs__Output event state 6" , "BO02-EvtStateArr.B5", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState07", "Outputs__Output event state 7" , "BO02-EvtStateArr.B6", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState08", "Outputs__Output event state 8" , "BO02-EvtStateArr.B7", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState09", "Outputs__Output event state 9" , "BO02-EvtStateArr.B8", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO02-EvtState10", "Outputs__Output event state 10" , "BO02-EvtStateArr.B9", "${ECMC_P}BO02-EvtStateArr.PROC"}
-        {"BO03-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO03-Ctrl_.B0", "${ECMC_P}BO03-Ctrl_.PROC"}
-        {"BO03-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO03-Ctrl_.B1", "${ECMC_P}BO03-Ctrl_.PROC"}
-        {"BO03-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO03-Ctrl_.B2", "${ECMC_P}BO03-Ctrl_.PROC"}
-        {"BO03-EvtState01", "Outputs__Output event state 1" , "BO03-EvtStateArr.B0", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState02", "Outputs__Output event state 2" , "BO03-EvtStateArr.B1", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState03", "Outputs__Output event state 3" , "BO03-EvtStateArr.B2", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState04", "Outputs__Output event state 4" , "BO03-EvtStateArr.B3", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState05", "Outputs__Output event state 5" , "BO03-EvtStateArr.B4", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState06", "Outputs__Output event state 6" , "BO03-EvtStateArr.B5", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState07", "Outputs__Output event state 7" , "BO03-EvtStateArr.B6", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState08", "Outputs__Output event state 8" , "BO03-EvtStateArr.B7", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState09", "Outputs__Output event state 9" , "BO03-EvtStateArr.B8", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO03-EvtState10", "Outputs__Output event state 10" , "BO03-EvtStateArr.B9", "${ECMC_P}BO03-EvtStateArr.PROC"}
-        {"BO04-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO04-Ctrl_.B0", "${ECMC_P}BO04-Ctrl_.PROC"}
-        {"BO04-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO04-Ctrl_.B1", "${ECMC_P}BO04-Ctrl_.PROC"}
-        {"BO04-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO04-Ctrl_.B2", "${ECMC_P}BO04-Ctrl_.PROC"}
-        {"BO04-EvtState01", "Outputs__Output event state 1" , "BO04-EvtStateArr.B0", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState02", "Outputs__Output event state 2" , "BO04-EvtStateArr.B1", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState03", "Outputs__Output event state 3" , "BO04-EvtStateArr.B2", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState04", "Outputs__Output event state 4" , "BO04-EvtStateArr.B3", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState05", "Outputs__Output event state 5" , "BO04-EvtStateArr.B4", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState06", "Outputs__Output event state 6" , "BO04-EvtStateArr.B5", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState07", "Outputs__Output event state 7" , "BO04-EvtStateArr.B6", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState08", "Outputs__Output event state 8" , "BO04-EvtStateArr.B7", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState09", "Outputs__Output event state 9" , "BO04-EvtStateArr.B8", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO04-EvtState10", "Outputs__Output event state 10" , "BO04-EvtStateArr.B9", "${ECMC_P}BO04-EvtStateArr.PROC"}
-        {"BO05-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO05-Ctrl_.B0", "${ECMC_P}BO05-Ctrl_.PROC"}
-        {"BO05-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO05-Ctrl_.B1", "${ECMC_P}BO05-Ctrl_.PROC"}
-        {"BO05-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO05-Ctrl_.B2", "${ECMC_P}BO05-Ctrl_.PROC"}
-        {"BO05-EvtState01", "Outputs__Output event state 1" , "BO05-EvtStateArr.B0", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState02", "Outputs__Output event state 2" , "BO05-EvtStateArr.B1", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState03", "Outputs__Output event state 3" , "BO05-EvtStateArr.B2", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState04", "Outputs__Output event state 4" , "BO05-EvtStateArr.B3", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState05", "Outputs__Output event state 5" , "BO05-EvtStateArr.B4", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState06", "Outputs__Output event state 6" , "BO05-EvtStateArr.B5", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState07", "Outputs__Output event state 7" , "BO05-EvtStateArr.B6", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState08", "Outputs__Output event state 8" , "BO05-EvtStateArr.B7", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState09", "Outputs__Output event state 9" , "BO05-EvtStateArr.B8", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO05-EvtState10", "Outputs__Output event state 10" , "BO05-EvtStateArr.B9", "${ECMC_P}BO05-EvtStateArr.PROC"}
-        {"BO06-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO06-Ctrl_.B0", "${ECMC_P}BO06-Ctrl_.PROC"}
-        {"BO06-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO06-Ctrl_.B1", "${ECMC_P}BO06-Ctrl_.PROC"}
-        {"BO06-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO06-Ctrl_.B2", "${ECMC_P}BO06-Ctrl_.PROC"}
-        {"BO06-EvtState01", "Outputs__Output event state 1" , "BO06-EvtStateArr.B0", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState02", "Outputs__Output event state 2" , "BO06-EvtStateArr.B1", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState03", "Outputs__Output event state 3" , "BO06-EvtStateArr.B2", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState04", "Outputs__Output event state 4" , "BO06-EvtStateArr.B3", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState05", "Outputs__Output event state 5" , "BO06-EvtStateArr.B4", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState06", "Outputs__Output event state 6" , "BO06-EvtStateArr.B5", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState07", "Outputs__Output event state 7" , "BO06-EvtStateArr.B6", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState08", "Outputs__Output event state 8" , "BO06-EvtStateArr.B7", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState09", "Outputs__Output event state 9" , "BO06-EvtStateArr.B8", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO06-EvtState10", "Outputs__Output event state 10" , "BO06-EvtStateArr.B9", "${ECMC_P}BO06-EvtStateArr.PROC"}
-        {"BO07-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO07-Ctrl_.B0", "${ECMC_P}BO07-Ctrl_.PROC"}
-        {"BO07-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO07-Ctrl_.B1", "${ECMC_P}BO07-Ctrl_.PROC"}
-        {"BO07-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO07-Ctrl_.B2", "${ECMC_P}BO07-Ctrl_.PROC"}
-        {"BO07-EvtState01", "Outputs__Output event state 1" , "BO07-EvtStateArr.B0", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState02", "Outputs__Output event state 2" , "BO07-EvtStateArr.B1", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState03", "Outputs__Output event state 3" , "BO07-EvtStateArr.B2", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState04", "Outputs__Output event state 4" , "BO07-EvtStateArr.B3", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState05", "Outputs__Output event state 5" , "BO07-EvtStateArr.B4", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState06", "Outputs__Output event state 6" , "BO07-EvtStateArr.B5", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState07", "Outputs__Output event state 7" , "BO07-EvtStateArr.B6", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState08", "Outputs__Output event state 8" , "BO07-EvtStateArr.B7", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState09", "Outputs__Output event state 9" , "BO07-EvtStateArr.B8", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO07-EvtState10", "Outputs__Output event state 10" , "BO07-EvtStateArr.B9", "${ECMC_P}BO07-EvtStateArr.PROC"}
-        {"BO08-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO08-Ctrl_.B0", "${ECMC_P}BO08-Ctrl_.PROC"}
-        {"BO08-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO08-Ctrl_.B1", "${ECMC_P}BO08-Ctrl_.PROC"}
-        {"BO08-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO08-Ctrl_.B2", "${ECMC_P}BO08-Ctrl_.PROC"}
-        {"BO08-EvtState01", "Outputs__Output event state 1" , "BO08-EvtStateArr.B0", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState02", "Outputs__Output event state 2" , "BO08-EvtStateArr.B1", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState03", "Outputs__Output event state 3" , "BO08-EvtStateArr.B2", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState04", "Outputs__Output event state 4" , "BO08-EvtStateArr.B3", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState05", "Outputs__Output event state 5" , "BO08-EvtStateArr.B4", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState06", "Outputs__Output event state 6" , "BO08-EvtStateArr.B5", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState07", "Outputs__Output event state 7" , "BO08-EvtStateArr.B6", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState08", "Outputs__Output event state 8" , "BO08-EvtStateArr.B7", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState09", "Outputs__Output event state 9" , "BO08-EvtStateArr.B8", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BO08-EvtState10", "Outputs__Output event state 10" , "BO08-EvtStateArr.B9", "${ECMC_P}BO08-EvtStateArr.PROC"}
-        {"BI01-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI01-Ctrl_.B0", "${ECMC_P}BI01-Ctrl_.PROC"}
-        {"BI02-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI02-Ctrl_.B0", "${ECMC_P}BI02-Ctrl_.PROC"}
-        {"BI03-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI03-Ctrl_.B0", "${ECMC_P}BI03-Ctrl_.PROC"}
-        {"BI04-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI04-Ctrl_.B0", "${ECMC_P}BI04-Ctrl_.PROC"}
-        {"BI05-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI05-Ctrl_.B0", "${ECMC_P}BI05-Ctrl_.PROC"}
-        {"BI06-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI06-Ctrl_.B0", "${ECMC_P}BI06-Ctrl_.PROC"}
-        {"BI07-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI07-Ctrl_.B0", "${ECMC_P}BI07-Ctrl_.PROC"}
-        {"BI08-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI08-Ctrl_.B0", "${ECMC_P}BI08-Ctrl_.PROC"}
+    pattern { REC_NAME, DESC, LNK_NAME, FLNK, SRC_NAME }
+        {"BO01-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO01-Ctrl_.B0", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_OutpBuffRst"}
+        {"BO01-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO01-Ctrl_.B1", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_ManOutpState"}
+        {"BO01-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO01-Ctrl_.B2", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_FrceOrdr"}
+        {"BO01-EvtState01", "Outputs__Output event state 1" , "BO01-EvtStateArr.B0", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState01"}
+        {"BO01-EvtState02", "Outputs__Output event state 2" , "BO01-EvtStateArr.B1", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState02"}
+        {"BO01-EvtState03", "Outputs__Output event state 3" , "BO01-EvtStateArr.B2", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState03"}
+        {"BO01-EvtState04", "Outputs__Output event state 4" , "BO01-EvtStateArr.B3", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState04"}
+        {"BO01-EvtState05", "Outputs__Output event state 5" , "BO01-EvtStateArr.B4", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState05"}
+        {"BO01-EvtState06", "Outputs__Output event state 6" , "BO01-EvtStateArr.B5", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState06"}
+        {"BO01-EvtState07", "Outputs__Output event state 7" , "BO01-EvtStateArr.B6", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState07"}
+        {"BO01-EvtState08", "Outputs__Output event state 8" , "BO01-EvtStateArr.B7", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState08"}
+        {"BO01-EvtState09", "Outputs__Output event state 9" , "BO01-EvtStateArr.B8", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState09"}
+        {"BO01-EvtState10", "Outputs__Output event state 10" , "BO01-EvtStateArr.B9", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState10"}
+        {"BO02-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO02-Ctrl_.B0", "${ECMC_P}BO02-Ctrl_.PROC","BO02_Ctrl_OutpBuffRst"}
+        {"BO02-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO02-Ctrl_.B1", "${ECMC_P}BO02-Ctrl_.PROC","BO02_Ctrl_ManOutpState"}
+        {"BO02-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO02-Ctrl_.B2", "${ECMC_P}BO02-Ctrl_.PROC","BO02_Ctrl_FrceOrdr"}
+        {"BO02-EvtState01", "Outputs__Output event state 1" , "BO02-EvtStateArr.B0", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState01"}
+        {"BO02-EvtState02", "Outputs__Output event state 2" , "BO02-EvtStateArr.B1", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState02"}
+        {"BO02-EvtState03", "Outputs__Output event state 3" , "BO02-EvtStateArr.B2", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState03"}
+        {"BO02-EvtState04", "Outputs__Output event state 4" , "BO02-EvtStateArr.B3", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState04"}
+        {"BO02-EvtState05", "Outputs__Output event state 5" , "BO02-EvtStateArr.B4", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState05"}
+        {"BO02-EvtState06", "Outputs__Output event state 6" , "BO02-EvtStateArr.B5", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState06"}
+        {"BO02-EvtState07", "Outputs__Output event state 7" , "BO02-EvtStateArr.B6", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState07"}
+        {"BO02-EvtState08", "Outputs__Output event state 8" , "BO02-EvtStateArr.B7", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState08"}
+        {"BO02-EvtState09", "Outputs__Output event state 9" , "BO02-EvtStateArr.B8", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState09"}
+        {"BO02-EvtState10", "Outputs__Output event state 10" , "BO02-EvtStateArr.B9", "${ECMC_P}BO02-EvtStateArr.PROC","BO02_EvtState10"}
+        {"BO03-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO03-Ctrl_.B0", "${ECMC_P}BO03-Ctrl_.PROC","BO03_Ctrl_OutpBuffRst"}
+        {"BO03-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO03-Ctrl_.B1", "${ECMC_P}BO03-Ctrl_.PROC","BO03_Ctrl_ManOutpState"}
+        {"BO03-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO03-Ctrl_.B2", "${ECMC_P}BO03-Ctrl_.PROC","BO03_Ctrl_FrceOrdr"}
+        {"BO03-EvtState01", "Outputs__Output event state 1" , "BO03-EvtStateArr.B0", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState01"}
+        {"BO03-EvtState02", "Outputs__Output event state 2" , "BO03-EvtStateArr.B1", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState02"}
+        {"BO03-EvtState03", "Outputs__Output event state 3" , "BO03-EvtStateArr.B2", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState03"}
+        {"BO03-EvtState04", "Outputs__Output event state 4" , "BO03-EvtStateArr.B3", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState04"}
+        {"BO03-EvtState05", "Outputs__Output event state 5" , "BO03-EvtStateArr.B4", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState05"}
+        {"BO03-EvtState06", "Outputs__Output event state 6" , "BO03-EvtStateArr.B5", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState06"}
+        {"BO03-EvtState07", "Outputs__Output event state 7" , "BO03-EvtStateArr.B6", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState07"}
+        {"BO03-EvtState08", "Outputs__Output event state 8" , "BO03-EvtStateArr.B7", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState08"}
+        {"BO03-EvtState09", "Outputs__Output event state 9" , "BO03-EvtStateArr.B8", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState09"}
+        {"BO03-EvtState10", "Outputs__Output event state 10" , "BO03-EvtStateArr.B9", "${ECMC_P}BO03-EvtStateArr.PROC","BO03_EvtState10"}
+        {"BO04-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO04-Ctrl_.B0", "${ECMC_P}BO04-Ctrl_.PROC","BO04_Ctrl_OutpBuffRst"}
+        {"BO04-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO04-Ctrl_.B1", "${ECMC_P}BO04-Ctrl_.PROC","BO04_Ctrl_ManOutpState"}
+        {"BO04-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO04-Ctrl_.B2", "${ECMC_P}BO04-Ctrl_.PROC","BO04_Ctrl_FrceOrdr"}
+        {"BO04-EvtState01", "Outputs__Output event state 1" , "BO04-EvtStateArr.B0", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState01"}
+        {"BO04-EvtState02", "Outputs__Output event state 2" , "BO04-EvtStateArr.B1", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState02"}
+        {"BO04-EvtState03", "Outputs__Output event state 3" , "BO04-EvtStateArr.B2", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState03"}
+        {"BO04-EvtState04", "Outputs__Output event state 4" , "BO04-EvtStateArr.B3", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState04"}
+        {"BO04-EvtState05", "Outputs__Output event state 5" , "BO04-EvtStateArr.B4", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState05"}
+        {"BO04-EvtState06", "Outputs__Output event state 6" , "BO04-EvtStateArr.B5", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState06"}
+        {"BO04-EvtState07", "Outputs__Output event state 7" , "BO04-EvtStateArr.B6", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState07"}
+        {"BO04-EvtState08", "Outputs__Output event state 8" , "BO04-EvtStateArr.B7", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState08"}
+        {"BO04-EvtState09", "Outputs__Output event state 9" , "BO04-EvtStateArr.B8", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState09"}
+        {"BO04-EvtState10", "Outputs__Output event state 10" , "BO04-EvtStateArr.B9", "${ECMC_P}BO04-EvtStateArr.PROC","BO04_EvtState10"}
+        {"BO05-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO05-Ctrl_.B0", "${ECMC_P}BO05-Ctrl_.PROC","BO05_Ctrl_OutpBuffRst"}
+        {"BO05-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO05-Ctrl_.B1", "${ECMC_P}BO05-Ctrl_.PROC","BO05_Ctrl_ManOutpState"}
+        {"BO05-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO05-Ctrl_.B2", "${ECMC_P}BO05-Ctrl_.PROC","BO05_Ctrl_FrceOrdr"}
+        {"BO05-EvtState01", "Outputs__Output event state 1" , "BO05-EvtStateArr.B0", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState01"}
+        {"BO05-EvtState02", "Outputs__Output event state 2" , "BO05-EvtStateArr.B1", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState02"}
+        {"BO05-EvtState03", "Outputs__Output event state 3" , "BO05-EvtStateArr.B2", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState03"}
+        {"BO05-EvtState04", "Outputs__Output event state 4" , "BO05-EvtStateArr.B3", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState04"}
+        {"BO05-EvtState05", "Outputs__Output event state 5" , "BO05-EvtStateArr.B4", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState05"}
+        {"BO05-EvtState06", "Outputs__Output event state 6" , "BO05-EvtStateArr.B5", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState06"}
+        {"BO05-EvtState07", "Outputs__Output event state 7" , "BO05-EvtStateArr.B6", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState07"}
+        {"BO05-EvtState08", "Outputs__Output event state 8" , "BO05-EvtStateArr.B7", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState08"}
+        {"BO05-EvtState09", "Outputs__Output event state 9" , "BO05-EvtStateArr.B8", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState09"}
+        {"BO05-EvtState10", "Outputs__Output event state 10" , "BO05-EvtStateArr.B9", "${ECMC_P}BO05-EvtStateArr.PROC","BO05_EvtState10"}
+        {"BO06-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO06-Ctrl_.B0", "${ECMC_P}BO06-Ctrl_.PROC","BO06_Ctrl_OutpBuffRst"}
+        {"BO06-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO06-Ctrl_.B1", "${ECMC_P}BO06-Ctrl_.PROC","BO06_Ctrl_ManOutpState"}
+        {"BO06-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO06-Ctrl_.B2", "${ECMC_P}BO06-Ctrl_.PROC","BO06_Ctrl_FrceOrdr"}
+        {"BO06-EvtState01", "Outputs__Output event state 1" , "BO06-EvtStateArr.B0", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState01"}
+        {"BO06-EvtState02", "Outputs__Output event state 2" , "BO06-EvtStateArr.B1", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState02"}
+        {"BO06-EvtState03", "Outputs__Output event state 3" , "BO06-EvtStateArr.B2", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState03"}
+        {"BO06-EvtState04", "Outputs__Output event state 4" , "BO06-EvtStateArr.B3", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState04"}
+        {"BO06-EvtState05", "Outputs__Output event state 5" , "BO06-EvtStateArr.B4", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState05"}
+        {"BO06-EvtState06", "Outputs__Output event state 6" , "BO06-EvtStateArr.B5", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState06"}
+        {"BO06-EvtState07", "Outputs__Output event state 7" , "BO06-EvtStateArr.B6", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState07"}
+        {"BO06-EvtState08", "Outputs__Output event state 8" , "BO06-EvtStateArr.B7", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState08"}
+        {"BO06-EvtState09", "Outputs__Output event state 9" , "BO06-EvtStateArr.B8", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState09"}
+        {"BO06-EvtState10", "Outputs__Output event state 10" , "BO06-EvtStateArr.B9", "${ECMC_P}BO06-EvtStateArr.PROC","BO06_EvtState10"}
+        {"BO07-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO07-Ctrl_.B0", "${ECMC_P}BO07-Ctrl_.PROC","BO07_Ctrl_OutpBuffRst"}
+        {"BO07-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO07-Ctrl_.B1", "${ECMC_P}BO07-Ctrl_.PROC","BO07_Ctrl_ManOutpState"}
+        {"BO07-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO07-Ctrl_.B2", "${ECMC_P}BO07-Ctrl_.PROC","BO07_Ctrl_FrceOrdr"}
+        {"BO07-EvtState01", "Outputs__Output event state 1" , "BO07-EvtStateArr.B0", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState01"}
+        {"BO07-EvtState02", "Outputs__Output event state 2" , "BO07-EvtStateArr.B1", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState02"}
+        {"BO07-EvtState03", "Outputs__Output event state 3" , "BO07-EvtStateArr.B2", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState03"}
+        {"BO07-EvtState04", "Outputs__Output event state 4" , "BO07-EvtStateArr.B3", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState04"}
+        {"BO07-EvtState05", "Outputs__Output event state 5" , "BO07-EvtStateArr.B4", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState05"}
+        {"BO07-EvtState06", "Outputs__Output event state 6" , "BO07-EvtStateArr.B5", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState06"}
+        {"BO07-EvtState07", "Outputs__Output event state 7" , "BO07-EvtStateArr.B6", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState07"}
+        {"BO07-EvtState08", "Outputs__Output event state 8" , "BO07-EvtStateArr.B7", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState08"}
+        {"BO07-EvtState09", "Outputs__Output event state 9" , "BO07-EvtStateArr.B8", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState09"}
+        {"BO07-EvtState10", "Outputs__Output event state 10" , "BO07-EvtStateArr.B9", "${ECMC_P}BO07-EvtStateArr.PROC","BO07_EvtState10"}
+        {"BO08-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO08-Ctrl_.B0", "${ECMC_P}BO08-Ctrl_.PROC","BO08_Ctrl_OutpBuffRst"}
+        {"BO08-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO08-Ctrl_.B1", "${ECMC_P}BO08-Ctrl_.PROC","BO08_Ctrl_ManOutpState"}
+        {"BO08-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO08-Ctrl_.B2", "${ECMC_P}BO08-Ctrl_.PROC","BO08_Ctrl_FrceOrdr"}
+        {"BO08-EvtState01", "Outputs__Output event state 1" , "BO08-EvtStateArr.B0", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState01"}
+        {"BO08-EvtState02", "Outputs__Output event state 2" , "BO08-EvtStateArr.B1", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState02"}
+        {"BO08-EvtState03", "Outputs__Output event state 3" , "BO08-EvtStateArr.B2", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState03"}
+        {"BO08-EvtState04", "Outputs__Output event state 4" , "BO08-EvtStateArr.B3", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState04"}
+        {"BO08-EvtState05", "Outputs__Output event state 5" , "BO08-EvtStateArr.B4", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState05"}
+        {"BO08-EvtState06", "Outputs__Output event state 6" , "BO08-EvtStateArr.B5", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState06"}
+        {"BO08-EvtState07", "Outputs__Output event state 7" , "BO08-EvtStateArr.B6", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState07"}
+        {"BO08-EvtState08", "Outputs__Output event state 8" , "BO08-EvtStateArr.B7", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState08"}
+        {"BO08-EvtState09", "Outputs__Output event state 9" , "BO08-EvtStateArr.B8", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState09"}
+        {"BO08-EvtState10", "Outputs__Output event state 10" , "BO08-EvtStateArr.B9", "${ECMC_P}BO08-EvtStateArr.PROC","BO08_EvtState10"}
+        {"BI01-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI01-Ctrl_.B0", "${ECMC_P}BI01-Ctrl_.PROC","BI01_Ctrl_BuffRst"}
+        {"BI02-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI02-Ctrl_.B0", "${ECMC_P}BI02-Ctrl_.PROC","BI02_Ctrl_BuffRst"}
+        {"BI03-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI03-Ctrl_.B0", "${ECMC_P}BI03-Ctrl_.PROC","BI03_Ctrl_BuffRst"}
+        {"BI04-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI04-Ctrl_.B0", "${ECMC_P}BI04-Ctrl_.PROC","BI04_Ctrl_BuffRst"}
+        {"BI05-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI05-Ctrl_.B0", "${ECMC_P}BI05-Ctrl_.PROC","BI05_Ctrl_BuffRst"}
+        {"BI06-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI06-Ctrl_.B0", "${ECMC_P}BI06-Ctrl_.PROC","BI06_Ctrl_BuffRst"}
+        {"BI07-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI07-Ctrl_.B0", "${ECMC_P}BI07-Ctrl_.PROC","BI07_Ctrl_BuffRst"}
+        {"BI08-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI08-Ctrl_.B0", "${ECMC_P}BI08-Ctrl_.PROC","BI08_Ctrl_BuffRst"}
 }
 
 file "ecmc_ESI_mbboDirect.template" {
-    pattern { REC_NAME, DESC}
-        {"BO01-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO01-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO02-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO02-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO03-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO03-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO04-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO04-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO05-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO05-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO06-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO06-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO07-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO07-EvtStateArr", "Outputs__Output event state 1"}
-        {"BO08-Ctrl_", "Ctrl__Output buffer reset"}
-        {"BO08-EvtStateArr", "Outputs__Output event state 1"}
-        {"BI01-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI02-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI03-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI04-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI05-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI06-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI07-Ctrl_", "Ctrl__Input buffer reset"}
-        {"BI08-Ctrl_", "Ctrl__Input buffer reset"}
+    pattern { REC_NAME, DESC , SRC_NAME}
+        {"BO01-Ctrl_", "Ctrl__Output buffer reset", "BO01_Ctrl_"}
+        {"BO01-EvtStateArr", "Outputs__Output event state 1", "BO01_EvtStateArr"}
+        {"BO02-Ctrl_", "Ctrl__Output buffer reset", "BO02_Ctrl_"}
+        {"BO02-EvtStateArr", "Outputs__Output event state 1", "BO02_EvtStateArr"}
+        {"BO03-Ctrl_", "Ctrl__Output buffer reset", "BO03_Ctrl_"}
+        {"BO03-EvtStateArr", "Outputs__Output event state 1", "BO03_EvtStateArr"}
+        {"BO04-Ctrl_", "Ctrl__Output buffer reset", "BO04_Ctrl_"}
+        {"BO04-EvtStateArr", "Outputs__Output event state 1", "BO04_EvtStateArr"}
+        {"BO05-Ctrl_", "Ctrl__Output buffer reset", "BO05_Ctrl_"}
+        {"BO05-EvtStateArr", "Outputs__Output event state 1", "BO05_EvtStateArr"}
+        {"BO06-Ctrl_", "Ctrl__Output buffer reset", "BO06_Ctrl_"}
+        {"BO06-EvtStateArr", "Outputs__Output event state 1", "BO06_EvtStateArr"}
+        {"BO07-Ctrl_", "Ctrl__Output buffer reset", "BO07_Ctrl_"}
+        {"BO07-EvtStateArr", "Outputs__Output event state 1", "BO07_EvtStateArr"}
+        {"BO08-Ctrl_", "Ctrl__Output buffer reset", "BO08_Ctrl_"}
+        {"BO08-EvtStateArr", "Outputs__Output event state 1", "BO08_EvtStateArr"}
+        {"BI01-Ctrl_", "Ctrl__Input buffer reset", "BI01_Ctrl_"}
+        {"BI02-Ctrl_", "Ctrl__Input buffer reset", "BI02_Ctrl_"}
+        {"BI03-Ctrl_", "Ctrl__Input buffer reset", "BI03_Ctrl_"}
+        {"BI04-Ctrl_", "Ctrl__Input buffer reset", "BI04_Ctrl_"}
+        {"BI05-Ctrl_", "Ctrl__Input buffer reset", "BI05_Ctrl_"}
+        {"BI06-Ctrl_", "Ctrl__Input buffer reset", "BI06_Ctrl_"}
+        {"BI07-Ctrl_", "Ctrl__Input buffer reset", "BI07_Ctrl_"}
+        {"BI08-Ctrl_", "Ctrl__Input buffer reset", "BI08_Ctrl_"}
 }
 
 file "ecmc_ESI_mbbiDirect_bi.template" {
-    pattern { REC_NAME, DESC, LNK_NAME, FLNK }
-        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC"}
-        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC"}
-        {"BO02-Stat-OutpShrtCirc", "Status__Output short circuit", "BO02-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO02-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO02-Stat_.B1", "${ECMC_P}BO02-Stat-OutpShrtCirc.PROC"}
-        {"BO02-Stat-OutpState", "Status__Output state", "BO02-Stat_.B2", "${ECMC_P}BO02-Stat-OutpBuffOvrflw.PROC"}
-        {"BO03-Stat-OutpShrtCirc", "Status__Output short circuit", "BO03-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO03-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO03-Stat_.B1", "${ECMC_P}BO03-Stat-OutpShrtCirc.PROC"}
-        {"BO03-Stat-OutpState", "Status__Output state", "BO03-Stat_.B2", "${ECMC_P}BO03-Stat-OutpBuffOvrflw.PROC"}
-        {"BO04-Stat-OutpShrtCirc", "Status__Output short circuit", "BO04-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO04-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO04-Stat_.B1", "${ECMC_P}BO04-Stat-OutpShrtCirc.PROC"}
-        {"BO04-Stat-OutpState", "Status__Output state", "BO04-Stat_.B2", "${ECMC_P}BO04-Stat-OutpBuffOvrflw.PROC"}
-        {"BO05-Stat-OutpShrtCirc", "Status__Output short circuit", "BO05-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO05-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO05-Stat_.B1", "${ECMC_P}BO05-Stat-OutpShrtCirc.PROC"}
-        {"BO05-Stat-OutpState", "Status__Output state", "BO05-Stat_.B2", "${ECMC_P}BO05-Stat-OutpBuffOvrflw.PROC"}
-        {"BO06-Stat-OutpShrtCirc", "Status__Output short circuit", "BO06-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO06-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO06-Stat_.B1", "${ECMC_P}BO06-Stat-OutpShrtCirc.PROC"}
-        {"BO06-Stat-OutpState", "Status__Output state", "BO06-Stat_.B2", "${ECMC_P}BO06-Stat-OutpBuffOvrflw.PROC"}
-        {"BO07-Stat-OutpShrtCirc", "Status__Output short circuit", "BO07-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO07-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO07-Stat_.B1", "${ECMC_P}BO07-Stat-OutpShrtCirc.PROC"}
-        {"BO07-Stat-OutpState", "Status__Output state", "BO07-Stat_.B2", "${ECMC_P}BO07-Stat-OutpBuffOvrflw.PROC"}
-        {"BO08-Stat-OutpShrtCirc", "Status__Output short circuit", "BO08-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BO08-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO08-Stat_.B1", "${ECMC_P}BO08-Stat-OutpShrtCirc.PROC"}
-        {"BO08-Stat-OutpState", "Status__Output state", "BO08-Stat_.B2", "${ECMC_P}BO08-Stat-OutpBuffOvrflw.PROC"}
-        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC"}
-        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI01-EvtState02", "Inputs__Input event state 2", "BI01-EvtStateArr.B1", "${ECMC_P}BI01-EvtState01.PROC"}
-        {"BI01-EvtState03", "Inputs__Input event state 3", "BI01-EvtStateArr.B2", "${ECMC_P}BI01-EvtState02.PROC"}
-        {"BI01-EvtState04", "Inputs__Input event state 4", "BI01-EvtStateArr.B3", "${ECMC_P}BI01-EvtState03.PROC"}
-        {"BI01-EvtState05", "Inputs__Input event state 5", "BI01-EvtStateArr.B4", "${ECMC_P}BI01-EvtState04.PROC"}
-        {"BI01-EvtState06", "Inputs__Input event state 6", "BI01-EvtStateArr.B5", "${ECMC_P}BI01-EvtState05.PROC"}
-        {"BI01-EvtState07", "Inputs__Input event state 7", "BI01-EvtStateArr.B6", "${ECMC_P}BI01-EvtState06.PROC"}
-        {"BI01-EvtState08", "Inputs__Input event state 8", "BI01-EvtStateArr.B7", "${ECMC_P}BI01-EvtState07.PROC"}
-        {"BI01-EvtState09", "Inputs__Input event state 9", "BI01-EvtStateArr.B8", "${ECMC_P}BI01-EvtState08.PROC"}
-        {"BI01-EvtState10", "Inputs__Input event state 10", "BI01-EvtStateArr.B9", "${ECMC_P}BI01-EvtState09.PROC"}
-        {"BI02-Stat-State", "Status__Input state", "BI02-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI02-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI02-Stat_.B1", "${ECMC_P}BI02-Stat-State.PROC"}
-        {"BI02-EvtState01", "Inputs__Input event state 1", "BI02-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI02-EvtState02", "Inputs__Input event state 2", "BI02-EvtStateArr.B1", "${ECMC_P}BI02-EvtState01.PROC"}
-        {"BI02-EvtState03", "Inputs__Input event state 3", "BI02-EvtStateArr.B2", "${ECMC_P}BI02-EvtState02.PROC"}
-        {"BI02-EvtState04", "Inputs__Input event state 4", "BI02-EvtStateArr.B3", "${ECMC_P}BI02-EvtState03.PROC"}
-        {"BI02-EvtState05", "Inputs__Input event state 5", "BI02-EvtStateArr.B4", "${ECMC_P}BI02-EvtState04.PROC"}
-        {"BI02-EvtState06", "Inputs__Input event state 6", "BI02-EvtStateArr.B5", "${ECMC_P}BI02-EvtState05.PROC"}
-        {"BI02-EvtState07", "Inputs__Input event state 7", "BI02-EvtStateArr.B6", "${ECMC_P}BI02-EvtState06.PROC"}
-        {"BI02-EvtState08", "Inputs__Input event state 8", "BI02-EvtStateArr.B7", "${ECMC_P}BI02-EvtState07.PROC"}
-        {"BI02-EvtState09", "Inputs__Input event state 9", "BI02-EvtStateArr.B8", "${ECMC_P}BI02-EvtState08.PROC"}
-        {"BI02-EvtState10", "Inputs__Input event state 10", "BI02-EvtStateArr.B9", "${ECMC_P}BI02-EvtState09.PROC"}
-        {"BI03-Stat-State", "Status__Input state", "BI03-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI03-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI03-Stat_.B1", "${ECMC_P}BI03-Stat-State.PROC"}
-        {"BI03-EvtState01", "Inputs__Input event state 1", "BI03-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI03-EvtState02", "Inputs__Input event state 2", "BI03-EvtStateArr.B1", "${ECMC_P}BI03-EvtState01.PROC"}
-        {"BI03-EvtState03", "Inputs__Input event state 3", "BI03-EvtStateArr.B2", "${ECMC_P}BI03-EvtState02.PROC"}
-        {"BI03-EvtState04", "Inputs__Input event state 4", "BI03-EvtStateArr.B3", "${ECMC_P}BI03-EvtState03.PROC"}
-        {"BI03-EvtState05", "Inputs__Input event state 5", "BI03-EvtStateArr.B4", "${ECMC_P}BI03-EvtState04.PROC"}
-        {"BI03-EvtState06", "Inputs__Input event state 6", "BI03-EvtStateArr.B5", "${ECMC_P}BI03-EvtState05.PROC"}
-        {"BI03-EvtState07", "Inputs__Input event state 7", "BI03-EvtStateArr.B6", "${ECMC_P}BI03-EvtState06.PROC"}
-        {"BI03-EvtState08", "Inputs__Input event state 8", "BI03-EvtStateArr.B7", "${ECMC_P}BI03-EvtState07.PROC"}
-        {"BI03-EvtState09", "Inputs__Input event state 9", "BI03-EvtStateArr.B8", "${ECMC_P}BI03-EvtState08.PROC"}
-        {"BI03-EvtState10", "Inputs__Input event state 10", "BI03-EvtStateArr.B9", "${ECMC_P}BI03-EvtState09.PROC"}
-        {"BI04-Stat-State", "Status__Input state", "BI04-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI04-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI04-Stat_.B1", "${ECMC_P}BI04-Stat-State.PROC"}
-        {"BI04-EvtState01", "Inputs__Input event state 1", "BI04-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI04-EvtState02", "Inputs__Input event state 2", "BI04-EvtStateArr.B1", "${ECMC_P}BI04-EvtState01.PROC"}
-        {"BI04-EvtState03", "Inputs__Input event state 3", "BI04-EvtStateArr.B2", "${ECMC_P}BI04-EvtState02.PROC"}
-        {"BI04-EvtState04", "Inputs__Input event state 4", "BI04-EvtStateArr.B3", "${ECMC_P}BI04-EvtState03.PROC"}
-        {"BI04-EvtState05", "Inputs__Input event state 5", "BI04-EvtStateArr.B4", "${ECMC_P}BI04-EvtState04.PROC"}
-        {"BI04-EvtState06", "Inputs__Input event state 6", "BI04-EvtStateArr.B5", "${ECMC_P}BI04-EvtState05.PROC"}
-        {"BI04-EvtState07", "Inputs__Input event state 7", "BI04-EvtStateArr.B6", "${ECMC_P}BI04-EvtState06.PROC"}
-        {"BI04-EvtState08", "Inputs__Input event state 8", "BI04-EvtStateArr.B7", "${ECMC_P}BI04-EvtState07.PROC"}
-        {"BI04-EvtState09", "Inputs__Input event state 9", "BI04-EvtStateArr.B8", "${ECMC_P}BI04-EvtState08.PROC"}
-        {"BI04-EvtState10", "Inputs__Input event state 10", "BI04-EvtStateArr.B9", "${ECMC_P}BI04-EvtState09.PROC"}
-        {"BI05-Stat-State", "Status__Input state", "BI05-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI05-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI05-Stat_.B1", "${ECMC_P}BI05-Stat-State.PROC"}
-        {"BI05-EvtState01", "Inputs__Input event state 1", "BI05-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI05-EvtState02", "Inputs__Input event state 2", "BI05-EvtStateArr.B1", "${ECMC_P}BI05-EvtState01.PROC"}
-        {"BI05-EvtState03", "Inputs__Input event state 3", "BI05-EvtStateArr.B2", "${ECMC_P}BI05-EvtState02.PROC"}
-        {"BI05-EvtState04", "Inputs__Input event state 4", "BI05-EvtStateArr.B3", "${ECMC_P}BI05-EvtState03.PROC"}
-        {"BI05-EvtState05", "Inputs__Input event state 5", "BI05-EvtStateArr.B4", "${ECMC_P}BI05-EvtState04.PROC"}
-        {"BI05-EvtState06", "Inputs__Input event state 6", "BI05-EvtStateArr.B5", "${ECMC_P}BI05-EvtState05.PROC"}
-        {"BI05-EvtState07", "Inputs__Input event state 7", "BI05-EvtStateArr.B6", "${ECMC_P}BI05-EvtState06.PROC"}
-        {"BI05-EvtState08", "Inputs__Input event state 8", "BI05-EvtStateArr.B7", "${ECMC_P}BI05-EvtState07.PROC"}
-        {"BI05-EvtState09", "Inputs__Input event state 9", "BI05-EvtStateArr.B8", "${ECMC_P}BI05-EvtState08.PROC"}
-        {"BI05-EvtState10", "Inputs__Input event state 10", "BI05-EvtStateArr.B9", "${ECMC_P}BI05-EvtState09.PROC"}
-        {"BI06-Stat-State", "Status__Input state", "BI06-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI06-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI06-Stat_.B1", "${ECMC_P}BI06-Stat-State.PROC"}
-        {"BI06-EvtState01", "Inputs__Input event state 1", "BI06-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI06-EvtState02", "Inputs__Input event state 2", "BI06-EvtStateArr.B1", "${ECMC_P}BI06-EvtState01.PROC"}
-        {"BI06-EvtState03", "Inputs__Input event state 3", "BI06-EvtStateArr.B2", "${ECMC_P}BI06-EvtState02.PROC"}
-        {"BI06-EvtState04", "Inputs__Input event state 4", "BI06-EvtStateArr.B3", "${ECMC_P}BI06-EvtState03.PROC"}
-        {"BI06-EvtState05", "Inputs__Input event state 5", "BI06-EvtStateArr.B4", "${ECMC_P}BI06-EvtState04.PROC"}
-        {"BI06-EvtState06", "Inputs__Input event state 6", "BI06-EvtStateArr.B5", "${ECMC_P}BI06-EvtState05.PROC"}
-        {"BI06-EvtState07", "Inputs__Input event state 7", "BI06-EvtStateArr.B6", "${ECMC_P}BI06-EvtState06.PROC"}
-        {"BI06-EvtState08", "Inputs__Input event state 8", "BI06-EvtStateArr.B7", "${ECMC_P}BI06-EvtState07.PROC"}
-        {"BI06-EvtState09", "Inputs__Input event state 9", "BI06-EvtStateArr.B8", "${ECMC_P}BI06-EvtState08.PROC"}
-        {"BI06-EvtState10", "Inputs__Input event state 10", "BI06-EvtStateArr.B9", "${ECMC_P}BI06-EvtState09.PROC"}
-        {"BI07-Stat-State", "Status__Input state", "BI07-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI07-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI07-Stat_.B1", "${ECMC_P}BI07-Stat-State.PROC"}
-        {"BI07-EvtState01", "Inputs__Input event state 1", "BI07-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI07-EvtState02", "Inputs__Input event state 2", "BI07-EvtStateArr.B1", "${ECMC_P}BI07-EvtState01.PROC"}
-        {"BI07-EvtState03", "Inputs__Input event state 3", "BI07-EvtStateArr.B2", "${ECMC_P}BI07-EvtState02.PROC"}
-        {"BI07-EvtState04", "Inputs__Input event state 4", "BI07-EvtStateArr.B3", "${ECMC_P}BI07-EvtState03.PROC"}
-        {"BI07-EvtState05", "Inputs__Input event state 5", "BI07-EvtStateArr.B4", "${ECMC_P}BI07-EvtState04.PROC"}
-        {"BI07-EvtState06", "Inputs__Input event state 6", "BI07-EvtStateArr.B5", "${ECMC_P}BI07-EvtState05.PROC"}
-        {"BI07-EvtState07", "Inputs__Input event state 7", "BI07-EvtStateArr.B6", "${ECMC_P}BI07-EvtState06.PROC"}
-        {"BI07-EvtState08", "Inputs__Input event state 8", "BI07-EvtStateArr.B7", "${ECMC_P}BI07-EvtState07.PROC"}
-        {"BI07-EvtState09", "Inputs__Input event state 9", "BI07-EvtStateArr.B8", "${ECMC_P}BI07-EvtState08.PROC"}
-        {"BI07-EvtState10", "Inputs__Input event state 10", "BI07-EvtStateArr.B9", "${ECMC_P}BI07-EvtState09.PROC"}
-        {"BI08-Stat-State", "Status__Input state", "BI08-Stat_.B0", "${ECMC_P}.PROC"}
-        {"BI08-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI08-Stat_.B1", "${ECMC_P}BI08-Stat-State.PROC"}
-        {"BI08-EvtState01", "Inputs__Input event state 1", "BI08-EvtStateArr.B0", "${ECMC_P}.PROC"}
-        {"BI08-EvtState02", "Inputs__Input event state 2", "BI08-EvtStateArr.B1", "${ECMC_P}BI08-EvtState01.PROC"}
-        {"BI08-EvtState03", "Inputs__Input event state 3", "BI08-EvtStateArr.B2", "${ECMC_P}BI08-EvtState02.PROC"}
-        {"BI08-EvtState04", "Inputs__Input event state 4", "BI08-EvtStateArr.B3", "${ECMC_P}BI08-EvtState03.PROC"}
-        {"BI08-EvtState05", "Inputs__Input event state 5", "BI08-EvtStateArr.B4", "${ECMC_P}BI08-EvtState04.PROC"}
-        {"BI08-EvtState06", "Inputs__Input event state 6", "BI08-EvtStateArr.B5", "${ECMC_P}BI08-EvtState05.PROC"}
-        {"BI08-EvtState07", "Inputs__Input event state 7", "BI08-EvtStateArr.B6", "${ECMC_P}BI08-EvtState06.PROC"}
-        {"BI08-EvtState08", "Inputs__Input event state 8", "BI08-EvtStateArr.B7", "${ECMC_P}BI08-EvtState07.PROC"}
-        {"BI08-EvtState09", "Inputs__Input event state 9", "BI08-EvtStateArr.B8", "${ECMC_P}BI08-EvtState08.PROC"}
-        {"BI08-EvtState10", "Inputs__Input event state 10", "BI08-EvtStateArr.B9", "${ECMC_P}BI08-EvtState09.PROC"}
+    pattern { REC_NAME, DESC, LNK_NAME, FLNK , SRC_NAME}
+        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC" "BO01_Stat_OutpShrtCirc"}
+        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC" "BO01_Stat_OutpBuffOvrflw"}
+        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC" "BO01_Stat_OutpState"}
+        {"BO02-Stat-OutpShrtCirc", "Status__Output short circuit", "BO02-Stat_.B0", "${ECMC_P}.PROC" "BO02_Stat_OutpShrtCirc"}
+        {"BO02-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO02-Stat_.B1", "${ECMC_P}BO02-Stat-OutpShrtCirc.PROC" "BO02_Stat_OutpBuffOvrflw"}
+        {"BO02-Stat-OutpState", "Status__Output state", "BO02-Stat_.B2", "${ECMC_P}BO02-Stat-OutpBuffOvrflw.PROC" "BO02_Stat_OutpState"}
+        {"BO03-Stat-OutpShrtCirc", "Status__Output short circuit", "BO03-Stat_.B0", "${ECMC_P}.PROC" "BO03_Stat_OutpShrtCirc"}
+        {"BO03-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO03-Stat_.B1", "${ECMC_P}BO03-Stat-OutpShrtCirc.PROC" "BO03_Stat_OutpBuffOvrflw"}
+        {"BO03-Stat-OutpState", "Status__Output state", "BO03-Stat_.B2", "${ECMC_P}BO03-Stat-OutpBuffOvrflw.PROC" "BO03_Stat_OutpState"}
+        {"BO04-Stat-OutpShrtCirc", "Status__Output short circuit", "BO04-Stat_.B0", "${ECMC_P}.PROC" "BO04_Stat_OutpShrtCirc"}
+        {"BO04-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO04-Stat_.B1", "${ECMC_P}BO04-Stat-OutpShrtCirc.PROC" "BO04_Stat_OutpBuffOvrflw"}
+        {"BO04-Stat-OutpState", "Status__Output state", "BO04-Stat_.B2", "${ECMC_P}BO04-Stat-OutpBuffOvrflw.PROC" "BO04_Stat_OutpState"}
+        {"BO05-Stat-OutpShrtCirc", "Status__Output short circuit", "BO05-Stat_.B0", "${ECMC_P}.PROC" "BO05_Stat_OutpShrtCirc"}
+        {"BO05-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO05-Stat_.B1", "${ECMC_P}BO05-Stat-OutpShrtCirc.PROC" "BO05_Stat_OutpBuffOvrflw"}
+        {"BO05-Stat-OutpState", "Status__Output state", "BO05-Stat_.B2", "${ECMC_P}BO05-Stat-OutpBuffOvrflw.PROC" "BO05_Stat_OutpState"}
+        {"BO06-Stat-OutpShrtCirc", "Status__Output short circuit", "BO06-Stat_.B0", "${ECMC_P}.PROC" "BO06_Stat_OutpShrtCirc"}
+        {"BO06-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO06-Stat_.B1", "${ECMC_P}BO06-Stat-OutpShrtCirc.PROC" "BO06_Stat_OutpBuffOvrflw"}
+        {"BO06-Stat-OutpState", "Status__Output state", "BO06-Stat_.B2", "${ECMC_P}BO06-Stat-OutpBuffOvrflw.PROC" "BO06_Stat_OutpState"}
+        {"BO07-Stat-OutpShrtCirc", "Status__Output short circuit", "BO07-Stat_.B0", "${ECMC_P}.PROC" "BO07_Stat_OutpShrtCirc"}
+        {"BO07-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO07-Stat_.B1", "${ECMC_P}BO07-Stat-OutpShrtCirc.PROC" "BO07_Stat_OutpBuffOvrflw"}
+        {"BO07-Stat-OutpState", "Status__Output state", "BO07-Stat_.B2", "${ECMC_P}BO07-Stat-OutpBuffOvrflw.PROC" "BO07_Stat_OutpState"}
+        {"BO08-Stat-OutpShrtCirc", "Status__Output short circuit", "BO08-Stat_.B0", "${ECMC_P}.PROC" "BO08_Stat_OutpShrtCirc"}
+        {"BO08-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO08-Stat_.B1", "${ECMC_P}BO08-Stat-OutpShrtCirc.PROC" "BO08_Stat_OutpBuffOvrflw"}
+        {"BO08-Stat-OutpState", "Status__Output state", "BO08-Stat_.B2", "${ECMC_P}BO08-Stat-OutpBuffOvrflw.PROC" "BO08_Stat_OutpState"}
+        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC" "BI01_Stat_State"}
+        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC" "BI01_Stat_BuffOvrflw"}
+        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC" "BI01_EvtState01"}
+        {"BI01-EvtState02", "Inputs__Input event state 2", "BI01-EvtStateArr.B1", "${ECMC_P}BI01-EvtState01.PROC" "BI01_EvtState02"}
+        {"BI01-EvtState03", "Inputs__Input event state 3", "BI01-EvtStateArr.B2", "${ECMC_P}BI01-EvtState02.PROC" "BI01_EvtState03"}
+        {"BI01-EvtState04", "Inputs__Input event state 4", "BI01-EvtStateArr.B3", "${ECMC_P}BI01-EvtState03.PROC" "BI01_EvtState04"}
+        {"BI01-EvtState05", "Inputs__Input event state 5", "BI01-EvtStateArr.B4", "${ECMC_P}BI01-EvtState04.PROC" "BI01_EvtState05"}
+        {"BI01-EvtState06", "Inputs__Input event state 6", "BI01-EvtStateArr.B5", "${ECMC_P}BI01-EvtState05.PROC" "BI01_EvtState06"}
+        {"BI01-EvtState07", "Inputs__Input event state 7", "BI01-EvtStateArr.B6", "${ECMC_P}BI01-EvtState06.PROC" "BI01_EvtState07"}
+        {"BI01-EvtState08", "Inputs__Input event state 8", "BI01-EvtStateArr.B7", "${ECMC_P}BI01-EvtState07.PROC" "BI01_EvtState08"}
+        {"BI01-EvtState09", "Inputs__Input event state 9", "BI01-EvtStateArr.B8", "${ECMC_P}BI01-EvtState08.PROC" "BI01_EvtState09"}
+        {"BI01-EvtState10", "Inputs__Input event state 10", "BI01-EvtStateArr.B9", "${ECMC_P}BI01-EvtState09.PROC" "BI01_EvtState10"}
+        {"BI02-Stat-State", "Status__Input state", "BI02-Stat_.B0", "${ECMC_P}.PROC" "BI02_Stat_State"}
+        {"BI02-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI02-Stat_.B1", "${ECMC_P}BI02-Stat-State.PROC" "BI02_Stat_BuffOvrflw"}
+        {"BI02-EvtState01", "Inputs__Input event state 1", "BI02-EvtStateArr.B0", "${ECMC_P}.PROC" "BI02_EvtState01"}
+        {"BI02-EvtState02", "Inputs__Input event state 2", "BI02-EvtStateArr.B1", "${ECMC_P}BI02-EvtState01.PROC" "BI02_EvtState02"}
+        {"BI02-EvtState03", "Inputs__Input event state 3", "BI02-EvtStateArr.B2", "${ECMC_P}BI02-EvtState02.PROC" "BI02_EvtState03"}
+        {"BI02-EvtState04", "Inputs__Input event state 4", "BI02-EvtStateArr.B3", "${ECMC_P}BI02-EvtState03.PROC" "BI02_EvtState04"}
+        {"BI02-EvtState05", "Inputs__Input event state 5", "BI02-EvtStateArr.B4", "${ECMC_P}BI02-EvtState04.PROC" "BI02_EvtState05"}
+        {"BI02-EvtState06", "Inputs__Input event state 6", "BI02-EvtStateArr.B5", "${ECMC_P}BI02-EvtState05.PROC" "BI02_EvtState06"}
+        {"BI02-EvtState07", "Inputs__Input event state 7", "BI02-EvtStateArr.B6", "${ECMC_P}BI02-EvtState06.PROC" "BI02_EvtState07"}
+        {"BI02-EvtState08", "Inputs__Input event state 8", "BI02-EvtStateArr.B7", "${ECMC_P}BI02-EvtState07.PROC" "BI02_EvtState08"}
+        {"BI02-EvtState09", "Inputs__Input event state 9", "BI02-EvtStateArr.B8", "${ECMC_P}BI02-EvtState08.PROC" "BI02_EvtState09"}
+        {"BI02-EvtState10", "Inputs__Input event state 10", "BI02-EvtStateArr.B9", "${ECMC_P}BI02-EvtState09.PROC" "BI02_EvtState10"}
+        {"BI03-Stat-State", "Status__Input state", "BI03-Stat_.B0", "${ECMC_P}.PROC" "BI03_Stat_State"}
+        {"BI03-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI03-Stat_.B1", "${ECMC_P}BI03-Stat-State.PROC" "BI03_Stat_BuffOvrflw"}
+        {"BI03-EvtState01", "Inputs__Input event state 1", "BI03-EvtStateArr.B0", "${ECMC_P}.PROC" "BI03_EvtState01"}
+        {"BI03-EvtState02", "Inputs__Input event state 2", "BI03-EvtStateArr.B1", "${ECMC_P}BI03-EvtState01.PROC" "BI03_EvtState02"}
+        {"BI03-EvtState03", "Inputs__Input event state 3", "BI03-EvtStateArr.B2", "${ECMC_P}BI03-EvtState02.PROC" "BI03_EvtState03"}
+        {"BI03-EvtState04", "Inputs__Input event state 4", "BI03-EvtStateArr.B3", "${ECMC_P}BI03-EvtState03.PROC" "BI03_EvtState04"}
+        {"BI03-EvtState05", "Inputs__Input event state 5", "BI03-EvtStateArr.B4", "${ECMC_P}BI03-EvtState04.PROC" "BI03_EvtState05"}
+        {"BI03-EvtState06", "Inputs__Input event state 6", "BI03-EvtStateArr.B5", "${ECMC_P}BI03-EvtState05.PROC" "BI03_EvtState06"}
+        {"BI03-EvtState07", "Inputs__Input event state 7", "BI03-EvtStateArr.B6", "${ECMC_P}BI03-EvtState06.PROC" "BI03_EvtState07"}
+        {"BI03-EvtState08", "Inputs__Input event state 8", "BI03-EvtStateArr.B7", "${ECMC_P}BI03-EvtState07.PROC" "BI03_EvtState08"}
+        {"BI03-EvtState09", "Inputs__Input event state 9", "BI03-EvtStateArr.B8", "${ECMC_P}BI03-EvtState08.PROC" "BI03_EvtState09"}
+        {"BI03-EvtState10", "Inputs__Input event state 10", "BI03-EvtStateArr.B9", "${ECMC_P}BI03-EvtState09.PROC" "BI03_EvtState10"}
+        {"BI04-Stat-State", "Status__Input state", "BI04-Stat_.B0", "${ECMC_P}.PROC" "BI04_Stat_State"}
+        {"BI04-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI04-Stat_.B1", "${ECMC_P}BI04-Stat-State.PROC" "BI04_Stat_BuffOvrflw"}
+        {"BI04-EvtState01", "Inputs__Input event state 1", "BI04-EvtStateArr.B0", "${ECMC_P}.PROC" "BI04_EvtState01"}
+        {"BI04-EvtState02", "Inputs__Input event state 2", "BI04-EvtStateArr.B1", "${ECMC_P}BI04-EvtState01.PROC" "BI04_EvtState02"}
+        {"BI04-EvtState03", "Inputs__Input event state 3", "BI04-EvtStateArr.B2", "${ECMC_P}BI04-EvtState02.PROC" "BI04_EvtState03"}
+        {"BI04-EvtState04", "Inputs__Input event state 4", "BI04-EvtStateArr.B3", "${ECMC_P}BI04-EvtState03.PROC" "BI04_EvtState04"}
+        {"BI04-EvtState05", "Inputs__Input event state 5", "BI04-EvtStateArr.B4", "${ECMC_P}BI04-EvtState04.PROC" "BI04_EvtState05"}
+        {"BI04-EvtState06", "Inputs__Input event state 6", "BI04-EvtStateArr.B5", "${ECMC_P}BI04-EvtState05.PROC" "BI04_EvtState06"}
+        {"BI04-EvtState07", "Inputs__Input event state 7", "BI04-EvtStateArr.B6", "${ECMC_P}BI04-EvtState06.PROC" "BI04_EvtState07"}
+        {"BI04-EvtState08", "Inputs__Input event state 8", "BI04-EvtStateArr.B7", "${ECMC_P}BI04-EvtState07.PROC" "BI04_EvtState08"}
+        {"BI04-EvtState09", "Inputs__Input event state 9", "BI04-EvtStateArr.B8", "${ECMC_P}BI04-EvtState08.PROC" "BI04_EvtState09"}
+        {"BI04-EvtState10", "Inputs__Input event state 10", "BI04-EvtStateArr.B9", "${ECMC_P}BI04-EvtState09.PROC" "BI04_EvtState10"}
+        {"BI05-Stat-State", "Status__Input state", "BI05-Stat_.B0", "${ECMC_P}.PROC" "BI05_Stat_State"}
+        {"BI05-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI05-Stat_.B1", "${ECMC_P}BI05-Stat-State.PROC" "BI05_Stat_BuffOvrflw"}
+        {"BI05-EvtState01", "Inputs__Input event state 1", "BI05-EvtStateArr.B0", "${ECMC_P}.PROC" "BI05_EvtState01"}
+        {"BI05-EvtState02", "Inputs__Input event state 2", "BI05-EvtStateArr.B1", "${ECMC_P}BI05-EvtState01.PROC" "BI05_EvtState02"}
+        {"BI05-EvtState03", "Inputs__Input event state 3", "BI05-EvtStateArr.B2", "${ECMC_P}BI05-EvtState02.PROC" "BI05_EvtState03"}
+        {"BI05-EvtState04", "Inputs__Input event state 4", "BI05-EvtStateArr.B3", "${ECMC_P}BI05-EvtState03.PROC" "BI05_EvtState04"}
+        {"BI05-EvtState05", "Inputs__Input event state 5", "BI05-EvtStateArr.B4", "${ECMC_P}BI05-EvtState04.PROC" "BI05_EvtState05"}
+        {"BI05-EvtState06", "Inputs__Input event state 6", "BI05-EvtStateArr.B5", "${ECMC_P}BI05-EvtState05.PROC" "BI05_EvtState06"}
+        {"BI05-EvtState07", "Inputs__Input event state 7", "BI05-EvtStateArr.B6", "${ECMC_P}BI05-EvtState06.PROC" "BI05_EvtState07"}
+        {"BI05-EvtState08", "Inputs__Input event state 8", "BI05-EvtStateArr.B7", "${ECMC_P}BI05-EvtState07.PROC" "BI05_EvtState08"}
+        {"BI05-EvtState09", "Inputs__Input event state 9", "BI05-EvtStateArr.B8", "${ECMC_P}BI05-EvtState08.PROC" "BI05_EvtState09"}
+        {"BI05-EvtState10", "Inputs__Input event state 10", "BI05-EvtStateArr.B9", "${ECMC_P}BI05-EvtState09.PROC" "BI05_EvtState10"}
+        {"BI06-Stat-State", "Status__Input state", "BI06-Stat_.B0", "${ECMC_P}.PROC" "BI06_Stat_State"}
+        {"BI06-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI06-Stat_.B1", "${ECMC_P}BI06-Stat-State.PROC" "BI06_Stat_BuffOvrflw"}
+        {"BI06-EvtState01", "Inputs__Input event state 1", "BI06-EvtStateArr.B0", "${ECMC_P}.PROC" "BI06_EvtState01"}
+        {"BI06-EvtState02", "Inputs__Input event state 2", "BI06-EvtStateArr.B1", "${ECMC_P}BI06-EvtState01.PROC" "BI06_EvtState02"}
+        {"BI06-EvtState03", "Inputs__Input event state 3", "BI06-EvtStateArr.B2", "${ECMC_P}BI06-EvtState02.PROC" "BI06_EvtState03"}
+        {"BI06-EvtState04", "Inputs__Input event state 4", "BI06-EvtStateArr.B3", "${ECMC_P}BI06-EvtState03.PROC" "BI06_EvtState04"}
+        {"BI06-EvtState05", "Inputs__Input event state 5", "BI06-EvtStateArr.B4", "${ECMC_P}BI06-EvtState04.PROC" "BI06_EvtState05"}
+        {"BI06-EvtState06", "Inputs__Input event state 6", "BI06-EvtStateArr.B5", "${ECMC_P}BI06-EvtState05.PROC" "BI06_EvtState06"}
+        {"BI06-EvtState07", "Inputs__Input event state 7", "BI06-EvtStateArr.B6", "${ECMC_P}BI06-EvtState06.PROC" "BI06_EvtState07"}
+        {"BI06-EvtState08", "Inputs__Input event state 8", "BI06-EvtStateArr.B7", "${ECMC_P}BI06-EvtState07.PROC" "BI06_EvtState08"}
+        {"BI06-EvtState09", "Inputs__Input event state 9", "BI06-EvtStateArr.B8", "${ECMC_P}BI06-EvtState08.PROC" "BI06_EvtState09"}
+        {"BI06-EvtState10", "Inputs__Input event state 10", "BI06-EvtStateArr.B9", "${ECMC_P}BI06-EvtState09.PROC" "BI06_EvtState10"}
+        {"BI07-Stat-State", "Status__Input state", "BI07-Stat_.B0", "${ECMC_P}.PROC" "BI07_Stat_State"}
+        {"BI07-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI07-Stat_.B1", "${ECMC_P}BI07-Stat-State.PROC" "BI07_Stat_BuffOvrflw"}
+        {"BI07-EvtState01", "Inputs__Input event state 1", "BI07-EvtStateArr.B0", "${ECMC_P}.PROC" "BI07_EvtState01"}
+        {"BI07-EvtState02", "Inputs__Input event state 2", "BI07-EvtStateArr.B1", "${ECMC_P}BI07-EvtState01.PROC" "BI07_EvtState02"}
+        {"BI07-EvtState03", "Inputs__Input event state 3", "BI07-EvtStateArr.B2", "${ECMC_P}BI07-EvtState02.PROC" "BI07_EvtState03"}
+        {"BI07-EvtState04", "Inputs__Input event state 4", "BI07-EvtStateArr.B3", "${ECMC_P}BI07-EvtState03.PROC" "BI07_EvtState04"}
+        {"BI07-EvtState05", "Inputs__Input event state 5", "BI07-EvtStateArr.B4", "${ECMC_P}BI07-EvtState04.PROC" "BI07_EvtState05"}
+        {"BI07-EvtState06", "Inputs__Input event state 6", "BI07-EvtStateArr.B5", "${ECMC_P}BI07-EvtState05.PROC" "BI07_EvtState06"}
+        {"BI07-EvtState07", "Inputs__Input event state 7", "BI07-EvtStateArr.B6", "${ECMC_P}BI07-EvtState06.PROC" "BI07_EvtState07"}
+        {"BI07-EvtState08", "Inputs__Input event state 8", "BI07-EvtStateArr.B7", "${ECMC_P}BI07-EvtState07.PROC" "BI07_EvtState08"}
+        {"BI07-EvtState09", "Inputs__Input event state 9", "BI07-EvtStateArr.B8", "${ECMC_P}BI07-EvtState08.PROC" "BI07_EvtState09"}
+        {"BI07-EvtState10", "Inputs__Input event state 10", "BI07-EvtStateArr.B9", "${ECMC_P}BI07-EvtState09.PROC" "BI07_EvtState10"}
+        {"BI08-Stat-State", "Status__Input state", "BI08-Stat_.B0", "${ECMC_P}.PROC" "BI08_Stat_State"}
+        {"BI08-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI08-Stat_.B1", "${ECMC_P}BI08-Stat-State.PROC" "BI08_Stat_BuffOvrflw"}
+        {"BI08-EvtState01", "Inputs__Input event state 1", "BI08-EvtStateArr.B0", "${ECMC_P}.PROC" "BI08_EvtState01"}
+        {"BI08-EvtState02", "Inputs__Input event state 2", "BI08-EvtStateArr.B1", "${ECMC_P}BI08-EvtState01.PROC" "BI08_EvtState02"}
+        {"BI08-EvtState03", "Inputs__Input event state 3", "BI08-EvtStateArr.B2", "${ECMC_P}BI08-EvtState02.PROC" "BI08_EvtState03"}
+        {"BI08-EvtState04", "Inputs__Input event state 4", "BI08-EvtStateArr.B3", "${ECMC_P}BI08-EvtState03.PROC" "BI08_EvtState04"}
+        {"BI08-EvtState05", "Inputs__Input event state 5", "BI08-EvtStateArr.B4", "${ECMC_P}BI08-EvtState04.PROC" "BI08_EvtState05"}
+        {"BI08-EvtState06", "Inputs__Input event state 6", "BI08-EvtStateArr.B5", "${ECMC_P}BI08-EvtState05.PROC" "BI08_EvtState06"}
+        {"BI08-EvtState07", "Inputs__Input event state 7", "BI08-EvtStateArr.B6", "${ECMC_P}BI08-EvtState06.PROC" "BI08_EvtState07"}
+        {"BI08-EvtState08", "Inputs__Input event state 8", "BI08-EvtStateArr.B7", "${ECMC_P}BI08-EvtState07.PROC" "BI08_EvtState08"}
+        {"BI08-EvtState09", "Inputs__Input event state 9", "BI08-EvtStateArr.B8", "${ECMC_P}BI08-EvtState08.PROC" "BI08_EvtState09"}
+        {"BI08-EvtState10", "Inputs__Input event state 10", "BI08-EvtStateArr.B9", "${ECMC_P}BI08-EvtState09.PROC" "BI08_EvtState10"}
 }
 
 file "ecmc_ESI_mbbiDirect.template" {
-    pattern { REC_NAME, DESC, FLNK }
-        {"BO01-Stat_", "Status__Output short circuit", "BO01-Stat-OutpState.PROC"}
-        {"BO02-Stat_", "Status__Output short circuit", "BO02-Stat-OutpState.PROC"}
-        {"BO03-Stat_", "Status__Output short circuit", "BO03-Stat-OutpState.PROC"}
-        {"BO04-Stat_", "Status__Output short circuit", "BO04-Stat-OutpState.PROC"}
-        {"BO05-Stat_", "Status__Output short circuit", "BO05-Stat-OutpState.PROC"}
-        {"BO06-Stat_", "Status__Output short circuit", "BO06-Stat-OutpState.PROC"}
-        {"BO07-Stat_", "Status__Output short circuit", "BO07-Stat-OutpState.PROC"}
-        {"BO08-Stat_", "Status__Output short circuit", "BO08-Stat-OutpState.PROC"}
-        {"BI01-Stat_", "Status__Input state", "BI01-Stat-BuffOvrflw.PROC"}
-        {"BI01-EvtStateArr", "Inputs__Input event state 1", "BI01-EvtState10.PROC"}
-        {"BI02-Stat_", "Status__Input state", "BI02-Stat-BuffOvrflw.PROC"}
-        {"BI02-EvtStateArr", "Inputs__Input event state 1", "BI02-EvtState10.PROC"}
-        {"BI03-Stat_", "Status__Input state", "BI03-Stat-BuffOvrflw.PROC"}
-        {"BI03-EvtStateArr", "Inputs__Input event state 1", "BI03-EvtState10.PROC"}
-        {"BI04-Stat_", "Status__Input state", "BI04-Stat-BuffOvrflw.PROC"}
-        {"BI04-EvtStateArr", "Inputs__Input event state 1", "BI04-EvtState10.PROC"}
-        {"BI05-Stat_", "Status__Input state", "BI05-Stat-BuffOvrflw.PROC"}
-        {"BI05-EvtStateArr", "Inputs__Input event state 1", "BI05-EvtState10.PROC"}
-        {"BI06-Stat_", "Status__Input state", "BI06-Stat-BuffOvrflw.PROC"}
-        {"BI06-EvtStateArr", "Inputs__Input event state 1", "BI06-EvtState10.PROC"}
-        {"BI07-Stat_", "Status__Input state", "BI07-Stat-BuffOvrflw.PROC"}
-        {"BI07-EvtStateArr", "Inputs__Input event state 1", "BI07-EvtState10.PROC"}
-        {"BI08-Stat_", "Status__Input state", "BI08-Stat-BuffOvrflw.PROC"}
-        {"BI08-EvtStateArr", "Inputs__Input event state 1", "BI08-EvtState10.PROC"}
+    pattern { REC_NAME, DESC, FLNK , SRC_NAME}
+        {"BO01-Stat_", "Status__Output short circuit", "BO01-Stat-OutpState.PROC", "BO01_Stat_"}
+        {"BO02-Stat_", "Status__Output short circuit", "BO02-Stat-OutpState.PROC", "BO02_Stat_"}
+        {"BO03-Stat_", "Status__Output short circuit", "BO03-Stat-OutpState.PROC", "BO03_Stat_"}
+        {"BO04-Stat_", "Status__Output short circuit", "BO04-Stat-OutpState.PROC", "BO04_Stat_"}
+        {"BO05-Stat_", "Status__Output short circuit", "BO05-Stat-OutpState.PROC", "BO05_Stat_"}
+        {"BO06-Stat_", "Status__Output short circuit", "BO06-Stat-OutpState.PROC", "BO06_Stat_"}
+        {"BO07-Stat_", "Status__Output short circuit", "BO07-Stat-OutpState.PROC", "BO07_Stat_"}
+        {"BO08-Stat_", "Status__Output short circuit", "BO08-Stat-OutpState.PROC", "BO08_Stat_"}
+        {"BI01-Stat_", "Status__Input state", "BI01-Stat-BuffOvrflw.PROC", "BI01_Stat_"}
+        {"BI01-EvtStateArr", "Inputs__Input event state 1", "BI01-EvtState10.PROC", "BI01_EvtStateArr"}
+        {"BI02-Stat_", "Status__Input state", "BI02-Stat-BuffOvrflw.PROC", "BI02_Stat_"}
+        {"BI02-EvtStateArr", "Inputs__Input event state 1", "BI02-EvtState10.PROC", "BI02_EvtStateArr"}
+        {"BI03-Stat_", "Status__Input state", "BI03-Stat-BuffOvrflw.PROC", "BI03_Stat_"}
+        {"BI03-EvtStateArr", "Inputs__Input event state 1", "BI03-EvtState10.PROC", "BI03_EvtStateArr"}
+        {"BI04-Stat_", "Status__Input state", "BI04-Stat-BuffOvrflw.PROC", "BI04_Stat_"}
+        {"BI04-EvtStateArr", "Inputs__Input event state 1", "BI04-EvtState10.PROC", "BI04_EvtStateArr"}
+        {"BI05-Stat_", "Status__Input state", "BI05-Stat-BuffOvrflw.PROC", "BI05_Stat_"}
+        {"BI05-EvtStateArr", "Inputs__Input event state 1", "BI05-EvtState10.PROC", "BI05_EvtStateArr"}
+        {"BI06-Stat_", "Status__Input state", "BI06-Stat-BuffOvrflw.PROC", "BI06_Stat_"}
+        {"BI06-EvtStateArr", "Inputs__Input event state 1", "BI06-EvtState10.PROC", "BI06_EvtStateArr"}
+        {"BI07-Stat_", "Status__Input state", "BI07-Stat-BuffOvrflw.PROC", "BI07_Stat_"}
+        {"BI07-EvtStateArr", "Inputs__Input event state 1", "BI07-EvtState10.PROC", "BI07_EvtStateArr"}
+        {"BI08-Stat_", "Status__Input state", "BI08-Stat-BuffOvrflw.PROC", "BI08_Stat_"}
+        {"BI08-EvtStateArr", "Inputs__Input event state 1", "BI08-EvtState10.PROC", "BI08_EvtStateArr"}
 }
 
 file "ecmc_ESI_ai.template" {
-    pattern { REC_NAME, DESC }
-        {"BO01-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO01-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO02-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO02-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO03-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO03-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO04-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO04-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO05-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO05-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO06-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO06-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO07-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO07-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BO08-Stat-OutpOrdrFb", "Status__Output order feedback" }
-        {"BO08-Stat-EvtsInOutpBuff", "Status__Events in output buffer" }
-        {"BI01-Stat-NoEvts", "Status__No of input events" }
-        {"BI01-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI01-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI01-EvtTme01", "Input event time 1" }
-        {"BI01-EvtTme02", "Input event time 2" }
-        {"BI01-EvtTme03", "Input event time 3" }
-        {"BI01-EvtTme04", "Input event time 4" }
-        {"BI01-EvtTme05", "Input event time 5" }
-        {"BI01-EvtTme06", "Input event time 6" }
-        {"BI01-EvtTme07", "Input event time 7" }
-        {"BI01-EvtTme08", "Input event time 8" }
-        {"BI01-EvtTme09", "Input event time 9" }
-        {"BI01-EvtTme10", "Input event time 10" }
-        {"BI02-Stat-NoEvts", "Status__No of input events" }
-        {"BI02-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI02-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI02-EvtTme01", "Input event time 1" }
-        {"BI02-EvtTme02", "Input event time 2" }
-        {"BI02-EvtTme03", "Input event time 3" }
-        {"BI02-EvtTme04", "Input event time 4" }
-        {"BI02-EvtTme05", "Input event time 5" }
-        {"BI02-EvtTme06", "Input event time 6" }
-        {"BI02-EvtTme07", "Input event time 7" }
-        {"BI02-EvtTme08", "Input event time 8" }
-        {"BI02-EvtTme09", "Input event time 9" }
-        {"BI02-EvtTme10", "Input event time 10" }
-        {"BI03-Stat-NoEvts", "Status__No of input events" }
-        {"BI03-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI03-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI03-EvtTme01", "Input event time 1" }
-        {"BI03-EvtTme02", "Input event time 2" }
-        {"BI03-EvtTme03", "Input event time 3" }
-        {"BI03-EvtTme04", "Input event time 4" }
-        {"BI03-EvtTme05", "Input event time 5" }
-        {"BI03-EvtTme06", "Input event time 6" }
-        {"BI03-EvtTme07", "Input event time 7" }
-        {"BI03-EvtTme08", "Input event time 8" }
-        {"BI03-EvtTme09", "Input event time 9" }
-        {"BI03-EvtTme10", "Input event time 10" }
-        {"BI04-Stat-NoEvts", "Status__No of input events" }
-        {"BI04-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI04-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI04-EvtTme01", "Input event time 1" }
-        {"BI04-EvtTme02", "Input event time 2" }
-        {"BI04-EvtTme03", "Input event time 3" }
-        {"BI04-EvtTme04", "Input event time 4" }
-        {"BI04-EvtTme05", "Input event time 5" }
-        {"BI04-EvtTme06", "Input event time 6" }
-        {"BI04-EvtTme07", "Input event time 7" }
-        {"BI04-EvtTme08", "Input event time 8" }
-        {"BI04-EvtTme09", "Input event time 9" }
-        {"BI04-EvtTme10", "Input event time 10" }
-        {"BI05-Stat-NoEvts", "Status__No of input events" }
-        {"BI05-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI05-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI05-EvtTme01", "Input event time 1" }
-        {"BI05-EvtTme02", "Input event time 2" }
-        {"BI05-EvtTme03", "Input event time 3" }
-        {"BI05-EvtTme04", "Input event time 4" }
-        {"BI05-EvtTme05", "Input event time 5" }
-        {"BI05-EvtTme06", "Input event time 6" }
-        {"BI05-EvtTme07", "Input event time 7" }
-        {"BI05-EvtTme08", "Input event time 8" }
-        {"BI05-EvtTme09", "Input event time 9" }
-        {"BI05-EvtTme10", "Input event time 10" }
-        {"BI06-Stat-NoEvts", "Status__No of input events" }
-        {"BI06-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI06-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI06-EvtTme01", "Input event time 1" }
-        {"BI06-EvtTme02", "Input event time 2" }
-        {"BI06-EvtTme03", "Input event time 3" }
-        {"BI06-EvtTme04", "Input event time 4" }
-        {"BI06-EvtTme05", "Input event time 5" }
-        {"BI06-EvtTme06", "Input event time 6" }
-        {"BI06-EvtTme07", "Input event time 7" }
-        {"BI06-EvtTme08", "Input event time 8" }
-        {"BI06-EvtTme09", "Input event time 9" }
-        {"BI06-EvtTme10", "Input event time 10" }
-        {"BI07-Stat-NoEvts", "Status__No of input events" }
-        {"BI07-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI07-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI07-EvtTme01", "Input event time 1" }
-        {"BI07-EvtTme02", "Input event time 2" }
-        {"BI07-EvtTme03", "Input event time 3" }
-        {"BI07-EvtTme04", "Input event time 4" }
-        {"BI07-EvtTme05", "Input event time 5" }
-        {"BI07-EvtTme06", "Input event time 6" }
-        {"BI07-EvtTme07", "Input event time 7" }
-        {"BI07-EvtTme08", "Input event time 8" }
-        {"BI07-EvtTme09", "Input event time 9" }
-        {"BI07-EvtTme10", "Input event time 10" }
-        {"BI08-Stat-NoEvts", "Status__No of input events" }
-        {"BI08-Stat-EvtsInBuff", "Status__Events in input buffer" }
-        {"BI08-Stat-OrdrFb", "Status__Input order feedback" }
-        {"BI08-EvtTme01", "Input event time 1" }
-        {"BI08-EvtTme02", "Input event time 2" }
-        {"BI08-EvtTme03", "Input event time 3" }
-        {"BI08-EvtTme04", "Input event time 4" }
-        {"BI08-EvtTme05", "Input event time 5" }
-        {"BI08-EvtTme06", "Input event time 6" }
-        {"BI08-EvtTme07", "Input event time 7" }
-        {"BI08-EvtTme08", "Input event time 8" }
-        {"BI08-EvtTme09", "Input event time 9" }
-        {"BI08-EvtTme10", "Input event time 10" }
+    pattern { REC_NAME, DESC , SRC_NAME}
+        {"BO01-Stat-OutpOrdrFb", "Status__Output order feedback", "BO01_Stat_OutpOrdrFb" }
+        {"BO01-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO01_Stat_EvtsInOutpBuff" }
+        {"BO02-Stat-OutpOrdrFb", "Status__Output order feedback", "BO02_Stat_OutpOrdrFb" }
+        {"BO02-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO02_Stat_EvtsInOutpBuff" }
+        {"BO03-Stat-OutpOrdrFb", "Status__Output order feedback", "BO03_Stat_OutpOrdrFb" }
+        {"BO03-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO03_Stat_EvtsInOutpBuff" }
+        {"BO04-Stat-OutpOrdrFb", "Status__Output order feedback", "BO04_Stat_OutpOrdrFb" }
+        {"BO04-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO04_Stat_EvtsInOutpBuff" }
+        {"BO05-Stat-OutpOrdrFb", "Status__Output order feedback", "BO05_Stat_OutpOrdrFb" }
+        {"BO05-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO05_Stat_EvtsInOutpBuff" }
+        {"BO06-Stat-OutpOrdrFb", "Status__Output order feedback", "BO06_Stat_OutpOrdrFb" }
+        {"BO06-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO06_Stat_EvtsInOutpBuff" }
+        {"BO07-Stat-OutpOrdrFb", "Status__Output order feedback", "BO07_Stat_OutpOrdrFb" }
+        {"BO07-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO07_Stat_EvtsInOutpBuff" }
+        {"BO08-Stat-OutpOrdrFb", "Status__Output order feedback", "BO08_Stat_OutpOrdrFb" }
+        {"BO08-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO08_Stat_EvtsInOutpBuff" }
+        {"BI01-Stat-NoEvts", "Status__No of input events", "BI01_Stat_NoEvts" }
+        {"BI01-Stat-EvtsInBuff", "Status__Events in input buffer", "BI01_Stat_EvtsInBuff" }
+        {"BI01-Stat-OrdrFb", "Status__Input order feedback", "BI01_Stat_OrdrFb" }
+        {"BI01-EvtTme01", "Input event time 1", "BI01_EvtTme01" }
+        {"BI01-EvtTme02", "Input event time 2", "BI01_EvtTme02" }
+        {"BI01-EvtTme03", "Input event time 3", "BI01_EvtTme03" }
+        {"BI01-EvtTme04", "Input event time 4", "BI01_EvtTme04" }
+        {"BI01-EvtTme05", "Input event time 5", "BI01_EvtTme05" }
+        {"BI01-EvtTme06", "Input event time 6", "BI01_EvtTme06" }
+        {"BI01-EvtTme07", "Input event time 7", "BI01_EvtTme07" }
+        {"BI01-EvtTme08", "Input event time 8", "BI01_EvtTme08" }
+        {"BI01-EvtTme09", "Input event time 9", "BI01_EvtTme09" }
+        {"BI01-EvtTme10", "Input event time 10", "BI01_EvtTme10" }
+        {"BI02-Stat-NoEvts", "Status__No of input events", "BI02_Stat_NoEvts" }
+        {"BI02-Stat-EvtsInBuff", "Status__Events in input buffer", "BI02_Stat_EvtsInBuff" }
+        {"BI02-Stat-OrdrFb", "Status__Input order feedback", "BI02_Stat_OrdrFb" }
+        {"BI02-EvtTme01", "Input event time 1", "BI02_EvtTme01" }
+        {"BI02-EvtTme02", "Input event time 2", "BI02_EvtTme02" }
+        {"BI02-EvtTme03", "Input event time 3", "BI02_EvtTme03" }
+        {"BI02-EvtTme04", "Input event time 4", "BI02_EvtTme04" }
+        {"BI02-EvtTme05", "Input event time 5", "BI02_EvtTme05" }
+        {"BI02-EvtTme06", "Input event time 6", "BI02_EvtTme06" }
+        {"BI02-EvtTme07", "Input event time 7", "BI02_EvtTme07" }
+        {"BI02-EvtTme08", "Input event time 8", "BI02_EvtTme08" }
+        {"BI02-EvtTme09", "Input event time 9", "BI02_EvtTme09" }
+        {"BI02-EvtTme10", "Input event time 10", "BI02_EvtTme10" }
+        {"BI03-Stat-NoEvts", "Status__No of input events", "BI03_Stat_NoEvts" }
+        {"BI03-Stat-EvtsInBuff", "Status__Events in input buffer", "BI03_Stat_EvtsInBuff" }
+        {"BI03-Stat-OrdrFb", "Status__Input order feedback", "BI03_Stat_OrdrFb" }
+        {"BI03-EvtTme01", "Input event time 1", "BI03_EvtTme01" }
+        {"BI03-EvtTme02", "Input event time 2", "BI03_EvtTme02" }
+        {"BI03-EvtTme03", "Input event time 3", "BI03_EvtTme03" }
+        {"BI03-EvtTme04", "Input event time 4", "BI03_EvtTme04" }
+        {"BI03-EvtTme05", "Input event time 5", "BI03_EvtTme05" }
+        {"BI03-EvtTme06", "Input event time 6", "BI03_EvtTme06" }
+        {"BI03-EvtTme07", "Input event time 7", "BI03_EvtTme07" }
+        {"BI03-EvtTme08", "Input event time 8", "BI03_EvtTme08" }
+        {"BI03-EvtTme09", "Input event time 9", "BI03_EvtTme09" }
+        {"BI03-EvtTme10", "Input event time 10", "BI03_EvtTme10" }
+        {"BI04-Stat-NoEvts", "Status__No of input events", "BI04_Stat_NoEvts" }
+        {"BI04-Stat-EvtsInBuff", "Status__Events in input buffer", "BI04_Stat_EvtsInBuff" }
+        {"BI04-Stat-OrdrFb", "Status__Input order feedback", "BI04_Stat_OrdrFb" }
+        {"BI04-EvtTme01", "Input event time 1", "BI04_EvtTme01" }
+        {"BI04-EvtTme02", "Input event time 2", "BI04_EvtTme02" }
+        {"BI04-EvtTme03", "Input event time 3", "BI04_EvtTme03" }
+        {"BI04-EvtTme04", "Input event time 4", "BI04_EvtTme04" }
+        {"BI04-EvtTme05", "Input event time 5", "BI04_EvtTme05" }
+        {"BI04-EvtTme06", "Input event time 6", "BI04_EvtTme06" }
+        {"BI04-EvtTme07", "Input event time 7", "BI04_EvtTme07" }
+        {"BI04-EvtTme08", "Input event time 8", "BI04_EvtTme08" }
+        {"BI04-EvtTme09", "Input event time 9", "BI04_EvtTme09" }
+        {"BI04-EvtTme10", "Input event time 10", "BI04_EvtTme10" }
+        {"BI05-Stat-NoEvts", "Status__No of input events", "BI05_Stat_NoEvts" }
+        {"BI05-Stat-EvtsInBuff", "Status__Events in input buffer", "BI05_Stat_EvtsInBuff" }
+        {"BI05-Stat-OrdrFb", "Status__Input order feedback", "BI05_Stat_OrdrFb" }
+        {"BI05-EvtTme01", "Input event time 1", "BI05_EvtTme01" }
+        {"BI05-EvtTme02", "Input event time 2", "BI05_EvtTme02" }
+        {"BI05-EvtTme03", "Input event time 3", "BI05_EvtTme03" }
+        {"BI05-EvtTme04", "Input event time 4", "BI05_EvtTme04" }
+        {"BI05-EvtTme05", "Input event time 5", "BI05_EvtTme05" }
+        {"BI05-EvtTme06", "Input event time 6", "BI05_EvtTme06" }
+        {"BI05-EvtTme07", "Input event time 7", "BI05_EvtTme07" }
+        {"BI05-EvtTme08", "Input event time 8", "BI05_EvtTme08" }
+        {"BI05-EvtTme09", "Input event time 9", "BI05_EvtTme09" }
+        {"BI05-EvtTme10", "Input event time 10", "BI05_EvtTme10" }
+        {"BI06-Stat-NoEvts", "Status__No of input events", "BI06_Stat_NoEvts" }
+        {"BI06-Stat-EvtsInBuff", "Status__Events in input buffer", "BI06_Stat_EvtsInBuff" }
+        {"BI06-Stat-OrdrFb", "Status__Input order feedback", "BI06_Stat_OrdrFb" }
+        {"BI06-EvtTme01", "Input event time 1", "BI06_EvtTme01" }
+        {"BI06-EvtTme02", "Input event time 2", "BI06_EvtTme02" }
+        {"BI06-EvtTme03", "Input event time 3", "BI06_EvtTme03" }
+        {"BI06-EvtTme04", "Input event time 4", "BI06_EvtTme04" }
+        {"BI06-EvtTme05", "Input event time 5", "BI06_EvtTme05" }
+        {"BI06-EvtTme06", "Input event time 6", "BI06_EvtTme06" }
+        {"BI06-EvtTme07", "Input event time 7", "BI06_EvtTme07" }
+        {"BI06-EvtTme08", "Input event time 8", "BI06_EvtTme08" }
+        {"BI06-EvtTme09", "Input event time 9", "BI06_EvtTme09" }
+        {"BI06-EvtTme10", "Input event time 10", "BI06_EvtTme10" }
+        {"BI07-Stat-NoEvts", "Status__No of input events", "BI07_Stat_NoEvts" }
+        {"BI07-Stat-EvtsInBuff", "Status__Events in input buffer", "BI07_Stat_EvtsInBuff" }
+        {"BI07-Stat-OrdrFb", "Status__Input order feedback", "BI07_Stat_OrdrFb" }
+        {"BI07-EvtTme01", "Input event time 1", "BI07_EvtTme01" }
+        {"BI07-EvtTme02", "Input event time 2", "BI07_EvtTme02" }
+        {"BI07-EvtTme03", "Input event time 3", "BI07_EvtTme03" }
+        {"BI07-EvtTme04", "Input event time 4", "BI07_EvtTme04" }
+        {"BI07-EvtTme05", "Input event time 5", "BI07_EvtTme05" }
+        {"BI07-EvtTme06", "Input event time 6", "BI07_EvtTme06" }
+        {"BI07-EvtTme07", "Input event time 7", "BI07_EvtTme07" }
+        {"BI07-EvtTme08", "Input event time 8", "BI07_EvtTme08" }
+        {"BI07-EvtTme09", "Input event time 9", "BI07_EvtTme09" }
+        {"BI07-EvtTme10", "Input event time 10", "BI07_EvtTme10" }
+        {"BI08-Stat-NoEvts", "Status__No of input events", "BI08_Stat_NoEvts" }
+        {"BI08-Stat-EvtsInBuff", "Status__Events in input buffer", "BI08_Stat_EvtsInBuff" }
+        {"BI08-Stat-OrdrFb", "Status__Input order feedback", "BI08_Stat_OrdrFb" }
+        {"BI08-EvtTme01", "Input event time 1", "BI08_EvtTme01" }
+        {"BI08-EvtTme02", "Input event time 2", "BI08_EvtTme02" }
+        {"BI08-EvtTme03", "Input event time 3", "BI08_EvtTme03" }
+        {"BI08-EvtTme04", "Input event time 4", "BI08_EvtTme04" }
+        {"BI08-EvtTme05", "Input event time 5", "BI08_EvtTme05" }
+        {"BI08-EvtTme06", "Input event time 6", "BI08_EvtTme06" }
+        {"BI08-EvtTme07", "Input event time 7", "BI08_EvtTme07" }
+        {"BI08-EvtTme08", "Input event time 8", "BI08_EvtTme08" }
+        {"BI08-EvtTme09", "Input event time 9", "BI08_EvtTme09" }
+        {"BI08-EvtTme10", "Input event time 10", "BI08_EvtTme10" }
 }
 
 file "ecmc_ESI_ao.template" {
-    pattern { REC_NAME, DESC }
-        {"BO01-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO01-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO01-OutpEvtTme01", "Output event time 1" }
-        {"BO01-OutpEvtTme02", "Output event time 2" }
-        {"BO01-OutpEvtTme03", "Output event time 3" }
-        {"BO01-OutpEvtTme04", "Output event time 4" }
-        {"BO01-OutpEvtTme05", "Output event time 5" }
-        {"BO01-OutpEvtTme06", "Output event time 6" }
-        {"BO01-OutpEvtTme07", "Output event time 7" }
-        {"BO01-OutpEvtTme08", "Output event time 8" }
-        {"BO01-OutpEvtTme09", "Output event time 9" }
-        {"BO01-OutpEvtTme10", "Output event time 10" }
-        {"BO02-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO02-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO02-OutpEvtTme01", "Output event time 1" }
-        {"BO02-OutpEvtTme02", "Output event time 2" }
-        {"BO02-OutpEvtTme03", "Output event time 3" }
-        {"BO02-OutpEvtTme04", "Output event time 4" }
-        {"BO02-OutpEvtTme05", "Output event time 5" }
-        {"BO02-OutpEvtTme06", "Output event time 6" }
-        {"BO02-OutpEvtTme07", "Output event time 7" }
-        {"BO02-OutpEvtTme08", "Output event time 8" }
-        {"BO02-OutpEvtTme09", "Output event time 9" }
-        {"BO02-OutpEvtTme10", "Output event time 10" }
-        {"BO03-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO03-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO03-OutpEvtTme01", "Output event time 1" }
-        {"BO03-OutpEvtTme02", "Output event time 2" }
-        {"BO03-OutpEvtTme03", "Output event time 3" }
-        {"BO03-OutpEvtTme04", "Output event time 4" }
-        {"BO03-OutpEvtTme05", "Output event time 5" }
-        {"BO03-OutpEvtTme06", "Output event time 6" }
-        {"BO03-OutpEvtTme07", "Output event time 7" }
-        {"BO03-OutpEvtTme08", "Output event time 8" }
-        {"BO03-OutpEvtTme09", "Output event time 9" }
-        {"BO03-OutpEvtTme10", "Output event time 10" }
-        {"BO04-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO04-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO04-OutpEvtTme01", "Output event time 1" }
-        {"BO04-OutpEvtTme02", "Output event time 2" }
-        {"BO04-OutpEvtTme03", "Output event time 3" }
-        {"BO04-OutpEvtTme04", "Output event time 4" }
-        {"BO04-OutpEvtTme05", "Output event time 5" }
-        {"BO04-OutpEvtTme06", "Output event time 6" }
-        {"BO04-OutpEvtTme07", "Output event time 7" }
-        {"BO04-OutpEvtTme08", "Output event time 8" }
-        {"BO04-OutpEvtTme09", "Output event time 9" }
-        {"BO04-OutpEvtTme10", "Output event time 10" }
-        {"BO05-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO05-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO05-OutpEvtTme01", "Output event time 1" }
-        {"BO05-OutpEvtTme02", "Output event time 2" }
-        {"BO05-OutpEvtTme03", "Output event time 3" }
-        {"BO05-OutpEvtTme04", "Output event time 4" }
-        {"BO05-OutpEvtTme05", "Output event time 5" }
-        {"BO05-OutpEvtTme06", "Output event time 6" }
-        {"BO05-OutpEvtTme07", "Output event time 7" }
-        {"BO05-OutpEvtTme08", "Output event time 8" }
-        {"BO05-OutpEvtTme09", "Output event time 9" }
-        {"BO05-OutpEvtTme10", "Output event time 10" }
-        {"BO06-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO06-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO06-OutpEvtTme01", "Output event time 1" }
-        {"BO06-OutpEvtTme02", "Output event time 2" }
-        {"BO06-OutpEvtTme03", "Output event time 3" }
-        {"BO06-OutpEvtTme04", "Output event time 4" }
-        {"BO06-OutpEvtTme05", "Output event time 5" }
-        {"BO06-OutpEvtTme06", "Output event time 6" }
-        {"BO06-OutpEvtTme07", "Output event time 7" }
-        {"BO06-OutpEvtTme08", "Output event time 8" }
-        {"BO06-OutpEvtTme09", "Output event time 9" }
-        {"BO06-OutpEvtTme10", "Output event time 10" }
-        {"BO07-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO07-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO07-OutpEvtTme01", "Output event time 1" }
-        {"BO07-OutpEvtTme02", "Output event time 2" }
-        {"BO07-OutpEvtTme03", "Output event time 3" }
-        {"BO07-OutpEvtTme04", "Output event time 4" }
-        {"BO07-OutpEvtTme05", "Output event time 5" }
-        {"BO07-OutpEvtTme06", "Output event time 6" }
-        {"BO07-OutpEvtTme07", "Output event time 7" }
-        {"BO07-OutpEvtTme08", "Output event time 8" }
-        {"BO07-OutpEvtTme09", "Output event time 9" }
-        {"BO07-OutpEvtTme10", "Output event time 10" }
-        {"BO08-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter" }
-        {"BO08-Ctrl-NoOutpEvts", "Ctrl__No of output events" }
-        {"BO08-OutpEvtTme01", "Output event time 1" }
-        {"BO08-OutpEvtTme02", "Output event time 2" }
-        {"BO08-OutpEvtTme03", "Output event time 3" }
-        {"BO08-OutpEvtTme04", "Output event time 4" }
-        {"BO08-OutpEvtTme05", "Output event time 5" }
-        {"BO08-OutpEvtTme06", "Output event time 6" }
-        {"BO08-OutpEvtTme07", "Output event time 7" }
-        {"BO08-OutpEvtTme08", "Output event time 8" }
-        {"BO08-OutpEvtTme09", "Output event time 9" }
-        {"BO08-OutpEvtTme10", "Output event time 10" }
-        {"BI01-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI02-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI03-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI04-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI05-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI06-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI07-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
-        {"BI08-Ctrl-OrdrCntr", "Ctrl__Input order counter" }
+    pattern { REC_NAME, DESC , SRC_NAME}
+        {"BO01-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO01_Ctrl_OutpOrdrCntr" }
+        {"BO01-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO01_Ctrl_NoOutpEvts" }
+        {"BO01-OutpEvtTme01", "Output event time 1", "BO01_OutpEvtTme01" }
+        {"BO01-OutpEvtTme02", "Output event time 2", "BO01_OutpEvtTme02" }
+        {"BO01-OutpEvtTme03", "Output event time 3", "BO01_OutpEvtTme03" }
+        {"BO01-OutpEvtTme04", "Output event time 4", "BO01_OutpEvtTme04" }
+        {"BO01-OutpEvtTme05", "Output event time 5", "BO01_OutpEvtTme05" }
+        {"BO01-OutpEvtTme06", "Output event time 6", "BO01_OutpEvtTme06" }
+        {"BO01-OutpEvtTme07", "Output event time 7", "BO01_OutpEvtTme07" }
+        {"BO01-OutpEvtTme08", "Output event time 8", "BO01_OutpEvtTme08" }
+        {"BO01-OutpEvtTme09", "Output event time 9", "BO01_OutpEvtTme09" }
+        {"BO01-OutpEvtTme10", "Output event time 10", "BO01_OutpEvtTme10" }
+        {"BO02-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO02_Ctrl_OutpOrdrCntr" }
+        {"BO02-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO02_Ctrl_NoOutpEvts" }
+        {"BO02-OutpEvtTme01", "Output event time 1", "BO02_OutpEvtTme01" }
+        {"BO02-OutpEvtTme02", "Output event time 2", "BO02_OutpEvtTme02" }
+        {"BO02-OutpEvtTme03", "Output event time 3", "BO02_OutpEvtTme03" }
+        {"BO02-OutpEvtTme04", "Output event time 4", "BO02_OutpEvtTme04" }
+        {"BO02-OutpEvtTme05", "Output event time 5", "BO02_OutpEvtTme05" }
+        {"BO02-OutpEvtTme06", "Output event time 6", "BO02_OutpEvtTme06" }
+        {"BO02-OutpEvtTme07", "Output event time 7", "BO02_OutpEvtTme07" }
+        {"BO02-OutpEvtTme08", "Output event time 8", "BO02_OutpEvtTme08" }
+        {"BO02-OutpEvtTme09", "Output event time 9", "BO02_OutpEvtTme09" }
+        {"BO02-OutpEvtTme10", "Output event time 10", "BO02_OutpEvtTme10" }
+        {"BO03-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO03_Ctrl_OutpOrdrCntr" }
+        {"BO03-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO03_Ctrl_NoOutpEvts" }
+        {"BO03-OutpEvtTme01", "Output event time 1", "BO03_OutpEvtTme01" }
+        {"BO03-OutpEvtTme02", "Output event time 2", "BO03_OutpEvtTme02" }
+        {"BO03-OutpEvtTme03", "Output event time 3", "BO03_OutpEvtTme03" }
+        {"BO03-OutpEvtTme04", "Output event time 4", "BO03_OutpEvtTme04" }
+        {"BO03-OutpEvtTme05", "Output event time 5", "BO03_OutpEvtTme05" }
+        {"BO03-OutpEvtTme06", "Output event time 6", "BO03_OutpEvtTme06" }
+        {"BO03-OutpEvtTme07", "Output event time 7", "BO03_OutpEvtTme07" }
+        {"BO03-OutpEvtTme08", "Output event time 8", "BO03_OutpEvtTme08" }
+        {"BO03-OutpEvtTme09", "Output event time 9", "BO03_OutpEvtTme09" }
+        {"BO03-OutpEvtTme10", "Output event time 10", "BO03_OutpEvtTme10" }
+        {"BO04-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO04_Ctrl_OutpOrdrCntr" }
+        {"BO04-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO04_Ctrl_NoOutpEvts" }
+        {"BO04-OutpEvtTme01", "Output event time 1", "BO04_OutpEvtTme01" }
+        {"BO04-OutpEvtTme02", "Output event time 2", "BO04_OutpEvtTme02" }
+        {"BO04-OutpEvtTme03", "Output event time 3", "BO04_OutpEvtTme03" }
+        {"BO04-OutpEvtTme04", "Output event time 4", "BO04_OutpEvtTme04" }
+        {"BO04-OutpEvtTme05", "Output event time 5", "BO04_OutpEvtTme05" }
+        {"BO04-OutpEvtTme06", "Output event time 6", "BO04_OutpEvtTme06" }
+        {"BO04-OutpEvtTme07", "Output event time 7", "BO04_OutpEvtTme07" }
+        {"BO04-OutpEvtTme08", "Output event time 8", "BO04_OutpEvtTme08" }
+        {"BO04-OutpEvtTme09", "Output event time 9", "BO04_OutpEvtTme09" }
+        {"BO04-OutpEvtTme10", "Output event time 10", "BO04_OutpEvtTme10" }
+        {"BO05-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO05_Ctrl_OutpOrdrCntr" }
+        {"BO05-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO05_Ctrl_NoOutpEvts" }
+        {"BO05-OutpEvtTme01", "Output event time 1", "BO05_OutpEvtTme01" }
+        {"BO05-OutpEvtTme02", "Output event time 2", "BO05_OutpEvtTme02" }
+        {"BO05-OutpEvtTme03", "Output event time 3", "BO05_OutpEvtTme03" }
+        {"BO05-OutpEvtTme04", "Output event time 4", "BO05_OutpEvtTme04" }
+        {"BO05-OutpEvtTme05", "Output event time 5", "BO05_OutpEvtTme05" }
+        {"BO05-OutpEvtTme06", "Output event time 6", "BO05_OutpEvtTme06" }
+        {"BO05-OutpEvtTme07", "Output event time 7", "BO05_OutpEvtTme07" }
+        {"BO05-OutpEvtTme08", "Output event time 8", "BO05_OutpEvtTme08" }
+        {"BO05-OutpEvtTme09", "Output event time 9", "BO05_OutpEvtTme09" }
+        {"BO05-OutpEvtTme10", "Output event time 10", "BO05_OutpEvtTme10" }
+        {"BO06-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO06_Ctrl_OutpOrdrCntr" }
+        {"BO06-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO06_Ctrl_NoOutpEvts" }
+        {"BO06-OutpEvtTme01", "Output event time 1", "BO06_OutpEvtTme01" }
+        {"BO06-OutpEvtTme02", "Output event time 2", "BO06_OutpEvtTme02" }
+        {"BO06-OutpEvtTme03", "Output event time 3", "BO06_OutpEvtTme03" }
+        {"BO06-OutpEvtTme04", "Output event time 4", "BO06_OutpEvtTme04" }
+        {"BO06-OutpEvtTme05", "Output event time 5", "BO06_OutpEvtTme05" }
+        {"BO06-OutpEvtTme06", "Output event time 6", "BO06_OutpEvtTme06" }
+        {"BO06-OutpEvtTme07", "Output event time 7", "BO06_OutpEvtTme07" }
+        {"BO06-OutpEvtTme08", "Output event time 8", "BO06_OutpEvtTme08" }
+        {"BO06-OutpEvtTme09", "Output event time 9", "BO06_OutpEvtTme09" }
+        {"BO06-OutpEvtTme10", "Output event time 10", "BO06_OutpEvtTme10" }
+        {"BO07-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO07_Ctrl_OutpOrdrCntr" }
+        {"BO07-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO07_Ctrl_NoOutpEvts" }
+        {"BO07-OutpEvtTme01", "Output event time 1", "BO07_OutpEvtTme01" }
+        {"BO07-OutpEvtTme02", "Output event time 2", "BO07_OutpEvtTme02" }
+        {"BO07-OutpEvtTme03", "Output event time 3", "BO07_OutpEvtTme03" }
+        {"BO07-OutpEvtTme04", "Output event time 4", "BO07_OutpEvtTme04" }
+        {"BO07-OutpEvtTme05", "Output event time 5", "BO07_OutpEvtTme05" }
+        {"BO07-OutpEvtTme06", "Output event time 6", "BO07_OutpEvtTme06" }
+        {"BO07-OutpEvtTme07", "Output event time 7", "BO07_OutpEvtTme07" }
+        {"BO07-OutpEvtTme08", "Output event time 8", "BO07_OutpEvtTme08" }
+        {"BO07-OutpEvtTme09", "Output event time 9", "BO07_OutpEvtTme09" }
+        {"BO07-OutpEvtTme10", "Output event time 10", "BO07_OutpEvtTme10" }
+        {"BO08-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO08_Ctrl_OutpOrdrCntr" }
+        {"BO08-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO08_Ctrl_NoOutpEvts" }
+        {"BO08-OutpEvtTme01", "Output event time 1", "BO08_OutpEvtTme01" }
+        {"BO08-OutpEvtTme02", "Output event time 2", "BO08_OutpEvtTme02" }
+        {"BO08-OutpEvtTme03", "Output event time 3", "BO08_OutpEvtTme03" }
+        {"BO08-OutpEvtTme04", "Output event time 4", "BO08_OutpEvtTme04" }
+        {"BO08-OutpEvtTme05", "Output event time 5", "BO08_OutpEvtTme05" }
+        {"BO08-OutpEvtTme06", "Output event time 6", "BO08_OutpEvtTme06" }
+        {"BO08-OutpEvtTme07", "Output event time 7", "BO08_OutpEvtTme07" }
+        {"BO08-OutpEvtTme08", "Output event time 8", "BO08_OutpEvtTme08" }
+        {"BO08-OutpEvtTme09", "Output event time 9", "BO08_OutpEvtTme09" }
+        {"BO08-OutpEvtTme10", "Output event time 10", "BO08_OutpEvtTme10" }
+        {"BI01-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI01_Ctrl_OrdrCntr" }
+        {"BI02-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI02_Ctrl_OrdrCntr" }
+        {"BI03-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI03_Ctrl_OrdrCntr" }
+        {"BI04-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI04_Ctrl_OrdrCntr" }
+        {"BI05-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI05_Ctrl_OrdrCntr" }
+        {"BI06-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI06_Ctrl_OrdrCntr" }
+        {"BI07-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI07_Ctrl_OrdrCntr" }
+        {"BI08-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI08_Ctrl_OrdrCntr" }
 }
 

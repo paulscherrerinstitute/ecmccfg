@@ -4,7 +4,7 @@ import argparse
 import fnmatch  # Ensure fnmatch is imported
 
 # Example:
-# python3 new_esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
+# python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
 
 entryDict={
   "Status"          : "Stat",
@@ -55,6 +55,7 @@ entryDict={
   "Reset"           : "Rst",
   "Position"        : "Pos",
   "Setpoint"        : "Set",
+  "Actual Value"       : "Act",
   "Actual"          : "Act",
   "Valid"           : "Vld",
   "Inp"             : "BI",
@@ -65,6 +66,15 @@ entryDict={
   "Open"            : "Opn",
   "Load"            : "Ld",
   "Force"           : "Frce",
+  "Operation"       : "Op",
+  "Statword"        : "Stat",
+  "Ctrlword"        : "Ctrl",
+  "Target"          : "Trg",
+  "Following"       : "Fllw",
+  "Velocity"        : "Vel",
+  "Velocity"        : "Vel",
+  "Commutation"     : "Com",
+  "Angle"           : "Angl",
 }
 
 pdoOutDict={
@@ -95,6 +105,7 @@ devsNeedIndex={
   "MTO"             : "BO",
   "POS"             : "Pos",
   "STM"             : "Drv",
+  "DRV"             : "Drv",
 }
 
 removeDictLast={
@@ -134,7 +145,7 @@ def checkPDODeviceAndChannel(name,input):
 
     if channelNumber>=0:
         devStr = devStr + str(channelNumber).zfill(2)
-    print ("Dev: " + devStr)
+    #print ("Dev: " + devStr)
     return devType, devStr
 
 def ifDigitLastMakeIt2Wide(s):
@@ -236,11 +247,11 @@ def parse_esi(esi_file, name_wildcard, rev_wildcard):
         product_code = device.xpath("Type/@ProductCode")[0] if device.xpath("Type/@ProductCode") else None
         revision_raw = device.xpath("Type/@RevisionNo")[0] if device.xpath("Type/@RevisionNo") else None
         
-        print(f"Checking device: {device_name}, raw revision: {revision_raw}")  # Debugging print
+        #print(f"Checking device: {device_name}, raw revision: {revision_raw}")  # Debugging print
 
         revision = parse_revision_number(revision_raw)
         revision_hex = to_hex(revision) if revision is not None else 'None'
-        print(f"Parsed revision for device {device_name}: {revision_hex}")  # Debugging parsed revision
+        #print(f"Parsed revision for device {device_name}: {revision_hex}")  # Debugging parsed revision
 
         # If the device matches the wildcard patterns
         if fnmatch.fnmatch(device_name, name_wildcard) and (rev_wildcard == "*" or fnmatch.fnmatch(str(revision_hex), rev_wildcard)):
@@ -597,27 +608,27 @@ def pdosToEcSubst(slaves, pdoMap):
                     for sub_entry in entry['sub_entries']:
                         if len(sub_entry['name']) == 0 or int(sub_entry['bitlen']) > 1: # dummy entry or not a binary
                             sub_entry_bit_index += int(sub_entry['bitlen'])
-                            print ('WARNING: Skipping entry' + sub_entry['desc'])
+                            print ('WARNING: Skipping entry \"' + sub_entry['desc'] + '\"')
                             continue
                         
                         if sm_index=='0' or sm_index=='2': # Output
-                            #  pattern {   REC_NAME,                DESC,                         LNK_NAME,                                       FLNK                          }'
-                            macros = F"{{\"{ sub_entry['name'] }\", \"{ sub_entry['desc'][:40] }\" , \"{ mbbxName }.B{ hex(sub_entry_bit_index)[2:] }\", \"${{ECMC_P}}{ mbbxName }.PROC\"}}"
+                            #  pattern {   REC_NAME,                DESC,                         LNK_NAME,                                       FLNK                          , SRC_NAME}'
+                            macros = F"{{\"{ sub_entry['name'] }\", \"{ sub_entry['desc'][:40] }\" , \"{ mbbxName }.B{ hex(sub_entry_bit_index)[2:] }\", \"${{ECMC_P}}{ mbbxName }.PROC\",\"{ sub_entry['name'].replace('-','_') }\"}}"
                             mbboDirect_bo_rows.append(macros)
                         else: # Input                                                        
-                            #  pattern {   REC_NAME,                DESC  ,                       LNK_NAME,                                       FLNK                          }'                            
-                            macros = F"{{\"{ sub_entry['name'] }\", \"{ sub_entry['desc'][:40] }\", \"{ mbbxName }.B{ hex(sub_entry_bit_index)[2:] }\", \"${{ECMC_P}}{ prev_bi_name }.PROC\"}}"
+                            #  pattern {   REC_NAME,                DESC  ,                       LNK_NAME,                                       FLNK                          , SRC_NAME}'                            
+                            macros = F"{{\"{ sub_entry['name'] }\", \"{ sub_entry['desc'][:40] }\", \"{ mbbxName }.B{ hex(sub_entry_bit_index)[2:] }\", \"${{ECMC_P}}{ prev_bi_name }.PROC\" \"{ sub_entry['name'].replace('-','_') }\"}}"
                             mbbiDirect_bi_rows.append(macros)
                             prev_bi_name = sub_entry['name']
                         sub_entry_bit_index += int(sub_entry['bitlen'])
 
                     if sm_index=='0' or sm_index=='2': # Output
-                        #  pattern {    REC_NAME,       DESC,         }'                        
-                        macros = F"{{\"{ mbbxName }\", \"{ entry['desc'][:40] }\"}}"
+                        #  pattern {    REC_NAME,       DESC,        , SRC_NAME }'                        
+                        macros = F"{{\"{ mbbxName }\", \"{ entry['desc'][:40] }\", \"{ mbbxName.replace('-','_') }\"}}"
                         mbboDirect_rows.append(macros)
                     else: # Input
-                        #  pattern {    REC_NAME,       DESC,                   FLNK                 }'
-                        macros = F"{{\"{ mbbxName }\", \"{ entry['desc'][:40] }\", \"{ prev_bi_name }.PROC\"}}"
+                        #  pattern {    REC_NAME,       DESC,                   FLNK                 , SRC_NAME}'
+                        macros = F"{{\"{ mbbxName }\", \"{ entry['desc'][:40] }\", \"{ prev_bi_name }.PROC\", \"{ mbbxName.replace('-','_') }\"}}"
                         mbbiDirect_rows.append(macros)
                     continue
 
@@ -626,8 +637,8 @@ def pdosToEcSubst(slaves, pdoMap):
                     continue
 
                 # normal data type
-                #  pattern {    REC_NAME,             DESC }
-                macros = F"{{\"{ entry['name'] }\", \"{ entry['desc'][:40] }\" }}"
+                #  pattern {    REC_NAME,             DESC,               SRC_NAME }
+                macros = F"{{\"{ entry['name'] }\", \"{ entry['desc'][:40] }\", \"{ entry['name'].replace('-','_') }\" }}"
                 if int(entry['bitlen']) > 1:
                     if sm_index=='0' or sm_index=='2':
                         # Output                        
@@ -650,7 +661,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #ecmc_ESI_mbboDirect_bo
     if len(mbboDirect_bo_rows) > 0:
         output_rows.append('file "ecmc_ESI_mbboDirect_bo.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
+        output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK, SRC_NAME }')
         for item in mbboDirect_bo_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -658,7 +669,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #ecmc_ESI_mbboDirect
     if len(mbboDirect_rows) > 0:
         output_rows.append('file "ecmc_ESI_mbboDirect.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC}')
+        output_rows.append('    pattern { REC_NAME, DESC , SRC_NAME}')
         for item in mbboDirect_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' + '\n')
@@ -666,7 +677,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #ecmc_ESI_mbbiDirect_bi
     if len(mbbiDirect_bi_rows) > 0:
         output_rows.append('file "ecmc_ESI_mbbiDirect_bi.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK }')
+        output_rows.append('    pattern { REC_NAME, DESC, LNK_NAME, FLNK , SRC_NAME}')
         for item in mbbiDirect_bi_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -674,7 +685,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #ecmc_ESI_mbbiDirect
     if len(mbbiDirect_rows) > 0:
         output_rows.append('file "ecmc_ESI_mbbiDirect.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC, FLNK }')
+        output_rows.append('    pattern { REC_NAME, DESC, FLNK , SRC_NAME}')
         for item in mbbiDirect_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -682,7 +693,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #ecmc_ESI_ai
     if len(ai_rows) > 0:
         output_rows.append('file "ecmc_ESI_ai.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC }')
+        output_rows.append('    pattern { REC_NAME, DESC , SRC_NAME}')
         for item in ai_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -690,7 +701,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #ecmc_ESI_ao
     if len(ao_rows) > 0:
         output_rows.append('file "ecmc_ESI_ao.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC }')
+        output_rows.append('    pattern { REC_NAME, DESC , SRC_NAME}')
         for item in ao_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -698,7 +709,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #bi_rows
     if len(bi_rows) > 0:
         output_rows.append('file "ecmc_ESI_bi.template" {' )
-        output_rows.append('    pattern { REC_NAME, DESC }')
+        output_rows.append('    pattern { REC_NAME, DESC , SRC_NAME}')
         for item in bi_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -706,7 +717,7 @@ def pdosToEcSubst(slaves, pdoMap):
     #bo_rows
     if len(bo_rows) > 0:
         output_rows.append('file "ecmc_ESI_bo.template" {')
-        output_rows.append('    pattern { REC_NAME, DESC }')
+        output_rows.append('    pattern { REC_NAME, DESC , SRC_NAME}')
         for item in bo_rows:
             output_rows.append('        ' + item)
         output_rows.append('}' +  '\n')
@@ -749,7 +760,7 @@ def pdoEntryToEcmcConfigOrDieStr(sm_index,pdo_index,entry):
     if len(name) == 0:
         name = 'dummy_' + str(dummyEntryIndex)
         dummyEntryIndex += 1
-
+    name = name.replace('-','_')
     # If dummy entry then use last entry index and increase subindex by 1
     entry_index = entry['index']
     entry_sub_index = entry['subindex']

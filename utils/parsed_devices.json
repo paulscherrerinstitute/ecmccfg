@@ -6827,7 +6827,7 @@
                                 "index": "0x7001",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO01-Ctrl-EnaManOperation",
+                                "name": "BO01-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -7108,7 +7108,7 @@
                         "index": "0x7001",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO01-Ctrl-EnaManOperation",
+                        "name": "BO01-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -7287,7 +7287,7 @@
                         "index": "0x7001",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO01-Ctrl-EnaManOperation",
+                        "name": "BO01-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -7412,7 +7412,7 @@
                         "index": "0x7001",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO01-Ctrl-EnaManOperation",
+                        "name": "BO01-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -7527,7 +7527,7 @@
                                 "index": "0x7011",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO02-Ctrl-EnaManOperation",
+                                "name": "BO02-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -7808,7 +7808,7 @@
                         "index": "0x7011",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO02-Ctrl-EnaManOperation",
+                        "name": "BO02-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -7987,7 +7987,7 @@
                         "index": "0x7011",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO02-Ctrl-EnaManOperation",
+                        "name": "BO02-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -8112,7 +8112,7 @@
                         "index": "0x7011",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO02-Ctrl-EnaManOperation",
+                        "name": "BO02-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -8227,7 +8227,7 @@
                                 "index": "0x7021",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO03-Ctrl-EnaManOperation",
+                                "name": "BO03-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -8508,7 +8508,7 @@
                         "index": "0x7021",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO03-Ctrl-EnaManOperation",
+                        "name": "BO03-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -8687,7 +8687,7 @@
                         "index": "0x7021",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO03-Ctrl-EnaManOperation",
+                        "name": "BO03-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -8812,7 +8812,7 @@
                         "index": "0x7021",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO03-Ctrl-EnaManOperation",
+                        "name": "BO03-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -8927,7 +8927,7 @@
                                 "index": "0x7031",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO04-Ctrl-EnaManOperation",
+                                "name": "BO04-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -9208,7 +9208,7 @@
                         "index": "0x7031",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO04-Ctrl-EnaManOperation",
+                        "name": "BO04-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -9387,7 +9387,7 @@
                         "index": "0x7031",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO04-Ctrl-EnaManOperation",
+                        "name": "BO04-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -9512,7 +9512,7 @@
                         "index": "0x7031",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO04-Ctrl-EnaManOperation",
+                        "name": "BO04-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -9627,7 +9627,7 @@
                                 "index": "0x7041",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO05-Ctrl-EnaManOperation",
+                                "name": "BO05-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -9908,7 +9908,7 @@
                         "index": "0x7041",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO05-Ctrl-EnaManOperation",
+                        "name": "BO05-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -10087,7 +10087,7 @@
                         "index": "0x7041",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO05-Ctrl-EnaManOperation",
+                        "name": "BO05-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -10212,7 +10212,7 @@
                         "index": "0x7041",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO05-Ctrl-EnaManOperation",
+                        "name": "BO05-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -10327,7 +10327,7 @@
                                 "index": "0x7051",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO06-Ctrl-EnaManOperation",
+                                "name": "BO06-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -10608,7 +10608,7 @@
                         "index": "0x7051",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO06-Ctrl-EnaManOperation",
+                        "name": "BO06-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -10787,7 +10787,7 @@
                         "index": "0x7051",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO06-Ctrl-EnaManOperation",
+                        "name": "BO06-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -10912,7 +10912,7 @@
                         "index": "0x7051",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO06-Ctrl-EnaManOperation",
+                        "name": "BO06-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -11027,7 +11027,7 @@
                                 "index": "0x7061",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO07-Ctrl-EnaManOperation",
+                                "name": "BO07-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -11308,7 +11308,7 @@
                         "index": "0x7061",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO07-Ctrl-EnaManOperation",
+                        "name": "BO07-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -11487,7 +11487,7 @@
                         "index": "0x7061",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO07-Ctrl-EnaManOperation",
+                        "name": "BO07-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -11612,7 +11612,7 @@
                         "index": "0x7061",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO07-Ctrl-EnaManOperation",
+                        "name": "BO07-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -11727,7 +11727,7 @@
                                 "index": "0x7071",
                                 "subindex": "0x4",
                                 "bitlen": "1",
-                                "name": "BO08-Ctrl-EnaManOperation",
+                                "name": "BO08-Ctrl-EnaManOp",
                                 "desc": "Ctrl__Enable manual operation",
                                 "data_type": "BOOL",
                                 "sub_entries": []
@@ -12008,7 +12008,7 @@
                         "index": "0x7071",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO08-Ctrl-EnaManOperation",
+                        "name": "BO08-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -12187,7 +12187,7 @@
                         "index": "0x7071",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO08-Ctrl-EnaManOperation",
+                        "name": "BO08-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []
@@ -12312,7 +12312,7 @@
                         "index": "0x7071",
                         "subindex": "0x4",
                         "bitlen": "1",
-                        "name": "BO08-Ctrl-EnaManOperation",
+                        "name": "BO08-Ctrl-EnaManOp",
                         "desc": "Ctrl__Enable manual operation",
                         "data_type": "BOOL",
                         "sub_entries": []

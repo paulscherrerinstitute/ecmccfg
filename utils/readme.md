@@ -3,50 +3,18 @@
 
 Tool to read data from slaves (actually SDO data).
 
-## new esi parser
+## esi parser
+
+NOTE: Right now only supports slaves with several alternative PDO mappings..
 ```
-python new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML-4/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL73xx.xml --name "EL7342*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL73xx.xml --name "EL7342*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL7xxx.xml --name "EL7031*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL7xxx.xml --name "EL7031*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ ELxxx.xml --name "EL2819*" --rev "0x*" --output parsed_devices.json
-python3 new_esi_parser.py --file ../../beckhoff_xml/Beckhoff\ EL2xxx.xml --name "EL2819*" --rev "0x*" --output parsed_devices.json
-
-
-Latest:
 # python3.12 -m venv ~/myhome/python/esi_parser
 # source ~/myhome/python/esi_parser/bin/activate
 # pip3 install lxm
 source ~/myhome/python/esi_parser/bin/activate
-python3 new_esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtSlaves "1" --filtPdoMaps "1,2,3,5" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
-python3 new_esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
+python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1*" --filtSlaves "1" --filtPdoMaps "1,2,3,5" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
+python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL1xxx.xml --name "EL1259*" --rev "0x1000*" --filtSlaves "1" --filtPdoMaps "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
+python3 esi_parser.py --file ../../../beckhoff_xml/Beckhoff\ EL72xx.xml --name "EL7211*" --rev "*" --filtSlaves "1" --outputJSON parsed_devices.json --outputECMC "" --mergeEntries 1
 ```
-
-## EtherCAT slave description file parser (ESI/XML) WIP
-
-Call:
-```
-#- Generate hw snippet (WIP) PDOS in top and (commented) SDOs in bottom:
-python3 parse_ec_esi_xml.py -b ../../beckhoff_xml/ -d CMMT-ST-MP-S0 -r 0x00000021 -o test.txt | tee test.test 
-python3 parse_ec_esi_xml.py -b ../../beckhoff_xml/ -d el70xx-0052 -r 0x00100034 -o test.cmd
-#- List available devices and version in the xml lib
-python3 parse_ec_esi_xml.py -b ../../beckhoff_xml/ -l -o slask.txt
-```
-sys.path.append('/opt/homebrew/opt/libxml2/lib/python3.13/site-packages/')
-
-### Known issues
-* Outputfile seems not to be written. Pipe to file instead..
-* Outpuit need manual editing
-
-### New version.. WIP
-```
-python new_esi_parser.py --file ../../Beckhoff_EtherCAT_XML/Beckhoff\ EL7xxx.xml --name "EL7047*" --rev "0x1000*" --output parsed_devices.json
-```
-
 ## Read EL70xx diagnostic, read_el70xx_diag.sh
 
 A tool that reads error and warning state of a EL70xx stepper drive. The error and warning diagnostics are read from the 0xA010 register.
