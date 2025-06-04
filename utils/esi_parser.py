@@ -504,6 +504,7 @@ def saveEcmcCmdFiles(slaves, filename_suffix):
                 f.write(F"epicsEnvSet(\"ECMC_EC_VENDOR_ID\"          \"0x2\")\n")  # bad hardcoded..
                 f.write(F"epicsEnvSet(\"ECMC_EC_PRODUCT_ID\"         \"{ slave['product_id'] }\")\n")
                 f.write(F"epicsEnvSet(\"ECMC_EC_REVISION\"           \"{ slave['revision'] }\")\n")
+                f.write(F"epicsEnvSet(\"ECMC_HW_PANEL\"              \"$(ECMC_EC_HWTYPE)\")\n")
                 f.write('\n')
                 for row in cmd_rows:
                     f.write(row + '\n')
