@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>293</width>
+    <height>310</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>90</y>
+     <width>271</width>
+     <height>216</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=01;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=02;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=03;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=04;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=05;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=06;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=07;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=08</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcEL1259_EVX.ui</string>
+   </property>
+   <property name="stacking">
+    <enum>caInclude::Row</enum>
+   </property>
+   <property name="numberOfItems" stdset="0">
+    <number>8</number>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_21">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>5</y>
+     <width>236</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Events of channel $(CH_ID)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>65</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_5">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>45</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Input</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_6">
+   <property name="geometry">
+    <rect>
+     <x>55</x>
+     <y>65</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>State</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_7">
+   <property name="geometry">
+    <rect>
+     <x>105</x>
+     <y>65</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Time</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_8">
+   <property name="geometry">
+    <rect>
+     <x>205</x>
+     <y>65</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Time</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_9">
+   <property name="geometry">
+    <rect>
+     <x>165</x>
+     <y>45</y>
+     <width>56</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Output</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_10">
+   <property name="geometry">
+    <rect>
+     <x>145</x>
+     <y>65</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>State</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
