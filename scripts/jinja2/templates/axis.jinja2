@@ -61,3 +61,12 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
   ${IF_TRUE}ecmcExit : Error: Invalid axis group ID
   ecmcEndIf()
 {%- endif %}
+
+{%- if axis.autoEnable is defined %}
+    {%- if axis.autoEnable.enableTimeout is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisAutoEnableTimeout({{ axis.id }},{{ axis.autoEnable.enableTimeout }})"
+    {%- endif %}
+    {%- if axis.autoEnable.disableTime is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisAutoDisableAfterTime({{ axis.id }},{{ axis.autoEnable.disableTime }})"
+    {%- endif %}
+{%- endif %}

@@ -431,6 +431,9 @@ axis:
       homing: true                                    # Allow homing
       constantVelocity: true                          # Allow constant velocity
       positioning: true                               # Allow positioning
+  autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
+    enableTimeout:                                    # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
+    disableTime:                                      # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
 
 epics:
   name: M1                                            # Axis name
