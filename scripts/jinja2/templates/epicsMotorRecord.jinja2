@@ -1,6 +1,15 @@
 #- -----------------------------------------------------------------------------
 #- Motor record init
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, 6, "{{ axis.parameters|default('') }}")
+
+{%- set axisFlags = 6 %}
+{%- if axis.autoEnable is defined %}
+    {%- if axis.autoEnable.enableTimeout is defined or axis.autoEnable.disableTime is defined%}
+         #- turn of motor record auto enable (bit 1 = 0)
+         {%- set axisFlags = 4 %}
+    {%- endif %}
+{%- endif %}
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "{{ axis.parameters|default('') }}")
+epicsEnvUnset(ECMC_AXIS_FLAGS)
 
 {#- catch unconfigured jog velocity and acceleration #}
 {%- set jog = None if trajectory.jog is undefined else trajectory.jog %}
