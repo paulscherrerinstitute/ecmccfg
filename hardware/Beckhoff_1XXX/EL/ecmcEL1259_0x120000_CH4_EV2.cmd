@@ -5,6 +5,7 @@ epicsEnvSet("ECMC_EC_HWTYPE"             "EL1259_0x120000_CH4_EV2")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x4eb3052")
 epicsEnvSet("ECMC_EC_REVISION"           "0x120000")
+epicsEnvSet("ECMC_HW_PANEL"              "$(ECMC_EC_HWTYPE)")
 
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1602,0x7001,0x1,U8,BO01_Ctrl_)" # 5 merged entries:
 #- 1: ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1602,0x7001,0x1,B1,BO01_Ctrl_OutpBuffRst)" # merged

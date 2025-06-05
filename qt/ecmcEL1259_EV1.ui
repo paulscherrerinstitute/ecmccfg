@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>293</width>
-    <height>123</height>
+    <height>114</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="macro">
-    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=01;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=02;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=03;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=04;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=05;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=06;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=07;IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=08</string>
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),CH_ID=$(CH_ID),EV=$(EV),EV=$(EV),ID=01</string>
    </property>
    <property name="filename" stdset="0">
     <string notr="true">ecmcEL1259_EVX.ui</string>
