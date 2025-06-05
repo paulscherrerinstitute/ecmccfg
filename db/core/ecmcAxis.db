@@ -93,20 +93,11 @@ record(mbbiDirect,"${P}${AXIS_NAME}-Stat_"){
   field(DESC, "${AXIS_NAME}: Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "${P}${AXIS_NAME}-Stat.VAL")
-  field(FLNK, "${P}${AXIS_NAME}-EnaCmd-RB.PROC")
+  field(FLNK, "${P}${AXIS_NAME}-EnaAct.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 
-#  // bit 0 enable
-record(bi,"${P}${AXIS_NAME}-EnaCmd-RB"){
-  field(DESC, "${AXIS_NAME}: Enable")
-  field(INP,  "${P}${AXIS_NAME}-Stat_.B0")
-  field(ZNAM, "Disabled")
-  field(ONAM, "Enabled")
-  field(ZSV,  "NO_ALARM")
-  field(OSV,  "NO_ALARM")
-  field(FLNK, "${P}${AXIS_NAME}-EnaAct.PROC")
-}
+#  // bit 0: empty (enable moved to dedicated cmd)
 
 #  // bit 1 enabled
 record(bi,"${P}${AXIS_NAME}-EnaAct"){
@@ -407,6 +398,17 @@ record(bo,"${P}${AXIS_NAME}-EnaCmd"){
   field(ONAM, "Enable")
   field(SCAN, "Passive")
   field(TSE,  "0")
+}
+
+record(bi,"${P}${AXIS_NAME}-EnaCmd-RB"){
+  field(DESC, "${AXIS_NAME}: Enable RB")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enable?")  
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(SCAN, "I/O Intr")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
 }
 
 record(seq, "${P}${AXIS_NAME}-EnaCmd_") {

@@ -1816,13 +1816,16 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>35</y>
+      <y>55</y>
       <width>20</width>
-      <height>261</height>
+      <height>241</height>
      </rect>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-Cmd_</string>
+    </property>
+    <property name="startBit">
+     <number>1</number>
     </property>
     <property name="endBit">
      <number>12</number>
@@ -2165,7 +2168,7 @@
      <x>10</x>
      <y>315</y>
      <width>211</width>
-     <height>126</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="title">
