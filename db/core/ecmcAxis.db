@@ -399,12 +399,13 @@ record(mbboDirect,"${P}${AXIS_NAME}-Cmd_"){
 }
 
 record(bo,"${P}${AXIS_NAME}-EnaCmd"){
-  field(DESC, "${AXIS_NAME}: Enable cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B0")
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Enable cmd")  
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enable?")
   field(ZNAM, "Disable")
   field(ONAM, "Enable")
   field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-EnaCmd_.PROC")
   field(TSE,  "0")
 }
 
