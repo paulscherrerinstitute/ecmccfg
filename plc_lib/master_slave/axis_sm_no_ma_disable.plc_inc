@@ -141,7 +141,7 @@ else if(static.VMState == 1) {
 
   #- Set "atTarget/inCtrlDb" of slaved axes if all master axes are atTarget (to reduce trq on slaved axes)
   #- Only valid in external traj mode
-  mc_grp_set_ctrl_within_db(${GRP_ID_SA},mc_grp_get_attraget(${GRP_ID_MA}))
+  mc_grp_set_ctrl_within_db(${GRP_ID_SA},mc_grp_get_ctrl_within_db(${GRP_ID_MA}))
 
   #- Sync slaved axes enable with master axis enabled
   mc_grp_set_enable(${GRP_ID_SA},mc_grp_get_enable(${GRP_ID_MA}));
