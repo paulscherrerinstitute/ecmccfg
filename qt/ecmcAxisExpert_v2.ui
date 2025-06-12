@@ -1076,7 +1076,7 @@
      <string notr="true">1</string>
     </property>
     <property name="pressMessage">
-     <string notr="true">0</string>
+     <string notr="true"/>
     </property>
    </widget>
    <widget class="caMessageButton" name="camessagebutton_3">
@@ -1095,13 +1095,13 @@
      <string notr="true">$(SYS):$(Axis)-TwkFwdCmd</string>
     </property>
     <property name="label">
-     <string notr="true">&lt;&lt;</string>
+     <string notr="true">&gt;&gt;</string>
     </property>
     <property name="releaseMessage">
      <string notr="true">1</string>
     </property>
     <property name="pressMessage">
-     <string notr="true">0</string>
+     <string notr="true"/>
     </property>
    </widget>
   </widget>

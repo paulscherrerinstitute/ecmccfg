@@ -22,6 +22,8 @@ record(mbbo,"${P}MstSlvSM${ID_2CH}-StateCmd"){
   field(ONST, "SLAVE")
   field(TWVL, "2")
   field(TWST, "MASTER")
+  field(THVL, "3")
+  field(THST, "RESET")
   field(SCAN, "Passive")
   field(TSE,  "$(TSE=-2)")
 }

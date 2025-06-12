@@ -419,130 +419,6 @@ record(seq, "${P}${AXIS_NAME}-EnaCmd_") {
   field(LNK2, "${P}${AXIS_NAME}.CNEN PP")
 }
 
-record(bo,"${P}${AXIS_NAME}-ExeCmd"){
-  field(DESC, "${AXIS_NAME}: Execute cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B1")
-  field(ZNAM, "Not Execute")
-  field(ONAM, "Execute")
-  field(HIGH, 0.001)
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-StpCmd"){
-  field(DESC, "${AXIS_NAME}: Stop cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B2")
-  field(ZNAM, "Not stop")
-  field(ONAM, "Stop")
-  field(HIGH, 0.001)
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-RstCmd"){
-  field(DESC, "${AXIS_NAME}: Reset cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B3")
-  field(ZNAM, "Not Reset")
-  field(ONAM, "Reset")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
-  field(DESC, "${AXIS_NAME}: Encoder source cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B4")
-  field(ZNAM, "Internal")
-  field(ONAM, "PLC")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
-  field(DESC, "${AXIS_NAME}: Traj source cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B5")
-  field(ZNAM, "Internal")
-  field(ONAM, "PLC")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
-  field(DESC, "${AXIS_NAME}: PLC enable cmd")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B6")
-  field(ZNAM, "disable")
-  field(ONAM, "enable")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-CmdFrmPLCCmd"){
-  field(DESC, "${AXIS_NAME}: Allow cmd from PLCs")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B7")
-  field(ZNAM, "Refuse")
-  field(ONAM, "Allow")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
-  field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B8")
-  field(ZNAM, "Disable")
-  field(ONAM, "Enable")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
-  field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.B9")
-  field(ZNAM, "Disable")
-  field(ONAM, "Enable")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-DbgPrntEna.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
-  field(DESC, "${AXIS_NAME}: Ena dbg prints")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BA")
-  field(ZNAM, "Disable")
-  field(ONAM, "Enable")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-}
-
-record(bo,"${P}${AXIS_NAME}-TwkBwdCmd"){
-  field(DESC, "${AXIS_NAME}: Tweak BWD")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BB")
-  field(ZNAM, "Idle")
-  field(ONAM, "Tweak")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-  field(HIGH, 0.001)
-}
-
-record(bo,"${P}${AXIS_NAME}-TwkFwdCmd"){
-  field(DESC, "${AXIS_NAME}: Tweak BWD")
-  field(OUT,  "${P}${AXIS_NAME}-Cmd_.BC")
-  field(ZNAM, "Idle")
-  field(ONAM, "Tweak")
-  field(SCAN, "Passive")
-  field(FLNK, "${P}${AXIS_NAME}-Cmd_.PROC")
-  field(TSE,  "0")
-  field(HIGH, 0.001)
-}
-
 record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   field(DESC, "${AXIS_NAME}: Target Position Cmd")
   field(DTYP, "asynFloat64")
@@ -775,4 +651,136 @@ record(ai,"${P}${AXIS_NAME}-SS1-VelMaxLim"){
 record(ai,"${P}${AXIS_NAME}-SS1-VelRestLim"){
   field(DESC, "Velocity rest limit (not safety...)")
   field(VAL,  -1)
+}
+
+record(bo,"${P}${AXIS_NAME}-ExeCmd"){
+  field(DESC, "${AXIS_NAME}: Execute cmd")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x2,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Not Execute")
+  field(ONAM, "Execute")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-StpCmd"){
+  field(DESC, "${AXIS_NAME}: Stop cmd")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x4,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Not stop")
+  field(ONAM, "Stop")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-RstCmd"){
+  field(DESC, "${AXIS_NAME}: Reset cmd")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x8,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Not Reset")
+  field(ONAM, "Reset")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
+  field(DESC, "${AXIS_NAME}: Encoder source cmd")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x10,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Internal")
+  field(ONAM, "PLC")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Traj source cmd")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x20,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Internal")
+  field(ONAM, "PLC")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
+  field(DESC, "${AXIS_NAME}: PLC enable cmd")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x40,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "disable")
+  field(ONAM, "enable")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-CmdFrmPLCCmd"){
+  field(DESC, "${AXIS_NAME}: Allow cmd from PLCs")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x80,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Refuse")
+  field(ONAM, "Allow")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
+  field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x100,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
+  field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x200,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
+  field(DESC, "${AXIS_NAME}: Ena dbg prints")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x400,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(bo,"${P}${AXIS_NAME}-TwkBwdCmd"){
+  field(DESC, "${AXIS_NAME}: Tweak BWD")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x800,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Idle")
+  field(ONAM, "Tweak")
+  field(SCAN, "Passive")
+  field(TSE,  "0")  
+}
+
+record(bo,"${P}${AXIS_NAME}-TwkFwdCmd"){
+  field(DESC, "${AXIS_NAME}: Tweak BWD")
+  info(asyn:READBACK,"1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x1000,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
+  field(ZNAM, "Idle")
+  field(ONAM, "Tweak")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
 }
