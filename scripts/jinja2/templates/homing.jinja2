@@ -1,15 +1,15 @@
 
 #- Only used for legacy syntax. Functionality is moved to encoder object
-{%- if (homing) and (encoder.homing) %}
+{%- if (homing is defined) and (encoder.homing is defined) %}
    # ERROR: Duplicate homing parameters identified (homing and encoder.homing)
    #        Homing parameters can only be defined at one place
-   ecmcExit 
+   ecmcExit
 {%- endif %}
 
-{% if homing -%}
-    # WARNING: 
+{% if homing is defined -%}
+    # WARNING:
     # WARNING: Homing parameters should be defined in encoder instead
-    # WARNING: 
+    # WARNING:
     #- =============================================================================
     #- Homing
     #- =============================================================================
@@ -18,7 +18,7 @@
         ecmcConfigOrDie "Cfg.SetAxisHomePosition({{ axis.id }},{{ homing.position }})"
         epicsEnvSet(HOME_POS, {{ homing.position }})
     {%- endif %}
-    {%- if homing.postMoveEnable %}
+    {%- if homing.postMoveEnable is defined %}
         ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable({{ axis.id }},{{ homing.postMoveEnable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition({{ axis.id }},{{ homing.postMovePosition|default(0)}})"
         epicsEnvSet(POST_ENA, {{ homing.postMoveEnable|int }})
@@ -31,14 +31,14 @@
     {#- velocities  #}
     {%- if homing.velocity is defined %}
        {%- if homing.velocity.to is defined %}
-          ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam({{ axis.id }},{{ homing.velocity.to }})"            
+          ecmcConfigOrDie "Cfg.SetAxisHomeVelTowardsCam({{ axis.id }},{{ homing.velocity.to }})"
           epicsEnvSet(VEL_TO_CAM, {{homing.velocity.to}})
           #- Set default of VEL_FRM_CAM to VEL_TO_CAM
           epicsEnvSet(VEL_FRM_CAM, {{homing.velocity.to}})
           ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id }},{{ homing.velocity.from|default(homing.velocity.to) }})"
        {%- endif %}
     {%- endif %}
-    {%- if homing.timeout %}
+    {%- if homing.timeout is defined %}
         ecmcConfigOrDie "Cfg.SetAxisSeqTimeout({{ axis.id }},{{ homing.timeout }})"
     {%- endif %}
     {%- if homing.type is defined %}
@@ -60,12 +60,12 @@
         epicsEnvSet(TOL_TO_REF, {{ homing.tolToPrim }})
     {%- endif %}
 
-    {%- if homing.acc is defined %}
-        epicsEnvSet(ACC, {{ homing.acc }})
-        ecmcConfigOrDie "Cfg.SetAxisHomeAcc({{ axis.id }},{{ homing.acc }})"
+    {%- if homing.acceleration is defined %}
+        epicsEnvSet(ACC, {{ homing.acceleration }})
+        ecmcConfigOrDie "Cfg.SetAxisHomeAcc({{ axis.id }},{{ homing.acceleration }})"
     {%- endif %}
-    {%- if homing.dec is defined %}
-        epicsEnvSet(DEC, {{ homing.dec }})
-        ecmcConfigOrDie "Cfg.SetAxisHomeDec({{ axis.id }},{{ homing.dec }})"
+    {%- if homing.deceleration is defined %}
+        epicsEnvSet(DEC, {{ homing.deceleration }})
+        ecmcConfigOrDie "Cfg.SetAxisHomeDec({{ axis.id }},{{ homing.deceleration }})"
     {%- endif %}
 {%- endif %}

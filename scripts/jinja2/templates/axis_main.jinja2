@@ -3,18 +3,20 @@
 #- ####################################################
 {% include 'axis.jinja2' %}
 {% include 'encoder.jinja2' %}
-    {%- if axis.type == 1 %}
-        {% include 'drive.jinja2' %}
-        {% include 'controller.jinja2' %}
-    {%endif%}
+{%- if axis.type == 1 %}
+    {% include 'drive.jinja2' %}
+    {% include 'controller.jinja2' %}
+{%endif%}
 {% include 'trajectory.jinja2' %}
 {% include 'input.jinja2' %}
 {% include 'homing.jinja2' %}
 {% include 'soft_limit.jinja2' %}
 {% include 'monitoring.jinja2' %}
 {% include 'epicsAxis.jinja2' %}
-{%- if epics.motorRecord.enable %}
-    {% include 'epicsMotorRecord.jinja2' %}
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.enable is defined) %}
+    {%- if epics.motorRecord.enable == true %}
+        {% include 'epicsMotorRecord.jinja2' %}
+    {%- endif %}
 {%- endif %}
 {#- this needs to be the command issued #}
 {%- if axis.features is defined %}
@@ -22,3 +24,14 @@
 {%- endif %}
 {% include 'axisHWLinks.jinja2' %}
 {% include 'axisCleanup.jinja2' %}
+{%- if (meta is defined) and (meta.ecb == true) and (plc is defined) %}
+    {%- if axis.type == 0 %}
+        {% include 'debug.jinja2' %}
+    {%- endif %}
+    {%- if axis.type == 1 %}
+        {% include 'plc.jinja2' %}
+    {%- endif %}
+    {%- if axis.type == 2 %}
+        {% include 'axisSynchronization.jinja2' %}
+    {%- endif %}
+{%- endif %}

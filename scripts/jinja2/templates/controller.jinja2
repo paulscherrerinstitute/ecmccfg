@@ -1,23 +1,26 @@
 #- =============================================================================
 #- Controller
 #- =============================================================================
+
+{# precondition: controller is defined #}
+
 ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id }},{{ controller.Kp }})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id }},{{ controller.Ki }})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id }},{{ controller.Kd }})"
 ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
 
 #- Set controller params for when near target
-{%- if controller.inner %}
+{%- if controller.inner is defined %}
     {%- if controller.inner.tol is defined %}
         ecmcConfigOrDie "Cfg.SetAxisCntrlInnerParams({{ axis.id }},{{ controller.inner.Kp|default(0) }},{{ controller.inner.Ki|default(0) }},{{ controller.inner.Kd|default(0) }},{{ controller.inner.tol }})"
     {%- else  %}
-         # WARNING: Controller inner tolerance not defined. 
+         # WARNING: Controller inner tolerance not defined.
     {%- endif  %}
 {%- else  %}
-    # INFO: Inner controller not used. 
+    # INFO: Inner controller not used.
 {%- endif  %}
 
-{%- if controller.limits %}
+{%- if controller.limits is defined %}
     {%- if controller.limits.minOutput is defined %}
         ecmcConfigOrDie "Cfg.SetAxisCntrlOutLL({{ axis.id }},{{ controller.limits.minOutput }})"
     {%- endif %}
@@ -33,7 +36,7 @@ ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
 {%- endif  %}
 
 #- Actually checked in ecmc monitor
-{%- if controller.deadband %}    
+{%- if controller.deadband is defined %}
     ecmcConfigOrDie "Cfg.SetAxisCntrlDeadband({{ axis.id }},{{ controller.deadband.tol }})"
     ecmcConfigOrDie "Cfg.SetAxisCntrlDeadbandTime({{ axis.id }},{{ controller.deadband.time }})"
 {%- endif  %}

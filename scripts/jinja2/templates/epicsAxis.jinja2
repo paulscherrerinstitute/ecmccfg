@@ -9,33 +9,39 @@ ecmcFileExist("ecmcAxis.db",1,1)
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"{{ monitoring.velocity.enable|default(0)|int }}>0",-{{ monitoring.velocity.max|default(0.0) }} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"{{ monitoring.velocity.enable|default(0)|int }}>0",{{ monitoring.velocity.max|default(0.0) }} ,0)
 
-{%- set homing = None if homing is undefined else homing%}
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
+{%- if (homing is defined) and (homing.type is defined)  %}
+    {%- set homingType = homing.type %}
+{%- else %}
+    {%- set homingType = 0 %}
+{%- endif %}
+
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homingType }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
+
 #- save PREC for use if encoder is added
 epicsEnvSet(ECMC_AXIS_PREC,{{ epics.precision }})
 #- Cleanup if needed
 epicsEnvUnset(V_DRVL)
 epicsEnvUnset(V_DRVH)
 
-{%- if (homing) and (encoder.homing) %}
+{%- if (homing is defined) and (encoder.homing is defined) %}
    # ERROR: Duplicate homing parameters identified (homing and encoder.homing)
    #        Homing parameters can only be defined at one place
    ecmcExit
 {%- endif %}
 
-# Add encoder PVS (always encoder number 1 (first encoder))
-#- {%- if homing is defined %}
-#-    {% include 'homing.jinja2' %}
-#- {%- else %}
-#-    {% include 'encoder.jinja2' %}
-#- {%- endif %}
+{# # Add encoder PVS (always encoder number 1 (first encoder)) #}
+{# #- {%- if homing is defined %} #}
+{# #-    {% include 'homing.jinja2' %} #}
+{# #- {%- else %} #}
+{# #-    {% include 'encoder.jinja2' %} #}
+{# #- {%- endif %} #}
 
 ecmcFileExist("ecmcEnc.db",1,1)
 dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',AXIS_NO={{ axis.id }},ENC_NO=1,PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ENC_EGU=},DESC=${ENC_DESC=},HOME_PROC=${HOME_PROC=0},VEL_TO_CAM=${VEL_TO_CAM=0},VEL_FRM_CAM=${VEL_FRM_CAM=0},ACC=${ACC=-1},DEC=${DEC=-1},REF_HME=${REF_HME=-1},REF_STRT=${REF_STRT=-1},POST_ENA=${POST_ENA=-1},POST_POS=${POST_POS=0},POS=${HOME_POS=0},PREC=${ECMC_AXIS_PREC=3}")
 
 #- Links to PVs
-ecmcGetSlaveIdFromEcPath({{ encoder.position }}, ECMC_SID_TEMP)
-dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',SUFFIX=Enc01-CfgLnkPosAct,DESC={{ encoder.position }},SID=${ECMC_SID_TEMP=-1}")
+ecmcGetSlaveIdFromEcPath({{ encoder.position|default("") }}, ECMC_SID_TEMP)
+dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',SUFFIX=Enc01-CfgLnkPosAct,DESC={{ encoder.position|default("") }},SID=${ECMC_SID_TEMP=-1}")
 
 #- -----------------------------------------------------------------------------
 #- Set ECMC_MOTOR_NAME needed by addEncoder script (if executed afterwards)

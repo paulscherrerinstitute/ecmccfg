@@ -4,16 +4,41 @@
 {#- source #}
 ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source }})"
 {%- set deceleration = trajectory.axis.deceleration|default(trajectory.axis.acceleration) %}
-{%- set maxDec = [trajectory.axis.acceleration, deceleration]|max %}
+
+{%- if trajectory.axis.acceleration > deceleration %}
+    {%- set maxDec = trajectory.axis.acceleration %}
+{%- else %}
+    {%- set maxDec = deceleration %}
+{%- endif %}
+
 ecmcConfigOrDie "Cfg.SetAxisJerk({{ axis.id }},{{ trajectory.axis.jerk|default(trajectory.axis.acceleration) }})"
 ecmcConfigOrDie "Cfg.SetAxisAcc({{ axis.id }},{{ trajectory.axis.acceleration }})"
-ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ deceleration|float }})"
+
+{%- if trajectory.axis.deceleration is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ trajectory.axis.deceleration }})"
+{%- else %}
+    ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ trajectory.axis.acceleration }})"
+{%- endif %}
+
 ecmcConfigOrDie "Cfg.SetAxisVel({{ axis.id }},{{ trajectory.axis.velocity }})"
-ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.emergencyDeceleration|default(maxDec*10.0)|float }})"
-{%- set jog = None if trajectory.jog is undefined else trajectory.jog  %}
-{%- set jogVelocity = jog.velocity|default(trajectory.axis.velocity) %}
-ecmcConfigOrDie "Cfg.SetAxisJogVel({{ axis.id }},{{ jogVelocity }})"
-{%- if trajectory.modulo is defined  %}
+
+{%- if trajectory.axis.emergencyDeceleration is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.emergencyDeceleration }})"
+{%- else %}
+    {%- if (trajectory.axis.deceleration is defined) and (trajectory.axis.deceleration > trajectory.axis.acceleration) %}
+        ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.deceleration * 10.0 }})"
+    {%- else %}
+        ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.acceleration * 10.0 }})"
+    {%- endif %}
+{%- endif %}
+
+{%- if (trajectory.jog is defined) and (trajectory.jog.velocity is defined) %}
+    ecmcConfigOrDie "Cfg.SetAxisJogVel({{ axis.id }},{{ trajectory.jog.velocity }})"
+{%- else %}
+    ecmcConfigOrDie "Cfg.SetAxisJogVel({{ axis.id }},{{ trajectory.axis.velocity }})"
+{%- endif %}
+
+{%- if trajectory.modulo is defined %}
     ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id }},{{ trajectory.modulo.range}})"
     ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id }},{{ trajectory.modulo.type}})"
 {%- endif %}

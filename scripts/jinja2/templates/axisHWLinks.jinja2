@@ -10,7 +10,7 @@ ecmcFileExist("ecmcAxisLinks.db",1,1)
   ecmcGetSlaveIdFromEcPath({{ drive.setpoint }}, ECMC_SID_TEMP)
   dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkDrvPosSet,DESC={{ drive.setpoint }},SID=${ECMC_SID_TEMP=-1}")
 {%else%}
-  dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=Cfg-LnkDrvPosSet,DESC={{ NAN }},SID=${ECMC_SID_TEMP=-1}")
+  dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=Cfg-LnkDrvPosSet,DESC=,SID=${ECMC_SID_TEMP=-1}")
 {%endif%}
 
 #- Encoder objects are defined in 
