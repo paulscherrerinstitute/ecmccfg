@@ -498,3 +498,33 @@ record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen_") {
 #  field(LNK1, "")
 #  field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
 #}
+
+record(longout,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-En") {
+    field(DESC, "EC High Soft Limit enabled RB")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM-En")
+    field(SCAN, "Passive")
+}
+
+record(longout,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-En") {
+    field(DESC, "EC High Soft Limit enabled RB")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM-En")
+    field(SCAN, "Passive")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM") {
+    field(DESC, "EC Low Soft Limit RB")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
+    field(SCAN, "Passive")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM") {
+    field(DESC, "EC High Soft Limit RB")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
+    field(SCAN, "Passive")
+}
