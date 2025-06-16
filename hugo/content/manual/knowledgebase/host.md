@@ -122,3 +122,6 @@ In order to successfully run an ecmc ethercat system at higher rates some tuning
 #### (PSI specific) Debian 12
 For debian 12 a different phyton venv needs to be copied to the tmp dir at startup.
 The venv can be found here: /ioc/NeedfulThings/ecmc_python_venv/.venv_deb12/
+
+### iocsh startup
+ecmc needs to be started with root priviledges (or with a user in realtime group), without ecmc might segfault.

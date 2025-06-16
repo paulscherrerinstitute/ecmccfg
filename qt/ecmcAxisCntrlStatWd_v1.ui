@@ -1812,25 +1812,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="caByteController" name="cabytecontroller_3">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>55</y>
-      <width>20</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(SYS):$(Axis)-Cmd_</string>
-    </property>
-    <property name="startBit">
-     <number>1</number>
-    </property>
-    <property name="endBit">
-     <number>12</number>
-    </property>
-   </widget>
    <widget class="QWidget" name="widget_22" native="true">
     <property name="geometry">
      <rect>
@@ -2159,6 +2140,123 @@
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-TwkFwdCmd</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_91">
+    <property name="geometry">
+     <rect>
+      <x>156</x>
+      <y>240</y>
+      <width>14</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-DbgPrntEna</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_92">
+    <property name="geometry">
+     <rect>
+      <x>156</x>
+      <y>260</y>
+      <width>14</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkBwdCmd</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_93">
+    <property name="geometry">
+     <rect>
+      <x>156</x>
+      <y>280</y>
+      <width>14</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkFwdCmd</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
     </property>
    </widget>
   </widget>

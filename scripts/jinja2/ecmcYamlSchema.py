@@ -185,7 +185,7 @@ class Schema:
             'group': {'type': 'string'},
             'autoEnable': {'type': 'dict', 'schema': {
                 'enableTimeout': {'type': 'float','default': -1.0},
-                'disableTime': {'type': 'float','default': -1.0},
+                'disableTimeout': {'type': 'float','default': -1.0},
             }},
             'autoMode': {'type': 'dict', 'schema': {
                 'modeSet': {'type': 'string'},

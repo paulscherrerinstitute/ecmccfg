@@ -66,7 +66,7 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
     {%- if axis.autoEnable.enableTimeout is defined %}
         ecmcConfigOrDie "Cfg.SetAxisAutoEnableTimeout({{ axis.id }},{{ axis.autoEnable.enableTimeout }})"
     {%- endif %}
-    {%- if axis.autoEnable.disableTime is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisAutoDisableAfterTime({{ axis.id }},{{ axis.autoEnable.disableTime }})"
+    {%- if axis.autoEnable.disableTimeout is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisAutoDisableAfterTime({{ axis.id }},{{ axis.autoEnable.disableTimeout }})"
     {%- endif %}
 {%- endif %}
