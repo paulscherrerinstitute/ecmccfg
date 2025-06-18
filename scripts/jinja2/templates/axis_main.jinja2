@@ -25,13 +25,9 @@
 {% include 'axisHWLinks.jinja2' %}
 {% include 'axisCleanup.jinja2' %}
 {%- if (meta is defined) and (meta.ecb == true) and (plc is defined) %}
-    {%- if axis.type == 0 %}
-        {% include 'debug.jinja2' %}
-    {%- endif %}
-    {%- if axis.type == 1 %}
-        {% include 'plc.jinja2' %}
-    {%- endif %}
-    {%- if axis.type == 2 %}
+    {%- if axis is defined %}
         {% include 'axisSynchronization.jinja2' %}
+    {%- else %}
+        {% include 'plc.jinja2' %}
     {%- endif %}
 {%- endif %}
