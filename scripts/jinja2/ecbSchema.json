@@ -1,0 +1,1054 @@
+{
+  "validSchemas": {
+    "axis": {
+      "axis.type=0": {
+        "required": "",
+        "optional": ""
+      },
+      "axis.type=1": {
+        "required": "axisSchema driveSchema encoderSchema trajectorySchema inputSchema",
+        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema controllerSchema controllerInnerSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema driveBrakeSchema trajectoryModuloSchema epicsMotorRecordPvtSchema"
+      },
+      "axis.type=2": {
+        "required": "axisSchema encoderSchema trajectorySchema inputSchema",
+        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema trajectoryModuloSchema epicsMotorRecordPvtSchema"
+      }
+    },
+    "plc": {
+      "axis.type=0": {
+        "required": "",
+        "optional": ""
+      },
+      "axis.type=1": {
+        "required": "plcSchema",
+        "optional": ""
+      },
+      "axis.type=2": {
+        "required": "axisSchema encoderSchema trajectorySchema",
+        "optional": "varSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema axisPlcSchema trajectoryModuloSchema"
+      }
+    },
+    "encoder": {
+      "axis.type=0": {
+        "required": "encoderSchema",
+        "optional": "encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema"
+      },
+      "axis.type=1": {
+        "required": "",
+        "optional": ""
+      },
+      "axis.type=2": {
+        "required": "",
+        "optional": ""
+      }
+    }
+  },
+  "metaSchema": {
+    "identifier": "meta",
+    "schema": {
+      "meta.author": {
+        "type": "string",
+        "required": false
+      },
+      "meta.facility": {
+        "type": "string",
+        "required": false
+      },
+      "meta.device": {
+        "type": "string",
+        "required": false
+      },
+      "meta.date": {
+        "type": "string",
+        "required": false
+      },
+      "meta.md5": {
+        "type": "string",
+        "required": false
+      },
+      "meta.ecb": {
+        "type": "boolean",
+        "required": false
+      },
+      "meta.ecbBuild": {
+        "type": "integer",
+        "required": false
+      }
+    }
+  },
+  "axisSchema": {
+    "identifier": "axis",
+    "schema": {
+      "axis.id": {
+        "type": "integer string",
+        "required": false
+      },
+      "axis.type": {
+        "default": 1,
+        "type": "string integer",
+        "required": false,
+        "normalize": "(string_remove_whitespaces=integer) 0=0 debug=0 1=1 real=1 j=1 joint=1 physical=1 motor=1 2=2 e=2 ee=2 end_effector=2 endeffector=2 endeffector=2 virtual=2"
+      },
+      "axis.mode": {
+        "default": "CSV",
+        "type": "string",
+        "required": false,
+        "normalize": "(string=string) csv=CSV csp=CSP"
+      },
+      "axis.parameters": {
+        "type": "string",
+        "required": false
+      },
+      "axis.healthOutput": {
+        "type": "string",
+        "required": false
+      },
+      "axis.feedSwitchesOutput": {
+        "type": "string",
+        "required": false
+      },
+      "axis.feedSwitchesValue": {
+        "type": "integer",
+        "required": false
+      },
+      "axis.group": {
+        "type": "string",
+        "required": false
+      },
+      "axis.autoMode.modeSet": {
+        "type": "string",
+        "required": false
+      },
+      "axis.autoMode.modeAct": {
+        "type": "string",
+        "required": false
+      },
+      "axis.autoMode.modeCmdMotion": {
+        "type": "integer",
+        "required": false
+      },
+      "axis.autoMode.modeCmdHome": {
+        "type": "integer",
+        "required": false
+      },
+      "axis.features.disableOnReset": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "axis.features.alarmAtHardLimits": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "axis.features.blockCom": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "axis.features.allowSrcChangeWhenEnabled": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "axis.features.allowedFunctions.positioning": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "axis.features.allowedFunctions.constantVelocity": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "axis.features.allowedFunctions.homing": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      }
+    }
+  },
+  "varSchema": {
+    "identifier": "var",
+    "allowAnySubkey": true
+  },
+
+  "epicsSchema": {
+    "identifier": "epics",
+    "schema": {
+      "epics.name": {
+        "type": "string",
+        "default": "axis",
+        "required": false
+      },
+      "epics.precision": {
+        "type": "integer",
+        "default": 3,
+        "required": false
+      },
+      "epics.unit": {
+        "type": "string",
+        "default": "mm",
+        "required": false
+      },
+      "epics.motorRecord.enable": {
+        "type": "boolean string",
+        "default": true,
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "epics.motorRecord.fieldInit": {
+        "type": "string",
+        "required": false
+      },
+      "epics.motorRecord.description": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+
+  "epicsMotorRecordPvtSchema": {
+    "identifier": "epics.motorRecord.pvt",
+    "schema": {
+      "epics.motorRecord.pvt.npoints": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      },
+      "epics.motorRecord.pvt.nreadback": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      }
+    }
+  },
+
+  "driveSchema": {
+    "identifier": "drive",
+    "schema": {
+      "drive.numerator": {
+        "type": "integer float",
+        "default": 0,
+        "required": false
+      },
+      "drive.denominator": {
+        "type": "integer",
+        "default": 1,
+        "required": false
+      },
+      "drive.type": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      },
+      "drive.setpoint": {
+        "type": "string",
+        "required": true
+      },
+      "drive.control": {
+        "type": "string",
+        "required": true
+      },
+      "drive.status": {
+        "type": "string",
+        "required": false
+      },
+      "drive.reduceTorqueEnable": {
+        "type": "boolean string",
+        "dependencies": "drive.reduceTorque",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "drive.reduceTorque": {
+        "type": "integer",
+        "dependencies": "drive.reduceTorqueEnable",
+        "required": false
+      },
+      "drive.enable": {
+        "type": "integer",
+        "required": false
+      },
+      "drive.enabled": {
+        "type": "integer",
+        "dependencies": "drive.status",
+        "required": false
+      },
+      "drive.warning": {
+        "type": "integer",
+        "dependencies": "drive.status",
+        "required": false
+      },
+      "drive.reset": {
+        "type": "integer",
+        "required": false
+      },
+      "drive.error": {
+        "type": "list",
+        "dependencies": "drive.status",
+        "required": false
+      }
+    }
+  },
+  "driveBrakeSchema": {
+    "identifier": "drive.brake",
+    "schema": {
+      "drive.brake.enable": {
+        "type": "boolean string",
+        "required": true,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "drive.brake.output": {
+        "type": "string",
+        "required": true
+      },
+      "drive.brake.openDelay": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      },
+      "drive.brake.closeAhead": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      }
+    }
+  },
+  "encoderSchema": {
+    "identifier": "encoder",
+    "schema": {
+      "encoder.source": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      },
+      "encoder.numerator": {
+        "type": "integer string float",
+        "default": 0,
+        "required": false
+      },
+      "encoder.denominator": {
+        "type": "integer",
+        "default": 1,
+        "required": false
+      },
+      "encoder.type": {
+        "type": "integer",
+        "default": 0,
+        "required": false
+      },
+      "encoder.mask": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.bits": {
+        "type": "integer",
+        "default": 16,
+        "required": false
+      },
+      "encoder.absBits": {
+        "type": "integer",
+        "default": 25,
+        "required": false
+      },
+      "encoder.absOffset": {
+        "type": "integer float string",
+        "default": 0.0,
+        "required": false
+      },
+      "encoder.unit": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.desc": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.position": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.control": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.status": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.warning": {
+        "type": "integer",
+        "required": false,
+        "dependencies": "encoder.status"
+      },
+      "encoder.ready": {
+        "type": "integer",
+        "required": false,
+        "dependencies": "encoder.status"
+      },
+      "encoder.reset": {
+        "type": "integer",
+        "required": false,
+        "dependencies": "encoder.control"
+      },
+      "encoder.error": {
+        "type": "list",
+        "dependencies": "encoder.status",
+        "required": false
+      },
+      "encoder.filter.velocity.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "encoder.filter.velocity.size": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.filter.trajectory.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "encoder.filter.trajectory.size": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.filter.position.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "encoder.filter.position.size": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.primary": {
+        "type": "integer",
+        "default": -1,
+        "required": false
+      },
+      "encoder.velocityFilterSize": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.positionFilterSize": {
+        "type": "integer",
+        "dependencies": "positionFilterEnable",
+        "required": false
+      },
+      "encoder.positionFilterEnable": {
+        "type": "boolean",
+        "required": false
+      }
+    }
+  },
+  "encoderHomingSchema": {
+    "identifier": "encoder.homing",
+    "schema": {
+      "encoder.homing.type": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.homing.position": {
+        "type": "integer float string",
+        "required": false
+      },
+      "encoder.homing.postMoveEnable": {
+        "type": "boolean string",
+        "dependencies": "homing.postMovePosition",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "encoder.homing.postMovePosition": {
+        "type": "integer float string",
+        "required": false
+      },
+      "encoder.homing.latchCount": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.homing.velocity.to": {
+        "type": "integer float",
+        "required": false
+      },
+      "encoder.homing.velocity.from": {
+        "type": "integer float",
+        "required": false
+      },
+      "encoder.homing.acceleration": {
+        "type": "intger float",
+        "required": false
+      },
+      "encoder.homing.deceleration": {
+        "type": "integer float",
+        "required": false
+      },
+      "encoder.homing.timeout": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.homing.refToEncIDAtStartup": {
+        "type": "integer",
+        "required": false,
+        "default": -1
+      },
+      "encoder.homing.refAtHome": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "encoder.homing.tolToPrim": {
+        "type": "integer float",
+        "required": false,
+        "default": 0.0
+      },
+      "encoder.homing.trigg": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.homing.ready": {
+        "type": "string",
+        "required": false
+      }
+
+    }
+  },
+  "encoderLutSchema": {
+    "identifier": "encoder.lookuptable",
+    "schema": {
+      "encoder.lookuptable.filename": {
+        "type": "string",
+        "required": true
+      },
+      "encoder.lookuptable.range": {
+        "type": "integer float",
+        "required": false
+      },
+      "encoder.lookuptable.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      }
+    }
+  },
+  "encoderDelayCompSchema": {
+    "identifier": "encoder.delayComp",
+    "schema": {
+      "encoder.delayComp.time": {
+        "type": "integer float",
+        "required": true
+      },
+      "encoder.delayComp.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      }
+    }
+  },
+  "encoderLatchSchema": {
+    "identifier": "encoder.latch",
+    "schema": {
+      "encoder.latch.position": {
+        "type": "string",
+        "required": true
+      },
+      "encoder.latch.control": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "encoder.latch.status": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      }
+    }
+  },
+  "controllerSchema": {
+    "identifier": "controller",
+    "schema": {
+      "controller.Kp": {
+        "default": 1.0,
+        "type": "integer float"
+      },
+      "controller.Ki": {
+        "default": 0.0,
+        "type": "intger float"
+      },
+      "controller.Kd": {
+        "default": 0.0,
+        "type": "integer float"
+      },
+      "controller.Kff": {
+        "default": 1.0,
+        "type": "integer float"
+      },
+      "controller.limits.minOutput": {
+        "type": "integer float"
+      },
+      "controller.limits.maxOutput": {
+        "type": "integer float"
+      },
+      "controller.limits.minIntegral": {
+        "type": "integer float"
+      },
+      "controller.limits.maxIntegral": {
+        "type": "integer float"
+      },
+      "controller.deadband.tol": {
+        "type": "integer float"
+      },
+      "controller.deadband.time": {
+        "type": "integer float"
+      }
+    }
+  },
+  "controllerInnerSchema": {
+    "identifier": "controller.inner",
+    "schema": {
+      "controller.inner.Kp": {
+        "default": 1.0,
+        "type": "integer float"
+      },
+      "controller.inner.Ki": {
+        "default": 0.0,
+        "type": "integer float"
+      },
+      "controller.inner.Kd": {
+        "default": 0.0,
+        "type": "integer float"
+      },
+      "controller.inner.tol": {
+        "default": 0.0,
+        "type": "integer float"
+      }
+    }
+  },
+  "homingSchema": {
+    "identifier": "homing",
+    "schema": {
+      "homing.type": {
+        "type": "integer",
+        "required": false
+      },
+      "homing.position": {
+        "type": "integer float string",
+        "required": false
+      },
+      "homing.postMoveEnable": {
+        "type": "boolean string",
+        "dependencies": "homing.postMovePosition",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "homing.postMovePosition": {
+        "type": "integer float string",
+        "required": false
+      },
+      "homing.latchCount": {
+        "type": "integer",
+        "required": false
+      },
+      "homing.velocity.to": {
+        "type": "integer float",
+        "required": false
+      },
+      "homing.velocity.from": {
+        "type": "integer float",
+        "required": false
+      },
+      "homing.acceleration": {
+        "type": "integer float",
+        "required": false
+      },
+      "homing.deceleration": {
+        "type": "integer float",
+        "required": false
+      },
+      "homing.timeout": {
+        "type": "integer",
+        "required": false
+      },
+      "homing.refToEncIDAtStartup": {
+        "type": "integer",
+        "required": false,
+        "default": -1
+      },
+      "homing.refAtHome": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "homing.tolToPrim": {
+        "type": "integer float",
+        "required": false,
+        "default": 0
+      },
+      "homing.trigg": {
+        "type": "string",
+        "required": false
+      },
+      "homing.ready": {
+        "type": "string",
+        "required": false
+      }
+    }
+  },
+  "trajectorySchema": {
+    "identifier": "trajectory",
+    "schema": {
+      "trajectory.source": {
+        "type": "integer",
+        "default": 0
+      },
+      "trajectory.type": {
+        "type": "integer",
+        "default": 0
+      },
+      "trajectory.axis.velocity": {
+        "type": "integer float",
+        "required": true
+      },
+      "trajectory.axis.acceleration": {
+        "type": "integer float",
+        "required": true
+      },
+      "trajectory.axis.jerk": {
+        "type": "integer float",
+        "required": false
+      },
+      "trajectory.axis.deceleration": {
+        "type": "integer float",
+        "required": false
+      },
+      "trajectory.axis.emergencyDeceleration": {
+        "type": "integer float",
+        "required": false
+      },
+      "trajectory.jog.velocity": {
+        "type": "integer float",
+        "required": false
+      },
+      "trajectory.jog.acceleration": {
+        "type": "integer float",
+        "required": false
+      }
+    }
+  },
+
+  "trajectoryModuloSchema": {
+    "identifier": "trajectory.modulo",
+    "schema": {
+      "trajectory.modulo.range": {
+        "type": "integer float",
+        "default": 0.0
+      },
+      "trajectory.modulo.type": {
+        "type": "integer",
+        "default": 0
+      }
+    }
+  },
+
+  "monitoringLagSchema": {
+    "identifier": "monitoring.lag",
+    "schema": {
+      "monitoring.lag.enable": {
+        "type": "boolean",
+        "required": true,
+        "dependencies": "monitoring.lag.tolerance monitoring.lag.time",
+        "normalize": "(string=boolean) yes=true no=false",
+        "default": false
+      },
+      "monitoring.lag.tolerance": {
+        "type": "integer float",
+        "default": 0
+      },
+      "monitoring.lag.time": {
+        "type": "integer",
+        "default": 100
+      }
+    }
+  },
+  "monitoringTargetSchema": {
+    "identifier": "monitoring.target",
+    "schema": {
+      "monitoring.target.enable": {
+        "type": "boolean",
+        "required": true,
+        "dependencies": "monitoring.target.tolerance monitoring.target.time",
+        "normalize": "(string=boolean) yes=true no=false",
+        "default": false
+      },
+      "monitoring.target.tolerance": {
+        "type": "integer float"
+      },
+      "monitoring.target.time": {
+        "type": "integer"
+      }
+    }
+  },
+  "monitoringVelocitySchema": {
+    "identifier": "monitoring.velocity",
+    "schema": {
+      "monitoring.velocity.enable": {
+        "type": "boolean",
+        "required": true,
+        "dependencies": "monitoring.velocity.max monitoring.velocity.time",
+        "normalize": "(string=boolean) yes=true no=false",
+        "default": false
+      },
+      "monitoring.velocity.max": {
+        "type": "integer float"
+      }
+    }
+  },
+  "monitoringVelocityTimeSchema": {
+    "identifier": "monitoring.velocity.time",
+    "schema": {
+      "monitoring.velocity.time.trajectory": {
+        "type": "integer",
+        "required": true
+      },
+      "monitoring.velocity.time.drive": {
+        "type": "integer",
+        "required": false
+      }
+    }
+  },
+  "monitoringVelocityDifferenceSchema": {
+    "identifier": "monitoring.velocityDifference",
+    "schema": {
+      "monitoring.velocityDifference.enable": {
+        "type": "boolean",
+        "required": true,
+        "dependencies": "monitoring.velocityDifference.max monitoring.velocityDifference.time",
+        "normalize": "(string=boolean) yes=true no=false",
+        "default": false
+      },
+      "monitoring.velocityDifference.max": {
+        "type": "integer float"
+      }
+    }
+  },
+  "monitoringVelocityDifferenceTimeSchema": {
+    "identifier": "monitoring.velocity.time",
+    "schema": {
+      "monitoring.velocityDifference.time.trajectory": {
+        "type": "integer",
+        "required": true
+      },
+      "monitoring.velocityDifference.time.drive": {
+        "type": "integer",
+        "required": false
+      }
+    }
+  },
+  "monitoringStallSchema": {
+    "identifier": "monitoring.stall",
+    "schema": {
+      "monitoring.stall.enable": {
+        "type": "integer"
+      },
+      "monitoring.stall.time.timeout": {
+        "type": "integer"
+      },
+      "monitoring.stall.time.factor": {
+        "type": "integer float"
+      }
+    }
+  },
+  "softlimitsSchema": {
+    "identifier": "softlimits",
+    "schema": {
+      "softlimits.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false",
+        "default": false
+      },
+      "softlimits.forwardEnable": {
+        "type": "boolean string",
+        "required": false,
+        "dependencies": "softlimits.enable softlimits.forward",
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "softlimits.forward": {
+        "type": "integer float",
+        "required": false,
+        "dependencies": "softlimits.forwardEnable"
+      },
+      "softlimits.backwardEnable": {
+        "type": "boolean string",
+        "required": false,
+        "dependencies": "softlimits.enable softlimits.backward",
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "softlimits.backward": {
+        "type": "integer float",
+        "required": false,
+        "dependencies": "softlimits.backwardEnable"
+      }
+    }
+  },
+  "inputSchema": {
+    "identifier": "input",
+    "schema": {
+      "input.limit.forward": {
+        "type": "string",
+        "required": true
+      },
+      "input.limit.forwardPolarity": {
+        "type": "integer",
+        "required": false
+      },
+      "input.limit.backward": {
+        "type": "string",
+        "required": true
+      },
+      "input.limit.backwardPolarity": {
+        "type": "integer",
+        "required": false
+      },
+      "input.limit.latchInput": {
+        "type": "boolean",
+        "required": false
+      },
+      "input.home": {
+        "type": "string",
+        "required": true
+      },
+      "input.homePolarity": {
+        "type": "integer"
+      },
+      "input.interlock": {
+        "type": "string",
+        "required": true
+      },
+      "input.interlockPolarity": {
+        "type": "integer",
+        "required": false
+      },
+      "input.analog.interlock": {
+        "type": "string",
+        "required": false
+      },
+      "input.analog.rawLimit": {
+        "type": "integer float",
+        "required": false
+      },
+      "input.analog.interlockPolarity": {
+        "type": "integer",
+        "required": false
+      },
+      "input.analog.enable": {
+        "type": "boolean",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      }
+    }
+  },
+  "axisPlcSchema": {
+    "identifier": "plc",
+    "schema": {
+      "plc.enable": {
+        "type": "boolean string",
+        "required": true,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.externalCommands": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.filter.velocity.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.filter.velocity.size": {
+        "type": "integer",
+        "required": false
+      },
+      "plc.filter.trajectory.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.filter.trajectory.size": {
+        "type": "integer",
+        "required": false
+      },
+      "plc.filter.position.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.filter.position.size": {
+        "type": "integer",
+        "required": false
+      },
+      "plc.velocity_filter.trajectory.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.velocity_filter.trajectory.size": {
+        "type": "integer",
+        "required": false
+      },
+      "plc.velocity_filter.encoder.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.velocity_filter.encoder.size": {
+        "type": "integer",
+        "required": false
+      },
+      "plc.file": {
+        "type": "string",
+        "required": false
+      },
+      "plc.macros": {
+        "type": "string",
+        "required": false
+      },
+      "plc.code": {
+        "type": "list",
+        "required": false
+      }
+    }
+  },
+  "plcSchema": {
+    "identifier": "plc",
+    "schema": {
+      "plc.id": {
+        "type": "integer",
+        "required": true
+      },
+      "plc.enable": {
+        "type": "boolean string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
+      },
+      "plc.rateMilliseconds": {
+        "type": "integer",
+        "required": false
+      },
+      "plc.file": {
+        "type": "string",
+        "required": false
+      },
+      "plc.macros": {
+        "type": "string",
+        "required": false
+      },
+      "plc.code": {
+        "type": "list",
+        "required": false
+      }
+    }
+  }
+}
