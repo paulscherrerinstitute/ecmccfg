@@ -59,7 +59,7 @@ record(bi,"${ECMC_P}AccSOvrAlrm"){
   field(FLNK, "${ECMC_P}AccOvrRunAlrm")
 }
 
-record(bi,"${ECMC_P}-AccOvrRunAlrm"){
+record(bi,"${ECMC_P}AccOvrRunAlrm"){
   field(DESC, "$(HWTYPE): Acc Ovrrun")
   field(INP,  "${ECMC_P}AccStat.B5")
   field(ZNAM, "No Alarm")
