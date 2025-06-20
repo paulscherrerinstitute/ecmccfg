@@ -183,6 +183,7 @@ class Schema:
             'feedSwitchesOutput': {'type': 'string'},
             'feedSwitchesValue': {'type': 'integer'},
             'group': {'type': 'string'},
+            'tweakDist': {'type': 'float','default': 1.0},
             'autoEnable': {'type': 'dict', 'schema': {
                 'enableTimeout': {'type': 'float','default': -1.0},
                 'disableTimeout': {'type': 'float','default': -1.0},

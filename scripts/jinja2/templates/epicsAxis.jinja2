@@ -10,7 +10,7 @@ ecmcEpicsEnvSetCalcTernary(V_DRVL,"{{ monitoring.velocity.enable|default(0)|int 
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"{{ monitoring.velocity.enable|default(0)|int }}>0",{{ monitoring.velocity.max|default(0.0) }} ,0)
 
 {%- set homing = None if homing is undefined else homing%}
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0}")
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epics.name }}',EGU='{{ epics.unit }}',PREC={{ epics.precision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homing.type|default(0)|int }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0},TWKDST={{ axis.tweakDist|default(0.0)|float }}")
 #- save PREC for use if encoder is added
 epicsEnvSet(ECMC_AXIS_PREC,{{ epics.precision }})
 #- Cleanup if needed

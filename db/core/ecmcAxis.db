@@ -412,6 +412,18 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   field(DRVH, ${V_DRVH=0})
 }
 
+record(ao,"${P}${AXIS_NAME}-TwkDstCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Tweak distance Cmd")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).tweakvalue?")
+  field(SCAN, "Passive")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(TSE,  "0")
+  field(VAL, "${TWKDST=0}")
+}
+
 record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   info(asyn:READBACK,"1")
   field(DESC, "${AXIS_NAME}: Motion Command")
