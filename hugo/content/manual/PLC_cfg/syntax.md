@@ -673,6 +673,32 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                        );
      1. Enable/disable motor record via CNEN field
      Note: The command only triggers once per ecmc cycle (with the latest value written to enable)
+
+  25. error = mc_set_traj_vel(
+                            <axIndex>,  : Axis index
+                            <vel>       : Target velocity
+                            );
+  Set target velocity.
+
+  26. error = mc_set_traj_acc(
+                            <axIndex>,  : Axis index
+                            <acc>       : Max acceleration
+                            );
+  Set max acceleration.
+
+  27. error = mc_set_traj_dec(
+                            <axIndex>,  : Axis index
+                            <dec>       : Max deceleration
+                            );
+  Set max deceleration.
+  note: mc_set_traj_dec() is only valid for trapez trajectory (trajectory.type=0). For s-curve trajectory mc_set_traj_acc() is used for both acceleration and deceleration.
+
+  28. error = mc_set_traj_jerk(
+                            <axIndex>,  : Axis index
+                            <jerk>      : Max jerk
+                            );
+  Set max jerk.
+  note: mc_set_traj_jerk() is only valid for s-curve trajectory (ruckig, trajectory.type=1)
 ```
 
 #### Motion Group

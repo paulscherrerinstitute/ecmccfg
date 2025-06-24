@@ -1154,7 +1154,7 @@
      <bool>false</bool>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(SYS):$(Axis)-TwkPosCmd</string>
+     <string notr="true">$(SYS):$(Axis)-TwkDstCmd</string>
     </property>
     <property name="keepFocus">
      <bool>true</bool>

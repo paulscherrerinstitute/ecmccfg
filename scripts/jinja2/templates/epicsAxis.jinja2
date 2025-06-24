@@ -80,3 +80,8 @@ epicsEnvSet(ECMC_PREV_AXIS_OBJ_ID,${ECMC_AXIS_NO})
 
 #- Store axis name as env variable for later use
 epicsEnvSet(ECMC_MOTOR_{{axis.id}}_FULL_NAME, ${ECMC_PREFIX}{{ epics.name }})
+
+{%- if axis.tweakDist is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisTweakDist(${ECMC_AXIS_NO},{{ axis.tweakDist|default(0.0)|float }})"
+{%- endif%}
+
