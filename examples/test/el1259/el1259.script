@@ -1,0 +1,37 @@
+
+require ecmccfg sandst_a
+
+# Number of channels (1,2,4 or 8)
+epicsEnvSet(CHS,2)
+# Number of events per channel (1,2,5 or 10)
+epicsEnvSet(EVS,2)
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=10, HW_DESC=EL1259_0x120000_CH$(CHS)_EV$(EVS)"
+ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
+
+# Get strange results.. The input is latched approx 30us before the output is set.. The below registers contain time offsets in this range but cannot be written:
+# ethercat download -m0 -p10 0x800F 0x12 --type int32 30000
+# SDO transfer aborted with code 0x08000021: Data cannot be transferred or stored to the application because of local control
+# Output offset times:
+#  sandst_a@c6025a-06:~$ ethercat upload -m0 -p10 0x800F 0x11 --type int32
+#  0xffff5038 -45000
+#  sandst_a@c6025a-06:~$ ethercat upload -m0 -p10 0x800F 0x12 --type int32
+#  0xffff09e8 -63000
+
+# Input offset times:
+#  sandst_a@c6025a-06:~$ ethercat upload -m0 -p10 0x818F 0x11 --type int32 
+#  0xffffdda0 -8800
+#  sandst_a@c6025a-06:~$ ethercat upload -m0 -p10 0x818F 0x12 --type int32 
+#  0xffffdecc -8500
+
+
+# not possible to write to..
+#ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x800F,0x11,-30000,4)"
+#ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x800F,0x12,-30000,4)"
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x800F,0x11,-30000,4)"
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x800F,0x12,-30000,4)"
+
+# Test PLC with some triggering and readback
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "FILE=./el1259.plc")
+
+

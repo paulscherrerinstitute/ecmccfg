@@ -1,0 +1,46 @@
+/* 
+ Setup:
+ * bridge output01 to input01
+ * set output at a certain time 
+ * Wait for input event
+ * compare output time with latched input time
+  This example uses only one event
+*/
+
+static.time := ec_get_time();
+
+// Only one output event at a time
+if (static.time > static.outputTime and not(static.waitForNextEvent) ) {
+  // Time for next event
+  static.outputTime := static.time + $(CYCLE_NS=100E6);
+
+  // Next state of output (note this is an array)
+  ${M}.s${S_ID=10}.BO${CH_ID=01}_EvtStateArr := not(${M}.s${S_ID=10}.BO${CH_ID=01}_EvtStateArr);
+
+  // Time is only 32bit
+  ${M}.s${S_ID=10}.BO${CH_ID=01}_OutpEvtTme01 := ec_chk_bits(static.outputTime,0,31);
+
+  // One vaild event in array
+  ${M}.s${S_ID=10}.BO${CH_ID=01}_Ctrl_NoOutpEvts := 1;
+  
+  // Trigger event write into event buffer with increase of OutpOrdrCntr
+  ${M}.s${S_ID=10}.BO${CH_ID=01}_Ctrl_OutpOrdrCntr += 1;
+
+  println('Output event trigger at: ', ${M}.s${S_ID=10}.BO${CH_ID=01}_OutpEvtTme01, ', state: ',${M}.s${S_ID=10}.BO01_EvtStateArr );
+
+  // Block further output events until reacived
+  static.waitForNextEvent := 1;
+};
+
+// See if an input event occured
+if(${M}.s${S_ID=10}.BI${CH_ID=01}_Stat_NoEvts > 0 and static.waitForNextEvent) {
+  static.outputTime32bits := ec_chk_bits(static.outputTime,0,31);
+  println('Input event recived at:  ', ${M}.s${S_ID=10}.BI01_EvtTme01, ', state: ',${M}.s${S_ID=10}.BI01_EvtStateArr ,' (diff [us]: ', (${M}.s${S_ID=10}.BI01_EvtTme01-static.outputTime32bits)/1000, ')');
+  static.waitForNextEvent := 0;
+} 
+
+// The above code only send a trigger after one is recived 
+if(${M}.s${S_ID=10}.BI${CH_ID=01}_Stat_NoEvts > 1) {
+  println('Now we are out of sync...')
+}
+
