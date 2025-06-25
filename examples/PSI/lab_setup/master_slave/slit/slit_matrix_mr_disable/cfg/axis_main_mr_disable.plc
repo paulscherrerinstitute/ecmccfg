@@ -25,8 +25,3 @@ var INV2[2] := {  1,    0.5};
 ####### Kinematics for slit system. 
 # Macros cannot be used in an include. In order to find files, the loadPLCFile.cmd parameter "INC" defines the dirs that MSI will look for the file)
 include "axis_kin_2DoF.plc_inc"
-
-####### State machine
-# Macros cannot be used in an include. In order to find files, the loadPLCFile.cmd parameter "INC" defines the dirs that MSI will look for the file)
-# include "axis_sm.plc_inc"
-

@@ -1,0 +1,10 @@
+static.testvalue += 1;
+if(static.testvalue > 10000) {
+  static.testvalue := 0;
+  println('RESET');
+};
+
+# ax1.ctrl.kp  := static.testvalue / 1000;
+# ax1.ctrl.ki  := static.testvalue / 10000;
+# ax1.ctrl.kd  := static.testvalue / 10000 + 0.1;
+# ax1.ctrl.kff := static.testvalue / 10000 + 0.2;
