@@ -67,6 +67,49 @@ axis:
   # parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 ```
 
+### Auto enable/disable
+
+#### ecmc native (preferred way)
+Native ecmc auto-enable/disable is the preferred way and can be configured by:
+```
+axis:
+  autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
+    enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
+    disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+```
+The motor record auto-enable/disable fucntionality will then automatically be disabled. 
+{{% notice warning %}}
+However, do not configure both ecmc native and motor record auto enable/disable at the same time.
+{{% /notice %}}
+
+#### motor record (do not use)
+
+{{% notice info %}}
+Please use the ecmc-native auto-enable/disable described above.
+{{% /notice %}}
+
+Auto enable disable is by default enabled in motor record. However, this solution is not optimal since motor record is just polling information from ecmc and all motor records block when one motor is waiting for enable.
+This is how the parameters timing paramters can be changed.
+```
+axis:
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+```
+{{% notice info %}}
+The powerAutoOnOff is defining a mode and should always be set to 2.
+{{% /notice %}}
+  
+{{% notice info %}}
+Note the mandatory ";" in the end of the parameters string. If not present, then teh last parameter will not be parsed.
+{{% /notice %}}
+
+
+### Tweak value
+ecmc and motor record tweak value can be defined in the axis.tweakDist:
+```
+axis:
+  tweakDist: 5.0                                    # Tweak distance
+```
+
 ## epics
 Epics configuration.
 
@@ -432,8 +475,9 @@ axis:
       constantVelocity: true                          # Allow constant velocity
       positioning: true                               # Allow positioning
   autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
-    enableTimeout:                                    # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
-    disableTime:                                      # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+    enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
+    disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+  tweakDist: 2.0                                      # Tweak value (both ecmc interface and motor record tweak value)
 
 epics:
   name: M1                                            # Axis name
