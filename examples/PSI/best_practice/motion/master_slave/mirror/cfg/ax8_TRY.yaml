@@ -2,6 +2,10 @@ axis:
   id: 8
   type: virtual
   group: VFM_VIRT
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 0.1
 
 epics:
   name: TRY
@@ -10,7 +14,7 @@ epics:
   motorRecord:
     enable: true
     description: "Y"
-    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen,TWV=0.1"
+    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen"
 
 encoder:
   type: 1                # Type (0=Incremental, 1=Absolute)

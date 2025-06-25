@@ -1,6 +1,10 @@
 axis:
   id: 12
   mode: CSV
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 1
 
 epics:
   name: AXIS

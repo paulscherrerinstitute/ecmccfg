@@ -1,6 +1,10 @@
 axis:
   id: 12
   mode: CSV
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 1
 
 epics:
   name: AXIS
@@ -9,7 +13,7 @@ epics:
   motorRecord:
     enable: true
     description: "Detector TR"
-    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen"
 
 drive:
   numerator: # Vmax 6000 rev/s * 2 mm/rev = 12000 mm/s

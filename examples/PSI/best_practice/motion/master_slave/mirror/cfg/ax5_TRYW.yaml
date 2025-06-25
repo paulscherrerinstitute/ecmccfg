@@ -10,9 +10,12 @@ axis:
   id: 5
   mode: CSV
   group: VFM_REAL
-  #parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
   features:
     allowSrcChangeWhenEnabled: true
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 0.1
 
 epics:
   name: TRYW
@@ -21,7 +24,7 @@ epics:
   motorRecord:
     enable: true
     description: "Y2 at Wall"
-    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=0.1"
+    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen"
 
 drive:
   numerator: 0.25               # Vmax 2000 step/s * 1/200 rev/step * 0.025mm/rev = 0.25 mm/s

@@ -25,6 +25,3 @@ var INV4[5] := {  1,     0,     0, -27/50,   -1/4};
 var INV5[5] := {  1,     0,     0, -27/50,    1/4};
 
 include "axis_kin_mirror.plc_inc"
-
-include "axis_sm.plc_inc"
-

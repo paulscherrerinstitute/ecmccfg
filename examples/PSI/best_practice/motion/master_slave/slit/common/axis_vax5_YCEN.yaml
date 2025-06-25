@@ -2,6 +2,10 @@ axis:
   id: ${AX_ID}
   group: virtualAxes
   type: end effector
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 0.5
 
 epics:
   name: CENTERY
@@ -9,7 +13,7 @@ epics:
   unit: mm
   motorRecord:
     description: "Center (Virtual)"
-    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen"
 
 encoder:
   type: 1
@@ -32,8 +36,8 @@ input:
 
 softlimits:
   enable: false
-  forwardEnable: true
-  backwardEnable: true
+  forwardEnable: false
+  backwardEnable: false
   forward: 52
   backward: 8
 
@@ -44,7 +48,7 @@ monitoring:
     time: 100
   target:
     enable: yes
-    tolerance: 0.02
+    tolerance: 0.05
     time: 100
   velocity:
     enable: yes

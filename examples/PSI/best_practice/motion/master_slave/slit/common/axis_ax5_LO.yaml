@@ -6,6 +6,10 @@ axis:
   mode: CSV
   features:
     allowSrcChangeWhenEnabled: true
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 0.5
 
 epics:
   name: TR_LO
@@ -13,7 +17,7 @@ epics:
   unit: mm
   motorRecord:
     description: "Low"
-    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen"
 
 drive:
   numerator: 10                 # max velo in EGU/s
@@ -53,8 +57,8 @@ input:
 
 softlimits:
   enable: false
-  backwardEnable: true
-  forwardEnable: true
+  backwardEnable: false
+  forwardEnable: false
   forward: 55.8
   backward: 5.1
 
@@ -65,7 +69,7 @@ monitoring:
     time: 100
   target:
     enable: true
-    tolerance: 0.05
+    tolerance: 0.025
     time: 100
   velocity:
     enable: true

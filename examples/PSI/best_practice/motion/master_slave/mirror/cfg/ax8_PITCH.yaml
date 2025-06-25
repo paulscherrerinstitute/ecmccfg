@@ -1,6 +1,10 @@
 axis:
   id: 8
   type: virtual
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 0.1
 
 epics:
   name: PITCH
@@ -9,7 +13,7 @@ epics:
   motorRecord:
     enable: true
     description: "PITCH"
-    fieldInit: "RTRY=0,FOFF=Frozen,TWV=0.1"
+    fieldInit: "RTRY=0,FOFF=Frozen"
 
 encoder:
   type: 1                # Type (0=Incremental, 1=Absolute)
