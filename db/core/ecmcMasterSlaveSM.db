@@ -1,0 +1,66 @@
+#Asyn parameters for master slave state machine
+record(bo,"${P}MstSlvSM${ID_2CH}-EnaCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Enable cmd")  
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/mst_slv_sm$(ID).enable?")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
+record(mbbo,"${P}MstSlvSM${ID_2CH}-StateCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "State")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/mst_slv_sm$(ID).state?")
+  field(ZRVL, "0")
+  field(ZRST, "IDLE")
+  field(ONVL, "1")
+  field(ONST, "SLAVE")
+  field(TWVL, "2")
+  field(TWST, "MASTER")
+  field(THVL, "3")
+  field(THST, "RESET")
+  field(SCAN, "Passive")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}MstSlvSM${ID_2CH}-Stat"){
+  field(DESC, "Status Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/mst_slv_sm$(ID).status?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${P}MstSlvSM${ID_2CH}-Stat_.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(mbbiDirect,"${P}MstSlvSM${ID_2CH}-Stat_"){
+  field(DESC, "Status Word mbbiD")
+  field(PINI, "$(PINI=1)")
+  field(INP,  "${P}MstSlvSM${ID_2CH}-Stat.VAL")
+  field(TSE,  "$(TSE=-2)")
+}
+
+# TODO bits of status word
+
+record(stringin,"${P}MstSlvSM${ID_2CH}-Nam"){
+  field(DESC, "Name")
+  field(PINI, "$(PINI=1)")
+  field(VAL,  "${NAME}")
+}
+
+record(stringin,"${P}MstSlvSM${ID_2CH}-SlvGrpNam"){
+  field(DESC, "Slave group name")
+  field(PINI, "$(PINI=1)")
+  field(VAL,  "${SLV_NAME}")
+}
+
+record(stringin,"${P}MstSlvSM${ID_2CH}-MstGrpNam"){
+  field(DESC, "master group name")
+  field(PINI, "$(PINI=1)")
+  field(VAL,  "${MST_NAME}")
+}

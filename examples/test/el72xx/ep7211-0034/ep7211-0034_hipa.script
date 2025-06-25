@@ -10,7 +10,7 @@ require ecmccomp
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "0")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_DRIVE), HW_DESC=EP7211-0034_TRQFF"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP= Motor-Beckhoff-AM8121-XFX0"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP= Motor-Beckhoff-AM8121-XFX0"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"

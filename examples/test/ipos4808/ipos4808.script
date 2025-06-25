@@ -21,7 +21,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 #-  * I_STDBY_MA    : Mandatory if Motor-Generic-2Phase-Stepper is used
 #- The values can be taken from EasyMotionStudio or by trial and error (BTW, coil resistance and inductance are not used in the iPOS cfgs)
 #- After running a tuning test in EasyMotionStudio, a reset is needed (from easymotion studio or over SDO (see motor cfg scripts).)
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000,I_STDBY_MA=100,CURR_KP=1.0,CURR_TI=0.26'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1000,I_STDBY_MA=100,CURR_KP=1.0,CURR_TI=0.26'"
 
 #- #############################################################################
 #- AXIS 1

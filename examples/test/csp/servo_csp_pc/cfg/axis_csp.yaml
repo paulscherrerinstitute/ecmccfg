@@ -55,7 +55,7 @@ trajectory:
   axis:
     velocity: 720
     acceleration: 1000
-    decceleration: 1000
+    deceleration: 1000
 
 input:
   limit:

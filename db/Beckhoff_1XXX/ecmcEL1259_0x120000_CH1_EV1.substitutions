@@ -1,0 +1,61 @@
+#-  ecmc database for: EL1259 8Ch. Dig Input 24V/8Ch. Dig. Output 24V with Multi-Time-Stamp
+#- Multi-Timestamping 1 Ch. 1x
+#-      ECMC_EC_HWTYPE:     EL1259_0x120000_CH1_EV1
+#-      ECMC_EC_VENDOR_ID:  0x2
+#-      ECMC_EC_PRODUCT_ID: 0x4eb3052
+#-      ECMC_EC_REVISION:   0x120000
+
+file "ecmc_ESI_mbboDirect_bo.template" {
+    pattern { REC_NAME, DESC, LNK_NAME, FLNK, SRC_NAME }
+        {"BO01-Ctrl-OutpBuffRst", "Ctrl__Output buffer reset" , "BO01-Ctrl_.B0", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_OutpBuffRst"}
+        {"BO01-Ctrl-ManOutpState", "Ctrl__Manual output state" , "BO01-Ctrl_.B1", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_ManOutpState"}
+        {"BO01-Ctrl-FrceOrdr", "Ctrl__Force order" , "BO01-Ctrl_.B2", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_FrceOrdr"}
+        {"BO01-Ctrl-EnaManOp", "Ctrl__Enable manual operation" , "BO01-Ctrl_.B3", "${ECMC_P}BO01-Ctrl_.PROC","BO01_Ctrl_EnaManOp"}
+        {"BO01-EvtState01", "Outputs__Output event state 1" , "BO01-EvtStateArr.B0", "${ECMC_P}BO01-EvtStateArr.PROC","BO01_EvtState01"}
+        {"BI01-Ctrl-BuffRst", "Ctrl__Input buffer reset" , "BI01-Ctrl_.B0", "${ECMC_P}BI01-Ctrl_.PROC","BI01_Ctrl_BuffRst"}
+}
+
+file "ecmc_ESI_mbboDirect.template" {
+    pattern { REC_NAME, DESC , SRC_NAME}
+        {"BO01-Ctrl_", "Ctrl__Output buffer reset", "BO01_Ctrl_"}
+        {"BO01-EvtStateArr", "Outputs__Output event state 1", "BO01_EvtStateArr"}
+        {"BI01-Ctrl_", "Ctrl__Input buffer reset", "BI01_Ctrl_"}
+}
+
+file "ecmc_ESI_mbbiDirect_bi.template" {
+    pattern { REC_NAME, DESC, LNK_NAME, FLNK , SRC_NAME}
+        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC" "BO01_Stat_OutpShrtCirc"}
+        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC" "BO01_Stat_OutpBuffOvrflw"}
+        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC" "BO01_Stat_OutpState"}
+        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC" "BI01_Stat_State"}
+        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC" "BI01_Stat_BuffOvrflw"}
+        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC" "BI01_EvtState01"}
+}
+
+file "ecmc_ESI_mbbiDirect.template" {
+    pattern { REC_NAME, DESC, FLNK , SRC_NAME}
+        {"BO01-Stat_", "Status__Output short circuit", "BO01-Stat-OutpState.PROC", "BO01_Stat_"}
+        {"BI01-Stat_", "Status__Input state", "BI01-Stat-BuffOvrflw.PROC", "BI01_Stat_"}
+        {"BI01-EvtStateArr", "Inputs__Input event state 1", "BI01-EvtState01.PROC", "BI01_EvtStateArr"}
+}
+
+file "ecmc_ESI_ai.template" {
+    pattern { REC_NAME, DESC , SRC_NAME}
+        {"BO01-Stat-OutpOrdrFb", "Status__Output order feedback", "BO01_Stat_OutpOrdrFb" }
+        {"BO01-Stat-EvtsInOutpBuff", "Status__Events in output buffer", "BO01_Stat_EvtsInOutpBuff" }
+        {"BI01-Stat-NoEvts", "Status__No of input events", "BI01_Stat_NoEvts" }
+        {"BI01-Stat-EvtsInBuff", "Status__Events in input buffer", "BI01_Stat_EvtsInBuff" }
+        {"BI01-Stat-OrdrFb", "Status__Input order feedback", "BI01_Stat_OrdrFb" }
+        {"BI01-EvtTme01", "Input event time 1", "BI01_EvtTme01" }
+}
+
+file "ecmc_ESI_ao.template" {
+    pattern { REC_NAME, DESC , SRC_NAME}
+        {"BO01-Ctrl-OutpOrdrCntr", "Ctrl__Output order counter", "BO01_Ctrl_OutpOrdrCntr" }
+        {"BO01-Ctrl-NoOutpEvts", "Ctrl__No of output events", "BO01_Ctrl_NoOutpEvts" }
+        {"BO01-Ctrl", "Ctrl__", "BO01_Ctrl" }
+        {"BO01-OutpEvtTme01", "Output event time 1", "BO01_OutpEvtTme01" }
+        {"BI01-Ctrl-OrdrCntr", "Ctrl__Input order counter", "BI01_Ctrl_OrdrCntr" }
+        {"BI01-Ctrl", "Ctrl__", "BI01_Ctrl" }
+}
+
