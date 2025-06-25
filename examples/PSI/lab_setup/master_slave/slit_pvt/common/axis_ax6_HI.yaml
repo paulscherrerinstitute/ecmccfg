@@ -6,6 +6,10 @@ axis:
   mode: CSV
   features:
     allowSrcChangeWhenEnabled: true
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 5.0
+  tweakDist: 0.5
 
 epics:
   name: TR_HI
