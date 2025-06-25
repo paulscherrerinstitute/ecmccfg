@@ -1,6 +1,10 @@
 axis:
   id: ${AXIS_ID=1}                                    # Axis id
   feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 5.0
+  tweakDist: 0.5
 
 epics:
   name: ${AX_NAME=M1}                                 # Axis anme

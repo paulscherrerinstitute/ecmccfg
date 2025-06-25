@@ -8,7 +8,7 @@ require ecmccfg "ENG_MODE=1"
 #- ethercat slaves
 #- Master0
 #- ...
-#- 16  0:16  PREOP  +  EP7211-0034 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
+#- 15  0:15  PREOP  +  EP7211-0034 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
 #- ...
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=15, HW_DESC=EP7211-0034_ALL_FB"
