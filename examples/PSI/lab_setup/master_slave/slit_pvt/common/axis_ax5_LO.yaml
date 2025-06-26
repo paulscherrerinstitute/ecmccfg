@@ -26,6 +26,8 @@ drive:
   control: ec${M_ID=0}.s$(DRV_SLAVE).driveControl01
   status: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01
   setpoint: ec${M_ID=0}.s$(DRV_SLAVE).velocitySetpoint01
+  reduceTorque: 2                                     # Reduce torque bit in drive control word
+  reduceTorqueEnable: True                            # Enable reduce torque functionality
 
 encoder:
   numerator: 1          # 1egu = 1mm
@@ -43,6 +45,7 @@ controller:
   Kff: 1.00
 
 trajectory:
+  type: 1
   axis:
     velocity: 1.0
     acceleration: 1.0
