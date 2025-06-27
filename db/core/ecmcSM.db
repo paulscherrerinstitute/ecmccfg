@@ -32,6 +32,17 @@ record(bo,"${P}SM${ID_2CH}-SlvsAutoDsbleCmd"){
   field(TSE,  "0")
 }
 
+record(bo,"${P}SM${ID_2CH}-DbgPrntEna"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Enable dbg printouts")  
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0x8),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/mst_slv_sm$(Index).control?")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
+
 record(mbbo,"${P}SM${ID_2CH}-StateCmd"){
   info(asyn:READBACK,"1")
   field(DESC, "State")

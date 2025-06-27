@@ -438,7 +438,7 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(TWVL, 2)
   field(THST, "ABS")
   field(THVL, 3)
-  field(FRST, "PVT")
+  field(FRST, "PVT_INTERN")
   field(FRVL, 9)
   field(FVST, "HOME")
   field(FVVL, 10)
@@ -763,4 +763,9 @@ record(bo,"${P}${AXIS_NAME}-TwkFwdCmd"){
   field(ONAM, "Tweak")
   field(SCAN, "Passive")
   field(TSE,  "0")
+}
+
+record(stringin,"${P}${AXIS_NAME}-GrpNam") {
+    field(DESC, "Name of Grp ")
+    field(VAL,  "${GRP_NAME='No group'}")
 }
