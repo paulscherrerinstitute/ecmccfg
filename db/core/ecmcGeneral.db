@@ -176,8 +176,12 @@ record(waveform,"$(P)MCU-Updated"){
   field(FLNK, "${ECMC_PROC_HOOK=''}")
 }
 
-# This db is only used to set the VAL field
 record(ao,"${P}MCU-Cfg-UI-EC-Rows") {
+  field(DESC, "UI: Panel rows")
+  field(VAL,  "1")
+}
+
+record(ao,"${P}MCU-Cfg-UI-AX-Rows") {
   field(DESC, "UI: Panel rows")
   field(VAL,  "1")
 }

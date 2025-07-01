@@ -420,7 +420,7 @@
         <x>30</x>
         <y>250</y>
         <width>251</width>
-        <height>161</height>
+        <height>176</height>
        </rect>
       </property>
       <property name="title">
@@ -645,7 +645,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>100</y>
+         <y>125</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -664,7 +664,7 @@
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>100</y>
+         <y>125</y>
          <width>41</width>
          <height>16</height>
         </rect>
@@ -702,7 +702,7 @@
        <property name="geometry">
         <rect>
          <x>170</x>
-         <y>95</y>
+         <y>120</y>
          <width>66</width>
          <height>31</height>
         </rect>
@@ -749,7 +749,7 @@
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>125</y>
+         <y>150</y>
          <width>41</width>
          <height>16</height>
         </rect>
@@ -787,7 +787,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>125</y>
+         <y>150</y>
          <width>100</width>
          <height>16</height>
         </rect>
@@ -806,7 +806,7 @@
        <property name="geometry">
         <rect>
          <x>170</x>
-         <y>120</y>
+         <y>145</y>
          <width>66</width>
          <height>31</height>
         </rect>
@@ -849,6 +849,60 @@
         </property>
        </widget>
       </widget>
+      <widget class="caShellCommand" name="cashellcommand_13">
+       <property name="geometry">
+        <rect>
+         <x>175</x>
+         <y>100</y>
+         <width>55</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="label">
+        <string notr="true">&gt;&gt;</string>
+       </property>
+       <property name="labels">
+        <string>Open first axis</string>
+       </property>
+       <property name="files">
+        <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+       </property>
+       <property name="args">
+        <string>AXIS_OVERVIEW $(IOC)</string>
+       </property>
+      </widget>
+      <widget class="caTextEntry" name="catextentry_4">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>100</y>
+         <width>36</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="channel" stdset="0">
+        <string notr="true">$(IOC):MCU-Cfg-UI-AX-Rows</string>
+       </property>
+      </widget>
+      <widget class="caLabel" name="calabel_110">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Overview rows:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_5">
       <property name="geometry">
@@ -856,7 +910,7 @@
         <x>300</x>
         <y>250</y>
         <width>251</width>
-        <height>161</height>
+        <height>176</height>
        </rect>
       </property>
       <property name="title">
@@ -1025,9 +1079,9 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>410</y>
+        <y>430</y>
         <width>251</width>
-        <height>101</height>
+        <height>86</height>
        </rect>
       </property>
       <property name="title">
@@ -1152,9 +1206,9 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>410</y>
+        <y>430</y>
         <width>251</width>
-        <height>101</height>
+        <height>86</height>
        </rect>
       </property>
       <property name="title">
