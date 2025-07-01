@@ -2,7 +2,7 @@
 
 axis:
   id: 5
-  group: realAxes
+  group: Slaves
   mode: CSV
   features:
     allowSrcChangeWhenEnabled: true

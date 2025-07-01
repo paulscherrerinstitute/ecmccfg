@@ -1,6 +1,6 @@
 axis:
   id: ${AX_ID}
-  group: virtualAxes
+  group: Masters
   type: end effector
   autoEnable:
     enableTimeout: 5.0
