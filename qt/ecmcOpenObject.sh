@@ -26,6 +26,9 @@
 #  PLG_SAFETY_GRP      : CMD, PREFIX, GRP_ID
 #  PLG_SAFETY_GRP_AXIS : CMD, PREFIX, DEV,        AX_NAME
 #  PVT_MAIN            : CMD, PREFIX
+#  SM_FIRST            : CMD, PREFIX
+#  SM_NEXT             : CMD, PREFIX, THIS_PLC_ID
+#  SM_PREV             : CMD, PREFIX, THIS_PLC_ID
 
 CMD=$1
 
@@ -385,7 +388,37 @@ function openPVTMain() {
   caqtdm -macro "$MACROS" ecmcProfileMove.ui
 }
 
+# SM
+function openSMFirst() {
+  PREFIX=$1
+  ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-SM-FrstObjId | tr -d '"')
+  ID_2=$(printf  "%02d" $ID_1)
+  echo "ID_1=$ID_1"
+  echo "ID_2=$ID_2"
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcSMxx.ui
+}
 
+function openSMNext() {
+  PREFIX=$1
+  ID=$2
+  ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-SM$ID-NxtObjId | tr -d '"')
+  ID_2=$(printf  "%02d" $ID_1)
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcSMxx.ui
+}
+
+function openSMPrev() {
+  PREFIX=$1
+  ID=$2
+  ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-SM$ID-PrvObjId | tr -d '"')
+  ID_2=$(printf  "%02d" $ID_1)
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcSMxx.ui
+}
 
 # Parse commands
 case $CMD in
@@ -464,7 +497,15 @@ case $CMD in
   "PVT_MAIN")
   openPVTMain $2
   ;;
-
+  "SM_FIRST")
+  openSMFirst $2
+  ;;
+  "SM_NEXT")
+  openSMNext $2 $3
+  ;;
+  "SM_PREV")
+  openSMPrev $2 $3
+  ;;
   *) echo "Invalid command"
   ;;
 esac
