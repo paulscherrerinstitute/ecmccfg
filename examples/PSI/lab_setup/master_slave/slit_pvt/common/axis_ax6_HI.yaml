@@ -2,7 +2,7 @@
 
 axis:
   id: 6
-  group: realAxes
+  group: Slaves
   mode: CSV
   features:
     allowSrcChangeWhenEnabled: true
@@ -17,7 +17,7 @@ epics:
   unit: mm
   motorRecord:
     description: "Hi"
-    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen,TWV=1,NTM"
 
 drive:
   numerator: 10                # max velo in EGU/s
