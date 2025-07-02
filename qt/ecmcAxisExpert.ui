@@ -2411,7 +2411,7 @@
      <string>ecmcAxisCntrlStatWd_v1.ui</string>
     </property>
     <property name="args">
-     <string>SYS=$(DEV),Axis=$(Axis)</string>
+     <string>DEV=$(DEV),Axis=$(Axis)</string>
     </property>
    </widget>
    <widget class="caLabel" name="calabel_116">
@@ -2996,7 +2996,7 @@
       </rect>
      </property>
      <property name="macro">
-      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(DEV),AX_ID=$(AX_ID)</string>
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),DEV=$(DEV),AX_ID=$(AX_ID)</string>
      </property>
      <property name="visibility">
       <enum>caFrame::Calc</enum>
@@ -3059,7 +3059,7 @@
       </rect>
      </property>
      <property name="macro">
-      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(DEV),AX_ID=$(AX_ID)</string>
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),DEV=$(DEV),AX_ID=$(AX_ID)</string>
      </property>
      <property name="visibility">
       <enum>caFrame::Calc</enum>
@@ -3933,7 +3933,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=02,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=02,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -3957,10 +3957,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -3974,7 +3974,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=05,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=05,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -3998,10 +3998,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4015,7 +4015,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=06,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=06,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4039,10 +4039,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4056,7 +4056,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=07,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=07,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4080,10 +4080,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4097,7 +4097,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=03,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=03,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4121,10 +4121,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4138,7 +4138,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=04,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=04,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4162,10 +4162,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4179,7 +4179,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=01,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=01,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4203,10 +4203,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4220,7 +4220,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">ENC_ID=08,SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+       <string notr="true">ENC_ID=08,DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -4244,10 +4244,10 @@
         <string>$(ENC_ID)</string>
        </property>
        <property name="files">
-        <string>ecmcAxisEncExpert_v1.ui</string>
+        <string>ecmcAxisEncExpert.ui</string>
        </property>
        <property name="args">
-        <string>ENC_ID=$(ENC_ID),SYS=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
+        <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC)</string>
        </property>
       </widget>
      </widget>
@@ -4645,7 +4645,7 @@
        </rect>
       </property>
       <property name="macro">
-       <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(DEV)</string>
+       <string notr="true">IOC=$(IOC),Axis=$(Axis),DEV=$(DEV)</string>
       </property>
       <property name="visibility">
        <enum>caFrame::Calc</enum>
@@ -5840,7 +5840,7 @@
       </rect>
      </property>
      <property name="macro">
-      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(DEV),AX_ID=$(AX_ID)</string>
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),DEV=$(DEV),AX_ID=$(AX_ID)</string>
      </property>
      <property name="visibility">
       <enum>caFrame::Calc</enum>
@@ -5884,7 +5884,7 @@
       </rect>
      </property>
      <property name="macro">
-      <string notr="true">IOC=$(IOC),Axis=$(Axis),SYS=$(DEV),AX_ID=$(AX_ID)</string>
+      <string notr="true">IOC=$(IOC),Axis=$(Axis),DEV=$(DEV),AX_ID=$(AX_ID)</string>
      </property>
      <property name="visibility">
       <enum>caFrame::Calc</enum>
