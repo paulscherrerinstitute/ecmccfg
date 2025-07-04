@@ -2408,7 +2408,7 @@
      <string>More...</string>
     </property>
     <property name="files">
-     <string>ecmcAxisCntrlStatWd_v1.ui</string>
+     <string>ecmcAxisCntrlStatWd.ui</string>
     </property>
     <property name="args">
      <string>DEV=$(DEV),Axis=$(Axis)</string>
