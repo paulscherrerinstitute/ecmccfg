@@ -21,17 +21,17 @@
       },
       "axis.type=1": {
         "required": "plcSchema",
-        "optional": ""
+        "optional": "metaSchema"
       },
       "axis.type=2": {
         "required": "axisSchema encoderSchema trajectorySchema",
-        "optional": "varSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema axisPlcSchema trajectoryModuloSchema"
+        "optional": "metaSchema varSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema axisPlcSchema trajectoryModuloSchema"
       }
     },
     "encoder": {
       "axis.type=0": {
         "required": "encoderSchema",
-        "optional": "encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema"
+        "optional": "metaSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema"
       },
       "axis.type=1": {
         "required": "",
