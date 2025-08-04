@@ -25,13 +25,14 @@ epicsEnvSet(FILE_TEMP_3,${ECMC_TMP_DIR}${FILE}_3)
 # step 1: get filename (need to check if filename contains other macros also). Basically run the filename in this iocsh
 ecmcIf("'$(CFG_TOOL=jinja)'=='ecb'")
   ${IF_TRUE}system "ecb --yaml ${FILE} --action readkey --key plc.file --output ${FILE_TEMP_1}"
-  ${IF_TRUE}system '[ ! -s ${FILE_TEMP_1} ] || sed -i "s/^\(.*\)$/epicsEnvSet(ECMC_PLC_FILENAME, \"\1\")/" ${FILE_TEMP_1}'
-  ${IF_TRUE}system '[   -s ${FILE_TEMP_1} ] || (install -D /dev/null ${FILE_TEMP_1} && echo "epicsEnvSet(ECMC_PLC_FILENAME, \"${ECMC_TMP_DIR}${FILE}\")" >> ${FILE_TEMP_1})'
+  ${IF_TRUE}system '[ ! -s ${FILE_TEMP_1} ] || sed -i "s/^\(.*\)$/epicsEnvSet(ECMC_PLC_FILENAME, \"\1\")\n/" ${FILE_TEMP_1}'
+  ${IF_TRUE}system '[   -s ${FILE_TEMP_1} ] || (install -D /dev/null ${FILE_TEMP_1} && echo "epicsEnvSet(ECMC_PLC_FILENAME, \"NONE\")\n" >> ${FILE_TEMP_1})'
 #- else
   ${IF_FALSE}system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcGetFileName.py ${FILE} ${FILE_TEMP_1}"
 ecmcEndIf()
 
 # PLC filename with expanded macros:
+#- system "cat ${FILE_TEMP_1}"
 ${SCRIPTEXEC} "${FILE_TEMP_1}"
 epicsEnvShow(ECMC_PLC_FILENAME)
 
