@@ -26,7 +26,7 @@ epicsEnvSet(FILE_TEMP_3,${ECMC_TMP_DIR}${FILE}_3)
 ecmcIf("'$(CFG_TOOL=jinja)'=='ecb'")
   ${IF_TRUE}system "ecb --yaml ${FILE} --action readkey --key plc.file --output ${FILE_TEMP_1}"
   ${IF_TRUE}system '[ ! -s ${FILE_TEMP_1} ] || sed -i "s/^\(.*\)$/epicsEnvSet(ECMC_PLC_FILENAME, \"\1\")\n/" ${FILE_TEMP_1}'
-  ${IF_TRUE}system '[   -s ${FILE_TEMP_1} ] || (install -D /dev/null ${FILE_TEMP_1} && echo "epicsEnvSet(ECMC_PLC_FILENAME, \"NONE\")\n" >> ${FILE_TEMP_1})'
+  ${IF_TRUE}system '[   -s ${FILE_TEMP_1} ] || echo "epicsEnvSet(ECMC_PLC_FILENAME, \"NONE\")\n" >> ${FILE_TEMP_1}'
 #- else
   ${IF_FALSE}system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcGetFileName.py ${FILE} ${FILE_TEMP_1}"
 ecmcEndIf()
