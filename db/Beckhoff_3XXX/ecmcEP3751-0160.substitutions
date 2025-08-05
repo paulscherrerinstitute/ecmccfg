@@ -1,0 +1,8 @@
+file "ecmc_analogInput-chX.template"
+{
+  pattern { CH_ID, sourceName,         KEY,     ESLO,  PREC, EGU  }
+          { X,     accelerationActual, AcclAct, 0.001, 3,    g    }
+          { Y,     accelerationActual, AcclAct, 0.001, 3,    g    }
+          { Z,     accelerationActual, AcclAct, 0.001, 3,    g    }
+          { '',    temperature,        Temp,    1.0,   0,    degC }
+}
