@@ -73,6 +73,10 @@
       "meta.ecbBuild": {
         "type": "integer",
         "required": false
+      },
+      "meta.ecbVersion": {
+        "type": "string",
+        "required": false
       }
     }
   },
