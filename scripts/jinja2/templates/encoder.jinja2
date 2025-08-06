@@ -159,11 +159,11 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     #- Need to write to env vars to also support legacy syntax ("homing." vs #encoder.homing.")
     {%- if encoder.homing.acceleration is defined %}
        epicsEnvSet(ACC, {{ encoder.homing.acceleration }})
-       ecmcConfigOrDie "Cfg.SetAxisHomeAcc({{ axis.id }},{{ encoder.homing.acceleration }})"
+       ecmcConfigOrDie "Cfg.SetAxisHomeAcc(${ECMC_AXIS_NO},{{ encoder.homing.acceleration }})"
     {%- endif %}
     {%- if encoder.homing.deceleration is defined %}
        epicsEnvSet(DEC, {{ encoder.homing.deceleration }})
-       ecmcConfigOrDie "Cfg.SetAxisHomeDec({{ axis.id }},{{ encoder.homing.deceleration }})"
+       ecmcConfigOrDie "Cfg.SetAxisHomeDec(${ECMC_AXIS_NO},{{ encoder.homing.deceleration }})"
     {%- endif %}
 
     {%- if encoder.homing.trigg is defined and  encoder.homing.ready %}
