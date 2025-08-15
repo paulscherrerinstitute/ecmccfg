@@ -36,6 +36,9 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
     field(UREV, "$(UREV=1.0)")
     field(VMAX, "$(VMAX=0)")
     field(SPAM, "$(SPAM=15)")
+    field(PCOF, "$(PCOF=0)")
+    field(DCOF, "$(DCOF=0)")
+    field(ICOF, "$(ICOF=0)")
 }
 
 # The message text
