@@ -40,3 +40,15 @@ record(ao,"$(PREFIX)$(MOTOR_NAME)-AccHom") {
     field(PINI, "YES")
     field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))AccHom")
 }
+
+record(bo,"${PREFIX}${MOTOR_NAME}-HomUseHVEL"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Use MR HVEL when homing")  
+  field(VAL, "$(UseHVEL=0)")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))HomeUseHVEL")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+}
