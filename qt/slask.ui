@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,75 +10,42 @@
     <height>488</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <widget class="caRelatedDisplay" name="carelateddisplay_7">
+  <property name="maximumSize">
+   <size>
+    <width>315</width>
+    <height>488</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="caLabel" name="calabel">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>463</y>
-     <width>71</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="labels">
-    <string>Expert</string>
-   </property>
-   <property name="files">
-    <string>ecmcAxisExpert.ui</string>
-   </property>
-   <property name="args">
-    <string>DEV=$(DEV),Axis=$(Axis),AX_ID=$(AX_ID),IOC=$(IOC)</string>
-   </property>
-  </widget>
-  <widget class="caMessageButton" name="camessagebutton_15">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>313</y>
-     <width>71</width>
+     <x>0</x>
+     <y>0</y>
+     <width>184</width>
      <height>24</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>60</width>
-     <height>24</height>
-    </size>
    </property>
    <property name="text">
-    <string>KILL</string>
+    <string>$(Axis)</string>
    </property>
-   <property name="channel" stdset="0">
-    <string notr="true">$(DEV):$(Axis)-EnaCmd</string>
-   </property>
-   <property name="label">
-    <string notr="true">KILL</string>
-   </property>
-   <property name="foreground">
-    <color>
-     <red>255</red>
-     <green>255</green>
-     <blue>255</blue>
-    </color>
-   </property>
-   <property name="background">
-    <color>
-     <red>170</red>
-     <green>0</green>
-     <blue>0</blue>
-    </color>
-   </property>
-   <property name="pressMessage">
-    <string notr="true">0</string>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="caFrame" name="StatusFrame">
    <property name="geometry">
     <rect>
      <x>232</x>
-     <y>8</y>
+     <y>5</y>
      <width>82</width>
      <height>301</height>
     </rect>
@@ -816,27 +783,71 @@
     </property>
    </widget>
   </widget>
-  <widget class="caLabel" name="calabel">
+  <widget class="caLabel" name="calabel_61">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>3</y>
-     <width>184</width>
-     <height>24</height>
+     <x>240</x>
+     <y>255</y>
+     <width>69</width>
+     <height>18</height>
     </rect>
    </property>
-   <property name="text">
-    <string>$(Axis)</string>
+   <property name="minimumSize">
+    <size>
+     <width>69</width>
+     <height>18</height>
+    </size>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   <property name="text">
+    <string>LastIlock:</string>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_23">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>275</y>
+     <width>32</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(DEV):$(Axis)-LastIlock</string>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::User</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="caRelatedDisplay" name="carelateddisplay_7">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>460</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="labels">
+    <string>Expert</string>
+   </property>
+   <property name="files">
+    <string>ecmcAxisExpert.ui</string>
+   </property>
+   <property name="args">
+    <string>DEV=$(DEV),Axis=$(Axis),AX_ID=$(AX_ID),IOC=$(IOC)</string>
    </property>
   </widget>
   <widget class="caStripPlot" name="castripplot">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>28</y>
+     <y>25</y>
      <width>241</width>
      <height>151</height>
     </rect>
@@ -923,11 +934,127 @@
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="caFrame" name="StatusFrame_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>435</y>
+     <width>230</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <widget class="caLineEdit" name="calineedit_9">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>190</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(DEV):$(Axis)-MsgTxt</string>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Default</enum>
+    </property>
+    <property name="alarmHandling">
+     <enum>caLineEdit::onBackground</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_6">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>5</y>
+      <width>126</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>25</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(DEV):$(Axis)-ErrId</string>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+   </widget>
+   <widget class="caMessageButton" name="camessagebutton_13">
+    <property name="geometry">
+     <rect>
+      <x>154</x>
+      <y>5</y>
+      <width>70</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>50</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>error reset</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(DEV):$(Axis)-RstCmd</string>
+    </property>
+    <property name="label">
+     <string notr="true">error reset</string>
+    </property>
+    <property name="releaseMessage">
+     <string notr="true">0</string>
+    </property>
+    <property name="pressMessage">
+     <string notr="true">1</string>
+    </property>
+    <property name="colorMode">
+     <enum>caMessageButton::Default</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_10">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>4</y>
+      <width>18</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>18</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>#</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>187</y>
+     <y>184</y>
      <width>230</width>
      <height>246</height>
     </rect>
@@ -3838,168 +3965,11 @@
     <zorder>calabel_91</zorder>
    </widget>
   </widget>
-  <widget class="caLineEdit" name="calineedit_23">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>278</y>
-     <width>32</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="channel" stdset="0">
-    <string notr="true">$(DEV):$(Axis)-LastIlock</string>
-   </property>
-   <property name="precisionMode">
-    <enum>caLineEdit::Channel</enum>
-   </property>
-   <property name="limitsMode">
-    <enum>caLineEdit::User</enum>
-   </property>
-   <property name="unitsEnabled">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="caLabel" name="calabel_61">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>258</y>
-     <width>69</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>69</width>
-     <height>18</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>LastIlock:</string>
-   </property>
-  </widget>
-  <widget class="caFrame" name="StatusFrame_2">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>438</y>
-     <width>230</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>50</height>
-    </size>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::Box</enum>
-   </property>
-   <widget class="caLineEdit" name="calineedit_9">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>190</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(DEV):$(Axis)-MsgTxt</string>
-    </property>
-    <property name="colorMode">
-     <enum>caLineEdit::Default</enum>
-    </property>
-    <property name="alarmHandling">
-     <enum>caLineEdit::onBackground</enum>
-    </property>
-    <property name="precisionMode">
-     <enum>caLineEdit::User</enum>
-    </property>
-   </widget>
-   <widget class="caLineEdit" name="calineedit_6">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>5</y>
-      <width>126</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>25</width>
-      <height>18</height>
-     </size>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(DEV):$(Axis)-ErrId</string>
-    </property>
-    <property name="precisionMode">
-     <enum>caLineEdit::User</enum>
-    </property>
-   </widget>
-   <widget class="caMessageButton" name="camessagebutton_13">
-    <property name="geometry">
-     <rect>
-      <x>154</x>
-      <y>5</y>
-      <width>70</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>50</width>
-      <height>18</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>error reset</string>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(DEV):$(Axis)-RstCmd</string>
-    </property>
-    <property name="label">
-     <string notr="true">error reset</string>
-    </property>
-    <property name="releaseMessage">
-     <string notr="true">0</string>
-    </property>
-    <property name="pressMessage">
-     <string notr="true">1</string>
-    </property>
-    <property name="colorMode">
-     <enum>caMessageButton::Default</enum>
-    </property>
-   </widget>
-   <widget class="caLabel" name="calabel_10">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>4</y>
-      <width>18</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>18</width>
-      <height>18</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>#</string>
-    </property>
-   </widget>
-  </widget>
   <widget class="caRelatedDisplay" name="carelateddisplay_6">
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>440</y>
+     <y>437</y>
      <width>71</width>
      <height>21</height>
     </rect>
@@ -4014,6 +3984,58 @@
     <string>P=$(DEV):,M=$(Axis)</string>
    </property>
   </widget>
+  <widget class="caMessageButton" name="camessagebutton_15">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>310</y>
+     <width>71</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>60</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>KILL</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(DEV):$(Axis)-EnaCmd</string>
+   </property>
+   <property name="label">
+    <string notr="true">KILL</string>
+   </property>
+   <property name="foreground">
+    <color>
+     <red>255</red>
+     <green>255</green>
+     <blue>255</blue>
+    </color>
+   </property>
+   <property name="background">
+    <color>
+     <red>170</red>
+     <green>0</green>
+     <blue>0</blue>
+    </color>
+   </property>
+   <property name="pressMessage">
+    <string notr="true">0</string>
+   </property>
+  </widget>
+  <zorder>castripplot</zorder>
+  <zorder>calabel</zorder>
+  <zorder>StatusFrame</zorder>
+  <zorder>calabel_61</zorder>
+  <zorder>calineedit_23</zorder>
+  <zorder>carelateddisplay_7</zorder>
+  <zorder>StatusFrame_2</zorder>
+  <zorder>tabWidget</zorder>
+  <zorder>carelateddisplay_6</zorder>
+  <zorder>camessagebutton_15</zorder>
  </widget>
  <customwidgets>
   <customwidget>

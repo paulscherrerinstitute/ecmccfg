@@ -52,7 +52,7 @@ widget = b"""
       <string>IOC=%s,DEV=%s,AX_ID=%d,Axis=%s</string>
      </property>
      <property name="filename" stdset="0">
-      <string notr="true">ecmcAxis.ui</string>
+      <string notr="true">ecmcAxisFrame.ui</string>
      </property>
     </widget>
    </item>
@@ -89,6 +89,9 @@ import tempfile
 from typing import List, NamedTuple
 
 import requests
+
+subPanelWidth = 330
+subPanelHeight = 500
 
 class axisModule(object):
     def __init__(self, index, name, dev):
@@ -149,7 +152,7 @@ def create_ui_file(fname: str, ioc: str, axes, rows: int):
         # number of columns in the grid layout
         cols = math.ceil(len(axes) / rows)
         
-        f.write(header % (min(1000, 315*cols), rows * 488 + 20, bytes(ioc, 'utf8'), 315*cols, rows * 488))
+        f.write(header % (min(1000, subPanelWidth*cols), rows * subPanelHeight + 20, bytes(ioc, 'utf8'), subPanelWidth*cols, rows * subPanelHeight))
 
         i=0
         for axis in axes:
