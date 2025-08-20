@@ -5,38 +5,15 @@
 ##       oversampling factor must be an integer.  "(1/EC_RATE*1E9) / NELM" 
 ##       
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg
 
-require ecmccfg 8.0.0
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=8.0.0, EC_RATE=1000"
-
-##############################################################################
-## Config hardware:
-
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
+# Ensure PV-update in 1Khz
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "1")
 # Note NELM equals oversampling factor in this case
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "34")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3702, NELM=100"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=34, HW_DESC=EL3702, NELM=100"
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "10"}")
+# Restore PV-update in 100Hz for less time critical records
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "10")
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

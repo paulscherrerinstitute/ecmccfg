@@ -6,23 +6,12 @@
 #
 # See last rows in this file for how to execute an example cmd
 #
-# Note: Unfortenately records cannot be loaded dynamically in EPICS
+# Note: Unfortunately records cannot be loaded dynamically in EPICS
 # 
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg
 
-require ecmccfg master
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
-
-##############################################################################
-
-$(SCRIPTEXEC) ($(ecmccfg_DIR)general.cmd 
+$(SCRIPTEXEC) $(ecmccfg_DIR)general.cmd 
 
 ##############################################################################
 ############# Example: 

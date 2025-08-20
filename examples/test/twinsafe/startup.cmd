@@ -13,7 +13,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,         "HW_DESC=EP1957-0022"
 #- PLC for FSoE communication
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,      "FILE=cfg/FSoE.plc, PLC_MACROS='FSOE_M_SID=22,FSOE_S_SID=23'"
 
-#- ###########################################################################
-#- go active
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd

@@ -3,11 +3,8 @@
 ## Oversampling factor can be set by the changing the "NELM" arg to addSlave
 ##       
 
-require ecmccfg v9.0.1_RC4 "IOC=$(IOC),ECMC_VER=v9.0.1_RC4, EC_RATE=1000"
-require ecmccomp
+require ecmccfg "IOC=$(IOC),EC_RATE=1000"
 
-##############################################################################
-## Config hardware:
 
 # Update records in 1ms (all data to EPICS in 1kHz)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
@@ -20,16 +17,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=AI-Generic-Range,CH_ID=2,MA
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-##############################################################################
-############# Go active:
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

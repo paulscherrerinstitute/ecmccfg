@@ -27,35 +27,16 @@
 #- static.triggRead;    : Trigger New read of data. (manual triggering of next read is needed in this example)
 #-
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2,EC_RATE=200"
-
-##############################################################################
-## Config hardware:
-
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",  "10")
+require ecmccfg
 
 #- Configure EL6002 with custom database and config of SDOs
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "$(SLAVE_ID=11)")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL6002, SUBST_FILE=ecmcEL6002_bytes.substitutions"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=11, HW_DESC=EL6002, SUBST_FILE=ecmcEL6002_bytes.substitutions"
 epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8000")  # To set correct sdo address in sensor config
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6002-Sensor-chX-default.cmd
 
 epicsEnvSet(ECMC_EC_SDO_INDEX, "0x8010")  # To set correct sdo address in sensor config
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL6002-Sensor-chX-default.cmd
-
-
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ecmcConfig "EcGetMemMapId(ec0.s11.mm.inputDataArray01)"
 epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
@@ -63,25 +44,7 @@ epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 ecmcConfig "EcGetMemMapId(ec0.s11.mm.inputDataArray02)"
 epicsEnvSet(MM_CH_2_IN,${ECMC_CONFIG_RETURN_VAL})
 
-##############################################################################
-## PLC 0
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=10,FILE=./plc/el6002.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),CH_ID=01,MM_ID=${MM_CH_1_IN},DBG='")
 
-##############################################################################
-## PLC 1
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=10,FILE=./plc/el6002.plc, PLC_MACROS='PLC_ID=1,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),CH_ID=02,MM_ID=${MM_CH_2_IN},DBG='")
 
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-##############################################################################
-############# Go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-
-iocInit()
-
-dbgrep *0${ECMC_EC_SLAVE_NUM}*

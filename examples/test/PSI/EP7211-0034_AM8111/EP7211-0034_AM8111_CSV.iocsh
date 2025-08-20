@@ -1,7 +1,6 @@
-require ecmccfg v7_RC1
+require ecmccfg
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EP7211-0034, CONFIG=-Motor-Beckhoff-AM8111-0F20-0000"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=3, HW_DESC=EP7211-0034, CONFIG=-Motor-Beckhoff-AM8111-0F20-0000"
 
 # Apply hardware configuration
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
@@ -9,20 +8,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 epicsEnvSet("DEV",      "STEST-MYDEVICE")
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=./cfg/AM8111_CSV.pax"
 
-
-# ADDITIONAL SETUP
-#
-# END of ADDITIONAL SETUP
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-# go active
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd

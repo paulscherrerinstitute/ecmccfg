@@ -3,7 +3,6 @@
 ## Encoder RLS on lab motion stage
 
 require ecmccfg "MASTER_ID=1"
-require ecmccomp
 
 ##############################################################################
 ## Config hardware:

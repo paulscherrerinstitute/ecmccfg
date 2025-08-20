@@ -1,13 +1,6 @@
 ##############################################################################
 ## Example config for el5101-0010
 
-require ecmccfg v9.6.2_RC1
-
-##############################################################################
-## Config hardware:
-
+require ecmccfg
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=9, HW_DESC=EL5101-0010"
 
-# go active
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

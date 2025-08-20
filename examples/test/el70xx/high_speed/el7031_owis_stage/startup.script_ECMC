@@ -1,7 +1,7 @@
 # ecmc test system
 # Anders Sandström
 
-require ecmccfg v9.0.1_RC3,"EC_RATE=500,ECMC_VER=v9.0.1_RC2"
+require ecmccfg,"EC_RATE=500"
 
 epicsEnvSet("IOC" ,"$(IOC="ec-base-01:Test:")")
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")

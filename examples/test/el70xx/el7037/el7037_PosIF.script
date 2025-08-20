@@ -1,37 +1,10 @@
 ##############################################################################
 ## Example config for el7037 positioning interface (no motorrecord support yet)
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg
 
-require ecmccfg master
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=26, HW_DESC=EL7037_PosIF, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
 
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
-
-##############################################################################
-## Configure hardware
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "26")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037_PosIF, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
-
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-
-ecmcConfig "Cfg.SetAppMode(1)"
 
 # Below is a sequence describing what records to use for absolute positioning! 
 #mcu002> dbpf IOC_TEST:m0s000-Pos01-StrtType 1

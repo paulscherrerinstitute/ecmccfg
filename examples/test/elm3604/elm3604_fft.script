@@ -4,57 +4,26 @@
 ## This test script uses the +-320mV sensor configuration
 ## A FFT plugin calculates the spectrum for ch4 of the elm3604
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg
 
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=1000"
-
-##############################################################################
-## Config hardware:
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=0, HW_DESC=EK1100"
 
 # Update records in 1ms (all data to EPICS in 1kHz)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,1)
 
 # Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
-epicsEnvSet("NELM",              "20")
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=11, HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 ########################################################################s######
 ## Load plugin: FFT linked to channel 3 of elm3604
-require ecmc_plugin_fft master  # to get access to db file..
+require ecmc_plugin_fft  # to get access to db file..
 epicsEnvSet("FFT_NELM", 20480)
 epicsEnvSet(ECMC_PLUGIN_FILNAME,"${HOME}/epics/base-7.0.4/require/${require_VERSION}/siteMods/ecmc_plugin_fft/master/lib/linux-x86_64/libecmc_plugin_fft.so")
 epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ec0.s11.mm.analogInputArray03;DBG_PRINT=0;NFFT=${FFT_NELM};RATE=1000;RM_DC=1;SCALE=1;MODE=CONT;ENABLE=1;")
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=0,FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=1"
 # Note: INDEX is the index of FFT object in FFT plugin and not PLUGIN_ID. In this case the same
 dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=0, NELM=${FFT_NELM}")
-
-##############################################################################
-## Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-##############################################################################
-## Go active:
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-iocInit()
-
-dbl > pvs.log

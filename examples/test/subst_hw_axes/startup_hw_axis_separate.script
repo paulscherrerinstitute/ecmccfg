@@ -1,16 +1,10 @@
 
-require ecmccfg,v9.0.1_RC4,"ECMC_VER=v9.0.1_RC4,MASTER_ID=0"
+require ecmccfg
 require ecmccomp
-
 
 # Load Hardware based on substitution and templae
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstHw.cmd, "FILE=./hw.subst"
 
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
 # Load Motion based on substitution and templae
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstAxes.cmd, "FILE=./axes.subst"
-
-# go active
-$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
 
