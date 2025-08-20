@@ -2,7 +2,6 @@
 ## Example config for el5042
 
 require ecmccfg "MASTER_ID=1"
-require ecmccomp
 
 ##############################################################################
 ## Config hardware:
@@ -15,7 +14,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS
 #- If the offset is needed then the sum of the bit's still need to match the bitcount of the encoder. Example: Offset 3 LSB bits, set ST_BITS=23 (26-3)
 #- ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Encoder-Generic-BISS-C,CH_ID=1,MACROS=MT_BITS=0,ST_BITS=23,CLK_FRQ_KHZ=1000,OFF_BITS=3"
 
-##############################################################################
-## Go active:
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-$(SCRIPTEXEC) $(ecmccfg_DIR)setAppMode.cmd
