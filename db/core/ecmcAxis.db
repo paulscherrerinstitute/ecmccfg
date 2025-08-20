@@ -318,7 +318,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimBwdIlock"){
   field(FLNK, "${P}${AXIS_NAME}-BusyLocal.PROC")
 }
 
-# // bit 21 softlimilockbwd
+# // bit 21 BusyLocal
 record(bi,"${P}${AXIS_NAME}-BusyLocal"){
   field(DESC, "${AXIS_NAME}: Local busy")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B15")
@@ -329,7 +329,7 @@ record(bi,"${P}${AXIS_NAME}-BusyLocal"){
   field(FLNK, "${P}${AXIS_NAME}-BusyGlobal.PROC")
 }
 
-# // bit 22 softlimilockbwd
+# // bit 22 BusyGlobal
 record(bi,"${P}${AXIS_NAME}-BusyGlobal"){
   field(DESC, "${AXIS_NAME}: Global busy")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B16")
