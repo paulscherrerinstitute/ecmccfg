@@ -1,0 +1,21 @@
+#- Special scaling where pV will be displayed as 0..16mA instead
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, LINR,    ESLO,         EOFF, EGU,  PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,    LSV,     HSV,     HHSV   }
+          {01,    "SLOPE", 4.8829615E-4, 0,    "mA", 3,    0,   -0.1, 16,   16.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR"}
+          {02,    "SLOPE", 4.8829615E-4, 0,    "mA", 3,    0,   -0.1, 16,   16.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR"}
+}
+
+file "ecmc_status_analog-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+          {02,    "AI"}
+}
+
+file "ecmc_analogOutput-chX.template"
+{
+  pattern {CH_ID, LINR,    ESLO,         EOFF, EGU,  PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,    LSV,     HSV,     HHSV,    DRVL, DRVH }
+          {01,    "SLOPE", 4.8829615E-4, 0,    "mA", 3,    0,   -0.1, 16,   16.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    16   }
+          {02,    "SLOPE", 4.8829615E-4, 0,    "mA", 3,    0,   -0.1, 16,   16.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    16   }
+}

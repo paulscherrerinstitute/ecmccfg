@@ -45,18 +45,31 @@ epicsEnvUnset(ECMC_AXIS_FLAGS)
 
 #- VMAX
 {%- if monitoring.velocity is defined %}
-  {%- if monitoring.velocity.enable|default(0)|int %}
-    epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}VMAX={{ monitoring.velocity.max }},")
-  {%- endif %}
+    {%- if monitoring.velocity.enable|default(0)|int %}
+        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}VMAX={{ monitoring.velocity.max }},")
+    {%- endif %}
+{%- endif %}
+
+#- Motor record controller params are scaled by a factor 0.01 (since they only allow a value 0..1)
+epicsEnvSet(ECMC_MR_PCOF,0)
+epicsEnvSet(ECMC_MR_ICOF,0)
+epicsEnvSet(ECMC_MR_DCOF,0)
+{%- if controller is defined %}
+    ecmcEpicsEnvSetCalc(ECMC_MR_PCOF,'clamp(0.0,{{ controller.Kp|default(0)|float }}/100.0,1.0)','%lf')
+    ecmcEpicsEnvSetCalc(ECMC_MR_ICOF,'clamp(0,{{ controller.Ki|default(0)|float }}/100.0,1.0)','%lf')
+    ecmcEpicsEnvSetCalc(ECMC_MR_DCOF,'clamp(0,{{ controller.Kd|default(0)|float }}/100.0,1.0)','%lf')
 {%- endif %}
 
 ecmcEpicsEnvSetCalc(ECMC_TEMP_SREV,'abs({{ drive.denominator|default(1)|int }})')
 ecmcEpicsEnvSetCalc(ECMC_TEMP_UREV,'abs({{ drive.numerator|default(1)|float }})')
 ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homing.type|default(0)|int }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),TWV={{ axis.tweakDist|default(1.0)|float }},{{ epics.motorRecord.fieldInit|default('') }},${ECMC_MR_TEMP_FIELDS=""}")
+dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default('') }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homing.type|default(0)|int }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),TWV={{ axis.tweakDist|default(1.0)|float }},{{ epics.motorRecord.fieldInit|default('') }},${ECMC_MR_TEMP_FIELDS=""},PCOF=${ECMC_MR_PCOF},ICOF=${ECMC_MR_ICOF},DCOF=${ECMC_MR_DCOF}")
 epicsEnvUnset(ECMC_TEMP_UREV)
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
+epicsEnvUnset(ECMC_MR_PCOF)
+epicsEnvUnset(ECMC_MR_ICOF)
+epicsEnvUnset(ECMC_MR_DCOF)
 
 #- PVT
 {%- if epics.motorRecord.pvt %}
