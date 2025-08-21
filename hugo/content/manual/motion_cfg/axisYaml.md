@@ -488,6 +488,7 @@ epics:
     enable: true
     description: This is MR
     fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
+    syncSoftLimits: false                             # Optional: Sync softlimits between motor and ecmc (default false)
 
 drive:
   numerator: 360                                      # Fastest speed in engineering units
@@ -601,9 +602,11 @@ trajectory:
     range: 360                                        # Modulo range 0..360
     type: 0                                           # Modulo type
 
+#  Limits can be overridden with plc-code by setting input.limit.forward or input.limit.backward to 'plcOverride', then 'ax<id>.mon.lowlim' and or 'ax<id>.mon.highlim' needs to be written to in plc code (1 means linit OK).
+
 input:
   limit:
-    forward: ec0.s$(ENC_SLAVE).ONE.0                  # Ethercat entry for low limit switch input
+    forward: ec0.s$(ENC_SLAVE).ONE.0                  # Ethercat entry for low limit switch input,
     forwardPolarity: 0                                # Polarity of forward limit switch
     backward: ec0.s1.BI_2.0                           # Ethercat entry for high limit switch input
     backwardPolarity: 0                               # Polarity of forward limit switch

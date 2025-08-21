@@ -11,7 +11,7 @@
 #-d */
 
 #-d  Use this subst file
-epicsEnvSet("ECMC_SUBST_TYPE"            "EX72XX-0010_STD") 
+epicsEnvSet("ECMC_SUBST_TYPE"            "EX72XX-9014_STD") 
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"

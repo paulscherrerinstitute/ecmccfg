@@ -501,7 +501,7 @@ record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM") {
     field(SCAN, "Passive")
 }
 
-# Requires new motor!!
+# Sync ecmc softlimits with motor softlimits, requires new motor!!
 record(bo,"${PREFIX}${MOTOR_NAME}-CfgSyncSftLim"){
   info(asyn:READBACK,"1")
   field(DESC, "Sync ecmc and MR softlimits")  
@@ -511,4 +511,5 @@ record(bo,"${PREFIX}${MOTOR_NAME}-CfgSyncSftLim"){
   field(ONAM, "Yes")
   field(SCAN, "Passive")
   field(TSE,  "0")
+  field(VAL,  "${SYNC_DXLM=0}")
 }

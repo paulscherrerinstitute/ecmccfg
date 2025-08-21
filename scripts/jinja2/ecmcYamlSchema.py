@@ -233,8 +233,9 @@ class Schema:
                         'schema': {
                         'npoints': {'default': 0},
                         'nreadback': {'default': 0},
-                        }
-                    }
+                        }                    
+                    },
+                    'syncSoftLimits': {'type': 'boolean', 'default': False},
                 }
             }
         }
