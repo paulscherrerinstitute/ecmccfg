@@ -7,19 +7,23 @@
 
 axis:
   id: ${AX_ID=1}
-  #feedSwitchesOutput: ec0.s$(BO_ID).binaryOutput01.0 # Ethercat entry for feed switches  
+  #feedSwitchesOutput: ec0.s$(BO_ID).binaryOutput01.0 # EtherCAT entry for feed switches  
   autoEnable:
     enableTimeout: 5.0
     disableTimeout: 5.0
   tweakDist: 0.5
+  autoEnable:
+    enableTimeout: 10.0
+    disableTimeout: 5.0
 
 epics:
-  name: ${AX_NAME=Axis1}
+  name: ${AX_NAME=M1}
   precision: 3
   unit: mm
   motorRecord:
+    syncSoftLimits: true
     enable: true
-    description: ""
+    description: "Servo"
     fieldInit: "RTRY=0,FOFF=Frozen"
 
 # Max scale is for motors with:
@@ -45,8 +49,8 @@ encoder:
   absOffset: $(OFFSET=0)
 
 controller:
-  Kp: 10.0
-  Ki: 0.01
+  Kp: 1.0
+  Ki: 0.0
   Kd: 0.0
 
 trajectory:
