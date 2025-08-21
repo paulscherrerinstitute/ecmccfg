@@ -1,34 +1,21 @@
 ##############################################################################
-## Example usefull to see ECMC perfromance
+## Example useful to see ECMC performance
 # Electrical Connections:
 # 1. Connect signal generator to EL3702
 # 2. Connect oscilloscope to signal generator and EL4732 output
 
 # PLC Configs:
-# 1. Transfer values directlly in PLC (ec_mm_cp())
+# 1. Transfer values directly in PLC (ec_mm_cp())
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg master
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
-
-##############################################################################
-## Config hardware:
+require ecmccfg
 
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
 
 # Choose sample rate (2, 10 or 100)
 epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
 
-# EK1100
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1101"
+# EK1101
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EK1101"
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,${ECMC_EC_SLAVE_NUM})"
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x730,1000000,0,1000000,0)"
 
@@ -40,19 +27,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_
 epicsEnvSet("ECMC_EC_SLAVE_NUM_AI",           "22")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_DESC=EL3174_+-10V"
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-## PLC 1
+# PLC 1
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/ai-to-ao.plc")
 
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(1)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

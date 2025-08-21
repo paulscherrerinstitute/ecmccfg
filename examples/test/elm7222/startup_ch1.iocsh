@@ -1,4 +1,4 @@
-require ecmccfg,ELM7222 "ENG_MODE=1,ECMC_VER=9.2.0"
+require ecmccfg, "ENG_MODE=1"
 
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd,      "HW_DESC=ELM7222-0010, SLAVE_ID=21"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd,   "CONFIG=-Motor-ch1-Beckhoff-AM8112-xFx1"

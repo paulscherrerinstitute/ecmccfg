@@ -1,14 +1,9 @@
 ##############################################################################
 ## Example config for smaract MCS2
 
-require ecmccfg sandst_a "ECMC_VER=sandst_a,IOC=$(IOC),EC_RATE=1000,MASTER_ID=0,ENG_MODE=1"
-require ecmccomp
-
-##############################################################################
-## Configure hardware
+require ecmccfg, "IOC=$(IOC),EC_RATE=1000,MASTER_ID=0,ENG_MODE=1"
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}setRecordUpdateRate.cmd "RATE_MS=1"
-
 
 epicsEnvSet("MCS2_SLAVE_NUM",              "15")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(MCS2_SLAVE_NUM), HW_DESC=MCS2,"
@@ -16,36 +11,11 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=SmarAct-SLC1750ds,MACROS='H
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=2"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=SmarAct-SR2013s,CH_ID=3,MACROS='HOME_VELO=10000,HOME_ACC=1000'"
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-## AXIS 1 (MCS2 CH1)
-#
+# AXIS 1 (MCS2 CH1)
 epicsEnvSet("MCS2_CHID",              "1")
 epicsEnvSet("DEV",      "$(IOC)")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_lin.yaml"
 
-##############################################################################
-## AXIS 3 (MCS2 CH1)
-#
+# AXIS 3 (MCS2 CH1)
 epicsEnvSet("MCS2_CHID",              "3")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd, "FILE=./cfg/axis_rot.yaml"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-##############################################################################
-############# go active:
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-
-iocInit()
-
-dbgrep *s00${MCS2_SLAVE_NUM}*

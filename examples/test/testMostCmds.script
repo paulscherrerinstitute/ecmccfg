@@ -1,27 +1,10 @@
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg master
-
-#- Choose motor record driver implementation
-#-   ECMC_MR_MODULE="ecmcMotorRecord"  => ECMC native built in motor record support (Default)
-#-   ECMC_MR_MODULE="EthercatMC"       => Motor record support from EthercatMC module (need to be loaded)
-#- Uncomment the line below to use EthercatMC (and add optional EthercatMC_VER to startup.cmd call):
-#- epicsEnvSet(ECMC_MR_MODULE,"EthercatMC")
-
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master, EC_RATE=2000"
+require ecmccfg
 
 // Should give error since after ec->init()
 ecmcConfig "Cfg.SetSampleRate(1000)"
 ecmcConfig "Cfg.SetSamplePeriod(10)"
 
-##############################################################################
-############# General:
+# General:
 $(SCRIPTEXEC) ($(ecmccfg_DIR)general.cmd 
 
 # Disable function call trace printouts
@@ -41,8 +24,7 @@ ecmcConfigOrDie "Cfg.SetTraceMaskBit(5,0)"
 # Update records in 10ms (100Hz) 
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",       "10")
 
-############################################################
-############# Configure hardware:
+# Configure hardware:
 
 ecmcConfig      "Cfg.EcResetMaster(1000)"
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(1,0x2,0x03f63052,2,0,0x1a00,0x6000,0x1,1,binaryInput01)"

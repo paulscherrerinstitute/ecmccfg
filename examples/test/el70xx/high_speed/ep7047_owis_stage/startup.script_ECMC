@@ -1,15 +1,11 @@
 # ecmc test system
 # Anders Sandström
 
-require ecmccfg v9.0.1_RC3,"EC_RATE=500,ECMC_VER=v9.0.1_RC2"
-
-epicsEnvSet("IOC" ,"$(IOC="ec-base-01:Test:")")
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg "EC_RATE=500"
 
 
 # Configure hardware
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=12, HW_DESC=EP7047-1032, CONFIG=-Motor-Micos-Epics-Training"
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 # Configure Motion
 epicsEnvSet("DEV",      "$(IOC)")
@@ -18,14 +14,3 @@ epicsEnvSet("DRIVE_ID", "$(ECMC_EC_SLAVE_NUM)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear.ax)
 
 dbLoadTemplate(ho.subs,"P=${IOC}:,PORT=${ECMC_ASYN_PORT},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_NO=${ECMC_AXIS_NO}")
-
-# Other
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

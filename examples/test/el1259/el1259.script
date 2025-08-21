@@ -1,5 +1,5 @@
 
-require ecmccfg sandst_a
+require ecmccfg
 
 # Number of channels (1,2,4 or 8)
 epicsEnvSet(CHS,2)

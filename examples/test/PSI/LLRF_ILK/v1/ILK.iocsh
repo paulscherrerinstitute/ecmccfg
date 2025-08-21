@@ -2,7 +2,6 @@
 #- mXsXXX naming
 require ecmccfg ILK_slaves, "ECMC_VER=dev,NAMING=mXsXXX"
 
-#- #############################################################################
 #- add slaves
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=TOBAS"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EK1100"
@@ -18,14 +17,5 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL1862"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EL1862"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=ILK"
 
-#- #############################################################################
-#- apply hardware configuration
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-
-#- #############################################################################
 #- PLC for slave to slave bit transfer
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=1,FILE=./plc/ena.plc")
-
-# go active
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
-#- #############################################################################

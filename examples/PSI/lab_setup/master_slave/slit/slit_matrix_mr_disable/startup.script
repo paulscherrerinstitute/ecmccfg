@@ -1,6 +1,6 @@
 
 #- Configuration scripts
-require ecmccfg sandst_a "MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=sandst_a"
+require ecmccfg v11.0.0_RC1 "MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=v11.0.0_RC1"
 
 #- Only output errors
 asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x01)
@@ -14,12 +14,6 @@ asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x01)
 #- The group ID:s configured in yaml are stored in GRP_<axis.group>_ID
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/axis_main_mr_disable.plc, PLC_ID=1, INC=.:${ecmccfg_DIR}, PLC_MACROS='PLC_ID=1, AX_M1=12, AX_M2=13, AX_S1=5, AX_S2=6, GRP_ID_SA=${GRP_realAxes_ID}, GRP_ID_MA=${GRP_virtualAxes_ID},DBG='"
 
-
-#ecmcConfigOrDie "Cfg.CreateMasterSlaveSM(0,test,virtualAxes,realAxes)"
-
 ${SCRIPTEXEC} ${ecmccfg_DIR}addMasterSlaveSM.cmd "NAME=test, MST_GRP_NAME=virtualAxes, SLV_GRP_NAME=realAxes"
 
-
-
-afterInit("ecmcConfigOrDie 'ControllerErrorReset()'")
 

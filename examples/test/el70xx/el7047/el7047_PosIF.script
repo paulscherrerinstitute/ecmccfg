@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example: Config for EL7047 positioning interface
 
-require ecmccfg sandst_a "EC_RATE=500"
+require ecmccfg "EC_RATE=500"
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,         "SLAVE_ID=2,                        HW_DESC=EL7047_PosIF"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd    "COMP=Motor-Generic-2Phase-Stepper, MACROS='I_MAX_MA=500, I_STDBY_MA=200, U_NOM_MV=42000, R_COIL_MOHM=1230,L_COIL_UH=1230'"

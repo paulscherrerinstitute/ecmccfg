@@ -19,21 +19,10 @@
 #       Offset value are in V
 #       
 ##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg master
+require ecmccfg
 require calc 3.7.4
 
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master, EC_RATE=1000,MODE=DAQ"
-
-##############################################################################
-## Config hardware:
-
-epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
+epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "1")
 
 # Choose sample rate (2, 10 or 100)
 epicsEnvSet("ECMC_OVER_SMP",                  "${OVERSAMP="100"}")
@@ -48,18 +37,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AO), HW_
 
 ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
 # Load custom records (no record loaded by addSlave.cmd)
 dbLoadRecords(stereo.db,"ECMC_P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_AI=${ECMC_EC_SLAVE_NUM_AI},SLAVE_AO=${ECMC_EC_SLAVE_NUM_AO},HWTYPE=${ECMC_EC_HWTYPE},T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE}, NELM=${ECMC_OVER_SMP}")
 
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

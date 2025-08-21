@@ -1,22 +1,6 @@
 #- #############################################################################
 #- mXsXXX naming
-require ecmccfg v7_RC1, "NAMING=mXsXXX"
+require ecmccfg, "NAMING=mXsXXX"
 
-#- #############################################################################
 #- add slaves
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP2008, SLAVE_ID=4"
-
-#- #############################################################################
-#- apply hardware configuration
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-
-#- #############################################################################
-#- configure diagnostics
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
-#- #############################################################################
-

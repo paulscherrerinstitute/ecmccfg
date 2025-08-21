@@ -16,55 +16,27 @@
 ##          callbacks in 125Hz, or 8ms, for the data storages arrays.
 ##
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg
 
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop, EC_RATE=500"
-
-##############################################################################
-## Config hardware:
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "0")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1100"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=0, HW_DESC=EK1100"
 
 # Update records in 1ms (all data to EPICS in 500Hz)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,2)
 
 # Note NELM equals oversampling factor in this case. Use +-320mv Config file for all 4 channels
 epicsEnvSet("NELM",              "40")
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=11, HW_DESC=ELM3604, NELM=${NELM=20}, CONFIG=-Sensor_+-320mV"
 
 # Update records in 10ms (for all records loaded below)
 epicsEnvSet(ECMC_SAMPLE_RATE_MS,10)
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
 # Make data storages 4 times the size of the memmaps
 ecmcEpicsEnvSetCalc(DS_SIZE, "${NELM=20}*4")
 
-##############################################################################
-## Data Storage 0
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
-
-##############################################################################
-## Data Storage 1
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
-
-##############################################################################
-## Data Storage 2
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
-
-##############################################################################
-## Data Storage 3
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=0, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0"
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=1, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0"
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=2, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0"
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=3, DS_SIZE=${DS_SIZE=20}, SAMPLE_RATE_MS=-1, DS_TYPE=0"
 
 ##############################################################################
 ## Prepare PLC macros (check MM index and calc scale and offset):
@@ -81,34 +53,8 @@ epicsEnvSet(MM_CH_4,${ECMC_CONFIG_RETURN_VAL})
 ecmcEpicsEnvSetCalc(SCALE, "343.6/2^23;",%.10lf)
 epicsEnvSet(OFFSET,0)
 
-##############################################################################
-## PLC 0
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=0,DS_ID=0,MM_ID=${MM_CH_1},SCALE=${SCALE},OFFSET=${OFFSET}'")
-
-##############################################################################
-## PLC 1
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=1, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=1,DS_ID=1,MM_ID=${MM_CH_2},SCALE=${SCALE},OFFSET=${OFFSET}'")
-
-##############################################################################
-## PLC 2
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=2, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=2,DS_ID=2,MM_ID=${MM_CH_3},SCALE=${SCALE},OFFSET=${OFFSET}'")
-
-##############################################################################
-## PLC 3
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=3, SAMPLE_RATE_MS=-1,FILE=./plc/moveData.plc, PLC_MACROS='PLC_ID=3,DS_ID=3,MM_ID=${MM_CH_4},SCALE=${SCALE},OFFSET=${OFFSET}'")
 
-##############################################################################
-## Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-ecmcGrepParam *ds0*
-
-##############################################################################
-## Go active:
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-iocInit()
-
-dbl > pvs.log

@@ -1,15 +1,10 @@
 #- #############################################################################
 #- Example config for iPOS4808
 
-require ecmccfg sandst_a "ENG_MODE=1"
-require ecmccomp sandst_a
+require ecmccfg "ENG_MODE=1"
 
-#- #############################################################################
-#- Configure hardware
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "5")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=5, HW_DESC=iPOS4808BX_2"
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=iPOS4808BX_2"
 
 #- NOTE USE HW_DESC = iPOS4808BX_2  (iPOS4808BX is for legacy)
 
@@ -28,8 +23,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Steppe
 #- The reduced current will be applied automatically by the iPOS4808 (no links needed in axis cfgs)
 #- $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos4808_1.ax)
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,   "FILE=./cfg/axis.yaml,               DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${ECMC_EC_SLAVE_NUM}"
-
-#- ###########################################################################
-#- go active
-${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
-${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
