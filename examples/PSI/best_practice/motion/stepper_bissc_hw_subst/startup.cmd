@@ -2,7 +2,6 @@
 ## Example config for EL7041 and EL5042 using loadSubstConfig.cmd
 
 require ecmccfg "ENG_MODE=1"
-require ecmccomp
 
 ##############################################################################
 # - apply hardware configuration

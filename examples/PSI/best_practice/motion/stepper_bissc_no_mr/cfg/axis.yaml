@@ -7,7 +7,7 @@ axis:
   tweakDist: 0.5
 
 epics:
-  name: ${AX_NAME=M1}                                 # Axis anme
+  name: ${AX_NAME=M1}                                 # Axis name
   precision: 3                                        # Decimal count
   description: Test cfg                               # Axis description
   unit: mm                                            # Unit

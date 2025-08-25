@@ -1,0 +1,11 @@
+file "${ecmccomp_DIR}/HWTemplate.cmd" {
+pattern { SLAVE_ID    HW_DESC       COMP                                COMP_CH   COMP_MACROS}
+# I/O
+        {2            EL2819        -1                                 -1         -1}
+# Encoders
+        { 9           EL5042        Encoder-Renishaw-26bit-BISS-C       1         ""}
+        { 9           EL5042        Encoder-Renishaw-26bit-BISS-C       2         ""}
+
+# Drives
+        {14            EL7041-0052   Motor-Generic-2Phase-Stepper        1        "I_MAX_MA=1000, I_STDBY_MA=500, U_NOM_MV=48000, R_COIL_MOHM=1230"}
+}
