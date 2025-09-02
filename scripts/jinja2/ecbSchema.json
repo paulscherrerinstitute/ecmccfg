@@ -1,10 +1,6 @@
 {
   "grandSchema": {
     "axis": {
-      "axis.type=0": {
-        "required": "",
-        "optional": ""
-      },
       "axis.type=1": {
         "required": "axisSchema driveSchema encoderSchema trajectorySchema inputSchema",
         "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema controllerSchema controllerInnerSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema driveBrakeSchema trajectoryModuloSchema epicsMotorRecordPvtSchema"
@@ -15,31 +11,15 @@
       }
     },
     "plc": {
-      "axis.type=0": {
-        "required": "",
-        "optional": ""
-      },
-      "axis.type=1": {
+      "meta.schemaNumber=0": {
         "required": "plcSchema",
         "optional": "metaSchema"
-      },
-      "axis.type=2": {
-        "required": "axisSchema encoderSchema trajectorySchema",
-        "optional": "metaSchema varSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema axisPlcSchema trajectoryModuloSchema"
       }
     },
     "encoder": {
-      "axis.type=0": {
+      "meta.schemaNumber=0": {
         "required": "encoderSchema",
         "optional": "metaSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema"
-      },
-      "axis.type=1": {
-        "required": "",
-        "optional": ""
-      },
-      "axis.type=2": {
-        "required": "",
-        "optional": ""
       }
     }
   },
@@ -76,6 +56,10 @@
       },
       "meta.ecbVersion": {
         "type": "string",
+        "required": false
+      },
+      "meta.schemaNumber": {
+        "type": "integer",
         "required": false
       }
     }
