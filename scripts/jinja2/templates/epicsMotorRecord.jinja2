@@ -55,15 +55,9 @@ ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }},
     ecmcEpicsEnvSetCalc(ECMC_TEMP_UREV,'abs(1)')
 {%- endif %}
 
-{%- if (homing is defined) and (homing.type is defined) %}
-    {%- set homingType = homing.type %}
-{%- else %}
-    {%- set homingType = 0 %}
-{%- endif %}
 
-#- todo: check if this part, with respect to homing, is correct
-ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,1,1)
-dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default("") }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},HOMEPROC={{ homingType }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),{{ epics.motorRecord.fieldInit|default("") }},${ECMC_MR_TEMP_FIELDS=""}")
+ecmcFileExist(ecmcMotorRecord.template,1,1)
+dbLoadRecords(ecmcMotorRecord.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default("") }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),{{ epics.motorRecord.fieldInit|default("") }},${ECMC_MR_TEMP_FIELDS=""}")
 epicsEnvUnset(ECMC_TEMP_UREV)
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
@@ -104,19 +98,7 @@ epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
    ecmcExit
 {%- endif %}
 
-#- todo: check if this part is correct
-{%- if (homing is defined) and (homing.type is defined) %}
-  {%- set homingType = homing.type %}
-{%- else %}
-  {%- set homingType = 14 %}
-{%- endif %}
-
-{%- if (encoder.homing is defined) or (homingType == 14) %}
-    ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
-    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC=14,HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
-{%- endif %}
-
-{%- if (homingType != 14) and (homingType > 0) %}
-    ecmcFileExist(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template,1,1)
-    dbLoadRecords(${ECMC_MR_MODULE="ecmcMotorRecord"}home.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPROC=${HOME_PROC=0},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
+{%- if (encoder.homing is defined) or (homing is defined) %}
+    ecmcFileExist(ecmcMotorRecordhome.template,1,1)
+    dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0}")
 {%- endif %}
