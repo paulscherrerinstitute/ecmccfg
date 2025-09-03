@@ -44,8 +44,7 @@ The below explained scaling might have changed in drive firmware (or differnt fo
 * Enable pos lag monitoring with resonable settings
 * Set the ecmc position controller params to 0 
 * Execute a small move (always be prepared to kill axes, or E-stop).
-* In this "open loop" move, the setpoint and actual should track well. If you see an error corresponding to approx. 25% of the move distance, then the scaling is wrong, then test the other scaling factor.
-
+* In this "open loop" move, the setpoint and actual position should track well. If you see an error corresponding to approx. 25% of the move distance, then the scaling is wrong, then test the other scaling factor.
 
 Max scale for motors depend on the pole count:
 * 6 pole: Max scale is 8000revs/s (in this case 8000mm/s)
