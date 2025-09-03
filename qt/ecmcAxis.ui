@@ -1809,7 +1809,7 @@
        </color>
       </property>
       <property name="visibility">
-       <enum>caGraphics::IfNotZero</enum>
+       <enum>caGraphics::IfZero</enum>
       </property>
       <property name="channel" stdset="0">
        <string notr="true">$(DEV):$(Axis).DHLM</string>
@@ -1848,7 +1848,7 @@
        </color>
       </property>
       <property name="visibility">
-       <enum>caGraphics::IfNotZero</enum>
+       <enum>caGraphics::IfZero</enum>
       </property>
       <property name="channel" stdset="0">
        <string notr="true">$(DEV):$(Axis).DLLM</string>
