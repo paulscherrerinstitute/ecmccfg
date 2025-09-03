@@ -125,3 +125,11 @@ The venv can be found here: /ioc/NeedfulThings/ecmc_python_venv/.venv_deb12/
 
 ### iocsh startup
 ecmc needs to be started with root priviledges (or with a user in realtime group), without ecmc might segfault.
+
+### c6025-0010 startup
+Need to change boot setting:
+* At PSI: make normal warewulf and packet fence setup, DON'T FORGETT THE USB DONGLE!!!
+* Go to boot menu
+* Boot menu: Set boot option 1 to "Usb stick"
+* Advanced->Network stack configuration: Enable network stack and PXE support
+* Save and exit
