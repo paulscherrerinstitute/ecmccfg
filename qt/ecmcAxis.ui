@@ -1654,9 +1654,9 @@
      <widget class="caTextEntry" name="catextentry_31">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>10</x>
         <y>149</y>
-        <width>46</width>
+        <width>56</width>
         <height>18</height>
        </rect>
       </property>
@@ -1679,9 +1679,9 @@
      <widget class="caTextEntry" name="catextentry_32">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>150</x>
         <y>149</y>
-        <width>41</width>
+        <width>56</width>
         <height>18</height>
        </rect>
       </property>
@@ -1699,84 +1699,6 @@
       </property>
       <property name="keepFocus">
        <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="caLed" name="caled_44">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>150</y>
-        <width>14</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="rectangular">
-       <bool>true</bool>
-      </property>
-      <property name="gradientEnabled">
-       <bool>false</bool>
-      </property>
-      <property name="ledWidth">
-       <number>12</number>
-      </property>
-      <property name="ledHeight">
-       <number>12</number>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis)-CfgDLLM-En-RB</string>
-      </property>
-      <property name="falseColor">
-       <color>
-        <red>160</red>
-        <green>160</green>
-        <blue>160</blue>
-       </color>
-      </property>
-      <property name="trueColor">
-       <color>
-        <red>0</red>
-        <green>85</green>
-        <blue>0</blue>
-       </color>
-      </property>
-     </widget>
-     <widget class="caLed" name="caled_45">
-      <property name="geometry">
-       <rect>
-        <x>195</x>
-        <y>150</y>
-        <width>14</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="rectangular">
-       <bool>true</bool>
-      </property>
-      <property name="gradientEnabled">
-       <bool>false</bool>
-      </property>
-      <property name="ledWidth">
-       <number>12</number>
-      </property>
-      <property name="ledHeight">
-       <number>12</number>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis)-CfgDHLM-En-RB</string>
-      </property>
-      <property name="falseColor">
-       <color>
-        <red>160</red>
-        <green>160</green>
-        <blue>160</blue>
-       </color>
-      </property>
-      <property name="trueColor">
-       <color>
-        <red>0</red>
-        <green>85</green>
-        <blue>0</blue>
-       </color>
       </property>
      </widget>
      <widget class="caGraphics" name="caGraphics_4">
@@ -1809,10 +1731,10 @@
        </color>
       </property>
       <property name="visibility">
-       <enum>caGraphics::IfZero</enum>
+       <enum>caGraphics::IfNotZero</enum>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis).DHLM</string>
+       <string notr="true">$(DEV):$(Axis).LVIO</string>
       </property>
       <property name="form">
        <enum>caGraphics::Circle</enum>
@@ -1848,81 +1770,13 @@
        </color>
       </property>
       <property name="visibility">
-       <enum>caGraphics::IfZero</enum>
+       <enum>caGraphics::IfNotZero</enum>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis).DLLM</string>
+       <string notr="true">$(DEV):$(Axis).LVIO</string>
       </property>
       <property name="form">
        <enum>caGraphics::Circle</enum>
-      </property>
-     </widget>
-     <widget class="caToggleButton" name="catogglebutton_12">
-      <property name="geometry">
-       <rect>
-        <x>15</x>
-        <y>149</y>
-        <width>16</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>22</width>
-        <height>22</height>
-       </size>
-      </property>
-      <property name="checkable">
-       <bool>true</bool>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis)-CfgDLLM-En</string>
-      </property>
-     </widget>
-     <widget class="caToggleButton" name="catogglebutton_13">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>149</y>
-        <width>16</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>22</width>
-        <height>22</height>
-       </size>
-      </property>
-      <property name="checkable">
-       <bool>true</bool>
-      </property>
-      <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis)-CfgDHLM-En</string>
       </property>
      </widget>
      <zorder>caGraphics_4</zorder>
@@ -1954,10 +1808,6 @@
      <zorder>calabel_92</zorder>
      <zorder>catextentry_31</zorder>
      <zorder>catextentry_32</zorder>
-     <zorder>caled_44</zorder>
-     <zorder>caled_45</zorder>
-     <zorder>catogglebutton_12</zorder>
-     <zorder>catogglebutton_13</zorder>
     </widget>
    </widget>
    <widget class="QWidget" name="motion">
@@ -2963,7 +2813,7 @@
     <widget class="caToggleButton" name="catogglebutton_3">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>21</x>
        <y>50</y>
        <width>100</width>
        <height>18</height>
@@ -3039,7 +2889,7 @@
     <widget class="caToggleButton" name="catogglebutton_8">
      <property name="geometry">
       <rect>
-       <x>-10</x>
+       <x>10</x>
        <y>70</y>
        <width>111</width>
        <height>18</height>
@@ -3059,7 +2909,7 @@
      <property name="geometry">
       <rect>
        <x>25</x>
-       <y>105</y>
+       <y>115</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -3084,7 +2934,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>105</y>
+       <y>115</y>
        <width>36</width>
        <height>16</height>
       </rect>
@@ -3122,7 +2972,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>105</y>
+       <y>115</y>
        <width>21</width>
        <height>16</height>
       </rect>
@@ -3141,7 +2991,7 @@
      <property name="geometry">
       <rect>
        <x>25</x>
-       <y>125</y>
+       <y>135</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -3166,7 +3016,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>125</y>
+       <y>135</y>
        <width>36</width>
        <height>16</height>
       </rect>
@@ -3204,7 +3054,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>125</y>
+       <y>135</y>
        <width>21</width>
        <height>16</height>
       </rect>
@@ -3223,7 +3073,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>105</y>
+       <y>115</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -3248,7 +3098,7 @@
      <property name="geometry">
       <rect>
        <x>185</x>
-       <y>105</y>
+       <y>115</y>
        <width>36</width>
        <height>16</height>
       </rect>
@@ -3286,7 +3136,7 @@
      <property name="geometry">
       <rect>
        <x>115</x>
-       <y>105</y>
+       <y>115</y>
        <width>21</width>
        <height>16</height>
       </rect>
@@ -3305,7 +3155,7 @@
      <property name="geometry">
       <rect>
        <x>115</x>
-       <y>125</y>
+       <y>135</y>
        <width>21</width>
        <height>16</height>
       </rect>
@@ -3324,7 +3174,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>125</y>
+       <y>135</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -3349,7 +3199,7 @@
      <property name="geometry">
       <rect>
        <x>185</x>
-       <y>125</y>
+       <y>135</y>
        <width>36</width>
        <height>16</height>
       </rect>
@@ -3803,6 +3653,25 @@
       <string>enc src:</string>
      </property>
     </widget>
+    <widget class="caToggleButton" name="catogglebutton_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>111</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>sync. sft. lim.</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-CfgSyncSftLim</string>
+     </property>
+    </widget>
     <zorder>cagraphics_5</zorder>
     <zorder>caLineEdit_43</zorder>
     <zorder>catogglebutton_3</zorder>
@@ -3836,6 +3705,31 @@
     <zorder>camenu_6</zorder>
     <zorder>calineedit_17</zorder>
     <zorder>calabel_91</zorder>
+    <zorder>catogglebutton_9</zorder>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Motor Expert</string>
+    </attribute>
+    <widget class="caToggleButton" name="catogglebutton_12">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>10</y>
+       <width>111</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>sync. sft. lim.</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-CfgSyncSftLim</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="caLineEdit" name="calineedit_23">

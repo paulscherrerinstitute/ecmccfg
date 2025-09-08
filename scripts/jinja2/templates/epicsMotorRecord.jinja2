@@ -9,7 +9,9 @@
     {%- endif %}
 {%- endif %}
 
-{%- set syncEcmcMRSofLim = epics.motorRecord.syncSoftLimits if epics.motorRecord.syncSoftLimits is defined else 0 %}
+#-  Default to sync softlimits
+{%- set syncEcmcMRSofLim = epics.motorRecord.syncSoftLimits if epics.motorRecord.syncSoftLimits is defined else 'true' %}
+
 
 ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "syncSoftLims={{ syncEcmcMRSofLim|int }};{{ axis.parameters|default('') }}")
 epicsEnvUnset(ECMC_AXIS_FLAGS)
@@ -36,11 +38,11 @@ epicsEnvUnset(ECMC_AXIS_FLAGS)
 {%- if softlimits.enable %}
     {%- if softlimits.forward is defined and softlimits.forwardEnable %}
         {%- set DHLM = softlimits.forward %}
-        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}HLM={{ DHLM }},")
+        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}HLM={{ DHLM }},DHLM_En={{ softlimits.forwardEnable | int }},")
     {%- endif %}
     {%- if softlimits.backward is defined and softlimits.backwardEnable %}
         {%- set DLLM = softlimits.backward %}
-        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}LLM={{ DLLM }},")
+        epicsEnvSet(ECMC_MR_TEMP_FIELDS,"${ECMC_MR_TEMP_FIELDS=""}LLM={{ DLLM }},DLLM_En={{ softlimits.backwardEnable | int}},")
     {%- endif %}
 {%- endif %}
 {%- set drive = None if drive is undefined else drive %}
