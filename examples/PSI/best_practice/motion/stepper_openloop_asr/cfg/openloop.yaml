@@ -1,0 +1,81 @@
+axis:
+  id: 1                                               # Axis id
+  type: joint                                         # this is for future selection of axis type
+
+epics:
+  name: Axis1                                         # Axis anme
+  precision: 3                                        # Decimal count
+  description: very important motor axis              # Axis description
+  unit: mm                                            # Unit
+
+drive:
+  numerator: 3600                                     # Fastest speed in engineering units
+  denominator: 32768                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
+  control: ec0.s$(DRV_SLAVE).driveControl01           # Control word ethercat entry
+  enable: 0                                           # Enable bit index in control word (not used if DS402)
+  enabled: 1                                          # Enabled bit index in status word (not used if DS402)
+  status: ec0.s$(DRV_SLAVE).driveStatus01             # Status word ethercat entry
+  setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
+  reduceTorque: 2                                     # Reduce torque bit in drive control word
+  reduceTorqueEnable: True                            # Enable reduce torque functionality
+
+encoder:
+  numerator: 360                                      # Scaling numerator example 360 deg/rev
+  denominator: 12800                                  # Scaling denominator example 4096 ticks per 360 degree
+  type: 0                                             # Type: 0=Incremental, 1=Absolute
+  bits: 16                                            # Total bit count of encoder raw da
+  position: ec0.s$(DRV_SLAVE).positionActual01        # Ethercat entry for actual position input (encoder)
+  control: ec0.s$(DRV_SLAVE).encoderControl01         # mandatory only if 'reset' is used
+  status: ec0.s$(DRV_SLAVE).encoderStatus01           # mandatory only if 'warning' or 'error' are used
+  homing:
+    type: 1
+    position: -30
+    velocity:
+      to: 3                                           # Velocity to cam/sensor (used for some homing seqs)
+      from: 2                                         # Velocity from cam/sensor (used for some homing seqs)
+
+controller:
+  Kp: 10                                              # Kp proportinal gain
+  Ki: 0.2                                             # Ki integral gain
+  Kd: 0                                               # Kd derivative gain
+
+trajectory:
+  axis:
+    velocity: 500                                     # Default velo for axis
+    acceleration: 2000                                # Default acc for axis
+    deceleration: 2000                                # Default dec for axis
+    jerk: 10                                          # Default jerk for axis
+  jog:
+    velocity: 5                                       # Default velo fro JOG (motor record)
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SLAVE).driveStatus01.12       # Ethercat entry for low limit switch input
+    backward: ec0.s$(DRV_SLAVE).driveStatus01.11      # Ethercat entry for high limit switch input
+  home: 'ec0.s$(DRV_SLAVE).ONE.0'                     # Ethercat entry for home switch
+  interlock: 'ec0.s$(DRV_SLAVE).ONE.0'                # Ethercat entry for interlock switch input
+
+
+softlimits:
+  enable: false                                       # Enable soft limits
+  forward: 100                                        # Soft limit position fwd
+  forwardEnable: false                                # Soft limit position fwd enable
+  backward: -100                                      # Soft limit position bwd
+  backwardEnable: false                               # Soft limit position bwd enable
+
+monitoring:
+  lag:
+    enable: true                                      # Enable position lag monitoring (following error)
+    tolerance: 3                                      # Allowed tolerance
+    time: 10                                          # Allowed time outside tolerance  target:
+  velocity:
+    enable: false                                     # Enable velocity monitoring
+    max: 100                                          # Allowed max velocity
+    time:
+      trajectory: 100                                 # Time allowed outside max velo before system init halt
+      drive: 200                                      # Time allowed outside max velo before system disables drive
+  target:
+    enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 0.5                                    # Allowed tolerance
+    time: 10                                          # Filter time inside tolerance to be at target
+  

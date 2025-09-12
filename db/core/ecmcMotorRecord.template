@@ -218,6 +218,7 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-RB") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
+    field(VAL, "$(DHLM_En=0)")
     field(SCAN, "I/O Intr")
 }
 
@@ -226,6 +227,7 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-RB") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
+    field(VAL, "$(DLLM_En=0)")
     field(SCAN, "I/O Intr")
 }
 
@@ -472,6 +474,7 @@ record(longout,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-En") {
     field(DESC, "EC High Soft Limit enabled RB")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM-En")
+    field(VAL, "$(DHLM_En=0)")
     field(SCAN, "Passive")
 }
 
@@ -480,6 +483,7 @@ record(longout,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-En") {
     field(DESC, "EC High Soft Limit enabled RB")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM-En")
+    field(VAL, "$(DLLM_En=0)")
     field(SCAN, "Passive")
 }
 
@@ -489,6 +493,7 @@ record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
+    field(VAL, "$(DLLM=0)")
     field(SCAN, "Passive")
 }
 
@@ -498,6 +503,7 @@ record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
+    field(VAL,  "$(DHLM=0)")
     field(SCAN, "Passive")
 }
 
@@ -511,5 +517,5 @@ record(bo,"${PREFIX}${MOTOR_NAME}-CfgSyncSftLim"){
   field(ONAM, "Yes")
   field(SCAN, "Passive")
   field(TSE,  "0")
-  field(VAL,  "${SYNC_DXLM=0}")
+  field(VAL,  "${SYNC_DXLM=1}")
 }
