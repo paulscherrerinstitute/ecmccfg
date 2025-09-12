@@ -1,5 +1,5 @@
 
-require ecmccfg
+require ecmccfg v11.0.0_RC1, "ECMC_VER=v11.0.0_RC1"
 
 # Number of channels (1,2,4 or 8)
 epicsEnvSet(CHS,2)
