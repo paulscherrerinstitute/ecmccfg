@@ -53,7 +53,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,          "HW_DESC=EL7041-0052"
 # 0:10 - EL7041    1Ch Stepper
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,          "HW_DESC=EL7041-0052"
 
-#- #################################################################
 #- Virtual axes
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,      "FILE=../common/axis_vax5_YCEN.yaml, AX_ID=${AX_NUM=12}"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,      "FILE=../common/axis_vax6_YGAP.yaml, AX_ID=${AX_NUM=13}"
