@@ -1,5 +1,5 @@
-file ecmcDS-idx.template
+file "ecmcDS-idx.template"
 {
   pattern { DS_DATAINDEX_ACT,           DS_DATA_ACT ,             DS_STAT,               DS_TYPE,               DS_STAT_,               DS_FULL,              DS_CLEAR_CMD,           DESC_NAME  }
-          { DS$(Index2Char)-DataIdAct,  DS$(Index2Char)-DataAct,  DS$(Index2Char)-Stat,  DS$(Index2Char)-Type,  DS$(Index2Char)-Stat_,  DS$(Index2Char)-Full, DS$(Index2Char)-ClrCmd, DS$(Index2Char)-Desc }
+          { "DS$(Index2Char)-DataIdAct",  "DS$(Index2Char)-DataAct",  "DS$(Index2Char)-Stat",  "DS$(Index2Char)-Type",  "DS$(Index2Char)-Stat_",  "DS$(Index2Char)-Full", "DS$(Index2Char)-ClrCmd", "DS$(Index2Char)-Desc" }
 }
