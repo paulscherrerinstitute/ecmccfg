@@ -172,6 +172,7 @@
       "epics.precision": {
         "type": "integer",
         "default": 3,
+        "min": 0,
         "required": false
       },
       "epics.unit": {
@@ -223,11 +224,14 @@
       "drive.denominator": {
         "type": "integer",
         "default": 1,
+        "min": 1,
         "required": false
       },
       "drive.type": {
         "type": "integer",
         "default": 0,
+        "min": 0,
+        "max": 1,
         "required": false
       },
       "drive.setpoint": {
@@ -250,25 +254,30 @@
       },
       "drive.reduceTorque": {
         "type": "integer",
+        "min": 0,
         "dependencies": "drive.reduceTorqueEnable",
         "required": false
       },
       "drive.enable": {
         "type": "integer",
+        "min": 0,
         "required": false
       },
       "drive.enabled": {
         "type": "integer",
+        "min": 0,
         "dependencies": "drive.status",
         "required": false
       },
       "drive.warning": {
         "type": "integer",
         "dependencies": "drive.status",
+        "min": 0,
         "required": false
       },
       "drive.reset": {
         "type": "integer",
+        "min": 0,
         "required": false
       },
       "drive.error": {
@@ -293,11 +302,13 @@
       "drive.brake.openDelay": {
         "type": "integer",
         "default": 0,
+        "min": 0,
         "required": false
       },
       "drive.brake.closeAhead": {
         "type": "integer",
         "default": 0,
+        "min": 0,
         "required": false
       }
     }
@@ -308,6 +319,8 @@
       "encoder.source": {
         "type": "integer",
         "default": 0,
+        "min": 0,
+        "max": 1,
         "required": false
       },
       "encoder.numerator": {
@@ -318,11 +331,14 @@
       "encoder.denominator": {
         "type": "integer",
         "default": 1,
+        "min": 1,
         "required": false
       },
       "encoder.type": {
         "type": "integer",
         "default": 0,
+        "min": 0,
+        "max": 1,
         "required": false
       },
       "encoder.mask": {
@@ -332,11 +348,15 @@
       "encoder.bits": {
         "type": "integer",
         "default": 16,
+        "min": 0,
+        "max": 64,
         "required": false
       },
       "encoder.absBits": {
         "type": "integer",
         "default": 25,
+        "min": 0,
+        "max": 64,
         "required": false
       },
       "encoder.absOffset": {
@@ -366,16 +386,19 @@
       },
       "encoder.warning": {
         "type": "integer",
+        "min": 0,
         "required": false,
         "dependencies": "encoder.status"
       },
       "encoder.ready": {
         "type": "integer",
+        "min": 0,
         "required": false,
         "dependencies": "encoder.status"
       },
       "encoder.reset": {
         "type": "integer",
+        "min": 0,
         "required": false,
         "dependencies": "encoder.control"
       },
@@ -454,6 +477,7 @@
       },
       "encoder.homing.latchCount": {
         "type": "integer",
+        "min": 0,
         "required": false
       },
       "encoder.homing.velocity.to": {
@@ -558,18 +582,22 @@
     "schema": {
       "controller.Kp": {
         "default": 1.0,
+        "min": 0,
         "type": "integer float"
       },
       "controller.Ki": {
         "default": 0.0,
+        "min": 0,
         "type": "intger float"
       },
       "controller.Kd": {
         "default": 0.0,
+        "min": 0,
         "type": "integer float"
       },
       "controller.Kff": {
         "default": 1.0,
+        "min": 0,
         "type": "integer float"
       },
       "controller.limits.minOutput": {
@@ -585,10 +613,12 @@
         "type": "integer float"
       },
       "controller.deadband.tol": {
-        "type": "integer float"
+        "type": "integer float",
+        "min": 0
       },
       "controller.deadband.time": {
-        "type": "integer float"
+        "type": "integer float",
+        "min": 0
       }
     }
   },
@@ -597,18 +627,22 @@
     "schema": {
       "controller.inner.Kp": {
         "default": 1.0,
+        "min": 0,
         "type": "integer float"
       },
       "controller.inner.Ki": {
         "default": 0.0,
+        "min": 0,
         "type": "integer float"
       },
       "controller.inner.Kd": {
         "default": 0.0,
+        "min": 0,
         "type": "integer float"
       },
       "controller.inner.tol": {
         "default": 0.0,
+        "min": 0,
         "type": "integer float"
       }
     }
@@ -688,10 +722,14 @@
     "schema": {
       "trajectory.source": {
         "type": "integer",
+        "min": 0,
+        "max": 1,
         "default": 0
       },
       "trajectory.type": {
         "type": "integer",
+        "min": 0,
+        "max": 1,
         "default": 0
       },
       "trajectory.axis.velocity": {
@@ -734,6 +772,8 @@
       },
       "trajectory.modulo.type": {
         "type": "integer",
+        "min": 0,
+        "max": 3,
         "default": 0
       }
     }
@@ -751,10 +791,12 @@
       },
       "monitoring.lag.tolerance": {
         "type": "integer float",
+        "min": 0,
         "default": 0
       },
       "monitoring.lag.time": {
         "type": "integer",
+        "min": 0,
         "default": 100
       }
     }
@@ -770,10 +812,12 @@
         "default": false
       },
       "monitoring.target.tolerance": {
-        "type": "integer float"
+        "type": "integer float",
+        "min": 0
       },
       "monitoring.target.time": {
-        "type": "integer"
+        "type": "integer",
+        "min": 0
       }
     }
   },
@@ -788,7 +832,8 @@
         "default": false
       },
       "monitoring.velocity.max": {
-        "type": "integer float"
+        "type": "integer float",
+        "min": 0
       }
     }
   },
@@ -797,10 +842,12 @@
     "schema": {
       "monitoring.velocity.time.trajectory": {
         "type": "integer",
+        "min": 0,
         "required": true
       },
       "monitoring.velocity.time.drive": {
         "type": "integer",
+        "min": 0,
         "required": false
       }
     }
@@ -816,7 +863,8 @@
         "default": false
       },
       "monitoring.velocityDifference.max": {
-        "type": "integer float"
+        "type": "integer float",
+        "min": 0
       }
     }
   },
@@ -825,10 +873,12 @@
     "schema": {
       "monitoring.velocityDifference.time.trajectory": {
         "type": "integer",
+        "min": 0,
         "required": true
       },
       "monitoring.velocityDifference.time.drive": {
         "type": "integer",
+        "min": 0,
         "required": false
       }
     }
@@ -840,10 +890,12 @@
         "type": "integer"
       },
       "monitoring.stall.time.timeout": {
-        "type": "integer"
+        "type": "integer",
+        "min": 0
       },
       "monitoring.stall.time.factor": {
-        "type": "integer float"
+        "type": "integer float",
+        "min": 0
       }
     }
   },
@@ -889,6 +941,8 @@
       },
       "input.limit.forwardPolarity": {
         "type": "integer",
+        "min": 0,
+        "max": 1,
         "required": false
       },
       "input.limit.backward": {
@@ -897,6 +951,8 @@
       },
       "input.limit.backwardPolarity": {
         "type": "integer",
+        "min": 0,
+        "max": 1,
         "required": false
       },
       "input.limit.latchInput": {
@@ -908,7 +964,9 @@
         "required": true
       },
       "input.homePolarity": {
-        "type": "integer"
+        "type": "integer",
+        "min": 0,
+        "max": 1
       },
       "input.interlock": {
         "type": "string",
@@ -916,7 +974,9 @@
       },
       "input.interlockPolarity": {
         "type": "integer",
-        "required": false
+        "required": false,
+        "min": 0,
+        "max": 1
       },
       "input.analog.interlock": {
         "type": "string",
@@ -928,6 +988,8 @@
       },
       "input.analog.interlockPolarity": {
         "type": "integer",
+        "min": 0,
+        "max": 1,
         "required": false
       },
       "input.analog.enable": {
