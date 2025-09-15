@@ -32,8 +32,6 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,${V_NOM_MV_LOCAL},
 #- Coil resistance 5.6 Ohm (unit 10 mOhm)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x4,560,2)"
 
-#- Motor full steps count 200
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,200,2)"
 
 epicsEnvUnset("I_MAX_MA_LOCAL")
 epicsEnvUnset("I_RUN_MA_LOCAL")
