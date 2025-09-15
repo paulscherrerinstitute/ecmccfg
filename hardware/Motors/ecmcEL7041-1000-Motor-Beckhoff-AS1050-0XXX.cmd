@@ -22,7 +22,4 @@
 #- reduced to 1/10 th of nominal for testing
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,2500,2)"
 
-#- Nominal voltage 48V (unit 1mV)
-#- 8010:03 Nominal voltage
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,48000,2)"
 

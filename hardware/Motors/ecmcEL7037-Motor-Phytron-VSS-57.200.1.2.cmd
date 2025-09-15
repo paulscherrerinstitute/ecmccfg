@@ -7,5 +7,3 @@
 #- Load common config from EL7047
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmcEL7047-Motor-Phytron-VSS-57.200.1.2.cmd
 
-#- Nominal voltage 24V (unit 10mV)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,2400,2)"

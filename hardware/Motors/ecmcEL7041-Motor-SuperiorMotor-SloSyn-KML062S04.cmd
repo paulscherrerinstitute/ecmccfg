@@ -14,8 +14,6 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,1800,2)"
 #- Reduced current 600mA (unit 1 mA)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,600,2)"
 
-#- Nominal voltage 48V (unit 1mV)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,48000,2)"
 
 #- Coil resistance 1.47 Ohm measured 3.2+0.4 Ohm (unit 10mOhm)
 #ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x4,147,2)"
