@@ -19,6 +19,11 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 #- common PDOs for status and control
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX70XX.cmd
 
+#- If V_NOM_MV is not set, issue a warning and fall back to V_MAX_MV
+ecmcFileExist("${ECMC_CONFIG_ROOT}issueWarning.cmd",1)
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}issueWarning.cmd "EXPR_STR='${V_NOM_MV=-1}<0', WARNING_STR='WARNING: V_NOM_MV not defined. Falling back to ${V_MAX_MV} mV.'"
+ecmcEpicsEnvSetCalc "V_NOM_MV" "${V_NOM_MV=${V_MAX_MV}}"
+
 ecmcFileExist("${ECMC_CONFIG_ROOT}chkValidVoltageSetOrDie.cmd",1)
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}chkValidVoltageSetOrDie.cmd"
 
