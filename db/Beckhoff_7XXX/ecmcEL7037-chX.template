@@ -190,4 +190,25 @@ record(bi,"${ECMC_P}Drv${CH_ID}-BI02"){
   field(OSV,  "NO_ALARM")
 }
 
+record(ai,"${ECMC_P}Drv${CH_ID}-InfoData1"){
+  field(DESC, "$(HWTYPE): Drive Info Data 1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).infoData1?")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-InfoData2"){
+  field(DESC, "$(HWTYPE): Drive Info Data 2")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).infoData2?")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai,"${ECMC_P}Drv${CH_ID}-MotorLoad"){
+  field(DESC, "$(HWTYPE): Drive Motor Load")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn(${PORT},${ADDR},${TIMEOUT})T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).motorLoad?")
+  field(SCAN, "I/O Intr")
+}
+
 # Encoder interface of EL70X7 are defined in ecmcEL5101-chX.template
