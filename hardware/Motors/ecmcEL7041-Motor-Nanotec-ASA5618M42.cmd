@@ -1,6 +1,6 @@
 #-d /**
-#-d   \brief hardware script for ecmcEL7041-0052-Motor-Nanotec-ASA5618M42
-#-d   \details Parametrization of EL7041 for motor Nanotec ecmcEL7041-0052-Motor-Nanotec-ASA5618M42
+#-d   \brief hardware script for ecmcEL7041-Motor-Nanotec-ASA5618M42
+#-d   \details Parametrization of EL7041 for motor Nanotec ecmcEL7041-Motor-Nanotec-ASA5618M42
 #-d   \author Niko Kivel
 #-d   \file
 #-d */

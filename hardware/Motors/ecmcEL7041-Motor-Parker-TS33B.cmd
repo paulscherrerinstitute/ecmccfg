@@ -1,6 +1,6 @@
 #-d /**
-#-d   \brief hardware script for EL7041-0052-Motor-Parker-TS33B
-#-d   \details Parametrization of EL7041-0052 for motor Parker TS33B with series wiring
+#-d   \brief hardware script for EL7041-Motor-Parker-TS33B
+#-d   \details Parametrization of EL7041 for motor Parker TS33B with series wiring
 #-d   \author Niko Kivel
 #-d   \file
 #-d   \note Torque: 10.7 Nm

@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief hardware script for Nanotec-ST4118S1006-B.cmd 
-#-d   \details Parmetrization of EL7041-0052 for motor Nanotec ST4118S1006-B
+#-d   \details Parmetrization of EL7041 for motor Nanotec ST4118S1006-B
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d */
