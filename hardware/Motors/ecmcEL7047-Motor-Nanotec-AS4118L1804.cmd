@@ -1,7 +1,7 @@
 #-d /**
-#-d   \brief hardware script for EL7047-Motor-AS4118L1804
-#-d   \details Parametrization of EL7047 for motor AS4118L1804
-#-d   \author Julen Etxeberria
+#-d   \brief hardware script for EL7047-Motor-Nanotec-AS4118L1804
+#-d   \details Parametrization of EL7047 for motor Nanotec AS4118L1804
+#-d   \author Julen Etxeberria (ported to ecmccfg by Javier Cereijo Garcia)
 #-d   \file
 #-d */
 
