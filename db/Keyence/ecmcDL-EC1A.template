@@ -4,7 +4,7 @@ record(mbbiDirect,"${ECMC_P}Dev-Stat"){
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).status?")
   field(SCAN, "I/O Intr")
-  field(FLNK, "${ECMC_P}Dev-Err-Alrm.PROC")
+  field(FLNK, "${ECMC_P}Dev-ErrAlrm.PROC")
   field(TSE,  "$(TSE=-2)")
 }
 

@@ -2,7 +2,7 @@
 require ecmccfg v11.0.0_RC1, "ECMC_VER=v11.0.0_RC1"
 
 # Number of channels (1,2,4 or 8)
-epicsEnvSet(CHS,2)
+epicsEnvSet(CHS,1)
 # Number of events per channel (1,2,5 or 10)
 epicsEnvSet(EVS,2)
 
@@ -32,6 +32,6 @@ ecmcConfigOrDie "Cfg.EcSelectReferenceDC(0,$(ECMC_EC_SLAVE_NUM))"
 #ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x800F,0x12,-30000,4)"
 
 # Test PLC with some triggering and readback
-$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "FILE=./el1259.plc")
+$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "FILE=./el1259.plc, PLC_MACROS='CYCLE_NS=50E6'"
 
 
