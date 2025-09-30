@@ -1,7 +1,7 @@
 ##############################################################################
 ## Example config for PVT
 
-require ecmccfg sandst_a "ECMC_VER=test_softlim,ENG_MODE=1,MASTER_ID=0"
+require ecmccfg v11.0.0_RC1 "ECMC_VER=v11.0.0_RC1,ENG_MODE=1,MASTER_ID=0"
 
 # 0:14 - EL7041    1Ch Stepper
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,            "SLAVE_ID=14,HW_DESC=EL7041-0052"

@@ -26,7 +26,7 @@ record(ai,"${ECMC_P}CH$(CH_ID)-PosAct"){
 record(calcout,  "${ECMC_P}CH$(CH_ID)-Inv-UDF") {
   field(DESC,  "description")
   field(CALC,  "A")
-  field(INPA,  "${ECMC_P}CH$(CH_ID)-Inv-Alrm CP")
+  field(INPA,  "${ECMC_P}CH$(CH_ID)-InvAlrm CP")
   field(OUT,  "${ECMC_P}CH$(CH_ID)-PosAct.UDF")
 }
 

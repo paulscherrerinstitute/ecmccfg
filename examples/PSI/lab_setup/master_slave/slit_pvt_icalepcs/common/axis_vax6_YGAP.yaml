@@ -8,15 +8,15 @@ axis:
   tweakDist: 0.5
 
 epics:
-  name: GAPY
+  name: CENTERX
   precision: 4
   unit: mm
   motorRecord:
-    description: "Gap (Virtual)"
+    description: "Center X (Virtual)"
     fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
     pvt:
-      npoints: 20
-      nreadback: 20
+      npoints: 200
+      nreadback: 200
 
 encoder:
   type: 1

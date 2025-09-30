@@ -60,10 +60,3 @@ monitoring:
 plc:
   enable: true
   externalCommands: true
-  filter:
-    velocity:
-      enable: false
-      size: 10
-    trajectory:
-      enable: false
-      size: 10

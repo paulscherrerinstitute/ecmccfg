@@ -14,8 +14,6 @@ epics:
 drive:
   numerator: 360                                      # Fastest speed in eng. units (360*8000Hz)
   denominator: 1048576                                # Scaling denominator example 4096 ticks per 360 degree
-  #denominator: 1075462                                # Scaling denominator example 4096 ticks per 360 degree
-  #denominator: 1081111                               # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET (normally +-16bit)
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
   setpoint: ec0.s$(DRV_SID).positionSetpoint01        # Velocity setpoint if CSV. Position setpoint if CSP
   control: ec0.s$(DRV_SID).driveControl01             # Control word ethercat entry

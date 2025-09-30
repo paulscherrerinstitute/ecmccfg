@@ -12,11 +12,11 @@ epics:
   precision: 4
   unit: mm
   motorRecord:
-    description: "Center (Virtual)"
+    description: "Center Y (Virtual)"
     fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
     pvt:
-      npoints: 20
-      nreadback: 20
+      npoints: 200
+      nreadback: 200
 
 encoder:
   type: 1
@@ -33,7 +33,6 @@ trajectory:
 input:
   limit:
     forward: ec${M_ID=0}.s-1.ONE.0             # unused
-    #forward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.12              # unused
     backward: ec${M_ID=0}.s-1.ONE.0             # unused
   home: ec${M_ID=0}.s-1.ONE.0                   # unused  
   interlock: ec${M_ID=0}.s-1.ONE.0              # unused

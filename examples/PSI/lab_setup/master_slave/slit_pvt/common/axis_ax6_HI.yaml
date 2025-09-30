@@ -45,6 +45,7 @@ controller:
   Kff: 1.00
 
 trajectory:
+  type: 1
   axis:
     velocity: 1.0
     acceleration: 1.0
