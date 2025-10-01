@@ -7,6 +7,11 @@
          #- turn of motor record auto enable (bit 1 = 0)
          {%- set axisFlags = 4 %}
     {%- endif %}
+
+    {%- if axis.autoEnable.atStartup is defined %}
+       #-  Set enable at axis create bit (bit 1 in axisFlags)
+       {%- set axisFlags = axisFlags + axis.autoEnable.atStartup %}
+    {%- endif %}
 {%- endif %}
 
 #-  Default to sync softlimits

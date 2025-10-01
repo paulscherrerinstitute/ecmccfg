@@ -24,3 +24,7 @@ epicsEnvSet("ECMC_CONFIG_FN", "${LOCAL_CONFIG=${ECMC_CONFIG_ROOT}ecmc${HW_DESC}$
 
 ecmcFileExist("${ECMC_CONFIG_FN}",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_FN}
+
+#- Settings done for ch1 and ch2 (this is not bullet proof, please switch to ecmccomp)
+ecmcConfigOrDie "Cfg.EcSetSlaveSDOSettingsDone(${ECMC_EC_SLAVE_NUM},1,1)"
+ecmcConfigOrDie "Cfg.EcSetSlaveSDOSettingsDone(${ECMC_EC_SLAVE_NUM},2,1)"

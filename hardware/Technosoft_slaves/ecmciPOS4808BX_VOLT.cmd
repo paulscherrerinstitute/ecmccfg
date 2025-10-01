@@ -36,6 +36,9 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a03,0x6063,0x0,32,positionActual02)"
 epicsEnvUnset(ECMC_CH_ID)
 
+#- Ensure drive gets some SDO settings
+ecmcConfigOrDie "Cfg.EcSetSlaveNeedSDOSettings(${ECMC_EC_SLAVE_NUM},1,1)"
+
 #- MAP EREF(h) as voltage setpoint
 # Special for access of EREF (output voltage)
 # CFG
