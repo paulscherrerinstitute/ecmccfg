@@ -477,6 +477,7 @@ axis:
   autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
     enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
     disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+    atStartup: True                                   # Auto enable axis at ioc start, default False
   tweakDist: 2.0                                      # Tweak value (both ecmc interface and motor record tweak value)
 
 epics:

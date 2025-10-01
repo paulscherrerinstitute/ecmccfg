@@ -11,8 +11,7 @@
     {%- if axis.autoEnable.atStartup is defined %}
        #-  Set enable at axis create bit (bit 1 in axisFlags)
        {%- set axisFlags = axisFlags + axis.autoEnable.atStartup %}
-    {%- endif %}    
-
+    {%- endif %}
 {%- endif %}
 
 #-  Default to sync softlimits
