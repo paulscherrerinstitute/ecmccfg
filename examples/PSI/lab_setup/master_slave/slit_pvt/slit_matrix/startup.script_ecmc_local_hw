@@ -1,7 +1,7 @@
 #- Configuration scripts
-#require ecmccfg sandst_a ,"MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=test_softlim"
-require ecmccfg v11.0.0_RC1,"ECMC_VER=v11.0.0_RC1,MASTER_ID=0,ENG_MODE=1,EC_RATE=500"
-
+require ecmccfg sandst_a ,"MASTER_ID=0,ENG_MODE=1,EC_RATE=500,ECMC_VER=sandst_a"
+#require ecmccfg v11.0.0_RC1,"ECMC_VER=v11.0.0_RC1,MASTER_ID=0,ENG_MODE=1,EC_RATE=500"
+require ecmccomp sandst_a
 #- Only output errors
 asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x01)
 
@@ -12,7 +12,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}pvtControllerConfig.cmd  "TRG_EC_ENTRY=ec0.s$(ECMC_E
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}addMasterSlaveSM.cmd "NAME=test, MST_GRP_NAME=Masters, SLV_GRP_NAME=Slaves"
 
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=0,AX=12,BUFF_SIZE=2000,DBG=0,ENA=1")
-require ecmc_plugin_motion v11.0.0_RC1 "${ECMC_PLUGIN_CONFIG=}"
+#epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=0,AX=12,BUFF_SIZE=2000,DBG=0,ENA=1")
+#require ecmc_plugin_motion v11.0.0_RC1 "${ECMC_PLUGIN_CONFIG=}"
 
 afterInit("ecmcConfigOrDie 'ControllerErrorReset()'")

@@ -1,7 +1,8 @@
 axis:
   id: ${AXIS_ID=1}                                    # Axis id
-  parameters: 'powerAutoOnOff=2;powerOffDelay=-1;'
-#  feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
+  #parameters: 'powerAutoOnOff=2;powerOffDelay=-1;'
+  autoEnable:
+    atStartup: True
 
 epics:
   name: ${AX_NAME=M1}                                 # Axis anme
