@@ -1,7 +1,8 @@
 ##############################################################################
 ## Example config for EL7041 and EL5042
 
-require ecmccfg sandst_a "ECMC_VER=sandst_a,ENG_MODE=1,MASTER_ID=0"
+require ecmccfg "ENG_MODE=1,MASTER_ID=0"
+require ecmccomp sandst_a
 
 # 0:7 - EL7041    1Ch Stepper
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=16,HW_DESC=EL7041-0052"

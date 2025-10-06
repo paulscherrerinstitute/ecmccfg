@@ -7,7 +7,7 @@ epics:
   name: ${AX_NAME=M1}                                 # Axis anme
   precision: 3                                        # Decimal count
   description: Test cfg                               # Axis description
-  unit: deg                                            # Unit
+  unit: deg                                           # Unit
   motorRecord:
       fieldInit: 'RTRY=0,FOFF=Frozen'                 # Extra config for Motor record
 
@@ -22,7 +22,7 @@ drive:
 encoder:
   desc: Openloop
   numerator: 360                                       # Scaling numerator example 1 mm/rev
-  denominator: 1048576                                   # Scaling denominator example 4096 ticks per 360 degree
+  denominator: 1048576                                 # Scaling denominator example 4096 ticks per 360 degree
   type: 0                                              # Type: 0=Incremental, 1=Absolute
   bits: 32                                             # Total bit count of encoder raw data
   absBits: 0                                           # Absolute bit count (for absolute encoders) always least significant part of 'bits'
