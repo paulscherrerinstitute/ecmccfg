@@ -14,6 +14,12 @@ Some new features that might be useful in ecmc v11:
 * CSP-PC mode (CSP Position Control). Enable ecmc centralized position loop also in CSP mode. Typical use cases:
   * A drive (El7062 or Ex72xx) in CSP that also needs to close the loop on a linear encoder. 
   * Motion based on analog I/O, analog output corresponds to a position. In order to close the loop in ecmc layer "CSP-PC" must be used.
+* PID parameters can be set from motor record fields but should be a factor 100 smaller (this because the fields are limited to teh range 0..1.0).
+
+{{% notice warning %}}
+Please be careful when using the motor record PID parameter fields. The settings via motor record should be a **factor 100 smaller** than the ecmc setting. Also note that these MR-fields are not synced with the ecmc fields if they are changed.
+Example: ecmc kp = 1, same setting through MR.PCOF = 0.01.
+{{% /notice %}}
 
 #### Migration guide v10 to v11
 In general v11 is backward compatible with v10 but in order to benefit from new functionalities some updates are recommended:
