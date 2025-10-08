@@ -218,7 +218,7 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-RB") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
-    field(VAL, "$(DHLM_En=0)")
+    field(VAL, "$(HLM=0)")
     field(SCAN, "I/O Intr")
 }
 
@@ -227,7 +227,7 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-RB") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
-    field(VAL, "$(DLLM_En=0)")
+    field(VAL, "$(LLM=0)")
     field(SCAN, "I/O Intr")
 }
 
