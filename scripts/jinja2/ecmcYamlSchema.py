@@ -236,7 +236,7 @@ class Schema:
                         'nreadback': {'default': 0},
                         }                    
                     },
-                    'syncSoftLimits': {'type': 'boolean', 'default': True},
+                    'syncSoftLimits': {'type': 'boolean', 'default': False},
                 }
             }
         }
