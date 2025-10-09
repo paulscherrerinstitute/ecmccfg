@@ -827,7 +827,7 @@
       "monitoring.velocity.enable": {
         "type": "boolean",
         "required": true,
-        "dependencies": "monitoring.velocity.max monitoring.velocity.time",
+        "dependencies": "monitoring.velocity.max monitoring.velocity.time.trajectory",
         "normalize": "(string=boolean) yes=true no=false",
         "default": false
       },
@@ -858,7 +858,7 @@
       "monitoring.velocityDifference.enable": {
         "type": "boolean",
         "required": true,
-        "dependencies": "monitoring.velocityDifference.max monitoring.velocityDifference.time",
+        "dependencies": "monitoring.velocityDifference.max monitoring.velocityDifference.time.trajectory",
         "normalize": "(string=boolean) yes=true no=false",
         "default": false
       },
@@ -869,7 +869,7 @@
     }
   },
   "monitoringVelocityDifferenceTimeSchema": {
-    "identifier": "monitoring.velocity.time",
+    "identifier": "monitoring.velocityDifference.time",
     "schema": {
       "monitoring.velocityDifference.time.trajectory": {
         "type": "integer",
