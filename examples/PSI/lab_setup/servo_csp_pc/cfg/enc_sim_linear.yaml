@@ -13,4 +13,4 @@ encoder:
   bits: 32
   absBits: 32
   absOffset: -294100
-  primary: 1
+  primary: True

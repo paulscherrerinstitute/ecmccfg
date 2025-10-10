@@ -39,7 +39,7 @@ encoder:
   bits: 32
   absBits: 32
   absOffset: -294100
-  useAsCSPDrvEnc: 1    # use this encoder as CSP drive encoder
+  useAsCSPDrvEnc: True    # use this encoder as CSP drive encoder
 
 controller:
   Kp: 1
