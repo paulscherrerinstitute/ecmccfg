@@ -460,10 +460,10 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   field(TWVL, 2)
   field(THST, "ABS")
   field(THVL, 3)
-  field(FRST, "PVT_INTERN")
-  field(FRVL, 9)
-  field(FVST, "HOME")
-  field(FVVL, 10)
+  field(NIST, "PVT_INTERN")
+  field(NIVL, 9)
+  field(TEST, "HOME")
+  field(TEVL, 10)
   field(VAL,  0)
 }
 
