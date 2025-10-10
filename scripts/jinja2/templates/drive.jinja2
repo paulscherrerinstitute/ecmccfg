@@ -62,13 +62,13 @@
 ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum({{ axis.id }},{{ drive.numerator }})"
 ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom({{ axis.id }},{{ drive.denominator }})"
 {#- brake #}
-{%- if drive.brake %}
+{%- if drive.brake is defined %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.brake.output }}","ax{{ axis.id }}.drv.brake")"
     ecmcConfigOrDie "Cfg.SetAxisDrvBrakeEnable({{ axis.id }}, {{ drive.brake.enable|int }})"
-    {%- if drive.brake.closeAhead %}
+    {%- if drive.brake.openDelay is defined %}
     ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime({{ axis.id }},{{ drive.brake.openDelay }})"
     {%- endif %}
-    {%- if drive.brake.closeAhead %}
+    {%- if drive.brake.closeAhead is defined %}
     ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id }},{{ drive.brake.closeAhead }})"
     {%- endif %}
 {%- endif %}
