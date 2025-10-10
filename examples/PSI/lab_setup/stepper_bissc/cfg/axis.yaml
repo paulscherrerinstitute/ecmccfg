@@ -47,7 +47,6 @@ encoder:
   delayComp:                                          # Delay compensation for time between application of setpoint to reading of encoder (normally atleast 2 cycles)
     time: 0                                           # Delay time between set and act [cycles]
     enable: true                                        # enable (defaults to 1 if not set)
-  
 
 controller:
   Kp: 10                                              # Kp proportinal gain
