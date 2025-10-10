@@ -19,7 +19,7 @@
 #    values). The simulated linear encoder should be selected as primary (for control).
 #    The drive object still needs to know the drive actual position in order to send
 #    accurate position setpoints. This is done by selecting the encoder with 
-#    "ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(<axis id>,<enc_id>)". 
+#    "ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(<axis id>,<enc_id>)".
 #    This encoder needs to have the proper scaling for the drive.
 #    The system will now also use the centralized ecmc position control loop,
 #    resulting in 2 position loops are activated, one in ecmc and one in the drive.
