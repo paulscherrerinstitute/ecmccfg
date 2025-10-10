@@ -502,6 +502,7 @@ drive:
   setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
   reduceTorque: 2                                     # Reduce torque bit in drive control word
   reduceTorqueEnable: True                            # Enable reduce torque functionality
+  useAsCSPDrvEnc: True                                # Use this encoder as CSP drive encoder (ecmc controller enabled in CSP)
   brake:
     enable: false
     output: ec0...                                    # Ethercat link to brake output
@@ -544,7 +545,7 @@ encoder:
     position: ''                                      # Link to latched value. Used for some homing seqs
     control: 0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
-  primary: 1                                          # Use this encoder as primary (for control)
+  primary: True                                       # Use this encoder as primary (for control)
   homing:
     type: 3                                           # Homing sequence type
     position: -30                                     # Position to reference encoder to

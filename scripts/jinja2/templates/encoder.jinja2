@@ -84,7 +84,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 
 #- Use this encoder as primary?!
 {%- if encoder.primary is defined %}
-    {%- if encoder.primary >0 %}
+    {%- if encoder.primary > 0 %}
         ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
     {%- endif %}
 {%- endif %}

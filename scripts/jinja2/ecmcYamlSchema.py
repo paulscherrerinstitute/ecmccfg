@@ -236,7 +236,7 @@ class Schema:
                         'nreadback': {'default': 0},
                         }                    
                     },
-                    'syncSoftLimits': {'type': 'boolean', 'default': True},
+                    'syncSoftLimits': {'type': 'boolean', 'default': False},
                 }
             }
         }
@@ -325,9 +325,9 @@ class Schema:
                     'status': {'type': 'integer', 'default': 0},
                 }
             },
-            'primary': {'type': 'integer', 'default': -1},
+            'primary': {'type': 'boolean'},
             'homing': homingSchema,
-            'useAsCSPDrvEnc': {'type': 'integer', 'default': -1},
+            'useAsCSPDrvEnc': {'type': 'boolean'},
         }
     }
 
