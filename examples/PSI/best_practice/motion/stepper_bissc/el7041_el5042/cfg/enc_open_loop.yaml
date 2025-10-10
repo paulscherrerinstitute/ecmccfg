@@ -10,3 +10,8 @@ encoder:
   position: ec0.s$(DRV_SID).positionActual01  # Ethercat entry for actual position input (encoder)
   homing:
     refToEncIDAtStartup: 1                    # Ref encoder at startup (to BISS value)
+    type: 2
+    position: 0
+    velocity:
+      to: 0.5
+      from: 0.25

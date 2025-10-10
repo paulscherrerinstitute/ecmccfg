@@ -1,6 +1,5 @@
 #- Example config for closed loop CSP with position control
-require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a"
-require ecmccomp sandst_a
+require ecmccfg "ENG_MODE=1"
 
 #- DO to feed limit switches
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=2,HW_DESC=EL2819"

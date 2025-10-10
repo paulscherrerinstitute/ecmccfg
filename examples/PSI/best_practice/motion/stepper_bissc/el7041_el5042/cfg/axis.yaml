@@ -10,9 +10,10 @@ epics:
   name: ${AX_NAME=M1}                                 # Axis name
   precision: 3                                        # Decimal count
   description: Test cfg                               # Axis description
-  unit: mm                                            # Unit
+  unit: mm                                            # Unit  
   motorRecord:
-      fieldInit: 'RTRY=0,FOFF=Frozen'                 # Extra config for Motor record
+    syncSoftLimits: False
+    fieldInit: 'RTRY=0,FOFF=Frozen'                 # Extra config for Motor record
 
 drive:
   numerator: 10                                       # Fastest speed in eng. units (2000 Fullsteps/s==10mm/s)
@@ -70,11 +71,11 @@ input:
   interlock: 'ec0.s$(DRV_SID).ONE.0'                  # Ethercat entry for interlock switch input
 
 softlimits:
-  enable: false                                       # Enable soft limits
-  forward: 100                                        # Soft limit position fwd
-  forwardEnable: false                                # Soft limit position fwd enable
-  backward: -100                                      # Soft limit position bwd
-  backwardEnable: false                               # Soft limit position bwd enable
+  enable: true                                       # Enable soft limits
+  forward: -5                                        # Soft limit position fwd
+  forwardEnable: true                                # Soft limit position fwd enable
+  backward: -15                                      # Soft limit position bwd
+  backwardEnable: true                               # Soft limit position bwd enable
 
 monitoring:
   lag:
