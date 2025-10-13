@@ -21,7 +21,65 @@ Please be careful when using the motor record PID parameter fields. The settings
 Example: ecmc kp = 1, same setting through MR.PCOF = 0.01.
 {{% /notice %}}
 
+#### Breaking changes
+
+Following functionalities have been remove din ecmc 11:
+* getAxisStatusStructV2 
+* Event*
+* ComamndList*
+* DataRecorder*
+* Cleanup of axis interfaces (remove duplicate infos)
+* Update of parameters (sync of ecmc and motor record interface)
+* Update of ecmc axis command word mbbo record ${P}${AXIS_NAME}-MtnCmd. As long as strings are used when writing to the the PV then it's backward compatible, however, if interfacing through the indexes/values then these needs to be updated:
+
+Old version:
+```
+record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
+  field(DESC, "${AXIS_NAME}: Motion Command")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
+  field(ZRST, "NO_COMMAND")
+  field(ZRVL, 0)
+  field(ONST, "VEL")
+  field(ONVL, 1)
+  field(TWST, "REL")
+  field(TWVL, 2)
+  field(THST, "ABS")
+  field(THVL, 3)
+  field(FVST, "PVT_REL")
+  field(FVVL, 8)
+  field(SXST, "PVT_ABS")
+  field(SXVL, 9)
+  field(SVST, "HOME")
+  field(SVVL, 10)
+  field(VAL,  0)
+}
+```
+
+New version:
+```
+record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "${AXIS_NAME}: Motion Command")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
+  field(ZRST, "NO_COMMAND")
+  field(ZRVL, -1)
+  field(ONST, "VEL")
+  field(ONVL, 1)
+  field(TWST, "REL")
+  field(TWVL, 2)
+  field(THST, "ABS")
+  field(THVL, 3)
+  field(NIST, "PVT_INTERN")
+  field(NIVL, 9)
+  field(TEST, "HOME")
+  field(TEVL, 10)
+  field(VAL,  0)
+}
+```
 #### Migration guide v10 to v11
+
 In general v11 is backward compatible with v10 but in order to benefit from new functionalities some updates are recommended:
 * Auto enable: Move auto enable from motor record to ecmc
 * Master/Slave sync. state  machine: Use ecmc native state machine for sync. of virtual and physical axes instead of state machine implemented in plc code.
