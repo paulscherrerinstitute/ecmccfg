@@ -23,13 +23,12 @@ Example: ecmc kp = 1, same setting through MR.PCOF = 0.01.
 
 #### Breaking changes
 
-Following functionalities have been remove din ecmc 11:
-* getAxisStatusStructV2 
-* Event*
-* ComamndList*
-* DataRecorder*
-* Cleanup of axis interfaces (remove duplicate infos)
-* Update of parameters (sync of ecmc and motor record interface)
+
+Following functionalities have been removed in ecmc 11:
+* getAxisStatusStructV2 (plugins need to be rebuilt)
+* Event* (replace by ecmc plc code)
+* CommandList* (replace by ecmc plc code)
+* DataRecorder* (replace by ecmc plc code)
 * Update of ecmc axis command word mbbo record ${P}${AXIS_NAME}-MtnCmd. As long as strings are used when writing to the the PV then it's backward compatible, however, if interfacing through the indexes/values then these needs to be updated:
 
 Old version:
@@ -87,9 +86,15 @@ In general v11 is backward compatible with v10 but in order to benefit from new 
 * Minimize risk of burning motors by SDO verification for drive slaves.
 
 ##### Auto-enable
-Auto-enable, previously handled by the motor record model 3 driver has now been implemented also in ecmc layer. It's highly recommended to switch to use the auto-enable features in ecmc instead since the motor record implementation is blocking and therefore other axes cannot take commands while auto enable is for one axis is executing.
-In ecmc auto-enable feature is configured with 3 settings:
+Auto-enable, previously handled by the motor record model 3 driver has now been implemented also in ecmc layer. It's highly recommended to switch to use the auto-enable features in ecmc since the motor record implementation is blocking and therefore other axes cannot take commands while auto enable is executing.
 
+First remove any custom motor record auto enable cfgs:
+```
+Remove:
+ #parameters: 'powerAutoOnOff=2;powerOffDelay=-1;'
+```
+
+In ecmc auto-enable feature is configured with 3 settings:
 ```
 axis:
   autoEnable:
@@ -97,6 +102,7 @@ axis:
     disableTimeout: 5.0 # Axis disable after this time when non busy.
     atStartup: False    # Auto enable axis at ioc start
 ```
+
 ##### Master/Slave sync. state machine
 For master slave axes systems where the virtual-physical axes state machine is loaded from plc-code should be updated to use the native ecmc state machine instead. This gives a higher level of diagnostics and also adds a few new features like improved error handling and controlling standby current on slaved axes.
 
