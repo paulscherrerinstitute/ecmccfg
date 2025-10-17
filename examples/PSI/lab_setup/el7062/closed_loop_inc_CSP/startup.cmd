@@ -15,6 +15,9 @@ epicsEnvSet(DRV_SID,${ECMC_EC_SLAVE_NUM})
 # CH2 Set touch probe to latch on index pulse
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8101,0x11,5,2)"
 
+# CH2 Set touch probe source 01 to secondary encoder
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8101,0x15,1,2)"
+
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,   "FILE=./cfg/axis.yaml,          DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${DRV_SID}, ENC_SID=${DRV_SID}, ENC_CH=01" 
 
 # strange but in this case the incremental encoder is connected to ch2
