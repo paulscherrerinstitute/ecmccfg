@@ -971,3 +971,11 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
    
    Returns an interpolated value from the lookup table object, with "lutObjIndex", for the position "index".
 ```
+
+#### Misc
+
+```
+ 1.  value = epics_running()
+   
+   Returns if epics has started (passed iocInit())
+```
