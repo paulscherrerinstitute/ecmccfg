@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>464</width>
-    <height>491</height>
+    <width>459</width>
+    <height>618</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>230</x>
      <y>0</y>
      <width>221</width>
-     <height>481</height>
+     <height>521</height>
     </rect>
    </property>
    <property name="title">
@@ -29,7 +29,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>340</y>
+      <y>330</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -68,7 +68,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>40</y>
+      <y>30</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -107,7 +107,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>220</y>
+      <y>210</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -119,14 +119,14 @@
      </size>
     </property>
     <property name="text">
-     <string>Homed</string>
+     <string>Homed:</string>
     </property>
    </widget>
    <widget class="caLabel" name="calabel_83">
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>240</y>
+      <y>230</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -145,7 +145,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>120</y>
+      <y>110</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -164,7 +164,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>140</y>
+      <y>130</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -183,7 +183,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>260</y>
+      <y>250</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -202,7 +202,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>260</y>
+      <y>250</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -241,7 +241,7 @@
     <property name="geometry">
      <rect>
       <x>-20</x>
-      <y>320</y>
+      <y>310</y>
       <width>161</width>
       <height>16</height>
      </rect>
@@ -260,7 +260,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>100</y>
+      <y>90</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -299,7 +299,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>140</y>
+      <y>130</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -338,7 +338,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>60</y>
+      <y>50</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -357,7 +357,7 @@
     <property name="geometry">
      <rect>
       <x>-20</x>
-      <y>300</y>
+      <y>290</y>
       <width>161</width>
       <height>16</height>
      </rect>
@@ -376,7 +376,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>200</y>
+      <y>190</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -395,7 +395,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>160</y>
+      <y>150</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -434,7 +434,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>300</y>
+      <y>290</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -473,7 +473,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>240</y>
+      <y>230</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -512,7 +512,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>80</y>
+      <y>70</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -531,7 +531,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>60</y>
+      <y>50</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -570,7 +570,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>180</y>
+      <y>170</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -589,7 +589,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>120</y>
+      <y>110</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -628,23 +628,23 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>40</y>
+      <y>30</y>
       <width>20</width>
-      <height>371</height>
+      <height>456</height>
      </rect>
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(SYS):$(Axis)-Stat</string>
     </property>
     <property name="endBit">
-     <number>18</number>
+     <number>22</number>
     </property>
    </widget>
    <widget class="caLed" name="caled_66">
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>320</y>
+      <y>310</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -683,7 +683,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>200</y>
+      <y>190</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -722,7 +722,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>180</y>
+      <y>170</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -761,7 +761,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>40</y>
+      <y>30</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -780,7 +780,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>100</y>
+      <y>90</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -799,7 +799,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>220</y>
+      <y>210</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -838,7 +838,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>280</y>
+      <y>270</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -857,7 +857,7 @@
     <property name="geometry">
      <rect>
       <x>-20</x>
-      <y>340</y>
+      <y>330</y>
       <width>161</width>
       <height>16</height>
      </rect>
@@ -876,7 +876,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>280</y>
+      <y>270</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -915,7 +915,7 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>160</y>
+      <y>150</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -934,7 +934,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>80</y>
+      <y>70</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -969,125 +969,11 @@
      </color>
     </property>
    </widget>
-   <widget class="caLabel" name="calabel_64">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>420</y>
-      <width>80</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>16777215</width>
-      <height>16</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Last Ilock</string>
-    </property>
-   </widget>
-   <widget class="caLineEdit" name="calineedit_37">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>420</y>
-      <width>41</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>16777215</width>
-      <height>18</height>
-     </size>
-    </property>
-    <property name="channel" stdset="0">
-     <string>$(SYS):$(Axis)-LastIlock</string>
-    </property>
-    <property name="background">
-     <color alpha="222">
-      <red>192</red>
-      <green>192</green>
-      <blue>192</blue>
-     </color>
-    </property>
-    <property name="colorMode">
-     <enum>caLineEdit::Static</enum>
-    </property>
-    <property name="precisionMode">
-     <enum>caLineEdit::Channel</enum>
-    </property>
-    <property name="limitsMode">
-     <enum>caLineEdit::User</enum>
-    </property>
-    <property name="unitsEnabled">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="caLabel" name="calabel_65">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>440</y>
-      <width>80</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>16777215</width>
-      <height>16</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Seq. state:</string>
-    </property>
-   </widget>
-   <widget class="caLineEdit" name="calineedit_38">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>440</y>
-      <width>41</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>16777215</width>
-      <height>18</height>
-     </size>
-    </property>
-    <property name="channel" stdset="0">
-     <string>$(SYS):$(Axis)-SeqState</string>
-    </property>
-    <property name="background">
-     <color alpha="222">
-      <red>192</red>
-      <green>192</green>
-      <blue>192</blue>
-     </color>
-    </property>
-    <property name="colorMode">
-     <enum>caLineEdit::Static</enum>
-    </property>
-    <property name="precisionMode">
-     <enum>caLineEdit::Channel</enum>
-    </property>
-    <property name="limitsMode">
-     <enum>caLineEdit::User</enum>
-    </property>
-    <property name="unitsEnabled">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="caLed" name="caled_77">
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>360</y>
+      <y>350</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -1126,7 +1012,7 @@
     <property name="geometry">
      <rect>
       <x>-20</x>
-      <y>360</y>
+      <y>350</y>
       <width>161</width>
       <height>16</height>
      </rect>
@@ -1145,7 +1031,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>380</y>
+      <y>370</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -1184,7 +1070,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>380</y>
+      <y>370</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -1203,7 +1089,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>400</y>
+      <y>390</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -1222,7 +1108,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>400</y>
+      <y>390</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -1257,6 +1143,238 @@
      </color>
     </property>
    </widget>
+   <widget class="caLed" name="caled_89">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>410</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-SftLimFwdIlock</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_90">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>430</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-SftLimBwdIlock</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_93">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>410</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Soft ilock fwd:</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_94">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>430</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Soft ilock bwd:</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_95">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>450</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Local busy:</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_94">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>450</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-BusyLocal</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_95">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>470</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-BusyGlobal</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_96">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>470</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Global busy:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
@@ -1264,7 +1382,7 @@
      <x>10</x>
      <y>0</y>
      <width>211</width>
-     <height>291</height>
+     <height>311</height>
     </rect>
    </property>
    <property name="title">
@@ -1690,22 +1808,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="caByteController" name="cabytecontroller_3">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>30</y>
-      <width>20</width>
-      <height>221</height>
-     </rect>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(SYS):$(Axis)-Cmd_</string>
-    </property>
-    <property name="endBit">
-     <number>10</number>
-    </property>
-   </widget>
    <widget class="QWidget" name="widget_22" native="true">
     <property name="geometry">
      <rect>
@@ -1986,14 +2088,181 @@
      </item>
     </layout>
    </widget>
+   <widget class="caToggleButton" name="catogglebutton_44">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>260</y>
+      <width>131</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Tweak Bwd:</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkBwdCmd</string>
+    </property>
+   </widget>
+   <widget class="caToggleButton" name="catogglebutton_45">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>131</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Tweak Fwd:</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkFwdCmd</string>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_91">
+    <property name="geometry">
+     <rect>
+      <x>156</x>
+      <y>240</y>
+      <width>14</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-DbgPrntEna</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_92">
+    <property name="geometry">
+     <rect>
+      <x>156</x>
+      <y>260</y>
+      <width>14</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkBwdCmd</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_93">
+    <property name="geometry">
+     <rect>
+      <x>156</x>
+      <y>280</y>
+      <width>14</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="rectangular">
+     <bool>true</bool>
+    </property>
+    <property name="gradientEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="ledWidth">
+     <number>12</number>
+    </property>
+    <property name="ledHeight">
+     <number>12</number>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(SYS):$(Axis)-TwkFwdCmd</string>
+    </property>
+    <property name="falseColor">
+     <color>
+      <red>160</red>
+      <green>160</green>
+      <blue>160</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>85</green>
+      <blue>0</blue>
+     </color>
+    </property>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>300</y>
+     <y>315</y>
      <width>211</width>
-     <height>181</height>
+     <height>126</height>
     </rect>
    </property>
    <property name="title">
@@ -2227,6 +2496,247 @@
      <string>Tgt vel cmd:</string>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>45</x>
+      <y>130</y>
+      <width>211</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Commands:</string>
+    </property>
+    <widget class="caLineEdit" name="calineedit_43">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>100</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-TgtPosCmd</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_70">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>80</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Cmd:</string>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_71">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>80</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Tgt pos cmd:</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_44">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>60</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-MtnCmdData</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_45">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>40</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-MtnCmd</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_75">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>80</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>CmdData:</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_46">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>80</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(SYS):$(Axis)-TgtVelCmd</string>
+     </property>
+     <property name="background">
+      <color alpha="222">
+       <red>192</red>
+       <green>192</green>
+       <blue>192</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="unitsEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_86">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>80</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Tgt vel cmd:</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QWidget" name="widget_26" native="true">
    <property name="geometry">
@@ -2264,6 +2774,139 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>435</y>
+     <width>211</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Status</string>
+   </property>
+   <widget class="caLineEdit" name="calineedit_38">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>55</y>
+      <width>46</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="channel" stdset="0">
+     <string>$(SYS):$(Axis)-SeqState</string>
+    </property>
+    <property name="background">
+     <color alpha="222">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::Channel</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="unitsEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_65">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>55</y>
+      <width>80</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Seq. state:</string>
+    </property>
+   </widget>
+   <widget class="caLabel" name="calabel_64">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>35</y>
+      <width>80</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Last Ilock:</string>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_37">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>35</y>
+      <width>46</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>18</height>
+     </size>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="channel" stdset="0">
+     <string>$(SYS):$(Axis)-LastIlock</string>
+    </property>
+    <property name="background">
+     <color alpha="222">
+      <red>192</red>
+      <green>192</green>
+      <blue>192</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="precisionMode">
+     <enum>caLineEdit::Channel</enum>
+    </property>
+    <property name="limitsMode">
+     <enum>caLineEdit::User</enum>
+    </property>
+    <property name="unitsEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
  </widget>
  <customwidgets>

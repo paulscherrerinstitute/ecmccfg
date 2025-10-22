@@ -1,19 +1,7 @@
 ##############################################################################
 ## Example config for el6688 PTP Sync terminal
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg master
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=master"
-
-##############################################################################
-## Config hardware:
+require ecmccfg
 
 epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
 
@@ -27,19 +15,5 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_AI), HW_
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "$(SLAVE_ID=54)")
 ${SCRIPTEXEC} ../../../hardware/Beckhoff_slaves/ecmcEL6688.cmd
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-## PLC 0
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=0, SAMPLE_RATE_MS=100,FILE=./plc/el6688.plc, PLC_MACROS='PLC_ID=0,SLAVE_ID=$(ECMC_EC_SLAVE_NUM),DBG='")
 
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

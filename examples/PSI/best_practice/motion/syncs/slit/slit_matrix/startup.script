@@ -1,0 +1,13 @@
+#- Configuration scripts
+require ecmccfg "ENG_MODE=1"
+
+# Configure Hardware and Motion
+< ../common/cfgHW_and_motion.cmd
+
+#- PLCs with kinematics (note the INC var including dirs to search for include files)
+#- The group ID:s configured in yaml are stored in GRP_<axis.group>_ID
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,    "FILE=./cfg/axis_main.plc, PLC_ID=1, INC=.:${ecmc_master_slave_DIR}, PLC_MACROS='PLC_ID=1, AX_M1=12, AX_M2=13, AX_S1=5, AX_S2=6, GRP_ID_SA=${GRP_realAxes_ID}, GRP_ID_MA=${GRP_virtualAxes_ID}'"
+
+#- Add state machine to sync the virtual and physical axes (the groups are defined in the yaml axis-cfg files) 
+${SCRIPTEXEC} ${ecmccfg_DIR}addMasterSlaveSM.cmd "NAME=Slit_SM, MST_GRP_NAME=virtualAxes, SLV_GRP_NAME=realAxes"
+

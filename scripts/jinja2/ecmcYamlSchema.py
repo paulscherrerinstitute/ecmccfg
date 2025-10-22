@@ -183,6 +183,12 @@ class Schema:
             'feedSwitchesOutput': {'type': 'string'},
             'feedSwitchesValue': {'type': 'integer'},
             'group': {'type': 'string'},
+            'tweakDist': {'type': 'float','default': 1.0},
+            'autoEnable': {'type': 'dict', 'schema': {
+                'enableTimeout': {'type': 'float','default': -1.0},
+                'disableTimeout': {'type': 'float','default': -1.0},
+                'atStartup': {'type': 'boolean','default': False},
+            }},
             'autoMode': {'type': 'dict', 'schema': {
                 'modeSet': {'type': 'string'},
                 'modeAct': {'type': 'string'},
@@ -228,8 +234,9 @@ class Schema:
                         'schema': {
                         'npoints': {'default': 0},
                         'nreadback': {'default': 0},
-                        }
-                    }
+                        }                    
+                    },
+                    'syncSoftLimits': {'type': 'boolean', 'default': False},
                 }
             }
         }
@@ -318,9 +325,9 @@ class Schema:
                     'status': {'type': 'integer', 'default': 0},
                 }
             },
-            'primary': {'type': 'integer', 'default': -1},
+            'primary': {'type': 'boolean'},
             'homing': homingSchema,
-            'useAsCSPDrvEnc': {'type': 'integer', 'default': -1},
+            'useAsCSPDrvEnc': {'type': 'boolean'},
         }
     }
 
@@ -413,9 +420,9 @@ class Schema:
                     'latchInput': {'type': 'boolean'}
                 }
             },
-            'home': {'required': True, 'type': 'string'},
+            'home': {'required': False, 'type': 'string'},
             'homePolarity': {'type': 'integer', 'allowed': [0, 1]},
-            'interlock': {'required': True, 'type': 'string'},
+            'interlock': {'required': False, 'type': 'string'},
             'interlockPolarity': {'type': 'integer', 'allowed': [0, 1]},
             'analog': {
                 'type': 'dict',

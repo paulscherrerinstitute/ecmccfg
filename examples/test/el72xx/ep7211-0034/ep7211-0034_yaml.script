@@ -1,31 +1,13 @@
 ##############################################################################
 ## Example config for el7211-0010
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg v9.5.5_RC1, "ECMC_VER=v9.5.5_RC1,EC_RATE=1000,ENG_MODE=1"
-require ecmccomp
+require ecmccfg, "EC_RATE=1000,ENG_MODE=1"
 
-##############################################################################
-## Configure hardware
-#- ethercat slaves
-#- Master0
-#- 16  0:16  PREOP  +  EP7211-0034 1K. MDP742 Servo-Motor-Endstufe mit OCT (50V, 4,5A 
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,        "SLAVE_ID=16, HW_DESC=EP7211-0034_ALL_FB"
-
 # Limit torque to 50% of motor rated torque
 #- Rated current = 2710mA (see motor config file, "0x8011 0x12 Rated current (mA)")
 #- Set to 50% of 2710 = 1355mA   (0x8011 0x11 Max current (mA))
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=Motor-Beckhoff-AM8111-XFX0,MACROS='I_MAX_MA=1335'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Beckhoff-AM8111-XFX0,MACROS='I_MAX_MA=1335'"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd     "FILE=./cfg/el7201_1.yaml, DRV_ID=$(ECMC_EC_SLAVE_NUM), AX_NAME='Axis1', AX_ID=1"
-
-#-Apply hardware configuration
-
-##############################################################################
-#- Go active
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

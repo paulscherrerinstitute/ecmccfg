@@ -2,10 +2,14 @@
 
 axis:
   id: 6
-  group: realAxes
+  group: Slaves
   mode: CSV
   features:
     allowSrcChangeWhenEnabled: true
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 5.0
+  tweakDist: 0.5
 
 epics:
   name: TR_HI
@@ -13,7 +17,7 @@ epics:
   unit: mm
   motorRecord:
     description: "Hi"
-    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+    fieldInit: "SPAM=0,RTRY=0,FOFF=Frozen,TWV=1,NTM"
 
 drive:
   numerator: 10                # max velo in EGU/s
@@ -22,6 +26,8 @@ drive:
   control: ec${M_ID=0}.s$(DRV_SLAVE).driveControl01
   status: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01
   setpoint: ec${M_ID=0}.s$(DRV_SLAVE).velocitySetpoint01
+  reduceTorque: 2                                     # Reduce torque bit in drive control word
+  reduceTorqueEnable: True                            # Enable reduce torque functionality
 
 encoder:
   numerator: 1          # 1egu = 1mm
@@ -39,6 +45,7 @@ controller:
   Kff: 1.00
 
 trajectory:
+  type: 1
   axis:
     velocity: 1.0
     acceleration: 1.0

@@ -16,19 +16,19 @@
     values). The simulated linear encoder should be selected as primary (for control).
     The drive object still needs to know the drive actual position in order to send
     accurate position setpoints. This is done by selecting the encoder with 
-    "ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(<axis id>,<enc_id>)". 
+    "ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(<axis id>,<enc_id>)" or ecmccfg or in yaml 
+    "encoder.useAsCSPDrvEnc=True".
     This encoder needs to have the proper scaling for the drive.
     The system will now also use the centralized ecmc position control loop,
     resulting in 2 position loops are activated, one in ecmc and one in the drive.
     In this case, the ecmc-PID parameters needs to be defined and then also tuned.
     Normally a PI controller is needed. The control output to the drive will be 
-    a position setpoint that is controller by the normal ecmc PID controller.
+    a position setpoint that is controlled by the normal ecmc PID controller.
     If the "Cfg.SelectAxisEncCSPDrv(<axis id>,<enc_id>)" is not executed or if the 
     primary encoder is selected, then the drive object will by default use the
     the primary encoder and the position loop in ecmc will be disabled (normal CSP).
     So, in order to use dual loops, the primary encoder and the CSP drive encoder 
     needs to be different.
-
 
 # Configuration for Ex72xx-xxxx
 * Lab test stage (1mm/rev)
@@ -90,3 +90,4 @@ axis:
   id: ${AX_ID=1}
   feedSwitchesOutput: ec0.s$(BO_ID).binaryOutput01.0 # Ethercat entry for feed switches
 ```
+

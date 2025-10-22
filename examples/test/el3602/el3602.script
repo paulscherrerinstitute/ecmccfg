@@ -1,22 +1,9 @@
 ##############################################################################
 ## Example config for el3602
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
+require ecmccfg
 
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
-
-##############################################################################
-## Config hardware:
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3602"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=11, HW_DESC=EL3602"
 
 # Configure analog sensors common (filter settings valid for all channles)
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL36XX-Sensor-common.cmd
@@ -49,16 +36,3 @@ epicsEnvSet("ECMC_EC_SDO_SIZE",          "2")
 epicsEnvSet("ECMC_EC_SDO_VALUE",         "9")       # 50Hz
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},${ECMC_EC_SDO_INDEX},$(ECMC_EC_SDO_INDEX_OFFSET),$(ECMC_EC_SDO_VALUE),$(ECMC_EC_SDO_SIZE))"
 
-
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

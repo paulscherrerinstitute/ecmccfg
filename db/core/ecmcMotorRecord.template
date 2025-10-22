@@ -36,6 +36,9 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
     field(UREV, "$(UREV=1.0)")
     field(VMAX, "$(VMAX=0)")
     field(SPAM, "$(SPAM=15)")
+    field(PCOF, "$(PCOF=0)")
+    field(DCOF, "$(DCOF=0)")
+    field(ICOF, "$(ICOF=0)")
 }
 
 # The message text
@@ -215,6 +218,7 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-RB") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
+    field(VAL, "$(HLM=0)")
     field(SCAN, "I/O Intr")
 }
 
@@ -223,6 +227,7 @@ record(ai,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-RB") {
     field(DTYP, "asynFloat64")
     field(PREC, "$(PREC)")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
+    field(VAL, "$(LLM=0)")
     field(SCAN, "I/O Intr")
 }
 
@@ -377,14 +382,6 @@ record(seq, "$(PREFIX)$(MOTOR_NAME)-MR-SyncTrgSeq") {
     field(LNK4, "$(PREFIX)$(MOTOR_NAME).SYNC PP")
 }
 
-record(seq, "${PREFIX}${MOTOR_NAME}-StpCmd_") {
-  field(DESC, "Stop Axis")    
-  field(DOL1, "${PREFIX}${MOTOR_NAME}-StpCmd CP")  
-  field(DO2,  "1")
-  field(LNK1, "")
-  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
-}
-
 ################################################################
 # Sync only
 record(longin,"${PREFIX}${MOTOR_NAME}-SyncMrCmd"){
@@ -472,29 +469,53 @@ record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cnen_") {
   field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
 }
 
-# Monitor of mbbi bits seems to not work?!
-#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Stp") {
-#  field(DESC, "Axis: STOP")    
-#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B0 CP")
-#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B1 CP")
-#  field(LNK1, "")
-#  field(LNK2, "${PREFIX}${MOTOR_NAME}.STOP PP")
-#}
-#
-## Monitor Sync command and issue SYNC
-#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
-#  field(DESC, "Axis: SYNC")    
-#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B2 CP")
-#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B3 CP")
-#  field(LNK1, "")
-#  field(LNK2, "${PREFIX}${MOTOR_NAME}.SYNC PP")
-#}
-#
-## Monitor CNEN command and issue CNEN
-#record(seq,   "${PREFIX}${MOTOR_NAME}-ECMC2MR-Sync") {
-#  field(DESC, "Axis: CNEN")
-#  field(DOL1, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B4 CP")
-#  field(DOL2, "${PREFIX}${MOTOR_NAME}-ECMC2MR-Cmd.B5 CP")
-#  field(LNK1, "")
-#  field(LNK2, "${PREFIX}${MOTOR_NAME}.CNEN PP")
-#}
+record(longout,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM-En") {
+    info(asyn:READBACK,"1")
+    field(DESC, "EC High Soft Limit enabled RB")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM-En")
+    field(VAL, "$(DHLM_En=0)")
+    field(SCAN, "Passive")
+}
+
+record(longout,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM-En") {
+    info(asyn:READBACK,"1")
+    field(DESC, "EC High Soft Limit enabled RB")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM-En")
+    field(VAL, "$(DLLM_En=0)")
+    field(SCAN, "Passive")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDLLM") {
+    info(asyn:READBACK,"1")
+    field(DESC, "EC Low Soft Limit RB")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDLLM")
+    field(VAL, "$(DLLM=0)")
+    field(SCAN, "Passive")
+}
+
+record(ao,"$(PREFIX)$(MOTOR_NAME)-CfgDHLM") {
+    info(asyn:READBACK,"1")
+    field(DESC, "EC High Soft Limit RB")
+    field(DTYP, "asynFloat64")
+    field(PREC, "$(PREC)")
+    field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))CfgDHLM")
+    field(VAL,  "$(DHLM=0)")
+    field(SCAN, "Passive")
+}
+
+# Sync ecmc softlimits with motor softlimits, requires new motor!!
+record(bo,"${PREFIX}${MOTOR_NAME}-CfgSyncSftLim"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Sync ecmc and MR softlimits")  
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))MOTOR_FLAGS_RW_SOFT_LIMITS")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(SCAN, "Passive")
+  field(TSE,  "0")
+  field(VAL,  "${SYNC_DXLM=1}")
+}

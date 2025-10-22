@@ -1,0 +1,13 @@
+#-d /**
+#-d   \brief template for mbbiDirect input for use of ESI converter script 
+#-d */
+
+record(mbbiDirect,"${ECMC_P}${REC_NAME}"){
+  field(DESC, "$(DESC)")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).${SRC_NAME}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${FLNK}")
+  field(TSE,  "$(TSE=-2)")
+}

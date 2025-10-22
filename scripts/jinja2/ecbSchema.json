@@ -3,11 +3,11 @@
     "axis": {
       "axis.type=1": {
         "required": "axisSchema driveSchema encoderSchema trajectorySchema inputSchema",
-        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema controllerSchema controllerInnerSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema driveBrakeSchema trajectoryModuloSchema epicsMotorRecordPvtSchema"
+        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema controllerSchema controllerInnerSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema driveBrakeSchema trajectoryModuloSchema epicsMotorRecordPvtSchema axisAutoEnableSchema"
       },
       "axis.type=2": {
         "required": "axisSchema encoderSchema trajectorySchema inputSchema",
-        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema trajectoryModuloSchema epicsMotorRecordPvtSchema"
+        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema trajectoryModuloSchema epicsMotorRecordPvtSchema axisAutoEnableSchema"
       }
     },
     "plc": {
@@ -103,6 +103,11 @@
         "type": "string",
         "required": false
       },
+      "axis.tweakDist": {
+        "type": "float",
+        "required": false,
+        "default": 1.0
+      },
       "axis.autoMode.modeSet": {
         "type": "string",
         "required": false
@@ -156,6 +161,28 @@
       }
     }
   },
+
+  "axisAutoEnableSchema": {
+    "identifier": "axis.autoEnable",
+    "schema": {
+        "axis.autoEnable.enableTimeout": {
+           "type": "float",
+           "required": false,
+           "default": -1.0
+        },
+        "axis.autoEnable.disableTimeout": {
+            "type": "float",
+            "required": false,
+            "default": -1.0
+        },
+        "axis.autoEnable.atStartup": {
+            "type": "boolean",
+            "required": false,
+            "default": false
+        }
+    }
+  },
+
   "varSchema": {
     "identifier": "var",
     "allowAnySubkey": true
@@ -193,6 +220,11 @@
       "epics.motorRecord.description": {
         "type": "string",
         "required": false
+      },
+      "epics.motorRecord.syncSoftLimits": {
+        "type": "boolean",
+        "required": false,
+        "default": false
       }
     }
   },
@@ -435,8 +467,11 @@
         "required": false
       },
       "encoder.primary": {
-        "type": "integer",
-        "default": -1,
+        "type": "boolean",
+        "required": false
+      },
+      "encoder.useAsCSPDrvEnv": {
+        "type": "boolean",
         "required": false
       },
       "encoder.velocityFilterSize": {
@@ -513,7 +548,7 @@
       "encoder.homing.tolToPrim": {
         "type": "integer float",
         "required": false,
-        "default": 0.0
+        "default": 0
       },
       "encoder.homing.trigg": {
         "type": "string",
@@ -961,7 +996,7 @@
       },
       "input.home": {
         "type": "string",
-        "required": true
+        "required": false
       },
       "input.homePolarity": {
         "type": "integer",
@@ -970,7 +1005,7 @@
       },
       "input.interlock": {
         "type": "string",
-        "required": true
+        "required": false
       },
       "input.interlockPolarity": {
         "type": "integer",

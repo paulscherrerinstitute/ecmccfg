@@ -14,6 +14,7 @@
 #  AXIS_FIRST          : CMD, PREFIX
 #  AXIS_NEXT           : CMD, PREFIX, THIS_AX_ID
 #  AXIS_NAME           : CMD, IOC DEV, AX_NAME
+#  AXIS_OVERVIEW       : CMD, IOC 
 #  DS_FIRST            : CMD, PREFIX
 #  DS_NEXT             : CMD, PREFIX, THIS_DS_ID
 #  DS_PREV             : CMD, PREFIX, THIS_DS_ID
@@ -26,6 +27,9 @@
 #  PLG_SAFETY_GRP      : CMD, PREFIX, GRP_ID
 #  PLG_SAFETY_GRP_AXIS : CMD, PREFIX, DEV,        AX_NAME
 #  PVT_MAIN            : CMD, PREFIX
+#  SM_FIRST            : CMD, PREFIX
+#  SM_NEXT             : CMD, PREFIX, THIS_PLC_ID
+#  SM_PREV             : CMD, PREFIX, THIS_PLC_ID
 
 CMD=$1
 
@@ -179,9 +183,9 @@ function openAxis() {
   echo "AX_PREFIX=$AX_PREFIX"
   AX_NAME=$( caget -noname -nostat -nounit $PREFIX:MCU-Cfg-AX$AX_ID-Nam | tr -d '"')
   echo "AX_NAME=$AX_NAME"
-  MACROS="SYS=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
+  MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+  caqtdm -macro $MACROS ecmcAxisExpert.ui
 }
 
 function openAxisByName() {
@@ -192,9 +196,9 @@ function openAxisByName() {
   echo "NAME=$AX_NAME"
   # AX_ID is needed as macro in panel
   AX_ID=$( caget -noname -nostat -nounit $AX_PREFIX:$AX_NAME-Id | tr -d '"')
-  MACROS="SYS=$AX_PREFIX,IOC=$IOC,Axis=$AX_NAME,AX_ID=$AX_ID"
+  MACROS="DEV=$AX_PREFIX,IOC=$IOC,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+  caqtdm -macro $MACROS ecmcAxisExpert.ui
 }
 
 function openFirstAxis() {
@@ -205,9 +209,9 @@ function openFirstAxis() {
   echo "AX_PREFIX=$AX_PREFIX"
   AX_NAME=$( caget -noname -nostat -nounit $PREFIX:MCU-Cfg-AX$AX_ID-Nam | tr -d '"')
   echo "AX_NAME=$AX_NAME"
-  MACROS="SYS=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
+  MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+  caqtdm -macro $MACROS ecmcAxisExpert.ui
 }
 
 function openNextAxis() {
@@ -219,9 +223,9 @@ function openNextAxis() {
   echo "AX_PREFIX=$AX_PREFIX"
   AX_NAME=$( caget -noname -nostat -nounit $PREFIX:MCU-Cfg-AX$AX_ID-Nam | tr -d '"')
   echo "AX_NAME=$AX_NAME"
-  MACROS="SYS=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
+  MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+  caqtdm -macro $MACROS ecmcAxisExpert.ui
 }
 
 function openPrevAxis() {
@@ -233,9 +237,16 @@ function openPrevAxis() {
   echo "AX_PREFIX=$AX_PREFIX"
   AX_NAME=$( caget -noname -nostat -nounit $PREFIX:MCU-Cfg-AX$AX_ID-Nam | tr -d '"')
   echo "AX_NAME=$AX_NAME"
-  MACROS="SYS=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
+  MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert_v2.ui
+  caqtdm -macro $MACROS ecmcAxisExpert.ui
+}
+
+function openAxisOverview() {
+  PREFIX=$1
+  M_ID=$( getMasterID $PREFIX )
+  ROWS=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-UI-AX-Rows | tr -d '"')
+  python3 /ioc/modules/qt/ecmc_start_axis_overview.py --rows $ROWS $PREFIX
 }
 
 # DATA STORAGE
@@ -245,7 +256,7 @@ function openFirstDS() {
   ID_2=$(printf  "%02d" $ID_1)
   echo "ID_1=$ID_1"
   echo "ID_2=$ID_2"
-  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  MACROS="DEV=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
   caqtdm -macro $MACROS ecmcDSxx.ui
 }
@@ -385,7 +396,37 @@ function openPVTMain() {
   caqtdm -macro "$MACROS" ecmcProfileMove.ui
 }
 
+# SM
+function openSMFirst() {
+  PREFIX=$1
+  ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-SM-FrstObjId | tr -d '"')
+  ID_2=$(printf  "%02d" $ID_1)
+  echo "ID_1=$ID_1"
+  echo "ID_2=$ID_2"
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcSMxx.ui
+}
 
+function openSMNext() {
+  PREFIX=$1
+  ID=$2
+  ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-SM$ID-NxtObjId | tr -d '"')
+  ID_2=$(printf  "%02d" $ID_1)
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcSMxx.ui
+}
+
+function openSMPrev() {
+  PREFIX=$1
+  ID=$2
+  ID_1=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-SM$ID-PrvObjId | tr -d '"')
+  ID_2=$(printf  "%02d" $ID_1)
+  MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
+  echo "MACROS=$MACROS"
+  caqtdm -macro $MACROS ecmcSMxx.ui
+}
 
 # Parse commands
 case $CMD in
@@ -424,6 +465,9 @@ case $CMD in
   ;;
   "AXIS_NAME")
   openAxisByName $2 $3 $4
+  ;;
+  "AXIS_OVERVIEW")
+  openAxisOverview $2
   ;;
   "DS_FIRST")
   openFirstDS $2
@@ -464,7 +508,15 @@ case $CMD in
   "PVT_MAIN")
   openPVTMain $2
   ;;
-
+  "SM_FIRST")
+  openSMFirst $2
+  ;;
+  "SM_NEXT")
+  openSMNext $2 $3
+  ;;
+  "SM_PREV")
+  openSMPrev $2 $3
+  ;;
   *) echo "Invalid command"
   ;;
 esac

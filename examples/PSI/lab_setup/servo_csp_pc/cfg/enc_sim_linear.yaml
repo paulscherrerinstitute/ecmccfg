@@ -8,9 +8,9 @@ encoder:
   desc: Sim linear
   type: 1
   position: ec0.s$(DRV_ID).positionActual01
-  numerator: 330
+  numerator: 0.9
   denominator: 1048576  # 20bits
   bits: 32
   absBits: 32
   absOffset: -294100
-  primary: 1
+  primary: True

@@ -1,0 +1,36 @@
+require ecmccfg "ENG_MODE=1"
+
+# - apply hardware configuration
+${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd,  "FILE=cfg/hw.subst"
+
+# - load axis configuration
+epicsEnvSet("DEV", "X10SA-ES1-VFM")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax1_TRYUW.yaml, DRV_SLAVE=015, ENC_SLAVE=005, ENC_CHANNEL=01"
+$(SCRIPTEXEC) ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,      "FILE=cfg/enc_openloop_Y.yaml, DRV_SLAVE=015"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax2_TRYR.yaml,  DRV_SLAVE=016, ENC_SLAVE=005, ENC_CHANNEL=02"
+$(SCRIPTEXEC) ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,      "FILE=cfg/enc_openloop_Y.yaml, DRV_SLAVE=016"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax3_TRYDW.yaml, DRV_SLAVE=017, ENC_SLAVE=008, ENC_CHANNEL=01"
+$(SCRIPTEXEC) ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,      "FILE=cfg/enc_openloop_Y.yaml, DRV_SLAVE=017"
+
+epicsEnvSet("DEV", "X10SA-ES1-HFM")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax4_TRYUR.yaml, DRV_SLAVE=018, ENC_SLAVE=008, ENC_CHANNEL=02"
+$(SCRIPTEXEC) ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,      "FILE=cfg/enc_openloop_Y.yaml, DRV_SLAVE=018"
+
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax5_TRYW.yaml,  DRV_SLAVE=019, ENC_SLAVE=007, ENC_CHANNEL=01"
+$(SCRIPTEXEC) ${ECMC_CONFIG_ROOT}loadYamlEnc.cmd,      "FILE=cfg/enc_openloop_Y.yaml, DRV_SLAVE=019"
+
+#- virtual axes
+epicsEnvSet("DEV", "X10SA-ES1-VFM")
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax7_TRX.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax8_TRY.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax9_PITCH.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax10_ROLL.yaml"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,     "FILE=cfg/ax11_YAW.yaml"
+
+#- load the kinematics
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadPLCFile.cmd, "FILE=cfg/main.plc,PLC_ID=1,INC=.:${ecmc_master_slave_DIR},PLC_MACROS='PLC_ID=1,AX_Y1=1,AX_Y2=2,AX_Y3=3,AX_X1=4,AX_X2=5,AX_TRX=7,AX_TRY=8,AX_PITCH=9,AX_ROLL=10,AX_YAW=11'"
+
+#- Add state machine to sync the virtual and physical axes (teh groups are defined in the yaml axis-cfg files) 
+${SCRIPTEXEC} ${ecmccfg_DIR}addMasterSlaveSM.cmd "NAME=Slit_SM, MST_GRP_NAME=VFM_VIRT, SLV_GRP_NAME=VFM_REAL"

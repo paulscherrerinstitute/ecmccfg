@@ -1,0 +1,63 @@
+axis:
+  id: ${AX_ID}
+  group: virtualAxes
+  type: end effector
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 3.0
+  tweakDist: 0.5
+
+epics:
+  name: CENTERY
+  precision: 4
+  unit: mm
+  motorRecord:
+    description: "Center (Virtual)"
+    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen"
+
+encoder:
+  type: 1
+  source: 1
+  numerator: 1
+  bits: 32
+
+trajectory:
+  axis:
+    velocity: 0.5
+    acceleration: 0.25
+    jerk: 0.25
+
+input:
+  limit:
+    forward: ec0.s0.ONE.0              # unused
+    backward: ec0.s0.ONE.0             # unused
+  home: ec0.s0.ONE.0                   # unused
+  interlock: ec0.s0.ONE.0              # unused
+
+softlimits:
+  enable: false
+  forwardEnable: false
+  backwardEnable: false
+  forward: 52
+  backward: 8
+
+monitoring:
+  lag:
+    enable: yes
+    tolerance: 0.02
+    time: 100
+  target:
+    enable: yes
+    tolerance: 0.05
+    time: 100
+  velocity:
+    enable: yes
+    max: 0.6
+    time:
+      trajectory: 100
+      drive: 100
+      
+plc:
+  enable: true
+  externalCommands: true
+

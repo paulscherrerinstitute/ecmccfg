@@ -38,6 +38,8 @@ ecmcConfigOrDie "Cfg.SetAxisEncType(${ECMC_AXIS_NO},{{ encoder.type }})"
 ecmcConfigOrDie "Cfg.SetAxisEncBits(${ECMC_AXIS_NO},{{ encoder.bits }})"
 {%- if encoder.type == 1  %}
     ecmcConfigOrDie "Cfg.SetAxisEncAbsBits(${ECMC_AXIS_NO},{{ encoder.absBits }})"
+    #- if abs-encoder then default to skip homing
+    ecmcConfigOrDie "Cfg.SetAxisEncEnableRefAtHome(${ECMC_AXIS_NO},0)"
 {%- endif  %}
 ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {#-{%- if encoder.mask %}#}
@@ -84,7 +86,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 
 #- Use this encoder as primary?!
 {%- if encoder.primary is defined %}
-    {%- if encoder.primary >0 %}
+    {%- if encoder.primary > 0 %}
         ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
     {%- endif %}
 {%- endif %}
@@ -159,9 +161,11 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     #- Need to write to env vars to also support legacy syntax ("homing." vs #encoder.homing.")
     {%- if encoder.homing.acceleration is defined %}
        epicsEnvSet(ACC, {{ encoder.homing.acceleration }})
+       ecmcConfigOrDie "Cfg.SetAxisHomeAcc(${ECMC_AXIS_NO},{{ encoder.homing.acceleration }})"
     {%- endif %}
     {%- if encoder.homing.deceleration is defined %}
        epicsEnvSet(DEC, {{ encoder.homing.deceleration }})
+       ecmcConfigOrDie "Cfg.SetAxisHomeDec(${ECMC_AXIS_NO},{{ encoder.homing.deceleration }})"
     {%- endif %}
 
     {%- if (encoder.homing.trigg is defined) and  (encoder.homing.ready is defined) %}

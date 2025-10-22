@@ -10,39 +10,19 @@ co##############################################################################
 ## To avoid issues with over/underflow it might be possible to use a virtuel axis for the encoder value (without scaling).
 ## Then this ax<id>.actpos can be written to the data storage instead. See other example in this dir.  
 
+require ecmccfg
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=develop"
-
-##############################################################################
-## Configure hardware
-
-#Configure EL1018 digital input terminal
-epicsEnvSet(ECMC_EC_SLAVE_NUM,                "1")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=1, HW_DESC=EL1018"
 epicsEnvSet("SLAVE_INPUTS", ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL1018"
 
-#Configure EL2808 digital output terminal
-epicsEnvSet(ECMC_EC_SLAVE_NUM,                "2")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=2, HW_DESC=EL2808"
 epicsEnvSet("SLAVE_OUTPUTS", ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=EL2808"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=3, HW_DESC=EL5101_32bit,"
 epicsEnvSet("SLAVE_ENCODER", ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL5101_32bit,"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "8")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=8, HW_DESC=EL7037, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
 epicsEnvSet("SLAVE_DRIVE", ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-Trinamic-QMot-QSH4218-41-10-035"
-
 
 # ADDITIONAL SETUP
 # Set all outputs to feed switches
@@ -56,12 +36,6 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput07,1)"
 ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${SLAVE_OUTPUTS},binaryOutput08,1)"
 # END of ADDITIONAL SETUP
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-## AXIS 1
-#
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7037_enc_filt_ds_1.ax)
 
@@ -69,7 +43,7 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/el7037_enc_filt_ds_
 ## Data Storage: For encoder values
 epicsEnvSet("ECMC_ID_DS_FILT",0)
 epicsEnvSet("ECMC_FILT_SIZE", 10)
-$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ECMC_ID_DS_FILT}, DS_SIZE=${ECMC_FILT_SIZE}, SAMPLE_RATE_MS=100,DS_TYPE=2")
+$(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ECMC_ID_DS_FILT}, DS_SIZE=${ECMC_FILT_SIZE}, SAMPLE_RATE_MS=100,DS_TYPE=2"
 
 ##############################################################################
 ## PLC 1: Implemnts a low pas filter. Writes filterend posiiton
@@ -80,18 +54,3 @@ $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ECMC_ID_DS_FILT}, DS_SIZ
 epicsEnvSet("ECMC_PLC_ID",0)
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ECMC_PLC_ID}, SAMPLE_RATE_MS=${ECMC_SAMPLE_RATE_MS},FILE=./plc/enc_filt_ds.plc, PLC_MACROS='PLC_ID=${ECMC_PLC_ID},ENC_S_ID=${SLAVE_ENCODER},DS_FILT_ID=${ECMC_ID_DS_FILT}'")
 
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-
-iocInit();
-dbl > pvs.log

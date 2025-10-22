@@ -1,0 +1,28 @@
+/* Forward kinematics to calculate virtual axes from real axes
+   | Tx    |         | Y1 |
+   | Yy    |         | Y2 |
+   | Pitch | = FWD * | Y3 |
+   | Roll  |         | X1 |
+   | Yaw   |         | X2 |
+*/
+var FWD1[5] := {27/25, -54/25, 27/25,    1/2,    1/2};
+var FWD2[5] := {  1/4,    1/2,   1/4,      0,      0};
+var FWD3[5] := {   -2,      0,     2,      0,      0};
+var FWD4[5] := {    2,     -4,     2,      0,      0};
+var FWD5[5] := {    0,      0,     0,     -2,      2};
+
+/* Inverse kinematics to calculate real axes from virtal axes
+   | Y1 |         | Tx    |
+   | Y2 |         | Ty    |
+   | Y3 | = INV * | Pitch |
+   | X1 |         | Roll  |
+   | X2 |         | Yaw   |
+*/
+var INV1[5] := {  0,     1,  -1/4,    1/8,      0};
+var INV2[5] := {  0,     1,     0,   -1/8,      0};
+var INV3[5] := {  0,     1,   1/4,    1/8,      0};
+var INV4[5] := {  1,     0,     0, -27/50,   -1/4};
+var INV5[5] := {  1,     0,     0, -27/50,    1/4};
+
+#- do the calculations
+include "axis_kin_mirror.plc_inc"

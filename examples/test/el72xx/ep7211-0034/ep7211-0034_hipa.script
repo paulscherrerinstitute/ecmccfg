@@ -5,53 +5,21 @@
 ##############################################################################
 ## Initiation:
 
-require ecmccfg sandst_a "ECMC_VER=EC_RATE=1000,ENG_MODE=1,MASTER_ID=1"
-require ecmccomp
+require ecmccfg "EC_RATE=1000,ENG_MODE=1,MASTER_ID=1"
 
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=0, HW_DESC=EP7211-0034_TRQFF"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP= Motor-Beckhoff-AM8121-XFX0"
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "0")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM_DRIVE), HW_DESC=EP7211-0034_TRQFF"
-${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP= Motor-Beckhoff-AM8121-XFX0"
-
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
 
-#epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="1"}")
-
-##############################################################################
-## AXIS 1
-#
 epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadYamlAxis.cmd "FILE=./cfg/el7201_hipa.yaml,DRV_ID=$(ECMC_EC_SLAVE_NUM_DRIVE),AX_NAME='Axis1',AX_ID=1"
 
-#epicsEnvSet("ECMC_SAMPLE_RATE_MS",            "${RATE="10"}")
-
-##############################################################################
-## Data Storage: For encoder values
-#
 epicsEnvSet("ID",0)
 epicsEnvSet("DS_SIZE", 200)
 epicsEnvSet("DS_TYPE", 0)  # Fill from end (newwst value in the end). Old values shifted out
 $(SCRIPTEXEC) $(ecmccfg_DIR)addDataStorage.cmd "DS_ID=${ID},DS_SIZE=${DS_SIZE},SAMPLE_RATE_MS=-1,DS_TYPE=${DS_TYPE}"
 
-##############################################################################
-## PLC 0
-#$(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ID},SAMPLE_RATE_MS=-1,FILE=./plc/trqFF_sine.plc,PLC_MACROS='M_ID=${ECMC_EC_MASTER_ID=0},S_ID=${ECMC_EC_SLAVE_NUM_DRIVE=0},ID=${ID}'"
 $(SCRIPTEXEC) $(ecmccfg_DIR)loadPLCFile.cmd, "PLC_ID=${ID},SAMPLE_RATE_MS=-1,FILE=./plc/trqFF_sine_adaptive.plc,PLC_MACROS='M_ID=${ECMC_EC_MASTER_ID=0},S_ID=${ECMC_EC_SLAVE_NUM_DRIVE=0},ID=${ID}'"
 dbLoadRecords("ecmcPlcBinary.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.exe,REC_NAME=TrgMtn")
-
-##############################################################################
-## Load plugin: MOTION
-#
-epicsEnvSet(ECMC_PLUGIN_CONFIG,"PLUGIN_ID=1,AX=1,BUFF_SIZE=200,DBG=0,ENA=1")
-require ecmc_plugin_motion sandst_a "${ECMC_PLUGIN_CONFIG}"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)

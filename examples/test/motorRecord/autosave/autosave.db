@@ -1,3 +1,0 @@
-record("*",$(NAME)) {
-  info(autosaveFields_pass0, "DVAL MFLG")
-}

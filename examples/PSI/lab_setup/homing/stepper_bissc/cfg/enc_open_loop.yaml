@@ -1,0 +1,22 @@
+encoder:
+  desc: 'Open loop'
+  unit: mm
+  numerator: 1                                # Scaling numerator
+  denominator: 12800                          # Scaling denominator
+  type: 0                                     # Type: 0=Incremental, 1=Absolute
+  bits: 16                                    # Total bit count of encoder raw data
+  absBits: 0                                  # Absolute bit count (for absolute encoders)
+  absOffset: 0                                # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s$(ENC_SID).positionActual01  # Ethercat entry for actual position input (encoder)
+  homing:
+    refToEncIDAtStartup: 1                    # Ref encoder at startup (to BISS value)
+    type: 1                                   # Homing sequence type
+    position: 0                               # Position to reference encoder to
+    velocity:
+      to: 2                                   # Velocity to cam/sensor (used for some homing seqs)
+      from: 1                                 # Velocity from cam/sensor (used for some homing seqs)
+    acceleration: 10                          # Acceleration during homing
+    deceleration: 10                          # Deceleration during homing
+    refAtHome: 1                              # If homing is executed then set position of this encoder
+    postMoveEnable: yes                       # Enable move after successfull homing
+    postMovePosition: 10                      # Position to move to after successfull homing

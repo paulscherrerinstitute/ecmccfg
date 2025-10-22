@@ -91,3 +91,11 @@ record(ai,"${ECMC_P}Drv${CH_ID}-Tune-P-Kp"){
   field(PREC, "$(PREC=0)")
   field(VAL,  "0")
 }
+
+record(waveform,"${ECMC_P}Drv${CH_ID}-Tune-Arr"){
+  field(PINI, "1")
+  field(DESC, "ecmccomp macro string")
+  field(PINI, "$(PINI=1)")
+  field(FTVL, "CHAR")
+  field(NELM, "$(SIZE=256)")
+}

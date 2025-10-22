@@ -1,0 +1,92 @@
+# Macros:
+#  AX_ID    : This axis id
+#  AX_NAME  : This axis name
+#  DRV_ID   : Slave id of drive
+#  BO_ID    : Slave Id of binary output for feeding switches
+#  OFFSET   : Offset
+
+axis:
+  id: ${AX_ID=1}
+  #feedSwitchesOutput: ec0.s$(BO_ID).binaryOutput01.0 # EtherCAT entry for feed switches  
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 5.0
+  tweakDist: 0.5
+  autoEnable:
+    enableTimeout: 10.0
+    disableTimeout: 5.0
+
+epics:
+  name: ${AX_NAME=M1}
+  precision: 3
+  unit: mm
+  motorRecord:
+    syncSoftLimits: true
+    enable: true
+    description: "Servo"
+    fieldInit: "RTRY=0,FOFF=Frozen"
+
+# Max scale is for motors with:
+# * 6 pole: Max scale is 8000revs/s (in this case 8000mm/s)
+# * 8 pole: Max scale is 6000revs/s
+drive:
+  numerator: 8000  # mm/s, Max speed is 8000 rev/sec for drive with 6 pole motor
+  denominator: 2147483648
+  type: 1                            # Stepper: 0, DS402: 1 (servos)
+  control: ec0.s$(DRV_ID).driveControl01
+  status: ec0.s$(DRV_ID).driveStatus01
+  setpoint: ec0.s$(DRV_ID).velocitySetpoint01
+  reset: 7
+
+# The encoder on most motors are 20bit single turn and 12 bit multiturn (4096 turns)
+encoder:
+  type: 1
+  position: ec0.s$(DRV_ID).positionActual01
+  numerator: 1
+  denominator: 1048576  # 20bits
+  bits: 32
+  absBits: 32
+  absOffset: $(OFFSET=0)
+
+controller:
+  Kp: 1.0
+  Ki: 0.0
+  Kd: 0.0
+
+trajectory:
+  source: 0
+  type: 1
+  axis:
+    velocity: 10
+    acceleration: 10
+    deceleration: 10
+
+input:
+  limit:
+    forward: ec0.s$(DRV_ID).ONE.1
+    backward: ec0.s$(DRV_ID).ONE.0
+  home: ec0.s$(DRV_ID).ONE.0
+  interlock: ec0.s$(DRV_ID).ONE.0
+
+softlimits:
+  enable: no
+  backwardEnable: yes
+  forwardEnable: yes
+  forward: 10
+  backward: -10
+
+monitoring:
+  lag:
+    enable: yes
+    tolerance: 0.1
+    time: 100
+  target:
+    enable: yes
+    tolerance: 0.01
+    time: 100
+  velocity:
+    enable: yes
+    max: 50
+    time:
+      trajectory: 100
+      drive: 200

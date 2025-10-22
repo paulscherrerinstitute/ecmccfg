@@ -34,3 +34,7 @@ ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd "${CFG_MACROS=""}"
 epicsEnvUnset(CALLED_FROM_CFG_SLAVE)
+
+#- Settings done for ch1 and ch2 (this is not bullet proof, please switch to ecmccomp)
+ecmcConfigOrDie "Cfg.EcSetSlaveSDOSettingsDone(${ECMC_EC_SLAVE_NUM},1,1)"
+ecmcConfigOrDie "Cfg.EcSetSlaveSDOSettingsDone(${ECMC_EC_SLAVE_NUM},2,1)"

@@ -1,0 +1,13 @@
+##############################################################################
+## Example config for el7342 (2 ch dc motor driver)
+
+require ecmccfg sandst_a "ECMC_VER=sandst_a"
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=17, HW_DESC=EL7342"
+
+# Configure motor CH1
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7332, CONFIG=-ch1-Motor-MicroMotors-RH158.24.15"
+
+# Configure motor CH2
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7332, CONFIG=-ch2-Motor-Maxon-115146"
+

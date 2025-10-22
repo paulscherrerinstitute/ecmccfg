@@ -1,0 +1,17 @@
+encoder:
+  desc: 'Open loop'
+  unit: mm
+  numerator: 1                                # Scaling numerator
+  denominator: 12800                          # Scaling denominator
+  type: 0                                     # Type: 0=Incremental, 1=Absolute
+  bits: 16                                    # Total bit count of encoder raw data
+  absBits: 0                                  # Absolute bit count (for absolute encoders)
+  absOffset: 0                                # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s$(DRV_SID).positionActual01  # Ethercat entry for actual position input (encoder)
+  homing:
+    refToEncIDAtStartup: 1                    # Ref encoder at startup (to BISS value)
+    type: 2
+    position: 0
+    velocity:
+      to: 0.5
+      from: 0.25

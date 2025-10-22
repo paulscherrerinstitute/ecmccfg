@@ -1,22 +1,12 @@
 ##############################################################################
 ## Example config for el3174 multi range analog input
 
-##############################################################################
-## Initiation:
-epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
-epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
-epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
-
-require ecmccfg develop
-
-# run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.2"
+require ecmccfg
 
 ##############################################################################
 ## Config hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "11")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL3174_+-10V"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=11, HW_DESC=EL3174_+-10V"
 
 # Configure analog sensors common (filter settings valid for all channles)
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL31XX-Sensor-common.cmd
@@ -37,17 +27,3 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3164-Sensor-chX-default.cmd
 epicsEnvSet("ECMC_EC_SDO_INDEX",         "0x8030")
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEL3164-Sensor-chX-default.cmd
 
-#Apply hardware configuration
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-############# Configure diagnostics:
-
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-
-# go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
-
-iocInit()

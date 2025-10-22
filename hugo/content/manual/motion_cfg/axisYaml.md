@@ -67,6 +67,49 @@ axis:
   # parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
 ```
 
+### Auto enable/disable
+
+#### ecmc native (preferred way)
+Native ecmc auto-enable/disable is the preferred way and can be configured by:
+```
+axis:
+  autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
+    enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
+    disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+```
+The motor record auto-enable/disable fucntionality will then automatically be disabled. 
+{{% notice warning %}}
+However, do not configure both ecmc native and motor record auto enable/disable at the same time.
+{{% /notice %}}
+
+#### motor record (do not use)
+
+{{% notice info %}}
+Please use the ecmc-native auto-enable/disable described above.
+{{% /notice %}}
+
+Auto enable disable is by default enabled in motor record. However, this solution is not optimal since motor record is just polling information from ecmc and all motor records block when one motor is waiting for enable.
+This is how the parameters timing paramters can be changed.
+```
+axis:
+  parameters: powerAutoOnOff=2;powerOnDelay=6.0;powerOffDelay=1.0;
+```
+{{% notice info %}}
+The powerAutoOnOff is defining a mode and should always be set to 2.
+{{% /notice %}}
+  
+{{% notice info %}}
+Note the mandatory ";" in the end of the parameters string. If not present, then teh last parameter will not be parsed.
+{{% /notice %}}
+
+
+### Tweak value
+ecmc and motor record tweak value can be defined in the axis.tweakDist:
+```
+axis:
+  tweakDist: 5.0                                    # Tweak distance
+```
+
 ## epics
 Epics configuration.
 
@@ -431,6 +474,11 @@ axis:
       homing: true                                    # Allow homing
       constantVelocity: true                          # Allow constant velocity
       positioning: true                               # Allow positioning
+  autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
+    enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
+    disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+    atStartup: True                                   # Auto enable axis at ioc start, default False
+  tweakDist: 2.0                                      # Tweak value (both ecmc interface and motor record tweak value)
 
 epics:
   name: M1                                            # Axis name
@@ -441,6 +489,7 @@ epics:
     enable: true
     description: This is MR
     fieldInit: 'RRES=1.0,RTRY=2,RMOD=1,UEIP=0,RDBD=0.1,URIP=1,RDBL=$(IOC):$(ECMC_MOTOR_NAME)-PosActSim' # Extra config for Motor record
+    syncSoftLimits: false                             # Optional: Sync softlimits between motor and ecmc (default false)
 
 drive:
   numerator: 360                                      # Fastest speed in engineering units
@@ -453,6 +502,7 @@ drive:
   setpoint: ec0.s$(DRV_SLAVE).velocitySetpoint01      # Velocity setpoint if CSV. Position setpoint if CSP
   reduceTorque: 2                                     # Reduce torque bit in drive control word
   reduceTorqueEnable: True                            # Enable reduce torque functionality
+  useAsCSPDrvEnc: True                                # Use this encoder as CSP drive encoder (ecmc controller enabled in CSP)
   brake:
     enable: false
     output: ec0...                                    # Ethercat link to brake output
@@ -495,7 +545,7 @@ encoder:
     position: ''                                      # Link to latched value. Used for some homing seqs
     control: 0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
-  primary: 1                                          # Use this encoder as primary (for control)
+  primary: True                                       # Use this encoder as primary (for control)
   homing:
     type: 3                                           # Homing sequence type
     position: -30                                     # Position to reference encoder to
@@ -554,9 +604,11 @@ trajectory:
     range: 360                                        # Modulo range 0..360
     type: 0                                           # Modulo type
 
+#  Limits can be overridden with plc-code by setting input.limit.forward or input.limit.backward to 'plcOverride', then 'ax<id>.mon.lowlim' and or 'ax<id>.mon.highlim' needs to be written to in plc code (1 means linit OK).
+
 input:
   limit:
-    forward: ec0.s$(ENC_SLAVE).ONE.0                  # Ethercat entry for low limit switch input
+    forward: ec0.s$(ENC_SLAVE).ONE.0                  # Ethercat entry for low limit switch input,
     forwardPolarity: 0                                # Polarity of forward limit switch
     backward: ec0.s1.BI_2.0                           # Ethercat entry for high limit switch input
     backwardPolarity: 0                               # Polarity of forward limit switch

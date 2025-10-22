@@ -26,6 +26,18 @@ record(waveform,"$(P)$(DS_DATA_ACT)") {
   field(PREC,  "$(PREC=3)")
 }
 
+record(waveform,"$(P)$(DS_DATA_SET)") {
+  info(asyn:FIFO, "1000")
+  field(PINI, "1")
+  field(DTYP, "asynFloat64ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR=),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64ArrayOut/ds${Index}.data=")
+  field(FTVL, "DOUBLE")
+  field(NELM, "$(NELM)")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+  field(PREC,  "$(PREC=3)")
+}
+
 record(longin,"$(P)$(DS_STAT)"){
   field(DESC, "ds$(Index): Status Word")
   field(PINI, "$(PINI=1)")

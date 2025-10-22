@@ -1,9 +1,13 @@
 axis:
   id: ${AXIS_ID=1}                                    # Axis id
   feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
+  autoEnable:
+    enableTimeout: 5.0
+    disableTimeout: 5.0
+  tweakDist: 0.5
 
 epics:
-  name: ${AX_NAME=M1}                                 # Axis anme
+  name: ${AX_NAME=M1}                                 # Axis name
   precision: 3                                        # Decimal count
   description: Test cfg                               # Axis description
   unit: mm                                            # Unit
@@ -44,7 +48,7 @@ encoder:
     - 1                                               # Error 0
 
 controller:
-  Kp: 10                                              # Kp proportinal gain
+  Kp: 1                                               # Kp proportinal gain
   Ki: 0                                               # Ki integral gain
   Kd: 0                                               # Kd derivative gain
 

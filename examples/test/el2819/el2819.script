@@ -1,0 +1,7 @@
+require ecmccfg
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,     "SLAVE_ID=2, HW_DESC=EL2819"
+
+# Test mapping the 16bits to a mbboDirect
+${SCRIPTEXEC} ${ecmccfg_DIR}addEcDataItem.cmd "STRT_ENTRY_NAME=binaryOutput01,DT=U16,RW=1,NAME='BitsOut',REC_TYPE=MBBODIRECT"
+

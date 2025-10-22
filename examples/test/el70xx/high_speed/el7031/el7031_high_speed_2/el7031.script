@@ -1,4 +1,4 @@
-require ecmccfg v9.0.1_RC2,"EC_RATE=5000,ECMC_VER=v9.0.1_RC2"
+require ecmccfg "EC_RATE=500"
 
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
 

@@ -255,6 +255,10 @@ ecmcFileExist(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,1)
 ecmcForLoop(${ecmccfg_DIR}ecmcELM360X_loopStep.cmd,"CH_ID=${ECMC_CH}, PDO=${ECMC_PDO_Data}, ENTRY=${ECMC_EC_ENTRY}",ECMC_LOOP_IDX,1,${NELM=1},1)
 ecmcConfigOrDie "Cfg.EcAddMemMapDT(ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.analogInputArray${ECMC_CH}_1,$(ECMC_EC_ARRAY_BYTE_SIZE),2,S32,ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.analogInputArray${ECMC_CH})"
 
+#- Configure DC clock
+ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/${ECMC_EC_SAMPLE_RATE=1000}*1E6)
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x700,${ECMC_TEMP_PERIOD_NANO_SECS},${ECMC_SYNC_0_OFFSET_NS=0},${ECMC_SYNC_1_PERIOD_NS=0},${ECMC_SYNC_1_OFFSET_NS=0})"
+epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)
 
 #- Cleanup
 epicsEnvUnset(ECMC_EC_ARRAY_BYTE_SIZE)

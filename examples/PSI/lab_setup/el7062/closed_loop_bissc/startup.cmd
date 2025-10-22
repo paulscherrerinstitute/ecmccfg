@@ -2,7 +2,7 @@
 ## Example config for EL7041 and EL5042
 
 require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a"
-require ecmccomp sandst_a
+
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=1,HW_DESC=EL9227-5500"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL2819"

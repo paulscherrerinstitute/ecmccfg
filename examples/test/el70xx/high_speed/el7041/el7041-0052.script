@@ -9,9 +9,8 @@ require ecmccfg v9.0.1_RC2,"IOC=$(IOC),ECMC_VER=v9.0.1_RC2"
 ##############################################################################
 ## Configure hardware
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "10")
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=10, HW_DESC=EL7041-0052, CONFIG=-Motor-Phytron-VSS-32.200.1.2"
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",        "$(ECMC_EC_SLAVE_NUM)")
-${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7041-0052, CONFIG=-Motor-Phytron-VSS-32.200.1.2"
 
 #- Set max current to 2.2A (unit 1mA)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,2200,2)"

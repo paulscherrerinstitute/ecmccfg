@@ -673,6 +673,32 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                        );
      1. Enable/disable motor record via CNEN field
      Note: The command only triggers once per ecmc cycle (with the latest value written to enable)
+
+  25. error = mc_set_traj_vel(
+                            <axIndex>,  : Axis index
+                            <vel>       : Target velocity
+                            );
+  Set target velocity.
+
+  26. error = mc_set_traj_acc(
+                            <axIndex>,  : Axis index
+                            <acc>       : Max acceleration
+                            );
+  Set max acceleration.
+
+  27. error = mc_set_traj_dec(
+                            <axIndex>,  : Axis index
+                            <dec>       : Max deceleration
+                            );
+  Set max deceleration.
+  note: mc_set_traj_dec() is only valid for trapez trajectory (trajectory.type=0). For s-curve trajectory mc_set_traj_acc() is used for both acceleration and deceleration.
+
+  28. error = mc_set_traj_jerk(
+                            <axIndex>,  : Axis index
+                            <jerk>      : Max jerk
+                            );
+  Set max jerk.
+  note: mc_set_traj_jerk() is only valid for s-curve trajectory (ruckig, trajectory.type=1)
 ```
 
 #### Motion Group
@@ -822,6 +848,32 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                        );
      1. Enable/disable motor record via CNEN field
      Note: The command only triggers motor record maximum once per ecmc cycle (with the latest value written to enable)
+
+ 23.  mc_grp_set_ignore_mr_status_check_at_disable(
+                                                   <grp_id>, : Group index
+                                                   <ignore>, : Ignore 1/0
+                                                   );
+     Ignore check of status when mr is disabling (avoid enableAmplifier(xx) failed") error
+
+ 23.  mc_grp_get_any_at_fwd_limit(
+                                  <grp_id>, : Group index
+                                  );
+     Returns true if any axis in the group is at a fwd limit switch, otherwise false.
+
+ 24.  mc_grp_get_any_at_bwd_limit(
+                       <grp_id>, : Group index                  
+                       );
+     Returns true if any axis in the group is at a bwd limit switch, otherwise false.
+
+ 25.  mc_grp_get_any_at_limit(
+                       <grp_id>, : Group index                  
+                       );
+     Returns true if any axis in the group is at a limit switch, otherwise false.
+ 
+ 26.  mc_grp_set_slaved_axis_ilocked(
+                       <grp_id>, : Group index                  
+                       );
+     Set slaved axis in interlock error.
 ```
 
 #### Data Storage

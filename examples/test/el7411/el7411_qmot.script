@@ -2,7 +2,7 @@
 ## Example config for el7411 with Qmot BLDC motor (incremental encoder)
 ## Note, the encoder needed to be inverted to fit motor rotation (otherwise the motor will act strange, however no real error..)
 
-require ecmccfg sandst_a "MASTER_ID=1,ENG_MODE=1"
+require ecmccfg, "MASTER_ID=1,ENG_MODE=1"
 
 #-#############################################################################
 ## Configure hardware

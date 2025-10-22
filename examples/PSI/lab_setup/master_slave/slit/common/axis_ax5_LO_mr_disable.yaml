@@ -1,0 +1,85 @@
+# https://paulscherrerinstitute.github.io/ecmccfg/manual/axis/axisyaml/
+axis:
+  id: 5
+  group: realAxes
+  mode: CSV
+  #parameters: 'powerAutoOnOff=2;powerOnDelay=1.0;powerOffDelay=2.0;'
+  features:
+    allowSrcChangeWhenEnabled: true
+  autoEnable:
+    enableTimeout: 5.0
+
+epics:
+  name: TR_LO
+  precision: 4
+  unit: mm
+  motorRecord:
+    description: "Low"
+    fieldInit: "SPAM=0,RTRY=1,FOFF=Frozen,TWV=1"
+
+drive:
+  numerator: 10                 # max velo in EGU/s
+  denominator: 32768            # MAX_INT for a 16-bit register, always this for this stepper drive!
+  type: 0
+  control: ec${M_ID=0}.s$(DRV_SLAVE).driveControl01
+  status: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01
+  setpoint: ec${M_ID=0}.s$(DRV_SLAVE).velocitySetpoint01
+  reduceTorque: 2                                     # Reduce torque bit in drive control word
+  reduceTorqueEnable: True                            # Enable reduce torque functionality
+
+encoder:
+  numerator: 1          # 1egu = 1mm
+  denominator: 12800    # Number of ticks when motor moves numerator (=1mm): 1 mm / 50 nm = 20000
+  type: 0               # Type: 0=Incremental, 1=Absolute
+  bits: 16              # Total bit count of encoder raw data
+  absBits: 0          # Absolute bit count (for abs enc) always least significant part of 'bits'
+  absOffset: 0.0000     # Encoder offset in eng units (for absolute encoders)
+  position: ec${M_ID=0}.s$(ENC_SLAVE).positionActual$(ENC_CHANNEL)
+
+controller:
+  Kp: 10.00
+  Ki: 0.001
+  Kd: 0.000
+  Kff: 1.00
+
+trajectory:
+  axis:
+    velocity: 1.0
+    acceleration: 1.0
+    deceleration: 1.0
+
+input:
+  limit:
+#    forward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.12   # 1119994 cnts // 55.9997 mm
+#    backward: ec${M_ID=0}.s$(DRV_SLAVE).driveStatus01.11  #   98010 cnts //  4.9005 mm
+    forward: ec${M_ID=0}.s$(DRV_SLAVE).ONE.1   # 1119994 cnts // 55.9997 mm
+    backward: ec${M_ID=0}.s$(DRV_SLAVE).ONE.0  #   98010 cnts //  4.9005 mm
+  home: ec${M_ID=0}.s-1.ONE.0                   # unused
+  interlock: ec${M_ID=0}.s-1.ONE.0                   # unused
+
+softlimits:
+  enable: false
+  backwardEnable: true
+  forwardEnable: true
+  forward: 55.8
+  backward: 5.1
+
+monitoring:
+  lag:
+    enable: true
+    tolerance: 0.02
+    time: 100
+  target:
+    enable: true
+    tolerance: 0.01
+    time: 100
+  velocity:
+    enable: true
+    max: 5
+    time:
+      trajectory: 100
+      drive: 200
+
+plc:
+  enable: true
+  externalCommands: true

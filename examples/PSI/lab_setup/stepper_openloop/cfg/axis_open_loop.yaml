@@ -1,12 +1,15 @@
 axis:
-  id: ${AXIS_ID=1}                                    # Axis id
+  id: ${AXIS_ID=4}                                    # Axis id
   #feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
+  autoEnable:
+    enableTimeout: 10.0
+    disableTimeout: 5.0
 
 epics:
-  name: ${AX_NAME=M1}                                 # Axis anme
+  name: ${AX_NAME=M1}                                 # Axis name
   precision: 3                                        # Decimal count
   description: Test cfg                               # Axis description
-  unit: mm                                            # Unit
+  unit: deg                                           # Unit
   motorRecord:
       fieldInit: 'RTRY=0,FOFF=Frozen'                 # Extra config for Motor record
 
@@ -46,10 +49,10 @@ controller:
 trajectory:
   axis:
     velocity: 720                                     # Default velo for axis
-    acceleration: 2000                                # Default acc for axis
-    deceleration: 2000                                # Default dec for axis
-    emergencyDeceleration: 7200                       # Deceleration when axis in error state
-    jerk: 7200                                        # Default jerk for axis
+    acceleration: 1000                                # Default acc for axis
+    deceleration: 1000                                # Default dec for axis
+    emergencyDeceleration: 2000                       # Deceleration when axis in error state
+    jerk: 2000                                        # Default jerk for axis
   jog:
     velocity: 1                                       # Default velo fro JOG (motor record)
 
@@ -61,17 +64,17 @@ input:
   interlock: 'ec0.s$(DRV_SID).ONE.0'                  # Ethercat entry for interlock switch input
 
 softlimits:
-  enable: false                                       # Enable soft limits
+  enable: true                                        # Enable soft limits
   forward: 100                                        # Soft limit position fwd
-  forwardEnable: false                                # Soft limit position fwd enable
+  forwardEnable: true                                 # Soft limit position fwd enable
   backward: -100                                      # Soft limit position bwd
-  backwardEnable: false                               # Soft limit position bwd enable
+  backwardEnable: true                                # Soft limit position bwd enable
 
 monitoring:
   lag:
     enable: true                                      # Enable position lag monitoring (following error)
-    tolerance: 10                                    # Allowed tolerance
-    time: 100                                          # Allowed time outside tolerance  target:
+    tolerance: 10                                     # Allowed tolerance
+    time: 1000                                         # Allowed time outside tolerance  target:
   velocity:
     enable: false                                     # Enable velocity monitoring
     max: 8                                            # Allowed max velocity

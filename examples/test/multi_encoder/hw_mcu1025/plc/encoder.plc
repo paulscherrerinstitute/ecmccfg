@@ -1,6 +1,0 @@
-
-
-println('Encoder value 0:', mc_get_act_pos(1,0));
-println('Encoder value 1:', mc_get_act_pos(1,1));
-println('Encoder value 2:', mc_get_act_pos(1,2));
-

@@ -48,4 +48,7 @@ Normally these arguments are set when the module is required:
 require ecmccfg "ENG_MODE=1,MASTER_ID=2"
 ```
 
+## iocsh startup
+ecmc needs to be started with root priviledges (or with a user in realtime group), without ecmc might segfault.
+
 

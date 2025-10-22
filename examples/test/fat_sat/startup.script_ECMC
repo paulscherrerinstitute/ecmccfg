@@ -1,42 +1,18 @@
 # ecmc test system
-# Anders Sandström
 
-require ecmccfg v9.0.1_RC3,"EC_RATE=500,ECMC_VER=v9.0.1_RC3,ENG_MODE=1"
+require ecmccfg "EC_RATE=500,ENG_MODE=1"
 
-ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(1000)"
-
-##############################################################################
-# Configure hardware
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=1, HW_DESC=EL5042, CONFIG=-Encoder-ch12-Renishaw_32-bit"
 epicsEnvSet(ENC_ID, ${ECMC_EC_SLAVE_NUM})
 epicsEnvSet(ENC_CH, 01)
-
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x13,9,1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8018,0x13,9,1)"
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=5, HW_DESC=EL7041, CONFIG=-Motor-generic-2ph-200step-1200mA"
 epicsEnvSet(DRV_ID, ${ECMC_EC_SLAVE_NUM})
 
-ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
-
-##############################################################################
-# Configure Motion
 epicsEnvSet("DEV",      "$(IOC)")
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}loadYamlAxis.cmd,   "FILE=cfg/stepper_closed_loop.yaml"
 
-##############################################################################
 # Load Test Admin Records:
 dbLoadRecords(./ecmcTestAdmin.db,"P=$(IOC):")
-
-##############################################################################
-# Other
-ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
-ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
-ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
-ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
-
-##############################################################################
-# Go active
-$(SCRIPTEXEC) ($(ecmccfg_DIR)setAppMode.cmd)
