@@ -1,0 +1,199 @@
+#- Touch Probe status
+record(mbbiDirect,"${ECMC_P}Tp${CH_ID}-Stat"){
+  field(DESC, "TP Stat Wd")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).touchProbeStatus${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-EnaAct01.PROC")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-EnaAct01"){
+  field(DESC, "TP Input 01")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B0")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-PosLtch01.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-PosLtch01"){
+  field(DESC, "Value latched on pos edge")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B1")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-NegLtch01.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-NegLtch01"){
+  field(DESC, "Value latched on neg edge")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B2")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-BI01.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-BI01"){
+  field(DESC, "Touch probe input")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B7")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-EnaAct02.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-EnaAct02"){
+  field(DESC, "TP Input 01")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B8")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-PosLtch02.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-PosLtch02"){
+  field(DESC, "Value latched on pos edge")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.B9")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-NegLtch02.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-NegLtch02"){
+  field(DESC, "Value latched on neg edge")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.BA")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")
+  field(FLNK, "${ECMC_P}Tp${CH_ID}-BI02.PROC")
+}
+
+record(bi,"${ECMC_P}Tp${CH_ID}-BI02"){
+  field(DESC, "Touch probe input 2")
+  field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.BF")
+  field(ZNAM, "False")
+  field(ONAM, "True")
+  field(ZSV,  "NO_ALARM")
+  field(OSV,  "NO_ALARM")  
+}
+
+record(ai,"${ECMC_P}Tp${CH_ID}-PosLtchPosAct01"){
+  field(DESC, "TP latched pos edge position")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).touchProbePositionPos${CH_ID}_1?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=Counts)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${ECMC_P}Tp${CH_ID}-NegLtchPosAct01"){
+  field(DESC, "TP latched neg edge position")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).touchProbePositionNeg${CH_ID}_1?")
+  field(SCAN, "I/O Intr")
+  field(LINR, "$(LINR=SLOPE)")
+  field(ESLO, "$(ESLO=1)")
+  field(EOFF, "$(EOFF=0)")
+  field(EGU,  "$(EGU=Counts)")
+  field(PREC, "$(PREC=7)")
+  field(LOW,  "$(LOW=0)")
+  field(LOLO, "$(LOLO=0)")
+  field(HIGH, "$(HIGH=0)")
+  field(HIHI, "$(HIHI=0)")
+  field(HYST, "$(HYST=0)")
+  field(LLSV, "$(LLSV=NO_ALARM)")
+  field(LSV,  "$(LSV=NO_ALARM)")
+  field(HSV,  "$(HSV=NO_ALARM)")
+  field(HHSV, "$(HHSV=NO_ALARM)")
+  field(TSE,  "$(TSE=-2)")
+}
+
+#record(ai,"${ECMC_P}Tp${CH_ID}-PosLtchPosAct02"){
+#  field(DESC, "TP latched pos edge position")
+#  field(PINI, "$(PINI=1)")
+#  field(DTYP, "asynFloat64")
+#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).touchProbePositionPos02_1?")
+#  field(SCAN, "I/O Intr")
+#  field(LINR, "$(LINR=SLOPE)")
+#  field(ESLO, "$(ESLO=1)")
+#  field(EOFF, "$(EOFF=0)")
+#  field(EGU,  "$(EGU=Counts)")
+#  field(PREC, "$(PREC=7)")
+#  field(LOW,  "$(LOW=0)")
+#  field(LOLO, "$(LOLO=0)")
+#  field(HIGH, "$(HIGH=0)")
+#  field(HIHI, "$(HIHI=0)")
+#  field(HYST, "$(HYST=0)")
+#  field(LLSV, "$(LLSV=NO_ALARM)")
+#  field(LSV,  "$(LSV=NO_ALARM)")
+#  field(HSV,  "$(HSV=NO_ALARM)")
+#  field(HHSV, "$(HHSV=NO_ALARM)")
+#  field(TSE,  "$(TSE=-2)")
+#}
+#
+#record(ai,"${ECMC_P}Tp${CH_ID}-NegLtchPosAct02"){
+#  field(DESC, "TP latched neg edge position")
+#  field(PINI, "$(PINI=1)")
+#  field(DTYP, "asynFloat64")
+#  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))CMD=UINT32TOFLOAT64/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).touchProbePositionNeg02_1?")
+#  field(SCAN, "I/O Intr")
+#  field(LINR, "$(LINR=SLOPE)")
+#  field(ESLO, "$(ESLO=1)")
+#  field(EOFF, "$(EOFF=0)")
+#  field(EGU,  "$(EGU=Counts)")
+#  field(PREC, "$(PREC=7)")
+#  field(LOW,  "$(LOW=0)")
+#  field(LOLO, "$(LOLO=0)")
+#  field(HIGH, "$(HIGH=0)")
+#  field(HIHI, "$(HIHI=0)")
+#  field(HYST, "$(HYST=0)")
+#  field(LLSV, "$(LLSV=NO_ALARM)")
+#  field(LSV,  "$(LSV=NO_ALARM)")
+#  field(HSV,  "$(HSV=NO_ALARM)")
+#  field(HHSV, "$(HHSV=NO_ALARM)")
+#  field(TSE,  "$(TSE=-2)")
+#}
+
+record(ai,"${ECMC_P}Tp${CH_ID}-Cmd-RB"){
+  field(DESC, "$(HWTYPE): TP Control Word RB")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).touchProbeControl${CH_ID}?")
+  field(PREC, "0")
+  field(SCAN, "I/O Intr")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(mbboDirect,"${ECMC_P}Tp${CH_ID}-Cmd"){
+  field(DESC, "$(HWTYPE): TP Control Word")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0xFFFFFFFF),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).touchProbeControl${CH_ID}=")
+  field(TSE,  "0")
+}
