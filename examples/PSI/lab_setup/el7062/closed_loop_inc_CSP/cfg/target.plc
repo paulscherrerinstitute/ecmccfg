@@ -1,0 +1,7 @@
+
+
+if(ax1.traj.targetpos<>static.oldTarget) {
+    println('new target: ',ax1.traj.targetpos );
+};
+
+static.oldTarget := ax1.traj.targetpos;
