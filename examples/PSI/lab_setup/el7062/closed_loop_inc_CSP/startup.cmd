@@ -1,6 +1,6 @@
 ##############################################################################
 ## Example config for open loop only
-require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=11.0.0"
+require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a"
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,      "SLAVE_ID=3,HW_DESC=EL7062_CSP"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper, CH_ID=1, MACROS='I_MAX_MA=1000, I_STDBY_MA=100, U_NOM_MV=24000,L_COIL_UH=3050,R_COIL_MOHM=2630'"
@@ -26,3 +26,4 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_inc.yaml, DEV=${
 #- Limit bwd
 #- dbpf c6025a-08:m0s003-One 3
 
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd     "FILE=./cfg/target.plc, SAMPLE_RATE_MS=1000"

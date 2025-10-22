@@ -14,13 +14,11 @@ encoder:
     control:  0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 1                                          # Bit in encoder status word for latch triggered status. Used for some homing seqs
   homing:
-    type: 11                                           # Homing sequence type
+    type: 12                                           # Homing sequence type
     position: 0                                        # Position to reference encoder to
     velocity:
-      to: 10                                           # Velocity to cam/sensor (used for some homing seqs)
-      from: 5                                          # Velocity from cam/sensor (used for some homing seqs)
+      to: 30                                           # Velocity to cam/sensor (used for some homing seqs)
+      from: 20                                          # Velocity from cam/sensor (used for some homing seqs)
     acceleration: 20                                   # Acceleration during homing
     deceleration: 100                                  # Deceleration during homing
-    refAtHome: 1                                       # If homing is executed then set position of this encoder
     latchCount: 1                                      # latch number to ref on (1=ref on first latch)
-  useAsCSPDrvEnc: True

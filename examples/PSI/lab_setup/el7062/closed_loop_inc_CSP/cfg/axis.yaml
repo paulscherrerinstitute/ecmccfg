@@ -2,6 +2,7 @@ axis:
   id: ${AXIS_ID=1}                                    # Axis id
   #feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
   mode: CSP
+  tweakDist: 1000
 
 epics:
   name: ${AX_NAME=M1}                                 # Axis anme
@@ -37,11 +38,15 @@ encoder:
     acceleration: 20                                  # Acceleration during homing
     deceleration: 100                                 # Deceleration during homing
     refAtHome: 2                                      # If homing is executed then set position of this encoder
+  useAsCSPDrvEnc: True
 
 controller:
-  Kp: 0.1                                             # Kp proportinal gain
+  Kp: 0.01                                            # Kp proportinal gain
   Ki: 0.01                                            # Ki integral gain
   Kd: 0                                               # Kd derivative gain
+  deadband:
+    tol: 0.0                                          # Stop control if within this distance from target for the below time
+    time: 100
 
 trajectory:
   type: 1
@@ -81,5 +86,5 @@ monitoring:
       drive: 200                                      # Time allowed outside max velo before system disables drive
   target:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
-    tolerance: 1                                      # Allowed tolerance
+    tolerance: 0.05                                   # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
