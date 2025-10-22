@@ -1,0 +1,24 @@
+if(${SELF}.firstscan) {
+  static.restorePos:=-1000;
+}
+
+#- Ensure auto save restore values have been written:
+if(not(epics_running())) {
+  return [];
+}
+
+if(not(mc_get_busy(${AX_ID=1})) and not(static.restoreDone)) {
+  mc_move_abs(${AX_ID=1},0,static.restorePos,360,360,360);
+  mc_move_abs(${AX_ID=1},1,static.restorePos,360,360,360);
+  static.restoreDone:=1;
+  println('Move triggered to: ',static.restorePos );
+};
+
+if(static.restoreDone) {
+  static.restorePos:=ax${AX_ID=1}.enc.actpos;
+};
+
+if(static.restorePos <> static.restorePosOld and not(mc_get_busy(${AX_ID=1}))) {
+  println('New restore pos: ',static.restorePos);
+  static.restorePosOld := static.restorePos;
+};

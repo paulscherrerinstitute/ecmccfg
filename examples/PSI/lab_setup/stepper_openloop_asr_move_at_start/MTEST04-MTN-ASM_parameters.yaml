@@ -1,0 +1,7 @@
+epics_version: 7.0.9
+cpu_architecture: x86_64
+os: deb12
+os_id: deb12
+ioc_host: c6025a-08
+ioc_port: 50001
+ioc_user: root
