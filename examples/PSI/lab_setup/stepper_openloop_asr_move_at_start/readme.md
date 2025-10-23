@@ -22,7 +22,7 @@ if(${SELF}.firstscan) {
   static.restorePos:=-1000;
 }
 
-#- Ensure auto save restore values have been written:
+#- Ensure auto save restore values have been written (PLC starts before epics is completely started):
 if(not(epics_running())) {
   return [];
 }
@@ -43,3 +43,12 @@ if(static.restorePos <> static.restorePosOld and not(mc_get_busy(${AX_ID=1}))) {
   static.restorePosOld := static.restorePos;
 };
 ```
+
+NOTE: Auto enable is configured in ecmc:
+```
+  autoEnable:
+    atStartup: yes
+    enableTimeout: 2
+    disableTimeout: 5
+```
+
