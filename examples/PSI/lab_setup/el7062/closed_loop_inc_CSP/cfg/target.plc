@@ -1,7 +1,17 @@
 
+if(${SELF}.firstscan) {
+  static.stateOld:=-1;
+}
 
 if(ax1.traj.targetpos<>static.oldTarget) {
-    println('new target: ',ax1.traj.targetpos );
+  println('new target: ',ax1.traj.targetpos );
 };
 
 static.oldTarget := ax1.traj.targetpos;
+
+static.state:=epics_get_state();
+if(static.state <> static.stateOld) {
+  println('epics state: ',static.state, ' epics started: ', epics_get_started());
+  static.stateOld:=static.state;
+}
+

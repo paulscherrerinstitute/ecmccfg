@@ -1,7 +1,7 @@
 encoder:
   desc: Inc RS422
   numerator: 360                                       # Scaling numerator example 1 mm/rev
-  denominator: 1048576                                 # Scaling denominator example 4096 ticks per 360 degree
+  denominator: 1048576                                 # see applyComponent.cmd: ST_ENC_RES=4000 corresponds to 1048576 (same as servos)
   type: 0                                              # Type: 0=Incremental, 1=Absolute
   bits: 32                                             # Total bit count of encoder raw data
   absBits: 0                                           # Absolute bit count (for absolute encoders) always least significant part of 'bits'

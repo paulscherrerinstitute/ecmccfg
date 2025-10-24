@@ -3,6 +3,9 @@ axis:
   feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
   mode: CSP
   tweakDist: 1000
+  autoEnable:
+    enableTimeout: 2
+    disableTimeout: 2
 
 epics:
   name: ${AX_NAME=M1}                                 # Axis anme
@@ -10,7 +13,7 @@ epics:
   description: Test cfg                               # Axis description
   unit: deg                                           # Unit
   motorRecord:
-      fieldInit: 'RTRY=0,FOFF=Frozen'                 # Extra config for Motor record
+    fieldInit: 'RTRY=0,FOFF=Frozen,SPAM=0'            # Extra config for Motor record
 
 drive:
   numerator: 360                                      # Fastest speed in eng. units (360*8000Hz)
