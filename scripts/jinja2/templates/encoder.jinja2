@@ -65,7 +65,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.latch.position }}","ax${ECMC_AXIS_NO}.enc.latchpos")"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}.{{ encoder.latch.control }}","ax${ECMC_AXIS_NO}.enc.latchcontrol")"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
-    ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchArmControlWord(${ECMC_AXIS_NO},{{ encoder.latch.controlValue }},{{ encoder.latch.controlBits }})"
+    ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchArmControlWord(${ECMC_AXIS_NO},{{ encoder.latch.armCmd }},{{ encoder.latch.armBits }})"
 {%- endif %}
 {%- if encoder.filter.velocity is defined %}    
         ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size|default(100) }})"    

@@ -322,8 +322,8 @@ class Schema:
                 'schema': {
                     'position': {'required': True, 'type': 'string'},
                     'control': {'type': 'integer', 'default': 0},
-                    'controlValue': {'type': 'integer', 'default': 1},
-                    'controlBits': {'type': 'integer', 'default': 1},
+                    'armCmd': {'type': 'integer', 'default': 1},
+                    'armBits': {'type': 'integer', 'default': 1},
                     'status': {'type': 'integer', 'default': 0},
                 }
             },

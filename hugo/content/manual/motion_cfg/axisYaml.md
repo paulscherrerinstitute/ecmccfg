@@ -545,6 +545,8 @@ encoder:
     position: ''                                      # Link to latched value. Used for some homing seqs
     control: 0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
+    armCmd:                                           # Value in dec to arm latch/touch probe to write to encoder.control 
+    armBits:                                          # Bit size of encoder.latch.armCmd
   primary: True                                       # Use this encoder as primary (for control)
   homing:
     type: 3                                           # Homing sequence type
