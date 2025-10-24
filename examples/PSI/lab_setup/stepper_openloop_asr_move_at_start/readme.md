@@ -23,7 +23,7 @@ if(${SELF}.firstscan) {
 }
 
 #- Ensure auto save restore values have been written (PLC starts before epics is completely started):
-if(not(epics_running())) {
+if(not(epics_get_started())) {
   return [];
 }
 
