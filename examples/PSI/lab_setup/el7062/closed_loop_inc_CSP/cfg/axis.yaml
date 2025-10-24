@@ -63,8 +63,8 @@ input:
   limit:
     forward: ec0.s$(DRV_SID).binaryInputs${DRV_CH=01}.1   # Ethercat entry for low limit switch input
     backward: ec0.s$(DRV_SID).binaryInputs${DRV_CH=01}.0  # Ethercat entry for high limit switch input
-  home: 'ec0.s-1.ONE.2'                       # Ethercat entry for home switch
-  interlock: 'ec0.s-1.ONE.0'                  # Ethercat entry for interlock switch input
+  home: 'ec0.s-1.ONE.2'                               # Ethercat entry for home switch
+  interlock: 'ec0.s-1.ONE.0'                          # Ethercat entry for interlock switch input
 
 softlimits:
   enable: false                                       # Enable soft limits
@@ -86,5 +86,5 @@ monitoring:
       drive: 200                                      # Time allowed outside max velo before system disables drive
   target:
     enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
-    tolerance: 0.05                                   # Allowed tolerance
+    tolerance: 0.1                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target
