@@ -1,16 +1,17 @@
 ##############################################################################
-## IMPORTANT: this example configure the motor on channel 1 and the ecnoder on channel 2 
+## IMPORTANT: this example configure the motor on channel 1 and the incremnetal encoder on channel 2
 
-require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a"
-require ecmccomp sandst_a
+require ecmccfg v11.0.1_RC1 "ENG_MODE=1,ECMC_VER=v11.0.1_RC1"
 
 #- Digital output for switches
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,      "SLAVE_ID=2,HW_DESC=EL2819"
 epicsEnvSet(BO_SID,${ECMC_EC_SLAVE_NUM})
+
+#- Drive an encoders (openloop and incremental)
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,      "SLAVE_ID=3,HW_DESC=EL7062_CSP"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper, CH_ID=1, MACROS='I_MAX_MA=1000, I_STDBY_MA=100, U_NOM_MV=24000,L_COIL_UH=3050,R_COIL_MOHM=2630'"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Drive-Generic-Ctrl-Params,    CH_ID=1, MACROS='I_TI=12,I_KP=58,V_TI=150,V_KP=176,P_KP=10'"
-#- configure touch probe to latch on index pulse of secondary encoder (incremental) and single turn resolution
+#-    configure touch probe to latch on index pulse of secondary encoder (incremental) and single turn resolution
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Encoder-Generic-INC,          CH_ID=2, MACROS='ST_ENC_RES=4000,TP1_POS_SRC=SEC,TP1_TRG=INDEX'"
 epicsEnvSet(DRV_SID,${ECMC_EC_SLAVE_NUM})
 
