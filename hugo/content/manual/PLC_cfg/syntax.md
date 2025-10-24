@@ -975,7 +975,11 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
 #### Misc
 
 ```
- 1.  value = epics_running()
+ 1.  value = epics_get_started()
    
    Returns if epics has started (passed iocInit())
+
+ 2.  value = epics_get_state()
+   
+   Returns epics state (hook)
 ```
