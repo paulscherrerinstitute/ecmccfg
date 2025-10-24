@@ -1,6 +1,6 @@
 axis:
   id: ${AXIS_ID=1}                                    # Axis id
-  feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
+  #feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # Ethercat entry for feed switches
   mode: CSP
   tweakDist: 1000
 
@@ -16,9 +16,9 @@ drive:
   numerator: 360                                      # Fastest speed in eng. units (360*8000Hz)
   denominator: 1048576                                # Scaling denominator example 4096 ticks per 360 degree
   type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
-  setpoint: ec0.s$(DRV_SID).positionSetpoint01        # Velocity setpoint if CSV. Position setpoint if CSP
-  control: ec0.s$(DRV_SID).driveControl01             # Control word ethercat entry
-  status: ec0.s$(DRV_SID).driveStatus01               # Status word ethercat entry
+  setpoint: ec0.s$(DRV_SID).positionSetpoint${DRV_CH=01}        # Velocity setpoint if CSV. Position setpoint if CSP
+  control: ec0.s$(DRV_SID).driveControl${DRV_CH=01}             # Control word ethercat entry
+  status: ec0.s$(DRV_SID).driveStatus${DRV_CH=01}               # Status word ethercat entry
 
 encoder:
   desc: Openloop
@@ -63,8 +63,8 @@ input:
   limit:
     forward: ec0.s$(DRV_SID).binaryInputs${DRV_CH=01}.1   # Ethercat entry for low limit switch input
     backward: ec0.s$(DRV_SID).binaryInputs${DRV_CH=01}.0  # Ethercat entry for high limit switch input
-  home: 'ec0.s-1.ONE.2'                       # Ethercat entry for home switch
-  interlock: 'ec0.s-1.ONE.0'                  # Ethercat entry for interlock switch input
+  home: 'ec0.s-1.ONE.2'                               # Ethercat entry for home switch
+  interlock: 'ec0.s-1.ONE.0'                          # Ethercat entry for interlock switch input
 
 softlimits:
   enable: false                                       # Enable soft limits
