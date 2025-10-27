@@ -380,7 +380,7 @@ Custom plc functions can be written in c in plugins.
         ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
         epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
   
-  14. retvalue = ec_mm_ds_append(
+  15. retvalue = ec_mm_append_to_ds(
                           <mmId>,       : Source memmap index
                           <dsId>);      : Destination data storage index
      Returns Error code or zero if success
@@ -389,7 +389,7 @@ Custom plc functions can be written in c in plugins.
         ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
         epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
   
-  15. retvalue = ec_mm_append_to_ds_scale_offset(
+  16. retvalue = ec_mm_append_to_ds_scale_offset(
                           <mmId>,       : Source memmap index
                           <dsId>        : Destination data storage index
                           <scale>       : Scale 
@@ -401,30 +401,60 @@ Custom plc functions can be written in c in plugins.
         ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
         epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
   
-  16. retvalue = ec_mm_push_asyn(
+  17. retvalue = ec_mm_push_asyn(
                         <mmId>)       : Source memmap index.
       push memap data to epics (can be used if T_SMP_MS=-1 for the param)
      Note: The mmId can be retrived by the bellow ecmc command (and feed into plc via macro):
         ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
         epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
   
-  17. retvalue = ec_get_time();
+  18. retvalue = ec_get_time();
      Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
      If return value is less than zero it should be considered to be an error code.
   
-  18. retvalue = ec_get_time_l32();
+  19. retvalue = ec_get_time_l32();
      Returns lower 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
      If return value is less than zero it should be considered to be an error code.
   
-  19. retvalue = ec_get_time_u32();
+  20. retvalue = ec_get_time_u32();
      Returns upper 32 bits of current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
      If return value is less than zero it should be considered to be an error code.
   
-  20. retvalue=ec_get_err():
+  
+  21. retvalue = ec_get_time_src(
+                             <clock_id>);  : System dependent clock id. Normally CLOCK_REALTIME=0, CLOCK_MONOTONIC=1.
+     
+     Returns current time in nano seconds for a certain clock source defined by clock_id.
+     (from 1 Jan 2000, same as EtherCAT DC:s).
+     If return value is equal or less than zero it should be considered to be an error.
+  
+  22. retvalue = ec_get_time_local_hour(
+                             <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
+                  returns the hours part, 0..23, of the nano second counter (removes years, months , days),
+  
+  23. retvalue = ec_get_time_local_min(
+                             <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
+                  returns the minutes part, 0..59, within the hour,
+
+  24. retvalue = ec_get_time_local_sec(
+                             <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
+                  returns the seocods part, 0..59, within the minute,
+
+
+   25. retvalue = ec_get_time_local_nsec(
+                             <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
+                  returns the nanoseocods part, 0..1E9-1, within the second,
+
+
+   26. retvalue = ec_get_dom_state(
+                             <domain_id>);  : Id for domain
+                  returns 1 if domain communication is ok, 0 if not and -1 if error (domain id out of range).
+
+   27. retvalue=ec_get_err():
       Returns error code from last lib call.
   
-  21. retvalue=ec_err_rst():
-      Resets error code for ec_lib.
+   28. retvalue=ec_err_rst():
+       Resets error code for ec_lib.
 ```
   
 #### Master to Master communication (within same host)
