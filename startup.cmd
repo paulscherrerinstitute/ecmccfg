@@ -31,7 +31,7 @@
 #- ENG_MODE          = 1/0. If ENG_MODE is set then PVs used for commissioning will be avaialble
 #- EC_TOOL_PATH      = Path to ethercat tool defaults to ethercat tool in ECmasterECMC_DIR, 
 #- otherwise            "/opt/etherlab/bin/ethercat"
-#- MAX_PARAM_COUNT   = Maximum asyn param count, defaults to 1500
+#- MAX_PARAM_COUNT   = Maximum asyn param count, defaults to 1650
 #-
 #- [set by module]
 #- ECMC_CONFIG_ROOT       = root directory of ${MODULE}
@@ -82,7 +82,7 @@ epicsEnvSet("ECMC_PROC_HOOK",       "${PROC_HOOK=''}")
 
 #-------------------------------------------------------------------------------
 #- Set max asyn param count ECMC_ASYN_PORT_MAX_PARAMS can override
-epicsEnvSet("ECMC_ASYN_PORT_MAX_PARAMS",${ECMC_ASYN_PORT_MAX_PARAMS=${MAX_PARAM_COUNT=1500}})
+epicsEnvSet("ECMC_ASYN_PORT_MAX_PARAMS",${ECMC_ASYN_PORT_MAX_PARAMS=${MAX_PARAM_COUNT=1650}})
 
 #-------------------------------------------------------------------------------
 #- call init-script, defaults to 'initAll'
