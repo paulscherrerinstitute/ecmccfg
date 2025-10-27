@@ -421,39 +421,43 @@ Custom plc functions can be written in c in plugins.
      If return value is less than zero it should be considered to be an error code.
   
   
-  21. retvalue = ec_get_time_src(
-                             <clock_id>);  : System dependent clock id. Normally CLOCK_REALTIME=0, CLOCK_MONOTONIC=1.
+  21. retvalue = ec_get_time_frm_src(
+                             <clock_src_id>);  : System dependent clock id. Normally CLOCK_REALTIME=0, CLOCK_MONOTONIC=1.
      
      Returns current time in nano seconds for a certain clock source defined by clock_id.
      (from 1 Jan 2000, same as EtherCAT DC:s).
      If return value is equal or less than zero it should be considered to be an error.
+
+  22. retvalue = ec_get_time_offset_mono():
+     
+     Returns current time offset in nano seconds if selected clock source is CLOC_MONOTONIC otherwise 0 monotonic.
   
-  22. retvalue = ec_get_time_local_hour(
+  23. retvalue = ec_get_time_local_hour(
                              <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
                   returns the hours part, 0..23, of the nano second counter (removes years, months , days),
   
-  23. retvalue = ec_get_time_local_min(
+  24. retvalue = ec_get_time_local_min(
                              <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
                   returns the minutes part, 0..59, within the hour,
 
-  24. retvalue = ec_get_time_local_sec(
+  25. retvalue = ec_get_time_local_sec(
                              <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
                   returns the seocods part, 0..59, within the minute,
 
 
-   25. retvalue = ec_get_time_local_nsec(
+  26. retvalue = ec_get_time_local_nsec(
                              <ns_since_ec_epoch>);  : Nano seconds since jan 1:st 2000. 
                   returns the nanoseocods part, 0..1E9-1, within the second,
 
 
-   26. retvalue = ec_get_dom_state(
+  27. retvalue = ec_get_dom_state(
                              <domain_id>);  : Id for domain
                   returns 1 if domain communication is ok, 0 if not and -1 if error (domain id out of range).
 
-   27. retvalue=ec_get_err():
+  28. retvalue=ec_get_err():
       Returns error code from last lib call.
   
-   28. retvalue=ec_err_rst():
+  29. retvalue=ec_err_rst():
        Resets error code for ec_lib.
 ```
   
