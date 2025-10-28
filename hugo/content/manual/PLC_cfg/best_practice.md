@@ -172,6 +172,9 @@ The following "addresses" can be used:
   - ax<id>.enc.<name>
   - ax<id>.drv.<name>
   - ax<id>.mon.<name>
+* data storage:
+  - ds<id>
+  - ds<id>.<name>
 * constants
   - <name>
 
