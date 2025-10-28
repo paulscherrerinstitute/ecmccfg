@@ -106,7 +106,29 @@ The resulting code will toggle two different outputs, the state of the last outp
 NOTE: Macros cannot be used in the filename when including a file. Instead the dir should be defined in the INC param when loading the PLC, see above.
 
 ### printouts
-Adding a DBG macro can be use full to be able to turn on/off printouts. Typically during commissioning it can be use full to have many printouts but later when system goes into production, it could be a good idea to turn (some) printouts off.
+
+There are two good ways to handle printouts:
+1. plc<id>.dbg or ${SELF}.dbg flag: Accessible bit from generic plc panel. Printouts can be switched on/off in runtime.
+2. MACROS: Mask priontouts with dbeug macros. IOC needs to be restated with a different value in order to chaneg state of printouts.
+
+#### `plc<id>.dbg` or ${SELF}.dbg
+
+The variable plc<id>.dbg or ${SELF}.dbg can be used to turn on and of debug printouts for an PLC:
+```C
+if(${SELF}.dbg) {
+  println('Time:            ',ec_get_time());
+  println('Time MONO:       ',ec_get_time_frm_src(1));
+  println('Time REAL:       ',ec_get_time_frm_src(0));
+};
+```
+This allows turning on/off printouts in runtime my writing to the `<prefix>PLC<id>-DbgCmd` PV whic is accessinle in the generic plc panel (which can be started from ecmcMain.ui).
+
+{{% notice warning %}}
+Only use the `plc<id>.dbg` varaible for dbg purpose. It should always be safe to write to this variable.
+{{% /notice %}}
+
+#### MACROS
+Adding a DBG macro can be usefull to be able to turn on/off printouts. Typically during commissioning it can be use full to have many printouts but later when system goes into production, it could be a good idea to turn (some) printouts off.
 
 Example of a printout that can be turned on/off (default off)
 ```C
