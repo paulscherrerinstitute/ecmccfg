@@ -108,12 +108,12 @@ NOTE: Macros cannot be used in the filename when including a file. Instead the d
 ### printouts
 
 There are two good ways to handle printouts:
-1. plc<id>.dbg or ${SELF}.dbg flag: Accessible bit from generic plc panel. Printouts can be switched on/off in runtime.
-2. MACROS: Mask priontouts with dbeug macros. IOC needs to be restated with a different value in order to chaneg state of printouts.
+1. `plc<id>.dbg` or `${SELF}.dbg` flag: Accessible bit from generic plc panel. Printouts can be switched on/off in runtime.
+2. MACROS: Mask priontouts with dbeug macros. IOC needs to be restated with a different MACRO value in order to change state of printouts.
 
-#### `plc<id>.dbg` or ${SELF}.dbg
+#### `plc<id>.dbg` or `${SELF}.dbg`
 
-The variable plc<id>.dbg or ${SELF}.dbg can be used to turn on and of debug printouts for an PLC:
+The variable `plc<id>.dbg` or `${SELF}.dbg` can be used to turn on and of debug printouts for an PLC:
 ```C
 if(${SELF}.dbg) {
   println('Time:            ',ec_get_time());
@@ -121,10 +121,10 @@ if(${SELF}.dbg) {
   println('Time REAL:       ',ec_get_time_frm_src(0));
 };
 ```
-This allows turning on/off printouts in runtime my writing to the `<prefix>PLC<id>-DbgCmd` PV whic is accessinle in the generic plc panel (which can be started from ecmcMain.ui).
+This allows turning on/off printouts in runtime by writing to the `<prefix>PLC<id>-DbgCmd` PV which is accessinle in the generic plc panel (can be started from ecmcMain.ui).
 
 {{% notice warning %}}
-Only use the `plc<id>.dbg` varaible for dbg purpose. It should always be safe to write to this variable.
+Only use the `plc<id>.dbg` variable for dbg purpose. It should always be safe to write to this variable.
 {{% /notice %}}
 
 #### MACROS
