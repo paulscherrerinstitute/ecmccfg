@@ -177,28 +177,28 @@ END_VAR
 
 The following "addresses" can be used:
 * global:
-  - global.<name>
+  - `global.<name>`
 * static
-  - static.<name>
+  - `static.<name>`
 * ethercat
-  - ec<mid>
-  - ec<mid>.s<sid>
-  - ec<mid>.s<sid>.<name>
+  - `ec<mid>`
+  - `ec<mid>.s<sid>`
+  - `ec<mid>.s<sid>.<name>`
 * motion:
-  - ax<id>
-  - ax<id>.traj
-  - ax<id>.enc
-  - ax<id>.drv
-  - ax<id>.mon
-  - ax<id>.traj.<name>
-  - ax<id>.enc.<name>
-  - ax<id>.drv.<name>
-  - ax<id>.mon.<name>
+  - `ax<id>`
+  - `ax<id>.traj`
+  - `ax<id>.enc`
+  - `ax<id>.drv`
+  - `ax<id>.mon`
+  - `ax<id>.traj.<name>`
+  - `ax<id>.enc.<name>`
+  - `ax<id>.drv.<name>`
+  - `ax<id>.mon.<name>`
 * data storage:
-  - ds<id>
-  - ds<id>.<name>
+  - `ds<id>`
+  - `ds<id>.<name>`
 * constants
-  - <name>
+  - `<name>`
 
 The variables will then be replaced/substituted with the addresses during load time.
 
