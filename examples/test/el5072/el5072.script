@@ -1,0 +1,99 @@
+require ecmccfg sandst_a "MASTER_ID=0"
+
+# NOTE: EL5072 reports signed position values (int32). 
+#       Take care when cfg motion axis (similar to single turn 32 bit 
+#       encoder with overflow).
+
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=7, HW_DESC=EL5072"
+
+# SETTINGS COMMON FOR BOTH CHANNELS
+## Enable excitation voltage 8000:08 (1 bit) FOR BOTH CHANNELS
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x8000,0x8,1,U8)"
+
+## Excitation frequency setting FOR BOTH CHANNELS
+# 1000dec: 1 kHz
+# 2000dec: 2 kHz
+# 2500dec: 2.5 kHz
+# 4000dec: 4 kHz
+# 5000dec: 5 kHz (default)
+# 7500dec: 7.5 kHz
+# 10000dec: 10 kHz
+# 12500dec: 12.5 kHz
+# 13000dec: 13 kHz
+# 15000dec: 15 kHz
+# 19400dec: 19.4 kHz
+# 20000dec: 20 kHz
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x8001,0x14,7500,U16)"
+
+## Excitation voltage setting FOR BOTH CHANNELS
+# 500dec: 0.5 Vrms (default)
+# 1000dec: 1 Vrms
+# 1500dec: 1.5 Vrms
+# 2000dec: 2 Vrms
+# 2500dec: 2.5 Vrms
+# 3000dec: 3 Vrms
+# 3500dec: 3.5 Vrms
+# 4000dec: 4 Vrms
+# 4500dec: 4.5 Vrms
+# 5000dec: 5 Vrms
+# 5500dec: 5.5 Vrms
+# 6000dec: 6 Vrms
+# 6500dec: 6.5 Vrms
+# 7000dec: 7 Vrms
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x8001,0x14,5000,U16)"
+
+# SETTINGS PER CHANNEL
+## CH 1,2
+epicsEnvSet(CH,0)  # CH 1
+#epicsEnvSet(CH,1)  # CH 2
+
+## Connection type, selection options
+# 4dec: “4-wire LVDT” (default)
+# 5dec:”5-wire LVDT”
+# 6dec: “6-wire LVDT”
+# 13dec:”3-wire Half Bridge”
+# 15dec:”5-wire Half Bridge”
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x12,6,U16)"
+
+## Sensor impedance setting:
+# 0dec: “High impedance / Marposs®” (default)
+# 1dec: “Mahr® impedance”
+# 2dec: “Tesa® impedance”
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x13,0,U16)"
+
+## Specification of the sensor sensitivity, value in mV/V/mm
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x16,100,F32)"
+
+## Overall sensor range, symmetrical specification in ±mm (+-50mm)
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x18,50,F32)"
+
+## Selection of the filter frequency
+# 20dec: 20 Hz
+# 30dec: 30 Hz
+# 40dec: 40 Hz
+# 50dec: 50 Hz
+# 60dec: 60 Hz (default)
+# 80dec: 80 Hz
+# 100dec: 100 Hz
+# 200dec: 200 Hz
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x19,50,U16)"
+
+## Level at which the position value is to be set to a preset value:
+# 0dec: Input disabled
+# 10dec: Latch on positive edge (default)
+# 11dec: Latch on negative edge
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x1B,10,U16)"
+
+## Enable user scaling
+# 0: User calibration disabled (default)
+# 1: User calibration enabled
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}0,0xA,0,U8)"
+
+## User calibration offset of the position value, default: 0
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x1C,0,F32)"
+
+## User calibration gain of the position value, default: 1
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${ECMC_EC_SLAVE_NUM},0x80${CH}1,0x1D,1,F32)"
+
+## 80n5 LUTs..
+epicsEnvSet(LVDT_SID,${ECMC_EC_SLAVE_NUM})

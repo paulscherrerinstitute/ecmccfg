@@ -1,0 +1,10 @@
+encoder:
+  desc: 'LVDT_${ENC_CH=01}_UINT'
+  unit: raw
+  numerator: 1                                # Scaling numerator
+  denominator: 1                              # Scaling denominator
+  type: 1                                     # Type: 0=Incremental, 1=Absolute
+  bits: 32                                    # Total bit count of encoder raw data
+  absBits: 32                                  # Absolute bit count (for absolute encoders)
+  absOffset: 0                                # Encoder offset in eng units (for absolute encoders)
+  position: ec0.s$(ENC_SID).posActUint32_${ENC_CH=01}  # Ethercat entry for actual position input (encoder)
