@@ -1,0 +1,66 @@
+VAR
+  // Globals
+  gTest        : global.test;
+  
+  // Statics
+  sTest        : static.test;
+  
+  // EtherCAT I/0
+  actPos       :   ${M}.s${DRV_SID}.positionActual01;
+  mySlave: ${M}.s${DRV_SID};
+  coolingValveBO:${M}.s${BO_SID=2}.binaryOutput02;
+  
+  // Axis data
+  targetPos : ax${AX_ID=1}.traj.targetpos;
+  myAxis: ax1;
+  myTraj: ax${AX_ID=1}.traj;
+  
+  // Data storage
+  buffer : ds0;
+  
+  // Constants
+  pi : 3.1415;
+END_VAR
+
+if(${SELF}.firstscan) {
+  static.stateOld:=-1;
+};
+
+coolingValveBO:=not(coolingValveBO);
+
+if(ax1.traj.targetpos<>static.oldTarget) {
+  println('new target: ',myTraj.targetpos );
+};
+
+static.oldTarget := ax1.traj.targetpos;
+
+static.state:=epics_get_state();
+if(static.state <> static.stateOld) {
+  println('epics state: ',static.state, ' epics started: ', epics_get_started());
+  static.stateOld:=static.state;
+};
+
+global.actPos:=10;
+
+if(gTest+ 1> 0+sTest+mySlave.positionActual01) {
+  println('actPos:', actPos);
+};
+
+if(gTest+ 1> 10+mySlave.positionActual01) {
+  println('actPos:', actPos);
+};
+static.pini:=1;
+
+// Control debug printouts from PV
+if(${SELF}.dbg) {
+  println('actPos:', actPos, ' myAxis enc: ', myAxis.enc.actpos+pi);
+  gTest += 1;
+  println('gTest: ', gTest);
+  println('buffer index: ', buffer.index);
+  println('DS index: ', ds0.index);
+  println('myTraj: ', myTraj.setpos);
+  if(myTraj.setpos>0) {
+      myTraj.setpos+=1;
+  }
+  println('mySlave.controlWord: ', mySlave.driveControl${CH=01});
+};
