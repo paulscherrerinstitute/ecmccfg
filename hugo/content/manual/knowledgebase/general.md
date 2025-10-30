@@ -63,3 +63,5 @@ To increase the use the following command in the top of your startup script:
 ```
 callbackSetQueueSize(<size>)
 ```
+Increasing the callback queue size could solve issues like "WARNING dbEvent possible queue stall".
+
