@@ -1,5 +1,5 @@
 record(ao,"${P}${AXIS_NAME}-SetEncPosCmd"){
-  field(DESC, "${AXIS_NAME}: Set Enc Pos")
+  field(DESC, "Set Enc Pos")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).setencpos?")
   field(SCAN, "Passive")
@@ -11,7 +11,7 @@ record(ao,"${P}${AXIS_NAME}-SetEncPosCmd"){
 
 record(ao,"${P}${AXIS_NAME}-AccCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Acceleration Cmd")
+  field(DESC, "Acceleration Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).acc?")
   field(SCAN, "Passive")
@@ -25,7 +25,7 @@ record(ao,"${P}${AXIS_NAME}-AccCmd"){
 
 record(ao,"${P}${AXIS_NAME}-DecCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Decceleration Cmd")
+  field(DESC, "Decceleration Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).dec?")
   field(SCAN, "Passive")
