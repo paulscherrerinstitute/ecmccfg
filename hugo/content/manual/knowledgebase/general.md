@@ -56,3 +56,10 @@ The solution is to increase the maximum parameter count by setting the "MAX_PARA
 ```
 require ecmccfg "MASTER_ID=1,......,MAX_PARAM_COUNT=2000"
 ```
+#### Callback Queue Size
+
+The default callback queue in EPICS base is only 2000 bytes. 
+To increase the use the following command in the top of your startup script:
+```
+callbackSetQueueSize(<size>)
+```
