@@ -6,12 +6,14 @@
 #-d   \author Niko Kivel, Anders Sandström, Felix Maier
 #-d   \file
 #-d   \param FILE the yaml-file containing the PLC definition
-#-d   \param DEV  the device name (optional, defaults to ${IOC}
+#-d   \param DEV  the device name (optional, defaults to ${IOC}), automatically appended with a `:`
+#-d   \param PREFIX  the device PREFIX, will _NOT_ be appended with a `:`
 #-d   \note Example calls:
 #-d   \note - call
 #-d   \code
 #-d     ${SCRIPTEXEC} "./loadYamlAxis.cmd" "FILE=./axis1.yaml"
 #-d     ${SCRIPTEXEC} "./loadYamlAxis.cmd" "FILE=./axis1.yaml, DEV=foobar"
+#-d     ${SCRIPTEXEC} "./loadYamlAxis.cmd" "FILE=./axis1.yaml, PREFIX=MTEST-STEPPER:X:"
 #-d   \endcode
 #-d */
 
@@ -66,7 +68,7 @@ system "rm -rf ${FILE_TEMP_2}"
 epicsEnvUnset(FILE_TEMP_2)
 
 #- set device name, default to ${IOC}
-epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")
+epicsEnvSet("ECMC_PREFIX"      "${PREFIX=${DEV=${IOC}}:}")
 
 #- check for ECMC-format PLC file and load the PLC
 ecmcFileExist("${FILE_TEMP_3}",1)

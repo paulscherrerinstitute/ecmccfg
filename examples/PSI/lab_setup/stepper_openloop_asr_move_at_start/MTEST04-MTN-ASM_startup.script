@@ -1,0 +1,13 @@
+require ecmccfg "ENG_MODE=1,MASTER_ID=0,ECMC_VER=sandst_a"
+epicsEnvSet( EPICS_CA_ADDR_LIST,"129.129.130.192")
+
+# Hardware
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=16, HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd  "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=1000,I_STDBY_MA=500,U_NOM_MV=48000,R_COIL_MOHM=1230,STEPS=400'"
+epicsEnvSet("DRV_SLAVE", "${ECMC_EC_SLAVE_NUM}")
+
+# Motion
+${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,    "FILE=./cfg/openloop.yaml,DEV=${IOC},DRV_SLAVE=${DRV_SLAVE}"
+
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd,     "FILE=./cfg/gotoPosAtStart.plc, PLC_ID=0"
+dbLoadRecords("ecmcPlcAnalog.db","P=$(IOC):,PORT=MC_CPU1,ASYN_NAME=plcs.plc0.static.restorePos,REC_NAME=RestorePos")

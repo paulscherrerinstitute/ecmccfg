@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>205</x>
-     <y>75</y>
+     <y>70</y>
      <width>146</width>
-     <height>111</height>
+     <height>121</height>
     </rect>
    </property>
    <property name="title">
@@ -320,9 +320,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>75</y>
+     <y>70</y>
      <width>186</width>
-     <height>111</height>
+     <height>121</height>
     </rect>
    </property>
    <property name="title">
@@ -332,7 +332,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>25</y>
+      <y>20</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -386,7 +386,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>55</y>
+      <y>50</y>
       <width>56</width>
       <height>16</height>
      </rect>
@@ -424,7 +424,7 @@
     <property name="geometry">
      <rect>
       <x>-35</x>
-      <y>55</y>
+      <y>50</y>
       <width>131</width>
       <height>16</height>
      </rect>
@@ -451,7 +451,7 @@
     <property name="geometry">
      <rect>
       <x>135</x>
-      <y>75</y>
+      <y>65</y>
       <width>30</width>
       <height>30</height>
      </rect>
@@ -471,7 +471,7 @@
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>80</y>
+      <y>70</y>
       <width>100</width>
       <height>22</height>
      </rect>
@@ -489,6 +489,53 @@
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(IOC):PLC$(ID_2)-EnaCmd</string>
+    </property>
+    <property name="fontScaleMode" stdset="0">
+     <enum>caToggleButton::None</enum>
+    </property>
+   </widget>
+   <widget class="caLed" name="caled_3">
+    <property name="geometry">
+     <rect>
+      <x>135</x>
+      <y>90</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):PLC$(ID_2)-DbgCmd</string>
+    </property>
+    <property name="trueColor">
+     <color>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+     </color>
+    </property>
+   </widget>
+   <widget class="caToggleButton" name="catogglebutton_2">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>95</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Dbg:   </string>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(IOC):PLC$(ID_2)-DbgCmd</string>
     </property>
     <property name="fontScaleMode" stdset="0">
      <enum>caToggleButton::None</enum>

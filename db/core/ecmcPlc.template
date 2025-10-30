@@ -41,3 +41,14 @@ record(stringin,"$(Name)$(DESC_NAME)") {
     field(DESC, "PLC Info")
     field(VAL,  "${DESC=PLC ${Index}}")
 }
+
+record(bo,"$(Name)$(PLC_DBG)"){
+  info(asyn:READBACK,"1")
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "PLC$(Index) dbg flag")
+  field(DTYP, "$(DTYP=asynInt32)")
+  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.plc${Index}.dbg?")
+  field(ZNAM, "disable")
+  field(ONAM, "enable")
+  field(SCAN, "Passive")
+}

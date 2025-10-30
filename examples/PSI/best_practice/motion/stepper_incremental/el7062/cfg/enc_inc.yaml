@@ -1,0 +1,26 @@
+encoder:
+  desc: Inc RS422
+  numerator: 360                                       # Scaling numerator example 1 mm/rev
+  denominator: 1048576                                 # Scaling denominator example 4096 ticks per 360 degree
+  type: 0                                              # Type: 0=Incremental, 1=Absolute
+  bits: 32                                             # Total bit count of encoder raw data
+  absBits: 0                                           # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  position: ec0.s$(ENC_SID).positionActual${ENC_CH=01}_2 # Ethercat entry for actual position input (encoder)
+  status: ec0.s$(ENC_SID).touchProbeStatus${ENC_CH=01}         # mandatory only if 'warning' or 'error' are used
+  control: ec0.s$(ENC_SID).touchProbeControl${ENC_CH=01}
+  primary: True
+  latch:
+    position: ec0.s$(ENC_SID).touchProbePositionPos$(ENC_CH=01)_1 # Link to latched value. Used for some homing seqs
+    control:  0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
+    status: 1                                          # Bit in encoder status word for latch triggered status. Used for some homing seqs
+    armCmd: 21
+    armBits: 5
+  homing:
+    type: 12                                           # Homing sequence type
+    position: 0                                        # Position to reference encoder to
+    velocity:
+      to: 30                                           # Velocity to cam/sensor (used for some homing seqs)
+      from: 20                                          # Velocity from cam/sensor (used for some homing seqs)
+    acceleration: 20                                   # Acceleration during homing
+    deceleration: 100                                  # Deceleration during homing
+    latchCount: 1                                      # latch number to ref on (1=ref on first latch)

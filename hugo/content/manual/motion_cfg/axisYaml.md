@@ -476,7 +476,7 @@ axis:
       positioning: true                               # Allow positioning
   autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
     enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
-    disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+    disableTimeout:   5.0                             # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
     atStartup: True                                   # Auto enable axis at ioc start, default False
   tweakDist: 2.0                                      # Tweak value (both ecmc interface and motor record tweak value)
 
@@ -545,6 +545,8 @@ encoder:
     position: ''                                      # Link to latched value. Used for some homing seqs
     control: 0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
+    armCmd:                                           # Value in dec to arm latch/touch probe to write to encoder.control 
+    armBits:                                          # Bit size of encoder.latch.armCmd
   primary: True                                       # Use this encoder as primary (for control)
   homing:
     type: 3                                           # Homing sequence type

@@ -56,7 +56,7 @@ record(ai,"${P}${AXIS_NAME}-PosErr"){
 #}
 
 record(longin,"${P}${AXIS_NAME}-Stat"){
-  field(DESC, "${AXIS_NAME}: Status Word")
+  field(DESC, "Status Word")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).status?")
@@ -66,7 +66,7 @@ record(longin,"${P}${AXIS_NAME}-Stat"){
 }
 
 record(calc,"${P}${AXIS_NAME}-SeqState") {
-  field(DESC, "${AXIS_NAME}: Seq state")
+  field(DESC, "Seq state")
   field(PINI, "$(PINI=1)")
   field(CALC,"A>>23 & 0xF")
   field(INPA,"${P}${AXIS_NAME}-Stat.VAL")
@@ -74,7 +74,7 @@ record(calc,"${P}${AXIS_NAME}-SeqState") {
 }
 
 record(calc,"${P}${AXIS_NAME}-LastIlock") {
-  field(DESC, "${AXIS_NAME}: Last interlock")
+  field(DESC, "Last interlock")
   field(PINI, "$(PINI=1)")
   field(CALC, "A>>27 & 0x1F")
   field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
@@ -82,7 +82,7 @@ record(calc,"${P}${AXIS_NAME}-LastIlock") {
 }
 
 record(calc,"${P}${AXIS_NAME}-Stat2Calc_") {
-  field(DESC, "${AXIS_NAME}: Shift stat 16 bits")
+  field(DESC, "Shift stat 16 bits")
   field(PINI, "$(PINI=1)")
   field(CALC, "A>>16 & 0xFF")
   field(INPA, "${P}${AXIS_NAME}-Stat.VAL")
@@ -90,7 +90,7 @@ record(calc,"${P}${AXIS_NAME}-Stat2Calc_") {
 }
 
 record(mbbiDirect,"${P}${AXIS_NAME}-Stat_"){
-  field(DESC, "${AXIS_NAME}: Status Word mbbiD")
+  field(DESC, "Status Word mbbiD")
   field(PINI, "$(PINI=1)")
   field(INP,  "${P}${AXIS_NAME}-Stat.VAL")
   field(FLNK, "${P}${AXIS_NAME}-EnaAct.PROC")
@@ -101,7 +101,7 @@ record(mbbiDirect,"${P}${AXIS_NAME}-Stat_"){
 
 #  // bit 1 enabled
 record(bi,"${P}${AXIS_NAME}-EnaAct"){
-  field(DESC, "${AXIS_NAME}: Enabled")
+  field(DESC, "Enabled")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B1")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
@@ -111,7 +111,7 @@ record(bi,"${P}${AXIS_NAME}-EnaAct"){
 }
 #  // bit 2 execute
 record(bi,"${P}${AXIS_NAME}-ExeCmd-RB"){
-  field(DESC, "${AXIS_NAME}: Execute Cmd")
+  field(DESC, "Execute Cmd")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B2")
   field(ZNAM, "No Execute")
   field(ONAM, "Execute")
@@ -122,7 +122,7 @@ record(bi,"${P}${AXIS_NAME}-ExeCmd-RB"){
 
 #  // bit 3 busy
 record(bi,"${P}${AXIS_NAME}-Busy"){
-  field(DESC, "${AXIS_NAME}: Busy")
+  field(DESC, "Busy")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B3")
   field(ZNAM, "Free")
   field(ONAM, "Busy")
@@ -133,7 +133,7 @@ record(bi,"${P}${AXIS_NAME}-Busy"){
 
 #  // bit 4 at target
 record(bi,"${P}${AXIS_NAME}-AtTarget"){
-  field(DESC, "${AXIS_NAME}: At target")
+  field(DESC, "At target")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B4")
   field(ZNAM, "Not at target")
   field(ONAM, "At target")
@@ -144,7 +144,7 @@ record(bi,"${P}${AXIS_NAME}-AtTarget"){
 
 #  // bit 5 moving
 record(bi,"${P}${AXIS_NAME}-Moving"){
-  field(DESC, "${AXIS_NAME}: Moving")
+  field(DESC, "Moving")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B5")
   field(ZNAM, "Standstill")
   field(ONAM, "Moving")
@@ -155,7 +155,7 @@ record(bi,"${P}${AXIS_NAME}-Moving"){
 
 #  // bit 6 limit fwd
 record(bi,"${P}${AXIS_NAME}-LimFwd"){
-  field(DESC, "${AXIS_NAME}: Limit FWD")
+  field(DESC, "Limit FWD")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B6")
   field(ZNAM, "Limit activated")
   field(ONAM, "Limit OK")
@@ -166,7 +166,7 @@ record(bi,"${P}${AXIS_NAME}-LimFwd"){
 
 #  // bit 7 limit bwd
 record(bi,"${P}${AXIS_NAME}-LimBwd"){
-  field(DESC, "${AXIS_NAME}: Limit BWD")
+  field(DESC, "Limit BWD")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B7")
   field(ZNAM, "Limit activated")
   field(ONAM, "Limit OK")
@@ -177,7 +177,7 @@ record(bi,"${P}${AXIS_NAME}-LimBwd"){
 
 #  // bit 8 homeswitch
 record(bi,"${P}${AXIS_NAME}-HomeSwitch"){
-  field(DESC, "${AXIS_NAME}: Home switch")
+  field(DESC, "Home switch")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B8")
   field(ZNAM, "Low")
   field(ONAM, "High")
@@ -188,7 +188,7 @@ record(bi,"${P}${AXIS_NAME}-HomeSwitch"){
 
 #  // bit 9 homed
 record(bi,"${P}${AXIS_NAME}-Homed"){
-  field(DESC, "${AXIS_NAME}: Homed")
+  field(DESC, "Homed")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B9")
   field(ZNAM, "Not homed")
   field(ONAM, "Homed")
@@ -199,7 +199,7 @@ record(bi,"${P}${AXIS_NAME}-Homed"){
 
 #  // bit 10 inRealtime
 record(bi,"${P}${AXIS_NAME}-InRT"){
-  field(DESC, "${AXIS_NAME}: In realtime")
+  field(DESC, "In realtime")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BA")
   field(ZNAM, "Not in realtime")
   field(ONAM, "In realtime")
@@ -210,7 +210,7 @@ record(bi,"${P}${AXIS_NAME}-InRT"){
 
 #  // bit 11 traj source
 record(bi,"${P}${AXIS_NAME}-TrjSrcTyp-RB"){
-  field(DESC, "${AXIS_NAME}: Traj Source")
+  field(DESC, "Traj Source")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BB")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
@@ -221,7 +221,7 @@ record(bi,"${P}${AXIS_NAME}-TrjSrcTyp-RB"){
 
 #  // bit 12 enc source
 record(bi,"${P}${AXIS_NAME}-EncSrcTyp-RB"){
-  field(DESC, "${AXIS_NAME}: Enc Source")
+  field(DESC, "Enc Source")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BC")
   field(ZNAM, "Internal")
   field(ONAM, "PLC")
@@ -232,7 +232,7 @@ record(bi,"${P}${AXIS_NAME}-EncSrcTyp-RB"){
 
 #  // bit 13 Allow plc commands
 record(bi,"${P}${AXIS_NAME}-CmdFrmPLCCmd-RB"){
-  field(DESC, "${AXIS_NAME}: Allow PLC cmds")
+  field(DESC, "Allow PLC cmds")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BD")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
@@ -243,7 +243,7 @@ record(bi,"${P}${AXIS_NAME}-CmdFrmPLCCmd-RB"){
 
 #  // bit 14 softlimbwdena
 record(bi,"${P}${AXIS_NAME}-SftLimFwdEna-RB"){
-  field(DESC, "${AXIS_NAME}: Softlim Fwd Enabled")
+  field(DESC, "Softlim Fwd Enabled")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BE")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
@@ -254,7 +254,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimFwdEna-RB"){
 
 #  // bit 15 softlimbwdena
 record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
-  field(DESC, "${AXIS_NAME}: Softlim Bwd Enabled")
+  field(DESC, "Softlim Bwd Enabled")
   field(INP,  "${P}${AXIS_NAME}-Stat_.BF")
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
@@ -265,7 +265,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimBwdEna-RB"){
 
 #  // bit 16 inStartupPhase
 record(bi,"${P}${AXIS_NAME}-InStartup"){
-  field(DESC, "${AXIS_NAME}: In startup phase")
+  field(DESC, "In startup phase")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B10")
   field(ZNAM, "Started")
   field(ONAM, "In startup")
@@ -276,7 +276,7 @@ record(bi,"${P}${AXIS_NAME}-InStartup"){
 
 # // bit 17 sumilockfwd
 record(bi,"${P}${AXIS_NAME}-SumIlockFwd"){
-  field(DESC, "${AXIS_NAME}: Sum. ilock fwd")
+  field(DESC, "Sum. ilock fwd")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B11")
   field(ZNAM, "OK")
   field(ONAM, "Not OK")
@@ -287,7 +287,7 @@ record(bi,"${P}${AXIS_NAME}-SumIlockFwd"){
 
 # // bit 18 sumilockbwd
 record(bi,"${P}${AXIS_NAME}-SumIlockBwd"){
-  field(DESC, "${AXIS_NAME}: Sum. ilock bwd")
+  field(DESC, "Sum. ilock bwd")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B12")
   field(ZNAM, "OK")
   field(ONAM, "Not OK")
@@ -298,7 +298,7 @@ record(bi,"${P}${AXIS_NAME}-SumIlockBwd"){
   
 # // bit 19 softlimilockfwd
 record(bi,"${P}${AXIS_NAME}-SftLimFwdIlock"){
-  field(DESC, "${AXIS_NAME}: Soft lim. fwd")
+  field(DESC, "Soft lim. fwd")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B13")
   field(ZNAM, "OK")
   field(ONAM, "Not OK")
@@ -309,7 +309,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimFwdIlock"){
 
 # // bit 20 softlimilockbwd
 record(bi,"${P}${AXIS_NAME}-SftLimBwdIlock"){
-  field(DESC, "${AXIS_NAME}: Soft lim. bwd")
+  field(DESC, "Soft lim. bwd")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B14")
   field(ZNAM, "OK")
   field(ONAM, "Not OK")
@@ -320,7 +320,7 @@ record(bi,"${P}${AXIS_NAME}-SftLimBwdIlock"){
 
 # // bit 21 BusyLocal
 record(bi,"${P}${AXIS_NAME}-BusyLocal"){
-  field(DESC, "${AXIS_NAME}: Local busy")
+  field(DESC, "Local busy")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B15")
   field(ZNAM, "Free")
   field(ONAM, "Busy")
@@ -331,7 +331,7 @@ record(bi,"${P}${AXIS_NAME}-BusyLocal"){
 
 # // bit 22 BusyGlobal
 record(bi,"${P}${AXIS_NAME}-BusyGlobal"){
-  field(DESC, "${AXIS_NAME}: Global busy")
+  field(DESC, "Global busy")
   field(INP,  "${P}${AXIS_NAME}-Stat_.B16")
   field(ZNAM, "Free")
   field(ONAM, "Busy")
@@ -343,7 +343,7 @@ record(bi,"${P}${AXIS_NAME}-BusyGlobal"){
 ####
 
 record(bi,"${P}${AXIS_NAME}-PLC-EnaCmd-RB"){
-  field(DESC, "${AXIS_NAME}: Plc enable")
+  field(DESC, "Plc enable")
   field(DTYP,"asynInt32")
   field(PINI, "$(PINI=1)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.enable?")
@@ -354,7 +354,7 @@ record(bi,"${P}${AXIS_NAME}-PLC-EnaCmd-RB"){
 }
 
 record(bi,"${P}${AXIS_NAME}-PLC-FirstScan"){
-  field(DESC, "${AXIS_NAME}: Plc firstscan")
+  field(DESC, "Plc firstscan")
   field(DTYP,"asynInt32")
   field(PINI, "$(PINI=1)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))CMD=FLOAT64TOINT32/T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.firstscan?")
@@ -365,7 +365,7 @@ record(bi,"${P}${AXIS_NAME}-PLC-FirstScan"){
 }
 
 record(ai,"${P}${AXIS_NAME}-PLC-Err"){
-  field(DESC, "${AXIS_NAME}: Plc error")
+  field(DESC, "Plc error")
   field(DTYP,"asynFloat64")
   field(PINI, "$(PINI=1)")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/plcs.ax$(AXIS_NO).plc.error?")
@@ -386,7 +386,7 @@ record(waveform,"${P}${AXIS_NAME}-PLC-Expr-RB"){
 
 record(bo,"${P}${AXIS_NAME}-EnaCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Enable cmd")  
+  field(DESC, "Enable cmd")  
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0x1),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
   field(ZNAM, "Disable")
@@ -396,7 +396,7 @@ record(bo,"${P}${AXIS_NAME}-EnaCmd"){
 }
 
 record(bi,"${P}${AXIS_NAME}-EnaCmd-RB"){
-  field(DESC, "${AXIS_NAME}: Enable RB")
+  field(DESC, "Enable RB")
   field(DTYP, "asynUInt32Digital")
   field(INP,  "@asynMask($(PORT),$(ADDR=0),$(MASK=0x1),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")  
   field(ZNAM, "Disabled")
@@ -408,7 +408,7 @@ record(bi,"${P}${AXIS_NAME}-EnaCmd-RB"){
 
 record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Target Position Cmd")
+  field(DESC, "Target Position Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targpos?")
   field(SCAN, "Passive")
@@ -422,7 +422,7 @@ record(ao,"${P}${AXIS_NAME}-TgtPosCmd"){
 
 record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Target Velocity Cmd")
+  field(DESC, "Target Velocity Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).targvelo?")
   field(SCAN, "Passive")
@@ -437,7 +437,7 @@ record(ao,"${P}${AXIS_NAME}-TgtVelCmd"){
 record(ao,"${P}${AXIS_NAME}-TwkDstCmd"){
   info(asyn:READBACK,"1")
   field(PINI, "$(PINI=1)")
-  field(DESC, "${AXIS_NAME}: Tweak distance Cmd")
+  field(DESC, "Tweak distance Cmd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).tweakvalue?")
   field(SCAN, "Passive")
@@ -449,7 +449,7 @@ record(ao,"${P}${AXIS_NAME}-TwkDstCmd"){
 
 record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Motion Command")
+  field(DESC, "Motion Command")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).command?")
   field(ZRST, "NO_COMMAND")
@@ -469,7 +469,7 @@ record(mbbo,  "${P}${AXIS_NAME}-MtnCmd"){
 
 record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Motion Command Data Param")
+  field(DESC, "Motion Command Data Param")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).cmddata?")
   field(SCAN, "Passive")
@@ -478,7 +478,7 @@ record(longout,"${P}${AXIS_NAME}-MtnCmdData"){
 }
 
 record(longin,"${P}${AXIS_NAME}-ErrId"){
-  field(DESC, "${AXIS_NAME}: Error Id")
+  field(DESC, "Error Id")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).errorid?")
@@ -490,7 +490,7 @@ record(longin,"${P}${AXIS_NAME}-ErrId"){
 }
 
 record(bi,"${P}${AXIS_NAME}-Err"){
-  field(DESC, "${AXIS_NAME}: Error")
+  field(DESC, "Error")
   field(PINI, "$(PINI=1)")
   field(INP,  "${P}${AXIS_NAME}-ErrId.VAL")
   field(TSE,  "$(TSE=-2)")
@@ -503,7 +503,7 @@ record(bi,"${P}${AXIS_NAME}-Err"){
 }
 
 record(longin,"${P}${AXIS_NAME}-WrnId"){
-  field(DESC, "${AXIS_NAME}: Warning Id")
+  field(DESC, "Warning Id")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).warningid?")
@@ -515,7 +515,7 @@ record(longin,"${P}${AXIS_NAME}-WrnId"){
 }
 
 record(bi,"${P}${AXIS_NAME}-Wrn"){
-  field(DESC, "${AXIS_NAME}: Warning")
+  field(DESC, "Warning")
   field(PINI, "$(PINI=1)")
   field(INP,  "${P}${AXIS_NAME}-WrnId.VAL")
   field(TSE,  "$(TSE=-2)")
@@ -591,7 +591,7 @@ record(calcout, "${P}${AXIS_NAME}-MtnCmd_") {
 }
 
 record(ao,"${P}${AXIS_NAME}-Id"){
-  field(DESC, "${AXIS_NAME}: Index")
+  field(DESC, "Index")
   field(SCAN, "Passive")
   field(PREC, "0")
   field(EGU,  "[]")
@@ -600,7 +600,7 @@ record(ao,"${P}${AXIS_NAME}-Id"){
 
 record(mbbo,  "${P}${AXIS_NAME}-SetEncIdCmd-RB"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Change encoder")
+  field(DESC, "Change encoder")
   field(DTYP, "asynInt32")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).primencid?")
   field(ZRST, "NO_COMMAND")
@@ -656,7 +656,7 @@ record(ai,"${P}${AXIS_NAME}-SS1-VelRestLim"){
 }
 
 record(bo,"${P}${AXIS_NAME}-ExeCmd"){
-  field(DESC, "${AXIS_NAME}: Execute cmd")
+  field(DESC, "Execute cmd")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x2,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -667,7 +667,7 @@ record(bo,"${P}${AXIS_NAME}-ExeCmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-StpCmd"){
-  field(DESC, "${AXIS_NAME}: Stop cmd")
+  field(DESC, "Stop cmd")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x4,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -678,7 +678,7 @@ record(bo,"${P}${AXIS_NAME}-StpCmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-RstCmd"){
-  field(DESC, "${AXIS_NAME}: Reset cmd")
+  field(DESC, "Reset cmd")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x8,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -689,7 +689,7 @@ record(bo,"${P}${AXIS_NAME}-RstCmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
-  field(DESC, "${AXIS_NAME}: Encoder source cmd")
+  field(DESC, "Encoder source cmd")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x10,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -701,7 +701,7 @@ record(bo,"${P}${AXIS_NAME}-EncSrcTyp-Cmd"){
 
 record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Traj source cmd")
+  field(DESC, "Traj source cmd")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x20,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
   field(ZNAM, "Internal")
@@ -711,7 +711,7 @@ record(bo,"${P}${AXIS_NAME}-TrjSrcTyp-Cmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
-  field(DESC, "${AXIS_NAME}: PLC enable cmd")
+  field(DESC, "PLC enable cmd")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x40,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -722,7 +722,7 @@ record(bo,"${P}${AXIS_NAME}-PLC-EnaCmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-CmdFrmPLCCmd"){
-  field(DESC, "${AXIS_NAME}: Allow cmd from PLCs")
+  field(DESC, "Allow cmd from PLCs")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x80,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -733,7 +733,7 @@ record(bo,"${P}${AXIS_NAME}-CmdFrmPLCCmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
-  field(DESC, "${AXIS_NAME}: Softlimit Bwd enable")
+  field(DESC, "Softlimit Bwd enable")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x100,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -744,7 +744,7 @@ record(bo,"${P}${AXIS_NAME}-SftLimBwdEna"){
 }
 
 record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
-  field(DESC, "${AXIS_NAME}: Softlimit Fwd enable")
+  field(DESC, "Softlimit Fwd enable")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x200,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -755,7 +755,7 @@ record(bo,"${P}${AXIS_NAME}-SftLimFwdEna"){
 }
 
 record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
-  field(DESC, "${AXIS_NAME}: Ena dbg prints")
+  field(DESC, "Ena dbg prints")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x400,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -766,7 +766,7 @@ record(bo,"${P}${AXIS_NAME}-DbgPrntEna"){
 }
 
 record(bo,"${P}${AXIS_NAME}-TwkBwdCmd"){
-  field(DESC, "${AXIS_NAME}: Tweak BWD")
+  field(DESC, "Tweak BWD")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x800,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
@@ -777,7 +777,7 @@ record(bo,"${P}${AXIS_NAME}-TwkBwdCmd"){
 }
 
 record(bo,"${P}${AXIS_NAME}-TwkFwdCmd"){
-  field(DESC, "${AXIS_NAME}: Tweak BWD")
+  field(DESC, "Tweak BWD")
   info(asyn:READBACK,"1")
   field(DTYP, "asynUInt32Digital")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x1000,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ax$(AXIS_NO).control?")
