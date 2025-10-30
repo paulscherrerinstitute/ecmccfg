@@ -1,0 +1,17 @@
+
+if(${SELF}.firstscan) {
+  static.stateOld:=-1;
+};
+
+static.state:=epics_get_state();
+if(static.state <> static.stateOld) {
+  println('epics state: ',static.state, ' epics started: ', epics_get_started());
+  static.stateOld:=static.state;
+};
+
+println('Time:            ',ec_get_time());          # selected clock (if MONO then with offset)
+println('Time MONO:       ',ec_get_time_frm_src(1));
+println('Time REAL:       ',ec_get_time_frm_src(0));
+println('Time OFF:        ',ec_get_time_offset_mono());
+println('Time 2:          ',ec_get_time_frm_src(2));
+println('Time 3:          ',ec_get_time_frm_src(3));
