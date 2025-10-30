@@ -4,7 +4,7 @@
 
 {%- set axisFlags = 6 %}
 {%- if axis.autoEnable is defined %}
-    {%- if axis.autoEnable.enableTimeout is defined or axis.autoEnable.disableTime is defined %}
+    {%- if (axis.autoEnable.enableTimeout is defined) or (axis.autoEnable.disableTime is defined) %}
          #- turn of motor record auto enable (bit 1 = 0)
          {%- set axisFlags = 4 %}
     {%- endif %}
