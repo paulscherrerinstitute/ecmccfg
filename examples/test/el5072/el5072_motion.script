@@ -117,10 +117,10 @@ ecmcConfig "Cfg.EcAddSimEntry(${LVDT_SID},posActUint32_01,U32,0)"
 ecmcConfig "Cfg.EcAddSimEntry(${LVDT_SID},posActUint32_02,U32,0)"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd     "FILE=./cfg/overflow.plc,PLC_MACROS='LVDT_SID=${LVDT_SID}'"
 
-#- NEED TO HANDLE signed integer
+#- These encoders are int32
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt.yaml,      DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=01"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt.yaml,      DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=02"
+
+#- These encoders are uint32: use these for motion axis
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt_uint.yaml, DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=01"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt_uint.yaml, DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=02"
-
-#  WARNING dbEvent possible queue stall
