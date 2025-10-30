@@ -1,6 +1,6 @@
 record(ao,"${P}${AXIS_NAME}-Ctrl-Kp"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Ctrl Kp")
+  field(DESC, "Ctrl Kp")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).ctrl.kp?")
   field(SCAN, "Passive")
@@ -12,7 +12,7 @@ record(ao,"${P}${AXIS_NAME}-Ctrl-Kp"){
 
 record(ao,"${P}${AXIS_NAME}-Ctrl-Ki"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Ctrl Ki")
+  field(DESC, "Ctrl Ki")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).ctrl.ki?")
   field(SCAN, "Passive")
@@ -24,7 +24,7 @@ record(ao,"${P}${AXIS_NAME}-Ctrl-Ki"){
 
 record(ao,"${P}${AXIS_NAME}-Ctrl-Kd"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Ctrl Kd")
+  field(DESC, "Ctrl Kd")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).ctrl.kd?")
   field(SCAN, "Passive")
@@ -36,7 +36,7 @@ record(ao,"${P}${AXIS_NAME}-Ctrl-Kd"){
 
 record(ao,"${P}${AXIS_NAME}-Ctrl-Kff"){
   info(asyn:READBACK,"1")
-  field(DESC, "${AXIS_NAME}: Ctrl Kff")
+  field(DESC, "Ctrl Kff")
   field(DTYP, "asynFloat64")
   field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).ctrl.kff?")
   field(SCAN, "Passive")

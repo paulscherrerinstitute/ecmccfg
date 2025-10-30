@@ -327,9 +327,9 @@ class Schema:
                     'status': {'type': 'integer', 'default': 0},
                 }
             },
-            'primary': {'type': 'boolean'},
+            'primary': {'type': ['boolean', 'integer' ]},
             'homing': homingSchema,
-            'useAsCSPDrvEnc': {'type': 'boolean'},
+            'useAsCSPDrvEnc': {'type': ['boolean', 'integer' ]},
         }
     }
 

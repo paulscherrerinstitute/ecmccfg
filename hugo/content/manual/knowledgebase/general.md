@@ -39,3 +39,27 @@ ECMC command "Cfg.EcSlaveVerify(0,0,0x2,0x044c2c52)" returned error: ERROR_EC_MA
 ```
 
 Diagnose the issue by logging into the host/server and run the "ethercat slaves" command. Ensure that the slaves are there and powered.
+
+#### Asyn parameter count exceeded
+
+For big IOC:s sometimes the default maximum asyn parameter count might not be enough and an error will be shown:
+```
+...
+ecmcConfigOrDie "Cfg.SetAppMode(1)"
+2025/10/27 11:15:39.015 ecmcAsynPortDriver:appendAvailParam: ERROR: Parameter table full (available params).
+Parameter with name plcs.ax27.traj.extsetpos will be discarded (max params = 1500).
+Increase paramtable size in call to ecmcAsynPortDriverConfigure().
+.....
+```
+
+The solution is to increase the maximum parameter count by setting the "MAX_PARAM_COUNT" macro when requiring ecmccfg:
+```
+require ecmccfg "MASTER_ID=1,......,MAX_PARAM_COUNT=2000"
+```
+#### Callback Queue Size
+
+The default callback queue in EPICS base is only 2000 bytes. 
+To increase the use the following command in the top of your startup script:
+```
+callbackSetQueueSize(<size>)
+```
