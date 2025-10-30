@@ -86,8 +86,9 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {%- endif %}
 
 #- Use this encoder as primary?!
+#- MARKER1
 {%- if encoder.primary is defined %}
-    {%- if encoder.primary > 0 %}
+    {%- if (encoder.primary > 0) or (encoder.primary == true) %}
         ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
     {%- endif %}
 {%- endif %}
@@ -199,8 +200,9 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     {%- endif %}
 {%- endif %}
 
+#- MARKER2
 {%- if encoder.useAsCSPDrvEnc is defined %}
-    {%- if encoder.useAsCSPDrvEnc > 0 %}
+    {%- if (encoder.useAsCSPDrvEnc > 0) or (encoder.useAsCSPDrvEnc == true) %}
         ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
         epicsEnvSet(ECMC_AX_DRV_MODE, "CSP_PC_ENC_0${ECMC_ENC_CFG_ID=1}")
     {%- endif %}

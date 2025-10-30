@@ -81,7 +81,7 @@
         "default": "CSV",
         "type": "string",
         "required": false,
-        "normalize": "(string=string) csv=CSV csp=CSP"
+        "normalize": "(string=string) csv=CSV csp=CSP csp_pc=CSP_PC"
       },
       "axis.parameters": {
         "type": "string",
@@ -467,12 +467,14 @@
         "required": false
       },
       "encoder.primary": {
-        "type": "boolean",
-        "required": false
+        "type": "boolean integer string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
       },
-      "encoder.useAsCSPDrvEnv": {
-        "type": "boolean",
-        "required": false
+      "encoder.useAsCSPDrvEnc": {
+        "type": "boolean integer string",
+        "required": false,
+        "normalize": "(string=boolean) yes=true no=false"
       },
       "encoder.velocityFilterSize": {
         "type": "integer",
@@ -572,6 +574,10 @@
         "type": "integer float",
         "required": false
       },
+      "encoder.scale": {
+        "type": "integer float",
+        "required": false
+      },
       "encoder.lookuptable.enable": {
         "type": "boolean string",
         "required": false,
@@ -609,6 +615,16 @@
         "type": "integer",
         "required": false,
         "default": 0
+      },
+      "encoder.latch.armCmd": {
+        "type": "integer",
+        "required": false,
+        "default": 1
+      },
+      "encoder.latch.armBits": {
+        "type": "integer",
+        "required": false,
+        "default": 1
       }
     }
   },
