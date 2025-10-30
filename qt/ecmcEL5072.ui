@@ -186,7 +186,7 @@
             <string>ecmcGraph_v1.ui</string>
            </property>
            <property name="args">
-            <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct,IOC=$(IOC)</string>
+            <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-PosAct,IOC=$(IOC)</string>
            </property>
           </widget>
          </item>
@@ -405,7 +405,7 @@
             <string>ecmcGraph_v1.ui</string>
            </property>
            <property name="args">
-            <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc01-PosAct,IOC=$(IOC)</string>
+            <string>TITLE=m$(MasterID)s$(SlaveID).Enc01: Actual Position,PV=$(IOC):m$(MasterID)s$(SlaveID)-Enc0$(CH)-PosAct,IOC=$(IOC)</string>
            </property>
           </widget>
          </item>
