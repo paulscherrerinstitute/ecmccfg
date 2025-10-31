@@ -1,0 +1,9 @@
+# Objective convert INT to UINT (move over/underflow)
+VAR
+  lvdtSlave : ${M}.s${LVDT_SID};
+  offset    : 2147483648; # 2^31
+END_VAR
+
+lvdtSlave.posActUint32_01:=lvdtSlave.positionActual01+offset;
+lvdtSlave.posActUint32_02:=lvdtSlave.positionActual02+offset;
+

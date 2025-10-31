@@ -7,7 +7,7 @@
 # right after the epicsThreadSleep at the end of this script
 #callbackSetQueueSize(4000)
 
-require ecmccfg "ENG_MODE=1"
+require ecmccfg sandst_a "ENG_MODE=1,ECMC_VER=sandst_a"
 
 #- Digital output for switches
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,      "SLAVE_ID=2,HW_DESC=EL2819"
