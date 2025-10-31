@@ -2,8 +2,6 @@
 #- Encoder
 #- =============================================================================
 
-{# assume "encoder" is defined #}
-
 #- Get current encoder index beeing configured (index of encoder added), needed for PV names
 ecmcConfig "GetAxisEncConfigIndex($(ECMC_AXIS_NO))"
 # Current encoder index beeing configured
@@ -86,7 +84,6 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {%- endif %}
 
 #- Use this encoder as primary?!
-#- MARKER1
 {%- if encoder.primary is defined %}
     {%- if (encoder.primary > 0) or (encoder.primary == true) %}
         ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
@@ -135,7 +132,8 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
             ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},{{ encoder.homing.velocity.from|default(encoder.homing.velocity.to) }})"
         {%- endif %}
     {%- endif %}
-        {%- if encoder.homing.timeout is defined %}
+
+    {%- if encoder.homing.timeout is defined %}
         ecmcConfigOrDie "Cfg.SetAxisSeqTimeout(${ECMC_AXIS_NO},{{ encoder.homing.timeout }})"
     {%- endif %}
 
@@ -200,7 +198,6 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     {%- endif %}
 {%- endif %}
 
-#- MARKER2
 {%- if encoder.useAsCSPDrvEnc is defined %}
     {%- if (encoder.useAsCSPDrvEnc > 0) or (encoder.useAsCSPDrvEnc == true) %}
         ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"

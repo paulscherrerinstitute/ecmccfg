@@ -20,7 +20,7 @@ ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC({{ axis.id }},{{ plc.externalCo
 #- system "rm -f ${OUTPUT_FILE}"
 
 #- PLC Encoder velocity filter
-{%- if plc.velocity_filter.encoder is defined %}
+{%- if (plc.velocity_filter is defined) and (plc.velocity_filter.encoder is defined) %}
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize({{ axis.id }},{{ plc.velocity_filter.encoder.size|default(1)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable({{ axis.id }},{{ plc.velocity_filter.encoder.enable|default(0)|int }})"    
 {%- else %}
@@ -38,7 +38,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncSourceType({{ axis.id }},{{ encoder.source|defaul
 
 #- Move to different syntax because of old bad naming
 #- PLC Encoder velocity velocity filter
-{%- if plc.velocity_filter.trajectory is defined %}
+{%- if (plc.velocity_filter is defined) and (plc.velocity_filter.trajectory is defined) %}
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize({{ axis.id }},{{ plc.velocity_filter.trajectory.size|default(1)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable({{ axis.id }},{{ plc.velocity_filter.trajectory.enable|default(0)|int }})"    
 {%- else %}

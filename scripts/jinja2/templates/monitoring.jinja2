@@ -3,7 +3,7 @@
     #- Monitoring
     #- =============================================================================
 
-    {%- if monitoring.lag.enable is defined %}
+    {%- if (monitoring.lag is defined) and (monitoring.lag.enable is defined) %}
         #- lag error if |planned-actual|>{{ monitoring.lag.tolerance }} for >{{ monitoring.lag.time }} cycles
         ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},{{ monitoring.lag.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id }},{{ monitoring.lag.tolerance }})"
@@ -12,7 +12,7 @@
         ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},0)"
     {%- endif %}
 
-    {%- if monitoring.target.enable is defined %}
+    {%- if (monitoring.target is defined) and (monitoring.target.enable is defined) %}
         #- at target if |target-actual|<{{ monitoring.target.tolerance }} for >{{ monitoring.target.time }} cycles
         ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},{{ monitoring.target.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonAtTargetTol({{ axis.id }},{{ monitoring.target.tolerance }})"
@@ -21,7 +21,7 @@
         ecmcConfigOrDie "Cfg.SetAxisMonEnableAtTargetMon({{ axis.id }},0)"
     {%- endif %}
 
-    {%- if monitoring.velocity.enable is defined %}
+    {%- if (monitoring.velocity is defined) and (monitoring.velocity.enable is defined) %}
         #- velocity: v_max = {{ monitoring.velocity.max}}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableMaxVel({{ axis.id }},{{ monitoring.velocity.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonMaxVel({{ axis.id }},{{ monitoring.velocity.max }})"
@@ -45,10 +45,10 @@
 
     {%- if (monitoring.stall is defined) and (monitoring.stall.enable is defined) %}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableStallMon({{ axis.id }},{{ monitoring.stall.enable|int }})"
-        {%- if monitoring.stall.time.timeout is defined %}
+        {%- if (monitoring.stall.time is defined) and (monitoring.stall.time.timeout is defined) %}
             ecmcConfigOrDie "Cfg.SetAxisMonStallMinTimeOut({{ axis.id }},{{ monitoring.stall.time.timeout }})"
         {%- endif  %}
-        {%- if monitoring.stall.time.factor is defined %}
+        {%- if (monitoring.stall.time is defined) and (monitoring.stall.time.factor is defined) %}
             ecmcConfigOrDie "Cfg.SetAxisMonStallTimeFactor({{ axis.id }},{{ monitoring.stall.time.factor }})"
         {%- endif  %}
     {%- endif %}

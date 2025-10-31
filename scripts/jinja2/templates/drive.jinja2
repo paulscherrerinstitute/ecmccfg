@@ -3,8 +3,6 @@
 #- =============================================================================
 {#- links #}
 
-{# precondition: drive is defined #}
-
 {%- if drive.type == 0 %}
     {#- For steppers, bits must be defined for control-enable and status-enabled #}
     {%- if drive.enable is defined %}

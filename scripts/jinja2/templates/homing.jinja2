@@ -28,6 +28,7 @@
     {%- if homing.latchCount is defined %}
         ecmcConfigOrDie "Cfg.SetAxisHomeLatchCountOffset({{ axis.id }},{{ homing.latchCount }})"
     {%- endif %}
+
     {#- velocities  #}
     {%- if homing.velocity is defined %}
        {%- if homing.velocity.to is defined %}
@@ -38,13 +39,16 @@
           ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam({{ axis.id }},{{ homing.velocity.from|default(homing.velocity.to) }})"
        {%- endif %}
     {%- endif %}
+
     {%- if homing.timeout is defined %}
         ecmcConfigOrDie "Cfg.SetAxisSeqTimeout({{ axis.id }},{{ homing.timeout }})"
     {%- endif %}
+
     {%- if homing.type is defined %}
         ecmcConfigOrDie "Cfg.SetAxisHomeSeqId({{ axis.id }},{{ homing.type }})"
         epicsEnvSet(HOME_PROC, {{ homing.type }})
     {%- endif %}
+
     {%- if homing.refToEncIDAtStartup is defined %}
         ecmcConfigOrDie "Cfg.SetAxisEncRefToOtherEncAtStartup({{ axis.id }},{{ homing.refToEncIDAtStartup }})"
         epicsEnvSet(REF_STRT, {{ homing.refToEncIDAtStartup }})
@@ -64,6 +68,7 @@
         epicsEnvSet(ACC, {{ homing.acceleration }})
         ecmcConfigOrDie "Cfg.SetAxisHomeAcc({{ axis.id }},{{ homing.acceleration }})"
     {%- endif %}
+
     {%- if homing.deceleration is defined %}
         epicsEnvSet(DEC, {{ homing.deceleration }})
         ecmcConfigOrDie "Cfg.SetAxisHomeDec({{ axis.id }},{{ homing.deceleration }})"

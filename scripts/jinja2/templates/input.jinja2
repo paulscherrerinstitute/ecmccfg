@@ -56,7 +56,7 @@
 {%- if (input.analog is defined) and (input.analog.interlock is defined) %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.analog.interlock }},"ax{{ axis.id }}.mon.analoginterlock")"
     {%- if input.analog.enable is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},{{ input.analog.enable|default(1)|int}})"
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},{{ input.analog.enable|int}})"
     {%- else %}
         ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},1)"
     {%- endif %}

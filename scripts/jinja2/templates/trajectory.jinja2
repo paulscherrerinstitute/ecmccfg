@@ -3,13 +3,6 @@
 #- =============================================================================
 {#- source #}
 ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source }})"
-{%- set deceleration = trajectory.axis.deceleration|default(trajectory.axis.acceleration) %}
-
-{%- if trajectory.axis.acceleration > deceleration %}
-    {%- set maxDec = trajectory.axis.acceleration %}
-{%- else %}
-    {%- set maxDec = deceleration %}
-{%- endif %}
 
 ecmcConfigOrDie "Cfg.SetAxisJerk({{ axis.id }},{{ trajectory.axis.jerk|default(trajectory.axis.acceleration) }})"
 ecmcConfigOrDie "Cfg.SetAxisAcc({{ axis.id }},{{ trajectory.axis.acceleration }})"
