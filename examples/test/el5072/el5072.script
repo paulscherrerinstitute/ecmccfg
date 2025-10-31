@@ -1,4 +1,4 @@
-require ecmccfg sandst_a "MASTER_ID=0"
+require ecmccfg sandst_a "MASTER_ID=0,ECMC_VER=sandst_a"
 
 # NOTE: EL5072 reports signed position values (int32). 
 #       Take care when cfg motion axis (similar to single turn 32 bit 

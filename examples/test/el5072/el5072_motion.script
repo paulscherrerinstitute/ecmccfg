@@ -1,4 +1,4 @@
-require ecmccfg sandst_a "MASTER_ID=0"
+require ecmccfg sandst_a "MASTER_ID=0,ECMC_VER=sandst_a"
 
 # NOTE: EL5072 reports signed position values (int32). 
 #       Take care when cfg motion axis (similar to single turn 32 bit 
@@ -112,15 +112,7 @@ epicsEnvSet(ENC_SID,${ECMC_EC_SLAVE_NUM})
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd,   "FILE=./cfg/axis.yaml,          DEV=${IOC}, AX_NAME=M1, AXIS_ID=1, DRV_SID=${DRV_SID}, ENC_SID=${ENC_SID}, ENC_CH=01"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_open_loop.yaml, DEV=${IOC}, ENC_SID=${DRV_SID}"
 
-# Move over/underflow (convert int32 to uint32)
-ecmcConfig "Cfg.EcAddSimEntry(${LVDT_SID},posActUint32_01,U32,0)"
-ecmcConfig "Cfg.EcAddSimEntry(${LVDT_SID},posActUint32_02,U32,0)"
-${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd     "FILE=./cfg/overflow.plc,PLC_MACROS='LVDT_SID=${LVDT_SID}'"
-
 #- These encoders are int32
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt.yaml,      DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=01"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt.yaml,      DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=02"
 
-#- These encoders are uint32: use these for motion axis
-${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt_uint.yaml, DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=01"
-${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd,    "FILE=./cfg/enc_lvdt_uint.yaml, DEV=${IOC}, ENC_SID=${LVDT_SID},ENC_CH=02"
