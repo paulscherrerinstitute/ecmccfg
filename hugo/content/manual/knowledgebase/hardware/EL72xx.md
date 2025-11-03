@@ -12,7 +12,7 @@ If the drive is in error/warning state and not possible to enable:
 * Missing power supply
 * STO tripped
 * Defect cable
-* Wrong/messey cabling between connector and actual terminal.
+* Wrong/messy cabling between connector and actual terminal.
 
 ### Tuning
 
