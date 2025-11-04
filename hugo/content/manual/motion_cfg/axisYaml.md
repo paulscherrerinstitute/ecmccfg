@@ -75,7 +75,7 @@ Native ecmc auto-enable/disable is the preferred way and can be configured by:
 axis:
   autoEnable:                                         # ecmc auto enable of axis (Please use this instead of motor record version..)
     enableTimeout: 5.0                                # If defined, ecmc tries to auto-enable for a maximum enableTimeout seconds.
-    disableTime:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
+    disableTimeout:   5.0                                # If defined, ecmc disables axis after idle (non busy) in disableTime seconds
 ```
 The motor record auto-enable/disable fucntionality will then automatically be disabled. 
 {{% notice warning %}}
