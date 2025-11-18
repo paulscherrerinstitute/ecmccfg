@@ -67,20 +67,22 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
     ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchArmControlWord(${ECMC_AXIS_NO},{{ encoder.latch.armCmd }},{{ encoder.latch.armBits }})"
 {%- endif %}
-{%- if encoder.filter.velocity is defined %}
+
+{%- if encoder.filter is defined %}
+    {%- if encoder.filter.velocity is defined %}
         ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size|default(100) }})"
         ecmcConfigOrDie "Cfg.SetAxisEncVelFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.velocity.enable|default(1)|int }})"
-{%- endif %}
-{%- if encoder.filter.trajectory is defined %}
-    # WARNING:  Use "encoder.filter.position" instead of "encoder.filter.trajectory"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|default(1)|int }})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size|default(10) }})"
-{%- endif %}
-
-#- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
-{%- if encoder.filter.position is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|default(1)|int }})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size|default(10) }})"
+    {%- endif %}
+    {%- if encoder.filter.trajectory is defined %}
+        # WARNING:  Use "encoder.filter.position" instead of "encoder.filter.trajectory"
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|default(1)|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size|default(10) }})"
+    {%- endif %}
+    #- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
+    {%- if encoder.filter.position is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|default(1)|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size|default(10) }})"
+    {%- endif %}
 {%- endif %}
 
 #- Use this encoder as primary?!
@@ -90,16 +92,17 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     {%- endif %}
 {%- endif %}
 
-{%- if epics is defined %}
-    {%- if epics.unit %}
-        epicsEnvSet(ENC_EGU,'{{ epics.unit }}')
-    {%- endif %}
-{%- endif %}
 
-#- If defined then use this EGU
-{%- if encoder.unit is defined %}
-    epicsEnvSet(ENC_EGU,'{{ encoder.unit }}')
+#- Encoder unit
+{%- set encoderUnit = "mm" %}
+{%- if (epics is defined) and (epics.unit is defined) %}
+    {%- set encoderUnit = epics.unit %}
 {%- endif %}
+{%- if (encoder.unit is defined) %}
+    {%- set encoderUnit = encoder.unit %}
+{%- endif %}
+epicsEnvSet(ENC_EGU,'{{ encoderUnit }}')
+
 
 {%- if encoder.desc is defined %}
     epicsEnvSet(ENC_DESC,'{{ encoder.desc }}')

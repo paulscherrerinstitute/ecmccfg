@@ -3,9 +3,9 @@
     #- Monitoring
     #- =============================================================================
 
-    {%- if (monitoring.lag is defined) and (monitoring.lag.enable is defined) %}
+    {%- if (monitoring.lag is defined) and (monitoring.lag.enable is defined) and (monitoring.lag.enable == true) %}
         #- lag error if |planned-actual|>{{ monitoring.lag.tolerance }} for >{{ monitoring.lag.time }} cycles
-        ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},{{ monitoring.lag.enable|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableLagMon({{ axis.id }},1)"
         ecmcConfigOrDie "Cfg.SetAxisMonPosLagTol({{ axis.id }},{{ monitoring.lag.tolerance }})"
         ecmcConfigOrDie "Cfg.SetAxisMonPosLagTime({{ axis.id }},{{ monitoring.lag.time }})"
     {%- else  %}

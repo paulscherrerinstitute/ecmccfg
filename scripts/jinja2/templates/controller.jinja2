@@ -2,13 +2,25 @@
 #- Controller
 #- =============================================================================
 
-ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id }},{{ controller.Kp }})"
-ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id }},{{ controller.Ki }})"
-ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id }},{{ controller.Kd }})"
-ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
+{%- if controller is defined %}
+    {%- set controllerKp  = controller.Kp %}
+    {%- set controllerKi  = controller.Ki %}
+    {%- set controllerKd  = controller.Kd %}
+    {%- set controllerKff = controller.Kff %}
+{%- else %}
+    {%- set controllerKp  = 1.0 %}
+    {%- set controllerKi  = 0.0 %}
+    {%- set controllerKd  = 0.0 %}
+    {%- set controllerKff = 1.0 %}
+{%- endif %}
+
+ecmcConfigOrDie "Cfg.SetAxisCntrlKp({{ axis.id }},{{ controllerKp }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKi({{ axis.id }},{{ controllerKi }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKd({{ axis.id }},{{ controllerKd }})"
+ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controllerKff }})"
 
 #- Set controller params for when near target
-{%- if controller.inner is defined %}
+{%- if (controller is defined) and (controller.inner is defined) %}
     {%- if controller.inner.tol is defined %}
         ecmcConfigOrDie "Cfg.SetAxisCntrlInnerParams({{ axis.id }},{{ controller.inner.Kp|default(0) }},{{ controller.inner.Ki|default(0) }},{{ controller.inner.Kd|default(0) }},{{ controller.inner.tol }})"
     {%- else  %}
@@ -18,7 +30,7 @@ ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
     # INFO: Inner controller not used.
 {%- endif  %}
 
-{%- if controller.limits is defined %}
+{%- if (controller is defined) and (controller.limits is defined) %}
     {%- if controller.limits.minOutput is defined %}
         ecmcConfigOrDie "Cfg.SetAxisCntrlOutLL({{ axis.id }},{{ controller.limits.minOutput }})"
     {%- endif %}
@@ -34,7 +46,7 @@ ecmcConfigOrDie "Cfg.SetAxisCntrlKff({{ axis.id }},{{ controller.Kff }})"
 {%- endif  %}
 
 #- Actually checked in ecmc monitor
-{%- if controller.deadband is defined %}
+{%- if (controller is defined) and (controller.deadband is defined) %}
     ecmcConfigOrDie "Cfg.SetAxisCntrlDeadband({{ axis.id }},{{ controller.deadband.tol }})"
     ecmcConfigOrDie "Cfg.SetAxisCntrlDeadbandTime({{ axis.id }},{{ controller.deadband.time }})"
 {%- endif  %}

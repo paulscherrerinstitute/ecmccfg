@@ -13,11 +13,7 @@
 {% include 'soft_limit.jinja2' %}
 {% include 'monitoring.jinja2' %}
 {% include 'epicsAxis.jinja2' %}
-{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.enable is defined) %}
-    {%- if epics.motorRecord.enable == true %}
-        {% include 'epicsMotorRecord.jinja2' %}
-    {%- endif %}
-{%- endif %}
+{% include 'epicsMotorRecord.jinja2' %}
 {#- this needs to be the command issued #}
 {%- if axis.features is defined %}
     ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"

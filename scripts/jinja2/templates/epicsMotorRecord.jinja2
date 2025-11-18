@@ -17,8 +17,16 @@
 
 #-  Default to sync softlimits
 {%- set syncEcmcMRSofLim = 0 %}
-{%- if (epics.motorRecord.syncSoftLimits is defined) and (epics.motorRecord.syncSoftLimits == true) %}
-    {% set syncEcmcMRSofLim = 1 %}
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.syncSoftLimits is defined) %}
+    {% if (epics.motorRecord.syncSoftLimits == true) %}
+        {% set syncEcmcMRSofLim = 1 %}
+    {%- endif %}
+{%- endif %}
+
+{%- if (epics is defined) and (epics.name is defined) %}
+    {%- set epicsName = epics.name %}
+{%- else %}
+    {%- set epicsName = "axis" %}
 {%- endif %}
 
 ${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "syncSoftLims={{ syncEcmcMRSofLim }};{{ axis.parameters|default("") }}")
@@ -72,11 +80,22 @@ epicsEnvUnset(ECMC_AXIS_FLAGS)
 epicsEnvSet(ECMC_MR_PCOF,0)
 epicsEnvSet(ECMC_MR_ICOF,0)
 epicsEnvSet(ECMC_MR_DCOF,0)
+
 {%- if controller is defined %}
-    ecmcEpicsEnvSetCalc(ECMC_MR_PCOF,'clamp(0.0,{{ controller.Kp|default(0)|float }}/100.0,1.0)','%lf')
-    ecmcEpicsEnvSetCalc(ECMC_MR_ICOF,'clamp(0,{{ controller.Ki|default(0)|float }}/100.0,1.0)','%lf')
-    ecmcEpicsEnvSetCalc(ECMC_MR_DCOF,'clamp(0,{{ controller.Kd|default(0)|float }}/100.0,1.0)','%lf')
-{%- endif %}
+    {%- set controllerKp = controller.Kp|float %}
+    {%- set controllerKi = controller.Ki|float %}
+    {%- set controllerKd = controller.Kd|float %}
+{% else %}
+    {%- set controllerKp = 1.0 %}
+    {%- set controllerKi = 0.0 %}
+    {%- set controllerKd = 0.0 %}
+{% endif %}
+
+{%- if axis.type == 1 %}
+    ecmcEpicsEnvSetCalc(ECMC_MR_PCOF,'clamp(0.0,{{ controllerKp }}/100.0,1.0)','%lf')
+    ecmcEpicsEnvSetCalc(ECMC_MR_ICOF,'clamp(0,{{ controllerKi }}/100.0,1.0)','%lf')
+    ecmcEpicsEnvSetCalc(ECMC_MR_DCOF,'clamp(0,{{ controllerKd }}/100.0,1.0)','%lf')
+{% endif %}
 
 {%- if drive is defined %}
     ecmcEpicsEnvSetCalc(ECMC_TEMP_SREV,'abs({{ drive.denominator|default(1)|int }})')
@@ -86,9 +105,33 @@ epicsEnvSet(ECMC_MR_DCOF,0)
     ecmcEpicsEnvSetCalc(ECMC_TEMP_UREV,'abs(1)')
 {%- endif %}
 
+{%- if (epics is defined) and (epics.unit is defined) %}
+    {%- set epicsUnit = epics.unit %}
+{%- else %}
+    {%- set epicsUnit = "mm" %}
+{%- endif %}
+
+{%- if (epics is defined) and (epics.precision is defined) %}
+    {%- set epicsPrecision = epics.precision %}
+{%- else %}
+    {%- set epicsPrecision = 3 %}
+{%- endif %}
+
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.description is defined) %}
+    {%- set epicsmotorRecordDescription = epics.motorRecord.description %}
+{%- else %}
+    {%- set epicsmotorRecordDescription = "" %}
+{%- endif %}
+
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.fieldInit is defined) %}
+    {%- set epicsmotorRecordfieldInit = epics.motorRecord.fieldInit %}
+{%- else %}
+    {%- set epicsmotorRecordfieldInit = "" %}
+{%- endif %}
+
 
 ecmcFileExist(ecmcMotorRecord.template,1,1)
-dbLoadRecords(ecmcMotorRecord.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epics.name }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epics.motorRecord.description|default("") }}',EGU={{ epics.unit }},PREC={{ epics.precision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),TWV={{ axis.tweakDist|default(1.0)|float }},{{ epics.motorRecord.fieldInit|default("") }},${ECMC_MR_TEMP_FIELDS=""},PCOF=${ECMC_MR_PCOF},ICOF=${ECMC_MR_ICOF},DCOF=${ECMC_MR_DCOF},SYNC_DXLM={{ syncEcmcMRSofLim }}")
+dbLoadRecords(ecmcMotorRecord.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epicsName }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epicsmotorRecordDescription }}',EGU={{ epicsUnit }},PREC={{ epicsPrecision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),TWV={{ axis.tweakDist|default(1.0)|float }},{{ epicsmotorRecordfieldInit }},${ECMC_MR_TEMP_FIELDS=""},PCOF=${ECMC_MR_PCOF},ICOF=${ECMC_MR_ICOF},DCOF=${ECMC_MR_DCOF},SYNC_DXLM={{ syncEcmcMRSofLim }}")
 epicsEnvUnset(ECMC_TEMP_UREV)
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
@@ -97,7 +140,7 @@ epicsEnvUnset(ECMC_MR_ICOF)
 epicsEnvUnset(ECMC_MR_DCOF)
 
 #- PVT
-{%- if epics.motorRecord.pvt is defined %}
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.pvt is defined) %}
 
     {%- if epics.motorRecord.pvt.npoints is defined %}
         {%- set pvtNpoints = epics.motorRecord.pvt.npoints %}
@@ -112,7 +155,7 @@ epicsEnvUnset(ECMC_MR_DCOF)
     {%- endif %}
 
     epicsEnvSet(ECMC_MR_PVT_FIRST_AXIS_ID,${ECMC_MR_PVT_FIRST_AXIS_ID={{ axis.id }}})
-    dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epics.name }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR={{ axis.id }},PREC={{ epics.precision }},NPOINTS={{ pvtNpoints }},NREADBACK={{ pvtNreadback }}")
+    dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epicsName }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR={{ axis.id }},PREC={{ epicsPrecision }},NPOINTS={{ pvtNpoints }},NREADBACK={{ pvtNreadback }}")
     #- Enable PVT for axis
     ecmcEnablePVTForAxis(${ECMC_MOTOR_PORT},{{ axis.id }},1)
     #- Save some vars for loading of ecmcProfileMoveController.template in setAppMode.cmd
@@ -120,7 +163,7 @@ epicsEnvUnset(ECMC_MR_DCOF)
     ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}<{{ pvtNpoints }}",{{ pvtNpoints }} ,${ECMC_MR_PVT_MAX_POINTS_IN_USE=0})
     ecmcEpicsEnvSetCalc(ECMC_MR_PVT_AXES_COUNT_IN_USE,"${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}+1")
     #- Load cfg records for PVT axis (enable auto gui)
-    dbLoadRecords(ecmcProfileMoveMCUAxis.template,"IOC=$(IOC),DEV=${DEV=$(IOC)},AXIS_NAME={{ epics.name }},PVT_AXIS_NO=$(ECMC_MR_PVT_AXES_COUNT_IN_USE),AXIS_NO={{ axis.id }}")
+    dbLoadRecords(ecmcProfileMoveMCUAxis.template,"IOC=$(IOC),DEV=${DEV=$(IOC)},AXIS_NAME={{ epicsName }},PVT_AXIS_NO=$(ECMC_MR_PVT_AXES_COUNT_IN_USE),AXIS_NO={{ axis.id }}")
 {%- endif %}
 
 #- ############################################################################
@@ -134,5 +177,5 @@ epicsEnvUnset(ECMC_MR_DCOF)
 
 {%- if (encoder.homing is defined) or (homing is defined) %}
     ecmcFileExist(ecmcMotorRecordhome.template,1,1)
-    dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epics.name }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
+    dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epicsName }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
 {%- endif %}
