@@ -1,6 +1,13 @@
 #- ####################################################
 #-  ECMC axis config, rendered from with jinja2
 #- ####################################################
+
+{%- if (axis is defined) and (axis.id is defined) %}
+    epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
+{%- else %}
+    epicsEnvSet(ECMC_AXIS_NO, ${${ECMC_AXIS_NO=-1}+1})
+{%- endif %}
+
 {% include 'axis.jinja2' %}
 {% include 'encoder.jinja2' %}
 {%- if axis.type == 1 %}
@@ -16,7 +23,7 @@
 {% include 'epicsMotorRecord.jinja2' %}
 {#- this needs to be the command issued #}
 {%- if axis.features is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisBlockCom(${ECMC_AXIS_NO}, {{ axis.features.blockCom|default(0)|int }})"
 {%- endif %}
 {% include 'axisHWLinks.jinja2' %}
 {% include 'axisCleanup.jinja2' %}

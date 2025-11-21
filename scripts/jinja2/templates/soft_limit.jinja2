@@ -3,11 +3,11 @@
     #- Soft limits
     #- =============================================================================
     {%- if softlimits.forwardEnable is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd({{ axis.id }},{{ softlimits.forwardEnable|int }})"
-        ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd({{ axis.id}},{{ softlimits.forward}})"
+        ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd(${ECMC_AXIS_NO},{{ softlimits.forwardEnable|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd(${ECMC_AXIS_NO},{{ softlimits.forward}})"
     {%- endif %}
     {%- if softlimits.backwardEnable is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd({{ axis.id }},{{ softlimits.backwardEnable|int }})"
-        ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd({{ axis.id }},{{ softlimits.backward}})"
+        ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd(${ECMC_AXIS_NO},{{ softlimits.backwardEnable|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd(${ECMC_AXIS_NO},{{ softlimits.backward}})"
     {%- endif %}
 {%- endif %}

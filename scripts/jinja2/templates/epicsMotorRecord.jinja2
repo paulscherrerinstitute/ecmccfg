@@ -29,7 +29,7 @@
     {%- set epicsName = "axis" %}
 {%- endif %}
 
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, {{ axis.id }}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "syncSoftLims={{ syncEcmcMRSofLim }};{{ axis.parameters|default("") }}")
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, ${ECMC_AXIS_NO}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "syncSoftLims={{ syncEcmcMRSofLim }};{{ axis.parameters|default("") }}")
 epicsEnvUnset(ECMC_AXIS_FLAGS)
 
 {# jog velocity #}
@@ -131,7 +131,7 @@ epicsEnvSet(ECMC_MR_DCOF,0)
 
 
 ecmcFileExist(ecmcMotorRecord.template,1,1)
-dbLoadRecords(ecmcMotorRecord.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epicsName }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO={{ axis.id }},DESC='{{ epicsmotorRecordDescription }}',EGU={{ epicsUnit }},PREC={{ epicsPrecision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),TWV={{ axis.tweakDist|default(1.0)|float }},{{ epicsmotorRecordfieldInit }},${ECMC_MR_TEMP_FIELDS=""},PCOF=${ECMC_MR_PCOF},ICOF=${ECMC_MR_ICOF},DCOF=${ECMC_MR_DCOF},SYNC_DXLM={{ syncEcmcMRSofLim }}")
+dbLoadRecords(ecmcMotorRecord.template,"PREFIX=${ECMC_PREFIX},MOTOR_NAME={{ epicsName }},MOTOR_PORT=${ECMC_MOTOR_PORT},ECMC_PORT=${ECMC_ASYN_PORT},AXIS_NO=${ECMC_AXIS_NO},DESC='{{ epicsmotorRecordDescription }}',EGU={{ epicsUnit }},PREC={{ epicsPrecision }},VELO={{ trajectory.axis.velocity }},JVEL={{ jogVelocity }},JAR={{ jogAcceleration }},ACCS={{ trajectory.axis.acceleration }},RDBD={{ rdbd }},DLLM={{ DLLM|float }},DHLM={{ DHLM|float }},SREV=$(ECMC_TEMP_SREV),UREV=$(ECMC_TEMP_UREV),TWV={{ axis.tweakDist|default(1.0)|float }},{{ epicsmotorRecordfieldInit }},${ECMC_MR_TEMP_FIELDS=""},PCOF=${ECMC_MR_PCOF},ICOF=${ECMC_MR_ICOF},DCOF=${ECMC_MR_DCOF},SYNC_DXLM={{ syncEcmcMRSofLim }}")
 epicsEnvUnset(ECMC_TEMP_UREV)
 epicsEnvUnset(ECMC_TEMP_SREV)
 epicsEnvUnset(ECMC_MR_TEMP_FIELDS)
@@ -154,16 +154,16 @@ epicsEnvUnset(ECMC_MR_DCOF)
         {%- set pvtNreadback = 0 %}
     {%- endif %}
 
-    epicsEnvSet(ECMC_MR_PVT_FIRST_AXIS_ID,${ECMC_MR_PVT_FIRST_AXIS_ID={{ axis.id }}})
-    dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epicsName }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR={{ axis.id }},PREC={{ epicsPrecision }},NPOINTS={{ pvtNpoints }},NREADBACK={{ pvtNreadback }}")
+    epicsEnvSet(ECMC_MR_PVT_FIRST_AXIS_ID,${ECMC_MR_PVT_FIRST_AXIS_ID=${ECMC_AXIS_NO}})
+    dbLoadRecords(ecmcProfileMoveAxis.template,"P=${ECMC_PREFIX},M={{ epicsName }}-PVT-,R=,PORT=${ECMC_MOTOR_PORT},ADDR=${ECMC_AXIS_NO},PREC={{ epicsPrecision }},NPOINTS={{ pvtNpoints }},NREADBACK={{ pvtNreadback }}")
     #- Enable PVT for axis
-    ecmcEnablePVTForAxis(${ECMC_MOTOR_PORT},{{ axis.id }},1)
+    ecmcEnablePVTForAxis(${ECMC_MOTOR_PORT},${ECMC_AXIS_NO},1)
     #- Save some vars for loading of ecmcProfileMoveController.template in setAppMode.cmd
     ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_RB_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0}<{{ pvtNreadback }}",{{ pvtNreadback }} ,${ECMC_MR_PVT_MAX_RB_POINTS_IN_USE=0})
     ecmcEpicsEnvSetCalcTernary(ECMC_MR_PVT_MAX_POINTS_IN_USE,"${ECMC_MR_PVT_MAX_POINTS_IN_USE=0}<{{ pvtNpoints }}",{{ pvtNpoints }} ,${ECMC_MR_PVT_MAX_POINTS_IN_USE=0})
     ecmcEpicsEnvSetCalc(ECMC_MR_PVT_AXES_COUNT_IN_USE,"${ECMC_MR_PVT_AXES_COUNT_IN_USE=0}+1")
     #- Load cfg records for PVT axis (enable auto gui)
-    dbLoadRecords(ecmcProfileMoveMCUAxis.template,"IOC=$(IOC),DEV=${DEV=$(IOC)},AXIS_NAME={{ epicsName }},PVT_AXIS_NO=$(ECMC_MR_PVT_AXES_COUNT_IN_USE),AXIS_NO={{ axis.id }}")
+    dbLoadRecords(ecmcProfileMoveMCUAxis.template,"IOC=$(IOC),DEV=${DEV=$(IOC)},AXIS_NAME={{ epicsName }},PVT_AXIS_NO=$(ECMC_MR_PVT_AXES_COUNT_IN_USE),AXIS_NO=${ECMC_AXIS_NO}")
 {%- endif %}
 
 #- ############################################################################
@@ -177,5 +177,5 @@ epicsEnvUnset(ECMC_MR_DCOF)
 
 {%- if (encoder.homing is defined) or (homing is defined) %}
     ecmcFileExist(ecmcMotorRecordhome.template,1,1)
-    dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epicsName }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO={{ axis.id }},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
+    dbLoadRecords(ecmcMotorRecordhome.template, "PREFIX=${ECMC_PREFIX}, MOTOR_NAME='{{ epicsName }}', MOTOR_PORT=${ECMC_MOTOR_PORT}, AXIS_NO=${ECMC_AXIS_NO},HOMEPOS=${HOME_POS=0},HVELTO=${VEL_TO_CAM=0},HVELFRM=${VEL_FRM_CAM=0},HOMEACC=${ACC=0},HOMEDEC=${DEC=0}")
 {%- endif %}

@@ -34,7 +34,7 @@ ecmcEpicsEnvSetCalcTernary(V_DRVH,"{{ monitoring.velocity.enable|default(0)|int 
 {%- endif %}
 
 
-dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',EGU='{{ epicsUnit }}',PREC={{ epicsPrecision }},AXIS_NO={{ axis.id }},HOMEPROC={{ homingType }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0},TWKDST={{ axis.tweakDist|default(0.0)|float }}, GRP_NAME={{ axis.group|default("No group")}}")
+dbLoadRecords("ecmcAxis.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',EGU='{{ epicsUnit }}',PREC={{ epicsPrecision }},AXIS_NO=${ECMC_AXIS_NO},HOMEPROC={{ homingType }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},VELO={{ trajectory.axis.velocity }},V_DRVL=${V_DRVL=0},V_DRVH=${V_DRVH=0},TWKDST={{ axis.tweakDist|default(0.0)|float }}, GRP_NAME={{ axis.group|default("No group")}}")
 
 #- save PREC for use if encoder is added
 epicsEnvSet(ECMC_AXIS_PREC,{{ epicsPrecision }})
@@ -56,7 +56,7 @@ epicsEnvUnset(V_DRVH)
 {# #- {%- endif %} #}
 
 ecmcFileExist("ecmcEnc.db",1,1)
-dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_NO={{ axis.id }},ENC_NO=1,PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ENC_EGU=},DESC=${ENC_DESC=},HOME_PROC=${HOME_PROC=0},VEL_TO_CAM=${VEL_TO_CAM=0},VEL_FRM_CAM=${VEL_FRM_CAM=0},ACC=${ACC=-1},DEC=${DEC=-1},REF_HME=${REF_HME=-1},REF_STRT=${REF_STRT=-1},POST_ENA=${POST_ENA=-1},POST_POS=${POST_POS=0},POS=${HOME_POS=0},PREC=${ECMC_AXIS_PREC=3}")
+dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_NO=${ECMC_AXIS_NO},ENC_NO=1,PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},EGU=${ENC_EGU=},DESC=${ENC_DESC=},HOME_PROC=${HOME_PROC=0},VEL_TO_CAM=${VEL_TO_CAM=0},VEL_FRM_CAM=${VEL_FRM_CAM=0},ACC=${ACC=-1},DEC=${DEC=-1},REF_HME=${REF_HME=-1},REF_STRT=${REF_STRT=-1},POST_ENA=${POST_ENA=-1},POST_POS=${POST_POS=0},POS=${HOME_POS=0},PREC=${ECMC_AXIS_PREC=3}")
 
 #- Links to PVs
 {%- if encoder.position is defined %}
@@ -90,20 +90,18 @@ ecmcFileExist("ecmcAxisType.db",1,1)
         {%- set controllerKff = 1.0 %}
     {%- endif %}
     ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCtrlParams.db",1,1)
-    ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCtrlParams.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_NO={{ axis.id }},KP={{ controllerKp }},KI={{ controllerKi }},KD={{ controllerKd }},KFF={{ controllerKff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")
+    ${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCtrlParams.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_NO=${ECMC_AXIS_NO},KP={{ controllerKp }},KI={{ controllerKi }},KD={{ controllerKd }},KFF={{ controllerKff }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")
    dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE={{ drive.type|default(0)|int }},TRAJ_TYPE={{ trajectory.type }},DRV_MODE=${ECMC_AX_DRV_MODE=N/A}")
 {%- else %}
    #- Virtual axis
    dbLoadRecords("ecmcAxisType.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_TYPE={{  axis.type|default(0)|int }},DRV_TYPE=-1,TRAJ_TYPE={{ trajectory.type }},DRV_MODE=${ECMC_AX_DRV_MODE=N/A}")
 {%- endif %}
 ${ECMC_ENG_MODE_CMD="#-"}ecmcFileExist("ecmcAxisCommission.db",1,1)
-${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_NO={{ axis.id }},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")
+${ECMC_ENG_MODE_CMD="#-"}dbLoadRecords("ecmcAxisCommission.db","P=${ECMC_PREFIX},AXIS_NAME='{{ epicsName }}',AXIS_NO=${ECMC_AXIS_NO},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1,T_SMP_MS=${ECMC_SAMPLE_RATE_MS},TSE=${ECMC_TSE},PORT=${ECMC_ASYN_PORT},ADDR=0,TIMEOUT=1")
 
 #-Add info in MCU namespace for auto gui generation
 ecmcFileExist("ecmcMcuAxisInfo.db",1,1)
-dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${DEV=${IOC}},AXIS_NAME='{{ epicsName }}',AXIS_NO={{ axis.id }}, PREV_OBJ_ID=${ECMC_PREV_AXIS_OBJ_ID=-1}")
-
-epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
+dbLoadRecords("ecmcMcuAxisInfo.db","P=${SM_PREFIX},DEV=${DEV=${IOC}},AXIS_NAME='{{ epicsName }}',AXIS_NO=${ECMC_AXIS_NO}, PREV_OBJ_ID=${ECMC_PREV_AXIS_OBJ_ID=-1}")
 
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_AXIS_OBJ_ID==-1)
@@ -123,7 +121,7 @@ epicsEnvSet(ECMC_PREV_AXIS_P,"$(IOC):MCU-Cfg-AX${ECMC_AXIS_NO}-")
 epicsEnvSet(ECMC_PREV_AXIS_OBJ_ID,${ECMC_AXIS_NO})
 
 #- Store axis name as env variable for later use
-epicsEnvSet(ECMC_MOTOR_{{axis.id}}_FULL_NAME, ${ECMC_PREFIX}{{ epicsName }})
+epicsEnvSet(ECMC_MOTOR_${ECMC_AXIS_NO}_FULL_NAME, ${ECMC_PREFIX}{{ epicsName }})
 
 {%- if axis.tweakDist is defined %}
     ecmcConfigOrDie "Cfg.SetAxisTweakDist(${ECMC_AXIS_NO},{{ axis.tweakDist|default(0.0)|float }})"

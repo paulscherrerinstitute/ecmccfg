@@ -2,36 +2,36 @@
 #- Trajectory
 #- =============================================================================
 {#- source #}
-ecmcConfigOrDie "Cfg.SetAxisTrajSourceType({{ axis.id }},{{ trajectory.source }})"
+ecmcConfigOrDie "Cfg.SetAxisTrajSourceType(${ECMC_AXIS_NO},{{ trajectory.source }})"
 
-ecmcConfigOrDie "Cfg.SetAxisJerk({{ axis.id }},{{ trajectory.axis.jerk|default(trajectory.axis.acceleration) }})"
-ecmcConfigOrDie "Cfg.SetAxisAcc({{ axis.id }},{{ trajectory.axis.acceleration }})"
+ecmcConfigOrDie "Cfg.SetAxisJerk(${ECMC_AXIS_NO},{{ trajectory.axis.jerk|default(trajectory.axis.acceleration) }})"
+ecmcConfigOrDie "Cfg.SetAxisAcc(${ECMC_AXIS_NO},{{ trajectory.axis.acceleration }})"
 
 {%- if trajectory.axis.deceleration is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ trajectory.axis.deceleration }})"
+    ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},{{ trajectory.axis.deceleration }})"
 {%- else %}
-    ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ trajectory.axis.acceleration }})"
+    ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},{{ trajectory.axis.acceleration }})"
 {%- endif %}
 
-ecmcConfigOrDie "Cfg.SetAxisVel({{ axis.id }},{{ trajectory.axis.velocity }})"
+ecmcConfigOrDie "Cfg.SetAxisVel(${ECMC_AXIS_NO},{{ trajectory.axis.velocity }})"
 
 {%- if trajectory.axis.emergencyDeceleration is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.emergencyDeceleration }})"
+    ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},{{ trajectory.axis.emergencyDeceleration }})"
 {%- else %}
     {%- if (trajectory.axis.deceleration is defined) and (trajectory.axis.deceleration > trajectory.axis.acceleration) %}
-        ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.deceleration * 10.0 }})"
+        ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},{{ trajectory.axis.deceleration * 10.0 }})"
     {%- else %}
-        ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.acceleration * 10.0 }})"
+        ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},{{ trajectory.axis.acceleration * 10.0 }})"
     {%- endif %}
 {%- endif %}
 
 {%- if (trajectory.jog is defined) and (trajectory.jog.velocity is defined) %}
-    ecmcConfigOrDie "Cfg.SetAxisJogVel({{ axis.id }},{{ trajectory.jog.velocity }})"
+    ecmcConfigOrDie "Cfg.SetAxisJogVel(${ECMC_AXIS_NO},{{ trajectory.jog.velocity }})"
 {%- else %}
-    ecmcConfigOrDie "Cfg.SetAxisJogVel({{ axis.id }},{{ trajectory.axis.velocity }})"
+    ecmcConfigOrDie "Cfg.SetAxisJogVel(${ECMC_AXIS_NO},{{ trajectory.axis.velocity }})"
 {%- endif %}
 
 {%- if trajectory.modulo is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id }},{{ trajectory.modulo.range}})"
-    ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id }},{{ trajectory.modulo.type}})"
+    ecmcConfigOrDie "Cfg.SetAxisModRange(${ECMC_AXIS_NO},{{ trajectory.modulo.range}})"
+    ecmcConfigOrDie "Cfg.SetAxisModType(${ECMC_AXIS_NO},{{ trajectory.modulo.type}})"
 {%- endif %}
