@@ -1,11 +1,11 @@
 
 VAR
-  mySlave : ${M}.s{DRV_ID=3}
-VAR_END
+  mySlave : ${M}.s${DRV_ID=3};
+END_VAR
 
 if(${SELF}.firstscan) {
   static.stateOld:=-1;
-}
+};
 
 if(ax1.traj.targetpos<>static.oldTarget) {
   println('new target: ',ax1.traj.targetpos );
@@ -17,9 +17,13 @@ static.state:=epics_get_state();
 if(static.state <> static.stateOld) {
   println('epics state: ',static.state, ' epics started: ', epics_get_started());
   static.stateOld:=static.state;
-}
+};
 
+mySlave.TESTING += 1;
 if(${SELF}.dbg) {
   println('ONE:           ',mySlave.ONE);
   println('ZERO:          ',mySlave.ZERO);
+  println('TESTING:       ',mySlave.TESTING);
+  //println('TESTING3:      ',${M}.sm1.TESTING3);
 };
+

@@ -11,7 +11,7 @@
 #-d   \param NAXES         (optional) Number of axes using pvt mode (defaults to the number of axes configuered for pvt if this command is executed after axes are configured)
 #-d   \param MAX_POINTS_PULSES (optional) Number points in time array (defaults to max of NREADBACK and NPOINTS defined in axes cfg if this command is executed after axes are configured)
 #-d   \param TRG_EC_ENTRY  (optional) EtherCAT entry for trigger output, default to nothing (triggering disabled). Example: TRG_EC_ENTRY='ec0.23.binaryOutput02.0'
-#-d   \param TRG_DUR_S     (optional) Duration of trigger pulse defaults to 0.1 s. Example: TRG_DUR=0.2, 
+#-d   \param TRG_DUR_S     (optional) Duration of trigger pulse defaults to 0.1 s. Example: TRG_DUR_S=0.2, 
 #-d   \param SOFT_TRG_FLNK (optional) Forward-link for soft trigger (PV name = <P>PVT-SftTrg)
 #-d */
 
@@ -40,7 +40,7 @@ dbLoadRecords(ecmcPVTTrigger.template,"P=${ECMC_PREFIX},R=PVT-,PORT=${ECMC_ASYN_
 
 ecmcIf("'${TRG_EC_ENTRY=NAN}'!='NAN'")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.LinkEcEntryToObject(${TRG_EC_ENTRY=NAN},pvtctrl.trigger.output)"
-${IF_TRUE}ecmcEpicsEnvSetCalc(ECMC_PVT_CNTRL_TRG_DUR_MS,"$(TRG_DUR=0.1)*1000")
+${IF_TRUE}ecmcEpicsEnvSetCalc(ECMC_PVT_CNTRL_TRG_DUR_MS,"$(TRG_DUR_S=0.1)*1000")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.SetPVTControllerTrgDurMs($(ECMC_PVT_CNTRL_TRG_DUR_MS=100))"
 ecmcEndIf()
 
