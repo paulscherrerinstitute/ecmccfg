@@ -41,6 +41,7 @@
 #define EC_SLAVES_MAX 65535
 
 enum EcToolCommand {
+  CMD_CHANGE_EC_STATE = 10,
   CMD_EL7062_AUTOTUNE = 70621,
   CMD_EL7062_READBACK = 70622
 };
@@ -50,6 +51,7 @@ void workerEtherCATTool(void *);
 static void initEtherCATTool(struct aSubRecord *);
 static long runEtherCATTool(struct aSubRecord *);
 
+static int setupChangeSlaveEtherCATstate(int, int, int);
 static int setupEL7062ExeAutoTune(int, int, int, char *, char *, char *);
 static int setupEL7062ReadBack(int, int, int, char *, char *, char *);
 
@@ -123,7 +125,9 @@ static long runEtherCATTool (struct aSubRecord *rec)
     // unused                               // F: sdoIndex    (double)
     // unused                               // G: sdoSubIndex (double)
     // unused                               // H: data type   (string)
-    // unused                               // I: command specific arg (double)
+
+    double *i = (double *)rec->i;           // I: command specific arg (double)
+    int cmdArg = (int)*i;
 
     char *prefix = (char *)rec->r;          // R: prefix  (string)
     char *epicsVer = (char *)rec->s;        // S: epics version (string)
@@ -149,6 +153,9 @@ static long runEtherCATTool (struct aSubRecord *rec)
     }
 
     switch(cmd) {
+        case CMD_CHANGE_EC_STATE:
+            setupChangeSlaveEtherCATstate(masterId, slaveId, cmdArg);
+            break;
         case CMD_EL7062_AUTOTUNE:
             setupEL7062ExeAutoTune(masterId, slaveId, chId, epicsVer, ecmccfgVer, prefix);
             break;
@@ -162,6 +169,38 @@ static long runEtherCATTool (struct aSubRecord *rec)
     return 0;
 }
 epicsRegisterFunction(runEtherCATTool);
+
+
+static int setupChangeSlaveEtherCATstate(int masterId, int slaveId, int cmdArg) {
+
+  char stateName[sizeof("SAFEOP")] = "";
+  bool isValidState = true;
+
+  switch(cmdArg) {
+    case 1:  strcpy(stateName, "INIT")   ; break;
+    case 2:  strcpy(stateName, "PREOP")  ; break;
+    case 3:  strcpy(stateName, "BOOT")   ; break;
+    case 4:  strcpy(stateName, "SAFEOP") ; break;
+    case 8:  strcpy(stateName, "OP")     ; break;
+    default: isValidState = false        ; break;
+  }
+
+  if (false == isValidState)
+    return -1;
+
+  size_t charCount = snprintf(scriptPath,
+      sizeof(scriptPath),
+      "/opt/etherlab/bin/ethercat states -m%d -p%d %s\n",
+      masterId,
+      slaveId,
+      stateName);
+
+  if (charCount >= sizeof(scriptPath) - 1)
+    return -1;
+
+  hasJob=1;
+  return 0;
+}
 
 
 static int setupEL7062ExeAutoTune(int master, int slave, int channel, char* epics, char *ecmccfg, char * prefix)
