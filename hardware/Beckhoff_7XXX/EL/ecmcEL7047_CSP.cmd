@@ -1,6 +1,6 @@
 #-d /**
-#-d   \brief hardware script for EL7037
-#-d   \details EL7037 stepper drive (24V,1.5A)
+#-d   \brief hardware script for EL7047
+#-d   \details EL7047 stepper drive (48V,5A)
 #-d   \author Anders Sandstroem
 #-d   \file
 #-d   \note SDOS

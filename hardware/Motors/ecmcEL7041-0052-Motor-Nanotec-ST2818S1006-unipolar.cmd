@@ -1,1 +1,0 @@
-ecmcEL7041-Motor-Nanotec-ST2818S1006-unipolar.cmd

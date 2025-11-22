@@ -1,1 +1,0 @@
-ecmcEL7041-0052-Motor-Nanotec-SCA5618X2804.cmd
