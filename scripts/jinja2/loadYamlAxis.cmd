@@ -24,9 +24,11 @@ epicsEnvSet(FILE_TEMP_2,${ECMC_TMP_DIR}${FILE}_2)
 epicsEnvSet(FILE_TEMP_3,${ECMC_TMP_DIR}${FILE}_3)
 
 
+
+
 # step 1: get filename (need to check if filename contains other macros also). Basically run the filename in this iocsh
 ecmcIf("'$(ECMC_CFG_TOOL=jinja)'=='ecb'")
-  ${IF_TRUE}system "ecb --yaml ${FILE} --action readkey --key plc.file --output ${FILE_TEMP_1}"
+  ${IF_TRUE}ecb --yaml ${FILE} --action readkey --key plc.file --output ${FILE_TEMP_1}
   ${IF_TRUE}system '[ ! -s ${FILE_TEMP_1} ] || sed -i "s/^\(.*\)$/epicsEnvSet(ECMC_PLC_FILENAME, \"\1\")\n/" ${FILE_TEMP_1}'
   ${IF_TRUE}system '[   -s ${FILE_TEMP_1} ] || echo "epicsEnvSet(ECMC_PLC_FILENAME, \"NONE\")\n" >> ${FILE_TEMP_1}'
 #- else
@@ -44,7 +46,7 @@ epicsEnvUnset(FILE_TEMP_1)
 
 # step 2: Set plc.file (write new yaml file)
 ecmcIf("'$(ECMC_CFG_TOOL=jinja)'=='ecb'")
-  ${IF_TRUE}system "ecb --yaml ${FILE} --action updatekey --key plc.file --value ${ECMC_PLC_FILENAME=} --output ${FILE_TEMP_2}"
+  ${IF_TRUE}ecb --yaml ${FILE} --action updatekey --key plc.file --value ${ECMC_PLC_FILENAME=} --output ${FILE_TEMP_2}
 #- else
   ${IF_FALSE}system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}ecmcPlcSetFileName.py ${FILE} ${FILE_TEMP_2} ${ECMC_PLC_FILENAME=}"
 ecmcEndIf()
@@ -57,7 +59,7 @@ epicsEnvUnset(ECMC_PLC_FILENAME)
 
 #- step 3: parse yaml file
 ecmcIf("'$(ECMC_CFG_TOOL=jinja)'=='ecb'")
-  ${IF_TRUE}system "ecb --yaml ${FILE_TEMP_2} --schemafile ${ECMC_CONFIG_ROOT}ecbSchema.json --schema axis --template ${ECMC_CONFIG_ROOT}axis_main.jinja2 --templatedir ${ECMC_CONFIG_ROOT} --output ${FILE_TEMP_3}"
+  ${IF_TRUE}ecb --yaml ${FILE_TEMP_2} --schemafile ${ECMC_CONFIG_ROOT}ecbSchema.json --schema axis --template ${ECMC_CONFIG_ROOT}axis_main.jinja2 --templatedir ${ECMC_CONFIG_ROOT} --output ${FILE_TEMP_3}
 #- else
   #- setup python venv and run `plcYamlJinja2.py` must be in the same 'system'-context
   ${IF_FALSE}system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}axisYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${FILE_TEMP_2} -o ${FILE_TEMP_3}"
