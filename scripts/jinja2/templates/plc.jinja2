@@ -23,7 +23,7 @@ ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable|default(1)|int }})"
 
 #- default PLC-PVs
 {%- if plc.id < 10 %}
-dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char=0{{ plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+    dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char=0{{ plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
 {%- else %}
     dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char={{ plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
 {%- endif %}

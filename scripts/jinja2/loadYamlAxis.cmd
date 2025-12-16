@@ -24,8 +24,6 @@ epicsEnvSet(FILE_TEMP_2,${ECMC_TMP_DIR}${FILE}_2)
 epicsEnvSet(FILE_TEMP_3,${ECMC_TMP_DIR}${FILE}_3)
 
 
-
-
 # step 1: get filename (need to check if filename contains other macros also). Basically run the filename in this iocsh
 ecmcIf("'$(ECMC_CFG_TOOL=jinja)'=='ecb'")
   ${IF_TRUE}ecb --yaml ${FILE} --action readkey --key plc.file --output ${FILE_TEMP_1}
