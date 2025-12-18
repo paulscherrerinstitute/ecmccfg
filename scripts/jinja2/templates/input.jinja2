@@ -3,70 +3,67 @@
 #- =============================================================================
 
 {#- FWD #}
-{%- if input.limit.forward == 'plcOverride' %}
-    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchFwdPLCOverride({{ axis.id }},1)"
+{%- if input.limit.forward == "plcOverride" %}
+    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchFwdPLCOverride(${ECMC_AXIS_NO},1)"
 {%- else %}
-
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax{{ axis.id }}.mon.highlim")"
-    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchFwdPLCOverride({{ axis.id }},0)"
-    {%- if input.limit.forwardPolarity is defined%}
-        ecmcConfigOrDie "Cfg.SetAxisMonLimitFwdPolarity({{ axis.id }},{{ input.limit.forwardPolarity }})"        
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.forward }},"ax${ECMC_AXIS_NO}.mon.highlim")"
+    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchFwdPLCOverride(${ECMC_AXIS_NO},0)"
+    {%- if input.limit.forwardPolarity is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisMonLimitFwdPolarity(${ECMC_AXIS_NO},{{ input.limit.forwardPolarity }})"
     {%- endif %}
 {%- endif %}
 
 {#- BWD #}
-{%- if input.limit.backward == 'plcOverride' %}
-    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchBwdPLCOverride({{ axis.id }},1)"
+{%- if input.limit.backward == "plcOverride" %}
+    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchBwdPLCOverride(${ECMC_AXIS_NO},1)"
 {%- else %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax{{ axis.id }}.mon.lowlim")"
-    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchBwdPLCOverride({{ axis.id }},0)"
-    {%- if input.limit.backwardPolarity is defined%}
-        ecmcConfigOrDie "Cfg.SetAxisMonLimitBwdPolarity({{ axis.id }},{{ input.limit.backwardPolarity }})"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.limit.backward }},"ax${ECMC_AXIS_NO}.mon.lowlim")"
+    ecmcConfigOrDie "Cfg.SetAxisLimitSwitchBwdPLCOverride(${ECMC_AXIS_NO},0)"
+    {%- if input.limit.backwardPolarity is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisMonLimitBwdPolarity(${ECMC_AXIS_NO},{{ input.limit.backwardPolarity }})"
     {%- endif %}
 {%- endif %}
 
 {#- latch limit switches, for debouncing  #}
-{%- if input.limit.latchInput is defined%}
-    ecmcConfigOrDie "Cfg.SetAxisMonLatchLimit({{ axis.id }},{{ input.limit.latchInput|int }})"
+{%- if input.limit.latchInput is defined %}
+    ecmcConfigOrDie "Cfg.SetAxisMonLatchLimit(${ECMC_AXIS_NO},{{ input.limit.latchInput|int }})"
 {%- endif %}
 
 {#- Home #}
 {%- if input.home is defined %}
-    {%- if input.home == 'plcOverride' %}
-        ecmcConfigOrDie "Cfg.SetAxisHomeSwitchPLCOverride({{ axis.id }},1)"
+    {%- if input.home == "plcOverride" %}
+        ecmcConfigOrDie "Cfg.SetAxisHomeSwitchPLCOverride(${ECMC_AXIS_NO},1)"
         #- Do not use hw-home sensor
-        ecmcConfigOrDie "Cfg.SetAxisHomeSwitchEnable({{ axis.id }},0)"
+        ecmcConfigOrDie "Cfg.SetAxisHomeSwitchEnable(${ECMC_AXIS_NO},0)"
     {%- else %}
-        ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax{{ axis.id }}.mon.homesensor")"
-        ecmcConfigOrDie "Cfg.SetAxisHomeSwitchEnable({{ axis.id }},1)"        
-        {%- if input.homePolarity is defined%}
-            ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity({{ axis.id }},{{ input.homePolarity }})"
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.home }},"ax${ECMC_AXIS_NO}.mon.homesensor")"
+        ecmcConfigOrDie "Cfg.SetAxisHomeSwitchEnable(${ECMC_AXIS_NO},1)"        
+        {%- if input.homePolarity is defined %}
+            ecmcConfigOrDie "Cfg.SetAxisMonHomeSwitchPolarity(${ECMC_AXIS_NO},{{ input.homePolarity }})"
         {%- endif %}
     {%- endif %}
 {%- endif %}
 
 {#- Interlock #}
-{%- if input.interlock is defined%}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax{{ axis.id }}.mon.extinterlock")"
-    {%- if input.interlockPolarity is defined%}
-        ecmcConfigOrDie "Cfg.SetAxisMonExtHWInterlockPolarity({{ axis.id }},{{ input.interlockPolarity }})"
+{%- if input.interlock is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.interlock }},"ax${ECMC_AXIS_NO}.mon.extinterlock")"
+    {%- if input.interlockPolarity is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisMonExtHWInterlockPolarity(${ECMC_AXIS_NO},{{ input.interlockPolarity }})"
     {%- endif %}
 {%- endif %}
 
 {#- Analog interlock like temperature sensors#}
-{%- if input.analog is defined%}
-    {%- if input.analog.interlock is defined%}
-        ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.analog.interlock }},"ax{{ axis.id }}.mon.analoginterlock")"
-        {%- if input.analog.enable is defined%}
-            ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},{{ input.analog.enable|int|default(1)}})"
-        {%- else %}
-            ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock({{ axis.id }},1)"
-        {%- endif %}
-        {%- if input.analog.interlockPolarity is defined %}
-            ecmcConfigOrDie "Cfg.SetAxisMonAnalogInterlockPolarity({{ axis.id }},{{ input.analog.interlockPolarity }})"
-        {%- endif %}
-        {%- if input.analog.rawLimit is defined%}
-            ecmcConfigOrDie "Cfg.SetAxisMonAnalogInterlockRawLimit({{ axis.id }},{{ input.analog.rawLimit }})"
-        {%- endif %}
+{%- if (input.analog is defined) and (input.analog.interlock is defined) %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject({{ input.analog.interlock }},"ax${ECMC_AXIS_NO}.mon.analoginterlock")"
+    {%- if input.analog.enable is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock(${ECMC_AXIS_NO},{{ input.analog.enable|int}})"
+    {%- else %}
+        ecmcConfigOrDie "Cfg.SetAxisMonEnableAnalogInterlock(${ECMC_AXIS_NO},1)"
+    {%- endif %}
+    {%- if input.analog.interlockPolarity is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisMonAnalogInterlockPolarity(${ECMC_AXIS_NO},{{ input.analog.interlockPolarity }})"
+    {%- endif %}
+    {%- if input.analog.rawLimit is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisMonAnalogInterlockRawLimit(${ECMC_AXIS_NO},{{ input.analog.rawLimit }})"
     {%- endif %}
 {%- endif %}

@@ -70,7 +70,6 @@ class Schema:
 
     metaSchema = {
         'type': 'dict',
-        'default': {},
         'schema': {
             'author': {'type': 'string'},
             'facility': {'type': 'string', 'default': 'SLS 2.0'},
@@ -83,7 +82,6 @@ class Schema:
     plcVeloFilterSchema = {
         'type': 'dict',
         'required': False,
-        'default': {},
         'schema': {
             'trajectory': {
                 'type': 'dict',                    
@@ -105,7 +103,6 @@ class Schema:
     filterSchema = {
         'type': 'dict',
         'required': False,
-        'default': {},
         'schema': {
             'velocity': {
                 'type': 'dict',
@@ -217,14 +214,12 @@ class Schema:
     epicsSchema = {
         'type': 'dict',
         'required': False,
-        'default': {'name': 'axis'},
         'schema': {
             'name': {'default': 'axis'},
             'precision': {'type': 'integer', 'min': 0, 'default': 3},
             'unit': {'type': 'string', 'default': 'mm'},
             'motorRecord': {
                 'type': 'dict',
-                'default': {'enable': True},
                 'schema': {
                     'enable': {'type': 'boolean', 'default': True},
                     'fieldInit': {'type': 'string'},
@@ -336,7 +331,6 @@ class Schema:
     controllerSchema = {
         'type': 'dict',
         'required': False,
-        'default': {'controller': {'Kp': 1}},
         'schema': {
             'Kp': {'type': 'float', 'default': 1., 'min': 0},
             'Ki': {'type': 'float', 'default': 0., 'min': 0},
@@ -469,7 +463,6 @@ class Schema:
     softlimitsSchema = {
         'type': 'dict',
         'required': False,
-        'default': {'enable': False},
         'schema': {
             'enable': {'required': False, 'type': 'boolean'},
             'forwardEnable': {'type': 'boolean', 'dependencies': ['forward', 'enable']},

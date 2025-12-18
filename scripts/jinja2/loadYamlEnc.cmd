@@ -21,7 +21,11 @@ on error halt
 
 #- setup python venv and run `plcYamlJinja2.py`
 #- MUST be in the same 'system'-context!!!
-system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}encYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${FILE} -o ${ECMC_TMP_DIR}${FILE}.enc"
+ecmcIf("'$(ECMC_CFG_TOOL=jinja)'=='ecb'")
+  ${IF_TRUE}ecb --yaml ${FILE} --schemafile ${ECMC_CONFIG_ROOT}ecbSchema.json --schema encoder --template ${ECMC_CONFIG_ROOT}add_encoder.jinja2 --templatedir ${ECMC_CONFIG_ROOT} --output ${ECMC_TMP_DIR}${FILE}.enc
+#- else
+  ${IF_FALSE}system ". ${ECMC_CONFIG_ROOT}pythonVenv.sh -d ${ECMC_TMP_DIR}; python ${ECMC_CONFIG_ROOT}encYamlJinja2.py -d ${ECMC_TMP_DIR} -T ${ECMC_CONFIG_ROOT} -D ${FILE} -o ${ECMC_TMP_DIR}${FILE}.enc"
+ecmcEndIf()
 
 #- set device name, default to ${IOC}
 epicsEnvSet("ECMC_PREFIX"      "${DEV=${IOC}}:")

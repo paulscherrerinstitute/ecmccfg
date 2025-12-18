@@ -11,12 +11,12 @@ dbLoadRecords("ecmcEnc.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},AXIS_N
 
 #- Links to PVs
 {%- if encoder.position is defined %}
-     ecmcGetSlaveIdFromEcPath({{ encoder.position }}, ECMC_SID_TEMP)
-     epicsEnvSet(ECMC_ENC_LNK_DESC,{{ encoder.position }})
-#- {%- else %}
-     epicsEnvSet(ECMC_SID_TEMP,-1)
-     epicsEnvSet(ECMC_ENC_LNK_DESC,'N/A')
-#- {%- endif %}
+    ecmcGetSlaveIdFromEcPath({{ encoder.position }}, ECMC_SID_TEMP)
+    epicsEnvSet(ECMC_ENC_LNK_DESC,{{ encoder.position }})
+{%- else %}
+    epicsEnvSet(ECMC_SID_TEMP,-1)
+    epicsEnvSet(ECMC_ENC_LNK_DESC,'N/A')
+{%- endif %}
 
 dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=Enc0${ECMC_ENC_CFG_ID}-CfgLnkPosAct,DESC=${ECMC_ENC_LNK_DESC},SID=${ECMC_SID_TEMP=-1}")
 

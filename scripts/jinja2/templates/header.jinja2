@@ -1,22 +1,22 @@
 #- General
 {#- drive is only present in type: 'joint' #}
 {%- set drive = None if drive is undefined else drive %}
-ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type|int }},{{ drive.type|default(0)|int }})"
+ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},{{ axis.type|int }},{{ drive.type|default(0)|int }})"
 {%- if axis.type|int == 2 %}
-ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id }},0)"
+ecmcConfigOrDie "Cfg.SetAxisTrajStartPos(${ECMC_AXIS_NO},0)"
 {%- endif %}
 #- health output
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id }}.health")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax${ECMC_AXIS_NO}.health")"
 
 #- Trajectory
 {%- set deceleration = trajectory.axis.acceleration if trajectory.axis.deceleration is undefined else trajectory.axis.deceleration %}
 {%- set maxDec = trajectory.axis.acceleration if trajectory.axis.acceleration > deceleration else deceleration %}
 
-ecmcConfigOrDie "Cfg.SetAxisAcc({{ axis.id }},{{ trajectory.axis.acceleration|float }})"
-ecmcConfigOrDie "Cfg.SetAxisDec({{ axis.id }},{{ deceleration|float }})"
-ecmcConfigOrDie "Cfg.SetAxisVel({{ axis.id }},{{ trajectory.axis.velocity|float }})"
-ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration({{ axis.id }},{{ trajectory.axis.emergencyDeceleration or maxDec*10 |float }})"
+ecmcConfigOrDie "Cfg.SetAxisAcc(${ECMC_AXIS_NO},{{ trajectory.axis.acceleration|float }})"
+ecmcConfigOrDie "Cfg.SetAxisDec(${ECMC_AXIS_NO},{{ deceleration|float }})"
+ecmcConfigOrDie "Cfg.SetAxisVel(${ECMC_AXIS_NO},{{ trajectory.axis.velocity|float }})"
+ecmcConfigOrDie "Cfg.SetAxisEmergDeceleration(${ECMC_AXIS_NO},{{ trajectory.axis.emergencyDeceleration or maxDec*10 |float }})"
 
 {%- set modulo = None if trajectory.modulo is not defined else trajectory.modulo %}
-ecmcConfigOrDie "Cfg.SetAxisModRange({{ axis.id }}, {{ modulo.range|default(0)|float}})"
-ecmcConfigOrDie "Cfg.SetAxisModType({{ axis.id }}, {{ modulo.type|default(0)|int}})"
+ecmcConfigOrDie "Cfg.SetAxisModRange(${ECMC_AXIS_NO}, {{ modulo.range|default(0)|float}})"
+ecmcConfigOrDie "Cfg.SetAxisModType(${ECMC_AXIS_NO}, {{ modulo.type|default(0)|int}})"

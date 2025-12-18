@@ -9,12 +9,12 @@ ecmcFileExist("ecmcAxisLinks.db",1,1)
 {%- if axis.type == 1 %}
   ecmcGetSlaveIdFromEcPath({{ drive.setpoint }}, ECMC_SID_TEMP)
   dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkDrvPosSet,DESC={{ drive.setpoint }},SID=${ECMC_SID_TEMP=-1}")
-{%else%}
+{%- else %}
   dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkDrvPosSet,DESC="N/A",SID=-1")
-{%endif%}
+{%- endif %}
 
-#- Encoder objects are defined in 
-#- Monitor 
+#- Encoder objects are defined in
+#- Monitor
 ecmcGetSlaveIdFromEcPath({{ input.limit.forward }}, ECMC_SID_TEMP)
 dbLoadRecords("ecmcAxisLinks.db","P=${ECMC_PREFIX},AXIS_NAME=${ECMC_MOTOR_NAME},SUFFIX=CfgLnkMonLimFwd,DESC={{ input.limit.forward }},SID=${ECMC_SID_TEMP=-1}")
 ecmcGetSlaveIdFromEcPath({{ input.limit.backward }}, ECMC_SID_TEMP)

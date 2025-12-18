@@ -39,7 +39,7 @@ record(ao,"$(Name)MCU-Cfg-PLC${Index}-PrvObjId") {
 
 record(stringin,"$(Name)$(DESC_NAME)") {
     field(DESC, "PLC Info")
-    field(VAL,  "${DESC=PLC ${index}}")
+    field(VAL,  "${DESC=PLC ${Index}}")
 }
 
 record(bo,"$(Name)$(PLC_DBG)"){

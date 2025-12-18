@@ -1,16 +1,13 @@
-{%- set softlimits = None if softlimits is undefined else softlimits %}
-{%- if softlimits.enable %}
-    {%- if softlimits.forwardEnable or softlimits.backwardEnable %}
-        #- =============================================================================
-        #- Soft limits
-        #- =============================================================================
-        {%- if softlimits.forwardEnable %}
-            ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd({{ axis.id }},{{ softlimits.forwardEnable|int }})"
-            ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd({{ axis.id}},{{ softlimits.forward}})"
-        {%- endif %}
-        {%- if softlimits.backwardEnable %}
-            ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd({{ axis.id }},{{ softlimits.backwardEnable|int }})"
-            ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd({{ axis.id }},{{ softlimits.backward}})"
-        {%- endif %}
+{%- if (softlimits is defined) and (softlimits.enable is defined) and (softlimits.enable == true) %}
+    #- =============================================================================
+    #- Soft limits
+    #- =============================================================================
+    {%- if softlimits.forwardEnable is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitFwd(${ECMC_AXIS_NO},{{ softlimits.forwardEnable|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosFwd(${ECMC_AXIS_NO},{{ softlimits.forward}})"
+    {%- endif %}
+    {%- if softlimits.backwardEnable is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEnableSoftLimitBwd(${ECMC_AXIS_NO},{{ softlimits.backwardEnable|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisSoftLimitPosBwd(${ECMC_AXIS_NO},{{ softlimits.backward}})"
     {%- endif %}
 {%- endif %}

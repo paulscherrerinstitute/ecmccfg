@@ -22,10 +22,10 @@ epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
 {%- endif  %}
 
-#- The base control word is not used in ecmc. All other bits are linked based on the the control word, see below..
-#- {%- if encoder.control %}
-#-     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax${ECMC_AXIS_NO}.enc.control")"
-#- {%- endif %}
+{# #- The base control word is not used in ecmc. All other bits are linked based on the the control word, see below.. #}
+{# #- {%- if encoder.control %} #}
+{# #-     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.control }}","ax${ECMC_AXIS_NO}.enc.control")" #}
+{# #- {%- endif %} #}
 {#- scaling #}
 ecmcConfigOrDie "Cfg.SetAxisEncScaleDenom(${ECMC_AXIS_NO},{{ encoder.denominator|float }})"
 ecmcConfigOrDie "Cfg.SetAxisEncScaleNum(${ECMC_AXIS_NO},{{ encoder.numerator }})"
@@ -67,45 +67,48 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.status }}.{{ encoder.latch.status }}","ax${ECMC_AXIS_NO}.enc.latchstatus")"
     ecmcConfigOrDie "Cfg.SetAxisEncHomeLatchArmControlWord(${ECMC_AXIS_NO},{{ encoder.latch.armCmd }},{{ encoder.latch.armBits }})"
 {%- endif %}
-{%- if encoder.filter.velocity is defined %}    
-        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size|default(100) }})"    
-        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.velocity.enable|int|default(1) }})"
-{%- endif %}
-{%- if encoder.filter.trajectory is defined %}
-    # WARNING:  Use "encoder.filter.position" instead of "encoder.filter.trajectory"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|int|default(1) }})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size|default(10) }})"
-{%- endif %}
 
-#- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
-{%- if encoder.filter.position is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|int|default(1) }})"
-    ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size|default(10) }})"
+{%- if encoder.filter is defined %}
+    {%- if encoder.filter.velocity is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.velocity.size|default(100) }})"
+        ecmcConfigOrDie "Cfg.SetAxisEncVelFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.velocity.enable|default(1)|int }})"
+    {%- endif %}
+    {%- if encoder.filter.trajectory is defined %}
+        # WARNING:  Use "encoder.filter.position" instead of "encoder.filter.trajectory"
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.enable|default(1)|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.trajectory.size|default(10) }})"
+    {%- endif %}
+    #- "encoder.filter.position" is a duplicate to "encoder.filter.trajectory" but better name
+    {%- if encoder.filter.position is defined %}
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterEnable(${ECMC_AXIS_NO},{{ encoder.filter.position.enable|default(1)|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisEncPosFilterSize(${ECMC_AXIS_NO},{{ encoder.filter.position.size|default(10) }})"
+    {%- endif %}
 {%- endif %}
 
 #- Use this encoder as primary?!
 {%- if encoder.primary is defined %}
-    {%- if encoder.primary > 0 %}
+    {%- if (encoder.primary > 0) or (encoder.primary == true) %}
         ecmcConfigOrDie "Cfg.SelectAxisEncPrimary(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
     {%- endif %}
 {%- endif %}
 
-{%- if epics is defined %}
-    {%- if epics.unit %}
-        epicsEnvSet(ENC_EGU,'{{ epics.unit }}')
-    {%- endif %}
-{%- endif %}
 
-#- If defined then use this EGU
-{%- if encoder.unit %}
-    epicsEnvSet(ENC_EGU,'{{ encoder.unit }}')
+#- Encoder unit
+{%- set encoderUnit = "mm" %}
+{%- if (epics is defined) and (epics.unit is defined) %}
+    {%- set encoderUnit = epics.unit %}
 {%- endif %}
+{%- if (encoder.unit is defined) %}
+    {%- set encoderUnit = encoder.unit %}
+{%- endif %}
+epicsEnvSet(ENC_EGU,'{{ encoderUnit }}')
 
-{%- if encoder.desc %}
+
+{%- if encoder.desc is defined %}
     epicsEnvSet(ENC_DESC,'{{ encoder.desc }}')
 {%- endif %}
 
-{% if encoder.homing -%}
+{%- if encoder.homing is defined %}
     #- =============================================================================
     #- Homing
     #- =============================================================================
@@ -113,7 +116,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
         ecmcConfigOrDie "Cfg.SetAxisHomePosition(${ECMC_AXIS_NO},{{ encoder.homing.position }})"
         epicsEnvSet(HOME_POS, {{ encoder.homing.position }})
     {%- endif %}
-    {%- if encoder.homing.postMoveEnable %}
+    {%- if encoder.homing.postMoveEnable is defined %}
         ecmcConfigOrDie "Cfg.SetAxisHomePostMoveEnable(${ECMC_AXIS_NO},{{ encoder.homing.postMoveEnable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisHomePostMoveTargetPosition(${ECMC_AXIS_NO},{{ encoder.homing.postMovePosition|default(0)}})"
         epicsEnvSet(POST_ENA, {{ encoder.homing.postMoveEnable|int }})
@@ -132,7 +135,8 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
             ecmcConfigOrDie "Cfg.SetAxisHomeVelOffCam(${ECMC_AXIS_NO},{{ encoder.homing.velocity.from|default(encoder.homing.velocity.to) }})"
         {%- endif %}
     {%- endif %}
-        {%- if encoder.homing.timeout %}
+
+    {%- if encoder.homing.timeout is defined %}
         ecmcConfigOrDie "Cfg.SetAxisSeqTimeout(${ECMC_AXIS_NO},{{ encoder.homing.timeout }})"
     {%- endif %}
 
@@ -154,7 +158,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
         ecmcConfigOrDie "Cfg.SetAxisHomeSeqId(${ECMC_AXIS_NO},{{ encoder.homing.type }})"
         epicsEnvSet(HOME_PROC, {{ encoder.homing.type }})
     {%- endif %}
-    
+
     #- ecmcConfigOrDie "Cfg.SelectAxisEncHome(${ECMC_AXIS_NO},-1)"
 
     #- Need to write to env vars to also support legacy syntax ("homing." vs #encoder.homing.")
@@ -167,7 +171,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
        ecmcConfigOrDie "Cfg.SetAxisHomeDec(${ECMC_AXIS_NO},{{ encoder.homing.deceleration }})"
     {%- endif %}
 
-    {%- if encoder.homing.trigg is defined and  encoder.homing.ready %}
+    {%- if (encoder.homing.trigg is defined) and  (encoder.homing.ready is defined) %}
        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.homing.trigg }}","ax${ECMC_AXIS_NO}.enc.homing_trigg")"
        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.homing.ready }}","ax${ECMC_AXIS_NO}.enc.homing_stat")"
     {%- endif %}
@@ -198,7 +202,7 @@ ecmcConfigOrDie "Cfg.SetAxisEncOffset(${ECMC_AXIS_NO},{{ encoder.absOffset }})"
 {%- endif %}
 
 {%- if encoder.useAsCSPDrvEnc is defined %}
-    {%- if encoder.useAsCSPDrvEnc > 0 %}
+    {%- if (encoder.useAsCSPDrvEnc > 0) or (encoder.useAsCSPDrvEnc == true) %}
         ecmcConfigOrDie "Cfg.SelectAxisEncCSPDrv(${ECMC_AXIS_NO},${ECMC_ENC_CFG_ID=1})"
         epicsEnvSet(ECMC_AX_DRV_MODE, "CSP_PC_ENC_0${ECMC_ENC_CFG_ID=1}")
     {%- endif %}
