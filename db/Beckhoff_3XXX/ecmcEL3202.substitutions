@@ -1,0 +1,13 @@
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, ESLO, EOFF, EGU,    PREC}
+          {01,    0.1,  0,    "DegC", 3   }
+          {02,    0.1,  0,    "DegC", 3   }
+}
+
+file "ecmc_status_analog-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+          {02,    "AI"}
+}
