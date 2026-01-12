@@ -20,7 +20,11 @@
 {% include 'soft_limit.jinja2' %}
 {% include 'monitoring.jinja2' %}
 {% include 'epicsAxis.jinja2' %}
-{% include 'epicsMotorRecord.jinja2' %}
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.enable == false) %}
+    #- skip MotorRecord
+{%- else %}
+    {% include 'epicsMotorRecord.jinja2' %}
+{%- endif %}
 {#- this needs to be the command issued #}
 {%- if axis.features is defined %}
     ecmcConfigOrDie "Cfg.SetAxisBlockCom(${ECMC_AXIS_NO}, {{ axis.features.blockCom|default(0)|int }})"
