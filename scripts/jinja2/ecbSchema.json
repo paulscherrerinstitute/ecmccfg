@@ -475,6 +475,19 @@
         "type": "boolean integer string",
         "required": false,
         "normalize": "(string=boolean) yes=true no=false"
+      },
+      "encoder.velocityFilterSize": {
+        "type": "integer",
+        "required": false
+      },
+      "encoder.positionFilterSize": {
+        "type": "integer",
+        "dependencies": "positionFilterEnable",
+        "required": false
+      },
+      "encoder.positionFilterEnable": {
+        "type": "boolean",
+        "required": false
       }
     }
   },
