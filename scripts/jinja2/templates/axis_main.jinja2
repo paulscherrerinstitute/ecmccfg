@@ -1,24 +1,40 @@
 #- ####################################################
 #-  ECMC axis config, rendered from with jinja2
 #- ####################################################
+
+{%- if (axis is defined) and (axis.id is defined) %}
+    epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
+{%- else %}
+    epicsEnvSet(ECMC_AXIS_NO, ${${ECMC_AXIS_NO=-1}+1})
+{%- endif %}
+
 {% include 'axis.jinja2' %}
 {% include 'encoder.jinja2' %}
-    {%- if axis.type == 1 %}
-        {% include 'drive.jinja2' %}
-        {% include 'controller.jinja2' %}
-    {%endif%}
+{%- if axis.type == 1 %}
+    {% include 'drive.jinja2' %}
+    {% include 'controller.jinja2' %}
+{% endif %}
 {% include 'trajectory.jinja2' %}
 {% include 'input.jinja2' %}
 {% include 'homing.jinja2' %}
 {% include 'soft_limit.jinja2' %}
 {% include 'monitoring.jinja2' %}
 {% include 'epicsAxis.jinja2' %}
-{%- if epics.motorRecord.enable %}
+{%- if (epics is defined) and (epics.motorRecord is defined) and (epics.motorRecord.enable == false) %}
+    #- skip MotorRecord
+{%- else %}
     {% include 'epicsMotorRecord.jinja2' %}
 {%- endif %}
 {#- this needs to be the command issued #}
 {%- if axis.features is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisBlockCom({{ axis.id }}, {{ axis.features.blockCom|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisBlockCom(${ECMC_AXIS_NO}, {{ axis.features.blockCom|default(0)|int }})"
 {%- endif %}
 {% include 'axisHWLinks.jinja2' %}
 {% include 'axisCleanup.jinja2' %}
+{%- if (meta is defined) and (meta.ecb == true) and (plc is defined) %}
+    {%- if axis is defined %}
+        {% include 'axisSynchronization.jinja2' %}
+    {%- else %}
+        {% include 'plc.jinja2' %}
+    {%- endif %}
+{%- endif %}

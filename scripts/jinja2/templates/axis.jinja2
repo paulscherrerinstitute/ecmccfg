@@ -1,59 +1,66 @@
- #- -=-=-=-=- axis
+#- ============================================================================
+#- Axis
+#- ============================================================================
 {#- drive is only present in type: 'joint' #}
-{%- set drive = None if drive is undefined else drive %}
-epicsEnvSet(ECMC_AXIS_NO,{{ axis.id }})
-ecmcConfigOrDie "Cfg.CreateAxis({{ axis.id }},{{ axis.type }},{{ drive.type|default(0)|int }},{{ trajectory.type }})"
-{%- if axis.type|int == 2 %}
-    ecmcConfigOrDie "Cfg.SetAxisTrajStartPos({{ axis.id }},0)"
+{%- if drive is defined %}
+    ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},{{ axis.type }},{{ drive.type }},{{ trajectory.type }})"
+{%- else %}
+    ecmcConfigOrDie "Cfg.CreateAxis(${ECMC_AXIS_NO},{{ axis.type }},0 ,{{ trajectory.type }})"
+{%- endif %}
+
+{%- if axis.type == 2 %}
+    ecmcConfigOrDie "Cfg.SetAxisTrajStartPos(${ECMC_AXIS_NO},0)"
 {%- endif %}
 #- health output
-ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","ax{{ axis.id }}.health")"
+ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default("") }}","ax${ECMC_AXIS_NO}.health")"
 
-{%- if axis.autoMode is defined %}
+{%- if (axis is defined) and (axis.autoMode is defined) %}
     {%- if axis.autoMode.modeSet is defined %}
         ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.autoMode.modeSet }}","ax${ECMC_AXIS_NO}.automodeset")"
         {%- if axis.autoMode.modeAct is defined %}
             ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.autoMode.modeAct }}","ax${ECMC_AXIS_NO}.automodeact")"
         {%- endif %}
         {%- if axis.autoMode.modeCmdHome is defined %}
-            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdHoming({{ axis.id }},{{ axis.autoMode.modeCmdHome|default(0)|int }})"
+            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdHoming(${ECMC_AXIS_NO},{{ axis.autoMode.modeCmdHome|default(0) }})"
         {%- endif %}
         {%- if axis.autoMode.modeCmdMotion is defined %}
-            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdMotion({{ axis.id }},{{ axis.autoMode.modeCmdMotion|default(0)|int }})"
+            ecmcConfigOrDie  "Cfg.SetAxisAutoModeCmdMotion(${ECMC_AXIS_NO},{{ axis.autoMode.modeCmdMotion|default(0) }})"
         {%- endif %}
     {%- endif %}
 {%- endif %}
 
-{%- if axis.features is defined %}
+{%- if (axis is defined) and (axis.features is defined) %}
     #- features
-    ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset({{ axis.id }}, {{ axis.features.disableOnReset|default(0)|int }})"
-    ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }}, {{ axis.features.alarmAtHardLimits|default(0)|int }})"
-    {%- if axis.features.alarmAtHardLimits  %}
+    ecmcConfigOrDie "Cfg.SetAxisDisableAtErrorReset(${ECMC_AXIS_NO}, {{ axis.features.disableOnReset|default(0)|int }})"
+    ecmcConfigOrDie "Cfg.SetAxisEnableAlarmAtHardLimits(${ECMC_AXIS_NO}, {{ axis.features.alarmAtHardLimits|default(0)|int }})"
+    {%- if (axis.features.alarmAtHardLimits is defined) and (axis.features.alarmAtHardLimits == true) %}
         # -------------- WARNING --------------
-        # Axis {{ axis.id }} will go into error state upon limit switch trigger
+        # Axis ${ECMC_AXIS_NO} will go into error state upon limit switch trigger
         # Recovery from this state is _only_ possible by manually disabling the
         # 'SetAxisEnableAlarmAtHardLimits' feature.
-        # ==> ecmcConfig "Cfg.SetAxisEnableAlarmAtHardLimits({{ axis.id }},0)"
+        # ==> ecmcConfig "Cfg.SetAxisEnableAlarmAtHardLimits(${ECMC_AXIS_NO},0)"
         # -------------------------------------
     {%- endif %}
     {#- the `axis.features.blockCom` key is handled in the top-level template #}
     {%- if axis.features.allowedFunctions is defined %}
         #- allowed motion functions
-        ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions({{ axis.id }},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
-    {% endif -%}
+        ecmcConfigOrDie "Cfg.SetAxisEnableMotionFunctions(${ECMC_AXIS_NO},{{ axis.features.allowedFunctions.positioning|default(1)|int }},{{ axis.features.allowedFunctions.constantVelocity|default(1)|int }},{{ axis.features.allowedFunctions.homing|default(1)|int }})"
+    {%- endif %}
     {%- if axis.features.allowSrcChangeWhenEnabled is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled({{ axis.id }},{{ axis.features.allowSrcChangeWhenEnabled|default(0)|int }})"
-    {% endif -%}
-{% endif -%}
+        ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled(${ECMC_AXIS_NO},{{ axis.features.allowSrcChangeWhenEnabled|int }})"
+    {%- else %}
+        ecmcConfigOrDie "Cfg.SetAxisAllowSourceChangeWhenEnabled(${ECMC_AXIS_NO}, 0)"
+    {%- endif %}
+{%- endif %}
 
 #- Feed 24 volt to switches if needed
-{%- if axis.feedSwitchesOutput is defined %}
+{%- if (axis is defined) and (axis.feedSwitchesOutput is defined) %}
   ecmcConfigOrDie "Cfg.WriteEcEntryEcPath({{ axis.feedSwitchesOutput }},{{ axis.feedSwitchesValue|default(1) }})"
 {%- endif %}
 
-{%- if axis.group is defined %}
+{%- if (axis is defined) and (axis.group is defined) %}
   #- Add axis to group, create new group if does not exist
-  ecmcConfigOrDie "Cfg.AddAxisToGroupByName({{ axis.id }},{{ axis.group }},1)"
+  ecmcConfigOrDie "Cfg.AddAxisToGroupByName(${ECMC_AXIS_NO},{{ axis.group }},1)"
   ecmcConfig "GetAxisGroupIndexByName({{ axis.group }})"
   # Set group id to GRP_{{ axis.group }}_ID env to allow for later use in PLC-Code
   epicsEnvSet(GRP_{{ axis.group }}_ID,${ECMC_CONFIG_RETURN_VAL=0})
@@ -64,12 +71,12 @@ ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ axis.healthOutput|default('') }}","
 
 {%- if axis.autoEnable is defined %}
     {%- if axis.autoEnable.enableTimeout is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisAutoEnableTimeout({{ axis.id }},{{ axis.autoEnable.enableTimeout }})"
+        ecmcConfigOrDie "Cfg.SetAxisAutoEnableTimeout(${ECMC_AXIS_NO},{{ axis.autoEnable.enableTimeout }})"
     {%- endif %}
     {%- if axis.autoEnable.disableTimeout is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisAutoDisableAfterTime({{ axis.id }},{{ axis.autoEnable.disableTimeout }})"
+        ecmcConfigOrDie "Cfg.SetAxisAutoDisableAfterTime(${ECMC_AXIS_NO},{{ axis.autoEnable.disableTimeout }})"
     {%- endif %}
     {%- if axis.autoEnable.atStartup is defined %}
-        ecmcConfigOrDie "Cfg.SetAxisEnableAtStartup({{ axis.id }},{{ axis.autoEnable.atStartup|int }})"
+        ecmcConfigOrDie "Cfg.SetAxisEnableAtStartup(${ECMC_AXIS_NO},{{ axis.autoEnable.atStartup|int }})"
     {%- endif %}
 {%- endif %}

@@ -1,5 +1,5 @@
 #- PLC rate, if not explicitly declared, deduce rate from bus frequence (ECMC_EC_SAMPLE_RATE)
-{%- if plc.rateMilliseconds > 0 %}
+{%- if (plc.rateMilliseconds is defined) and (plc.rateMilliseconds > 0) %}
 epicsEnvSet("ECMC_PLC_SAMPLE_RATE_MS",  "{{ plc.rateMilliseconds|float }}")
 {%- else %}
 ecmcEpicsEnvSetCalc(ECMC_PLC_RATE_, "1000/${ECMC_EC_SAMPLE_RATE}", "%f")
@@ -12,9 +12,9 @@ epicsEnvSet("PLC_ID", {{ plc.id }})
 ecmcConfigOrDie "Cfg.CreatePLC({{ plc.id }},${ECMC_PLC_SAMPLE_RATE_MS})"
 
 #- PLC code
-{%- if plc.code %}
+{%- if plc.code is defined %}
     {%- for line in plc.code %}
-        ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(';', '|') }}"
+        ecmcConfigOrDie "Cfg.AppendPLCExpr({{ plc.id }})={{ line|replace(";", "|") }}"
     {%- endfor %}
 {%- endif %}
 
@@ -22,7 +22,12 @@ ecmcConfigOrDie "Cfg.CreatePLC({{ plc.id }},${ECMC_PLC_SAMPLE_RATE_MS})"
 ecmcConfigOrDie "Cfg.SetPLCEnable({{ plc.id }},{{ plc.enable|default(1)|int }})"
 
 #- default PLC-PVs
-dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char={{ '%02d' % plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+{%- if plc.id < 10 %}
+    dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char=0{{ plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+{%- else %}
+    dbLoadTemplate(${SUBST_FILE="ecmcPlc.substitutions"}, "PORT=${ECMC_ASYN_PORT},A=0,Index={{ plc.id }},Name=${ECMC_PREFIX},Index2Char={{ plc.id }},T_SMP_MS=${ECMC_SAMPLE_RATE_MS}")
+{%- endif %}
+
 
 #- Below for facilitate auto gui generation
 # Do not set NxtObj "pointer" if this is the first axis (ECMC_PREV_PLC_OBJ_ID==-1)

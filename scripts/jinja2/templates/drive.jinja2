@@ -6,70 +6,69 @@
 {%- if drive.type == 0 %}
     {#- For steppers, bits must be defined for control-enable and status-enabled #}
     {%- if drive.enable is defined %}
-       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.enable|int }}","ax{{ axis.id }}.drv.control")"
+       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.enable|int }}","ax${ECMC_AXIS_NO}.drv.control")"
     {%- else %}
-       # WARNING: enable bit not defined. Using Beckhoff default bit, 0, for enable in control word
-       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.0","ax{{ axis.id }}.drv.control")"
+        # WARNING: enable bit not defined. Using Beckhoff default bit, 0, for enable in control word
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.0","ax${ECMC_AXIS_NO}.drv.control")"
     {%- endif %}
     {%- if drive.enabled is defined %}
-       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.enabled|int }}","ax{{ axis.id }}.drv.status")"
+       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.enabled|int }}","ax${ECMC_AXIS_NO}.drv.status")"
     {%- else %}
-       # WARNING: status bit not defined. Using Beckhoff default bit, 1, for enabled in status word
-       ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.1","ax{{ axis.id }}.drv.status")"
+        # WARNING: status bit not defined. Using Beckhoff default bit, 1, for enabled in status word
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.1","ax${ECMC_AXIS_NO}.drv.status")"
     {%- endif %}
 {%- else %}
     {#- DS402 #}
     {%- if drive.enable is defined %}
-       # WARNING: enable control bit defined but not used in DS402 mode.
+        # WARNING: enable control bit defined but not used in DS402 mode.
     {%- endif %}
     {%- if drive.enabled is defined %}
-       # WARNING: enabled status bit defined but not used in DS402 mode.
+        # WARNING: enabled status bit defined but not used in DS402 mode.
     {%- endif %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax{{ axis.id }}.drv.control")"
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax{{ axis.id }}.drv.status")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}","ax${ECMC_AXIS_NO}.drv.control")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}","ax${ECMC_AXIS_NO}.drv.status")"
 {%- endif %}
 
 {#- Todo: add more types, add default type #}
-{%- if axis.mode == 'CSV' %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.velocity")"
+{%- if axis.mode == "CSV" %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax${ECMC_AXIS_NO}.drv.velocity")"
     epicsEnvSet(ECMC_AX_DRV_MODE, ${ECMC_AX_DRV_MODE="CSV"})
 {%- else %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax{{ axis.id }}.drv.position")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax${ECMC_AXIS_NO}.drv.position")"
     epicsEnvSet(ECMC_AX_DRV_MODE, ${ECMC_AX_DRV_MODE="CSP"})
 {%- endif %}
 {%- if drive.reduceTorqueEnable is defined %}
     {%- if drive.reduceTorque is defined %}
-        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque }}","ax{{ axis.id }}.drv.reducetorque")"
-        ecmcConfigOrDie "Cfg.SetAxisDrvReduceTorqueEnable({{ axis.id }}, {{ drive.reduceTorqueEnable|int }})"
+        ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque }}","ax${ECMC_AXIS_NO}.drv.reducetorque")"
+        ecmcConfigOrDie "Cfg.SetAxisDrvReduceTorqueEnable(${ECMC_AXIS_NO}, {{ drive.reduceTorqueEnable|int }})"
     {%- endif %}
 {%- endif %}
 {%- if drive.reset is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reset }}","ax{{ axis.id }}.drv.reset")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reset }}","ax${ECMC_AXIS_NO}.drv.reset")"
 {%- endif %}
 {%- if drive.warning is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.warning }}","ax{{ axis.id }}.drv.warning")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ drive.warning }}","ax${ECMC_AXIS_NO}.drv.warning")"
 {%- endif %}
 {%- if drive.error is defined %}
     {%- for bit in drive.error %}
         {%- if bit is string %}
-            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax{{ axis.id }}.drv.alarm{{loop.index0}}")"
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ bit }}","ax${ECMC_AXIS_NO}.drv.alarm{{loop.index0}}")"
         {%- else  %}
-            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit }}","ax{{ axis.id }}.drv.alarm{{loop.index0}}")"
+            ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.status }}.{{ bit }}","ax${ECMC_AXIS_NO}.drv.alarm{{loop.index0}}")"
         {%- endif  %}
     {%- endfor %}
 {%- endif %}
 {#- scaling #}
-ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum({{ axis.id }},{{ drive.numerator }})"
-ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom({{ axis.id }},{{ drive.denominator }})"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleNum(${ECMC_AXIS_NO},{{ drive.numerator }})"
+ecmcConfigOrDie "Cfg.SetAxisDrvScaleDenom(${ECMC_AXIS_NO},{{ drive.denominator }})"
 {#- brake #}
 {%- if drive.brake is defined %}
-    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.brake.output }}","ax{{ axis.id }}.drv.brake")"
-    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeEnable({{ axis.id }}, {{ drive.brake.enable|int }})"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.brake.output }}","ax${ECMC_AXIS_NO}.drv.brake")"
+    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeEnable(${ECMC_AXIS_NO}, {{ drive.brake.enable|int }})"
     {%- if drive.brake.openDelay is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime({{ axis.id }},{{ drive.brake.openDelay }})"
+        ecmcConfigOrDie "Cfg.SetAxisDrvBrakeOpenDelayTime(${ECMC_AXIS_NO},{{ drive.brake.openDelay }})"
     {%- endif %}
     {%- if drive.brake.closeAhead is defined %}
-    ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime({{ axis.id }},{{ drive.brake.closeAhead }})"
+        ecmcConfigOrDie "Cfg.SetAxisDrvBrakeCloseAheadTime(${ECMC_AXIS_NO},{{ drive.brake.closeAhead }})"
     {%- endif %}
 {%- endif %}
-
