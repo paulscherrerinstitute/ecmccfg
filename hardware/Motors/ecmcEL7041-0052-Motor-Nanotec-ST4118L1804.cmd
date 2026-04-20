@@ -1,1 +1,0 @@
-ecmcEL7041-Motor-Nanotec-ST4118L1804.cmd
