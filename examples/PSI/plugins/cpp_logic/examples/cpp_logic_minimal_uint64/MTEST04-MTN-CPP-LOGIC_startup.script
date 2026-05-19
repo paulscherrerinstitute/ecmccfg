@@ -1,0 +1,6 @@
+
+require ecmccfg v11.0.8_RC1 "MASTER_ID=1, ECMC_VER=v11.0.8_RC1"
+####${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,     "SLAVE_ID=${S_ID=2},HW_DESC=EL3702, NELM=100"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,     "SLAVE_ID=${S_ID=4},HW_DESC=EL1252,"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadCppLogic.cmd, "MACROS='S_ID=${S_ID=4}',REPORT=1"
+
