@@ -259,6 +259,43 @@ The built-in runtime names currently include:
 - `logic.stat.count`
 - `logic.stat.dbg_txt`
 
+### Record Link Options
+
+The generic C++ logic record templates accept an optional `ASYN_OPT` macro in
+front of `PARAM`:
+
+```text
+@asyn($(PORT),0,1000)$(ASYN_OPT=)$(PARAM)
+```
+
+Existing substitutions that only set `PARAM` continue to work unchanged because
+`ASYN_OPT` defaults to an empty string.
+
+Use `ASYN_OPT` when an integer exported variable should be connected through
+the `asynFloat64` interface. This is useful for analog records, display tools,
+or clients that expect floating-point asyn access:
+
+```text
+ASYN_OPT="/TYPE=asynFloat64/CMD=UINT64TOFLOAT64/"
+PARAM="my_counter"
+```
+
+Supported scalar conversion commands are:
+
+- `INT32TOFLOAT64`
+- `UINT32TOFLOAT64`
+- `INT64TOFLOAT64`
+- `UINT64TOFLOAT64`
+
+For example:
+
+```text
+file "$(ecmccfg_DIR)db/generic/ecmcCppLogicAi.template" {
+  pattern { P, REC, PORT, ASYN_OPT, PARAM, SCAN }
+          { "$(IOC):", "MyCounter", "CPP.LOGIC", "/TYPE=asynFloat64/CMD=UINT64TOFLOAT64/", "my_counter", "I/O Intr" }
+}
+```
+
 Current control word bits are:
 
 - bit 0: enable execution

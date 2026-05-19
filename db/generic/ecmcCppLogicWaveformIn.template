@@ -3,5 +3,5 @@ record(waveform, "$(P)$(REC)") {
   field(SCAN, "I/O Intr")
   field(FTVL, "$(FTVL=LONG)")
   field(NELM, "$(NELM=1)")
-  field(INP,  "@asyn($(PORT),0,1000)$(PARAM)")
+  field(INP,  "@asyn($(PORT),0,1000)$(ASYN_OPT=)$(PARAM)")
 }

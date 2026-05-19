@@ -2,5 +2,5 @@ record(ao, "$(P)$(REC)") {
   field(DESC, "$(DESC=)")
   field(DTYP, "$(DTYP=asynFloat64)")
   field(PREC, "$(PREC=3)")
-  field(OUT,  "@asyn($(PORT),0,1000)$(PARAM)")
+  field(OUT,  "@asyn($(PORT),0,1000)$(ASYN_OPT=)$(PARAM)")
 }

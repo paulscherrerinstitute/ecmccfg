@@ -1,7 +1,7 @@
 record(bo, "$(P)$(REC)") {
   field(DESC, "$(DESC=)")
   field(DTYP, "$(DTYP=asynInt32)")
-  field(OUT,  "@asyn($(PORT),0,1000)$(PARAM)")
+  field(OUT,  "@asyn($(PORT),0,1000)$(ASYN_OPT=)$(PARAM)")
   field(ZNAM, "$(ZNAM=Off)")
   field(ONAM, "$(ONAM=On)")
 }
