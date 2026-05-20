@@ -5,7 +5,7 @@ file "ecmc_analogInput-chX.template"
 }
 
 
-file "ecmcEl3681-stat-chX.template"
+file "ecmcEL3681-stat-chX.template"
 {
   pattern {CH_ID, KEY }
           {01,    "AI"}
