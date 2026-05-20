@@ -1,0 +1,15 @@
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, ESLO, EOFF, EGU,   PREC}
+          {01,    1,    0,    "RAW", 6   }
+}
+
+
+file "ecmcEl3681-stat-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+
+}
+
+
