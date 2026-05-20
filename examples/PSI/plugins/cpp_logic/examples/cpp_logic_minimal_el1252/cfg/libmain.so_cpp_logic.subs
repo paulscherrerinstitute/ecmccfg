@@ -3,6 +3,6 @@
 global { P = "$(P)" PORT = "$(PORT)" }
 
 file ecmcCppLogicAi.template {
-  pattern { REC,                    ASYN_OPT,                                 PARAM,                           DESC,                            DTYP,      SCAN }
+  pattern { REC,                    ASYN_OPT,                                 PARAM,                           DESC,                            DTYP,        SCAN       }
   { "main-timestampLatchPositive01","/TYPE=asynFloat64/CMD=UINT64TOFLOAT64/", "main.timestampLatchPositive01", "main.timestampLatchPositive01", asynFloat64, "I/O Intr" }
 }
