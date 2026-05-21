@@ -9,3 +9,9 @@ file "ecmcEL3681-stat-chX.template"
   pattern {CH_ID, KEY }
           {01,    "AI"}
 }
+
+file "ecmcEL3681-ModeRange-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+}

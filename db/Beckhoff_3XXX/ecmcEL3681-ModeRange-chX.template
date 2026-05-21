@@ -1,0 +1,100 @@
+#  TxPDO 0x1a01 "SAI TxPDO-Map Range"
+#    PDO entry 0x0000:00,  4 bit, "Gap"
+#    PDO entry 0x6001:05,  4 bit, "Mode"
+#    PDO entry 0x6001:09,  8 bit, "Range"
+record(mbbi,"${ECMC_P}${KEY=AI}${CH_ID}-ModeAct"){
+  field(DESC, "AI$(CH_ID): Mode Act")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0x00F0,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeStatus${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(SHFT, "4")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "DC voltage")
+  field(ONST, "AC voltage")
+  field(TWST, "DC current")
+  field(THST, "AC current")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(mbbi,"${ECMC_P}${KEY=AI}${CH_ID}-RngAct"){
+  field(DESC, "AI$(CH_ID): Range Act")
+  field(PINI, "$(PINI=1)")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask($(PORT),$(ADDR=0),0xFF00,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeStatus${CH_ID}?")
+  field(SCAN, "I/O Intr")
+  field(SHFT, "8")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "255")
+  field(ZRST, "3V/1A")
+  field(ONST, "30V/10A")
+  field(TWST, "300V")
+  field(THST, "300mV/100mA")
+  field(TSE,  "$(TSE=-2)")
+}
+
+#SM2: PhysAddr 0x1100, DefaultSize    2, ControlRegister 0x24, Enable 1
+#  RxPDO 0x1600 "SAI RxPDO-Map Range"
+#    PDO entry 0x7000:01,  1 bit, "Disable autorange"
+#    PDO entry 0x7000:02,  1 bit, "Start calibration"
+#    PDO entry 0x0000:00,  2 bit, "Gap"
+#    PDO entry 0x7000:05,  4 bit, "Mode"
+#    PDO entry 0x7000:09,  8 bit, "Range"
+record(bo,"${ECMC_P}${KEY=AI}${CH_ID}-AutoRngDisCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "AI$(CH_ID): Disable autorange")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x0001,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeControl${CH_ID}=")
+  field(ZNAM, "Autorange")
+  field(ONAM, "Manual range")
+  field(SCAN, "Passive")
+}
+
+record(bo,"${ECMC_P}${KEY=AI}${CH_ID}-CalibCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "AI$(CH_ID): Start calibration")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x0002,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeControl${CH_ID}=")
+  field(ZNAM, "Idle")
+  field(ONAM, "Start")
+  field(SCAN, "Passive")
+}
+
+record(mbbo,"${ECMC_P}${KEY=AI}${CH_ID}-ModeCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "AI$(CH_ID): Mode Cmd")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0x00F0,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeControl${CH_ID}=")
+  field(SCAN, "Passive")
+  field(SHFT, "4")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "DC voltage")
+  field(ONST, "AC voltage")
+  field(TWST, "DC current")
+  field(THST, "AC current")
+}
+
+record(mbbo,"${ECMC_P}${KEY=AI}${CH_ID}-RngCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "AI$(CH_ID): Range Cmd")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0xFF00,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynUInt32Digital/ec$(MASTER_ID).s$(SLAVE_POS).modeControl${CH_ID}=")
+  field(SCAN, "Passive")
+  field(SHFT, "8")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "255")
+  field(ZRST, "3V/1A")
+  field(ONST, "30V/10A")
+  field(TWST, "300V")
+  field(THST, "300mV/100mA")
+}
