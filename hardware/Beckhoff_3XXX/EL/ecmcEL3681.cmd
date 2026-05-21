@@ -36,9 +36,18 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
 #-    PDO entry 0x6000:0f,  1 bit, "TxPDO State"
 #-    PDO entry 0x6000:10,  1 bit, "TxPDO Toggle"
 #-    PDO entry 0x6000:11, 32 bit, "Value"
+#-  TxPDO 0x1a01 "SAI TxPDO-Map Range"
+#-    PDO entry 0x0000:00,  4 bit, "Gap"
+#-    PDO entry 0x6001:05,  4 bit, "Mode"
+#-    PDO entry 0x6001:09,  8 bit, "Range"
 
 #- analog input Ch1, mapped as status01
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_32bit.cmd "CH_ID=01,ECMC_PDO=0x1a00,ECMC_ENTRY=0x6000"
+
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6001,0x01,U16,modeStatus01)"
+
+#- control
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7000,0x01,U16,modeControl01)"
 
 #- Default panel
 epicsEnvSet("ECMC_HW_PANEL"              "EL3681")
