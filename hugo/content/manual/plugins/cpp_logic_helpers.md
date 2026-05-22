@@ -136,6 +136,10 @@ The core header also exposes small helper functions backed by ECMC host
 services:
 
 - `ecmcCpp::getCycleTimeS()`
+- `ecmcCpp::getEcTimeNs()`
+- `ecmcCpp::getEcTimeOffsetNs()`
+- `ecmcCpp::getEcDomainState(...)`
+- `ecmcCpp::getEcStatusOK()`
 - `ecmcCpp::getEcMasterStateWord(...)`
 - `ecmcCpp::getEcSlaveStateWord(...)`
 - `ecmcCpp::lutExists(...)`
@@ -148,6 +152,7 @@ services:
 Typical use cases:
 
 - read the configured realtime cycle time without hard-coding it
+- read EtherCAT application time, monotonic offset, domain status, and consolidated status
 - inspect EtherCAT master/slave state words from logic code
 - read values from ecmc lookup tables loaded during IOC startup
 - request IOC shutdown when logic detects an unrecoverable condition
@@ -360,6 +365,10 @@ unchanged input value.
 
 ### EtherCAT status wrappers
 
+- `ecmcCpp::getEcTimeNs()`
+- `ecmcCpp::getEcTimeOffsetNs()`
+- `ecmcCpp::getEcDomainState(...)`
+- `ecmcCpp::getEcStatusOK()`
 - `ecmcCpp::EcMasterStatus`
 - `ecmcCpp::EcSlaveStatus`
 
