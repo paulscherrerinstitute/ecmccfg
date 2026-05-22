@@ -138,6 +138,8 @@ services:
 - `ecmcCpp::getCycleTimeS()`
 - `ecmcCpp::getEcTimeNs()`
 - `ecmcCpp::getEcTimeOffsetNs()`
+- `ecmcCpp::getEcLastReceiveTimeNs()`
+- `ecmcCpp::getEcLastSendTimeNs()`
 - `ecmcCpp::getEcDomainState(...)`
 - `ecmcCpp::getEcStatusOK()`
 - `ecmcCpp::getEcMasterStateWord(...)`
@@ -152,7 +154,7 @@ services:
 Typical use cases:
 
 - read the configured realtime cycle time without hard-coding it
-- read EtherCAT application time, monotonic offset, domain status, and consolidated status
+- read EtherCAT application time, monotonic offset, last receive/send timestamps, domain status, and consolidated status
 - inspect EtherCAT master/slave state words from logic code
 - read values from ecmc lookup tables loaded during IOC startup
 - request IOC shutdown when logic detects an unrecoverable condition
@@ -367,6 +369,8 @@ unchanged input value.
 
 - `ecmcCpp::getEcTimeNs()`
 - `ecmcCpp::getEcTimeOffsetNs()`
+- `ecmcCpp::getEcLastReceiveTimeNs()`
+- `ecmcCpp::getEcLastSendTimeNs()`
 - `ecmcCpp::getEcDomainState(...)`
 - `ecmcCpp::getEcStatusOK()`
 - `ecmcCpp::EcMasterStatus`
