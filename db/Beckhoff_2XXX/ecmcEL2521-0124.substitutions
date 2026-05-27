@@ -38,7 +38,7 @@ file "ecmc_analogInputUintToFloat-chX.template"
 {
   pattern {CH_ID, KEY,   suffix,    sourceName,       EGU,      DESC                     }
           {01,    "Enc", "-PosAct", "positionActual", "Counts", "Encoder Actual position"}
-          {01,    "Enc", "-LtchPosAct", "encoderLatchPostion", "Counts", "Encoder Latch position"}
+          {01,    "Enc", "-LtchPosAct", "encoderLatchPosition", "Counts", "Encoder Latch position"}
 }
 
 # Encoder position value (for setting "preset" value)
