@@ -851,7 +851,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x1b773052,2,3,0x1a00,0x6000,0x0,1
 OK
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x1b773052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
 OK
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x1b773052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x1b773052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPosition01)"
 OK
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(4,0x2,0x1b773052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
 OK
@@ -1008,7 +1008,7 @@ ecmcConfigOrDie "Cfg.EcAddEntryComplete(12,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x0,
 OK
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(12,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x11,16,positionActual01)"
 OK
-ecmcConfigOrDie "Cfg.EcAddEntryComplete(12,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPostion01)"
+ecmcConfigOrDie "Cfg.EcAddEntryComplete(12,0x2,0x1b7d3052,2,3,0x1a00,0x6000,0x12,16,encoderLatchPosition01)"
 OK
 ecmcConfigOrDie "Cfg.EcAddEntryComplete(12,0x2,0x1b7d3052,2,3,0x1a03,0x6010,0x1,16,driveStatus01)"
 OK
@@ -3001,9 +3001,9 @@ Starting iocInit
 2023/12/14 16:29:08.252 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s1.analogInput04 linked to record (asyn reason 159).
 2023/12/14 16:29:08.255 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s2.positionActual01 linked to record (asyn reason 160).
 2023/12/14 16:29:08.259 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.positionActual01 linked to record (asyn reason 161).
-2023/12/14 16:29:08.262 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.encoderLatchPostion01 linked to record (asyn reason 162).
+2023/12/14 16:29:08.262 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s4.encoderLatchPosition01 linked to record (asyn reason 162).
 2023/12/14 16:29:08.269 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s12.positionActual01 linked to record (asyn reason 163).
-2023/12/14 16:29:08.272 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s12.encoderLatchPostion01 linked to record (asyn reason 164).
+2023/12/14 16:29:08.272 ecmcAsynPortDriver:drvUserCreate: Parameter ec0.s12.encoderLatchPosition01 linked to record (asyn reason 164).
 2023/12/14 16:29:08.277 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actpos linked to record (asyn reason 165).
 2023/12/14 16:29:08.279 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.actvel linked to record (asyn reason 166).
 2023/12/14 16:29:08.281 ecmcAsynPortDriver:drvUserCreate: Parameter ax1.setpos linked to record (asyn reason 167).

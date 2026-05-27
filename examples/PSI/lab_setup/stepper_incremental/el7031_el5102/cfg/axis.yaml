@@ -45,7 +45,7 @@ encoder:
   control: ec0.s$(ENC_SID).encoderControl${ENC_CH=01} # Encoder control word
   primary: True
   latch:
-    position: ec0.s$(ENC_SID).encoderLatchPostion$(ENC_CH=01) # Latched position used by index homing
+    position: ec0.s$(ENC_SID).encoderLatchPosition$(ENC_CH=01) # Latched position used by index homing
     control: 0                                        # Latch arm bit in encoder control word
     status: 0                                         # Latch event bit in encoder status word
   homing:

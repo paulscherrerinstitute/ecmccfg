@@ -39,7 +39,7 @@ Important settings:
 - `position: ec0.s$(ENC_SID).positionActual01`
 - `control: ec0.s$(ENC_SID).encoderControl01`
 - `status: ec0.s$(ENC_SID).encoderStatus01`
-- `latch.position: ec0.s$(ENC_SID).encoderLatchPostion01`
+- `latch.position: ec0.s$(ENC_SID).encoderLatchPosition01`
 - `latch.control: 0`
 - `latch.status: 0`
 

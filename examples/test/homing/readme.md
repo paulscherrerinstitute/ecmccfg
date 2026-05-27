@@ -10,7 +10,7 @@ epicsEnvSet("ECMC_HOME_ACC",              "21")                             # Ac
 epicsEnvSet("ECMC_HOME_DEC",              "100")                            # Deceleration used during homing
 epicsEnvSet("ECMC_HOME_POS_MOVE_ENA",     "0")                              # Enable move to position after successful homing
 epicsEnvSet("ECMC_HOME_POS_MOVE_TARG_POS","0")                              # Target position to go to after successful homing
-epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPostion01")   # Ethercat entry for latch position (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPosition01")   # Ethercat entry for latch position (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.encoderControl01.0")      # Ethercat entry for latch control (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.encoderStatus01.0")       # Ethercat entry for latch status (only valid for home seq 11,12)
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                             # Index of latch/over/under-flow for home (home seq 11,12,21,22)
@@ -111,7 +111,7 @@ Not a valid homing sequence, can be used if encoder is absolute.
 
 Some additional parameters need to be defined for this homing sequence should work (Example for el5101 ):
 ```
-epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPostion01")     # Ethercat entry for latch position (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPosition01")     # Ethercat entry for latch position (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.encoderControl01.0")        # Ethercat entry for latch control (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.encoderStatus01.0")         # Ethercat entry for latch status (only valid for home seq 11,12)
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                               # Number of latch/over/under-flow for home (home seq 11,12,21,22)
@@ -125,7 +125,7 @@ epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                               # 
 
 Some additional parameters need to be defined for this homing sequence should work (Example for el5101 ):
 ```
-epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPostion01")     # Ethercat entry for latch position (only valid for home seq 11,12)
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",       "ec0.s3.encoderLatchPosition01")     # Ethercat entry for latch position (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",  "ec0.s3.encoderControl01.0")        # Ethercat entry for latch control (only valid for home seq 11,12)
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",   "ec0.s3.encoderStatus01.0")         # Ethercat entry for latch status (only valid for home seq 11,12)
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                               # Number of latch/over/under-flow for home (home seq 11,12,21,22)

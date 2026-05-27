@@ -44,7 +44,7 @@ encoder:
   control: ec0.s$(ENC_SID).encoderControl${ENC_CH=01}
   primary: True
   latch:
-    position: ec0.s$(ENC_SID).encoderLatchPostion$(ENC_CH=01) # Link to latched value. Used for some homing seqs
+    position: ec0.s$(ENC_SID).encoderLatchPosition$(ENC_CH=01) # Link to latched value. Used for some homing seqs
     control:  0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                          # Bit in encoder status word for latch triggered status. Used for some homing seqs
 #    armCmd: 21
