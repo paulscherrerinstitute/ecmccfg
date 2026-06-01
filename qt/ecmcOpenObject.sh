@@ -49,6 +49,29 @@
 CMD=$1
 
 # ETHERCAT:
+function getEcOverviewCmd() {
+  EC_OVERVIEW_CMD=$( command -v start_ecmc_overview.py 2>/dev/null )
+  if [ -n "$EC_OVERVIEW_CMD" ]; then
+    echo "$EC_OVERVIEW_CMD"
+    return 0
+  fi
+
+  for EC_OVERVIEW_CMD in \
+    /sls/controls/bin/start_ecmc_overview.py \
+    /sf/controls/bin/start_ecmc_overview.py \
+    /hipa/controls/bin/start_ecmc_overview.py \
+    /proscan/controls/bin/start_ecmc_overview.py
+  do
+    if [ -x "$EC_OVERVIEW_CMD" ]; then
+      echo "$EC_OVERVIEW_CMD"
+      return 0
+    fi
+  done
+
+  echo "ERROR: start_ecmc_overview.py not found in PATH or known controls bin directories." >&2
+  return 1
+}
+
 function getMasterID() {
   PREFIX=$1
   M_ID=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-EC-Mst | tr -d '"')
@@ -67,7 +90,8 @@ function openEcOverview() {
   PREFIX=$1
   M_ID=$( getMasterID $PREFIX )
   ROWS=$( caget -noname -nostat -nounit -int $PREFIX:MCU-Cfg-UI-EC-Rows | tr -d '"')
-  start_ecmc_overview.py --master $M_ID --rows $ROWS $PREFIX
+  EC_OVERVIEW_CMD=$( getEcOverviewCmd ) || return 1
+  "$EC_OVERVIEW_CMD" --master $M_ID --rows $ROWS $PREFIX
 }
 
 function openEcSlaveFirst() {
