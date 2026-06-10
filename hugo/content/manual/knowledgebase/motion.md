@@ -17,13 +17,33 @@ special PLC-based limit logic.
 - [hardware]({{< relref "/manual/knowledgebase/hardware/_index.md" >}})
 
 ## Topics
-1. [both_limits error](#both_limits-error)
-2. [position lag error, (following error)](#position-lag-error)
-3. [drive refuses to enable](#drive-refuses-to-enable)
-4. [force manual motion](#force-manual-motion)
-5. [double limit switches](#double-limit-switches)
+1. [ERROR_MON_TOL_OUT_OF_RANGE](#error_mon_tol_out_of_range)
+2. [both_limits error](#both_limits-error)
+3. [position lag error, (following error)](#position-lag-error)
+4. [drive refuses to enable](#drive-refuses-to-enable)
+5. [force manual motion](#force-manual-motion)
+6. [double limit switches](#double-limit-switches)
 
 ---
+
+## ERROR_MON_TOL_OUT_OF_RANGE
+The `ERROR_MON_TOL_OUT_OF_RANGE` error means that a monitor tolerance, range, or
+limit window is invalid. One possible cause is a virtual axis where the
+softlimits are calculated dynamically from one or more physical axes.
+
+For example, in a slit system the virtual gap and center axes may depend on the
+current physical blade positions and the physical axis softlimits. If the
+physical axes and gap are moved to extreme positions, the calculated valid range
+for the virtual center axis can become invalid. A typical symptom is that the
+calculated low softlimit becomes higher than the calculated high softlimit. This
+is not a valid motion range, and ecmc should block motion rather than allow an
+unsafe or undefined move.
+
+To recover, check the calculated softlimits for both the physical and virtual
+axes. The system must be brought back into a valid operating range. Depending on
+the setup, this may require increasing the softlimit range on the physical axes
+or moving the physical axes/gap away from the extreme positions so that the
+virtual axis limits can be calculated correctly again.
 
 ## both_limits error
 The `BOTH_LIMITS` error can be related to limit switches not being powered with
