@@ -50,6 +50,11 @@ record(bo,"$(P)MCU-Cfg-Eng-Mode") {
     field(ZNAM, "No")
 }
 
+record(ai,"$(P)MCU-Cfg-Pnl-ColorId") {
+    field(DESC, "Panel background color ID")
+    field(VAL, "$(PNL_COLOR_ID=0)")
+}
+
 # This db is only used to set the VAL field
 record(ai,"${P}MCU-Cfg-PLC-FrstObjId") {
   field(DESC, "First PLC ID")
