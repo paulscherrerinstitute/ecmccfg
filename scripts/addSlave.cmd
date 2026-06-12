@@ -1,6 +1,6 @@
 #==============================================================================
 # addSlave.cmd
-#- Arguments: HW_DESC, [SLAVE_ID = 0, SUBST_FILE, P_SCRIPT, NELM, DEFAULT_SUBS, DEFAULT_SLAVE_PVS, MACROS]
+#- Arguments: HW_DESC, [SLAVE_ID = 0, SUBST_FILE, P_SCRIPT, NELM, DEFAULT_SUBS, DEFAULT_SLAVE_PVS, MACROS, DRV01_AX_NAME, DRV02_AX_NAME, ENC01_AX_NAME, ENC02_AX_NAME]
 
 #-d /**
 #-d   \brief Script for adding a slave to the EtherCAT bus configuration.
@@ -16,6 +16,10 @@
 #-d   \param DEFAULT_SLAVE_PVS (optional, caution!) basic slave PVs, i.e. ${ECMC_P}-Operational will be suppressed
 #-d   \param CALLED_FROM_CFG_SLAVE (optional) Set if called by configureSlave.cmd, default 0
 #-d   \param MACROS: MACROS for subst file
+#-d   \param DRV01_AX_NAME (optional) Axis name using drive channel 01
+#-d   \param DRV02_AX_NAME (optional) Axis name using drive channel 02
+#-d   \param ENC01_AX_NAME (optional) Axis name using encoder channel 01
+#-d   \param ENC02_AX_NAME (optional) Axis name using encoder channel 02
 #-d   \note Example calls:
 #-d   \note - call w/o SLAVE_ID
 #-d   \code
@@ -68,6 +72,26 @@ epicsEnvUnset(ECMC_SUBST_TYPE)
 ecmcEpicsEnvSetCalcTernary(DEFAULT_SLAVE_PVS, "${DEFAULT_SLAVE_PVS=True}", "","#- ")
 ${DEFAULT_SLAVE_PVS}${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyTemplate.cmd" "TEMPLATE_FILE=ecmcEcSlave.template,ECMC_P=${ECMC_P},ECMC_G=${ECMC_G=}"
 epicsEnvUnset(DEFAULT_SLAVE_PVS)
+
+ecmcIf("'${DRV01_AX_NAME=NAN}'!='NAN'")
+${IF_TRUE}ecmcFileExist("ecmcEcSlaveAxisName.template",1,1)
+${IF_TRUE}dbLoadRecords("ecmcEcSlaveAxisName.template","ECMC_P=${ECMC_P},ROLE=Drv,CH_ID=01,AX_NAME=${DRV01_AX_NAME}")
+ecmcEndIf()
+
+ecmcIf("'${DRV02_AX_NAME=NAN}'!='NAN'")
+${IF_TRUE}ecmcFileExist("ecmcEcSlaveAxisName.template",1,1)
+${IF_TRUE}dbLoadRecords("ecmcEcSlaveAxisName.template","ECMC_P=${ECMC_P},ROLE=Drv,CH_ID=02,AX_NAME=${DRV02_AX_NAME}")
+ecmcEndIf()
+
+ecmcIf("'${ENC01_AX_NAME=NAN}'!='NAN'")
+${IF_TRUE}ecmcFileExist("ecmcEcSlaveAxisName.template",1,1)
+${IF_TRUE}dbLoadRecords("ecmcEcSlaveAxisName.template","ECMC_P=${ECMC_P},ROLE=Enc,CH_ID=01,AX_NAME=${ENC01_AX_NAME}")
+ecmcEndIf()
+
+ecmcIf("'${ENC02_AX_NAME=NAN}'!='NAN'")
+${IF_TRUE}ecmcFileExist("ecmcEcSlaveAxisName.template",1,1)
+${IF_TRUE}dbLoadRecords("ecmcEcSlaveAxisName.template","ECMC_P=${ECMC_P},ROLE=Enc,CH_ID=02,AX_NAME=${ENC02_AX_NAME}")
+ecmcEndIf()
 
 #- Do not set NxtSlv "pointer" if this is the first slave (ECMC_EC_PREVIOUS_SLAVE==-1)
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_NEXT_SLV,"${ECMC_EC_PREV_SLAVE_NUM=-1}>=0", "","#- ")
