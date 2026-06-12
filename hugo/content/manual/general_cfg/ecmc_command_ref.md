@@ -445,7 +445,7 @@ chapter = false
 | `Cfg.SetAxisPLCEncVelFilterSize(<int>,<int>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetAxisPLCTrajVelFilterEnable(<int>,<int>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetAxisPLCTrajVelFilterSize(<int>,<int>)` | No public header brief found (parser-specific or undocumented). |
-| `Cfg.SetEcStartupTimeout(<int>)` | No public header brief found (parser-specific or undocumented). |
+| `Cfg.SetEcStartupTimeout(<int>)` | Set the maximum EtherCAT startup wait time in seconds before entering runtime. Default is 30 seconds. |
 | `Cfg.SetSamplePeriodMs(<float>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetSampleRate(<float>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetTraceMask(<int>)` | No public header brief found (parser-specific or undocumented). |

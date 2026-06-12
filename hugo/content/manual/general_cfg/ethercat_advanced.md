@@ -15,6 +15,11 @@ Use it when you need:
 - explicit distributed-clock setup
 - slave identity verification
 - topology gaps where one or more slave positions should be skipped
+- longer EtherCAT OP-state startup timeout during commissioning
+
+For the common `Max wait time 30 second(s)` startup message, see
+[EtherCAT startup timeout]({{< relref "/manual/general_cfg/startup/_index.md#ethercat-startup-timeout" >}})
+before changing lower-level EtherCAT settings.
 
 ## Additional Domains
 
