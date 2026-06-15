@@ -1,14 +1,14 @@
 file "ecmc_analogOutput-chX_F32.template"
 {
-  pattern {CH_ID,  EGU, PREC, HYST}
-          {01,     "",  3,      0 }
-          {02,     "",  3,      0 }
-          {03,     "",  3,      0 }
-          {04,     "",  3,      0 }
-          {05,     "",  3,      0 }
-          {06,     "",  3,      0 }
-          {07,     "",  3,      0 }
-          {08,     "",  3,      0 }
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC, HYST}
+          {01, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {02, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {03, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {04, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {05, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {06, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {07, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
+          {08, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=}", "${_PREC=3}", 0}
 }
 
 file "ecmc_status_analog_one_record-chX.template"

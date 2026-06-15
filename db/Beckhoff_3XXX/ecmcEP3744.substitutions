@@ -10,11 +10,11 @@ file "ecmc_binaryInputArray-chX.template"{
 #- analog inputs
 #- TODO: scaling must be checked, but have no access to vacuum or pressurized air.
 file "ecmc_analogInput-chX.template"{
-  pattern {CH_ID, ESLO,             EGU,    PREC}
-          {01,    3.0518509476E-4,  "bar",  3   }
-          {02,    3.0518509476E-4,  "bar",  3   }
-          {03,    3.0518509476E-4,  "bar",  3   }
-          {04,    3.0518509476E-4,  "bar",  3   }
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC}
+          {01, "${_ESLO=3.0518509476E-4}", "${_EOFF=0}", "${_EGU=bar}", "${_PREC=3}"}
+          {02, "${_ESLO=3.0518509476E-4}", "${_EOFF=0}", "${_EGU=bar}", "${_PREC=3}"}
+          {03, "${_ESLO=3.0518509476E-4}", "${_EOFF=0}", "${_EGU=bar}", "${_PREC=3}"}
+          {04, "${_ESLO=3.0518509476E-4}", "${_EOFF=0}", "${_EGU=bar}", "${_PREC=3}"}
 }
 
 # channel status

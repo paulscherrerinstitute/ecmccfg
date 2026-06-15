@@ -1,13 +1,13 @@
 # 4..20mA (0..32767)
 file "ecmc_analogOutput-chX.template"
 {
-  pattern {CH_ID, ESLO,           EOFF, EGU,  PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,    LSV,     HSV,     HHSV,    DRVL, DRVH}
-          {01,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {02,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {03,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {04,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {05,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {06,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {07,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
-          {08,    4.882961516E-4, 4,    "mA", 3,    4,   3.9,  20,   20.1, 0,    "MAJOR", "MINOR", "MINOR", "MAJOR", 4,    20  }
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV, LSV, HSV, HHSV, DRVL, DRVH}
+          {01, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {02, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {03, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {04, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {05, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {06, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {07, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
+          {08, "${_ESLO=4.882961516E-4}", "${_EOFF=4}", "${_EGU=mA}", "${_PREC=3}", 4, 3.9, 20, 20.1, 0, "MAJOR", "MINOR", "MINOR", "MAJOR", 4, 20}
 }

@@ -1,8 +1,8 @@
 file "ecmc_analogInput-chX.template"
 {
-  pattern { CH_ID, sourceName,         KEY,     ESLO,  PREC, EGU  }
-          { X,     accelerationActual, AcclAct, 0.001, 3,    g    }
-          { Y,     accelerationActual, AcclAct, 0.001, 3,    g    }
-          { Z,     accelerationActual, AcclAct, 0.001, 3,    g    }
-          { '',    temperature,        Temp,    1.0,   0,    degC }
+  pattern {CH_ID, sourceName, KEY, ESLO, EOFF, PREC, EGU}
+          {X, accelerationActual, AcclAct, "${_ESLO=0.001}", "${_EOFF=0}", "${_PREC=3}", "${_EGU=g}"}
+          {Y, accelerationActual, AcclAct, "${_ESLO=0.001}", "${_EOFF=0}", "${_PREC=3}", "${_EGU=g}"}
+          {Z, accelerationActual, AcclAct, "${_ESLO=0.001}", "${_EOFF=0}", "${_PREC=3}", "${_EGU=g}"}
+          {'', temperature, Temp, "${_ESLO=1.0}", "${_EOFF=0}", "${_PREC=0}", "${_EGU=degC}"}
 }
