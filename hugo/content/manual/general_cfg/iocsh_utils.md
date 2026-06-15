@@ -482,6 +482,27 @@ If no slave id can be parsed, the result variable is set to `-2`.
 Use it when startup logic needs to derive a slave number from a path macro
 instead of being given the slave position explicitly.
 
+### ecmcGetEcEntryChannelFromEcPath
+
+```text
+ecmcGetEcEntryChannelFromEcPath(<ec_path>, <result_env_var>)
+```
+
+Extracts the channel id from the EtherCAT entry alias in a path such as:
+
+```text
+ec0.s7.positionActual01
+```
+
+and stores `01` in the chosen EPICS environment variable.
+
+If the channel id cannot be identified, the result variable is set to `-2`.
+
+Use it when startup logic needs to derive the channel from the linked EtherCAT
+entry instead of being given the channel explicitly. This is used, for example,
+to create slave-local axis-name marker records such as `Drv01-AxName` and
+`Enc01-AxName`.
+
 ### ecmcExit
 
 ```text

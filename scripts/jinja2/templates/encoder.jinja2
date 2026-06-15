@@ -1,6 +1,11 @@
 #- =============================================================================
 #- Encoder
 #- =============================================================================
+{%- if (epics is defined) and (epics.name is defined) %}
+    {%- set epicsName = epics.name %}
+{%- else %}
+    {%- set epicsName = "${ECMC_MOTOR_NAME}" %}
+{%- endif %}
 
 #- Get current encoder index beeing configured (index of encoder added), needed for PV names
 ecmcConfig "GetAxisEncConfigIndex($(ECMC_AXIS_NO))"
@@ -20,6 +25,8 @@ epicsEnvSet(ECMC_ENC_CFG_ID,${ECMC_CONFIG_RETURN_VAL})
     {%- endif  %}
 {%- else  %}
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ encoder.position }}","ax${ECMC_AXIS_NO}.enc.actpos")"
+    ecmcFileExist("${ECMC_CONFIG_ROOT}addEcSlaveAxisName.cmd",1)
+    ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addEcSlaveAxisName.cmd" "EC_PATH={{ encoder.position }},ROLE=Enc,AX_NAME={{ epicsName }}"
 {%- endif  %}
 
 {# #- The base control word is not used in ecmc. All other bits are linked based on the the control word, see below.. #}

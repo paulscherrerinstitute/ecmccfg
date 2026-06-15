@@ -2,6 +2,11 @@
 #- Drive
 #- =============================================================================
 {#- links #}
+{%- if (epics is defined) and (epics.name is defined) %}
+    {%- set epicsName = epics.name %}
+{%- else %}
+    {%- set epicsName = "axis" %}
+{%- endif %}
 
 {%- if drive.type == 0 %}
     {#- For steppers, bits must be defined for control-enable and status-enabled #}
@@ -37,6 +42,8 @@
     ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.setpoint }}","ax${ECMC_AXIS_NO}.drv.position")"
     epicsEnvSet(ECMC_AX_DRV_MODE, ${ECMC_AX_DRV_MODE="CSP"})
 {%- endif %}
+ecmcFileExist("${ECMC_CONFIG_ROOT}addEcSlaveAxisName.cmd",1)
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addEcSlaveAxisName.cmd" "EC_PATH={{ drive.setpoint }},ROLE=Drv,AX_NAME={{ epicsName }}"
 {%- if drive.reduceTorqueEnable is defined %}
     {%- if drive.reduceTorque is defined %}
         ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ drive.control }}.{{ drive.reduceTorque }}","ax${ECMC_AXIS_NO}.drv.reducetorque")"
