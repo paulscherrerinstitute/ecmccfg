@@ -1,0 +1,17 @@
+file "ecmc_analogInput-chX.template"
+{
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC}
+          {01, "${_ESLO=1E-6}", "${_EOFF=0}", "${_EGU=}", "${_PREC=6}"}
+}
+
+file "ecmcEL3681-stat-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+}
+
+file "ecmcEL3681-ModeRange-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    "AI"}
+}

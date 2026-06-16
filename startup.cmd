@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 11.0.7
+#- ECMC_VER          = 11.0.8
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -33,6 +33,7 @@
 #- EC_TOOL_PATH      = Path to ethercat tool defaults to ethercat tool in ECmasterECMC_DIR, 
 #- otherwise            "/opt/etherlab/bin/ethercat"
 #- MAX_PARAM_COUNT   = Maximum asyn param count, defaults to 1650
+#- PNL_COLOR_ID      = Panel color ID, defaults to 0
 #- ECMC_REQUIRE_ECMC = Command used to load ecmc. Defaults to "require ecmc".
 #-                    Set to "#-" when ecmc is already registered by a classic IOC.
 #-
@@ -58,7 +59,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-epicsEnvSet(ECMC_VER,${ECMC_VER=11.0.7})
+epicsEnvSet(ECMC_VER,${ECMC_VER=11.0.8})
 epicsEnvSet("ECMC_REQUIRE_ECMC", "${ECMC_REQUIRE_ECMC=require ecmc}")
 ${ECMC_REQUIRE_ECMC} "${ECMC_VER}"
 
@@ -158,7 +159,7 @@ ecmcFileExist("${ECMC_CONFIG_ROOT}setDiagnostics.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}setDiagnostics.cmd
 
 #- Load ecmc information into record
-dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0}")
+dbLoadRecords("ecmcMcuInfo.db","P=${SM_PREFIX},ECMC_VER=${ECMC_VER}, M_ID=${ECMC_EC_MASTER_ID}, ,MCU_NAME=${ECMC_P_SCRIPT}, M_RATE=${ECMC_EC_SAMPLE_RATE}, M_TIME=${ECMC_EC_SAMPLE_RATE_MS},PV_TIME=${ECMC_SAMPLE_RATE_MS}, MCU_MODE=${ECMC_MODE},MCU_PVA=${PVA=No},MCU_ENG=${ECMC_ENG_MODE=0},PNL_COLOR_ID=${PNL_COLOR_ID=0}")
 
 #-------------------------------------------------------------------------------
 #- Initialize links to first objects to -1

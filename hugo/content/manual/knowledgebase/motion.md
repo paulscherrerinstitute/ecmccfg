@@ -17,13 +17,33 @@ special PLC-based limit logic.
 - [hardware]({{< relref "/manual/knowledgebase/hardware/_index.md" >}})
 
 ## Topics
-1. [both_limits error](#both_limits-error)
-2. [position lag error, (following error)](#position-lag-error)
-3. [drive refuses to enable](#drive-refuses-to-enable)
-4. [force manual motion](#force-manual-motion)
-5. [double limit switches](#double-limit-switches)
+1. [ERROR_MON_TOL_OUT_OF_RANGE](#error_mon_tol_out_of_range)
+2. [both_limits error](#both_limits-error)
+3. [position lag error, (following error)](#position-lag-error)
+4. [drive refuses to enable](#drive-refuses-to-enable)
+5. [force manual motion](#force-manual-motion)
+6. [double limit switches](#double-limit-switches)
 
 ---
+
+## ERROR_MON_TOL_OUT_OF_RANGE
+The `ERROR_MON_TOL_OUT_OF_RANGE` error means that a monitor tolerance, range, or
+limit window is invalid. One possible cause is a virtual axis where the
+softlimits are calculated dynamically from one or more physical axes.
+
+For example, in a slit system the virtual gap and center axes may depend on the
+current physical blade positions and the physical axis softlimits. If the
+physical axes and gap are moved to extreme positions, the calculated valid range
+for the virtual center axis can become invalid. A typical symptom is that the
+calculated low softlimit becomes higher than the calculated high softlimit. This
+is not a valid motion range, and ecmc should block motion rather than allow an
+unsafe or undefined move.
+
+To recover, check the calculated softlimits for both the physical and virtual
+axes. The system must be brought back into a valid operating range. Depending on
+the setup, this may require increasing the softlimit range on the physical axes
+or moving the physical axes/gap away from the extreme positions so that the
+virtual axis limits can be calculated correctly again.
 
 ## both_limits error
 The `BOTH_LIMITS` error can be related to limit switches not being powered with
@@ -148,14 +168,42 @@ Note that in PLC code, bits must be accessed with the `ec_chk_bit()` command.
 ## double limit switches legacy (still an option)
 Sometimes two limit switches are needed, but only one can be linked in the YAML configuration. One use case is overlapping axis ranges where a switch is used to prevent collisions.
 
-To configure this, add a PLC where the two limit switches are combined with an `and` (for normally closed switches) into one bit by using the simulation entries (`ec<mid>.s<sid>.ONE` or `ec<mid>.s<sid>.ZERO`).
+To configure this, add a PLC where the two limit switches are combined with an `and` (for normally closed switches) into one bit by using a simulation entry. For new configurations, prefer a named global simulation entry. Legacy configurations can still use scoped simulation entries such as `ec<mid>.s<sid>.ZERO`.
 
 1. Add a plc
-2. Choose an unused bit in the simulation entry `ec<mid>.s<sid>.ZERO` (dummy 32-bit memory area in ecmc initialized to 0). Any slave can be chosen, but it probably makes sense to use the drive slave.
-3. Add code to combine the two switches into one bit ("and"). Use ec_wrt_bit to set the value.
-4. Use the selected simulation bit in the YAML config.
+2. Add a global simulation entry, for example `Cfg.EcAddSimEntry(SIM_LIMITS,U32,0)`.
+3. Choose an unused bit in the simulation entry.
+4. Add code to combine the two switches into one bit ("and"). Use ec_wrt_bit to set the value.
+5. Use the selected simulation bit in the YAML config.
 
-Example (use ec0.s2.ZERO.31 as combined limit switch):
+Example (use `SIM_LIMITS.31` as combined limit switch):
+
+```txt
+ecmcConfigOrDie "Cfg.EcAddSimEntry(SIM_LIMITS,U32,0)"
+```
+
+```txt
+# Bit 31
+# Switch 1: ec0.s5.binaryInput01
+# Switch 2: ec0.s5.binaryInput02
+SIM_LIMITS:=ec_wrt_bit(SIM_LIMITS,ec0.s5.binaryInput01 and ec0.s5.binaryInput02,31);
+```
+
+Then use it as a forward or backward bit in YAML:
+
+```yaml
+input:
+  limit:
+    forward: SIM_LIMITS.31     # In PLC "ec0.s5.binaryInput01 and ec0.s5.binaryInput02"
+    backward: ....
+```
+
+Legacy example (use `ec0.s2.ZERO.31` as combined limit switch):
+
+1. Choose an unused bit in the simulation entry `ec<mid>.s<sid>.ZERO` (dummy 32-bit memory area in ecmc initialized to 0). Any slave can be chosen, but it probably makes sense to use the drive slave.
+2. Add code to combine the two switches into one bit ("and"). Use ec_wrt_bit to set the value.
+3. Use the selected simulation bit in the YAML config.
+
 ```txt
 # Master 0
 # Drive slave  3 (can be any slave)

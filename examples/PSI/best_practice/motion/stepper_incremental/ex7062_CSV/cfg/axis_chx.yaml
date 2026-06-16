@@ -1,0 +1,97 @@
+axis:
+  id: ${AXIS_ID=1}                                    # Axis id
+  #feedSwitchesOutput: ec0.s${BO_SID}.binaryOutput${BO_CH=01} # EtherCAT entry for feed switches
+  tweakDist: 360
+  autoEnable:
+    enableTimeout: 2
+    disableTimeout: 2
+
+epics:
+  name: ${AX_NAME=M1}                                 # Axis anme
+  precision: 3                                        # Decimal count
+  description: Test cfg                               # Axis description
+  unit: deg                                            # Unit
+  motorRecord:
+      fieldInit: 'RTRY=0,FOFF=Frozen'                 # Extra config for Motor record
+      syncSoftLimits: true
+
+drive:
+  numerator: 2880000                                  # Fastest speed in eng. units (360*8000Hz)
+  denominator: 2147483648                             # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET (normally +-16bit)
+  type: 1                                             # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
+  setpoint: ec0.s$(DRV_SID).velocitySetpoint${DRV_CH=01}   # Velocity setpoint if CSV. Position setpoint if CSP
+  control: ec0.s$(DRV_SID).driveControl${DRV_CH=01}        # Control word EtherCAT entry
+  status: ec0.s$(DRV_SID).driveStatus${DRV_CH=01}          # Status word EtherCAT entry
+
+encoder:
+  desc: Inc
+  numerator: 360                                           # Scaling numerator example 1 mm/rev
+  denominator: 1048576                                     # Scaling denominator example 4096 ticks per 360 degree
+  type: 0                                                  # Type: 0=Incremental, 1=Absolute
+  bits: 32                                                 # Total bit count of encoder raw data
+  absBits: 0                                               # Absolute bit count (for absolute encoders) always least significant part of 'bits'
+  position: ec0.s$(ENC_SID).positionActual${ENC_CH=01}_2   # EtherCAT entry for actual position input (encoder)
+  status: ec0.s$(ENC_SID).touchProbeStatus${ENC_CH=01}
+  control: ec0.s$(ENC_SID).touchProbeControl${ENC_CH=01}
+  latch:
+    position: ec0.s$(ENC_SID).touchProbePositionPos$(ENC_CH=01)_1 # Link to latched value. Used for some homing seqs
+    control:  0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
+    status: 1                                          # Bit in encoder status word for latch triggered status. Used for some homing seqs
+    armCmd: 21
+    armBits: 5
+  homing:
+    type: 11                                           # Homing sequence type
+    position: 0                                        # Position to reference encoder to
+    postMovePosition: 0
+    postMoveEnable: true
+    velocity:
+      to: 360                                           # Velocity to cam/sensor (used for some homing seqs)
+      from: 360                                         # Velocity from cam/sensor (used for some homing seqs)
+    acceleration: 360                                   # Acceleration during homing
+    deceleration: 360                                  # Deceleration during homing
+    latchCount: 1
+
+controller:
+  Kp: 10                                              # Kp proportinal gain
+  Ki: 0                                               # Ki integral gain
+  Kd: 0                                               # Kd derivative gain
+
+trajectory:
+  axis:
+    velocity: 720                                     # Default velo for axis
+    acceleration: 1000                                # Default acc for axis
+    deceleration: 1000                                # Default dec for axis
+    emergencyDeceleration: 7200                       # Deceleration when axis in error state
+    jerk: 10000                                        # Default jerk for axis
+  jog:
+    velocity: 1                                       # Default velo fro JOG (motor record)
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SID).binaryInputs${DRV_CH=01}.1                    # EtherCAT entry for low limit switch input
+    backward: ec0.s$(DRV_SID).binaryInputs${DRV_CH=01}.0                   # EtherCAT entry for high limit switch input
+  home: 'ec0.s$(DRV_SID).ONE.0'                       # EtherCAT entry for home switch
+  interlock: 'ec0.s$(DRV_SID).ONE.0'                  # EtherCAT entry for interlock switch input
+
+softlimits:
+  enable: true                                       # Enable soft limits
+  forward: 10000                                        # Soft limit position fwd
+  forwardEnable: true                                # Soft limit position fwd enable
+  backward: -10000                                      # Soft limit position bwd
+  backwardEnable: true                               # Soft limit position bwd enable
+
+monitoring:
+  lag:
+    enable: true                                      # Enable position lag monitoring (following error)
+    tolerance: 10                                    # Allowed tolerance
+    time: 100                                          # Allowed time outside tolerance  target:
+  velocity:
+    enable: false                                     # Enable velocity monitoring
+    max: 8                                            # Allowed max velocity
+    time:
+      trajectory: 100                                 # Time allowed outside max velo before system init halt
+      drive: 200                                      # Time allowed outside max velo before system disables drive
+  target:
+    enable: true                                      # Enable at target monitoring (needs to be enabled if using motor record)
+    tolerance: 0.5                                    # Allowed tolerance
+    time: 10                                          # Filter time inside tolerance to be at target

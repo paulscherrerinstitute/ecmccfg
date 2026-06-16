@@ -1,3 +1,8 @@
 # Auto-generated C++ logic substitutions
 # Logic: cpp_logic_waveform
 global { P = "$(P)" PORT = "$(PORT)" }
+
+file ecmcCppLogicWaveformIn.template {
+  pattern { REC, PARAM, DESC, NELM, FTVL }
+  { "epics-ec-s23-mm-analogOutputArray01", "epics_ec.s23.mm.analogOutputArray01", "epics_ec.s23.mm.analogOutputArray01", "100", "SHORT" }
+}

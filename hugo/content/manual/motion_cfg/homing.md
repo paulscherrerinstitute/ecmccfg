@@ -106,7 +106,7 @@ The same functionality is available in YAML through the homing configuration:
 homing:
   type: 3
   position: 0
-  postMoveEnable: 1
+  postMoveEnable: True
   postMovePosition: 10.0
 ```
 
@@ -212,7 +212,7 @@ Two common hardware patterns are used for this:
 Legacy `epicsEnvSet(...)` configuration still works:
 
 ```bash
-epicsEnvSet("ECMC_EC_ENC_LATCHPOS",        "ec0.s3.encoderLatchPostion01") # Latch position entry
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",        "ec0.s3.encoderLatchPosition01") # Latch position entry
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",   "ec0.s3.encoderControl01.0")    # Latch arm bit
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",    "ec0.s3.encoderStatus01.0")     # Latch occurred bit
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                            # 1 = first latch, 2 = second latch, ...
@@ -237,7 +237,7 @@ encoder:
   control: ec0.s$(ENC_SID).encoderControl${ENC_CH=01}
   primary: True
   latch:
-    position: ec0.s$(ENC_SID).encoderLatchPostion$(ENC_CH=01)
+    position: ec0.s$(ENC_SID).encoderLatchPosition$(ENC_CH=01)
     control: 0
     status: 0
   homing:
@@ -274,7 +274,7 @@ The same EL51xx versus EL7062 distinction applies here as for sequence `11`:
 Legacy `epicsEnvSet(...)` configuration still works:
 
 ```bash
-epicsEnvSet("ECMC_EC_ENC_LATCHPOS",        "ec0.s3.encoderLatchPostion01") # Latch position entry
+epicsEnvSet("ECMC_EC_ENC_LATCHPOS",        "ec0.s3.encoderLatchPosition01") # Latch position entry
 epicsEnvSet("ECMC_EC_ENC_LATCH_CONTROL",   "ec0.s3.encoderControl01.0")    # Latch arm bit
 epicsEnvSet("ECMC_EC_ENC_LATCH_STATUS",    "ec0.s3.encoderStatus01.0")     # Latch occurred bit
 epicsEnvSet("ECMC_HOME_LATCH_COUNT_OFFSET","2")                            # 1 = first latch, 2 = second latch, ...
@@ -299,7 +299,7 @@ encoder:
   control: ec0.s$(ENC_SID).encoderControl${ENC_CH=01}
   primary: True
   latch:
-    position: ec0.s$(ENC_SID).encoderLatchPostion$(ENC_CH=01)
+    position: ec0.s$(ENC_SID).encoderLatchPosition$(ENC_CH=01)
     control: 0
     status: 0
   homing:
@@ -368,7 +368,8 @@ Use homing sequence `11` for low-limit plus index homing and `12` for high-limit
 
 See also:
 - [EL7047 + EL5102 best-practice example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7047_el5102)
-- [EL7062 best-practice example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7062)
+- [EX7062 CSV best-practice example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSV)
+- [EL7062 CSP best-practice example](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSP)
 - [EL7062 hardware notes]({{< relref "/manual/knowledgebase/hardware/EL7062.md" >}})
 
 ### ECMC_SEQ_HOME_SET_POS = 15, (setPosition)

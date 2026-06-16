@@ -1,10 +1,10 @@
 # analog inputs
 file "ecmc_analogInput-chX.template"{
-  pattern {CH_ID, ESLO, EGU,    PREC}
-          {01,    0.1,  "degC", 3   }
-          {02,    0.1,  "degC", 3   }
-          {03,    0.1,  "degC", 3   }
-          {04,    0.1,  "degC", 3   }
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC}
+          {01, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=degC}", "${_PREC=3}"}
+          {02, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=degC}", "${_PREC=3}"}
+          {03, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=degC}", "${_PREC=3}"}
+          {04, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=degC}", "${_PREC=3}"}
 }
 
 # channel status

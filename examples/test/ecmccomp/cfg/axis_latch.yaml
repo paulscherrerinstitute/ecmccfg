@@ -78,7 +78,7 @@ encoder:
   #     size: 100                                     # Filter size for encoder value
   #     enable: true                                  # enable encoder value filter
   latch:
-    position: 'ec0.s$(DRV_SLAVE).encoderLatchPostion01'                                   # Link to latched value. Used for some homing seqs
+    position: 'ec0.s$(DRV_SLAVE).encoderLatchPosition01'                                   # Link to latched value. Used for some homing seqs
     control: 0                                     # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                      # Bit in encoder status word for latch triggered status. Used for some homing seqs
   primary: 1                                       # Use this encoder as primary (for control)

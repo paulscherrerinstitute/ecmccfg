@@ -2156,6 +2156,41 @@
        </widget>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="groupBox_11">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>495</y>
+        <width>251</width>
+        <height>56</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>CPP logic:</string>
+      </property>
+      <widget class="caShellCommand" name="cashellcommand_38">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>30</y>
+         <width>55</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="label">
+        <string notr="true">&gt;&gt;</string>
+       </property>
+       <property name="labels">
+        <string>Open plugin overview</string>
+       </property>
+       <property name="files">
+        <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+       </property>
+       <property name="args">
+        <string>CPP_LOGIC_OVERVIEW $(IOC)</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">

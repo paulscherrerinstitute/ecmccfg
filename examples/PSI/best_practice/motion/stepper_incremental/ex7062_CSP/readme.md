@@ -1,7 +1,8 @@
-# Homing on index with EL7062
+# Homing on index with EL7062/EX7062 in CSP
 
-The EL7062 works differently from EL51xx for index-based homing.
-For EL7062, the touch probe objects must be configured and used as the latch source.
+The EL7062/EX7062 family works differently from EL51xx for index-based homing.
+For these drives, the touch probe objects must be configured and used as the
+latch source.
 
 This example uses:
 - EL7062 in CSP mode
@@ -113,3 +114,4 @@ This example uses sequence `12`.
 
 - `hugo/content/manual/motion_cfg/homing.md`
 - `hugo/content/manual/knowledgebase/hardware/EL7062.md`
+- `examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSV/`

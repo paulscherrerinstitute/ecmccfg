@@ -1,14 +1,14 @@
 file "ecmc_analogInput-chX.template"
 {
-  pattern {CH_ID, ESLO, EOFF, EGU,    PREC}
-          {01,    0.1,  0,    "DegC", 2   }
-          {02,    0.1,  0,    "DegC", 2   }
-          {03,    0.1,  0,    "DegC", 2   }
-          {04,    0.1,  0,    "DegC", 2   }
-          {05,    0.1,  0,    "DegC", 2   }
-          {06,    0.1,  0,    "DegC", 2   }
-          {07,    0.1,  0,    "DegC", 2   }
-          {08,    0.1,  0,    "DegC", 2   }
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC}
+          {01, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {02, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {03, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {04, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {05, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {06, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {07, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
+          {08, "${_ESLO=0.1}", "${_EOFF=0}", "${_EGU=DegC}", "${_PREC=2}"}
 }
 
 file "ecmc_status_analog-chX.template"

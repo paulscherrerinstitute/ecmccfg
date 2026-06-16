@@ -19,7 +19,8 @@ selection, and YAML files.
   [Stepper BiSS-C](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_bissc)
 - I want incremental stepper examples:
   [EL7047 + EL5102](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7047_el5102) or
-  [EL7062](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7062)
+  [EX7062 CSV](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSV) or
+  [EL7062 CSP](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSP)
 - I want PLC examples:
   [basic PLCs](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/plcs/basic) or
   [master-less PLC](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/plcs/masterless)
@@ -31,7 +32,8 @@ selection, and YAML files.
 - [Stepper BiSS-C](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_bissc)
   EL7041/EL5042 and EL7062/EL5042 examples
 - [Stepper incremental, EL7047 + EL5102](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7047_el5102)
-- [Stepper incremental, EL7062](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7062)
+- [Stepper incremental, EX7062 CSV](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSV)
+- [Stepper incremental, EL7062 CSP](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSP)
 - [SmarAct MCS2](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/smaract/mcs2)
 - [PVT profile move, EL7041-0052](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/pvt/el7041_0052)
 - [Stepper open loop + autosave restore](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_openloop_asr)

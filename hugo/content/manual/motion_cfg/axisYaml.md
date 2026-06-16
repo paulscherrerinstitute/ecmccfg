@@ -555,7 +555,31 @@ optional
 ```
 
 ## softlimits
-Soft limits to propagate to the motorRecord.
+Soft limits define the allowed software travel range of an axis.
+
+There are two related sets of soft limits:
+
+- ecmc soft limits, configured by the `softlimits` YAML section and enforced by
+  ecmc.
+- motor-record soft limits, exposed as the motor record `HLM` and `LLM`
+  limits.
+
+The ecmc soft limits should normally describe the outer maximum range that the
+axis is allowed to move. During startup the motor-record soft limits are
+initialized from the same values. If soft-limit synchronization is disabled, the
+motor-record limits can then be adjusted at runtime to a narrower range while
+the ecmc soft limits remain as the outer protection.
+
+In newer versions of ecmc and the motor record, the two limit sets can be
+synchronized with `epics.motorRecord.syncSoftLimits`. When synchronization is
+enabled, the ecmc and motor-record limits are kept equal. If the synchronized
+motor-record soft limits are set to `0,0`, both the ecmc and motor-record soft
+limits are disabled.
+
+If synchronization is not enabled, disable ecmc soft limits with the enable PVs:
+
+- `<PREFIX>:<MOTOR>-SftLimBwdEna`
+- `<PREFIX>:<MOTOR>-SftLimFwdEna`
 
 optional
 

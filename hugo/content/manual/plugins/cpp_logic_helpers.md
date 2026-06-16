@@ -65,6 +65,46 @@ struct MyLogic : public ecmcCpp::LogicBase {
 ECMC_CPP_LOGIC_REGISTER_DEFAULT(MyLogic)
 ```
 
+### Creation error handling
+
+`ECMC_CPP_LOGIC_REGISTER_DEFAULT(...)` uses the C++ logic ABI create callback:
+
+```c
+int32_t createInstance(void** instance);
+```
+
+The callback returns `0` on success and an ecmc error code on failure. On
+success, `*instance` contains the created logic object. On failure, the instance
+is `nullptr` and `Cfg.LoadCppLogic(...)` returns the error.
+
+For checks that need the constructed object, add an optional `validateCreation(...)`
+member function:
+
+```cpp
+struct MyLogic : public ecmcCpp::LogicBase {
+  MyLogic() {
+    // Build bindings and local state.
+  }
+
+  int32_t validateCreation(std::string* errorMessage) {
+    if (bad_config) {
+      if (errorMessage) {
+        *errorMessage = "bad config: missing AXIS_ID";
+      }
+      return ECMC_CPP_LOGIC_CREATE_INSTANCE_FAIL;
+    }
+    return 0;
+  }
+};
+```
+
+If `validateCreation(...)` returns an error, the default adapter deletes the object,
+returns the error code over the ABI, and passes the message to
+`Cfg.LoadCppLogic(...)`.
+
+Use `ecmcConfigOrDie "Cfg.LoadCppLogic(...)"` in startup scripts when a failed
+creation should stop IOC startup.
+
 ### Binding/export helpers
 
 For scalar values:
@@ -96,6 +136,12 @@ The core header also exposes small helper functions backed by ECMC host
 services:
 
 - `ecmcCpp::getCycleTimeS()`
+- `ecmcCpp::getEcTimeNs()`
+- `ecmcCpp::getEcTimeOffsetNs()`
+- `ecmcCpp::getEcLastReceiveTimeNs()`
+- `ecmcCpp::getEcLastSendTimeNs()`
+- `ecmcCpp::getEcDomainState(...)`
+- `ecmcCpp::getEcStatusOK()`
 - `ecmcCpp::getEcMasterStateWord(...)`
 - `ecmcCpp::getEcSlaveStateWord(...)`
 - `ecmcCpp::lutExists(...)`
@@ -108,6 +154,7 @@ services:
 Typical use cases:
 
 - read the configured realtime cycle time without hard-coding it
+- read EtherCAT application time, monotonic offset, last receive/send timestamps, domain status, and consolidated status
 - inspect EtherCAT master/slave state words from logic code
 - read values from ecmc lookup tables loaded during IOC startup
 - request IOC shutdown when logic detects an unrecoverable condition
@@ -199,15 +246,123 @@ Axis state readback:
 - `ecmcCpp::axisIsBusy(...)`
 - `ecmcCpp::axisHasError(...)`
 - `ecmcCpp::axisGetErrorId(...)`
+- `ecmcCpp::axisGetStatus(axis, status)`
+- `ecmcCpp::axisGetStatus(axis)`
+
+`axisGetStatus(...)` fills or returns an `ecmcCpp::AxisStatus` snapshot with
+the common motion status fields. The native motion bitfield is exposed as a
+stable `status_word` mask. Use flags such as:
+
+- `ECMC_CPP_AXIS_STATUS_ENABLED`
+- `ECMC_CPP_AXIS_STATUS_BUSY`
+- `ECMC_CPP_AXIS_STATUS_HOMED`
+- `ECMC_CPP_AXIS_STATUS_LIMIT_FWD`
+
+Example:
+
+```cpp
+ecmcCpp::AxisStatus status {};
+if (ecmcCpp::axisGetStatus(axis_id, status) == 0 && status.valid) {
+  const bool enabled =
+    (status.status_word & ECMC_CPP_AXIS_STATUS_ENABLED) != 0u;
+  const double actual = status.current_position_actual;
+}
+```
 
 External source value injection:
 
 - `ecmcCpp::axisSetExternalSetpointPos(...)`
 - `ecmcCpp::axisSetExternalEncoderPos(...)`
 
+Selected encoder helpers:
+
+- `ecmcCpp::axisGetEncoderActualPos(axis, encoder)`
+- `ecmcCpp::axisSetEncoderActualPos(axis, encoder, position)`
+- `ecmcCpp::axisGetEncoderHomed(axis, encoder)`
+- `ecmcCpp::axisSetEncoderHomed(axis, encoder, homed)`
+- `ecmcCpp::axisGetEncoderReady(axis, encoder)`
+- `ecmcCpp::axisGetPrimaryEncoder(axis)`
+- `ecmcCpp::axisSelectPrimaryEncoder(axis, encoder)`
+
+The selected encoder helpers use the ECMC motion API encoder convention: the
+first encoder is `1`.
+
+Motion group helpers:
+
+- `ecmcCpp::axisGroupGetEnable(group)`
+- `ecmcCpp::axisGroupGetAnyEnable(group)`
+- `ecmcCpp::axisGroupGetEnabled(group)`
+- `ecmcCpp::axisGroupGetAnyEnabled(group)`
+- `ecmcCpp::axisGroupGetBusy(group)`
+- `ecmcCpp::axisGroupGetAnyBusy(group)`
+- `ecmcCpp::axisGroupGetAnyErrorId(group)`
+- `ecmcCpp::axisGroupSetEnable(group, enable)`
+- `ecmcCpp::axisGroupSetTrajSource(group, source)`
+- `ecmcCpp::axisGroupSetEncSource(group, source)`
+- `ecmcCpp::axisGroupResetError(group)`
+- `ecmcCpp::axisGroupSetError(group, error_id)`
+- `ecmcCpp::axisGroupSetSlavedAxisInError(group)`
+- `ecmcCpp::axisGroupHalt(group)`
+- `ecmcCpp::axisGroupAxisInGroup(group, axis)`
+- `ecmcCpp::axisGroupSize(group)`
+- `ecmcCpp::axisGroupGetTrajSourceExt(group)`
+- `ecmcCpp::axisGroupGetAnyTrajSourceExt(group)`
+- `ecmcCpp::axisGroupSetAllowSourceChangeWhenEnabled(group, allow)`
+- `ecmcCpp::axisGroupSetMrSync(group, sync)`
+- `ecmcCpp::axisGroupSetMrStop(group, stop)`
+- `ecmcCpp::axisGroupSetMrCnen(group, enable)`
+- `ecmcCpp::axisGroupSetAutoEnable(group, enable)`
+- `ecmcCpp::axisGroupSetAutoDisable(group, enable)`
+- `ecmcCpp::axisGroupSetCtrlWithinDeadband(group, within)`
+- `ecmcCpp::axisGroupSetIgnoreMrStatusCheckAtDisable(group, ignore)`
+- `ecmcCpp::axisGroupGetAnyAtForwardLimit(group)`
+- `ecmcCpp::axisGroupGetAnyAtBackwardLimit(group)`
+- `ecmcCpp::axisGroupGetAnyAtLimit(group)`
+- `ecmcCpp::axisGroupGetAnyInterlocked(group)`
+- `ecmcCpp::axisGroupSetSlavedAxisInterlocked(group)`
+- `ecmcCpp::axisGroupGetCtrlWithinDeadband(group)`
+
 Use these helpers when the logic should work directly with ECMC axis source
 selection or external trajectory/encoder feeds, instead of using the higher
 level PLCopen-style `MC_*` blocks.
+
+### Master-to-master shared memory helpers
+
+Master-to-master shared-memory helpers are available through
+`ecmcCppLogic.hpp`:
+
+- `ecmcCpp::m2mWrite(index, value)`
+- `ecmcCpp::m2mRead(index)`
+- `ecmcCpp::m2mStatus()`
+- `ecmcCpp::m2mResetError()`
+- `ecmcCpp::m2mGetError()`
+- `ecmcCpp::m2mIocRun(master_index)`
+- `ecmcCpp::m2mIocEcOk(master_index)`
+
+### Data storage helpers
+
+Data storage helpers are available through `ecmcCppLogic.hpp`. In addition to
+single-value access, the C++ helpers support `std::vector<double>` for bulk
+read/write/append:
+
+- `ecmcCpp::dataStorageClear(storage)`
+- `ecmcCpp::dataStorageAppend(storage, value)`
+- `ecmcCpp::dataStorageGet(storage, index)`
+- `ecmcCpp::dataStorageSet(storage, index, value)`
+- `ecmcCpp::dataStorageGetIndex(storage)`
+- `ecmcCpp::dataStorageSetIndex(storage, index)`
+- `ecmcCpp::dataStorageRead(storage, values)`
+- `ecmcCpp::dataStorageWrite(storage, values)`
+- `ecmcCpp::dataStorageAppend(storage, values)`
+- `ecmcCpp::dataStorageAppendFromStorage(from_storage, from_index, elements, to_storage)`
+- `ecmcCpp::dataStorageIsFull(storage)`
+- `ecmcCpp::dataStorageGetSize(storage)`
+- `ecmcCpp::dataStoragePushAsyn(storage)`
+- `ecmcCpp::dataStorageGetAvg(storage)`
+- `ecmcCpp::dataStorageGetMin(storage)`
+- `ecmcCpp::dataStorageGetMax(storage)`
+- `ecmcCpp::dataStorageGetError()`
+- `ecmcCpp::dataStorageResetError()`
 
 ## ecmcCppControl.hpp
 
@@ -320,6 +475,12 @@ unchanged input value.
 
 ### EtherCAT status wrappers
 
+- `ecmcCpp::getEcTimeNs()`
+- `ecmcCpp::getEcTimeOffsetNs()`
+- `ecmcCpp::getEcLastReceiveTimeNs()`
+- `ecmcCpp::getEcLastSendTimeNs()`
+- `ecmcCpp::getEcDomainState(...)`
+- `ecmcCpp::getEcStatusOK()`
 - `ecmcCpp::EcMasterStatus`
 - `ecmcCpp::EcSlaveStatus`
 

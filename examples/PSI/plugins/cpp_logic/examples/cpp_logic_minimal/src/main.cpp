@@ -11,6 +11,7 @@
 
 #include "ecmcCppLogic.hpp"
 
+#include <cstdint>
 #include <string>
 
 struct NativeBounceLogic : public ecmcCpp::LogicBase {
@@ -39,6 +40,16 @@ struct NativeBounceLogic : public ecmcCpp::LogicBase {
     epics.readOnly("main.actual_position", actual_position)
          .readOnly("main.cycle_counter", cycle_counter)
          .writable("main.velocity_setpoint", velocity_setpoint);
+  }
+
+  int32_t validateCreation(std::string* errorMessage) {
+    if (slave_id.empty()) {
+      if (errorMessage) {
+        *errorMessage = "S_ID macro must not be empty";
+      }
+      return ECMC_CPP_LOGIC_CREATE_INSTANCE_FAIL;
+    }
+    return 0;
   }
 
   void run() override {

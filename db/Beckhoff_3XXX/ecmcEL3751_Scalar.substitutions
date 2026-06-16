@@ -1,7 +1,7 @@
 file "ecmc_analogInput-chX.template"
 {
-  pattern {CH_ID, ESLO,           EOFF, EGU,    PREC}
-          {01,    1,              0,    "Raw",  3   }
+  pattern {CH_ID, ESLO, EOFF, EGU, PREC}
+          {01, "${_ESLO=1}", "${_EOFF=0}", "${_EGU=Raw}", "${_PREC=3}"}
 }
 
 file "ecmcEL3751_status-chX.template"

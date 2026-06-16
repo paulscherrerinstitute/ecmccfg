@@ -157,6 +157,26 @@ The main split is:
 - `ecmc...`: live realtime bindings to `ecmc` item names
 - `epics...`: values exported on the C++ logic instance's dedicated asyn port
 
+Creation can fail cleanly before realtime starts. With the default registration
+macro, add `validateCreation(std::string* errorMessage)` when validation needs the
+constructed object:
+
+```cpp
+int32_t validateCreation(std::string* errorMessage) {
+  if (bad_config) {
+    if (errorMessage) {
+      *errorMessage = "bad config: missing AXIS_ID";
+    }
+    return ECMC_CPP_LOGIC_CREATE_INSTANCE_FAIL;
+  }
+  return 0;
+}
+```
+
+If this hook returns an error, `Cfg.LoadCppLogic(...)` returns the error code and
+message. Use `ecmcConfigOrDie` around `Cfg.LoadCppLogic(...)` when startup
+should stop on a fatal C++ logic creation error.
+
 ## Supported Binding Styles
 
 For normal scalars, the C++ value type is inferred from the bound variable type.
@@ -238,6 +258,43 @@ The built-in runtime names currently include:
 - `logic.stat.div`
 - `logic.stat.count`
 - `logic.stat.dbg_txt`
+
+### Record Link Options
+
+The generic C++ logic record templates accept an optional `ASYN_OPT` macro in
+front of `PARAM`:
+
+```text
+@asyn($(PORT),0,1000)$(ASYN_OPT=)$(PARAM)
+```
+
+Existing substitutions that only set `PARAM` continue to work unchanged because
+`ASYN_OPT` defaults to an empty string.
+
+Use `ASYN_OPT` when an integer exported variable should be connected through
+the `asynFloat64` interface. This is useful for analog records, display tools,
+or clients that expect floating-point asyn access:
+
+```text
+ASYN_OPT="/TYPE=asynFloat64/CMD=UINT64TOFLOAT64/"
+PARAM="my_counter"
+```
+
+Supported scalar conversion commands are:
+
+- `INT32TOFLOAT64`
+- `UINT32TOFLOAT64`
+- `INT64TOFLOAT64`
+- `UINT64TOFLOAT64`
+
+For example:
+
+```text
+file "$(ecmccfg_DIR)db/generic/ecmcCppLogicAi.template" {
+  pattern { P, REC, PORT, ASYN_OPT, PARAM, SCAN }
+          { "$(IOC):", "MyCounter", "CPP.LOGIC", "/TYPE=asynFloat64/CMD=UINT64TOFLOAT64/", "my_counter", "I/O Intr" }
+}
+```
 
 Current control word bits are:
 

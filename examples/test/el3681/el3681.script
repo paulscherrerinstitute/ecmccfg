@@ -1,0 +1,18 @@
+##############################################################################
+## Example config
+
+require ecmccfg v11.0.8_RC1
+
+#${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL3681_ALL"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=6, HW_DESC=EL3681"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x01,1,1)"     # Enable vendor calibration
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x04,1,1)"     # Enable filter
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x0A,0,1)"     # 0 = 50 Hz, 1 = 60 Hz
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x1D,2,1)"     # 2 = scaled presentation: 1 bit = 1 µV in
+
+# This is not working, see manual...
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x09,1,1)"     # Disable autorange
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x0D,0,1)"     # DC voltage
+#ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x11,1,1)"     # 30 V
+
+

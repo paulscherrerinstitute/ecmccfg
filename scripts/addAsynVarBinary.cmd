@@ -23,7 +23,6 @@
 epicsEnvSet("ECMC_ASYN_VAR_DEV", "${DEV=${IOC}}")
 
 ecmcFileExist("ecmcAsynVarBinary.db",1,1)
-dbLoadRecords("ecmcAsynVarBinary.db",
-              "DEV=${ECMC_ASYN_VAR_DEV},NAME=${NAME},ASYN_NAME=${ASYN_NAME},PORT=${PORT=MC_CPU1},ADDR=${ADDR=0},TIMEOUT=${TIMEOUT=0},T_SMP_MS=${T_SMP_MS=1000},TSE=${TSE=0},DESC='${DESC=}',ONAM=${ONAM=One},ZNAM=${ZNAM=Zero},PINI=${PINI=1},${DB_MACROS=}")
+dbLoadRecords("ecmcAsynVarBinary.db","DEV=${ECMC_ASYN_VAR_DEV},NAME=${NAME},ASYN_NAME=${ASYN_NAME},PORT=${PORT=MC_CPU1},ADDR=${ADDR=0},TIMEOUT=${TIMEOUT=0},T_SMP_MS=${T_SMP_MS=1000},TSE=${TSE=0},DESC='${DESC=}',ONAM=${ONAM=One},ZNAM=${ZNAM=Zero},PINI=${PINI=1},${DB_MACROS=}")
 
 epicsEnvUnset(ECMC_ASYN_VAR_DEV)

@@ -2,5 +2,5 @@ record(longin, "$(P)$(REC)") {
   field(DESC, "$(DESC=)")
   field(DTYP, "$(DTYP=asynInt32)")
   field(SCAN, "$(SCAN=1 second)")
-  field(INP,  "@asyn($(PORT),0,1000)$(PARAM)")
+  field(INP,  "@asyn($(PORT),0,1000)$(ASYN_OPT=)$(PARAM)")
 }

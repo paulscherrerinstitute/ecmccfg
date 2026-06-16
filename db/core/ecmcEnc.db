@@ -60,6 +60,7 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeVelToCam"){
   field(SCAN, "Passive")
   field(DESC, "Velocity to cam")
   field(VAL,  "${VEL_TO_CAM=0}")
+  field(PREC, "3") 
 }
 
 record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeVelFrmCam"){
@@ -67,6 +68,7 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeVelFrmCam"){
   field(SCAN, "Passive")
   field(DESC, "Velocity from cam")
   field(VAL,  "${VEL_FRM_CAM=0}")
+  field(PREC, "3") 
 }
 
 record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeAcc"){
@@ -74,6 +76,7 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeAcc"){
   field(SCAN, "Passive")
   field(DESC, "Acceleration")
   field(VAL,  "${ACC=0}")
+  field(PREC, "3") 
 }
 
 record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeDec"){
@@ -81,6 +84,7 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeDec"){
   field(SCAN, "Passive")
   field(DESC, "Deceleration")
   field(VAL,  "${DEC=0}")
+  field(PREC, "3") 
 }
 
 record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePos"){
@@ -88,6 +92,7 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePos"){
   field(SCAN, "Passive")
   field(DESC, "Position")
   field(VAL,  "${POS=0}")
+  field(PREC, "3") 
 }
 
 record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePstMveEna"){
@@ -102,6 +107,7 @@ record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmePstMvePos"){
   field(SCAN, "Passive")
   field(DESC, "Post Move Position")
   field(VAL,  "${POST_POS=0}")
+  field(PREC, "3") 
 }
 
 record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-HmeRefAtStrtToEncId"){

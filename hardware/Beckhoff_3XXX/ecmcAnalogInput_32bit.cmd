@@ -26,3 +26,4 @@ ecmcEpicsEnvSetCalc("ECMC_CHANNEL",${CH_ID=1},"%02x")
 #- analog input channel with status
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,${SYNC_MAN=3},${ECMC_PDO=0x1a00},${ECMC_ENTRY=0x6000},0x01,U16,status${ECMC_CHANNEL})"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,${SYNC_MAN=3},${ECMC_PDO=0x1a00},${ECMC_ENTRY=0x6000},0x11,S32,analogInput${ECMC_CHANNEL})"
+ecmcConfigOrDie "Cfg.EcAddEntryAlias(${ECMC_EC_SLAVE_NUM},analogInput${ECMC_CHANNEL},AI${ECMC_CHANNEL})"

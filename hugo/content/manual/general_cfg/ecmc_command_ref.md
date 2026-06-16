@@ -247,7 +247,8 @@ chapter = false
 | `Cfg.EcAddSdoBuffer(<int>,0x<hex>,0x<hex>,<str>,<int>)` | Adds a Service Data Object for writing. |
 | `Cfg.EcAddSdoComplete(<int>,0x<hex>,<str>,<int>)` | Adds a Service Data Object for writing. |
 | `Cfg.EcAddSdoDT(<int>,0x<hex>,0x<hex>,<str>,<str>)` | Adds a Service Data Object for writing. |
-| `Cfg.EcAddSimEntry(<int>,<str>,<str>,%` | Adds an EtherCAT simulation entry. |
+| `Cfg.EcAddSimEntry(<int>,<str>,<str>,%` | Adds a slave-scoped EtherCAT simulation entry. |
+| `Cfg.EcAddSimEntry(<str>,<str>,%` | Adds a global EtherCAT simulation entry on the internal simulation slave. See [Advanced EtherCAT and Commissioning]({{< relref "/manual/general_cfg/ethercat_advanced.md#simulation-entries" >}}). |
 | `Cfg.EcAddSlave(<int>,<int>,0x<hex>,0x<hex>)` | Adds an EtherCAT slave to the hardware configuration. |
 | `Cfg.EcApplyConfig(<int>)` | Apply hardware configuration to master. |
 | `Cfg.EcEnablePrintouts(<int>)` | Enable diagnostic printouts from EtherCAT objects. |
@@ -444,7 +445,7 @@ chapter = false
 | `Cfg.SetAxisPLCEncVelFilterSize(<int>,<int>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetAxisPLCTrajVelFilterEnable(<int>,<int>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetAxisPLCTrajVelFilterSize(<int>,<int>)` | No public header brief found (parser-specific or undocumented). |
-| `Cfg.SetEcStartupTimeout(<int>)` | No public header brief found (parser-specific or undocumented). |
+| `Cfg.SetEcStartupTimeout(<int>)` | Set the maximum EtherCAT startup wait time in seconds before entering runtime. Default is 30 seconds. |
 | `Cfg.SetSamplePeriodMs(<float>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetSampleRate(<float>)` | No public header brief found (parser-specific or undocumented). |
 | `Cfg.SetTraceMask(<int>)` | No public header brief found (parser-specific or undocumented). |

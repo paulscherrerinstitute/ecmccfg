@@ -1,10 +1,10 @@
 file "ecmc_analogInputFloat-chX.template"
 {
-  pattern {CH_ID, EGU,}
-          {01,    Raw }
-          {02,    Raw }
-          {03,    Raw }
-          {04,    Raw }
+  pattern {CH_ID, ESLO, EGU, EOFF, PREC}
+          {01, "${_ESLO=1}", "${_EGU=Raw}", "${_EOFF=0}", "${_PREC=7}"}
+          {02, "${_ESLO=1}", "${_EGU=Raw}", "${_EOFF=0}", "${_PREC=7}"}
+          {03, "${_ESLO=1}", "${_EGU=Raw}", "${_EOFF=0}", "${_PREC=7}"}
+          {04, "${_ESLO=1}", "${_EGU=Raw}", "${_EOFF=0}", "${_PREC=7}"}
 }
 
 file "ecmcELM360X-stat-chX.template"

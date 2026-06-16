@@ -132,8 +132,8 @@ if((static.seqStep>2 and (not(ax1.mon.lowlim) or not(ax1.mon.highlim))) or stati
 # print out each new valid latched value (on c-track)
 if(ec_chk_bit(ec0.s3.encoderStatus01,0) and not(static.oldLatchValid))
 {
-  println('New latched position: ' , ec0.s3.encoderLatchPostion01);
-  static.errorcode:=ds_append_data(1, ec0.s3.encoderLatchPostion01);
+  println('New latched position: ' , ec0.s3.encoderLatchPosition01);
+  static.errorcode:=ds_append_data(1, ec0.s3.encoderLatchPosition01);
   ds_push_asyn(1);  
 };
 

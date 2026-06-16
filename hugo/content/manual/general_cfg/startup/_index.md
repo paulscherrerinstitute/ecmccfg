@@ -48,6 +48,26 @@ Normally these arguments are set when the module is required:
 require ecmccfg "ENG_MODE=1,MASTER_ID=2"
 ```
 
+## EtherCAT startup timeout
+
+When EtherCAT startup fails with messages like `Max wait time 30 second(s)`,
+increase the EtherCAT startup timeout before ecmc enters runtime:
+
+```bash
+ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
+```
+
+The value is in seconds. The default timeout is 30 seconds.
+
+Place the command after `require ecmccfg` or `startup.cmd` has loaded ecmc,
+but before `setAppMode.cmd` or `finalize.cmd` starts runtime. In the normal
+startup flow, this means before `iocInit`, because `finalize.cmd` is typically
+registered to run at init.
+
+This is different from `ECMC_EC_STARTUP_DELAY`. That macro is used by
+`setAppMode.cmd` for `Cfg.EcSetDelayECOkAtStartup(...)` and controls a startup
+delay/minimum wait, not the maximum OP-state timeout.
+
 ## `MASTER_ID=-1`
 
 Setting `MASTER_ID=-1` starts ecmc without claiming an EtherCAT master.

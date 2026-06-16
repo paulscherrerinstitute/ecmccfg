@@ -39,7 +39,7 @@ Important settings:
 - `position: ec0.s$(ENC_SID).positionActual01`
 - `control: ec0.s$(ENC_SID).encoderControl01`
 - `status: ec0.s$(ENC_SID).encoderStatus01`
-- `latch.position: ec0.s$(ENC_SID).encoderLatchPostion01`
+- `latch.position: ec0.s$(ENC_SID).encoderLatchPosition01`
 - `latch.control: 0`
 - `latch.status: 0`
 
@@ -83,6 +83,6 @@ The `home` and `interlock` entries in `cfg/axis.yaml` are placeholders and shoul
 
 - [Hugo homing manual](../../../../../../hugo/content/manual/motion_cfg/homing.md)
 - [Post move after homing](../../../../../../hugo/content/manual/motion_cfg/homing.md#post-move-after-homing)
-- [EL7062 incremental best-practice example](../el7062/README.md)
+- [EL7062/EX7062 CSP incremental best-practice example](../ex7062_CSP/readme.md)
 
 The sequence descriptions for `ECMC_SEQ_HOME_LOW_LIM_INDEX = 11` and `ECMC_SEQ_HOME_HIGH_LIM_INDEX = 12` are in the same homing manual.

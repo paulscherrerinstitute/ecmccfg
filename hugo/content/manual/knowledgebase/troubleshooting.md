@@ -53,6 +53,7 @@ you know the visible problem, but not yet which detailed page to use.
 | `ERROR_MON_MAX_VELOCITY_EXCEEDED` | Velocity too high, configuration mismatch, or encoder malfunction. |
 | `ERROR_MON_POS_LAG_INTERLOCK` | Following error, motion blocked, configuration mismatch (tolerance too tight). |
 | `ERROR_MON_STALL` | Motion stall. |
+| `ERROR_MON_TOL_OUT_OF_RANGE` | Invalid monitor tolerance or limit window, for example calculated virtual-axis softlimits outside the valid range. See [motion]({{< relref "/manual/knowledgebase/motion.md#error_mon_tol_out_of_range" >}}). |
 | `ERROR_DRV_HW_ALARM_X` | Hardware error, missing power supply; check dedicated hardware panels. |
 | `ERROR_ENC_NOT_READY` | Encoder issue, cabling issue, or missing power supply. |
 | `ERROR_EC_LINK_DOWN` | EtherCAT cabling issue, slave power missing. |

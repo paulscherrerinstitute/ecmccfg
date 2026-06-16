@@ -14,319 +14,967 @@
    <string>Cpp Logic Overview</string>
   </property>
   <widget class="caLabel" name="caLabelTitle">
-   <property name="geometry"><rect><x>10</x><y>10</y><width>250</width><height>21</height></rect></property>
-   <property name="text"><string>C++ Logic Overview</string></property>
-   <property name="font"><font><pointsize>12</pointsize><bold>true</bold></font></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>250</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>C++ Logic Overview</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelHint">
-   <property name="geometry"><rect><x>10</x><y>34</y><width>520</width><height>16</height></rect></property>
-   <property name="text"><string>Unused rows remain disconnected. Open one logic instance for full control and app-panel access.</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>34</y>
+     <width>520</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Unused rows remain disconnected. Open one logic instance for full control and app-panel access.</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelColOpen">
-   <property name="geometry"><rect><x>10</x><y>62</y><width>50</width><height>18</height></rect></property>
-   <property name="text"><string>Open</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>62</y>
+     <width>50</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelColId">
-   <property name="geometry"><rect><x>72</x><y>62</y><width>30</width><height>18</height></rect></property>
-   <property name="text"><string>ID</string></property>
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>62</y>
+     <width>30</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelColRate">
-   <property name="geometry"><rect><x>116</x><y>62</y><width>100</width><height>18</height></rect></property>
-   <property name="text"><string>Rate [ms]</string></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>62</y>
+     <width>100</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Rate [ms]</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelColCnt">
-   <property name="geometry"><rect><x>230</x><y>62</y><width>100</width><height>18</height></rect></property>
-   <property name="text"><string>Exec count</string></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>62</y>
+     <width>100</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Exec count</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelColDbg">
-   <property name="geometry"><rect><x>344</x><y>62</y><width>180</width><height>18</height></rect></property>
-   <property name="text"><string>Debug text</string></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>62</y>
+     <width>180</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Debug text</string>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic0">
-   <property name="geometry"><rect><x>10</x><y>86</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 0</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>86</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="labels">
+    <string>Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 0</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId0">
-   <property name="geometry"><rect><x>74</x><y>88</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>0</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>88</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate0">
-   <property name="geometry"><rect><x>116</x><y>84</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic0-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>84</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic0-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt0">
-   <property name="geometry"><rect><x>230</x><y>84</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic0-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>84</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic0-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg0">
-   <property name="geometry"><rect><x>344</x><y>84</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic0-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>84</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic0-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic1">
-   <property name="geometry"><rect><x>10</x><y>116</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 1</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>116</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 1</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId1">
-   <property name="geometry"><rect><x>74</x><y>118</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>1</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>118</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate1">
-   <property name="geometry"><rect><x>116</x><y>114</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic1-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>114</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic1-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt1">
-   <property name="geometry"><rect><x>230</x><y>114</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic1-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>114</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic1-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg1">
-   <property name="geometry"><rect><x>344</x><y>114</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic1-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>114</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic1-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic2">
-   <property name="geometry"><rect><x>10</x><y>146</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 2</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>146</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 2</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId2">
-   <property name="geometry"><rect><x>74</x><y>148</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>2</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>148</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate2">
-   <property name="geometry"><rect><x>116</x><y>144</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic2-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>144</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic2-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt2">
-   <property name="geometry"><rect><x>230</x><y>144</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic2-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>144</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic2-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg2">
-   <property name="geometry"><rect><x>344</x><y>144</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic2-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>144</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic2-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic3">
-   <property name="geometry"><rect><x>10</x><y>176</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 3</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>176</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 3</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId3">
-   <property name="geometry"><rect><x>74</x><y>178</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>3</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>178</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>3</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate3">
-   <property name="geometry"><rect><x>116</x><y>174</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic3-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>174</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic3-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt3">
-   <property name="geometry"><rect><x>230</x><y>174</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic3-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>174</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic3-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg3">
-   <property name="geometry"><rect><x>344</x><y>174</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic3-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>174</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic3-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic4">
-   <property name="geometry"><rect><x>10</x><y>206</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 4</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>206</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 4</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId4">
-   <property name="geometry"><rect><x>74</x><y>208</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>4</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>208</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>4</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate4">
-   <property name="geometry"><rect><x>116</x><y>204</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic4-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>204</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic4-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt4">
-   <property name="geometry"><rect><x>230</x><y>204</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic4-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>204</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic4-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg4">
-   <property name="geometry"><rect><x>344</x><y>204</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic4-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>204</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic4-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic5">
-   <property name="geometry"><rect><x>10</x><y>236</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 5</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>236</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 5</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId5">
-   <property name="geometry"><rect><x>74</x><y>238</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>5</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>238</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>5</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate5">
-   <property name="geometry"><rect><x>116</x><y>234</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic5-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>234</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic5-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt5">
-   <property name="geometry"><rect><x>230</x><y>234</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic5-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>234</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic5-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg5">
-   <property name="geometry"><rect><x>344</x><y>234</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic5-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>234</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic5-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic6">
-   <property name="geometry"><rect><x>10</x><y>266</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 6</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>266</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 6</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId6">
-   <property name="geometry"><rect><x>74</x><y>268</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>6</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>268</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>6</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate6">
-   <property name="geometry"><rect><x>116</x><y>264</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic6-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>264</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic6-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt6">
-   <property name="geometry"><rect><x>230</x><y>264</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic6-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>264</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic6-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg6">
-   <property name="geometry"><rect><x>344</x><y>264</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic6-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>264</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic6-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
-
   <widget class="caShellCommand" name="openCppLogic7">
-   <property name="geometry"><rect><x>10</x><y>296</y><width>46</width><height>20</height></rect></property>
-   <property name="label"><string notr="true">Open</string></property>
-   <property name="files"><string>bash /ioc/modules/ecmccfg/qt/ecmcOpenObject.sh</string></property>
-   <property name="args"><string>CPP_LOGIC $(IOC) 7</string></property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>296</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="label">
+    <string notr="true">Open</string>
+   </property>
+   <property name="files">
+    <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+   </property>
+   <property name="args">
+    <string>CPP_LOGIC $(IOC) 7</string>
+   </property>
   </widget>
   <widget class="caLabel" name="caLabelId7">
-   <property name="geometry"><rect><x>74</x><y>298</y><width>20</width><height>18</height></rect></property>
-   <property name="text"><string>7</string></property>
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>298</y>
+     <width>20</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>7</string>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditRate7">
-   <property name="geometry"><rect><x>116</x><y>294</y><width>96</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic7-RateMsAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>116</x>
+     <y>294</y>
+     <width>96</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic7-RateMsAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditCnt7">
-   <property name="geometry"><rect><x>230</x><y>294</y><width>100</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic7-CntAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>294</y>
+     <width>100</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic7-CntAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="caLineEdit" name="caLineEditDbg7">
-   <property name="geometry"><rect><x>344</x><y>294</y><width>396</width><height>22</height></rect></property>
-   <property name="channel" stdset="0"><string notr="true">$(IOC):CppLogic7-DbgTxtAct</string></property>
-   <property name="colorMode"><enum>caLineEdit::Static</enum></property>
-   <property name="precisionMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="limitsMode"><enum>caLineEdit::Channel</enum></property>
-   <property name="unitsEnabled"><bool>true</bool></property>
+   <property name="geometry">
+    <rect>
+     <x>344</x>
+     <y>294</y>
+     <width>396</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):CppLogic7-DbgTxtAct</string>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="limitsMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+   <property name="unitsEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>caLabel</class>
-   <extends>QWidget</extends>
+   <extends>QLabel</extends>
    <header>caLabel</header>
   </customwidget>
   <customwidget>
@@ -336,7 +984,7 @@
   </customwidget>
   <customwidget>
    <class>caShellCommand</class>
-   <extends>QPushButton</extends>
+   <extends>QWidget</extends>
    <header>caShellCommand</header>
   </customwidget>
  </customwidgets>

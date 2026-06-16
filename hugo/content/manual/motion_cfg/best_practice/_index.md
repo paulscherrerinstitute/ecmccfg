@@ -44,13 +44,15 @@ Example tree:
 
 Closed-loop stepper examples with incremental encoder:
 
-1. EL7062_CSP
-2. EL7047 and EL5102
+1. EX7062/ED7062 in CSV with integrated incremental encoder
+2. EL7062_CSP with integrated incremental encoder
+3. EL7047 and EL5102
 
 Example trees:
 
-- `examples/PSI/best_practice/motion/stepper_incremental/el7062/`
-- `examples/PSI/best_practice/motion/stepper_incremental/el7047_el5102/`
+- [EX7062/ED7062 CSV](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSV)
+- [EL7062 CSP](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/ex7062_CSP)
+- [EL7047 and EL5102](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/best_practice/motion/stepper_incremental/el7047_el5102)
 
 ## Special motion examples
 

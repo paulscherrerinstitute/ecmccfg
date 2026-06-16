@@ -1,10 +1,10 @@
 # Scaling is between 4..21.179mA 16bit (see manual)
 file "ecmc_analogInput-chX.template"{
-  pattern {CH_ID, ESLO,            EGU,  EOFF, PREC, LOW, LOLO, HIGH, HIHI, LLSV,    LSV,     HSV,     HHSV   }
-          {01,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
-          {02,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
-          {03,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
-          {04,    5.2428075234E-4, "mA", 4,    3   , 4,   3,    20,   21,   "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+  pattern {CH_ID, ESLO, EGU, EOFF, PREC, LOW, LOLO, HIGH, HIHI, LLSV, LSV, HSV, HHSV}
+          {01, "${_ESLO=5.2428075234E-4}", "${_EGU=mA}", "${_EOFF=4}", "${_PREC=3}", 4, 3, 20, 21, "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+          {02, "${_ESLO=5.2428075234E-4}", "${_EGU=mA}", "${_EOFF=4}", "${_PREC=3}", 4, 3, 20, 21, "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+          {03, "${_ESLO=5.2428075234E-4}", "${_EGU=mA}", "${_EOFF=4}", "${_PREC=3}", 4, 3, 20, 21, "MAJOR", "MAJOR", "MINOR", "MAJOR"}
+          {04, "${_ESLO=5.2428075234E-4}", "${_EGU=mA}", "${_EOFF=4}", "${_PREC=3}", 4, 3, 20, 21, "MAJOR", "MAJOR", "MINOR", "MAJOR"}
 }
 
 file "ecmc_status_analog-chX.template"

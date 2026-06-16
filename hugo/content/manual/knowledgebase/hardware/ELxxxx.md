@@ -26,6 +26,36 @@ Example of slaves needing 5V power supply:
 **The voltage level of the power bus after (downstream of) a 5V terminal is normally also 5V. If another voltage is needed, then another system terminal is needed to set a new voltage level of the power bus.**
 {{% /notice %}}
 
+## Analog input/output display macros
+Most scalar analog input and analog output substitutions in `db/Beckhoff_3XXX`
+and `db/Beckhoff_4XXX` support override macros for common EPICS display and
+conversion fields.
+
+These macros are named with a leading underscore because the substitution file
+uses them as defaults for the normal record fields:
+
+| Macro | Record field | Typical use |
+| --- | --- | --- |
+| `_ESLO` | `ESLO` | Scaling factor |
+| `_EOFF` | `EOFF` | Scaling offset |
+| `_EGU` | `EGU` | Engineering unit |
+| `_PREC` | `PREC` | Display precision |
+
+Example:
+
+```bash
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=12, HW_DESC=EL3174_0to10V, MACROS='_EGU=mm,_PREC=4'"
+```
+
+The same override value is applied to all scalar channels in that substitution
+file. If the substitution file contains different channel defaults and only one
+channel should change, create or use a more specific substitution file instead.
+
+{{% notice note %}}
+These `_XXXX` macros are intended for scalar analog records. They are not used
+for waveform/array substitutions such as oversampling terminals.
+{{% /notice %}}
+
 ## Related Pages
 - [hardware]({{< relref "/manual/knowledgebase/hardware/_index.md" >}})
 - [EL1xxx]({{< relref "/manual/knowledgebase/hardware/EL1xxx.md" >}})
