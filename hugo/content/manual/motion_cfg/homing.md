@@ -106,7 +106,7 @@ The same functionality is available in YAML through the homing configuration:
 homing:
   type: 3
   position: 0
-  postMoveEnable: 1
+  postMoveEnable: True
   postMovePosition: 10.0
 ```
 
