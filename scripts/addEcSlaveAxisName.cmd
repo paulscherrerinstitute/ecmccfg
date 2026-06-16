@@ -5,6 +5,7 @@
 #-d /**
 #-d   \brief Add an axis-name marker record below the slave prefix.
 #-d   \details The slave id and channel id are derived from the EtherCAT link.
+#-d   \file
 #-d   \param EC_PATH EtherCAT entry path, for example ec0.s7.velocitySetpoint01
 #-d   \param ROLE    Channel role, normally Drv or Enc
 #-d   \param AX_NAME Axis name using this slave channel
