@@ -11,23 +11,23 @@
 
 #include "ecmcCppLogic.hpp"
 
+#include <array>
+#include <cstdint>
 #include <string>
 
 struct WaveformGenerator : public ecmcCpp::LogicBase {
-  static constexpr size_t kMaxSamples = 100;
-  std::vector<int16_t> samples;
+  std::array<int16_t, 100> samples {};
   std::string slave_id {"14"};
   std::string ch_id {"01"};
   int cycle_counter {0};
   
-  WaveformGenerator():samples(kMaxSamples, 0) {
+  WaveformGenerator() {
     slave_id = ecmcCpp::getMacroValueString(ecmcCpp::getMacrosString(), "S_ID", "14");
     ch_id = ecmcCpp::getMacroValueString(ecmcCpp::getMacrosString(), "CH_ID", "01");
     const std::string item_base = "ec.s" + slave_id + ".";
     const std::string waveformEcPath = item_base + "mm.analogOutputArray" + ch_id;
-    const std::string epicsWaveformPath = "epics_" + waveformEcPath;
-    ecmc.outputAutoArray(waveformEcPath, samples);
-    epics.readOnlyArray(epicsWaveformPath, samples);
+    ecmc.outputArray(waveformEcPath, samples);
+    epics.readOnlyArray("epics_ec.s23.mm.analogOutputArray01", samples);
 
     ecmcCpp::setEnableDbg(true);
 
@@ -43,4 +43,3 @@ struct WaveformGenerator : public ecmcCpp::LogicBase {
 };
 
 ECMC_CPP_LOGIC_REGISTER_DEFAULT(WaveformGenerator)
-
