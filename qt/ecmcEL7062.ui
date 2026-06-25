@@ -341,7 +341,7 @@
           <number>10</number>
          </property>
          <property name="channel" stdset="0">
-          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI01</string>
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI02</string>
          </property>
          <property name="colorMode">
           <enum>caLed::Static</enum>
@@ -401,7 +401,7 @@
           <number>10</number>
          </property>
          <property name="channel" stdset="0">
-          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI02</string>
+          <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Drv$(DRV)-BI01</string>
          </property>
          <property name="colorMode">
           <enum>caLed::Static</enum>
