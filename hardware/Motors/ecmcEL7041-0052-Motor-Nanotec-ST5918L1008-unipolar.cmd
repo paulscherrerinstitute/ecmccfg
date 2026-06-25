@@ -1,1 +1,0 @@
-ecmcEL7041-Motor-Nanotec-ST5918L1008-unipolar.cmd
