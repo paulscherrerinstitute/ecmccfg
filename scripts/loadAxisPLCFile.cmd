@@ -27,7 +27,7 @@ epicsEnvSet("ECMC_TMP_FILE",            "${TMP_PATH=/tmp}/PLC${ECMC_AX_ID_TEMP}.
 
 #- Convert file with optional macros (msi)
 ecmcFileExist("${FILE}",1)
-system "msi -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} ${FILE}"
+system "msi -V -M '${PLC_MACROS=EMPTY}' -o ${ECMC_TMP_FILE} '${FILE}'"
 
 #- Printout parsed file?
 ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, ${PRINT_PLC_FILE=1}=1,"", "#-"  )
