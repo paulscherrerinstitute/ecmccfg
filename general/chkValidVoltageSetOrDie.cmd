@@ -11,6 +11,6 @@
 #-d   \file
 #-d*/
 
-ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${V_NOM_MV=-1}<0 or ${V_NOM_MV=-1}>${I_MAX_MA=0}", "ecmcExit Error: Voltage setpoint too high, negative or zero...","# Voltage setting OK (${V_NOM_MV=-1})...")
+ecmcEpicsEnvSetCalcTernary(ECMC_EXE_CMD, "${V_NOM_MV=-1}<=0 or ${V_NOM_MV=-1}>${V_MAX_MV=0}", "ecmcExit Error: Voltage setpoint too high, negative or zero...","# Voltage setting OK (${V_NOM_MV=-1})...")
 ${ECMC_EXE_CMD}
 epicsEnvUnset(ECMC_EXE_CMD)

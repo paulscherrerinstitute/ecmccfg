@@ -1,1 +1,0 @@
-ecmcEL7041-Motor-Nanotec-SCA2018M0804.cmd

@@ -1,1 +1,0 @@
-ecmcEL7037-Motor-Nanotec-ST5918L1008-parallel.cmd

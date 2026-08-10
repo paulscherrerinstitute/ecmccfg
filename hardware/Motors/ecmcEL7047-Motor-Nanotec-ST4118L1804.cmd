@@ -6,6 +6,7 @@
 #-d   \param I_STDBY_MA   : (optional) Standby current in mA (defaults to 500mA)
 #-d   \param V_MAX_MV     : (optional) Maximum voltage in mV (defaults to 48V)
 #-d   \param V_NOM_MV     : (optional) Nominal voltage in mV (defaults to max voltage)
+#-d   \author Anders Sandstroem
 #-d   \file
 #-d */
 
