@@ -30,6 +30,7 @@ General configuration covers IOC/bootstrap behavior that is not axis-specific:
 - [Startup Validator]({{< relref "/manual/general_cfg/startup_validator.md" >}}) for checking startup syntax, script macros, and local file references before IOC execution.
 - [ESI Parser]({{< relref "/manual/general_cfg/esi_parser.md" >}}) for the legacy EtherCAT ESI XML utility.
 - [Advanced EtherCAT and Commissioning]({{< relref "/manual/general_cfg/ethercat_advanced.md" >}}) for extra domains, data items, DC, slave verify, and topology skips.
+- [EtherCAT Endpoint Timing]({{< relref "/manual/general_cfg/ethercat_timing.md" >}}) for input/output delay, DC phase, timestamps, timing PVs, and the diagnostic panel.
 - [FSoE and TwinSAFE]({{< relref "/manual/general_cfg/fsoe.md" >}}) for direct safety-telegram forwarding and hardware-panel navigation.
 - [Axis Groups]({{< relref "/manual/general_cfg/axis_groups.md" >}}) for named axis collections used by `mc_grp_...` PLC helpers.
 - [Master/Slave State Machine]({{< relref "/manual/general_cfg/master_slave_state_machine.md" >}}) for synchronized virtual/physical systems.

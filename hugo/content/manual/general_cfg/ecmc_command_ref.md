@@ -282,6 +282,10 @@ chapter = false
 | `Cfg.EcSetSlaveEnableSDOCheck(<int>,<int>)` | Enable SDO setting check for a slave SDO setting check is default true for slaves linked to a motion axis. |
 | `Cfg.EcSetSlaveNeedSDOSettings(<int>,<int>,<int>)` | Set bit that slave needs SDO settings * This slave needs SDO settings i.e. |
 | `Cfg.EcSetSlaveSDOSettingsDone(<int>,<int>,<int>)` | Set bit that all SDOs has been set for this slave * After SDOs have been set this function should be called to tell ecmc that. |
+| `Cfg.EcSetSlaveTimingOverride(<int>,<int>,<int>,<int>,<int>)` | Set endpoint PDO cycle offset, event correction and uncertainty. |
+| `Cfg.EcSetSlaveTimingSource(<int>,<int>,<int>)` | Set endpoint source: cycle-only, SYNC0 or SYNC1. |
+| `Cfg.EcSetSlaveTimingUpdateDivisor(<int>,<int>,<int>)` | Set the cycles between fresh endpoint values. |
+| `Cfg.EcLinkSlaveTimingTimestamp(<int>,<int>,<str>,<int>,<int>)` | Link a 32- or 64-bit DC timestamp entry to an endpoint. |
 | `Cfg.EcSlaveConfigDC(<int>,0x<hex>,<int>,<int>,<int>,<int>)` | Configure slave DC clock. See [Advanced EtherCAT and Commissioning]({{< relref "/manual/general_cfg/ethercat_advanced.md" >}}). |
 | `Cfg.EcSlaveConfigWatchDog(<int>,<int>,<int>)` | Configure Slave watch dog. |
 | `Cfg.EcSlaveVerify(<int>,<int>,0x<hex>,0x<hex>)` | Verify slave at position * The command verifies that the actual slave at a certain position\ has the correct alias, position, vendor id, product code and revision number. See [Advanced EtherCAT and Commissioning]({{< relref "/manual/general_cfg/ethercat_advanced.md" >}}). |

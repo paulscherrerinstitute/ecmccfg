@@ -110,6 +110,13 @@ record(longin, "${ECMC_P}Timing-$(DIR_PV)-CycleOffset") {
   field(SCAN, "I/O Intr")
 }
 
+record(longin, "${ECMC_P}Timing-$(DIR_PV)-UpdateDivisor") {
+  field(DESC, "Cycles between fresh values")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(TIMING_PORT=ecmcRTLog),$(SLAVE_POS),$(TIMEOUT=1))timing.$(DIR_ASYN).updateDivisor")
+  field(SCAN, "I/O Intr")
+}
+
 record(longin, "${ECMC_P}Timing-$(DIR_PV)-TimestampBits") {
   field(DESC, "Timestamp width")
   field(EGU,  "bits")
