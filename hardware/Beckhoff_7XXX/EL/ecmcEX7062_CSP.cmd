@@ -85,6 +85,10 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x1C33,0x2,${ECMC_TEMP_PERIOD
 ecmcFileExist(${ecmccfg_DIR}applySlaveDCconfig.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveDCconfig.cmd "ASSIGN_ACTIVATE=0x700,SYNC_0_CYCLE=62500,SYNC_0_SHIFT=${SYNC_0_SHIFT=0},SYNC_1_CYCLE=${ECMC_SYNC_1}"
 
+#- Shared ED7062/EL7062 input timing metadata.
+ecmcFileExist(${ecmccfg_DIR}ecmcEX7062Timing.cmd,1)
+${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX7062Timing.cmd
+
 epicsEnvUnset(ECMC_SYNC_1)
 
 ecmcEpicsEnvSetCalc("ECMC_TEMP_WHATCHDOG_1",1000/${ECMC_EC_SAMPLE_RATE=1000}*1000)

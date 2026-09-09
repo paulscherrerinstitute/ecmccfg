@@ -182,8 +182,21 @@ Use your browser search for these prefixes when you already know the category.
         ecmcConfig "EcGetMemMapId(ec0.s11.mm.analogInputArray01)"
         epicsEnvSet(MM_CH_1_IN,${ECMC_CONFIG_RETURN_VAL})
 
-  18. retvalue = ec_get_time();
-     Returns current time in nano seconds (from 1 Jan 2000, same as EtherCAT DC:s).
+  18a. retvalue = ec_get_time();
+     Returns the current clock time when the PLC calls the function, in nano
+     seconds (from 1 Jan 2000, same as EtherCAT DC:s). This is not a cached
+     EtherCAT receive or send timestamp.
+     If return value is less than zero it should be considered to be an error code.
+
+  18a. retvalue = ec_get_last_receive_time();
+     Returns the cached timestamp of the receive phase in the current EtherCAT
+     application cycle. Calling this function does not read the clock.
+     If return value is less than zero it should be considered to be an error code.
+
+  18b. retvalue = ec_get_last_send_time();
+     Returns the cached timestamp of the most recently completed EtherCAT send
+     phase. Because PLCs execute before send, this normally refers to the
+     preceding application cycle. Calling this function does not read the clock.
      If return value is less than zero it should be considered to be an error code.
 
   19. retvalue = ec_get_time_l32();
@@ -394,6 +407,21 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
                          );
 
     Returns encoder position for any of the configured encoders of an axis.
+
+ 15a. retvalue = mc_get_touch_probe_pos(
+                         <axIndex>,         : Axis index
+                         <encIndex>         : Encoder index (starts from 1)
+                         );
+
+    Returns the last hardware-latched position after the encoder object's
+    masking, multiturn conversion, scaling, and engineering offset.
+
+ 15b. retvalue = mc_get_touch_probe_sequence(
+                         <axIndex>,         : Axis index
+                         <encIndex>         : Encoder index (starts from 1)
+                         );
+
+    Returns a counter incremented for each new hardware-latched position.
 
  16. retvalue = mc_set_act_pos(
                          <axIndex>,         : Axis index

@@ -759,6 +759,7 @@ encoder:
       enable: true                                    # enable encoder value filter
   latch:
     position: ''                                      # Link to latched value. Used for some homing seqs
+    timestamp: ''                                     # Optional 32/64-bit DC timestamp for the same latch event
     control: 0                                        # Bit in encoder control word to arm latch. Used for some homing seqs
     status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
     armCmd:                                           # Value in dec to arm latch/touch probe to write to encoder.control

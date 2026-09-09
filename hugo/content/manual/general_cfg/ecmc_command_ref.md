@@ -173,6 +173,8 @@ chapter = false
 | `Cfg.SetAxisEncType(<int>,<int>)` | Set encoder type. |
 | `Cfg.SetAxisEncVelFilterEnable(<int>,<int>)` | Enables/disables encoder velocity filter. |
 | `Cfg.SetAxisEncVelFilterSize(<int>,<int>)` | Set size of encoder velocity filter. |
+| `AxisTouchProbeArm(<axis>,<encoder>,<arm>)` | Arm or disarm the selected axis encoder touch probe. Encoder index starts at 1. |
+| `AxisPrintTouchProbe(<axis>,<encoder>)` | Print the latest coherent latched position and optional DC timestamp. |
 | `Cfg.SetAxisErrorId(<int>,<int>)` | Set axis error code. |
 | `Cfg.SetAxisHomeAcc(<int>,<float>)` | Set homing acceleration for current encoder beeing configured. |
 | `Cfg.SetAxisHomeDec(<int>,<float>)` | Set homing deceleration for current encoder beeing configured. |

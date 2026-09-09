@@ -597,6 +597,10 @@
         "type": "string",
         "required": true
       },
+      "encoder.latch.timestamp": {
+        "type": "string",
+        "required": false
+      },
       "encoder.latch.control": {
         "type": "integer",
         "required": false,

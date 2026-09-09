@@ -318,6 +318,7 @@ class Schema:
                 'type': 'dict',
                 'schema': {
                     'position': {'required': True, 'type': 'string'},
+                    'timestamp': {'type': 'string'},
                     'control': {'type': 'integer', 'default': 0},
                     'armCmd': {'type': 'integer', 'default': 1},
                     'armBits': {'type': 'integer', 'default': 1},
