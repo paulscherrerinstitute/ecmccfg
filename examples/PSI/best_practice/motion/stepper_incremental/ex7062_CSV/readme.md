@@ -45,12 +45,12 @@ latch:
   position: ec0.s$(ENC_SID).touchProbePositionPos$(ENC_CH=01)_1
   control: 0
   status: 1
-  armCmd: 21
+  armCmd: 17
   armBits: 5
 ```
 
-`armCmd: 21` is `0b10101`. It enables touch probe 1, selects the trigger mode,
-and arms positive-edge latching.
+`armCmd: 17` is `0b10001`. It enables touch probe 1 and arms positive-edge
+latching.
 
 ### Encoder 2: open-loop drive counter
 

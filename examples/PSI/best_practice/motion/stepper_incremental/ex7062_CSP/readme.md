@@ -53,7 +53,7 @@ encoder:
     position: ec0.s$(ENC_SID).touchProbePositionPos$(ENC_CH=01)_1
     control: 0
     status: 1
-    armCmd: 21
+    armCmd: 17
     armBits: 5
   homing:
     type: 12
@@ -80,8 +80,8 @@ The relevant YAML settings are:
 - `encoder.latch.armBits`: number of bits written from `armCmd`
 
 For this example:
-- `armCmd: 21` means `0b10101`
-- this sets touch probe 1 enable, trigger mode B1, and positive-edge latching
+- `armCmd: 17` means `0b10001`
+- this sets touch probe 1 enable and positive-edge latching
 - `armBits: 5` means those 5 bits are written starting at bit `0`
 
 ## Notes about channel numbering

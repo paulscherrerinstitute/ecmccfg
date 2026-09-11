@@ -1,0 +1,12 @@
+#- =============================================================================
+#- Position compare
+#- =============================================================================
+{%- if positionCompare is defined %}
+{%- set minLeadNs = (positionCompare.minLeadMs|default(2)|float * 1000000)|round(0, 'common')|int %}
+{%- set maxLeadNs = (positionCompare.maxLeadMs|default(100)|float * 1000000)|round(0, 'common')|int %}
+{%- set pulseWidthNs = (positionCompare.pulseWidthMs|default(0)|float * 1000000)|round(0, 'common')|int %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToAxisPositionCompare({{ positionCompare.output }},${ECMC_AXIS_NO},0)"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToAxisPositionCompare({{ positionCompare.activate }},${ECMC_AXIS_NO},1)"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToAxisPositionCompare({{ positionCompare.startTime }},${ECMC_AXIS_NO},2)"
+    ecmcConfigOrDie "Cfg.AxisPositionCompareConfigure(${ECMC_AXIS_NO},{{ minLeadNs }},{{ maxLeadNs }},{{ positionCompare.activateIdle|default(3)|int }},{{ positionCompare.activateSchedule|default(0)|int }},{{ pulseWidthNs }},{{ positionCompare.resetValue|default(0)|int }})"
+{%- endif %}

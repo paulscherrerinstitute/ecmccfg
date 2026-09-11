@@ -347,7 +347,7 @@ encoder:
     position: ec0.s$(ENC_SID).touchProbePositionPos$(ENC_CH=01)_1
     control: 0
     status: 1
-    armCmd: 21
+    armCmd: 17
     armBits: 5
   homing:
     type: 11
@@ -361,7 +361,7 @@ Meaning of the EL7062-specific latch settings:
 - `encoder.status`: touch-probe status word.
 - `encoder.latch.position`: latched touch-probe position.
 - `encoder.latch.control`: start bit in the touch-probe control word where the arm command is written.
-- `encoder.latch.armCmd`: value written to arm the touch probe. `21` means `0b10101`, which enables touch probe 1, selects trigger mode B1, and enables latching on positive edge.
+- `encoder.latch.armCmd`: value written to arm the touch probe. `17` means `0b10001`, which enables touch probe 1 and enables latching on positive edge.
 - `encoder.latch.armBits`: number of bits written from `armCmd`. For the EL7062 touch-probe example this is `5`.
 
 Use homing sequence `11` for low-limit plus index homing and `12` for high-limit plus index homing.

@@ -3,11 +3,11 @@
     "axis": {
       "axis.type=1": {
         "required": "axisSchema driveSchema encoderSchema trajectorySchema inputSchema",
-        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema controllerSchema controllerInnerSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema driveBrakeSchema trajectoryModuloSchema epicsMotorRecordPvtSchema axisAutoEnableSchema"
+        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema encoderTouchProbeSchema touchProbeSchema positionCompareSchema varSchema epicsSchema controllerSchema controllerInnerSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema driveBrakeSchema trajectoryModuloSchema epicsMotorRecordPvtSchema axisAutoEnableSchema"
       },
       "axis.type=2": {
         "required": "axisSchema encoderSchema trajectorySchema inputSchema",
-        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema varSchema epicsSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema trajectoryModuloSchema epicsMotorRecordPvtSchema axisAutoEnableSchema"
+        "optional": "metaSchema homingSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema encoderTouchProbeSchema touchProbeSchema positionCompareSchema varSchema epicsSchema axisPlcSchema softlimitsSchema monitoringLagSchema monitoringTargetSchema monitoringVelocitySchema monitoringVelocityTimeSchema monitoringVelocityDifferenceSchema monitoringStallSchema trajectoryModuloSchema epicsMotorRecordPvtSchema axisAutoEnableSchema"
       }
     },
     "plc": {
@@ -19,7 +19,7 @@
     "encoder": {
       "meta.schemaNumber=0": {
         "required": "encoderSchema",
-        "optional": "metaSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema"
+        "optional": "metaSchema encoderHomingSchema encoderLutSchema encoderDelayCompSchema encoderLatchSchema encoderTouchProbeSchema touchProbeSchema"
       }
     }
   },
@@ -620,6 +620,141 @@
         "type": "integer",
         "required": false,
         "default": 1
+      }
+    }
+  },
+  "encoderTouchProbeSchema": {
+    "identifier": "encoder.touchProbe",
+    "schema": {
+      "encoder.touchProbe.position": {
+        "type": "string",
+        "required": true
+      },
+      "encoder.touchProbe.timestamp": {
+        "type": "string",
+        "required": false
+      },
+      "encoder.touchProbe.control": {
+        "type": "string",
+        "required": true
+      },
+      "encoder.touchProbe.controlBit": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "encoder.touchProbe.status": {
+        "type": "string",
+        "required": true
+      },
+      "encoder.touchProbe.statusBit": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "encoder.touchProbe.armCmd": {
+        "type": "integer",
+        "required": false,
+        "default": 17
+      },
+      "encoder.touchProbe.armBits": {
+        "type": "integer",
+        "required": false,
+        "default": 5
+      }
+    }
+  },
+  "touchProbeSchema": {
+    "identifier": "touchProbe",
+    "schema": {
+      "touchProbe.position": {
+        "type": "string",
+        "required": true
+      },
+      "touchProbe.timestamp": {
+        "type": "string",
+        "required": false
+      },
+      "touchProbe.control": {
+        "type": "string",
+        "required": true
+      },
+      "touchProbe.controlBit": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "touchProbe.status": {
+        "type": "string",
+        "required": true
+      },
+      "touchProbe.statusBit": {
+        "type": "integer",
+        "required": false,
+        "default": 0
+      },
+      "touchProbe.armCmd": {
+        "type": "integer",
+        "required": false,
+        "default": 17
+      },
+      "touchProbe.armBits": {
+        "type": "integer",
+        "required": false,
+        "default": 5
+      }
+    }
+  },
+  "positionCompareSchema": {
+    "identifier": "positionCompare",
+    "schema": {
+      "positionCompare.output": {
+        "type": "string",
+        "required": true
+      },
+      "positionCompare.activate": {
+        "type": "string",
+        "required": true
+      },
+      "positionCompare.startTime": {
+        "type": "string",
+        "required": true
+      },
+      "positionCompare.minLeadMs": {
+        "type": "float",
+        "required": false,
+        "default": 2.0,
+        "min": 0
+      },
+      "positionCompare.maxLeadMs": {
+        "type": "float",
+        "required": false,
+        "default": 100.0,
+        "min": 0
+      },
+      "positionCompare.activateIdle": {
+        "type": "integer",
+        "required": false,
+        "default": 3,
+        "min": 0
+      },
+      "positionCompare.activateSchedule": {
+        "type": "integer",
+        "required": false,
+        "default": 0,
+        "min": 0
+      },
+      "positionCompare.pulseWidthMs": {
+        "type": "float",
+        "required": false,
+        "default": 0.0,
+        "min": 0
+      },
+      "positionCompare.resetValue": {
+        "type": "integer",
+        "required": false,
+        "default": 0,
+        "min": 0
       }
     }
   },

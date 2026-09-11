@@ -26,6 +26,8 @@ class Schema:
             'drive',
             'controller',
             'trajectory',
+            'positionCompare',
+            'touchProbe',
             'input',
             'axisPlc',
             'homing',
@@ -37,6 +39,8 @@ class Schema:
             'epics',
             'encoder',
             'trajectory',
+            'positionCompare',
+            'touchProbe',
             'input',
             'axisPlc',
             'homing',
@@ -56,7 +60,7 @@ class Schema:
     }
 
     encSchemaDict = {
-        0: ['encoder']
+        0: ['encoder', 'touchProbe']
     }
 
     def get_schema(self, keys):
@@ -267,6 +271,21 @@ class Schema:
         }
     }
 
+    touchProbeSchema = {
+        'type': 'dict',
+        'required': False,
+        'schema': {
+            'position': {'required': True, 'type': 'string'},
+            'timestamp': {'type': 'string'},
+            'control': {'required': True, 'type': 'string'},
+            'controlBit': {'type': 'integer', 'default': 0},
+            'status': {'required': True, 'type': 'string'},
+            'statusBit': {'type': 'integer', 'default': 0},
+            'armCmd': {'type': 'integer', 'default': 17},
+            'armBits': {'type': 'integer', 'default': 5},
+        }
+    }
+
     encoderSchema = {
         'type': 'dict',
         'required': True,
@@ -325,6 +344,7 @@ class Schema:
                     'status': {'type': 'integer', 'default': 0},
                 }
             },
+            'touchProbe': touchProbeSchema,
             'primary': {'type': ['boolean', 'integer' ]},
             'homing': homingSchema,
             'useAsCSPDrvEnc': {'type': ['boolean', 'integer' ]},
@@ -369,6 +389,22 @@ class Schema:
                     'time': {'type': 'integer', 'min': 0},
                 }
             },
+        }
+    }
+
+    positionCompareSchema = {
+        'type': 'dict',
+        'required': False,
+        'schema': {
+            'output': {'required': True, 'type': 'string'},
+            'activate': {'required': True, 'type': 'string'},
+            'startTime': {'required': True, 'type': 'string'},
+            'minLeadMs': {'type': 'float', 'min': 0, 'default': 2.0},
+            'maxLeadMs': {'type': 'float', 'min': 0, 'default': 100.0},
+            'activateIdle': {'type': 'integer', 'min': 0, 'default': 3},
+            'activateSchedule': {'type': 'integer', 'min': 0, 'default': 0},
+            'pulseWidthMs': {'type': 'float', 'min': 0, 'default': 0.0},
+            'resetValue': {'type': 'integer', 'min': 0, 'default': 0},
         }
     }
 
@@ -563,6 +599,8 @@ class Schema:
         'drive': driveSchema,
         'controller': controllerSchema,
         'trajectory': trajectorySchema,
+        'touchProbe': touchProbeSchema,
+        'positionCompare': positionCompareSchema,
         'input': inputSchema,
         'axisPlc': axisPlcSchema,
         'plc': plcSchema,

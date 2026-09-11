@@ -96,8 +96,8 @@ Need to be able to write a value at a certain bit-offset location in the control
        position: ec0.s$(ENC_SID).touchProbePositionPos$(ENC_CH=01)_1 # Link to latched value. Used for some homing seqs
        control:  0                                        # Start bit in encoder control word to arm latch. Used for some homing seqs
        status: 1                                          # Bit in encoder status word for latch triggered status. Used for some homing seqs
-NEW    armValue: 21  or 0b10101 or 0x15                   # Value to write at encoder.control.control , see table above 0b00010101 = 21
-NEW    armValueBits: 8                                    # bit count to write to encoder.control.control
+NEW    armValue: 17  or 0b10001 or 0x11                   # Value to write at encoder.control.control, touch probe 1 positive edge
+NEW    armValueBits: 5                                    # bit count to write to encoder.control.control
      homing:
        type: 11                                           # Homing sequence type
        position: 0                                        # Position to reference encoder to

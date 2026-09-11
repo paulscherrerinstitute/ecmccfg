@@ -1,0 +1,22 @@
+#- =============================================================================
+#- Touch probe
+#- =============================================================================
+{%- set _touchProbe = none %}
+{%- if (encoder is defined) and (encoder.touchProbe is defined) %}
+    {%- set _touchProbe = encoder.touchProbe %}
+{%- elif touchProbe is defined %}
+    {%- set _touchProbe = touchProbe %}
+{%- endif %}
+{%- if (encoder is defined) and (encoder.touchProbe is defined) and (touchProbe is defined) %}
+    # ERROR: Duplicate touch-probe configuration. Prefer encoder.touchProbe; top-level touchProbe is kept only as a compatibility alias.
+    ecmcExit
+{%- endif %}
+{%- if _touchProbe is not none %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ _touchProbe.position }}","ax${ECMC_AXIS_NO}.enc.touchprobepos")"
+    {%- if _touchProbe.timestamp is defined %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ _touchProbe.timestamp }}","ax${ECMC_AXIS_NO}.enc.touchprobetimestamp")"
+    {%- endif %}
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ _touchProbe.control }}.{{ _touchProbe.controlBit|default(0)|int }}","ax${ECMC_AXIS_NO}.enc.touchprobecontrol")"
+    ecmcConfigOrDie "Cfg.LinkEcEntryToObject("{{ _touchProbe.status }}.{{ _touchProbe.statusBit|default(0)|int }}","ax${ECMC_AXIS_NO}.enc.touchprobestatus")"
+    ecmcConfigOrDie "Cfg.SetAxisEncTouchProbeArmControlWord(${ECMC_AXIS_NO},{{ _touchProbe.armCmd|default(17)|int }},{{ _touchProbe.armBits|default(5)|int }})"
+{%- endif %}
