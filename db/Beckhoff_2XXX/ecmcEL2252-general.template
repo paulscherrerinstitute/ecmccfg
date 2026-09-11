@@ -16,19 +16,19 @@ record(longin,"${ECMC_P}Dev-Ctrl-RB"){
   field(SCAN, "$(SCAN=I/O Intr)")
 }
 
-record(ao,"${ECMC_P}Dev-StartTime"){
+record(int64out,"${ECMC_P}Dev-StartTime"){
   info(asyn:READBACK,"1")
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=$(HWTYPE): Control word)")
-  field(DTYP, "asynFloat64")
-  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).startTime=")
+  field(DESC, "$(DESC=$(HWTYPE): DC start time)")
+  field(DTYP, "asynInt64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ec$(MASTER_ID).s$(SLAVE_POS).startTime=")
   field(SCAN, "Passive")
 }
 
-record(ai,"${ECMC_P}Dev-StartTime-RB"){
+record(int64in,"${ECMC_P}Dev-StartTime-RB"){
   field(PINI, "$(PINI=YES)")
-  field(DESC, "$(DESC=$(HWTYPE): Control word)")
-  field(DTYP, "asynFloat64")
-  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).startTime?")
+  field(DESC, "$(DESC=$(HWTYPE): DC start time)")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ec$(MASTER_ID).s$(SLAVE_POS).startTime?")
   field(SCAN, "$(SCAN=I/O Intr)")
 }
