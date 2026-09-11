@@ -335,6 +335,14 @@ optional
   * `armCmd`: arm command value, default 17 for EL7062/ED7062 TP1 positive edge
   * `armBits`: number of bits written from `armCmd`, default 5
 
+When `encoder.touchProbe` is configured, ecmccfg also loads optional
+encoder-specific touch-probe PVs. The main readbacks are:
+`<Axis>-Enc0<ENC>-TP-Valid`, `-TP-Seq`, `-TP-Pos`, `-TP-TimeValid`,
+`-TP-TimeRaw`, `-TP-EventTimeNs`, and `-TP-Armed`. The matching caQtDM panel is
+`ecmcEncTouchProbe.ui`. A static config marker, `<Axis>-Enc0<ENC>-TP-HasTP`, is
+also loaded with `VAL=1` and can be used by GUIs to show or hide touch-probe
+controls.
+
 ```yaml
 encoder:
   numerator: 360
@@ -543,6 +551,15 @@ AxisPrintPositionCompare(axis)
 
 `direction` is `1` for positive crossing, `-1` for negative crossing and `0`
 for either direction.
+
+When `positionCompare` is configured, ecmccfg also loads optional axis-specific
+position-compare PVs. The main readbacks are:
+`<Axis>-PC-State`, `-PC-Reason`, `-PC-Seq`, `-PC-Target`, `-PC-Pos`,
+`-PC-Vel`, `-PC-Dir`, `-PC-ScheduledTimeNs`, `-PC-LeadTimeNs`,
+`-PC-PulseWidthNs`, `-PC-ResetTimeNs`, `-PC-LastActivate`, and
+`-PC-LastOutput`. The matching caQtDM panel is `ecmcAxisPositionCompare.ui`.
+A static config marker, `<Axis>-PC-HasPC`, is also loaded with `VAL=1` and can be
+used by GUIs to show or hide position-compare controls.
 
 ## input
 Links to the binary input sensors for limit switches, home sensor and external interlock.

@@ -5614,6 +5614,44 @@
       <string/>
      </property>
     </widget>
+    <widget class="caFrame" name="caframe_2">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>60</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="visibility">
+      <enum>caFrame::IfNotZero</enum>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-HasPC</string>
+     </property>
+     <widget class="caRelatedDisplay" name="TP">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="label">
+       <string notr="true">PC</string>
+      </property>
+      <property name="labels">
+       <string>Pos. Cmp</string>
+      </property>
+      <property name="files">
+       <string>ecmcAxisPositionCompare.ui</string>
+      </property>
+      <property name="args">
+       <string>DEV=$(DEV),Axis=$(Axis),IOC=$(IOC);</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QTabWidget" name="tabWidget_2">

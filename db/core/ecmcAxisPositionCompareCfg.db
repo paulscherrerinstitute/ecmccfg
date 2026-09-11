@@ -1,0 +1,8 @@
+# Static config marker loaded only when the axis YAML contains positionCompare.
+# This is intentionally not an asyn/runtime PV; GUIs can use it to show PC tools.
+
+record(ai,"${P}${AXIS_NAME}-PC-HasPC") {
+  field(DESC, "Axis has position compare")
+  field(PINI, "YES")
+  field(VAL,  "1")
+}

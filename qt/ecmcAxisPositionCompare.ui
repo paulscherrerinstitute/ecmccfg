@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PositionCompare</class>
+ <widget class="QWidget" name="PositionCompare">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>520</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Position compare $(Axis)</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelDir">
+     <property name="text">
+      <string>Direction</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="labelLead">
+     <property name="text">
+      <string>Lead time [ns]</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <widget class="caLineEdit" name="lastOutput">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-LastOutput</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="caLineEdit" name="direction">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Dir</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="caLineEdit" name="reason">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Reason</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="labelSched">
+     <property name="text">
+      <string>Scheduled time [ns]</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="caLineEdit" name="pulseWidth">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-PulseWidthNs</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="0">
+    <widget class="QLabel" name="labelTargetCmd">
+     <property name="text">
+      <string>Target cmd</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0">
+    <widget class="QLabel" name="labelOutput">
+     <property name="text">
+      <string>Last output</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="1">
+    <widget class="caMessageButton" name="cancelCmd">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-CancelCmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Cancel</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">0</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true">1</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="caLineEdit" name="state">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-State</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="labelPulse">
+     <property name="text">
+      <string>Pulse width [ns]</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="caLineEdit" name="target">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Target</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QLabel" name="labelActivate">
+     <property name="text">
+      <string>Last activate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="labelReset">
+     <property name="text">
+      <string>Reset time [ns]</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="caLineEdit" name="scheduledTime">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-ScheduledTimeNs</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="caLineEdit" name="velocity">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Vel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="labelAcc">
+     <property name="text">
+      <string>Acceleration</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="caLineEdit" name="acceleration">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Acc</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="labelPos">
+     <property name="text">
+      <string>Position</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="labelSampleAge">
+     <property name="text">
+      <string>Sample age [ns]</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="0">
+    <widget class="QLabel" name="labelOutputCmd">
+     <property name="text">
+      <string>Output cmd</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="labelSeq">
+     <property name="text">
+      <string>Sequence</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0" colspan="2">
+    <widget class="QLabel" name="labelCommands">
+     <property name="text">
+      <string>Commands</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="0">
+    <widget class="caMessageButton" name="armCmd">
+     <property name="text">
+      <string>Arm</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-ArmCmd</string>
+     </property>
+     <property name="label">
+      <string notr="true">Arm</string>
+     </property>
+     <property name="releaseMessage">
+      <string notr="true">0</string>
+     </property>
+     <property name="pressMessage">
+      <string notr="true">1</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="caLineEdit" name="position">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Pos</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="caLineEdit" name="resetTime">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-ResetTimeNs</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="caLineEdit" name="sampleAge">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-SampleAgeNs</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="labelTarget">
+     <property name="text">
+      <string>Target</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="caLineEdit" name="sequence">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-Seq</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelReason">
+     <property name="text">
+      <string>Reason</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="caLineEdit" name="lastActivate">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-LastActivate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelState">
+     <property name="text">
+      <string>State</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="labelVel">
+     <property name="text">
+      <string>Velocity</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="caLineEdit" name="leadTime">
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-LeadTimeNs</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="0">
+    <widget class="QLabel" name="labelDirCmd">
+     <property name="text">
+      <string>Direction cmd (-1/0/1)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1">
+    <widget class="caTextEntry" name="catextentry_13">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-TargetCmd</string>
+     </property>
+     <property name="keepFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="1">
+    <widget class="caTextEntry" name="catextentry_14">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-DirCmd</string>
+     </property>
+     <property name="keepFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1">
+    <widget class="caTextEntry" name="catextentry_15">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(DEV):$(Axis)-PC-OutputCmd</string>
+     </property>
+     <property name="keepFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caTextEntry</class>
+   <extends>caLineEdit</extends>
+   <header>caTextEntry</header>
+  </customwidget>
+  <customwidget>
+   <class>caMessageButton</class>
+   <extends>QPushButton</extends>
+   <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

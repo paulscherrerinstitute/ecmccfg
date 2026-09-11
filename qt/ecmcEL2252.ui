@@ -36,7 +36,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
+     <y>50</y>
      <width>111</width>
      <height>71</height>
     </rect>
@@ -179,7 +179,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>100</y>
+     <y>50</y>
      <width>32</width>
      <height>22</height>
     </rect>
@@ -188,55 +188,11 @@
     <string>BO01</string>
    </property>
   </widget>
-  <widget class="caTextEntry" name="catextentry_13">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>270</y>
-     <width>91</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>20</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>20</height>
-    </size>
-   </property>
-   <property name="readOnly">
-    <bool>false</bool>
-   </property>
-   <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Dev-StartTime</string>
-   </property>
-   <property name="keepFocus">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="caLabel" name="calabel_6">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>250</y>
-     <width>51</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>StartTime</string>
-   </property>
-  </widget>
   <widget class="caLabel" name="calabel_8">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>330</y>
+     <y>120</y>
      <width>32</width>
      <height>22</height>
     </rect>
@@ -249,7 +205,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>350</y>
+     <y>120</y>
      <width>111</width>
      <height>71</height>
     </rect>
@@ -388,13 +344,73 @@
     </property>
    </widget>
   </widget>
+  <widget class="caLineEdit" name="efuCurr">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>300</y>
+     <width>101</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Dev-StartTime-RB</string>
+   </property>
+  </widget>
+  <widget class="caTextEntry" name="catextentry_13">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="readOnly">
+    <bool>false</bool>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Dev-StartTime</string>
+   </property>
+   <property name="keepFocus">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_11">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>41</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Activate</string>
+   </property>
+  </widget>
   <widget class="caByteController" name="cabytecontroller_2">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>230</y>
+     <y>220</y>
      <width>20</width>
-     <height>21</height>
+     <height>16</height>
     </rect>
    </property>
    <property name="channel" stdset="0">
@@ -411,7 +427,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>230</y>
+     <y>220</y>
      <width>20</width>
      <height>16</height>
     </rect>
@@ -423,33 +439,17 @@
     <number>1</number>
    </property>
   </widget>
-  <widget class="caLabel" name="calabel_11">
+  <widget class="caLabel" name="calabel_12">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>230</y>
-     <width>41</width>
+     <x>0</x>
+     <y>250</y>
+     <width>51</width>
      <height>22</height>
     </rect>
    </property>
    <property name="text">
-    <string>Activate</string>
-   </property>
-  </widget>
-  <widget class="caLineEdit" name="efuCurr">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>300</y>
-     <width>90</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-   <property name="channel" stdset="0">
-    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Dev-StartTime-RB</string>
+    <string>DC-Time [ns]</string>
    </property>
   </widget>
  </widget>

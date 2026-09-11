@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>200</width>
-    <height>767</height>
+    <height>793</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>5</y>
      <width>181</width>
-     <height>651</height>
+     <height>681</height>
     </rect>
    </property>
    <property name="title">
@@ -1351,6 +1351,44 @@
      <enum>caLineEdit::hexadecimal</enum>
     </property>
    </widget>
+   <widget class="caFrame" name="caframe">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>650</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="visibility">
+     <enum>caFrame::IfNotZero</enum>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(DEV):$(Axis)-Enc$(ENC_ID)-TP-HasTP</string>
+    </property>
+    <widget class="caRelatedDisplay" name="TP">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="label">
+      <string notr="true">TP</string>
+     </property>
+     <property name="labels">
+      <string>TP</string>
+     </property>
+     <property name="files">
+      <string>ecmcEncTouchProbe.ui</string>
+     </property>
+     <property name="args">
+      <string>ENC_ID=$(ENC_ID),DEV=$(DEV),Axis=$(Axis),IOC=$(IOC);</string>
+     </property>
+    </widget>
+   </widget>
    <zorder>carelateddisplay</zorder>
    <zorder>groupBox_2</zorder>
    <zorder>calabel_73</zorder>
@@ -1372,12 +1410,13 @@
    <zorder>carelateddisplay_2</zorder>
    <zorder>calabel_85</zorder>
    <zorder>calineedit_56</zorder>
+   <zorder>caframe</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>660</y>
+     <y>690</y>
      <width>181</width>
      <height>91</height>
     </rect>
@@ -1510,6 +1549,12 @@
    <class>caMessageButton</class>
    <extends>QPushButton</extends>
    <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>caLabel</class>

@@ -1,0 +1,8 @@
+# Static config marker loaded only when this encoder YAML contains touchProbe.
+# This is intentionally not an asyn/runtime PV; GUIs can use it to show TP tools.
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-HasTP") {
+  field(DESC, "Encoder has touch probe")
+  field(PINI, "YES")
+  field(VAL,  "1")
+}

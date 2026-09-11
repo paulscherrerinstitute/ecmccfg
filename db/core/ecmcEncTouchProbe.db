@@ -1,0 +1,77 @@
+# Optional touch-probe readbacks for one encoder.
+# Loaded only when the encoder YAML contains a touchProbe section.
+
+record(longin,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-Valid"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enc.touchprobe.valid$(ENC_NO)?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe valid")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-Seq"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).enc.touchprobe.sequence$(ENC_NO)?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe sequence")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-Pos"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).enc.touchprobe.position$(ENC_NO)?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe position")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-TimeValid"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enc.touchprobe.timestampvalid$(ENC_NO)?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe timestamp valid")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-TimeRaw"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).enc.touchprobe.timestampraw$(ENC_NO)?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe raw timestamp")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-EventTimeNs"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).enc.touchprobe.eventtimens$(ENC_NO)?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe event time")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-Armed"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enc.touchprobe.armed$(ENC_NO)?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Touch probe armed")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(bo,"${P}${AXIS_NAME}-Enc0$(ENC_NO)-TP-ArmCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Touch probe arm command")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).enc.touchprobe.armcmd$(ENC_NO)?")
+  field(ZNAM, "Disarm")
+  field(ONAM, "Arm")
+  field(SCAN, "Passive")
+}

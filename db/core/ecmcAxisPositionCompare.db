@@ -1,0 +1,236 @@
+# Optional position-compare readbacks for one axis.
+# Loaded only when the axis YAML contains a positionCompare section.
+
+record(mbbi,"${P}${AXIS_NAME}-PC-State"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).poscomp.state?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare state")
+  field(TSE,  "$(TSE=-2)")
+  field(ZRST, "DISABLED")
+  field(ZRVL, "0")
+  field(ONST, "ARMED")
+  field(ONVL, "1")
+  field(TWST, "QUEUED")
+  field(TWVL, "2")
+  field(THST, "FIRED")
+  field(THVL, "3")
+  field(FRST, "MISSED")
+  field(FRVL, "4")
+  field(FVST, "ERROR")
+  field(FVVL, "5")
+  field(SXST, "RESET_QUEUED")
+  field(SXVL, "6")
+}
+
+record(mbbi,"${P}${AXIS_NAME}-PC-Reason"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).poscomp.reason?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare reason")
+  field(TSE,  "$(TSE=-2)")
+  field(ZRST, "NONE")
+  field(ZRVL, "0")
+  field(ONST, "ARMED")
+  field(ONVL, "1")
+  field(TWST, "IDLE_CYCLE")
+  field(TWVL, "2")
+  field(THST, "WAIT_DIR")
+  field(THVL, "3")
+  field(FRST, "WAIT_VEL")
+  field(FRVL, "4")
+  field(FVST, "TOO_FAR")
+  field(FVVL, "5")
+  field(SXST, "TOO_LATE")
+  field(SXVL, "6")
+  field(SVST, "TOO_CLOSE")
+  field(SVVL, "7")
+  field(EIST, "SCHED_OUT")
+  field(EIVL, "8")
+  field(NIST, "SCHED_RESET")
+  field(NIVL, "9")
+  field(TEST, "FIRED")
+  field(TEVL, "10")
+  field(ELST, "RESET_DONE")
+  field(ELVL, "11")
+  field(TVST, "ERROR")
+  field(TVVL, "12")
+  field(TTST, "MISSED")
+  field(TTVL, "13")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-Seq"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.sequence?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare sequence")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${P}${AXIS_NAME}-PC-Target"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poscomp.target?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare target")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${P}${AXIS_NAME}-PC-Pos"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poscomp.position?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare position")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${P}${AXIS_NAME}-PC-Vel"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poscomp.velocity?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}/s")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare velocity")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ai,"${P}${AXIS_NAME}-PC-Acc"){
+  field(PINI, "1")
+  field(DTYP, "asynFloat64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poscomp.acceleration?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}/s^2")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare acceleration")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(longin,"${P}${AXIS_NAME}-PC-Dir"){
+  field(PINI, "1")
+  field(DTYP, "asynInt32")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).poscomp.direction?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Position compare direction")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-ScheduledTimeNs"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.scheduledtimens?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Scheduled event time")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-LeadTimeNs"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.leadtimens?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Compare lead time")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-SampleAgeNs"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.sampleagens?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Compare sample age")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-PulseWidthNs"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.pulsewidthns?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Compare pulse width")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-ResetTimeNs"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.resettimens?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Scheduled reset time")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-LastActivate"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.lastactivate?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Last activate value")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(int64in,"${P}${AXIS_NAME}-PC-LastOutput"){
+  field(PINI, "1")
+  field(DTYP, "asynInt64")
+  field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.lastoutput?")
+  field(SCAN, "I/O Intr")
+  field(DESC, "Last output value")
+  field(TSE,  "$(TSE=-2)")
+}
+
+record(ao,"${P}${AXIS_NAME}-PC-TargetCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Position compare target")
+  field(DTYP, "asynFloat64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ax$(AXIS_NO).poscomp.targetcmd?")
+  field(PREC, "${PREC=3}")
+  field(EGU,  "${EGU=mm}")
+  field(SCAN, "Passive")
+}
+
+record(longout,"${P}${AXIS_NAME}-PC-DirCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Position compare direction")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).poscomp.directioncmd?")
+  field(DRVL, "-1")
+  field(DRVH, "1")
+  field(SCAN, "Passive")
+}
+
+record(int64out,"${P}${AXIS_NAME}-PC-OutputCmd"){
+  info(asyn:READBACK,"1")
+  field(DESC, "Position compare output")
+  field(DTYP, "asynInt64")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ax$(AXIS_NO).poscomp.outputcmd?")
+  field(VAL,  "1")
+  field(SCAN, "Passive")
+}
+
+record(bo,"${P}${AXIS_NAME}-PC-ArmCmd"){
+  field(DESC, "Arm position compare")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).poscomp.armcmd?")
+  field(ZNAM, "Idle")
+  field(ONAM, "Arm")
+  field(SCAN, "Passive")
+  field(HIGH, "0.1")
+}
+
+record(bo,"${P}${AXIS_NAME}-PC-CancelCmd"){
+  field(DESC, "Cancel position compare")
+  field(DTYP, "asynInt32")
+  field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ax$(AXIS_NO).poscomp.cancelcmd?")
+  field(ZNAM, "Idle")
+  field(ONAM, "Cancel")
+  field(SCAN, "Passive")
+  field(HIGH, "0.1")
+}
