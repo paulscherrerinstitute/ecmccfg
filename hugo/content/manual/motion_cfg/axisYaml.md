@@ -322,8 +322,18 @@ optional
 - `positionFilterEnable`: position filter enable
 - `latch`:
   * `position`: ''
+  * `timestamp`: ''
   * `control`: ''
   * `status`: ''
+- `touchProbe`: touch-probe mapping for use outside homing
+  * `position`: latched touch-probe position entry
+  * `timestamp`: optional 32/64-bit DC timestamp entry for the same edge
+  * `control`: touch-probe control word entry
+  * `controlBit`: first control bit to write, default 0
+  * `status`: touch-probe status word entry
+  * `statusBit`: captured-event status bit, default 0
+  * `armCmd`: arm command value, default 17 for EL7062/ED7062 TP1 positive edge
+  * `armBits`: number of bits written from `armCmd`, default 5
 
 ```yaml
 encoder:
@@ -348,8 +358,18 @@ encoder:
   # positionFilterEnable: false
   # latch:
   #   position: ''
+  #   timestamp: ''
   #   control: ''
   #   status: ''
+  # touchProbe:
+  #   position: ec0.s$(ENC_SLAVE).touchProbePositionPos01_1
+  #   timestamp: ec0.s$(ENC_SLAVE).touchProbeTimestampPos01_1
+  #   control: ec0.s$(ENC_SLAVE).touchProbeControl01
+  #   controlBit: 0
+  #   status: ec0.s$(ENC_SLAVE).touchProbeStatus01
+  #   statusBit: 0
+  #   armCmd: 17
+  #   armBits: 5
 ```
 
 If `encoder.position` or the drive setpoint/actual-position entry uses `F32` or `F64`
@@ -480,6 +500,49 @@ trajectory:
   #   range: 0
   #   type: 0
 ```
+
+## positionCompare
+Optional one-shot timed output at an axis position crossing. This is typically
+used with an EL2252 timestamp-scheduled digital output.
+
+mandatory
+
+- `output`: EtherCAT output entry to schedule, for example `binaryOutput01`
+- `activate`: EtherCAT activation/control entry
+- `startTime`: EtherCAT DC start-time entry. Use a 64-bit integer entry/PV for EL2252.
+
+optional
+
+- `minLeadMs`: minimum allowed scheduling lead time in milliseconds, default 2.0
+- `maxLeadMs`: maximum allowed scheduling lead time in milliseconds, default 100.0
+- `activateIdle`: activation value while idle, default 3 for EL2252
+- `activateSchedule`: activation value written for one cycle to load a schedule, default 0 for EL2252
+- `pulseWidthMs`: automatic reset pulse width in milliseconds, default 0. Fractions such as 0.5 are allowed.
+- `resetValue`: output value for the automatic reset, default 0
+
+```yaml
+positionCompare:
+  output: ec0.s$(OUT_SLAVE).binaryOutput01
+  activate: ec0.s$(OUT_SLAVE).activate
+  startTime: ec0.s$(OUT_SLAVE).startTime
+  minLeadMs: 2.0
+  maxLeadMs: 100.0
+  activateIdle: 3
+  activateSchedule: 0
+  pulseWidthMs: 10.0
+  resetValue: 0
+```
+
+Arm and inspect it at runtime with:
+
+```text
+AxisPositionCompareArm(axis,target,direction,outputValue)
+AxisPositionCompareCancel(axis)
+AxisPrintPositionCompare(axis)
+```
+
+`direction` is `1` for positive crossing, `-1` for negative crossing and `0`
+for either direction.
 
 ## input
 Links to the binary input sensors for limit switches, home sensor and external interlock.
@@ -764,6 +827,15 @@ encoder:
     status: 0                                         # Bit in encoder status word for latch triggered status. Used for some homing seqs
     armCmd:                                           # Value in dec to arm latch/touch probe to write to encoder.control
     armBits:                                          # Bit size of encoder.latch.armCmd
+  touchProbe:                                         # Optional touch-probe mapping, separate from homing latch
+    position: ec0.s$(ENC_SLAVE).touchProbePositionPos01_1 # Latched touch-probe position
+    timestamp: ec0.s$(ENC_SLAVE).touchProbeTimestampPos01_1 # Optional 32/64-bit DC timestamp for same edge
+    control: ec0.s$(ENC_SLAVE).touchProbeControl01    # Touch-probe control word
+    controlBit: 0                                     # First control bit to write
+    status: ec0.s$(ENC_SLAVE).touchProbeStatus01      # Touch-probe status word
+    statusBit: 0                                      # Captured-event status bit
+    armCmd: 17                                        # EL7062/ED7062 TP1 positive-edge arm command
+    armBits: 5                                        # Number of bits written from armCmd
   primary: True                                       # Use this encoder as primary (for control)
   useAsCSPDrvEnc: True                                # Use this encoder as CSP drive encoder (ecmc controller enabled in CSP)
 # allowOverUnderFlow: True                            # Allow over/under flow of encoder raw counter (default true). Set to false for linear encoders.
@@ -827,6 +899,17 @@ trajectory:
   modulo:
     range: 360                                        # Modulo range 0..360
     type: 0                                           # Modulo type
+
+positionCompare:                                      # Optional timed output at a position crossing
+  output: ec0.s$(OUT_SLAVE).binaryOutput01            # Output value entry, for example EL2252 BO1
+  activate: ec0.s$(OUT_SLAVE).activate                # Timed-output activation/control entry
+  startTime: ec0.s$(OUT_SLAVE).startTime              # 64-bit DC start-time entry
+  minLeadMs: 2.0                                      # Minimum scheduling lead time [ms]
+  maxLeadMs: 100.0                                    # Maximum scheduling lead time [ms]
+  activateIdle: 3                                     # EL2252 idle/no-new-schedule value
+  activateSchedule: 0                                 # EL2252 schedule/load value, written for one cycle
+  pulseWidthMs: 10.0                                  # Optional auto-reset pulse width [ms], 0 disables
+  resetValue: 0                                       # Output value for auto reset
 
 #  Limits can be overridden with plc-code by setting input.limit.forward or input.limit.backward to 'plcOverride', then 'ax<id>.mon.lowlim' and/or 'ax<id>.mon.highlim' needs to be written to in plc code (1 means limit OK).
 

@@ -74,6 +74,24 @@ Use automatic discovery where the slave reports enough information. Put
 terminal-specific overrides in its ecmccfg hardware snippet so IOC startup
 remains hardware-independent.
 
+## DC/SYNC shift and scheduling margin
+
+The DC/SYNC shift changes where the slave input sample or output application
+lands inside the EtherCAT cycle. Even when the timestamp conversion is correct,
+this phase can affect the practical timing margin:
+
+- If an input sample is too close to frame transfer or terminal calculation
+  completion, the visible PDO value can move by one cycle.
+- If a timed output is scheduled with too little lead time relative to the
+  terminal's SYNC phase, the terminal may not reliably accept the new schedule.
+- Adding terminals changes frame length and can move host send/receive timing,
+  so margins that are only barely sufficient may become unstable.
+
+Prefer hardware timestamps and scheduled-output start times for sub-cycle
+accuracy, but still choose a DC/SYNC shift that leaves comfortable margin around
+PDO transfer and terminal processing. The best shift is terminal-, topology- and
+cycle-rate-dependent and should be verified on the real system.
+
 Inspect the resolved result:
 
 ```text

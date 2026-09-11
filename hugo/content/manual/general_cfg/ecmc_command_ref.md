@@ -175,6 +175,14 @@ chapter = false
 | `Cfg.SetAxisEncVelFilterSize(<int>,<int>)` | Set size of encoder velocity filter. |
 | `AxisTouchProbeArm(<axis>,<encoder>,<arm>)` | Arm or disarm the selected axis encoder touch probe. Encoder index starts at 1. |
 | `AxisPrintTouchProbe(<axis>,<encoder>)` | Print the latest coherent latched position and optional DC timestamp. |
+| `Cfg.SetAxisEncTouchProbeArmControlWord(<axis>,<control>,<bits>)` | Configure the encoder touch-probe arm command word. |
+| `AxisPositionCompareArm(<axis>,<target>,<direction>,<outputValue>)` | Arm a one-shot position compare. Direction is `1` positive, `-1` negative, `0` either. |
+| `AxisPositionCompareCancel(<axis>)` | Cancel the armed/scheduled position compare. |
+| `AxisPrintPositionCompare(<axis>)` | Print position-compare state, reason, sequence, target, scheduled time, lead time, pulse/reset settings and last output/activate values. |
+| `Cfg.LinkEcEntryToAxisPositionCompare(<entryPath>,<axis>,<compareEntryIndex>)` | Link an EtherCAT entry to position compare. Entry index `0`=output, `1`=activate, `2`=startTime. |
+| `Cfg.LinkEcEntryToAxisPositionCompare(<slaveBusPosition>,<entryId>,<axis>,<compareEntryIndex>,<entryBitIndex>)` | Link an EtherCAT entry or bit to position compare using slave and entry id. Entry index `0`=output, `1`=activate, `2`=startTime. |
+| `Cfg.AxisPositionCompareConfigure(<axis>,<minLeadNs>,<maxLeadNs>,<activateIdle>,<activateSchedule>)` | Configure position-compare lead-time window and activation values. |
+| `Cfg.AxisPositionCompareConfigure(<axis>,<minLeadNs>,<maxLeadNs>,<activateIdle>,<activateSchedule>,<pulseWidthNs>,<resetValue>)` | Configure position compare including automatic reset pulse width and reset value. |
 | `Cfg.SetAxisErrorId(<int>,<int>)` | Set axis error code. |
 | `Cfg.SetAxisHomeAcc(<int>,<float>)` | Set homing acceleration for current encoder beeing configured. |
 | `Cfg.SetAxisHomeDec(<int>,<float>)` | Set homing deceleration for current encoder beeing configured. |

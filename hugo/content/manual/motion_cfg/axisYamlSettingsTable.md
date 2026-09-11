@@ -105,10 +105,19 @@ Notes:
 | encoder.filter.position.size | Filter size for encoder value | Yes |
 | encoder.filter.position.enable | enable encoder value filter | Yes |
 | encoder.latch.position | Link to latched value. Used for some homing seqs | Yes |
+| encoder.latch.timestamp | Optional 32/64-bit DC timestamp for the same latch event | Yes |
 | encoder.latch.control | Bit in encoder control word to arm latch. Used for some homing seqs | Yes |
 | encoder.latch.status | Bit in encoder status word for latch triggered status. Used for some homing seqs | Yes |
-| encoder.latch.armCmd | Value in dec to arm latch/touch probe to write to encoder.control | Yes |
+| encoder.latch.armCmd | Value in dec to arm latch to write to encoder.control | Yes |
 | encoder.latch.armBits | Bit size of encoder.latch.armCmd | Yes |
+| encoder.touchProbe.position | Link to touch-probe latched position. Used for touch-probe functionality separate from homing latch. | Yes |
+| encoder.touchProbe.timestamp | Optional 32/64-bit DC timestamp for the same touch-probe edge | Yes |
+| encoder.touchProbe.control | Touch-probe control word entry | Yes |
+| encoder.touchProbe.controlBit | First bit in touch-probe control word to write `armBits` bits from `armCmd`; default 0 | Yes |
+| encoder.touchProbe.status | Touch-probe status word entry | Yes |
+| encoder.touchProbe.statusBit | Status bit for captured touch-probe event; default 0 | Yes |
+| encoder.touchProbe.armCmd | Value in dec to arm touch probe; default 17 for EL7062/ED7062 TP1 positive edge | Yes |
+| encoder.touchProbe.armBits | Bit size of encoder.touchProbe.armCmd; default 5 | Yes |
 | encoder.primary | Use this encoder as primary (for control) | Yes |
 | encoder.useAsCSPDrvEnc | Use this encoder as CSP drive encoder (ecmc controller enabled in CSP) | Yes |
 | encoder.allowOverUnderFlow | Allow over/under flow of encoder raw counter (default true). Set to false for linear encoders. | Yes |
@@ -158,6 +167,15 @@ Notes:
 | trajectory.jog.velocity | Default velocity for JOG (motor record) | No |
 | trajectory.modulo.range | Modulo range 0..360 | No |
 | trajectory.modulo.type | Modulo type | No |
+| positionCompare.output | EtherCAT output entry to schedule, for example an EL2252 binary output | Yes |
+| positionCompare.activate | EtherCAT activation/control entry used by the timed-output terminal | Yes |
+| positionCompare.startTime | EtherCAT DC start-time entry; use a 64-bit integer entry/PV for EL2252 | Yes |
+| positionCompare.minLeadMs | Minimum scheduling lead time [ms], default 2.0 | Yes |
+| positionCompare.maxLeadMs | Maximum scheduling lead time [ms], default 100.0 | Yes |
+| positionCompare.activateIdle | Activation value written while idle, default 3 for EL2252 | Yes |
+| positionCompare.activateSchedule | Activation value written for one cycle to load a schedule, default 0 for EL2252 | Yes |
+| positionCompare.pulseWidthMs | Optional automatic reset pulse width [ms], default 0. Fractions such as 0.5 are allowed. | Yes |
+| positionCompare.resetValue | Output value for automatic reset after pulseWidthMs, default 0 | Yes |
 | input.limit.forward | EtherCAT entry for low limit switch input | No |
 | input.limit.forwardPolarity | Polarity of forward limit switch | No |
 | input.limit.backward | EtherCAT entry for high limit switch input | No |

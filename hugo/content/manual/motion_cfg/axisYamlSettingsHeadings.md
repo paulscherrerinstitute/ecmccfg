@@ -107,12 +107,22 @@ For examples and configuration guidance, use [yaml configuration](../axisyaml/).
   - `velocity.enable` — Enable velocity filter.
   - `position.size` — Position filter size.
   - `position.enable` — Enable position filter.
-- `latch` (optional) — Latch/touch probe settings.
+- `latch` (optional) — Homing latch settings. For EL7062/ED7062 touch-probe use outside homing, prefer the separate `touchProbe` section.
   - `position` — Latched value link.
+  - `timestamp` — Optional DC timestamp for the same latch event.
   - `control` — Control bit to arm latch.
   - `status` — Status bit for latch triggered.
   - `armCmd` — Value written to `encoder.control` to arm latch.
   - `armBits` — Bit length of `armCmd`.
+- `touchProbe` (optional) — Encoder touch-probe mapping separate from homing latch.
+  - `position` — Latched touch-probe position entry.
+  - `timestamp` — Optional 32- or 64-bit DC timestamp entry for the same edge.
+  - `control` — Touch-probe control word entry.
+  - `controlBit` — First bit to write in the control word (default `0`).
+  - `status` — Touch-probe status word entry.
+  - `statusBit` — Status bit that indicates a captured event (default `0`).
+  - `armCmd` — Value written to arm the touch probe (default `17`, EL7062/ED7062 TP1 positive edge).
+  - `armBits` — Number of bits written from `armCmd` (default `5`).
 - `primary` (optional) — Use as primary encoder for control.
 - `useAsCSPDrvEnc` (optional) — Use as CSP drive encoder when controller enabled in CSP.
 - `allowOverUnderFlow` (optional) — Allow over/under flow of encoder raw counter (default true). Set to false for linear encoders.
@@ -164,6 +174,18 @@ For examples and configuration guidance, use [yaml configuration](../axisyaml/).
 - `jog.velocity` (optional) — Default jog velocity (motor record).
 - `modulo.range` (optional) — Modulo range.
 - `modulo.type` (optional) — Modulo type.
+
+## positionCompare
+
+- `output` (required) — EtherCAT output entry to schedule, for example an EL2252 binary output.
+- `activate` (required) — EtherCAT activation/control entry used by the timed-output terminal.
+- `startTime` (required) — EtherCAT DC start-time entry. Use a 64-bit integer PV/entry for EL2252 start time.
+- `minLeadMs` (optional) — Minimum allowed scheduling lead time in milliseconds (default `2.0`).
+- `maxLeadMs` (optional) — Maximum allowed scheduling lead time in milliseconds (default `100.0`).
+- `activateIdle` (optional) — Activation value written while idle (default `3` for EL2252).
+- `activateSchedule` (optional) — Activation value written for one cycle to load a new schedule (default `0` for EL2252).
+- `pulseWidthMs` (optional) — If greater than zero, schedule an automatic reset after this pulse width in milliseconds. Fractions such as `0.5` are allowed.
+- `resetValue` (optional) — Output value used for the automatic reset (default `0`).
 
 ## input
 - `limit.forward` (required) — Forward limit switch entry.
