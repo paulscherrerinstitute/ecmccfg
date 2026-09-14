@@ -198,6 +198,8 @@ In one 1 kHz EL2252-to-EL7062/ED7062 test:
   in constant-velocity crossings;
 - the same setting gave about 20 microseconds error in acceleration and
   deceleration zones;
+- adding many more EtherCAT slaves changed the measured acceleration/deceleration
+  result slightly, but the result stayed repeatable rather than random;
 - the hardware timestamp path itself was much tighter than the axis prediction
   error;
 - a grounding problem originally caused intermittent missing or random-looking
@@ -213,8 +215,13 @@ correct, the shift can affect margin and repeatability. In one EL7062 setup,
 moving the DC shift into the approximately 200 us range improved stability.
 
 Adding more EtherCAT slaves can also move host send/receive timing because the
-frame length and topology change. This should not change a correctly queued
-EL2252 DC event, but it can expose marginal lead-time or DC-shift settings.
+frame length and topology change. A correctly accepted EL2252 DC event should
+still execute at the queued DC `startTime`; that hardware event is not expected
+to become random just because the frame is longer. What can change is the
+software-side margin before the event is queued, and therefore the measured
+position result. This is most visible in acceleration/deceleration regions,
+where the target crossing depends on the assumed position, velocity and
+acceleration at the scheduling cycle.
 
 When results are unstable, check:
 
