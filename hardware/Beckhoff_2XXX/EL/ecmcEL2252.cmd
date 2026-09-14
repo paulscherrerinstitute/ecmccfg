@@ -8,6 +8,7 @@
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL2252")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x08cc3052")
+epicsEnvSet("ECMC_HW_PANEL"              "EL2252")
 
 #- verify slave
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
@@ -38,4 +39,3 @@ ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/${ECMC_EC_SAMPLE_RATE=1000
 ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x300,${ECMC_TEMP_PERIOD_NANO_SECS},0,0,0)"
 epicsEnvUnset(ECMC_TEMP_PERIOD_NANO_SECS)
 
-epicsEnvSet("ECMC_HW_PANEL"              "EL2252")
