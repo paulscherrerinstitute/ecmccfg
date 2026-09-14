@@ -534,7 +534,7 @@ positionCompare:
   activate: ec0.s$(OUT_SLAVE).activate
   startTime: ec0.s$(OUT_SLAVE).startTime
   minLeadMs: 2.0
-  maxLeadMs: 100.0
+  maxLeadMs: 4.0
   activateIdle: 3
   activateSchedule: 0
   pulseWidthMs: 10.0
@@ -551,6 +551,41 @@ AxisPrintPositionCompare(axis)
 
 `direction` is `1` for positive crossing, `-1` for negative crossing and `0`
 for either direction.
+
+### Practical timing notes
+
+The EL2252 timed-output path can be very accurate, but the final position error
+also depends on how early the axis position compare predicts the crossing. A
+large `maxLeadMs` makes ecmc schedule farther ahead of the target and gives
+following error, velocity error and acceleration-model error more time to
+accumulate. For a 1 kHz EtherCAT cycle, a useful tested starting point is:
+
+```yaml
+positionCompare:
+  minLeadMs: 2.0
+  maxLeadMs: 4.0
+```
+
+In one EL2252-to-EL7062/ED7062 touch-probe test at about 10 engineering
+units/s, reducing the maximum lead improved the measured output position error
+from roughly one EtherCAT cycle scale down to tens of microseconds. With
+`minLeadMs: 2.0` and `maxLeadMs: 4.0`, constant-velocity crossings were about
+13 to 18 microseconds late, and acceleration/deceleration crossings were about
+20 microseconds from the requested position in opposite directions. Treat these
+numbers as an example, not a guarantee; mechanics, grounding, terminal timing,
+DC shift and following error all affect the result.
+
+When validating with a hardware touch probe, distinguish the two errors:
+
+- Position-compare output error is approximately
+  `(latched_position - target_position) / velocity`.
+- The `timing_us` field printed by the touch-probe reconstruction PLC is the
+  reconstruction check between the hardware-latched position and the encoder
+  position estimated at the touch-probe timestamp.
+
+For the first expression, a negative value means the output occurred before the
+axis reached the requested target position, and a positive value means it
+occurred after the target.
 
 When `positionCompare` is configured, ecmccfg also loads optional axis-specific
 position-compare PVs. The main readbacks are:

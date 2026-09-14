@@ -132,3 +132,7 @@ overrides.
 - Sub-cycle, preferably below 10 us, touch-probe or compare accuracy requires
   terminal hardware timestamps or timestamp-scheduled outputs such as EL2252.
 - Mechanical response is separate from EtherCAT/software endpoint delay.
+
+For a complete verification example using an EL2252 timestamp-scheduled output
+and an EL7062/ED7062 touch-probe latch, see
+[Verify DC Timing with Position Compare]({{< relref "/manual/general_cfg/verify_dc_timing_position_compare.md" >}}).
