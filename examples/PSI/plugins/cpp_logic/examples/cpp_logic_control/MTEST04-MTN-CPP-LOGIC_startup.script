@@ -9,7 +9,7 @@
 #   caqtdm -macro "IOC=MTEST04-MTN-CPP-LOGIC,CPP_ID=0" ecmcCppLogic.ui
 #   caqtdm MTEST04-MTN-CPP-LOGIC_cpp_logic.ui
 
-require ecmccfg sandst_a "ECMC_VER=struc"
+require ecmccfg sandst_a "ECMC_VER=sandst_a"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=14,HW_DESC=EL7041-0052"
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd, "COMP=Motor-Generic-2Phase-Stepper,MACROS='I_MAX_MA=500,I_STDBY_MA=200,U_NOM_MV=48000,R_COIL_MOHM=1230'"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadCppLogic.cmd, "REPORT=1"

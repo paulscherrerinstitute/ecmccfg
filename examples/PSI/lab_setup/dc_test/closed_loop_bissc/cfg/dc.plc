@@ -1,0 +1,234 @@
+# Timestamped touch-probe position reconstruction.
+#
+# Run as a GENERAL PLC every EtherCAT cycle. It must execute after the axis so
+# ax<AX_ID>.enc.actpos is the position produced from the current input PDO.
+# The axis owns touch-probe control. This PLC only reads results and writes its
+# data storages.
+#
+# The PLC keeps six normal encoder samples, interpolates the encoder position
+# at each new hardware timestamp, and compares it with the hardware latch.
+# By default, one compact result line is printed for every captured event.
+# Printing runs in the RT PLC thread, so set PRINT_RESULT=0 for normal operation.
+# Set PUSH_ASYN=1 only for a short test if the data-storage records are
+# configured with SAMPLE_RATE_MS=-1.
+#
+# PLC macros:
+#   AX_ID                   axis containing the open-loop encoder (default 1)
+#   ENC_ID                  one-based encoder index on the axis (default 1)
+#   MASTER_ID               EtherCAT master index (default 0)
+#   TP_SID                  ED7062 ecmc slave index (default 22)
+#   ENC_CH                  ED7062 channel, 01 or 02 (default 01)
+#   DS_BASE                 first of ten data storages (default 20)
+#   AUTO_ARM                arm/rearm touch probe through axis object (default 1)
+#   PRINT_RESULT            print one comparison line per event (default 1)
+#   PUSH_ASYN               push all storages after an event (default 0)
+#
+# Data storages DS_BASE + n:
+#   0 sequence                    5 position error (estimated - hardware)
+#   1 raw 32-bit timestamp        6 local velocity [engineering units/s]
+#   2 extended event time [ns]    7 equivalent timing error [ns]
+#   3 hardware-latched position   8 mode: 0 interpolation, 1 extrapolation
+#   4 timestamp-estimated pos.     9 event age from receive [ns]
+
+if(${SELF}.firstscan) {
+  static.sequence := 0;
+  static.historyCount := 0;
+  static.interpolationValid := 0;
+  static.mode := -1;
+  static.receiveTime := ec_get_last_receive_time();
+  static.sampleTime0 := ec_get_slave_input_event_time(${TP_SID=22});
+  static.sampleTime1 := static.sampleTime0;
+  static.sampleTime2 := static.sampleTime0;
+  static.sampleTime3 := static.sampleTime0;
+  static.sampleTime4 := static.sampleTime0;
+  static.sampleTime5 := static.sampleTime0;
+
+  static.samplePos0 := ax${AX_ID=1}.enc.actpos;
+  static.samplePos1 := static.samplePos0;
+  static.samplePos2 := static.samplePos0;
+  static.samplePos3 := static.samplePos0;
+  static.samplePos4 := static.samplePos0;
+  static.samplePos5 := static.samplePos0;
+
+  # Ignore a touch-probe result left over from before this PLC was started.
+  static.oldProbeSequence :=
+    mc_get_touch_probe_sequence(${AX_ID=1},${ENC_ID=1});
+
+  if(${AUTO_ARM=1}) {
+    static.armError := mc_touch_probe_arm(${AX_ID=1},${ENC_ID=1},1);
+    if(static.armError) {
+      println('TP arm failed, error=', static.armError);
+    };
+  };
+
+  ds_clear_data(${DS_BASE=20}+0);
+  ds_clear_data(${DS_BASE=20}+1);
+  ds_clear_data(${DS_BASE=20}+2);
+  ds_clear_data(${DS_BASE=20}+3);
+  ds_clear_data(${DS_BASE=20}+4);
+  ds_clear_data(${DS_BASE=20}+5);
+  ds_clear_data(${DS_BASE=20}+6);
+  ds_clear_data(${DS_BASE=20}+7);
+  ds_clear_data(${DS_BASE=20}+8);
+  ds_clear_data(${DS_BASE=20}+9);
+};
+
+# Shift the normal-position history. Associate the newest value with the exact
+# slave input event resolved from its DC/SYNC schedule.
+static.sampleTime5 := static.sampleTime4;
+static.sampleTime4 := static.sampleTime3;
+static.sampleTime3 := static.sampleTime2;
+static.sampleTime2 := static.sampleTime1;
+static.sampleTime1 := static.sampleTime0;
+static.samplePos5 := static.samplePos4;
+static.samplePos4 := static.samplePos3;
+static.samplePos3 := static.samplePos2;
+static.samplePos2 := static.samplePos1;
+static.samplePos1 := static.samplePos0;
+
+static.receiveTime := ec_get_last_receive_time();
+static.frameSendTime := ec_get_last_send_time();
+static.sampleTime0 := ec_get_slave_input_event_time(${TP_SID=22});
+static.samplePos0 := ax${AX_ID=1}.enc.actpos;
+if(static.sampleTime0 > 0 and static.historyCount < 6) {
+  static.historyCount := static.historyCount + 1;
+};
+
+static.timestamp :=
+  ec${MASTER_ID=0}.s${TP_SID=22}.touchProbeTimestampPos${ENC_CH=01}_1;
+static.probeSequence :=
+  mc_get_touch_probe_sequence(${AX_ID=1},${ENC_ID=1});
+static.newEvent := static.probeSequence != static.oldProbeSequence;
+
+# A changed, non-zero timestamp identifies one new positive-edge event.
+if(static.newEvent and static.historyCount >= 2) {
+
+  # Extend the 32-bit timestamp around the resolved slave input sample time.
+  # This keeps the comparison in the EtherCAT/DC time domain and avoids using
+  # host receive timing, which changes with frame length/topology.
+  static.sampleTimeLow32 := ec_chk_bits(static.sampleTime0,0,31);
+  static.eventDelta := static.timestamp - static.sampleTimeLow32;
+  if(static.eventDelta > 2147483647) {
+    static.eventDelta := static.eventDelta - 4294967296;
+  };
+  if(static.eventDelta < -2147483648) {
+    static.eventDelta := static.eventDelta + 4294967296;
+  };
+  static.eventTime := static.sampleTime0 + static.eventDelta;
+
+  static.interpolationValid := 0;
+  static.mode := -1;
+
+  # Select the pair bracketing the event. If the event is newer than the
+  # newest normal sample, use the newest pair for forward extrapolation.
+  if(static.eventTime >= static.sampleTime0) {
+    static.olderTime := static.sampleTime1;
+    static.newerTime := static.sampleTime0;
+    static.olderPos := static.samplePos1;
+    static.newerPos := static.samplePos0;
+    static.interpolationValid := 1;
+    static.mode := 1;
+  } else if(static.eventTime >= static.sampleTime1) {
+    static.olderTime := static.sampleTime1;
+    static.newerTime := static.sampleTime0;
+    static.olderPos := static.samplePos1;
+    static.newerPos := static.samplePos0;
+    static.interpolationValid := 1;
+    static.mode := 0;
+  } else if(static.eventTime >= static.sampleTime2 and static.historyCount >= 3) {
+    static.olderTime := static.sampleTime2;
+    static.newerTime := static.sampleTime1;
+    static.olderPos := static.samplePos2;
+    static.newerPos := static.samplePos1;
+    static.interpolationValid := 1;
+    static.mode := 0;
+  } else if(static.eventTime >= static.sampleTime3 and static.historyCount >= 4) {
+    static.olderTime := static.sampleTime3;
+    static.newerTime := static.sampleTime2;
+    static.olderPos := static.samplePos3;
+    static.newerPos := static.samplePos2;
+    static.interpolationValid := 1;
+    static.mode := 0;
+  } else if(static.eventTime >= static.sampleTime4 and static.historyCount >= 5) {
+    static.olderTime := static.sampleTime4;
+    static.newerTime := static.sampleTime3;
+    static.olderPos := static.samplePos4;
+    static.newerPos := static.samplePos3;
+    static.interpolationValid := 1;
+    static.mode := 0;
+  } else if(static.eventTime >= static.sampleTime5 and static.historyCount >= 6) {
+    static.olderTime := static.sampleTime5;
+    static.newerTime := static.sampleTime4;
+    static.olderPos := static.samplePos5;
+    static.newerPos := static.samplePos4;
+    static.interpolationValid := 1;
+    static.mode := 0;
+  };
+
+  if(static.interpolationValid and
+     static.newerTime != static.olderTime) {
+    static.positionEstimated := static.olderPos +
+      (static.newerPos-static.olderPos) *
+      (static.eventTime-static.olderTime) /
+      (static.newerTime-static.olderTime);
+
+    static.velocity := (static.newerPos-static.olderPos) * 1E9 /
+                       (static.newerTime-static.olderTime);
+    # Use the encoder object's processed latch. This includes the same raw
+    # masking, multiturn extension, scaling and engineering offset as actpos.
+    static.positionHardware :=
+      mc_get_touch_probe_pos(${AX_ID=1},${ENC_ID=1});
+    static.positionError := static.positionEstimated-static.positionHardware;
+    static.timingError := 0;
+    if(abs(static.velocity) > 1E-12) {
+      static.timingError := static.positionError/static.velocity*1E9;
+    };
+
+    static.sequence := static.sequence + 1;
+    ds_append_data(${DS_BASE=20}+0,static.sequence);
+    ds_append_data(${DS_BASE=20}+1,static.timestamp);
+    ds_append_data(${DS_BASE=20}+2,static.eventTime);
+    ds_append_data(${DS_BASE=20}+3,static.positionHardware);
+    ds_append_data(${DS_BASE=20}+4,static.positionEstimated);
+    ds_append_data(${DS_BASE=20}+5,static.positionError);
+    ds_append_data(${DS_BASE=20}+6,static.velocity);
+    ds_append_data(${DS_BASE=20}+7,static.timingError);
+    ds_append_data(${DS_BASE=20}+8,static.mode);
+    ds_append_data(${DS_BASE=20}+9,static.receiveTime-static.eventTime);
+
+    if(${PRINT_RESULT=1}) {
+      println('TP seq=', static.sequence,
+              ' latched=', static.positionHardware,
+              ' estimated=', static.positionEstimated,
+              ' error=', static.positionError,
+              ' timing_us=', static.timingError/1000,
+              ' velocity=', static.velocity,
+              ' mode=', static.mode,
+              ' event_minus_sample_us=',
+                (static.eventTime-static.sampleTime0)/1000,
+              ' sample_minus_receive_us=',
+                (static.sampleTime0-static.receiveTime)/1000,
+              ' sample_minus_frame_send_us=',
+                (static.sampleTime0-static.frameSendTime)/1000,
+              ' pair_dt_us=',
+                (static.newerTime-static.olderTime)/1000);
+    };
+
+    if(${PUSH_ASYN=0}) {
+      ds_push_asyn(${DS_BASE=20}+0);
+      ds_push_asyn(${DS_BASE=20}+1);
+      ds_push_asyn(${DS_BASE=20}+2);
+      ds_push_asyn(${DS_BASE=20}+3);
+      ds_push_asyn(${DS_BASE=20}+4);
+      ds_push_asyn(${DS_BASE=20}+5);
+      ds_push_asyn(${DS_BASE=20}+6);
+      ds_push_asyn(${DS_BASE=20}+7);
+      ds_push_asyn(${DS_BASE=20}+8);
+      ds_push_asyn(${DS_BASE=20}+9);
+    };
+  };
+};
+
+static.oldProbeSequence := static.probeSequence;
+
+

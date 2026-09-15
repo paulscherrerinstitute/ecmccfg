@@ -1,0 +1,13 @@
+# Auto-generated C++ logic substitutions
+# Logic: cpp_logic_control
+
+file ecmcCppLogicAo.template {
+  pattern { REC, PARAM, DESC, PREC }
+  { "control-setpoint-position", "control.setpoint_position", "control.setpoint_position", "3" }
+}
+
+file ecmcCppLogicLongIn.template {
+  pattern { REC, PARAM, DESC }
+  { "control-actual-position", "control.actual_position", "control.actual_position" }
+  { "control-raw-velocity-cmd", "control.raw_velocity_cmd", "control.raw_velocity_cmd" }
+}

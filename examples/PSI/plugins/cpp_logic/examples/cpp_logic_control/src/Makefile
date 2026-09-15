@@ -2,9 +2,9 @@ include /ioc/tools/driver.makefile
 MODULE = main
 BUILDCLASSES = Linux
 ARCH_FILTER = deb10% deb12%
-EXCLUDE_VERSIONS+=3 7.0.5 7.0.6 7.0.7
+EXCLUDE_VERSIONS+=3 7.0.5 7.0.6 7.0.7 7.0.8 7.0.9
 USR_CXXFLAGS += -std=c++17
-ecmc_VERSION = strucpp
+ecmc_VERSION = sandst_a
 DIRS+=.
 SOURCES += $(foreach d,${DIRS}, $(wildcard $d/*.c) $(wildcard $d/*.cpp))
 HEADERS += $(foreach d,${DIRS}, $(wildcard $d/*.h))

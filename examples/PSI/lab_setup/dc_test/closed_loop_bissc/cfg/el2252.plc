@@ -1,0 +1,64 @@
+# Standalone EL2252 timed-output toggle test.
+#
+# Run as a GENERAL PLC every EtherCAT cycle. This snippet does not use any
+# axis, position compare, or touch-probe logic. It only schedules one EL2252
+# output transition every PERIOD_NS.
+#
+# PLC macros:
+#   MASTER_ID               EtherCAT master index (default 0)
+#   EL2252_SID              EL2252 slave index (default 25)
+#   CH                      EL2252 output channel, 01 or 02 (default 01)
+#   PERIOD_NS               toggle period [ns] (default 100 ms)
+#   LEAD_NS                 schedule lead time [ns] (default 5 ms)
+#   PRINT_RESULT            print one line per scheduled toggle (default 1)
+#
+# EL2252 timed-output convention:
+#   activate = 0            schedule/load current output + startTime
+#   activate = 3            idle/no new schedule
+
+if(${SELF}.firstscan) {
+  static.periodNs := ${PERIOD_NS=100000000};
+  static.leadNs := ${LEAD_NS=5000000};
+  static.outputValue := 0;
+  static.sequence := 0;
+  static.now := ec_get_time();
+  static.nextToggleTime := static.now + static.periodNs;
+
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.triState${CH=01} := 0;
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.binaryOutput${CH=01} := 0;
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.activate := 3;
+};
+
+static.now := ec_get_time();
+ec${MASTER_ID=0}.s${EL2252_SID=25}.triState${CH=01} := 0;
+
+if(static.now >= static.nextToggleTime) {
+  if(static.outputValue) {
+    static.outputValue := 0;
+  } else {
+    static.outputValue := 1;
+  };
+
+  static.startTime := static.now + static.leadNs;
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.startTime := static.startTime;
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.binaryOutput${CH=01} :=
+    static.outputValue;
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.activate := 0;
+
+  static.sequence := static.sequence + 1;
+  static.nextToggleTime := static.nextToggleTime + static.periodNs;
+  if(static.nextToggleTime <= static.now) {
+    static.nextToggleTime := static.now + static.periodNs;
+  };
+
+  if(${PRINT_RESULT=1}) {
+    println('EL2252 toggle seq=', static.sequence,
+            ' output=', static.outputValue,
+            ' startTime=', static.startTime,
+            ' lead_us=', (static.startTime-static.now)/1000);
+  };
+} else {
+  ec${MASTER_ID=0}.s${EL2252_SID=25}.activate := 3;
+};
+
+

@@ -13,8 +13,8 @@ The source tree is:
 Expected flow:
 
 1. `make`
-2. `make pvs`
-3. `make ui`
+2. Optional `make pvs`
+3. Optional  `make ui`
 4. `make install`
 5. start the IOC with `MTEST04-MTN-CPP-LOGIC_startup.script`
 
