@@ -1,0 +1,19 @@
+file "ecmcEL1262_binaryInputArray-chX.template"
+{
+  pattern {CH_ID, DTYP,                FTVL    }
+          {01,    "asynInt8ArrayIn",  "UCHAR" }
+          {02,    "asynInt8ArrayIn",  "UCHAR" }
+}
+
+file "ecmcEL37XX-chX.template"
+{
+  pattern {CH_ID, KEY }
+          {01,    BI  }
+          {02,    BI  }
+}
+
+file "ecmcEL37XX_common.template"
+{
+  pattern {}
+          {}
+}

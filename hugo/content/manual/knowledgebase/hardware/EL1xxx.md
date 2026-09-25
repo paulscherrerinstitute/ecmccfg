@@ -8,6 +8,39 @@ chapter = false
 Use this page for EL1xxx digital-input terminals with special timing or signal
 level behavior.
 
+## EL1262 oversampling and `NELM`
+The EL1262 transfers its oversampled digital inputs as packed bytes. Therefore,
+for this terminal, `NELM` specifies the number of bytes per channel and per
+EtherCAT cycle, not the number of individual digital samples.
+
+The actual oversampling factor is:
+
+```text
+oversampling factor = NELM * 8
+```
+
+For example, `NELM=1` transfers one byte containing eight time-ordered input
+bits, so it configures 8-times oversampling. `NELM=125` transfers 125 bytes and
+corresponds to the maximum factor of 1000 samples per EtherCAT cycle.
+
+```bash
+# 8-times oversampling (8 bits per channel and EtherCAT cycle):
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=16, HW_DESC=EL1262, NELM=1"
+
+# 1000-times oversampling (125 packed bytes per channel and EtherCAT cycle):
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=16, HW_DESC=EL1262, NELM=125"
+```
+
+At an EtherCAT rate of `1 kHz`, `NELM=125` therefore produces an effective
+digital-input sampling rate of `1 MHz`. The corresponding sample period is
+calculated using `NELM * 8`, not `NELM` alone.
+
+{{% notice note %}}
+For the EL1262, valid `NELM` values are byte counts in the range 1 through 125.
+The waveform elements are packed bytes; each element contains eight consecutive
+digital input samples.
+{{% /notice %}}
+
 ## EL1252, EL1252-0050
 `EL1252-xxxx` is a two-channel digital-input terminal with timestamps for both
 low-to-high and high-to-low edges:

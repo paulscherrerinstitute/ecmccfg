@@ -1,0 +1,25 @@
+file "ecmcED2504_F32.template" {
+  pattern { CH }
+          { 01 }
+          { 02 }
+          { 03 }
+          { 04 }
+}
+
+file "ecmcED2504-status.template" {
+  pattern { REC_NAME, DESC, MASK, ZNAM, ONAM }
+          { "PWM-Warn",      "PWM warning",           "0x0020", "OK",    "Warning" }
+          { "PWM-Err",       "PWM error",             "0x0040", "OK",    "Error" }
+          { "PWM-Diag",      "PWM diagnostic active", "0x1000", "No",    "Yes" }
+          { "PWM-TxInvalid", "PWM TxPDO invalid",     "0x2000", "Valid", "Invalid" }
+}
+
+file "ecmcED2504-cycleCounter.template" {
+  pattern { DUMMY }
+          { "" }
+}
+
+file "ecmcED2504-reset.template" {
+  pattern { DUMMY }
+          { "" }
+}

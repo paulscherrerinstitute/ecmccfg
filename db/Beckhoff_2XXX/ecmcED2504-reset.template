@@ -1,0 +1,8 @@
+record(bo, "${ECMC_P}PWM-Reset") {
+  field(DESC, "ED2504 PWM reset")
+  field(PINI, "1")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT,  "@asynMask(${PORT},${ADDR=0},0x0040,${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.PWM_Ctrl?")
+  field(ZNAM, "Run")
+  field(ONAM, "Reset")
+}

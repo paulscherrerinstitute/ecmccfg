@@ -1,0 +1,1628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>412</width>
+    <height>326</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="replaceMacro" name="replacemacro">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>280</y>
+     <width>91</width>
+     <height>46</height>
+    </rect>
+   </property>
+   <property name="reloadOnChange">
+    <bool>true</bool>
+   </property>
+   <property name="displayMode" stdset="0">
+    <enum>replaceMacro::List</enum>
+   </property>
+   <property name="macroKey">
+    <string notr="true">ID</string>
+   </property>
+   <property name="macroValues">
+    <string>;1;2</string>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_9">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>293</y>
+     <width>141</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Channel $(ID)</string>
+   </property>
+   <property name="maxLength">
+    <number>32770</number>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true"/>
+   </property>
+   <property name="background">
+    <color alpha="0">
+     <red>160</red>
+     <green>160</green>
+     <blue>164</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::User</enum>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_11">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>210</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI0$(ID)-Arr.NELM</string>
+   </property>
+   <property name="background">
+    <color alpha="0">
+     <red>160</red>
+     <green>160</green>
+     <blue>164</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_15">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>210</y>
+     <width>98</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="text">
+    <string>Elements (NELM):</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::PlainText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+   </property>
+  </widget>
+  <widget class="caStripPlot" name="castripplot">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>381</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="Title" stdset="0">
+    <string notr="true"/>
+   </property>
+   <property name="channels" stdset="0">
+    <string>$(IOC):m$(MasterID)s$(SlaveID)-BI0$(ID)-Arr</string>
+   </property>
+   <property name="YAxisScaling" stdset="0">
+    <enum>caStripPlot::autoScale</enum>
+   </property>
+   <property name="foreground">
+    <color>
+     <red>238</red>
+     <green>238</green>
+     <blue>236</blue>
+    </color>
+   </property>
+  </widget>
+  <widget class="caWaveTable" name="cawavetable_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>391</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI0$(ID)-Arr</string>
+   </property>
+   <property name="numberOfColumns">
+    <number>125</number>
+   </property>
+   <property name="columnSize">
+    <number>70</number>
+   </property>
+   <property name="horizontalOffset">
+    <number>0</number>
+   </property>
+   <property name="verticalOffset">
+    <number>0</number>
+   </property>
+   <attribute name="horizontalHeaderVisible">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>70</number>
+   </attribute>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderDefaultSectionSize">
+    <number>40</number>
+   </attribute>
+   <row/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <column/>
+   <item row="0" column="0">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="1">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="2">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="3">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="4">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="5">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="6">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="7">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="8">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="9">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="10">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="11">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="12">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="13">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="14">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="15">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="16">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="17">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="18">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="19">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="20">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="21">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="22">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="23">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="24">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="25">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="26">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="27">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="28">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="29">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="30">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="31">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="32">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="33">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="34">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="35">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="36">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="37">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="38">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="39">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="40">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="41">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="42">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="43">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="44">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="45">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="46">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="47">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="48">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="49">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="50">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="51">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="52">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="53">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="54">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="55">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="56">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="57">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="58">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="59">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="60">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="61">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="62">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="63">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="64">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="65">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="66">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="67">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="68">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="69">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="70">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="71">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="72">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="73">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="74">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="75">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="76">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="77">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="78">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="79">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="80">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="81">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="82">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="83">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="84">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="85">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="86">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="87">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="88">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="89">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="90">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="91">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="92">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="93">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="94">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="95">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="96">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="97">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="98">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="99">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="100">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="101">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="102">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="103">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="104">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="105">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="106">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="107">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="108">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="109">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="110">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="111">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="112">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="113">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="114">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="115">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="116">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="117">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="118">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="119">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="120">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="121">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="122">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="123">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+   <item row="0" column="124">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeft|AlignLeading</set>
+    </property>
+   </item>
+  </widget>
+  <widget class="caLabel" name="calabel_21">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="text">
+    <string>value[0..NELM-1]:</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::PlainText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+  <customwidget>
+   <class>caStripPlot</class>
+   <extends>QwtPlot</extends>
+   <header>caStripPlot</header>
+  </customwidget>
+  <customwidget>
+   <class>caWaveTable</class>
+   <extends>QTableWidget</extends>
+   <header>caWaveTable</header>
+  </customwidget>
+  <customwidget>
+   <class>replaceMacro</class>
+   <extends>QWidget</extends>
+   <header>replaceMacro</header>
+  </customwidget>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

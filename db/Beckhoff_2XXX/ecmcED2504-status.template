@@ -1,0 +1,9 @@
+record(bi, "${ECMC_P}${REC_NAME}") {
+  field(DESC, "${DESC}")
+  field(DTYP, "asynUInt32Digital")
+  field(INP,  "@asynMask(${PORT},${ADDR=0},${MASK},${TIMEOUT=1})T_SMP_MS=${T_SMP_MS=1000}/TYPE=asynUInt32Digital/ec${MASTER_ID}.s${SLAVE_POS}.PWM_Stat?")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "${ZNAM}")
+  field(ONAM, "${ONAM}")
+  field(TSE,  "-2")
+}

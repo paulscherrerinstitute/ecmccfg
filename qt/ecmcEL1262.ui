@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>125</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="caInclude" name="cainclude">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>128</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OPERATIONAL status of the slave&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="macro">
+    <string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType)</string>
+   </property>
+   <property name="filename" stdset="0">
+    <string notr="true">ecmcE_slave_frame.ui</string>
+   </property>
+  </widget>
+  <widget class="caFrame" name="caframe">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>40</y>
+     <width>120</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string notr="true">IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType),CH=1</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>120</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>CH01</string>
+    </property>
+    <widget class="caRelatedDisplay" name="CiA402_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="label">
+      <string notr="true"/>
+     </property>
+     <property name="labels">
+      <string>Expert</string>
+     </property>
+     <property name="files">
+      <string>ecmcEL1262_chX_expert.ui</string>
+     </property>
+     <property name="args">
+      <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(CH),IOC=$(IOC);</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_12">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI0$(CH)-CycCnt</string>
+     </property>
+     <property name="background">
+      <color alpha="0">
+       <red>160</red>
+       <green>160</green>
+       <blue>164</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_19">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>40</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="text">
+      <string>value[0]:</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+     </property>
+    </widget>
+    <widget class="caWaveTable" name="cawavetable_4">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>40</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI0$(CH)-Arr</string>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <row/>
+     <column/>
+     <item row="0" column="0">
+      <property name="font">
+       <font/>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeft|AlignLeading</set>
+      </property>
+     </item>
+    </widget>
+    <widget class="caLabel" name="calabel_18">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>70</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="text">
+      <string>cycle:</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="caFrame" name="caframe_2">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>200</y>
+     <width>120</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="macro">
+    <string notr="true">IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType),CH=2</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>120</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>CH02</string>
+    </property>
+    <widget class="caRelatedDisplay" name="CiA402_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="label">
+      <string notr="true"/>
+     </property>
+     <property name="labels">
+      <string>Expert</string>
+     </property>
+     <property name="files">
+      <string>ecmcEL1262_chX_expert.ui</string>
+     </property>
+     <property name="args">
+      <string>MasterID=$(MasterID), SlaveID=$(SlaveID),ID=$(CH),IOC=$(IOC);</string>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_11">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI0$(CH)-CycCnt</string>
+     </property>
+     <property name="background">
+      <color alpha="0">
+       <red>160</red>
+       <green>160</green>
+       <blue>164</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+    </widget>
+    <widget class="caLabel" name="calabel_16">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>70</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="text">
+      <string>cycle:</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+     </property>
+    </widget>
+    <widget class="caWaveTable" name="cawavetable_3">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>40</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="channel" stdset="0">
+      <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI0$(CH)-Arr</string>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <row/>
+     <column/>
+     <item row="0" column="0">
+      <property name="font">
+       <font/>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeft|AlignLeading</set>
+      </property>
+     </item>
+    </widget>
+    <widget class="caLabel" name="calabel_21">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>40</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="text">
+      <string>value[0]:</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="caLabel" name="calabel_20">
+   <property name="geometry">
+    <rect>
+     <x>-20</x>
+     <y>360</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="text">
+    <string>nxt time:</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::PlainText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_13">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>380</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Dev-NxtTime</string>
+   </property>
+   <property name="background">
+    <color alpha="0">
+     <red>160</red>
+     <green>160</green>
+     <blue>164</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+  </widget>
+  <widget class="caLineEdit" name="calineedit_14">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>420</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="channel" stdset="0">
+    <string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BI01-Arr.NELM</string>
+   </property>
+   <property name="background">
+    <color alpha="0">
+     <red>160</red>
+     <green>160</green>
+     <blue>164</blue>
+    </color>
+   </property>
+   <property name="colorMode">
+    <enum>caLineEdit::Static</enum>
+   </property>
+   <property name="precisionMode">
+    <enum>caLineEdit::Channel</enum>
+   </property>
+  </widget>
+  <widget class="caLabel" name="calabel_22">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>400</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="text">
+    <string>elements (NELM):</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::PlainText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>caRelatedDisplay</class>
+   <extends>QWidget</extends>
+   <header>caRelatedDisplay</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>caLabel</class>
+   <extends>QLabel</extends>
+   <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caInclude</class>
+   <extends>QWidget</extends>
+   <header>caInclude</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
+  </customwidget>
+  <customwidget>
+   <class>caWaveTable</class>
+   <extends>QTableWidget</extends>
+   <header>caWaveTable</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
