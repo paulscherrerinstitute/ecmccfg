@@ -181,6 +181,8 @@ record(longout,"$(P)MCU-RTLog-DiagLevel") {
   field(DESC, "RTLog diag dump level")
   field(DTYP, "asynInt32")
   field(VAL,  "1")
+  field(DRVL, "0")
+  field(DRVH, "2")
   field(OUT,  "@asyn($(PORT=ecmcRTLog),$(ADDR=0))RTLOG_DIAG_LEVEL")
 }
 

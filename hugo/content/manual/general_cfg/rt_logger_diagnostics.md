@@ -108,20 +108,26 @@ bit 1, and source index `3`.
 Set `Axis` to the ecmc axis index. `Axis rpt` immediately summarizes the axis
 command, request/execute counters, state, and detected blockers.
 
-Press `Dump` to request a JSON snapshot. File creation runs in the RT logger
+Press `Dump` to request a YAML snapshot. File creation runs in the RT logger
 worker thread, not in the realtime motion thread. The generated path is reported
 in `File` and has this form:
 
 ```text
-/tmp/ecmc_motion_diag_<pid>_<timestamp>.json
+/tmp/ecmc_motion_diag_<pid>_<timestamp>.yaml
 ```
 
-The dump contains configured axes, axis groups, master/slave state machines,
-motion state, interlocks, command counters, detected blockers, and state-machine
-transition/fault history.
+`DiagLevel` controls the amount of information:
 
-Keep diagnostic level at its default value `1`. It is currently recorded in the
-JSON metadata; it does not change which objects are included.
+| Level | Contents |
+|---:|---|
+| 0 | Compact metadata and object counts. |
+| 1 | Metadata, analyzed axis/group/master-slave state, blockers, and findings. |
+| 2 | Level 1 plus a second YAML document containing the complete raw state of all motion objects and their member variables. |
+
+Level 2 includes axis internals, encoder, monitor, trajectory, controller,
+drive, motor-record adapter, axis groups, PVT, and master/slave state machines.
+Creating that snapshot briefly holds the ecmc realtime mutex while the state is
+formatted, so use level 2 for diagnostics rather than cyclic acquisition.
 
 ## Axis Command Counters
 
@@ -180,7 +186,10 @@ $(IOC):MCU-RTLog-FilterMask
 $(IOC):MCU-RTLog-FilterIndex
 $(IOC):MCU-RTLog-DiagAxis
 $(IOC):MCU-RTLog-DiagAxisRpt
+$(IOC):MCU-RTLog-DiagLevel
 $(IOC):MCU-RTLog-DiagDump
+$(IOC):MCU-RTLog-DiagBusy
+$(IOC):MCU-RTLog-DiagStatus
 $(IOC):MCU-RTLog-DiagFile
 ```
 

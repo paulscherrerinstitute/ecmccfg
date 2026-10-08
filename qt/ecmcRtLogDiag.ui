@@ -474,7 +474,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Motion diagnostics dump</string>
+    <string>Motion diagnostics dump (YAML)</string>
    </property>
    <widget class="caLabel" name="diagLevelLabel">
     <property name="geometry">
@@ -486,7 +486,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Level</string>
+     <string>Level 0-2</string>
     </property>
    </widget>
    <widget class="caTextEntry" name="diagLevel">
@@ -500,6 +500,9 @@
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(IOC):MCU-RTLog-DiagLevel</string>
+    </property>
+    <property name="toolTip">
+     <string>0: summary, 1: analyzed diagnostics, 2: analysis plus complete raw motion-object state</string>
     </property>
    </widget>
    <widget class="caMessageButton" name="diagDump">
@@ -516,6 +519,9 @@
     </property>
     <property name="label">
      <string notr="true">Dump</string>
+    </property>
+    <property name="toolTip">
+     <string>Write the selected diagnostic level to the YAML file shown below</string>
     </property>
     <property name="releaseMessage">
      <string notr="true">0</string>
@@ -635,6 +641,9 @@
     </property>
     <property name="channel" stdset="0">
      <string notr="true">$(IOC):MCU-RTLog-DiagFile</string>
+    </property>
+    <property name="toolTip">
+     <string>Path of the latest generated YAML diagnostic file</string>
     </property>
     <property name="colorMode">
      <enum>caLineEdit::Static</enum>

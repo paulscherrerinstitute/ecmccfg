@@ -93,7 +93,7 @@ you know the visible problem, but not yet which detailed page to use.
 ## Diagnostics Tools
 - Use the [RT logger diagnostics]({{< relref "/manual/general_cfg/rt_logger_diagnostics.md" >}})
   to trace motion commands through the motor-record request, ecmc request, and
-  execute stages, inspect blockers, and create a JSON motion-state dump.
+  execute stages, inspect blockers, and create a YAML motion-state dump.
 - Use the hardware diagnostics guide for `ec_diagnostic_messages.py` usage and interpretation:
   [Diagnostics]({{< relref "/manual/knowledgebase/hardware/Diag.md" >}})
 - Use `read_el70xx_diag.sh` or `read_el5042_diag.sh` for Beckhoff drives/encoders.
