@@ -502,7 +502,7 @@
      <string notr="true">$(IOC):MCU-RTLog-DiagLevel</string>
     </property>
     <property name="toolTip">
-     <string>0: summary, 1: analyzed diagnostics, 2: analysis plus complete raw motion-object state</string>
+     <string>0: summary, 1: analysis plus log buffers, 2: level 1 plus complete raw motion-object state</string>
     </property>
    </widget>
    <widget class="caMessageButton" name="diagDump">

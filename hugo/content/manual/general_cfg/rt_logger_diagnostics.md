@@ -121,13 +121,18 @@ in `File` and has this form:
 | Level | Contents |
 |---:|---|
 | 0 | Compact metadata and object counts. |
-| 1 | Metadata, analyzed axis/group/master-slave state, blockers, and findings. |
+| 1 | Metadata, analyzed axis/group/master-slave state, blockers, findings, and both log buffers. |
 | 2 | Level 1 plus a second YAML document containing the complete raw state of all motion objects and their member variables. |
 
 Level 2 includes axis internals, encoder, monitor, trajectory, controller,
 drive, motor-record adapter, axis groups, PVT, and master/slave state machines.
 Creating that snapshot briefly holds the ecmc realtime mutex while the state is
 formatted, so use level 2 for diagnostics rather than cyclic acquisition.
+
+Levels 1 and 2 include non-destructive snapshots of the configuration log
+buffer and the runtime/debug log buffer. Each entry contains its sequence,
+timestamp, severity, and message. Runtime entries also contain source type and
+source index. Up to the existing 1024 entries from each buffer are included.
 
 ## Axis Command Counters
 
