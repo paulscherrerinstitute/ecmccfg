@@ -23,6 +23,36 @@ For the common `Max wait time 30 second(s)` startup message, see
 [EtherCAT startup timeout]({{< relref "/manual/general_cfg/startup/_index.md#ethercat-startup-timeout" >}})
 before changing lower-level EtherCAT settings.
 
+## Coupler Port Wiring Check
+
+After the EtherCAT master scan completes, ecmc can check selected slaves for a
+likely upstream cable connected to OUT instead of IN. The check only produces
+a retained startup warning; it does not interlock motion or modify EtherCAT
+configuration.
+
+The check is disabled by default and enabled per slave by its hardware snippet,
+after the slave object has been created. The standard EK1100, EK1101, EKM1101,
+Technosoft iPOS, Nanotec N6, SmarAct MCS2, and Festo CMMT-ST snippets enable it.
+Other hardware with a verified port layout can opt in the same way:
+
+```bash
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
+```
+
+Passing `0` disables the check for that slave. The command is configuration-only
+and must be issued before runtime. Wiring warnings are retained in the
+configuration log buffer and are included in motion diagnostic dumps at
+diagnostic levels 1 and 2.
+
+The global master switch is enabled by default. Disable every port-wiring check
+without changing the per-slave selections with:
+
+```bash
+ecmcConfigOrDie "Cfg.EcSetPortWiringCheckEnable(0)"
+```
+
+Setting it to `1` again restores the checks selected by the hardware snippets.
+
 ## Additional Domains
 
 The normal setup uses one EtherCAT domain.
