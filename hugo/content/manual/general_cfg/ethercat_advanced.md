@@ -32,7 +32,8 @@ configuration.
 
 The check is disabled by default and enabled per slave by its hardware snippet,
 after the slave object has been created. The standard EK1100, EK1101, EKM1101,
-Technosoft iPOS, Nanotec N6, SmarAct MCS2, and Festo CMMT-ST snippets enable it.
+EK1501-0010, Technosoft iPOS, Nanotec N6, SmarAct MCS2, Festo CMMT-ST, Kuhnke
+FIODrive, and MonoDAQ E-gMeter snippets enable it.
 Other hardware with a verified port layout can opt in the same way:
 
 ```bash
