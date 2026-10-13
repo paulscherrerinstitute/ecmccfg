@@ -1,6 +1,6 @@
 #==============================================================================
 # addSlave.cmd
-#- Arguments: HW_DESC, [SLAVE_ID = 0, SUBST_FILE, P_SCRIPT, NELM, DEFAULT_SUBS, DEFAULT_SLAVE_PVS, MACROS]
+#- Arguments: HW_DESC, [SLAVE_ID = 0, SUBST_FILE, P_SCRIPT, NELM, DEFAULT_SUBS, DEFAULT_SLAVE_PVS, MACROS, OPT]
 
 #-d /**
 #-d   \brief Script for adding a slave to the EtherCAT bus configuration.
@@ -14,6 +14,7 @@
 #-d   \param NELM (optional) Used for oversampling cards. Defaults to 1
 #-d   \param DEFAULT_SUBS (optional) option to disable default PVs for mapped PDOs
 #-d   \param DEFAULT_SLAVE_PVS (optional, caution!) basic slave PVs, i.e. ${ECMC_P}-Operational will be suppressed
+#-d   \param OPT (optional) option macros passed only to the hardware snippet
 #-d   \param CALLED_FROM_CFG_SLAVE (optional) Set if called by configureSlave.cmd, default 0
 #-d   \param MACROS: MACROS for subst file
 #-d   \note Example calls:
@@ -38,9 +39,9 @@
 #-d */
 
 #- Only allow macro CONFIG if called from configureSlave.cmd  (avoid copy paste errors)
-ecmcIf("'${CONFIG=NAN}'!='NAN' and ${CALLED_FROM_CFG_SLAVE=0}!=1")
-${IF_TRUE}ecmcExit : Error: addSlave.script is not accepting CONFIG macro. Use configureSlave.cmd instead
-ecmcEndIf()
+ecmcEpicsEnvSetCalcTernary(ECMC_ADD_SLAVE_INVALID_CONFIG,"'${CONFIG=NAN}'!='NAN' and ${CALLED_FROM_CFG_SLAVE=0}!=1","","#-")
+${ECMC_ADD_SLAVE_INVALID_CONFIG}ecmcExit : Error: addSlave.script is not accepting CONFIG macro. Use configureSlave.cmd instead
+epicsEnvUnset(ECMC_ADD_SLAVE_INVALID_CONFIG)
 
 #-Clear panel data (ensure new)
 epicsEnvUnset(ECMC_HW_PANEL)
@@ -49,12 +50,19 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 epicsEnvSet("P_SCRIPT",           "${P_SCRIPT=${ECMC_P_SCRIPT}}")
 
+#- Define the slave prefix before the hardware script. This allows configurable
+#- hardware scripts to load feature-specific records directly. HW_DESC is used
+#- as the preliminary hardware type; the naming script is run again below with
+#- the hardware script's ECMC_EC_HWTYPE to preserve existing behaviour.
+ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd" "MASTER_ID=${ECMC_EC_MASTER_ID},SLAVE_POS=${ECMC_EC_SLAVE_NUM},HWTYPE=${HW_DESC}"
+
 #- clear previous component type (ensure correct ECMC_EC_COMP_TYPE is set for the slave)
 epicsEnvUnset(ECMC_EC_COMP_TYPE)
 
 #- add ${HW_DESC} to the bus at position ${SLAVE_ID}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd",1)
-${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1}"
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}ecmc${HW_DESC}.cmd" "NELM=${NELM=1},${OPT=}"
 
 #- deduce what the prefix should be
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${P_SCRIPT}.cmd",1)

@@ -3,7 +3,7 @@ ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS",1000/${ECMC_EC_SAMPLE_RATE=1000
 ecmcEpicsEnvSetCalc("ECMC_TEMP_PERIOD_NANO_SECS_HALF",${ECMC_TEMP_PERIOD_NANO_SECS}/2)
 
 #- NOTE important the sync 1 period needs to be 0!
-ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x700,${ECMC_TEMP_PERIOD_NANO_SECS},${ECMC_TEMP_PERIOD_NANO_SECS_HALF},0,0)"
+ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},${ASSIGN_ACTIVATE=0x700},${SYNC_0_CYCLE=${ECMC_TEMP_PERIOD_NANO_SECS}},${SYNC_0_SHIFT=${ECMC_TEMP_PERIOD_NANO_SECS_HALF}},${SYNC_1_CYCLE=0},${SYNC_1_SHIFT=0})"
 
 # NOTE: Sometimes the EP7211-0034 will not go to op with the following error in /var/log/messages:
 # Sep  8 09:54:21 mcag-epics4 kernel: EtherCAT ERROR 0-40: SDO download 0x1C32:01 (2 bytes) aborted.

@@ -1,0 +1,5 @@
+file "ecmcEP7211-0034_INFO2_INPUTS.template"
+{
+  pattern {CH_ID}
+          {01   }
+}

@@ -20,7 +20,7 @@ record(bi,"${ECMC_P}Tp${CH_ID}-BI01"){
 }
 
 record(bi,"${ECMC_P}Tp${CH_ID}-BI02"){
-  field(DESC, "TP Input 01")
+  field(DESC, "TP Input 02")
   field(INP,  "${ECMC_P}Tp${CH_ID}-Stat.BF")
   field(ZNAM, "False")
   field(ONAM, "True")

@@ -1,6 +1,6 @@
 #==============================================================================
 # configureSlave.cmd
-#- Arguments: HW_DESC, CONFIG, [SLAVE_ID = 0], [CFG_MACROS]
+#- Arguments: HW_DESC, CONFIG, [SLAVE_ID = 0], [OPT], [CFG_MACROS]
 
 #-d /**
 #-d   \brief Script for adding a slave with dedicated slave configuration to the EtherCAT bus configuration.
@@ -11,6 +11,7 @@
 #-d   \param CONFIG configuration file, i.e. -Motor-Nanotec-ST4118L1804-B
 #-d   \note The CONFIG together with the HW_DESC form the full filename which by definition is ecmc${HW_DESC}${CONFIG}.cmd, i.e.: _ecmcEL7037-Motor-Nanotec-ST4118L1804-B.cmd_
 #-d   \param SLAVE_ID (optional) bus position
+#-d   \param OPT (optional) option macros passed to the hardware snippet
 #-d   \param CFG_MACROS (optional) Substitution macros for config file
 #-d   \param NELM (optional) Used for oversampling cards. Defaults to 1
 #-d   \note Example calls:
@@ -29,7 +30,7 @@
 epicsEnvSet("ECMC_EC_SLAVE_NUM",  "${SLAVE_ID=0}")
 epicsEnvSet("HW_DESC",            "${HW_DESC}")
 ecmcFileExist("${ECMC_CONFIG_ROOT}addSlave.cmd",1)
-${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=${HW_DESC}, NELM=${NELM=1},CALLED_FROM_CFG_SLAVE=1"
+${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}addSlave.cmd "SLAVE_ID=${ECMC_EC_SLAVE_NUM}, HW_DESC=${HW_DESC}, NELM=${NELM=1},OPT='${OPT=}',CALLED_FROM_CFG_SLAVE=1"
 # apply config ${CONFIG} for ${HW_DESC}
 ecmcFileExist("${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd",1)
 ${SCRIPTEXEC} ${ECMC_CONFIG_ROOT}ecmc${HW_DESC}${CONFIG}.cmd "${CFG_MACROS=""}"
