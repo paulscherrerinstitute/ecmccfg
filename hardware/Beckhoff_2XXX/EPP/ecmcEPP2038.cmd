@@ -13,6 +13,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x64764569")
 
 #- verify slave
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- binary outputs
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX2008.cmd

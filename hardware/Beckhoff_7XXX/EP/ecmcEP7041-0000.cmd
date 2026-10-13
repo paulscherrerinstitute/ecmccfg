@@ -14,6 +14,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1b814052")
 #- verify slave, including reset
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=${ECMC_SLAVE_RESET=true}"
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- ###########################################################
 #- ############ Config PDOS: Channel 1

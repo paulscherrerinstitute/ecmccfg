@@ -14,6 +14,7 @@ epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- ############  read electronic nameplate
 ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8008,0x1,1,1)"

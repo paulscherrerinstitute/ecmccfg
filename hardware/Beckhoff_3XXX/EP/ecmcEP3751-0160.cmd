@@ -12,6 +12,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID",    "0x0ea74052")
 #- verify slave
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 
 #- Accelerometer Self Test

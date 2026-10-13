@@ -12,6 +12,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x0c5a4052")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- analog input Ch1
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcAnalogInput_16bit.cmd "CH_ID=1,ECMC_PDO=0x1a00,ECMC_ENTRY=0x6000"

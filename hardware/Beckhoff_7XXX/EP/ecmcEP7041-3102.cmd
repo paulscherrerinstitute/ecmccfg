@@ -14,6 +14,7 @@ epicsEnvSet("ECMC_EC_COMP_TYPE"          "EP7041-3102")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- common PDOs for status and control
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX70XX.cmd

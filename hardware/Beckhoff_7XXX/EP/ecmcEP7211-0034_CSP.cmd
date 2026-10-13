@@ -28,6 +28,7 @@ epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- common PDOs for CSP
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_CSP.cmd

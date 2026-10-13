@@ -5,6 +5,7 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID",    "0x07a54052")
 #- verify slave
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #***************** OUTPUTS FROM MASTER
 #- RxPDO Mapping Connection 001
