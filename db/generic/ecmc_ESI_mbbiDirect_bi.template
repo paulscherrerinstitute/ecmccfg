@@ -10,6 +10,6 @@ record(bi,"${ECMC_P}${REC_NAME}"){
   field(ONAM, "${ONAM=One}")
   field(ZSV,  "${ZSV=NO_ALARM}")
   field(OSV,  "${OSV=NO_ALARM}")
-  field(FLNK, "${FLNK=}}")
+  field(FLNK, "${FLNK=}")
   field(TSE,  "$(TSE=-2)")
 }
