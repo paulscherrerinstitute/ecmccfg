@@ -51,36 +51,36 @@ file "ecmc_ESI_mbboDirect.template" {
 
 file "ecmc_ESI_mbbiDirect_bi.template" {
     pattern { REC_NAME, DESC, LNK_NAME, FLNK , SRC_NAME}
-        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC" "BO01_Stat_OutpShrtCirc"}
-        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC" "BO01_Stat_OutpBuffOvrflw"}
-        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC" "BO01_Stat_OutpState"}
-        {"BO02-Stat-OutpShrtCirc", "Status__Output short circuit", "BO02-Stat_.B0", "${ECMC_P}.PROC" "BO02_Stat_OutpShrtCirc"}
-        {"BO02-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO02-Stat_.B1", "${ECMC_P}BO02-Stat-OutpShrtCirc.PROC" "BO02_Stat_OutpBuffOvrflw"}
-        {"BO02-Stat-OutpState", "Status__Output state", "BO02-Stat_.B2", "${ECMC_P}BO02-Stat-OutpBuffOvrflw.PROC" "BO02_Stat_OutpState"}
-        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC" "BI01_Stat_State"}
-        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC" "BI01_Stat_BuffOvrflw"}
-        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC" "BI01_EvtState01"}
-        {"BI01-EvtState02", "Inputs__Input event state 2", "BI01-EvtStateArr.B1", "${ECMC_P}BI01-EvtState01.PROC" "BI01_EvtState02"}
-        {"BI01-EvtState03", "Inputs__Input event state 3", "BI01-EvtStateArr.B2", "${ECMC_P}BI01-EvtState02.PROC" "BI01_EvtState03"}
-        {"BI01-EvtState04", "Inputs__Input event state 4", "BI01-EvtStateArr.B3", "${ECMC_P}BI01-EvtState03.PROC" "BI01_EvtState04"}
-        {"BI01-EvtState05", "Inputs__Input event state 5", "BI01-EvtStateArr.B4", "${ECMC_P}BI01-EvtState04.PROC" "BI01_EvtState05"}
-        {"BI01-EvtState06", "Inputs__Input event state 6", "BI01-EvtStateArr.B5", "${ECMC_P}BI01-EvtState05.PROC" "BI01_EvtState06"}
-        {"BI01-EvtState07", "Inputs__Input event state 7", "BI01-EvtStateArr.B6", "${ECMC_P}BI01-EvtState06.PROC" "BI01_EvtState07"}
-        {"BI01-EvtState08", "Inputs__Input event state 8", "BI01-EvtStateArr.B7", "${ECMC_P}BI01-EvtState07.PROC" "BI01_EvtState08"}
-        {"BI01-EvtState09", "Inputs__Input event state 9", "BI01-EvtStateArr.B8", "${ECMC_P}BI01-EvtState08.PROC" "BI01_EvtState09"}
-        {"BI01-EvtState10", "Inputs__Input event state 10", "BI01-EvtStateArr.B9", "${ECMC_P}BI01-EvtState09.PROC" "BI01_EvtState10"}
-        {"BI02-Stat-State", "Status__Input state", "BI02-Stat_.B0", "${ECMC_P}.PROC" "BI02_Stat_State"}
-        {"BI02-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI02-Stat_.B1", "${ECMC_P}BI02-Stat-State.PROC" "BI02_Stat_BuffOvrflw"}
-        {"BI02-EvtState01", "Inputs__Input event state 1", "BI02-EvtStateArr.B0", "${ECMC_P}.PROC" "BI02_EvtState01"}
-        {"BI02-EvtState02", "Inputs__Input event state 2", "BI02-EvtStateArr.B1", "${ECMC_P}BI02-EvtState01.PROC" "BI02_EvtState02"}
-        {"BI02-EvtState03", "Inputs__Input event state 3", "BI02-EvtStateArr.B2", "${ECMC_P}BI02-EvtState02.PROC" "BI02_EvtState03"}
-        {"BI02-EvtState04", "Inputs__Input event state 4", "BI02-EvtStateArr.B3", "${ECMC_P}BI02-EvtState03.PROC" "BI02_EvtState04"}
-        {"BI02-EvtState05", "Inputs__Input event state 5", "BI02-EvtStateArr.B4", "${ECMC_P}BI02-EvtState04.PROC" "BI02_EvtState05"}
-        {"BI02-EvtState06", "Inputs__Input event state 6", "BI02-EvtStateArr.B5", "${ECMC_P}BI02-EvtState05.PROC" "BI02_EvtState06"}
-        {"BI02-EvtState07", "Inputs__Input event state 7", "BI02-EvtStateArr.B6", "${ECMC_P}BI02-EvtState06.PROC" "BI02_EvtState07"}
-        {"BI02-EvtState08", "Inputs__Input event state 8", "BI02-EvtStateArr.B7", "${ECMC_P}BI02-EvtState07.PROC" "BI02_EvtState08"}
-        {"BI02-EvtState09", "Inputs__Input event state 9", "BI02-EvtStateArr.B8", "${ECMC_P}BI02-EvtState08.PROC" "BI02_EvtState09"}
-        {"BI02-EvtState10", "Inputs__Input event state 10", "BI02-EvtStateArr.B9", "${ECMC_P}BI02-EvtState09.PROC" "BI02_EvtState10"}
+        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC", "BO01_Stat_OutpShrtCirc"}
+        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC", "BO01_Stat_OutpBuffOvrflw"}
+        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC", "BO01_Stat_OutpState"}
+        {"BO02-Stat-OutpShrtCirc", "Status__Output short circuit", "BO02-Stat_.B0", "${ECMC_P}.PROC", "BO02_Stat_OutpShrtCirc"}
+        {"BO02-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO02-Stat_.B1", "${ECMC_P}BO02-Stat-OutpShrtCirc.PROC", "BO02_Stat_OutpBuffOvrflw"}
+        {"BO02-Stat-OutpState", "Status__Output state", "BO02-Stat_.B2", "${ECMC_P}BO02-Stat-OutpBuffOvrflw.PROC", "BO02_Stat_OutpState"}
+        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC", "BI01_Stat_State"}
+        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC", "BI01_Stat_BuffOvrflw"}
+        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC", "BI01_EvtState01"}
+        {"BI01-EvtState02", "Inputs__Input event state 2", "BI01-EvtStateArr.B1", "${ECMC_P}BI01-EvtState01.PROC", "BI01_EvtState02"}
+        {"BI01-EvtState03", "Inputs__Input event state 3", "BI01-EvtStateArr.B2", "${ECMC_P}BI01-EvtState02.PROC", "BI01_EvtState03"}
+        {"BI01-EvtState04", "Inputs__Input event state 4", "BI01-EvtStateArr.B3", "${ECMC_P}BI01-EvtState03.PROC", "BI01_EvtState04"}
+        {"BI01-EvtState05", "Inputs__Input event state 5", "BI01-EvtStateArr.B4", "${ECMC_P}BI01-EvtState04.PROC", "BI01_EvtState05"}
+        {"BI01-EvtState06", "Inputs__Input event state 6", "BI01-EvtStateArr.B5", "${ECMC_P}BI01-EvtState05.PROC", "BI01_EvtState06"}
+        {"BI01-EvtState07", "Inputs__Input event state 7", "BI01-EvtStateArr.B6", "${ECMC_P}BI01-EvtState06.PROC", "BI01_EvtState07"}
+        {"BI01-EvtState08", "Inputs__Input event state 8", "BI01-EvtStateArr.B7", "${ECMC_P}BI01-EvtState07.PROC", "BI01_EvtState08"}
+        {"BI01-EvtState09", "Inputs__Input event state 9", "BI01-EvtStateArr.B8", "${ECMC_P}BI01-EvtState08.PROC", "BI01_EvtState09"}
+        {"BI01-EvtState10", "Inputs__Input event state 10", "BI01-EvtStateArr.B9", "${ECMC_P}BI01-EvtState09.PROC", "BI01_EvtState10"}
+        {"BI02-Stat-State", "Status__Input state", "BI02-Stat_.B0", "${ECMC_P}.PROC", "BI02_Stat_State"}
+        {"BI02-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI02-Stat_.B1", "${ECMC_P}BI02-Stat-State.PROC", "BI02_Stat_BuffOvrflw"}
+        {"BI02-EvtState01", "Inputs__Input event state 1", "BI02-EvtStateArr.B0", "${ECMC_P}.PROC", "BI02_EvtState01"}
+        {"BI02-EvtState02", "Inputs__Input event state 2", "BI02-EvtStateArr.B1", "${ECMC_P}BI02-EvtState01.PROC", "BI02_EvtState02"}
+        {"BI02-EvtState03", "Inputs__Input event state 3", "BI02-EvtStateArr.B2", "${ECMC_P}BI02-EvtState02.PROC", "BI02_EvtState03"}
+        {"BI02-EvtState04", "Inputs__Input event state 4", "BI02-EvtStateArr.B3", "${ECMC_P}BI02-EvtState03.PROC", "BI02_EvtState04"}
+        {"BI02-EvtState05", "Inputs__Input event state 5", "BI02-EvtStateArr.B4", "${ECMC_P}BI02-EvtState04.PROC", "BI02_EvtState05"}
+        {"BI02-EvtState06", "Inputs__Input event state 6", "BI02-EvtStateArr.B5", "${ECMC_P}BI02-EvtState05.PROC", "BI02_EvtState06"}
+        {"BI02-EvtState07", "Inputs__Input event state 7", "BI02-EvtStateArr.B6", "${ECMC_P}BI02-EvtState06.PROC", "BI02_EvtState07"}
+        {"BI02-EvtState08", "Inputs__Input event state 8", "BI02-EvtStateArr.B7", "${ECMC_P}BI02-EvtState07.PROC", "BI02_EvtState08"}
+        {"BI02-EvtState09", "Inputs__Input event state 9", "BI02-EvtStateArr.B8", "${ECMC_P}BI02-EvtState08.PROC", "BI02_EvtState09"}
+        {"BI02-EvtState10", "Inputs__Input event state 10", "BI02-EvtStateArr.B9", "${ECMC_P}BI02-EvtState09.PROC", "BI02_EvtState10"}
 }
 
 file "ecmc_ESI_mbbiDirect.template" {

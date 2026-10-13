@@ -24,12 +24,12 @@ file "ecmc_ESI_mbboDirect.template" {
 
 file "ecmc_ESI_mbbiDirect_bi.template" {
     pattern { REC_NAME, DESC, LNK_NAME, FLNK , SRC_NAME}
-        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC" "BO01_Stat_OutpShrtCirc"}
-        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC" "BO01_Stat_OutpBuffOvrflw"}
-        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC" "BO01_Stat_OutpState"}
-        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC" "BI01_Stat_State"}
-        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC" "BI01_Stat_BuffOvrflw"}
-        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC" "BI01_EvtState01"}
+        {"BO01-Stat-OutpShrtCirc", "Status__Output short circuit", "BO01-Stat_.B0", "${ECMC_P}.PROC", "BO01_Stat_OutpShrtCirc"}
+        {"BO01-Stat-OutpBuffOvrflw", "Status__Output buffer overflow", "BO01-Stat_.B1", "${ECMC_P}BO01-Stat-OutpShrtCirc.PROC", "BO01_Stat_OutpBuffOvrflw"}
+        {"BO01-Stat-OutpState", "Status__Output state", "BO01-Stat_.B2", "${ECMC_P}BO01-Stat-OutpBuffOvrflw.PROC", "BO01_Stat_OutpState"}
+        {"BI01-Stat-State", "Status__Input state", "BI01-Stat_.B0", "${ECMC_P}.PROC", "BI01_Stat_State"}
+        {"BI01-Stat-BuffOvrflw", "Status__Input buffer overflow", "BI01-Stat_.B1", "${ECMC_P}BI01-Stat-State.PROC", "BI01_Stat_BuffOvrflw"}
+        {"BI01-EvtState01", "Inputs__Input event state 1", "BI01-EvtStateArr.B0", "${ECMC_P}.PROC", "BI01_EvtState01"}
 }
 
 file "ecmc_ESI_mbbiDirect.template" {
