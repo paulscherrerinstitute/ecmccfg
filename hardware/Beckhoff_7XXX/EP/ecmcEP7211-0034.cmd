@@ -14,10 +14,10 @@ epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
-ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- common PDOs for CSV
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_CSV.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- DC
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_DC.cmd

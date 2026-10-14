@@ -14,10 +14,10 @@ epicsEnvSet("ECMC_EC_COMP_TYPE"          "EP7041-3102")
 
 #- verify slave, including reset
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
-ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- common PDOs for status and control
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX70XX.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- Max full step freq = 2000Hz (setting is 1)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x5,1,1)"

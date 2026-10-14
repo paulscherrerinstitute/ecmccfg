@@ -41,12 +41,12 @@ ${ECMC_EP7211_OPT_INFO2_NOT_INPUTS}${ECMC_EP7211_OPT_INFO2_NOT_TEMP}ecmcExit Err
 
 #- Verify slave, including reset.
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd "RESET=true"
-ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- Configure one complete, validated base PDO profile.
 ${ECMC_EP7211_OPT_CSV}${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_CSV.cmd
 ${ECMC_EP7211_OPT_CSP}${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_CSP.cmd
 ${ECMC_EP7211_OPT_CST}${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_CST_OPT.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #- Info data 2 is already mapped by the CST base profile; add the same PDO for
 #- CSV/CSP. Selection 10 is defined by the EP7211-0034 ESI as: bit 0 input 1,

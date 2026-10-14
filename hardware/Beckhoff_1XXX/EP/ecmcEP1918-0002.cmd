@@ -5,12 +5,12 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID",    "0x077e4052")
 #- verify slave
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,0)
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
-ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 #***************** OUTPUTS FROM MASTER
 #- RxPDO Mapping Connection 001
 # FSoE_Command
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7040,0x01,U8,fsoe_cmd_out_01)"
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 # FSoE Data
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7002,0x01,U8,fsoe_data_out_01)"
 

@@ -12,7 +12,6 @@ epicsEnvSet("ECMC_EC_PRODUCT_ID",    "0x0ea74052")
 #- verify slave
 ecmcFileExist(${ecmccfg_DIR}slaveVerify.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
-ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 
 
 #- Accelerometer Self Test
@@ -79,4 +78,5 @@ ecmcConfigOrDie "Cfg.EcSlaveConfigDC(${ECMC_EC_SLAVE_NUM},0x30,${ECMC_TEMP_PERIO
 epicsEnvUnset("ECMC_TEMP_PERIOD_NANO_SECS")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcWatchDog.cmd
+ecmcConfigOrDie "Cfg.EcSetSlavePortWiringCheckEnable(${ECMC_EC_SLAVE_NUM},1)"
 ecmcConfigOrDie "Cfg.EcSetDelayECOkAtStartup(${ECMC_EC_STARTUP_DELAY=6000})"
