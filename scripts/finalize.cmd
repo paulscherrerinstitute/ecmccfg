@@ -26,6 +26,7 @@ ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_EXE, "'Error' in '${ECMC_CONFIG_RETURN_VAL
 ${ECMC_BLOCK_EXE=}epicsEnvSet(ECMC_AXES_GRP_COUNT,${ECMC_CONFIG_RETURN_VAL=0})
 ${ECMC_BLOCK_EXE=}dbLoadRecords(ecmcAxisGroups.db,"P=${IOC}:,COUNT=${ECMC_AXES_GRP_COUNT=0}")
 ${ECMC_BLOCK_EXE=}ecmcEpicsEnvSetCalc(ECMC_AXES_GRP_LOOP_END,"${ECMC_AXES_GRP_COUNT=0}-1")
+${ECMC_BLOCK_EXE=}ecmcEpicsEnvSetCalcTernary(ECMC_BLOCK_EXE, "${ECMC_AXES_GRP_COUNT=0}>0", "", "#-")
 ${ECMC_BLOCK_EXE=}ecmcForLoop(${ecmccfg_DIR}finalizeAxGrp_loopStep.cmd,"P=${IOC}:",ECMC_LOOP_IDX,0,${ECMC_AXES_GRP_LOOP_END=0},1)
 epicsEnvUnset(ECMC_BLOCK_EXE)
 
