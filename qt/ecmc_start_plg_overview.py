@@ -88,7 +88,7 @@ sub_panel_height = 130
 
 
 def get_plugins_from_ioc(ioc: str):
-    import ca, epicsPV
+    from ecmc_ca_compat import ca, epicsPV
 
     plugins = []
     plg_id = epicsPV.epicsPV('%s:MCU-Cfg-PLG-FrstObjId' % ioc).getw()

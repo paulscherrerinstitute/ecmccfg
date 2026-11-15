@@ -88,7 +88,7 @@ sub_panel_height = 286
 
 
 def get_ds_from_ioc(ioc: str):
-    import ca, epicsPV
+    from ecmc_ca_compat import ca, epicsPV
 
     ds_list = []
     ds_id = epicsPV.epicsPV('%s:MCU-Cfg-DS-FrstObjId' % ioc).getw()

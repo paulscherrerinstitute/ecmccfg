@@ -53,21 +53,6 @@ ECMC_QT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 export EPICS_DISPLAY_PATH="$ECMC_QT_DIR${EPICS_DISPLAY_PATH:+:$EPICS_DISPLAY_PATH}"
 cd "$ECMC_QT_DIR" || exit 1
 
-function caqtdm() {
-  local binary=${CAQTDM_BIN:-}
-  if [ -z "$binary" ]; then
-    binary=$(type -P caqtdm || type -P caQtDM || true)
-    if [ -z "$binary" ] && [ -x /Applications/caQtDM.app/Contents/MacOS/caQtDM ]; then
-      binary=/Applications/caQtDM.app/Contents/MacOS/caQtDM
-    fi
-  fi
-  if [ -z "$binary" ]; then
-    echo 'caQtDM not found; set CAQTDM_BIN or add it to PATH.' >&2
-    return 1
-  fi
-  "$binary" "$@"
-}
-
 # PSI caget has long format flags; EPICS Base caget uses -t and -n.
 ECMC_CAGET_PSI=
 function caget() {
