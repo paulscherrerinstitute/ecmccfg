@@ -15,7 +15,7 @@
 #- SYS
 #-
 #- [optional]
-#- ECMC_VER          = 11.1.1
+#- ECMC_VER          = 11.2.0
 #- EthercatMC_VER    = 3.0.2 (obsolete)
 #- INIT              = initAll
 #- MASTER_ID         = 0 <-- put negatuve number to disable master, aka non ec-mode
@@ -71,7 +71,7 @@ on error halt
 #-
 #-------------------------------------------------------------------------------
 #- load required modules
-epicsEnvSet(ECMC_VER,${ECMC_VER=11.1.1})
+epicsEnvSet(ECMC_VER,${ECMC_VER=11.2.0})
 epicsEnvSet("ECMC_REQUIRE_ECMC", "${ECMC_REQUIRE_ECMC=require ecmc}")
 ${ECMC_REQUIRE_ECMC} "${ECMC_VER}"
 ecmcLogBufferWrite("INFO","IOC startup started.")

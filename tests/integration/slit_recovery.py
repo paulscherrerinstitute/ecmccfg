@@ -41,17 +41,29 @@ def motor_idle(rig, axes):
 
 
 def stationary_dwell(rig, positions, allowed=None, seconds=.6):
-    pulses_end = time.monotonic()+seconds
     tolerance = rig.profile.get('tolerance', .015)
+    stable_since = None
     def held():
-        if not motor_idle(rig, rig.profile['axes']):
-            fields = ('-Busy', '-VelAct', '.DMOV', '.MOVN', '.MIP', '.PACT')
-            state = {a: {f: rig.get(a, f) for f in fields} for a in rig.profile['axes']}
+        nonlocal stable_since
+        fields = ('-Busy', '-VelAct', '.DMOV', '.MOVN', '.MIP', '.PACT')
+        state = {a: {f: rig.get(a, f) for f in fields} for a in rig.profile['axes']}
+        terminal = all(values['-Busy'] == 0 and values['.DMOV'] == 1
+                       and values['.MOVN'] == 0 and values['.MIP'] == 0
+                       and values['.PACT'] == 0 for values in state.values())
+        if not terminal:
             raise AssertionError('motor record or native axis restarted after termination: '+str(state))
         for axis, value in positions.items():
             if abs(rig.get(axis, '-PosAct')-value) > tolerance: raise AssertionError(axis+': cancelled motion replayed')
-        return time.monotonic() >= pulses_end
-    wait_checked(rig, held, 'terminal motor state remains stationary', seconds+5, allowed)
+        # Actual velocity is independently published and may briefly retain or
+        # quantize a pre-STOP sample on slow hardware.  Demand a continuous
+        # quiet interval while still rejecting command restarts and drift on
+        # every observation.
+        if any(abs(values['-VelAct']) >= .005 for values in state.values()):
+            stable_since = None
+            return False
+        if stable_since is None: stable_since = time.monotonic()
+        return time.monotonic()-stable_since >= seconds
+    wait_checked(rig, held, 'terminal motor state and measured velocity remain stationary', seconds+5, allowed)
 
 
 def reset_known_errors(rig, allowed):
