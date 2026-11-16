@@ -87,7 +87,7 @@ the profile's physical envelope. Native soft limits must be enabled. The state
 machine must already be enabled. Zero-reference preparation and the encoder-power group require Auto power
 mode with Force ON released and encoder power control enabled.
 
-The default run contains 91 live hardware cases (52 with state-machine management and 39 standalone repeats). Six full-stroke homing cases are available separately, for 97 selectable cases in total. Select the added groups independently:
+The default run contains 92 live hardware cases (52 with state-machine management and 40 standalone repeats). Six full-stroke homing cases are available separately, for 98 selectable cases in total. Select the added groups independently:
 
 ```sh
 python3 tests/integration/slit_hardware/run.py --prefix HWSLIT: --run --case native --case target_write --case motor

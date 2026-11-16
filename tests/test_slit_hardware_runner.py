@@ -555,7 +555,7 @@ class HardwareRunnerTests(unittest.TestCase):
         with patch.object(run, 'Client', side_effect=AssertionError('connection attempted')):
             with redirect_stdout(io.StringIO()):
                 self.assertEqual(run.main([]), 0)
-        self.assertEqual(make_suite(None, GROUPS).countTestCases(), 103)
+        self.assertEqual(make_suite(None, GROUPS).countTestCases(), 106)
         self.assertEqual(make_suite(None, GROUPS, ('motor_stop',)).countTestCases(), 2)
 
     def test_bad_identity_modes_and_statuses_never_write(self):
@@ -608,7 +608,7 @@ class HardwareRunnerTests(unittest.TestCase):
     def test_all_cases_reference_zero_restore_velocities_and_use_expected_fields(self):
         code, report, xml = self.run_live_boundary()
         self.assertEqual(code, 0, report)
-        self.assertEqual(len(report['tests']), 91)
+        self.assertEqual(len(report['tests']), 92)
         self.assertTrue(all(t['status'] == 'passed' for t in report['tests']), report)
         self.assertEqual(xml.attrib['errors'], '0')
         self.assertTrue(self.client.closed)
