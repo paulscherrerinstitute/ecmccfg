@@ -30,13 +30,26 @@
     {%- endif %}
 {%- endif %}
 
+#- Restore mode: 0=ECMC startup source, 1=restored motor pair to ECMC + sync,
+#- 2=restored motor pair remains local.  axis.parameters follows and may
+#- override this generated option for backward compatibility.
+{%- set restoreEcmcMRSofLim = 0 %}
+{%- if (epics is defined) and (epics.motorRecord is defined) and
+       (epics.motorRecord.restoreSoftLimits|default(false) == true) %}
+    {%- if syncEcmcMRSofLim == 1 %}
+        {%- set restoreEcmcMRSofLim = 1 %}
+    {%- else %}
+        {%- set restoreEcmcMRSofLim = 2 %}
+    {%- endif %}
+{%- endif %}
+
 {%- if (epics is defined) and (epics.name is defined) %}
     {%- set epicsName = epics.name %}
 {%- else %}
     {%- set epicsName = "axis" %}
 {%- endif %}
 
-${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, ${ECMC_AXIS_NO}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "syncSoftLims={{ syncEcmcMRSofLim }};{{ axis.parameters|default("") }}")
+${ECMC_MR_MODULE="ecmcMotorRecord"}CreateAxis(${ECMC_MOTOR_PORT}, ${ECMC_AXIS_NO}, ${ECMC_AXIS_FLAGS={{ axisFlags }}}, "syncSoftLims={{ syncEcmcMRSofLim }};restoreMotorSoftLims={{ restoreEcmcMRSofLim }};{{ axis.parameters|default("") }}")
 epicsEnvUnset(ECMC_AXIS_FLAGS)
 
 {% if trajectory.axis.acceleration is defined %}

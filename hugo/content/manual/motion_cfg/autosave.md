@@ -17,26 +17,24 @@ For the complete incremental stepper setup, see
 ## Enable soft-limit restoration in YAML
 
 ```yaml
-axis:
-  parameters: "restoreMotorSoftLims=1;"
-
 epics:
   name: Axis1
   motorRecord:
-    syncSoftLimits: true
+    restoreSoftLimits: true
+    syncSoftLimits: true  # false keeps the restored pair motor-local
 ```
 
-`restoreMotorSoftLims=1` belongs in `axis.parameters`, not in
-`epics.motorRecord`. Append it with a semicolon if other driver options already
-exist, for example `powerAutoOnOff=2;restoreMotorSoftLims=1;`.
+`restoreSoftLimits` is a startup-only policy. `syncSoftLimits` remains
+runtime-configurable. With restore enabled and sync disabled, autosave-restored
+motor limits remain local and enabled ECMC limits bound them without being
+modified. With both enabled, the restored pair is copied to ECMC and ongoing
+synchronization is enabled.
 
-The restore option also enables ongoing motor-record/ECMC soft-limit
-synchronization. Omitting, commenting out, or setting
-`epics.motorRecord.syncSoftLimits: false` does not disable synchronization while
-`restoreMotorSoftLims=1` remains in the driver options. The generated option
-string can contain `syncSoftLims=0;restoreMotorSoftLims=1;`: the restore option
-turns synchronization on. Restore-once with synchronization disabled afterward
-is not a separate mode of this option.
+For backward compatibility, advanced configurations may still put
+`restoreMotorSoftLims=1` in `axis.parameters`; mode 1 restores into ECMC and
+forces synchronization. Internal mode 2 performs motor-local restoration.
+Normal YAML configurations should use the two booleans above rather than these
+numeric driver modes.
 
 Without the restore option, ECMC seeds the motor's limits from its configured
 limits at startup. Saving the motor limit fields alone does not make restored

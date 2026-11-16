@@ -238,6 +238,7 @@ class Schema:
                         }                    
                     },
                     'syncSoftLimits': {'type': 'boolean', 'default': False},
+                    'restoreSoftLimits': {'type': 'boolean', 'default': False},
                 }
             }
         }

@@ -226,6 +226,11 @@
         "type": "boolean",
         "required": false,
         "default": false
+      },
+      "epics.motorRecord.restoreSoftLimits": {
+        "type": "boolean",
+        "required": false,
+        "default": false
       }
     }
   },
