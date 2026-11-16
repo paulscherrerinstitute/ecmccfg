@@ -71,7 +71,7 @@ assert feedback.position == 11200 and raw == 5656064
 assert DEFAULT_REPORT == ROOT / 'test-results/slit/slit-report.json'
 suite = make_suite(None, ('open', 'closed'), MODULES)
 tests = list(suite)
-assert len(tests) == 480
+assert len(tests) == 484
 independent = list(make_suite(None, ('closed',), ('no_sm',)))
 assert len(independent) == 37
 assert all('.no_sm.Independent' in test.id() for test in independent)
