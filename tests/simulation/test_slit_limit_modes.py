@@ -17,8 +17,8 @@ from slit_hardware.cases import make_suite as make_hardware_suite
 from slit.run import make_suite as make_sim_suite
 
 selected = list(make_hardware_suite(None, ('softlimits',)))
-assert len(selected) == 6 and all(test.motion_axes == () for test in selected)
-assert len(list(make_sim_suite(None, ('open', 'closed'), ('softlimit_modes',)))) == 12
+assert len(selected) == 8 and all(test.motion_axes == () for test in selected)
+assert len(list(make_sim_suite(None, ('open', 'closed'), ('softlimit_modes',)))) == 16
 
 
 class Clock:
@@ -88,6 +88,13 @@ class Boundary:
             values[field+'-RB'] = value
             if values['-CfgSyncSftLim'] and self.defect != 'no_native_to_motor':
                 self.pending.append((axis, '.DLLM' if field == '-CfgDLLM' else '.DHLM', value))
+            elif (not values['-CfgSyncSftLim'] and
+                  (values['-CfgDLLM-En-RB'] or values['-CfgDHLM-En-RB'])):
+                # A changed unsynchronized native range is published once as
+                # the motor record's RO boundary.  Its callback initially
+                # installs that pair; later narrower motor edits remain local.
+                values['.DLLM' if field == '-CfgDLLM' else '.DHLM'] = value
+                self.user_limits(values)
             return
         if field in ('.LLM', '.HLM'):
             dial = value-values['.OFF'] if not values['.DIR'] else values['.OFF']-value
@@ -95,6 +102,11 @@ class Boundary:
             value = dial
         if field in ('.DLLM', '.DHLM'):
             if self.defect == 'cannot_disable_motor' and value == 0: return
+            native_enabled = (values['-CfgDLLM-En-RB'] or values['-CfgDHLM-En-RB'])
+            native_defined = (values['-CfgDLLM-RB'] != 0 or values['-CfgDHLM-RB'] != 0)
+            if (value != 0 and native_enabled and native_defined and
+                    self.defect != 'motor_ignores_native_range'):
+                value = max(values['-CfgDLLM-RB'], min(values['-CfgDHLM-RB'], value))
             values[field] = value
             self.user_limits(values)
             if ((values['-CfgSyncSftLim'] and self.defect != 'no_motor_to_native') or
@@ -145,6 +157,8 @@ for cls in (SimCases, HardwareCases):
         for sync in (0, 1): exercise(cls, name, sync)
     for name, defect in (
         ('test_nested_independent_limits_without_sync', 'propagates_without_sync'),
+        ('test_native_limits_bound_unsynced_motor_limits', 'motor_ignores_native_range'),
+        ('test_motor_soft_limit_callback_rate_is_bounded', 'high_soft_limit_callback_rate'),
         ('test_controller_only_limits_without_sync', 'cannot_disable_motor'),
         ('test_motor_only_limits_without_sync', 'ignored_flags'),
         ('test_synced_limits_in_both_directions', 'no_native_to_motor'),

@@ -1045,9 +1045,11 @@ are reset to conceal a residual. Post-home move verdicts are unchanged.
 ## Independent soft-limit modes and motor offsets
 
 The `softlimit_modes` simulator module and explicit `softlimits` hardware group
-share six live configuration cases: motor-only limits, ECMC-only limits, nested
-independent limits, synchronization in both directions, OFF/DIR changes, and
-user-limit edits under nonzero OFF with sync enabled. Both physical axes are
+share eight live configuration cases: motor-only limits, ECMC-only limits,
+nested independent limits, unsynced motor limits bounded by enabled ECMC limits,
+synchronization in both directions, OFF/DIR changes, and user-limit edits under
+nonzero OFF with sync enabled, plus an idle CA callback-rate bound for physical
+and virtual motor soft limits. Both physical axes are
 checked. DIR=Pos/Neg and OFF=0/+10/-10 are exercised; these are motor coordinate
 offsets, not physical travel or encoder-reference changes. Live cases require
 positive MRES. The standalone ECMC fixture additionally covers negative MRES
@@ -1074,26 +1076,30 @@ polls while sync is off. Hardware motion guards remain unchanged.
 
 DOC: `user = direction * dial + OFF`, so changing OFF shifts LLM/HLM while
 DLLM/DHLM and ECMC limits stay fixed. USER/INFERRED: no-sync permits independent
-pairs; sync propagates edits. COMPAT: independence does not automatically clamp
-motor fields to a changing ECMC range; nested ranges are explicitly configured.
+pairs; sync propagates edits. COMPAT: enabled ECMC limits bound motor fields even
+without synchronization, while narrower nested motor ranges remain independent.
 The effective motion constraints belong to both layers. Existing simulator
 `limits` cases and standalone ECMC monitor tests exercise motion rejection;
 these new hardware cases establish configuration propagation, not travel into
 or beyond a limit.
 
-An IOC may fail the independent zero-motor-pair case if cached driver read-only
-limits prevent disabling the motor pair. ECMC also currently seeds motor limits
-once during ordinary startup even with sync off; sync-flag-only transitions may
-not publish unchanged numeric limits. These are visible acceptance failures or
-startup caveats, not grounds to substitute observed values or enable sync as a
-cleanup shortcut. Reports distinguish the requested configuration from actual
-readbacks. No live IOC or physical execution is implied by offline test success.
+The independent zero-motor-pair case disables the native limit enables before
+writing the motor zero sentinel, then re-enables the native range. This ordering
+avoids trying to create 0/0 through two writes while the ECMC read-only range is
+already active. With motor 0/0 established, the driver leaves the motor
+read-only range clear while ECMC continues enforcing its native limits.
+ECMC also seeds motor limits once during ordinary startup even with sync off.
+Acceptance failures are not grounds to substitute observed values or enable
+sync as a cleanup shortcut. Reports distinguish the requested configuration
+from actual readbacks. No live IOC or physical execution is implied by offline
+test success.
 
 `tests/simulation/test_slit_limit_modes.py` executes the actual simulator and
 hardware case methods at controlled parameter boundaries. Delayed delivery must
 pass; missing propagation, accidental no-sync writes, ignored DIR, incorrect OFF
-application, unavailable zero pairs, dropped enable flags and unintended motion
-must fail. It checks full restoration and forbids movement commands. This is
+application, unavailable zero pairs, missing unsynced range enforcement,
+dropped enable flags and unintended motion must fail. It checks full restoration
+and forbids movement commands. This is
 harness validation, not a replacement motor/ECMC implementation.
 
 

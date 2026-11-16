@@ -1,14 +1,16 @@
 """Shared live simulator/hardware limit propagation checks; no motion commands.
 
 DOC: motor user = direction * dial + OFF. USER: four requested limit modes.
-COMPAT: no-sync does not automatically clamp motor field edits to native limits.
-These acceptance cases deliberately fail if the requested independent zero pair
-cannot be established; no fallback silently enables synchronization.
+COMPAT: with sync off, enabled native limits bound motor field edits without
+propagating those edits back to ECMC. These acceptance cases deliberately fail
+if that boundary or the independent zero pair cannot be established; no
+fallback silently enables synchronization.
 """
 from contextlib import contextmanager
 import math
 import time
 import json
+import threading
 
 # ESS motor.h::MF_RW_SOFT_LIMITS. A writable driver PV is not proof that
 # the motor record has consumed the corresponding aggregate-status callback.
@@ -185,10 +187,15 @@ class LimitModeChecks:
         for axis in self.rig.profile['physical']:
             with self.limit_session(axis) as s:
                 low, high = s.pair(.8)
-                s.native(low, high)
-                # A zero pair is a disabled motor limit even when OFF is nonzero.
-                # A cached read-only driver range can prevent this: fail visibly.
+                # Clear the native enables before establishing the special
+                # motor 0/0 pair.  Once an enabled native range is published as
+                # the motor record's read-only range, two sequential caputs
+                # cannot reliably cross through an otherwise-invalid partial
+                # zero pair.  Re-enable the native range only after 0/0 exists.
+                s.native(low, high, enabled=False)
                 s.motor(0, 0)
+                s.write('-CfgDLLM-En', 1)
+                s.write('-CfgDHLM-En', 1)
                 s.stable({'.DLLM': 0, '.DHLM': 0, '-CfgDLLM-RB': low,
                           '-CfgDHLM-RB': high, '-CfgSyncSftLim': 0,
                           '-CfgDLLM-En-RB': 1, '-CfgDHLM-En-RB': 1})
@@ -199,10 +206,76 @@ class LimitModeChecks:
                 low, high = s.pair(.8)
                 motor_low, motor_high = s.pair(.4)
                 s.native(low, high)
+                s.expect({'.DLLM': low, '.DHLM': high},
+                         'motor record consumes the changed native boundary')
                 s.motor(motor_low, motor_high)
                 s.stable({'.DLLM': motor_low, '.DHLM': motor_high,
                           '-CfgDLLM-RB': low, '-CfgDHLM-RB': high, '-CfgSyncSftLim': 0,
                           '-CfgDLLM-En-RB': 1, '-CfgDHLM-En-RB': 1})
+
+    def test_native_limits_bound_unsynced_motor_limits(self):
+        for axis in self.rig.profile['physical']:
+            with self.limit_session(axis) as s:
+                native_low, native_high = s.pair(.6)
+                motor_low, motor_high = s.pair(.3)
+                requested_low, requested_high = s.pair(.9)
+                s.native(native_low, native_high)
+                s.expect({'.DLLM': native_low, '.DHLM': native_high},
+                         'motor record consumes the changed native boundary')
+                s.motor(motor_low, motor_high)
+                s.write('.DLLM', requested_low)
+                s.write('.DHLM', requested_high)
+                s.expect({'.DLLM': native_low, '.DHLM': native_high,
+                          '-CfgDLLM-RB': native_low, '-CfgDHLM-RB': native_high,
+                          '-CfgSyncSftLim': 0},
+                         'enabled native range bounds unsynced motor limit edits')
+                s.stable({'.DLLM': native_low, '.DHLM': native_high,
+                          '-CfgDLLM-RB': native_low, '-CfgDHLM-RB': native_high,
+                          '-CfgDLLM-En-RB': 1, '-CfgDHLM-En-RB': 1,
+                          '-CfgSyncSftLim': 0})
+
+    def test_motor_soft_limit_callback_rate_is_bounded(self):
+        """Motor limit CA events stay at the nominal 1 Hz poll scale."""
+        duration = STABLE_SECONDS
+        names = [self.rig.prefix + axis + field
+                 for axis in self.rig.profile['axes'] for field in ('.DLLM', '.DHLM')]
+        # The offline boundary validates the verdict and its negative control;
+        # live SIM/HW clients exercise real CA subscriptions below.
+        if not hasattr(self.rig.client, 'factory'):
+            count = 1000 if self.rig.client.defect == 'high_soft_limit_callback_rate' else 0
+            self.assertLessEqual(count, 6, 'synthetic high-rate motor soft-limit callbacks')
+            return
+        counts = {name: 0 for name in names}
+        lock = threading.Lock()
+        pvs = []
+        try:
+            for name in names:
+                pv = self.rig.client.factory(name, auto_monitor=True)
+                self.assertTrue(pv.wait_for_connection(timeout=self.rig.client.timeout),
+                                'connect soft-limit monitor ' + name)
+                def callback(pvname=name, **_kwargs):
+                    with lock: counts[pvname] += 1
+                token = pv.add_callback(callback)
+                pvs.append((pv, token))
+            # Exclude each subscription's initial value event.
+            time.sleep(.2)
+            with lock:
+                for name in counts: counts[name] = 0
+            deadline = time.monotonic() + duration
+            while time.monotonic() < deadline:
+                for axis in self.rig.profile['axes']:
+                    self.assertEqual(self.rig.get(axis, '-Busy'), 0,
+                                     axis + ' moved during callback-rate check')
+                time.sleep(.05)
+            with lock: observed = dict(counts)
+            # Nominal idle poll is 1 Hz. Initial-event exclusion plus two-event
+            # scheduling margin avoids timing-edge flakes while rejecting loops.
+            limit = math.ceil(duration) + 2
+            self.assertTrue(all(count <= limit for count in observed.values()),
+                            f'motor soft-limit callback rate exceeds poll bound {limit}: {observed}')
+        finally:
+            for pv, token in pvs:
+                pv.remove_callback(token)
 
     def test_synced_limits_in_both_directions(self):
         for axis in self.rig.profile['physical']:
@@ -220,9 +293,15 @@ class LimitModeChecks:
             with self.limit_session(axis) as s:
                 for sync in (0, 1):
                     s.sync(sync)
-                    low, high = s.pair(.8)
+                    # Use a distinct synchronized boundary.  devMotorAsyn
+                    # intentionally suppresses a same-value RO status update,
+                    # so reusing the unsynchronized pair would not exercise
+                    # native-to-motor propagation on the second iteration.
+                    low, high = s.pair(.8 if not sync else .7)
                     s.native(low, high)
                     if not sync:
+                        s.expect({'.DLLM': low, '.DHLM': high},
+                                 'motor record consumes the changed native boundary')
                         low, high = s.pair(.4)
                         s.motor(low, high)
                     else:
