@@ -1,6 +1,7 @@
 """Hardware motion, controlled stall recovery and opt-in limit homing checks."""
 import time
 import unittest
+from .command_burst import CommandBurstTests
 from .homing import HomingTests, HOMING_NAMES
 from .softlimits import SoftLimitModeTests, SOFT_LIMIT_NAMES
 from slit_recovery import concurrent_physical_moves
@@ -254,6 +255,7 @@ class ConcurrentTests(unittest.TestCase):
 
 
 GROUPS = {
+    'command_burst': (CommandBurstTests, ('test_all_axes_command_burst_recovers',)),
     'softlimits': (SoftLimitModeTests, SOFT_LIMIT_NAMES),
     'homing': (HomingTests, HOMING_NAMES),
     'status': (StatusTests, ('test_idle_status_and_kinematics',)),
@@ -320,6 +322,7 @@ def make_suite(rig, groups, patterns=()):
                 'test_real_encoder_sleep_wake_and_backup': ((rig.profile['encoder_power']['axis'],) if rig else ('TR_LO', 'TR_HI')),
             }.get(original, ('TR_LO',) if '_lo_' in name else ('TR_HI',) if '_hi_' in name else ())
             if group == 'concurrent': test.motion_axes = ('TR_LO', 'TR_HI')
+            if group == 'command_burst': test.motion_axes = ('TR_LO', 'TR_HI', 'CENTERY', 'GAPY')
             if group == 'homing': test.motion_axes = ('TR_HI',)
             if group == 'coupled_stop':
                 test.motion_axes = ('CENTERY',) if original.startswith('test_center') else ('GAPY',)
