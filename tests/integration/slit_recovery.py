@@ -269,6 +269,13 @@ def stop_blade_during_virtual(rig, master, blade, interface, step, validate):
         before = {a: rig.get(a, '-PosAct') for a in rig.profile['physical']}
         field = '.STOP' if interface == 'motor' else '-StpCmd'
         rig.client.put(rig.prefix+blade+field, 1, wait=False, notify=False)
+        # STOP deliberately removes one blade from virtual trajectory
+        # ownership.  From this point the two blades can begin deceleration on
+        # different RT cycles, so preserving the commanded master's orthogonal
+        # coordinate is no longer a valid motion-isolation requirement.  The
+        # checks below still bound each blade's stopping travel and require the
+        # complete group to terminate without replay.
+        rig.motion_expectation = None
         wait_checked(rig, lambda: motor_idle(rig, rig.profile['axes']) and complete.is_set(),
                      'physical STOP terminates the complete coordinated group', 8, allowed)
         if abs(rig.get(master, '-PosAct')-target) <= rig.profile.get('tolerance', .015):
