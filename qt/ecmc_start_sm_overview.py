@@ -88,7 +88,7 @@ sub_panel_height = 457
 
 
 def get_state_machines_from_ioc(ioc: str):
-    import ca, epicsPV
+    from ecmc_ca_compat import ca, epicsPV
 
     sms = []
     sm_id = epicsPV.epicsPV('%s:MCU-Cfg-SM-FrstObjId' % ioc).getw()

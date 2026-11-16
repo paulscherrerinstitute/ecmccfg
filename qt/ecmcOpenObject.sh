@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 ########
 # Open ecmc objects with following args
@@ -48,6 +48,38 @@
 #  TRG_EC_TOOL_HW_DIAG : CMD, PREFIX, M_ID        S_ID
 #  OPEN_EC_TOOL_HW_DIAG_MAIN : CMD, PREFIX, M_ID S_ID
 
+# Resolve displays and helper commands relative to this checkout/installation.
+ECMC_QT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+export EPICS_DISPLAY_PATH="$ECMC_QT_DIR${EPICS_DISPLAY_PATH:+:$EPICS_DISPLAY_PATH}"
+cd "$ECMC_QT_DIR" || exit 1
+
+# PSI caget has long format flags; EPICS Base caget uses -t and -n.
+ECMC_CAGET_PSI=
+function caget() {
+  local arg
+  local args=()
+  if [ -z "$ECMC_CAGET_PSI" ]; then
+    if command caget -h 2>&1 | grep -q -- '-noname'; then
+      ECMC_CAGET_PSI=yes
+    else
+      ECMC_CAGET_PSI=no
+    fi
+  fi
+  if [ "$ECMC_CAGET_PSI" = yes ]; then
+    command caget "$@"
+    return $?
+  fi
+  for arg in "$@"; do
+    case "$arg" in
+      -noname) args+=(-t) ;;
+      -nostat|-nounit) ;;
+      -int) args+=(-n) ;;
+      *) args+=("$arg") ;;
+    esac
+  done
+  command caget "${args[@]}"
+}
+
 CMD=$1
 
 # ETHERCAT:
@@ -85,7 +117,7 @@ function openEcExpert() {
   M_ID=$( getMasterID $PREFIX )
   MACROS="MasterID=$M_ID,SYS=$PREFIX,IOC=$PREFIX"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcEcExpert.ui
+  caqtdm -macro "$MACROS" ecmcEcExpert.ui
 }
 
 function openEcOverview() {
@@ -109,7 +141,7 @@ function openEcSlaveFirst() {
   echo "PANEL=$PANEL"
   MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcGenericSlaveOverview.ui
+  caqtdm -macro "$MACROS" ecmcGenericSlaveOverview.ui
 }
 
 function openEcSlave() {
@@ -131,7 +163,7 @@ function openEcSlave() {
   # Assemnbe macros string
   MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcGenericSlaveOverview.ui
+  caqtdm -macro "$MACROS" ecmcGenericSlaveOverview.ui
 }
 
 function openEcSlaveGeneric() {
@@ -156,7 +188,7 @@ function openEcSlaveGeneric() {
   MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
   
-  caqtdm -macro $MACROS ecmcGenericSlaveOverview.ui
+  caqtdm -macro "$MACROS" ecmcGenericSlaveOverview.ui
 }
 
 function openEcSlaveNext() {
@@ -178,7 +210,7 @@ function openEcSlaveNext() {
   echo "PANEL=$PANEL"
   MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$NXT_S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS --attach ecmcGenericSlaveOverview.ui
+  caqtdm -macro "$MACROS" --attach ecmcGenericSlaveOverview.ui
 }
 
 function openEcSlavePrev() {
@@ -200,7 +232,7 @@ function openEcSlavePrev() {
   echo "PANEL=$PANEL"
   MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$M_ID,SlaveID=$NXT_S_ID,PANEL=$PANEL"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS --attach ecmcGenericSlaveOverview.ui
+  caqtdm -macro "$MACROS" --attach ecmcGenericSlaveOverview.ui
 }
 
 # MOTION:
@@ -226,7 +258,7 @@ function openAxis() {
   echo "AX_NAME=$AX_NAME"
   MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert.ui
+  caqtdm -macro "$MACROS" ecmcAxisExpert.ui
 }
 
 function openAxisByName() {
@@ -239,7 +271,7 @@ function openAxisByName() {
   AX_ID=$( caget -noname -nostat -nounit $AX_PREFIX:$AX_NAME-Id | tr -d '"')
   MACROS="DEV=$AX_PREFIX,IOC=$IOC,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert.ui
+  caqtdm -macro "$MACROS" ecmcAxisExpert.ui
 }
 
 function openFirstAxis() {
@@ -252,7 +284,7 @@ function openFirstAxis() {
   echo "AX_NAME=$AX_NAME"
   MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert.ui
+  caqtdm -macro "$MACROS" ecmcAxisExpert.ui
 }
 
 function openNextAxis() {
@@ -266,7 +298,7 @@ function openNextAxis() {
   echo "AX_NAME=$AX_NAME"
   MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert.ui
+  caqtdm -macro "$MACROS" ecmcAxisExpert.ui
 }
 
 function openPrevAxis() {
@@ -280,7 +312,7 @@ function openPrevAxis() {
   echo "AX_NAME=$AX_NAME"
   MACROS="DEV=$AX_PREFIX,IOC=$PREFIX,Axis=$AX_NAME,AX_ID=$AX_ID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcAxisExpert.ui
+  caqtdm -macro "$MACROS" ecmcAxisExpert.ui
 }
 
 function openAxisOverview() {
@@ -384,7 +416,7 @@ function openFirstDS() {
   echo "ID_2=$ID_2"
   MACROS="DEV=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcDSxx.ui
+  caqtdm -macro "$MACROS" ecmcDSxx.ui
 }
 
 function openNextDS() {
@@ -394,7 +426,7 @@ function openNextDS() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcDSxx.ui
+  caqtdm -macro "$MACROS" ecmcDSxx.ui
 }
 
 function openPrevDS() {
@@ -404,7 +436,7 @@ function openPrevDS() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcDSxx.ui
+  caqtdm -macro "$MACROS" ecmcDSxx.ui
 }
 
 function openPLCOverview() {
@@ -427,7 +459,7 @@ function openPLCFirst() {
   echo "ID_2=$ID_2"
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcPLCxx.ui
+  caqtdm -macro "$MACROS" ecmcPLCxx.ui
 }
 
 function openPLCNext() {
@@ -437,7 +469,7 @@ function openPLCNext() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcPLCxx.ui
+  caqtdm -macro "$MACROS" ecmcPLCxx.ui
 }
 
 function openPLCPrev() {
@@ -447,7 +479,7 @@ function openPLCPrev() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcPLCxx.ui
+  caqtdm -macro "$MACROS" ecmcPLCxx.ui
 }
 
 # PLG
@@ -459,7 +491,7 @@ function openPLGFirst() {
   echo "ID_2=$ID_2"
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcPLGxx.ui
+  caqtdm -macro "$MACROS" ecmcPLGxx.ui
 }
 
 function openPLGNext() {
@@ -469,7 +501,7 @@ function openPLGNext() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcPLGxx.ui
+  caqtdm -macro "$MACROS" ecmcPLGxx.ui
 }
 
 function openPLGPrev() {
@@ -479,7 +511,7 @@ function openPLGPrev() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcPLGxx.ui
+  caqtdm -macro "$MACROS" ecmcPLGxx.ui
 }
 
 #- safety plugin related
@@ -489,14 +521,14 @@ function openPLGSafetyGrp() {
   NAME=$( caget -noname -nostat -nounit -int $PREFIX:SS1-Grp$ID-Nam | tr -d '"')
   MACROS="SYS=$PREFIX,IOC=$PREFIX,SAFETY_GRP=$NAME"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
+  caqtdm -macro "$MACROS" ecmc_plugin_safety_group.ui
 }
 
 function openPLGSafetyMain() {
   PREFIX=$1  
   MACROS="SYS=$PREFIX,IOC=$PREFIX"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmc_plugin_safety_main.ui
+  caqtdm -macro "$MACROS" ecmc_plugin_safety_main.ui
 }
 
 function openPLGSafetyGrpAxis() {
@@ -505,7 +537,7 @@ function openPLGSafetyGrpAxis() {
   AX_NAME=$3
   NAME=$( caget -noname -nostat -nounit -int $DEV:$AX_NAME-SS1-GrpNam | tr -d '"')
   MACROS="SYS=$PREFIX,IOC=$PREFIX,SAFETY_GRP=$NAME"
-  caqtdm -macro $MACROS ecmc_plugin_safety_group.ui
+  caqtdm -macro "$MACROS" ecmc_plugin_safety_group.ui
 }
 
 function openPVTMain() {
@@ -541,7 +573,7 @@ function openSMFirst() {
   echo "ID_2=$ID_2"
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcSMxx.ui
+  caqtdm -macro "$MACROS" ecmcSMxx.ui
 }
 
 function openSMNext() {
@@ -551,7 +583,7 @@ function openSMNext() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcSMxx.ui
+  caqtdm -macro "$MACROS" ecmcSMxx.ui
 }
 
 function openSMPrev() {
@@ -561,7 +593,7 @@ function openSMPrev() {
   ID_2=$(printf  "%02d" $ID_1)
   MACROS="SYS=$PREFIX,IOC=$PREFIX,ID_1=$ID_1,ID_2=$ID_2"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcSMxx.ui
+  caqtdm -macro "$MACROS" ecmcSMxx.ui
 }
 
 function ecToolReadHwDiag() {
@@ -595,7 +627,7 @@ function openEcToolReadHwDiagMain() {
   caput $PREFIX:m$MID-EcTool.U 1
   MACROS="SYS=$PREFIX,IOC=$PREFIX,MasterID=$MID,SlaveID=$$SID"
   echo "MACROS=$MACROS"
-  caqtdm -macro $MACROS ecmcEcToolMain.ui
+  caqtdm -macro "$MACROS" ecmcEcToolMain.ui
   caput $PREFIX:m$MID-EcTool.PROC 1
 }
 

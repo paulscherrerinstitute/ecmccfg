@@ -113,7 +113,7 @@ class axisModule(object):
 
 def get_axes_from_ioc(ioc: str, grp_id, grp_name, grp_ax_id,grp_ax_name, sm_id_mst, sm_id_slv) -> List[NamedTuple]:
     """ Get axes from a running IOC """
-    import ca, epicsPV    
+    from ecmc_ca_compat import ca, epicsPV
     axes = []
     # These PVs are of intrest:
     #  c6025a-06:MCU-Cfg-AX-FrstObjId

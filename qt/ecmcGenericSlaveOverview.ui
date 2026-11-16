@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,6 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QWidget" name="centralwidget">
   <widget class="caLineEdit" name="calineedit_50">
    <property name="geometry">
     <rect>
@@ -237,7 +238,7 @@
      <string>Open first axis</string>
     </property>
     <property name="files">
-     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+     <string>bash ecmcOpenObject.sh</string>
     </property>
     <property name="args">
      <string>EC_SLAVE_PREV $(SYS) $(MasterID) $(SlaveID)</string>
@@ -319,7 +320,7 @@
      <string>Open first axis</string>
     </property>
     <property name="files">
-     <string>bash /ioc/modules/qt/ecmcOpenObject.sh</string>
+     <string>bash ecmcOpenObject.sh</string>
     </property>
     <property name="args">
      <string>EC_SLAVE_NEXT $(SYS) $(MasterID) $(SlaveID)</string>
@@ -404,6 +405,7 @@
    <property name="unitsEnabled">
     <bool>true</bool>
    </property>
+  </widget>
   </widget>
  </widget>
  <customwidgets>

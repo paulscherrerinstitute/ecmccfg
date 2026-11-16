@@ -102,7 +102,7 @@ class axisModule(object):
 
 
 def get_axes_groups_from_ioc(ioc: str) -> List[NamedTuple]:    
-    import ca, epicsPV
+    from ecmc_ca_compat import ca, epicsPV
     groups = []    
     # These PVs are of intrest:
     # c6025a-08:MCU-Cfg-AXGRP-Cnt

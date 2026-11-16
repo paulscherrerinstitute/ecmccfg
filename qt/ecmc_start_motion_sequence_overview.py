@@ -112,8 +112,7 @@ FOOTER = """
 
 
 def get_sequences(ioc):
-    import ca  # noqa: F401
-    import epicsPV
+    from ecmc_ca_compat import ca, epicsPV
 
     def read(pv_name):
         return epicsPV.epicsPV(pv_name).getw()

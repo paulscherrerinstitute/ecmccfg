@@ -88,7 +88,7 @@ sub_panel_height = 196
 
 
 def get_plcs_from_ioc(ioc: str):
-    import ca, epicsPV
+    from ecmc_ca_compat import ca, epicsPV
 
     plcs = []
     plc_id = epicsPV.epicsPV('%s:MCU-Cfg-PLC-FrstObjId' % ioc).getw()
