@@ -1575,7 +1575,7 @@
        <bool>false</bool>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis).DLLM</string>
+       <string notr="true">$(DEV):$(Axis).LLM</string>
       </property>
       <property name="keepFocus">
        <bool>true</bool>
@@ -1600,7 +1600,7 @@
        <bool>false</bool>
       </property>
       <property name="channel" stdset="0">
-       <string notr="true">$(DEV):$(Axis).DHLM</string>
+       <string notr="true">$(DEV):$(Axis).HLM</string>
       </property>
       <property name="keepFocus">
        <bool>true</bool>
@@ -1944,17 +1944,52 @@
       </property>
      </widget>
      <widget class="caLabel" name="nativeTargetWriteMode">
-    <property name="geometry"><rect><x>76</x><y>1</y><width>48</width><height>16</height></rect></property>
-    <property name="font"><font><pointsize>7</pointsize><bold>true</bold></font></property>
-    <property name="text"><string>NO EXEC</string></property>
-    <property name="alignment"><set>Qt::AlignCenter</set></property>
-    <property name="toolTip"><string>EXEC is not required: each native target-position write starts an ABS/REL move, including auto-enable when configured. This badge is shown only while that mode is enabled.</string></property>
-    <property name="channel" stdset="0"><string notr="true">$(DEV):$(Axis)-AutoExecuteOnTargetPos-RB</string></property>
-    <property name="visibility"><enum>caLabel::IfNotZero</enum></property>
-    <property name="foreground"><color><red>0</red><green>0</green><blue>0</blue></color></property>
-    <property name="background"><color><red>255</red><green>220</green><blue>140</blue></color></property>
-   </widget>
-   <widget class="caTextEntry" name="catextentry_18">
+      <property name="geometry">
+       <rect>
+        <x>76</x>
+        <y>1</y>
+        <width>48</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>EXEC is not required: each native target-position write starts an ABS/REL move, including auto-enable when configured. This badge is shown only while that mode is enabled.</string>
+      </property>
+      <property name="text">
+       <string>NO EXEC</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="foreground">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+      <property name="background">
+       <color>
+        <red>255</red>
+        <green>220</green>
+        <blue>140</blue>
+       </color>
+      </property>
+      <property name="visibility">
+       <enum>caLabel::IfNotZero</enum>
+      </property>
+      <property name="channel" stdset="0">
+       <string notr="true">$(DEV):$(Axis)-AutoExecuteOnTargetPos-RB</string>
+      </property>
+     </widget>
+     <widget class="caTextEntry" name="catextentry_18">
       <property name="geometry">
        <rect>
         <x>35</x>
@@ -2829,6 +2864,7 @@
        <string notr="true">$(DEV):$(Axis)-AtTarget</string>
       </property>
      </widget>
+     <zorder>nativeTargetWriteMode</zorder>
      <zorder>caframe_8</zorder>
      <zorder>caGraphics_1</zorder>
      <zorder>cagraphics</zorder>
