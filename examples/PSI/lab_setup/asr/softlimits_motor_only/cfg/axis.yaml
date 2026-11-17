@@ -12,8 +12,8 @@ epics:
   motorRecord:
     restoreSoftLimits: true
     syncSoftLimits: false
-    fieldInit: 'RTRY=0,FOFF=Frozen'
-
+    fieldInit: 'DLLM=-50,DHLM=50,RTRY=0,FOFF=Frozen'
+    
 drive:
   numerator: 7200
   denominator: 32768
@@ -50,11 +50,7 @@ input:
   home: 'ec0.s$(DRV_SID).ONE.0'
   interlock: 'ec0.s$(DRV_SID).ONE.0'
 softlimits:
-  enable: true
-  forward: 100
-  forwardEnable: true
-  backward: -100
-  backwardEnable: true
+  enable: false
 monitoring:
   lag: {enable: true, tolerance: 10, time: 1000}
   velocity:
