@@ -100,6 +100,9 @@ class BacklashTests(SlitCase):
         self.rig.wait(lambda: abs(self.rig.get(self.axis, '-PosAct')-self.rig.plant.physical_position(self.axis)) < .003,
                       'restored backlash-free feedback published', 3)
         reset_known_errors(self.rig, allowed)
+        # Slave motion can change CENTERY feedback while its record target
+        # stays at zero. Synchronize first so returning to zero is a new move.
+        self.rig.sync_motor_record('CENTERY')
         self.rig.move('CENTERY', 0)
         # A coordinated fault can leave GAPY.VAL at zero while feedback is
         # outside its deadband. Use an unambiguously new request before zero.

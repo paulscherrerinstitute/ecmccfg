@@ -83,6 +83,7 @@ class HomingTests(SlitCase):
         self.rig.wait(lambda: self.rig.get(self.axis, '-HomProc') == sequence,
                       'requested motor home procedure selected', 3)
         self.complete = None
+        self.home_event('request home', sequence=sequence, trigger=trigger)
         if trigger == 'motor':
             self.complete = self.rig.client.put(self.rig.name(self.axis, field), 1, wait=False)
         else:
@@ -93,12 +94,14 @@ class HomingTests(SlitCase):
                           and self.rig.get(self.axis, '-MtnCmdData') == sequence,
                           'native HOMING command and sequence staged', 3)
             self.rig.put(self.axis, '-ExeCmd', 1)
+        self.home_event('home request issued')
         self.rig.trace.append({'action': 'homing triggered', 'sequence': sequence, 'trigger': trigger,
                                'motor_field': field if trigger == 'motor' else None})
         # Observe motion immediately. A full IOC snapshot reads hundreds of
         # PVs and can consume the whole search or the cam-abort window.
         if moving:
             self.rig.wait(self.moving_flags, f'{trigger} home {sequence}: Busy=1 DMOV=0 MOVN=1 Homed=0', 4)
+            self.home_event('moving flags observed')
             # MtnCmdData reads control.cmdData (the request), not the
             # sequencer's resolved status.cmdData. Request 14 stays 14 here;
             # the physical edge check in success() verifies its configured home.
@@ -125,10 +128,73 @@ class HomingTests(SlitCase):
         description = 'homing completes: Busy=0 DMOV=1 MOVN=0 Homed=1'
         if expected_position is not None: description += f' and actual position={expected_position:g}'
         self.rig.wait(done, description, 15)
+        self.home_event('completion observed')
         self.assertEqual(self.rig.get(self.axis, '.LVIO'), 0)
         self.assertEqual(self.rig.get(self.axis, '.SEVR'), 0)
 
     def success(self, sequence, trigger):
+        return self.trace_home(self._success, sequence, trigger)
+
+    def trace_home(self, operation, sequence, trigger):
+        # Capture asynchronous publication without adding CA polling traffic.
+        # Keep verdicts unchanged: this diagnoses missed/incorrect transitions.
+        if not hasattr(self.rig.client, 'factory'):
+            return operation(sequence, trigger)
+        events = deque(maxlen=512)
+        lock = threading.Lock()
+        started = time.monotonic()
+        subscriptions = []
+
+        def event(field, value, timestamp=None):
+            if hasattr(value, 'item'):
+                value = value.item()
+            with lock:
+                events.append({'seconds': time.monotonic() - started,
+                               'field': field, 'value': value,
+                               'ioc_timestamp': timestamp})
+
+        def callback(field):
+            def changed(value=None, timestamp=None, **kwargs):
+                event(field, value, timestamp)
+            return changed
+
+        self._home_event = event
+        try:
+            for field in ('.DMOV', '.MOVN', '.MIP', '.MSTA', '-Busy', '-ExeCmd-RB',
+                          '-SeqState', '-Homed', '-ErrId', '-EnaAct'):
+                pv = self.rig.client.factory(self.rig.name(self.axis, field), auto_monitor=True)
+                token = pv.add_callback(callback(field))
+                subscriptions.append((pv, token))
+            self.home_event('before homing setup')
+            return operation(sequence, trigger)
+        except unittest.SkipTest:
+            raise
+        except Exception as error:
+            self.home_event('failed: ' + str(error).split('\n')[0])
+            with lock:
+                captured = list(events)
+            raise AssertionError(str(error) + '\nHoming status transitions '
+                                 '(CA events; fields are not an atomic snapshot):\n'
+                                 + json.dumps(captured, indent=2)) from error
+        finally:
+            self._home_event = None
+            for pv, token in subscriptions:
+                pv.remove_callback(token)
+            with lock:
+                captured = list(events)
+            self.rig.trace.append({'action': 'homing status transitions', 'axis': self.axis,
+                                   'sequence': sequence, 'trigger': trigger, 'events': captured})
+
+    def home_event(self, stage, **details):
+        event = getattr(self, '_home_event', None)
+        if event:
+            event('stage', stage)
+            for key, value in details.items():
+                event(key, value)
+            complete = getattr(self, 'complete', None)
+            event('motor_callback_complete', None if complete is None else complete.is_set())
+
+    def _success(self, sequence, trigger):
         if sequence in (21, 22) and self.loop != 'closed':
             self.skipTest('21/22 require the primary absolute EL5042 encoder')
         start = .25 if sequence in (7, 9) else (-.25 if sequence in (8, 10) else 0)
@@ -343,6 +409,10 @@ class HomingTests(SlitCase):
         self.rig.assert_stays(idle, 'abort/reset must not replay homing or falsely set Homed')
 
     def post_home_move(self, trigger):
+        return self.trace_home(lambda sequence, source: self._post_home_move(source),
+                               14, trigger)
+
+    def _post_home_move(self, trigger):
         transport = self.rig.open_text_commands()
         self.addCleanup(self.rig.close_text_commands, transport)
         number = self.rig.profile['axes'][self.axis]
