@@ -11,9 +11,11 @@ class CommandBurstTests(unittest.TestCase):
         rig = self.rig
         axes = tuple(rig.profile['axes'])
         self.assertEqual(rig.client.get(rig.prefix+'SM00-EnaCmd'), 1)
-        # Only ownership/interlock errors are expected. Hardware, encoder and
-        # bus faults must fail before reset, never become an automatic allowlist.
-        allowed = {a: (0x1432b, 0x1432e, 0x14331) for a in axes}
+        # Conflicting requests may latch ERROR_AXIS_BUSY at controller level;
+        # reset_known_errors() below clears it through MCU-ErrRst and verifies
+        # that every axis and the controller return to zero. Hardware, encoder
+        # and bus faults must fail before reset, never become an allowlist.
+        allowed = {a: (0x1431c, 0x1432b, 0x1432e, 0x14331) for a in axes}
         previous = rig.motion_expectation
         rig.touched.update(axes)
         try:
@@ -55,6 +57,14 @@ class CommandBurstTests(unittest.TestCase):
                 positions = {a: rig.get(a, '-PosAct') for a in rig.profile['physical']}
                 stationary_dwell(rig, positions, allowed)
                 reset_known_errors(rig, allowed)
+                # Clearing the controller latch can release a motor-record
+                # retry that was pending while the controller was faulted.
+                # Cancel it explicitly before requiring stable standstill.
+                for axis in axes:
+                    rig.client.put(rig.prefix+axis+'.STOP', 1, wait=False, notify=False)
+                wait_checked(rig, lambda: motor_idle(rig, axes),
+                             'all motor records terminate after error reset',
+                             rig.profile['timeout'])
                 stationary_dwell(rig, positions)
                 for axis in axes:
                     origin = rig.get(axis, '-PosAct')
