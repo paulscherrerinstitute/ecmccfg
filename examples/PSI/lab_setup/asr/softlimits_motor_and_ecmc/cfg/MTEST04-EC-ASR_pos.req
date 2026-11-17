@@ -1,0 +1,5 @@
+# Motor pair: restored locally because syncSoftLimits is false.
+MTEST04-EC-ASR:M1.DLLM
+MTEST04-EC-ASR:M1.DHLM
+# ECMC limits remain at their YAML-configured values. Do not restore the
+# competing CfgDLLM/CfgDHLM records for this axis.

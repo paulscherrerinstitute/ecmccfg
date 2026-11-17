@@ -1,5 +1,9 @@
 # ELM3504 queued SDO autosave / restore
 
+The `softlimits_*` subdirectories are three independent motion IOCs demonstrating
+soft-limit autosave/restore for the motor-only, independent motor/ECMC, and
+synchronized motor/ECMC cases. See `softlimits_README.md` for a comparison.
+
 This PSI IOC example tests PREOP restoration of the low/high range-error
 thresholds on all four channels of an ELM3504 at master 0, slave 26. It requires
 ECMC and ecmccfg builds with queued-SDO support. No motion axes are loaded.

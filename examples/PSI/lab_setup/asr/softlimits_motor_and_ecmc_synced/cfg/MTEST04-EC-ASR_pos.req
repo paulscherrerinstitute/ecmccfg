@@ -1,0 +1,3 @@
+# The motor pair is authoritative and is copied into ECMC during startup.
+MTEST04-EC-ASR:M1.DLLM
+MTEST04-EC-ASR:M1.DHLM

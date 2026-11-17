@@ -1,0 +1,64 @@
+axis:
+  id: ${AXIS_ID=4}
+  autoEnable:
+    enableTimeout: 10.0
+    disableTimeout: 5.0
+
+epics:
+  name: ${AX_NAME=M1}
+  precision: 3
+  description: synchronized motor and ECMC soft limits with autosave restore
+  unit: deg
+  motorRecord:
+    restoreSoftLimits: true
+    syncSoftLimits: true
+    fieldInit: 'RTRY=0,FOFF=Frozen'
+
+drive:
+  numerator: 7200
+  denominator: 32768
+  type: 0
+  setpoint: ec0.s$(DRV_SID).velocitySetpoint01
+  control: ec0.s$(DRV_SID).driveControl01
+  enable: 0
+  reset: 1
+  reduceTorque: 2
+  reduceTorqueEnable: true
+  status: ec0.s$(DRV_SID).driveStatus01
+  enabled: 1
+  warning: 2
+  error: [3, 7, 14]
+
+encoder:
+  desc: Openloop
+  numerator: 360
+  denominator: 12800
+  type: 0
+  bits: 16
+  absBits: 0
+  position: ec0.s$(ENC_SID).positionActual${ENC_CH=01}
+  status: ec0.s$(ENC_SID).encoderStatus${ENC_CH=01}
+
+controller: {Kp: 10, Ki: 0, Kd: 0}
+trajectory:
+  axis: {velocity: 36, acceleration: 1000, deceleration: 1000, emergencyDeceleration: 2000, jerk: 2000}
+  jog: {velocity: 1}
+input:
+  limit:
+    forward: ec0.s$(DRV_SID).ONE.0
+    backward: ec0.s$(DRV_SID).ONE.0
+  home: 'ec0.s$(DRV_SID).ONE.0'
+  interlock: 'ec0.s$(DRV_SID).ONE.0'
+softlimits:
+  enable: true
+  forward: 100
+  forwardEnable: true
+  backward: -100
+  backwardEnable: true
+monitoring:
+  lag: {enable: true, tolerance: 10, time: 1000}
+  velocity:
+    enable: false
+    max: 8
+    time: {trajectory: 100, drive: 200}
+  target: {enable: true, tolerance: 0.1, time: 10}

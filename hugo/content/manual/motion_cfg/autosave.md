@@ -134,8 +134,8 @@ follows:
 3. **Autosave restores the motor fields during `iocInit`.** Restore passes 0 and 1
    load `.DLLM` and `.DHLM`, for example `-123` and `123`. `.DVAL` is restored
    separately and follows the motor's position-restoration policy.
-4. **Capture the restored limits after the IOC is built.** At
-   `initHookAfterIocBuilt`, ECMC captures the motor record's `.DLLM`, `.DHLM` and
+4. **Capture the restored limits after the IOC is running.** At
+   `initHookAfterIocRunning`, ECMC captures the motor record's `.DLLM`, `.DHLM` and
    `.MRES`. This is an IOC initialization hook, not an autosave callback. If
    autosave did not replace the fields, their template defaults are captured.
 5. **Allow native axis initialization.** Once the IOC is running and bus/timing
