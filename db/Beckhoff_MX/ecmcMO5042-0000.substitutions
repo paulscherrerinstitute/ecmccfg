@@ -4,3 +4,27 @@ file "ecmcEL5042-chX.template"
           {01   }
           {02   }
 }
+
+file "ecmc_analogInputFloat-chX.template"
+{
+  pattern {CH_ID, KEY, sourceName, suffix,        EGU, PREC}
+          {"",    "",  EFUCurrent, "EFUCurrent",  "A", 4   }
+}
+
+file "ecmc_status-chX.template"
+{
+  pattern {CH_ID, KEY, sourceName, suffix      }
+          {"",    "",  EFUStatus,  "EFUStat"   }
+}
+
+file "ecmc_status-chX.template"
+{
+  pattern {CH_ID, KEY, sourceName, suffix,      MASK,    T_SMP_MS }
+          {"",    "",  EFUStatus,  "EFUCycCnt", 0xC000,  125,     }
+}
+
+file "ecmc_controlWord-chX.template"
+{
+  pattern {CH_ID, KEY, sourceName, suffix    }
+          {"",    "",  EFUControl, "EFUCntrl"}
+}
