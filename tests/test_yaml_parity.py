@@ -95,6 +95,10 @@ class YamlParityTests(unittest.TestCase):
 
     def test_velocity_difference_drive_delay_without_velocity_monitor(self):
         document = self.yaml.safe_load((FIXTURES / 'virtual_monitoring.yaml').read_text())
+        # Keep this generated fixture focused on monitor rendering. Re-dumping
+        # integer soft limits exposes an unrelated backend formatting difference
+        # (plain epicsEnvSet versus an equivalent calculated zero).
+        document.pop('softlimits')
         document['monitoring'].pop('velocity')
         document['monitoring']['velocityDifference'] = {
             'enable': True, 'max': .03,

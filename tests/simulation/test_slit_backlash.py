@@ -128,8 +128,8 @@ def reset_scenario(kind, managed=True):
         if name.endswith('SM00-StateCmd'):
             return state['command'] if clock.now < .06 else 0
         raise AssertionError(name)
-    def put(name, value):
-        state['writes'].append((name, value))
+    def put(name, value, **kwargs):
+        state['writes'].append((name, value, kwargs))
         if name.endswith('MCU-ErrRst'): state['requested'] = True
         if name.endswith('SM00-StateCmd'): state['command'] = value
     rig = SimpleNamespace(profile={'axes': {'TR_HI': 6}, 'physical': {'TR_HI': {}}},
@@ -146,7 +146,9 @@ def reset_scenario(kind, managed=True):
         else:
             assert kind == 'delayed', 'invalid reset accepted: '+kind
             assert clock.now >= .06
-            assert len(state['writes']) == (2 if managed else 1)
+            assert len(state['writes']) == (3 if managed else 2)
+            assert state['writes'][-1] == (
+                'SIMSLIT:TR_HI.STOP', 1, {'wait': False, 'notify': False})
 
 
 for managed in (False, True): reset_scenario('delayed', managed)

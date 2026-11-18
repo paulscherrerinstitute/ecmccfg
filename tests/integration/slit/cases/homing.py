@@ -491,9 +491,24 @@ class HomingTests(SlitCase):
         # Cleanup needs a verified zero position, not proof of a new move.
         # A tiny/already-zero request can finish between CA observations, so
         # do not require a fresh Busy=1 pulse here as native motion tests do.
-        self.rig.stage_native(self.axis, 3, position=0)
-        self.rig.put(self.axis, '-ExeCmd', 1)
-        self.rig.wait_native_stopped(self.axis, target=0)
+        for attempt in range(2):
+            self.rig.stage_native(self.axis, 3, position=0)
+            self.rig.put(self.axis, '-ExeCmd', 1)
+            self.rig.wait_native_stopped(self.axis)
+            self.rig.put(self.axis, '-ExeCmd', 0)
+            if (abs(self.physical()) < .01
+                    and abs(self.rig.get(self.axis, '-PosAct')) < .01):
+                break
+            if attempt == 0:
+                # In open loop the asynchronously sampled plant can stop a few
+                # counts behind a completed trajectory. Re-enable once to
+                # rebase the next trajectory from actual position, then issue
+                # a real corrective move; never redefine either encoder.
+                self.rig.put(self.axis, '-EnaCmd', 0)
+                self.rig.wait_drive_disabled(self.axis)
+                self.rig.put(self.axis, '-EnaCmd', 1)
+                self.rig.wait(lambda: self.rig.get(self.axis, '-EnaAct') == 1,
+                              'axis re-enabled for bounded homing cleanup correction', 6)
         # The fixture's atTarget tolerance is 0.01 mm. A completed return may
         # legitimately auto-disable before reaching the tighter 0.002 mm used
         # above to verify coordinate references. Cleanup must use the normal
@@ -501,7 +516,6 @@ class HomingTests(SlitCase):
         self.rig.wait(lambda: abs(self.physical()) < .01
                       and abs(self.rig.get(self.axis, '-PosAct')) < .01,
                       'homing cleanup verifies physical and encoder zero within 10 um', 5)
-        self.rig.put(self.axis, '-ExeCmd', 0)
         errors = self.rig.stop_all()
         if errors: raise AssertionError('homing cleanup disable failed: ' + '; '.join(errors))
         # The motor poller must acknowledge the small reference again before
