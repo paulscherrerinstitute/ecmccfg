@@ -50,9 +50,15 @@ class MonitoringTests(SettingsCase):
         self.closed()
         self.controller()
         self.config('MonPosLagTol', .006)
-        self.config('MonPosLagTime', 100)
+        self.config('MonPosLagTime', 600)
         self.config('MonEnableLagMon', 1)
         self.enable()
+        self.rig.plant.inject(self.axis, encoder_bias_mm=.012)
+        self.rig.assert_stays(lambda: self.healthy() and self.rig.get(self.axis, '-ErrId') == 0,
+                              'short lag excursion stays below configured lag time', .2)
+        self.rig.plant.inject(self.axis, encoder_bias_mm=0)
+        self.rig.assert_stays(lambda: self.healthy() and self.rig.get(self.axis, '-ErrId') == 0,
+                              'clearing lag resets its qualification timer', .15)
         self.rig.plant.inject(self.axis, encoder_bias_mm=.012)
         self.recover(0x14c08)
         self.controller(kp=2, kff=1)
@@ -65,12 +71,20 @@ class MonitoringTests(SettingsCase):
         self.config('MonVelDiffTol', .08)
         # Long enough to tolerate the intentionally sampled CA plant while
         # still tripping well before the end of the bounded test move.
-        self.config('MonVelDiffTrajILDelay', 100)
-        self.config('MonVelDiffDriveILDelay', 50)
+        # MCU-Cmd.AOUT is limited to 39 bytes: the trajectory setter fits a
+        # three-digit value, while the longer drive setter fits two digits.
+        self.config('MonVelDiffTrajILDelay', 600)
+        self.config('MonVelDiffDriveILDelay', 99)
         self.rig.stage_native(self.axis, 3, .5, .15)
         self.rig.execute_native(self.axis)
         self.rig.wait(lambda: self.rig.get(self.axis, '-PosAct') > .03,
                       'measured motion before freezing feedback', 3)
+        self.rig.plant.inject(self.axis, frozen=True)
+        self.rig.assert_stays(lambda: self.healthy() and self.rig.get(self.axis, '-ErrId') == 0,
+                              'short velocity difference stays below drive delay', .025)
+        self.rig.plant.inject(self.axis, frozen=False)
+        self.rig.assert_stays(lambda: self.healthy() and self.rig.get(self.axis, '-ErrId') == 0,
+                              'clearing velocity difference resets its shared timer', .15)
         self.rig.plant.inject(self.axis, frozen=True)
         self.recover(0x14c14)
         self.config('MonEnableVelocityDiff', 0)

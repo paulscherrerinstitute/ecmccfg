@@ -2720,7 +2720,7 @@
             "monitoring.velocityDifference.time.drive"
           ],
           "requirement": "optional block; supply enable, max and time.trajectory; time.drive optional",
-          "description": "Velocity setpoint vs actual monitoring. Times are in EtherCAT cycles. Current template also checks velocity.time.drive; supply both monitor blocks and drive delays (see the configuration guide).",
+          "description": "Velocity setpoint vs actual monitoring. Its trajectory and drive delays are independent of the maximum-velocity monitor. Times are in EtherCAT cycles.",
           "entries": [
             {
               "key": "monitoring.velocityDifference.enable",

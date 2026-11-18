@@ -56,9 +56,40 @@ class TorqueTests(SlitCase):
                       'master AtTarget precedes slave-control deadband dwell', 8)
         # CA can publish the AtTarget edge late relative to the RT-cycle dwell,
         # so do not require a fixed wall-clock interval after this observation.
-        # Seeing this state at all proves the two qualification bands differ;
-        # settled() then proves the forwarded slave-control state eventually
-        # enables reduced torque.
+        self.settled()
+
+    def test_master_slave_control_deadband_tolerance_is_independent(self):
+        if self.loop != 'closed':
+            self.skipTest('requires EL5042 count quantization')
+        self.settled()
+        number = self.rig.profile['axes']['CENTERY']
+        transport = self.rig.open_text_commands()
+        self.addCleanup(self.rig.close_text_commands, transport)
+        original = self.rig.text_command(
+            f'GetAxisMonSlvCtrlDbTol({number})', query=True)
+        self.addCleanup(self.rig.text_command,
+                        f'Cfg.SetAxisMonSlvCtrlDbTol({number},{original:.12g})')
+        self.rig.text_command(f'Cfg.SetAxisMonSlvCtrlDbTol({number},0.000001)')
+        try:
+            # This target lies between the combined EL5042 count grid points.
+            # The residual remains well inside ordinary master/slave AtTarget
+            # tolerances but outside the temporarily tightened master band.
+            complete = self.rig.start_move('CENTERY', .12345)
+            self.rig.wait(lambda: self.rig.get('CENTERY', '-AtTarget') == 1
+                          and all(self.rig.get(axis, '-TrjSrcTyp-RB') == 1
+                                  for axis in self.rig.profile['physical'])
+                          and abs(self.rig.get('CENTERY', '-PosAct')
+                                  - self.rig.get('CENTERY', '-PosSet')) > 1e-6
+                          and all(not self.reduced(axis)
+                                  for axis in self.rig.profile['physical']),
+                          'master slave-control tolerance clears reduced torque independently', 3)
+            self.rig.wait(lambda: complete.is_set()
+                          and self.rig.get('CENTERY', '.DMOV') == 1,
+                          'master tolerance test motor request completes', 5)
+        finally:
+            self.rig.text_command(
+                f'Cfg.SetAxisMonSlvCtrlDbTol({number},{original:.12g})')
+        self.rig.move('CENTERY', 0)
         self.settled()
 
     def test_encoder_disturbance_removes_reduced_torque_and_recovers(self):

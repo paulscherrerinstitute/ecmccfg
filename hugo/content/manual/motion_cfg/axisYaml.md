@@ -884,12 +884,9 @@ For `velocity` and `velocityDifference`, include `enable`, `max` and
 The monitoring `time` values below are **EtherCAT cycles**, not milliseconds.
 At 1 kHz, 100 cycles is 100 ms; at 500 Hz it is 200 ms.
 
-The current `monitoring.jinja2` template checks `monitoring.velocity.time.drive`
-before rendering `velocityDifference.time.drive`. Consequently, configuring
-`velocityDifference` alone can fail during rendering, and its drive delay can
-be skipped unless the velocity drive delay is also supplied. If using this
-feature, provide both monitor blocks and both `time.drive` values explicitly.
-This is a template limitation, not an intended dependency between the monitors.
+The trajectory and drive delays for `velocityDifference` are independent of
+the corresponding maximum-velocity monitor delays. Either monitor can be
+configured without enabling the other.
 
 optional
 

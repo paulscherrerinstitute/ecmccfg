@@ -93,6 +93,22 @@ class YamlParityTests(unittest.TestCase):
                 self.assertIn('epicsEnvSet(V_DRVL,0)', generated)
                 self.assertIn('epicsEnvSet(V_DRVH,0)', generated)
 
+    def test_velocity_difference_drive_delay_without_velocity_monitor(self):
+        document = self.yaml.safe_load((FIXTURES / 'virtual_monitoring.yaml').read_text())
+        document['monitoring'].pop('velocity')
+        document['monitoring']['velocityDifference'] = {
+            'enable': True, 'max': .03,
+            'time': {'trajectory': 1000, 'drive': 600},
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / 'velocity-difference-only.yaml'
+            source.write_text(self.yaml.safe_dump(document))
+            generated = self.compare(source)
+            text = '\n'.join(generated)
+            self.assertIn('Cfg.SetAxisMonVelDiffTrajILDelay(${ECMC_AXIS_NO},1000)', text)
+            self.assertIn('Cfg.SetAxisMonVelDiffDriveILDelay(${ECMC_AXIS_NO},600)', text)
+            self.assertNotIn('Cfg.SetAxisMonMaxVelDriveILDelay', text)
+
     def test_additional_encoder(self):
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp) / 'encoder.yaml'
@@ -208,7 +224,7 @@ class YamlParityTests(unittest.TestCase):
                         self.assertIn('Cfg.SetAxisEncPwrEnable(${ECMC_AXIS_NO},0)', text)
                         self.assertNotIn('Cfg.SetAxisEncPwrEnable(${ECMC_AXIS_NO},1)', text)
                     if fixture == 'ioc' and source.name.startswith('axis_vax'):
-                        self.assertIn('Cfg.SetAxisMonSlvCtrlDbTol(${ECMC_AXIS_NO},0.01)', text)
+                        self.assertIn('Cfg.SetAxisMonSlvCtrlDbTol(${ECMC_AXIS_NO},0.005)', text)
                         self.assertIn('Cfg.SetAxisMonSlvCtrlDbTime(${ECMC_AXIS_NO},600)', text)
             if fixture == 'ioc':
                 self.assertIn('ENC_CH=01,ENC_PWR_CH=04', startup)

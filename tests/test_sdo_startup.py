@@ -122,7 +122,7 @@ class SdoStartupTests(unittest.TestCase):
         self.assertNotIn('SDO_AUTO_START', text)
 
     def test_elm3504_example_saves_exactly_the_eight_configured_endpoints(self):
-        example = ROOT / 'examples/PSI/lab_setup/asr'
+        example = ROOT / 'examples/PSI/lab_setup/asr/analog'
         startup = (example / 'MTEST04-EC-ASR_startup.script').read_text()
         request = (example / 'cfg/MTEST04-EC-ASR_sdo_set.req').read_text()
         self.assertIn('#ENABLE-PASS=1', request)

@@ -55,7 +55,7 @@ monitoring:
     tolerance: 0.02
     time: 100
     slaveControlDeadband:
-      tolerance: 0.01
+      tolerance: 0.005
       # Longer than AtTarget so SIM can observe the independent dwell.
       time: 600
   velocity:

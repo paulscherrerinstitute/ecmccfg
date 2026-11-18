@@ -71,9 +71,9 @@ assert feedback.position == 11200 and raw == 5656064
 assert DEFAULT_REPORT == ROOT / 'test-results/slit/slit-report.json'
 suite = make_suite(None, ('open', 'closed'), MODULES)
 tests = list(suite)
-assert len(tests) == 488
+assert len(tests) == 494
 independent = list(make_suite(None, ('closed',), ('no_sm',)))
-assert len(independent) == 37
+assert len(independent) == 38
 assert all('.no_sm.Independent' in test.id() for test in independent)
 assert not any('coordinated_motion' in test.id() or 'center_and_gap' in test.id()
                for test in independent)
@@ -84,11 +84,11 @@ assert {test.loop for test in ignored_cases} == {'open', 'closed'}
 assert {test.loop for test in tests} == {'open', 'closed'}
 assert all(test.rig is None for test in tests)
 assert len(list(make_suite(None, ('closed',), ('limits',)))) == 10
-assert len(list(make_suite(None, ('closed',), ('enable',)))) == 3
+assert len(list(make_suite(None, ('closed',), ('enable',)))) == 4
 assert len(list(make_suite(None, ('closed',), ('brake',)))) == 8
 assert len(list(make_suite(None, ('closed',), ('feedback',)))) == 6
 assert len(list(make_suite(None, ('closed',), ('noise',)))) == 2
-assert len(list(make_suite(None, ('closed',), ('torque',)))) == 4
+assert len(list(make_suite(None, ('closed',), ('torque',)))) == 5
 assert len(list(make_suite(None, ('closed',), ('native',)))) == 5
 assert len(list(make_suite(None, ('closed',), ('softlimit_sync',)))) == 3
 assert len(list(make_suite(None, ('closed',), ('homing',)))) == 45

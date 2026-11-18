@@ -102,7 +102,9 @@ class Rig:
             self.plant.check()
             if self.motion_expectation is not None: self.motion_expectation.check()
             if predicate(): return
-            time.sleep(.02)
+            # Keep command-side CA polling below the load of the independent
+            # plant's synchronous feedback circuit, especially on loaded IOCs.
+            time.sleep(.05)
         raise AssertionError('timeout: ' + description + '\n' + json.dumps(self.snapshot(), indent=2))
 
     def snapshot(self):
@@ -147,6 +149,9 @@ class Rig:
             if not predicate():
                 raise AssertionError(description + '\n' + json.dumps(self.snapshot(), indent=2))
             return time.monotonic() >= deadline
+        # Negative-duration assertions usually read several CA PVs per sample.
+        # A 50 ms cadence still detects state changes promptly without starving
+        # the independent SIM plant's synchronous feedback traffic.
         self.wait(observed, description, seconds + 2)
 
     def stop_all(self):

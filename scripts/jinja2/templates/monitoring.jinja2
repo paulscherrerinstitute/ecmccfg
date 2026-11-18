@@ -43,7 +43,7 @@
         ecmcConfigOrDie "Cfg.SetAxisMonEnableVelocityDiff(${ECMC_AXIS_NO},{{ monitoring.velocityDifference.enable|int }})"
         ecmcConfigOrDie "Cfg.SetAxisMonVelDiffTol(${ECMC_AXIS_NO},{{ monitoring.velocityDifference.max }})"
         ecmcConfigOrDie "Cfg.SetAxisMonVelDiffTrajILDelay(${ECMC_AXIS_NO},{{ monitoring.velocityDifference.time.trajectory }})"
-        {%- if monitoring.velocity.time.drive is defined %}
+        {%- if monitoring.velocityDifference.time.drive is defined %}
             ecmcConfigOrDie "Cfg.SetAxisMonVelDiffDriveILDelay(${ECMC_AXIS_NO},{{ monitoring.velocityDifference.time.drive }})"
         {%- endif  %}
     {%- endif %}
