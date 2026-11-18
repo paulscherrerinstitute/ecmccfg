@@ -73,10 +73,20 @@ class EnableTests(SlitCase):
                               and self.rig.get(axis, '-EnaAct') == 1
                               and self.rig.get(axis, '-EnaCmd-RB') == 1,
                               'trajectory interlock faults before drive-disable delay', 3)
+                # Remove the live monitor violation before resetting.  Otherwise
+                # the queued move can restart and immediately relatch 0x14c07,
+                # making the result depend on CA/full-suite timing rather than
+                # solely on DisableAtErrorReset.
+                self.rig.put(axis, '-ExeCmd', 0)
+                self.rig.put(axis, '-StpCmd', 1)
+                self.rig.wait(lambda: self.rig.get(axis, '-ErrId') == 0x14c07
+                              and abs(self.rig.get(axis, '-VelAct')) < .005
+                              and self.rig.get(axis, '-EnaAct') == 1
+                              and self.rig.get(axis, '-EnaCmd-RB') == 1,
+                              'faulted move stopped while axis remains enabled', 3)
                 self.rig.put(axis, '-RstCmd', 1)
                 self.rig.wait(lambda: self.rig.get(axis, '-ErrId') == 0
                               and self.rig.get(axis, '-EnaAct') == expected_enabled
                               and self.rig.get(axis, '-EnaCmd-RB') == expected_enabled,
                               'reset policy leaves axis '
                               + ('enabled' if expected_enabled else 'disabled'), 6)
-                self.rig.put(axis, '-ExeCmd', 0)
