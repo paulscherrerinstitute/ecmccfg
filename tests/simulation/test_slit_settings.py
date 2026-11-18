@@ -131,5 +131,5 @@ old_count = len(restores)
 case.restore()
 assert len(restores) == old_count
 
-assert len(list(make_suite(None, ('closed',), ('filters','controller','monitoring')))) == 16
+assert len(list(make_suite(None, ('closed',), ('filters','controller','monitoring')))) == 17
 print('Settings cases: parameter transport/readback, restoration order, filter smoothing/noise/bypass and inner/outer P verdicts passed, including negative controls; no IOC.')

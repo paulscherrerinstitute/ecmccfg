@@ -44,6 +44,23 @@ class TorqueTests(SlitCase):
                       'coordinated move reaches target', 8)
         self.settled()
 
+    def test_master_slave_control_deadband_has_independent_dwell(self):
+        """Master AtTarget precedes its deliberately longer slave-control dwell."""
+        self.settled()
+        self.rig.start_move('CENTERY', -.3)
+        self.rig.wait(lambda: self.rig.get('CENTERY', '-Busy') == 1
+                      and all(not self.reduced(axis) for axis in self.rig.profile['physical']),
+                      'coordinated motion restores full torque', 3)
+        self.rig.wait(lambda: self.rig.get('CENTERY', '-AtTarget') == 1
+                      and all(not self.reduced(axis) for axis in self.rig.profile['physical']),
+                      'master AtTarget precedes slave-control deadband dwell', 8)
+        # CA can publish the AtTarget edge late relative to the RT-cycle dwell,
+        # so do not require a fixed wall-clock interval after this observation.
+        # Seeing this state at all proves the two qualification bands differ;
+        # settled() then proves the forwarded slave-control state eventually
+        # enables reduced torque.
+        self.settled()
+
     def test_encoder_disturbance_removes_reduced_torque_and_recovers(self):
         if self.loop != 'closed':
             self.skipTest('requires primary EL5042 feedback')

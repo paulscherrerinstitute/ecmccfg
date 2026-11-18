@@ -145,11 +145,11 @@ trips require their specific error code and verify reset does not replay motion.
 | `cases/native.py` | Native ABS/REL/VEL commands, staging before execute, repeated execute requests, native STOP, center/gap commands |
 | `cases/isolation.py` | Blocked virtual motor/native command bursts during physical motion; both-direction physical jog release/STOP with no virtual controller errors and fresh coordinated recovery |
 | `cases/softlimit_sync.py` | Motor-to-ECMC and ECMC-config-to-motor limit values; enable-flag propagation in both interfaces |
-| `cases/torque.py` | Reduced-torque bit 2 clears during physical/coordinated motion, returns after settling, and responds to closed-loop encoder disturbance |
+| `cases/torque.py` | Reduced-torque bit 2 clears during physical/coordinated motion, returns after settling, follows the master axis's independent slave-control deadband dwell, and responds to closed-loop encoder disturbance |
 | `cases/brake.py` | Applied when disabled; release after enable; application before power-off; cancellation while opening; release during physical/coordinated motion; failed/lost enable |
 | `cases/filters.py` | Encoder-2 velocity/position window and enable settings; position-step smoothing and bypass; velocity-noise attenuation and bypass |
 | `cases/controller.py` | Outer/inner gains, gain-band selection, output and I limits in both polarities, limit release, I freeze/release/reset precedence during a busy trajectory, deadband dwell/reactivation, feedforward suppression/recovery |
-| `cases/monitoring.py` | Max-velocity, lag, velocity-difference and at-target settings; below-limit motion, exact fault/disable and fresh-command recovery, frozen-feedback detection, tolerance/dwell |
+| `cases/monitoring.py` | Max-velocity, lag, velocity-difference and at-target settings; below-limit motion, exact fault/disable and fresh-command recovery, frozen-feedback detection, tolerance/dwell, and latched auto-disable timing after AtTarget is lost |
 | `cases/touch_probe.py` | Independent EL7062 DS402 CSV axis: electrical positive-edge capture in both travel directions, rearm, retained latched position/raw timestamp, disarmed input and enabled-without-edge negative controls |
 | `cases/position_compare.py` | Missing-clock negative control: compare remains armed without touching EL2252 output/activate/startTime, then cancels without claiming a fired event |
 
@@ -166,7 +166,7 @@ cases exercise behavior or rejection paths, with these limits:
 | Velocity filter | Injected position noise produces velocity noise; enabling a 400-cycle window reduces RMS below 65% of baseline; bypass raises it again | Exact response, delay and attenuation versus window size; behavior at other IOC rates |
 | Position filter | A raw step traverses intermediate filtered values and eventually reaches its final value | No expected step-response curve or window-duration check. The bypass assertion only waits for the final value, so it could pass with smoothing still enabled |
 | Controller | Inner/outer P gain selection; signed output/I limits and release; nonzero I freeze/release/reset precedence; deadband suppression/reactivation; feedforward off/on | Outer D and inner I/D gains have readback checks only. Exact I accumulation rate, intermediate feedforward gains, and exact deadband timing are not established |
-| Monitoring | Below-limit motion, max-velocity trip/disable, monitor disable and raised-limit recovery; lag and frozen-feedback faults; at-target tolerance/dwell; no replay after reset | Exact trajectory/drive delay counts, negative-direction velocity trips, threshold boundary sweeps and concurrent-fault priority |
+| Monitoring | Below-limit motion, max-velocity trip/disable, monitor disable and raised-limit recovery; lag and frozen-feedback faults; at-target tolerance/dwell; auto-disable with the first AtTarget edge either latched or cancelled after AtTarget loss; no replay after reset | Exact trajectory/drive delay counts, negative-direction velocity trips, threshold boundary sweeps and concurrent-fault priority |
 | Touch probe | Positive electrical edges in both travel directions; position/raw timestamp transport; explicit rearm; disarmed/no-edge rejection; control disable forces disarm | Live automatic rearm after repeated events, negative electrical edges, multiple channels, native timestamp reconstruction/rollover and physical capture timing |
 | Position compare | Missing sample clock leaves the request waiting without scheduling output; cancellation does not claim an event | Successful output scheduling, target crossing, pulse/reset behavior and direction/late-event handling are not exercised by this SIM fixture |
 
@@ -431,6 +431,11 @@ noise case runs only in closed-loop mode: +/-0.014 mm measurement disturbance
 must clear the bit and at-target without an axis fault, then both recover after
 noise removal. External trajectory handling uses the existing state-machine
 control-deadband signal; Busy alone does not define reduced torque for slaves.
+The virtual masters configure `monitoring.target.slaveControlDeadband` with a
+0.01 tolerance and a 600-cycle dwell, independently of their 0.02/100-cycle
+AtTarget band. The functional case requires master AtTarget to assert while
+reduced torque is still off, then requires reduced torque after the longer
+slave-control dwell completes.
 The plant does not model motor-current or holding-torque physics.
 
 Additional boundary checks are included in the existing modules:

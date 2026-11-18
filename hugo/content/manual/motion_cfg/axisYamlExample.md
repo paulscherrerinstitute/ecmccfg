@@ -40,6 +40,8 @@ axis:
   features:
     blockCom: false                                   # Block communication to axis
     allowSrcChangeWhenEnabled: false                  # Allow traj/enc source change when axis is enabled
+    disableOnReset: false                             # Disable the axis when an error is reset
+    alarmAtHardLimits: false                          # Raise an axis error when a hard limit activates
     allowedFunctions:
       homing: true                                    # Allow homing
       constantVelocity: true                          # Allow constant velocity
@@ -63,6 +65,10 @@ epics:
     syncSoftLimits: false                             # Optional: Sync softlimits between motor and ecmc (default false).
                                                       # On false->true, ecmc soft limits are copied to the motor record.
                                                       # While true, later motor record soft-limit changes are written back to ecmc.
+    restoreSoftLimits: false                          # Startup-only: autosave motor DLLM/DHLM overrides ecmc limits and enables sync
+    pvt:
+      npoints: 1000                                   # Maximum PVT target points
+      nreadback: 1000                                 # Maximum PVT readback points
 
 drive:
   numerator: 360                                      # Fastest speed in engineering units
@@ -131,6 +137,8 @@ encoder:
     armBits: 5                                        # Number of bits written from armCmd
   primary: True                                       # Use this encoder as primary (for control)
   useAsCSPDrvEnc: True                                # Use this encoder as CSP drive encoder (ecmc controller enabled in CSP)
+  unit: mm                                            # Optional encoder engineering unit
+  desc: Main encoder                                  # Optional encoder description
 # allowOverUnderFlow: True                            # Allow over/under flow of encoder raw counter (default true). Set to false for linear encoders.
   homing:
     type: 3                                           # Homing sequence type
@@ -156,6 +164,16 @@ encoder:
 #    enable: true                                     # Enable correction table (default enabled if loaded).
 #    scale: 1                                         # Scale applied to LUT (if you want value to be added then set scale to -1.0)
 #    range: 360                                       # LUT modulo value (Lut should cover the range 0..range)
+  power:                                              # Optional relay-controlled absolute encoder power
+    enable: false
+    output: ec0.s$(PWR_SLAVE).binaryOutput01
+    activeHigh: true
+    idleDelay: 5.0                                    # Seconds idle before power is removed
+    startupDelay: 0.5                                 # Seconds after power-on before checking ready
+    startupTimeout: 5.0                               # Seconds allowed for encoder ready
+    backup:
+      encoder: 1                                      # Encoder index used while the absolute encoder is off
+      maxPositionDifference: 0.1                     # Maximum accepted wake-up position difference
 
 controller:
   Kp: 1                                               # Kp proportional gain
@@ -189,6 +207,7 @@ trajectory:
     jerk: 10                                          # Default jerk for axis
   jog:
     velocity: 5                                       # Default velocity for JOG (motor record)
+    acceleration: 1                                   # Optional JOG acceleration
   modulo:
     range: 360                                        # Modulo range 0..360
     type: 0                                           # Modulo type
@@ -212,6 +231,7 @@ input:
     forwardPolarity: 0                                # Polarity of forward limit switch
     backward: ec0.s1.BI_2.0                           # EtherCAT entry for high limit switch input
     backwardPolarity: 0                               # Polarity of backward limit switch
+    latchInput: false                                 # Latch limit input activation when supported
   home: 'ec0.s$(MCS2_SLAVE_NUM).ONE.0'                # EtherCAT entry for home switch
   homePolarity: 0                                     # Polarity of home switch
   interlock: 'ec0.s$(ENC_SLAVE).ONE.0'                # EtherCAT entry for interlock switch input
@@ -238,6 +258,9 @@ monitoring:
     enable: true                                      # Enable at target monitoring (needs to be enabled and configured if using motor record)
     tolerance: 0.5                                    # Allowed tolerance
     time: 10                                          # Filter time inside tolerance to be at target [cycles]
+    slaveControlDeadband:                             # Optional independent master-axis band forwarded to slaves
+      tolerance: 0.01                                 # Master error tolerance for slave control decisions
+      time: 100                                       # Qualification time inside tolerance [cycles]
   velocity:
     enable: false                                     # Enable velocity monitoring
     max: 100                                          # Allowed max velocity
@@ -260,6 +283,7 @@ plc:
   enable: true                                        # Enable axis plc
   externalCommands: true                              # Allow axis to inputs from PLC
   file: myplcfile.plc                                 # File with plc code
+  macros: 'MY_MACRO=1'                                # Optional macros passed while loading plc.file
   code:                                               # Sync code (appended after code in plc.file)
     - if(ax2.traj.source){ax2.drv.enable:=(ax10.drv.enable or ax11.drv.enable)}; # Enable axis if one of master axes is enabled
     - ax2.traj.setpos:=ax10.traj.setpos-ax11.traj.setpos/2; # calculate set pos for physical axis

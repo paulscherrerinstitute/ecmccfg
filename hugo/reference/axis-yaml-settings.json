@@ -472,6 +472,20 @@
         },
         {
           "keys": [
+            "epics.motorRecord.restoreSoftLimits"
+          ],
+          "requirement": "optional; startup policy",
+          "description": "Allow initialized or autosave-restored motor dial limits to override the YAML-derived ecmc limits during startup. This also enables ongoing motor/ecmc soft-limit synchronization; use with the documented startup gate and autosave request files.",
+          "entries": [
+            {
+              "key": "epics.motorRecord.restoreSoftLimits",
+              "summary": "Restore motor DLLM/DHLM into ecmc at startup and keep the two interfaces synchronized; see the autosave guide.",
+              "default": "false"
+            }
+          ]
+        },
+        {
+          "keys": [
             "epics.motorRecord.pvt"
           ],
           "requirement": "optional",
@@ -2655,7 +2669,7 @@
             "monitoring.target.slaveControlDeadband.time"
           ],
           "requirement": "required pair when slaveControlDeadband is present",
-          "description": "Live master-axis band forwarded to slaves for reduced-torque control. Applies to physical and virtual master axes and defaults to the AtTarget tolerance and time when omitted.",
+          "description": "Independent live master-axis error band and qualification time forwarded to slaves for control-deadband decisions such as reduced torque. Configure these keys on the master axis. They apply to physical and virtual masters and may be tighter or slower than ordinary AtTarget. If omitted, ecmc uses the AtTarget tolerance and time. Example: `slaveControlDeadband: {tolerance: 0.01, time: 100}`.",
           "entries": [
             {
               "key": "monitoring.target.slaveControlDeadband.tolerance",

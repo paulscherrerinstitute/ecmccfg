@@ -1,4 +1,6 @@
 """Native monitor settings and bounded fault/disable/recovery experiments."""
+import time
+
 from .settings import SettingsCase
 
 
@@ -89,3 +91,57 @@ class MonitoringTests(SettingsCase):
                               'within tolerance must complete a dwell before at-target', .2)
         self.rig.wait(lambda: self.healthy() and self.rig.get(self.axis, '-AtTarget') == 1,
                       'settled feedback sets at-target after dwell', 3)
+
+    def test_auto_disable_at_target_latch(self):
+        self.closed()
+        self.controller(kp=2, kff=1)
+        timeout = 1.5
+        normal_tolerance = .006
+        self.config('AutoDisableAfterTime', timeout)
+        self.config('MonEnableAtTargetMon', 1)
+        self.config('MonAtTargetTime', 10)
+
+        def establish_at_target(target):
+            self.config('MonAtTargetTol', normal_tolerance)
+            self.rig.move(self.axis, target)
+            self.rig.wait(lambda: self.healthy()
+                          and self.rig.get(self.axis, '-AtTarget') == 1
+                          and self.rig.get(self.axis, '-EnaAct') == 1,
+                          'enabled axis reaches AtTarget before testing auto-disable latch', 3)
+
+        # Without the latch, losing AtTarget must cancel/reset auto-disable
+        # timing. Keep the loss longer than the configured timeout.
+        self.config('AutoDisableAtTgtLtch', 0)
+        establish_at_target(.04)
+        self.config('MonAtTargetTol', 1e-9)
+        self.rig.wait(lambda: self.healthy() and self.rig.get(self.axis, '-AtTarget') == 0,
+                      'tight tolerance clears AtTarget with latch disabled', 2)
+        self.rig.assert_stays(lambda: self.healthy()
+                              and self.rig.get(self.axis, '-AtTarget') == 0
+                              and self.rig.get(self.axis, '-EnaAct') == 1,
+                              'lost AtTarget cancels auto-disable timing without latch', timeout + .4)
+
+        # Restore AtTarget and let the ordinary timer disable the axis. This
+        # proves auto-disable itself is active before testing latched behavior.
+        self.config('MonAtTargetTol', normal_tolerance)
+        self.rig.wait(lambda: self.healthy() and self.rig.get(self.axis, '-AtTarget') == 1,
+                      'AtTarget recovers before ordinary auto-disable', 2)
+        self.rig.wait(lambda: self.healthy() and self.rig.get(self.axis, '-EnaAct') == 0,
+                      'continuous AtTarget auto-disables the axis', timeout + 2)
+
+        # New motion resets the previous latch. With latching enabled, the
+        # timer starts at the first AtTarget edge and must continue after loss.
+        self.config('AutoDisableAtTgtLtch', 1)
+        # Keep the target between EL5042 encoder counts so tightening the
+        # tolerance deterministically removes AtTarget in the SIM plant.
+        establish_at_target(.02)
+        edge_time = time.monotonic()
+        self.config('MonAtTargetTol', 1e-9)
+        self.rig.wait(lambda: self.healthy() and self.rig.get(self.axis, '-AtTarget') == 0,
+                      'tight tolerance clears AtTarget with latch enabled', 2)
+        self.rig.wait(lambda: self.healthy()
+                      and self.rig.get(self.axis, '-AtTarget') == 0
+                      and self.rig.get(self.axis, '-EnaAct') == 0,
+                      'latched first AtTarget edge completes auto-disable after later loss', timeout + 2)
+        self.assertLess(time.monotonic() - edge_time, timeout + 1,
+                        'latched auto-disable restarted its timer after AtTarget was lost')

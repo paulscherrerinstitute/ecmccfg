@@ -207,6 +207,9 @@ class YamlParityTests(unittest.TestCase):
                         self.assertIn('ec0.s5.binaryOutput${ENC_PWR_CH}', text)
                         self.assertIn('Cfg.SetAxisEncPwrEnable(${ECMC_AXIS_NO},0)', text)
                         self.assertNotIn('Cfg.SetAxisEncPwrEnable(${ECMC_AXIS_NO},1)', text)
+                    if fixture == 'ioc' and source.name.startswith('axis_vax'):
+                        self.assertIn('Cfg.SetAxisMonSlvCtrlDbTol(${ECMC_AXIS_NO},0.01)', text)
+                        self.assertIn('Cfg.SetAxisMonSlvCtrlDbTime(${ECMC_AXIS_NO},600)', text)
             if fixture == 'ioc':
                 self.assertIn('ENC_CH=01,ENC_PWR_CH=04', startup)
                 self.assertIn('ENC_CH=02,ENC_PWR_CH=03', startup)

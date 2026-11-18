@@ -71,6 +71,7 @@ Notes:
 | `epics.motorRecord.description` | This is MR | optional | — |
 | `epics.motorRecord.fieldInit` | Extra config for motor record | optional | — |
 | `epics.motorRecord.syncSoftLimits` | Sync softlimits between motor and ecmc (default false; `restoreMotorSoftLims=1` overrides this to enabled). When synchronization is disabled, motor record HLM/LLM and ecmc soft limits may differ. On false->true, ecmc soft limits are copied to the motor record; while true, later motor record soft-limit changes are written back to ecmc. | optional | false |
+| `epics.motorRecord.restoreSoftLimits` | Restore motor DLLM/DHLM into ecmc at startup and keep the two interfaces synchronized; see the autosave guide. | optional; startup policy | false |
 | `epics.motorRecord.pvt.npoints` | Max number of target points for PVT/profile move | optional | 0 |
 | `epics.motorRecord.pvt.nreadback` | Max number of readback points for PVT/profile move | optional | 0 |
 | `drive.numerator` | Drive scale numerator; CSV uses velocity scaling, CSP uses position scaling. The schema default 0 is not a usable hardware scale. | optional; configure scaling explicitly | 0 |

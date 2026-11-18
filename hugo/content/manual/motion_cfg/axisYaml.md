@@ -901,6 +901,10 @@ optional
   * `enable`: enable target monitoring. This is mandatory for use with motor record.
   * `tolerance`: tolerance in engineering units
   * `time`: time for the condition to be true in EtherCAT cycles
+  * `slaveControlDeadband`: optional independent band evaluated on a master axis
+    and forwarded to its slaves for control decisions such as reduced torque
+    * `tolerance`: master-axis error tolerance in engineering units
+    * `time`: qualification time inside that tolerance in EtherCAT cycles
 - `velocity`
   * `enable`: enable velocity monitoring
   * `max`: upper limit for velocity
@@ -923,6 +927,10 @@ monitoring:
     enable: true
     tolerance: 0.125
     time: 100  # EtherCAT cycles
+    # Optional on a master axis. If omitted, ecmc uses target tolerance/time.
+    slaveControlDeadband:
+      tolerance: 0.01
+      time: 100  # EtherCAT cycles
   # velocity:
   #   enable: false
   #   max: 100
