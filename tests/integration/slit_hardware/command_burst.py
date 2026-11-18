@@ -57,14 +57,6 @@ class CommandBurstTests(unittest.TestCase):
                 positions = {a: rig.get(a, '-PosAct') for a in rig.profile['physical']}
                 stationary_dwell(rig, positions, allowed)
                 reset_known_errors(rig, allowed)
-                # Clearing the controller latch can release a motor-record
-                # retry that was pending while the controller was faulted.
-                # Cancel it explicitly before requiring stable standstill.
-                for axis in axes:
-                    rig.client.put(rig.prefix+axis+'.STOP', 1, wait=False, notify=False)
-                wait_checked(rig, lambda: motor_idle(rig, axes),
-                             'all motor records terminate after error reset',
-                             rig.profile['timeout'])
                 stationary_dwell(rig, positions)
                 for axis in axes:
                     origin = rig.get(axis, '-PosAct')

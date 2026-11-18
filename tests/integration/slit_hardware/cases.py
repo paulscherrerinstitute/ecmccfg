@@ -58,6 +58,35 @@ class MotionTests(unittest.TestCase):
         self.rig.move(axis, origin)
 
 
+class DmovLifecycleTests(unittest.TestCase):
+    """Require the complete motor Done/Moving transition on real motion."""
+
+    def motor_lifecycle(self, axis):
+        rig = self.rig
+        origin, target = rig.origins[axis], rig.origins[axis] + rig.profile['step']
+        complete = rig.start(axis, target)
+        rig.wait(lambda: rig.get(axis, '-Busy') == 1
+                 and rig.get(axis, '.DMOV') == 0
+                 and rig.get(axis, '.MOVN') == 1,
+                 axis+' motor move exposes Busy=1, DMOV=0 and MOVN=1')
+        if complete is not None and complete.is_set():
+            raise AssertionError(axis+': put-notify completed while DMOV was still low')
+        rig.finish(axis, target, complete)
+        rig.move(axis, origin)
+
+    def test_motor_and_native_dmov_lifecycle(self):
+        # Motor-record commands cover one physical and one virtual axis.
+        self.motor_lifecycle('TR_LO')
+        self.motor_lifecycle('CENTERY')
+
+        # Native writes remain restricted to physical axes by Operations.
+        axis = 'TR_HI'
+        origin, target = self.rig.origins[axis], self.rig.origins[axis] + self.rig.profile['step']
+        with self.rig.native_configuration(axis):
+            self.rig.native_move(axis, target, target, require_motor_flags=True)
+            self.rig.native_move(axis, origin, origin, require_motor_flags=True)
+
+
 class VirtualTests(MotionTests):
     # Load only the two virtual cases through the explicit runner group below.
     def test_center_both_directions(self): self.round_trip('CENTERY')
@@ -261,6 +290,7 @@ GROUPS = {
     'status': (StatusTests, ('test_idle_status_and_kinematics',)),
     'motion': (MotionTests, ('test_physical_lo_both_directions', 'test_physical_hi_both_directions',
                             'test_repeated_motor_targets', 'test_motor_stop_during_move')),
+    'dmov': (DmovLifecycleTests, ('test_motor_and_native_dmov_lifecycle',)),
     'stall': (StallTests, STALL_NAMES),
     'coupled_stop': (CoupledStopTests, COUPLED_STOP_NAMES),
     'concurrent': (ConcurrentTests, ('test_lo_moves_while_hi_is_nudged', 'test_hi_moves_while_lo_is_nudged')),
@@ -323,6 +353,7 @@ def make_suite(rig, groups, patterns=()):
             }.get(original, ('TR_LO',) if '_lo_' in name else ('TR_HI',) if '_hi_' in name else ())
             if group == 'concurrent': test.motion_axes = ('TR_LO', 'TR_HI')
             if group == 'command_burst': test.motion_axes = ('TR_LO', 'TR_HI', 'CENTERY', 'GAPY')
+            if group == 'dmov': test.motion_axes = ('TR_LO', 'TR_HI', 'CENTERY')
             if group == 'homing': test.motion_axes = ('TR_HI',)
             if group == 'coupled_stop':
                 test.motion_axes = ('CENTERY',) if original.startswith('test_center') else ('GAPY',)

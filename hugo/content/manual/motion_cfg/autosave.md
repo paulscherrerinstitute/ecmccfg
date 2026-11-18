@@ -44,12 +44,120 @@ After changing soft limits, reload any open caQtDM panels. Numeric input widgets
 such as the motor `VAL` field, use the limits read when the panel was opened and
 can reject values based on the previous limits until the panel is reloaded.
 
+## Three soft-limit arrangements
+
+ECMC supports three useful arrangements. They differ in which layer enforces a
+limit and whether changes propagate between the motor record and ECMC. The
+complete PSI IOC projects are under
+[`examples/PSI/lab_setup/asr`](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/lab_setup/asr).
+They deliberately share the `MTEST04-EC-ASR` IOC identity and the same hardware;
+install and run only one project at a time.
+
+| Arrangement | Motor limits | ECMC limits | Runtime synchronization |
+| --- | --- | --- | --- |
+| Motor only | Autosave-restored | Disabled | Off |
+| Motor and ECMC, independent | Autosave-restored and bounded by ECMC | YAML-configured | Off |
+| Motor and ECMC, synchronized | Autosave-restored | Replaced by the restored motor pair | On |
+
+All three arrangements save only the motor dial fields:
+
+```text
+MTEST04-EC-ASR:M1.DLLM
+MTEST04-EC-ASR:M1.DHLM
+```
+
+Do not add `-CfgDLLM`, `-CfgDHLM`, their readbacks, or their enable records to
+the same autosave request. Those records create a second, competing restore
+path.
+
+### Motor limits only
+
+Use motor-only limits when motor-record commands should be constrained but ECMC
+native commands may bypass that range. Disable ECMC limits and enable motor-local
+restoration without synchronization:
+
+```yaml
+epics:
+  name: M1
+  motorRecord:
+    restoreSoftLimits: true
+    syncSoftLimits: false
+    fieldInit: 'DLLM=-50,DHLM=50,RTRY=0,FOFF=Frozen'
+
+softlimits:
+  enable: false
+```
+
+`fieldInit` supplies the motor defaults used when no save file exists. Autosave
+overwrites `.DLLM/.DHLM` when a saved pair is available. Because ECMC limits are
+disabled, native commands are not protected by these motor-only limits. See
+[`softlimits_motor_only`](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/lab_setup/asr/softlimits_motor_only).
+
+### Independent motor and ECMC limits
+
+Use independent limits when ECMC must enforce an outer safety envelope while
+the motor record uses a narrower operator range:
+
+```yaml
+epics:
+  name: M1
+  motorRecord:
+    restoreSoftLimits: true
+    syncSoftLimits: false
+
+softlimits:
+  enable: true
+  backward: -100
+  backwardEnable: true
+  forward: 100
+  forwardEnable: true
+```
+
+For example, autosave may restore motor limits `-80, 80` while ECMC remains at
+`-100, 100`. With synchronization off, later motor edits do not change ECMC.
+The enabled ECMC limits are nevertheless the maximum range accepted by the
+motor record, so restored motor limits must lie inside the ECMC envelope. See
+[`softlimits_motor_and_ecmc`](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/lab_setup/asr/softlimits_motor_and_ecmc).
+
+After restart, the expected values for that example are:
+
+```text
+M1.DLLM/M1.DHLM                 -80 / 80
+M1-CfgDLLM-RB/M1-CfgDHLM-RB   -100 / 100
+M1-CfgSyncSftLim                 No
+```
+
+### Synchronized motor and ECMC limits
+
+Use synchronized limits when both interfaces should expose and enforce the same
+restored pair:
+
+```yaml
+epics:
+  name: M1
+  motorRecord:
+    restoreSoftLimits: true
+    syncSoftLimits: true
+
+softlimits:
+  enable: true
+  backward: -100
+  backwardEnable: true
+  forward: 100
+  forwardEnable: true
+```
+
+At startup, the autosave-restored motor pair replaces the YAML ECMC pair. Later
+motor-limit edits propagate to ECMC, and ECMC limit changes propagate back to
+the motor record. See
+[`softlimits_motor_and_ecmc_synced`](https://github.com/paulscherrerinstitute/ecmccfg/tree/master/examples/PSI/lab_setup/asr/softlimits_motor_and_ecmc_synced).
+
 ## Which values are used?
 
 The standard YAML generator initializes the motor record's `.DLLM` and `.DHLM`
 from the YAML soft-limit configuration. Autosave can overwrite those fields
 while the IOC initializes. ECMC then snapshots the initialized motor fields and
-uses that pair when `restoreMotorSoftLims=1` is selected.
+applies the selected motor-local or synchronized restore policy.
 
 | Configuration | Startup source of the restored limit pair |
 | --- | --- |
@@ -58,11 +166,12 @@ uses that pair when `restoreMotorSoftLims=1` is selected.
 | No restore option | Configured ECMC limits seed the motor at startup |
 
 The driver does not detect whether autosave supplied a field. It uses the motor
-record values after initialization. For example, YAML limits `-100, 100` and
-saved dial limits `-123, 123` result in `-123, 123`; without a saved pair the
-standard generated motor record retains the YAML-derived values. A custom
-motor template must initialize its dial fields consistently with the desired
-ECMC limits.
+record values after initialization. Without a saved pair, the standard generated
+motor record retains its YAML- or `fieldInit`-derived values. In synchronized
+mode, a saved pair replaces the configured ECMC pair. In independent mode, the
+saved motor pair remains local and must fit inside the enabled ECMC envelope.
+A custom motor template must initialize its dial fields consistently with the
+desired arrangement.
 
 ## Autosave request and restore passes
 
@@ -78,8 +187,8 @@ MTEST04-MTN-ASM:Axis1.DHLM
 
 Do not also restore the writable `-CfgDLLM` and `-CfgDHLM` records for the same
 axis. That creates competing restore paths. Do not save `-RB` readback records
-as configuration. Independent limit enable flags are not encoded by the two
-dial limits and require separate ordering if they must also be restored.
+as configuration. Configure the ECMC limit values and enable flags in YAML for
+the independent arrangement.
 
 With the PSI `ioc install` workflow, a filename ending in `_pos.req` selects the
 two-pass restore setup. For a differently named request, the PSI directive
@@ -122,7 +231,7 @@ hook also sets the EGU flag before motor-record initialization.
 
 ## Startup sequence, step by step
 
-With `restoreMotorSoftLims=1` and `ECMC_STARTUP_GATE=1`, startup proceeds as
+With `restoreSoftLimits: true` and `ECMC_STARTUP_GATE=1`, startup proceeds as
 follows:
 
 1. **Load the YAML configuration, before `iocInit`.** ECMC receives the configured
@@ -142,9 +251,11 @@ follows:
    health has been good continuously for two seconds, the gate allows native axis
    initialization. Drives, motion commands and ordinary cyclic command producers
    remain held.
-6. **Apply the buffered soft-limit pair.** With valid native axis status, the
-   motor poller applies the captured limits to ECMC under the RT mutex. Failed
-   attempts are retried. After success, normal soft-limit synchronization resumes.
+6. **Complete the selected restore policy.** With synchronization enabled, the
+   motor poller applies the captured pair to ECMC under the RT mutex; failed
+   attempts are retried. With synchronization disabled, the captured pair stays
+   in the motor record and ECMC either retains its YAML envelope or remains
+   disabled in the motor-only arrangement.
 7. **Deliver the first healthy motor status.** The compatibility workaround
    handles a stale startup `COMM_ALARM` once, under the motor-record lock, before
    normal asyn status delivery. This permits a deferred position-load command to
@@ -158,8 +269,9 @@ follows:
    handshake. Ordinary PLCs, plugins and other motion command producers can then
    run, and a configured startup enable can be applied. An axis without a loaded
    motor record does not wait for a motor-record handshake.
-10. **Continue normal operation.** Motor and ECMC soft limits remain synchronized.
-    Autosave independently saves the monitored fields for the next restart.
+10. **Continue normal operation.** Synchronized mode propagates changes in both
+    directions. Independent and motor-only modes keep motor edits local.
+    Autosave saves the motor dial fields for the next restart.
 
 ## Complete startup before motion
 

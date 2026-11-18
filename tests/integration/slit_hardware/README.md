@@ -60,6 +60,7 @@ hardware to simulated open/closed-loop variants.
 | --- | --- |
 | `status` | Real backend, fixture identity, bus/application state, axis IDs, stopped motor/native status, no faults/warnings, coordinate agreement, virtual feedback kinematics |
 | `motion` | Each physical axis moves both directions and returns; repeated motor targets; STOP while busy and no subsequent movement; motor/native completion, atTarget and faults |
+| `dmov` | Full `DMOV/MOVN` lifecycle for physical and virtual motor moves plus a physical native move; put-notify remains incomplete while `DMOV=0` |
 | `virtual` | Center and gap move both directions and return; predicted blade targets stay in the test envelope; physical/virtual feedback agrees |
 | `encoder_power` | A normal move of the configured encoder-power axis settles, BiSS powers off and counter becomes primary; the next move restores power/readiness/BiSS primary and completes |
 | `native` | LO and HI native absolute and relative moves using the execute PV, with native parameters restored |
@@ -87,7 +88,7 @@ the profile's physical envelope. Native soft limits must be enabled. The state
 machine must already be enabled. Zero-reference preparation and the encoder-power group require Auto power
 mode with Force ON released and encoder power control enabled.
 
-The default run contains 92 live hardware cases (52 with state-machine management and 40 standalone repeats). Six full-stroke homing cases are available separately, for 98 selectable cases in total. Select the added groups independently:
+The default run contains 93 live hardware cases (53 with state-machine management and 40 standalone repeats). Six full-stroke homing cases are available separately, for 99 selectable cases excluding the opt-in soft-limit reconfiguration group. Select the added groups independently:
 
 ```sh
 python3 tests/integration/slit_hardware/run.py --prefix HWSLIT: --run --case native --case target_write --case motor

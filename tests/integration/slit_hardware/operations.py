@@ -159,7 +159,8 @@ class Operations:
             except Exception as error: errors.append(str(error))
             if errors: raise RuntimeError('native test cleanup: '+'; '.join(errors))
 
-    def native_move(self, axis, value, expected, command=3, on_write=False):
+    def native_move(self, axis, value, expected, command=3, on_write=False,
+                    require_motor_flags=False):
         self.healthy()
         if not self.idle(): raise RuntimeError('native move requires idle axes')
         if self.get(axis, '-AutoExecuteOnTargetPos-RB') != int(on_write):
@@ -177,8 +178,14 @@ class Operations:
             self.native_put(axis, '-ExeCmd', 1, expected=expected)
         else:
             self.native_put(axis, '-TgtPosCmd', value, expected=expected)
-        self.wait(lambda: self.get(axis, '-Busy') == 1 or self.get(axis, '.DMOV') == 0,
-                  axis+' native move starts')
+        if require_motor_flags:
+            self.wait(lambda: self.get(axis, '-Busy') == 1
+                      and self.get(axis, '.DMOV') == 0
+                      and self.get(axis, '.MOVN') == 1,
+                      axis+' native move exposes Busy=1, DMOV=0 and MOVN=1')
+        else:
+            self.wait(lambda: self.get(axis, '-Busy') == 1 or self.get(axis, '.DMOV') == 0,
+                      axis+' native move starts')
         self.finish(axis, expected, None)
         self.sync_motor(axis)
 

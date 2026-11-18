@@ -555,7 +555,7 @@ class HardwareRunnerTests(unittest.TestCase):
         with patch.object(run, 'Client', side_effect=AssertionError('connection attempted')):
             with redirect_stdout(io.StringIO()):
                 self.assertEqual(run.main([]), 0)
-        self.assertEqual(make_suite(None, GROUPS).countTestCases(), 106)
+        self.assertEqual(make_suite(None, GROUPS).countTestCases(), 107)
         self.assertEqual(make_suite(None, GROUPS, ('motor_stop',)).countTestCases(), 2)
 
     def test_bad_identity_modes_and_statuses_never_write(self):
@@ -608,7 +608,7 @@ class HardwareRunnerTests(unittest.TestCase):
     def test_all_cases_reference_zero_restore_velocities_and_use_expected_fields(self):
         code, report, xml = self.run_live_boundary()
         self.assertEqual(code, 0, report)
-        self.assertEqual(len(report['tests']), 92)
+        self.assertEqual(len(report['tests']), 93)
         self.assertTrue(all(t['status'] == 'passed' for t in report['tests']), report)
         self.assertEqual(xml.attrib['errors'], '0')
         self.assertTrue(self.client.closed)
@@ -629,6 +629,20 @@ class HardwareRunnerTests(unittest.TestCase):
             self.assertEqual(self.client.values['HW:'+axis+'.SET'], 0)
             self.assertEqual(self.client.values['HW:'+axis+'.FOFF'], 1)
             self.assertEqual(self.client.values['HW:'+axis+'-Enc01-Homed'], 1)
+
+    def test_dmov_lifecycle_rejects_a_stuck_done_flag_while_busy(self):
+        original = self.client.get
+        def get(name):
+            value = original(name)
+            if name.endswith('.DMOV'):
+                axis = name[3:-len('.DMOV')]
+                if self.client.values.get('HW:'+axis+'-Busy') == 1:
+                    return 1
+            return value
+        self.client.get = get
+        code, report, _ = self.run_live_boundary(('--case', 'dmov'))
+        self.assertEqual(code, 1)
+        self.assertIn('DMOV=0', json.dumps(report['tests'][0]))
 
     def test_no_sm_cases_disable_management_for_every_motion_and_restore_sources(self):
         for axis in self.profile['physical']:

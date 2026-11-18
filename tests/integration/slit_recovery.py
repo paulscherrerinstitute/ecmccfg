@@ -82,6 +82,14 @@ def reset_known_errors(rig, allowed):
                 and rig.client.get(rig.prefix+'MCU-ErrId') == 0
                 and rig.client.get(rig.prefix+'SM00-StateCmd') == 0)
     wait_checked(rig, reset_complete, 'known test fault resets without motion', 5, allowed)
+    # Clearing the controller latch can release a motor-record retry that was
+    # pending while the controller was faulted. Process STOP once more after
+    # reset so that no stale target is retried and record alarms are cleared.
+    for axis in rig.profile['axes']:
+        rig.client.put(rig.prefix+axis+'.STOP', 1, wait=False, notify=False)
+    wait_checked(rig, lambda: motor_idle(rig, rig.profile['axes'])
+                 and all(rig.get(a, '.SEVR') == 0 for a in rig.profile['axes']),
+                 'motor records terminate and clear alarms after error reset', 5)
 
 
 
