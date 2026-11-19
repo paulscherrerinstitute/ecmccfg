@@ -53,6 +53,31 @@ class MotorTests(SlitCase):
     def test_motor_fault_completes_callback_and_recovers(self):
         self.interrupted_motor_move('fault')
 
+    def test_repeated_short_moves_complete_individually(self):
+        axis = self.axis
+        self.rig.put(axis, '-EnaCmd', 1)
+        self.rig.wait(lambda: self.rig.get(axis, '-EnaAct') == 1,
+                      'drive enabled for short moves', 6)
+        self.rig.sync_motor_record(axis)
+        origin = self.rig.get(axis, '.RBV')
+        # Stay above the motor's setpoint deadband and move toward the
+        # middle of the fixture if the initial position is positive.
+        step = -.04 if origin > 0 else .04
+        for index, target in enumerate((origin + step, origin) * 4, start=1):
+            with self.subTest(move=index, target=target):
+                complete = self.rig.put(axis, '.VAL', target)
+
+                def finished():
+                    self.rig.check_native_error(axis)
+                    self.assertEqual(self.rig.get(axis, '.LVIO'), 0)
+                    return (complete.is_set() and motor_idle(self.rig, (axis,))
+                            and abs(self.rig.get(axis, '.RBV') - target) < .012
+                            and abs(self.rig.get(axis, '-PosAct') - target) < .012)
+
+                # Busy/DMOV=0 may be too brief for the CA polling loop.
+                # A changed readback and a fresh callback must still be seen.
+                self.rig.wait(finished, f'short move {index} reaches target and completes', 6)
+
     def test_offset_and_direction_coordinate_mapping(self):
         axis = self.axis
         saved = {s: self.rig.get(axis, s) for s in ('.OFF', '.DIR', '.FOFF', '-CfgSyncSftLim', '-CfgDLLM-RB', '-CfgDHLM-RB')}
