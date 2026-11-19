@@ -24,9 +24,9 @@ ecmcConfigOrDie "Cfg.SetAxisAllowCommandsFromPLC(${ECMC_AXIS_NO},{{ plc.external
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize(${ECMC_AXIS_NO},{{ plc.velocity_filter.encoder.size|default(1)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable(${ECMC_AXIS_NO},{{ plc.velocity_filter.encoder.enable|default(0)|int }})"
 {%- else %}
-    # WARNING: Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x
-    ecmcLogBufferWrite("WARNING","Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x")
     {%- if (plc.filter is defined) and (plc.filter.velocity is defined) %}
+        # WARNING: Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x
+        ecmcLogBufferWrite("WARNING","Please use updated yaml syntax for encoder velo filtering: plc.velocity_filter.encoder.x")
         ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterSize(${ECMC_AXIS_NO},{{ plc.filter.velocity.size|default(1) }})"
         ecmcConfigOrDie "Cfg.SetAxisPLCEncVelFilterEnable(${ECMC_AXIS_NO},{{ plc.filter.velocity.enable|default(0)|int }})"
     {%- else %}
@@ -43,13 +43,15 @@ ecmcConfigOrDie "Cfg.SetAxisEncSourceType(${ECMC_AXIS_NO},{{ encoder.source|defa
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize(${ECMC_AXIS_NO},{{ plc.velocity_filter.trajectory.size|default(1)|int }})"
     ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable(${ECMC_AXIS_NO},{{ plc.velocity_filter.trajectory.enable|default(0)|int }})"
 {%- else %}
-    # WARNING: Please use updated yaml syntax for trajectory velo filtering:  plc.velocity_filter.trajectory.x)
-    ecmcLogBufferWrite("WARNING","Please use updated yaml syntax for trajectory velo filtering: plc.velocity_filter.trajectory.x")
     {%- if (plc.filter is defined) and (plc.filter.position is defined) %}
+        # WARNING: Please use updated yaml syntax for trajectory velo filtering:  plc.velocity_filter.trajectory.x)
+        ecmcLogBufferWrite("WARNING","Please use updated yaml syntax for trajectory velo filtering: plc.velocity_filter.trajectory.x")
         ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize(${ECMC_AXIS_NO},{{ plc.filter.position.size|default(1) }})"
         ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable(${ECMC_AXIS_NO},{{ plc.filter.position.enable|default(0)|int }})"
     {%- else %}
-        {%- if (plc.filter is defined) and (plc.filter.trajectory) %}
+        {%- if (plc.filter is defined) and (plc.filter.trajectory is defined) %}
+            # WARNING: Please use updated yaml syntax for trajectory velo filtering:  plc.velocity_filter.trajectory.x)
+            ecmcLogBufferWrite("WARNING","Please use updated yaml syntax for trajectory velo filtering: plc.velocity_filter.trajectory.x")
             ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterSize(${ECMC_AXIS_NO},{{ plc.filter.trajectory.size|default(1) }})"
             ecmcConfigOrDie "Cfg.SetAxisPLCTrajVelFilterEnable(${ECMC_AXIS_NO},{{ plc.filter.trajectory.enable|default(0)|int }})"
         {%- else %}
