@@ -108,6 +108,8 @@ def check(client, names):
             wait(lambda: plc_at(reference_from), 'nonzero position before PLC reference')
             raw_pv = 'SIM:ec0:s2:positionActual01-RB'
             raw_before = int(get(raw_pv))
+            setpoint_pv = 'SIM:ec0:s2:positionSetpoint01'
+            setpoint_before = int(get(setpoint_pv))
             command(8)
 
             def referenced():
@@ -120,6 +122,9 @@ def check(client, names):
             deadline = time.monotonic() + .4
             while time.monotonic() < deadline:
                 require(referenced(), 'PLC reference did not remain settled')
+                raw_setpoint = int(get(setpoint_pv))
+                require(raw_setpoint == setpoint_before,
+                        f'CSP raw setpoint changed during reference: {setpoint_before} -> {raw_setpoint}')
                 raw_delta = (int(get(raw_pv)) - raw_before + (1 << 31)) % (1 << 32) - (1 << 31)
                 require(abs(raw_delta) < .006 * 1048576, 'CSP drive moved during reference')
                 time.sleep(.03)
