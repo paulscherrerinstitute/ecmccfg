@@ -1,0 +1,9 @@
+encoder:
+  desc: absolute
+  numerator: 1
+  denominator: 4096
+  type: 1   
+  bits: 26
+  absBits: 26
+  absOffset: $(ENC_OFF)
+  position: ec0.s$(ENC_SID).positionActual$(ENC_CH)

@@ -1,0 +1,201 @@
+#
+# file:   eht_interlock_parking.plc
+# author: Felix Maier <felix.maier@psi.ch>, November 2026
+#
+# This PLC code moves the EHT "lifting X" axis to the parking position when an
+# interlock is detected. The default park position is the right side (looking
+# in beam direction).  # This can be changed by setting the PV
+# `PREFIX:X-ParkPos' to LEFT.  Configuration for speed, acceleration, timeout
+# and the actual parking positions in mm can be configured in the below VAR
+# section.
+#
+# TODO: 
+#   - only one parking position is possible, due to homing. 
+#   - mc_set_enable_motion_funcs: connect it to the flag is_pending_interlock.
+#   - add PV with interlock flag.
+
+
+VAR
+  # configuration
+  AID                     :   1;
+  PARK_VEL                :   3;
+  PARK_VEL_SLOW           :   0.5;
+  PARK_ACC                :   2;
+  PARK_POS_LEFT_MM        :   60;
+  PARK_POS_RIGHT_MM       :   5.3;
+  TIMEOUT_SEC             :   20;
+
+  # pv
+  pv_park_position        :   static.pv_park_position;
+
+  prev_dbg                :   static.prev_dbg;
+
+  # axis
+  ax_enabled              :   ax1.drv.enabled;
+  ax_actpos               :   ax1.enc.actpos;
+
+  # variables
+  prev_is_interlock       :   static.prev_is_interlock;
+  prev_pv_park_position   :   static.prev_park_position;
+  timeout_cycles          :   static.timeout_cycles;
+  is_interlock            :   static.is_interlock;
+  is_pend_interlock       :   static.is_pend_interlock;
+  park_position           :   static.park_position;
+
+  # constants
+  TRUE                    :   1;
+  FALSE                   :   0;
+  BUSY                    :   1;
+  NOT_BUSY                :   0;
+  PV_PARK_RIGHT           :   0;
+  PV_PARK_LEFT            :   1;
+  PARK_TOL                :   0.5;
+
+  # error
+  ERROR_TIMEOUT           :   262144; # 0x40000
+
+  # state machine
+  state                   :   static.state;
+  SM_BOOT                 :   2;
+  SM_IDLE                 :   0;
+  SM_INIT                 :   100;
+  SM_START_MOVE           :   200; 
+  SM_START_MOVE2          :   250; 
+  SM_WAIT_FOR_PARKING     :   300;
+  SM_DISABLE              :   400;
+
+END_VAR
+
+
+# -----------------------------------------------------------------------------
+if(${SELF}.firstscan) {
+  state := SM_BOOT;
+  timeout_cycles := TIMEOUT_SEC / ${SELF}.scantime;
+  park_position := PARK_POS_RIGHT_MM;
+  is_pend_interlock := FALSE;
+  is_interlock := FALSE;
+};
+
+
+# =============================================================================
+# INTERLOCK & TIMEOUT HANDLING
+# =============================================================================
+if(state != SM_BOOT) {
+  if(${SELF}.dbg  == TRUE) {
+    is_interlock := TRUE;
+  }
+  else {
+    is_interlock := FALSE;
+  };
+
+  if (state != SM_IDLE) {
+    timeout_cycles := timeout_cycles - 1;
+  
+    if (timeout_cycles < 0) {
+      #mc_set_axis_error(AID, ERROR_TIMEOUT);
+      #state := SM_DISABLE;
+    };
+  }
+}
+
+
+# =============================================================================
+# STATES
+# =============================================================================
+if (state == SM_BOOT) {
+  if(epics_get_started() == TRUE) {
+    state := SM_IDLE;
+  }
+}
+
+else if (state == SM_IDLE) {
+  if( (is_interlock == TRUE) and (prev_is_interlock == FALSE) ) {
+    println('__EHT__: interlock detected');
+    if(mc_get_busy(AID) == BUSY) {
+
+
+      println('__EHT__: axis is moving, halt');
+      mc_mr_set_cnen(AID, 0);
+      mc_mr_set_stop(AID, 1);
+    };
+    is_pend_interlock := TRUE;
+    state := SM_INIT;
+    println('__EHT__: state -> SM_INIT');
+    println('__EHT__: disable motion functions');
+    mc_set_enable_motion_funcs(AID, 0, 0, 1);
+    mc_set_ignore_disabled_motion_cmds(AID,1);
+    timeout_cycles := TIMEOUT_SEC / ${SELF}.scantime;
+  }
+  else if( (is_interlock == FALSE) and (prev_is_interlock == TRUE) ) {
+    println('__EHT__: enable move functions');
+    is_pend_interlock := FALSE;
+    mc_set_enable_motion_funcs(AID, 1, 1, 1);
+    mc_set_ignore_disabled_motion_cmds(AID,0);
+  }
+
+  if( (is_pend_interlock == TRUE) and (ax_enabled) ) {
+    mc_mr_set_cnen(AID, 0);
+  }
+
+  # change park position
+  if( (prev_pv_park_position == PV_PARK_RIGHT) and (pv_park_position == PV_PARK_LEFT) ) {
+    println('__EHT__: change park position to LEFT');
+    park_position := PARK_POS_LEFT_MM;
+  };
+ 
+  if( (prev_pv_park_position == PV_PARK_LEFT) and (pv_park_position == PV_PARK_RIGHT) ) {
+    println('__EHT__: change park position to Right');
+    park_position := PARK_POS_RIGHT_MM;
+  };
+}
+
+
+else if (state == SM_INIT) {
+  if(mc_get_busy(AID) == NOT_BUSY) {
+    if( ax_enabled == TRUE) {
+      state := SM_START_MOVE;
+      println('__EHT__: state -> SM_START_MOVE');
+    }
+    else {
+      mc_power(AID, 1);
+    };
+  };
+}
+
+
+else if (state == SM_START_MOVE) {
+  mc_home_pos(AID, 0, 1, PARK_VEL, PARK_VEL_SLOW, -55);
+  mc_home_pos(AID, 1, 1, PARK_VEL, PARK_VEL_SLOW, -55);
+  println('__EHT__: ---------------------------> DEBUG');
+  if(mc_get_busy(AID) == BUSY) {
+    state := SM_WAIT_FOR_PARKING;
+    println('__EHT__: state -> SM_WAIT_FOR_PARKING');
+  }
+}
+
+else if (state == SM_WAIT_FOR_PARKING) {
+  if(mc_get_homed(AID)) {
+    state := SM_DISABLE;
+    println('__EHT__: state -> SM_DISABLE');
+  };
+}
+
+
+else if (state == SM_DISABLE) {
+  #mc_power(AID,0);
+  mc_mr_set_cnen(AID, 0);
+  state := SM_IDLE;
+  if(is_interlock == FALSE) {
+    println('__EHT__: enable move functions');
+    mc_set_enable_motion_funcs(AID, 1, 1, 1);
+    mc_set_ignore_disabled_motion_cmds(AID,0);
+  }
+  println('__EHT__: state -> SM_IDLE');
+};
+
+
+# -----------------------------------------------------------------------------
+prev_dbg := ${SELF}.dbg;
+prev_is_interlock := is_interlock;
+prev_pv_park_position := pv_park_position;
+# vim: set expandtab ts=2 sw=2 sts=2 et:

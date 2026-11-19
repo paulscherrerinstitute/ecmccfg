@@ -1,0 +1,175 @@
+# Block ordinary motion during an interlock-controlled parking home.
+#
+# Test operation:
+#   1. Set this PLC's debug input high to assert the test interlock.
+#   2. The PLC blocks ABS/REL/velocity commands, stops existing motion and
+#      starts homing procedure 1. Homing remains admitted.
+#   3. While homing, send arbitrary motor-record or native ABS commands. They
+#      must be ignored without changing the active homing execute state.
+#   4. Native/motor STOP and disable commands remain effective by design.
+#
+# Cfg.SetAxisIgnoreDisabledMotionCommands(AID,1) is configured permanently in
+# startup.cmd. Do not toggle that policy here: when all motion functions are
+# enabled it has no effect, and keeping it enabled closes transition races.
+
+VAR
+  AID                     : 1;
+  HOME_SEQUENCE           : 1;
+  HOME_VEL_TO             : 4;
+  HOME_VEL_FROM           : 0.5;
+  HOME_POSITION           : -55;
+  HOME_TIMEOUT_SEC        : 30;
+
+  ax_enabled              : ax1.drv.enabled;
+
+  state                   : static.state;
+  interlock               : static.interlock;
+  interlock_old           : static.interlock_old;
+  home_started            : static.home_started;
+  timeout_cycles          : static.timeout_cycles;
+
+  FALSE                   : 0;
+  TRUE                    : 1;
+  NOT_BUSY                : 0;
+  BUSY                    : 1;
+
+  SM_BOOT                 : 0;
+  SM_IDLE                 : 10;
+  SM_STOP                 : 20;
+  SM_ENABLE               : 30;
+  SM_START_HOME           : 40;
+  SM_WAIT_HOME            : 50;
+  SM_DISABLE              : 60;
+END_VAR
+
+
+if(${SELF}.firstscan) {
+  state := SM_BOOT;
+  interlock := FALSE;
+  interlock_old := FALSE;
+  home_started := FALSE;
+  timeout_cycles := 0;
+};
+
+
+# The PLC debug input is the reproducible test-interlock source.
+if(state != SM_BOOT) {
+  if(${SELF}.dbg == TRUE) {
+    interlock := TRUE;
+  }
+  else {
+    interlock := FALSE;
+  };
+};
+
+
+if(state == SM_BOOT) {
+  if(epics_get_started() == TRUE) {
+    mc_set_enable_motion_funcs(AID, 1, 1, 1);
+    state := SM_IDLE;
+    println('block_motion_funcs: ready');
+  };
+}
+
+
+else if(state == SM_IDLE) {
+  if((interlock == TRUE) and (interlock_old == FALSE)) {
+    # Close command admission before touching the active trajectory. ABS/REL,
+    # PVT and velocity/jog requests are now ignored, while HOME stays allowed.
+    mc_set_enable_motion_funcs(AID, 0, 0, 1);
+    home_started := FALSE;
+
+    # Use the native synchronous command path. Motor-record STOP/CNEN requests
+    # are asynchronous and can otherwise arrive after a new home has started.
+    # Native disable is intentionally not filtered by the motion-function gate.
+    mc_power(AID, 0);
+    state := SM_STOP;
+    println('block_motion_funcs: moves blocked; disabling active motion');
+  }
+  else if(interlock == FALSE) {
+    # Ignore mode remains configured, but no command type is disabled here.
+    mc_set_enable_motion_funcs(AID, 1, 1, 1);
+  };
+}
+
+
+else if(state == SM_STOP) {
+  # Do not start home until both trajectory and drive acknowledge the native
+  # disable. This prevents a late disable from cancelling the new home.
+  if((mc_get_busy(AID) == NOT_BUSY) and (ax_enabled == FALSE)) {
+    state := SM_ENABLE;
+  };
+}
+
+
+else if(state == SM_ENABLE) {
+  if(ax_enabled == FALSE) {
+    mc_power(AID, 1);
+  }
+  else {
+    state := SM_START_HOME;
+  };
+}
+
+
+else if(state == SM_START_HOME) {
+  # Generate one explicit low-to-high home edge.
+  mc_home_pos(AID, 0, HOME_SEQUENCE,
+              HOME_VEL_TO, HOME_VEL_FROM, HOME_POSITION);
+  mc_home_pos(AID, 1, HOME_SEQUENCE,
+              HOME_VEL_TO, HOME_VEL_FROM, HOME_POSITION);
+  timeout_cycles := HOME_TIMEOUT_SEC / ${SELF}.scantime;
+  state := SM_WAIT_HOME;
+  println('block_motion_funcs: homing requested');
+}
+
+
+else if(state == SM_WAIT_HOME) {
+  timeout_cycles := timeout_cycles - 1;
+
+  # Require observation of an active home. This prevents an old Homed=1 value
+  # from completing the state before the new request has actually run.
+  if(mc_get_busy(AID) == BUSY) {
+    home_started := TRUE;
+  };
+
+  if((home_started == TRUE)
+     and (mc_get_busy(AID) == NOT_BUSY)
+     and (mc_get_homed(AID) == TRUE)) {
+    state := SM_DISABLE;
+    println('block_motion_funcs: homing complete');
+  }
+  else if((home_started == TRUE)
+          and (mc_get_busy(AID) == NOT_BUSY)
+          and (mc_get_homed(AID) == FALSE)) {
+    # An external native/motor STOP or disable must remain effective. Treat it
+    # as an aborted home and finish in the safe disabled state.
+    state := SM_DISABLE;
+    println('block_motion_funcs: homing aborted by STOP or disable');
+  }
+  else if(timeout_cycles < 0) {
+    state := SM_DISABLE;
+    println('block_motion_funcs: homing timeout');
+  };
+}
+
+
+else if(state == SM_DISABLE) {
+  # Native disable is deliberate and must remain effective even while ordinary
+  # motion functions are blocked.
+  mc_power(AID, 0);
+
+  if(ax_enabled == FALSE) {
+    home_started := FALSE;
+    state := SM_IDLE;
+
+    if(interlock == FALSE) {
+      mc_set_enable_motion_funcs(AID, 1, 1, 1);
+    };
+    println('block_motion_funcs: parked and disabled');
+  };
+};
+
+
+interlock_old := interlock;
+# vim: set expandtab ts=2 sw=2 sts=2 et:

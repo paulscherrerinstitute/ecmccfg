@@ -1,0 +1,115 @@
+VAR
+  AID                     :   1;
+
+  ax_enabled              :   ax1.drv.enabled;
+  prev_is_interlock       :   static.prev_is_interlock;
+  is_interlock            :   static.is_interlock;
+  is_pend_interlock       :   static.is_pend_interlock;
+
+  # constants
+  TRUE                    :   1;
+  FALSE                   :   0;
+  BUSY                    :   1;
+  NOT_BUSY                :   0;
+
+  # state machine
+  state                   :   static.state;
+  SM_BOOT                 :   2;
+  SM_IDLE                 :   0;
+  SM_INIT                 :   100;
+  SM_START_MOVE           :   200; 
+  SM_START_MOVE2          :   250; 
+  SM_WAIT_FOR_PARKING     :   300;
+  SM_DISABLE              :   400;
+
+END_VAR
+
+# -----------------------------------------------------------------------------
+if(${SELF}.firstscan) {
+  state := SM_BOOT;
+  is_pend_interlock := FALSE;
+  is_interlock := FALSE;
+};
+
+if(state != SM_BOOT) {
+  if(${SELF}.dbg  == TRUE) {
+    is_interlock := TRUE;
+  }
+  else {
+    is_interlock := FALSE;
+  };
+}
+
+
+# =============================================================================
+# STATES
+# =============================================================================
+if (state == SM_BOOT) {
+  if(epics_get_started() == TRUE) {
+    state := SM_IDLE;
+  }
+}
+
+else if (state == SM_IDLE) {
+  if( (is_interlock == TRUE) and (prev_is_interlock == FALSE) ) {
+    if(mc_get_busy(AID) == BUSY) {
+      println('__EHT__: axis is moving, halt');
+      mc_power(AID, 0);
+      #mc_mr_set_cnen(AID, 0);
+      #mc_mr_set_stop(AID, 1);
+    };
+    is_pend_interlock := TRUE;
+    state := SM_INIT;
+    mc_set_enable_motion_funcs(AID, 0, 0, 1);
+    mc_set_ignore_disabled_motion_cmds(AID,1);
+  }
+  else if( (is_interlock == FALSE) and (prev_is_interlock == TRUE) ) {
+    is_pend_interlock := FALSE;
+    mc_set_enable_motion_funcs(AID, 1, 1, 1);
+    mc_set_ignore_disabled_motion_cmds(AID,0);
+  }
+
+  if( (is_pend_interlock == TRUE) and (ax_enabled) ) {
+    mc_mr_set_cnen(AID, 0);
+  }
+}
+
+
+else if (state == SM_INIT) {
+  if(mc_get_busy(AID) == NOT_BUSY) {
+    if( ax_enabled == TRUE) {
+      state := SM_START_MOVE;
+    }
+    else {
+      mc_power(AID, 1);
+    };
+  };
+}
+
+else if (state == SM_START_MOVE) {
+  mc_home_pos(AID, 0, 1, 4, 0.5, -55);
+  mc_home_pos(AID, 1, 1, 4, 0.5, -55);
+  state := SM_WAIT_FOR_PARKING;
+}
+
+else if (state == SM_WAIT_FOR_PARKING) {
+  if(mc_get_homed(AID)) {
+    state := SM_DISABLE;
+  };
+}
+
+
+else if (state == SM_DISABLE) {
+  mc_mr_set_cnen(AID, 0);
+  state := SM_IDLE;
+  if(is_interlock == FALSE) {
+    mc_set_enable_motion_funcs(AID, 1, 1, 1);
+    mc_set_ignore_disabled_motion_cmds(AID,0);
+  }
+};
+
+
+# -----------------------------------------------------------------------------
+
+prev_is_interlock := is_interlock;
+# vim: set expandtab ts=2 sw=2 sts=2 et:

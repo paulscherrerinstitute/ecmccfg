@@ -1,0 +1,71 @@
+axis:
+  id: $(AID)
+  mode: csv
+  autoEnable:
+    enableTimeout: 1
+    disableTimeout: 1
+
+epics:
+  name: $(ANAME)
+  unit: mm
+  motorRecord:
+    description: $(ANAME)
+    enable: true
+
+drive:
+  numerator: 10
+  denominator: 32768
+  type: 0
+  control: ec0.s$(DRV_SID).driveControl01
+  status: ec0.s$(DRV_SID).driveStatus01
+  setpoint: ec0.s$(DRV_SID).velocitySetpoint01
+  enable: 0
+  enabled: 1
+
+encoder:
+  desc: openloop
+  numerator: 1
+  denominator: 12800
+  type: 0
+  bits: 16
+  position: ec0.s$(DRV_SID).positionActual01
+  homing:
+    type: 1
+    position: -55
+    velocity: 
+      to: 3
+      from: 1
+
+controller:
+  Kp: 1.0
+  Ki: 0.0
+
+trajectory:
+  type: 0
+  axis:
+    velocity: 3
+    acceleration: 7
+    deceleration: 7
+
+input:
+  limit:
+    forward: ec0.s$(DRV_SID).driveStatus01.12
+    backward: ec0.s$(DRV_SID).driveStatus01.11
+  home: ec0.s$(DRV_SID).ONE.0
+  interlock: ec0.s$(DRV_SID).ONE.0
+
+monitoring:
+  target:
+    enable: true
+    tolerance: 0.1
+    time: 100
+  lag:
+    enable: false
+    tolerance: 5
+    time: 100
+  velocity:
+    enable: false
+    max: 100
+    time:
+      trajectory: 100
+      drive: 200
