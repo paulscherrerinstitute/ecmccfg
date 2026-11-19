@@ -29,6 +29,16 @@ class Loader:
             line = expand(raw, self.env | scope).strip()
             if line.startswith('#'):
                 continue
+            condition = re.fullmatch(r'ecmcIf\("(.*)"\)', line)
+            if condition:
+                self.env['IF_TRUE'] = '' if expression(condition[1]) else '#-'
+                continue
+            if line == 'ecmcEndIf()':
+                self.env.pop('IF_TRUE', None)
+                continue
+            if line == 'exit':
+                self.env.pop('IF_TRUE', None)
+                return
             if line.startswith('ecmcExit'):
                 raise ValueError(line)
             match = re.fullmatch(r'(epicsEnvSet|epicsEnvUnset|ecmcEpicsEnvSetCalcTernary|ecmcEpicsEnvSetCalc)\((.*)\)', line)
@@ -63,6 +73,14 @@ class Loader:
 
 
 class SdoStartupTests(unittest.TestCase):
+    def test_simulation_skips_async_sdo_configuration_and_pvs(self):
+        for options in ({}, {'BYTE_SIZE': '256'}):
+            with self.subTest(options=options):
+                loader = Loader(ECMC_SIM='1', **options)
+                self.assertEqual(loader.commands, [])
+                self.assertEqual(loader.records, [])
+                self.assertEqual(loader.registrations, [])
+
     def test_default_scalar_needs_no_queue_restore_flags(self):
         loader = Loader()
         self.assertIn('Cfg.EcConfigureSdoQueue(26,threshold,0,0)', loader.commands)

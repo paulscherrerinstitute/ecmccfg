@@ -6,7 +6,7 @@
 ecmcFileExist("ecmcAxis.db",1,1)
 
 #- Set DRVX fields of TgtPosCmd and TgtVelCmd pvs if needed
-{%- if (monitoring is defined) and (monitoring.velocity is defined) %}
+{%- if (monitoring is defined) and (monitoring.velocity is defined) and (monitoring.velocity.enable|default(0)|int > 0) %}
 ecmcEpicsEnvSetCalcTernary(V_DRVL,"{{ monitoring.velocity.enable|default(0)|int }}>0",-{{ monitoring.velocity.max|default(0.0) }} ,0)
 ecmcEpicsEnvSetCalcTernary(V_DRVH,"{{ monitoring.velocity.enable|default(0)|int }}>0",{{ monitoring.velocity.max|default(0.0) }} ,0)
 {%- else %}

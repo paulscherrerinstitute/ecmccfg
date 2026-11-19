@@ -555,7 +555,7 @@ class HardwareRunnerTests(unittest.TestCase):
         with patch.object(run, 'Client', side_effect=AssertionError('connection attempted')):
             with redirect_stdout(io.StringIO()):
                 self.assertEqual(run.main([]), 0)
-        self.assertEqual(make_suite(None, GROUPS).countTestCases(), 107)
+        self.assertEqual(make_suite(None, GROUPS).countTestCases(), 108)
         self.assertEqual(make_suite(None, GROUPS, ('motor_stop',)).countTestCases(), 2)
 
     def test_bad_identity_modes_and_statuses_never_write(self):

@@ -204,7 +204,8 @@ class YamlParityTests(unittest.TestCase):
             self.assertNotIn('.enc.power)', startup)
             for source in sorted((directory/'cfg').glob('*.yaml')):
                 with self.subTest(fixture=fixture, yaml=source.name):
-                    generated = self.compare(source, 'encoder' if source.name == 'biss-c.yaml' else 'axis')
+                    schema = 'encoder' if source.name == 'biss-c.yaml' or source.name.startswith('enc_') else 'axis'
+                    generated = self.compare(source, schema)
                     text = '\n'.join(generated)
                     if source.name.startswith('axis_ax'):
                         label = '01' if '_LO.' in source.name else '02'
