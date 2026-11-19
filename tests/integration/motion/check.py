@@ -178,8 +178,70 @@ def check(client, names):
              tuple(get('DS01-DataAct')[:2]) == (sample + 1, sample + 6),
              'published source and copied data storage waveforms')
 
+    def group_sequence():
+        require_idle()
+        axes = ('CSP', 'PLC')
+        state_idle, state_armed, state_done, state_stopped = 0, 1, 3, 5
+        require(get('Seq0-Running') == 0, 'sequence already running')
+        wait(lambda: get('SEQ-GroupSize') == 2 and get('SEQ-GroupMember') == 1,
+             'both axes in the PLC motion group')
+
+        def start():
+            put('Seq0-Cmd-Arm', 1)
+            wait(lambda: get('Seq0-State') == state_armed and
+                 get('SEQ-SeqState') == state_armed, 'sequence armed')
+            put('Seq0-Cmd-Start', 1)
+            wait(lambda: get('Seq0-Running') == 1 and get('SEQ-SeqRunning') == 1 and
+                 get('SEQ-GroupBusy') == 1 and all(get(a + '-Busy') == 1 for a in axes),
+                 'sequence starts both group members')
+
+        try:
+            command(12, 1)
+            wait(lambda: get('SEQ-GroupEnable') == 1 and
+                 all(get(a + '-EnaAct') == 1 for a in axes), 'group enabled')
+            for axis in axes:
+                if abs(get(axis + '-PosAct')) >= .006:
+                    put(axis + '.SYNC', 1)
+                    wait(lambda: get(axis + '.SYNC') == 0 and
+                         abs(get(axis + '.VAL') - get(axis + '.RBV')) < .006,
+                         f'{axis} motor record sync')
+                    put(axis + '.VAL', 0)
+                    wait(lambda: at(axis, 0), f'{axis} at zero before the sequence')
+
+            start()
+            command(11, expected=0x14c08)
+            wait(lambda: get('SEQ-GroupError') == 0x14c08 and get('PLC-ErrId') == 0x14c08,
+                 'group reports the fault from its PLC axis')
+            # The group is an aggregate. Issue its halt explicitly on fault.
+            command(13)
+            put('Seq0-Cmd-Stop', 1)
+            wait(lambda: get('SEQ-GroupBusy') == 0 and all(idle(a) for a in axes) and
+                 get('Seq0-State') == state_stopped, 'group halt and sequence stop')
+            require(get('CSP-PosAct') < .40, 'healthy group axis reached the target before the halt')
+            require(get('CSP-ErrId') == 0, 'healthy group axis also faulted')
+            command(14)
+            put('Seq0-Cmd-Reset', 1)
+            wait(lambda: get('SEQ-GroupError') == 0 and get('PLC-ErrId') == 0 and
+                 get('Seq0-State') == state_idle and get('Seq0-ErrorId') == 0,
+                 'group and sequence reset')
+
+            command(12, 1)
+            wait(lambda: get('SEQ-GroupEnable') == 1, 'group re-enabled after reset')
+            start()
+            wait(lambda: get('Seq0-State') == state_done and
+                 get('SEQ-SeqState') == state_done and get('SEQ-GroupBusy') == 0 and
+                 at('CSP', .45) and at('PLC', -.45), 'sequence completes after recovery')
+            require(get('Seq0-ErrorId') == 0 and get('SEQ-GroupError') == 0,
+                    'unexpected error after group sequence')
+        finally:
+            put('Seq0-Cmd-Stop', 1)
+            for axis in axes:
+                put(axis + '.STOP', 1)
+                put(axis + '-EnaCmd', 0)
+
     require(get('MCU-Cfg-Sim-Mode') == 1, 'Refusing to issue motion outside simulation')
-    cases = {'csp': motor, 'plc': plc, 'ethercat': ethercat, 'storage': storage}
+    cases = {'csp': motor, 'plc': plc, 'ethercat': ethercat, 'storage': storage,
+             'group-sequence': group_sequence}
     for name in names:
         cases[name]()
         print(f'PASS {name}', flush=True)
@@ -187,7 +249,7 @@ def check(client, names):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--case', choices=('csp', 'plc', 'ethercat', 'storage'), action='append')
+    parser.add_argument('--case', choices=('csp', 'plc', 'ethercat', 'storage', 'group-sequence'), action='append')
     args = parser.parse_args()
     os.environ.setdefault('EPICS_CA_AUTO_ADDR_LIST', 'NO')
     os.environ.setdefault('EPICS_CA_ADDR_LIST', '127.0.0.1')
@@ -215,7 +277,7 @@ def main():
             raise RuntimeError(f'Could not write SIMMOTION:{suffix}={value!r} '
                                f'(CA result={status!r}, wait={wait})')
 
-    check((get, put), args.case or ('csp', 'plc', 'ethercat', 'storage'))
+    check((get, put), args.case or ('csp', 'plc', 'ethercat', 'storage', 'group-sequence'))
 
 
 if __name__ == '__main__':

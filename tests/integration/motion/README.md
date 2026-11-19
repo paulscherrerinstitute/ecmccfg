@@ -19,7 +19,7 @@ python3 ecmccfg/tests/integration/motion/check.py
 ```
 
 Use repeatable `--case` options to select from `csp`, `plc`,
-`ethercat`, and `storage`. The checker requires
+`ethercat`, `storage`, and `group-sequence`. The checker requires
 the `SIMMOTION:` namespace and simulation metadata before issuing motion.
 Run it against an otherwise idle simulation.
 
@@ -39,6 +39,14 @@ and bit-range functions, including invalid bit index handling and error
 reset. The storage case covers clear, append, size, full, cursor, element
 read/write, min/max/average, buffer copy, error/reset, and waveform
 publication. Both cases verify results through EPICS.
+
+The group/sequence case enables both axes through the PLC group API and
+starts a compiled sequence with two nonblocking moves and explicit wait
+steps. It verifies that both axes are busy together, injects a fault into
+one axis, checks the group error, then explicitly halts the group and
+stops the sequence. It checks that the unaffected axis stops short of
+its target, resets both the group and the sequence, then reruns the same
+plan to completion. The group API is used explicitly to stop both axes.
 
 PLC APIs are described in [the PLC function reference](../../../hugo/content/manual/plc_cfg/functions.md)
 and [variable reference](../../../hugo/content/manual/plc_cfg/variables.md).

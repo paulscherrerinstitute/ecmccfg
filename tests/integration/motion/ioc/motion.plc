@@ -25,6 +25,13 @@ VAR
   encReady    : static.encReady;
   encHomed    : static.encHomed;
   hwReady     : static.hwReady;
+  groupSize   : static.groupSize;
+  groupMember : static.groupMember;
+  groupBusy   : static.groupBusy;
+  groupError  : static.groupError;
+  groupEnable : static.groupEnable;
+  seqRunning  : static.seqRunning;
+  seqState    : static.seqState;
   lastTarget  : global.lastTarget;
 END_VAR
 
@@ -97,7 +104,10 @@ if (request != ack) {
   };
   # 85000 = ERROR_MON_MAX_POSITION_LAG_EXCEEDED (0x14c08).
   if (command == 11) { rc := mc_set_axis_error(2, 85000); };
-  if (command < 1 or command > 11) { rc := -1; };
+  if (command == 12) { rc := mc_grp_set_enable(0, target); };
+  if (command == 13) { rc := mc_grp_halt(0); };
+  if (command == 14) { rc := mc_grp_reset_error(0); };
+  if (command < 1 or command > 14) { rc := -1; };
   result := rc;
   lastTarget := target;
   commands := commands + 1;
@@ -112,3 +122,10 @@ atTarget := axis.mon.attarget;
 encReady := mc_get_enc_ready(2, 1);
 encHomed := mc_get_enc_homed(2, 1);
 hwReady := mc_get_hw_ready(2);
+groupSize := mc_grp_size(0);
+groupMember := mc_grp_axis_in_grp(0, 1) and mc_grp_axis_in_grp(0, 2);
+groupBusy := mc_grp_get_any_busy(0);
+groupError := mc_grp_get_any_error_id(0);
+groupEnable := mc_grp_get_enabled(0);
+seqRunning := seq_get_running(0);
+seqState := seq_get_state(0);

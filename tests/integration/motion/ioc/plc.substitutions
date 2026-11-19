@@ -25,4 +25,11 @@ file "plc-output.template" {
           { EncReady, plc0.static.encReady }
           { EncHomed, plc0.static.encHomed }
           { HwReady, plc0.static.hwReady }
+          { GroupSize, plc0.static.groupSize }
+          { GroupMember, plc0.static.groupMember }
+          { GroupBusy, plc0.static.groupBusy }
+          { GroupError, plc0.static.groupError }
+          { GroupEnable, plc0.static.groupEnable }
+          { SeqRunning, plc0.static.seqRunning }
+          { SeqState, plc0.static.seqState }
 }
