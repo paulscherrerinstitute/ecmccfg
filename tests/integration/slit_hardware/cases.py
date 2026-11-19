@@ -87,6 +87,22 @@ class DmovLifecycleTests(unittest.TestCase):
             self.rig.native_move(axis, origin, origin, require_motor_flags=True)
 
 
+    def test_repeated_short_motor_moves(self):
+        rig = self.rig
+        axis = 'TR_LO'
+        origin = rig.origins[axis]
+        step = min(.1, rig.profile['step'])
+        if step <= 2 * rig.profile['tolerance']:
+            self.skipTest('short move must exceed twice the position tolerance')
+        for index, target in enumerate((origin + step, origin) * 4, start=1):
+            with self.subTest(move=index, target=target):
+                # A fast move may finish between polls. finish still requires
+                # the callback, target checks and all axes idle.
+                complete = rig.start(axis, target, require_busy=False)
+                self.assertIsNotNone(complete, 'motor write must provide a completion callback')
+                rig.finish(axis, target, complete)
+
+
 class VirtualTests(MotionTests):
     # Load only the two virtual cases through the explicit runner group below.
     def test_center_both_directions(self): self.round_trip('CENTERY')
@@ -290,7 +306,7 @@ GROUPS = {
     'status': (StatusTests, ('test_idle_status_and_kinematics',)),
     'motion': (MotionTests, ('test_physical_lo_both_directions', 'test_physical_hi_both_directions',
                             'test_repeated_motor_targets', 'test_motor_stop_during_move')),
-    'dmov': (DmovLifecycleTests, ('test_motor_and_native_dmov_lifecycle',)),
+    'dmov': (DmovLifecycleTests, ('test_motor_and_native_dmov_lifecycle', 'test_repeated_short_motor_moves')),
     'stall': (StallTests, STALL_NAMES),
     'coupled_stop': (CoupledStopTests, COUPLED_STOP_NAMES),
     'concurrent': (ConcurrentTests, ('test_lo_moves_while_hi_is_nudged', 'test_hi_moves_while_lo_is_nudged')),
@@ -353,7 +369,9 @@ def make_suite(rig, groups, patterns=()):
             }.get(original, ('TR_LO',) if '_lo_' in name else ('TR_HI',) if '_hi_' in name else ())
             if group == 'concurrent': test.motion_axes = ('TR_LO', 'TR_HI')
             if group == 'command_burst': test.motion_axes = ('TR_LO', 'TR_HI', 'CENTERY', 'GAPY')
-            if group == 'dmov': test.motion_axes = ('TR_LO', 'TR_HI', 'CENTERY')
+            if group == 'dmov':
+                test.motion_axes = (('TR_LO',) if name == 'test_repeated_short_motor_moves'
+                                    else ('TR_LO', 'TR_HI', 'CENTERY'))
             if group == 'homing': test.motion_axes = ('TR_HI',)
             if group == 'coupled_stop':
                 test.motion_axes = ('CENTERY',) if original.startswith('test_center') else ('GAPY',)

@@ -259,7 +259,7 @@ class Rig(Operations):
         return all(self.get(a, '-Busy') == 0 and self.get(a, '.DMOV') == 1
                    and self.get(a, '.MOVN') == 0 for a in self.profile['axes'])
 
-    def start(self, axis, target):
+    def start(self, axis, target, *, require_busy=True):
         self.healthy()
         if not self.idle(): raise RuntimeError('axes must be idle before a move')
         self.validate_target(axis, target)
@@ -268,8 +268,9 @@ class Rig(Operations):
         self.put(axis, '.VELO', self.profile['velocity'])
         self.motion_expectation = MotionExpectation(self, axis)
         complete = self.put(axis, '.VAL', self.user_position(axis, target))
-        self.wait(lambda: self.get(axis, '-Busy') == 1 or self.get(axis, '.DMOV') == 0,
-                  axis + ' motion starts')
+        if require_busy:
+            self.wait(lambda: self.get(axis, '-Busy') == 1 or self.get(axis, '.DMOV') == 0,
+                      axis + ' motion starts')
         if self.get(axis, '.LVIO'): raise AssertionError(axis + ': move rejected by motor limits')
         return complete
 

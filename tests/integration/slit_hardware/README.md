@@ -421,3 +421,12 @@ requested pair, actual user/dial/native values, OFF/DIR and `.MFLG`. The general
 simulator snapshot includes `.MFLG` too. Boundary checks now delay flag/limit
 callbacks to 1 Hz and reject a missing record flag separately from missing
 numeric propagation. This changes test observations only; motorECMC is untouched.
+
+The `dmov` group includes eight short motor-record moves on TR_LO. Each
+move stays within 0.1 mm of the test origin, subject to the configured
+travel and velocity checks. The case checks a fresh put-notify callback,
+motor and axis position, and DMOV completion after every request.
+
+```sh
+python3 tests/integration/slit_hardware/run.py --prefix HWSLIT: --run --test test_repeated_short_motor_moves
+```

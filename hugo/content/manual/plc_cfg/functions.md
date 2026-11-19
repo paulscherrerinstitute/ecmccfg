@@ -557,6 +557,25 @@ A shared memory buffer of 120 doubles can be accessed for read and write operati
   Returns 0 on success or an error code if the axis is invalid.
 ```
 
+#### Motor-record requests from PLCs
+
+Use `mc_mr_set_sync`, `mc_mr_set_stop`, and `mc_mr_set_cnen` only when
+the PLC needs to affect the EPICS motor record itself. The same guidance
+applies to the `mc_grp_mr_set_*` functions below. For ordinary PLC motion
+control, prefer the direct ECMC functions such as `mc_halt` and `mc_power`.
+
+The motor-record part of these requests is asynchronous with respect to
+the PLC scan. A successful return means ECMC accepted the request. EPICS
+still has to process the motor record, which can take many PLC scans and
+depends on IOC load and record processing. The once-per-cycle limit
+describes request dispatch. It gives no completion deadline.
+
+Issue the request once, then wait in a separate PLC state for feedback
+that confirms the intended result, such as the axis being idle after
+STOP or actual enable feedback matching the requested CNEN state. For a
+group, check every affected member. Use a timeout and a defined failure
+path. Avoid issuing the request on every scan while waiting.
+
 ### Motion Group
 
 Use [Axis Groups]({{< relref "/manual/motion_cfg/axis_groups.md" >}}) to define the groups that these functions operate on.

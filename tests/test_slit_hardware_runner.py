@@ -608,7 +608,7 @@ class HardwareRunnerTests(unittest.TestCase):
     def test_all_cases_reference_zero_restore_velocities_and_use_expected_fields(self):
         code, report, xml = self.run_live_boundary()
         self.assertEqual(code, 0, report)
-        self.assertEqual(len(report['tests']), 93)
+        self.assertEqual(len(report['tests']), 94)
         self.assertTrue(all(t['status'] == 'passed' for t in report['tests']), report)
         self.assertEqual(xml.attrib['errors'], '0')
         self.assertTrue(self.client.closed)
