@@ -131,12 +131,15 @@ for bad in (None, '-Busy', '.DMOV', '.MOVN', '-Homed'):
     assert c.moving_flags() == (bad is None)
 
 suite = list(make_suite(None, ('closed',), ('homing',)))
-# 22 motor cases, 22 native cases, and the shared permission regression.
-assert len(suite) == 45
+# 22 motor cases, 24 native cases (including both index terminals), and the
+# shared permission regression.
+assert len(suite) == 47
 assert sum(test.id().endswith('test_ignore_disabled_motion_commands')
            for test in suite) == 1
 assert sum('test_motor_' in test.id() for test in suite) == 22
-assert sum('test_native_' in test.id() for test in suite) == 22
+assert sum('test_native_' in test.id() for test in suite) == 24
+assert any(t.id().endswith('test_native_sequence_11_el5102_index') for t in suite)
+assert any(t.id().endswith('test_native_sequence_11_el7062_touch_probe_index') for t in suite)
 for sequence in (1,2,3,4,5,6,7,8,9,10,14,21,22):
     for trigger in ('motor', 'native'):
         assert any(test.id().endswith(f'test_{trigger}_sequence_{sequence:02d}') for test in suite)
@@ -146,7 +149,7 @@ if DEFAULT_CONFIG.exists():
     startup = (DEFAULT_CONFIG / 'startup.cmd').read_text()
     marker = (DEFAULT_CONFIG / 'test-marker.db').read_text()
     assert 'SIM:SlitTest:HomingSchema' in marker
-    assert 'field(INP,"2")' in marker and 'field(VAL,"2")' in marker
+    assert 'field(INP,"3")' in marker and 'field(VAL,"3")' in marker
     # The real Jinja template loads HomProc/OMSL, HomPos, speeds and AccHom
     # only when the axis YAML declares homing. Startup Cfg commands alone do
     # not cause these records to exist (the live setup failure).

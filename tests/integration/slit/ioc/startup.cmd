@@ -23,10 +23,17 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Steppe
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd "FILE=./cfg/axis_ax5_LO.yaml,DRV_SLAVE=14,ENC_SLAVE=14,ENC_CHANNEL=01,M_ID=0"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd "FILE=./cfg/biss-c.yaml,DEV=${IOC},ENC_SID=9,ENC_CH=02,ENC_PWR_CH=03"
 # Independent DS402 probe axis; deliberately outside the slit kinematic groups.
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd "SLAVE_ID=20,HW_DESC=EL7062_OPT,OPT='MODE=CSV,TP=1,TP_DC=1,INPUTS=0,ENC2=0,DIAG=0,AUTOTUNE=0'"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd "SLAVE_ID=20,HW_DESC=EL7062_OPT,OPT='MODE=CSV,TP=1,TP_DC=1,INPUTS=0,ENC2_1=0,ENC2_2=1,DIAG=0,AUTOTUNE=0'"
+${SCRIPTEXEC} ${ecmccfg_DIR}applyComponent.cmd "COMP=Encoder-Generic-INC,CH_ID=2,MACROS='ST_ENC_RES=4096,TP1_POS_SRC=SEC,TP1_TRG=INDEX'"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd "SLAVE_ID=21,HW_DESC=EL2252"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd "FILE=./cfg/axis_probe.yaml"
 ecmcConfigOrDie "Cfg.SimSetValue(ec0.s20.driveStatus01,64)"
+# Two extra incremental encoders on TR_HI exercise both index-latch dialects.
+# EL5102 uses the legacy latch control/status PDOs; EL7062 uses touch probe 1.
+epicsEnvSet("ECMC_AXIS_NO",6)
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd "SLAVE_ID=22,HW_DESC=EL5102"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd "FILE=./cfg/enc_el5102_index.yaml,ENC_SID=22,ENC_CH=01"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd "FILE=./cfg/enc_el7062_index.yaml,ENC_SID=20,ENC_CH=02"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd "FILE=./cfg/axis_vax5_YCEN.yaml,AX_ID=12,M_ID=0,DRV_SLAVE=14"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd "FILE=./cfg/axis_vax6_YGAP.yaml,AX_ID=13,M_ID=0,DRV_SLAVE=14"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "FILE=./cfg/axis_main.plc,INC=./cfg,PLC_MACROS='AX_CEN=12,AX_GAP=13,AX_LO=5,AX_HI=6'"

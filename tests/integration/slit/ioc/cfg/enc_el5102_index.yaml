@@ -1,0 +1,27 @@
+encoder:
+  desc: EL5102 index fixture
+  unit: mm
+  numerator: 1
+  denominator: 4096
+  type: 0
+  bits: 32
+  absBits: 0
+  position: ec0.s$(ENC_SID).positionActual$(ENC_CH=01)
+  status: ec0.s$(ENC_SID).encoderStatus$(ENC_CH=01)
+  control: ec0.s$(ENC_SID).encoderControl$(ENC_CH=01)
+  latch:
+    position: ec0.s$(ENC_SID).encoderLatchPosition$(ENC_CH=01)
+    control: 0
+    status: 0
+    armCmd: 1
+    armBits: 1
+  homing:
+    type: 11
+    position: 0
+    velocity:
+      to: 0.2
+      from: 0.1
+    acceleration: 1
+    deceleration: 1
+    latchCount: 1
+    timeout: 12

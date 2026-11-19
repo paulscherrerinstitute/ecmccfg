@@ -67,7 +67,12 @@ does not create those PVs.
 The physical-axis YAML files link drive-status bit 13 through `input.home`.
 Their `encoder.homing` settings and the additional BiSS encoder YAML set
 procedure 1, 0.2/0.1 mm/s, acceleration/deceleration 1, latch count 1, no
-post-home move, and a 12-second sequence watchdog. `test-marker.db` supplies `SIM:SlitTest:HomingSchema=2`. Restart this
+post-home move, and a 12-second sequence watchdog. EL5102 slave 22 and channel
+2 of the existing EL7062 slave 20 add blade-coupled incremental encoders for
+index homing: the former uses the legacy encoder latch PDOs and the latter uses
+touch probe 1 configured from the secondary encoder index. Channel 1 remains
+the independent probe-axis fixture. `test-marker.db` supplies
+`SIM:SlitTest:HomingSchema=3`. Restart this
 IOC from the updated directory before running the new module; no ECMC binary
 change is required for these test additions.
 

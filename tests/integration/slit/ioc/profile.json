@@ -53,5 +53,20 @@
     "counts_per_mm": 100000,
     "output_slave": 21,
     "sample_clock": false
+  },
+  "index_encoders": {
+    "axis": "TR_HI",
+    "counts_per_mm": 4096,
+    "index_period_mm": 0.125,
+    "el5102": {
+      "encoder_id": 3,
+      "slave": 22,
+      "channel": "01"
+    },
+    "el7062": {
+      "encoder_id": 4,
+      "slave": 20,
+      "channel": "02"
+    }
   }
 }

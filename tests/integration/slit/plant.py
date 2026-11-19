@@ -6,7 +6,7 @@ import threading
 import time
 
 import el7041
-from .instrumentation import ProbeAxis
+from .instrumentation import IndexEncoders, ProbeAxis
 
 
 class PlantThread(threading.Thread):
@@ -178,6 +178,7 @@ class Plant:
         self.error, self.thread = None, None
         self.blades = {}
         self.probe_axis = None
+        self.index_encoders = None
         self.last_elapsed, self.max_elapsed, self.last_commands = 0.0, 0.0, {}
         self.last_published = None
         self.io_phase = 'initializing'
@@ -192,6 +193,7 @@ class Plant:
                     'io_phase': self.io_phase, 'io_seconds': dict(self.io_seconds),
                     'io_max_seconds': dict(self.io_max_seconds), 'failure': self.failure_details,
                     'probe_axis': self.probe_axis.snapshot() if self.probe_axis else None,
+                    'index_encoders': self.index_encoders.snapshot() if self.index_encoders else None,
                     'blades': {axis: {'position_mm': blade.position_mm,
                                      'drive_position_mm': blade.drive_position_mm,
                                      'backlash_mm': blade.backlash_mm,
@@ -338,11 +340,15 @@ class Plant:
             if 'probe_axis' in self.profile:
                 self.probe_axis = ProbeAxis(self.profile['probe_axis'], self.prefix,
                                             self.factory, self.timeout)
+            if 'index_encoders' in self.profile:
+                self.index_encoders = IndexEncoders(self.profile['index_encoders'], self.prefix,
+                                                    self.factory, self.timeout)
             previous = time.monotonic()
             self.started.set()
             while not self.stop.is_set():
                 commands = {axis: self.io_call(axis + ' command read', io.read) for axis, io in ios.items()}
                 probe_commands = self.probe_axis.read() if self.probe_axis else None
+                index_commands = self.index_encoders.read() if self.index_encoders else None
                 powers = {axis: self.io_call(axis + ' encoder relay read', pv.get,
                                              use_monitor=False, timeout=self.timeout)
                           for axis, pv in power_pvs.items()}
@@ -363,8 +369,14 @@ class Plant:
                     feedback = {axis: self.blades[axis].step(*command, elapsed, encoder_power=powers.get(axis, True)) for axis, command in commands.items()}
                     probe_feedback = (self.probe_axis.step(probe_commands, elapsed)
                                       if self.probe_axis else None)
+                    index_feedback = (self.index_encoders.step(
+                        index_commands,
+                        self.blades[self.profile['index_encoders']['axis']].position_mm)
+                        if self.index_encoders else None)
                 if self.probe_axis:
                     self.io_call('DS402 probe feedback', self.probe_axis.publish, probe_feedback)
+                if self.index_encoders:
+                    self.io_call('index encoder feedback', self.index_encoders.publish, index_feedback)
                 for axis, (drive, position, status) in feedback.items():
                     for key, value in (('position', position), ('status', status)):
                         pv = encoders[axis][key]
@@ -389,6 +401,8 @@ class Plant:
             self.started.set()
             if self.probe_axis:
                 self.probe_axis.close()
+            if self.index_encoders:
+                self.index_encoders.close()
             for axis, io in ios.items():
                 blade = self.blades.get(axis)
                 if blade:

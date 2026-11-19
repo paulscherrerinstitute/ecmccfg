@@ -8,6 +8,6 @@ record(longin,"$(P)SIM:SlitTest:Schema") {
 # Homing tests require the position-based home-cam link and encoder defaults.
 record(longin,"$(P)SIM:SlitTest:HomingSchema") {
   field(DESC,"Slit homing fixture capability")
-  field(INP,"2")
-  field(VAL,"2")
+  field(INP,"3")
+  field(VAL,"3")
 }

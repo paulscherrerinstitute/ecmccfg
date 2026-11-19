@@ -30,7 +30,7 @@ class HomingTests(SlitCase):
         except Exception as error:
             raise AssertionError('homing requires the updated dedicated slit_matrix_sim_test IOC; '
                                  'restart it with the home-cam links and HomingSchema marker') from error
-        self.assertEqual(capability, 2, 'restart the dedicated IOC with updated axis homing YAML and HomingSchema=2')
+        self.assertEqual(capability, 3, 'restart the dedicated IOC with index encoders and HomingSchema=3')
         super().setUp()
         # Sync disabled permits independent motor and controller limit pairs.
         if self.rig.get(self.axis, '-CfgSyncSftLim'):
@@ -466,6 +466,40 @@ class HomingTests(SlitCase):
 
     def test_native_post_home_move(self):
         self.post_home_move('native')
+
+    def index_home(self, kind):
+        config = self.rig.profile.get('index_encoders')
+        if not config:
+            self.skipTest('requires the EL5102/EL7062 index-encoder fixture')
+        terminal = config[kind]
+        self.configure_sensors(0)
+        self.rig.put(self.axis, '-EnaCmd', 0)
+        self.rig.wait_drive_disabled(self.axis)
+        self.rig.put(self.axis, '-SetEncIdCmd-RB', terminal['encoder_id'])
+        self.rig.wait(lambda: self.rig.get(self.axis, '-SetEncIdCmd-RB') == terminal['encoder_id'],
+                      kind + ' selected as the active homing encoder', 3)
+        self.start_home(11, 'native')
+        self.finish_home()
+        actual, physical = self.rig.get(self.axis, '-PosAct'), self.physical()
+        # Sequence 11 reaches the -0.4 mm limit and reverses. With a 0.125 mm
+        # index period, the first positive-going index is at -0.375 mm.
+        expected_index = -.375
+        self.assertAlmostEqual(physical - actual, expected_index, delta=.015,
+                               msg=kind + ' must reference the first index after the low limit')
+        state = self.rig.plant.snapshot()['index_encoders']
+        capture = state[kind + '_capture']
+        self.assertIsNotNone(capture, kind + ' must observe an index capture')
+        self.assertAlmostEqual(capture['position_mm'], expected_index, delta=1 / 4096)
+        self.rig.trace.append({'action': 'index homing verified', 'encoder': kind,
+                               'encoder_id': terminal['encoder_id'], 'actual': actual,
+                               'physical_mm': physical, 'index_mm': expected_index,
+                               'latch_state': state})
+
+    def test_native_sequence_11_el5102_index(self):
+        self.index_home('el5102')
+
+    def test_native_sequence_11_el7062_touch_probe_index(self):
+        self.index_home('el7062')
 
     def restore_reference(self):
         # Keep feedback alive through STOP. Never reset the plant counters to

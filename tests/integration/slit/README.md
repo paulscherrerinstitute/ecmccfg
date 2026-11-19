@@ -509,7 +509,9 @@ allow the motor record to update more slowly than the native ECMC state.
 Restart the dedicated IOC with the updated `ioc/startup.cmd`
 and `test-marker.db` before running homing. Both physical-axis YAML files must declare `encoder.homing` so ecmccfg loads
 the motor homing records, including `-HomProc.OMSL`. Startup Cfg commands alone
-do not create these PVs. No ECMC rebuild is required by these test additions. The new `SIM:SlitTest:HomingSchema=2` capability marker prevents
+do not create these PVs. No ECMC rebuild is required by these test additions. The
+`SIM:SlitTest:HomingSchema=3` capability marker also requires the EL5102 legacy
+latch and EL7062 touch-probe index fixtures and prevents
 homing against an old setup that still links the home sensor to constant ONE.
 The base fixture schema stays 2 so other modules keep their existing guard.
 
@@ -518,7 +520,8 @@ python3 tests/integration/slit/run.py --prefix SIMSLIT: --run --case homing
 python3 tests/integration/slit/run.py --prefix SIMSLIT: --run --case homing --loop closed
 ```
 
-The homing module contains 45 cases per loop mode, including the ignored-motion-command regression. That regression starts a
+The homing module contains 47 cases per loop mode, including EL5102 and EL7062
+index-homing cases and the ignored-motion-command regression. That regression starts a
 slow native home with position and velocity commands disabled, then injects direct move calls, asynchronous motor `.VAL` spam,
 and repeated native ABS `MtnCmd/TgtPosCmd/ExeCmd` requests throughout most of the search leg. The homing sequencer must stay busy,
 continue making physical progress, and finish without an axis error. With the same motion functions blocked, native STOP/disable
