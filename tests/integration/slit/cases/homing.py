@@ -561,7 +561,7 @@ class HomingTests(SlitCase):
                           'restoring independent motor limits leaves controller limits unchanged', 5)
 
     def test_ignore_disabled_motion_commands(self):
-        """Rejected move requests must neither fault nor cancel a running home."""
+        """Rejected direct, motor and native moves must not cancel a running home."""
         self.configure_sensors(0)
         rig = self.rig
         axis_id = rig.profile['axes'][self.axis]
@@ -617,6 +617,10 @@ class HomingTests(SlitCase):
         self.addCleanup(restore_permissions)
         command(f'Cfg.SetAxisIgnoreDisabledMotionCommands({axis_id},1)')
         command(f'Cfg.SetAxisEnableMotionFunctions({axis_id},0,0,1)')
+        # Keep the search active long enough to inject realistic CA bursts
+        # through both user-facing command interfaces.
+        rig.put(self.axis, '-VelToHom', .05)
+        rig.put(self.axis, '-VelFrmHom', .03)
         self.start_home(1, 'native')
         for request in (f'MoveAbsolutePosition({axis_id},.1,.2,1,1)',
                         f'MoveRelativePosition({axis_id},.1,.2,1,1)',
@@ -627,6 +631,74 @@ class HomingTests(SlitCase):
             self.assertEqual(rig.get(self.axis, '-MtnCmd'), 10)
             self.assertEqual(rig.get(self.axis, '-Busy'), 1)
         self.finish_home()
+
+        def spam_while_homing(interface):
+            # Sequence 1 ends at the backward switch. Move away with ordinary
+            # positioning temporarily admitted, then reinstate the policy
+            # before starting the home that receives the command burst.
+            command(f'Cfg.SetAxisEnableMotionFunctions({axis_id},1,1,1)')
+            # Homing changes the encoder reference, so an absolute user target
+            # of .2 is not necessarily physical +.2. Preserve the measured
+            # encoder/plant offset and place the blade physically away from the
+            # backward home switch before starting the next search.
+            desired_physical = .15
+            reposition_target = (rig.get(self.axis, '-PosAct')
+                                 + desired_physical - self.physical())
+            rig.move(self.axis, reposition_target)
+            self.assertAlmostEqual(self.physical(), desired_physical, delta=.03,
+                                   msg='fixture must start homing away from the backward switch')
+            command(f'Cfg.SetAxisEnableMotionFunctions({axis_id},0,0,1)')
+            self.start_home(1, 'native')
+            writes = 0
+            started = time.monotonic()
+            start_position = self.physical()
+            progress_target = start_position - .25
+            # Keep injecting until the home has traversed most of its search
+            # leg. This proves that homing continues under sustained competing
+            # commands, rather than merely surviving a short burst and
+            # completing after the burst has ended.
+            while self.physical() > progress_target:
+                self.assertLess(time.monotonic() - started, 12,
+                                f'homing made no progress under {interface} ABS spam')
+                self.assertTrue(self.moving_flags(),
+                                f'home stopped during {interface} ABS spam after {writes} writes')
+                target = .3 if writes % 2 == 0 else -.3
+                if interface == 'motor':
+                    # Do not serialize put-notify callbacks behind the first
+                    # rejected motor request; this is command spam, not a wait
+                    # for motion completion.
+                    rig.client.put(rig.name(self.axis, '.VAL'), target,
+                                   wait=False, notify=False)
+                    writes += 1
+                else:
+                    # Exercise the native axis-PV path, including a fresh
+                    # momentary execute request for every staged ABS target.
+                    rig.put(self.axis, '-ExeCmd', 0)
+                    rig.put(self.axis, '-MtnCmd', 3)
+                    rig.put(self.axis, '-MtnCmdData', 0)
+                    rig.put(self.axis, '-TgtPosCmd', target)
+                    rig.put(self.axis, '-ExeCmd', 1)
+                    writes += 5
+                rig.check_native_error(self.axis)
+                self.assertEqual(rig.get(self.axis, '-Busy'), 1,
+                                 f'{interface} ABS injection cancelled homing after {writes} writes')
+                self.assertEqual(rig.get(self.axis, '-Homed'), 0,
+                                 f'{interface} ABS injection completed home prematurely')
+                self.assertNotEqual(rig.get(self.axis, '-SeqState'), 0,
+                                    f'{interface} ABS injection stopped the homing sequencer')
+                time.sleep(.05)
+            end_position = self.physical()
+            self.assertLessEqual(end_position, progress_target + .01,
+                                 f'homing must make substantial forward progress under {interface} ABS spam')
+            self.finish_home()
+            rig.trace.append({'action': 'disabled ABS spam survived homing',
+                              'interface': interface, 'writes': writes,
+                              'start_physical_mm': start_position,
+                              'end_spam_physical_mm': end_position,
+                              'snapshot': rig.snapshot()})
+
+        spam_while_homing('motor')
+        spam_while_homing('native')
         for kill in (0, 1):
             # Sequence 1 finishes at the backward switch. A repeat from there
             # may complete before moving flags can be sampled. Reposition with
@@ -640,8 +712,56 @@ class HomingTests(SlitCase):
             rig.wait_native_stopped(self.axis)
             rig.check_native_error(self.axis)
             if kill:
-                rig.wait(lambda: rig.get(self.axis, '-EnaAct') == 0,
-                         'kill remains effective with disabled moves ignored', 6)
+                rig.wait_drive_disabled(self.axis)
+
+        def interrupt_blocked_home(interface, action):
+            # Restore both motor-record and native enable ownership after the
+            # preceding disable case, then put the blade safely away from the
+            # backward switch before starting another blocked-motion home.
+            rig.put(self.axis, '.CNEN', 1)
+            rig.wait(lambda: rig.get(self.axis, '.CNEN') == 1,
+                     f'motor enable ownership restored before {interface} {action} case', 3)
+            command(f'Cfg.SetAxisEnableMotionFunctions({axis_id},1,1,1)')
+            desired_physical = .15
+            reposition_target = (rig.get(self.axis, '-PosAct')
+                                 + desired_physical - self.physical())
+            # Setup is not the behavior under test. Use a slow native move so
+            # occasional CA plant latency cannot trip position-lag monitoring
+            # before the blocked STOP/disable assertion begins.
+            rig.native_move(self.axis, reposition_target, velocity=.1)
+            self.assertAlmostEqual(self.physical(), desired_physical, delta=.03)
+            command(f'Cfg.SetAxisEnableMotionFunctions({axis_id},0,0,1)')
+            self.start_home(1, 'native')
+
+            if interface == 'native' and action == 'stop':
+                rig.put(self.axis, '-StpCmd', 1)
+            elif interface == 'native':
+                rig.put(self.axis, '-EnaCmd', 0)
+            elif action == 'stop':
+                rig.put(self.axis, '.STOP', 1)
+            else:
+                rig.put(self.axis, '.CNEN', 0)
+
+            rig.wait(lambda: rig.get(self.axis, '-Busy') == 0
+                     and rig.get(self.axis, '-SeqState') == 0
+                     and rig._drive_stationary(self.axis),
+                     f'{interface} {action} terminates homing while moves are blocked', 8)
+            rig.check_native_error(self.axis)
+            self.assertEqual(rig.get(self.axis, '-Homed'), 0,
+                             f'{interface} {action} must abort rather than complete homing')
+            if action == 'disable':
+                rig.wait_drive_disabled(self.axis)
+            else:
+                self.assertEqual(rig.get(self.axis, '-EnaAct'), 1,
+                                 f'{interface} STOP should leave the drive enabled')
+            rig.trace.append({'action': 'blocked-motion homing interrupted',
+                              'interface': interface, 'interrupt': action,
+                              'snapshot': rig.snapshot()})
+
+        for interface in ('native', 'motor'):
+            for action in ('stop', 'disable'):
+                with self.subTest(interface=interface, action=action):
+                    interrupt_blocked_home(interface, action)
 
     def test_motor_sequence_01(self):
         self.success(1, "motor")
