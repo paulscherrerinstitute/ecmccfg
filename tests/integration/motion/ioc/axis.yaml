@@ -1,0 +1,61 @@
+# EL7062 incremental CSP, using the same position scale for drive and encoder.
+axis:
+  id: ${AX_ID}
+  mode: CSP
+  autoEnable:
+    enableTimeout: 3
+    disableTimeout: 60
+epics:
+  name: ${AX_NAME}
+  unit: mm
+  precision: 5
+  motorRecord:
+    enable: true
+    fieldInit: 'RTRY=0,FOFF=Frozen'
+drive:
+  type: 1
+  numerator: 1
+  denominator: 1048576
+  control: ec0.s${SID}.driveControl01
+  status: ec0.s${SID}.driveStatus01
+  setpoint: ec0.s${SID}.positionSetpoint01
+encoder:
+  numerator: 1
+  denominator: 1048576
+  type: 0
+  bits: 32
+  position: ec0.s${SID}.positionActual01
+  useAsCSPDrvEnc: true
+  homing:
+    type: 15
+    position: 0
+controller:
+  Kp: 0
+  Ki: 0
+  Kd: 0
+trajectory:
+  axis:
+    velocity: 0.15
+    acceleration: 0.5
+    deceleration: 0.5
+input:
+  limit:
+    forward: ec0.s-1.ONE.0
+    backward: ec0.s-1.ONE.0
+  home: ec0.s-1.ZERO.0
+  interlock: ec0.s-1.ONE.0
+softlimits:
+  enable: true
+  forwardEnable: true
+  backwardEnable: true
+  forward: 0.7
+  backward: -0.7
+monitoring:
+  target:
+    enable: true
+    tolerance: 0.003
+    time: 50
+  lag:
+    enable: true
+    tolerance: 0.03
+    time: 100

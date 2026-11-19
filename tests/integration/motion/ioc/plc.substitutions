@@ -1,0 +1,28 @@
+file "plc-input.template" {
+  pattern { NAME, VAR }
+          { Request, request }
+          { Command, command }
+          { Target, target }
+}
+file "plc-output.template" {
+  pattern { NAME, VAR }
+          { Ack, plc0.static.ack }
+          { Result, plc0.static.result }
+          { Commands, plc0.static.commands }
+          { Scans, plc0.static.scans }
+          { FirstScans, plc0.static.firstScans }
+          { Busy, plc0.static.busy }
+          { Homed, plc0.static.homed }
+          { Actual, plc0.static.actual }
+          { Enabled, plc0.static.enabled }
+          { AtTarget, plc0.static.atTarget }
+          { AxisError, plc0.static.axisError }
+          { LastTarget, global.lastTarget }
+          { EcValue, plc0.static.ecValue }
+          { EcError, plc0.static.ecError }
+          { DsError, plc0.static.dsError }
+          { DsAverage, plc0.static.dsAverage }
+          { EncReady, plc0.static.encReady }
+          { EncHomed, plc0.static.encHomed }
+          { HwReady, plc0.static.hwReady }
+}

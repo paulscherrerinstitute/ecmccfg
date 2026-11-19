@@ -1,0 +1,4 @@
+record(ao, "$(P)SEQ-$(NAME)") {
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT),0,1)TYPE=asynFloat64/plcs.plc0.static.$(VAR)=")
+}

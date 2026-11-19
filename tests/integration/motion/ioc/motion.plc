@@ -1,0 +1,114 @@
+# Request/acknowledgement interface for manually driven acceptance cases.
+# Capture each request once. Keep function return status separate from axis error.
+VAR
+  axis        : ax2;
+  request     : static.request;
+  ack         : static.ack;
+  command     : static.command;
+  target      : static.target;
+  result      : static.result;
+  commands    : static.commands;
+  scans       : static.scans;
+  firstScans  : static.firstScans;
+  busy        : static.busy;
+  homed       : static.homed;
+  actual      : static.actual;
+  enabled     : static.enabled;
+  atTarget    : static.atTarget;
+  axisError   : static.axisError;
+  inputBit    : ec0.s3.binaryInput01;
+  outputBit   : ec0.s4.binaryOutput01;
+  ecValue     : static.ecValue;
+  ecError     : static.ecError;
+  dsError     : static.dsError;
+  dsAverage   : static.dsAverage;
+  encReady    : static.encReady;
+  encHomed    : static.encHomed;
+  hwReady     : static.hwReady;
+  lastTarget  : global.lastTarget;
+END_VAR
+
+if (${SELF}.firstscan) {
+  firstScans := firstScans + 1;
+};
+scans := scans + 1;
+var rc := 0;
+if (request != ack) {
+  if (command == 1) { rc := mc_power(2, 1); };
+  if (command == 2) { rc := mc_power(2, 0); };
+  if (command == 3) {
+    mc_move_abs(2, 0, target, 0.15, 0.5, 0.5);
+    if (abs(target) <= 0.6) {
+      rc := mc_move_abs(2, 1, target, 0.15, 0.5, 0.5);
+    } else { rc := -2; };
+  };
+  if (command == 4) {
+    mc_move_rel(2, 0, target, 0.15, 0.5, 0.5);
+    if (abs(mc_get_act_pos(2, 1) + target) <= 0.6) {
+      rc := mc_move_rel(2, 1, target, 0.15, 0.5, 0.5);
+    } else { rc := -2; };
+  };
+  if (command == 5) {
+    mc_move_vel(2, 0, target, 0.5, 0.5);
+    if (abs(target) <= 0.15) {
+      rc := mc_move_vel(2, 1, target, 0.5, 0.5);
+    } else { rc := -2; };
+  };
+  if (command == 6) { rc := mc_halt(2, 0); };
+  if (command == 7) { rc := mc_reset(2); };
+  if (command == 8) {
+    mc_home_pos(2, 0, 15, 0.1, 0.1, 0);
+    rc := mc_home_pos(2, 1, 15, 0.1, 0.1, 0);
+  };
+  if (command == 9) {
+    ec_err_rst();
+    var word := ec_set_bit(0, 3);
+    word := ec_wrt_bit(word, 1, 0);
+    word := ec_flp_bit(word, 1);
+    word := ec_clr_bit(word, 0);
+    word := ec_wrt_bits(word, 5, 4, 6);
+    ecValue := word;
+    outputBit := ec_chk_bit(word, 3) and ec_chk_bits(word, 4, 6) == 5 and inputBit;
+    ec_set_bit(word, 64);
+    ecError := ec_get_err();
+    ec_err_rst();
+    rc := ec_get_err();
+  };
+  if (command == 10) {
+    ds_err_rst();
+    rc := ds_clear_data(0) + ds_clear_data(1);
+    if (ds_is_full(0) or ds_get_buff_id(0) != 0) { rc := -14; };
+    rc := rc + ds_append_data(0, target);
+    rc := rc + ds_append_data(0, target + 1);
+    rc := rc + ds_append_data(0, target + 2);
+    rc := rc + ds_append_data(0, target + 3);
+    if (ds_get_size(0) != 4 or not(ds_is_full(0))) { rc := -10; };
+    rc := rc + ds_set_buff_id(0, 2);
+    if (ds_get_buff_id(0) != 2) { rc := -11; };
+    rc := rc + ds_set_data(0, 2, target + 6);
+    if (ds_get_data(0, 2) != target + 6) { rc := -12; };
+    dsAverage := ds_get_avg(0);
+    if (ds_get_min(0) != target or ds_get_max(0) != target + 6) { rc := -13; };
+    rc := rc + ds_append_to_ds(0, 1, 2, 1);
+    ds_append_to_ds(0, -1, 1, 1);
+    dsError := ds_get_err();
+    ds_err_rst();
+    rc := rc + ds_get_err() + ds_push_asyn(0) + ds_push_asyn(1);
+  };
+  # 85000 = ERROR_MON_MAX_POSITION_LAG_EXCEEDED (0x14c08).
+  if (command == 11) { rc := mc_set_axis_error(2, 85000); };
+  if (command < 1 or command > 11) { rc := -1; };
+  result := rc;
+  lastTarget := target;
+  commands := commands + 1;
+  ack := request;
+};
+busy := mc_get_busy(2);
+homed := mc_get_homed(2);
+actual := mc_get_act_pos(2, 1);
+axisError := mc_get_axis_err(2);
+enabled := axis.drv.enabled;
+atTarget := axis.mon.attarget;
+encReady := mc_get_enc_ready(2, 1);
+encHomed := mc_get_enc_homed(2, 1);
+hwReady := mc_get_hw_ready(2);
