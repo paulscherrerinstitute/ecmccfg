@@ -1,7 +1,7 @@
 #- N6 0x60FE:01 is a full 32-bit word. Physical outputs start at bit 16.
 record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Arr}"){
   info(asyn:READBACK,"1")
-  field(DESC, "${HWTYPE}: 0x60FE:01 digital outputs")
+  field(DESC, "${HWTYPE}: Digital outputs")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
   field(NOBT, "32")
@@ -10,7 +10,7 @@ record(mbboDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Arr}"){
 }
 
 record(mbbiDirect,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Arr}-RB"){
-  field(DESC, "${HWTYPE}: 0x60FE:01 outputs readback")
+  field(DESC, "${HWTYPE}: Digital outputs RB")
   field(PINI, "${PINI=1}")
   field(DTYP, "asynUInt32Digital")
   field(SCAN, "${SCAN=I/O Intr}")

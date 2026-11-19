@@ -6,6 +6,7 @@
 #-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EL5112_ABC_DC32")
+epicsEnvSet("ECMC_SUBST_TYPE"            "EL5112_ABC_DC64")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x13f83052")
 

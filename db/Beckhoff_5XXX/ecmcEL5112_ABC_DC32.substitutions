@@ -6,7 +6,7 @@ file "ecmcEL5131-chX.template"
 }
 
 # timestamp
-file "ecmc_timestamp_64-chX.template"{
+file "ecmc_timestamp_32-chX.template"{
   pattern {CH_ID, KEY,      suffix,        sourceName          }
           {"",    "Enc01",  "-Time",       "timestamp01"       }
           {"",    "Enc01",  "-TimeIdx",    "timestampIndex01"  }

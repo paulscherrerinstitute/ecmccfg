@@ -1,0 +1,31 @@
+record(longin,"${ECMC_P}Dev-Status-RB"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "External sync status word")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).status01?")
+  field(SCAN, "$(SCAN=I/O Intr)")
+}
+
+record(int64in,"${ECMC_P}Dev-TimeDc-RB"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "Internal DC timestamp")
+  field(DTYP, "asynInt64")
+  field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ec$(MASTER_ID).s$(SLAVE_POS).timeDc01?")
+  field(SCAN, "$(SCAN=I/O Intr)")
+}
+
+record(int64in,"${ECMC_P}Dev-TimePtp-RB"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "External PTP timestamp")
+  field(DTYP, "asynInt64")
+  field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt64/ec$(MASTER_ID).s$(SLAVE_POS).timePtp01?")
+  field(SCAN, "$(SCAN=I/O Intr)")
+}
+
+record(ai,"${ECMC_P}Dev-DcMasterControl-RB"){
+  field(PINI, "$(PINI=YES)")
+  field(DESC, "DC master clock control value")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynFloat64/ec$(MASTER_ID).s$(SLAVE_POS).controlValueDcMaster01?")
+  field(SCAN, "$(SCAN=I/O Intr)")
+}

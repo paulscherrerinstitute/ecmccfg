@@ -54,6 +54,11 @@
 #-d   scalar SDO command and integer/float PV templates; DT is then required.
 #-d */
 
+# Simulation has no asynchronous SDO transport or asyn SDO records.
+ecmcIf("${ECMC_SIM=0}==1")
+${IF_TRUE}exit
+ecmcEndIf()
+
 # Scalar objects always serialize requests and support startup restore. Val
 # still only stages data unless WRITE_ON_VAL is explicitly enabled.
 ecmcEpicsEnvSetCalcTernary(ECMC_SDO_BAD_OPTIONS,"('${WRITE_ON_VAL=0}'!='0' and '${WRITE_ON_VAL=0}'!='1') or ('${PREOP_ONLY=0}'!='0' and '${PREOP_ONLY=0}'!='1')","","#-")

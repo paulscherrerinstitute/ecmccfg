@@ -8,6 +8,7 @@
 #-d */
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "EP7211-0034_ALL")
+epicsEnvSet("ECMC_SUBST_TYPE"            "EP7211-0034_CSP_ALL")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b4052")
 epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")

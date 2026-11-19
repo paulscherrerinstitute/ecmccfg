@@ -44,9 +44,9 @@ ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${EC
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7${ECMC_KL_SLAVE_NUM}0,0x0D,B1,binaryOutput05_R)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7${ECMC_KL_SLAVE_NUM}0,0x0E,B1,binaryOutput05_G)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7${ECMC_KL_SLAVE_NUM}0,0x0F,B1,binaryOutput05_B)"
-ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7${ECMC_KL_SLAVE_NUM}0,0x10,B1,notConnected01,0)
+ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},1,2,0x1600,0x7${ECMC_KL_SLAVE_NUM}0,0x10,B1,notConnected01,0)"
 ##################### KL1408 (inputs for first row of buttons), three last inputs not connect10
-epicsEnvSet("ECMC_KL_SLAVE_NUM"             "0110
+epicsEnvSet("ECMC_KL_SLAVE_NUM"             "01")
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6${ECMC_KL_SLAVE_NUM}0,0x1,B1,binaryInput01)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6${ECMC_KL_SLAVE_NUM}0,0x2,B1,binaryInput02)"
 ecmcConfigOrDie "Cfg.EcAddEntryDT(${ECMC_EC_SLAVE_NUM},${ECMC_EC_VENDOR_ID},${ECMC_EC_PRODUCT_ID},2,3,0x1a01,0x6${ECMC_KL_SLAVE_NUM}0,0x3,B1,binaryInput03)"

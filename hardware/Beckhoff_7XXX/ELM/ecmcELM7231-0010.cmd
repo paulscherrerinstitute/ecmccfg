@@ -22,6 +22,7 @@
 #- ###########################################################
 
 epicsEnvSet("ECMC_EC_HWTYPE"             "ELM7231-0010_CSV")
+epicsEnvSet("ECMC_SUBST_TYPE"            "ELM7231-0010")
 epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x502275f9")
 epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7231_OCT")

@@ -12,6 +12,9 @@ epicsEnvSet("ECMC_EC_VENDOR_ID"          "0x2")
 epicsEnvSet("ECMC_EC_PRODUCT_ID"         "0x1c2b4052")
 epicsEnvSet("ECMC_EC_COMP_TYPE"          "EL7211_OCT")
 
+#- Verify slave before the standard configuration writes SDOs.
+${SCRIPTEXEC} ${ecmccfg_DIR}slaveVerify.cmd
+
 #- Load standard cfg
 ecmcFileExist(${ecmccfg_DIR}ecmcEX72XX_CST_STD_ch01.cmd,1)
 ${SCRIPTEXEC} ${ecmccfg_DIR}ecmcEX72XX_CST_STD_ch01.cmd
