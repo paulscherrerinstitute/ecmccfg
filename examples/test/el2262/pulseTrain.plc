@@ -30,4 +30,4 @@ if (static.counter >= 65536)
 {
   static.counter := 0;
 };
-ec0.s27.cycleCounter01 := static.counter;
+ec0.s23.cycleCounter01 := static.counter;
