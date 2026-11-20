@@ -1,0 +1,43 @@
+# Each request starts with one scan of writes. Read back on the next scan,
+# after the PLC runtime has committed its direct data-interface writes.
+VAR
+  request : global.exchange;
+  ack     : global.exchangeAck;
+  action  : global.peerAction;
+  value   : global.peerValue;
+  localId : static.privateVal;
+END_VAR
+
+if (${SELF}.firstscan) { static.firstScans := static.firstScans + 1; };
+static.scans := static.scans + 1;
+static.scanTime := ${SELF}.scantime;
+var scratch := 0;
+scratch := scratch + 1;
+static.localValue := scratch;
+
+if (request != ack) {
+  if (static.pending == 0) {
+    if (action == 1) { localId := value + 100; };
+    if (action == 2) { ds2.clear := 1; };
+    if (action == 3) { ds2.append := localId; };
+    if (action == 4) { ds2.index := 0; };
+    if (action == 5) {
+      static.m2mValue := m2m_read(119);
+      static.m2mStatus := m2m_stat();
+      m2m_read(-1);
+      static.m2mError := m2m_get_err();
+      m2m_err_rst();
+      static.m2mErrorAfterReset := m2m_get_err();
+    };
+    if (action == 6) { ds2.data := localId + 1; };
+    static.pending := 1;
+  } else {
+    static.storageSize := ds2.size;
+    static.storageIndex := ds2.index;
+    static.storageFull := ds2.full;
+    static.storageData := ds2.data;
+    static.storageError := ds2.error;
+    ack := request;
+    static.pending := 0;
+  };
+};

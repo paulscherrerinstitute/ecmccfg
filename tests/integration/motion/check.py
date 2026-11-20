@@ -192,9 +192,10 @@ def check(client, names):
              'both axes in the PLC motion group')
 
         def start():
-            put('Seq0-Cmd-Arm', 1)
+            wait(lambda: get('SEQ-SeqValid') == 1, 'compiled sequence is valid in PLC')
+            command(21)
             wait(lambda: get('Seq0-State') == state_armed and
-                 get('SEQ-SeqState') == state_armed, 'sequence armed')
+                 get('SEQ-SeqState') == state_armed and get('SEQ-SeqArmed') == 1, 'sequence armed by PLC')
             put('Seq0-Cmd-Start', 1)
             wait(lambda: get('Seq0-Running') == 1 and get('SEQ-SeqRunning') == 1 and
                  get('SEQ-GroupBusy') == 1 and all(get(a + '-Busy') == 1 for a in axes),
@@ -244,9 +245,96 @@ def check(client, names):
                 put(axis + '.STOP', 1)
                 put(axis + '-EnaCmd', 0)
 
+    def peer_request(code, target):
+        previous = get('SEQ-Exchange')
+        require(get('SEQ-ExchangeAck') == previous, 'peer PLC has an outstanding request')
+        command(code, target)
+        try:
+            wait(lambda: get('SEQ-Exchange') == previous + 1, 'new peer request published')
+        except AssertionError as error:
+            actual = get('SEQ-Exchange')
+            ack = get('SEQ-ExchangeAck')
+            raise AssertionError(f'PLC command {code} completed, but shared request was '
+                                 f'{actual:g} (expected {previous + 1:g}, peer ack {ack:g})') from error
+        return previous + 1
+
+    def peer_ack(request):
+        wait(lambda: get('SEQ-ExchangeAck') == request, 'peer PLC acknowledges shared request')
+
+    def variables():
+        require_idle()
+        wait(lambda: get('SEQ-Peer-FirstScans') == 1 and get('SEQ-Peer-Scans') > 0,
+             'peer PLC starts and observes firstscan')
+        require(math.isclose(get('SEQ-Peer-ScanTime'), .020, abs_tol=1e-6),
+                'peer PLC scantime differs from configured 20 ms')
+        original_velocity = get('PLC-TgtVelCmd')
+        try:
+            command(16, .08)
+            wait(lambda: abs(get('SEQ-AxisTargetVel') - .08) < 1e-6 and
+                 abs(get('PLC-TgtVelCmd') - .08) < 1e-6, 'direct ax2 target velocity write')
+            require(get('SEQ-AxisId') == 2 and
+                    abs(get('SEQ-AxisPos') - get('PLC-PosAct')) < .006 and idle('PLC'),
+                    'direct ax2 reads and idle state')
+
+            put('PLC01-EnaCmd', 0)
+            request = peer_request(15, 23)
+            scans = get('SEQ-Peer-Scans')
+            time.sleep(.2)
+            require(get('SEQ-Peer-Scans') == scans and get('SEQ-ExchangeAck') != request,
+                    'disabled peer still executed')
+            put('PLC01-EnaCmd', 1)
+            peer_ack(request)
+            wait(lambda: get('SEQ-PrivateVal') == 23 and get('SEQ-Peer-PrivateVal') == 123 and
+                 get('SEQ-Peer-Scans') > scans, 'global exchange and independent statics')
+            require(get('SEQ-Peer-FirstScans') == 1 and get('SEQ-Peer-LocalValue') == 1,
+                    'peer firstscan or local initialization changed on resume')
+
+            for action, index, value in ((2, 0, 0), (3, 1, 0), (4, 0, 123), (6, 0, 124), (2, 0, 0)):
+                peer_ack(peer_request(17, action))
+                wait(lambda: get('SEQ-Peer-StorageSize') == 2 and
+                     get('SEQ-Peer-StorageIndex') == index and get('SEQ-Peer-StorageData') == value and
+                     get('SEQ-Peer-StorageFull') == 0 and get('SEQ-Peer-StorageError') == 0,
+                     f'direct ds2 state after action {action}')
+        finally:
+            put('PLC01-EnaCmd', 1)
+            command(16, original_velocity)
+
+    def m2m():
+        sample = get('SEQ-Exchange') + 1000
+        request = peer_request(18, sample)
+        try:
+            peer_ack(request)
+            wait(lambda: get('SEQ-Peer-M2mValue') == sample and get('SEQ-Peer-M2mStatus') == 1 and
+                 get('SEQ-Peer-M2mError') == 0x20059 and get('SEQ-Peer-M2mErrorAfterReset') == 0,
+                 'same-IOC M2M data and error reset')
+        finally:
+            command(19)
+        original = get('SEQ-M2mPrevious')
+        peer_ack(peer_request(17, 5))
+        wait(lambda: get('SEQ-Peer-M2mValue') == original, 'M2M slot restored')
+
+    def motor_record_plc():
+        require_idle()
+        try:
+            command(1)
+            wait(lambda: get('PLC-EnaAct') == 1, 'PLC axis enabled')
+            origin = get('PLC-PosAct')
+            target = -.45 if origin >= 0 else .45
+            command(3, target)
+            wait(lambda: motor_started('PLC') and abs(get('PLC-PosAct') - origin) > .02,
+                 'motion before PLC motor-record STOP')
+            command(20)
+            wait(lambda: idle('PLC'), 'asynchronous PLC motor-record STOP completes')
+            require(abs(get('PLC-PosAct') - target) > .05 and get('PLC-ErrId') == 0,
+                    'motor-record STOP did not halt the axis before its target')
+        finally:
+            put('PLC.STOP', 1)
+            put('PLC-EnaCmd', 0)
+
     require(get('MCU-Cfg-Sim-Mode') == 1, 'Refusing to issue motion outside simulation')
     cases = {'csp': motor, 'plc': plc, 'ethercat': ethercat, 'storage': storage,
-             'group-sequence': group_sequence}
+             'group-sequence': group_sequence, 'variables': variables, 'm2m': m2m,
+             'motor-record-plc': motor_record_plc}
     for name in names:
         cases[name]()
         print(f'PASS {name}', flush=True)
@@ -254,7 +342,7 @@ def check(client, names):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--case', choices=('csp', 'plc', 'ethercat', 'storage', 'group-sequence'), action='append')
+    parser.add_argument('--case', choices=('csp', 'plc', 'ethercat', 'storage', 'group-sequence', 'variables', 'm2m', 'motor-record-plc'), action='append')
     args = parser.parse_args()
     os.environ.setdefault('EPICS_CA_AUTO_ADDR_LIST', 'NO')
     os.environ.setdefault('EPICS_CA_ADDR_LIST', '127.0.0.1')
@@ -282,7 +370,7 @@ def main():
             raise RuntimeError(f'Could not write SIMMOTION:{suffix}={value!r} '
                                f'(CA result={status!r}, wait={wait})')
 
-    check((get, put), args.case or ('csp', 'plc', 'ethercat', 'storage', 'group-sequence'))
+    check((get, put), args.case or ('csp', 'plc', 'ethercat', 'storage', 'group-sequence', 'variables', 'm2m', 'motor-record-plc'))
 
 
 if __name__ == '__main__':

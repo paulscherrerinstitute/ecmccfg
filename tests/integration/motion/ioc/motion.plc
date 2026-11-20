@@ -33,6 +33,12 @@ VAR
   seqRunning  : static.seqRunning;
   seqState    : static.seqState;
   lastTarget  : global.lastTarget;
+  exchange    : global.exchange;
+  exchangeAck : global.exchangeAck;
+  peerAction  : global.peerAction;
+  peerValue   : global.peerValue;
+  privateVal  : static.privateVal;
+  m2mPrevious : static.m2mPrevious;
 END_VAR
 
 if (${SELF}.firstscan) {
@@ -107,7 +113,37 @@ if (request != ack) {
   if (command == 12) { rc := mc_grp_set_enable(0, target); };
   if (command == 13) { rc := mc_grp_halt(0); };
   if (command == 14) { rc := mc_grp_reset_error(0); };
-  if (command < 1 or command > 14) { rc := -1; };
+  if (command == 15) {
+    privateVal := target;
+    peerValue := target;
+    peerAction := 1;
+    exchange := exchange + 1;
+  };
+  if (command == 16) { axis.traj.targetvel := target; };
+  if (command == 17) {
+    peerAction := target;
+    exchange := exchange + 1;
+  };
+  if (command == 18) {
+    m2m_err_rst();
+    if (m2m_stat() != 1) {
+      rc := m2m_get_err();
+    } else {
+      m2mPrevious := m2m_read(119);
+      rc := m2m_write(119, target);
+      if (rc == 0) {
+        peerAction := 5;
+        exchange := exchange + 1;
+      };
+    };
+  };
+  if (command == 19) { rc := m2m_write(119, m2mPrevious); };
+  if (command == 20) { rc := mc_mr_set_stop(2, 1); };
+  if (command == 21) {
+    seq_arm(0, 0);
+    rc := seq_arm(0, 1);
+  };
+  if (command < 1 or command > 21) { rc := -1; };
   result := rc;
   lastTarget := target;
   commands := commands + 1;
@@ -129,3 +165,8 @@ groupError := mc_grp_get_any_error_id(0);
 groupEnable := mc_grp_get_enabled(0);
 seqRunning := seq_get_running(0);
 seqState := seq_get_state(0);
+static.axisId := axis.id;
+static.axisPos := axis.enc.actpos;
+static.axisTargetVel := axis.traj.targetvel;
+static.seqValid := seq_get_valid(0);
+static.seqArmed := seq_get_armed(0);

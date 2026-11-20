@@ -13,6 +13,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd "SLAVE_ID=3,HW_DESC=EL1008"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd "SLAVE_ID=4,HW_DESC=EL2008"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addDataStorage.cmd "DS_ID=0,DS_SIZE=4,DS_TYPE=0,SAMPLE_RATE_MS=-1"
 ${SCRIPTEXEC} ${ecmccfg_DIR}addDataStorage.cmd "DS_ID=1,DS_SIZE=4,DS_TYPE=0,SAMPLE_RATE_MS=-1"
+${SCRIPTEXEC} ${ecmccfg_DIR}addDataStorage.cmd "DS_ID=2,DS_SIZE=2,DS_TYPE=0,SAMPLE_RATE_MS=-1"
 # First axis group in this dedicated IOC. Sequence moves start without waiting,
 # then explicit wait steps check both axes.
 ecmcConfigOrDie "Cfg.AddAxisGroup(simMotion)"
@@ -25,4 +26,5 @@ ecmcConfigOrDie "Cfg.SeqWaitInPos(0,2,1,8000)"
 ecmcConfigOrDie "Cfg.SeqWaitInPos(0,3,2,8000)"
 ecmcConfigOrDie "Cfg.CompileMotionSeq(0)"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "FILE=./motion.plc,PLC_ID=0,SAMPLE_RATE_MS=10,START_AFTER_EPICS=1"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "FILE=./peer.plc,PLC_ID=1,SAMPLE_RATE_MS=20,START_AFTER_EPICS=1"
 dbLoadTemplate("./plc.substitutions","P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT}")

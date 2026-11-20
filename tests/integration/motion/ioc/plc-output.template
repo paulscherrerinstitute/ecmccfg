@@ -1,5 +1,5 @@
 record(ai, "$(P)SEQ-$(NAME)") {
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)T_SMP_MS=10/TYPE=asynFloat64/plcs.$(VAR)?")
+  field(INP, "@asyn($(PORT),0,1)T_SMP_MS=$(SAMPLE_MS=10)/TYPE=asynFloat64/plcs.$(VAR)?")
   field(SCAN, "I/O Intr")
 }

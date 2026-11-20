@@ -55,3 +55,20 @@ async SDO transfers.
 
 The simulation uses a position-following plant model. The tests cover ECMC
 command and feedback paths rather than physical servo tuning.
+
+Additional selectable cases:
+
+- `variables` pauses and resumes PLC 1, checks scan time and first-scan
+  behavior, and verifies a shared global request/acknowledgement and
+  same-name static values isolated in the two PLCs. It also checks an
+  initialized local variable, direct `ax2` position/ID reads and target
+  velocity writes, and direct `ds2` clear/append/index/data access.
+- `m2m` writes slot 119 in PLC 0 and reads it in PLC 1 inside the same IOC.
+  It checks shared-memory status and the invalid-index error/reset path,
+  then restores the slot. This case assumes exclusive use of that slot
+  during the check and does not cover communication between IOCs.
+- `motor-record-plc` issues PLC motor-record STOP during a move and
+  waits for actual motor completion. The PLC return alone is insufficient.
+
+The group sequence case also arms the sequence through `seq_arm` and
+checks PLC valid/armed readbacks before starting it through EPICS.

@@ -32,4 +32,31 @@ file "plc-output.template" {
           { GroupEnable, plc0.static.groupEnable }
           { SeqRunning, plc0.static.seqRunning }
           { SeqState, plc0.static.seqState }
+          { PrivateVal, plc0.static.privateVal }
+          { AxisId, plc0.static.axisId }
+          { AxisPos, plc0.static.axisPos }
+          { AxisTargetVel, plc0.static.axisTargetVel }
+          { Exchange, global.exchange }
+          { ExchangeAck, global.exchangeAck }
+          { M2mPrevious, plc0.static.m2mPrevious }
+          { SeqValid, plc0.static.seqValid }
+          { SeqArmed, plc0.static.seqArmed }
+}
+
+file "plc-output.template" {
+  pattern { NAME, VAR, SAMPLE_MS }
+          { Peer-PrivateVal, plc1.static.privateVal, 20 }
+          { Peer-FirstScans, plc1.static.firstScans, 20 }
+          { Peer-Scans, plc1.static.scans, 20 }
+          { Peer-ScanTime, plc1.static.scanTime, 20 }
+          { Peer-LocalValue, plc1.static.localValue, 20 }
+          { Peer-StorageSize, plc1.static.storageSize, 20 }
+          { Peer-StorageIndex, plc1.static.storageIndex, 20 }
+          { Peer-StorageFull, plc1.static.storageFull, 20 }
+          { Peer-StorageData, plc1.static.storageData, 20 }
+          { Peer-StorageError, plc1.static.storageError, 20 }
+          { Peer-M2mValue, plc1.static.m2mValue, 20 }
+          { Peer-M2mStatus, plc1.static.m2mStatus, 20 }
+          { Peer-M2mError, plc1.static.m2mError, 20 }
+          { Peer-M2mErrorAfterReset, plc1.static.m2mErrorAfterReset, 20 }
 }
