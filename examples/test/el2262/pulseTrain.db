@@ -5,5 +5,5 @@ record(ao, "$(IOC):EL2262-PulseFreq") {
   field(EGU, "Hz")
   field(PREC, "3")
   field(DRVL, "0")
-  field(DRVH, "4000")
+  field(DRVH, "$(MAX_FREQ=4000)")
 }

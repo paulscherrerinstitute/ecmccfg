@@ -1,12 +1,12 @@
-record(longout,"${ECMC_P}${KEY=BO}${CH_ID=01}-CycCnt"){
-  field(DESC, "$(HWTYPE): BO$(CH_ID): Cycle Counter")
+record(longout,"${ECMC_P}${KEY=BO}01-CycCnt"){
+  field(DESC, "$(HWTYPE): BO01: Cycle Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter01=")
 }
 
-record(longout,"${ECMC_P}${KEY=BO}${CH_ID=02}-CycCnt"){
-  field(DESC, "$(HWTYPE): BO$(CH_ID): Cycle Counter")
+record(longout,"${ECMC_P}${KEY=BO}02-CycCnt"){
+  field(DESC, "$(HWTYPE): BO02: Cycle Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
   field(OUT,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter02=")

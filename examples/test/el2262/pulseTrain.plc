@@ -1,30 +1,40 @@
-# CH1 has one packed byte per bus cycle, giving an 8 kHz output sample clock.
+# CH1 has eight output samples per packed byte and a 1 kHz bus clock.
 # Advance phase once per output bit and preserve it across EtherCAT cycles.
 var frequency := static.frequencyHz;
 var packed := 0;
 var mask := 1;
 var sample := 0;
+var byteIndex := 0;
+var sampleRate := 8000 * ${PULSE_BYTES=1};
+var phaseStep := frequency / sampleRate;
 
-if (frequency > 0 and frequency <= 4000)
+for (byteIndex := 0; byteIndex < ${PULSE_BYTES=1}; byteIndex += 1)
 {
-  for (sample := 0; sample < 8; sample += 1)
+  packed := 0;
+  mask := 1;
+  if (frequency > 0 and frequency <= sampleRate / 2)
   {
-    if (static.phase < 0.5)
+    for (sample := 0; sample < 8; sample += 1)
     {
-      packed += mask;
+      if (static.phase < 0.5)
+      {
+        packed += mask;
+      };
+      mask *= 2;
+      static.phase += phaseStep;
+      static.phase -= floor(static.phase);
     };
-    mask *= 2;
-    static.phase += frequency / 8000;
-    static.phase -= floor(static.phase);
+  }
+  else
+  {
+    static.phase := 0;
   };
-}
-else
-{
-  static.phase := 0;
+
+  # CH1 is memmap 0 in both standalone IOCs.
+  ec_set_mm_data(0, byteIndex, packed);
 };
 
-# CH1 is memmap 0 in this standalone IOC. Update its 16-bit cycle counter.
-ec_set_mm_data(0, 0, packed);
+# Update the 16-bit cycle counter once per EtherCAT cycle.
 static.counter += 1;
 if (static.counter >= 65536)
 {
