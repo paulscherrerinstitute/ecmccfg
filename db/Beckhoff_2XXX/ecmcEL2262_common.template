@@ -2,14 +2,14 @@ record(longout,"${ECMC_P}${KEY=BO}${CH_ID=01}-CycCnt"){
   field(DESC, "$(HWTYPE): BO$(CH_ID): Cycle Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter$(CH_ID)=")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter01=")
 }
 
 record(longout,"${ECMC_P}${KEY=BO}${CH_ID=02}-CycCnt"){
   field(DESC, "$(HWTYPE): BO$(CH_ID): Cycle Counter")
   field(PINI, "$(PINI=1)")
   field(DTYP, "asynInt32")
-  field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter$(CH_ID)=")
+  field(OUT,  "@asynMask($(PORT),$(ADDR=0),0xFFFF,$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt32/ec$(MASTER_ID).s$(SLAVE_POS).cycleCounter02=")
 }
 
 record(ai,"${ECMC_P}Dev-NxtTime"){
