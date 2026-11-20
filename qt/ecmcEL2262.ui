@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>125</width><height>500</height></rect></property>
+  <property name="windowTitle"><string>EL2262</string></property>
+  <widget class="caInclude" name="slaveFrame">
+   <property name="geometry"><rect><x>0</x><y>0</y><width>128</width><height>500</height></rect></property>
+   <property name="macro"><string>IOC=$(IOC),MasterID=$(MasterID),SlaveID=$(SlaveID),HWType=$(HWType)</string></property>
+   <property name="filename" stdset="0"><string notr="true">ecmcE_slave_frame.ui</string></property>
+  </widget>
+  <widget class="caLabel" name="nextLabel">
+   <property name="geometry"><rect><x>5</x><y>38</y><width>115</width><height>18</height></rect></property>
+   <property name="text"><string>Next output time</string></property>
+  </widget>
+  <widget class="caLineEdit" name="nextTime">
+   <property name="geometry"><rect><x>5</x><y>57</y><width>115</width><height>22</height></rect></property>
+   <property name="channel" stdset="0"><string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-Dev-NxtTime</string></property>
+  </widget>
+  <widget class="QGroupBox" name="channel1">
+   <property name="geometry"><rect><x>5</x><y>88</y><width>115</width><height>105</height></rect></property>
+   <property name="title"><string>CH01</string></property>
+   <widget class="caWaveTable" name="array1">
+    <property name="geometry"><rect><x>8</x><y>22</y><width>99</width><height>42</height></rect></property>
+    <property name="channel" stdset="0"><string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BO01-Arr</string></property>
+    <row/>
+    <column/>
+    <item row="0" column="0"/>
+   </widget>
+   <widget class="caLineEdit" name="counter1">
+    <property name="geometry"><rect><x>8</x><y>73</y><width>99</width><height>22</height></rect></property>
+    <property name="channel" stdset="0"><string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BO01-CycCnt</string></property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="channel2">
+   <property name="geometry"><rect><x>5</x><y>202</y><width>115</width><height>105</height></rect></property>
+   <property name="title"><string>CH02</string></property>
+   <widget class="caWaveTable" name="array2">
+    <property name="geometry"><rect><x>8</x><y>22</y><width>99</width><height>42</height></rect></property>
+    <property name="channel" stdset="0"><string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BO02-Arr</string></property>
+    <row/>
+    <column/>
+    <item row="0" column="0"/>
+   </widget>
+   <widget class="caLineEdit" name="counter2">
+    <property name="geometry"><rect><x>8</x><y>73</y><width>99</width><height>22</height></rect></property>
+    <property name="channel" stdset="0"><string notr="true">$(IOC):m$(MasterID)s$(SlaveID)-BO02-CycCnt</string></property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget><class>caInclude</class><extends>QWidget</extends><header>caInclude.h</header><container>1</container></customwidget>
+  <customwidget><class>caLabel</class><extends>QLabel</extends><header>caLabel.h</header></customwidget>
+  <customwidget><class>caLineEdit</class><extends>QLineEdit</extends><header>caLineEdit.h</header></customwidget>
+  <customwidget><class>caWaveTable</class><extends>QTableWidget</extends><header>caWaveTable.h</header></customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

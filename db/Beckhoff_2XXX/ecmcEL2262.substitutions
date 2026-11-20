@@ -1,0 +1,12 @@
+file "ecmcEL2262_binaryOutputArray-chX.template"
+{
+  pattern {CH_ID}
+          {01   }
+          {02   }
+}
+
+file "ecmcEL2262_common.template"
+{
+  pattern {}
+          {}
+}

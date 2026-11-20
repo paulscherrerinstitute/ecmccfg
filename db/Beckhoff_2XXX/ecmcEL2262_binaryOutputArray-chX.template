@@ -1,0 +1,14 @@
+#-d /**
+#-d   \brief packed oversampling digital output array
+#-d   \details Each byte contains eight consecutive output samples.
+#-d   \file
+#-d */
+
+record(waveform,"${ECMC_P}${KEY=BO}${CH_ID}${suffix=-Arr}"){
+  field(DESC, "${HWTYPE}: BO$(CH_ID): Packed output [$(NELM)*8]")
+  field(PINI, "${PINI=1}")
+  field(DTYP, "asynInt8ArrayOut")
+  field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))T_SMP_MS=$(T_SMP_MS=1000)/TYPE=asynInt8ArrayOut/ec$(MASTER_ID).s$(SLAVE_POS).mm.binaryOutputArray$(CH_ID)=")
+  field(FTVL, "UCHAR")
+  field(NELM, "$(NELM=1)")
+}

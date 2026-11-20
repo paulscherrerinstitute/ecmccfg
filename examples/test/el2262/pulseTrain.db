@@ -1,0 +1,9 @@
+record(ao, "$(IOC):EL2262-PulseFreq") {
+  field(DESC, "EL2262 CH1 pulse frequency")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT),0,1)T_SMP_MS=100/TYPE=asynFloat64/plcs.plc0.static.frequencyHz=")
+  field(EGU, "Hz")
+  field(PREC, "3")
+  field(DRVL, "0")
+  field(DRVH, "4000")
+}
