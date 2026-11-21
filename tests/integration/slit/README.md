@@ -1125,3 +1125,19 @@ requested pair, actual user/dial/native values, OFF/DIR and `.MFLG`. The general
 simulator snapshot includes `.MFLG` too. Boundary checks now delay flag/limit
 callbacks to 1 Hz and reject a missing record flag separately from missing
 numeric propagation. This changes test observations only; motorECMC is untouched.
+
+
+### Immediate motor-record STOP
+
+`test_immediate_motor_stop_completes_and_recovers` sends a motor `.VAL`
+put-notify and immediately sends an ordinary `.STOP` put. It checks the
+completion callback, idle status without replay, and a subsequent move.
+To inspect the driver ordering, select one loop and enable the opt-in trace:
+
+```sh
+./run_slit_tests.py --loop closed --test test_immediate_motor_stop_completes_and_recovers --motor-status-trace-axis 6
+```
+
+The IOC log includes `move entry`, `stop entry`, and `poll entry`.
+A passing test checks completion and recovery. The trace is needed to
+establish whether that run sent STOP before the poller saw the move.

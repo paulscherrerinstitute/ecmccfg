@@ -53,6 +53,32 @@ class MotorTests(SlitCase):
     def test_motor_fault_completes_callback_and_recovers(self):
         self.interrupted_motor_move('fault')
 
+    def test_immediate_motor_stop_completes_and_recovers(self):
+        axis = self.axis
+        self.rig.put(axis, '-EnaCmd', 1)
+        self.rig.wait(lambda: self.rig.get(axis, '-EnaAct') == 1,
+                      'drive enabled before immediate STOP', 6)
+        self.rig.sync_motor_record(axis)
+        origin = self.rig.get(axis, '.RBV')
+        target = origin + (-.4 if origin > 0 else .4)
+        complete = self.rig.put(axis, '.VAL', target)
+        # Send STOP as an ordinary put, before waiting for any status update.
+        self.rig.put(axis, '.STOP', 1)
+
+        def finished():
+            self.rig.check_native_error(axis)
+            return complete.is_set() and motor_idle(self.rig, (axis,))
+
+        self.rig.wait(finished, 'immediate STOP completes motor record and callback', 8)
+        stopped = self.rig.plant.physical_position(axis)
+        self.assertGreater(abs(self.rig.get(axis, '.RBV') - target), .05,
+                           'STOP must prevent arrival at the original target')
+        self.rig.assert_stays(lambda: finished()
+                              and abs(self.rig.plant.physical_position(axis) - stopped) < .003,
+                              'immediate STOP stays done without replay', .3)
+        self.rig.move(axis, origin + (-.1 if origin > 0 else .1))
+        self.rig.move(axis, origin)
+
     def test_repeated_short_moves_complete_individually(self):
         axis = self.axis
         self.rig.put(axis, '-EnaCmd', 1)

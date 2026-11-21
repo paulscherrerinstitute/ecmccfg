@@ -371,3 +371,14 @@ positive/negative stored bits, retains latched U32 positions/timestamps until
 disarm/rearm, and does not emulate continuous capture or probe 2. The slit tests
 validate raw capture transport. Successful position-compare output needs a native
 SIM sample-clock provider and is not covered by the current fixture.
+
+### EL5021
+
+`el5021.EL5021` provides a reusable counter, preload, C-reset and C-latch
+model. Supply mechanical position to `step(position, control, preset)`; it
+returns the unsigned 32-bit counter, status and latch value. The position unit
+is degrees by default (`counts_per_degree=819200`); set the scale explicitly
+for other mechanics. C-reset is selected at construction, not from live SDOs.
+The scanner exposes EL5021 fields as manual encoder fields, consistent with
+other external encoders. Mechanical coupling belongs in the machine plant;
+the scanner does not infer which drive moves an encoder.

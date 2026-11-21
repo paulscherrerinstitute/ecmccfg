@@ -5,11 +5,11 @@ import manual
 
 
 def supported(hardware):
-    return bool(re.fullmatch(r'EL(?:5042|5101|5102)(?:[-_].*)?', hardware))
+    return bool(re.fullmatch(r'EL(?:5021|5042|5101|5102)(?:[-_].*)?', hardware))
 
 
 def channel_count(hardware):
-    return 1 if hardware.startswith('EL5101') else 2
+    return 1 if hardware.startswith(('EL5021', 'EL5101')) else 2
 
 
 class Terminal(manual.Fields):
