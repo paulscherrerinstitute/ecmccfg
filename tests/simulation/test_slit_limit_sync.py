@@ -20,6 +20,7 @@ class Rig:
         self.values = {axis: {'.LLM': -1., '.DLLM': -1., '-CfgDLLM-RB': -1.,
                               '.HLM': 1., '.DHLM': 1., '-CfgDHLM-RB': 1.,
                               '-CfgSyncSftLim': sync, '.MRES': .001, '-ErrId': 0,
+                              '.VELO': .4,
                               '-SftLimBwdEna-RB': 1, '-SftLimFwdEna-RB': 1,
                               '-CfgDLLM-En-RB': 1, '-CfgDHLM-En-RB': 1}
                        for axis in self.profile['physical']}
@@ -42,6 +43,8 @@ class Rig:
                     if motor and self.defect == 'no_motor_to_ecmc': continue
                     if not motor and field.startswith('.') and self.defect == 'no_ecmc_to_motor': continue
                     self.pending.append((axis, field, value))
+        elif suffix == '.VELO':
+            values[suffix] = value
         else:
             low = suffix in ('-SftLimBwdEna', '-CfgDLLM-En')
             assert suffix in ('-SftLimBwdEna', '-SftLimFwdEna', '-CfgDLLM-En', '-CfgDHLM-En')
@@ -56,7 +59,8 @@ class Rig:
                 self.pending.clear()
             if predicate(): return
         raise AssertionError(description)
-    def native_move(self, axis, target):
+    def native_move(self, axis, target, velocity=.4):
+        assert velocity == .2
         assert self.values[axis]['-CfgDLLM-RB'] <= target <= self.values[axis]['-CfgDHLM-RB']
     def move(self, axis, target):
         assert self.values[axis]['.LLM'] <= target <= self.values[axis]['.HLM']

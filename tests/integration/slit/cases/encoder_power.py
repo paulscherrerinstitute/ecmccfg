@@ -348,11 +348,15 @@ class EncoderPowerTests(EncoderPowerCase):
             self.rig.assert_stays(lambda: no_alarm() and self.state() == 1
                                   and self.rig.encoder_status(self.axis) == bits,
                                   'off-state hardware error/warning must not alarm ECMC', .3)
+            # Preparation settles within its motion tolerance, not necessarily
+            # at the exact nominal target. Detect motion from the position at
+            # wake-up rather than treating that harmless offset as motion.
+            before = self.rig.plant.physical_position(self.axis)
             self.start(.25)
             self.rig.wait(lambda: self.state() == 2, 'encoder warm-up starts', 3)
             self.rig.assert_stays(lambda: no_alarm() and self.state() == 2
                                   and (self.rig.encoder_status(self.axis) & 3) == bits
-                                  and abs(self.rig.plant.physical_position(self.axis)-.15) < .002,
+                                  and abs(self.rig.plant.physical_position(self.axis)-before) < .002,
                                   'diagnostics remain suppressed during warm-up; motion waits', .3)
         finally:
             self.rig.plant.inject(self.axis, encoder_error=False, encoder_warning=False)

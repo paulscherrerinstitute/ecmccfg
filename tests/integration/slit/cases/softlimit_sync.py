@@ -55,8 +55,11 @@ class SoftLimitSyncTests(SlitCase):
                 self.rig.put(axis, '.HLM', .55)
                 self.synchronized(axis, -.45, .55)
                 self.flags_match(axis, 1, 1)
-                self.rig.native_move(axis, .2)
-                self.rig.native_move(axis, 0)
+                # Limit synchronization is under test, not following-error
+                # performance. Leave margin for the externally sampled plant
+                # when Channel Access briefly stalls under a full-suite run.
+                self.rig.native_move(axis, .2, velocity=.2)
+                self.rig.native_move(axis, 0, velocity=.2)
             finally:
                 self.restore(axis, original)
 
@@ -65,7 +68,12 @@ class SoftLimitSyncTests(SlitCase):
         # existing config interface; poll readbacks must update motor limits.
         for axis in self.rig.profile['physical']:
             original = self.original(axis)
+            velocity = self.rig.get(axis, '.VELO')
             try:
+                # This test verifies limit propagation, not maximum tracking
+                # speed. A slower motor move tolerates occasional CA plant
+                # stalls without weakening ECMC's following-error monitor.
+                self.rig.put(axis, '.VELO', .2)
                 self.rig.put(axis, '-CfgDLLM', -.35)
                 self.rig.put(axis, '-CfgDHLM', .45)
                 self.synchronized(axis, -.35, .45)
@@ -73,6 +81,7 @@ class SoftLimitSyncTests(SlitCase):
                 self.rig.move(axis, -.2)
                 self.rig.move(axis, 0)
             finally:
+                self.rig.put(axis, '.VELO', velocity)
                 self.restore(axis, original)
 
     def test_soft_limit_enable_flags_sync_both_interfaces(self):

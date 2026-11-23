@@ -334,3 +334,14 @@ for initial, defect, accepted in ((-.002112001, None, True), (.003, None, True),
         else:
             assert accepted and case.rig.arrived and clock.now >= .45, (initial, defect)
 print('Late readiness: initial offsets pass; motion before/during the hold, early enable/readiness and faults fail.')
+
+# Off-state diagnostics use the same pre-motion hold requirement. A position
+# that is valid under arrive()'s tolerance must not be compared with the exact
+# nominal target, while real displacement during warm-up must still fail.
+source = (root/'tests/integration/slit/cases/encoder_power.py').read_text()
+diagnostics = source[source.index('    def off_state_diagnostics'):
+                     source.index('    def test_encoder_error_while_powered_off')]
+assert 'before = self.rig.plant.physical_position(self.axis)' in diagnostics
+assert 'physical_position(self.axis)-before' in diagnostics
+assert 'physical_position(self.axis)-.15' not in diagnostics
+print('Off-state diagnostics: warm-up motion is measured from the actual settled position.')
