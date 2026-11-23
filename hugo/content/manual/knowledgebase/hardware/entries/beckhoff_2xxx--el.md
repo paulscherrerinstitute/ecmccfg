@@ -19,6 +19,8 @@ for naming, direction and inclusion rules.
 - [ecmcEL2084.cmd](#snippet-ecmcel2084)
 - [ecmcEL2124.cmd](#snippet-ecmcel2124)
 - [ecmcEL2252.cmd](#snippet-ecmcel2252)
+- [ecmcEL2262.cmd](#snippet-ecmcel2262)
+- [ecmcEL2262_loopStep.cmd](#snippet-ecmcel2262_loopstep)
 - [ecmcEL2502.cmd](#snippet-ecmcel2502)
 - [ecmcEL2521-0124.cmd](#snippet-ecmcel2521-0124)
 - [ecmcEL2521.cmd](#snippet-ecmcel2521)
@@ -150,6 +152,30 @@ No direct entry declarations; follow the referenced snippets above.
 | `triState02` | `1 bits (legacy)` | Output (master → slave) | `0x7010:0x2 (PDO 0x1601, SM 2)` | `—` | [L33](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2252.cmd#L33) |
 | `activate` | `8 bits (legacy)` | Output (master → slave) | `0x1d09:0x81 (PDO 0x1602, SM 0)` | `—` | [L34](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2252.cmd#L34) |
 | `startTime` | `64 bits (legacy)` | Output (master → slave) | `0x1d09:0x90 (PDO 0x1603, SM 1)` | `—` | [L35](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2252.cmd#L35) |
+
+<a id="snippet-ecmcel2262"></a>
+
+## ecmcEL2262.cmd
+
+[Source: hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd)
+
+| Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
+| --- | --- | --- | --- | --- | --- |
+| `cycleCounter01` | `U16` | Output (master → slave) | `0x7800:0x1 (PDO 0x1700, SM 0)` | `—` | [L28](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd#L28) |
+| `cycleCounter02` | `U16` | Output (master → slave) | `0x7800:0x2 (PDO 0x1701, SM 1)` | `—` | [L33](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd#L33) |
+| `nextSyncTime` | `U32` | Input (slave → master) | `0x1d09:0x98 (PDO 0x1702, SM 2)` | `—` | [L38](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd#L38) |
+| `ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.binaryOutputArray01` | `U8` | Output (master → slave) | `ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.binaryOutputArray01_1; bytes ${NELM=1}` | `—` | [L46](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd#L46) |
+| `ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.mm.binaryOutputArray02` | `U8` | Output (master → slave) | `ec$(ECMC_EC_MASTER_ID).s${ECMC_EC_SLAVE_NUM}.binaryOutputArray02_1; bytes ${NELM=1}` | `—` | [L47](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262.cmd#L47) |
+
+<a id="snippet-ecmcel2262_loopstep"></a>
+
+## ecmcEL2262_loopStep.cmd
+
+[Source: hardware/Beckhoff_2XXX/EL/ecmcEL2262_loopStep.cmd](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262_loopStep.cmd)
+
+| Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
+| --- | --- | --- | --- | --- | --- |
+| `binaryOutputArray${CH_ID}_${ECMC_LOOP_IDX}` | `U8; update=0` | Output (master → slave) | `0x7${ECMC_ENTRY_HEX_VALUE}:0x${PDO_ENTRY_OFFSET} (PDO 0x${ECMC_PDO_HEX_VALUE}, SM ${SYNC_MAN})` | `—` | [L7](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EL/ecmcEL2262_loopStep.cmd#L7) |
 
 <a id="snippet-ecmcel2502"></a>
 

@@ -69,10 +69,10 @@ Documented configuration options:
 
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
-| `driveControl01` | `U16` | Output (master → slave) | `0x7010:0x01 (PDO 0x1610, SM 2)` | `—` | [L40](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L40) |
-| `velocitySetpoint01` | `S32` | Output (master → slave) | `0x7010:0x06 (PDO 0x1612, SM 2)` | `—` | [L41](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L41) |
-| `positionActual01` | `U32` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L43](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L43) |
-| `driveStatus01` | `U16` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a10, SM 3)` | `—` | [L44](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L44) |
+| `driveControl01` | `U16` | Output (master → slave) | `0x7010:0x01 (PDO 0x1610, SM 2)` | `—` | [L41](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L41) |
+| `velocitySetpoint01` | `S32` | Output (master → slave) | `0x7010:0x06 (PDO 0x1612, SM 2)` | `—` | [L42](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L42) |
+| `positionActual01` | `U32` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L44](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L44) |
+| `driveStatus01` | `U16` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a10, SM 3)` | `—` | [L45](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/ELM/ecmcELM7231-0010.cmd#L45) |
 
 <a id="snippet-ecmcelm7231-0010_opt"></a>
 

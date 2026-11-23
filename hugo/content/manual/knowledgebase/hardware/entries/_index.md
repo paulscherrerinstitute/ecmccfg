@@ -43,7 +43,7 @@ versus scaled feedback on the [Nanotec N6]({{< relref "/manual/knowledgebase/har
 | [Beckhoff_1XXX/EPP]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_1xxx--epp.md" >}}) | 1 | 0 |
 | [Beckhoff_2XXX]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_2xxx.md" >}}) | 3 | 28 |
 | [Beckhoff_2XXX/ED]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_2xxx--ed.md" >}}) | 2 | 18 |
-| [Beckhoff_2XXX/EL]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_2xxx--el.md" >}}) | 22 | 120 |
+| [Beckhoff_2XXX/EL]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_2xxx--el.md" >}}) | 24 | 126 |
 | [Beckhoff_2XXX/EP]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_2xxx--ep.md" >}}) | 3 | 14 |
 | [Beckhoff_2XXX/EPP]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_2xxx--epp.md" >}}) | 2 | 0 |
 | [Beckhoff_3XXX]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_3xxx.md" >}}) | 3 | 9 |
@@ -58,11 +58,11 @@ versus scaled feedback on the [Nanotec N6]({{< relref "/manual/knowledgebase/har
 | [Beckhoff_7XXX]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_7xxx.md" >}}) | 11 | 92 |
 | [Beckhoff_7XXX/EL]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_7xxx--el.md" >}}) | 54 | 279 |
 | [Beckhoff_7XXX/ELM]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_7xxx--elm.md" >}}) | 4 | 12 |
-| [Beckhoff_7XXX/EP]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_7xxx--ep.md" >}}) | 15 | 42 |
+| [Beckhoff_7XXX/EP]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_7xxx--ep.md" >}}) | 15 | 43 |
 | [Beckhoff_9XXX/EL]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_9xxx--el.md" >}}) | 10 | 29 |
 | [Beckhoff_AMI]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_ami.md" >}}) | 2 | 12 |
 | [Beckhoff_KL]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_kl.md" >}}) | 6 | 49 |
-| [Beckhoff_MX]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_mx.md" >}}) | 25 | 110 |
+| [Beckhoff_MX]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_mx.md" >}}) | 25 | 102 |
 | [Beckhoff_couplers]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_couplers.md" >}}) | 3 | 20 |
 | [Beckhoff_slaves]({{< relref "/manual/knowledgebase/hardware/entries/beckhoff_slaves.md" >}}) | 2 | 90 |
 | [Festo]({{< relref "/manual/knowledgebase/hardware/entries/festo.md" >}}) | 5 | 19 |
@@ -74,6 +74,7 @@ versus scaled feedback on the [Nanotec N6]({{< relref "/manual/knowledgebase/har
 | [PSI]({{< relref "/manual/knowledgebase/hardware/entries/psi.md" >}}) | 7 | 13 |
 | [Sensors]({{< relref "/manual/knowledgebase/hardware/entries/sensors.md" >}}) | 4 | 14 |
 | [Sensors/el6224_outputs]({{< relref "/manual/knowledgebase/hardware/entries/sensors--el6224_outputs.md" >}}) | 1 | 1 |
+| [Servotronix]({{< relref "/manual/knowledgebase/hardware/entries/servotronix.md" >}}) | 1 | 15 |
 | [SmarAct]({{< relref "/manual/knowledgebase/hardware/entries/smaract.md" >}}) | 1 | 24 |
 | [Technosoft_slaves]({{< relref "/manual/knowledgebase/hardware/entries/technosoft_slaves.md" >}}) | 8 | 58 |
 

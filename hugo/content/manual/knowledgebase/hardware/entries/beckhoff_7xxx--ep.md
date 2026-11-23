@@ -179,15 +179,15 @@ Documented configuration options:
 
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
-| `driveControl01` | `16 bits (legacy)` | Output (master → slave) | `0x7010:0x01 (PDO 0x1600, SM 2)` | `—` | [L47](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L47) |
-| `positionSetpoint01` | `32 bits; signed=1` | Output (master → slave) | `0x7010:0x05 (PDO 0x1606, SM 2)` | `—` | [L50](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L50) |
-| `positionActual01` | `32 bits (legacy)` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L53](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L53) |
-| `driveStatus01` | `16 bits (legacy)` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a01, SM 3)` | `—` | [L55](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L55) |
-| `velocityActual01` | `S32` | Input (slave → master) | `0x6010:0x07 (PDO 0x1a02, SM 3)` | `—` | [L57](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L57) |
-| `torqueActual01` | `S16` | Input (slave → master) | `0x6010:0x08 (PDO 0x1a03, SM 3)` | `—` | [L60](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L60) |
-| `infoData01` | `U16` | Input (slave → master) | `0x6010:0x12 (PDO 0x1a04, SM 3)` | `—` | [L62](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L62) |
-| `infoData02` | `U16` | Input (slave → master) | `0x6010:0x13 (PDO 0x1a05, SM 3)` | `—` | [L64](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L64) |
-| `touchProbeStatus01` | `U16` | Input (slave → master) | `0x6001:0x01 (PDO 0x1a07, SM 3)` | `—` | [L68](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L68) |
+| `driveControl01` | `16 bits (legacy)` | Output (master → slave) | `0x7010:0x01 (PDO 0x1600, SM 2)` | `—` | [L48](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L48) |
+| `positionSetpoint01` | `32 bits; signed=1` | Output (master → slave) | `0x7010:0x05 (PDO 0x1606, SM 2)` | `—` | [L51](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L51) |
+| `positionActual01` | `32 bits (legacy)` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L54](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L54) |
+| `driveStatus01` | `16 bits (legacy)` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a01, SM 3)` | `—` | [L56](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L56) |
+| `velocityActual01` | `S32` | Input (slave → master) | `0x6010:0x07 (PDO 0x1a02, SM 3)` | `—` | [L58](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L58) |
+| `torqueActual01` | `S16` | Input (slave → master) | `0x6010:0x08 (PDO 0x1a03, SM 3)` | `—` | [L61](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L61) |
+| `infoData01` | `U16` | Input (slave → master) | `0x6010:0x12 (PDO 0x1a04, SM 3)` | `—` | [L63](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L63) |
+| `infoData02` | `U16` | Input (slave → master) | `0x6010:0x13 (PDO 0x1a05, SM 3)` | `—` | [L65](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L65) |
+| `touchProbeStatus01` | `U16` | Input (slave → master) | `0x6001:0x01 (PDO 0x1a07, SM 3)` | `—` | [L69](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_CSP_ALL.cmd#L69) |
 
 <a id="snippet-ecmcep7211-0034_csp_std"></a>
 
@@ -274,6 +274,7 @@ Referenced hardware snippets (may be conditional):
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
 | `TouchProbeStatus` | `16 bits (legacy)` | Input (slave → master) | `0x6001:0x01 (PDO 0x1a07, SM 3)` | `—` | [L22](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_TP.cmd#L22) |
+| `touchProbeStatus01` | `—` | — | `Alias of TouchProbeStatus` | `—` | [L23](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_7XXX/EP/ecmcEP7211-0034_TP.cmd#L23) |
 
 <a id="snippet-ecmcep7211-0034_trqff"></a>
 

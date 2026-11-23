@@ -35,7 +35,7 @@ No direct entry declarations; follow the referenced snippets above.
 
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
-| `GAP` | `4 bits (legacy)` | Output (master → slave) | `0x0000:0x0 (PDO 0x1604, SM 0)` | `—` | [L18](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L18) |
+| `GAP01` | `4 bits (legacy)` | Output (master → slave) | `0x0000:0x0 (PDO 0x1604, SM 0)` | `—` | [L18](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L18) |
 | `binaryOutput01` | `1 bits (legacy)` | Output (master → slave) | `0x7040:0x1 (PDO 0x1604, SM 0)` | `—` | [L20](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L20) |
 | `binaryOutput02` | `1 bits (legacy)` | Output (master → slave) | `0x7050:0x1 (PDO 0x1605, SM 0)` | `—` | [L21](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L21) |
 | `binaryOutput03` | `1 bits (legacy)` | Output (master → slave) | `0x7060:0x1 (PDO 0x1606, SM 0)` | `—` | [L22](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L22) |
@@ -44,7 +44,7 @@ No direct entry declarations; follow the referenced snippets above.
 | `binaryInput02` | `1 bits (legacy)` | Input (slave → master) | `0x6010:0x1 (PDO 0x1a01, SM 1)` | `—` | [L26](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L26) |
 | `binaryInput03` | `1 bits (legacy)` | Input (slave → master) | `0x6020:0x1 (PDO 0x1a02, SM 1)` | `—` | [L27](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L27) |
 | `binaryInput04` | `1 bits (legacy)` | Input (slave → master) | `0x6030:0x1 (PDO 0x1a03, SM 1)` | `—` | [L28](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L28) |
-| `GAP` | `4 bits (legacy)` | Output (master → slave) | `0x0000:0x0 (PDO 0x1a03, SM 0)` | `—` | [L29](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L29) |
+| `GAP02` | `4 bits (legacy)` | Output (master → slave) | `0x0000:0x0 (PDO 0x1a03, SM 0)` | `—` | [L29](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_2XXX/EP/ecmcEP2308.cmd#L29) |
 
 <a id="snippet-ecmcep2624"></a>
 

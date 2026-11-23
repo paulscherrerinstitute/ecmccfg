@@ -191,24 +191,16 @@ No direct entry declarations; follow the referenced snippets above.
 
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
-| `encoderSet01` | `B1` | Output (master → slave) | `0x7000:0x01 (PDO 0x1600, SM 2)` | `—` | [L58](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L58) |
-| `encoderDir01` | `B1` | Output (master → slave) | `0x7000:0x02 (PDO 0x1600, SM 2)` | `—` | [L59](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L59) |
-| `dummyStub1` | `U8` | Output (master → slave) | `0x0000:0x00 (PDO 0x1600, SM 2)` | `—` | [L60](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L60) |
-| `dummyStub2` | `B4` | Output (master → slave) | `0x0000:0x00 (PDO 0x1600, SM 2)` | `—` | [L61](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L61) |
-| `dummyStub3` | `B2` | Output (master → slave) | `0x0000:0x00 (PDO 0x1600, SM 2)` | `—` | [L62](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L62) |
-| `encoderSet02` | `B1` | Output (master → slave) | `0x7010:0x01 (PDO 0x1601, SM 2)` | `—` | [L65](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L65) |
-| `encoderDir02` | `B1` | Output (master → slave) | `0x7010:0x02 (PDO 0x1601, SM 2)` | `—` | [L66](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L66) |
-| `dummyStub4` | `U8` | Output (master → slave) | `0x0000:0x00 (PDO 0x1601, SM 2)` | `—` | [L67](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L67) |
-| `dummyStub5` | `B4` | Output (master → slave) | `0x0000:0x00 (PDO 0x1601, SM 2)` | `—` | [L68](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L68) |
-| `dummyStub6` | `B2` | Output (master → slave) | `0x0000:0x00 (PDO 0x1601, SM 2)` | `—` | [L69](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L69) |
-| `control01` | `U16` | Output (master → slave) | `0x7020:0x01 (PDO 0x1620, SM 2)` | `—` | [L72](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L72) |
-| `encoderStatus01` | `U16` | Input (slave → master) | `0x6000:0x01 (PDO 0x1a00, SM 3)` | `—` | [L76](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L76) |
-| `positionActual01` | `S64` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L77](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L77) |
-| `encoderStatus02` | `U16` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a02, SM 3)` | `—` | [L80](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L80) |
-| `positionActual02` | `S64` | Input (slave → master) | `0x6010:0x11 (PDO 0x1a02, SM 3)` | `—` | [L81](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L81) |
-| `status02` | `U16` | Input (slave → master) | `0x6020:0x01 (PDO 0x1a20, SM 3)` | `—` | [L84](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L84) |
-| `dummyStub7` | `U16` | Input (slave → master) | `0x0000:0x00 (PDO 0x1a20, SM 3)` | `—` | [L85](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L85) |
-| `current` | `S32` | Input (slave → master) | `0x6020:0x11 (PDO 0x1a20, SM 3)` | `—` | [L86](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L86) |
+| `encoderControl01` | `U16` | Output (master → slave) | `0x7000:0x01 (PDO 0x1600, SM 2)` | `—` | [L11](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L11) |
+| `encoderControl02` | `U16` | Output (master → slave) | `0x7010:0x01 (PDO 0x1601, SM 2)` | `—` | [L14](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L14) |
+| `EFUControl` | `U16` | Output (master → slave) | `0x7020:0x01 (PDO 0x1620, SM 2)` | `—` | [L17](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L17) |
+| `encoderStatus01` | `U16` | Input (slave → master) | `0x6000:0x01 (PDO 0x1a00, SM 3)` | `—` | [L21](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L21) |
+| `positionActual01` | `S64` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L22](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L22) |
+| `encoderStatus02` | `U16` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a02, SM 3)` | `—` | [L25](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L25) |
+| `positionActual02` | `S64` | Input (slave → master) | `0x6010:0x11 (PDO 0x1a02, SM 3)` | `—` | [L26](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L26) |
+| `EFUStatus` | `U16` | Input (slave → master) | `0x6020:0x01 (PDO 0x1a20, SM 3)` | `—` | [L29](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L29) |
+| `gap1` | `U16; update=0` | Input (slave → master) | `0x0000:0x00 (PDO 0x1a20, SM 3)` | `—` | [L30](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L30) |
+| `EFUCurrent` | `F32` | Input (slave → master) | `0x6020:0x11 (PDO 0x1a20, SM 3)` | `—` | [L31](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_MX/ecmcMO5042-0000.cmd#L31) |
 
 <a id="snippet-ecmcmo7062-0100"></a>
 

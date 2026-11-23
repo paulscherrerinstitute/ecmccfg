@@ -313,18 +313,18 @@ Documented configuration options:
 
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
-| `encoderControl01` | `U16` | Output (master → slave) | `0x7000:0x01 (PDO 0x1600, SM 2)` | `—` | [L17](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L17) |
-| `encoderValue01` | `U32` | Output (master → slave) | `0x7000:0x11 (PDO 0x1600, SM 2)` | `—` | [L18](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L18) |
-| `encoderStatus01` | `U32` | Input (slave → master) | `0x6000:0x01 (PDO 0x1a00, SM 3)` | `—` | [L20](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L20) |
-| `positionActual01` | `U32` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L21](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L21) |
-| `encoderLatchPostion01` | `U32` | Input (slave → master) | `0x6000:0x12 (PDO 0x1a00, SM 3)` | `—` | [L22](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L22) |
-| `encoderLatchPostion02` | `U32` | Input (slave → master) | `0x6000:0x12 (PDO 0x1a00, SM 3)` | `—` | [L23](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L23) |
-| `encoderLatchPosition01` | `—` | — | `Alias of encoderLatchPostion01` | `—` | [L25](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L25) |
-| `encoderLatchPosition02` | `—` | — | `Alias of encoderLatchPostion02` | `—` | [L26](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L26) |
-| `timestamp01` | `U64` | Input (slave → master) | `0x6000:0x16 (PDO 0x1a0d, SM 3)` | `—` | [L29](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L29) |
-| `timestampIndex01` | `U64` | Input (slave → master) | `0x6000:0x1F (PDO 0x1a0d, SM 3)` | `—` | [L30](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L30) |
-| `timestampLatch01` | `U64` | Input (slave → master) | `0x6000:0x20 (PDO 0x1a0d, SM 3)` | `—` | [L31](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L31) |
-| `timestampLatch02` | `U64` | Input (slave → master) | `0x6000:0x21 (PDO 0x1a0d, SM 3)` | `—` | [L32](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L32) |
+| `encoderControl01` | `U16` | Output (master → slave) | `0x7000:0x01 (PDO 0x1600, SM 2)` | `—` | [L18](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L18) |
+| `encoderValue01` | `U32` | Output (master → slave) | `0x7000:0x11 (PDO 0x1600, SM 2)` | `—` | [L19](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L19) |
+| `encoderStatus01` | `U32` | Input (slave → master) | `0x6000:0x01 (PDO 0x1a00, SM 3)` | `—` | [L21](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L21) |
+| `positionActual01` | `U32` | Input (slave → master) | `0x6000:0x11 (PDO 0x1a00, SM 3)` | `—` | [L22](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L22) |
+| `encoderLatchPostion01` | `U32` | Input (slave → master) | `0x6000:0x12 (PDO 0x1a00, SM 3)` | `—` | [L23](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L23) |
+| `encoderLatchPostion02` | `U32` | Input (slave → master) | `0x6000:0x12 (PDO 0x1a00, SM 3)` | `—` | [L24](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L24) |
+| `encoderLatchPosition01` | `—` | — | `Alias of encoderLatchPostion01` | `—` | [L26](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L26) |
+| `encoderLatchPosition02` | `—` | — | `Alias of encoderLatchPostion02` | `—` | [L27](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L27) |
+| `timestamp01` | `U64` | Input (slave → master) | `0x6000:0x16 (PDO 0x1a0d, SM 3)` | `—` | [L30](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L30) |
+| `timestampIndex01` | `U64` | Input (slave → master) | `0x6000:0x1F (PDO 0x1a0d, SM 3)` | `—` | [L31](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L31) |
+| `timestampLatch01` | `U64` | Input (slave → master) | `0x6000:0x20 (PDO 0x1a0d, SM 3)` | `—` | [L32](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L32) |
+| `timestampLatch02` | `U64` | Input (slave → master) | `0x6000:0x21 (PDO 0x1a0d, SM 3)` | `—` | [L33](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_5XXX/EL/ecmcEL5112_ABC_DC64.cmd#L33) |
 
 <a id="snippet-ecmcel5131"></a>
 

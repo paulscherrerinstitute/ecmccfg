@@ -57,9 +57,9 @@ Referenced hardware snippets (may be conditional):
 | Entry identifier | Type | Direction | Object / data source | Condition prefix | Source |
 | --- | --- | --- | --- | --- | --- |
 | `binaryInputArray01` | `U8` | Input (slave → master) | `0x6000:0x01 (PDO 0x1a00, SM 3)` | `—` | [L16](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L16) |
-| `GAP` | `8 bits (legacy)` | Input (slave → master) | `0x0000:0x00 (PDO 0x1a00, SM 3)` | `—` | [L18](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L18) |
+| `GAP01` | `8 bits (legacy)` | Input (slave → master) | `0x0000:0x00 (PDO 0x1a00, SM 3)` | `—` | [L18](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L18) |
 | `binaryInputArray02` | `U8` | Input (slave → master) | `0x6010:0x01 (PDO 0x1a01, SM 3)` | `—` | [L20](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L20) |
-| `GAP` | `8 bits (legacy)` | Input (slave → master) | `0x0000:0x00 (PDO 0x1a01, SM 3)` | `—` | [L21](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L21) |
+| `GAP02` | `8 bits (legacy)` | Input (slave → master) | `0x0000:0x00 (PDO 0x1a01, SM 3)` | `—` | [L21](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L21) |
 | `accelerometerStatus${CH_ID}` | `U16` | Input (slave → master) | `0x60${ECMC_PDO_INDEX}0:0x01 (PDO 0x1a0${ECMC_PDO_INDEX}, SM 3)` | `—` | [L34](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L34) |
 | `accelerometerActual${CH_ID}` | `S16` | Input (slave → master) | `0x60${ECMC_PDO_INDEX}0:0x11 (PDO 0x1a0${ECMC_PDO_INDEX}, SM 3)` | `—` | [L35](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L35) |
 | `accelerometerStatus${CH_ID}` | `U16` | Input (slave → master) | `0x60${ECMC_PDO_INDEX}0:0x01 (PDO 0x1a0${ECMC_PDO_INDEX}, SM 3)` | `—` | [L40](https://github.com/paulscherrerinstitute/ecmccfg/blob/master/hardware/Beckhoff_1XXX/EP/ecmcEP1816-3008.cmd#L40) |
