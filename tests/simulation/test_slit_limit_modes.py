@@ -18,7 +18,7 @@ from slit.run import make_suite as make_sim_suite
 
 selected = list(make_hardware_suite(None, ('softlimits',)))
 assert len(selected) == 8 and all(test.motion_axes == () for test in selected)
-assert len(list(make_sim_suite(None, ('open', 'closed'), ('softlimit_modes',)))) == 16
+assert len(list(make_sim_suite(None, ('open', 'closed'), ('softlimit_modes',)))) == 18
 
 
 class Clock:
