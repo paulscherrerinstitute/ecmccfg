@@ -37,6 +37,10 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlEnc.cmd "FILE=./cfg/enc_el7062_index.yaml,EN
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd "FILE=./cfg/axis_vax5_YCEN.yaml,AX_ID=12,M_ID=0,DRV_SLAVE=14"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadYamlAxis.cmd "FILE=./cfg/axis_vax6_YGAP.yaml,AX_ID=13,M_ID=0,DRV_SLAVE=14"
 ${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "FILE=./cfg/axis_main.plc,INC=./cfg,PLC_MACROS='AX_CEN=12,AX_GAP=13,AX_LO=5,AX_HI=6'"
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPLCFile.cmd "FILE=./cfg/motor_record_readback.plc,PLC_ID=1,SAMPLE_RATE_MS=100,START_AFTER_EPICS=1"
+dbLoadRecords("./motor-record-plc.db", "P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},AXIS=TR_LO")
+dbLoadRecords("./motor-record-plc.db", "P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},AXIS=TR_HI")
+dbLoadRecords("./motor-record-plc.db", "P=${ECMC_PREFIX},PORT=${ECMC_ASYN_PORT},AXIS=Probe")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addMasterSlaveSM.cmd "NAME=Slit_SM,MST_GRP_NAME=virtualAxes,SLV_GRP_NAME=realAxes"
 
 # Brake, home-cam and per-encoder defaults are defined in cfg/*.yaml.

@@ -1,0 +1,15 @@
+record(ai, "$(P)SIM:SlitTest:$(AXIS):Off") {
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)T_SMP_MS=100/TYPE=asynFloat64/plcs.plc1.static.$(AXIS)Off?")
+  field(SCAN, "I/O Intr")
+}
+record(ai, "$(P)SIM:SlitTest:$(AXIS):Dir") {
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)T_SMP_MS=100/TYPE=asynFloat64/plcs.plc1.static.$(AXIS)Dir?")
+  field(SCAN, "I/O Intr")
+}
+record(ai, "$(P)SIM:SlitTest:$(AXIS):Loaded") {
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)T_SMP_MS=100/TYPE=asynFloat64/plcs.plc1.static.$(AXIS)Loaded?")
+  field(SCAN, "I/O Intr")
+}

@@ -106,6 +106,11 @@ are shared between PLCs. Both can also be exposed as EPICS PVs; see
                                   ax<id>.traj.dir<0: backward
                                   ax<id>.traj.dir=0: standstill
  27. ax<id>.cntrl.error           actual controller error          (ro)
+ 27a. ax<id>.mr.off               motor record offset              (ro)
+ 27b. ax<id>.mr.dir               motor record direction           (ro)
+                                  0: positive, 1: negative
+ 27c. ax<id>.mr.loaded            motor record bound (0 or 1)       (ro)
+                                  All three default to 0 before binding.
  28. ax<id>.cntrl.poserror        actual position error            (ro)
  29. ax<id>.cntrl.output          actual controller output         (ro)
  30. ax<id>.drv.setvelraw         actual raw velocity setpoint     (ro)

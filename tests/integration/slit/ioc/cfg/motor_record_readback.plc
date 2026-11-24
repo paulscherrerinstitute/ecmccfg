@@ -1,0 +1,9 @@
+static.TR_LOOff := ax5.mr.off;
+static.TR_LODir := ax5.mr.dir;
+static.TR_HIOff := ax6.mr.off;
+static.TR_HIDir := ax6.mr.dir;
+static.TR_LOLoaded := ax5.mr.loaded;
+static.TR_HILoaded := ax6.mr.loaded;
+static.ProbeOff := ax7.mr.off;
+static.ProbeDir := ax7.mr.dir;
+static.ProbeLoaded := ax7.mr.loaded;

@@ -1057,6 +1057,11 @@ are reset to conceal a residual. Post-home move verdicts are unchanged.
 
 ## Independent soft-limit modes and motor offsets
 
+The SIM fixture also checks that a 100 ms PLC reads fractional `.OFF` and
+both `.DIR` values through `axN.mr.off` and `axN.mr.dir`. It checks both
+blades, per-axis isolation, and readback after restoring the original fields.
+Select it with `--case softlimit_modes --test test_motor_record_plc_variables`.
+
 The `softlimit_modes` simulator module and explicit `softlimits` hardware group
 share eight live configuration cases: motor-only limits, ECMC-only limits,
 nested independent limits, unsynced motor limits bounded by enabled ECMC limits,
