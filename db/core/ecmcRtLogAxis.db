@@ -190,7 +190,7 @@ record(stringin,"${P}${AXIS_NAME}-MsgTxt") {
   field(DTYP, "asynOctetRead")
   field(INP, "@asyn($(PORT=ecmcRTLog),$(ADDR=$(AXIS_NO)),$(TIMEOUT=1))RTLOG_AXIS_MESSAGE_TEXT")
   field(SCAN, "I/O Intr")
-  info(Q:group, { "${P}axis${AXIS_NO}": { "MsgTxt": {+channel:"VAL"} } })
+  info(Q:group, { "${P}axis${AXIS_NO}": { "MsgTxt": {+channel:"VAL", +trigger:"MsgTxt"} } })
 }
 
 # Full interlock or ignored-command explanation; independent of motor support.
