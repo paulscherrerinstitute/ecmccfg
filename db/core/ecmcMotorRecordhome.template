@@ -5,7 +5,6 @@ record(longout,"$(PREFIX)$(MOTOR_NAME)-HomProc") {
     field(DTYP, "asynInt32")
     field(PINI, "YES")
     field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))HomProc")
-    info(asyn:READBACK,"1")
 }
 
 record(ao,"$(PREFIX)$(MOTOR_NAME)-HomPos") {
