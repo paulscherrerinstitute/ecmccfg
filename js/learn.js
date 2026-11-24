@@ -136,6 +136,12 @@ $(window).resize(function() {
 jQuery(document).ready(function() {
     restoreTabSelections();
 
+    $('#sidebar .section-toggle').on('click', function() {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        $('#sidebar .highlightable').perfectScrollbar('update');
+    });
+
     jQuery('#sidebar .category-icon').on('click', function() {
         $( this ).toggleClass("fa-angle-down fa-angle-right") ;
         $( this ).parent().parent().children('ul').toggle() ;

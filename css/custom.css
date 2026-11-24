@@ -47,3 +47,45 @@ h6 {
 .page-title {
     font-size: 1rem !important;
 }
+#sidebar .section-toggle {
+    float: right;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    margin-left: .25rem;
+    border: 1px solid #899489;
+    border-radius: .2rem;
+    background: #343e34;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#sidebar .section-toggle:hover,
+#sidebar .section-toggle:focus-visible {
+    background: #79b45a;
+    border-color: #a5d58b;
+    color: #172014;
+}
+
+#sidebar .section-toggle:focus-visible {
+    outline: 2px solid #a5d58b;
+    outline-offset: 2px;
+}
+
+#sidebar .section-toggle::before {
+    content: "+";
+}
+
+#sidebar .section-toggle[aria-expanded="true"]::before {
+    content: "−";
+}
+
+#sidebar ul.topics:not(.searched) li > .section-toggle[aria-expanded="false"] ~ ul {
+    display: none;
+}
+
+#sidebar ul.topics li > .section-toggle[aria-expanded="true"] ~ ul {
+    display: block;
+}
