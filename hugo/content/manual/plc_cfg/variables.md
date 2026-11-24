@@ -106,11 +106,6 @@ are shared between PLCs. Both can also be exposed as EPICS PVs; see
                                   ax<id>.traj.dir<0: backward
                                   ax<id>.traj.dir=0: standstill
  27. ax<id>.cntrl.error           actual controller error          (ro)
- 27a. ax<id>.mr.off               motor record offset              (ro)
- 27b. ax<id>.mr.dir               motor record direction           (ro)
-                                  0: positive, 1: negative
- 27c. ax<id>.mr.loaded            motor record bound (0 or 1)       (ro)
-                                  All three default to 0 before binding.
  28. ax<id>.cntrl.poserror        actual position error            (ro)
  29. ax<id>.cntrl.output          actual controller output         (ro)
  30. ax<id>.drv.setvelraw         actual raw velocity setpoint     (ro)
@@ -150,6 +145,11 @@ are shared between PLCs. Both can also be exposed as EPICS PVs; see
  47. ax<id>.ctrl.ki               Set PID-controller ki            (rw)
  48. ax<id>.ctrl.kd               Set PID-controller kd            (rw)
  49. ax<id>.ctrl.kff              Set PID-controller kff           (rw)
+ 50. ax<id>.mr.off               motor record offset              (ro)
+ 51. ax<id>.mr.dir               motor record direction           (ro)
+                                  0: positive, 1: negative
+ 52. ax<id>.mr.loaded            motor record bound (0 or 1)       (ro)
+                                  All three default to 0 before binding.
 ```
 
 `ax<id>.blockcom` is a per-axis protection bit. It is independent of the
