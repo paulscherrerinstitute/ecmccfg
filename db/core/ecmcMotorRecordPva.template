@@ -33,8 +33,8 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)"){
 	field(UREV,"$(UREV=1.0)")
 	info(Q:group, {
 		"${PREFIX}axis${AXIS_NO}": {
-			"setpoint": {+channel:"VAL"},
-			"readback": {+channel:"RBV"}
+			"setpoint": {+channel:"VAL", +trigger:"setpoint"},
+			"readback": {+channel:"RBV", +trigger:"readback"}
 		}
 	})
 }
@@ -50,7 +50,7 @@ record(stringout, "$(PREFIX)$(MOTOR_NAME)-DbgStrToLOG") {
     field(OUT,"@asyn($(MOTOR_PORT),$(AXIS_NO))StrToLOG")
 		info(Q:group, {
 			"${PREFIX}axis${AXIS_NO}": {
-				"DbgStrToLOG": {+channel:"VAL"}
+				"DbgStrToLOG": {+channel:"VAL", +trigger:"DbgStrToLOG"}
 			}
 		})
 }
@@ -74,7 +74,7 @@ record(longin, "$(PREFIX)$(MOTOR_NAME)-Err")
     field(SCAN, "I/O Intr")
 		info(Q:group, {
 			"${PREFIX}axis${AXIS_NO}": {
-				"Error": {+channel:"VAL"}
+				"Error": {+channel:"VAL", +trigger:"Error"}
 			}
 		})
 }
@@ -87,7 +87,7 @@ record(ai, "$(PREFIX)$(MOTOR_NAME)-VelAct")
     field(SCAN, "I/O Intr")
 		info(Q:group, {
 			"${PREFIX}axis${AXIS_NO}": {
-				"velocityActual": {+channel:"VAL"}
+				"velocityActual": {+channel:"VAL", +trigger:"velocityActual"}
 			}
 		})
 }
@@ -116,7 +116,7 @@ record(ai, "$(PREFIX)$(MOTOR_NAME)-EncAct")
     field(SCAN, "I/O Intr")
 		info(Q:group, {
 			"${PREFIX}axis${AXIS_NO}": {
-				"encoderActual": {+channel:"VAL"}
+				"encoderActual": {+channel:"VAL", +trigger:"encoderActual"}
 			}
 		})
 }
