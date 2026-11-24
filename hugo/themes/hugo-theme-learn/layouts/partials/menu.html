@@ -132,7 +132,33 @@
           {{end}}
           {{ $pages := ($currentNode.Scratch.Get "pages") }}
 
-        {{if eq .Site.Params.ordersectionsby "title"}}
+        {{/* Group advanced motion pages without changing content paths or URLs. */}}
+        {{ if eq .File.Path "manual/motion_cfg/_index.md" }}
+          {{ $advancedPaths := slice "manual/motion_cfg/native_target_write.md" "manual/motion_cfg/axisPLC.md" "manual/motion_cfg/axis_groups.md" "manual/motion_cfg/master_slave_state_machine.md" "manual/motion_cfg/pvt.md" "manual/motion_cfg/sequencer.md" "manual/motion_cfg/drive_lookup_table.md" "manual/motion_cfg/encoder_power.md" "manual/motion_cfg/ecb.md" "manual/motion_cfg/ecmccomp.md" "manual/motion_cfg/ecmc_cfg_tool.md" }}
+          {{ $advancedPages := where $pages "File.Path" "in" $advancedPaths }}
+          {{ range $pages.ByWeight }}
+            {{ if eq .File.Path "manual/motion_cfg/advanced.md" }}
+              {{ $group := . }}
+              {{ $expanded := eq $group.RelPermalink $currentNode.RelPermalink }}
+              {{ range $advancedPages }}
+                {{ if eq .RelPermalink $currentNode.RelPermalink }}{{ $expanded = true }}{{ end }}
+              {{ end }}
+              <li data-nav-id="{{ $group.RelPermalink }}" title="{{ $group.Title }}" class="dd-item {{ if $expanded }}parent{{ end }} {{ if eq $group.RelPermalink $currentNode.RelPermalink }}active{{ end }}">
+                <button type="button" class="section-toggle" aria-expanded="{{ if $expanded }}true{{ else }}false{{ end }}" aria-label="Toggle advanced motion pages" aria-controls="nav-advanced-motion"></button>
+                <a href="{{ $group.RelPermalink }}">{{ $group.Title }}</a>
+                <ul id="nav-advanced-motion">
+                  {{ range $advancedPages.ByWeight }}
+                    {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
+                  {{ end }}
+                </ul>
+              </li>
+            {{ else if not (in $advancedPaths .File.Path) }}
+              {{ if not .Params.hidden }}
+                {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{else if eq .Site.Params.ordersectionsby "title"}}
           {{ range $pages.ByTitle }}
             {{ if and .Params.hidden (not $.showhidden) }}
             {{else}}
