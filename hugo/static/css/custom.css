@@ -52,11 +52,26 @@ h6 {
     min-width: 1.75rem;
     min-height: 1.75rem;
     margin-left: .25rem;
-    border: 1px solid currentColor;
+    border: 1px solid #899489;
     border-radius: .2rem;
-    background: transparent;
-    color: inherit;
+    background: #343e34;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
     cursor: pointer;
+}
+
+#sidebar .section-toggle:hover,
+#sidebar .section-toggle:focus-visible {
+    background: #79b45a;
+    border-color: #a5d58b;
+    color: #172014;
+}
+
+#sidebar .section-toggle:focus-visible {
+    outline: 2px solid #a5d58b;
+    outline-offset: 2px;
 }
 
 #sidebar .section-toggle::before {
