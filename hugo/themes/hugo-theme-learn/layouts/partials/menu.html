@@ -107,21 +107,25 @@
 {{ with $currentNode.File }}{{ $currentFileUniqueID = .UniqueID }}{{ end }}
  {{with .sect}}
   {{if and .IsSection (or (not .Params.hidden) $.showhidden)}}
+    {{ $hasChildren := gt (len (where (.Pages | union .Sections) "Params.hidden" "ne" true)) 0 }}
+    {{ $expanded := or (.IsAncestor $currentNode) (eq .RelPermalink $currentNode.RelPermalink) .Params.alwaysopen }}
     {{safeHTML .Params.head}}
     <li data-nav-id="{{.RelPermalink}}" title="{{.Title}}" class="dd-item
         {{if .IsAncestor $currentNode }}parent{{end}}
         {{if eq .File.UniqueID $currentFileUniqueID}}active{{end}}
         {{if .Params.alwaysopen}}parent{{end}}
         ">
+      {{ if $hasChildren }}
+        <button type="button" class="section-toggle" aria-expanded="{{ if $expanded }}true{{ else }}false{{ end }}" aria-label="Toggle {{ .Title }} pages" aria-controls="nav-{{ .File.UniqueID }}"></button>
+      {{ end }}
       <a href="{{.RelPermalink}}">
           {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML .Params.Post}}
           {{ if $showvisitedlinks}}
             <i class="fas fa-check read-icon"></i>
           {{ end }}
       </a>
-      {{ $numberOfPages := (add (len ( where .Pages "Params.hidden" "ne" true )) (len ( where .Sections "Params.hidden" "ne" true ))) }}
-      {{ if ne $numberOfPages 0 }}
-        <ul>
+      {{ if $hasChildren }}
+        <ul id="nav-{{ .File.UniqueID }}">
           {{ $currentNode.Scratch.Set "pages" .Pages }}
           {{ if .Sections}}
             {{ $currentNode.Scratch.Set "pages" (.Pages | union .Sections) }}

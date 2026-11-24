@@ -47,3 +47,30 @@ h6 {
 .page-title {
     font-size: 1rem !important;
 }
+#sidebar .section-toggle {
+    float: right;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    margin-left: .25rem;
+    border: 1px solid currentColor;
+    border-radius: .2rem;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+#sidebar .section-toggle::before {
+    content: "+";
+}
+
+#sidebar .section-toggle[aria-expanded="true"]::before {
+    content: "−";
+}
+
+#sidebar ul.topics:not(.searched) li > .section-toggle[aria-expanded="false"] ~ ul {
+    display: none;
+}
+
+#sidebar ul.topics li > .section-toggle[aria-expanded="true"] ~ ul {
+    display: block;
+}

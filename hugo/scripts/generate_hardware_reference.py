@@ -143,7 +143,7 @@ def render(root=ROOT):
         groups[path.parent].append(path)
 
     index = [
-        '+++', 'title = "Hardware entry reference"', 'weight = 17', '+++', '', MARKER, '',
+        '+++', 'title = "Hardware entry reference"', 'weight = 99', '+++', '', MARKER, '',
         'This catalogue is generated from the hardware scripts. It lists EtherCAT entry',
         'identifiers such as `positionActual01` (the exact spelling matters), their',
         'data types, directions, PDO addresses, aliases and process-image data items.',
