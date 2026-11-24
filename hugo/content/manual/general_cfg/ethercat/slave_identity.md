@@ -48,6 +48,12 @@ production information in this field; see the
 [identity-object description](https://infosys.beckhoff.com/content/1033/ej2502/2448711307.html).
 `HWRev` is the SII device revision and is kept separate from firmware.
 
+Before attempting the optional firmware SDO, ecmccfg calls
+`Cfg.EcGetSlaveSdoReadSupport(slave)`. A zero result skips the transfer and
+reports `No discovered SDOs`. This is a conservative EtherLab check based on
+the discovered SDO count, not the slave's authoritative SII CoE mailbox flag;
+a CoE slave without SDO-info enumeration can therefore also be skipped.
+
 ## Enable or disable reads
 
 Reads are enabled by default for real hardware. Revision and serial use the

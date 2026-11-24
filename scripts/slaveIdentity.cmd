@@ -12,6 +12,15 @@ ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_ID_CMD,"'${ECMC_TEMP_SLAVE_SKIP_STATU
 ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_ID_STATUS,"'${ECMC_TEMP_SLAVE_SKIP_STATUS}'!=''","${ECMC_TEMP_SLAVE_SKIP_STATUS}","${ECMC_TEMP_SLAVE_ID_STATUS}")
 ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_FW_STATUS,"'${ECMC_TEMP_SLAVE_SKIP_STATUS}'!=''","${ECMC_TEMP_SLAVE_SKIP_STATUS}","${ECMC_TEMP_SLAVE_FW_STATUS}")
 
+#- Conservatively suppress optional CoE reads when EtherLab discovered no SDOs.
+#- This is not an authoritative mailbox flag: CoE slaves without SDO-info
+#- enumeration can also report zero and will simply keep firmware as Unknown.
+epicsEnvSet(ECMC_TEMP_SLAVE_SDO_READ_SUPPORT,"0")
+${ECMC_TEMP_SLAVE_ID_CMD}epicsEnvSet(ECMC_CONFIG_RETURN_VAL,"Error: not read")
+${ECMC_TEMP_SLAVE_ID_CMD}ecmcConfig "EcGetSlaveSdoReadSupport(${ECMC_EC_SLAVE_NUM})"
+${ECMC_TEMP_SLAVE_ID_CMD}ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_SDO_READ_SUPPORT,"'Error' in '${ECMC_CONFIG_RETURN_VAL=Error}'",0,"${ECMC_CONFIG_RETURN_VAL=0}")
+${ECMC_TEMP_SLAVE_ID_CMD}ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_FW_STATUS,"${ECMC_TEMP_SLAVE_SDO_READ_SUPPORT=0}=0","No discovered SDOs","${ECMC_TEMP_SLAVE_FW_STATUS}")
+
 #- Keep a failed command from reusing the preceding slave's result.
 ${ECMC_TEMP_SLAVE_ID_CMD}epicsEnvSet(ECMC_CONFIG_RETURN_VAL,"Error: not read")
 ${ECMC_TEMP_SLAVE_ID_CMD}ecmcConfig "EcGetSlaveRevisionNum(${ECMC_EC_SLAVE_NUM})"
@@ -29,7 +38,7 @@ ${ECMC_TEMP_SLAVE_ID_CMD}ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_NUM_CMD,"${E
 ${ECMC_TEMP_SLAVE_ID_CMD}${ECMC_TEMP_SLAVE_NUM_CMD=#- }epicsEnvSet(ECMC_TEMP_SLAVE_SER,"${ECMC_CONFIG_RETURN_VAL=0}")
 ${ECMC_TEMP_SLAVE_ID_CMD}ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_ID_STATUS,"${ECMC_TEMP_SLAVE_REV_OK=0}>0 and ${ECMC_TEMP_SLAVE_SER_OK=0}>0","Available","Read failed")
 
-ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_FW_CMD,"'${ECMC_TEMP_SLAVE_SKIP_STATUS}'='' and ${ECMC_SDO_STRING_SUPPORTED=0}>0","","#- ")
+ecmcEpicsEnvSetCalcTernary(ECMC_TEMP_SLAVE_FW_CMD,"'${ECMC_TEMP_SLAVE_SKIP_STATUS}'='' and ${ECMC_SDO_STRING_SUPPORTED=0}>0 and ${ECMC_TEMP_SLAVE_SDO_READ_SUPPORT=0}>0","","#- ")
 ${ECMC_TEMP_SLAVE_FW_CMD}ecmcEpicsEnvSetSdoString(ECMC_TEMP_SLAVE_SDO,${ECMC_EC_SLAVE_NUM},0x100a,0,39)
 ${ECMC_TEMP_SLAVE_FW_CMD}epicsEnvSet(ECMC_TEMP_SLAVE_FW,"${ECMC_TEMP_SLAVE_SDO_DB_VALUE=Unknown}")
 ${ECMC_TEMP_SLAVE_FW_CMD}epicsEnvSet(ECMC_TEMP_SLAVE_FW_STATUS,"${ECMC_TEMP_SLAVE_SDO_STATUS=Not read}")
@@ -47,6 +56,7 @@ epicsEnvUnset(ECMC_TEMP_SLAVE_NUM_CMD)
 epicsEnvUnset(ECMC_TEMP_SLAVE_FW_CMD)
 epicsEnvUnset(ECMC_TEMP_SLAVE_REV_OK)
 epicsEnvUnset(ECMC_TEMP_SLAVE_SER_OK)
+epicsEnvUnset(ECMC_TEMP_SLAVE_SDO_READ_SUPPORT)
 epicsEnvUnset(ECMC_TEMP_SLAVE_SDO)
 epicsEnvUnset(ECMC_TEMP_SLAVE_SDO_DB_VALUE)
 epicsEnvUnset(ECMC_TEMP_SLAVE_SDO_STATUS)

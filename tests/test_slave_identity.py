@@ -51,7 +51,8 @@ class Script:
             words = shlex.split(line)
             if words[0] == 'ecmcConfig':
                 self.calls.append(words[1])
-                result = self.responses.get(words[1], '0')
+                default = '1' if words[1].startswith('EcGetSlaveSdoReadSupport(') else '0'
+                result = self.responses.get(words[1], default)
                 if result is not None:
                     self.env['ECMC_CONFIG_RETURN_VAL'] = result
             elif words[0] == 'iocshLoad':
@@ -80,7 +81,9 @@ class SlaveIdentityTests(unittest.TestCase):
                                         'EcGetSlaveSerialNum(13)': '4294967295'})
         self.assertEqual(script.records, [dict(HWFw='Unknown', HWRev='0x00150000',
             HWSer='4294967295', HWFwStat='Not supported', HWIdStat='Available')])
-        self.assertEqual(script.calls, ['EcGetSlaveRevisionNum(13)', 'EcGetSlaveSerialNum(13)'])
+        self.assertEqual(script.calls, ['EcGetSlaveSdoReadSupport(13)',
+                                       'EcGetSlaveRevisionNum(13)',
+                                       'EcGetSlaveSerialNum(13)'])
 
     def test_string_reader_and_unsigned_values(self):
         for revision, serial in [('4294967295', '4294967295'), ('0', '0')]:
@@ -104,7 +107,17 @@ class SlaveIdentityTests(unittest.TestCase):
                 self.assertEqual(script.records, [dict(HWFw='Unknown', HWRev='Unknown',
                     HWSer='Unknown', HWFwStat=status, HWIdStat=status)])
         script = self.startup({'ECMC_READ_SLAVE_IDENTITY': '0', 'READ_IDENTITY': '1'})
-        self.assertEqual(len(script.calls), 2)
+        self.assertEqual(len(script.calls), 3)
+
+    def test_no_discovered_sdos_skips_firmware_only(self):
+        script = self.startup({'ECMC_SDO_STRING_SUPPORTED': '1'},
+            {'EcGetSlaveSdoReadSupport(13)': '0',
+             'EcGetSlaveRevisionNum(13)': '1376256',
+             'EcGetSlaveSerialNum(13)': '42'})
+        self.assertEqual(script.records, [dict(HWFw='Unknown', HWRev='0x00150000',
+            HWSer='42', HWFwStat='No discovered SDOs', HWIdStat='Available')])
+        self.assertNotIn('ecmcEpicsEnvSetSdoString', [call[0] if isinstance(call, tuple)
+                                                      else call for call in script.calls])
 
     def test_failed_reads_and_no_stale_values(self):
         for result in ['Error: 1234', None]:
