@@ -113,9 +113,7 @@ input:
 
 - [Complete axis YAML example]({{< relref "/manual/motion_cfg/axisYamlExample.md" >}}) contains the full annotated configuration.
 
-Use this page as the configuration guide, and use the two pages below as fast references:
-- [Axis YAML settings table](../axisyaml-table/) for compact key-by-key lookup.
-- [Axis YAML settings (heading view)](../axisyaml-headings/) for grouped section overview.
+Use the [Axis YAML settings reference](../axisyaml-table/) for grouped key-by-key lookup, types, requirements and defaults.
 
 Related motion docs:
 - [Drive modes CSV, CSP, CSP-PC]({{< relref "/manual/motion_cfg/modes_CSV_CSP_CSP_PC.md" >}})

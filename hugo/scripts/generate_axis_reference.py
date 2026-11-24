@@ -13,11 +13,30 @@ END = '<!-- END GENERATED AXIS YAML REFERENCE -->'
 
 
 def render(sections):
-    table = ['| Key | Description | Requirement | Default when parent section is present |',
-             '| --- | --- | --- | --- |']
+    ecb = json.loads((HUGO.parent / 'scripts/jinja2/ecbSchema.json').read_text())
+    types = {key: item['type'] for block in ecb.values()
+             for key, item in block.get('schema', {}).items()}
+
+    def dtype(key):
+        if key.startswith('plc.code['):
+            return 'string (list item)'
+        if key in types:
+            raw = types[key]
+            label = ' / '.join(raw.replace('intger', 'integer').split())
+            return label + (' (schema typo)' if 'intger' in raw else '')
+        return 'mapping' if any(k.startswith(key + '.') for k in types) else '—'
+
+    def esc(value):
+        return str(value).replace('|', '\\|').replace('\n', ' ')
+
+    def row(key, desc, requirement, default='—'):
+        return '| `' + key + '` | ' + dtype(key) + ' | ' + esc(desc) + ' | ' + esc(requirement) + ' | ' + esc(default) + ' |'
+
+    table = []
     headings = []
     seen = set()
     for section in sections:
+        table.extend(['## ' + section['name'], '', '| Key | Type (ECB schema) | Description | Requirement | Default |', '| --- | --- | --- | --- | --- |'])
         headings.extend(['## ' + section['name'], ''])
         for group in section['groups']:
             label = ' / '.join('`' + key + '`' for key in group['keys'])
@@ -26,14 +45,22 @@ def render(sections):
                         for entry in group['entries'] if 'default' in entry]
             suffix = ' Defaults: ' + '; '.join(defaults) + '.' if defaults else ''
             headings.append('- ' + label + ' (' + requirement + ') — ' + group['description'] + suffix)
-            for entry in group['entries']:
+            entry_keys = {entry['key'] for entry in group['entries']}
+            extra = [key for key in group['keys'] if key not in entry_keys]
+            for key in extra:
+                table.append(row(key, group['description'], requirement))
+            for index, entry in enumerate(group['entries']):
                 key = entry['key']
                 if key in seen:
                     raise ValueError('Duplicate reference key: ' + key)
                 seen.add(key)
-                table.append('| `' + key + '` | ' + (entry['summary'] or group['description']) + ' | ' + requirement + ' | ' + str(entry.get('default', '—')) + ' |')
+                desc = entry['summary'] or group['description']
+                if index == 0 and not extra and entry['summary'] and entry['summary'] != group['description']:
+                    desc += ' — ' + group['description']
+                table.append(row(key, desc, requirement, entry.get('default', '—')))
+        table.append('')
         headings.append('')
-    return {'axisYamlSettingsTable.md': '\n'.join(table),
+    return {'axisYamlSettingsTable.md': '\n'.join(table).rstrip(),
             'axisYamlSettingsHeadings.md': '\n'.join(headings).rstrip()}
 
 

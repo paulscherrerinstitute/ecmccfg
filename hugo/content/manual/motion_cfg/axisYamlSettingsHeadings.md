@@ -3,7 +3,10 @@ title = "Axis YAML settings (heading view)"
 slug = "axisyaml-headings"
 weight = 17
 chapter = false
+hidden = true
 +++
+
+This compatibility view is retained for existing links. Prefer the [combined YAML settings reference](../axisyaml-table/), which includes section headings and types.
 
 Reference companion to [yaml configuration](../axisyaml/).
 Use this page when you want to browse YAML settings by section instead of by

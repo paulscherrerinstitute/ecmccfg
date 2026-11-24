@@ -47,11 +47,12 @@ go directly to [legacy motion]({{< relref "/manual/motion_cfg/legacy.md" >}}).
 
 | Task | Guide |
 | --- | --- |
-| Look up YAML keys | [Settings table]({{< relref "/manual/motion_cfg/axisYamlSettingsTable.md" >}}) or [grouped settings]({{< relref "/manual/motion_cfg/axisYamlSettingsHeadings.md" >}}) |
+| Look up YAML keys | [Settings table]({{< relref "/manual/motion_cfg/axisYamlSettingsTable.md" >}}) |
 | See all settings in a configuration | [Complete axis YAML example]({{< relref "/manual/motion_cfg/axisYamlExample.md" >}}) |
 | Configure motor-record examples and retry tests | [Motor record examples]({{< relref "/manual/motion_cfg/best_practice/motor.md" >}}) |
 | Maintain classic `.ax`, `.vax`, or `.sax` files | [Legacy motion]({{< relref "/manual/motion_cfg/legacy.md" >}}); use the scaling, direction, homing, and motion diagnostics guides above as needed |
-| Specialized motion, coordination, and configuration tools | [Advanced motion]({{< relref "/manual/motion_cfg/advanced.md" >}}) |
+| Specialized motion, coordination, and runtime tools | [Advanced motion]({{< relref "/manual/motion_cfg/advanced.md" >}}) |
+| Select a configuration backend | [ECB]({{< relref "/manual/motion_cfg/ecb.md" >}}) and [ECMCCOMP]({{< relref "/manual/motion_cfg/ecmccomp.md" >}}) |
 
 <a id="configuration-warnings"></a>
 

@@ -22,6 +22,4 @@ These features are optional. For a standard axis, start with the [axis YAML conf
 
 ## Configuration tools
 
-- [ECB configuration backend]({{< relref "/manual/motion_cfg/ecb.md" >}})
-- [ECMCCOMP]({{< relref "/manual/motion_cfg/ecmccomp.md" >}})
 - [Runtime configuration tool]({{< relref "/manual/motion_cfg/ecmc_cfg_tool.md" >}})

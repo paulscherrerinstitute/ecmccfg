@@ -134,7 +134,7 @@
 
         {{/* Group advanced motion pages without changing content paths or URLs. */}}
         {{ if eq .File.Path "manual/motion_cfg/_index.md" }}
-          {{ $advancedPaths := slice "manual/motion_cfg/native_target_write.md" "manual/motion_cfg/axisPLC.md" "manual/motion_cfg/axis_groups.md" "manual/motion_cfg/master_slave_state_machine.md" "manual/motion_cfg/pvt.md" "manual/motion_cfg/sequencer.md" "manual/motion_cfg/drive_lookup_table.md" "manual/motion_cfg/encoder_power.md" "manual/motion_cfg/ecb.md" "manual/motion_cfg/ecmccomp.md" "manual/motion_cfg/ecmc_cfg_tool.md" }}
+          {{ $advancedPaths := slice "manual/motion_cfg/native_target_write.md" "manual/motion_cfg/axisPLC.md" "manual/motion_cfg/axis_groups.md" "manual/motion_cfg/master_slave_state_machine.md" "manual/motion_cfg/pvt.md" "manual/motion_cfg/sequencer.md" "manual/motion_cfg/drive_lookup_table.md" "manual/motion_cfg/encoder_power.md" "manual/motion_cfg/ecmc_cfg_tool.md" }}
           {{ $advancedPages := where $pages "File.Path" "in" $advancedPaths }}
           {{ range $pages.ByWeight }}
             {{ if eq .File.Path "manual/motion_cfg/advanced.md" }}
