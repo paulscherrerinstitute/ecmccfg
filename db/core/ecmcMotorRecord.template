@@ -40,6 +40,12 @@ record(motor,"$(PREFIX)$(MOTOR_NAME)")
     field(DCOF, "$(DCOF=0)")
     field(ICOF, "$(ICOF=0)")
     field(MFLG, "$(MFLG=8)")
+    info(Q:group, {
+        "${PREFIX}axis${AXIS_NO}": {
+            "setpoint": {+channel:"VAL", +trigger:"setpoint"},
+            "readback": {+channel:"RBV", +trigger:"readback"}
+        }
+    })
 }
 
 # The message text
@@ -55,6 +61,11 @@ record(stringout,"$(PREFIX)$(MOTOR_NAME)-DbgStrToLOG") {
     field(VAL,  "")
     field(DTYP, "asynOctetWrite")
     field(OUT,  "@asyn($(MOTOR_PORT),$(AXIS_NO))StrToLOG")
+    info(Q:group, {
+        "${PREFIX}axis${AXIS_NO}": {
+            "DbgStrToLOG": {+channel:"VAL", +trigger:"DbgStrToLOG"}
+        }
+    })
 }
 
 # These records make the motor resolution, offset and direction available to the driver
@@ -91,6 +102,11 @@ record(ai, "$(PREFIX)$(MOTOR_NAME)-EncAct")
     field(PREC, "0")
     field(INP,  "@asyn($(MOTOR_PORT),$(AXIS_NO))EncAct")
     field(SCAN, "I/O Intr")
+    info(Q:group, {
+        "${PREFIX}axis${AXIS_NO}": {
+            "encoderActual": {+channel:"VAL", +trigger:"encoderActual"}
+        }
+    })
 }
 
 record(longin, "$(PREFIX)$(MOTOR_NAME)-MR-ErrId")
