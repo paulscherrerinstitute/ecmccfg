@@ -20,47 +20,15 @@ For YAML configuration of the motor record itself, see
 For example-driven setups, see
 [motor record examples]({{< relref "/manual/motion_cfg/best_practice/motor.md" >}}).
 
-## Native target-write mode
+<a id="native-target-write-mode"></a>
 
-The native target-position interface can optionally start ABS/REL motion on a
-write, similar to writing motor-record `.VAL`. **With this mode enabled, the
-axis can move without a separate EXECUTE request**, including automatic drive
-enable when configured. It is disabled by default and does not change the
-motor record's own `.VAL` behavior. See
-[Native target-write motion]({{< relref "/manual/motion_cfg/native_target_write.md" >}})
-for the commands and the **NO EXEC** panel indication.
+For the independent native ECMC target-position interface, see [Native target-write mode]({{< relref "/manual/motion_cfg/native_target_write.md" >}}).
 
 ## Common use cases
 
 ### Auto save restore
 
-Open-loop stepper systems with incremental encoders often use auto save restore
-through the motor record. For soft-limit restoration, the exact driver option, value precedence, startup gate and position policy, see [motor position and soft-limit autosave]({{< relref "/manual/motion_cfg/autosave.md" >}}).
-
-Important note:
-
-- this position-restore workflow is intended for incremental encoders
-- in YAML terms this means `encoder.type: 0`
-- soft-limit restoration is independent of position restoration; see the autosave guide
-
-At PSI, this is commonly done by adding a file ending in `_pos.req` in the
-local `cfg/` directory and listing the `DVAL` fields that should be restored.
-
-Example:
-
-```text
-MTEST04-MTN-ASM:Axis1.DVAL
-```
-
-Both autosave passes, 0 and 1, must be registered before `iocInit`. In the PSI
-`ioc install` workflow, a `_pos.req` filename selects the two-pass setup.
-For another filename, request it explicitly with the PSI directive below
-(the value `2` is not an autosave pass number):
-
-```text
-#ENABLE-PASS=2
-MTEST04-MTN-ASM:Axis1.DVAL
-```
+See [Motor position and soft-limit autosave]({{< relref "/manual/motion_cfg/autosave.md" >}}) for incremental-encoder position restoration, request files and startup ordering.
 
 ### Open-loop retries based on another readback
 
@@ -205,6 +173,10 @@ dbpf IOC_TEST:Axis1.URIP 0
 
 Motion can then continue, but retries based on `RDBL` are disabled while this
 setting is active.
+
+## Disabling the motor record
+
+Set `epics.motorRecord.enable: false` in the axis YAML to use the native interface without a motor record. For PLC access to the motor record `OFF` and `DIR` fields and binding status, see [PLC variables]({{< relref "/manual/plc_cfg/variables.md" >}}).
 
 ## Related examples
 

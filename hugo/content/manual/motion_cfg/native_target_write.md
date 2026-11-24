@@ -1,8 +1,10 @@
 +++
-title = "Native target-write motion"
+title = "Native target-write mode"
 weight = 24
 chapter = false
 +++
+
+This feature belongs to the native ECMC motion interface, independently of whether an EPICS motor record is loaded.
 
 Native axes normally stage a target position and wait for an EXECUTE request.
 The optional target-write mode starts an ABS or REL move when the target is
