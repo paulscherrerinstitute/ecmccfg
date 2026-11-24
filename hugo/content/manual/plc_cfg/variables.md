@@ -145,10 +145,12 @@ are shared between PLCs. Both can also be exposed as EPICS PVs; see
  47. ax<id>.ctrl.ki               Set PID-controller ki            (rw)
  48. ax<id>.ctrl.kd               Set PID-controller kd            (rw)
  49. ax<id>.ctrl.kff              Set PID-controller kff           (rw)
- 50. ax<id>.mr.off               motor record offset              (ro)
- 51. ax<id>.mr.dir               motor record direction           (ro)
+ 50. ax<id>.mr.off                EPICS motor record OFF field     (ro)
+                                  User coordinate offset.
+ 51. ax<id>.mr.dir                EPICS motor record DIR field     (ro)
                                   0: positive, 1: negative
- 52. ax<id>.mr.loaded            motor record bound (0 or 1)       (ro)
+ 52. ax<id>.mr.loaded             EPICS motor record bound        (ro)
+                                  0: not bound, 1: bound
                                   All three default to 0 before binding.
 ```
 
