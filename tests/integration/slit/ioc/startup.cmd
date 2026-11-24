@@ -2,7 +2,10 @@
 # Based on examples/PSI/lab_setup/master_slave/slit_epics_2026/slit_matrix/startup_test_sim.cmd.
 # Use a separate IOC/PV namespace so the test never shares normal device PVs.
 epicsEnvSet("IOC", "${TEST_IOC=SIMSLIT}")
-require ecmccfg ${ECMCCFG_TEST_VER=sandst_a} "MASTER_ID=0,ENG_MODE=1,EC_RATE=1000,ECMC_VER=${ECMC_TEST_VER=sandst_a},SIM=1"
+#require ecmccfg ${ECMCCFG_TEST_VER=v11.2.0_RC2} "MASTER_ID=0,ENG_MODE=1,EC_RATE=1000,ECMC_VER=${ECMC_TEST_VER=v11.2.0_RC2},SIM=1"
+#require ecmccfg "MASTER_ID=0,ENG_MODE=1,EC_RATE=1000,SIM=1"
+require ecmccfg sandst_a "MASTER_ID=0,ENG_MODE=1,EC_RATE=1000,ECMC_VER=sandst_a,SIM=1"
+
 on error halt
 asynSetTraceMask(${ECMC_ASYN_PORT}, -1, 0x01)
 ecmcConfigOrDie "Cfg.SetEcStartupTimeout(100)"
