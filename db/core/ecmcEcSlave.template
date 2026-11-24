@@ -28,7 +28,7 @@ record(calc,"${ECMC_P}EntryCntr") {
   field(FLNK, "${ECMC_P}Stat_.PROC")
   info(Q:group, {
     "${ECMC_G}": {
-      "entryCounter": {+channel:"VAL"}
+      "entryCounter": {+channel:"VAL", +trigger:"entryCounter"}
     }
   })
 }
@@ -51,7 +51,7 @@ record(bi,"${ECMC_P}Online"){
   field(FLNK, "${ECMC_P}Operational.PROC")
   info(Q:group, {
     "${ECMC_G}": {
-      "online": {+channel:"VAL"}
+      "online": {+channel:"VAL", +trigger:"online"}
     }
   })
 }
@@ -66,7 +66,7 @@ record(bi,"${ECMC_P}Operational"){
   field(FLNK, "${ECMC_P}Alstate-Init.PROC")
   info(Q:group, {
     "${ECMC_G}": {
-      "operational": {+channel:"VAL"}
+      "operational": {+channel:"VAL", +trigger:"operational"}
     }
   })
 }
@@ -81,7 +81,7 @@ record(bi,"${ECMC_P}Alstate-Init"){
   field(FLNK, "${ECMC_P}Alstate-Preop.PROC")
   info(Q:group, {
     "${ECMC_G}": {
-      "init": {+channel:"VAL"}
+      "init": {+channel:"VAL", +trigger:"init"}
     }
   })
 }
@@ -96,7 +96,7 @@ record(bi,"${ECMC_P}Alstate-Preop"){
   field(FLNK, "${ECMC_P}Alstate-Safeop.PROC")
   info(Q:group, {
     "${ECMC_G}": {
-      "preop": {+channel:"VAL"}
+      "preop": {+channel:"VAL", +trigger:"preop"}
     }
   })
 }
@@ -111,7 +111,7 @@ record(bi,"${ECMC_P}Alstate-Safeop"){
   field(FLNK, "${ECMC_P}Alstate-Op.PROC")
   info(Q:group, {
     "${ECMC_G}": {
-      "safeop": {+channel:"VAL"}
+      "safeop": {+channel:"VAL", +trigger:"safeop"}
     }
   })
 }
@@ -125,7 +125,7 @@ record(bi,"${ECMC_P}Alstate-Op"){
   field(OSV,  "NO_ALARM")
   info(Q:group, {
     "${ECMC_G}": {
-      "op": {+channel:"VAL"}
+      "op": {+channel:"VAL", +trigger:"op"}
     }
   })
 }
@@ -154,7 +154,7 @@ record(stringin, "${ECMC_P}HWType"){
   field(VAL,  "$(HWTYPE)")
   info(Q:group, {
     "${ECMC_G}": {
-      "hwType": {+channel:"VAL"}
+      "hwType": {+channel:"VAL", +trigger:"hwType"}
     }
   })
 }
@@ -165,7 +165,7 @@ record(stringin, "${ECMC_P}HWFw"){
   field(VAL, "$(HWFw=Unknown)")
   info(Q:group, {
     "${ECMC_G}": {
-      "hwFw": {+channel:"VAL"}
+      "hwFw": {+channel:"VAL", +trigger:"hwFw"}
     }
   })
 }
@@ -175,7 +175,7 @@ record(stringin, "${ECMC_P}HWRev"){
   field(VAL, "$(HWRev=Unknown)")
   info(Q:group, {
     "${ECMC_G}": {
-      "hwRev": {+channel:"VAL"}
+      "hwRev": {+channel:"VAL", +trigger:"hwRev"}
     }
   })
 }
@@ -185,7 +185,7 @@ record(stringin, "${ECMC_P}HWSer"){
   field(VAL, "$(HWSer=Unknown)")
   info(Q:group, {
     "${ECMC_G}": {
-      "hwSer": {+channel:"VAL"}
+      "hwSer": {+channel:"VAL", +trigger:"hwSer"}
     }
   })
 }
@@ -195,7 +195,7 @@ record(stringin, "${ECMC_P}HWFwStat"){
   field(VAL, "$(HWFwStat=Not read)")
   info(Q:group, {
     "${ECMC_G}": {
-      "hwFwStat": {+channel:"VAL"}
+      "hwFwStat": {+channel:"VAL", +trigger:"hwFwStat"}
     }
   })
 }
@@ -205,7 +205,7 @@ record(stringin, "${ECMC_P}HWIdStat"){
   field(VAL, "$(HWIdStat=Not read)")
   info(Q:group, {
     "${ECMC_G}": {
-      "hwIdStat": {+channel:"VAL"}
+      "hwIdStat": {+channel:"VAL", +trigger:"hwIdStat"}
     }
   })
 }
